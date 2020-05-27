@@ -1,0 +1,32 @@
+12:58:54 <cataska> < letoh> 該不會連 on lisp 也有人翻了吧XD
+12:59:23 <cataska> 對岸已經有人翻了唷
+13:01:29 <_13h> 一點也不意外XD
+13:01:41 <_13h> 這樣幾本 lisp 經典都有中文版了
+13:04:59 <_13h> 嗯  不對  還有兩本沒有  再找找XD
+13:05:09 <cataska> 如果 Paradigms of Artificial Intelligence Programming: Case Studies in Common Lisp 也有中文版...
+13:07:11 <_13h> lisp in small pieces 好像沒有開放，應該不太容易出現中譯@_@
+13:16:31 <_13h> http://img.my.csdn.net/uploads/201210/20/1350663803_2652.png   看起來不太好用XD
+15:28:51 <_13h> http://girlloveshaskell.com/
+15:32:40 <MnO2> @@
+15:32:55 <MnO2> 一看就知道是bootstrap做的
+15:33:56 <MnO2> 結果也沒有個人資料啊xD
+15:38:32 <CindyLinz> 有個人資料會觸犯個資法唷 (咦)
+15:40:40 <_13h> twitter 帳號上人肉看看？
+15:40:49 <kanru`> 誰來組織一下 LispGirls
+15:43:32 <MnO2> CindyLinz: 自己公開的不算？
+15:52:01 <CindyLinz> 咦 這邊是自己公開的喔? XD
+15:52:24 <b4283> LispBoyz
+15:54:02 <_13h> 怎麼聽起來像什麼男孩歌唱團體
+15:55:29 <b4283> XD
+15:58:54 <_13h> http://marijnhaverbeke.nl/cl-javascript/  #  CL-JavaScript allows you to add user scripting to your Common Lisp application without requiring your poor users to learn Common Lisp
+16:01:18 <kanru`> 這個讚.. 我用過 parenscript gen 出 js 然後用 cl-javascript 去跑 XD
+16:05:02 <_13h> XDXD  為什麼需要這樣
+16:12:09 <b4283> (js-repl) 這個太可怕了
+16:13:34 <b4283> 我誤解名字了，剛以為是 clisp->js-- translator
+16:16:08 <cataska> 前幾天看到一本雜誌叫 Hardware Girls
+16:16:25 <cataska> 不知道裡面是什麼內容
+16:17:51 <kanru`> _13h: 好玩 :P
+16:17:56 <b4283> 是五金雜誌吧？
+17:11:45 <b4283> http://stackoverflow.com/questions/12748246/sorting-1-million-8-digit-numbers-in-1mb-of-ram
+22:26:28 <MnO2> http://serverfault.com/questions/337082/how-do-i-prevent-accidental-rm-rf
+22:26:34 <MnO2> 原來有safe-rm這種東西xD

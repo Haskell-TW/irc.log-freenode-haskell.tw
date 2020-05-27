@@ -1,0 +1,80 @@
+14:20:31 <CindyLinz> Comments are considered harmful.. XDD https://www.facebook.com/chernhan.ou/posts/10152034511049060
+15:14:55 <mno2> 我想寫一個 hackage 範例補充的 Chrome extension，不知道有沒有人有興趣
+15:15:39 <mno2> 可以針對 package 中的 function 自動在 client side 安插一小段 HTML，把蒐集來的範例顯示出來
+15:16:27 <mno2> 也就是一個 (package-name, version, function-name) 來決定顯示出一些 hpaste, gist 等等
+15:17:08 <mno2> 同時可以讓使用者貼 gist, haste 連結來 suggest 要顯示哪些範例
+15:17:30 <mno2> 反向的話，可以根據使用度，來推薦哪些 package 比較熱門
+15:17:59 <mno2> 如果範例多，可以自動開 issue 給作者，請他加進原始文件中
+15:36:17 <CindyLinz> 有趣耶
+15:49:15 <mno2> CindyLinz 有興趣嗎？  （話說我 tmonad 設計想好但工作太忙一直都沒空動 LOL)
+15:50:17 <mno2> 這個 app 應該蠻簡單的，科技熟的人搞不好週末一天就寫完了
+15:58:28 <CindyLinz> mno2: 有~
+15:59:03 <CindyLinz> 你可以整理一下想要的功能嗎?
+16:01:24 <mno2> 口頭描述的剛剛都講啦，你有推薦畫 wireframe 的軟體嗎？
+16:07:58 <CindyLinz> 沒做過 orz
+16:08:06 <CindyLinz> 我都是 vim 開起來就寫了.... zz
+16:08:53 <CindyLinz> 這個用來推荐的「使用度」.. 有這種統計喔?
+16:09:18 <letoh> 請問一下 wireframe 是指什麼?  3d rendering 的那種 wireframe 嗎? XD
+16:09:28 <CindyLinz> 還是說, 由這個 extension 來統計這個 package doc 被閱覽的不重複人數?
+16:09:40 <CindyLinz> 不重複人數, 和... 時間.. 之類的
+16:15:00 <mno2> letoh: http://balsamiq.com/
+16:15:59 <mno2> CindyLinz: server 會有 log 啊，還是會有一個 server 存  (package-name, version, function-name) -> snippets, 跟 query 次數的 counter
+16:16:15 <mno2> extension 就從 server 拿就好
+16:16:44 <mno2> 你想要的話也可以加 like / unlike
+16:17:21 <mno2> 反正想個公式，想要蒐集什麼資料，前端加一加
+16:17:43 <letoh> 唔，看起來像是初期規劃或打草稿用的平台
+16:18:23 <mno2> 做 web 或 app 時，講 wireframe 通常是這樣工具做出來的草稿
+16:18:31 <letoh> 瞭解
+16:21:31 <CindyLinz> mno2: 嗯, 所以不是 hackage 來的某個數據
+16:21:41 <CindyLinz> cabal 安裝量之類的 :p
+16:22:13 <mno2> CindyLinz: 要的話，也可以使用啊。反正 extension 只要在頁面上，什麼都可以拿到。
+16:22:26 <CindyLinz> 因為我不知道 hackage 有沒有這個啦 ^^|
+16:22:32 <mno2> hackage 2 有
+16:22:44 <CindyLinz> 喔喔~~
+16:22:53 <mno2> 應該說下載量啦，不是安裝量
+16:23:06 <CindyLinz> 反正應該是正比 XD
+16:23:18 <mno2> yes
+16:27:39 <mno2> 不知道這個 proejct 要叫什麼名字
+16:28:10 <mno2> example combinator
+16:29:08 <mno2> lazy documentation
+16:29:17 <mno2> 我喜歡後者 xDD
+16:30:31 <mno2> 有種不死到臨頭不寫 doc 的感覺
+16:55:45 <CindyLinz> lazy 不錯 :p
+16:56:01 <CindyLinz> LazyDoc
+16:56:09 <CindyLinz> 可是不會放進 hackage XD
+16:59:43 <mno2> non-strict documentation
+17:05:22 <CindyLinz> 比較喜歡 Lazy.. XD
+20:39:31 <CindyLinz> mno2: 一則一則留言/眉批式的比較好, 還是 wiki 式的比較好呢?
+20:39:52 <CindyLinz> gist / haste 的話應該是留言/眉批式的..
+20:40:44 <mno2> https://chrome.google.com/webstore/detail/sourcegraph/dgjhfomjieaadpoljlnidmbgkdffpack?hl=en  我希望有點像這樣
+20:41:13 <mno2> 其實可以抓回來 cache，不過就比較複雜一點
+20:41:25 <mno2> 我是想說用 pgrest 就可以很快解決 xD
+20:41:30 <mno2> 剛好今天很紅
+20:46:26 <mno2> 要不然來趕個潮流來用 firebase
+20:55:26 <CindyLinz> 後端要架哪也是有一點傷腦筋
+20:55:39 <CindyLinz> 不過是可以把眼睛閉起來先寫程式, 寫完再來傷腦筋 XD
+20:56:28 <CindyLinz> pgrest 要找一台能架 postgresql 的機器吧? @@"
+20:56:42 <CindyLinz> 我們這個應該是 document based 的東西?
+20:58:36 <CindyLinz> 因為是 user generated content, 比較會需要修改修正的功能
+20:59:35 <CindyLinz> 哇 他這個還有去分析人家裡面的語法語意喔? 把實際呼叫哪個函數都抓出來 @@"
+21:41:57 <mno2> 有需要我可以去開一台 digitaloceans
+21:42:38 <mno2> 如果要 cache 的話，firebase 大概不太夠用
+21:42:51 <mno2> sourcegraph 就是 yinwang 現在的公司啊 xD
+21:44:23 <CindyLinz> 原來他現在在工作啊...
+21:44:34 <CindyLinz> 不過有他在的地方... 分析語意就跟喝水一樣吧 XD
+21:46:09 <mno2> 應該吧 xD
+21:46:45 <mno2> 我剛剛睡起來，我先清醒一下等一下再來想後端要怎樣
+21:48:55 <CindyLinz> wiki 式的, backend 是 git 這樣..? XD
+21:50:18 <CindyLinz> 可是 comment, note 式的比較好做.. @@"
+21:50:35 <mno2> 對啊
+21:50:59 <mno2> wiki 感覺太麻煩了
+21:52:07 <CindyLinz> 可是 wiki 被整理過比較好用.. (閃閃)
+21:52:27 <CindyLinz> 有想要先只 focus 在使用範例嗎?
+21:53:00 <CindyLinz> 每一則都是「一段程式碼 + 這段程式碼的說明」
+21:53:18 <CindyLinz> 只是這樣.. LazyDoc 名字就取太大了 :p
+21:56:31 <CindyLinz> 嗯, 看一下你原始的提議的確是只要有範例補充
+21:56:50 <CindyLinz> 那就先這樣好了.
+22:05:56 <mno2> 被整理過的確比較好用，前提是有人整理 xD
+22:06:35 <mno2> 我是覺得先做範理補充，丟出來看社群反應
+22:06:47 <mno2> 有好評再看看要不要做 wiki
+22:31:19 <CindyLinz> 嗯嗯

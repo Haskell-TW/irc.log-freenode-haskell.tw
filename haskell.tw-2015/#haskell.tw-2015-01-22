@@ -1,0 +1,69 @@
+11:08:54 <miaoski> @CindyLinz: 看起來一堆箭頭不錯
+11:08:54 <lambdabot> Unknown command, try @list
+11:22:30 <cibs> miaoski: 是說插在身上的嗎
+11:22:49 <miaoski>  @cibs: 那是箭，不是箭頭
+17:13:29 <CindyLinz> 想再問個 coding style 的意見 o.o
+17:13:35 <CindyLinz> 像 finally 這樣的函數
+17:13:39 <CindyLinz> @type finally
+17:13:40 <lambdabot> IO a -> IO b -> IO a
+17:13:51 <CindyLinz> 如果兩個參數都是好幾行的 do-block
+17:14:05 <CindyLinz> 要怎麼寫才會比較開心呢?
+17:14:56 <CindyLinz> 我現在只會用 () 把一整個 do 包起來, 或是在 do 前面放個 $
+17:15:11 <CindyLinz> 當然是比較喜歡放 $ 這種.. 但是只適用在最後一個參數...
+17:16:00 <CindyLinz> 欸.. 先把前面那個參數獨立 let 出來是個好點子嗎? 不過這樣要額外想一個變數名, 不是很喜歡這樣 :/
+17:19:40 <cibs> where XD
+17:20:18 <petercommand> 加個括號感覺怪怪的XD
+17:20:32 <cibs> finally body final where body = do final = do
+17:20:48 <petercommand> CindyLinz: 弄個 infixl 的 ($)?
+17:22:12 <CindyLinz> cibs: 在 do block 裡面應該不能這樣寫 where..
+17:22:49 <CindyLinz> where 可以寫在 let ooooo 的其中一項之下, 或是 case 的一個 branch 之下
+17:23:06 <petercommand> :info ($)
+17:23:14 <petercommand> @info ($)
+17:23:14 <CindyLinz> petercommand: infixl 的 ($) 這樣用起來是怎樣感覺呀?
+17:23:14 <lambdabot> ($)
+17:24:46 <petercommand> 這樣就可以加 $ 一直套用下去了呀:p
+17:25:36 <CindyLinz> petercommand: 想像不到 ^^|   給我一下範例 ^^|
+17:26:31 <CindyLinz> 喔喔 就可以寫成 finally $$$ body $$$ final 的?
+17:26:56 <petercommand> 對阿...
+17:27:11 <CindyLinz> 來翻翻 hayoo
+17:28:42 <CindyLinz> 好像沒有... o.o   沒有人想用嗎 @@"
+17:29:06 <petercommand> @hoogle (a -> b) -> a -> b infixl 0
+17:29:08 <lambdabot> Parse error:
+17:29:09 <lambdabot>   (a -> b) -> a -> b infixl 0
+17:29:09 <lambdabot>                             ^
+17:29:10 <CindyLinz> 搜 (a -> b) -> a -> b 出來的都是 infixr 的, 或是不相干的
+17:29:15 <petercommand> @hoogle (a -> b) -> a -> b
+17:29:16 <lambdabot> Prelude ($) :: (a -> b) -> a -> b
+17:29:16 <lambdabot> Data.Function ($) :: (a -> b) -> a -> b
+17:29:16 <lambdabot> Prelude ($!) :: (a -> b) -> a -> b
+17:29:27 <petercommand> CindyLinz: 對呀...找不到QQ
+17:31:19 <petercommand> CindyLinz: 咦? hayoo 是搜尋整個 hackage 嗎?
+17:31:34 <CindyLinz> 應該是.. 然後只有搜最新版
+17:31:44 <CindyLinz> 我最近都用它, 覺得很方便
+17:33:52 <petercommand> 喔喔，好像很不錯:p
+17:35:37 <CindyLinz> 可是找不到 infixl 的 ($)... QQ
+17:44:42 <pkmx> ($)本來就應該要是infixl
+17:49:10 <CindyLinz> 嗯.. 不過 infixr 的用法用蠻兇的 XD
+17:49:33 <CindyLinz> 喔.. infixl 的設計就是..... 把現在 $ 連打的用法, 前面的都換成 . ?
+17:51:22 <petercommand> 對阿...
+17:59:59 <pkmx> 話說記得很久以前不是有人提說要改成讓operator之間有partial order
+18:00:04 <pkmx> 好像沒下文了
+18:01:05 <pkmx> 一直覺得用0~9去標示就是非常詭異的設計
+18:02:48 <petercommand> 那新增加的 operator 怎麼去定義跟其他 operator 的 partial order 呢?
+18:03:06 <petercommand> 自己定義的 operator
+18:03:50 <CindyLinz> `吾` 將介於 `材` 與 `不材` 之間.. XD
+18:04:20 <petercommand> XD
+18:05:33 <CindyLinz> @pl \b j m -> Data.Foldable.foldr (\a b -> j a) b m
+18:05:34 <lambdabot> flip (Data.Foldable.foldr . (const .))
+18:05:46 <CindyLinz> @type flip (Data.Foldable.foldr . (const .))
+18:05:47 <lambdabot> Foldable t => b -> (a -> b) -> t a -> b
+18:05:50 <CindyLinz> @type maybe
+18:05:51 <lambdabot> b -> (a -> b) -> Maybe a -> b
+18:05:58 <CindyLinz> 獲得 maybe 函數.. XD
+18:13:25 <petercommand> :p
+22:40:25 <mno2> http://jaspervdj.be/posts/2015-01-20-haskell-design-patterns-extended-modules.html
+23:56:31 <pkmx> @hoogle Show a => a -> Text
+23:56:33 <lambdabot> Data.Text.Lazy unfoldr :: (a -> Maybe (Char, a)) -> a -> Text
+23:56:33 <lambdabot> Data.Text unfoldr :: (a -> Maybe (Char, a)) -> a -> Text
+23:56:33 <lambdabot> Debug.Trace traceShow :: Show a => a -> b -> b
+23:56:39 <pkmx> :<

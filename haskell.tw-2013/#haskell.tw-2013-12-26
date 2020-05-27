@@ -1,0 +1,121 @@
+22:09:08 <suhorng> http://yinwang0.wordpress.com/2013/12/24/oop/ 對OOP的砲火依舊猛烈
+22:10:47 <letoh> is everything an object 這點好像在 g+ 上說過了?
+22:12:13 <suhorng> 沒仔細追 g+ XD
+22:19:33 <hashcat_> prolog有加進OO的傾向
+22:20:34 <letoh> oo 的 prolog 要叫 oop ? (抱歉這實在很冷XD
+22:21:28 <hashcat_> 暈
+22:22:06 <hashcat_> 我是很懷疑他是否真言之有物
+22:22:45 <letoh> p 開頭語言還不少  以前 object pascal 好像沒有什麼特別的簡稱
+22:23:19 <hashcat_> 簡稱下去就變OP了
+22:23:31 <letoh> XDXD
+22:24:25 <letoh> 不過以前 object pascal 紅的時候我沒參與到，開始學的時候已經是 delphi 的時代了，mailing list 上很少有人提 object pascal 這名字@_@
+22:25:06 <hashcat_> 這個我覺得比你講得還冷ㄟ
+22:25:34 <hashcat_> 看王垠文像是看天書唉
+22:26:21 <letoh> 很王垠的感覺? XD
+22:26:26 <hashcat_> 講程式講到一行程式碼都沒有
+22:27:21 <hashcat_> 跟什麼佛學講量子力學一個方程式都沒有
+22:28:53 <petercommand> 這比喻XD
+22:29:28 <hashcat_> 其他學科有這傾向, 越外行越長篇大論, 用越多形容詞
+22:29:43 <hashcat_> 但他又不是外行, 還能有這特徵
+22:30:34 <b4283> 文好長
+22:31:01 <hashcat_> 形容詞應該補充為標準不明確的形容詞
+22:31:36 <hashcat_> 若是有個閥值, 大於多少算快, 小於多少算慢之類的定義就還好
+22:44:28 <petercommand> " It is bad idea of giving the programmers the power of defining control structures" 好像還好?
+22:48:41 <suhorng> 說到樓上這句, 我在想說 FP 給的 power 不是更大嗎... Scheme給的還特別大耶
+22:49:13 <suhorng> 雖然他也有提到就是..
+22:50:24 <hashcat_> 來實驗設計
+22:50:34 <hashcat_> 統計一票不懂程序的菜鳥, 讓高手只用一個月教一個語言, 測量那些菜鳥編程的速度和行數, 出誤導性題目測量犯錯率和完成率
+22:51:00 <hashcat_> haskell高手教haskell, python高手教python這樣
+22:51:25 <hashcat_> 相信prolog一定會勝出
+22:51:30 <letoh> XDXD
+22:51:42 <letoh> 如果 haskell 高手教 python，會變怎樣?
+22:51:57 <b4283> vim 高手教 vim, emacs 高手教 emacs
+22:51:59 <suhorng> 可能會出現 "python's lambda is broken"
+22:52:09 <letoh> suhorng++ XD
+22:52:13 <godfat> XDDDDD+++
+22:52:31 <hashcat_> haskell高手也可能說他不會python
+22:53:22 <petercommand> XD
+22:53:57 <suhorng> 這..我只是引述以前的戰文的標題阿XD""
+22:54:25 <letoh> 印象中那個 blog 有不少引戰文XD
+22:54:39 <hashcat_> 哪個blog?
+22:54:51 <godfat> 可是我真的覺得 python 很多 fp 的功能都是.. 很不好用 O_o
+22:54:52 <godfat> 之前想反轉字串，然後發現他好多東西都是 in-place 的
+22:55:02 <letoh> 對
+22:55:09 <suhorng> in-place XD
+22:55:36 <suhorng> hashcat_: 搜尋 python's lambda is broken 應該會找到那個blog
+22:55:40 <letoh> godfat: Guido 自己寫了幾篇勸世文說 python 不是讓你拿來寫 fp 用的XD
+22:56:37 <godfat> letoh, .......好吧，我認了，我同意。偏偏好多人都喜歡亂跟 fp 扯上關係..
+22:56:44 <suhorng> letoh: 不過我怎麼對引戰文沒什麼印象..?
+22:57:01 <hashcat_> 想用分類雙盲測試跟交叉驗證結束這些亂七八糟的戰文
+22:57:21 <suhorng> 然後昨天看到很有趣的 http://blog.lab49.com/archives/3011 (雖然應該是舊消息了)
+22:57:25 <letoh> suhorng: 唔  可能我記錯了  因為這標題記得好幾個地方出現過
+22:58:10 <suhorng> 一個型別 跟他的zipper之間 有某種類似微分的關係XD
+22:59:23 <letoh> http://python-history.blogspot.tw/2009/04/origins-of-pythons-functional-features.html
+22:59:40 <CindyLinz> 偏微分
+23:00:49 <letoh> Guido 在講 TRE 時也提到
+23:00:52 <letoh> "I don't believe in recursion as the basis of all programming. This is a fundamental belief of certain computer scientists, especially those who love Scheme and like to teach programming by starting with a "cons" cell and recursion."
+23:01:28 <letoh> 現在 google 好像變聰明  隨便丟幾個關鍵字就找到了XD
+23:01:43 <suhorng> 喔 偏微分w
+23:03:25 <suhorng> letoh: XDDD
+23:04:28 <hashcat_> prolog還是各種冷清
+23:04:30 <letoh> 那篇是 Guido 在說明為啥 Python 不做 TRE
+23:04:58 <letoh> hashcat_: 辛苦了... 有看過一點，但實在沒深入玩過XD
+23:05:03 <godfat> ruby 有做耶，不過是個 compile option...
+23:05:53 <letoh> godfat: 因為 matz 不排斥 recursion ?
+23:06:11 <letoh> 雖說他是從 lisp 世界來的...
+23:06:27 <godfat> 這我就不知道了，不過還有加 curry, 加進去時 matz 說 for functional kids
+23:06:39 <letoh> 好親切XDXD
+23:07:06 <godfat> 現實上倒是沒看過有人在用.. 老實講不是預設，composition 也不方便時，curry 實在用處不大
+23:07:30 <hashcat_> suhorng: 至少要看下table跟index
+23:08:01 <suhorng> table跟index?
+23:08:48 <hashcat_> tabled讓prolog免於無窮搜尋
+23:09:03 <godfat> 哇，好帥喔，byte code compile option 居然可以 runtime 調整...
+23:09:04 <godfat> 我之前試是整個 ruby 要重新 compile 說
+23:09:04 <godfat> RubyVM::InstructionSequence.compile_option = {
+23:09:04 <godfat>   :tailcall_optimization => true,
+23:09:04 <godfat>   :trace_instruction => false
+23:09:04 <godfat> }
+23:09:04 <godfat> 加上去之後後面的程式就有 TCO 了耶
+23:09:37 <hashcat_> 我找下文
+23:09:45 <suhorng> 哇!
+23:10:23 <hashcat_> tabling其實就是memoization
+23:10:40 <letoh> cache
+23:11:13 <hashcat_> Term indexing貌似沒那麼重要
+23:11:17 <letoh> 在程式裡亂改 vm 參數會不會遇到打架的參數啊?
+23:12:32 <CindyLinz> 那些好喜歡跟 FP 扯上關係的人, 偏偏又不來玩真正的 FP... QQ
+23:13:16 <godfat> letoh, 我猜是會的，所以我還滿意外可以這樣做
+23:13:39 <godfat> CindyLinz, 真的，有時候看到都覺得好火... 搞不清楚狀況的傢伙
+23:13:47 <hashcat_> suhorng: Modes, DCG, Constraints, Higher-order有兩種ISO用call謂詞做, 另一種是像是HiLog
+23:14:13 <letoh> 像 c 有的 pragma 也很討厭  非用不可的時候只好細心一點管理XD
+23:14:48 <godfat> 王垠的文章還沒看完，其實我大抵同意他的說法，但身為一個 OOP 喜愛者，我不覺得這算是打擊 OOP, 因為本來對我來說 OOP 就只是一個便利的工具而已，很多東西都不用也不能強求
+23:15:19 <suhorng> hashcat_: ...我可以說我完全看不懂嗎QQ
+23:15:30 <suhorng> 最近我又開始碰C++ (遮臉)
+23:15:39 <godfat> letoh, 可以限制 scope 應該就好，例如 file scope 之類的
+23:15:42 <hashcat_> suhorng: 你要是看得懂我就沒啥好講啦
+23:16:12 <petercommand> dynamic scope...
+23:16:16 <hashcat_> 只是想秀一下prolog有不少可以深的地方
+23:16:40 <suhorng> 邏輯!
+23:17:39 <letoh> file scope 大概是基本要求了吧  不然太可怕XD   include 個檔案進來，結果裡面改了參數XD
+23:18:07 <hashcat_> Constraints比較好講, 就是可以拿來表述解應符合的條件, 像是線性規劃或組合優化之類的問題
+23:18:49 <godfat> XD
+23:18:50 <godfat> 不過像 ruby 其實沒有檔案的概念，就不太容易做 file scope..
+23:19:13 <hashcat_> suhorng:另外尾遞歸和物件導向跟prolog意外的合
+23:19:29 <hashcat_> suhorng:不灌了噗噗, 都是能查的詞
+23:19:45 <suhorng> XDD
+23:19:47 <suhorng> 好喔
+23:20:22 <petercommand> function scope之類的呢?
+23:21:02 <hashcat_> 我自己是偏向xsb prolog還有基於前者的flora-2, 不過論實用還是入門都是swi佔優
+23:21:08 <letoh> block scope
+23:21:31 <suhorng> 套件比較完整的樣子?
+23:21:55 <godfat> ruby 的話，function/block scope 大概是靠 ensure
+23:22:35 <hashcat_> suhorng: xsb特性比較全, 不過連有在更新的編輯器都無, 很haskell的感覺
+23:23:00 <hashcat_> suhorng:swi含各種工具
+23:23:01 <b4283> Design Patterns 書被批很慘
+23:24:12 <godfat> 我覺得是層次不一樣的問題，我覺得王垠可能有一個毛病是，學會了更好的東西後，開始回頭批評之前的東西很差，但其實那是一個學習的過程
+23:24:30 <hashcat_> suhorng: xsb是研究用兼商用, 會比較多實驗的特性可以玩
+23:25:01 <suhorng> 嗯@@
+23:25:14 <suhorng> GHC表示 XD
+23:26:32 <hashcat_> suhorng: xsb還有flora-2這系統可以玩
+23:33:11 <hashcat_> suhorng: flora-2有一個很吸引人的說法叫可計算知識
+23:33:50 <hashcat_> suhorng: 不論對人對計算機都是有意亦可言的東西!
+23:33:57 <hashcat_> *意義

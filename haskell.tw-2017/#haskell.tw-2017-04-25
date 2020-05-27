@@ -1,0 +1,4 @@
+17:34:14 <pkmx> @pl \f s -> (const s) <$> f mempty
+17:34:14 <lambdabot> flip ((<$>) . const) . ($ mempty)
+17:34:22 <pkmx> :t \f s -> (const s) <$> f mempty
+17:34:24 <lambdabot> (Monoid t, Functor f) => (t -> f b1) -> b -> f b

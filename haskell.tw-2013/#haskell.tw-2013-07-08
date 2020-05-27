@@ -1,0 +1,46 @@
+00:01:28 <hashcat> 想說其實也是可以
+00:01:52 <hashcat> 公設打一打就成可是貌似沒人這樣用
+00:03:05 <monochrom> prolog 沒有全稱量詞, 存在量詞. (for all, there exists)
+00:11:36 <hashcat> prolog不是大寫就算是全稱了
+00:14:39 <hashcat> 然後請求就是存在的證明這樣
+00:16:58 <monochrom> prolog 缺少 否定(negation)
+00:19:15 <hashcat> 不理解
+00:20:17 <favonia> hashcat: Coq 的邏輯可以到超多階邏輯，Prolog 雖然我沒有了解，但他的一些後繼者都不行，所以我猜應該不行吧。
+00:20:38 <monochrom> 怎樣寫 "not p(x)" 呢?
+00:21:47 <favonia> hashcat: 我的意思是說，可能 Prolog 的證明能力（甚至是表達能力）本身就受很大的限制
+00:21:51 <hashcat> not(p(X))?
+00:22:09 <favonia> 其實什麼 formal 系統都會受限，但只要「夠用」大家就滿意了
+00:22:15 <monochrom> 還有, 對於用那方法獲取量詞, 我有保留. 怎樣寫 "forall e, there exists d, for all x, q(e, d, x)" 呢?
+00:22:59 <favonia> Coq 足以囊括你平常想得到的數學
+00:24:06 <hashcat> q(E,D,X)
+00:24:20 <hashcat> 然後就找到D了
+00:25:09 <favonia> monochrom: 在某些後繼者可以定義 bottom 然後寫 p(x) -> bottom
+00:25:55 <favonia> hashcat: 一個很無聊但萬用的例子就是 Prolog 沒辦法證明自己是正確的 xD
+00:27:14 <hashcat> 我還在想是什麼回事
+00:27:48 <hashcat> coq跟prolog的邏輯系統有什麼關鍵差異
+00:29:48 <hashcat> 然後找到這個
+00:29:52 <hashcat> http://www.ai.sri.com/~stickel/pttp.html
+00:34:03 <hashcat> 還沒看完先睡覺好了
+00:34:08 <hashcat> 暈
+00:47:09 <CindyLinz> favonia: 唔, 所以你最近比較多在用的是 Coq 嗎?
+00:47:29 <favonia> CindyLinz: 我比較常用 Agda
+00:47:34 <CindyLinz> 噢
+00:48:16 <monochrom> 可惜 hashcat 走了. q(E,D,X) 求 D, 這是 forall e, forall x, there exists d, q(e, d, x). 量詞次序錯了.
+20:00:53 <favonia> hashcat: monochrom 最後有回應你 xD
+20:01:55 <hashcat> 回應什麼我沒看到
+20:02:08 <hashcat> 對喔有紀錄
+20:07:07 <hashcat> q(C,D,E)會找到所有滿足q的(C,D,E)
+20:13:20 <hashcat> 然後再用遞歸把forall展開成 and , there exist展開成 or
+20:14:32 <hashcat> 看有沒解這樣
+22:47:18 <suhorng> @hoogle Maybe a -> m (Maybe a)
+22:47:18 <lambdabot> Control.Applicative optional :: Alternative f => f a -> f (Maybe a)
+22:47:18 <lambdabot> Data.Generics.Aliases orElse :: Maybe a -> Maybe a -> Maybe a
+22:47:18 <lambdabot> Prelude Just :: a -> Maybe a
+22:47:50 <suhorng> @hoogle Monad m => Maybe a -> m (Maybe a)
+22:47:51 <lambdabot> Control.Applicative optional :: Alternative f => f a -> f (Maybe a)
+22:47:51 <lambdabot> Data.Traversable mapM :: (Traversable t, Monad m) => (a -> m b) -> t a -> m (t b)
+22:47:51 <lambdabot> Data.Traversable forM :: (Traversable t, Monad m) => t a -> (a -> m b) -> m (t b)
+22:54:01 <suhorng> :t StateT $ \s -> MaybeT $ return (Just ((), s))
+22:54:02 <lambdabot> Not in scope: data constructor `MaybeT'
+22:54:08 <suhorng> 囧
+23:33:34 <hashcat> lambdabot功能少了些

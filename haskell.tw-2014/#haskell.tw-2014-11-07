@@ -1,0 +1,6 @@
+09:17:08 <mno2> http://www.reddit.com/r/haskell/comments/2l9bvb/ghcing_ghci_plus_extra_goodies/
+09:17:18 <mno2> [ghci-ng - GHCi plus extra goodies]
+09:17:37 <mno2> http://macbeth.cs.ucdavis.edu/lang_study.pdf
+09:17:50 <mno2> [A Large Scale Study of Programming Languages and Code Quality in Github]
+16:49:08 <CindyLinz> 覺得.. ConstructAssign 的感覺... 有點像 named tuple
+16:50:14 <CindyLinz> 可能會不太好用.. :Q 因為就失去了直接在裡面寫 constant value 的功能了...

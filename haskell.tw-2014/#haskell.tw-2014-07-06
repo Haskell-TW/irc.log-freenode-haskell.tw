@@ -1,0 +1,127 @@
+00:01:59 <petercommand> 甚麼是唯物程式法呀?
+00:03:47 <b4283> 唯物是指人的精神除了物理層面外沒有其他內涵，精神現象是化學反應導致的
+00:04:21 <b4283> 宇宙可視為一個巨大機械
+00:04:30 <petercommand> 那加上程式法呢?
+00:04:31 <b4283> 每一個物件都可預測
+00:05:28 <petercommand> b4283: 蠻同意的(不過精神現象是物理化學反應導致的阿XDD)
+00:05:33 <petercommand> b4283: 蠻同意的(不過精神現象是物理+化學反應導致的阿XDD)
+00:06:28 <b4283> 我化學不好 XD
+00:07:21 <b4283> petercommand: monochrom 說到母體，所以我想應該跟 matrix 有關…
+00:08:17 <au> ...可能是指用 object / method 當作基本元素，而不是 lambda closure 當作基本元素的系統 (如果是這樣的話，母體指稱的是 object prototype 或 class )
+00:09:31 <au> object calculus 和 lambda calculus 可以互相嵌入表示 (靜態或動態型別皆然)，沒有誰淺過誰的問題，只有思考方式偏好的問題 XD
+00:11:23 <CindyLinz> 那是異教 XD
+00:12:07 <au> 沒錯 XD
+00:12:08 <monochrom> 唯物指思想上只有 object :)
+00:12:46 <monochrom> 萬惡的唯物世襲主義 :)
+00:13:09 <petercommand> b4283: 有本書叫physical control of brain，可以看看:p
+00:13:38 <b4283> 世襲… inheritance ? XD
+00:13:44 <monochrom> 是
+00:13:46 <b4283> petercommand: thanks
+00:14:04 <b4283> petercommand: 有中文版嗎 XD
+00:16:08 <CindyLinz> Haskell 是神聖的一神教, lambda (closure), class, lazy 三位一體 (?
+00:16:32 <CindyLinz> monochrom: 原來你唯物的「物」是物件導向的物件啊 XD
+11:15:11 <mno2_> http://dreixel.net/research/pdf/ghp.pdf   Our design is inspired by Conor McBride’s Strathclyde Haskell
+11:15:12 <mno2_> Enhancement (SHE) preprocessor.
+11:15:19 <mno2_> "SHE" wwwwww
+11:50:34 <petercommand> :t Data.Map.Map
+11:50:35 <lambdabot> Not in scope: data constructor ‘Data.Map.Map’
+11:50:41 <petercommand> :t Data.Map.map
+11:50:42 <lambdabot> (a -> b) -> M.Map k a -> M.Map k b
+11:50:52 <petercommand> :t M.Map
+11:50:52 <lambdabot> Not in scope: data constructor ‘M.Map’
+11:57:23 <miaoski> yllan: 感謝! 8 小時抓完 38G ... 晚一點進公司看怎麼切
+11:57:33 <miaoski> CindyLinz: 聽說有妳的 talk ... 也可以放上網路? www
+12:07:04 <CindyLinz> miaoski: 不要 XD
+13:59:05 <c9sloud> https://github.com/freehaha/go-r3  有 go 版的 r3 了耶
+14:08:02 <petercommand> :t Map.Map
+14:08:03 <lambdabot> Not in scope: data constructor ‘Map.Map’
+14:08:48 <petercommand> @src Data.Map.Map
+14:08:49 <lambdabot> Source not found. I am sorry.
+14:08:53 <petercommand> @info Data.Map.Map
+14:08:54 <lambdabot> Data.Map.Map
+14:08:59 <petercommand> @info Data.Map.Mapp
+14:08:59 <lambdabot> Data.Map.Mapp
+14:09:02 <petercommand> ...
+14:09:29 <petercommand> Data.Map.Map是type嗎?
+15:12:57 <petercommand> :k Data.Map.Map
+15:12:57 <lambdabot> * -> * -> *
+15:35:55 <CindyLinz> 好奇, 之前聽過一些像是 Free Monad 的東西, 有沒有什麼在程式開發上的好應用啊?
+16:52:31 <mno2_> CindyLinz: 你的意思應該是套用這個抽象的 Use Case?
+16:53:51 <mno2_> 有點難解釋耶。我也不敢說我自己很懂。不過 pipes 就是基於 Free Monad 吧。如果要實際去找的話就要去看 free 的 reverse dependency。不過自己寫一寫其實就有點像是 Fix 一樣無處不在的感覺
+16:54:48 <mno2_> 一般愛用的比喻都是用 AST，不過畢竟是個比喻
+16:55:07 <mno2_> http://www.haskellforall.com/2012/06/you-could-have-invented-free-monads.html
+16:55:40 <mno2_>  引用 Gabriel 文章的定義 data Free f r = Free (f (Free f r)) | Pure r
+16:56:34 <mno2_> 其實就是某個 functor (可以想做是某種結構，可以是樹或是 List），然後你可以把它一直接起來，來一步一步執行。
+16:56:59 <mno2_> 如果沿用 AST 的譬喻就是走一棵樹，然後變成一個抽象的 list
+16:57:13 <mno2_> 這個 list 的的節點可以套用任何動作
+16:57:27 <mno2_> 可以是 print 的東西就是 codegen
+16:57:50 <mno2_> 然後最後會有某個結果 Pure r
+16:58:29 <mno2_> 接起來的動作就是 >>= ,  然後 lift 到這個結構的東做就是 return
+16:59:36 <CindyLinz> mno2_: 有沒有什麼東西一定要那樣去寫, 或是用它以後可以好寫很多?
+17:00:13 <mno2_> CindyLinz: 好難回答喔，這就好像你要怎麼跟不懂 Haskell 的人說，啊這不就是 Monad 嗎
+17:00:41 <CindyLinz> mno2_: 不會啊, 我是問我們的 daily use XD
+17:00:43 <mno2_> 就是會卡好一陣子，等到有一天靈光乍現就會覺得好像蠻合理的
+17:00:53 <CindyLinz> 如果只是實作 GHC 用得到, 那就算是沒用這樣 XD
+17:01:25 <mno2_> CindyLinz: 一般文章舉的 example 都是 AST 跟 interpreter 啊
+17:01:39 <CindyLinz> 嗯
+17:02:04 <mno2_> 應該說你想要 model 某種流程的時候， pipes 也算是去抽象化流程，把它歸為幾類來組合
+17:02:52 <mno2_> 但 AST 只是某種 special case
+17:03:19 <mno2_> 其實它是一個抽象的流程代表，不一定實際指 AST 的結構。有可能一個抽象的結構會包含好一大塊 AST
+17:06:42 <mno2_> 而之前提到有 memory leak 的時候，其實也是就好像要接兩個 list 一樣，踩到某種情況 complexity 就變 O(n^2)
+17:09:10 <petercommand> Maybe a裡的Just是type constructor嗎?
+17:09:29 <petercommand> :t Just
+17:09:30 <lambdabot> a -> Maybe a
+17:09:34 <petercommand> :k Just
+17:09:35 <lambdabot>     Not in scope: type constructor or class ‘Just’
+17:09:36 <lambdabot>     A data constructor of that name is in scope; did you mean DataKinds?
+17:10:15 <petercommand> @src Just
+17:10:16 <lambdabot> Source not found. Maybe if you used more than just two fingers...
+17:10:21 <CindyLinz> petercommand: data constructor
+17:10:50 <petercommand> 喔喔，來查一下
+17:11:09 <petercommand> 有點混淆XD
+19:27:03 <mno2_> 有點不太懂 Constraint Kinds 這個 extension 的動機。就是他究竟是為了解決什麼問題而存在。
+19:31:36 <CindyLinz> sample 看起來不錯耶 :p
+19:31:38 <CindyLinz> type Stringy a = (Read a, Show a)
+19:31:51 <CindyLinz> 然後 foo :: Stringy a => a -> (String, String -> a)
+19:33:10 <CindyLinz> 我在 Perl package 裡面寫了一大堆 (MonadIO m, MonadCatch m)
+19:33:29 <petercommand> CindyLinz: 這種情況為甚麼要constraint kinds呢?
+19:34:16 <CindyLinz> petercommand: 如果一直打 foo :: (Read a, Show a) => ... 就打很多次啊
+19:39:44 <petercommand> type這個keyword是做甚麼的呀?
+19:40:09 <petercommand> 像type Stringy a 裡的type
+19:40:22 <CindyLinz> 以後 Stringy a 就相當於 (Read a, Show a)
+19:41:18 <petercommand> 喔喔，synonyms...昨天剛看，忘記了XD
+19:45:09 <petercommand> CindyLinz: 不過stringy這個例子應該是原本沒有constraint kinds就可以加了?
+19:47:44 <CindyLinz> 嗯嗯 以前我只看過用在 data type 上的
+19:55:42 <mno2_> 沒有耶，測了一下 type Stringy a = (Read a, Show a) 沒有加 -XContraintKinds 過不了
+19:56:22 <mno2_> 我覺得 ghc 已經在 type level 長出另一層語言了..
+19:59:54 <petercommand> 所以這裡是Constraint synonym的意思嗎?
+20:00:05 <petercommand> 看起來好像是這樣
+20:00:32 <petercommand> 原本沒看懂XD
+20:01:18 <CindyLinz> petercommand: 我看反你的意思了 XD # 19:45 < petercommand> CindyLinz: 不過stringy這個例子應該是原本沒有constraint kinds就可以加了?
+20:01:36 <petercommand> 喔喔XDXD
+20:01:53 <CindyLinz> mno2_: 把 Agda 用某種扭曲的方式一點一點 porting 回來? XD
+20:06:54 <mno2_> CindyLinz: 總覺得聞起來怪怪的 xD    但也不至於到 Java 長出 lambda 這種程度。也許只是我程度不到那個 level
+20:07:02 <CindyLinz> 聞起來怪怪的 XD
+20:07:21 <CindyLinz> 不是就在 Set 上面加了個 Set_1 嗎? XD
+20:07:57 <mno2_> 不止吧， type level operator 都出現了
+20:10:42 <petercommand> type level operator指的是甚麼呀?
+20:11:59 <mno2_> {-# LANGUAGE TypeOperators #-}
+20:14:57 <mno2_> Closed Type Families 還可以寫 type level recursive function 耶
+20:25:06 <petercommand> 像data Barry t k p = Barry { yabba :: p, dabba :: t k }
+20:26:08 <petercommand> 這裡Barry就是type constructor，對嗎?
+20:36:31 <petercommand> 應該是左邊的Barry是type constructor, 右邊的Barry是data constructor...
+21:18:30 <CindyLinz> mno2_: operator 和 function 不是一樣嗎? @@"
+21:24:53 <mno2_> CindyLinz: 一樣啊，我只是要說不止而已。還是我誤解你的 Set_1 的意思？
+21:26:06 <mno2_> petercommand: data constructor 跟 type constructor 兩者命名可以相同
+21:26:38 <petercommand> 恩
+21:29:10 <CindyLinz> mno2_: 那我也講一次 Set_1 的意思好了 XD
+21:29:34 <CindyLinz> 就是慢慢把 value level 能做的事慢慢搬到 type level 做一次 XD
+21:30:45 <CindyLinz> 來設一下鍵盤 cap lock ←→ ctrl XD
+21:33:50 <mno2_> Set_1 是哪裡的術語啊？
+21:37:00 <CindyLinz> mno2_: Agda's universe; all types belongs to Set; all Sets belongs to Set_1; all Set_1 belongs to Set_2, ... etc
+21:37:34 <CindyLinz> My ctrl is configured to broken... Can't switch to Chinese IME.. XD
+21:38:19 <CindyLinz> 呼 ctrl 回來了 :p
+21:38:51 <CindyLinz> 突然覺得, 我左邊的 ctrl 換成 caps lock 也不好啊, 我切中文不方便 @@"
+21:39:08 <CindyLinz> 咦不對 caps lock 那個位置也不該不方便
+23:53:41 <monochrom> CindyLinz: http://hackage.haskell.org/package/free-game 是一大個 free monad. 在現今版本不易看出. 在 0.3.0.0 則很明顯.
+23:56:45 <CindyLinz> 好像很有趣 :p

@@ -1,0 +1,73 @@
+12:59:10 <Yu-Lin> 這兩三天的 ICFP 戰況如何
+13:32:33 <Yu-Lin> 有人可以回答我問題嗎？
+13:34:25 <godfat> 我吃完飯後稍微說一下 XD
+13:36:40 <Yu-Lin> 我有個跟 ICFP 無關的問題
+13:36:42 <Yu-Lin> XD
+13:36:57 <Yu-Lin> zip 這個 function，實際上到底是什麼？
+13:37:08 <GH_J> 選我選我
+13:37:18 <godfat> 把兩個 lists 變成 pair of list
+13:37:20 <Yu-Lin> 應該說，從數學上講，這到底是什麼
+13:37:31 <godfat> 那我就不知道了 XDD
+13:37:39 <godfat> list of pairs..
+13:38:15 <Yu-Lin> 主要是我在 python 版看到一段討論
+13:38:17 <Yu-Lin> http://uranusjr.logdown.com/posts/2013/08/10/python-zip-so-did-unzip
+13:38:55 <Yu-Lin> 所以我突然發現，從功能上，我是知道，但是從數學上，我一點都不知道 zip 到底是什麼XD
+13:39:11 <_13h> 喔  最近那個合併 list 比較的問題
+13:40:36 <Yu-Lin> 恩
+13:43:45 <CindyLinz> pair of list -> list of pair.. 算是個.. 算子交換的算子?
+13:44:17 <CindyLinz> 數學好像有一門在講 operator 的.. 沒讀過 ._.
+13:44:26 <CindyLinz> 是不是叫 算子論?
+13:45:26 <CindyLinz> http://en.wikipedia.org/wiki/Operator_theory
+13:46:07 <Yu-Lin> Operator theory?
+13:46:11 <Yu-Lin> wiki 到這個
+13:46:34 <Yu-Lin> 喔喔，發現我 OP 了XD
+13:51:00 <Yu-Lin> http://en.wikipedia.org/wiki/Convolution_(computer_science)
+13:51:08 <CindyLinz> 不過我一看到 zip 第一個想到的是檔案壓縮啊..... wwww
+13:51:16 <Yu-Lin> 我的問題似乎跟這篇有關
+13:51:20 <Yu-Lin> wwwww
+13:51:58 <CindyLinz> 電腦版的 convolution.. hmm
+14:01:31 <Yu-Lin> 懂了XD
+15:14:08 <CindyLinz> mno2: Mighttpd 有用 Conduit 耶.. TMonad 也會跟進嘍?
+15:14:22 <mno2> CindyLinz: yes
+15:14:38 <mno2> CindyLinz: 雖然我沒有很喜歡 Conduit ，不過他畢竟是目前支援最齊全的
+15:14:54 <mno2> 要用 Wai 勢必要用 Conduit
+15:17:31 <hashcat> Conduit有濃重的商業背景
+15:17:36 <hashcat> 有點討厭
+15:18:31 <hashcat> 烏拉圭某大學的type theory: www.fing.edu.uy/inco/eventos/lernet2008/
+15:22:42 <CindyLinz> 往好處想.. 工業味道也最重, 正是我們需要的 XD
+15:23:40 <CindyLinz> mno2: 記得.. Conduit 整個是 pure haskell 寫的哄?
+15:23:54 <hashcat> 是
+15:24:01 <hashcat> 若不是我會更討厭
+15:24:01 <CindyLinz> cool
+15:24:27 <suhorng> 那是?
+15:24:42 <hashcat> 什麼那是
+15:26:41 <hashcat> haskell程序自動證明機
+15:26:43 <hashcat> http://hackage.haskell.org/package/sbv
+15:26:49 <suhorng> 喔喔 感謝
+15:26:54 <suhorng> 一直搜到奇怪的東西._.
+15:27:00 <hashcat> 最近新興趣是亂貼東西
+15:41:45 <suhorng> Scheme有辦法看macro expand之後的code嗎..?
+15:42:06 <miaout17> 結果ICFP Contest報了名沒去打。週末加了一些班，處理一些私事，去了g0v hackathon
+15:51:12 <b4283> suhorng: 查了一下標準裡沒有
+15:51:41 <b4283> 但是 guile 有 macroexpand 可以印出 ast..
+15:53:08 <_13h> racket 應該也可以  但我不會用@_@
+16:01:01 <suhorng> 繼續研究><
+16:02:20 <_13h> ypsilon 有 macro-expand 可以用
+19:34:49 <mno2> coursers  上有開 Introduction to Mathematical Philosophy
+19:34:54 <mno2> coursera
+19:35:44 <mno2> 有興趣的話可以註冊一下
+19:36:23 <mno2> 第二個禮拜就有講 What is Truth
+19:42:04 <hashcat> 喔~
+19:42:16 <hashcat> 我看過那網站好幾次
+19:42:34 <hashcat> 不過都搞不清楚要怎看到課件
+19:43:00 <hashcat> 放棄了,現在看到那網站都直接跳過
+19:46:08 <mno2> 他一定要先 signup 才能看到。如果是已經結束之前又沒註冊過的課應該是沒辦法看到
+19:46:37 <hashcat> 原來是這樣
+19:46:50 <hashcat> 等會看下
+19:47:15 <mno2> 所以通常看到有興趣的課我都先註冊再說
+19:48:58 <suhorng> 對了, PL課也要有新的session了, 在十月
+19:50:49 <mno2> suhorng: link ?
+19:52:48 <suhorng> sorry, 忘了給link https://www.coursera.org/course/proglang
+19:52:56 <mno2> thanks
+19:54:00 <suhorng> 上一個session內的公告說: "The course will be very similar to the previous offering, with the same materials, videos, homeworks, and overall structure. "
+20:35:16 <letoh> pl 課有通知，說想上的人可以再上一次XD

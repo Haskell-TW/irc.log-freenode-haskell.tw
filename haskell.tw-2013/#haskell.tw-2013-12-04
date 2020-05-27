@@ -1,0 +1,87 @@
+00:09:46 <godfat> https://github.com/klange/nyancat
+00:30:28 <godfat> 影片沒看，不過看到 Edward Kmett 說..
+00:30:28 <godfat> > I happen to disagree with him on this point, but he does seem to honestly believe it these days.
+00:30:28 <godfat> 嗯，看來路有很多方向 XD
+00:30:29 <lambdabot>   <hint>:1:44: parse error on input `,'
+13:45:16 <junhunz> f
+13:45:20 <junhunz> 有人吗？
+16:56:54 <mno2> CindyLinz: 我開了一台 digitaloceans sanfrancisco,  你帳號想要用什麼？
+17:03:00 <hashcat> 亂入我也有digitaloceans
+17:06:36 <hashcat> 剛發現貌似編譯的語言少有或沒有reflection, 那就不能怪haskell也沒有了
+17:21:27 <CindyLinz> mno2: cindy
+17:21:45 <CindyLinz> 咦, 所以一開始就要加後台了歐 ^^|
+17:28:37 <mno2> CindyLinz: 想說來玩玩 pgrest, :p
+17:29:57 <CindyLinz> 那這樣還要存 hpaste 嗎?
+17:30:34 <mno2> CindyLinz: 看你啊 xD
+17:31:00 <mno2> 萬一後端掛掉自動切 hpaste  xDD
+17:32:19 <CindyLinz> 呃.. 如果只拿 digitalocean 機器存備份 snapshot 的話..
+17:32:27 <CindyLinz> 喔, 可以當 hot 備援 XD
+17:34:22 <hashcat> 順便再亂入
+17:34:32 <hashcat> 我今天才知道有個協定是ddns
+17:36:06 <hashcat> 動態dns是可以動態改變ip的dns協定
+17:36:16 <hashcat> 可以用來分散覆載
+21:14:55 <mno2> 剛剛在 g0v 看到 a-tsioh 有在用 ocaml ，有人認識嗎？
+22:06:31 <CindyLinz> mno2: 我處理了 share module_info 的問題. 不過有個有趣發現 orz
+22:06:46 <CindyLinz> 我是用 livescript.net 頁面裡的 compile 來產生 .js 檔
+22:07:17 <CindyLinz> (不有趣的部分) 它生的檔案不會有頭尾的 (function(){   和 }).call(this)  所以這一部分我手動加一下..
+22:07:56 <CindyLinz> (有趣的部分) 發現你原本用 livescript 1.2.0 生出來的 .js 檔裡面, isPageValid 整個不見了
+22:08:05 <CindyLinz> 包括函數定義與呼叫的部分通通都被丟掉了
+22:08:31 <CindyLinz> 我猜這是踩到 node.js ≠ browser 的地雷之一...
+22:09:47 <CindyLinz> 可能 node.js 的環境裡面沒有 window 及其內容, 所以把你那整個函數呼叫都當成 constant
+22:10:10 <mno2> 有可能 xD
+22:10:25 <mno2> 這種不會有個 warning 之類的嗎？ xD
+22:10:27 <CindyLinz> 可是我沒看懂為什麼它會認為 isPageValid 會 return true...
+22:10:37 <CindyLinz> 我怎麼知道, 是你 compile 的欸
+22:11:04 <CindyLinz> 我是丟頁面裡面的那個, 這些有出來, 然後.. 看起來應該也沒有顯示 warning 的地方
+22:11:21 <CindyLinz> isPageValid 看起來只能 return true 或 false 或是 exception
+22:11:42 <CindyLinz> 我覺得在 node.js 環境應該是 always exception 才對 :Q
+22:13:19 <mno2> 還是我 commit 到舊的？
+22:14:20 <CindyLinz> 噢... 你是說你的 .js 和 .ls 不是同步的?
+22:14:23 <CindyLinz> 也是有可能..
+22:19:19 <CindyLinz> mno2: 不得不說, 你的 ls 很不道地欸.. 括號那麼多! (逃)
+22:19:44 <mno2> CindyLinz: 我就說我只會取子集寫啦 xDDD
+22:20:41 <mno2> CindyLinz: 給我你的 gpg key ，傳密碼給你
+22:20:54 <CindyLinz> 我把 fetchExample 改成 backcall 的版本
+22:21:03 <CindyLinz> 沒有用過 gpg key ^^|
+22:22:23 <CindyLinz> 你是說 digital ocean 的密碼嗎? 直接給你我的 ssh public key 可以嗎?
+22:22:49 <CindyLinz> 這樣會不會有什麼風險啊?
+22:23:46 <mno2> 喔喔，也可以
+22:26:04 <CindyLinz> 平常會關起來省錢嗎?
+22:26:39 <mno2> 不會啊，就開著，一個月也才 $5
+22:27:25 <CindyLinz> 也對.. 上次我在 survey 的時候是想租來開 minecraft server, 記憶體要吃 > 2G...
+22:27:54 <mno2> 開大台當然就比較貴
+22:28:07 <CindyLinz> 可是只有記憶體大, 別的部分不大嘛 QQ
+22:29:17 <godfat> 開超大 swap..?
+22:29:45 <CindyLinz> 那玩不動... ^^|
+22:30:03 <godfat> 搞不好 ssd 能這樣玩？ XD
+22:30:12 <CindyLinz> 開超大 swap 的玩法是先把想做的動作寫成 script 輸入進去給它慢慢背景跑吧.......||
+22:30:30 <godfat> XDDD
+22:30:33 <CindyLinz> 行嗎...?? (懷疑貌)
+22:31:45 <godfat> 我只知道我開 $5/mo 的 digitalocean 本身沒有開 swap,
+22:31:45 <godfat> 結果我 ruby 有東西跑不動... 我只好幫他開
+22:31:45 <godfat> 然後發現 /tmp 的空間超小，packer 會用那邊 build 又 build 不起來
+22:31:45 <godfat> 還好可以用 TMPDIR 改暫存位置...
+22:32:14 <godfat> 不過便宜我也認了 @@
+22:32:47 <CindyLinz> 或是你用實體的筆電之類的 build 完再把 binary 搬上去?
+22:33:15 <godfat> 那我得弄 linux 或 crosscompile |||b
+22:33:24 <CindyLinz> 對喔你是用 mac...
+22:33:49 <CindyLinz> 那再開一個 $80/mo 的, 只用一個小時編完就關掉... XD
+22:34:07 <godfat> 我曾經想過，暫時加大... XD 還好後來是都解決了 @@
+22:34:16 <CindyLinz> 咦, 它可以暫時加大?
+22:34:22 <CindyLinz> 要 reboot 嗎?
+22:34:30 <godfat> 好像只能加記憶體就是了
+22:34:31 <godfat> 忘記要不要，應該要吧
+22:34:55 <CindyLinz> 不在意短期 down time 的話, 比加開方便的感覺...
+22:35:03 <CindyLinz> 比加開第二台方便的感覺
+22:35:33 <godfat> 是啊.. 開第二台我還要弄一樣的環境 XD
+22:36:52 <CindyLinz> godfat: 哼哼, 就用你昨天找來的熱呼呼的 socat 搬啊!
+22:37:49 <godfat> XDDD 也是，socat 好強啊
+22:37:50 <godfat> 不不等會，單純只是要搬的話，rsync 比較方便？ XD
+22:38:36 <CindyLinz> 我還不會用 socat.. 所以我自己都是用 tar czvf - dirs | nc 目標   然後接收用 nc -l OOOO | tar xzvf -
+22:38:50 <CindyLinz> 加個 v 只是為了比較有 fu.. XD
+22:39:59 <godfat> XDDD 我 nc 只是拿來傳 diff 而已，
+22:40:00 <godfat> 要傳目錄不用 rsync 嗎？
+22:40:12 <CindyLinz> 因為我都記不清楚 rsync 的參數... orz
+22:40:31 <CindyLinz> 好像 path 結尾有斜線或沒有斜線還會有微妙差異 orz
+22:40:36 <godfat> 難怪，不過我也都是要用時才查的，不常用都記不起來
+22:40:39 <CindyLinz> tar 就可以有目錄了 XD

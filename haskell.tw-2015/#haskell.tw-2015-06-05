@@ -1,0 +1,97 @@
+02:25:20 <CindyLinz> Funth 26 的投影片~~ http://cindylinz.github.io/Talk-PermutationParser/
+02:46:07 <CindyLinz> 聽說是個比 Cabal 方便的好東西.. # https://halcyon.sh/
+02:46:22 <CindyLinz> 要來讀讀看 ^^
+02:50:24 <monochrom> 其實更似是針對一個更宏觀問題
+02:51:16 <CindyLinz> 好像是說可以依 project 管控多個 GHC 版本, 然後一堆 library 的不同版本
+02:51:28 <CindyLinz> 然後聽說又不必像 cabal-sandbox 那樣同樣的 library 到處裝
+02:51:38 <CindyLinz> 可能它看到一樣的會幫忙 share
+04:10:09 <CindyLinz> 感覺怪怪der.. orz
+04:12:55 <monochrom> 甚麼感覺怪呢?
+04:29:58 <pkmx> nix表示：
+04:57:03 <monochrom> 忽然覺得你們好像不用睡 :D
+11:37:22 <CindyLinz> 一開始聽到的是我上面寫的那些
+11:37:41 <CindyLinz> 可是看它的 Tutorial, 後面開始出現什麼安裝 app 的方法是blabla.....
+11:38:11 <CindyLinz> 它是一個 app platform 嗎? @@"
+11:38:34 <CindyLinz> 而且所有的東西都是裝在根目錄 /app 裡面\
+11:40:20 <CindyLinz> monochrom: 這是存活者偏誤統計啊~~ # 04:57 < monochrom> 忽然覺得你們好像不用睡 :D
+12:15:46 <caasihuang> 就像我覺得網路上大家好像什麼都會一樣？ #HiveMind
+14:20:53 <suhorng> CindyLinz: 是說你有打算實作純 Hindley-Milner 嗎@@?
+14:22:29 <CindyLinz> suhorng: 我覺得... 不先實作純 Hindley-Milner 可能會寫不出不純的?
+14:22:45 <suhorng> XDD
+14:22:58 <CindyLinz> 就是想要個完成度還堪用的 Haskell, 所以應該不能停在純 Hindley-Milner 吧
+14:23:08 <suhorng> 應該會差很多
+14:23:11 <CindyLinz> 是喔?
+14:23:16 <CindyLinz> 所以純的會白寫嗎? XD
+14:23:40 <suhorng> 不會, 但純的滿簡單的, 只要會手算, 程式就寫得出來; 純的 Hindley-Milner 至少就沒有討論 constructor 那些, 也沒有 kin
+14:23:43 <suhorng> kind
+14:24:16 <suhorng> 寫了 simply type lambda calculus 的 type inference 後(有 unification)就可以無痛升級成 Hindley-Milner
+14:24:21 <CindyLinz> 是說... 昨天跟 a127a127 討論... 發現 layout format 這個設計就會超出 context free language 的範圍
+14:24:27 <suhorng> 對
+14:24:37 <CindyLinz> 為什麼要在這種小地方就把 language parser 搞複雜呢 orz
+14:24:39 <suhorng> 完全不想碰 Haskell parser, 要處理 layout XDD
+14:24:40 <CindyLinz> python 你來說說!
+14:24:57 <suhorng> 我還以為 python 的 layout 比 Haskell 簡單
+14:25:25 <CindyLinz> 我想第一步是用自己的程式 (Turing complete 的 XD) 簡單掃一遍, 把字串和註解還有 quasi quote 之外的 do, let, of, where 這些都加上 { ; }
+14:25:33 <suhorng> XDD
+14:25:38 <CindyLinz> 然後再丟給 context free grammer
+14:25:40 <suhorng> 感覺合理欸, 不知道 GHC 是不是也這樣做
+14:25:40 <CindyLinz> grammar
+14:25:52 <suhorng> 可是我還有個不知道怎麼處理的地方是 operator
+14:26:03 <suhorng> 是不是得先掃過一遍把使用者定義的 operator 跟 priority 取出來阿
+14:26:19 <CindyLinz> !
+14:26:50 <CindyLinz> 可以先不管 priority, 把它們塞成一包: 一團由 binary infix operator 作成的串燒
+14:26:52 <suhorng> 唔, top level definition 的語法好像不難, 這樣應該可以 top-level definitions 跟裡面的 expressions 分開
+14:26:55 <suhorng> 嗯哼
+14:27:08 <CindyLinz> 然後.... 我有用過的 layout format language, 除了 Haskell 以外只有 coffeescript 和 livescript
+14:27:16 <CindyLinz> 它們的 layout format.... 我從來都沒搞清楚 orz
+14:27:36 <CindyLinz> 只有寫多了就避開自己也搞不懂的 corner case.. orz
+14:27:38 <suhorng> wwww
+14:27:44 <CindyLinz> 我不知道它們存不存在嚴格定義
+14:27:50 <suhorng> 這是 neural network 的強項!
+14:28:00 <CindyLinz> 這兩個語言都是用 example 對照譯出來的 javascript 給你看而已
+14:28:05 <CindyLinz> 自己去「依此類推」
+14:28:22 <CindyLinz> python 我不知道有沒有嚴格定義... Haskell 的定義還蠻明確的 :|
+14:28:35 <suhorng> 哦, 這麼說來不知道 Haskell 的 desugar 是在哪一步做的
+14:28:40 <suhorng> 呃 好像不重要
+14:28:42 <CindyLinz> suhorng: compiler 內建一個 neural network 嗎...... OAO
+14:28:50 <CindyLinz> 會思考的 compiler.... (抖抖
+14:28:52 <suhorng> CindyLinz: 人啦XD
+14:29:11 <CindyLinz> 喔XD
+14:29:24 <suhorng> neural network...之錢財看到有人把 neural network 的短期記憶擴展到長期記憶 變成像 turing machine 的東西XD
+14:33:00 <CindyLinz> 無法理解它的對應 @@"
+14:33:15 <CindyLinz> 這個「記憶」就變成 turing machine 的 state 嗎?
+14:35:31 <suhorng> CindyLinz: 原本舊的 neural network (LSTM 那個) 一個東西只有一格記憶空間 擴展後相當於接上外部記憶體 然後原本的 neural network 則當成 turing machine 的 state (transition) controller
+14:35:44 <suhorng> 我找一下XD
+14:36:15 <CindyLinz> neural network 是會變化的哄
+14:36:29 <suhorng> https://code-beer.hackpad.com/Talk--APBpjytJfJv 拉到底下的 Neural Turing Machine
+14:52:26 <CindyLinz> 這哪一年的東東啊, 有人要講 NPAPI?
+14:52:34 <CindyLinz> 不是被 chrome 禁掉惹? ^^|
+14:53:10 <CindyLinz> 看起來是今年耶 XD
+14:53:31 <CindyLinz> 教大家寫 NPAPI, 寫一堆 non-chrome only 的東西來抵制 chrome 嗎? XD
+14:54:25 <CindyLinz> 那個 Neural Turing Machine 的能力看起來好強大, 這樣直覺會聯想到內容農場ww
+14:54:50 <suhorng> 內容農場XDDD
+14:55:31 <CindyLinz> 下一場講永動機也沒有違合感這樣...
+14:55:35 <suhorng> Code & Beer 似乎一直都有默默的活動
+14:56:18 <CindyLinz> 這是個什麼性質的秘密組織啊?
+14:56:47 <suhorng> 之前去看文章中的實驗, 有兩個, 一個是輸入一個數列後, 要求該網路也輸出一樣的數列, 另一個是對輸入排序. 第一個實驗結果他們去檢驗 train 出來的神經網路, 還把它翻成虛擬碼XDD 可以看到過程中真的把東西寫進記憶體然後再讀出來
+14:58:02 <suhorng> 性質應該是滿自由的吧, 各種分享演講
+14:59:44 <suhorng> 這個~ https://code-beer.hackpad.com/ https://www.facebook.com/groups/204354589736353/
+14:59:47 <CindyLinz> 請阿苗分享在54新觀點力戰群嘴的經驗也可以嗎?
+15:00:29 <CindyLinz> 喔 程式人相關XD
+15:00:46 <suhorng> 我不太清楚這邊跟開源社有沒有關聯或合作關係
+15:03:10 <CindyLinz> 他們看起來是先放主題再徵講者?
+15:03:42 <suhorng> 都有 也有反過來的 沒有什麼規定
+15:05:40 <CindyLinz> suhorng: 你被點名講 Haskell 耶~
+15:06:19 <suhorng> >""""<
+15:06:53 <CindyLinz> [開場] 今天預定要講 Haskell, 不過我想講比 Haskell 更厲害的東西!
+15:07:51 <suhorng> 然後開始講 C++
+15:08:37 <CindyLinz> 怎麼不是 Idris/Agda.. XD
+15:09:15 <suhorng> C++ 語言本身的難懂跟難學程度樂勝(?
+15:10:57 <CindyLinz> 我不覺得 C++ 那個叫作「難」.. ^^|
+15:11:21 <CindyLinz> 如果用「花很多時間學」來衡量的話, 那是難沒錯...
+15:11:40 <suhorng> 這樣講確實是
+15:11:57 <CindyLinz> 我覺得難的東西是... 東西通常不多, 但是要花很多時間冥想, 會不會通要看悟性....
+15:12:44 <CindyLinz> 當然老師如果很棒的話, 可以作很厲害的催化劑, 他知道學生哪邊可能不通, 量身定作地幫助學生把實際門檻拉很低
+15:13:02 <CindyLinz> 但是難的東西還是會有老師怎麼拉都拉不下來的部分在 ^^|
+15:13:07 <suhorng> 那個是可遇不可求了....
+15:13:30 <CindyLinz> 然後突然想通了以後可能會一輩子愛上這個領域.... (思

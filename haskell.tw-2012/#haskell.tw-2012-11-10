@@ -1,0 +1,23 @@
+00:40:19 <CindyLinz> 我今天讀 Total Programming, 講到: For any language in which all programs terminate, there ar always-terminating programs which cannot be written in it - amoung these are the interpreter for the language itself.
+00:40:25 <CindyLinz> 感覺蠻有趣的 ^^
+01:02:06 <MnO2> CindyLinz: 這好像complexity課有上過？
+01:02:25 <MnO2> CindyLinz: 我是修隨機客的
+01:05:13 <CindyLinz> MnO2: 啦~ 我沒有修 complexity :D
+01:05:44 <CindyLinz> MnO2: complexity 有教 programming language 喔?
+01:05:52 <MnO2> CindyLinz: 網媒不用修complexity?
+01:05:57 <CindyLinz> MnO2: 不用 :D
+01:07:06 <CindyLinz> 還是他講的通通都是轉化為 turing machine 上面再來討論的?
+01:07:12 <MnO2> CindyLinz: 這描述不需要到programming language的程度吧，這應該只是recursive language的描述
+01:07:51 <CindyLinz> 也包含最後面那句嗎? 就是其中一例就是它自己的 interpreter
+01:09:59 <MnO2> 就看他自己的interpreter有沒有在那個language中啊?  應該可以證明不包含吧
+01:10:10 <MnO2> complexity課的習題都在搞類似這種東西
+01:12:14 <CindyLinz> 我讀這句的時候, 心中有一股 Godel 不完備定理的 fu~  我把 interpreter 想成是一組公設, 它可以「證明」這個 language 裡面的所有命題(程式+input), 所以這一組公設裡面一定有至少一條公設, 是這個 language 無法描述的
+19:47:35 <MnO2> http://www.youtube.com/watch?v=P4wNjfPJo8g
+19:48:32 <MnO2> 單中杰的演講，講Monadic Regions
+19:48:47 <MnO2> 主要是修正Iteratee的一些問題
+23:51:41 <CindyLinz> 查 Dependency Injection 的時候查到的 Dependency Inversion ^^| # http://lostechies.com/derickbailey/2011/09/22/dependency-injection-is-not-the-same-as-the-dependency-inversion-principle/
+23:54:47 <CindyLinz> QQ 單中杰不是講中文啊
+23:56:48 <MnO2> CindyLinz: 為什麼對非說中文的人演講要講中文 @@?
+23:57:06 <MnO2> http://electronics.stackexchange.com/questions/48516/why-are-they-called-breadboards
+23:57:10 <MnO2> 長知識...
+23:59:12 <CindyLinz> MnO2: 點連結之前不知道是對非中文的人講啊 ^^|

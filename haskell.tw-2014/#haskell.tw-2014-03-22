@@ -1,0 +1,103 @@
+04:04:04 <CindyLinz> 還是會忘記平常 (非定義 class 或 instance 的時候) 的 ScopedTypeVariable 要在外層額外打上 forall 才會生效
+04:05:20 <monochrom> 而我就常忘記一旦用上 forall, 所有 type variables 都要列在 forall 之下
+04:06:04 <monochrom> 你是這麼早起, 還是這麼遲睡? 還是失眠? :)
+04:06:54 <monochrom> 還是, 日審 Perl, 夜判 Haskell? XD
+04:16:34 <CindyLinz> 還沒睡.. 白天上班, 晚上去立法院附近, 回來再趕工.. 不過差不多要睡了 @@" 
+04:17:00 <CindyLinz> 心情不太好, 影響生產力... :(
+04:18:00 <monochrom> 我心情不好時也不敢改功課, 恐怕拿學生分數來出氣 XD
+04:18:42 <CindyLinz> ww
+04:20:19 <letoh> 心情不好可以拿 bug 出氣 XD
+20:11:26 <hashcat_> www.impredicative.com/ur/
+20:11:52 <hashcat_> 很多語言都想併吞haskell
+20:54:52 <hashcat_> 含ml haskell又精簡
+22:23:05 <monochrom> 好事. 古時很多語言都想像C
+22:24:54 <monochrom> 先知們不是說過, Haskell 是將來所有語言的指標嗎? :)
+22:59:56 <CindyLinz> 只是都沒有吞到 non-strict 的部分. 那才是 Haskell 的特色啊~ (無論好壞)
+23:11:07 <hashcat_> 那是敗筆吧
+23:12:33 <hashcat_> 新語言都踢掉那特性
+23:13:18 <hashcat_> 代價高昂 結果無聊
+23:14:56 <hashcat_> 塞滿記憶體 號稱減少不必要計算 結果卻是減速
+23:15:26 <monochrom> 我認為不是. 我認為 non-strict 非常重要. 只有 non-strict 才可以做 "forever m = m >> forever m"
+23:15:34 <hashcat_> CindyLinz 上次你也亂用過
+23:17:04 <CindyLinz> hashcat_: 忘了, 怎樣亂用啊? XD
+23:17:30 <CindyLinz> 不過, 我覺得亂用語言特性, 產生恐怖的結果, 是天經地義啊?
+23:17:34 <hashcat_> 算了  沒有
+23:18:04 <CindyLinz> 但不能因為這樣而當成該特性不好的證據..
+23:18:18 <CindyLinz> 很厲害的刀, 通常也會有很恐怖的破壞力嘛 :p
+23:18:29 <hashcat_> 多數計算non-strict很low
+23:18:43 <hashcat_> 不該是預設
+23:19:18 <CindyLinz> 我看沒有 non-strict 的 haskell-like, 就很難像 haskell.. @_@"
+23:19:33 <CindyLinz> 畢竟 haskell syntax 不是很有特色.. ^^|
+23:20:14 <hashcat_> haskell寫qsort還能寫成假的qsort
+23:20:47 <CindyLinz> hashcat_: input 給的也不一樣呀~
+23:21:24 <CindyLinz> 我記得 C++ SGI STL 裡面.. qsort 也沒有做 list 能用的
+23:23:25 <hashcat_> 反正看到熟手都能亂用  只有深入了解內部實作才不會用錯的特性
+23:23:51 <hashcat_> 就覺得畫蛇添足了
+23:24:30 <hashcat_> 而且haskell號稱編譯過就是正確的程序
+23:25:19 <hashcat_> 從這來說non-strict這特性失敗阿
+23:25:31 <monochrom> 學 lazy evaluation 並不是深入了解內部實作
+23:25:35 <CindyLinz> 我是不認識這些新語言的作者.. 只是有在懷疑.... 如果他們自己本身同時是個 Haskell expert, 看到一個沒有 non-strict by default 的語言, 真的會覺得它有含入 Haskell, 或是和 Haskell 相像嗎? @_@"
+23:26:42 <hashcat_> idris這很專家了吧
+23:26:52 <hashcat_> strict by default
+23:27:09 <CindyLinz> 畢竟我還不是 expert, 只是玩得稍微有些日子, 我覺得我摸到的常見 library 都吃 non-strict 特性吃得很深.. 沒有 non-strict 的話這些 library 根本不能動.. @@"
+23:27:23 <CindyLinz> 像是 edwardk 的 lens..
+23:27:25 <monochrom> 我也看不出 non-strictness 怎樣減低正確性. 相反, 我看 strictness 才減低正確性. 我剛才已舉例子.
+23:27:56 <CindyLinz> non-strict 應該是增加表達得出來的寫法吧
+23:28:19 <CindyLinz> 我以為正確性跟 type 比較有關?
+23:29:03 <hashcat_> 正確不只是輸入輸出正確
+23:29:43 <hashcat_> 還有有限的資源估計
+23:30:12 <CindyLinz> hashcat_: 問問, 你是怎樣估計 idris 作者 haskell 很熟呀?
+23:30:41 <hashcat_> haskell根本是idris的子集阿
+23:30:41 <CindyLinz> 嗯.. 因為, 我想從 github 看.. 結果作者叫作 idris-lang... 囧
+23:31:09 <CindyLinz> hashcat_: 沒有 non-strict by default, fu 就不對, 不可能是子集啊 @_@"
+23:31:13 <hashcat_> idris也有實作non-strict
+23:31:28 <hashcat_> 只是不是預設
+23:31:46 <hashcat_> 要聲明才會
+23:32:21 <CindyLinz> 這樣應該頂多語法像吧 @_@"
+23:32:49 <CindyLinz> 喔, idris-lang 有 member list.. # https://github.com/idris-lang
+23:33:18 <hashcat_> 多一兩條線聲明lazy就不像拉
+23:33:33 <CindyLinz> idris-dev 有 51% 用 haskell 寫~ XD
+23:36:19 <monochrom> 好, non-strict 語言要用多些資源. 我有個想法, 這是因為下層的電腦 strict, 把 non-strict 程式編譯到 strict 的電腦才導致浪費. 即是說, 在另一個平行宇宙, 電腦都是 non-strict 的, 那裏的另一個 hashcat 在訴說: C 太 strict 了, 以致比 Haskell 慢...
+23:37:39 <hashcat_> 極端來說ada連有限資源下都能保證正確輸出
+23:38:01 <CindyLinz> 這是.. functional machine 或是 logic machine 的電腦模型?
+23:38:24 <hashcat_> haskell則是有機會記憶體不夠直接死掉
+23:38:41 <CindyLinz> hashcat_: ada 發生 bit 反轉的時候我覺得它還是會錯吧 :|
+23:39:40 <CindyLinz> hashcat_: 記憶體不夠會死掉是因為寫的人沒估計記憶體啊.. 不過這種 GC base 的 runtime, 的確不是設計給這麼嚴苛的環境用的
+23:39:45 <hashcat_> haskell如果光是插不夠記憶體就掛 那就算拉
+23:40:22 <hashcat_> 上限沒有簡單的方法估計
+23:41:01 <hashcat_> ur/web連gc都拔掉了
+23:41:51 <monochrom> 我正是說, 我只能同意浪費這一點, 而即使這一點也有問題, 究竟是本質還是歷史偶然
+23:42:34 <monochrom> 我懂得計算上限. 不過你可以說方法不簡單.
+23:43:02 <hashcat_> 記憶體成本很貴  人力成本也是
+23:43:40 <CindyLinz> 「不簡單」指的是對所有可能的程式適用的計算上限的演算法不存在嗎?
+23:43:52 <monochrom> 幸運地, 在 strict 及充滿 side effects 的語言, 計算輸出的正確性也不簡單. 扯平.
+23:45:18 <hashcat_> ur/web和idris大大減輕成本
+23:45:31 <CindyLinz> 我覺得有用到 遞迴 或是 long-term 沒有回收的記憶體 的程式, 都很難計算記憶體使用量欸
+23:46:24 <CindyLinz> idris 更現實的問題是, 要承受它本身 bug 多的成本吧 @_@"
+23:47:34 <hashcat_> bug可以修,但特性不是用來修的
+23:48:17 <CindyLinz> 這是沒錯
+23:48:25 <hashcat_> 額罷了
+23:48:29 <CindyLinz> 但是現在就考慮成本的比較, 太早了 @@"
+23:48:47 <CindyLinz> 因為根本不能實際比較, 只能空想 @@"
+23:50:13 <hashcat_> 反正port到小版子很困難
+23:50:56 <hashcat_> 就是不好嘖
+23:52:44 <monochrom> 記憶量難以計算, 我認為 GC 才是問題, 不論 strict 或 non-strict.
+23:52:55 <CindyLinz> 我的感覺啊~ 那些宣稱自己融入 Haskell 的特性的語言, 根本就沒有 Haskell 的重點味道, 只是在藉用 Haskell 的名聲吃豆腐吧 @@"
+23:53:10 <hashcat_> 暈
+23:53:21 <monochrom> 不, 甚至不是 GC 問題. 是分享問題.
+23:53:42 <hashcat_> haskell只有non-strict能提嘛
+23:54:55 <CindyLinz> hashcat_: 如果不是 non-strict 的話, static 的有 ocaml, F#, erlang(?); dynamic 的有 list, scheme.. 我不覺得 Haskell 還有什麼特色啊?
+23:54:56 <hashcat_> 額先來睡
+23:55:38 <monochrom> 假設有某 record, 讓我叫它做 x. 我們想知道幾時可以扔掉 x, 因為這關乎計算記憶量.
+23:55:42 <CindyLinz> 唔.. 不知道上面哪幾個語言裡面有 Haskell 的 class.. 可能也算是個特色 ^^|
+23:55:45 <hashcat_> typeclass跟範疇論也很haskell阿
+23:56:02 <hashcat_> 無括號函數套用
+23:56:15 <CindyLinz> hashcat_: 無括號函數套用的語言太多了 ^^|
+23:56:33 <hashcat_> 簡陋不堪的module
+23:56:35 <CindyLinz> hashcat_: 你看古早的 unix shell script.. XD
+23:56:41 <hashcat_> 假qsort
+23:56:56 <hashcat_> 先睡了
+23:57:40 <CindyLinz> 你說的後面其他項目, 我現在平常在寫, 都不太遇到的 @@"
+23:58:45 <monochrom> 但是, x 被千多個其他 record 所指. (千夫所指? XD) 而這千多個其他 record 之間關係不大. 那麼, 要知道幾時可扔掉 x, 就要先計算那千多個菜鳥的動向. 這就是計算記憶量的難處, 根本與 non-strictness 無關, SML 及 javascript 一樣難.
+23:59:06 <CindyLinz> monochrom: 我對 GC 真是又愛又恨 @_@"
+23:59:49 <monochrom> 其實也不關乎 GC. 你以為在 C++ 又容易了嗎?

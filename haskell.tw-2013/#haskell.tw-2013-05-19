@@ -1,0 +1,11 @@
+00:44:48 <MnO2> 不太確定 Facebook auth 是指？ OAuth 可以參考 http://hackage.haskell.org/package/snaplet-oauth ，不過沒有 Facebook ，要加應該不難。其他 FB API 可以參考 http://hackage.haskell.org/package/fb
+00:53:26 <hychen> 我轉用yesod了
+18:31:26 <letoh> MnO2: 因為實在拖太久  我直接發 pull request 了XD
+18:32:01 <letoh> 不過這幾天還有一些修改，等你 merge 完我再接著 commit 上去
+20:41:42 <MnO2> letoh: 結果 fleurer 手腳比較快
+20:43:17 <MnO2> 疑，他好像還沒按 merge
+21:17:55 <letoh> 好像只有留 comment
+22:47:49 <MnO2> http://nineties.github.io/category-seminar/1.html#/
+23:34:38 <letoh> 我看到後面已經暈了...
+23:34:51 <letoh> 前半段還可以
+23:37:51 <MnO2> https://www.fpcomplete.com/user/bartosz/understanding-yoneda

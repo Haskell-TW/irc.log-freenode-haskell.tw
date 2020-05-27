@@ -1,0 +1,38 @@
+12:57:59 <CindyLinz> 如果 return 去掉, 只用 pure
+12:58:20 <CindyLinz> mzero 和 mplus 去掉, 只用 empty 和 (<|>)
+12:58:28 <CindyLinz> 那 MonadPlus 根本可以丟掉了.. XD
+12:58:37 <CindyLinz> Monad 還有剩一個 (>>=)
+17:43:24 <pkmx> 這就是 MonadPlus 比 Alternative 厲害的地方不是嗎XD
+18:10:28 <CindyLinz> 可是用不到 MonadPlus 啊
+18:10:38 <CindyLinz> 用 (Alternative m, Monad m) => 就好了
+18:21:05 <pkmx> 是沒錯xd
+20:50:05 <petercommand> 有 (Alternative m, Monad m) => MonadPlus m 嗎XD
+20:55:48 <pkmx> @src MonadPlus
+20:55:49 <lambdabot> class Alternative m => MonadPlus m where
+20:55:49 <lambdabot>     -- Note: Alternative wasn't a superclass before GHC 7.10
+20:55:49 <lambdabot>     mzero :: m a
+20:55:49 <lambdabot>     mplus :: m a -> m a -> m a
+20:56:16 <pkmx> base 4.9 是
+20:56:26 <pkmx> class (Alternative m, Monad m) => MonadPlus m
+20:57:09 <pkmx> mzero = empty ; mplus = (<|>)
+21:09:33 <CindyLinz> 是 class 的 constraint (必要條件), 不是 instance 的 constraint (充分條件)
+21:09:58 <CindyLinz> 所以我們還需要每次都手動寫一下 mzero=empty 和 mplus=(<|>)... 
+21:10:26 <CindyLinz> 欸, 有 default 實作嗎?
+21:10:37 <CindyLinz> 那就還剩下 instance 一下.. ^^|
+23:34:06 <CindyLinz> @hoogle Applicative f => [f a] -> f [a]
+23:34:09 <lambdabot> CLaSH.Util (<:>) :: Applicative f => f a -> f [a] -> f [a]
+23:34:10 <lambdabot> Turtle.Options.Parsers (<:>) :: Applicative f => f a -> f [a] -> f [a]
+23:34:10 <lambdabot> Data.Attoparsec.Combinators pured :: (Applicative g, Applicative f) => g a -> g (f a)
+23:34:24 <CindyLinz> @hoogle Monad f => [f a] -> f [a]
+23:34:25 <lambdabot> Control.Monad.Run mswitch :: (Monad m, MonadUnTrans MaybeAlg t) => [t m b] -> m b -> m b
+23:34:26 <lambdabot> Control.Monad.Run mswitch0 :: (Monad m, MonadUnTrans MaybeAlg t) => [t m b] -> m b -> m b
+23:34:26 <lambdabot> Control.Monad.Run mswitch1 :: (Monad m, MonadUnTrans MaybeAlg t) => [t m b] -> m b -> m b
+23:34:51 <CindyLinz> @hoogle sequence
+23:34:51 <lambdabot> Prelude sequence :: (Traversable t, Monad m) => t (m a) -> m (t a)
+23:34:52 <lambdabot> Control.Monad sequence :: (Traversable t, Monad m) => t (m a) -> m (t a)
+23:34:52 <lambdabot> Data.Traversable sequence :: (Traversable t, Monad m) => t (m a) -> m (t a)
+23:35:00 <CindyLinz> @hoogle sequenceA
+23:35:01 <lambdabot> Prelude sequenceA :: (Traversable t, Applicative f) => t (f a) -> f (t a)
+23:35:01 <lambdabot> Data.Traversable sequenceA :: (Traversable t, Applicative f) => t (f a) -> f (t a)
+23:35:01 <lambdabot> Control.Monad.Exception.Asynchronous.Lazy sequenceA :: Applicative f => Exceptional e (f a) -> f (Exceptional e a)
+23:35:13 <CindyLinz> * 敲敲 hoogle

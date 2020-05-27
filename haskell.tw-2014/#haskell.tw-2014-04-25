@@ -1,0 +1,54 @@
+10:18:00 <monochrom> 良葛格英文名是甚麼?
+10:19:45 <darkx> monochrom: http://openhome.cc/Gossip/
+10:20:03 <darkx> caterpillar
+10:21:02 <darkx> https://twitter.com/caterpillar
+10:21:05 <darkx> 這位
+10:22:44 <godfat> 這麼巧？ rubyconf.tw 良葛格正在台上
+10:24:25 <darkx> godfat: 大大等等要上場XD 期待中
+10:24:35 <b4283> darkx: 耶耶，上場什麼？
+10:25:24 <godfat> XD.. 下午三點，題目是 RubyQC -- A conceptual QuickCheck library for Ruby
+10:25:35 <godfat> 獻醜
+10:25:38 <darkx> XDD
+10:26:25 <b4283> 耶耶，這個活動沒有 irc channel 呀
+10:26:31 <mno2> godfat 也在 Chicago?
+10:26:59 <godfat> mn02, 這在台灣呀？ XD
+10:27:03 <mno2> 喔喔
+10:27:12 <godfat> http://rubyconf.tw/2014
+10:27:16 <darkx> mno2: Chicago 也剛好有 Rubyconf? XD
+10:27:31 <b4283> 下午兩點 matz 要作 keynote
+10:27:36 <godfat> mno2, 你現在在 Chicago 嗎？
+10:27:42 <b4283> 主題是什麼？
+10:27:45 <mno2> 啊，那是 RailsConf
+10:28:02 <mno2> 沒有，我只是看到 xdite 飛去 Chicago
+10:28:07 <darkx> lol
+10:28:53 <b4283> brucehsu 要講 new ruby vm 呢
+10:29:22 <godfat> matz 主題好像是 objective ruby
+10:29:22 <godfat> 我好期待明天 brucehsu 的 :D
+10:30:16 <mno2> new ruby VM 的主打特色是什麼？ 沒有大鎖？
+10:30:40 <godfat> STM!
+10:30:54 <darkx> 他在趕簡報感得很焦慮啊 XD
+10:30:59 <b4283> mruby 出 1.0 了呢
+10:31:08 <b4283> http://www.mruby.org/
+10:31:14 <darkx> 然後今天我們出飯店電梯的時候... 遇到 Matz 在大廳 XD
+10:31:19 <godfat> 我剛剛聽到他說還差很多投影片 @@ 啊啊，我現在不挑太難的題目了.. XD
+10:31:22 <b4283> 什麼，兩個月的舊聞了 orz
+10:36:24 <darkx> 10:33:38 | ij1iao > https://github.com/i-tu/Hasklig/ # 太厲害了, 為了 haskell 設計的字型...
+10:36:40 <darkx> #cschat.tw
+10:46:08 <poga> darkx: 原來字型可以做成這樣@_@ 好帥
+10:47:57 <darkx> poga: 不過看習慣 monospace font 反而覺得怪 XD
+10:48:04 <darkx> 可能這個對於數學家來說比較親切吧 XD
+10:48:43 <godfat> agda 裡面都直接用 unicode 符號
+10:49:39 <monochrom> 其實也不是符號及語文它們本身的問題, 是人的問題.
+10:51:38 <monochrom> 當你向人用語文的時候, 人習慣語文的語意是模糊及可以隨意改變的. 人可以使用語文證明任何命題.
+10:52:31 <godfat> 同理，或許習慣的數學符號也會模糊了當前 context 下的意義？ :P
+10:52:48 <monochrom> 所以, 我寧願另起爐灶, 轉用符號, 並設下非常嚴厲規則.
+10:53:04 <godfat> XDDDD 佩服佩服
+10:55:04 <monochrom> 誠然, 學界中也有學棍把符號的語意定得模糊及可以隨意改變, 達到證明任何命題的目的.
+10:55:43 <monochrom> 幸而學棍的人數還遠不及全人類的人數.
+11:21:06 <kanru> haskell font
+11:21:12 <kanru> 怎麼沒有 emacs 的
+11:21:39 <kanru> 喔喔，是從 source code pro 改得
+11:31:58 <kanru> 爛掉..
+12:15:09 <cataska> http://www.cryptol.net/
+13:01:29 <cataska> http://dev.stephendiehl.com/hask/
+13:21:08 <mno2> 他列的項目蠻不錯的，可惜還需要補強一下內容說明

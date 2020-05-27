@@ -1,0 +1,5 @@
+16:17:48 <mno2> CindyLinz: http://hackage.haskell.org/package/ZipFold-0.1
+18:03:02 <CindyLinz> 不太像 @_@"
+18:04:18 <CindyLinz> 喔 最下面有個 class Zip' f where zip' :: f a -> f b -> f (P a b)
+18:04:22 <CindyLinz> P 是 strict pair
+18:14:07 <CindyLinz> 有種失落感 ._.

@@ -1,0 +1,11 @@
+00:20:24 <mno2> http://cokmett.github.io/cokmett/
+00:20:30 <mno2> 這太好笑了
+00:51:35 <CindyLinz> XDDD
+07:30:14 <suhorngM_> XDDDDDD
+07:34:27 <suhorngM_> https://github.com/cokmett/cokmett/issues/3 XDDDDDDD
+11:53:11 <pkmx> :t \f -> get >>= f
+11:53:13 <lambdabot> MonadState a m => (a -> m b) -> m b
+11:53:25 <pkmx> @hoogle MonadState a m => (a -> m b) -> m b
+11:53:25 <lambdabot> Control.Monad.Cont runContT :: ContT r m a -> (a -> m r) -> m r
+11:53:25 <lambdabot> Prelude (=<<) :: Monad m => (a -> m b) -> m a -> m b
+11:53:25 <lambdabot> Control.Monad (=<<) :: Monad m => (a -> m b) -> m a -> m b

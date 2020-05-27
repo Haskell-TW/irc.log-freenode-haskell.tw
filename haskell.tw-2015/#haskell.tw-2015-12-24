@@ -1,0 +1,8 @@
+17:04:21 <suhorng-_> :t (id =<<)
+17:04:23 <lambdabot> Monad m => m (m b) -> m b
+17:04:30 <suhorng-_> :t (join .) . fmap
+17:04:31 <lambdabot> Monad m => (a1 -> m a) -> m a1 -> m a
+17:04:56 <suhorng-_> CindyLinz: 就這樣XD
+17:08:13 <CindyLinz> * 二次中槍
+18:27:26 <petercommand> @unpl  (join .) . fmap
+18:27:27 <lambdabot> (\ d i -> (fmap d i) >>= \ e -> e)

@@ -1,0 +1,291 @@
+00:51:10 <c9sloud> 是嗎 XDD
+00:51:59 <c9sloud> 時間點好像是我剛發完 blog
+00:52:11 <godfat> 我不知道 perl 生態圈，不過 ruby 的話，純 ruby 有不少好處，例如跨 vm 和容易修改
+00:52:23 <c9sloud> hirom san 怒了 XDDD
+00:52:46 <godfat> 他在怒啥？
+00:54:34 <au> 只好送 r3 入憲^H^H進入 vm opcode
+00:55:36 <c9sloud> 因為我 benchmark 就是拿 Router::Boom 來比 XDD
+00:55:52 <godfat> perl 有實作相同 vm opcode 的其他 vm 嗎？
+00:55:53 <godfat> 喔原來他就是 Router::Boom 的作者 XDD
+00:56:34 <c9sloud> 真是無心插柳柳成陰 （亂用成語
+00:56:53 <au> '/static/index.html' =~ qr3{'/static/index.html' => 1, '/post/{id}' => 2} # 設計對白
+00:57:29 <c9sloud> XDDDDD
+00:57:39 <c9sloud> too powerful
+00:57:43 <c9sloud> XD
+00:58:52 <au> godfat: 有一些實驗性質的如 p2
+00:59:32 <au> (拿 _why 的 potion 去改的)
+01:00:20 <godfat> 喔喔喔... 想當初我也有點期待 potion XD
+01:00:30 <c9sloud> wow
+01:00:31 <letoh> potion 好像有人接手
+01:01:08 <c9sloud> p2 在哪？
+01:01:12 <au> https://github.com/perl11/p2
+01:01:22 <godfat> 前一陣子看到 http://whytheluckystiff.net/ 看了一陣後感到很失望 orz
+01:01:52 <c9sloud> ohoh i saw it
+01:02:53 <au> godfat: 那是不相干的澳客
+01:03:13 <godfat> 所以感到非常失望 orz... 尤其網頁有點醜...
+01:07:37 <c9sloud> 嘖嘖 p2 看起來很厲害
+01:08:16 <c9sloud> 所以 _why 到底去哪了？@@
+01:09:04 <au> 退休了
+01:10:48 <godfat> 有可能復出嗎？
+01:12:10 <c9sloud> QQ
+01:15:28 <au> godfat: 可以看 CLOSURE.pdf 自己下結論嘍 :p
+01:16:32 <godfat> 下載中~~ http://kevinw.github.io/2013/04/30/why-did-why-the-lucky-stiff-quit/
+01:16:44 <c9sloud> CLOSURE?
+01:16:47 <c9sloud> ohoh
+01:17:40 <CindyLinz> godfat: perl 生態, 我覺得是怎麼用都不會錯吧... XD
+01:17:41 <c9sloud> 是說 donald 真有毅力
+01:17:46 <godfat> \me 想從工作上退休，網路倒是不必
+01:17:58 <godfat> 原來老是打反 XD
+01:18:20 <godfat> CindyLinz, 沒有錯的定義？ XD
+01:18:36 <CindyLinz> 就那句有名的 There is more than one way to do it 啊..
+01:19:04 <CindyLinz> 嗯, 我覺得如果想去規定別人應該怎麼做, 那就是錯了 XD
+01:19:07 <godfat> 這只是說有很多對的方式？ XD
+01:19:26 <godfat> 自己可以覺得自己做錯了 XD
+01:24:04 <c9sloud> 對不起我錯了（莫名
+01:26:05 <godfat> 嗯，所以想去規定別人應該怎麼做，也沒有錯 XD
+01:26:30 <au> 「萬語萬律，鳳皆擁之。於其域中，更無岐途。」 -- "Until an asteroid, _why", 2005
+01:27:28 <c9sloud> michael 死前也說過 im done.. 之類的
+01:28:03 <c9sloud> 不過這樣好悲觀阿...
+01:28:46 <c9sloud> "what if america is written for 32bit PC"
+01:29:57 <CindyLinz> godfat: 不不, 規定別人該怎麼做是第二階, 不在那句的 way 的範圍內 XD
+01:31:02 <c9sloud> donald 表示...我書都還沒寫完呢
+01:33:32 <godfat> CindyLinz XDD 是說對 perl 這句話雖然我沒什麼感覺，但對 python 那句話倒是滿有感覺的 -- 很不喜歡...
+01:33:44 <CindyLinz> godfat: 唔唔 python 是哪句?
+01:34:35 <godfat> """There should be one-- and preferably only one --obvious way to do it."""
+01:34:35 <godfat> https://wiki.python.org/moin/TOOWTDI
+01:34:52 <CindyLinz> 這根本衝著 perl 來的嘛....wwww
+01:35:00 <godfat> 是啊...
+01:36:06 <CindyLinz> 那 ruby 有沒有啊?
+01:36:26 <godfat> 沒有聽說耶 XD 不過應該是比較接近 perl, 如果要問的話
+01:36:27 <CindyLinz> There might be one, or maybe more ways to do it (?
+01:36:33 <godfat> XDDDDDD ++
+01:37:10 <godfat> 海森紅寶石
+01:37:34 <c9sloud> or slower way to do it lol
+01:37:41 <godfat> XDDDDD
+01:39:07 <godfat> 之前是有人在說 principle of least surprise, 不過我覺得這太因人而異了...
+01:53:21 <godfat> 做了很多自己的東西，有時候因為只有自己在用而感到沮喪，不過，或許那不是重點吧，不然，我何必繼續做呢？
+01:56:35 <c9sloud> 為了繳房貸 XDDDD
+01:56:52 <godfat> ...=_=...夢醒了
+01:56:58 <c9sloud> 為了繳稅 (時事梗
+01:58:24 <c9sloud> "as I walk through the valley of code, i shall have no fear"
+01:59:27 <c9sloud> "Je pense, donc je suis"
+02:00:32 <monochrom> 說起 "繳房貸", 我就剛在前晚看影碟 Thank You for Smoking, 主角也是說 "繳房貸". :)
+02:04:58 <c9sloud> 就是那個梗 you got it :p
+02:07:35 <c9sloud> 話說 Thank You for Smoking 簡直就是用 "繳房貸" 貫穿整部片 XD
+02:08:04 <godfat> 沒有看不知道是啥 XD
+02:08:20 <monochrom> 是呀, 最精彩的是不止主角識得這樣說 :)
+02:10:07 <c9sloud> "Everyone's got a mortgage to pay." XD
+02:10:13 <c9sloud> http://en.wikiquote.org/wiki/Thank_You_for_Smoking
+02:23:16 <poga> 可惡想看（打開 itunes）
+02:24:45 <poga> 可惡沒有...
+02:47:34 <caasihuang> 不確定意境對不對： http://www.kiwisbybeat.com/minus37.html #minus #UntilAnAsteroid
+02:48:23 <caasihuang> c9sloud: 目前進度到 r3_tree_insert_path ，不知道 compile 以後會不會爛掉，
+02:48:33 <caasihuang> 但沒之前那麼卡了。
+02:49:23 <godfat> caasihuang, 想起 FLCL, 幾年前一直反覆在看
+02:49:49 <caasihuang> 不知道為啥，這邊一直沒看 FLCL
+02:50:10 <godfat> 沒地方看？沒機緣看？沒時間看？不敢看？ XD
+02:54:51 <caasihuang> 小時候看不懂第一集，就一直放著沒看了 XD
+02:55:55 <godfat> XDDD 我現在應該也看不懂 XD
+03:16:53 <caasihuang> godfat: 今晚（12）去 CLBC 前方便找你鬼混嗎？
+03:19:12 <godfat> 好啊，正好雜誌其實還有一本在我這，可以還你... XD
+03:20:02 <caasihuang> 下午啥時方便？要中午到台北的話，恐怕爬不起來 0rz
+03:20:54 <caasihuang> 村長的環球分享會晚上七點才開始
+03:21:47 <godfat> 好像都可以，晚上還在想要不要去打球
+03:23:16 <caasihuang> 好健康 QQ
+03:23:39 <CindyLinz> 現在還沒睡的人就別談健康了啦.... (逃)
+03:23:44 <godfat> 才怪 orz... 一週一次而已，我現在都下午四、五點才起床 orz
+03:24:01 <caasihuang> 那約四點？地點哪邊方便？
+03:24:03 <godfat> 話說這裡每次深夜也都太熱鬧了吧... XD
+03:24:07 <caasihuang> CindyLinz: 0rz
+03:24:37 <CindyLinz> 晚睡 貧血 膚色白 好看耶 (咦)
+03:24:43 <godfat> ok, 我也不知道耶，交通方便可以坐下的地方應該都可以 XD
+03:25:02 <godfat> ||||b 吸血鬼
+03:25:10 <caasihuang> 那等我看一下捷運圖 XD
+03:29:14 <caasihuang> 你在西門還是古亭？忠孝新生旁邊有個摩斯耶。還是說有離你打球地方比較近的站？
+03:30:01 <godfat> 在古亭。打球在科技大樓 XD
+03:32:53 <caasihuang> 打球幾點？聊聊後還打算回家再去打球嗎？要是是的話東門，否的話大安？
+03:33:27 <poga_> !
+03:34:01 <caasihuang> poga_: 被發現了！一起一起？
+03:34:23 <godfat> 八點到十點，那東門好了。感謝規劃行程 XDD
+03:35:10 <poga_> 好啊好啊，所以是在哪 XD
+03:35:33 <caasihuang> 下午四點東門站。
+03:35:59 <poga_> okok XD
+03:36:20 <caasihuang> 看到附近有（越來越難吃，但方便坐的）吉野家，不知道還有沒有別的吃的。
+03:36:28 <godfat> cool~~
+03:36:34 <poga_> caasihuang: 就... 交給你了！（拍
+03:36:58 <caasihuang> poga_ godfat: roger that QQ
+08:14:23 <c9sloud> 17 歲用 asm 寫了 lisp interpreter 究竟是一個什麼樣的概念? http://lisp.tw/2013/05/11/lisp-on-ibm-1130/
+08:14:50 <c9sloud> caasihuang: 卡?
+08:16:50 <monochrom> 誰?! 哪個天才17歲就寫了 lisp interpreter, 而且用 asm?!
+08:20:19 <c9sloud> "Guy Steele ── Common Lisp The Language 2nd 的作者、Java 語言規範制定者、Common Lisp 標準化委員會成員 ── 早在高中時代，年僅十七歲，就在 IBM 1130 機器上，用 Assembly Language 寫出了 LISP。" XDD
+08:20:23 <c9sloud> 這太強了
+08:20:27 <c9sloud> 現年 59 歲
+08:20:33 <monochrom> 啊, Guy Steele, 怪不得呢. 他還染指 javascript, 使之由無章法變得有章法.
+08:20:35 <c9sloud> 先去買咖啡先...
+08:22:32 <monochrom> 我曾細讀 ECMAScript 3 一些重要部份, 完全感受到 Guy Steele 由 lisp 帶來的影響.
+08:24:10 <godfat> 看來他的影響還不太夠.. 原本豈不是更扯？
+08:27:11 <monochrom> 其實, 可說他的影響令我哭笑不得.
+08:28:15 <monochrom> 我厭惡 lisp 有幾方面. 其中一方面就是, 一個變數有兩個 bindings, 分別是 value binding 及 function binding.
+08:28:56 <godfat> 這個記得上次討論過
+08:29:08 <monochrom> (+ x x) 使用了 x 的 value binding. (x 1 1) 使用的是 x 的 function binding. 兩相獨立.
+08:30:44 <monochrom> 好了, 到了 ECMAScript, Guy Steele 就把它玩到最大, 每個變數都有任意多個 bindings, 只要你起個名字就行!
+08:31:16 <godfat> x.x = 1
+08:31:16 <godfat> x.y = 2
+08:31:16 <godfat> 這個意思？
+08:31:24 <monochrom> 就是了
+08:32:30 <godfat> 想想我似乎是不怎麼介意。就算是 x() 也可想像成 x.__hidden__ 之類的
+08:33:00 <monochrom> 當然了, 既然決定了做 OOP, 這樣是無可厚非.
+08:34:39 <godfat> 確實...
+08:35:11 <monochrom> 用 lisp 的思想去擴大做 OOP, 這是令人拍案叫絕的.
+08:37:28 <c9sloud> hidden class?
+11:06:45 <caasihuang> c9sloud: 指的是自己身為一個爛程序猿的卡， r3 一點都不卡 XD
+11:07:51 <caasihuang> 昨天 _why 的文章才讓我想起 Guy Steele ，傳說中把 CACM 從頭讀完的人
+11:08:21 <caasihuang> 但講的話跟昨天的情境有點不同，最後就沒引他的話了
+11:09:41 <monochrom> 可惜不是把 Knuth 的 TAOCP 從頭讀完, 然後獲 Bill Gates 接見 XD
+11:10:18 <caasihuang> https://www.irccloud.com/pastebin/8LJiFLCo
+11:10:47 <monochrom> 話說王垠又有沒有向 Bill Gates 遞覆歷呢?
+11:11:09 <caasihuang> monochrom: 他好像也讀完了，而且之前 DEK 的問答他也是提問者。
+11:11:27 <monochrom> 呀
+11:13:00 <monochrom> 我也有特意讀些少古文, 當然讀的很少. 別說古文了, 就連我自己出錢買完家的書, 都是讀一成, 展覧九成...
+11:13:12 <monochrom> s/完/回/
+11:14:17 <monochrom> 展覧: http://www.vex.net/~trebla/weblog/fpbooks.xhtml
+11:14:52 <caasihuang> https://www.irccloud.com/pastebin/jtjnP9XO
+11:15:29 <caasihuang> monochrom: 這邊一直卡英文閱讀速度，更別提吃古文了 XD
+11:15:29 <c9sloud> 能讀完也要能融會貫通阿 XDDDDD 這太難
+11:15:34 <c9sloud> 等我貫通都不知道什麼時候了
+11:15:53 <monochrom> 給我一天72小時也未必讀完, 還講做習作...
+11:16:10 <c9sloud> 話說這邊有人真的有讀完任何一冊 The Art of Computer Programming 嗎?
+11:16:19 <monochrom> 世上怎能有人這樣快呢?!
+11:16:23 <caasihuang> 但昨天 _why 提到有動力全部都要這點的確讓我想起這些訪談內容
+11:16:24 <c9sloud> 未看先猜 au 應該有 XD
+11:17:06 <c9sloud> "有動力全部都要這點" ?
+11:17:23 <caasihuang> 有內在的動力，全部都想瞭解
+11:17:36 <monochrom> 我倒是很幸運在香港長大, 又入了英文名校, 所以英文難不倒我.
+11:20:02 <caasihuang> 記得好像有篇 blog 文，是位香港人講到自己讀了 TAOCP ，莫非... XD
+11:20:17 <monochrom> 只不過, 有時聽見某教授說, "某某經典文章 cite 的人多, 讀過的人少", 於是有一天, 就去圖書館找來讀. 這是虚榮心作動力, 因為想加入少數有讀過的行列 :)
+11:20:25 <caasihuang> c9sloud: 抱歉，這邊表達能力很差，常打出看不懂的話 0rz
+11:23:16 <monochrom> 那篇文就是 Cooley and Tukey 的 fast Fourier transform. 原來很短及很易讀, 只是玩一玩中學代數及 divide and conquer 已. 不過玩一玩就完全改變算法速度, 倒也大開眼界.
+11:25:47 <monochrom> 後來鍾情 formal methods, 少不免找出 Floyd 的原文及 Hoare 的原文來讀 (都是關於 assertion, pre/post condition 的)
+11:25:48 <c9sloud> monochrom: 同意 XDD
+11:26:23 <c9sloud> 是說我也讀完 SICP 但讀完之後也忘的差不多了 XDD
+11:28:47 <monochrom> 我未在 blog 提過自己讀過 TAOCP, 所以那位港人不是我
+11:29:16 <c9sloud> 啥.. _why 是讀 Harvard
+11:29:45 <monochrom> 但我很炫耀我讀過 Algebra of Programming! XD
+11:30:25 <monochrom> 其實嘛, 只讀完前半部就停了 :)
+11:31:35 <c9sloud> XD
+11:36:58 <monochrom> 讀過幾篇有名的古文(都是頗容易的), 又受師父薰陶, 從此認為, 別崇尚難的辦法, 應該崇尚用容易的辦法解決別人認為不易解決的問題.
+11:38:02 <monochrom> 換句話說, 假設有一天你有個問題不懂解決, 跑來問我. 那麼:
+11:38:59 <monochrom> 如果我提出的解法很深, 令你說: "很高深啊! 你程度真高啊!" 那我就失敗了.
+11:39:53 <monochrom> 相反, 如果我的辦法說出來很淺, 令你說: "原來就只是這樣嗎?" 那我就成功了!
+11:48:31 <caasihuang> 好棒的想法...！
+11:55:24 <petercommand> monochrom: 不一定能這樣講....要看有沒有Z>B
+11:56:12 <petercommand> 很多問題用brute force是最簡單的，只是他不一定是個好方法
+11:56:25 <monochrom> 當然了, 有時沒有容易的辦法. 總之盡量吧!
+11:57:35 <monochrom> 如果算法太慢, 當然不算解決了問題.
+11:59:23 <c9sloud> 那我覺得 Haskell 失敗了 (逃~~~~~
+11:59:50 <monochrom> 但我能把 haskell 說得很淺! :)
+12:01:12 <c9sloud> monochrom: 那你成功了 :D
+12:01:12 <c9sloud> XD
+12:01:20 <monochrom> 不過呢, 你一問我 lazy evaluation 及怎樣解釋程式用多少時間, 多少記憶, 我還沒有淺的方法.
+12:01:32 <c9sloud> XDD
+14:55:50 <caasihuang> godfat poga_: 客運怪怪的，在路肩慢慢開，也許會遲到
+14:56:23 <godfat> 路肩 @@ ok
+14:58:47 <poga_> Ok~
+14:59:11 <caasihuang> 等換車 @@
+15:05:39 <caasihuang> 現在客運的新車有 USB 充電孔！？
+15:17:23 <CindyLinz> 反正 ruby perl python 也講不清楚... # 用多少時間, 多少記憶體...
+15:17:32 <CindyLinz> 在意的話根本就都是用實測的....ww
+15:19:37 <b4283> http://www.reddit.com/r/programming/comments/1v0z02/haskell_vs_ada_vs_c_vs_awk_vs_an_experiment_in/
+15:29:22 <b4283> 1994 有點老了
+15:40:21 <CindyLinz> c9sloud: QQ metacpan.org 掛了
+15:40:40 <CindyLinz> 但 search.cpan.org 是好的...!  他們排輪休嗎..ww
+15:43:45 <c9sloud> they have a deal
+15:43:53 <c9sloud> xD
+15:44:03 <whitglint> Ada 耶，05 推出之前有稍微玩一下，我是 begin end 控 XD
+15:44:53 <CindyLinz> whitglint: 不考慮 begin-lisp-end 嗎? 可以寫 begin + 3 ( * 4 5 end ) 喔~~ :D
+15:45:25 <whitglint> 但還是不習慣 member function 要寫在外面
+15:45:47 <whitglint> 在裡面多好～有一體的感覺
+15:47:40 <CindyLinz> whitglint: 你在前面包一層 preprocessor 吧 ^^  因為底下的結構是一樣的, preprocessor 應該就不會太複雜吧
+15:48:30 <poga_> godfat: caasihuang 我到東門了，正在找地方坐
+15:48:52 <godfat> 喔喔，那我也該準備出發了.. XD
+15:49:02 <whitglint> CindyLinz: 但是找不到人一起寫 Ada 吧，那就有點無聊 XD
+15:50:06 <whitglint> CindyLinz: begin-lisp-end 是啥...
+15:50:08 <CindyLinz> 如果加上 preprocessor 的話, 可能就真的只有你自己用了..ww
+15:50:27 <caasihuang> poga_: 剛出站
+15:50:27 <CindyLinz> whitglint: 就 preprocessor, 把 begin 換成 (, 把 end 換成 )
+15:50:41 <whitglint> ...
+15:51:25 <whitglint> 聽說有人剛學 C 就 #define begin {  #define end }
+15:51:33 <CindyLinz> 賀!
+15:51:43 <CindyLinz> 看來他不能用 STL 了....
+15:52:50 <whitglint> 可以追隨 c9sloud 的精神，自己寫一套 Fast STL # 誤
+15:53:23 <whitglint> 然後 twitter 就會有人說 STL is fast enough
+15:53:37 <CindyLinz> 可是 STL 用到 begin end, 死罪
+15:53:38 <au> ...and it's pure C++
+15:54:31 <whitglint> 不會啊，STL 讓我寫 C++ 也能 begin end，多好～
+15:55:43 <CindyLinz> 會讓你剛剛說的 #define begin {  #define end } 壞掉啊
+15:56:00 <poga_> 找到一家小食糖 godfat
+15:56:01 <whitglint> 「(+ x x) 使用了 x 的 value binding. (x 1 1) 使用的是 x 的 function binding. 兩相獨立.」是指 x 能當作 function 呼叫嗎？
+15:56:21 <whitglint> 有一種 C++ function object 的感覺
+15:56:38 <poga_> godfat: 七號出口後面181巷進去唯一一家
+15:56:40 <c9sloud> iter.begin(); 壞掉喏
+15:57:15 <c9sloud> 只好用大寫
+15:57:34 <c9sloud> BEGIN .,, END
+15:57:37 <whitglint> CindyLinz: 不是我這麼做的啦... 頭殻還沒壞 XD
+15:58:28 <godfat> poga_, caasihuang, 所以你們人都到了嗎？ @@"
+16:00:04 <petercommand> #define begin_bracket { #define end_bracket }
+16:02:56 <poga_> 我們都到了
+16:06:08 <whitglint> 今天有聚會？
+16:09:02 <petercommand> CACM指的是哪本書呀?
+16:11:39 <whitglint> 本來要問「沒有人包 r3 haskell binding 嗎？」XD
+16:12:03 <CindyLinz> 有啊 mno2
+16:12:29 <petercommand> 看起來好像是雜誌
+16:12:37 <whitglint> 嗯，還好有先瞄一下，python binding 有兩套
+16:19:44 <c9sloud> 台灣好像沒人寫過分散式系統相關理論書籍
+16:19:47 <c9sloud> 悲哀
+16:19:52 <c9sloud> QQ
+16:20:05 <c9sloud> 只好買對岸寫的
+16:22:12 <whitglint> c9sloud: r3 不考慮 -O3 嗎？
+16:32:10 <c9sloud> whitglint: 可以阿
+16:32:21 <c9sloud> 效果應該也會不錯
+16:33:02 <whitglint> 剛發現我寫的 cpp example 忘記 free(errstr)
+16:33:15 <whitglint> 果然是陷阱 XD
+16:36:02 <whitglint> c9sloud: 一轉眼連 json output 都有了
+16:41:24 <c9sloud> whitglint: 有哇
+16:41:33 <c9sloud> 1.3 就有了
+16:41:52 <c9sloud> 應該還會把 ip mask 功能加上去 XD
+16:41:55 <whitglint> https://www.irccloud.com/pastebin/oy0tk0IW
+16:42:22 <c9sloud> 喔你要分開寫
+16:42:34 <c9sloud> simple_cpp_SOURCES =  simple_cpp.cpp
+16:42:44 <c9sloud> 他是用 program name 當 prefix
+16:53:52 <whitglint> configure.ac 加一行 AC_PROG_CXX 就編過了～
+16:57:45 <whitglint> c9sloud: https://github.com/c9s/r3/pull/57 請過目 :)
+17:02:55 <whitglint> 不是 Google C++ Style XD
+17:08:42 <whitglint> c9sloud: Failed — The Travis CI build failed 喵？
+17:09:58 <c9sloud> automake 過?
+17:10:44 <c9sloud> https://travis-ci.org/c9s/r3/jobs/27385983
+17:11:00 <c9sloud> 應該是 ../libr3.la
+17:11:02 <c9sloud> so .so
+17:11:03 <c9sloud> not .so
+17:11:12 <c9sloud> 你好像 link 到 ../.libs/libr3.so
+17:15:14 <whitglint> c9sloud: 只有改這邊 https://github.com/whitglint/r3/blob/master/examples/Makefile.am
+17:16:13 <whitglint> 我自己編會過
+17:19:16 <c9sloud> 弄一個 simple_cpp_LIBADD ?
+17:19:17 <c9sloud> http://www.gnu.org/software/automake/manual/automake.html#Conditional-Libtool-Sources
+17:22:20 <whitglint> c9sloud: 它怎用 g++ 而不是 clang++，編譯參數也不太一樣
+17:22:53 <whitglint> https://github.com/c9s/r3/blob/master/.travis.yml 這邊也要改嗎？
+17:36:32 <c9sloud> 咦
+17:36:43 <c9sloud> maybe orz
+17:36:54 <c9sloud> 那個是 czchen 弄的 memory leak tester
+17:50:39 <czchen> whitglint: 看起來是 address sanitizer 的 symbol 找不到，試試看在 .travis.yml 加上 CXXFLAGS=-fsanitize=address
+17:50:59 <c9sloud> czchen++
+17:51:04 <c9sloud> 神 option
+19:42:27 <whitglint> czchen: cc1plus: error: unrecognized command line option ‘-fsanitize=address’ 它仍用 g++ 去編譯...
+19:55:28 <czchen> whitglint: 要把 C++ compiler 改成 clang
+20:01:02 <whitglint> czchen: 加上 CXX=clang++ 嗎？
+20:03:42 <czchen> try it?
+20:04:20 <whitglint> 只能一直 commit 一直 try 嗎？XD
+20:06:34 <czchen> 可以在自己的 repo try 到 ok，再用 rebase 整理
+20:09:58 <whitglint> czchen: 過了～～～
+20:33:32 <c9sloud> awesome!
+20:48:18 <c9sloud> othree++ こ找到一個bug
+20:48:29 <c9sloud> fixed

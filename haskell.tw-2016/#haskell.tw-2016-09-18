@@ -1,0 +1,46 @@
+17:13:32 <CindyLinz> > [(1,1),(3,4)]
+17:13:35 <lambdabot>  [(1,1),(3,4)]
+17:13:36 <CindyLinz> > [(1,1)..(3,4)]
+17:13:39 <lambdabot>  error:
+17:13:40 <lambdabot>      • Ambiguous type variable ‘t0’ arising from a use of ‘show_M485664738059...
+17:13:40 <lambdabot>        prevents the constraint ‘(Show t0)’ from being solved.
+17:13:46 <CindyLinz> > [(1,1)..(3,4)] :: (Int, Int)
+17:13:49 <lambdabot>  error:
+17:13:49 <lambdabot>      • Couldn't match expected type ‘(Int, Int)’
+17:13:49 <lambdabot>                    with actual type ‘[(t0, t1)]’
+17:13:56 <CindyLinz> > [(1,1)..(3,4)] :: [(Int, Int)]
+17:13:58 <lambdabot>  error:
+17:13:59 <lambdabot>      • No instance for (Enum (Int, Int))
+17:13:59 <lambdabot>          arising from the arithmetic sequence ‘(1, 1) .. (3, 4)’
+17:14:39 <CindyLinz> > range (1,1) (3,4) :: [(Int, Int)]
+17:14:42 <lambdabot>  error:
+17:14:42 <lambdabot>      • Couldn't match expected type ‘(Integer, Integer) -> [(Int, Int)]’
+17:14:42 <lambdabot>                    with actual type ‘[Integer]’
+17:15:00 <CindyLinz> > range ((1,1), (3,4)) :: [(Int, Int)]
+17:15:03 <lambdabot>  [(1,1),(1,2),(1,3),(1,4),(2,1),(2,2),(2,3),(2,4),(3,1),(3,2),(3,3),(3,4)]
+17:25:11 <pkmx> > (,) <$> [1..3] <*> [1..4]
+17:25:14 <lambdabot>  [(1,1),(1,2),(1,3),(1,4),(2,1),(2,2),(2,3),(2,4),(3,1),(3,2),(3,3),(3,4)]
+17:26:00 <pkmx> > [ (i, j) | i <- [1..3], j <- [1..4] ]
+17:26:02 <lambdabot>  [(1,1),(1,2),(1,3),(1,4),(2,1),(2,2),(2,3),(2,4),(3,1),(3,2),(3,3),(3,4)]
+17:28:55 <CindyLinz> @type (%)
+17:28:57 <lambdabot> Integral a => a -> a -> Ratio a
+17:29:05 <CindyLinz> 原來是拿去這樣用了 XD
+19:31:50 <drbean> @type (,)
+19:31:52 <lambdabot> a -> b -> (a, b)
+21:13:41 <CindyLinz> 為什麼 Haskell import 指令只能在 module 開頭呢... 這樣不方便啊...
+21:20:31 <caasih> @type Data.EitherR.fmapL
+21:20:33 <lambdabot> error:
+21:20:33 <lambdabot>     Not in scope: ‘Data.EitherR.fmapL’
+21:20:33 <lambdabot>     No module named ‘Data.EitherR’ is imported.
+22:00:36 <pkmx> 想要有 function scope 的 import
+22:01:10 <pkmx> 之前在同一個 module 裡面同時 import Attoparsec.Text 和 Attoparsec.Bytestring 用起來真想死 XD
+22:18:34 <CindyLinz> function scope import!
+22:18:45 <CindyLinz> 沒有想過, 但是聽起來有實用到....
+22:26:56 <pkmx> 像 scala 那樣
+22:27:54 <pkmx> 如果 method 裡面 import 的話就只有那個 method 裡面看得到
+22:36:58 <CindyLinz> 一講出來就覺得實用了 QQ
+22:49:44 <pkmx> 不過一個 function import 的 instances 應該還是要全部都看得到 不然會壞掉 XD
+23:42:18 <monochrom> 我在香港了! 我跟大家同時區了!
+23:45:57 <monochrom> 所以要睡了! 因為坐了15小時追日飛機了!
+23:53:06 <petercommand> monochrom: XDD
+23:53:16 <petercommand> function scope import ++

@@ -1,0 +1,15 @@
+10:22:39 <MnO2__> https://www.fpcomplete.com/user/edwardk/editorial/procrustean-mathematics
+22:27:10 <suhorng> mno2: auto那個到底是什麼意思阿 XDDD
+22:27:30 <suhorng> 去翻 C++14 才發現他出現 polymorphic function 了
+22:29:13 <suhorng> auto add = [](auto x, auto y) { return x + y; }; 維基上的例子
+22:29:27 <suhorng> 說是會等價於
+22:29:27 <suhorng> struct unnamed_lambda {   template<typename T, typename U>     auto operator()(T x, U y) const {return x + y;} }; auto lambda = unnamed_lambda();
+22:29:37 <suhorng> struct unnamed_lambda
+22:29:38 <suhorng> {
+22:29:38 <suhorng>   template<typename T, typename U>
+22:29:38 <suhorng>     auto operator()(T x, U y) const {return x + y;}
+22:29:38 <suhorng> };
+22:29:38 <suhorng> auto lambda = unnamed_lambda();
+22:33:17 <b4283> 是開玩笑的吧
+22:40:50 <suhorng> 哈哈
+22:41:48 <suhorng> 這次的 functional thursday (#7) https://registrano.com/events/3264cf 11/7(四)

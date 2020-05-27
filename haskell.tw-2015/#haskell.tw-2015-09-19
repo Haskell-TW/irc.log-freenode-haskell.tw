@@ -1,0 +1,12 @@
+00:00:55 <suhorngM_> > let { nwd 0 b = b; nwd a b = nwd b (a `mod` b) } in nwd 15 12
+00:00:57 <lambdabot>  *Exception: divide by zero
+00:01:07 <CindyLinz> 對喔 是 mod 不是 %... XD
+00:01:07 <suhorngM_> oops
+00:01:17 <CindyLinz> > let gcd a 0 = a; gcd a b = nwd b (a `mod` b); nwd a 0 = a; nwd a b = gcd b (a `mod` b) in nwd 15 20
+00:01:19 <lambdabot>  5
+00:01:34 <suhorngM_> LOL
+00:04:59 <CindyLinz> 好像應該把那個 LC interpreter 接到 irc 上
+00:05:08 <CindyLinz> 可是我是用 JS 寫的不是用 perl 寫的 QQ
+00:05:33 <suhorngM_> XDDDD
+00:29:58 <monochrom> 用 perl 寫個 js interpreter
+00:32:02 <CindyLinz> 直接用 perl 重寫一遍比較簡單 XD

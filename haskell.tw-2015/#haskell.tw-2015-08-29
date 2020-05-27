@@ -1,0 +1,63 @@
+00:06:02 <suhorngM_> letoh: 在嗎?
+00:06:11 <letoh> 在
+00:06:40 <suhorngM_> 想問下, 在你的電腦上 racket 的啟動速度很慢嗎..?
+00:07:42 <letoh> 啟動會頓一下，不過這東西要怎麼描述..? 比 jvm 快一點? XD
+00:07:49 <suhorngM_> XDDDD
+00:08:09 <suhorngM_> 好喔, 我這邊是要花 1.5 秒左右....看來還是不太可能回去用 Racket /o/
+00:08:21 <suhorngM_> 比起其他的 s-expr 系列的語言..
+00:08:23 <letoh> 講快或慢都是我的感覺啊，總要有個客觀一點的比較XD
+00:08:35 <suhorngM_> 例如跟 Gauche 啟動速度比
+00:08:42 <letoh> 我看看我的 racket 還在不在XD
+00:08:47 <suhorngM_> xDD
+00:08:48 <CindyLinz> suhorngM_: 用 yin
+00:08:53 <letoh> 喔.. gauche 那當然是快得多
+00:09:22 <suhorngM_> 我沒有讓 racket 常駐開著, 所以要是不能快速啟動實在不太想用 (因此, Scala out!)
+00:10:10 <suhorngM_> 不過平常用 ghci 就會常駐開著...好像滿不公平的比較xD    CindyLinz: xDD
+00:11:02 <letoh> 新系統沒有編譯過 racket，不過之前的印象是慢到有感  應該有超過一秒
+00:11:14 <suhorngM_> 嗯嗯
+00:11:30 <suhorngM_> 還有另外一點就是我在用 Gauche 的時候
+00:11:49 <letoh> 雖然 racket 蠻不錯的  但最後也是因為這原因放生XD
+00:11:56 <suhorngM_> 如果有很多個模組, 那直接用 (use) 的時候好像不會 reload 那個模組...不太知道該怎麼解決
+00:12:59 <letoh> 模組的部份直接用起來沒遇到問題就沒深入看了  為什麼會需要 reload ?
+00:13:13 <letoh> 你改完後想在 shell 直接 reload 嗎?
+00:13:52 <letoh> suhorngM_: http://practical-scheme.net/gauche/man/gauche-refe_100.html  類似這個?
+00:14:04 <suhorngM_> letoh; 對對, 改完後 reload
+00:14:17 <suhorngM_> 喔, 這個好酷
+00:14:19 <letoh> suhorngM_: reload-modified-modules  這個也許可以試試?
+00:14:52 <suhorngM_> OK
+00:15:01 <suhorngM_> 果然 Gauche 的 library 就是很完整 XDD
+00:15:26 <letoh> 文件還蠻好查的啊  我直接找一下就看到了
+00:15:42 <b4283> 聽起來像是在挑對象 <letoh> 雖然 racket 蠻不錯的  但最後也是因為這原因放生XD
+00:15:44 <CindyLinz> suhorngM_: 你在選 backend 語言嗎?
+00:15:49 <letoh> racket 的文件也不錯啦XD
+00:15:53 <suhorngM_> * 完全沒想到會有這種東西   還以為會是 (use) 的時候給個參數之類
+00:16:16 <suhorngM_> CindyLinz: 沒有~ 我 backend 應該也會選 js;  另一個目標是 C(++).      letoh: 啟動速度太慢了, out XD
+00:16:47 <letoh> suhorngM_: 這種情況找 gauche 底下的 library 比較容易找到，畢竟是跟系統有關的功能
+00:16:54 <suhorngM_> 好喔
+00:17:00 <CindyLinz> suhorngM_: 喔 XD
+00:17:05 <CindyLinz> 對哄 你好像有講過
+00:17:20 <suhorngM_> 咦? 我有講過喔XD
+00:17:26 <letoh> b4283: 很重要的，要一直相處下去的對象總是要慎重一點XD
+00:18:03 <CindyLinz> suhorngM_: 有, 而且有說到要做 asm.js
+00:18:16 <CindyLinz> suhorngM_: 不過那部分發話者是我..
+00:19:17 <letoh> CindyLinz: 話說你之前不是說要弄 postscript，怎麼現在又變心了?
+00:19:47 <suhorngM_> CindyLinz: XDDDDDDD
+00:20:04 <CindyLinz> letoh: 在準備 haskell compiler 的 backend 啊~ 是不同事
+00:20:26 <letoh> 喔喔喔
+00:20:32 <CindyLinz> suhorngM_: 我清楚記得是要廬你做 XD
+00:25:58 <suhorngM_> CindyLinz: 欸欸XDDDDDDDDD 這不可能的啦~~!! 當然是想辦法轉成 javascript 呀,  轉成 asm.js 如此困難
+00:34:01 <CindyLinz> suhorngM_: 應該只差在記憶體管理?
+00:35:42 <suhorngM_> 唔?
+00:37:15 <b4283> letoh: XDDD
+00:41:32 <suhorngM_> 啊.剛剛以為我在 #cschat.tw 結果原來又跑錯了orz
+00:42:48 <letoh> 其實沒什麼差  反正大部份的人都在XD
+00:43:58 <CindyLinz> #cschat.tw 是無 log 講話不用負責區 (?
+00:44:34 <letoh> 咦  剛剛才發現這邊有 log XD
+00:44:59 <CindyLinz> 為了 async 聊天而設
+00:45:11 <CindyLinz> 這裡的人全時區分佈... XD
+00:45:27 <letoh> 說的也是... 不過你也是全時區吧XD
+00:46:29 <CindyLinz> 那我就是 witness 了!
+00:47:56 <letoh> 天網
+00:48:53 <CindyLinz> 狗不會對我狂叫, 我可以通過檢驗 :D
+00:49:11 <b4283> The-All-In-One
+01:05:26 <petercommand> The-One-In-All

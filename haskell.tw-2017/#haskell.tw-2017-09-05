@@ -1,0 +1,39 @@
+16:29:40 <FerdinL> Remember that doubleEveryOther should double every other number
+16:29:40 <FerdinL> beginning from the right, that is, the second-to-last, fourth-to-last,
+16:29:40 <FerdinL> . . . numbers are doubled.
+16:29:40 <FerdinL> Example: doubleEveryOther [8,7,6,5] == [16,7,12,5]
+16:29:41 <FerdinL> Example: doubleEveryOther [1,2,3] == [1,4,3]
+16:29:48 <FerdinL> 请问这个怎么解？
+16:52:19 <CindyLinz> 它要從右邊開始數位置, 那就要先用某個函數遞迴下去, 然後這個函數回來的時候會告訴你現在應該是奇還是偶
+16:52:56 <CindyLinz> 然後你也可以考慮讓同一個函數除了告訴你現在奇還是偶以外, 也順便把後半的數列 double 好
+16:53:33 <CindyLinz> 順便做了兩件事, 以「好理解」的角度來說, 不一定是好的程式風格就是了.... 不過都可以練練 :p
+16:54:46 <CindyLinz> 或是說你也可以一開始先數一遍長度.. 就知道開頭第一個應該是奇還是偶, 然後從頭往尾巴作 double
+17:15:34 <caasih> FerdinL 知道有 log 可以看嗎？ QQ
+17:16:29 <caasih> 不知道他的題目有沒有什麼限制？我想到最傻的解法大概是 reverse, double 目標, reverse
+17:17:28 <caasih> 看你的敘述想到的另外一種解則是把 list 表達成 (Int -> Int) -> (Int -> Int) -> [Int]
+17:18:00 <caasih> 兩個 (Int -> Int) 一個是 double 一個是 id ，但是誰是誰，要等看到尾巴知道數量再決定
+17:18:25 <caasih> 這樣似乎還能當成 monad 練習題
+17:32:11 <CindyLinz> > let doubleEveryOther = fst . go where go (x:xs) = let (xs', factor) = go xs in (x*factor : xs', 3-factor); go _ = ([], 1) in doubleEveryOther [8,7,6,5]
+17:32:14 <lambdabot>  [16,7,12,5]
+17:32:20 <CindyLinz> > let doubleEveryOther = fst . go where go (x:xs) = let (xs', factor) = go xs in (x*factor : xs', 3-factor); go _ = ([], 1) in doubleEveryOther [1,2,3]
+17:32:23 <lambdabot>  [1,4,3]
+17:36:17 <caasih> CindyLinz++
+17:36:32 <caasih> (1+2)-factor 太厲害了，欸 XD
+17:48:15 <cibs> 我覺得 go 比較厲害 XD
+17:48:30 <cibs> 很難想出比它更精楚又更短的字 XD
+17:48:35 <cibs> CindyLinz++
+17:48:45 <cibs> s/精/清/
+18:02:13 <CindyLinz> go 不是我想的... 看 haskell library 常常會看到... XD
+18:03:33 <jokester> 看到代码都不明白= =
+18:03:52 <jokester> 晚上回去再看
+18:03:57 <CindyLinz> 排版的關係嗎? irc 上面打多行比較不方便.. QQ
+18:04:23 <jokester> 应该不是.. 我还没有入门
+18:06:09 <CindyLinz> https://gist.github.com/CindyLinz/030adc3f50358b75d00a28b8e8b4ae9e
+18:06:38 <CindyLinz> 喔 ^^|
+18:06:58 <CindyLinz> 如果可以丟 gist link 給 lambdabot, 叫它去抓來執行就更好了 :p
+18:08:47 <CindyLinz> 那個 fst 是個內建函數, 功能是把 pair (a, b) 裡面第一項 a 拿出來
+18:09:23 <CindyLinz> . 是另一個內建函數, 把 a . b 變成一個先把參數餵給 b, 然後再把 b 生出的結果餵給 a 的函數
+18:13:07 <jokester> 嗯这样好读多了，多谢你/o\
+18:15:55 <jokester> 3-factor那里很妙
+18:16:37 <jokester> 一层层递归进去直到[] 再一层层:回去
+18:23:44 <CindyLinz> 嗯嗯我也覺得很好玩 ^^

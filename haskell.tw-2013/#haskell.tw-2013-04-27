@@ -1,0 +1,15 @@
+21:26:53 <suhorng1> 從朋友那邊聽到 rust http://www.rust-lang.org/
+21:27:08 <suhorng1> 語法有像 C, 不知道會不會比較流行ＸＤ？
+21:27:19 <suhorng1> 但是才 v0.6
+21:37:30 <CindyLinz> 嗯.. 不過也不能因為 0.6 < 1 就表示它不穩定, 要看這 project 的信用如何 :p
+21:38:06 <CindyLinz> 你看 Windows 都 8.0 了.. (逃)
+21:38:57 <CindyLinz> 有個相當糟的好像是第 98 版.. (思)
+21:50:08 <favonia> CindyLinz: 比較糟的是從 VISTA 版到 XP 版（字串順序）不知道改了多少版
+21:50:38 <MnO2> 0.4 -> 0.5 版改很大， 0.5 -> 0.6 好像好一些
+21:52:03 <suhorng1> 98版那個..XD 不如說 SMLNJ 的版號相當驚人
+21:52:50 <MnO2> 不過有 samsung 開始支持，就看看能走多遠
+21:53:05 <suhorng1> Rust感覺有些是受 Ruby 影響 (像 .each 跟後面很像 block 的東西)
+21:53:21 <suhorng1> 也有很多是受 ML 影響 ("The let keyword introduces a local variable. Variables are immutable by default. To introduce a local variable that you can re-assign later, use let mut instead.")
+21:53:50 <suhorng1> type的寫法也有點像ML..
+21:58:49 <MnO2> 語法上的確跟 ruby 有像。不過我之前看 0.4 版的印象，不是從 OO 出發的話感覺起來還是有差
+22:20:07 <CindyLinz> favonia: 字串順序 XDD

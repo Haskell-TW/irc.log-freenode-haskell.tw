@@ -1,0 +1,425 @@
+00:27:33 <c9sloud> https://www.facebook.com/photo.php?v=10152215019671715&set=vb.614411714&type=2&theater
+00:27:33 <c9sloud> XD
+00:29:35 <CindyLinz> 怎麼沒有看到他打出來的字上 irc XD
+00:30:21 <CindyLinz> 咦.. 你在 Makefile.PL 用到的 package, 需不需要在哪邊叫 cpan 裝啊?
+00:30:39 <CindyLinz> 我現在是直接 perl Makefile.PL 就 error, 因為缺了 ExtUtils::PkgConfig
+00:30:57 <CindyLinz> 然後.. 一般我們 dependency 是寫在 Makefile.PL 裡面.. 這樣是要怎麼解開呢 囧
+00:33:15 <c9sloud> 咦
+00:33:22 <c9sloud> 我以為 CONFIGURE_REQUIRE 會裝?
+00:34:37 <c9sloud> 不然這樣的話好像得手動裝
+00:35:07 <CindyLinz> 可是 Makefile.PL 會執行失敗是怎麼解的啊 ._.
+00:35:42 <CindyLinz> 還是說這 Makefile.PL 要用會自己 bootstrap 的寫法, 發現該有的沒有, 就自己先跑去裝一裝, 然後再回頭重跑自己 ._.
+00:36:00 <CindyLinz> 這也太像某種電腦生物了吧.....ww
+00:36:39 <c9sloud> ㄟ..
+00:36:58 <c9sloud> 之前好像有遇過類似的問題 問過 gugod
+00:37:04 <c9sloud> 他好像是說要手動裝 orz
+00:37:13 <c9sloud> 可能要找找看 usecase XD
+00:37:22 <CindyLinz> 那我不要這個了 XD
+00:37:54 <c9sloud> CindyLinz: 還是說可以先跑一段 script 檢查 dependency
+00:38:07 <c9sloud> 嗯嗯..
+00:38:08 <CindyLinz> 啊我知道有一種解法
+00:38:11 <c9sloud> 那可能先拿掉好了
+00:38:20 <CindyLinz> 在 inc/ 裡面自帶 Makefile.PL 要用的 package
+00:38:28 <c9sloud> 阿對喔
+00:38:42 <c9sloud> 不過這樣要怎麼包? (思)
+00:38:58 <CindyLinz> MANIFEST 裡面把 inc/ 裡面也列進去呀?
+00:39:36 <CindyLinz> 來用 cpanm -L inc ExtUtils::PkgConfig 裝裝看
+00:42:07 <CindyLinz> 嘖.. 裝這東西有生出 arch dependent 的檔案 orz
+00:48:53 <c9sloud> 可能要參考一下 Gtk2 怎麼弄
+00:48:55 <CindyLinz> c9sloud: 為什麼毛毛會玩一陣子就停住啊?
+00:49:18 <c9sloud> 因為.. 他在看我會不會抱他 XD
+00:49:19 <CindyLinz> c9sloud: 快教牠寫 @bf !
+00:49:24 <c9sloud> XDDD
+00:50:01 <c9sloud> CindyLinz: https://github.com/gitpan/Gtk2/blob/master/Makefile.PL 他這邊是這樣用
+00:50:14 <c9sloud> 51 行那邊
+00:50:27 <CindyLinz> 這 perl 怎麼越來越硬了....
+00:50:35 <CindyLinz> whitglint: 喂~ 你說說話啊 OAO
+00:51:26 <c9sloud> CindyLinz: 就是 fail 之後他會寫一個 fatal dependency 的 Makefile
+00:51:34 <c9sloud> 然後 make 的時候會裝 dependency
+00:51:49 <c9sloud> 然後那個 Makefile 好像就是 pure perl 專用的
+00:52:18 <c9sloud> cpan 在裝 module 的時候遇到 fatal deps 好像會在裝完 dependency 之後重新跑一次 perl Makefile.PL
+00:52:30 <c9sloud> 所以第二次的時候就可以用 ExtUtils::PkgConfig
+00:53:09 <CindyLinz> 這是什麼裡默契..ww
+00:53:24 <CindyLinz> 喔就 exit 1 以後就會重跑?
+00:53:35 <c9sloud> 嗯嗯 好像是這樣的樣子
+00:53:45 <CindyLinz> 不過這個自己就試不了了哄? @@"
+00:54:00 <whitglint> 怎突然被點名？
+00:54:02 <CindyLinz> 就假設它會對好了 XD
+01:03:43 <whitglint> 跨語言辛苦啊～大家都寫 C++ 不就好了 # 誤
+01:08:29 <c9sloud> CindyLinz: 可能要用 docker XD
+01:08:36 <c9sloud> whitglint: XDDD
+01:08:51 <c9sloud> whitglint: 我們 r3 還缺一個 C++ wrapper XDDD
+01:09:50 <whitglint> 來包一個 header only wrapper？
+01:10:47 <letoh> r3++
+01:11:05 <whitglint> boost.r3 # 咦
+01:11:16 <CindyLinz> letoh: r4 了 (咦)
+01:11:52 <letoh> CindyLinz: 反正你還是會先拿到 r3 啊XD
+01:18:37 <c9sloud> 結果 thread worker 還是沒寫完 XDD 一直被狗干擾 XD
+01:18:43 <c9sloud> 先睡覺好了 orz
+01:19:08 <whitglint> 不過 c++ 好像沒 package manager，寫完要放哪...
+01:19:30 <c9sloud> whitglint: 直接 fork ? 然後 autotools 就可以直接裝了 XD
+01:19:42 <c9sloud> r3.hpp 之類的? :-p
+01:19:43 <c9sloud> XD
+01:19:55 <whitglint> 應該是 XD
+01:20:02 <c9sloud> CindyLinz: 話說上次那個 ER 寫的 memory alignment 我讀完了.. 好像可以來整理一下寫個中文版
+01:20:20 <c9sloud> 那篇還算蠻新的 2013 年寫的
+01:20:40 <c9sloud> 他說是 20 年來的 missing C 技巧晶華
+01:21:13 <c9sloud> 先睡 XD
+01:21:15 <letoh> whitglint: 寫完不是都丟 windows\system32 ? XD
+01:21:49 <whitglint> letoh: 哇那太可怕了～
+01:22:04 <whitglint> 現在沒寫成 header only 會被笑的啊 # 誤
+01:23:10 <letoh> XDXD
+01:24:20 <whitglint> 那麼有 r3-dev 嗎？
+01:25:22 <letoh> 那是什麼? package ?
+01:26:43 <whitglint> apt 的 lib package 不是都會把 .so 和 .h/.a 分開包
+01:26:54 <letoh> 喔喔喔，好像是
+01:27:30 <whitglint> 軟語言好像不搞這套，都直接抓 source 了吧
+01:28:08 <letoh> python module 偶爾會有 .so
+01:31:58 <whitglint> 好像也是抓 .c 下來編的？
+01:32:07 <letoh> 對啊
+01:32:15 <whitglint> 加速模組什麼的
+01:32:28 <letoh> 不一定是加速啦
+01:33:18 <whitglint> 跨語言光是傳參數的規則就覺得很麻煩
+01:33:46 <letoh> 這倒是  而且有很多問題要注意，例如 GIL 之類的XD
+01:34:00 <letoh> 還有 GC...
+01:35:43 <whitglint> 之前試 QML，還要跟 QObject 的 property 互通，喔～飽了～
+01:36:23 <letoh> 一般都是要這樣啊，兩邊的物件要轉換
+01:43:16 <whitglint> letoh: 好像有聽大大說要寫 r3 python binding
+01:43:32 <letoh> 哪位大大說的? XD
+01:43:59 <whitglint> 什麼時候 r3 binding 變成各程式語言的入門範例了 XD
+01:44:20 <letoh> whitglint: HelloWorld 又進化了
+01:44:32 <whitglint> 初音小時候嘛
+01:45:00 <letoh> 小時候就那麼優..(ry
+02:00:22 <CindyLinz> 哪裡入門了......
+02:00:33 <CindyLinz> 真是走錯門了...ww
+02:01:20 <CindyLinz> 飽了 XD
+02:07:10 <whitglint> 一大堆規則和注意事項，看文件就飽了～
+02:15:03 <au> 剛跟 github ux interview 完... 有強調之前這裡討論到的反洗板功能很重要 XD https://hackpad.com/GitHub-User-Research-Questions-oPzxJ4NL9vx
+02:15:27 <au> 如果有想法歡迎加入，下星期的 round 2 meeting 繼續討論
+02:37:13 <caasihuang> au++
+02:38:17 <caasihuang> 慘了，誤會 v8 了， node-sqlite3 是靠一個 run 來呼叫 finalizer
+02:42:30 <monochrom> "五項堅持, 三項注意"? XD
+03:15:48 <whitglint> c9sloud: 大概瞄了一下 r3.h，覺得可能有名稱衝突的風險，例如 _node、node 很常見，是否改成 _r3_node、r3_node 好些
+03:23:09 <caasihuang> whitglint: 這邊的暫時解法是在 cpp 中用 namespace 把 include 包起來，但非常同意你的提議
+03:23:23 <caasihuang> 如果是 C 的話不知道該怎辦。
+03:24:11 <whitglint> caasihuang: c++ 倒還有解，c 就麻煩了
+03:27:02 <whitglint> #define METHOD_GET 這塊和下面 enum 也是有風險
+03:30:35 <monochrom> 寫C真是苦海無涯 :)
+09:55:49 <c9sloud> 同意 :-p
+09:55:58 <c9sloud> 還有一些 function 要 rename
+09:56:12 <c9sloud> 或是改寫成 static function
+10:08:19 <monochrom> 請愛用 static :)
+10:36:31 <c9sloud> 不過現在倒是還好, 因為那些 private 的non-static functions 是在另外的 header file
+10:39:35 <c9sloud> 然後 METHOD_GET, METHOD_POST 倒是還好
+10:39:43 <c9sloud> 因為一個 application 應該只會有一個 router :p
+10:50:22 <c9sloud> au: 可以在下面 +1 嗎
+10:50:24 <c9sloud> XD
+11:08:47 <c9sloud> au: updated with my comments :p
+11:12:53 <c9sloud> 我現在終於知道為何 Zend VM 要有一堆 TSRML_CC 跟 TSRML_DD  XDDD
+11:13:55 <c9sloud> 實在是因為 API 設計上考量 XD
+12:33:34 <c9sloud> whitglint: 早~ XD
+12:36:44 <c9sloud> whitglint: 我覺得 node 的確應該改個名字
+12:36:49 <c9sloud> 不過還沒想好
+12:37:00 <c9sloud> r3_node 太像 function name prefix
+12:38:15 <c9sloud> 在想是否要參考 glib2, g_dir_* 回傳 GDir*
+12:38:30 <c9sloud> 改名叫 R3Node* 之類的
+12:38:45 <c9sloud> CindyLinz: http://search.cpan.org/~ingy/JSONY-0.0.5/lib/JSONY.pm  # JSONY XD
+12:42:28 <b4283> SONY XD
+12:50:08 <c9sloud> 我以為念 JSON-Y XD
+12:50:29 <c9sloud> CindyLinz: 1.2.0 有 release~~ pattern matching 有加速兩倍 XD
+13:13:45 <c9sloud> http://ideone.com/recent # 這個好讚 不知道有沒有 haskell
+13:45:20 <whitglint> c9sloud: 早呀！XD
+13:59:31 <aksatac_> 改名為 RThreeNode 就不會撞名了 (誤)
+14:00:08 <c9sloud> aksatac_: xDDD
+14:03:14 <whitglint> 看成 RThreadNode
+14:03:57 <whitglint> 寫程式最花時間的就是命名 # 誤
+14:08:25 <c9sloud> r3_node_t* ?
+14:27:54 <CindyLinz> c9sloud: 我昨天晚上就有想要 merge 1.2.0 啊
+14:28:03 <CindyLinz> c9sloud: 所以才發現那堆問題.. XD
+14:28:23 <CindyLinz> c9sloud: 不過你放進來的那一些 z 開頭的函數我都要想辦法把它們改回去 orz
+14:28:33 <c9sloud> Why?
+14:28:50 <CindyLinz> c9sloud: dependency 變大, 就不能用了啊
+14:29:01 <CindyLinz> c9sloud: 例如說我的電腦就不能裝了
+14:29:12 <c9sloud> Well its just a function wrapper
+14:29:21 <CindyLinz> c9sloud: 我現在會 compile error
+14:29:30 <c9sloud> When USE_JEMALLOC is not defined
+14:29:50 <c9sloud> Its just normal malloc and free
+14:29:50 <CindyLinz> c9sloud: 所以是你自動 define 了?
+14:30:04 <c9sloud> Yes, autotools defines it
+14:30:05 <CindyLinz> c9sloud: 不只欸, 還有 strndup 也被 z 了 XD
+14:30:48 <c9sloud> You need to include zmalloc.c,h
+14:31:10 <CindyLinz> 不過這問題比較小, 反正 c 都還看得懂知道怎麼處理.. Makefile.PL 的問題比較大 XD
+14:31:21 <c9sloud> jemalloc is disabled by default
+14:31:24 <CindyLinz> 我現在不知道要怎麼前進了 XD
+14:31:38 <c9sloud> Ok let me send you a PR
+14:33:47 <CindyLinz> 你用手機在打字喔? 怎麼都打英文 XD
+14:37:36 <c9sloud> Yeahhh
+14:38:37 <CindyLinz> 你慢慢來 我正要出去.. 沒辦法弄 ^^|
+14:39:08 <c9sloud> Yeah XD
+15:08:03 <c9sloud> CindyLinz: const-c.inc 可以砍掉嗎？因為他每次都會改成我自己的 perl 路徑 XD
+15:08:09 <c9sloud> 這樣一不小心就會 commit 出去
+15:17:14 <letoh> check 是什麼東西?
+15:18:06 <c9sloud> CindyLinz: PR sent :p
+15:18:07 <letoh> dep 怎麼會需要這種東西啊@_@
+15:18:21 <c9sloud> letoh: 那是 build dep
+15:18:47 <letoh> build dep ?
+15:18:48 <c9sloud> letoh: unit testing 用 ^^
+15:19:18 <c9sloud> 其實沒有裝check, configure 應該還是會過
+15:19:22 <c9sloud> 只是不能 make check
+15:19:27 <letoh> 我還以為這算是在開發時處理的?
+15:19:34 <letoh> 不會過@_@
+15:19:39 <c9sloud> 咦是喔
+15:19:50 <c9sloud> message 來一下?
+15:19:57 <letoh> No package 'check' found   然後就停了
+15:20:47 <letoh> http://pastebin.com/5Re2DMmy   message
+15:21:03 <c9sloud> 好像是因為 PKG_CHECK_MODULES
+15:21:43 <letoh> autotools 可以分 require 跟 recommend 嗎?
+15:22:38 <c9sloud> 可以
+15:22:43 <c9sloud> 要自己寫腳本測
+15:22:52 <c9sloud> 其實我先前並不知道 PKG_CHECK_MODULES 會 blocking XD
+15:22:56 <c9sloud> 我改一下
+15:22:58 <letoh> 嗯嗯  我先拿掉了
+15:23:29 <letoh> 暫時先把 check 拿掉就可以 configure&&make
+15:25:18 <letoh> make target 好像沒有 clean 和 distclean @_@
+15:25:43 <c9sloud> 嗯? 有哇
+15:25:47 <c9sloud> 我常用耶
+15:26:00 <c9sloud> 拿掉之後 ./autogen.sh 一下
+15:26:06 <c9sloud> ./configure && make
+15:26:18 <letoh> 對啊  有重跑 autogen
+15:26:46 <letoh> make && make clean 會回報 make: *** No rule to make target `clean'.  Stop.
+15:27:14 <letoh> 阿我知道了  應該是有生效
+15:28:30 <c9sloud> 阿我發現了
+15:28:37 <c9sloud> "check" 被 check 了兩次
+15:28:42 <c9sloud> 我把後面那個拿掉就可以了
+15:28:49 <c9sloud> 我 push 一下
+15:28:57 <c9sloud> CindyLinz: 修好囉~ 兩個 PR sent
+15:29:07 <c9sloud> letoh: just pushed
+15:29:18 <letoh> thanks!
+15:29:54 <c9sloud> update 之後要跑一下 autoconf
+15:30:01 <c9sloud> autoconf => 用來更新 configure script
+15:30:24 <c9sloud> 咦等等
+15:30:36 <letoh> 好像沒有 push 上去呀@_@
+15:30:47 <c9sloud> 等我一下 我在 reproduce
+15:30:54 <letoh> 好
+15:31:54 <letoh> benchmark ? 建議不要裝在 PREFIX/bin
+15:36:11 <c9sloud> 咦 他居然有裝進去
+15:36:13 <c9sloud> XDD
+15:36:16 <c9sloud> 我一起修
+15:40:07 <c9sloud> letoh: 有囉~
+15:40:37 <c9sloud> 很不幸的 PKG_CHECK_MODULES 檢查的東西好像非有不行，所以我就加了一個 option XD
+15:40:45 <c9sloud> --enable-check #
+15:40:59 <c9sloud> 改看 check.h 好了
+15:41:02 <letoh> 這樣方便多了
+15:41:05 <c9sloud> 我改一下..
+15:43:05 <letoh> configure.ac:90: error: possibly undefined macro: AM_PATH_CHECK
+15:43:36 <c9sloud> 你那邊沒有 AM_PATH_CHECK?
+15:43:46 <c9sloud> 我想想
+15:44:01 <letoh> 看來有版本限制  我研究一下
+15:44:13 <c9sloud> 那行好像可以直接拿掉
+15:44:19 <c9sloud> 好像 deprecated 了
+15:44:33 <letoh> 對啊  我查到的也是說 deprecated
+15:44:45 <c9sloud> ok 我拿掉了
+15:44:53 <c9sloud> pushed b737fbb
+15:45:05 <letoh> 看到了，試試
+15:51:22 <whitglint> 我來包包看 r3 c++ wrapper... 不過 git 怎麼用... XD
+15:53:00 <letoh> git clone ...
+15:54:04 <letoh> http://pastebin.com/VfzHBgfi   benchmark 結果
+16:19:23 <whitglint> make check 不過
+16:20:26 <whitglint> check_tree.c:3:10: fatal error: 'check.h' file not found
+16:22:51 <c9sloud> 嗯嗯 在修.. AC_CHECK_HEADERS 沒辦法找到 check.h orz
+16:23:46 <whitglint> 生了一堆可怕的檔案
+16:23:57 <c9sloud> XD
+16:25:58 <c9sloud> 還是回到  ./configure --enable-check
+16:26:08 <c9sloud> XD
+16:26:15 <whitglint> c9sloud: 有沒有打算把 http parser 也做一做 XD
+16:27:00 <c9sloud> whitglint: 好像有人有做過
+16:27:14 <c9sloud> whitglint: http://search.cpan.org/~kazuho/HTTP-Parser-XS-0.16/lib/HTTP/Parser/XS.pm
+16:28:27 <whitglint> c9sloud: 我想要 c 實作的
+16:28:56 <c9sloud> https://github.com/search?l=C&q=http+header&ref=cmdform&type=Repositories 還蠻多的 XD
+16:29:26 <c9sloud> whitglint: 如果要加 http header parser 的話，那應該會另外寫一個 library 然後再寫一個 http server 把兩個兜起來 XD
+16:29:27 <whitglint> repo 更新了，那我要怎麼 update local 呢？好像沒有 git update
+16:29:35 <c9sloud> whitglint: 用 git pull origin master
+16:30:43 <c9sloud> https://github.com/joyent/http-parser 這個看起來不賴耶
+16:32:44 <whitglint> joyent 聽起來應該是 node.js 那一套
+16:32:57 <c9sloud> https://github.com/alobbs/libhpack 這個看起來也蠻厲害的
+16:35:26 <c9sloud> http://tinyclouds.org/libebb/ 這個更威 XD 用 Ragel + libev 做 parsing
+16:36:14 <c9sloud> 咦 他的 library 砍掉了
+16:36:18 <c9sloud> 看來應該是被挖角無誤 XD
+16:36:28 <c9sloud> https://github.com/taf2/libebb  # 其他 fork
+16:38:45 <c9sloud> 咦 如果他是 node.js 的話，說不定他把 parser 移動到 node js 了
+16:39:40 <c9sloud> 咦不對.. 裡面是 c++ 而且沒有 Ragel + PEG
+16:40:31 <c9sloud> hmm 有空應該寫一個 http header parser 來玩玩 XDD
+16:40:42 <c9sloud> 順便把 http 摸熟
+16:57:14 <c9sloud> json-c 跟 jsoncpp 居然不能共存 ... @@
+17:00:13 <c9sloud> letoh: hihi 你跑 benchmark 機器的 CPU 是 i5 嗎?
+17:01:05 <letoh> 不是，算是舊機器 cpu 是 E8400
+17:34:49 <c9sloud> 話說, lazily parsed http header 好像還是沒有人做?
+17:35:37 <letoh> 不太懂這邊為什麼需要 lazy ?
+17:36:06 <c9sloud> 因為其實大部分在 web app 裡面只會去讀 cookie, POST content.. 之類的
+17:36:41 <c9sloud> 如果可以先跑一次，知道每個 field 的定位點
+17:36:51 <c9sloud> 需要讀 header 的時候才去 parse value
+17:37:11 <c9sloud> 所以也許可以分兩個 stage, 第一個 stage 去 parser 每次一定要 parse 的
+17:37:22 <c9sloud> 第二個 stage 才去 parse 用到的
+17:38:04 <letoh> 感覺是多一個 preprocessing stage?
+17:38:06 <c9sloud> 現在看到的實作都是看到什麼全部都一起 parse 起來
+17:38:10 <c9sloud> yeah
+17:38:26 <c9sloud> 我猜可能會是用一個 char** 把所有的行開頭的位置都存起來
+17:38:31 <letoh> 這樣整個 steam 都要先記起來了
+17:38:48 <c9sloud> 然後在用 prefix tree 去 match header key 符合的部分
+17:38:58 <c9sloud> (又是 prefix tree XD
+17:39:14 <c9sloud> letoh: 可能不用?
+17:39:48 <c9sloud> 不過 multi-part content 可能又是另外一個 parser
+17:40:18 <letoh> 萬一後面才需要 parse 的資料是放在 stream 的開頭，還是得保留起來吧?
+17:40:49 <letoh> 不過 parse 過的 stream data 就可以丟了，只存有意義的部份
+17:41:33 <c9sloud> 像 User-Agent 幾乎很少用
+17:41:40 <c9sloud> 嗯嗯
+17:41:58 <c9sloud> letoh: 後面才需要 parse 是指? 之後才會用到的嗎?
+17:42:18 <letoh> 因為 lazy 不是嗎?
+17:42:21 <c9sloud> 可能 scanning phase 就可以先決定哪些一定要先 preparse 哪些可以 ignore 掉
+17:42:43 <letoh> 我以為你整個 parse 的動作都要 lazy @_@
+17:43:15 <c9sloud> 嗯嗯我想 API 可以設計成由使用者自定哪些是他一定要 prefetch 的
+17:43:28 <c9sloud> 這樣可能會比 ragel 更快
+17:43:42 <letoh> 嗯嗯嗯  一般只處理需要的部份就好
+17:43:52 <c9sloud> 而且每個 header key point 還可以丟給 thread 分散式處理 XDD
+17:44:15 <c9sloud> 好了可以來想 project name XDD 排到下個月 XDD
+17:44:42 <au> h3 :p
+17:45:05 <c9sloud> XDDDD
+17:45:09 <c9sloud> au: nice XD
+17:45:17 <au> (氚)
+17:45:29 <c9sloud> 好名字耶!
+17:45:34 <c9sloud> 那就決定了 XD
+18:45:15 <c9sloud> 只有記憶體用量的差別而已
+18:45:35 <c9sloud> 但如果硬是把 int 改成 unsigned char 來用，好像還會特別慢一點點
+18:46:02 <c9sloud> 不太確定是不是 CPU instruction 有對 int 這類整數的計算或調用有優化
+18:46:23 <letoh> 這種玩法通常只有在資源受限的環境才會用到，一般在 pc 應該不會刻意改成 char
+18:47:30 <letoh> 或者搭配 bitfield，總之資料得先塞得進去才能執行程式，也才能開始考慮效能問題
+19:26:31 <c9sloud> au: 氚 的話好像是 3H?  H3 的話應該是氫?
+19:26:46 <c9sloud> 不過是說 3H 也算是氫的一種 超重氫 XD
+19:27:24 <c9sloud> 是說該不會以後專案名稱都用週期表上的元素 XDDD
+19:40:18 <petercommand> c9sloud: r3是甚麼呀www
+19:40:32 <petercommand> 也是元素名稱嗎?XD
+20:03:16 <c9sloud> petercommand: 如果要吊書袋的話也是可以硬說是 "Euclidean space of real numbers in three dimensions" 啦 XDDDD
+20:03:34 <c9sloud> petercommand: 其實這個名字是 router tree 的諧音 XD
+20:04:04 <c9sloud> trie-based router 雖然說 trie 有人念成 try
+20:04:20 <c9sloud> 不過把數字擺前面的話 namespace 恐怕過不了 XD
+20:06:39 <c9sloud> 跑 perl router 的 benchmark .... 其他的 router 都等好久.... @@
+20:06:52 <c9sloud> 已經等 HTTP::Router 兩分鐘了
+20:10:23 <c9sloud> https://gist.github.com/c9s/488d6fd4e53c34758559
+20:11:39 <godfat> web app 上 routing 真的這麼吃重嗎..?
+20:12:30 <c9sloud> godfat: 其實只是 for fun :p
+20:12:39 <c9sloud> 就當練習
+20:13:23 <godfat> XD 我可以理解做起來很好玩，可是不太能理解為什麼會成為某種風潮 XD 大家都是覺得很好玩？
+20:13:43 <c9sloud> "performance is a feature" :p
+20:14:20 <petercommand> c9sloud: XD
+20:14:22 <c9sloud> 而且現在是 C10K 年代 XD
+20:15:18 <letoh> godfat: 可能是當寫出來的東西跑太慢，遷怒的對象可以少一個XD
+20:15:51 <godfat> 很難想像實際 web app 上有差很多呀 XD 一個可能是 routes 超多，上千個，然後所有東西都從 file/memcache 出所以超快，之類的
+20:16:17 <godfat> letoh 那倒是真的 XDDDDDD 我弄 rails 都亂怪一通，反正一堆東西都慢得跟鬼一樣
+20:21:07 <c9sloud> 想弄一個東西可以在 RPi 上面跑的來玩玩.. 我是覺得 Pi 上頭不可能跑 Rails 的 XDD
+20:21:32 <c9sloud> https://github.com/joyent/http-parser/blob/master/http_parser.c # wow a huge state machine...
+20:21:33 <godfat> ruby 系的話大概是玩 mruby 我猜
+20:21:46 <c9sloud> godfat: rails 可以用 mruby 跑嗎?
+20:22:00 <godfat> 當然不可能 XDDDD 差太遠了 XDorz
+20:22:02 <letoh> rpi 跑什麼都慢...
+20:22:10 <letoh> 我現在就掛在 rpi 上啊XD
+20:22:49 <letoh> 大概都得重新改寫，能丟 gpu 的就丟 gpu 才快得起來
+20:22:57 <godfat> http 有限制一定要 ascii-7bit 嗎？居然有個好大的 table = =...
+20:23:07 <c9sloud> 話說以前的年代大家的電腦都很慢，所以寫什麼效能都拼得要死 XD
+20:23:17 <c9sloud> 這..要讀 rfc
+20:23:24 <c9sloud> 我已經載到 Kindle 了 XD
+20:23:36 <godfat> XDDD 真的超有幹勁的，真不錯
+20:25:15 <godfat> 就我所知，node 的 http parser 主要不是效能考量，而是彈性考量，不知道現在是否還是這樣
+20:25:15 <godfat> 之前知道的是 mongrel 的 ragel based 的 http parser 還是比較快，只是彈性不足
+20:31:29 <c9sloud> godfat: 我現在的想法是覺得彈性還是可以兼顧
+20:31:39 <c9sloud> 不過還沒讀 rfc 所以不是太確定
+20:32:02 <c9sloud> 基本上做兩層 layer
+20:32:15 <c9sloud> 最底層的 layer 一律都是回傳 value as char*
+20:32:30 <godfat> 我沒讀 rfc 也沒讀 source 所以更不清楚 XDD 只聽說 http 其實滿複雜的，因為有不少特例
+20:32:34 <c9sloud> 至於要 parse 成 Date 還是 integer
+20:32:48 <c9sloud> 就從第二層 layer 去拉
+20:33:00 <c9sloud> 嗯嗯
+20:33:12 <godfat> 我的想像是只要給我 headers 的 key-value pair 即可
+20:33:12 <c9sloud> rfc2616
+20:33:15 <c9sloud> http://tools.ietf.org/html/rfc2616
+20:34:02 <godfat> 嗯，意思大概就是不需要你說的第二層
+20:34:11 <c9sloud> 對
+20:34:17 <c9sloud> 所以 application 可以決定要用哪一層
+20:36:35 <c9sloud> 就像你可以用 NSUrl 去抓 JSON 或是用 CFNetwork 慢慢刻到死 XD
+20:36:52 <godfat> objective-c?
+20:37:53 <godfat> 話說需要 streaming 嗎？還是 web server 應該把 header buffer 起來？
+20:39:16 <c9sloud> 應該是 buffer 起來 (?)
+20:39:26 <c9sloud> 因為要 lazily parse
+20:40:16 <godfat> lazily parse 也只需 buffer 在 http parser 即可，跟 web server 是否要 buffer 無關？即仍可做成 streaming?
+20:41:26 <c9sloud> 嗯嗯 看 API 怎麼定義
+20:41:48 <c9sloud> http://www.php.net/manual/en/function.http-cache-etag.php # top layer API 可能會有點像是這樣 I guess
+20:42:10 <c9sloud> 右邊那一塊
+20:43:02 <letoh> 為什麼是叫 etag @_@
+20:46:37 <godfat> 這些算是高階的 API 嗎？我猜內部也是有個 map* http_parse 之類的，不然一個個做好像有點痛苦..? XD
+20:47:04 <godfat> etag 大概只是正好停在那頁，要看的是右邊的清單 XD
+20:47:13 <c9sloud> 嗯嗯
+20:47:44 <c9sloud> godfat: 大概會是 char *retval = http_parser("key", ....); 之類的，不會是一次回傳 map
+20:48:01 <c9sloud> http_parse(buf, "key"...);
+20:48:02 <letoh> 我本來以為 etag 是什麼特殊的東西，但點下去也沒跑出說明或定義@_@
+20:48:26 <c9sloud> 我記得是拿來做 cache 用的
+20:48:30 <c9sloud> http://en.wikipedia.org/wiki/HTTP_ETag
+20:49:08 <letoh> 原來如此  看來還是得先看一下 rfc
+20:49:13 <godfat> 那要怎麼記得 parse 好的東西呀？還是那由 buffer 決定？
+20:49:43 <godfat> http cache 機制複雜得跟鬼一樣... ~.~
+20:50:57 <c9sloud> 我覺得應該要有一個 parser object 裡面有一個 buffer char *
+20:51:26 <godfat> 嗯嗯，所以是紀錄在 parser object 裡
+20:51:39 <c9sloud> rfc 太多了 XD 可能也要順便看 RFC 3986
+20:51:54 <c9sloud> 也許先從 wiki pages 讀個概觀再深入下去
+20:52:54 <letoh> 看了一下 routing 的範例  突然想到以前看葉秉哲還是誰的 blog 曾看過的，在討論 dictionary 要可以拿 regex 當作 key
+20:55:35 <godfat> 那我的 dictionary 准不准拿 regex 當 key 呀？有 regex 的 regex 嗎？ XD
+20:55:39 <letoh> 這些 routing lib 感覺就是在解這個問題
+20:56:34 <godfat> 如果是大小寫的問題，normalize 後應該就可以了，什麼時候會想用 regex?
+20:56:34 <godfat> 如 X-Runtime 與 Runtime 這樣的差異嗎？
+20:57:08 <c9sloud> letoh: 照你這樣說的話，其實 r3 可以抽出來做一個 support regex 的 hash !
+20:57:15 <c9sloud> 其實是支援的
+20:57:26 <c9sloud> 你可以把 r3 當成一個支援 regexp 的 hash table 來用 XD
+20:57:28 <letoh> '/blog/post/{id}' => [ 'controller' => 'PostController' , 'action' => 'item'   , 'method'   => 'GET' ] ,   像這個
+20:58:07 <letoh> 其實就是在封裝一個特別的 dictionary structure 啊，只是還沒有方便的語法糖而已
+20:58:07 <c9sloud> 嗯嗯
+20:58:32 <c9sloud> 其實 dictionary structure 大多都是 hash table 或 tree 的實作
+20:58:46 <c9sloud> 只是用 hash table 的話沒辦法支援 regexp
+20:59:00 <c9sloud> 其實一般的 tree 也不行
+20:59:14 <c9sloud> 但 r3 會自動把 regexp 的部分切出來 parse
+20:59:29 <c9sloud> 所以經你這樣一提，其實是可以這樣拿過來用
+20:59:59 <letoh> 我覺得把 regexp 切出來處理，算是實作上的技巧了
+21:00:29 <c9sloud> r3_tree_insert_pathl(t, "contact-{name}", .....);     r3_tree_matchl(t,"contact-John", ...);
+21:00:53 <letoh> 另外我覺得比較不一樣的是 match key 以後還要處理 binding
+21:00:58 <letoh> 像那個 id
+21:01:27 <letoh> 這感覺又有點像 lex 在幹的事了@_@
+21:01:39 <c9sloud> 嗯?
+21:01:58 <letoh> 像我剛剛貼的例子， {id} 是指 regex ?
+21:02:25 <c9sloud> 其實不用，r3 現在 API 是你可以 capture matched strings 但也可以不用管他
+21:02:32 <letoh> 嗯嗯嗯
+21:02:49 <c9sloud> 所以可以單純拿來當做 hash table (dictionary) 來用
+21:04:35 <letoh> 我剛剛其實一直避開用 hash table，因為一般通過 hash function 計算的設計，好像就跟 regex 無緣了XD
+21:04:47 <c9sloud> yeah
+21:04:56 <c9sloud> XD
+21:05:10 <letoh> 用 associative array 或 map, dict 可能比較接近
+21:06:36 <c9sloud> 嗯嗯
+21:06:42 <c9sloud> 同意
+21:07:11 <c9sloud> letoh: 照這樣說，可以用 macro 來寫一個 hash table 的 interface XD
+21:07:38 <c9sloud> R3_MAP_INIT, R3_MAP_SET, R3_MAP_GET 之類的 XD
+21:07:41 <letoh> 對啊  剛剛看了一下突然想起以前看過的文章，好像可以封裝起來用
+21:08:01 <c9sloud> 阿不過我沒寫 delete node function XD
+21:08:12 <c9sloud> 這樣就不能 R3_MAP_UNSET 了 XD
+22:02:16 <CindyLinz> nginx 有實作 regex
+22:02:39 <CindyLinz> 然後可以拿 capture 去作 if 判斷之類的 conditional routing
+22:03:29 <CindyLinz> 唔.. 用 r3 的話, 其彈性會比 nginx 低耶 @@"
+22:21:14 <c9sloud> CindyLinz: 不會阿，你可以用 c 寫 conditions XDDD
+22:23:28 <c9sloud> CindyLinz: 其實我很少用 nginx 的 conditions 妳提到的 use cade 是像？
+22:28:33 <CindyLinz> c9sloud: 當網址裡面出現 cindy 的時候就額外印 log
+22:28:44 <CindyLinz> online debug 好用 :D
+22:28:59 <c9sloud> 其實我有想過這個
+22:29:40 <CindyLinz> 然後用 php 配 nginx 的話, 會額外去 detect php 檔有沒有存在 @@"
+22:29:44 <c9sloud> 有點類似 Jifty 的 before ~ /pattern/ 或 after ~/pattern/
+22:29:47 <c9sloud> 但後來覺得只要另外在 match 前面加一段 code 就可以了 XD
+22:31:08 <c9sloud> 然後後來也沒有做 file checking 是覺得這個部分好像應該是 http server 要 handle ... 所以還在想 :p
+22:32:50 <c9sloud> CindyLinz: 不過好像勢必會做到 http server XDDDD
+22:49:10 <c9sloud> CindyLinz: 不然就要再做一層抽象叫 r3_router_, r3_router_before("pattern"...., callback);  r3_router_add("pattern", ....);  把底層包起來
+22:50:12 <c9sloud> 弄一個 before_patterns / after_patterns 的 array 用來循序比對
+22:50:46 <c9sloud> 這樣可以過一層 pattern matching 就可以比較彈性方便了 XD 不用什麼都自己寫
+22:51:18 <c9sloud> 不過我現在注意力已經發散到 http header parser 上面了 XD (逃)

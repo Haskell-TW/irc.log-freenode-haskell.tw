@@ -1,0 +1,27 @@
+04:28:42 <monochrom> type theory 竟成了葵花寶典, 辟邪劍法 XD
+07:35:31 <CindyLinz> 是內功! XD
+09:07:33 <CindyLinz> Haskell 代入的那個位置才是葵花寶典 XDD
+11:39:38 <CindyLinz> 原來這個是可以投稿程式的呀.. http://benchmarksgame.alioth.debian.org/
+11:39:57 <CindyLinz> 那可以拿來當 online judge 玩^H練習耶 :p
+11:40:37 <CindyLinz> 看到 GHC 輸給 Go 了, 不爽中.. XD # http://benchmarksgame.alioth.debian.org/u64q/performance.php?test=nbody&sort=fullcpu
+14:45:14 <mno2> 看起來 go 1.2 runtime 改進了不少
+15:05:20 <CindyLinz> 這一頁裡面 GHC 的 code 兩個都看起來好奇怪啊
+15:05:44 <CindyLinz> 它們都會一再把資料壓到 Ptr Double 裡面再解回來...
+15:05:48 <CindyLinz> 這是規定的嗎? orz
+15:06:26 <CindyLinz> 主要時間是花在一個 50M 次的... 迴圈
+15:07:05 <CindyLinz> 這兩個 GHC code 在每一次 iterate 都會去把東西從 Ptr 裡面解出來算, 算完再壓回 Ptr....
+15:15:05 <mno2> CindyLinz: 不知道耶，不熟 Ptr
+15:39:19 <CindyLinz> mno2: 就理解成 C 的 ptr 就是了 ^^|
+15:39:40 <CindyLinz> 這兩支 GHC 版的就一直重覆地使用 Storable.. @@"
+15:39:50 <mno2> CindyLinz: 我知道可以理解成 C pointer, 但我不知道你的問題的答案
+16:03:05 <CindyLinz> 喔 XD
+23:14:19 <mno2> https://docs.google.com/presentation/d/18ZdJoDGQr47wBfO-zEwW1hkc6tfiAdP7TYTKhki_IKk/edit#slide=id.p   禮拜五要給個 talk
+23:14:19 <mno2> 關於 strictness / unboxed type 的簡易教學
+23:16:05 <CindyLinz> :D
+23:16:22 <CindyLinz> 教同事喔?
+23:27:40 <mno2> CindyLinz: no, haskell.sg
+23:28:24 <CindyLinz> 喔喔~
+23:29:36 <mno2> new name for bottom = finger
+23:30:53 <CindyLinz> 中指? @@"
+23:33:41 <mno2> CindyLinz: 對啊
+23:55:51 <CindyLinz> 噗噗噗

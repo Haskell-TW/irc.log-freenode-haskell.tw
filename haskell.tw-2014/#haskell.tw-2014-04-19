@@ -1,0 +1,14 @@
+18:46:35 <CindyLinz> @src repeat
+18:46:36 <lambdabot> repeat x = xs where xs = x : xs
+19:07:26 <CindyLinz> @src foldl
+19:07:27 <lambdabot> foldl f z []     = z
+19:07:27 <lambdabot> foldl f z (x:xs) = foldl f (f z x) xs
+19:09:47 <CindyLinz> @src foldl'
+19:09:48 <lambdabot> foldl' f a []     = a
+19:09:48 <lambdabot> foldl' f a (x:xs) = let a' = f a x in a' `seq` foldl' f a' xs
+19:10:33 <CindyLinz> @src ($!)
+19:10:33 <lambdabot> f $! x = x `seq` f x
+19:10:37 <CindyLinz> @src seq
+19:10:38 <lambdabot> Source not found. You untyped fool!
+19:10:45 <CindyLinz> Q_Q
+19:21:34 <CindyLinz> 原本預期 lambdabot 給一個 <<native>> 之類的, 結果竟然罵人.. ._.

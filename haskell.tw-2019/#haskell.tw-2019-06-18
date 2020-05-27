@@ -1,0 +1,13 @@
+22:21:12 <Galaxian> 大家晚安
+22:21:20 <Galaxian> 問個新手問題
+22:22:56 <Galaxian> list comprehension 裡面如果從無限 list 取 x
+22:23:14 <Galaxian> 那 x 也會是一個無限 list
+22:23:36 <Galaxian> 呃... 不太會形容我的問題 QQ
+22:25:33 <Galaxian>  [ x | x <- [1..], x <= 5] 結果會是 [1,2,3,4,5  的無限 list
+22:26:02 <Galaxian> 有什麼方法讓取出來的 list 變成有限的嗎?
+22:31:43 <caasih> `take 5`?
+22:32:30 <caasih> 永遠不知道下一個 take 到的是不是 bottom
+22:34:56 <Galaxian> 是啊 XD
+22:35:08 <Galaxian> 不可能知道後面還有沒有符合條件的元素
+22:38:37 <Galaxian> 先用take排除好了
+22:38:41 <Galaxian> 感謝

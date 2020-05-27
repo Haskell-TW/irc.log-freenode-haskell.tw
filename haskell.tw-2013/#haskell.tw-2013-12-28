@@ -1,0 +1,85 @@
+00:02:13 <hashcat_> suhorng: X10是統一整個網路的計算資源, 跟ThorScript有差距
+00:02:46 <suhorng> 網路!
+00:04:28 <hashcat_> suhorng: 能宣告分佈式資料在集群中各記憶體的布局
+00:05:54 <hashcat_> 我貌似都在看些沒人在用的語言..
+00:06:19 <suhorng> XDDD
+00:10:38 <hashcat_> 不過就是沒辦法無視
+00:21:45 <monochrom> 怎麼 IBM 時不時都想弄個統一天下的語言? 上次是 PL/I, 結果是天下反面教材.
+00:23:44 <hashcat_> 因為他是IBM
+00:24:24 <monochrom> 真是性格決定命運! XD
+00:24:47 <hashcat_> 有做有機會, 連IBM都不做就沒機會了
+00:25:30 <hashcat_> 另外一個有這種能力跟心思的公司被甲骨文吃掉啦
+00:28:16 <hashcat_> 也不是期待他有多大機會成功推廣, 只是為一種可能性全力以赴, 還有人在做的感動
+00:31:59 <hashcat_> 雖說我只是圍觀路人, 也是可以順便感動一下
+00:38:46 <monochrom> 但我不感動. 我認為統一天下是荒謬的.
+00:50:35 <hashcat> 錢都賺飽了, 不做好玩的事還能做啥
+00:54:05 <hashcat> 洋人佔領北美洲還想著月球火星能不挖礦插國旗
+00:56:33 <hashcat> 更早前有火炮後還想著多管機砲
+00:59:12 <hashcat> 差距就慢慢拉大了, 想要把網路各資源用個語言, 也還好而已
+01:05:48 <hashcat> 有haskell想著idris
+01:07:41 <hashcat> 那個目標也算縮小了  只面向高性能計算
+01:08:52 <hashcat> 通用的話現在是python的天下
+01:45:13 <letoh> python 厲害的地方在於吃到不少科學計算的市場?
+03:42:31 <favonia> 我覺得 python 這方面的優勢很不穩 lol
+22:00:10 <CindyLinz> "In his book, self-balancing binary search trees are less than a page of code.
+22:00:12 <CindyLinz> Except that delete is left as an exercise to the reader.
+22:00:14 <CindyLinz> "
+22:00:18 <CindyLinz> # http://matt.might.net/articles/red-black-delete/
+22:00:47 <CindyLinz> 這裡的「his」指的是寫 Purely functional datastructure 的  Chris Okasaki XD
+22:07:05 <hashcat> favonia: 中小規模科學計算開源首選
+22:14:25 <CindyLinz> 欸我不太懂欸, 為什麼 python 會擅於科學計算啊?
+22:14:48 <hashcat> favonia:python常常比最強的沒嬴過,但在很多領域位居老二老三的
+22:15:00 <CindyLinz> 科學計算不是高階點的用 mathematica 或 matlab, 低階就用 C 直接掃了? @@"
+22:15:46 <hashcat> 個人想法是因為一件事一個方法的哲學
+22:16:53 <hashcat> 很有科學的可重複性, 另外對CS要求不高
+22:17:12 <hashcat> matlab慢
+22:17:28 <hashcat> 用途有限
+22:17:40 <CindyLinz> python 不會比 matlab 更慢嗎?
+22:17:57 <CindyLinz> 我記得就算是寫 C, 也要很有經驗的人能把矩陣運算寫贏 matlab
+22:18:15 <CindyLinz> 要懂得怎麼去考慮 memory locality 之類的..
+22:18:25 <hashcat> python的矩陣包後端是fortran
+22:18:34 <CindyLinz> 不過寫 C 後來用 gsl 這套 lib 就行了..
+22:18:36 <CindyLinz> 喔
+22:19:17 <hashcat> 還有自動jit成c或opencl
+22:19:52 <hashcat> 但用法都是python
+22:21:05 <hashcat> 像統計來說的話王牌可能是R,spss
+22:21:21 <hashcat> 接下來python
+22:22:31 <hashcat> 企業It java c++ python
+22:22:33 <CindyLinz> 所以說, 因為 python 夾帶了一個還算強力的運算引擎, 然後再配合 python 本身「黏合」很方便, 所以就厲害了?
+22:24:07 <hashcat> 自動jit那個缺reflection的編譯語言就不好搞了
+22:24:29 <CindyLinz> 我正在看這篇.. http://blogs.perl.org/users/ovid/2010/08/what-to-know-before-debating-type-systems.html
+22:24:48 <CindyLinz> 其中 Fallacy: Dynamically typed languages are weakly typed 這一段裡面講到
+22:25:03 <CindyLinz> Dynamic type language 的強項在於它有一個 runtime
+22:25:27 <CindyLinz> 使得執行爆掉的時候可以噴出很詳細的訊息讓人知道它到底發生了什麼事
+22:25:40 <CindyLinz> 不過.. 這讓我想到 Java....
+22:25:58 <CindyLinz> 不知道作者是不是把 Java 歸為 dynamic..
+22:26:23 <CindyLinz> 然後你說的 reflection, 也讓我想到這個 @@"
+22:28:22 <hashcat> 我覺得可以協調封裝不同功能也很重要
+22:29:38 <CindyLinz> 嗯嗯嗯
+22:30:09 <hashcat> 要是字串處理perl統計R硬體輸出c的
+22:31:01 <hashcat> 會讓人有種我還是紙上作業好了的感覺
+22:32:26 <hashcat> 或者花錢請各種程序員, 但要協調會死人
+22:34:21 <CindyLinz> 你大概會想要有一種「語言包」, 裡面某一段寫 :perl 就是開始跑 perl, 寫 :R 就開始跑 R.. 然後變數可以共通著用 XD
+22:34:29 <hashcat> 順便講下符號計算 mathematica maxima sympy
+22:34:47 <hashcat> 又有python這樣
+22:34:53 <CindyLinz> XD
+22:35:40 <hashcat> python有夠穩
+22:38:30 <hashcat> 不得不首選
+22:38:40 <CindyLinz> 統計還有 SCSS
+22:38:45 <CindyLinz> 寫錯 XD
+22:38:52 <CindyLinz> SPSS
+22:40:10 <hashcat> 在python之前的都很名貴
+22:40:22 <CindyLinz> XD
+22:41:04 <hashcat> 之後的就,很多都沒之後了
+23:16:18 <petercommand> "python之前"是指甚麼?
+23:20:19 <petercommand> 應該說甚麼叫"之前"阿XD
+23:20:55 <favonia> petercommand: 之錢，就是比較貴的意思
+23:21:23 <suhorng> CindyLinz: purely functional data structure 搜下去會找到作者的心得欸 XDD 好有趣
+23:22:46 <petercommand> favonia: XD
+23:38:45 <monochrom> 我看 python 與科學計算: 如果你只見過 fortran, c, python, 你會選哪一樣?
+23:38:57 <mno2> 原來 Reid Barton 也會出現在 mathoverflow:  http://mathoverflow.net/a/2312
+23:41:15 <monochrom> 換另一個方法講: 問: 為甚麼老人電腦班教視窗而不是Mac呢? 答: 如果你只見過視窗, 你會教哪一樣?
+23:43:13 <CindyLinz> 他指的之前之後是排名吧?
+23:44:09 <suhorng> 怎麼這樣句子聽起來有種「如果我只見過 C++, Java, Python, 要選擇 OOP 還是 functional programming 呢？」的感覺
+23:45:43 <suhorng> "Git is a purely functional data structure" http://www.jayway.com/2013/03/03/git-is-a-purely-functional-data-structure/ XDDDD
+23:45:58 <suhorng> 他其實是種 Zipper 吧(誤)

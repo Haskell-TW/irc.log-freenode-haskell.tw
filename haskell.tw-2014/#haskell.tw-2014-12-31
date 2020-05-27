@@ -1,0 +1,107 @@
+00:38:16 <suhorng> 有大 Λ 的 type inference 就 undecidable ++
+00:38:45 <suhorng> 好像 rank 2 以上就是了?
+01:09:24 <CindyLinz> 原來我們平常就跟 undecidable 這麼接近了....w
+01:10:11 <CindyLinz> 沒想過要怎麼證明這種東西 @@"
+01:26:16 <pkmx> 印象中rank-2是decidable?
+01:26:50 <pkmx> rank-k, k >= 3 才是 undecidable?
+09:22:04 <suhorng> 恩阿 k >= 3
+09:22:29 <suhorng> 喔 .... "以上" 有包含, 所以我用詞不對 XDDD
+12:55:21 <miaoski> player {hp=hp2} = p2 這種寫法好不舒服
+12:55:38 <miaoski> 雖然沒有賦值，但這會讓人有左賦值/右賦值的混亂感@@
+12:58:35 <pkmx> 用lens啊
+13:33:16 <miaoski> brain hurting ...
+13:36:35 <petercommand> http://hackage.haskell.org/package/base-4.7.0.2/docs/src/Data-OldTypeable-Internal.html#Typeable
+13:37:23 <petercommand> 這裏的 INSTANCE_TYPEABLE(...) 是不是 c  macro 呀？
+13:42:06 <petercommand> hackage.haskell.org 網頁好像看不到 .h 檔
+14:00:03 <monochrom> 是
+14:13:28 <petercommand> thx
+19:01:46 <petercommand> haskell 有內建 Applicative f => f (a -> b) -> f (b -> c) -> f (a -> c) 這樣的函數嗎?
+19:02:15 <petercommand> @hoogle Applicative f => f (a -> b) -> f (b -> c) -> f (a -> c)
+19:02:17 <lambdabot> Data.Generics.Schemes everywhereBut :: GenericQ Bool -> GenericT -> GenericT
+19:02:32 <petercommand> @@
+19:19:20 <suhorng> miaoski: 有點看不懂這行 code, 這是 pattern matching 嗎?
+19:19:24 <suhorng> 做 binding?
+19:34:26 <suhorng> @hoogle Applicative f => f (a -> b) -> f (b -> c) -> f a -> f c
+19:34:26 <lambdabot> Prelude (.) :: (b -> c) -> (a -> b) -> a -> c
+19:34:27 <lambdabot> Data.Function (.) :: (b -> c) -> (a -> b) -> a -> c
+19:34:27 <lambdabot> Control.Parallel.Strategies (-|) :: (a -> b) -> Strategy b -> (b -> c) -> (a -> c)
+19:34:50 <suhorng> @hoogle Applictaive f => f (b -> c) -> f (a -> b) -> f a -> f c
+19:34:51 <lambdabot> Warning: Unknown class Applictaive
+19:34:51 <lambdabot> Prelude (.) :: (b -> c) -> (a -> b) -> a -> c
+19:34:51 <lambdabot> Data.Function (.) :: (b -> c) -> (a -> b) -> a -> c
+19:35:42 <suhorng> 唔,  f (b -> c) -> f (a -> b) -> f (a -> c) 這真的寫得出來嗎@@?
+19:36:15 <suhorng> 喔喔可以...
+19:36:18 <suhorng> :t liftA2 (.)
+19:36:19 <lambdabot> Applicative f => f (b -> c) -> f (a -> b) -> f (a -> c)
+19:37:18 <petercommand> :t liftA
+19:37:19 <lambdabot> Applicative f => (a -> b) -> f a -> f b
+19:37:26 <petercommand> :t liftM
+19:37:27 <lambdabot> Monad m => (a1 -> r) -> m a1 -> m r
+19:37:34 <petercommand> :t liftM2
+19:37:35 <lambdabot> Monad m => (a1 -> a2 -> r) -> m a1 -> m a2 -> m r
+19:38:28 <petercommand> :t liftA2
+19:38:29 <lambdabot> Applicative f => (a -> b -> c) -> f a -> f b -> f c
+19:40:17 <petercommand> suhorng: 原來可以用這系列的函數做出來XD
+19:40:25 <petercommand> :t lift
+19:40:26 <lambdabot> (MonadTrans t, Monad m) => m a -> t m a
+19:41:19 <petercommand> suhorng: 好讚呀...^^
+19:41:25 <suhorng> petercommand: 其實只是方便讓人不用寫 \f ax ay -> f <$> ax <*> ay 而已
+19:41:37 <petercommand> 對呀
+19:42:08 <petercommand> :t a
+19:42:09 <lambdabot> Expr
+20:19:51 <pkmx> :t liftA2 $ flip (.)
+20:19:52 <lambdabot> Applicative f => f (a -> b) -> f (b -> c) -> f (a -> c)
+20:21:00 <pkmx> :t liftA2 (>>>)
+20:21:01 <lambdabot> (Category cat, Applicative f) => f (cat a b) -> f (cat b c) -> f (cat a c)
+20:21:27 <suhorng> XDDDDD
+20:22:33 <pkmx> 差點忘了 (>>>) 這東西
+20:22:40 <petercommand> :t (>>>)
+20:22:41 <lambdabot> Category cat => cat a b -> cat b c -> cat a c
+20:24:13 <petercommand> 沒看過這東西XD
+20:39:55 <pkmx> @djinn Applicative f => f (a -> b) -> f (b -> c) -> f (a -> c)
+20:39:55 <lambdabot> Error: Class not found: Applicative
+20:39:58 <pkmx> @@
+20:40:10 <pkmx> @djinn Monad f => f (a -> b) -> f (b -> c) -> f (a -> c)
+20:40:10 <lambdabot> -- f cannot be realized.
+20:40:14 <suhorng> @@....
+20:40:22 <petercommand> XD
+20:40:44 <suhorng> djinn 能處理有 typeclass 的東西嗎?
+20:40:56 <pkmx> ▆▅▄▃ 崩╰(〒皿〒)╯潰 ▃▄▅▆
+20:40:57 <petercommand> @djinn Functor f => f (a -> b) -> f (b -> c) -> f (a -> c)
+20:40:57 <lambdabot> Error: Class not found: Functor
+20:41:29 <pkmx> @djinn Monad m => m (a -> b) -> m a -> m b
+20:41:29 <lambdabot> -- f cannot be realized.
+20:41:43 <pkmx> 這東西到底能做啥=.=
+20:42:09 <pkmx> @djinn Monad m => (a -> m b) -> m a -> m b
+20:42:10 <lambdabot> f a b = b >>= a
+20:42:19 <pkmx> 哦 我打錯了=p
+20:42:36 <suhorng> :t ap
+20:42:37 <lambdabot> Monad m => m (a -> b) -> m a -> m b
+20:43:05 <pkmx> 喔對啊 ap應該也要可以生出來才是...
+20:45:11 <pkmx> @djinn Monad m => m (m a) -> m a
+20:45:11 <lambdabot> -- f cannot be realized.
+20:45:31 <petercommand> @djinn Monad m => a -> ma
+20:45:32 <lambdabot> -- f cannot be realized.
+20:45:33 <petercommand> @djinn Monad m => a -> m a
+20:45:33 <lambdabot> f = return
+20:46:12 <petercommand> @djinn Monad m => m a -> m b -> (a -> b -> c) -> m c
+20:46:12 <lambdabot> -- f cannot be realized.
+20:46:37 <petercommand> @djinn Monad m => m a -> m b -> (a -> b -> m c) -> m c
+20:46:37 <lambdabot> -- f cannot be realized.
+20:46:45 <pkmx> @djinn Monad m => (a -> b) -> m a -> m b
+20:46:45 <lambdabot> -- f cannot be realized.
+20:46:54 <pkmx> 感覺弱弱der
+20:47:48 <petercommand> @djinn (a -> b -> c)
+20:47:48 <lambdabot> -- f cannot be realized.
+20:47:58 <petercommand> @djinn a -> b -> c
+20:47:59 <lambdabot> -- f cannot be realized.
+20:48:10 <petercommand> @djinn forall a b. a -> b -> c
+20:48:10 <lambdabot> -- f cannot be realized.
+20:49:33 <pkmx> 這個生的出來才厲害吧XD
+20:50:03 <pkmx> @djinn (a -> b) -> (b -> c) -> (a -> c)
+20:50:04 <lambdabot> f a b c = b (a c)
+20:50:40 <petercommand> XD
+20:50:41 <suhorng> @djinn ((a -> j) -> i) -> (a -> (b -> k) -> j) -> (b -> k) -> i
+20:50:42 <lambdabot> f a b c = a (\ d -> b d c)
+20:54:42 <petercommand> @djinn (a -> (b -> c) -> d) -> b -> (a -> c)-> (a -> d) -> (b -> a) -> d
+20:54:43 <lambdabot> f a b c _ d = a (d b) (\ _ -> c (d b))

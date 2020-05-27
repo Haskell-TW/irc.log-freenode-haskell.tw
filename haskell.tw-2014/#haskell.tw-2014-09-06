@@ -1,0 +1,107 @@
+01:02:58 <suhorng> Data.Strict 是不是自動會是 strict 的呢?
+01:03:17 <au> 是
+01:03:21 <suhorng> 怎麼好像沒聽過 Data.Set.Lazy
+01:03:23 <suhorng> 嗯XD 感謝
+01:04:46 <monochrom> 因為 Data.Map.Lazy 是指對 value lazy. Data.Set 沒有 value.
+01:05:35 <au> Data.Set 直接改成 .Lazy 的話會很有趣 http://stackoverflow.com/a/7136586
+01:05:42 <au> (for some value of 有趣)
+01:06:43 <monochrom> memoize 正是那樣做!
+01:06:47 <suhorng> 咦, 原本以為要比大小, 結果竟然還真的可以改 lazy 喔XD
+01:07:09 <suhorng> 對 Value lazy 也真合理
+01:08:58 <suhorng> range 也太有趣 XDD
+16:04:19 <suhorngM_> 是說, 像 Standard ML (/ OCaml) 那類的 mutual recursive function 該怎麼定義呢?
+16:04:52 <suhorngM_> 當我定義 let rec f x = e1 and g y = e2 的時候, f 跟 g 在 e1 (e2) 中還算 free variable 嗎?
+16:05:36 <letoh> 應該不算了?
+16:06:21 <suhorngM_> 可是如果需要建立 closure 的話, 是不是還是得抓進來呀
+16:07:16 <letoh> 應該是，不然你就得有另外的機制可以參考到 function 吧 (f 和 g)
+16:07:20 <suhorngM_> 像是 let n = 5 in let rec f x = g and g y = n + y;;   在 f 當中是不是需要把 g 抓進 closure 中?
+16:07:24 <suhorngM_> 嗯嗯
+16:08:39 <suhorngM_> 那這樣跟非遞迴的感覺好怪, 因為原本以為只有 free variable 才要捕捉, 結果這個情況要抓更多東西
+16:09:31 <letoh> 以這邊來說.. 如果把 f 看成是某種 variable，只是綁在函式上? (我不曉得實作是什麼情況)
+16:10:35 <suhorngM_> 綁在函式上?
+16:10:58 <suhorngM_> 是像 g 這裡有用到 n, 也得建立 closure, 連帶的 f 也需要(抓 g)
+16:12:11 <letoh> 像 f 個 g 分別都是函數  而且因為都有參考到，所以要抓進來
+16:12:47 <suhorngM_> 嗯..是的
+16:13:00 <suhorngM_> 我現在是例外處理
+16:13:41 <suhorngM_> 然後為了表達 "抓進來" 結果我把 f, g 也算成 free variable...有夠怪
+16:14:04 <letoh> 我的想法是  如果 f g 也想成 variable 呢?
+16:14:17 <letoh> 有點像 let f = fun x -> e1
+16:14:49 <letoh> ml 定義的函式不曉得是不是像 scheme 那麼單純@_@
+16:14:52 <suhorngM_> 嗯?
+16:14:58 <letoh> ml 定義的函數不曉得是不是像 scheme 那麼單純@_@
+16:15:04 <suhorngM_> 應該是, 我把 let rec 跟 letrec 當同個東西了
+16:15:26 <suhorngM_> 嗯對, 當成 variable..
+16:15:35 <letoh> 嗯嗯  那把 f 想成單純的 binding 會比較簡單?
+16:15:57 <letoh> 這樣你要抓的東西就不用特別分 function 還是 variable
+16:16:16 <suhorngM_> 嗯嗯嗯
+16:16:21 <suhorngM_> 現在看來似乎是 binding 了
+16:16:54 <suhorngM_> 不過跟普通的 let 差異只在一個右邊 reference 到的是新定義的, 一個不是
+16:17:08 <letoh> 所以我才會說 let f x = e1 是不是可以看成 let f = fun x -> e1  感覺是一樣的?
+16:17:20 <suhorngM_> let 可以, let rec 無法
+16:17:43 <letoh> 嗯.. rec 應該只是用來辨識要不要 recursive
+16:18:10 <suhorngM_> 就是我感覺跟 (let ...), (letrec ...) 的差別好像一樣
+16:18:18 <suhorngM_> 呃..細節好像有不同
+16:18:28 <letoh> 說到這個，我想到在實作 forth 的遞迴函式的方法
+16:18:57 <suhorngM_> 怎麼做呢?
+16:18:59 <letoh> forth 在定義函式時  如果要再呼叫自己是不行的.. 例如 : foo ( ) foo ;  沒辦法這樣做
+16:19:00 <suhorngM_> dup?
+16:19:09 <suhorngM_> 嗯...
+16:19:19 <letoh> body 裡呼叫的 foo 會去找之前定義過的  找不到就會編譯錯誤
+16:19:52 <letoh> 但事實上編譯器看到第二個 foo 時，第一個 foo 已經建好了 (知道 entry address)
+16:20:19 <letoh> 真的要呼叫也不會難，只是因為 foo 這個新名字還沒加到 namespace 裡，所以會找不到
+16:20:56 <letoh> 所以 forth 裡面就設計一個 recursive 指令，來代表 *正在定義的函數*
+16:21:05 <letoh> : foo ( ) recursive ;  變成這樣
+16:21:12 <suhorngM_> 唔
+16:21:23 <suhorngM_> 永遠指到現在正在定義的函數?
+16:21:34 <letoh> 所以我在想  那個 rec , and 主要是 namespace 的控制?
+16:21:57 <suhorngM_> 嗯..right
+16:22:35 <letoh> 然後會影響到包 closure 的結果
+16:22:57 <suhorngM_> 阿 這樣想真的會有點底層
+16:23:15 <letoh> 都是實作細節了@_@
+16:23:19 <suhorngM_> 以 closure 來說的話, 就是只知道新的 closure allocate 在 heap 上的位址
+16:23:30 <suhorngM_> 但是實際上該 closure 可能根本 uninitialized
+16:24:11 <letoh> 我以為 closure 在建立函數時就應該要一起準備了?
+16:24:23 <letoh> 什麼情況會 uninitialized 呢?
+16:24:32 <suhorngM_> 裡面的 free variable 還沒初始化好
+16:24:42 <suhorngM_> 函數位址也可能還沒填好
+16:24:44 <letoh> 嗯...
+16:25:28 <suhorngM_> 假如 f 用到 g, g 又用到 f 的話, 應該一定有某個時刻是其中某個未初始化好 (畢竟不是 Haskell)
+16:25:52 <suhorngM_> 不過只抓 pointer 的話就還好XD
+16:26:11 <letoh> "永遠指到現在正在定義的函數?" <- 其實真正的運作不是這樣  但不是重點所以先想成這樣比較好說明XD
+16:26:36 <suhorngM_> 好 XDD
+16:26:46 <letoh> 例如在 f 裡參考到 g，但 g 其實後面才會定義到?
+16:27:12 <letoh> 所以還在處理 f 裡的 g 時，完全不曉得 g 在哪... 你是指這種狀況嗎?
+16:29:30 <suhorngM_> 不是耶, 假定都用編譯到機器碼 (而不是直譯), 那 f, g 是都互相知道對方的程式位址
+16:29:36 <suhorngM_> http://ideone.com/4XPjHY
+16:29:57 <suhorngM_> 以這個來說, f 用到 g, g 有 n 這個 free variable, 如果我們給 f, g 都建立 closure 的話
+16:30:22 <suhorngM_> 那我們可能先初始化 f 的 closure (填入 f 位址, free variables)
+16:30:33 <letoh> 嗯
+16:30:43 <suhorngM_> 此時 g 的 closure 雖然可以作成空間已經配置好了, 不過內容可能還是亂的
+16:31:14 <suhorngM_> 喔 好像有人讓 mutual recursive function 共享 closure...
+16:31:30 <letoh> 這樣感覺會打架...
+16:31:47 <suhorngM_> XD
+16:32:25 <letoh> 萬一兩邊都參考同一個名字的變數  那怎麼處理呢? 實際上可能需要分開吧?
+16:32:33 <suhorngM_> 想像成 struct mutual_rec_funcs { int free_var; function f(); int g(int); }; 的話應該沒事?
+16:33:04 <suhorngM_> 沒有 assignment 的話就沒事, 有 assignment 的話應該要實作成他們實際上是改到同個變數
+16:33:38 <letoh> 以 f 和 g 來說，g 需要知道跟 f 有關的資訊，應該只有 f 本身而已，不應該牽涉到 f 的 free variable ?
+16:34:11 <suhorngM_> 嗯..對
+16:34:15 <letoh> suhorngM_: 我覺得 *改到同一個變數* 的做法有點怪  可能要想一些例子@_@
+16:34:38 <suhorngM_> letoh: 修改變數是另一個故事了, 先忽略這種可能好了XD
+16:34:52 <suhorngM_> letoh: 阿, 怕撞名的話一開始先把所有變數重新命名好了~
+16:35:01 <letoh> 嗯嗯  但參考的話也有可能是不同變數吧? (如果有 shadowing 的話)
+16:35:42 <suhorngM_> 嗯嗯對, 那一開始先依照 scope 重新命名避開 shadowing 好了
+16:36:25 <letoh> https://github.com/letoh/playground-forth/blob/master/recursion2.fs  這是 forth 裡寫 mutial recursive 的方法 (L1 ~ L18)
+16:36:42 <letoh> 範例是經典的 even / odd
+16:36:47 <suhorngM_> ok
+16:36:58 <suhorngM_> direct call 這邊好像還 ok
+16:37:42 <letoh> 因為 forth 很多地方需要明確給清楚資訊，所以拿 even 來說，它就只知道 odd，不知道 odd 還有哪些其他 free variable
+16:38:23 <letoh> 因為我也只有給它 odd 的資訊而已 (L3 的 defer odd)
+16:38:32 <CindyLinz> it's odd.. (X
+16:39:44 <letoh> 我猜 ml 裡面應該是要在編譯時處理類似的事?
+16:43:10 <suhorngM_> letoh: 會要處理資訊..
+16:43:46 <suhorngM_> 我只是想因為每次都有 free variable, 不同次的 {f,g} 之間其實是不同的函數
+16:43:55 <suhorngM_> 像 (make-fn 3) 跟 (make-fn 5) 之類
+16:44:35 <letoh> 嗯 每次包新的 closure
+16:44:46 <suhorngM_> 阿, 像 Scheme 的 letrec 就規定不能在 f,g 被初始化之前參照到他們...
+16:46:23 <suhorngM_> http://www.r6rs.org/final/html/r6rs/r6rs-Z-H-14.html#node_idx_402
+16:46:41 <suhorngM_> It should be possible to evaluate each <init> without assigning or referring to the value of any <variable>

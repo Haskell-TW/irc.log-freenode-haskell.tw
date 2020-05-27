@@ -1,0 +1,217 @@
+00:04:04 <c9sloud> CindyLinz: 我剛剛用你的 Router::R3 跑起來也有 1541216.6571618
+00:04:07 <c9sloud> per seconds
+00:05:34 <c9sloud> CindyLinz: https://gist.github.com/c9s/28504e4f63599daf8646
+00:08:19 <c9sloud> 這樣每個 request 只 take 0.6us 的 overhead XDDDD
+00:08:51 <CindyLinz> 等等, 又要來 debug 了 ._.
+00:08:55 <CindyLinz> 我去發 issue
+00:09:43 <c9sloud> XDDD
+00:09:46 <c9sloud> CindyLinz: 什麼的 issue
+00:11:08 <CindyLinz> c9sloud: 就.. data 變成 NULL 的.. (發了)
+00:11:19 <c9sloud> 咦咦?
+00:11:22 <c9sloud> 我看看
+00:14:15 <c9sloud> CindyLinz:  /post4/{id1:\d{3}}/{id2} 這個 pattern 會變成
+00:14:54 <c9sloud> edge1"/post4/{id1:\d{3}}"  edge2"/([^/)+"
+00:15:11 <c9sloud> 我記得好像是 [^/]+ 還是 [^/]* ?
+00:15:14 <c9sloud> 我確認一下 XD
+00:17:13 <CindyLinz> 然後我發的第二發.. 後面 id2 的部分改成 {id2:\d+}  然後配一樣的 match, /post4/123/
+00:17:35 <CindyLinz> 嗯, 目前也是會 data 部分 NULL, 不過我覺得這一個應該要連 match 都不成功才對?
+00:17:44 <c9sloud> 哦哦! 我懂了
+00:18:00 <c9sloud> match 不成功的話，會回傳最後一個 node
+00:18:05 <c9sloud> 所以要檢查 endpoint
+00:18:15 <c9sloud> child->endpoint > 1 代表有 route 結束在這個節點
+00:18:18 <c9sloud> > 0
+00:18:19 <c9sloud> sorry
+00:18:20 <lambdabot>  0
+00:18:25 <CindyLinz> XD
+00:19:00 <CindyLinz> 欸.. 你是說有 return matched_node 的時候也不一定是成功喔?
+00:19:28 <c9sloud> 對
+00:19:31 <c9sloud> 要看 endpoint
+00:20:06 <c9sloud> 是說好像找不到回傳 NULL 就好了，那時好像有什麼考量才這樣做
+00:20:09 <c9sloud> XD
+00:20:19 <CindyLinz> 好~ 還好有測到 ww
+00:20:45 <CindyLinz> 欸不過.. case 1 應該算是有 match? 還是你的設計是規定 capture 一定至少要一個字以上?
+00:21:06 <c9sloud> case 1 應該是有 match 到一個 non endpoint 的 node
+00:21:45 <c9sloud> 如果他是完全不同的 pattern
+00:21:48 <c9sloud> 就會 return NULL
+00:24:37 <CindyLinz> 嗯我現在加上 if( matched_node->endpoint ) 以後, case 1 有一半會判定為沒 match, 另一半是有 match 但是 data 為 NULL
+00:24:50 <CindyLinz> 嗯, 我覺得 case 1 應該要是有 match, 而且 data 要出來..?
+00:25:40 <c9sloud> 可是 {id2} 不是 optional pattern 耶
+00:25:54 <CindyLinz> match 到空字串啊?
+00:26:35 <c9sloud> slug 會 compile 成 ([^/]+)
+00:26:38 <c9sloud> 預設的
+00:26:44 <c9sloud> 所以 id2 會變成 ([^*]+)
+00:26:54 <c9sloud>    ([^/]+)
+00:27:06 <CindyLinz> 喔喔, 那我這個補在說明裡...
+00:27:25 <CindyLinz> 那你幫我把後面那一半有 match 但 data 為 NULL 的調成不會 match... ^^|
+00:27:29 <CindyLinz> 機率性耶 好怪?
+00:28:13 <c9sloud> 真奇怪
+00:28:16 <c9sloud> 好
+00:28:19 <CindyLinz> 啊你等我一下 我確認一下是在哪邊的問題
+00:28:30 <c9sloud> 總之如果沒有 match 的話我都回傳 NULL 好了
+00:28:39 <CindyLinz> 如果我純 C 測試都沒掛的話就是另一個問題了
+00:29:53 <c9sloud> 我等一下可以補一下 check 的 test case
+00:34:45 <CindyLinz> 我知道為什麼機率性了..!
+00:35:00 <CindyLinz> 因為我試的例子是拿 hashref 拿進去.. 所以每一次的順序都不一樣
+00:35:25 <c9sloud> 哦哦哦哦!
+00:35:26 <c9sloud> XD
+00:35:41 <CindyLinz> 有的位置不會錯..
+00:35:45 <c9sloud> 我補上去了
+00:35:54 <c9sloud> 如果不是 endpoint 一律都是回傳 NULL
+00:35:57 <CindyLinz> 放開頭的話會錯
+00:36:28 <CindyLinz> 只有加上幫忙檢查 endpoint 嗎? 嗯 因為我現在也有檢查 endpoint, 還是發生的?
+00:36:38 <CindyLinz> 那我先 merge, 然後把我的 check 拿掉
+00:37:18 <c9sloud> 現在是這樣: return e->child && e->child->endpoint ? e->child : NULL;
+00:37:35 <c9sloud> 然後 restlen == 0 # 代表路徑比對完了
+00:37:41 <CindyLinz> 喔 原來還有 e->child.. X
+00:37:42 <CindyLinz> XD
+00:38:13 <c9sloud> XD
+00:40:19 <CindyLinz> 欸欸 r3_tree_insert_pathl 怎麼變成 r3_tree_insert_pathl_ 了.. ._.
+00:40:30 <CindyLinz> 長尾巴了!
+00:40:38 <c9sloud> XD
+00:41:02 <c9sloud> CindyLinz: 因為 czchen 說 symbol export to ABI 的時候盡量避免 symbol conflict
+00:41:12 <c9sloud> 所以加上一個 regexp-symbol-export
+00:41:18 <c9sloud> 是 ^r3_
+00:41:27 <c9sloud> 這樣 _r3 就沒辦法用了
+00:41:44 <c9sloud> 因為 r3_tree_insert_pathl 實際上是一個 macro 去 call _r3_tree_insert...
+00:41:55 <c9sloud> 咦不對
+00:41:57 <c9sloud> 我看看
+00:42:05 <c9sloud> 可能我在 replace 的時候不小心換掉了 orz
+00:42:43 <CindyLinz> 欸.. case1 放在第一條 pattern 的時候, 會 match, 然後 data = NULL @@"
+00:43:02 <CindyLinz> 我也來看一下 ->child 和 ->endpoint 好了
+00:44:26 <CindyLinz> 啊不對, 我沒有 edge ^^|
+00:45:27 <c9sloud> function name fix @ 5bd1757
+00:47:25 <CindyLinz> git merge 線亂一點, 看起來比較活絡.. (誤)
+00:47:29 <c9sloud> CindyLinz: 不過我把你的 test case 加上去之後
+00:47:37 <c9sloud> 沒問題耶
+00:47:40 <c9sloud> test case 有過
+00:48:03 <c9sloud> https://github.com/c9s/r3/blob/master/tests/check_tree.c#L143
+00:52:14 <CindyLinz> c9sloud: 那個.. 只放一組 pattern 的時候不會錯..
+00:52:28 <CindyLinz> 要多放幾個假的在它下面才能錯
+00:54:05 <c9sloud> ok XD
+00:54:07 <c9sloud> 我看看
+00:54:33 <c9sloud> 你的 test case 還有哪些 pattern ?
+00:55:59 <CindyLinz> c9sloud: http://lpaste.net/8504166912597426176
+00:58:38 <c9sloud> 有了 XD
+00:59:10 <c9sloud>  我現在是 /post/11/
+00:59:16 <c9sloud> 會 return child
+01:01:35 <c9sloud> 阿我知道了
+01:01:41 <c9sloud> 我修... XD
+01:02:26 <CindyLinz> 來抄你的 doc....ww
+01:14:23 <c9sloud> CindyLinz: e979729 修正了 XD
+01:14:45 <c9sloud> https://github.com/c9s/r3/commit/e9797295b5a8de0fa2989aa934f4379f9ad9be75
+01:15:21 <c9sloud> branch edge 的時候 swap child 沒 swap 到 endpoint 的 property
+01:15:31 <CindyLinz> 好歐~~ ^^
+01:18:50 <CindyLinz> 都好了
+01:23:08 <c9sloud> 噢太棒了 XDD
+01:23:16 <c9sloud> bug free   (hope)
+01:23:17 <c9sloud> XD
+01:26:47 <c9sloud> CindyLinz: 現在有 90% 的 coverage XD 788156
+01:26:51 <c9sloud>  https://coveralls.io/builds/788156
+01:33:13 <c9sloud> https://github.com/c9s/r3/network # 最近一週的 network 好嗨呀 XD
+01:33:22 <CindyLinz> XDXD
+01:33:27 <CindyLinz> presure...ww
+01:34:00 <c9sloud> XDDD
+01:34:55 <c9sloud> 也許可以附上我剛剛貼的 bench.pl 跟 Router-Simple 比較一下 ? XDDD
+01:35:00 <c9sloud> http://search.cpan.org/dist/Router-Simple/
+01:36:05 <c9sloud> 我覺得這速度實在快的太誇張了，這樣就有很多空間來加東西搞鬼 XD
+01:36:16 <c9sloud> 我還想做 statistics XD
+01:38:11 <CindyLinz> 好兇..ww
+01:38:30 <CindyLinz> 丟 cpan 了
+01:46:09 <c9sloud> CindyLinz: 有空再做啦 XDDDD
+01:46:30 <c9sloud> 事情都快滿出來了 XD
+01:47:05 <c9sloud> 但是有 statistics 的話會很讚 在 live production 上面可以看到每個 routes 的熱門程度 XD
+01:47:28 <c9sloud> 搭配 canvas + dot graph 來畫 :-p
+01:47:42 <c9sloud> 又有人送 PR
+01:48:05 <CindyLinz> 不過 statistics 可以 user 自己在 matched 以後加呀?
+01:48:47 <c9sloud> 嗯嗯對
+01:49:05 <c9sloud> 可是 struct 可能還是要 support
+01:50:22 <CindyLinz> 唔, 不過那個 ->data 都放 void* 給 user 隨意放了, 他要自己加一個 counter 應該是可以的呀?
+01:52:20 <c9sloud> 因為我是在想還可以透過 statistics 來動態調整每個 edges 的權重 XD
+01:53:00 <CindyLinz> 可以讓這個 match 的 tree 自我調整變快喔?
+01:53:23 <godfat> 那 benchmark 更難了 XD
+01:55:09 <CindyLinz> 真是好奢侈的困擾...ww
+01:56:05 <c9sloud> XDD
+01:56:13 <c9sloud> 先去睡 XD
+01:56:43 <CindyLinz> 晚安 :p
+09:59:49 <mno2> http://cstheory.stackexchange.com/questions/10916/uses-of-algebraic-structures-in-theoretical-computer-science/10929#10929
+10:00:04 <mno2> “Category theorists think of algebra as part of category theory. Algebraists think of category theory as part of algebra. Logicians think they're both crazy. “   lol
+10:10:21 <CindyLinz> XDD
+11:17:13 <monochrom> 哈哈
+12:30:00 <c9sloud> hahaha
+12:30:34 <c9sloud> 奇怪 irccloud 怎麼沒有做 gravatar 整合
+12:32:06 <c9sloud> 最近完全連不上 search.cpan.org 耶
+12:32:09 <c9sloud> 好爛
+12:32:16 <c9sloud> 503 XD
+14:13:52 <c9sloud> CindyLinz: 前幾天討論的 memory 的問題，在 RTOS 上好像不太會有 XD
+14:14:20 <c9sloud> 最近讀到的，分享一下...  RTOS 上面的 memory allocation 都是由 OS 做 blocks (block 底下再去分 partitions)
+14:14:36 <c9sloud> 然後 task 如果要不到記憶體，這個 task 就會被 suspend
+14:14:40 <c9sloud> 直到有記憶體可以用
+14:15:48 <c9sloud> alignment 的問題也是透過 partitions 來解決，會規劃 32, 64, 128, 256 等大小為單位的 partitions，依照記憶體調用的大小去分配，減少 defragmentation 的問題
+14:16:37 <c9sloud> memory allocation 則會依照 first-in, first-out 的順序處理 (Nucleus RTOS)
+14:17:29 <c9sloud> 該文章也有說到像 garbage collection language 的好處就是不太會有 memory fragmentation XDD
+14:32:06 <mno2> 是因為 garbage collection language 沒有 (memory) pointer，所以東西可以在自己的 process internal space 亂搬？ 還是說這邊的 fragmentation 是單純從 OS 的角度討論，不泛指 internal fragmentation ?
+14:58:20 <godfat> copy compact gc 確實可以解決 fragmentation 的問題這樣？ XD
+15:02:49 <c9sloud> mno2: 對
+15:03:15 <c9sloud> 因為 pointer 都是 language VM 自己 maintain 所以他要搬去哪就搬去哪，比較不會有問題 XD
+15:05:16 <c9sloud> CindyLinz: 然後另外看到像 tree 這種 DS 很適合用 region-based memory management 的樣子
+15:17:38 <mno2> http://stackoverflow.com/questions/7038811/why-dont-haskell-compilers-facilitate-deterministic-memory-management?lq=1
+15:23:30 <godfat> 想起 types and programming languages 那本提到的，控制存取次數的 file handle type
+16:13:04 <CindyLinz> c9sloud: suspend!
+16:13:54 <c9sloud> CindyLinz: yeah RTOS 看會看 priority 採取動作
+16:13:59 <CindyLinz> c9sloud: 雖然說 suspend 是比 kill 好啦.. 不過我以為在 RT=real time 這樣的系統裡面, suspend 跟 kill 差不多啊 ._.
+16:14:07 <c9sloud> 譬如說很重要的 task 要不到記憶體的時候
+16:14:15 <c9sloud> 他會排第一個去拿記憶體
+16:14:26 <c9sloud> 而不是 return NULL :-p
+16:14:41 <CindyLinz> 喔, 那應該是某人要用沒得用的時候, 是先去找找看賤民來 suspend?
+16:14:50 <CindyLinz> 找不到的話就是他自己這樣?
+16:14:53 <c9sloud> suspend 應該是指 scheduler 的 suspend
+16:15:02 <c9sloud> 不是 shell 那種的 suspend
+16:15:08 <CindyLinz> 咦?
+16:15:53 <c9sloud> process scheduler 呀
+16:15:59 <CindyLinz> 不知道 suspend scheduler 是什麼意思 ._.
+16:17:12 <CindyLinz> 放 copy compact gc 這種大絕要 cd 很久吧... XD
+16:17:36 <c9sloud> CindyLinz: http://www.tutorialspoint.com/operating_system/os_process_scheduling.htm 這個? :p
+16:18:06 <CindyLinz> 裡面講到 suspend 這個字的時候都是說 process 啊?
+16:18:18 <c9sloud> 嗯嗯
+16:18:36 <CindyLinz> 對啦 那就是找地位低的 suspend 掉..
+16:19:29 <CindyLinz> 但如果沒有 swap 之類的先把地位低的佔的記憶體暫時趕到 disk 上的話... 我想應該還是只能 kill 這個倒楣的 process 了...
+16:19:45 <c9sloud> CindyLinz: http://www.design-reuse.com/articles/25090/dynamic-memory-allocation-fragmentation-c.html 這裡
+16:20:00 <c9sloud> "The pool is configured such that, if a task attempts to allocate a block, when there are none available, and it requests to be suspended on the allocation API call, suspended tasks will be woken up in a first-in, first-out order. The other option would have been task priority order."
+16:20:48 <b4283> suspend 其實就是 blocking 吧
+16:21:02 <CindyLinz> 看起來是啊..
+16:21:07 <b4283> 還是有分？
+16:24:21 <CindyLinz> c9sloud: 不過.. 平常都玩軟軟的語言, 偶爾拿 C 殺 Rails lib 的效能感覺好像很開心, 但如果栽進那種最高階語言就是 C 的世界, 大家都是 C 以下的時候, 就沒有這麼開心的事了.. ._.
+16:34:24 <mno2> 要求加薪結果就被 suspend 了 lol
+16:35:49 <CindyLinz> orz
+16:35:49 <godfat> 這樣就要有 try_malloc 了 XD
+16:36:42 <CindyLinz> 先看怎樣能產生 priority inversion 的情境, block 住一個 high priority 的 process, 再回頭來要求加薪!
+17:17:46 <CindyLinz> 記得以前從 real mode 演進到 protected mode 的時候, code segment 和 data segment 被嚴格分開, 讓我覺得失落了一陣子...
+17:18:24 <CindyLinz> 有些啟動時用的 code, 已經用過了, 就應該要可以拿來存變數啊... XD
+17:18:25 <godfat> 可是你好像也沒很愛 lisp? XD
+17:18:47 <CindyLinz> godfat: 是 architecture 層級的啦, 跟語言無關 ^^|
+17:19:24 <CindyLinz> 就.. 後面的 code 想存資料, 想存在已經沒用的 code 身上 XD
+17:20:01 <godfat> 不知道耶，如果 c 可以寫... int f(){ return 0; }
+17:20:02 <godfat> 然後在某個地方 f = (type cast)1; 這樣有很好嗎？ XD
+17:20:36 <CindyLinz> godfat: 在保護模式 TEXT segment 會被標 readonly 啊, 想去改它會 abort
+17:21:47 <CindyLinz> 然後以前變數也可以亂塞, 例如說塞在函數之間.. 反正只要 jmp 或 call 的時候不會直接踩到那邊就好 XD
+17:23:02 <mno2> 動到別人的薪水會出事啊 lol
+17:23:40 <godfat> 不過有 vm 好像也可以做差不多的事？看那個 vm 有沒有保護模式... XD
+20:14:56 <c9sloud> CindyLinz: 也不是耶，只是覺得寫一些簡潔不浪費資源的程式用起來很爽 XD
+20:15:38 <c9sloud> mno2: Ahahhaha
+20:15:51 <c9sloud> mno2++ # 動到別人的薪水會出事啊 lol
+20:16:43 <c9sloud> CindyLinz: 話說好六七年前就想寫 OS 了只是一直沒去做 XD
+20:31:43 <letoh> 同樣的問題 rtos 也會有啊
+20:34:46 <letoh> suspend 跟 blocking 可能有不一樣的結果(通常)，不過得先確定你說的 blocking 長什麼樣子
+20:36:10 <letoh> code segment 分開後  其實也可以再合併回去啊，只是要設定一下 page 屬性而已
+20:36:36 <letoh> (前面訊息太多  隨便跳著看XD)
+21:11:42 <whitglint> 記得 turbo c 還能設定 memory model 之類的
+21:11:54 <whitglint> tiny small large 什麼的
+22:05:16 <CindyLinz> 覺得構造 conduit 程式的時候, 某個角度跟 coroutine 好像
+22:05:38 <CindyLinz> 用 xx <- await 來取得上游的資料, 用 yield oo 把資料丟給下游
+22:25:02 <mno2_> 在寫 r3 的 haskell binding   :p
+22:33:36 <CindyLinz> 你喔?
+22:35:08 <mno2_> 對啊
+22:36:11 <CindyLinz> :D
+23:34:05 <c9sloud> mno2_++
+23:56:44 <c9sloud> travis ci 的環境好難搞. jemalloc 跟 graphviz 都是舊版
+23:56:58 <c9sloud> 還在 ubuntu precise 的樣子

@@ -1,0 +1,147 @@
+14:36:37 <Yu-Lin> a -> (b,c)
+14:37:22 <Yu-Lin> :t a -> (b,c)
+14:37:23 <lambdabot> parse error on input `->'
+14:37:41 <Yu-Lin> > :t a -> (b,c)
+14:37:42 <lambdabot>   <hint>:1:1: parse error on input `:'
+14:37:49 <Yu-Lin> > a -> (b,c)
+14:37:50 <lambdabot>   <hint>:1:3: parse error on input `->'
+14:47:57 <hashcat> 中午好
+14:48:05 <hashcat> 下午了..
+14:48:55 <CindyLinz> XD
+14:50:14 <hashcat> :type 不是那樣使的
+14:50:41 <hashcat> 型別是type-level
+14:51:09 <hashcat> :t 從 function-level得出type-level
+14:51:10 <lambdabot> lexical error at character '\158'
+14:51:59 <hashcat> type-level 沒法在 value-level 運算所以 > 無效
+14:53:33 <hashcat> :D
+16:35:10 <Jhe> 有人嗎@@?
+16:54:51 <Yu-Lin> 從來沒用過 lambdabot 阿XD
+16:55:49 <Yu-Lin> @djinn (a, b) -> c -> (b, c)
+16:55:50 <lambdabot> f (_, a) b = (a, b)
+16:55:56 <Jhe> list 有辦法設終止條件嗎@@?
+16:56:03 <Yu-Lin> @djinn a -> (b, c)
+16:56:04 <lambdabot> -- f cannot be realized.
+16:56:25 <Yu-Lin> 終止條件？
+16:56:42 <Jhe> 例如我有函數
+16:57:01 <Jhe> 帶入 參數後可以產生值
+16:57:10 <Jhe> 但還是要經過塞選
+16:57:15 <Jhe> 塞選
+16:57:27 <Jhe> 直到固定值停止
+16:57:59 <Jhe> 我只會用無限數列 讓他跑 然後肉眼看@@
+16:59:06 <Jhe> 像這樣 [x | x <- [1..],even (fib x)]
+16:59:34 <Jhe> 能指定說 fib x 大於 四百萬後停止嗎?
+17:00:12 <Yu-Lin> 方法是有啦，看你想走哪條路
+17:00:28 <Jhe> 我都不知道@@
+17:00:49 <Jhe> 走哪條路@@?
+17:01:07 <Yu-Lin> 我直覺想到的是 take 1 (filter (> 4000000) [x | x <- [1..],even (fib x)])
+17:01:42 <Yu-Lin> 這樣會取出第一個超過四百萬的數字，如果沒 over flow 的話
+17:02:06 <CindyLinz> Yu-Lin: 有個函數叫作 takeWhile
+17:02:22 <Yu-Lin> XD
+17:02:25 <CindyLinz> 會一直取取取, 取到該條件為止
+17:04:19 <Yu-Lin> 這樣你的問題解決了嗎？
+17:04:24 <Yu-Lin> XD
+17:04:32 <Jhe> 喔試試看@@
+17:04:34 <Jhe> 我*
+17:04:47 <Yu-Lin> takeWhile
+17:06:49 <Yu-Lin> 昨天回去的時候，有跟另外一個人聊
+17:07:15 <Yu-Lin> 對方有問為什麼大家都用 haskell 討論，畢竟 FPL 這麼多
+17:09:42 <hashcat> 最早標準化的純函數式語言
+17:10:08 <hashcat> 其他語言用到後來都變得不像函數式
+17:10:38 <CindyLinz> 咦.. 原來問問題的是 Jhe 不是 Yu-Lin XD
+17:10:47 <Yu-Lin> XD
+17:10:55 <hashcat> 有人說functional其實是泛函式
+17:11:26 <Jhe> @@
+17:11:31 <CindyLinz> 泛函式?
+17:12:07 <CindyLinz> 我以為最早的標準化的純函數式語言是 Untyped Lambda Calculus.. (逃)
+17:12:40 <hashcat> functional programming 跟 functional analysis 兩個 functional 一樣
+17:13:25 <hashcat> 把其他函數當參數的函數叫泛函
+17:13:40 <Yu-Lin> C++ 術語？
+17:14:16 <CindyLinz> higher-order function?
+17:14:19 <hashcat> 數學
+17:14:45 <CindyLinz> 覺得對照大貓投影片第九頁 # http://www.slideshare.net/miaout17/tutorial-19128603
+17:14:45 <hashcat> 有個科目叫泛函分析
+17:14:49 <Yu-Lin> 恩，我也只想到 higher-order function 的一種
+17:15:03 <CindyLinz> 我覺得, haskell 裡面可以玩到的, functional 的東西比較多
+17:15:33 <CindyLinz> 有如走火入魔般的境界.. XD
+17:16:50 <CindyLinz> 而 Agda 或 Coq 那種的, 可能沒被試圖拿來作生活應用, 所以雖然也很純, 而且有些更入魔的概念.. 但是拿來應付日常生活問題所發展的工具不太多
+17:18:46 <Jhe> takeWhile (<4000000) [fib x | x <- [1..],even (fib x)]
+17:18:54 <hashcat> 我也想不出型別的型別有啥用
+17:19:05 <Yu-Lin> > takeWhile (<4000000) [fib x | x <- [1..],even (fib x)]
+17:19:06 <lambdabot>   Not in scope: `fib'
+17:19:06 <lambdabot>  Perhaps you meant `fix' (imported from Data.Function)N...
+17:19:29 <Jhe> fib = fibonacce
+17:19:29 <CindyLinz> 我形容為走火入魔指的是, 看起來應該不適合 functional 的事情, 也硬是用 functional 的方式去做...
+17:19:49 <Yu-Lin> 我可以理解你說的XD
+17:20:17 <hashcat> 我覺得很適合
+17:20:32 <CindyLinz> hashcat: 形別的形別可以有比較好的描述性, 可以更精確描述程式的行為. Agda 和 Coq 就拿它們來作證明了
+17:21:05 <Jhe> 這樣 list 也是不會停@@
+17:21:36 <CindyLinz> 不會停嗎?
+17:21:47 <hashcat> 你那個效率太差吧
+17:21:48 <CindyLinz> > takeWhile (<20) [1,2..]
+17:21:50 <lambdabot>   [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
+17:21:53 <CindyLinz> 停了呀
+17:21:59 <hashcat> let fibList = 1:scanl (+) (1) fibList
+17:22:22 <hashcat> > let fibList = 1:scanl (+) (1) fibList in take 100 fibList
+17:22:23 <lambdabot>   [1,1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181,6765,10946,1...
+17:22:29 <hashcat> > let fibList = 1:scanl (+) (1) fibList in take 4000000000000000 fibList
+17:22:30 <lambdabot>   []
+17:22:43 <hashcat> 額好吧
+17:22:53 <hashcat> 忘記Int數量有限
+17:22:55 <CindyLinz> 是不是超過 Int 了?
+17:23:01 <hashcat> > let fibList = 1:scanl (+) (1) fibList in take 4000000 fibList
+17:23:02 <lambdabot>   [1,1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181,6765,10946,1...
+17:23:32 <Jhe> 後面吳全迴圈的地方他還是會一直運算
+17:23:37 <Jhe> 無窮*
+17:24:02 <Jhe> 儘管後面的數都大於四百萬了
+17:24:44 <CindyLinz> Haskell 的 lazy 特性使她不會去算你沒有要的部分呀
+17:24:59 <hashcat> > let fibList = 1:scanl (+) (1) fibList in takeWhile (<4000000) fibList
+17:25:00 <lambdabot>   [1,1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181,6765,10946,1...
+17:25:16 <Jhe> 我知道 但是我想讓它出現完整的list
+17:25:21 <Jhe> 怎麼想才會達成
+17:25:22 <CindyLinz> 為什麼你們不拿小一點的數字嘗試就好啊... 那個 ... 下去什麼都看不到了 XD
+17:25:23 <Jhe> ??
+17:25:36 <CindyLinz> > let fibList = 1:scanl (+) (1) fibList in takeWhile (<40) fibList
+17:25:37 <lambdabot>   [1,1,2,3,5,8,13,21,34]
+17:25:42 <hashcat> 但是沒聰明到會把你下次會用到的保留下來
+17:25:44 <CindyLinz> 這樣不就是完整的 list 了嗎?
+17:26:17 <CindyLinz> 這邊看到 ... 是因為 lambdabot 不想顯示太長 ^^|
+17:28:24 <Jhe> 喔~ 了解了
+17:31:02 <hashcat> 寫這種遞歸函數應該把倒數幾個也一起傳下去
+17:33:37 <Yu-Lin> > let loop f input = let (c , d) = (b , d) in c
+17:33:38 <lambdabot>   not an expression: `let loop f input = let (c , d) = (b , d) in c'
+17:34:01 <CindyLinz> Yu-Lin: 你 f 沒用到啊 XD
+17:34:13 <Yu-Lin> 可惡，太香了，我要去買晚餐回公司吃
+17:34:31 <Yu-Lin> 阿，對阿 f 跟 input 都沒用到XD
+17:34:56 <CindyLinz> input = b :p
+17:40:53 <hashcat> 別說agda了
+17:41:13 <hashcat> haskell實用本身就有莫名困難
+17:41:25 <hashcat> 不知道問題出在哪裡
+17:42:13 <CindyLinz> hashcat: 人太少是個大難題. 不見得是語言本身的問題, 而有歷史因素的問題
+17:42:19 <CindyLinz> 西瓜偎大邊....
+17:42:36 <_13h> 怎樣才叫「實用」?
+17:43:08 <_13h> lib 要夠多? 要有 ror 那種潮物？
+17:43:56 <CindyLinz> 我覺得 lib 要夠多, 不容易找到還不存在的 lib.. XD
+17:44:14 <CindyLinz> 當然不是說那種 problem domain 的部分 :p
+17:45:38 <_13h> 嗯  我覺得還要再加上有夠多 code snippet，抄起來方便一點XD  像 activestate 建立起來的 recipe database 還不錯
+17:45:47 <CindyLinz> 這個也是...
+17:46:13 <CindyLinz> 不過 lib 和 code snippet 覺得都是人多就會多, 而多了就會人多的東西.... :/
+17:47:04 <CindyLinz> 只是 Haskell 和其他常見語言的共通性比較低, 很難直接拿別的語言的 lib / code, 然後用機械式地翻譯以後變成 Haskell 可以用的版本
+17:49:02 <hashcat> 罷了反正不期待了
+17:49:37 <hashcat> 雖說一些殺手級應用我覺得已經出現了
+17:53:13 <CindyLinz> hashcat: 不要用期待的呀.. 你看 C 界大老 K&R 之類的也是在 C 不太實用的年代用力參與的啊 ^^
+17:54:47 <hashcat> 他們讓有錢人養所以才能用力參與
+17:56:21 <CindyLinz> hashcat: Haskell 的 GHC 也有微軟在養啦... XD
+17:57:00 <CindyLinz> 不過沒被養的話可以用小力一點參與 ^^|
+18:01:38 <hashcat> 微軟養這做啥
+18:01:42 <hashcat> 感覺不妙
+18:02:14 <hashcat> 到時跑出啥H#
+18:02:20 <_13h> 可能是過幾年會跑出一個 h#  (誤
+18:02:23 <_13h> XDXD
+18:03:42 <hashcat> 好像只有這種可能
+18:04:29 <_13h> 不過 ocaml 也沒變 o# ，反而是 f#，所以到時候可能不會直接叫 h# XD
+18:07:10 <CindyLinz> hashcat: 微軟研究院感覺不太像平常接觸到的微軟.. :|
+18:07:21 <Yu-Lin> 他們已經有 F#
+18:09:29 <hashcat> 好吧
+18:09:36 <hashcat> 應該不會變成怪東西
+19:53:34 <godfat1> 調整了一下設定，之前嫌吵關掉訊息通知，結果每次看到討論時時間都過了 @_@
+20:16:03 <Yu-Lin> 準備回高雄去

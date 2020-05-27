@@ -1,0 +1,36 @@
+11:52:42 <mno2> livescript2 已經 kickstart 了嗎？ 看 branch 還是空的。Issue tag with ls2 也幾乎沒有 open issue
+11:52:45 <mno2> https://github.com/gkz/LiveScript/tree/ls2
+12:01:25 <mno2> CindyLinz: 你有用過 acid-state 嗎？其實這個看起來就是 yinwang 的理想啊。任何 serializable data structure 然後支援 ACID
+12:01:43 <CindyLinz> mno2: 沒有用過
+12:02:19 <CindyLinz> mno2: 看 doc 很開心, 然後還是去用 mysql / postgres.. XD
+12:03:08 <mno2> 我覺得在 haskell 社群會覺得大家都好聰明喔。走路都會踢到一個 library 想說這看起來好像是理想
+12:03:14 <au> mno2: 還沒，要追 https://github.com/gkz/LiveScript/issues/260
+12:03:22 <mno2> 只是實際上可能還不 stable
+12:04:04 <mno2> au: 有看到這篇。thanks
+12:04:06 <au> 好像是本來要開始時 gkz 被慢性肌腱炎拖累了一陣子
+12:04:07 <mno2> AFK
+12:04:07 <CindyLinz> mno2: XD
+12:04:28 <CindyLinz> c9sloud: 小心啊~~~~ # 12:04 < au> 好像是本來要開始時 gkz 被慢性肌腱炎拖累了一陣子
+12:04:37 <au> 真的~
+12:08:32 <c9sloud> 我現在幾乎每天刮痧伸展...
+12:09:03 <c9sloud> 等肌腱炎好了要用啞鈴稍微鍛鍊一下..不然這肌肉實在太弱了
+12:09:05 <c9sloud> XD
+12:10:25 <au> 之前有一陣子 RSI，發現是睡醒時最痛，查了一下資料之後改成戴護腕睡，沒幾天就不藥而癒了
+12:12:07 <c9sloud> QQ 我戴好久一直沒好 QQQQQ
+12:12:28 <c9sloud> 看來還是要休息才行...要找時間放長假 QQ
+13:01:39 <petercommand> flip' f = \x y -> f y x
+13:02:27 <petercommand> 這個是代表甚麼意思呢?
+13:07:08 <au> > let (?) = flip (-) in 200 ? 300
+13:07:09 <lambdabot>  100
+13:07:29 <au> > let (<) = flip (>) in 200 < 300
+13:07:30 <lambdabot>  True
+13:18:10 <petercommand> let fun f = \x y -> f y x in fun (+) 1 1
+13:18:15 <petercommand> > let fun f = \x y -> f y x in fun (+) 1 1
+13:18:17 <lambdabot>  2
+13:19:31 <petercommand> > let fun f = \x y -> f y x in fun zip [1] [2]
+13:19:32 <lambdabot>  [(2,1)]
+13:20:40 <petercommand> 我應該是想問，這裡的等於是甚麼意思吧
+13:24:56 <au> 就是「看到左邊的形式就展開成右邊的定義」
+13:26:23 <petercommand> 嗯...
+13:26:33 <petercommand> > let fun f x y = f y x in fun zip [1] [2]
+13:26:35 <lambdabot>  [(2,1)]

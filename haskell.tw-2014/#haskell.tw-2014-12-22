@@ -1,0 +1,81 @@
+12:01:35 <CindyLinz> 要好好用 remark.js 還是要讀 code... @@" https://github.com/gnab/remark/blob/develop/src/remark/lexer.js
+12:01:58 <CindyLinz> 會翻到一些裡功能.. @@"
+12:02:20 <CindyLinz> 例如說 DEF 和 MACRO
+12:08:43 <CindyLinz> 噗.. 7.0 還沒有 MACRO.. XD
+12:10:22 <CindyLinz> 欸.. DEF 根本就 markdown 裡面就有的分離式超連結嘛.. XD  叫這名字看不懂啦 XD
+15:16:49 <cibs> CindyLinz: 妳的投影片是需要用什麼特殊的效果嗎? XDD
+15:21:13 <CindyLinz> cibs: 不需要特殊效果... 可是我覺得 remark.js 裡面的縮排的規則有點難以掌握 orz
+15:21:58 <CindyLinz> 就.. 我想要秀程式碼的時候看起來是 2 格縮排
+15:22:13 <CindyLinz> 然後好像我在 remark.js 裡面有些要寫 2 格有些要寫 4 格
+15:22:30 <CindyLinz> 有些地方寫 2 格會被吃掉變成沒縮排; 有些地方寫 4 格會真的縮 4 格....
+15:22:52 <CindyLinz> 覺得.. 平淡也是一種奢侈... orz
+15:23:30 <cibs> 那不是 markdown 的 rule 本身解釋的嗎? @@
+15:24:14 <CindyLinz> markdown 說照列啊 @@"
+15:24:52 <CindyLinz> 然後.. 放在 list 裡面的 code block 和不在 list 裡面的 code block 的縮排規則不一樣 @@"
+15:25:18 <cibs> markdown 不是說要 4 格以上的縮排才可以看是程式碼??
+15:25:28 <cibs> 所以在 list 裡的應該要再多 4+ 格?
+15:26:21 <CindyLinz> 要用 syntax 上色的話會用 fense 的, 用 ```haskell ...很多行... ``` 這樣
+15:26:35 <CindyLinz> 就.. 不一定 orz
+15:27:15 <CindyLinz> list 外的話, 縮排要寫 0,2,4,6,8,... (正常)
+15:28:52 <CindyLinz> 第 1 層 list 內的話.. list 自己是 2, 然後程式碼要 4,6,8,.. 或是 2,6,8,....  寫 2,4,6,8 的話 2 和 4 會黏在同一層
+15:28:53 <cibs> 所以在 list 裡要用 syntax 上色的話 ``` 要從行頭還是要對齊 list?
+15:29:01 <CindyLinz> ``` 的位置好像沒差
+15:29:05 <cibs> 喔喔
+15:29:31 <cibs> 果然很麻煩
+15:30:13 <CindyLinz> list 自己的縮排用 0,2,6 (再之後的還沒用過)  4 會被併到跟 2 一起
+15:30:51 <CindyLinz> 所以其實是因為 list 應該用 0,4,8.. 嗎
+15:31:08 <CindyLinz> 這樣好像有可能... 1層 list 的 code block 從 4 開始..
+15:31:41 <CindyLinz> 可是 list 的寫法.. 0 寫 +, 1 放空格, 然後 2 就開始寫內容了... 看起來就不是 4 啊 orz
+15:36:04 <cibs> 我會把上面補到 4 耶 XD 有時候
+15:36:37 <cibs> <blank>1.<blank>item...
+15:36:51 <cibs> 這樣寫到 10 以上比較有機會對齊
+15:37:39 <CindyLinz> + 的 OL 沒有數字嘛 XD
+15:37:51 <CindyLinz> 欸.. 那個數字不用頂格寫喔?
+15:38:17 <CindyLinz> 那我應該寫 空+空空item 嗎
+15:38:24 <CindyLinz> 空8空空 (誤)
+15:38:30 <cibs> 沒有數字的話沒有 format 的話妳就不好讀這是第幾 item 了啊
+15:38:48 <CindyLinz> 只是個 bullet dot.. ._.
+15:38:57 <cibs> 咦應該不用頂格 如果要頂格的話就寫 1. <blank><blank> XD
+15:39:08 <cibs> 反正就是以可以寫 10 以上又可以對齊為概念
+15:39:18 <CindyLinz> 那你也會去對數字有沒有對喔? 不會就 1. 1. 1. 1. 到底? XD
+15:39:25 <cibs> 我會去對數字 XD
+15:39:28 <CindyLinz> OAO
+15:39:32 <CindyLinz> 那很累耶 QQ
+15:39:43 <cibs> 我會盡量 keep plain text mode 和 formatted mode 都是 readable
+15:40:26 <CindyLinz> 該不會嵌圖的時候會附 ascii art.... OAO
+15:40:56 <CindyLinz> 我用力考慮考慮 orz
+15:41:23 <cibs> 嵌圖就只好乖乖附 link 啦 XD
+15:41:40 <cibs> 用 ASCII art 太走火入魔了
+15:42:47 <CindyLinz> 如果把 bullet dot 換成數字, 在回頭去講的時候就可以不用指, 直接講編號
+16:18:35 <cibs> 所以 bullet 只適合在 ul :D
+16:43:39 <aksatac> remark.js 好用嗎
+16:53:52 <CindyLinz> cibs: 啊我剛剛講錯了 是用 UL.. XD
+16:54:05 <CindyLinz> aksatac: 還不錯.. 我用了一年多...
+16:54:33 <cibs> CindyLinz: 我有看懂 XD
+16:54:44 <CindyLinz> 但是一直有這些小毛病.. 但又不夠致命, 我一直沒有下決心把它機制弄清楚 ^^|
+16:56:21 <cibs> how about building a new one
+16:57:27 <CindyLinz> OAO
+16:57:44 <CindyLinz> 覺得我想做的事已經太多, 這一個就先跳過吧 orz
+16:59:25 <CindyLinz> 另外.. 我雖然很喜歡 markdown 乾淨的感覺, 但一方面它的功能真的太少... (雖然常見的其實都是 markdown 的變體, 通常會有 syntax hilight, 插圖檔, 表格之類的功能..)
+16:59:49 <CindyLinz> 另一方面, 好像拿來描述投影片, 還是有些東西水土不服的感覺 @@"
+17:00:09 <CindyLinz> remark.js 的 template 和 layout 是解決了一大塊
+17:00:33 <aksatac> CindyLinz: Cool, 有機會也來用用看
+17:01:03 <CindyLinz> 然後, 它允許我們硬寫 html 和 javascript 又解決了另一大塊...
+17:02:42 <CindyLinz> 不過.. 如果想要一一控制畫面上的東西的出場順序 (有時候想這樣 QQ), 覺得距離還是有點大.. (刻 js lib 要刻很多的感覺.. ^^|)
+17:03:10 <CindyLinz> 例如說, 某一頁寫了一些東西, 下一步想把它們用 line-through 劃掉的效果.. XD
+17:04:22 <CindyLinz> 或是某一頁有文有圖, 圖片部分準備了 N 張分解動畫, 想要圖片部分可以一步一步動, 文字部分不要複製貼上 N 遍...
+17:12:25 <cibs> CindyLinz: 後面 slide 的 js 不能控制前面 slide 的 DOM 嗎
+17:12:50 <CindyLinz> cibs: 可以, 所有的東西都在 DOM 上, 隨時可以改
+17:13:14 <cibs> 那 strike out 不能在後面的 slide 直接改前面 slide 的 style 嗎
+17:14:40 <CindyLinz> 可以.. 但是希望可以繼續寫 markdown-like 的東西來決定要顯示什麼圖和動畫之類的, 而不是每一次都塞一段 javascript code ^^|  希望 javascript code 是 static 擺在那邊可以一直用這樣
+17:15:32 <CindyLinz> 覺得我缺少一個繼續優雅的表示法 ^^|
+17:16:26 <cibs> reuse 的話，先訂好一個 class strike-out-next, 然後每 load 一個 slides 都跑 default 的 js 去找前面 slides 的這個 class 把它 strike out 掉? XD
+17:16:31 <CindyLinz> 在 remark.js 裡面是用 -- 來分動作, remark.js 會把它整個展開, 把前半頁的內容整個複製貼上到下一頁..
+17:16:51 <cibs> 但是要 markdown-like 可能有點難了
+17:17:49 <CindyLinz> 有在想也許 markdown 拿來作投影片.. 要作得很棒的話, 可能真的會走不下去, 但想到要設計好的新語言, 就放棄惹, 繼續用 remark.js... XD
+17:18:17 <cibs> 如果只是把常用的 animiation 加成 markdown extension 呢
+17:21:12 <CindyLinz> 好主意.. 我可以在 -- 之後的動作裡貼 hint.. 例如說首次出現的圖檔表示法是 ![alt text](img url) 後序動畫寫成 !^[next alt text](next img url) 表示它要蓋掉原有的 img
+17:21:47 <CindyLinz> ^ 的表達方式模仿 git..  !^ 是前一個, !^^ 是前兩個, 或是 !~1 !~2, ...
+17:22:11 <cibs> (Y)
+17:22:40 <CindyLinz> 這樣就又更離不開 remark.js 了? XD
+17:38:40 <CindyLinz> cibs: 空空加空感覺很棒!!

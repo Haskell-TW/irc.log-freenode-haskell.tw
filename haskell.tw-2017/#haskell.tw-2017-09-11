@@ -1,0 +1,22 @@
+14:13:55 <HaskellISFUN> Hi 有人在吗?
+14:18:25 <jokester> 早喔
+14:45:57 <CindyLinz> 午安~~
+15:44:16 <cibs> 下午好~
+15:45:24 <CindyLinz> fix( "Hi" :)
+15:45:26 <CindyLinz> > fix( "Hi" :)
+15:45:29 <lambdabot>  ["Hi","Hi","Hi","Hi","Hi","Hi","Hi","Hi","Hi","Hi","Hi","Hi","Hi","Hi","Hi",...
+15:46:18 <cibs> 回音的概念
+16:05:11 <CindyLinz> 剛在想有沒有什麼 Haskell 式的打招呼 XD
+16:12:35 <CindyLinz> > fix( "Hi " ++)
+16:12:38 <lambdabot>  "Hi Hi Hi Hi Hi Hi Hi Hi Hi Hi Hi Hi Hi Hi Hi Hi Hi Hi Hi Hi Hi Hi Hi Hi Hi ...
+16:43:28 <jokester> 看了一下fix的定义 好神奇
+17:06:51 <cibs> @type fix
+17:06:53 <lambdabot> (a -> a) -> a
+17:35:50 <CindyLinz> @src fix
+17:35:51 <lambdabot> fix f = let x = f x in x
+17:36:08 <CindyLinz> @pl fix
+17:36:09 <lambdabot> fix
+17:36:11 <CindyLinz> ..
+17:36:33 <CindyLinz> @pl \f -> let x = f x in x
+17:36:33 <lambdabot> fix
+17:36:36 <CindyLinz> ...

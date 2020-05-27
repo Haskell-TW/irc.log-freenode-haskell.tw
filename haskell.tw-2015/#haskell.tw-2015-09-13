@@ -1,0 +1,74 @@
+00:02:15 <monochrom> 怎樣接近一點呢?
+00:02:57 <CindyLinz> 我講不出來, 我不知道 dependent type 語言的充分條件是什麼 ^^|
+00:03:32 <CindyLinz> 很不精確地想就是... Agda 能描述的東西也可以用 Haskell 描述 (可加上一些約定的限制) 的話, 那就是接近到幾乎一樣這樣...
+01:43:03 <suhorngM_> 感覺不會耶. 這樣不會讓更多東西可以被當成 value 用呀. Agda, Coq 這種有分 universe 的反而是讓可以寫的程式變少了(但是沒有的話會 inconsistent)
+01:45:35 <suhorngM_> 比較古老的一些東西好像會用 sort 這個字... value -> type -> sort
+01:46:29 <CindyLinz> 噢, 我們就選擇無視 inconsistent, 把所有的宇宙壓扁疊起來就好了?
+01:46:52 <au> value -> type -> kind -> sort ?
+01:47:03 <suhorngM_> 忘了中間有沒有 kind ><
+01:47:10 <au> GHC 支援到 kind
+01:48:23 <suhorngM_> CindyLinz: 嗯, 全部壓起來是可以, 即 Type : Type. 不過這樣說的話應該是不會有 'kind', 因為也是 'type'...?
+01:49:09 <monochrom> 一般數學人及邏輯人多數叫它們 value, type, sort. 即是說, 我們叫 kind 的, 他們叫 sort.
+01:49:24 <CindyLinz> suhorngM_: DataKind 開起來把 Type->Value, Kind->Type 用這樣 (思
+01:50:42 <suhorngM_> 我不知道 DataKind 怎麼做的, 可是應該還是單向的上去吧...?
+01:51:13 <monochrom> 單向的上去.
+01:51:15 <CindyLinz> 這樣是不是就已經可以接成N重天了呢.. @@"
+01:51:40 <CindyLinz> 好像有些限制..
+01:51:43 <monochrom> 不是. 因為不會把 kind 推上一層.
+01:53:20 <monochrom> DataKinds 只做: "data X = Y" 就得到一個叫 X 的 kind, 裏面有個叫 Y 的 type.
+01:53:26 <suhorngM_> 他是把 value 不知怎麼的在 kind 也弄一份類似的出來...
+01:54:42 <CindyLinz> 我想的是... Vec :: * -> Nat -> *   還有 Nat :: *   那就可以再來個 Vec2 :: Vec -> * (嗯, 意味不明) Vec3 :: Vec2 -> * ... 這樣子
+01:55:06 <monochrom> 留意沒有任何東西給你一個新的在 kind 之上的
+01:59:11 <monochrom> CindyLinz: 要點是 "我給你10重天" 本身沒用的. 只要一天我還沒給你個方法寫些第10重天的 expressions, "我給你10重天" 就仍是空頭支票
+02:00:06 <monochrom> 而 GHC 只給了你寫1,2,3重天的 expressions 的方法
+02:00:28 <monochrom> 或稱 0,1,2
+02:00:33 <CindyLinz> 我想的重數不是這樣子一口氣寫出 10 重..
+02:00:41 <CindyLinz> 我都只是 0,1,2 沒錯
+02:01:14 <CindyLinz> 但是 A 的 0,1,2 的 1,2 和 B 的 0,1,2 的 0,1 重疊; 然後 B 的 0,1,2 的 1,2 與 C 的 0,1,2 的 0,1 重疊..
+02:01:24 <monochrom> 但 Coq 就真的讓你寫任意第n重天的 expressions.
+02:02:00 <CindyLinz> 雖然我們沒有限制禁止 B 的 0,1,2 真的拿來當 0,1,2 用而不一定是 1,2,3.. 不過我們可以用 約定 的
+02:02:10 <suhorngM_> Idris 是自動會推導出是第幾個 universe 就是了..
+02:02:22 <CindyLinz> type system 沒有保護效果這樣..
+02:04:03 <monochrom> 甚麼是約定呢?
+02:05:02 <CindyLinz> monochrom: 就是使用的人自己小心, 避免特定用法
+02:05:23 <CindyLinz> 如果這特定用法還蠻容易看出來有沒有用到, 那就忍耐一下...
+02:05:44 <CindyLinz> 如果應用的時候常常會很難看出來, 那就不可接受
+02:06:06 <monochrom> 那麼就是還有 type system 保護.
+02:06:48 <CindyLinz> 有屋頂, 有漏水.. 但如果拿一個水桶擋擋就可以平安度過一個颱風天, 那就可以暫時不修 XD
+02:07:02 <monochrom> 只不過換了執法者
+02:08:46 <CindyLinz> XD
+02:10:20 <monochrom> 只要能把約定寫成檢查算法, 就是有 type system 保護. (這是用 Church thesis 加 Curry-Howard correspondence 傾力得來的!)
+02:11:56 <CindyLinz> 可能還沒辦法那麼簡單的時候.......吧 ^^|
+02:12:27 <monochrom> 分別只是那檢查算法在 compiler 裏還是在心中
+02:12:59 <CindyLinz> 想構造全面性的演算法, 一不小心就觸動 undecidable 問題啊 XD
+02:13:36 <monochrom> 叫得 "算法" 就已是 decidable
+02:14:26 <petercommand> XDD
+02:14:27 <CindyLinz> 嗯... 所以是失敗嘛 ^^|
+02:16:02 <CindyLinz> 簡單想, 覺得應該還沒那麼難.. 只是如果變成強迫性地要標註適用層數, 用起來不開心...
+02:16:18 <petercommand> 總覺得寫 N 重天感覺會寫昏頭XD
+02:16:53 <monochrom> GHC 只給你3重天. 這是形容 GHC 的檢查算法. 如果你心中再加些 GHC 沒有的規則, 來逹到無上限, 那麼只算是你心中無上限, 而不算是 GHC 無上限.
+02:17:14 <CindyLinz> 我還沒想假設我會寫這 DataKind.. 我可以怎樣利用它 @@"  
+02:17:52 <CindyLinz> 拿來順便證明程式的正確性嗎? 另外弄一套看起來就很像邏輯式的 annotation 會不會比較好用呢 @@"
+02:18:14 <CindyLinz> monochrom: 嗯嗯
+02:18:47 <suhorngM_> 咦XD Agda 就是有要標層數
+02:19:24 <petercommand> 總覺得 datakind 不是很好的作法..把不同層的東西一起定義了
+02:19:37 <CindyLinz> petercommand: 那個 HList 看起來很炫的說 XD
+02:20:14 <monochrom> 順便給大家講個: 以前香港武俠小說家 古龍 在他的 小李飛刀 裏的一段:
+02:21:19 <monochrom> 某甲和某乙比武
+02:21:30 <monochrom> <甲> 出招吧
+02:21:42 <monochrom> <乙> 招已出
+02:21:57 <monochrom> <甲> 在哪裏?
+02:22:19 <monochrom> <乙> 在心中
+02:22:58 <CindyLinz> petercommand: https://hackage.haskell.org/package/HList-0.4.1.0/docs/Data-HList-HList.html
+02:23:16 <monochrom> 呀, 其實比這個更爛. 應該是:
+02:24:55 <petercommand> CindyLinz: 睡醒再來看XD
+02:25:06 <petercommand> * Zzz..
+02:25:30 <CindyLinz> petercommand: XD
+02:25:51 <monochrom> <乙> 出劍吧  <甲> 劍已出  <乙> 在哪裏  <甲> 在心中. 出招吧  <乙> 招已出  <甲> 在哪裏?  <乙> 在心中
+02:26:28 <petercommand> monochrom: 心法大覺
+02:26:36 <CindyLinz> 乙是 Functor
+02:27:08 <CindyLinz> 兩個都是.....
+02:27:54 <monochrom> 所以不少人都覺古龍太吹水
+02:29:23 <CindyLinz> 他的作品我都只看一點點就 halt 了.....ww
+18:42:30 <mno2> http://www.stephendiehl.com/llvm/
+18:42:37 <mno2> 這一系列越來越厲害了..

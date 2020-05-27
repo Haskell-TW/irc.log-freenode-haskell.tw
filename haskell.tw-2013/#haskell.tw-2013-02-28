@@ -1,0 +1,65 @@
+18:18:38 <suhorng> http://existentialtype.wordpress.com/2011/03/15/teaching-fp-to-freshmen/ 去年的事. 原來 CMU 把 OOP 從 introductory courses 中移除了, 變成大二以上的選修課
+18:19:31 <suhorng> 他們的(入門？)程式課滿有趣的 有 imperative 和 functional 兩門
+18:20:10 <suhorng> 不過是開給有學過程式語言的人的樣子
+18:21:23 <suhorng> :t (join (+))
+18:21:25 <lambdabot> Num a => a -> a
+18:21:42 <suhorng> > join (+) 1
+18:21:44 <lambdabot>   2
+18:21:44 <suhorng> > join (+) 2
+18:21:46 <lambdabot>   4
+19:00:23 <suhorng> @pl \a -> a + a
+19:00:23 <lambdabot> join (+)
+19:00:26 <suhorng> @pl \a -> a + 2*a
+19:00:27 <lambdabot> ap (+) (2 *)
+19:12:17 <suhorng> \ x y -> x + y * 2
+19:12:24 <suhorng> @pl \ x y -> x + y * 2
+19:12:25 <lambdabot> (. (2 *)) . (+)
+19:12:58 <suhorng> @pl \x y -> (x + x) ++ (show $ y * 2)
+19:12:59 <lambdabot> (. (show . (2 *))) . (++) . join (+)
+19:13:27 <suhorng> @pl \x y -> (show $ y * 2) ++ (x + x)
+19:13:28 <lambdabot> flip ((++) . show . (2 *)) . join (+)
+19:15:19 <CindyLinz> 你好愛 pointless 啊 XD
+19:15:38 <CindyLinz> 喜歡寫讓人看不懂的程式嗎? XD
+19:15:59 <CindyLinz> 把 \ x y -> x + y * 2 改成 (. (2 *)) . (+) 你是想整誰 XDD
+19:16:43 <CindyLinz> 不過倒是一個想要沒誠意 open source 的作法..
+19:16:51 <CindyLinz> 把整個程式所有函數都這樣搞一下 XD
+19:19:03 <suhorng> 我在找能不能讓 lambdabot 找不出來的例子XD
+19:19:21 <suhorng> 或是用到少見的函式之類
+19:19:37 <suhorng> 連兩個參數都能 pointless 是哪招...
+19:19:52 <CindyLinz> 因為 \ x y ->  === \x -> \y ->   的關係?
+19:19:57 <CindyLinz> induction rocks!
+19:20:04 <suhorng> 喔喔www
+19:20:27 <suhorng> 像之前我就以為 \a -> a + a 不能 pointless, 結果它竟然回我 join (+) orz
+19:20:44 <CindyLinz> 剛剛我也好奇它是怎麼用 join 的
+19:20:53 <CindyLinz> 因為我記得 join 是 m (m a) -> m a
+19:21:06 <CindyLinz> :t 一下發現它配的 monad 是 (->)
+19:21:07 <lambdabot> fd:9: commitBuffer: invalid argument (invalid character)
+19:21:46 <suhorng> 嗯, 實在神奇
+19:24:12 <CindyLinz> 如果有 predefine 一個 a -> (a, a) 的函數, 就好啦? ^^
+19:24:18 <CindyLinz> @pl join
+19:24:19 <lambdabot> join
+19:24:45 <CindyLinz> 對喔.. join 是在 class 上, 這樣沒有實作.. XD
+19:25:22 <CindyLinz> 不過現在丟 a -> (a,a) 給它, 它一定又去套 join....
+19:25:35 <CindyLinz> @pl \x -> (x, x)
+19:25:35 <lambdabot> join (,)
+19:25:47 <suhorng> wwwww
+19:26:03 <CindyLinz> @pl \x -> (x, x). without join
+19:26:04 <lambdabot> (. without join) . join (,)
+19:26:13 <CindyLinz> .......................||
+19:26:13 <suhorng> 囧
+19:26:29 <suhorng> 之前我也好奇 pair (f, g) a = (f a, g a) 這種
+19:26:33 <suhorng> 結果也是 Monad...
+19:26:50 <suhorng> @pl \ (f, g) -> \a -> (f a, g a)
+19:26:51 <lambdabot> uncurry (liftM2 (,))
+19:27:00 <CindyLinz> 那你應該想繼續逼問這些用到的 monad 實作能不能也 pointless..
+19:27:09 <suhorng> www
+19:27:43 <suhorng> 這真的就想不到了
+19:35:07 <CindyLinz> 乾脆從 untyped lambda calculus 來想 pointless 怎麼實作好了?
+19:37:09 <CindyLinz> 一定要允許定幾條可以用參數的函數定義.. 不然弄不下去 :/
+19:39:03 <suhorng> 倒也是不用XD 只要大致上是夠有名的函式我可以接受
+19:39:29 <suhorng> 所以用 Monad 雖然出乎意料 不過還可以接受
+19:40:26 <suhorng> 直接從 untyped lambda calculus 來的話感覺怪怪的
+19:42:11 <suhorng> CindyLinz: 是說我終於開始看 Harper 的 Practical Foundations for Programming Languages 了
+19:42:50 <suhorng> 感覺很不錯~ 雖然對於理論來說 這好像只是淺淺的入門而已
+19:48:04 <CindyLinz> 那一本... 我不感興趣的證明好多啊... (艸)
+19:52:01 <suhorng> XDDD

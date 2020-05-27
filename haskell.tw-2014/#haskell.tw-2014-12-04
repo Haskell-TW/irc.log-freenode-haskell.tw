@@ -1,0 +1,49 @@
+00:06:02 <darkx> CindyLinz: 髒髒
+00:06:20 <darkx> $_ 念做 it 的話一切都懂了阿，就英文 XD
+00:16:27 <letoh> 就像 _1 和 _2 ?
+15:01:19 <cibs> miaoski: 等等你可以接受 _ * _ 不能接受 $a * $b 是什麼概念 XD
+15:06:08 <CindyLinz> 有解釋啦~~ :p
+15:06:09 <CindyLinz> 16:55 < CindyLinz> miaoski: 講不出來.. 那不就是偏見 + 意識型態嘛 XD
+15:06:09 <CindyLinz> 17:21 < miaoski> XDDDD 正是
+15:09:47 <cibs> 放棄治療
+15:09:59 <cibs> 放棄治療 miaoski
+15:14:47 <CindyLinz> cibs 崩潰中.. XD
+15:22:31 <miaoski> cibs: 別崩潰了 XD  下星期姐姐就要來講 Haskell
+15:22:41 <miaoski> 啊不對，她下星期是單純來吃便當的
+15:23:26 <miaoski> cibs: OK, 這樣說好了。_ * _ 我可以當做是 _1 * _2 (或 Clojure 裡的 (* %1 %2))
+15:23:49 <miaoski> 雖然覺得語意不明，但至少 _ 的意思就是個佔位符，一般把它丟掉 (嘿嘿)
+15:23:55 <CindyLinz> 那要怎麼作出 _2 * _1 的效果?
+15:24:15 <miaoski> $a * $b 不行，是因為 $a / $b 平常就已經是常用變數了。這比 $_ 更讓我難接受
+15:24:22 <miaoski> CindyLinz: 妳講出來啦 XD
+15:24:34 <CindyLinz> miaoski: 我覺得 _1 * _2 比 _ * _ 好很多 @@"
+15:25:32 <CindyLinz> 而且 _ * _ 比 Haskell 裡面的 Rec _ _ a _ _ b 裡面出現的 _ 還糟一級 @@"
+15:26:18 <miaoski> CindyLinz: Haskell 那個不糟啊。Scala 的 _ 就是和 Haskell 學的: 不在意這個變數
+15:26:29 <CindyLinz> 因為 _ * _ 裡面的 _ 是出現在一個, potentially 很大一團 expression 裡面零散出現的若干個 _
+15:26:52 <CindyLinz> 然後 programmer 要一邊讀一邊記著已經看過了幾個 _
+15:26:58 <miaoski> _ * _ 感覺就是這兩個相乘你也不會很在意這樣 XDDDD
+15:27:02 <CindyLinz> 好吧, 如果一定只用在很短的地方那可以
+15:27:20 <miaoski> 不用。因為它只能這樣了. 印象中不能 _ * _ * _ * _ 嘿嘿。這可以請 cibs 試試看
+15:28:44 <CindyLinz> miaoski: Haskell 的 _ 是真的丟棄不能碰欸.. 這邊 _ * _ 還是有要去取出對應的參數來用吧
+15:29:24 <CindyLinz> 但其實 Haskell 的 Rec _ _ a _ _ b 也已經是不好了欸 @@"
+15:29:39 <CindyLinz> 我只是說 _ * _ 比 Rec _ _ a _ _ b 還更糟 XD
+15:30:34 <CindyLinz> 說它不好, 是從.. 參數多的時候 (4 個以上) 用 named parameter 比直接對位置的 parameter 設計好
+15:31:04 <CindyLinz> 如果 _ * _ 一定只能用到兩個, 那的確有緩解這個問題
+15:31:54 <CindyLinz> 如果兩個 _ 距離很遠, 那就還是不好... 但可以不用, 自己小心都用成 _1 _2 就好.. 不過 _ 只能用兩個是個很奇怪的限制 @@"
+15:32:08 <CindyLinz> 畢竟還是可以用 _3 _4 _5 _6 吧?
+15:32:30 <CindyLinz> 覺得它可以列作建議, 而不是限制..
+15:33:42 <miaoski> CindyLinz: 平常 Scala 的 _ 就是丟掉不能用的。它 blah.foreach(println _) 和 reduce(_ * _) 我覺得是噁心的語法糖
+15:33:59 <miaoski> Rec _ _ a _ _ b 為什麼不好？明明就很棒
+15:34:23 <miaoski> Clojure 是 %1 ... 59
+15:34:25 <miaoski> %9
+15:36:33 <CindyLinz> miaoski: 太長了, _ 個數太多, 要去對應不好..
+15:37:33 <CindyLinz> 所以 Haskell 自己提供了 Record syntax, 然後另外有髒透了(?)的 edwardk 弄了個 Control.Lens 出來, 更全面/彈性地解決這個問題
+15:39:44 <CindyLinz> edwark 的記錄可以參考這邊「猙獰的應用」段落 XD # https://cindylinz.github.io/Talk-TakeItEasy-DynamicTypedAndUntypedHaskell-UsingGHC/#34
+16:00:01 <miaoski> CindyLinz: 我不要想讓別人取代妳在我心目前中的位置 所以先不看了
+16:00:36 <CindyLinz> 放棄治療 miaoski....
+16:00:40 <CindyLinz> cibs: //hand
+18:31:33 <cibs> miaoski: 一般平常寫 code 才不會把 $a, $b 當成常用變數吧 XD
+18:31:46 <cibs> miaoski: val m: (Int, Int, Int, Int) => Int = { _ * _ * _ * _ }; m(0, 1, 2, 3)
+18:32:39 <cibs> CindyLinz: //hand
+19:14:05 <pkmx> @pl \a b c d -> a * b * c * d
+19:14:05 <lambdabot> ((((*) .) . (*)) .) . (*)
+20:42:44 <CindyLinz> pkmx: 此風不可長..... OAO

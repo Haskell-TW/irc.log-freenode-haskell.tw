@@ -1,0 +1,3 @@
+01:39:37 <suhorng> 維持 GHC 的 LLVM backend 真不容易阿... http://smart-cactus.org/~ben/posts/2014-11-28-state-of-llvm-backend.html
+11:16:39 <suhorng> Comonad 用的 codo notation XD https://hackage.haskell.org/package/codo-notation
+11:16:43 <suhorng> template-haskell

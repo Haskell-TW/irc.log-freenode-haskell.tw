@@ -1,0 +1,90 @@
+01:46:15 <letoh> http://worrydream.com/AlligatorEggs/  好像在哪看過這些鱷魚
+09:48:50 <CindyLinz> 昨天感受了 Coq interactive 編輯
+09:49:07 <CindyLinz> 覺得如果寫 Haskell 的時候也有類似的東西幫忙, 會大有幫助 :p
+09:49:18 <CindyLinz> 可以即時提示我, 寫出來的每一個 term 的 type
+09:51:18 <MnO2> Leksah不知道有沒有
+09:51:26 <CindyLinz> 但.. 我還是希望我的編輯區用起來像 vim ^^|
+09:51:53 <letoh> emacs 的 semantics 不曉得能不能處理 haskell
+09:51:55 <CindyLinz> 我覺得 VisualStudio / eclipse 的最大缺點, 就是不能用 vim 了 (或整合得很爛)
+09:51:55 <MnO2> haskellmode?
+09:52:17 <CindyLinz> haskellmode? 我查一下這啥 ^^|
+09:54:50 <b4283> haskell mode 好像還沒有 docs
+09:57:14 <jaiyalas> agda 也是這樣互動的~
+09:58:38 <CindyLinz> 你們看的是這個嗎? # http://projects.haskell.org/haskellmode-vim/
+09:59:10 <b4283> 我不曉得 vim 也有，我說的是 github 上的 emacs-haskell-mode
+09:59:28 <CindyLinz> b4283: 嗯嗯..
+10:00:15 <CindyLinz> b4283: 從 vim 換到 emacs 有點辛苦呀, 會捨不得離開 vim  XD
+10:01:53 <b4283> 還好啦, 跳下來用一下就習慣了 XD
+10:02:20 <b4283> #emacs.tw 歡迎你 (廣告)
+10:02:43 <CindyLinz> b4283: 不是怕 emacs 難用啊, 是捨不得 vim 啊 ^^|
+10:05:56 <b4283> :P
+10:29:08 <CindyLinz> 看起來這個 vim 的 haskellmode 已經包含了我粗略想到的所有功能了 :p
+10:41:07 <_13h> 似乎只支援 ghc XD  來試試
+10:44:17 <CindyLinz> 上 Coq 也有複習 logic 的效果 :p
+11:19:20 <_13h> 裝好 emacs 用的了，c-c c-d 可以查 function sig，還蠻方便的
+11:22:02 <_13h> 不對，不用按，移到函式的位置就會自動顯示了
+11:22:22 <CindyLinz> 要用滑鼠?
+11:27:04 <_13h> 不用
+11:27:42 <_13h> 我都在 terminal 呀，輸入的指標移過去就可以了
+11:27:56 <CindyLinz> 嗯嗯
+11:30:59 <hychen> 下午停課?
+11:35:37 <jaiyalas> 對的！
+11:35:51 <jaiyalas> 穆老師會講一點小故事(應該)
+11:35:59 <jaiyalas> 然後就是複習/討論時間
+11:36:49 <CindyLinz> jaiyalas: 小故事... 像是 Hilbert 與 Brouwer 之間的愛恨情仇?
+11:37:17 <MnO2> 古人的八卦~
+11:37:24 <jaiyalas> 很可惜 XD
+11:37:26 <jaiyalas> 並不是
+11:37:32 <jaiyalas> 是大鬍子的八卦
+11:37:34 <CindyLinz> jaiyalas: 欸 我是說等級.. XD
+11:37:42 <hychen> 那我還是過去好了
+11:37:45 <jaiyalas> XDDDD
+11:37:48 <CindyLinz> XD
+11:38:03 <MnO2> 大鬍子是誰?
+11:38:09 <CindyLinz> 早上都沒有用到 Coq.. 我小電池白帶了..||
+11:38:28 <hychen> 昨天生病 /.\, 早上頭還是很暈..
+11:38:38 <jaiyalas> Dijkstra
+11:38:45 <jaiyalas> 應該會講... 吧 XD
+11:38:59 <jaiyalas> 剛剛穆老師還一副不確定的樣子 :p
+11:39:32 <CindyLinz> 聽說 徐讚昇(tshsu) 有一次進出電梯的時候撞到 Dijkstra XD
+11:40:09 <hychen> 我昨稍微看了一下monad transformation, 我覺得我又搞不懂monad了... /.\
+11:41:04 <CindyLinz> hychen: 你藉由看 Monad Transformation 來養病!?
+11:41:28 <hychen> CindyLinz, 反正躺著...
+11:42:05 <CindyLinz> 在還在用 Turbo C 的日子裡, 我有幾次生病發燒
+11:42:13 <CindyLinz> 那就很容易作惡夢
+11:42:27 <CindyLinz> 我夢到我在 Turbo C 單步執行東西..
+11:42:35 <CindyLinz> trace 遞迴的程式...
+11:42:40 <hychen> 下午的複習是指什麼?
+11:42:49 <hychen> 我夢到我搞懂monad...
+11:42:59 <CindyLinz> 那不是惡夢 XD
+11:43:20 <CindyLinz> 你竟然沒夢到被一層又一層 monad 壓死, 鑽不出來...
+11:44:27 <hychen> CindyLinz, 我在python裡面實作monad , 但會需要很多lambda function, 會很沒效率
+11:44:37 <hychen> CindyLinz, 再來也會多了很多物件
+11:45:02 <hychen> 我在想是不是用meta class 來做出composed class 來達到monad想做的事
+11:45:03 <CindyLinz> 先不要管效率吧?
+11:45:35 <CindyLinz> 至少就先能應用在一些比較不在意效率的情境啦~
+11:46:52 <_13h> 昨天看了一下 monad transformer 發現還是早點睡比較好
+11:48:49 <CindyLinz> (Y)
+11:49:20 <hychen> CindyLinz, 早上沒有用coq?
+11:49:33 <hychen> CindyLinz, 那在上什麼? 我以為他昨天的part1還沒講完
+11:49:44 <CindyLinz> hychen: 沒有, 在講有 side-effect 的時候可以 apply 的 rules
+11:50:11 <CindyLinz> 很像 Hoare Logic
+11:50:21 <hychen> ok
+11:50:55 <hychen> logic 類的我上課都跟不上... 只好自己看 XD
+11:51:46 <CindyLinz> 不過寫的符號更像程式
+11:51:47 <_13h> 一般需要大迴圈的話，是用 forever 還是把 main 抓進來遞迴呢?
+11:51:59 <CindyLinz> 畢竟最後是要拿到 Coq 裡面跑吧
+11:53:41 <CindyLinz> _13h: forever 的話應該拿不到前一個 iteration 的東西出來用?
+11:57:12 <_13h> 嗯嗯，我要放在 main 裡的，還在嘗試不同寫法
+11:57:14 <CindyLinz> 我覺得能用 forever 的話, 用 forever 比較清楚
+11:57:41 <CindyLinz> 不過 forever 裡面是 monad.. 還是可以偷偷用 monad 傳東西... @#$@^^
+11:59:36 <CindyLinz> 我也不知道最好的方法是哪種 :Q
+12:00:14 <_13h> 暫時還不會用 monad ~ 看了很多次還是頭暈XD
+14:06:18 <CindyLinz> 戰神 Dijkstra 嗎 XD
+14:08:03 <MnO2> 戰神?
+14:08:53 <CindyLinz> scm 說 Dijkstra 的文章看起來很過癮, 他喜歡跟人家嗆..
+14:08:59 <CindyLinz> 有他在的地方, 大家都會很緊張
+14:09:11 <CindyLinz> 可是也有一堆人很崇拜他
+20:25:27 <Rifur> 不知道哪邊找得到XD
+20:26:15 <Rifur> EWD 好像是這個 http://www.cs.utexas.edu/~EWD/
+20:39:54 <CindyLinz> 照片看起來是

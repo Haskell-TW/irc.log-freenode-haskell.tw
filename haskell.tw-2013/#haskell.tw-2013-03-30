@@ -1,0 +1,68 @@
+00:37:10 <b4283> autotools 表示:
+16:57:03 <MnO2> http://d.hatena.ne.jp/kazu-yamamoto/20130205/1360051153
+16:57:22 <MnO2> 7.4.2 開始可以有一點點 stack trace 的功能
+16:57:31 <MnO2> 不過看起來不是很有用
+17:59:01 <MnO2> 如果有時間理論上應該挑個 library 比較豐富的主流語言，然後把他的 lib 對到相對應的 haskell package
+19:21:18 <MnO2> http://partake.in/events/1698f7f8-4151-4048-b317-03a8c3f1a7ab
+19:21:37 <MnO2> ekmett 寫的 library 已經可以變成讀書會主題了...
+22:26:58 <MnO2> http://stackoverflow.com/a/9159863/1022246
+22:27:11 <MnO2> http://blogs.perl.org/users/ovid/2010/08/what-to-know-before-debating-type-systems.html 裡面有個 reference
+22:28:07 <MnO2> （不過太長了還沒看完）
+22:36:03 <suhorng> Harper也很堅持這個觀點XD
+22:36:33 <suhorng> 或說, 他堅持 "dynamically typed" 只不過是 "static" typing 的一個特例 (也沒錯啦..)
+22:39:46 <CindyLinz> static type 不也是 dynamic type 的一個特例嗎? @@"
+22:40:25 <CindyLinz> 那... static type 和 dynamic type 就是同一個集合了 (Y)
+22:42:33 <b4283> 我覺得 static type 的 type 和 dynamic type 的 type 意思不一樣耶
+22:43:29 <b4283> static type 指的只是長度固定，dynamic type 是一種抽象
+22:43:59 <suhorng> 他說的 "是 static typing" 的特例是指說實際上我們在做的是弄一個 sum type (A + B + ...)
+22:44:41 <suhorng> 也說執行時關聯的是 "tag"、"classfication of values" 而不是 "type" XD
+22:45:05 <suhorng> b4283: 後面這一句是什麼意思呀~?
+22:51:23 <b4283> 唔
+22:51:38 <b4283> nvm
+22:51:44 <b4283> 我突然想到 c 可以用 typedef 定義新的 type不過長度依然是
+22:51:45 <b4283> 固定的
+22:54:42 <letoh> ?
+22:54:50 <suhorng> 嗯 好像不太一樣
+22:56:30 <MnO2> 其實 ref 裡面有另一篇，之前在 g+ 貼過的
+22:56:32 <MnO2> http://stackoverflow.com/questions/9154388/does-untyped-also-mean-dynamically-typed-in-the-academic-cs-world
+22:56:54 <MnO2> 講得比較精簡
+22:58:48 <MnO2> CindyLinz: 其實兩種本來就是不衝突的啊，只是剛好都有 type 這個字，所以大家就戰起來了
+22:59:20 <MnO2> 因為 type 是先被學術界拿來指稱現在所謂 static type
+23:00:17 <MnO2> 所以後來被喜歡 dynamic type 的人拿來戰，就不爽。明明就是我先用 type 這個字的，而且還有正規定義。
+23:00:24 <MnO2> 按照定義你們不該稱作 type
+23:00:40 <MnO2> 你們應該叫做 dynamic check
+23:01:39 <MnO2> 甚至學術論文上講得比較絕，就直接很方便地稱 dynamic type 為 untyped
+23:02:08 <letoh> untyped 不是沒有 type 的意思，而是 static type 的反義?
+23:02:45 <MnO2> letoh: 在某種 context 下，可以這麼說
+23:03:19 <MnO2> letoh: 但你要先知道原本 "type" 這個字數學上 well defined 的定義
+23:03:32 <MnO2> 才能得出 "反"
+23:03:53 <MnO2> 英文上就加個 "un"
+23:04:20 <letoh> 嗯  那我有另一個問題  這些 type 的討論應該都是數學上  或理論上的討論吧?
+23:04:38 <letoh> dynamic type 算是實作技術還是理論上說得通的東西呢?
+23:05:15 <b4283> 還有另一個詞 duck-typing
+23:07:43 <MnO2> letoh: 我不是很確定，但就我有限的認知。我認為學者們多半不會認為 dynamic checking 是沒有好處的。但不太 care。
+23:07:55 <b4283> 正在看 Existential Type
+23:08:14 <MnO2> 其一我猜測是，所謂 runtime ，在 lambda calculus 裡面就變成了 value
+23:08:25 <CindyLinz> 學者們多半不 care 「好處」吧?
+23:08:46 <CindyLinz> 他們比較在意... soundness / completeness
+23:09:17 <MnO2> 對，就如 CindyLinz 所言
+23:11:10 <MnO2> 打個有點爛的對比
+23:12:26 <CindyLinz> 覺得 dynamic type 有不方便出論文的缺點.. :|
+23:12:28 <MnO2> static type 跟 dynamic type 我覺得是不同的東西，我覺得戰的過程，有點像是拿 Javascript 戰 Java
+23:12:42 <CindyLinz> 還蠻不錯的類比 :p
+23:12:44 <MnO2> 所以 Java 的人就說， Javascript 是 un-Java
+23:12:45 <CindyLinz> 名字也像 XD
+23:18:16 <b4283> 看懂 60% .. 再想想..
+23:19:31 <b4283> dynamic type 對他來說似乎等於 no type check at compile time
+23:19:53 <b4283> so more penalties introduced
+23:23:23 <b4283> 不太懂為什麼 dynamic type 會疊加起來變成唯一一個 type 的論點
+23:24:29 <b4283> btw 文章裡面有一本 pdf 的書 "Practical Foundations of Programming Languages"
+23:26:20 <suhorng> 不是指疊加起來
+23:26:50 <suhorng> 是指像 data MyType = Type1 x x x | Type2 x x x x | Type3 ... 這種 (sum types)
+23:29:03 <suhorng> 所以 data TheType = IntType Int | FunctionType (TheType -> TheType) | PairType (TheType, TheType) ...這樣
+23:30:36 <b4283> 程式裡的所有的變數都是這個 type ?
+23:31:18 <b4283> 聽起來沒什麼道理 XD~
+23:32:47 <suhorng> 就是他說 dynamic typing 是 static type 一個特例的意思
+23:32:54 <suhorng> 全部都是 "TheType"
+23:33:17 <suhorng> 然後執行期的 "type" checking 就是檢查是哪個 tag
+23:58:54 <monochrom> 試想像用haskell寫個scheme的interpreter, 你發覺需要寫個sum type來代表所有可能的值. 從這個觀點看, scheme就是只得一個type, 然後在執行時才知是哪個分支.

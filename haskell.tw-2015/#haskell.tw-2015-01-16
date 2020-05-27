@@ -1,0 +1,235 @@
+02:44:12 <caasihuang> 這樣算 Functor 嗎？ https://github.com/caasi/sandbox/blob/master/livescript/cps.ls#L23
+02:44:44 <caasihuang> 發現這樣寫，好像根本不用什麼 CPS 變換跟 generator XD
+03:19:28 <CindyLinz> 唔.. 看不懂 livescript.. 不過看到了 .then  我猜它是 functor 的機會不大 @@"
+03:20:54 <CindyLinz> 可以把陣列傳進去嗎? fmap((x) -> x+1)([1,2,3]) .... (這語法不知道對不對 ^^|)
+03:21:55 <CindyLinz> 或是... 傳一個參數.. fmap((x) -> x+1)((a) -> a+2)  .... 會出來相當於 (a) -> a+3
+06:29:44 <YuLIn> callback promise style -> cps
+06:32:45 <monochrom> :)
+11:02:01 <miaoski> CindyLinz: LiveScript 很耐斯的，一定有什麼誤會
+11:21:16 <CindyLinz> caasihuang: 欸.. 我覺得我可能誤會了..... 你的意思可能是要 instance Functor Promise 而不是在為所有的 Functor 定義 fmap :: Functor f => (a -> b) -> f a -> f b 哄?
+11:27:24 <CindyLinz> caasihuang: Promise 照名字看, 應該是那種.... 某一天, 會有個結果出來的東西?  那應該是一個 Functor instance 沒錯.. 不過我看不懂 livescript, 不能幫你檢查 ^^|
+11:56:48 <cibs> 這樣 Functor instance 是誰呢？
+11:56:52 <cibs> 我以為是 Array 耶
+11:57:02 <cibs> Promise 本身不是沒有對它作用的 fmap 嗎
+11:57:31 <CindyLinz> 可以對 Promise 的輸出作
+11:58:59 <CindyLinz> 可以聯想一下.... instance Functor ((->) r) where fmap g func = g . func
+11:59:27 <CindyLinz> 如果 Promise 是「某一天會有個結果」的話, 可以視為 f a 的 a 是那個結果
+12:02:55 <CindyLinz> 然後... Haskell 的函數通常都是天生 Thunk, 所以都是 Promise? XD
+12:03:08 <CindyLinz> 滿滿的 promise... (幸福
+12:30:16 <aksatac> 這是我的競選承諾，總有一天會實現
+14:24:58 <CindyLinz> 是說... mtl 裡面在 ErrorT 之外平行加了個結構一樣的 ExceptT... 只是 Monad class 部分仍然只有 class MonadError, 然後, 在 ExceptT 裡面的使用方式依然是 throwError 和 catchError.... 這樣是有哪裡比較好嗎? XD
+14:25:42 <CindyLinz> 決定繼續使用 ErrorT.....ww
+14:26:27 <CindyLinz> 繼續來寫有 error 就是沒 error; 沒 error 就是有 error 的程式........ww
+15:16:31 <CindyLinz> OR 的用法寫成這樣.... isOOO <- either (const True) (const False) =<< runErrorT $ do  ... when (某條件ok) (throwError ()) ... when (另一條件ok) (throwError ())  ..... 最後面 ... return ()
+15:17:05 <CindyLinz> AND 的話寫成 either (const False) (const True) =<< runErrorT $ do ... when (某條件fail) (throwError()) ........
+15:17:14 <CindyLinz> 這樣寫法感覺好嗎?
+15:17:31 <cibs> not at all
+15:17:48 <cibs> 好吧是我個人喜好 XD
+15:18:40 <CindyLinz> 來個推荐寫法~~ ^^|
+15:18:44 <cibs> 我會覺得主角放在前面比較清淅耶
+15:18:45 <CindyLinz> 用 contT ?
+15:18:58 <CindyLinz> 主角?
+15:19:06 <cibs> do ... 這個
+15:19:23 <CindyLinz> 假設這一團 do 很大... 例如說.... 總共有 25 個條件好了
+15:20:02 <cibs> 好吧如果很大的話就還不錯，可以看成 header 了 XD
+15:20:03 <CindyLinz> 所以你會.... ( do ...... 一大團 .... ) >>= either (const True) (const False) 這樣 ?
+15:20:09 <cibs> 我剛想的是如果沒有很大的情況
+15:20:27 <CindyLinz> 不過這小問題啦.. 我想問.... 這樣子用 runErrorT + either 的用法好嗎? ^^|
+15:20:53 <CindyLinz> 我有覺得最前面的 either (const True) (const False) 有點..... 冗?
+15:21:09 <cibs> 有一點，所以才造成我剛剛講的 XD
+15:21:21 <CindyLinz> 雖然可以不用轉 either... 直接 case eitherOOO of
+15:21:27 <cibs> 不過如果 do 很大的話那個就相對小很多了
+15:21:43 <CindyLinz> 可是 eitherOOO 不能配合 when 或 unless 使用 @@"
+15:22:04 <cibs> 沒想到更好的 XD
+15:22:47 <petercommand> 話說...似乎我寫 haskell 會 pattern matching 愈來愈多層...然後 indent 就愈來愈可怕XD
+15:23:12 <CindyLinz> 我寫這之前有試一個.. 用 execWriterT..     寫成這樣 Any isOOO <- execWriterT $ do ... when (某條件ok) (tell True) .........
+15:23:48 <CindyLinz> 這樣用是可以... 只是說... 已知結論以後, 後面的 test 還是要跑, 很無謂地跑
+15:23:56 <CindyLinz> 沒有 short-circuit 的效果
+15:24:02 <cibs> petercommand: 我用所有有 pattern matching 的語言都很容易寫出這個問題...orz
+15:24:16 <CindyLinz> petercommand: 我前陣子也是越寫越深... 所以現在開始整理一下書寫的風格, 處理這問題 ^^|
+15:24:33 <CindyLinz> 如果在 monad 裡面就是用好幾個小的 do-block 斷開
+15:26:21 <CindyLinz> do-block 的結果一定要在最前面接.... hmm.... 如果可以有個 redo-block, 在尾巴接就更好了 XD
+15:28:34 <CindyLinz> 咦.. 用 execWriterT 的話應該不用 when ... tell 這麼累.. 可以寫 tell (某條件 ok)
+15:29:14 <CindyLinz> 或是... 如果這個「某條件 ok」是某 monad action 算出來的.. 可以 lift 檢查某條件 >>= tell 或 tell =<< lift 檢查某條件
+15:29:24 <petercommand> hmm... 接後面好像不錯耶XD
+15:36:24 <CindyLinz> 有時候會寫一整排 lift.. 不知道有沒有附 unlift 函數的 helper... :p
+15:36:27 <caasihuang> CindyLinz: 謝謝，正在讀，等等重新整理一下自己的想法再看該怎麼表達
+15:37:02 <caasihuang> YuLi
+15:37:50 <CindyLinz> lifts :: ((forall a. t m a -> m a) -> m a) -> t m a
+15:39:39 <CindyLinz> lifts :: (MonadTrans t, Monad m) => ((forall a. t m a -> m a) -> m a) -> t m a
+15:39:56 <caasihuang> YuLIn: 你說得對，我搞錯了，是想說當一切 function 都 async 且返回 promise ，是不是就不用 call/cc 之類的功能做 CPS 變換了？
+15:41:32 <CindyLinz> caasihuang: 你把註解的地方改寫成 instance Functor Promise where 好了? ^^
+15:42:16 <caasihuang> 好，到定點就改 XD
+15:42:40 <CindyLinz> @hoogle (MonadTrans t, Monad m) => ((forall a. t m a -> m a) -> m a) -> t m a
+15:42:42 <lambdabot> No results found
+15:42:46 <CindyLinz> QQ
+16:29:36 <CindyLinz> 啊前面那個寫法會 compile 不過..
+16:29:46 <CindyLinz> isOOO <- either (const True) (const False) =<< runErrorT $ do  ...
+16:30:10 <CindyLinz> 因為 do 前面的 $ 會把這個 expr 變成 (either (const True) (const False) =<< runErrorT) $ (do ... )
+16:33:46 <CindyLinz> 然後 const True 要改成 const $ return True ..... 這樣太苦了 orz
+16:36:55 <CindyLinz> @pl const . return
+16:36:55 <lambdabot> const . return
+16:36:57 <CindyLinz> QQ
+16:37:03 <CindyLinz> @type const . return
+16:37:04 <lambdabot> Monad m => a -> b -> m a
+16:44:47 <CindyLinz> 發現 ExceptT 和 ErrorT 的差異了..... 雖然它們都是包 Either, 但是 ErrorT 要求 Left a 的 a 必須 instance Error a, 是個可以噴訊息的東西.... @@"
+16:53:39 <caasihuang> CindyLinz: 改好了，來巴著 godfat 討論這個 XD
+16:54:09 <godfat1> 咦，沒有 follow, 要回頭看一下 XD
+16:56:13 <godfat> 雖然 livescript 語法也看很多了，但還是不熟，
+16:56:13 <godfat> 腦袋轉不太過來|||b
+17:00:56 <CindyLinz> livescript 的語法: 當你覺得已經看了許多, 它總是比你看過的更多..... orz
+17:03:01 <godfat> 而且我覺得滿難記的，好多變，感覺腦裡要有 parser XD
+17:03:51 <CindyLinz> caasihuang: 欸~ 你用 Haskell 翻譯一遍啦~ 我們就比較好懂了 (咦
+17:04:49 <caasihuang> godfat: 結果是 sequential 和 parallel 的 async 操作都可以藏到程式結構裡，不用有 fiber 或 call/cc ，我是從這點開始往回做那個看起來像 Functor 的東西的
+17:05:30 <caasihuang> CindyLinz: 可是 Haskell 應該沒有這些奇怪的 async control flow 問題啊 XDD
+17:07:01 <caasihuang> 我會努力試看看的。文字解釋的話，是靠 instance Functor Promise 的 fmap 把要用的 async function 都包成吃普通的值或是 Promise 都可以的 function
+17:07:11 <CindyLinz> caasihuang: 對.. Haskell 只有一個奇怪的..... (咦咦
+17:07:39 <caasihuang> `.....`?
+17:07:49 <CindyLinz> lazy eval.. XD
+17:09:01 <caasihuang> 在想如果這個配上 JS 實作的 thunk 是不是也可以往 lazy 方向發展？這樣當要 log 時才會去要用到的東西...，下次好了 XD
+17:11:21 <CindyLinz> caasihuang: 這個方向發展下去... 不是 Haskell 的 lazy evaluation, 而是禁忌的 unsafeInterleaveIO..  玩這個要小心一點 @@"
+17:12:17 <caasihuang> 對齁，是跟外界要東西？我還不是很明白 unsafeInterleaveIO ... XD
+17:12:19 <CindyLinz> 要像 lazy evaluation 的話.... 放在 thunk 裡面的函數要寫得自律一點, 不要有任何 side effect, 像是改 DOM 或是 ajax 之類的動作
+17:13:25 <CindyLinz> caasihuang: 是個隨手亂用很開心, 要正經大用的時候會 GG 的東西.. XD
+17:13:59 <caasihuang> Haskell 是怎麼幫 programmer 把有 side effect 跟沒有的部分分開的？靠 type 嗎？
+17:14:14 <caasihuang> JS 沒有 type 啊，看來只能寫在名字上面（？）
+17:14:15 <CindyLinz> 對..
+17:15:44 <caasihuang> 0rz
+17:15:45 <CindyLinz> 一個看待的角度是這樣... 在 Haskell 裡面我們不能直接製造 effect. 但是我們寫一堆: 你給我一個世界, 我可以藉此生出下一個世界的函數.. 然後我們把這些函數接起來
+17:16:25 <CindyLinz> 所以這種函數的 type 裡面就會描述說它就是要吃一個世界吐一個世界.. 和其他不會吃世界吐世界的函數就分開了
+17:17:26 <CindyLinz> 會吃世界吐世界的函數裡面可以呼叫純函數.. 因為可以不把取得的世界餵食它; 但是反過來就沒辦法用, 因為純函數沒有拿到世界, 沒辦法餵食想要吃世界的函數
+17:18:09 <caasihuang> 那可以說 m a -> (a -> m b) -> m b 的 m a, m b 是這邊講的世界， (a -> m b) 是吃世界吐世界的函數？
+17:18:52 <caasihuang> 另外一個問題是，不懂為啥是 m a -> (a -> m b) -> m b 而不是 (a -> m b) -> m a -> m b
+17:18:54 <CindyLinz> 有些 m 有帶著世界, 可以這樣說..
+17:19:32 <caasihuang> 有些 m 帶著世界 XD
+17:19:33 <CindyLinz> caasihuang: 這就沒什麼道理了... 只是有些人覺得 m a -> (a -> m b) -> m b 比較順手而已 ^^|
+17:19:47 <CindyLinz> (=<<) 就是倒過來的.. 偶爾也是可以用
+17:20:01 <caasihuang> 喔喔喔 XD
+17:20:02 <CindyLinz> 我今天下午寫的一些東西就有用 =<<
+17:20:41 <CindyLinz> 帶著世界的 m 通常會長得像類似這樣的結構:  \s -> (s, a)
+17:21:12 <godfat> 還沒空看細節亂插話 -- 其實只有 IO monad 是特例？
+17:21:29 <CindyLinz> 前面的 \s 用來吃前一個世界, 然後 (s, a) 裡面的 s 用來生下一個世界... 然後那個 a 是傳遞給下一個世界函數作參考的東東
+17:22:38 <CindyLinz> godfat: monad 結構部分 IO monad 不是特例.. 它跟 State 長得一樣... 特例的部分是....這個「世界」是個想像, 沒辦法用 Haskell 的 ADT 語法定義出來這樣....
+17:23:30 <CindyLinz> 不過 ADT 不能寫出來的東西還蠻多的... 像是 Int 裡面真正用來表示數字的東西也不能用 ADT 寫... 用 ADT 寫出來的用起來太慢惹 ^^|
+17:24:05 <godfat> 我想說的是，假設我們同時有 IO monad 跟 state monad 好了，
+17:24:06 <godfat> 但是前者在實際執行時有確定的順序，但 state monad 沒有？
+17:26:01 <CindyLinz> 嗯.. 其順序不是 IO 或 State 決定的. 是依 Haskell 一致的 lazy eval 順序定的
+17:27:15 <CindyLinz> 從尾巴開始看, Runtime 餵食一個 s 給 \s -> (s, a) 的參數, 看看最後會不會變成 bottom
+17:27:41 <CindyLinz> State 用 (s, a) 的話.. 因為是個 pair constructor, 所以就不用再看了.. 除非有人要拿 s 或 a 出來
+17:27:51 <caasihuang> 胡思亂想一下，以前在想故事題材時查過這個： http://en.wikipedia.org/wiki/Digital_physics
+17:28:20 <CindyLinz> 嗯.. 另有一個 strict 版的 State 是用 (# s , a #), 用 unboxed 的 pair, 那就會再去確認 s 和 a 是否 ok
+17:28:24 <caasihuang> 當聽到 side effect 和世界這樣的形容時，就會想起來...
+17:29:20 <CindyLinz> 然後.. 要確認最後一個 s, a 是不是好的, 就再往前看生成它們的東西
+17:29:26 <CindyLinz> 類似這樣...
+17:30:20 <godfat> CindyLinz, 所以或許可以說 io monad 其實是 strict 版的 state monad 嗎..? XD
+17:30:34 <CindyLinz> unsafeInterleaveIO 就是... 人家要檢查它的 s, a 是不是好的... 它就直接宣稱: 我是好的, 這邊是機密你別檢查!
+17:31:43 <CindyLinz> godfat: 是.. data IO 裡面就是寫 data IO a = IO (\State# RealWorld -> (# State# RealWorld, a #))
+17:33:06 <godfat> 哈哈，那我懂了，關鍵差異應該是在這
+17:33:08 <godfat> 那既然有 # 強迫是 strict, 有什麼可以強迫不是 strict 的嗎？
+17:33:08 <godfat> 例如 unsafeInterleaveANYTHING?
+17:34:21 <godfat> 然後 seq 就是強迫 eval 嗎..? 我一直搞不太清楚 seq 覺得有時候如我所想，
+17:34:21 <godfat> 有時候又不是...
+17:57:24 <CindyLinz> godfat: 沒放 # 就沒有 strict 啊
+17:57:45 <CindyLinz> 欸不過 (#  ,  #) 是 unbox, 比 strict 再多一點點功能
+17:58:14 <CindyLinz> 資料結構會沒有這個 pair, 直接放兩個內容物
+17:58:30 <CindyLinz> godfat: 等等喔.. 我回想確認一下 unbox 對 element 是怎麼處理的 囧
+17:58:43 <godfat> 話說 ghci 不能用嗎？嗚嗚
+17:58:49 <godfat> > (# 1, 2 #)
+17:58:51 <lambdabot>  Kind incompatibility when matching types:
+17:58:51 <lambdabot>    a0 :: *
+17:58:51 <lambdabot>    (# a1, a2 #) :: #
+17:59:15 <CindyLinz> 是 extension
+17:59:30 <godfat> ...XD
+18:00:17 <CindyLinz> 我剛剛有講錯 orz
+18:00:27 <CindyLinz> let (# a, b #) = (# 1, undefined #) in a
+18:00:30 <CindyLinz> > let (# a, b #) = (# 1, undefined #) in a
+18:00:32 <lambdabot>  1
+18:00:47 <CindyLinz> 這樣沒爆....
+18:00:49 <godfat> 咦...
+18:01:31 <CindyLinz> 所以 (# .... #) 只有說... 這個 pair 的包裝紙不會實際存在, 會直接放一排內容物
+18:02:02 <godfat> 這樣 type 是啥啊？ = = 是原本的 tuple 嗎？
+18:02:05 <CindyLinz> 和 ( .... ) 比起來, 少掉的表達力就是不能整個是個 bottom
+18:02:16 <godfat> 喔喔好吧..
+18:02:35 <CindyLinz> (# ... #) 自己 type.. 不能寫 (a, b) = (# 1, 2 #)
+18:02:57 <CindyLinz> 所以... strict State 或 IO 也沒有強迫那個 s 或 a 要算出來
+18:03:26 <godfat> 這樣我還是不太懂 effect 發生的瞬間到底是因為什麼 XD
+18:03:55 <CindyLinz> 但是它要知道這個 action 會 return
+18:04:07 <CindyLinz> 也不能這樣說哄? ^^|
+18:04:35 <godfat> 我的想像是，ghc 內部有個神秘 function 可以強迫產生 effect, 只對 io 有效
+18:04:47 <CindyLinz> 欸就... \s -> (# s, a #) 這邊 s 吃下去以後.. 出來會是 (# .... #) 而不是 undefined 或是不出來
+18:06:42 <godfat> 哪天用力鑽下去看 source 好了 @@"
+18:06:42 <godfat> 感覺一直在抽象跟具象間打轉 XDD
+18:08:14 <godfat> 我一直在想這篇 http://blog.ezyang.com/2011/05/unraveling-the-mystery-of-the-io-monad/
+18:08:14 <godfat> 幾年前看的，晚上重看一次好了
+18:11:40 <CindyLinz> 糟糕我看 source 不覺得它哪裡有 strict.... XD # http://hackage.haskell.org/package/transformers-0.4.2.0/docs/src/Control-Monad-Trans-State-Strict.html#StateT
+18:12:11 <CindyLinz> 啊對照 Lazy 可以看出來..
+18:12:14 <godfat> ghc 說看到名字有 strict 自動把他變 strict (誤)
+18:12:14 <CindyLinz> http://hackage.haskell.org/package/transformers-0.4.2.0/docs/src/Control-Monad-Trans-State-Lazy.html#StateT
+18:12:24 <CindyLinz> Lazy 的特別 lazy... XD
+18:12:59 <CindyLinz> 在 >>= 裡面.. strict 版用的是 (a, s') <- runStateT m s, 而 lazy 版用的是 ~(a, s') <- runStateT m s
+18:13:43 <CindyLinz> 把這邊看成 runStateT m s >>= \(a, s') -> ... 和  ... >>= \ ~(a, s') -> ...
+18:14:15 <godfat> 這也一直是讓我覺得很亂的地方.. pattern matching 預設 strict,
+18:14:16 <godfat> 不要 strict 用 ~
+18:14:16 <godfat> 反之則要 strict 用 #
+18:14:16 <godfat> ?
+18:14:32 <CindyLinz> 左邊這種是要先去確認出來的東西是否是 ( , ) 的長相, 然後才會去跑函數內的東西; 而右邊這種會直接「當作」它一定會長得像 ( , ), 不經確認就進去
+18:15:15 <CindyLinz> godfat: 因為要作 pattern matching 的時候就是要決定往哪邊走, 要去看 body 會不會 bottom... 所以要先確認將往哪一條路走
+18:15:53 <CindyLinz> 所以要確認.. 確認到這個 pattern 有寫出來限制的部分都 ok
+18:17:01 <godfat> 我記得好像是說這邊如果不確認的話，容易拉著一大串可能的 branches,
+18:17:01 <godfat> 太吃記憶體？
+18:17:53 <CindyLinz> 沒有啦 # 這種寫法是用在 primitive type.. 像是 tuple 有 #, 或是 Int#.. 之類的.. 我們自己寫的 ADT... 應該只有 newtype 有這效果
+18:19:25 <CindyLinz> 然後 ADT 被塞到別人肚子的時候.. 可以這樣寫 type..   data A = A {-# UNPACK #-} !X {-# UNPACK #-} !Y 
+18:19:42 <CindyLinz> 這樣就會把 X 和 Y 的內容直接塞到 A 的肚子, 而沒有 X 和 Y 的皮
+18:19:44 <godfat> (暈) 各種技巧 orz...
+18:20:00 <CindyLinz> 不過只有滿足特定條件的 X 和 Y.. 這樣寫才有效果
+18:20:10 <CindyLinz> tune 效能用的 XD
+18:20:51 <CindyLinz> {-# .... #-} 長得就很像惡魔的角.. (ry
+18:21:10 <godfat> XDDDDD
+18:22:00 <CindyLinz> godfat: 不確認.. 我沒有想過你說的那個 branch 的效能問題..... 只是... 不當場判斷的話, 要怎麼繼續進行呢?
+18:22:07 <CindyLinz> in general 是有一個以上的 branch 欸
+18:22:12 <CindyLinz> 超過一個 branch
+18:22:21 <CindyLinz> 然後外部在問你說, 你這個 expression 會不會 bottom
+18:22:35 <CindyLinz> 那我不是沒得選擇, 現在就一定要馬上知道要往哪條路走嗎?
+18:22:53 <godfat> 太忙了只好晚點再說了 XD
+18:22:53 <godfat> 不過記得是在這邊討論到的說
+18:22:57 <CindyLinz> 然後就很自然地(?)把 eval 規則定成這樣
+18:23:05 <CindyLinz> 好 XD
+19:35:20 <pkmx> stringly-typed language 又闖禍了 # https://github.com/ValveSoftware/steam-for-linux/issues/3671
+19:36:21 <godfat> 我下午才跟人說到三大含糊語言，sh, php 跟 javascript
+20:52:06 <CindyLinz> 三大含糊... XD
+22:53:01 <CindyLinz> 糟.. 看到這文章標題就想到 haskell 的 operator section..... # http://www.quora.com/How-big-is-the-secondary-ticketing-market-in
+22:53:12 <CindyLinz> How big is the secondary ticketing market (in $)?
+23:13:50 <au> > let іn іn = "in" in (іn $) іn
+23:13:51 <lambdabot>  "in"
+23:15:24 <CindyLinz> 怪i.. XD
+23:17:07 <petercommand> 我以為會出現 not in scope 錯誤..
+23:17:22 <CindyLinz> 用 let 定義了呀?
+23:17:37 <petercommand> 喔...
+23:17:59 <petercommand> 忘記了XD
+23:18:11 <CindyLinz> au 的字集也跟我們一般人不一樣......ww
+23:18:18 <au> XD
+23:18:24 <CindyLinz> 真不愧是作字典的... m(_._)m
+23:18:33 <au> 沒辦法，in 是 haskell 保留字
+23:19:45 <au> n 又沒有同形異體字，只好用白俄烏克蘭的 і (U+456)
+23:20:08 <CindyLinz> 真是太專業了.... @@"
+23:20:51 <CindyLinz> > 3　+4
+23:20:53 <lambdabot>  7
+23:21:03 <CindyLinz> > id　5
+23:21:05 <lambdabot>  5
+23:21:22 <CindyLinz> 有沒有看不見的「字」? XD
+23:22:09 <au> 有看到全形空白 XD
+23:22:32 <CindyLinz> 想說偷塞全型空白當字尾.. 可是被抓出來是空白惹 QQ
+23:25:46 <petercommand> > 3 +4
+23:25:48 <lambdabot>  7
+23:26:48 <petercommand> > 3
+23:26:50 <lambdabot>  3
+23:27:23 <petercommand> > 3​+4
+23:27:24 <lambdabot>  <hint>:1:2: lexical error at character '\8203'
+23:27:30 <petercommand> XDDD
+23:28:36 <petercommand> U+200B
+23:29:10 <petercommand> 這個連看都看不出來了
+23:37:24 <pkmx> > let īn = undefined ; der = True ; gg = īn in der
+23:37:25 <lambdabot>  True
+23:39:28 <pkmx> > let īn = īn ; der = True ; gg = īn in der
+23:39:30 <lambdabot>  True
+23:39:31 <pkmx> 應該這樣XDD

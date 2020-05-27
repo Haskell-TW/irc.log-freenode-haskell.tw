@@ -1,0 +1,166 @@
+06:14:51 <monochrom> 去會友也不錯
+14:47:03 <CindyLinz> Haskell 呼函數的時候如果套一下 flip 可以把最前面兩個參數的位置交換
+14:47:18 <CindyLinz> 例如說...
+14:47:36 <CindyLinz> > flip (\a b -> (a, b))
+14:47:38 <lambdabot>  No instance for (Data.Typeable.Internal.Typeable t0)
+14:47:38 <lambdabot>    arising from a use of `M426580164427288460213415.show_M4265801644272884602...
+14:47:38 <lambdabot>  The type variable `t0' is ambiguous
+14:47:38 <lambdabot>  Possible fix: add a type signature that fixes these type variable(s)
+14:47:38 <lambdabot>  Note: there are several potential instances:
+14:47:44 <CindyLinz> @type flip (\a b -> (a, b))
+14:47:45 <lambdabot> t1 -> t -> (t, t1)
+14:48:27 <CindyLinz> 如果參數1是一串比較長的 do-notation 的東西, 而參數2是很短的參數, 我很可能就會採用這樣的方式呼叫
+14:48:43 <CindyLinz> 把 do-notation 放在最後一個, 就可以在最後面寫 $ do .....
+14:48:46 <CindyLinz> 我想問..
+14:49:15 <CindyLinz> 如果原本有三個參數以上, 其中第一個是長的其他是短的, 通常是怎樣寫, 來把第一個推到最後一個?
+14:50:03 <CindyLinz> @type flip (\a b c -> (a, b, c))
+14:50:04 <lambdabot> t1 -> t -> t2 -> (t, t1, t2)
+14:51:20 <CindyLinz> > flip (flip (\a b c -> (a, b, c)) 2) 3 1
+14:51:22 <lambdabot>  (1,2,3)
+14:51:42 <CindyLinz> 是這樣寫嗎? 有沒有看起來更舒服的寫法? QQ
+14:52:00 <CindyLinz> > flip (flip (flip (\a b c d -> (a, b, c, d)) 2) 3) 4 1
+14:52:02 <lambdabot>  (1,2,3,4)
+14:52:14 <godfat> @type \b c a -> (\a b c -> (a, b, c) a b c)
+14:52:15 <lambdabot>     Couldn't match expected type `t1 -> t2 -> t3 -> t0'
+14:52:15 <lambdabot>                 with actual type `(t1, t2, t3)'
+14:52:15 <lambdabot>     The function `(a, b, c)' is applied to three arguments,
+14:52:34 <CindyLinz> godfat: 你是說為每一種排列寫一隻 helper 喔?
+14:52:45 <godfat> 記得之前的討論是這樣 XDDD
+14:52:57 <CindyLinz> 嗚嗚真絕望.. QQ
+14:53:02 <monochrom> 可以自定一個 xxx f b c a = f a b c
+14:53:15 <CindyLinz> 的確是 helper.. QQ
+14:54:34 <godfat> c++ 的話... f(_3, _1, _2)(b, c, a)
+14:54:40 <CindyLinz> 或是開大絕用 template.... $(flip' 1 3) (\a b c -> (a, b, c)) = \b c a -> (a, b, c)
+14:55:22 <CindyLinz> 其實心理上還是有點抗拒 template, 如果能不用還是會盡量不去動用 @@"
+14:56:10 <CindyLinz> 這是哪一國的 C++... 囧
+14:56:22 <godfat> 這樣是 flip' 就是把 a b c 變 b c a? 這跟直接定義 flip' 有啥不同？
+14:56:39 <godfat> c++11 之類的...
+14:56:46 <CindyLinz> C++ 相見不相識, 笑問 compiler 何處來 XD
+14:56:47 <monochrom> 我覺得, 沒必要尋求通用解法. 你真的有這麼多參數要重組嗎?
+14:57:08 <b4284> flip table
+14:57:08 <CindyLinz> godfat: 可能寫錯了 XD  我指的是 flip' 1 3 就是把第一個參數移到第三個 XD
+14:57:53 <CindyLinz> monochrom: 但如果找到了會很開心啊 XD
+14:58:08 <CindyLinz> godfat: helper 產生器
+14:58:25 <CindyLinz> monochrom: 現在是一直頻繁使用同一個.. 三個的
+14:58:58 <monochrom> 如果還是想尋求通用解法, 那就應先學數學裏的羣論 group theory
+14:59:11 <CindyLinz> 然後正在猶豫要疊兩次 flip, 還是就認命照原有的順序寫, 放一對距離很遠的括號 ^^|  不過現在大概會寫一個 helper 來用吧
+14:59:38 <CindyLinz> 對所以突然想說上來問問大家好了 ^^
+15:00:23 <CindyLinz> 這種換順序的 helper 應該取什麼名字好?
+15:00:58 <CindyLinz> flip313 ? (總共3個, 把第1個, 搬到第3個)
+15:01:32 <CindyLinz> 好像不用知道總共幾個, 反正就是從前面數.. 那可以叫 flip13
+15:02:44 <CindyLinz> 嗯, flip13 這名字好像很有氣勢 XD
+15:04:03 <godfat> CindyLinz, https://gist.github.com/godfat/9406676
+15:05:30 <godfat> flip13 比 flip313 為啥比較有氣勢？ = =...
+15:05:30 <godfat> 是說 template 我是沒用過，所以不明白你寫的 flip' template 跟 flip' function 有啥不同 XD
+15:05:37 <godfat> 少一個 function call...?
+15:05:40 <CindyLinz> 像是惡靈13什麼的 XDrz
+15:05:43 <monochrom> 看來是時候聲稱不懂 C++ 了
+15:06:32 <CindyLinz> 原來是函數呼叫的結果再呼叫一次 :p
+15:06:47 <CindyLinz> godfat: 把 haskell template 想成 C++ 的巨集好了 XD
+15:07:06 <CindyLinz> 但是 type safe!
+15:08:12 <godfat> 不過要省掉那個 bind 好像只有 boost phoenix?
+15:08:12 <godfat> http://www.boost.org/doc/libs/1_55_0/libs/phoenix/doc/html/index.html
+15:08:12 <godfat> CindyLinz, 我的意思是 runtime 上有差嗎？如果能用 function 為何不用 function..?
+15:08:15 <CindyLinz> 我想的是 flip' 1 2 = flip    flip' 1 3 = \f b c a -> f a b c     flip' 2 3 = \f a c b -> f a b c
+15:08:44 <CindyLinz> godfat: 因為以為直接用函數寫不出來 ._.
+15:09:16 <godfat> 喔喔，可以任意 flip 的 flip
+15:10:25 <godfat> 搞不好也是可以，不過大概會很複雜..
+15:14:47 <CindyLinz> 試試看 ._.
+15:21:06 <CindyLinz> 怪怪的....
+15:21:23 <CindyLinz> 應該先寫下這個 gflip 的 type 的
+15:21:30 <CindyLinz> 然後就會覺得好像寫不出來.. @@"
+15:22:01 <godfat> 之前看過個可以吃掉任意 arg 的 function, 可能類似那樣，玩弄 type class
+15:22:01 <CindyLinz> gflip :: Int -> Int -> (某函數) -> (某函數)
+15:22:18 <CindyLinz> 這邊這兩個某函數的 type 寫不出來 orz
+15:22:36 <godfat> http://blogger.godfat.org/2009/12/varargs-in-haskell.html
+15:23:04 <CindyLinz> 但那個 varargs 的函數的 return type 是固定的啊
+15:23:46 <CindyLinz> 或說, 不能 depend on arg type
+15:24:12 <godfat> 不知道... XD
+15:25:39 <CindyLinz> 覺得 agda 好像可以搞這種的... 但那就不是 haskell 了, 要拒絕向惡魔祈禱, 掉進去就出不來了..XD
+15:25:47 <godfat> XDDD
+15:30:51 <CindyLinz> 寫 flip13 的 type 和函數定義長得幾乎一模一樣, 寫兩遍好笨 XD
+16:40:43 <godfat> 忽然在想，有語意的 diff 是不錯，不過似乎會變成寫錯的不能 commit
+16:40:43 <godfat> 嗯，可能也是好事 XD
+16:42:34 <hashcat> 啥麼語意
+16:43:07 <hashcat> 有語意的話要靠公設和命題, 這樣就成了定理證明器
+16:43:08 <godfat> 例如我用 a 語言寫程式，commit, commit, 然後看 diff, 現在大多是語法上的 diff
+16:43:26 <godfat> 更正，文字上，連語法都談不成
+16:43:31 <hashcat> 附帶語意網的git
+16:44:09 <hashcat> Haskell的型別系統多少也是能糾正語意錯誤
+16:44:13 <godfat> 不知道範圍怎麼界定
+16:44:13 <godfat> 比方說 f = 1 + 2
+16:44:13 <godfat> 改成 f = 1 * 2
+16:44:13 <godfat> 他會知道改的語意是從 + 變 *
+16:44:41 <hashcat> 哦
+16:44:57 <hashcat> 我想到 Ada Spark 和 prolog
+16:45:11 <godfat> 有現行的？
+16:45:24 <hashcat> 用於寫程序的定理證明器
+16:45:49 <hashcat> 因為符合某個語意就代表他會有一票性質符合某個命題
+16:46:19 <hashcat> http://en.wikipedia.org/wiki/SPARK_%28programming_language%29
+16:46:47 <hashcat> 所以你把+改成*他就會偵測到某些命題的真值被改變
+16:48:13 <hashcat> http://en.wikipedia.org/wiki/Formal_methods
+16:48:28 <hashcat> 這種是那些語意方法的通稱
+16:49:28 <hashcat> 貌似沒有C++的工具
+16:49:46 <hashcat> 最需要的反而沒有暈
+16:53:14 <godfat> 好像不錯，晚點再看.. XD
+16:54:03 <hashcat> 結論是"語意"是用一票命題來確認的
+16:55:11 <godfat> 嗯嗯，所以沒辦法在不多做事的情況下做語意 diff 了
+17:01:28 <hashcat> 當然說得是數學的那種語意
+17:02:14 <hashcat> 要電腦看到冰淇淋三個字就能自己冒出冰淇淋的圖像也太超過啦
+17:04:38 <suhorng> Real World OCaml!!!! https://realworldocaml.org/v1/en/html/index.html
+17:04:47 <suhorng> 不知道之前有沒有貼過
+17:05:13 <hashcat> 用prolog的話... 語意即程序
+17:05:58 <hashcat> 所以研究prolog就是減少語法的腦力消耗, 深入語意這方面的性質
+17:07:17 <hashcat> 又是Real World
+17:07:26 <suhorng> 真實世界很棒阿XD
+17:07:38 <hashcat> 每次real world都是fake world
+17:08:26 <hashcat> 當然是要有些實用
+17:08:38 <hashcat> 實際例子才能叫real world吧
+17:09:05 <hashcat> 像是某公司的訊號分析器的ocaml源代碼之類的
+17:09:23 <hashcat> 自己想像的的real world是哪門子的real world
+17:10:00 <hashcat> 充其量只是語法介紹書
+17:11:15 <suhorng> 好吧XD 看目錄好像確實 Real World Haskell比較 real world 一點
+17:11:58 <hashcat> 讓我想到妙禪和山達基
+17:12:19 <hashcat> 解決你人生中的問題
+17:16:52 <CindyLinz> godfat: 可以加上 draft mode, 標 draft 的 commit 可以是 compile 不能的程式
+17:17:27 <CindyLinz> godfat: 然後 語意 diff 的功能只應用在非 draft 的 commit 之間
+17:18:12 <CindyLinz> godfat: 我覺得語意 diff 先只要能處理縮排和多餘空白的相容, 就已經幫助很大了 ^^
+17:19:39 <godfat> CindyLinz, hashcat, 我剛剛碰到的狀況是，我移動 function 定義的位置，然後加了一行。實際上我只想看到多一行而已，不想看到整個文件大移動這樣
+17:22:09 <hashcat> 哦那簡單多拉
+17:25:31 <CindyLinz> godfat: 這也很實用.... 但好像比空白又難了些 :p
+17:25:40 <hashcat> http://en.wikipedia.org/wiki/Longest_common_subsequence_problem
+17:26:28 <hashcat> diff可以辦到吧
+17:26:35 <CindyLinz> 但我沒有想通的一個點是.... 傳統的版本控制是直接要求檔案的 byte 對 byte 要完全一樣
+17:26:56 <CindyLinz> 而用了這種比較寬容的 diff, 會把 byte 對 byte 不一樣的檔案視為一樣
+17:27:13 <godfat> 我想這也得讓 diff 程式知道什麼是 function, 最好還能跨檔案，例如 function a 都是在 module m 下，但檔案位置移動時可以知道沒有改變
+17:27:16 <CindyLinz> 那麼, 是大家 repository 裡面就各自放長得不一樣的檔案嗎?
+17:27:39 <CindyLinz> godfat: 那你的 refactor 會不會就白做了? 就只有你自己的 local 版本有變...
+17:27:41 <godfat> 應該沒錯？
+17:27:57 <CindyLinz> 因為 diff 說, 你 refactor 完以後的程式和之前的程式是 equivalent 的...
+17:28:04 <godfat> 喔，commit 得記得 bytes diff, 但是 diff viewer 需要另一種顯示
+17:28:15 <CindyLinz> 喔喔 只是查看的時候用?
+17:28:19 <godfat> 對
+17:29:36 <CindyLinz> 可惜程式碼沒有 normal form.. XD
+17:29:43 <CindyLinz> 沒有「好的」normal form..
+17:30:31 <godfat> 所以我一向吃掉所有 trailing whitespaces, 至少是最簡單的一步 :s
+17:30:49 <CindyLinz> godfat: 那最後一行最後面的 new-line 要不要吃掉? XD
+17:31:12 <godfat> 我是固定第一行和最後一行保留一個 LF
+17:31:24 <CindyLinz> 不過 trailing whitespace 在 markdown 裡是有意義的 @@"
+17:31:44 <godfat> 這曾經讓我感到非常困擾 >< 後來怎麼解決忘記了...
+17:31:49 <CindyLinz> 編輯這種檔案就希望 editor 會把 trailing white space 標成紅底色
+17:32:01 <CindyLinz> 一點都不想處理看不見的程式碼......ww
+17:32:03 <godfat> 我 vim 也是這樣做，也會標 tab
+17:32:32 <CindyLinz> 想到線上遊戲的技能: 射出看不見的箭 XD
+17:46:42 <CindyLinz> refactor 中, 修到某一步, ghc 噴出來的 error 有 1004 行, 真過癮....ww
+18:07:42 <CindyLinz> 把 cabal build 改成 cabal build 2>&1 | less   不然每次翻頁好累 orz
+18:07:54 <CindyLinz> 第一個 error 最重要啊 XD
+19:06:06 <godfat> 時間零不應該視為 false 居然需要這麼長篇大論論述才能接受？
+19:06:06 <godfat> https://mail.python.org/pipermail/python-ideas/2014-March/026647.html
+20:01:05 <CindyLinz> XD
+22:57:36 <CindyLinz> undefined 是很棒的 XXX 註解法
+22:57:41 <CindyLinz> 還可以這樣寫:
+22:57:53 <CindyLinz> undefined "Need implement 某東西"
+23:45:22 <monochrom> 時間本來就不應視為布爾值. 布爾值本來就不應視為時間. 刻意把它們混淆, 一開始就輸了, 之後怎樣兩相對映都是胡說八道
+23:46:48 <monochrom> 又例如, 如果把溫度視為布爾值, 那麼是不是攝氏0度及華氏0度都視為false?
+23:47:17 <petercommand11> kelvin表示:
+23:51:45 <monochrom> 當然, 時間0不應該視為 false 需要長篇大論論述才能接受, 完全等於: 信了邪教的人需要長篇大論論述才不再信. 信了歪理很久的人, 當然需要長篇大論才重新明白顯淺道理.

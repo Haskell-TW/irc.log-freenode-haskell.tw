@@ -1,0 +1,469 @@
+00:00:24 <letoh> 不過老實說，現在網路上找得到的 forth 資料大概都看不太到我剛剛講的那些特性XD
+00:00:55 <letoh> 得去找更久以前，還沒有網路，只有紙本的老雜誌，上面講很多秘技
+00:01:51 <letoh> 網路上的介紹有點像在講 brainfuck，然後大家看看覺得是個怪東西就沒了
+00:02:11 <CindyLinz> brainfuck 應該是純玩具....
+00:02:46 <CindyLinz> 行銷壞掉了..
+00:03:51 <letoh> 大概吧，brainfuck 好像很難實際使用XD
+00:04:50 <CindyLinz> 聽聽這名字, 出生第一天就沒打算用吧 XD
+00:05:55 <letoh> 但這種名字比較引人注意啊
+00:07:43 <CindyLinz> X
+00:07:44 <CindyLinz> XD
+00:13:43 <CindyLinz> Haskell 那個 network package, 好像不能叫它 block 住直到 recv 滿我要的 byte 數哄 QQ
+00:15:11 <suhorng> 沒有把這功能包裝浸來的樣子
+00:15:18 <CindyLinz> 不過 它的 lazy bytestring 裡面有個 getContents
+00:15:37 <CindyLinz> getContents :: Socket -> IO ByteString
+00:16:02 <CindyLinz> 這樣可以先把 socket 「罩」一個 getContents 拿到 lazy bytestring
+00:16:33 <CindyLinz> 然後自己在這 lazy bytestring 上面「刮」出想要的長度, 這樣應該就是 block 在上面了吧 :p
+00:22:29 <suhorng> 神秘耶XD 是把它變成類似 stream 嗎...
+00:23:12 <CindyLinz> lazy bytestring 是一串 strict bytestring 呀
+00:24:43 <suhorng> 嗯 對
+00:25:09 <suhorng> 喔我是在找 getContents 會做什麼XD
+00:25:47 <suhorng> 感覺就像把 socket 收到的「所有」資料「包裝」成一個 stream
+00:27:06 <CindyLinz> 嗯嗯, Network.Socket.ByteString.Lazy 的 getContents 應該是模仿 Data.ByteString.Lazy 的 getContents, 而這個又是模仿 System.IO 的 getContents 和 hGetContents 吧 :p
+00:28:00 <CindyLinz> 這東東好像在出 exception 的時候有點討厭..
+00:29:30 <CindyLinz> 因為呼叫 getContents 的 monad action 可能已經「結束」了..
+00:30:01 <CindyLinz> 不過拿它去 strictly & blockingly 刮出資料來用, 應該就不會有這困擾
+00:30:13 <CindyLinz> 因為會 block 在後面這個步驟
+01:05:10 <CindyLinz> 為什麼 Lazy 的 ByteString 有 take, drop, splitAt, 然後有 takeWhile, dropWhile. 就是沒有 splitWhile 呢... 我想用的正是這個啊 QQ
+01:05:56 <CindyLinz> 啊, 原來化作 span 與 break 了 :p
+01:08:07 <CindyLinz> 我想用 span 來刮出我要的一行資料 (用 \n 判斷)
+01:08:33 <CindyLinz> 這樣用是很方便, 可是這樣要怎麼避免 memory 吃爆呢 o.o
+01:09:32 <CindyLinz> 啊, 反正它輸出的第一個 Lazy ByteString 也是 lazy 的
+01:10:29 <CindyLinz> 所以我可以先來數一下這個輸出有多長, (一個個數, 不是直接用 length), 發現它超過我的限制的時候就做些動作這樣
+01:10:54 <CindyLinz> 這樣應該就不會真的把過長的 bytestring 全都塞進記憶體吧
+01:15:38 <CindyLinz> 用 null (drop limit line) 來判斷這個 line 是不是過長
+01:26:27 <letoh> 感覺跟寫 c 差不多
+01:28:39 <CindyLinz> 覺得不像啊 ._.
+01:29:05 <CindyLinz> C 沒有 lazy 可用 (謎: C 不會有 lazy 跑出來亂)
+01:29:55 <letoh> 「數一下這個輸出有多長, (一個個數, 不是直接用 length) 發現它超過我的限制的時候就做些動作這樣」  像這一段說的
+01:29:57 <CindyLinz> C 的話應該是一邊比對 \n, 一邊判斷長度有沒有超過吧?
+01:30:14 <letoh> null 也可以啊  總之就是某個 token
+01:30:30 <letoh> 長度的話  還沒收進來之前都不知道多長
+01:30:32 <CindyLinz> \n 是因為我現在用 line break ^^
+01:30:35 <letoh> 只好邊收邊數
+01:31:00 <CindyLinz> 但我在 haskell 現在自然的寫法不太方便邊收邊數..
+01:31:27 <CindyLinz> 寫起來是先收再數, 不過實際上應該是 segment wise 邊收邊數 :|
+01:31:32 <letoh> 我看上面的說法有點像邊收邊數  只是包成 lazy 的樣子而已
+01:31:37 <letoh> 嗯
+01:32:01 <letoh> 寫 c 只是比較苦命一點，得自己模擬XD  但想法應該是一樣的
+01:32:02 <CindyLinz> 我覺得不像指的是 code 長得很不像.. 思路不一樣
+01:32:39 <CindyLinz> 畢竟我是先寫 C 出身的, 所以現在這樣寫對我來說除了有點神祕感以外, 其實是感到很迂迴 ^^|
+01:33:08 <CindyLinz> 那個「一個個數」改成 null (drop limit line) 了, 讓 drop 幫我數 XD
+01:33:11 <letoh> 唔...像我在寫 parser 的時候，我的 i/o 是封裝起來的  不會讀東西，一直到 get next token 才會去讀一點進來看看夠不夠，不夠再接著讀
+01:33:32 <letoh> parser 覺得夠了，i/o buffer 就不會再有新東西進來
+01:33:46 <letoh> 大概就是這樣的感覺吧，算是 lazy 嗎?
+01:34:52 <CindyLinz> 是 demand driven.. 至於是不是 lazy 的話.. 應該還要看你怎麼利用語言特性?
+01:35:22 <CindyLinz> 在 C 裡面自己手動刻 thunk 什麼的, 我不知道算不算 lazy 耶
+01:35:36 <letoh> 喔  如果要講語言特性的話.. c 當然是什麼都沒有，只能靠 struct 把一些 context 記起來，等到真的需要時再處理 (呼叫 i/o callback 之類的)
+01:36:03 <letoh> 基本上就是一堆 struct 封裝起來的東西傳來傳去，裡面裝有一堆資料和 callback
+01:36:34 <letoh> 有點像自己刻 thunk 的味道，不過在寫的時候沒想那麼多就是了
+01:36:34 <CindyLinz> 嗯, 我不知道這 lazy 是不是專指語言特性, 就是如果用平常的 evaluation 順序來看的話買上就會執行光光, 但是不會的那種
+01:37:08 <CindyLinz> 買上->馬上 XD
+01:37:31 <letoh> 用 c macro 封裝一下的話，雖然看起來沒那麼漂亮，但應該也可以弄得像 lazy
+01:37:50 <CindyLinz> 那是邪路啊 XD
+01:38:06 <letoh> result = parse(read(io_ctxt));  例如這樣?
+01:38:29 <letoh> 邪路XD
+01:38:40 <CindyLinz> c macro 用多了一定會遇到鬼啊 XD
+01:38:54 <letoh> 怎麼說? 我還蠻愛用的耶XD
+01:39:19 <letoh> 我還以為走夜路才會遇到，原來邪路也會XD
+01:39:21 <CindyLinz> 像是 side-effect 被放兩遍啊, 或是語法剛好黏到
+01:39:39 <CindyLinz> 還有 macro name 打架的時候
+01:40:05 <letoh> 唔，目前還沒遇到，side-effect 的確是得小心處理，不過我大概都是 macro 搭配 helper function
+01:40:17 <letoh> macro 做修飾用的
+01:40:42 <CindyLinz> 那 result = parse(read(prev_io_ctxt.then(after_io_ctext)))
+01:40:52 <CindyLinz> 可能不能 . XD
+01:41:10 <letoh> 要包成這樣也可以吧
+01:41:26 <CindyLinz> 我指的是如果 then 不是你設計的
+01:41:38 <CindyLinz> 是某個原本就有的函數
+01:41:50 <letoh> 嗯  undef 掉
+01:41:54 <CindyLinz> ...
+01:42:04 <letoh> 那一串基本上都要是 macro 了，盡量不要混用
+01:42:15 <CindyLinz> letoh: 恐怖份子... (指)
+01:42:37 <letoh> 然後小心處理 prescan 就可以了
+01:42:58 <letoh> 還好啦，很多例外處理之類的都用這種方式封起來了XD
+01:43:16 <letoh> 裡面常常有一堆 setjmp 之類的東西
+01:44:25 <letoh> 而且其實有一些好處，很方便做 hook... 需要 debug 時方便
+01:44:27 <CindyLinz> letoh: 恐怖份子最愛土炮危險武器了... (點頭)
+01:44:32 <letoh> XDXD
+01:45:17 <letoh> 而且還可以只讓某個檔案裡的 macro 變得不一樣，這樣不必影響一大堆程式碼的行為
+01:45:28 <CindyLinz> 像這樣.. 雖然這個可能不被定義為恐怖份子, 是民兵.. # http://www.theatlantic.com/infocus/2013/02/diy-weapons-of-the-syrian-rebels/100461/
+01:46:04 <letoh> 看起來差不多啊XD
+01:47:06 <letoh> 應該叫 DIYer  XD
+01:47:28 <CindyLinz> 地下兵工廠...
+01:47:48 <CindyLinz> prescan 是你另外寫的 compiler?
+01:48:20 <letoh> prescan 就 cpp 的功能吧... 我有一些參數會組合  還會變字串之類的 macro
+01:48:45 <letoh> http://gcc.gnu.org/onlinedocs/cpp/Argument-Prescan.html  類似這個
+01:49:13 <CindyLinz> 喔
+01:49:14 <letoh> 字串要傳來傳去才方便變成 log 追蹤XD
+01:49:37 <letoh> 有時候 macro 重構之後就會遇到這些問題
+01:52:24 <letoh> 如果 c macro 可以寫成遞迴型式的話應該會更好玩XD
+01:52:36 <CindyLinz> 對耶, 行不行啊?
+01:52:43 <CindyLinz> macro 會重複 apply 嗎?
+01:53:00 <letoh> 記得不行  會被擋下來
+01:53:13 <CindyLinz> 如果能遞迴.. 它就變成 untyped lambda calculus 了..
+01:53:55 <CindyLinz> letoh: 你就變成用真正的 C 定義一些函數當 vm 的 api
+01:54:05 <CindyLinz> letoh: 然後上面的 macro 才是你寫應用程式的語言?
+01:54:09 <letoh> 這不用定義就做過了
+01:54:38 <letoh> 但要弄完整就會遇到遞迴了XD  應該有辦法避開才對@_@
+01:54:54 <CindyLinz> 啊不過 macro 就算有遞迴, 也是 compile time 的時候做, 不能 runtime 做
+01:55:32 <letoh> 唔  其實不用強求一定是 macro 本身要遞迴吧
+01:55:51 <CindyLinz> hmm
+01:55:52 <letoh> 可以繞個幾層後，讓 function 去做真正的工作
+01:56:04 <CindyLinz> 用 function 寫一個 fix point
+01:56:20 <CindyLinz> 然後讓 macro 來做真正的工作 :D
+01:56:39 <letoh> 應該有人玩過了XD
+01:57:27 <CindyLinz> 可惜沒有 type check
+01:57:46 <letoh> boost 裡的 preprocessor 還沒用過，應該找時間玩玩XD
+01:57:52 <CindyLinz> 不過很多寫壞了 compile time 應該就可以炸開
+01:58:28 <letoh> http://www.boost.org/doc/libs/1_39_0/libs/preprocessor/doc/examples/array_arithmetic.c
+01:59:28 <letoh> CindyLinz: 這才是邪道XD
+01:59:54 <CindyLinz> ...
+02:06:04 <CindyLinz> 這樣是不打算讓別人接手的意思嗎? :/
+02:06:18 <letoh> 對了... 剛剛有個問題忘了問：demand driven 跟 lazy 有什麼差別呢? 剛剛找半天沒什麼好的參考資料
+02:07:23 <letoh> 唔，只好再用一層函式包起來...XD
+02:07:35 <letoh> 交出去就說這些都是函式
+02:09:16 <CindyLinz> 真是名副其實的「不明包裹」....||
+02:09:23 <letoh> "A demand driven architecture/language performs computations when the result is required by some other computation."
+02:09:32 <letoh> 看起來有點像 lazy eval
+02:09:47 <CindyLinz> demand driven 剛剛是我隨口想的詞, 不過差不多就你 quote 這句的意思
+02:09:52 <letoh> 嗯嗯
+02:10:11 <CindyLinz> 我剛剛在想它是不是 lazy, 只是因為我想的是語言的 lazy 特性
+02:10:31 <CindyLinz> 不過從你 macro 建立的這個「語言」來說, 應該也可以算是 lazy 吧?
+02:10:45 <letoh> http://stackoverflow.com/questions/1635827/how-would-one-implement-lazy-evaluation-in-c
+02:12:35 <CindyLinz> QQ.. 我想對一個 Lazy ByteString 作 switch..case 啦..
+02:12:57 <CindyLinz> 可能用 guard 好了, 就不會一直縮排下去
+02:13:32 <letoh> 縮排很討厭... 寫 sml/haskell 終於發現寬螢幕的好處XD
+02:14:00 <CindyLinz> 可是更多時候高螢幕更實用啊... :|
+02:14:28 <letoh> 是沒錯... 但可以轉的螢幕不多
+02:14:59 <CindyLinz> 這是我在辦公室的坐位 :p # http://sphotos-h.ak.fbcdn.net/hphotos-ak-ash3/643983_4729175508487_1024533839_n.jpg
+02:15:26 <letoh> 後面那片擋光板是什麼怪東西XD
+02:15:32 <CindyLinz> 轉成高螢幕的時候, 它的寬度就比平常小螢幕還短了...
+02:15:42 <CindyLinz> 擋光板?
+02:15:50 <letoh> 黑色的那片
+02:16:28 <letoh> 感覺左右太窄了
+02:16:47 <CindyLinz> 你是說坐位隔板的上半白色半透明的嗎?
+02:16:50 <letoh> 不過以 80 columns 來說應該夠用XD
+02:16:59 <letoh> 那個螢幕啦
+02:17:15 <letoh> 因為我也有類似的東西  但真的是遮光用的
+02:17:41 <CindyLinz> 對不起我還沒找到你說的是什麼 ^^|
+02:18:02 <letoh> 喔  其實就是在講螢幕  只是長的很像我的遮光板XD
+02:18:08 <CindyLinz> 喔 XD
+02:19:55 <letoh> 每次看到別人的桌子那麼乾淨，就想到我的桌子看起來很不像寫程式的XD
+02:22:32 <letoh> 看了幾個 lazy 做法都差不多
+02:23:44 <CindyLinz> lazy 也可以用在收桌子方面.. (逃)
+02:23:56 <letoh> XD
+02:24:38 <letoh> 有機會也拍下好了，我桌上一堆電路板，晶片 馬達 還有螺絲和起子等工具
+02:25:35 <CindyLinz> 你是機械/電機系的吧...
+02:25:58 <letoh> 應該是吧，不過後來有點走偏了XD
+12:24:52 <suhorng> PL課進入Ruby了!
+12:56:14 <favonia> 這堂課是要教多少語言...
+12:56:24 <favonia> 他有講為什麼要這樣上嗎？
+13:08:12 <suhorng> 教三種，SML、Racket、Ruby，他說為了介紹 functional、(?我忘了)、OOP
+13:08:43 <suhorng> 聽說最後教 Ruby 是因為有 OO 也有 functional 的部份XD
+14:13:50 <CindyLinz> 厚厚厚, ByteString 和 ByteString.Lazy 的 instance IsString ByteString 是定義在 ByteString.Char8 裡面啦... orz
+14:14:27 <CindyLinz> 所以如果想要直接拿 string literal "abc" 當 ByteString 用, 除了 import Data.ByteString 以外, 還要加一個 import Data.ByteString.Char8 ()
+14:16:36 <suhorng> kerker...
+14:17:30 <suhorng> 一直沒有去仔細研究幾種 Char8 / Word8 / 之類的差在哪XD
+14:18:04 <suhorng> 有空也來研究 ByteString 好了, 想用 Haskell 寫拿來用的程式好像無可避免要用這個XD
+14:22:44 <CindyLinz> 我 import Char8 後面是放 ()
+14:22:48 <CindyLinz> 意思是我用的不是 Chr8
+14:23:11 <CindyLinz> 還是用 Word8 的版本.. 但是 Word8 的 instance IsString 是定義在 Char8 裡面啊...||
+14:41:11 <CindyLinz> 從 doc 看不出來 @@"
+14:56:45 <letoh> suhorng: 唔  我 sec 6 還沒開始XD
+15:00:04 <letoh> 終於要在系統上裝 ruby 了嗎XD
+15:16:11 <CindyLinz> 想把文字表示(十進位)的 ByteString (strict or lazy) 轉成 Int 或是其他 IntXX 和 WordXX
+15:16:56 <letoh> import Char8 或 Word8 以後會發生什麼事?  有些函式的行為會改變嗎?
+15:17:41 <CindyLinz> letoh: 因為 instance IsString Data.ByteString.ByteString 寫在 Word8 的那個檔案裡
+15:17:50 <CindyLinz> 不 import 的話, 就沒有這個 instance 可以用
+15:18:07 <CindyLinz> 打 () 是說, 我沒有 import 它裡面的任何函數進來
+15:18:27 <CindyLinz> 嗯, 剛想說是不是只能用 read $ toString byteString
+15:18:42 <CindyLinz> 發現好像沒有 toString byteString 這種東西 ^^|
+15:19:06 <CindyLinz> 只好苦力自己讀一個一個 word8 出來拼嗎 ^^|
+15:20:37 <letoh> 以前看過的好像是 import Data.Word(Word8)  這個
+15:21:19 <CindyLinz> 噢 Read Word8
+15:21:38 <CindyLinz> 那是讀出來的結果存到 Word8
+15:21:47 <CindyLinz> 但是 Read 讀的對象是 String
+15:22:09 <letoh> 唔  這幾個東西都長得太像了，找個時間好好搞清楚好了XD
+15:22:11 <CindyLinz> ByteString -> String 的確是需要一層 charset @@"
+15:23:19 <CindyLinz> 啊.. Data.ByteString.Char8.ByteString 的 unpack 就是 ByteString -> [Char]
+15:24:47 <CindyLinz> 它當作所有的字都是 unicode 的 0-255
+15:25:05 <CindyLinz> 只好來把 Data.ByteString 都改成 Data.ByteString.Char8 了
+15:26:17 <CindyLinz> 可是 Network.Socket.ByteString 輸出的是 Data.ByteString 不是 Char8 的..
+15:52:12 <letoh> http://gittup.org/tup/index.html 新的 build system ?
+16:12:23 <CindyLinz> 找得好累.. 決定自己寫一個 Num num => ByteString -> num
+16:12:43 <CindyLinz> 這樣比較快, 而且不用擔心有沒有什麼 double buffer 的問題... :Q
+16:13:29 <CindyLinz> 不過我只有用到正數就好 :p
+16:24:41 <CindyLinz> 唔.. 要 (Integral num, Num num) 才方便.. 不然都要先生成 Integer 再轉...
+16:58:22 <CindyLinz> QQ
+16:58:45 <CindyLinz> 我寫了 let (cmd:arg1:arg2:arg3:arg4:arg5:_) = cmds :: [ByteString]
+16:59:06 <CindyLinz> 不過 cmds 不一定有那麼多項, 根據 cmd 的不同, 長度會不一樣
+16:59:37 <CindyLinz> 我想說, 我根據 cmd 決定如果在項目數比較少的時候, 只要不要去摸到後面的 arg4, arg5 就不會有問題
+16:59:48 <CindyLinz> 不過好像這一個 pattern match 下去就直接爆了
+17:01:00 <CindyLinz> 如果是整個.. 連 cmd 都沒用到的話, 那就不會有事
+17:02:01 <CindyLinz> 所以可能要寫成這樣? let (cmd:args1) = cmds :: [ByteString] ; (arg1:args2) = args1 ; (arg2:args3) = args2 ...
+17:03:55 <CindyLinz> 實驗可行..
+17:05:52 <CindyLinz> 嗯 括號可以不用寫 :p
+17:13:52 <CindyLinz> 想起以前用 turbo pascal 的時候, 沒有 scanf 可以用.. 寫題目的時候也都是自己 parse 字串... 先用空白之類的把字串隔出來, 然後再把 digit 整理成整數..
+17:16:29 <letoh> 我很少用 scanf 耶，幾乎都自己處理@_@
+17:17:23 <CindyLinz> 如果 parse input 不是重點的話, 當然是選省事的路走啊 ^^|
+17:17:41 <letoh> 也是要 parse 啦，不過都自己寫XD
+17:17:52 <CindyLinz> 不過要讀熟 scanf 的 manual, 也是很廢事的
+17:17:56 <CindyLinz> 費事
+17:18:46 <CindyLinz> letoh: 你聽反了啦 XD
+17:19:19 <CindyLinz> letoh: 如果程式裡面重點在其他地方的話, parse input 這種事, 就懶得花時間刻了
+17:20:07 <letoh> 嗯  我知道你說的啊  剛剛只是說我的習慣，不管再怎麼麻煩還是都先寫 parser XD
+17:20:54 <letoh> 不過  我很少處理檔案就是，資料通常都是串流進來的
+17:21:17 <CindyLinz> 是噢.. 我覺得就算有事先把它寫好印在紙上, 比賽的時候直接照抄打進去也很浪費時間欸 o.o
+17:22:12 <letoh> 比賽當然就另當別論啦
+17:22:25 <letoh> 其實我覺得寫 parser 還蠻快樂的XD
+17:22:56 <CindyLinz> 嗯..
+17:23:17 <CindyLinz> 後來 C++ 有了 STL 真是太過份了... 只好用 C++ 了... orz
+17:23:18 <letoh> 通常會實驗一下怎麼用 macro 包成好看一點的 dsl XD
+17:23:42 <letoh> 結果就是每次手刻出來的東西都長得不太一樣
+17:24:22 <CindyLinz> 平常自己用的話為什麼要一再手刻啊?
+17:25:42 <letoh> 我常常需要很多小工具啊  常常要處理不同的輸入格式
+17:26:07 <CindyLinz> 那不是就屯著用? ^^
+17:26:07 <letoh> 自用的就 python+regex 處理一下，要丟出去的就用 c 自幹
+17:26:16 <CindyLinz> 這東西又不會過期 XD
+17:27:35 <letoh> 其實我也在想應該要有個簡單的程序來完成這些瑣事，不過玩這些東西還蠻開心的，所以一直沒動力去調整XD
+17:27:57 <CindyLinz> 也是...
+17:28:23 <CindyLinz> 打電動也是從一直重複的事裡面獲得樂趣..
+17:31:30 <letoh> 這比喻還不錯，我一款遊戲都可以玩半年以上，破關了再破一次XD
+17:31:35 <CindyLinz> 以前我看同學在玩楓之谷, 一直在練功.. 我問他練功可以幹嘛? 等級可以變強; 那變強可以幹嘛? 變強可以打更高等級的怪; 那更高等級的怪到時候是不是其實要打更久而且更難打? 對; ......
+17:32:11 <letoh> 就繼續練啊XD
+17:34:15 <CindyLinz> 後來我學姊問我說楓之谷一直在做重複的事情哪裡好玩. 我說: 你是不是覺得這遊戲要有樂趣的話, 應該要充滿變化, 常有探索未知的驚喜, 讓你不斷有不同境界越來越深入的感動? 對; 那你快去作研究寫 paper 吧.. = =
+17:34:28 <letoh> XDXD
+17:37:00 <letoh> 其實外人看起來是重複的過程，但實際上還是有很多細微的不同XD
+17:38:22 <CindyLinz> 嗯, 這種時候拿出 category theory 套上去說它們 isomorphism 絕對是很白目的行為 XD
+17:40:52 <CindyLinz> 我覺得這種設計良好的遊戲中, 會不斷地間歇性給人成就感, 而且有恰當比例是讓人覺得有把握能達到的, 難度也控制得能讓人覺得越來越厲害, 而不會直接挫折離開
+17:42:16 <letoh> 但這種遊戲世界有點假，有些人不會喜歡
+17:45:07 <letoh> 不過對輕玩家來說，可能循序漸近會好一點吧@_@
+17:45:59 <letoh> 之前看到 ptt 的 game design 板剛好有人討論遊戲要怎樣設計才好玩
+17:46:14 <CindyLinz> 能紅的遊戲都是循序漸近的吧?
+17:46:37 <CindyLinz> 像前一陣子那些偷菜遊戲, 剛註冊的時候能玩的東西都是可能10秒就收成的
+17:49:08 <letoh> 像我都玩 rpg，有遇過遊戲可以越級挑戰，而且也不會說打不死，只是少一些武器比較難打而已
+17:50:06 <CindyLinz> 那你應該受不了十里坡劍神玩法? XD
+17:50:43 <letoh> 喔  十里坡劍神單純是因為太蠢吧XD
+17:51:08 <CindyLinz> 可是他玩得下去耶......
+17:52:09 <letoh> 如果單純打怪都沒變化，應該玩不下去吧... 我猜只是剛好賺夠經驗值可以學到新招，所以靠耐心撐下去
+17:52:26 <CindyLinz> 很強的耐心..... @@"
+17:53:00 <letoh> 像我之前玩的一款遊戲，在同一個地方打到某個程度就學不到新東西了，只好繼續往其他地區跑
+17:53:07 <CindyLinz> 楓之谷之前也有人在練超高等初心者
+17:53:36 <CindyLinz> 現在雖然也有, 不過現在比較多是用吸經驗值的方式升級, 那就不覺得厲害了 XD
+17:54:12 <letoh> 唔..楓之谷是 2D 的那一款嗎?
+17:54:21 <CindyLinz> letoh: 這樣設計比較好啊, 不然遊戲設計者後面的創作都心酸的 XD
+17:54:29 <CindyLinz> letoh: 2D的對
+17:54:32 <letoh> 台灣還有人在玩啊? 我只知道日本很紅，還一直有廣告
+17:54:57 <CindyLinz> 還蠻多的, 是遊戲橘子主要收入來源
+17:55:20 <CindyLinz> 遊戲部分啦.. 橘子在金流代收和機房出租那部分不知道有多大
+17:55:51 <letoh> 嗯嗯，可以做動態平衡調整，就算在新手村練到超強，後面的關卡只會變得更強XD
+17:56:53 <letoh> 講錯  應該說變得更難
+17:57:19 <CindyLinz> 如果讓玩家能自己想出有很多種不同玩法(練法), 耐玩性會比較高
+17:57:40 <CindyLinz> 可是又怕玩家是因為搞不清楚狀況而走了一條太難走的路, 然後就不玩了...
+17:58:41 <letoh> 有些 rpg 玩到末期很無聊，就是因為等級高到可以隨便虐王... 以前玩 LOM 時最後一關的王才剛出來沒幾秒就被我殺了，我到現在連王的絕招是什麼都不曉得
+17:59:18 <letoh> 走了太難的路就往回走啊，像開放世界遊戲的玩法
+17:59:32 <letoh> 比較有探索世界的感覺
+18:00:19 <CindyLinz> 心志這麼強靭的玩家比例沒那麼高啊 ^^|
+18:00:48 <CindyLinz> 你幹嘛不一直挨打就好, 這樣就可以看到啦? XD
+18:01:53 <letoh> 我忘了XD 因為不小心使出必殺技，王就死了..瞬間覺得很空虛，直接封片XD
+18:03:22 <letoh> 突然想到... 學 haskell 應該也有不少人在新手村就遇到 monad，然後就走不下去了XD
+18:03:42 <CindyLinz> 新手村第一個 boss 聽說是 fold
+18:04:11 <letoh> fold 會有什麼問題? 我好像蠻順的
+18:04:13 <CindyLinz> monad 是第二個, 不知道還算不算是新手村 XD
+18:05:16 <letoh> 不過我可能在其他語言有碰過類似的東西了，也說不準@_@
+18:05:52 <CindyLinz> 要去理解為什麼 foldr 可以用在 infinite list, foldl 不行, 但是 foldl 可以 strict.. 然後接下來是用 continuation passing style 來用一個叫 cfold 的東西, 巧妙運用傳給它的 function 可以做到 foldl 或 foldr
+18:07:12 <CindyLinz> 是 scm 點出來, 我才回想起我有在這邊大約卡了兩天
+18:07:28 <CindyLinz> 因為後來的 monad 在第一次讀的時候卡了兩週, 所以前面這隻小 boss 就忘掉了 XD
+18:07:33 <letoh> 後面的 cfold 沒聽過，來找找看
+18:07:47 <CindyLinz> 我在 Yet Another Haskell Tutorial 讀的
+18:08:13 <letoh> 喔這本...好像也是卡在某個地方就沒看下去了XD
+18:10:38 <letoh> 找到了.. sec 4.6
+18:11:11 <CindyLinz> 這邊有 http://en.wikibooks.org/wiki/Haskell/YAHT/Type_basics
+18:11:38 <CindyLinz> 嗯嗯
+18:11:57 <letoh> 原來有網頁版，比 pdf 方便多了
+18:16:55 <letoh> 原來 cfold 指的是 cps 版的 fold
+18:18:27 <CindyLinz> 嗯嗯
+18:57:08 <letoh> 大概看懂了  根據呼叫的時機決定行為是 foldr 或 foldl
+18:57:18 <letoh> 大概看懂了  根據呼叫 k 的時機決定行為是 foldr 或 foldl
+19:04:36 <letoh> 不過 「foldr 可以用在 infinite list」這點不太懂
+19:51:18 <CindyLinz> 就...
+19:52:31 <CindyLinz> > foldr (\a b -> (a+1) : b) [] [1..]
+19:52:34 <lambdabot>   [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,2...
+19:52:41 <CindyLinz> 這樣是可以的
+19:53:25 <CindyLinz> > foldl (\b a -> (a+1) : b) [] [1..]
+19:53:32 <lambdabot>   mueval: Prelude.undefined
+19:53:51 <CindyLinz> foldl 會爆掉
+19:53:57 <CindyLinz> > foldl (\b a -> (a+1) : b) [] [1..10]
+19:54:02 <lambdabot>   mueval-core: Time limit exceeded
+19:54:12 <CindyLinz> 奇怪我到底寫了什麼 XD
+19:54:48 <CindyLinz> > foldl (\b a -> (a+1) : b) [] [1..10]
+19:54:51 <lambdabot>   [11,10,9,8,7,6,5,4,3,2]
+19:55:03 <CindyLinz> 有限個的時候才能用 foldl
+19:55:26 <CindyLinz> 不知道 lambdabot 剛剛怎麼了 XD
+22:09:08 <letoh> > (:) 3 []
+22:09:10 <lambdabot>   [3]
+22:11:09 <letoh> http://foldr.com/  我找到這個站
+22:11:27 <CindyLinz> ...........||
+22:13:52 <CindyLinz> 每年付 10 美元租這網址只為了放這個東西嗎 XD
+22:14:02 <suhorng> 意圖使人一直戳下去wwwwww
+22:14:06 <letoh> 蠻有趣的站  不曉得做什麼用的XD
+22:16:59 <letoh> 我本來想的是... foldr f z (x:xs) = f x (foldr f z xs) 看起來就是會一直遞迴跑進 foldr，直到到看見 []，才開始往回執行 f x <ret> 的部份
+22:17:23 <suhorng> 因為lazy的緣故
+22:17:28 <letoh> 如果是 infinite list，怎麼知道最後一筆在哪裡? 在這之前，前面看到的那一堆 x 不是得先存起來嗎?
+22:17:34 <favonia> CindyLinz: http://hackage.haskell.org/packages/archive/bytestring-nums/0.3.6/doc/html/Data-ByteString-Nums-Careless.html
+22:17:41 <favonia> CindyLinz: http://hackage.haskell.org/packages/archive/readable/0.1.0.1/doc/html/Data-Readable.html
+22:17:47 <favonia> 如果你懶得寫
+22:18:04 <suhorng> letoh: 就是 f 只要不 demand 第二個參數, 就不會進去
+22:18:42 <suhorng> 如果 f 要的話, 是的, 就記下 f x <waiting...> 之類然後跑進去
+22:18:52 <favonia> 不然用 attoparsec 隨便寫寫也很快...
+22:20:07 <CindyLinz> favonia: 已經寫完了 QQ # https://gist.github.com/CindyLinz/5071195
+22:20:13 <letoh> 嗯... 那這樣說好了  以前面提到的例子，就會是 (2:(3:(4:(5:(...))))) 在把 list 全部展開之前，前面的 2:3:... 應該都沒辦法處理，只能先存起來吧?
+22:20:44 <suhorng> 不一定呀 如果你最後的計算是 head
+22:20:55 <suhorng> 那它看到 2:_ 後面就不會去管他
+22:21:28 <suhorng> foldr （：）　〔〕　的話括弧會像 ２：（３：（４：（５：（６：...
+22:21:56 <favonia> > head [1..]
+22:21:58 <lambdabot>   1
+22:23:41 <CindyLinz> Intable (Y)
+22:25:11 <suhorng> letoh: 前一次 PL 作業不是提到 lazy 嗎, 一個 stream 那樣(不過還會把算過的東西記起來)
+22:25:38 <suhorng> 可以稍微類比
+22:26:22 <letoh> 我不懂的地方是 : 不像 head，以簡單一點的 [1,2] 為例好了，應該是 2:(foldr f [] [3]) => 2:(3:[]) => 2:[3] => [2,3]    要遇到 [] 才開始收斂，如果不知道什麼時候可以遇到 []，不就得一直展開下去嗎? 那需要記住的東西會非常多吧?
+22:26:34 <CindyLinz> 覺得我喚醒一隻 boss 了的感覺.. (得意)
+22:26:51 <suhorng> 問題就在於不會展開下去呀
+22:27:24 <letoh> 不會展開的話，那 lambdabot 回應的 [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,2 是怎麼跑出來的呢?
+22:27:51 <CindyLinz> letoh: 那是因為 lambdabot 最後會 apply print.. 是 print 要求它一直輸出的
+22:27:56 <suhorng> > foldr ((:) . (* 2)) [] [1..]
+22:27:58 <lambdabot>   [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,...
+22:28:17 <CindyLinz> letoh: print 張開大嘴說, 喂, 前面的我都印完了, 繼續給我後面的吧~~
+22:28:38 <letoh> 嗯  所以不用遇到 [] 就會知道前面是一個未完成的 list 了?
+22:29:01 <CindyLinz> 我想想看...
+22:29:02 <suhorng> 用 （：） 出來的只可能是 list 呀
+22:29:30 <CindyLinz> letoh: 其實不知道是不是會完成的 list, 只是說, foldr 可以在不知道的情況下工作
+22:29:36 <suhorng> 它從 foldr f z (x : xs) 變身成 f x (foldr f z xs)
+22:29:43 <letoh> 唔  可是 foldr 還沒 return 耶? print 怎麼會知道資料是什麼呢?
+22:29:48 <suhorng> 在這裡我們的 f 是 （：）
+22:29:58 <letoh> 感覺很神奇XD
+22:30:00 <suhorng> 沒有 return 不 return 的~ 它做的是變成一個 thunk
+22:30:32 <CindyLinz> 實作上是 return 了一個 thunk
+22:30:38 <letoh> 就算是 thunk，要知道它的值也是得計算完並且傳出來不是嗎? thunk 只是可以晚一點算而已
+22:30:42 <CindyLinz> 然後看拿到 thunk 的 print 想怎麼運用這個 thunk
+22:30:53 <suhorng> 這裡我們的 f 是　（：）, 那它看到 "我現在要第一個元素" 之類, 看到 （：） 所以就知道第一個元素是什麼了
+22:30:54 <letoh> 所以那其實是一個很大包的 thunk ?
+22:31:12 <suhorng> 舉個類似(不精確的)例子好了
+22:31:35 <CindyLinz> letoh: 對, 不過不一定要把 thunk 徹底解開才能用, 你可以解多少用多少.. 就像某些網頁遊戲裡面的升級禮物包一樣.. 打開 10 級包裡面會得到一些禮物, 再加上一個還沒打開的 20 級包 XD
+22:32:01 <CindyLinz> 等你20級的時候再開它, 然後又會得到一些禮物, 還有35級禮物包...
+22:33:59 <CindyLinz> letoh: 所以這個「很大包」的「大」應該是說它真的完全解開來會很大, 而包起來的情況下其實可以是很小的
+22:34:39 <CindyLinz> 用 script 語言想的話, 它可以是一串字串, 拿去 eval 以後會生東西
+22:34:48 <CindyLinz> (程式碼字串)
+22:35:21 <letoh> 好，我整理一下現在的想法。所以當我拿到 print $ foldr (:) [] [1,2,3]，首先我會先看到 1:(foldr f [] [2,3])，所以我可以先輸出 "[1,"，並留下一包 thunk (foldr f [] [2,3]) 等一下再算
+22:36:30 <letoh> 接著解開會再看到 2:(foldr f [] [3])，又可以輸出 "2,"，再記住下一包 thunk (foldr f [] [3])
+22:36:35 <letoh> 類似這個過程嗎?
+22:37:06 <suhorng> 大概吧XD (我反正是這樣相信(?
+22:37:30 <letoh> 但我的問題是，如果 f 換成 (+) 這種，不就爆了?
+22:37:55 <letoh> 我不可能先輸出 "1+" 然後再算後面的 thunk 吧?
+22:38:04 <favonia> letoh: 所以要用 foldl
+22:38:05 <CindyLinz> letoh: 是的.. (+) 會爆
+22:38:08 <letoh> 因為我得算出最後的 6 才能真正印出來
+22:38:09 <suhorng> +就爆了
+22:38:34 <CindyLinz> letoh: 因為 apply (+) 的時候, 它一直撐著不輸出呀...
+22:38:58 <CindyLinz> 他說他還沒吃夠, 不想輸出 ^^|
+22:39:01 <letoh> 喔對啊，所以我的問題一直卡在 foldr 可以處理 infinite list 這件事
+22:39:19 <letoh> foldr (+) 0 [1..]  就會爆了吧? 這算反例嗎?
+22:39:36 <suhorng> 不算
+22:39:42 <letoh> 對呀，就是「一直撐著不輸出」
+22:39:46 <letoh> 唔...
+22:40:00 <CindyLinz> letoh: 他是指, 會爆, 但不算反例 XD
+22:40:02 <suhorng> 可以處理 infinite list 這樣說實在有點模糊
+22:40:06 <letoh> 嗯
+22:40:15 <letoh> > foldr (+) 0 [1..]
+22:40:17 <CindyLinz> 不模糊啊, 就是 存在 可處理的時候.. XD
+22:40:17 <lambdabot>   *Exception: stack overflow
+22:40:30 <suhorng> 嗯對
+22:40:33 <letoh> 這樣我就沒問題了XD
+22:40:34 <CindyLinz> foldl 就 不存在 可處理的時候..
+22:40:50 <suhorng> http://www.haskell.org/haskellwiki/Fold
+22:41:25 <CindyLinz> 嗯.. 剛開始學 haskell 的時候, 這邊的確也是第一次真的體會到 lazy evaluation 的時候吧?
+22:41:27 <suhorng> "One important thing to note in the presence of lazy, or normal-order evaluation, ..." 那裡開始就是 "可處理" 的清楚敘述
+22:41:46 <CindyLinz> 原來 fold 會覺得難, 是因為它偷偷暗合了 Continuation passing 和 lazy evaluation...
+22:41:46 <letoh> 唔，其實那個 eval 過程我沒有問題XD
+22:42:03 <suhorng> CindyLinz: 是在說 foldl 的那個定義嗎?
+22:42:19 <suhorng> > const 5 (foldr (+) 0 [1..])
+22:42:21 <lambdabot>   5
+22:42:26 <CindyLinz> suhorng: 是在說.. fold 是 Haskell 初學者會遇到的第一隻 boss.. XD
+22:42:31 <CindyLinz> monad 是第二隻
+22:42:50 <suhorng> letoh: 說模糊是因為那這樣算不算「可處理」 foldr (+) 0 [1..] XD?
+22:43:13 <suhorng> CindyLinz: 噢噢　我在想你說的 continuation passing 是不是在說 foldl 的那個定義...
+22:43:22 <CindyLinz> suhorng: 你這 foldr 根本沒跑啊, 這例子不算啦 XD
+22:43:27 <suhorng> 哈哈
+22:43:31 <CindyLinz> suhorng: 這例子要是算的話, foldl 也行了啊.... orz
+22:44:07 <suhorng> 也對...
+22:44:12 <CindyLinz> suhorng: 不是, 是讀 fold 的時候有讀到一個叫 cfold 的東西
+22:44:24 <CindyLinz> 18:11 < CindyLinz> 這邊有 http://en.wikibooks.org/wiki/Haskell/YAHT/Type_basics
+22:45:06 <suhorng> 喔喔喔喔~!!
+22:54:00 <letoh> > foldl (:) [] [1..]
+22:54:02 <lambdabot>   Occurs check: cannot construct the infinite type: a0 = [a0]
+22:54:22 <letoh> > foldl (:) [] [1..10]
+22:54:23 <lambdabot>   Occurs check: cannot construct the infinite type: a0 = [a0]
+22:55:36 <suhorng> letoh: 用 flip (:)
+22:55:54 <suhorng> > foldl (flip (:)) [] [1..10]
+22:55:56 <lambdabot>   [10,9,8,7,6,5,4,3,2,1]
+22:55:56 <CindyLinz> 對 foldl 吃的函數, 它的參數順序和 foldr 相反
+22:56:08 <letoh> 原來 type 擋下來
+22:56:11 <letoh> 喔喔喔
+22:56:15 <letoh> 相反orz
+22:56:15 <CindyLinz> 我從來也記不住, 每次都要查 orz
+22:56:30 <letoh> > foldl (flip (:)) [] [1..]
+22:56:37 <letoh> 死掉了?
+22:56:40 <lambdabot>   mueval: mueval: Prelude.undefined
+22:56:41 <lambdabot>  ExitFailure 1
+22:57:06 <suhorng> 死掉了XD
+22:57:59 <CindyLinz> letoh: 就說不存在能用的嘛 XD
+22:58:32 <letoh> 可是好像還是有一點不懂
+22:59:05 <letoh> 阿  不過這展開好像有點怪
+23:00:01 <letoh> 3:(2:(1:[]))  的確是沒辦法先印出來，第一筆該印出來的資料還沒出現
+23:00:15 <CindyLinz> 你好像畫反了?
+23:00:28 <letoh> 反了嗎?
+23:00:36 <CindyLinz> 這一組 3: 可以先出來啊
+23:00:56 <letoh> 應該說 ...:(3:(2:(1:[])))
+23:00:56 <CindyLinz> 還是你是說 ...:3:(2:(1:[])) ?
+23:00:59 <CindyLinz> 喔 :p
+23:01:01 <letoh> 嗯嗯
+23:01:35 <letoh> 以前沒有把 lazy 放進來一起想XD
+23:01:46 <letoh> lazy 好可怕XD
+23:02:40 <CindyLinz> 嘿嘿.. (誤)
+23:04:11 <letoh> 所以 map 基本上要用 foldr 來組合
+23:04:21 <letoh> sum 要用 foldl
+23:06:09 <CindyLinz> sum 這種對稱性的 foldr 也行啊
+23:06:28 <CindyLinz> 只是說.. foldl' (strict 版 foldl) 有時候比較快
+23:06:56 <CindyLinz> 用 foldr 可以實作出 foldl, 反相不行
+23:14:08 <suhorng> foldl' 那個超陰險的XD
+23:14:20 <suhorng> 用 foldl (+) 0 [1..1000000] 照樣會炸掉...
+23:14:23 <suhorng> 因為lazy
+23:14:35 <CindyLinz> 花生省魔術? # 陰險
+23:15:20 <suhorng> 剛開始學 haskell 完全沒注意到是不是 strict 的差...
+23:15:39 <suhorng> 原本以為 foldl 是 tail recursion 已經沒問題了, 結果沒用 foldl' 還是炸掉..
+23:16:02 <CindyLinz> 這樣陰險的是 foldl 啊? XD
+23:16:08 <suhorng> 是沒錯w
+23:16:26 <CindyLinz> foldl 扮黑臉, foldl' 扮白臉.. 後面的比較壞.. (咦)
+23:20:43 <letoh> http://www.haskell.org/haskellwiki/Foldl_as_foldr
+23:42:03 <suhorng> 話說 scheme 在 define/lambda 等到底會不會做 pattern matching (或類似)？
+23:42:32 <suhorng> 剛才看到 (lambda (x y z) !@!%) 跟 (lambda xs !@$@!) 兩種用法 好驚訝
+23:43:00 <suhorng> 讓人覺得前者像是在分別 match 參數 list 中的三個元素
+23:44:09 <suhorng> 還有 (lambda (x . y) &!*$@) 也像是在 match...
+23:44:39 <letoh> suhorng: 要自己
+23:44:46 <letoh> case 吧
+23:46:25 <letoh> suhorng: 如果要的話也許可以自己弄個 macro 之類的?
+23:47:03 <b4283> suhorng: 查了一下，剛好 r6rs 裡有寫到的三種你都說了
+23:47:10 <CindyLinz> suhorng: 要穩住, 不要接受惡魔的引誘!!
+23:47:19 <b4283> (lambda (x y z) ...)  takes 3
+23:47:33 <b4283> (lambda x ...) takes any number make them a list
+23:47:45 <letoh> x y z 是指接受三個參數吧?
+23:48:16 <b4283> (lambda (a b c <...> . z) ...) takes at least 3
+23:48:28 <b4283> (z is a list)
+23:48:47 <letoh> 原來 r6rs 可以這樣寫!
+23:49:17 <letoh> 那要怎麼 match 其他條件?
+23:49:52 <suhorng> 唔
+23:50:03 <b4283> letoh: 什麼其他的條件?
+23:50:13 <suhorng> CindyLinz: 為什麼是惡魔啊XD
+23:50:41 <suhorng> letoh: 難怪..我之前想的都是用 define-syntax 做
+23:53:11 <suhorng> chicken (one Scheme compiler) 也可以接受 (define ((delay-null)) '()) 這樣寫法耶XDDD
+23:54:46 <letoh> 嗯  r6rs 可以先拆掉...不過...

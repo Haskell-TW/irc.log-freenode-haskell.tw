@@ -1,0 +1,97 @@
+00:00:22 <CindyLinz> letoh: 有時候也會提醒你: 下面這一樣非常恐怖噁心, 心藏不夠強的話不要亂看 (逃)
+00:00:41 <letoh> *貼心*
+00:00:51 <MnO2> 地雷指南
+00:01:26 <CindyLinz> 我還因為這樣多學會了一個英文單字..
+00:01:29 <letoh> survival guide ? XD
+00:01:53 <CindyLinz> gory: a. 1. 血汙的 2. 令人毛髮悚然的, 殘酷的
+00:01:59 <CindyLinz> adj.
+00:03:35 <letoh> 這種字平常學不到... 為啥會在 perl doc 看到XD
+00:04:36 <CindyLinz> 它跟你說 perl compiler 對某類型的語法是怎麼 parse 的....
+00:05:14 <CindyLinz> man perlop  然後找 Gory details of parsing quoted constructs
+00:05:40 <letoh> 竟然是大標題
+00:07:31 <CindyLinz> 我好像大四的時候吧, 試圖看了一次, 看了一個下午, 快要吐血就放棄了.. XD
+00:08:03 <CindyLinz> 兩三年後有再看一次, 有讀完了... 不過現在又忘了 orz  不像 perl oo 可以直接講出來
+00:10:56 <letoh> 聽起來看這文件像是什麼自虐行為XD
+00:11:59 <CindyLinz> 那次是在設計某東西的語法, 想參考啊 @@"
+00:12:15 <CindyLinz> 這段好像是一次 parse 好幾層 quote 之類的東西?
+00:12:34 <CindyLinz> 然後 perl 的設計讓我們不用 2^n 個 \
+00:13:04 <CindyLinz> 像 php / java 寫 regex 的時候都要把 \ double 過 ^^|
+00:13:12 <letoh> 感覺好炫
+00:13:19 <CindyLinz> perl 更恐怖的是 s/被取代/這邊可以放程式碼/e
+00:13:36 <CindyLinz> 程式碼裡面還可以寫 regex @_@"
+00:13:44 <letoh> XD
+00:13:54 <letoh> 這件事完全不知道  以前就可以嗎?
+00:14:00 <CindyLinz> 這個以前就可以
+00:14:05 <CindyLinz> 尾巴用 e 結尾
+00:14:45 <CindyLinz> s/\w+/length $&/ge 會把連續的 alphanumeric 換成 長度
+00:15:09 <letoh> 難怪 perl6 一直難產 (誤
+00:15:09 <CindyLinz> 我在我們公司的程式裡面寫過 s/...../....../see
+00:15:38 <CindyLinz> ee 就是, eval 完以後的結果, 再當程式 eval 一次..
+00:15:44 <letoh> XD
+00:15:58 <CindyLinz> letoh: perl6 有個叫 rule 的東西, 好像是從 perl5 的 regex 再推廣
+00:16:09 <CindyLinz> 剛好湊成 see 很開心啊 XD
+00:17:44 <CindyLinz> 幹嘛重學啊 ^^|
+00:18:17 <letoh> 因為每次重新看的體會可能不同啊
+00:18:23 <CindyLinz> perl 一點一點都可以累積, 很好啊.. 又不像 Agda.. (左看又看)
+00:18:57 <MnO2> 有bee嗎？
+00:19:18 <CindyLinz> 沒印象有 b 作尾綴 o.o
+00:20:09 <MnO2> 那 ieee 呢
+00:20:15 <CindyLinz> 那可以
+00:20:39 <CindyLinz> i 是不分大小寫, e 三次就是... repeat 我剛剛說的那個動作三次 ^^|
+00:21:24 <letoh> Creating Custom RE Engines
+00:21:31 <letoh> 看到這個嚇到了
+00:22:07 <CindyLinz> 快離開!
+00:22:08 <MnO2> 這功能大概就是讓人在奇怪的地方有小小的滿足感xD
+00:25:56 <CindyLinz> 好幾個月前, 我用 perl 遞迴的 regex 寫 csv 的 parser, 把 csv 檔轉成 array of array.. 的確是蠻有樂趣的 XD
+00:32:59 <letoh> 「遞迴的 regex」   大概長什麼樣子呢?
+00:34:38 <CindyLinz> print <> =~ /^((\((?1)\))*)$/ ? "YES\n" : "NO\n"
+00:34:51 <CindyLinz> 判斷輸入是不是成對的括號
+00:35:11 <letoh> 好棒的東西!
+00:35:16 <CindyLinz> 例如說 () (()(())) 都是 YES
+00:35:31 <CindyLinz> 你 man perlre 會看到
+00:36:07 <letoh> 以前拿來寫寫 cgi，好像都沒想過需要那麼複雜的語法XD
+00:36:28 <CindyLinz> (?數字)
+00:37:10 <CindyLinz> perl 不一定在寫 cgi 呀 :p
+00:37:23 <CindyLinz> 不過... gmail 是不是也算是 cgi? XD
+00:37:38 <letoh> 算吧  其實到現在都是走同一條路啊
+00:37:56 <letoh> 感覺上只是包裝很多皮
+00:38:08 <CindyLinz> 那 latex online.. (咦)
+00:38:29 <letoh> 忘了 mimetex 怎麼做的了
+00:38:51 <letoh> http://www.forkosh.com/mimetex.html
+00:39:29 <letoh> 記得也是一隻 cgi
+00:39:43 <CindyLinz> 世界變了 XD
+00:40:08 <letoh> 沒記錯的話，這是小時候就有的東西XD
+00:40:28 <CindyLinz> 想到以前用 C 寫過 cgi... (遠目)
+22:14:21 <MnO2> http://brendaneich.github.com/Strange-Loop-2012/#/
+22:14:38 <MnO2> 今天這篇還蠻夯的
+22:18:13 <letoh> 好炫
+22:19:45 <MnO2> 某幾頁算是承認javascript是組語了嗎？ xD
+22:33:51 <b4283> 看起來 ES6 要新增 class 語法
+22:34:32 <letoh> 聽起來怎麼感覺像以前的 php
+22:36:04 <b4283> xml 化XD
+22:40:30 <b4283> shallow coroutine 不曉得是什麼意思
+22:48:13 <b4283> 整篇看下來很像廣告
+22:48:19 <b4283> 行銷的
+22:51:18 <b4283> http://www.playescapegoat.com/ 不錯玩 XD
+23:07:02 <suhorng> 想要請教一下，有人讀過 Real World Haskell 嗎？最近想要多看點 Haskell code 的例子(及一些小程式應用XD)
+23:07:24 <suhorng> 不知道這本書適不適合
+23:14:29 <MnO2> suhorng: 我不知道你之前看過哪些東西，不太能給意見。
+23:15:29 <MnO2> 不過如果是看完Learn you a haskell for GG之後就去看Real World Haskell，大概看完頭幾章之後就會遭遇比較抖的學習曲線
+23:16:10 <suhorng> 之前在看 Introduction to Functional Programming Using Haskell，中間跳過一些章節
+23:16:34 <MnO2> 一樣可以看，只是會稍微痛苦一點而已。
+23:17:04 <suhorng> Learn you a haskell 也只看到 ch 9, 沒有學過 Functors, Monad..
+23:17:07 <suhorng> 嗯! 好
+23:17:23 <MnO2> 不過以現今的教材而言，大概也沒有比較舒服的學習方式。
+23:18:07 <suhorng> 好 謝謝!
+23:18:21 <CindyLinz> Haskell 應該怎麼教呢 :/
+23:18:53 <letoh> 比較舒服的學習方式
+23:18:57 <MnO2> 其實Snoyman之前有發起一本Mezo Haskell
+23:19:09 <MnO2> 如果那本完成的話可以補足蠻大一塊的
+23:19:41 <MnO2> 但問題是好像提了也沒有動工，變成打嘴砲了
+23:21:32 <letoh> Mezo Haskell 的方向大概是?
+23:22:09 <MnO2> https://github.com/mezzohaskell/mezzohaskell
+23:22:14 <MnO2> 他有列大綱
+23:23:12 <letoh> https://github.com/mezzohaskell/mezzohaskell/blob/master/chapters/language/typeclasses.md
+23:23:24 <letoh> 每個目錄裡面都只有一個檔案
+23:52:17 <b4283> http://hildr.luminance.org/Mannux/Mannux.html 直接把 c# 編成 js 來 run.. 太威了吧
+23:58:35 <letoh> 編成組語有什麼奇怪的? XD

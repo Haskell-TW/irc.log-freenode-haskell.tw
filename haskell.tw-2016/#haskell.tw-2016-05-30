@@ -1,0 +1,11 @@
+01:53:41 <petercommand> 原來是拿到 indirection closure
+11:40:57 <CindyLinz> forward term?
+12:24:44 <petercommand> forward term?
+12:25:08 <petercommand> 反正沿著 indirection closure 一路找下去就找到那個 contructor closure 了
+12:27:05 <petercommand> 我猜是因為 tag bit 要更新的關係，所以 thunk 更新後，會被更新成 indirection closure，而 indirection closure 裡的 closure ptr 就能夠有 tag bit
+12:27:55 <petercommand> 然後 gc 的時候才會拿掉 indirection closure
+13:39:09 <CindyLinz> petercommand: 嗯嗯是我理解的 forward term... 我都會自己亂發明名詞來理解 XDD
+13:39:32 <CindyLinz> 我覺得這個設計是為了... 當 value 體積比 thunk 小的時候
+13:39:51 <CindyLinz> 這樣子可以省空間
+13:40:10 <CindyLinz> 而當 value 體積比 thunk 大的時候.. 這樣才能 allocate 較大的空間
+16:36:55 <petercommand> CindyLinz: 嗯嗯..

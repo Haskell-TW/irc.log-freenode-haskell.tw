@@ -1,0 +1,67 @@
+12:55:22 <mno2> 回想 zonble 那一篇把 design pattern 比喻做大絕招就覺得這個比喻好好用
+12:56:49 <mno2> 所以 PL 的設計是怎樣組合大絕招按鍵會讓你不會按錯招，為什麼前下後 A 是升龍拳之類的
+13:19:22 <b4283> 升龍拳應該是前下前斜下 P
+13:32:42 <darkx> 看來 APL 裡面充滿了大絕招 (誤
+13:54:25 <miaout17> 這對話充滿了Esoteric programming language的靈感啊…
+13:56:16 <miaout17> →↓↘P: Push the current value into the stack...之類的
+14:09:32 <darkx> lol
+18:51:48 <favonia> miaout17: 升龍拳為什麼是 push (認真)
+18:52:54 <godfat> 喔喔，應該是 pop?
+18:53:51 <b4283> 想像 list 垂直立在 ryu 的頭上 ...
+19:08:13 <miaout17> 升龍拳pop, 波動拳push好了
+19:09:00 <miaout17> 百裂掌 swap top 2 elements on the stack
+19:13:13 <letoh> 提到 push 第一個想到的是半月斬... 不過算了，不要太認真XD
+19:54:00 <miaout17> 認真就贏了 (?)
+22:37:05 <gansteed> name <- getLine 这里的name算是一个IO Action吗？
+22:41:44 <mno2> name 只是一個 binding， getLine ㄘㄞ˙ㄕˋ
+22:41:52 <mno2> 才是 IO action
+22:45:43 <suhorng> name <- getLine 應該(?)會被轉成右邊這個： getLine >>= (\name -> ....
+22:49:22 <gansteed> learnyouahaskell上说:要从一个 I/O action 中取出值，你必须要在另一个 I/O action 中将他用 <- 绑定给一个名字, 那这里另外一个 IO Action 在哪里呢?
+22:50:20 <gansteed> 是指 输入 是一个 IO action， getLine 就是另一个吗？
+22:51:22 <miaout17> 這段話好奇怪...翻譯有問題嗎？
+22:54:36 <miaout17> if we're taking data out of an I/O action, we can only take it out when we're inside another I/O action. 
+22:55:20 <gansteed> 英文是:Remember, to get the value out of an I/O action, you have to perform it inside another I/O action by binding it to a name with <-.
+22:55:52 <miaout17> 意思是如果readName = do name <- getLine 沒縮排請見諒
+22:56:04 <gansteed> 其实我严重怀疑中文翻译的作者是用Google翻译的 :(
+22:56:21 <miaout17> 那readName就要是 io Action
+22:56:40 <miaout17> 注意inside
+22:56:51 <letoh> 中文是看 github 上的那一份嗎?，應該已經修不少了XD
+22:57:27 <gansteed> 哦， 这样的意思啊 :)
+22:58:07 <gansteed> <letoh> 中文是这一份 http://learnyouahaskell-zh-tw.csie.org/ 不知到你说得是不是这一份~
+22:58:10 <miaout17> 我用詞不知道有沒有誤
+22:58:28 <miaout17> 好久沒碰Haskell
+22:58:48 <gansteed> miaout17, 那么在main中， main也是一个I/O action吗？
+23:00:42 <miaout17> Yes. I think so
+23:02:14 <gansteed> :p
+23:05:21 <suhorng> 有點小差異, do name <- getLine 不太可行, 因為他最後被轉成的 getLine >>= (\name -> ...) 還沒結束
+23:07:42 <suhorng> do 的每一行之間都是用 (>>=) 或 (>>) 兩個函式去串起來的. 當我們寫成
+23:07:43 <suhorng> do  a <- actionA
+23:07:43 <suhorng>      b <- actionB
+23:07:43 <suhorng>      ....
+23:07:43 <suhorng> 時
+23:08:13 <suhorng> a <-
+23:08:14 <suhorng> b <- actionB
+23:08:14 <suhorng>        ....
+23:08:14 <suhorng> 這部份就是他說的 "another I/O action"
+23:12:15 <gansteed> 这一部分都是？
+23:13:14 <suhorng> 有點像是把「actionA」刪掉時剩下的部份
+23:13:28 <suhorng> 剩下一個「a <- 」還有接下來的 b <- actionB 等等等
+23:14:07 <suhorng> 這可能看起來很怪, 不過「a <- actionA」不算是一整個東西，「actionA」本身就是一個 I/O action 了
+23:14:18 <suhorng> a <- 是搭配剩下來的 I/O action 的 binding
+23:16:10 <gansteed> 就是说除actionA外的这些都是相对于actionA的another I/O Action， 同样 除 ActionB外的 也都是ActionB的 another I/O action吗？
+23:17:13 <suhorng> 對的
+23:19:03 <suhorng> 所以實際上了, actionA之外的那些是被弄成了一個 function to another I/O action, 然後我們把 actionA 跟這個 function 用電線接在一起
+23:19:34 <suhorng> 例如我可以寫 do { s <- getLine; putStrLn s }
+23:20:09 <suhorng> 他就是由這兩個東西組成： getLine （第一個 I/O action）和 \s -> putStrLn s （function to another I/O action）
+23:20:32 <suhorng> 這是為什麼他用詞說「by binding it to a name」
+23:23:54 <gansteed> :p 那你所说的“电线” 可以理解成s <- 加上 \s -> 吗?
+23:24:06 <gansteed> 或者说就是s?
+23:24:51 <suhorng> 噢噢, 我說得電線, 是把這兩個東西接起來的函數
+23:25:03 <suhorng> 另有其人：「(>>=)」
+23:25:18 <suhorng> 寫完整點，就是 getLine >>= (\s -> putStrLn s)
+23:25:48 <gansteed> 哦， 这样子的啊~
+23:26:08 <suhorng> 嗯嗯
+23:40:42 <suhorng> https://www.hackerrank.com/contests/lambda-calculi-apr14 完全忘了在這邊貼，已經結束了…
+23:44:36 <hashcat> haskell感覺就是在拼積木
+23:44:54 <hashcat> 非函數式的沒這感受
+23:56:57 <hashcat> Idris好像還是沒有多核心的平行化, 持續關注

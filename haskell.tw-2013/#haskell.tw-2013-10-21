@@ -1,0 +1,297 @@
+14:55:58 <mno2> https://www.youtube.com/watch?v=gKWNjFagR9k
+14:56:15 <mno2> 影片來了 : CUFP 2013: Julien Verlaguet, Facebook: Analyzing PHP statically
+14:56:43 <CindyLinz> (Y)
+14:58:17 <b4283> (Y) 是向上的大姆指嗎
+14:58:36 <CindyLinz> 對啊
+14:58:40 <CindyLinz> MSN / Facebook 的符號
+15:22:29 <CindyLinz> 覺得 Haskell 裡面用 where 定義東西, 我常常會造成 syntax error @@"
+15:22:39 <CindyLinz> 好像 where 能適用的地方比 let..in 少很多
+15:22:49 <CindyLinz> 像是塞在一個 case..of 的 branch 裡面就不行 @@"
+15:23:19 <CindyLinz> 用 where 是想說可以讓主線程式不用多一層縮排, 用 let..in 的話就會多一層
+15:36:58 <CindyLinz> 用 ghc 7.6 的 multi-way-if 以後, 就可以不再用 else if 了耶~ ^^
+17:24:14 <CindyLinz> 娃~ multi way if 的 syntax 有 ambiguity...
+17:24:59 <CindyLinz> if | cond1 -> expr1 | cond2 -> if | cond3 -> expr3 | cond4 -> expr4
+17:25:13 <CindyLinz> cond4 會歸屬後面的 if
+17:30:16 <CindyLinz> 加括號好醜, 還是用 case () of { _| cond1 -> expr1 ; _| cond2 -> expr2 } 好了
+21:00:48 <hashcat> https://github.com/GaloisInc/HaLVM
+21:02:48 <hashcat> 從ghc 6沒動靜許久突然有了
+21:09:07 <Yu_lin> running on xen?
+21:10:53 <hashcat> 嗯嗯
+21:11:16 <hashcat> 應該是可以做成雲端
+21:11:27 <hashcat> 或者說他本來就是打算作雲端
+21:12:11 <CindyLinz> birst memory 要夠大.. (咦)
+21:12:38 <CindyLinz> 奇怪沒這個字 XD
+21:12:38 <Yu_lin> http://www.slideshare.net/xen_com_mgr/the-halvm-a-simple-platform-for-simple-platforms 只看這張圖會讓我覺得這是在寫一個作業系統吧XD
+21:12:58 <CindyLinz> 啊.. burst :p
+21:14:15 <mno2> Yu_lin: 其實我覺得寫 OS 跟寫 compiler 其實是同一件事耶 xD
+21:14:44 <letoh> 不太懂
+21:14:48 <Guest84027> mno2: why? XD
+21:14:50 <Yu_lin> mno2：我一直以為只有寫 forth 時才是同一件事情XD
+21:15:34 <Guest84027> 變guest了 XD
+21:16:40 <mno2> 1. runtime service: 其實看一些 runtime service 跟 OS 很像啊，ghc runtime 要調度 thread,  rust 也有 scheduler
+21:17:00 <CindyLinz> OS 是只剩下 runtime 的 compiler?
+21:17:01 <mno2> 不過 service 的概念比較是 micro kernel 的感覺
+21:17:11 <Yu_lin> gc 就等於 OS 的 memery manager 這樣嗎？XD
+21:17:20 <letoh> 有點怪  如果只講 runtime 的話，還算 compiler 嗎?
+21:17:20 <mno2> 可以這麼說
+21:17:46 <mno2> 要看你怎麼定義啦，我的認定是包含在裡面
+21:18:15 <letoh> compile 完以後，compiler 的工作就算結束了吧?
+21:18:47 <letoh> runtime service 是 runtime 的事，應該沒有 compile 介入?  不過 dynamic compiler 不曉得該怎麼算XD
+21:18:59 <hashcat> 來裝Xen
+21:19:01 <CindyLinz> letoh: 只是有些 compiler 的實作是連 runtime 也考慮進去的, 所以說寫 compiler 也是在設計 runtime, 不過不一定是說 compiler === runtime (我想是這樣?)
+21:19:51 <letoh> 我覺得比較像是語言的設計就會需要那些 runtime ?
+21:19:57 <hashcat> compiler -> lexer + parser + code generator
+21:20:07 <hashcat> 貌似linker並不算在裡面
+21:20:19 <mno2> 因為如果要把 python, ruby 包含進來的話，好像就分不開 runtime，或許我應該用「設計語言」詞彙會比較精準？
+21:20:24 <letoh> 我是覺得翻譯的工作做完就算結束了
+21:20:49 <hashcat> Python, Ruby沒有Compiler的概念吧
+21:21:03 <letoh> python, ruby 都是說 interpreter 吧?
+21:21:13 <mno2> 還是要翻譯成他們 VM 的 bytecode 啊
+21:21:15 <letoh> 好像沒聽說有人用 compiler 這種說法
+21:21:50 <letoh> python -c 可以看成 compiler ?
+21:22:03 <hashcat> Nuitka算是translator
+21:22:08 <letoh> 不是 -c  忘了是哪個XD
+21:22:19 <mno2> 那可能我不應該用 compiler 這個詞吧，不過我也不知道該怎麼形容
+21:22:33 <CindyLinz> google translate 可以算是一個 compiler 嗎?
+21:22:45 <hashcat> Interpretor是走一片執行一片
+21:23:00 <mno2> 總之我覺得設計語言的 runtime，還有操作方式。都跟設計 OS 很像
+21:23:03 <letoh> compiler 跟 translator 的分界在哪?
+21:23:10 <CindyLinz> mno2: 有感覺~
+21:23:21 <hashcat> compiler是全部轉成機器碼, 跟執行無關
+21:23:29 <letoh> mno2: 這說法我也同意
+21:23:45 <letoh> 不過 compiler 的部份我覺得很難接受XD
+21:23:53 <mno2> 那就是我用詞錯誤
+21:24:04 <hashcat> 出去溜躂
+21:24:21 <mno2> 我真正的意思是前面那句
+21:24:32 <letoh> 嗯，瞭解
+21:24:35 <petercommand> google translate這種應該算interpreter?
+21:25:10 <letoh> 像 gcc 其實也是把很多 stage 整合在一起，所以不能只看前端工具?
+21:26:00 <letoh> python/ruby 的話，當然翻譯成 bytecode 那一段我覺得是 compiler 的工作，但後面 interpreter/runtime 在執行的部份就很難說了
+21:26:39 <mno2> petercommand: 假如說，今天 AI 可以完全成立的話， google translate 是可以算成 interpreter 的啊。那時候自然語言的知識表達可能是完全自由的
+21:26:58 <petercommand> 嗯
+21:27:00 <CindyLinz> petercommand: 我只是來亂的 可以不要理我 XD
+21:28:05 <mno2> 那時候自然語言就是 programming language
+21:28:17 <mno2> 甚至任何手勢，眼神
+21:29:12 <mno2> 我認為 CS 整個領域就是符號操作與實作的 trade-off
+21:29:18 <CindyLinz> 那可能不一定是好事... orz
+21:29:24 <mno2> 所有 CS 的知識都是在解決這個問題
+21:29:28 <letoh> 萬一有 bug ...
+21:29:36 <CindyLinz> 魔鬼終結者的時代就來了...
+21:29:51 <mno2> Machine Learning, AI. 都是為了達到自然語言符號可以拿來使用的終極目標
+21:31:31 <mno2> 現在的實作受限於某些條件，所以現今的 PL 可能要受限於某種典範。
+21:39:43 <hashcat> 程序語言這種形式語言跟自然語言都會一直有區別
+21:41:15 <hashcat> 自然語言隨聲符跟圖像產生, 依照時間跟文化的交流變化
+21:41:36 <hashcat> 人工語言是先嚴格定義才使用
+21:42:33 <hashcat> 數學符號就是從自然語言分離的
+21:42:47 <mno2> 用形式語言去 model 自然語言的研究也是有人做的 :p    我印象中 ccshan 的研究就是這方面
+21:43:11 <mno2> 結果據說很少人看得懂他的東西 xD
+21:43:17 <hashcat> 應該是沒有放棄人工語言把數學概念塞回自然語言的趨勢
+21:44:00 <hashcat> 啥嚜東西
+21:44:33 <hashcat> 自然語言沒多久就變成火星文去了
+21:44:43 <petercommand> 在自然語言最大的問題就是很多時候並無法清楚呈現自己的需求
+21:45:55 <hashcat> 我阿公就聽不懂我在講什麼了
+21:46:02 <petercommand> ambiguous
+21:46:51 <hashcat> 形式語言規則講究極簡跟強健
+21:47:23 <hashcat> 反正就是自然語言當程序語言這種事難想像
+21:48:36 <hashcat> 貌似剛有人問translator跟compiler啥差別
+21:49:00 <mno2> 我認為糢糊在 AI 完全成立的情況下不是很重要。因為系統會回饋問你，你的意思是什麼意思。就像跟老闆下命令給屬下一樣，還是會去執行。
+21:49:04 <hashcat> translator跑出的東西處理器看不懂
+21:49:25 <hashcat> 要再用別的compiler
+21:49:45 <letoh> 為什麼不能把 tanslation target 就設定為處理器呢?
+21:49:58 <hashcat> 自然語言是地獄, 形式語言是天堂
+21:50:16 <hashcat> 是天堂與地獄的差距
+21:50:32 <favonia> hashcat: 有人造自然語言 (逃)
+21:50:41 <hashcat> 那就變成compiler了吧
+21:50:50 <mno2> klingon?
+21:51:04 <letoh> 所以其實兩個動作是一樣的  只是 target 不一樣?
+21:51:20 <suhorng> 推人造自然語言 XDD
+21:51:24 <hashcat> 是code generator換掉了
+21:51:48 <Yu_lin> 以前的人造自然語言 -> 日本語
+21:51:52 <hashcat> Pypy的RPython就是產生其他語言的
+21:52:08 <hashcat> 人造自然語言就是人工地獄
+21:52:11 <letoh> 那是因為有 translator 啊
+21:52:19 <letoh> 那是因為 rpython 有 translator 啊
+21:53:03 <hashcat> 這樣區分, translator沒有compiler就沒用
+21:53:45 <favonia> 我目前看過最誇張的還是 lojban
+21:54:23 <hashcat> 人工地獄比較沒那麼水深火熱
+21:54:29 <petercommand> hashcat: 我記得像翻人造語言的話，google translate的品質就極佳(ex: esperanto)
+21:55:52 <hashcat> 人造語言互翻?
+21:57:39 <letoh> 看了 wikipedia 上的介紹說是文化中立  語言有辦法做到這樣嗎?
+21:57:50 <petercommand> 翻成自然語言啦XD
+21:57:57 <letoh> 我以為語言都是跟著文化發展的
+21:59:27 <petercommand> letoh: 做的時候是文化中立，有人用之後就不是啦
+21:59:56 <petercommand> "It is *designed* to be as culturally neutral as possible"
+22:02:05 <b4283> 在說 Ido 嗎
+22:02:34 <petercommand> Ido?
+22:03:10 <b4283> 類似世界語的人造語言
+22:03:55 <petercommand> 上那句是lojban的wikipedia頁寫的
+22:04:47 <b4283> oh
+22:05:05 <petercommand> s/上/上面
+22:13:10 <hashcat> Haskell貌似還是沒發展SPMD的跡象
+22:17:44 <CindyLinz> 這個? https://github.com/PatrickMaier/HdpH
+22:18:00 <CindyLinz> Haskell Distributed Parallel Haskell
+22:18:22 <hashcat> 那個是monadic
+22:18:48 <hashcat> 在想的是不用monadic的
+22:19:10 <hashcat> 換掉runtime的那種平行化
+22:19:57 <hashcat> http://www.mathematik.uni-marburg.de/~eden/
+22:20:13 <hashcat> 就裝不上去
+22:20:30 <hashcat> 問了沒人鳥
+22:21:04 <CindyLinz> XD
+22:21:11 <hashcat> 還是關注x10好了
+22:21:24 <hashcat> 這個連dependent type都用了
+22:22:27 <hashcat> http://x10-lang.org/
+22:23:19 <hashcat> 還能在gpu跟cpu混合的集群上跑
+22:25:06 <hashcat> 也一直沒有發表完就垂死的跡象
+22:32:47 <CindyLinz> context free grammar 好像不能認 fibonacci 長度的字串?
+22:35:58 <suhorng> 不能 (by pumping lemma for CFL)
+22:36:19 <CindyLinz> hmm..
+22:36:31 <suhorng> http://en.wikipedia.org/wiki/Pumping_lemma_for_context-free_languages 從第三點可以直接看到
+22:36:52 <CindyLinz> perl regex 如果不去動用塞程式碼進去的功能, 好像還是被 context free language 限制住..
+22:37:19 <CindyLinz> 不過它可以寫得很像不能傳參數的 scheme 喔 XD
+22:37:22 <suhorng> 我記得是這個是直接用deriving tree + 鴿洞去證 @@
+22:37:23 <suhorng> XDDD
+22:38:20 <Yu_lin> 聽起來真親切XD
+22:44:12 <CindyLinz> https://gist.github.com/CindyLinz/62de8f8f030cc180223f
+22:44:33 <CindyLinz> 找不到方法傳參數, 真是太可惜了 :|
+22:45:16 <hashcat> perl真難看
+22:46:29 <CindyLinz> hashcat: 也許你比較喜歡把 (?&ab) 改寫成 (?P>ab)
+22:47:25 <hashcat> 我都看不懂
+22:47:31 <hashcat> 只覺得很難看
+22:47:41 <CindyLinz> 那就會像 python 了 XD
+22:48:11 <hashcat> perl是在做啥的
+22:48:25 <CindyLinz> 然後把 (?<a> a+) 改成 (?P<a> a+)
+22:49:09 <CindyLinz> 看你想做啥~
+22:50:00 <CindyLinz> 沒什麼特定領域, general purpose, 強項是字串處理
+22:51:29 <hashcat> 看下數值跟統計怎樣
+22:55:48 <hashcat> 貌似沒有
+22:56:35 <hashcat> 跟這語言無緣
+23:00:01 <CindyLinz> 可以拿 lambda bot 的 @pl 功能當成程式碼混淆器來用嗎..... = 3=
+23:01:02 <suhorng> @pl \a b c d e f g -> g a c e d f b
+23:01:02 <lambdabot> flip . ((flip . ((flip . ((flip . (flip .) . flip) .)) .) . flip . (flip .) . flip) .) . flip . flip id
+23:04:09 <hashcat> 沒用吧
+23:04:52 <hashcat> haskell看型別就可以猜到是在做啥的
+23:05:06 <CindyLinz> @pl cfold' f z x:xs = f x z (\y -> cfold' f y xs)
+23:05:09 <lambdabot> cfold' = id (fix (flip (flip . (flip .) . ((ap .) .) . flip (flip . (flip .) . (((.) .) .) . ap (flip . (flip .) . (((.) .) .) . flip) . (flip .)) head) tail))
+23:05:09 <lambdabot> optimization suspended, use @pl-resume to continue.
+23:05:25 <suhorng> @@ optimization suspended XDDDDDDD
+23:05:25 <lambdabot>  optimization suspended XDDDDDDD
+23:05:41 <CindyLinz> @pl-resume
+23:05:48 <lambdabot> cfold' = id (fix (flip (flip . (flip .) . ((ap .) .) . flip (flip . (flip .) . (((.) .) .) . ap (flip . (flip .) . (((.) .) .) . flip) . (flip .)) head) tail))
+23:05:48 <lambdabot> optimization suspended, use @pl-resume to continue.
+23:05:52 <suhorng> CindyLinz: 好像弄錯了欸
+23:06:04 <suhorng> 噢沒事我看錯
+23:06:16 <CindyLinz> 不知道是不是 @pl 遇到 QQ 了.. XDD
+23:06:18 <CindyLinz> @pl-resume
+23:06:31 <lambdabot> cfold' = id (fix (flip (flip . (flip .) . ((ap .) .) . flip (flip . (flip .) . (((.) .) .) . ap (flip . (flip .) . (((.) .) .) . flip) . (flip .)) head) tail))
+23:06:31 <lambdabot> optimization suspended, use @pl-resume to continue.
+23:06:45 <hashcat> 怎u;4混淆型別都一樣
+23:06:47 <CindyLinz> 都一樣嘛 :p  我去 yet another haskell tutorial 抄 cfold.. XD
+23:07:09 <CindyLinz> @t cfold' f z x:xs = f x z (\y -> cfold' f y xs)
+23:07:09 <lambdabot> Maybe you meant: tell thank you thanks thesaurus thx tic-tac-toe ticker time todo todo-add todo-delete type v @ ? .
+23:07:18 <CindyLinz> 這啥情況 XD
+23:07:23 <suhorng> 啥鬼 XDDD
+23:08:16 <suhorng> @tell thank you
+23:08:16 <lambdabot> Consider it noted.
+23:08:20 <CindyLinz> @type cfold' f z x:xs = f x z (\y -> cfold' f y xs)
+23:08:21 <lambdabot> parse error on input `='
+23:08:36 <CindyLinz> @type id (fix (flip (flip . (flip .) . ((ap .) .) . flip (flip . (flip .) . (((.) .) .) . ap (flip . (flip .) . (((.) .) .) . flip) .  (flip .)) head) tail))
+23:08:37 <suhorng> @pl cfold' f z (x:xs) = f x z (\y -> cfold' f y xs)
+23:08:38 <lambdabot> (b -> a -> (a -> c) -> c) -> a -> [b] -> c
+23:08:41 <lambdabot> cfold' = id (fix (flip (flip . (flip .) . ((ap .) .) . flip (flip . (flip .) . (((.) .) .) . ap (flip . (flip .) . (((.) .) .) . flip) . (flip .)) head) tail))
+23:08:41 <lambdabot> optimization suspended, use @pl-resume to continue.
+23:09:02 <CindyLinz> 對耶我剛剛漏括號
+23:09:39 <CindyLinz> @type id (fix (flip (flip . (flip .) . ((ap .) .) . flip (flip . (flip .) . (((.) .) .) . ap (flip . (flip .) . (((.) .) .) . flip) . (flip .)) head) tail))
+23:09:40 <lambdabot> (b -> a -> (a -> c) -> c) -> a -> [b] -> c
+23:10:39 <CindyLinz> @unpl id (fix (flip (flip . (flip .) . ((ap .) .) . flip (flip . (flip .) . (((.) .) .) . ap (flip . (flip .) . (((.) .) .) . flip) . (flip .)) head) tail))
+23:10:40 <lambdabot> (fix (\ d g j h -> (tail >>= \ bf -> return ((\ z -> return ((\ cf ad ae ah al -> cf ah ae (ad al)) g ((\ dp at au -> d dp au at) g)) g j (head z)) h bf)) h))
+23:10:51 <CindyLinz> 這個 unpl.... orz
+23:11:14 <suhorng> 要用 fix 來寫果然不簡單
+23:15:38 <CindyLinz> @pl (fix (\ d g j h -> (tail >>= \ bf -> return ((\ z -> return ((\ cf ad ae ah al -> cf ah ae (ad al)) g ((\ dp at au -> d dp au at) g)) g j (head z)) h bf)) h))
+23:15:41 <lambdabot> fix (flip (flip . (flip .) . ((ap .) .) . ((((tail >>=) .) .) .) . ((((return .) .) .) .) . flip (flip . (flip .) . (((.) .) .) . flip (ap . (return .) . ap (flip . (flip .) . (((.) .) .) . flip) . (
+23:15:42 <lambdabot> flip .)) id) head) id)
+23:15:42 <lambdabot> optimization suspended, use @pl-resume to continue.
+23:15:53 <CindyLinz> 會越來越大耶 :p
+23:16:21 <CindyLinz> (其實是看到隔壁 #haskell 在玩, 忍不住也玩起來 :p)
+23:20:08 <CindyLinz> 今天晚上多讀了一點 perl 的 regex.. 讓我覺得好像弄一個完全只由這種 regex-like 字串處理作成的 turing complete language 好像也很好玩 :p
+23:23:47 <hashcat> 一直沒法理解fix是作啥的
+23:24:04 <hashcat> >  (fix $ ap $ return . (1:)) [1,2,3,4]
+23:24:05 <lambdabot>   [1,1,2,3,4]
+23:24:06 <suhorng> hashcat: 那 Y combinator 呢？無論哪一版
+23:24:17 <suhorng> 喔 不太一樣XD
+23:24:26 <hashcat> y能理解
+23:25:08 <suhorng> fix :: (a -> a) -> a
+23:25:08 <suhorng> fix f = f (fix f) --最普通就跟 Y 一樣
+23:25:14 <CindyLinz> hashcat: 你是說功用嗎? 還是它為什麼會動?
+23:25:45 <suhorng> 對喔XD
+23:25:53 <hashcat> 不知道是做啥的
+23:26:30 <CindyLinz> 我覺得用它是讓我們比較專注在 iteration 之間的變化
+23:26:48 <suhorng> 不是很確定 可能有些用法open recursion可以把不同東西接起來, fix最後收回來?
+23:28:02 <hashcat> > fix (1:)
+23:28:03 <lambdabot>   [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,...
+23:28:21 <suhorng> 直接找到不動點
+23:28:48 <hashcat> > fix id
+23:28:55 <lambdabot>   mueval-core: Time limit exceeded
+23:29:01 <CindyLinz> 不過平常要應用的話, 找不動點真的不知道能幹嘛 XD
+23:29:14 <CindyLinz> 就像那個 r.gz... XD
+23:29:34 <hashcat> > fix (0+)
+23:29:41 <lambdabot>   mueval-core: Time limit exceeded
+23:29:47 <hashcat> 根本找不到
+23:31:22 <hashcat> > fix (\rec n -> if n == 0 then 1 else n * rec (n-1)) 10
+23:31:23 <lambdabot>   3628800
+23:31:43 <hashcat> 貌似勉強有點感覺了
+23:31:46 <hashcat> 找到那個
+23:31:55 <CindyLinz> ....不動點
+23:32:09 <suhorng> 但是要說
+23:32:09 <suhorng> > fix (1 : )
+23:32:09 <suhorng> 有「找到」也是很難說阿 XD
+23:32:10 <lambdabot>   [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,...
+23:32:32 <hashcat> 哦~原來貌似是這樣
+23:32:33 <CindyLinz> 反正我們也宣稱找到根號2了..ww
+23:32:47 <suhorng> data Nat = Zero | Suc Nat 比對 fix (1+) 跟 fix Suc
+23:32:59 <hashcat> ((a->b)->(a->b)) -> a -> b
+23:32:59 <suhorng> 這個倒是會變 Suc (Suc (Suc (Suc (Suc ....
+23:33:09 <hashcat> 這種樣子的貌似有作用
+23:33:41 <hashcat> 是泛函的不動點!
+23:33:58 <hashcat> 函數的不動點沒作用
+23:35:16 <hashcat> 終於知道除了把記憶體弄爆的用途了
+23:35:28 <suhorng> 當成 stream 也有可能？ constant stream (1:)
+23:35:30 <suhorng> xDD
+23:35:48 <hashcat> @type (1:)
+23:35:49 <lambdabot> Num a => [a] -> [a]
+23:36:46 <hashcat> @type fix (1:)
+23:36:47 <lambdabot> Num a => [a]
+23:37:20 <hashcat> 好像又不全是
+23:38:03 <hashcat> 其實 (1:) 也可以當作某方面把記憶體弄爆的東西
+23:38:14 <hashcat> 只是他沒作完
+23:39:54 <hashcat> > fix (\rec n -> (n: rec (n+1))) 1
+23:39:55 <lambdabot>   [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28...
+23:40:44 <hashcat> 感覺對 [a] 這種狀況可以使用會有合理的解釋
+23:41:54 <suhorng> 沒作完 : 達不到的無窮 XD
+23:42:04 <hashcat> 當作是惰性計算的超能力好了
+23:42:40 <suhorng> 只能乖乖逼近, 1:_|_,　1:1:_|_,　1:1:1:_|_, ...
+23:43:10 <hashcat> > fix (\rec n -> (n: rec (1/n))) 100.0
+23:43:11 <lambdabot>   [100.0,1.0e-2,100.0,1.0e-2,100.0,1.0e-2,100.0,1.0e-2,100.0,1.0e-2,100.0,1.0...
+23:44:25 <hashcat> > fix (\rec n -> (n: rec (1/(n+1)))) 1.0
+23:44:26 <lambdabot>   [1.0,0.5,0.6666666666666666,0.6000000000000001,0.625,0.6153846153846154,0.6...
+23:45:06 <hashcat> > fix (\rec n -> (1/n: rec (1/n))) 1.0
+23:45:08 <lambdabot>   [1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1....
+23:45:22 <hashcat> > fix (\rec n -> (1/n: rec (1/(n+1)))) 1.0
+23:45:23 <lambdabot>   [1.0,2.0,1.5,1.6666666666666665,1.6,1.625,1.6153846153846154,1.619047619047...
+23:47:34 <suhorng> > fix (\ xs -> 0 : map (1+) xs)
+23:47:35 <lambdabot>   [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,...
+23:47:37 <hashcat> > fix (\rec n -> (1/n: rec (n+1)))) 1.0
+23:47:39 <lambdabot>   <hint>:1:33: parse error on input `)'
+23:47:51 <hashcat> > fix (\rec n -> (1/n: rec (n+1))) 1.0
+23:47:52 <lambdabot>   [1.0,0.5,0.3333333333333333,0.25,0.2,0.16666666666666666,0.1428571428571428...
+23:48:51 <hashcat> 不錯用
+23:49:19 <hashcat> 不用吃到自己就有迭代
+23:50:06 <petercommand> 這個bot的time limit是多久呀
+23:51:31 <hashcat> 是遞歸, 貌似都可以
+23:55:27 <hashcat> ＠help
+23:55:40 <hashcat> @?
+23:56:55 <petercommand> @tell help
+23:56:55 <lambdabot> What should I tell help?
+23:57:05 <petercommand> @tell ?
+23:57:06 <lambdabot> What should I tell ??
+23:58:25 <hashcat> 找不到欸
+23:58:45 <hashcat> 想說應該是有預設值在原始碼

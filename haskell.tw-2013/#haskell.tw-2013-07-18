@@ -1,0 +1,50 @@
+00:48:04 <favonia> hashcat: https://www.youtube.com/watch?v=iOGmwA5yBn0
+00:49:46 <hashcat> favonia: 還有新的阿
+00:55:03 <hashcat> 一看是很久以前的
+02:33:12 <CindyLinz> 如果想把各 commit 之間的 diff (patch) 整理好的話.. 應該是 darcs >> git 的理由
+02:34:27 <CindyLinz> 可是 darcs 不能 inplace 切換不同的 branch (repository), 這在我實際面對的環境來說非常糟糕
+02:34:36 <CindyLinz> 因為 code base 很大
+02:35:24 <CindyLinz> 各開發中的 branch (repository) 之間的差異很小. 但是要為每一個 branch (repository) 複製一次所有檔案是不切實際的
+10:58:17 <Yu-Lin> 總算找到 py3 中可以善用 list 又符合我要求的做法了
+11:12:33 <favonia> Yu-Lin: 你想要的做法是？
+11:15:32 <_13h> Yu-Lin: 你有興趣掛一下 python 的頻道嗎? XD
+11:16:10 <Yu-Lin> XD
+11:16:45 <Yu-Lin> python.tw?
+11:17:19 <_13h> 嗯嗯
+16:39:14 <Yu-Lin> 話說我現在才發現，python.tw 沒有對話紀錄的存檔......
+17:08:36 <Jhe__> 一直都沒有＠＠
+17:08:46 <Jhe__> 那個 log 是怎麼弄的＠＠？
+17:09:31 <CindyLinz> 我把我掛在頻道收到的對話都存檔起來.... o.o
+17:09:42 <CindyLinz> 我是說這一個 channel 的
+17:16:35 <hashcat> 就是說你沒收到的訊息就不見拉?
+17:16:41 <hashcat> 我還以為有bot
+17:19:24 <CindyLinz> 對 沒收到就不見了
+17:19:35 <CindyLinz> 但.. 它的確也是 bot 啊 ^^|
+17:20:01 <CindyLinz> 那隻 lambdabot 不在線上的時候, 也是什麼都不見了呀
+17:22:03 <hashcat> 人機一體
+17:24:30 <CindyLinz> 這 channel 啊, 當初考慮到人數不太多, 話題想一起討論的人可能時間錯開了, 而且很多人不會 24hr 掛在線上. 所以就決定把 log 留下來公開放, 這樣上線的時候可以去 check 一下有沒有出現過想要接著討論的話題.
+17:24:50 <CindyLinz> XD
+17:37:53 <letoh> Yu-Lin: 我記得那邊很久以前也有 log bot，但後來沒人維護就停了@_@
+19:22:40 <Yu-Lin> 回家囉
+19:23:10 <Yu-Lin> 今天被說 code 寫的太深了，別人不好維護
+19:23:15 <Yu-Lin> gg 了（痛哭
+19:58:34 <hashcat> 這是種稱讚吧
+20:33:54 <suhorng> http://www.yinwang.org/blog-cn/2013/07/17/phd-grind/
+21:09:10 <MnO2> http://www.yinwang.org/blog-cn/2013/07/17/phd-grind/
+21:13:14 <b4283> http://www.yinwang.org/blog-cn/2013/07/17/phd-grind/
+21:13:54 <suhorng> 什麼魔術ww
+21:14:29 <b4283> 大家都貼害我都想貼一下
+21:14:44 <letoh> 沒跟到orz
+21:15:33 <hashcat> 那到底啥阿
+21:15:48 <hashcat> 不知道他在講啥
+21:16:11 <hashcat> 看起來像機器產生文 = =
+21:22:23 <suhorng> 不懂
+21:23:22 <letoh> 原來是 IncPy!!
+21:26:18 <favonia> http://www.yinwang.org/blog-cn/2013/07/17/phd-grind/
+21:26:28 <favonia> 奇怪好像什麼效果都沒有啊
+21:26:38 <letoh> XDXD
+21:26:53 <favonia> logbot__: 為什麼沒有彩蛋
+21:28:15 <MnO2> 寫個 logbot plugin 自動轉貼 yinwang 好了 (羞愧）
+21:29:37 <suhorng> 乾脆備份(誤)　雖然說不定 commit log 還看得到...
+21:30:21 <letoh> 乾脆請他在 github 上註冊一下這個頻道的通知 (誤
+23:20:41 <miaout17> 好像還是第一次看到王垠抱怨IU?

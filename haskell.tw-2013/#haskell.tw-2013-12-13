@@ -1,0 +1,34 @@
+00:03:25 <CindyLinz> mno2: pgrest 可以怎樣作類似 session 或 authentication 的功能啊?
+00:04:23 <mno2> CindyLinz: authentication 就用 not exists 之類的 query 先查一遍 auth table 再說吧
+00:04:47 <mno2> CindyLinz: session 投影片都沒提，有實作嗎？
+00:07:00 <mno2> 不過我也不是很確定一般的 session 實作方式是什麼就是
+00:07:18 <CindyLinz> 我想的只要能額外 pass 一個 token, 剩下就可以自己做了
+00:07:59 <mno2> 那理論上也是類似吧，就預定好一個 function, check session table
+00:08:15 <CindyLinz> 但是如果它沒有額外開什麼門路的話, 就變成全部都要做成 view, 多一個 field 放 token.. orz
+00:08:22 <mno2> 只是這一版好像還沒
+00:08:59 <mno2> CindyLinz:  的確是..
+00:09:01 <CindyLinz> 那就會有很多 boilerplate codes.. 那, 手動自己包一層自動生成的 cgi 程式好像比 pgrest 還方便了 @@"
+00:09:33 <mno2> CindyLinz: 所以不適合太複雜的 use case 吧 xD
+00:10:08 <CindyLinz> 只是多 token 就算太複雜噢? orz
+00:11:02 <mno2> CindyLinz: token 我不知道耶，也許有奧妙的方式吧
+00:13:34 <mno2> CindyLinz: 不過你碰過的 use case 哪些是 rest 情況還需要 session 啊？
+00:13:58 <CindyLinz> mno2: facebook 的 graph api 就都要呀
+00:14:18 <mno2> 喔喔，沒用過 xD
+00:14:24 <mno2> http://stackoverflow.com/questions/6068113/do-sessions-really-violate-restfulness
+00:14:35 <CindyLinz> token 看是放在 url 裡面, 或是從 cookie 送過去
+00:14:59 <CindyLinz> 如果真的是以「session」的方式在使用它, 的確違反 rest 的精神
+00:15:16 <CindyLinz> 但如果只是用來控制存取權就還好啊
+00:15:25 <CindyLinz> 我想問題不是 rest
+00:15:35 <CindyLinz> rest 可以總是開一個 field 放 access token
+00:17:07 <CindyLinz> 問題是 postgres 裡面的 資料-table 不可能額外有這一個 field 的
+00:19:04 <mno2> CindyLinz: 同意
+00:19:34 <mno2> 只是提到 session 就讓我想到而已
+00:20:24 <CindyLinz> 嗯嗯嗯
+16:13:42 <CindyLinz> 用 cabal 寫 package 的 test suite 有辦法 import 自己的 hidden module 來測試嗎?
+16:14:09 <CindyLinz> 我在 Test-Suite 的 build-depends: 把 package name 寫進去
+16:14:56 <CindyLinz> 然後在 test 的 main-is 的 hs 檔裡面 import 自己 package 的 hidden module. cabal build 的時候被 cabal 抱怨了:
+16:15:08 <CindyLinz>     it is a hidden module in the package `AugmentedRBTree-0.1.0.0'
+16:19:04 <CindyLinz> 嗯, 把 package 「正文」部分的 hs-source-dirs: 也加到 TestSuite 裡面讓它再 compile 一次是個解法.... ww
+16:19:25 <CindyLinz> 比暫時開成 exposed, 打包時再關掉好 XD
+18:07:07 <CindyLinz> 不知道是我腦筋不行了, 還是 paper (technicl report) 寫得很難讀.. 讀 Fully Persistent Arrays (Paul F. Dietz 1989) 讀得好想睡 orz
+18:20:23 <hashcat> 邊讀邊動手畫圖=P

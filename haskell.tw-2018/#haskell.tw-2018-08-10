@@ -1,0 +1,98 @@
+00:02:15 <CindyLinz> 那些偶爾從中國來的朋友可能沒有註冊暱稱吧 @@
+00:04:46 <petercommand> #haskell 的做法好像蠻不錯的..unidentified 的如果說了不像 spam 的東西，就 voice，
+00:05:42 <CindyLinz> 他們都是說完就跑了
+00:05:48 <petercommand> 預設只有 identified 說的訊息會被看到
+00:05:51 <CindyLinz> 其實只要待超過30秒就不是 spammer... XD
+00:06:01 <CindyLinz> 噢
+00:06:12 <petercommand> 設 reduced moderation
+00:06:16 <petercommand> +z
+00:06:28 <petercommand> 還有一些其他東西
+00:06:38 <CindyLinz> 私訊他問說你是真人嗎? 有回答就給過
+00:06:47 <petercommand> 一樣是要一個 bot 協助的樣子
+00:06:55 <petercommand> CindyLinz: captcha! xD
+00:07:04 <CindyLinz> 我知道了...
+00:07:13 <CindyLinz> 就私訊問他「What's a monad?」
+00:07:18 <petercommand> XDD
+00:10:03 <petercommand> +z > The effects of +b, +q, and +m are relaxed. For each message, if that message would normally be blocked by one of these modes, it is instead sent to channel operators (+o).
+00:10:08 <CindyLinz> 想一下... identified 的不踢, unidentified 就問他什麼是 monad, 回答了(無論答案是什麼)的就不踢?
+00:10:24 <CindyLinz> 我還不能改 mode 就是了w
+00:10:34 <petercommand> CindyLinz: 設 +z 就都不用踢了
+00:10:44 <petercommand> CindyLinz: 反正不是 op 就看不到
+00:10:52 <CindyLinz> 只剩我煩就對了w
+00:10:59 <petercommand> XDD
+00:11:12 <caasih> 所以才說你要跟 favonia 要 +s
+00:11:48 <CindyLinz> hmm
+00:18:12 <favonia> CindyLinz: 你應該可以改 mode 了不是嗎(?)
+00:24:36 <CindyLinz> 那天不行.. 我試一下
+00:25:29 <CindyLinz> 咦 真的可以耶
+00:42:28 <CindyLinz> 用 /whois 看, 有 account entry 的就是 identified, 沒有的就是 unidentified 哄?
+01:01:24 <petercommand> CindyLinz: 看起來是這樣
+02:44:21 <wraeth26> kaniini has invited you to join #litepub
+02:45:14 <Turbo-Folker> kaniini has invited you to join #litepub
+04:36:52 <ori16> kaniini has invited you to join #litepub
+04:50:26 <salios> kaniini has invited you to join #litepub
+05:29:40 <Kirito> kaniini has invited you to join #litepub
+06:05:07 <foxcookie> kaniini has invited you to join #litepub
+07:28:00 <caa51h> favonia 自己都被踢掉 OAO
+09:56:53 <mappum> kaniini has invited you to join #litepub
+11:20:34 <jimbeamm> kaniini has invited you to join #litepub
+11:50:55 <Zoddo2> kaniini has invited you to join #litepub
+14:10:23 <CindyLinz> caa51h: 我還沒改 script 啊...
+14:10:37 <CindyLinz> 今天要來研究一下那些奇怪的 modes.. XD
+15:19:27 <CindyLinz> script 改成 join 10 秒以後給 voice, 然後就可以說話...
+15:19:45 <CindyLinz> spam bot 應該都是 join 以後瞬間丟完話就跑了
+15:20:51 <CindyLinz> * 想想, 我也不想看垃圾.... 還是 -z 好惹w
+15:21:17 <petercommand> 哈哈XD
+15:21:40 <cindy> test
+15:22:10 <CindyLinz> 十秒好久, 改成五秒好了...
+15:26:25 <CindyLinz> 突然開始期待 spam bot 出現.....w
+15:27:47 <cibs> 放了補獸網的獵人
+15:29:12 <CindyLinz> 不知道這個是不是 bot... 5秒太長了嗎 @@"
+15:29:16 <CindyLinz> 不知道這個是不是 bot... 5秒太短了嗎 @@"
+15:31:26 <cibs> 先調短成 2 秒看看？
+15:31:33 <cibs> 不夠再加？
+15:31:54 <CindyLinz> 欸.. 我在想是不是已經太短了, 所以 bot r00tobo15 拿是拿到 voice..
+15:32:10 <CindyLinz> 不過他沒講話就離開了, 大概所有的話都是五秒內講完的...
+15:32:32 <CindyLinz> 不過這樣也就夠了.. 好先來試試兩秒
+15:36:39 <CindyLinz> 也許 bot 看到 channel 有設 +m 就不來了.....
+16:04:48 <caa51h> CindyLinz++
+16:08:27 <caa51h> +v 真不錯，剛看到這個 https://imgur.com/rXs337t
+16:09:38 <petercommand> perl6!
+16:11:04 <CindyLinz> bot 的名字好兇 XD
+16:12:09 <petercommand> 嗚，#perl6 的 topic 我有缺字型無法顯示XD
+16:12:40 <caa51h> 這個？ »ö«
+16:12:52 <petercommand> 不是
+16:13:26 <caa51h> 本來以為是臉，細看 »ö« 應該是 Camelia
+16:13:32 <petercommand> 最後面的
+16:13:41 <caa51h> 喔喔我沒裝動畫 topic ，看不到後面的
+16:14:01 <petercommand> https://imgur.com/a/mvxyKkS
+16:14:29 <petercommand> 動畫 topic?
+16:14:52 <petercommand> 聽起來好神奇的東西XD
+16:16:17 <caa51h> irssi 有這個 https://github.com/irssi/scripts.irssi.org/blob/master/scripts/twtopic.pl
+16:16:41 <caa51h> 但會讓中文複製便很難，因為一直在重繪...
+16:16:46 <caa51h> *變
+16:17:23 <petercommand> 喔喔..酷
+16:18:00 <petercommand> caa51h: 打 /topic 就可以看到啦
+16:18:06 <petercommand> xD
+16:19:46 <CindyLinz> #perl6 等好久才給 voice
+16:20:16 <caa51h> petercommand: lol 最後那個字我連 ? 都看不到
+16:20:29 <petercommand> CindyLinz: 我一加立刻就有 voice 了耶..
+16:20:37 <petercommand> caa51h: XDD
+16:21:03 <CindyLinz> 還是它是週期性給的啊
+16:21:09 <CindyLinz> 公車來了就給你 voice. (X
+16:22:08 <Dworf> kaniini has invited you to join #litepub
+16:22:35 <petercommand> 秒數太短了XD
+16:22:56 <CindyLinz> 這個新型態的 bot 不會自動退下.... o.o
+16:23:34 <CindyLinz> 好改五秒試試...
+16:30:57 <caa51h> petercommand: 那個 emoji 在 mac 上看還是有 structure color 的蝴蝶 XD
+16:32:22 <petercommand> XD
+16:32:39 <petercommand> 蠻讚的
+16:32:47 <petercommand> https://emojipedia.org/butterfly/
+16:47:13 <petercommand> 都是 screen 的問題，看來 screen 太舊版讓 emoji 顯示不出來了
+16:47:16 <petercommand> xd
+16:48:34 <caa51h> XDDD
+16:50:07 <caa51h> perl6 的人們真幽默 #screen
+16:56:31 <petercommand> XDD
+17:16:34 <CindyLinz> 咦.. Sigyn 為什麼殺他
+17:17:30 <petercommand> Sigyn 沒有在這個頻道了..大概是被踢走了XD
+17:18:06 <CindyLinz> Sigyn 的餘韻不絕啊... o.o

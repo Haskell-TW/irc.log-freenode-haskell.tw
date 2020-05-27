@@ -1,0 +1,41 @@
+17:56:14 <MnO2> 我回來了
+18:02:13 <CindyLinz> Hi :D
+18:02:28 <CindyLinz> 水來了水來了 :D
+18:02:51 <CindyLinz> 不過現在頭好痛.. 血都跑到肚子裡了... :|
+18:15:35 <letoh> MnO2: hi
+18:16:12 <letoh> 感覺兩個禮拜好久:p
+18:38:10 <MnO2> CindyLinz: 你喜宴食物中毒了嗎？ xD
+18:38:44 <MnO2> letoh: 我也覺得還蠻久的
+18:42:29 <letoh> 上禮拜發現有些翻譯很怪  但是又忘了筆記了XD
+18:44:04 <MnO2> letoh: OK，我這幾天找時間看一下好了。最近正好有人送不少patch
+18:44:53 <letoh> 還有個小建議  中英文字之間可以加個空白嗎?
+18:45:23 <letoh> 不過這做起來有點累  目前看到的都是黏在一起
+18:46:22 <MnO2> letoh: 有人已經建議過了，只是我還沒做
+18:46:29 <letoh> 嗯嗯
+18:47:35 <letoh> 另外就是  有些內文給的連結好像無效
+18:47:53 <letoh> 例如 type class 那一章的 http://learnyouahaskell-zh-tw.csie.org/zh-tw/Int
+18:48:08 <MnO2> letoh: OK
+18:48:12 <letoh> 這個連結沒有東西... 類似的地方還有好幾個
+18:48:38 <MnO2> letoh: 嗯嗯
+18:48:56 <letoh> 原文好像是連結到 haskellwiki 之類的地方?
+18:49:13 <letoh> http://learnyouahaskell-zh-tw.csie.org/zh-tw/make-types-and-classes-for-ourselves.html  我正在看這一頁
+18:49:40 <letoh> 在 Type parameters 底下有三個無效連結，在 Derived instances 底下有一個無效連結
+18:49:54 <letoh> 前幾天看到的，趁還沒忘趕快回報XD
+18:50:25 <MnO2> letoh: 好的，待會修掉
+18:50:59 <letoh> 原文好像是連結到第三章的樣子
+18:54:01 <letoh> learnyouahaskell-zh-tw.github.com  現在是放在這邊嗎? 我覺得直接 fork 一下，有看到就順手改好了，不然通常看過就忘XD
+18:55:17 <letoh> "inspired by txt2tags"
+18:55:32 <letoh> 我還蠻喜歡 txt2tags... 改起來很方便XD
+18:55:37 <MnO2> https://github.com/learnyouahaskell-zh-tw/learnyouahaskell-zh-tw.github.com
+18:56:12 <letoh> ok, 我先研究一下怎麼玩，系統裡沒裝 ruby
+18:57:11 <letoh> 裝到 rpi 上XD
+19:00:59 <MnO2> letoh: rpi 現在是你的隨身電腦嗎？ xD
+19:04:35 <MnO2> http://www.youtube.com/watch?v=YScIPA8RbVE
+19:04:41 <MnO2> The Algebra of Algebraic Data Types
+19:04:46 <MnO2> 應該沒貼過
+19:08:28 <MnO2> 兩個禮拜沒摸鍵盤，突然覺得對電腦好陌生...
+19:34:48 <MnO2> https://plus.google.com/communities/101347256411666267026
+19:34:58 <MnO2> Cat Theory的community
+19:58:27 <letoh> MnO2: 沒有隨身，不過把不想污染系統的東西都丟到 rpi 裡XD
+23:36:00 <MnO2> http://ft-l.github.com/HackageUI/index.html
+23:36:11 <MnO2> 有人在進行的新版Hackage介面

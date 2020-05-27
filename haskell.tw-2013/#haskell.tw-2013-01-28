@@ -1,0 +1,138 @@
+09:46:06 <drbean> 我感謝 #haskell.tw 的活動
+09:48:16 <b4283> MnO2: Making our own types and typeclasses 有一句「過多無畏的型別約束」
+09:48:50 <MnO2> b4283: 「無謂」對吧？
+09:48:56 <b4283> 是的
+09:51:04 <MnO2> b4283: OK, thanks
+10:38:03 <_13h> MnO2: 請問一下，網頁右上角那個 beta 是你加的嗎？英文版網頁好像沒有... 那個圖好像會擋到下一章的連結
+11:21:13 <favonia> MnO2: 應該要學 Google 擺 alpha 代表測試版，擺 beta 代表正式版
+11:21:19 <favonia> （誤）
+11:35:43 <suhorng> 是說可不可以問一下 之前在這裡聽到一個 Monad 的 菜單<=>把菜做出來的比喻
+11:35:54 <suhorng> 能在聽一次嗎XD
+11:39:58 <_13h> 我沒印象XD 把 log 抓回來 grep 一下比較快?
+11:49:25 <favonia> suhorng: 與其說 monad 像菜單，不如說菜單在某種解釋下符合 monad 介面吧 xD
+11:53:22 <suhorng> 我想問
+11:53:26 <suhorng> *打錯 orz
+11:54:12 <suhorng> 剛才找還沒找到 .. 之前好像在說 "寫出菜單不代表把菜做出來"
+11:54:24 <suhorng> 在講 evaluate 的差別?
+11:56:16 <favonia> suhorng: 可能是在講 IO a 和 a 直覺上的差別的譬喻
+11:56:34 <favonia> （但既是直覺又是譬喻就不要太認真了lol）
+11:58:00 <suhorng> 那麼我們寫一個有 m a 型態的程式
+11:58:15 <suhorng> 並且他可以隨便丟來丟去 組合
+11:58:35 <suhorng> 像是我們在處理 "副作用的描述" @@?
+12:02:10 <favonia> suhorng: er 不太懂你這句話的意思 @@ 你是說用 m a 像是在處理有副作用的敘述，還是反過來？還是？
+12:04:36 <suhorng> 像是說，Maybe a、State s a 這類 monad 在做什麼事滿好理解的；可是 monad 只是提供一個方便的語法嗎？
+12:04:56 <suhorng> 只是提供 (>>=) 的介面，方便我們把東西串起來？
+12:06:28 <suhorng> 像 IO a 就一直不太懂他裡面的 "值" 是什麼樣的。typeclassopedia 說 m a 代表 "A computation producing a value of type a"
+12:06:47 <suhorng> 意思是說 m a 在做的事情是描述那個 computation 嗎？
+12:09:16 <CindyLinz> 是
+12:10:01 <favonia> suhorng: 嚴格來說 monad 本身沒有說那是 computation
+12:10:17 <favonia> suhorng: 那個介面沒有說他一定要是 computation
+12:10:17 <MnO2> _13h: 不是，是我接手翻譯的時候就有了，理論上可以拿掉
+12:10:37 <favonia> suhorng: 而是說 computation 的某些性質符合 monad 介面
+12:10:47 <favonia> suhorng: 所以就來用一下～
+12:10:56 <_13h> MnO2: 好  我還在想說調一下 z-index 讓連結可以放在最上面@_@
+12:11:44 <suhorng> 喔~
+12:11:44 <_13h> MnO2: 那 send feedback 的功能呢？看起來也是後來才加的?
+12:13:01 <MnO2> _13h: send feedback 是我加上去的，不過現在背後也沒有 server ， 所以只是裝飾 xD
+12:13:19 <MnO2> _13h: 只是想偷學 google 抓圖 feedback
+12:13:50 <_13h> XDXD  那我在 mobi 裡把 #feedback 藏起來好了... 有 ajax 的部份基本上都會失校
+12:14:00 <_13h> 失效
+12:16:07 <suhorng> 像是 putStrLn (interactive I/O)、array、forkIO (concurrency?) 這些用 monad 包起來 都是提供一個方便我們存取的介面 這樣說可以嗎？
+12:16:42 <suhorng> 這樣好像太模糊了..
+12:17:28 <suhorng> 應該說 interactive I/O、array 這些剛好符合 monad 的介面？
+12:23:01 <MnO2> suhorng: yes, 不過 IO Monad 因為就是 Haskell 強迫 model 的方式，所以也逃不掉
+12:23:17 <suhorng> 恩QQ
+12:23:28 <suhorng> 謝謝大家!
+12:23:39 <favonia> MnO2: 好像很久以前不是這樣的（？？？）
+12:23:48 <favonia> MnO2: 不過隨便啦以現在為準 xD
+12:24:44 <MnO2> favonia: 很久以前還沒意識到 Monad 的時候就沒轍吧 xD
+12:38:59 <_13h> 突然有個問題...一般在講 FP 最明顯的特色就是 first-class function 吧
+12:39:34 <_13h> 那 c++ 裡的 operator () 算不算有沾到邊呢？
+12:40:31 <_13h> 或者其他 operator，好像可以拿來模擬一些特性
+12:41:41 <favonia> _13h: 算還很遠吧～你 procedure 不能丟來丟去就失敗啦 xD
+12:42:10 <_13h> 丟 object reference 不算嗎?
+12:42:37 <suhorng> 你的確可以寫個 struct
+12:42:48 <suhorng> 在裡面實做 operator() 然後把它丟來丟去
+12:42:53 <suhorng> 在 C++ 裡面稱作 functor
+12:43:01 <_13h> 嗯嗯
+12:43:20 <suhorng> 可是離真正的 first-class function 我覺得還有段距離 用起來也是(因為type)
+12:43:30 <_13h> 我大概知道還差得遠，但想知道還差多遠XD
+12:43:52 <suhorng> C++11 裡面的 lambda 好像就是用 functor 來做的
+12:44:33 <suhorng> 現在 C++11 裡面也有 std::function，可能多像一點
+12:45:43 <_13h> 嗯嗯，應該是說，很多特性都被分散加入語言中，不是用統一的概念設計出來的？
+12:48:10 <suhorng> 比如說..nested function？
+12:48:50 <_13h> nested function 算在 first-class function 裡面嗎？
+12:50:02 <_13h> 應該問，要有 first-class function 支援才能做出 nested function 嗎?
+12:50:20 <suhorng> 好像有牽扯到 closure XDrz 只是覺得要支持 first-class function 就自然要支援 closure
+12:50:53 <suhorng> functions are values 的話，要在哪裡建立一個 function 都可以，也可以當成值傳來傳去，那 nested function 也很自然
+12:50:57 <_13h> 嗯，不曉得，我覺得主要應該是 closure 吧@_@
+12:50:59 <_13h> 嗯嗯
+12:51:27 <_13h> nested function 也可以不傳出去呀
+12:52:07 <suhorng> 我覺得是可以在任何地方創建一個 function，就像普通產生一個值一樣
+12:52:13 <_13h> 定義完直接呼叫。我覺得要傳出去這個動作比較需要 first-class function 的支援，不傳出去的話好像就沒差了
+12:52:21 <suhorng> 所以就算有 nested function 也很自然
+12:52:55 <suhorng> 現在C++(11)支援很多，我也不確定還有哪些不行XD
+12:53:20 <_13h> 因為印象中 gcc extension 好像有支援 nested function..  但應該沒辦法傳來傳去 (記得傳出去有機會爛掉...
+12:53:26 <suhorng> 不過都是透過 functor 的樣子
+12:53:32 <suhorng> gcc extension 那個很奇怪@@
+12:54:20 <_13h> 感覺是用奇怪技巧模擬出來的  不過我不敢用就沒研究了
+12:54:27 <suhorng> 現在在 C++ 要暫時創建一個匿名函數 傳來傳去的 大概都用 lambda？要更好操作就用 std::function 存起來，好像會都有效能損失
+12:55:18 <suhorng> *會都有 → 有
+12:55:38 <_13h> 唔... 就算有損失，跑起來應該還是比 XXX 快 (誤
+12:58:48 <favonia> _13h: Haskell 和 C 長度差 6 個字
+12:59:30 <suhorng> 或者說, first-class function 指語言把 function 當成普通的 value, 所以 blahblah...
+12:59:36 <_13h> 唔，遙不可及XD
+12:59:37 <suhorng> 然後 C++ 裡面的 function 本來就不是 value
+13:00:00 <suhorng> 但是你可以用 function object 來做到(接近?)一樣的事情
+13:00:02 <_13h> std::function 應該比較接近吧，但還是差蠻遠的
+13:00:54 <suhorng> std::function其實也不是普通function 是另外做出來近似的（？
+13:01:03 <_13h> 嗯嗯  有 object (當作 closure 半成品用) 又可以提供 callable interface 的話，應該可以模擬出某些功能?
+13:01:42 <suhorng> lambda也是(這樣說對嗎)closure唷 可以幫你抓外部變數
+13:02:32 <suhorng> int main() {
+13:02:32 <suhorng>  int i = 1;
+13:02:32 <suhorng>  auto inc = [i](int n) { return n + i; };
+13:02:32 <suhorng>  cout << inc(5) << endl;
+13:02:32 <suhorng>  return 0;
+13:02:32 <suhorng> }
+13:03:02 <suhorng> [=] 就是把全部的變數用 value 抓進來 (&是抓reference...)
+13:03:13 <suhorng> 要partial application用 std::bind
+13:03:18 <_13h> 抓外部變數的話，比較像 lexical scoping 辦到的?  closure 有要求一定要 lexical scoping 嗎?
+13:05:47 <suhorng> 好神秘w
+13:06:26 <favonia> _13h: dynamic scoping 只要偷偷傳個什麼東西進去就好啦
+13:06:46 <_13h> 唔，compiler 處理掉嗎?
+13:07:56 <favonia> _13h: 你一定要有個方法來偷偷溝通
+13:08:08 <_13h> 嗯嗯
+13:08:24 <favonia> _13h: 不管是先講好暗號還是每次都拿新的
+13:08:25 <_13h> 是為了要處理 free variable 嗎？
+13:08:46 <favonia> er 應該吧（variable 這個字已經用爛啦）
+13:08:55 <_13h> 好吧XDXD
+13:09:43 <_13h> 我也不曉得對不對，看過很多亂七八糟的資料後，都不曉得哪些解釋才是對的XD
+13:10:11 <favonia> _13h: 色即是空 空即是色
+13:11:01 <MnO2> 色 = null
+13:12:30 <suhorng> 我一直分不清 null 跟 empty 的差別XDrz
+13:13:59 <_13h> empty 還是有東西.. null 就是什麼都沒有了？
+13:14:29 <_13h> empty 想成空容器之類的，null 連容器都沒有
+13:15:10 <favonia> suhorng: 沒差啦，你要叫 favonia 也可以。null 通常是 pointer 在用 empty 大概是 list 或 tree
+13:15:15 <suhorng> 恩@@
+13:51:15 <b4283> Map.empty
+13:53:47 <b4283> (離 monad 章節還好遠..)
+13:55:23 <_13h> 我是看了某個 slide 才對 monad 有點感覺@_@  但我忘了在哪看到的了... 忘了備份XD
+15:46:18 <b4283> 蠻好奇的，有沒有用 haskell 寫的 c compiler?
+15:47:51 <MnO2> 沒聽說過
+16:10:40 <b4283> http://stackoverflow.com/questions/809710/what-is-the-best-language-to-write-a-compiler-in
+16:16:52 <_13h> lcc  那不就是我學 c 在用的 compiler 嗎XD
+16:21:36 <suhorng> 倒是有個 Write Yourself a Scheme in 48 Hours in Haskell (a  XD
+16:21:58 <MnO2> audrey 的名作啊
+16:23:45 <_13h> 咦  原來那份教學是 audrey 寫的?
+16:26:23 <suhorng> 好像不是
+16:26:27 <b4283> 是啦
+16:26:55 <MnO2> 還是 Jonathan 的時候寫的
+16:27:28 <suhorng> 原來是這樣..
+16:31:36 <b4283> 不過真的有人能在 48 hours 內看完嗎 XD
+16:36:18 <suhorng> 應該要很有"基礎"吧www
+16:38:55 <_13h> 閉著眼睛掃一遍XD
+18:07:24 <MnO2> http://www.haskell.org/pipermail/haskell-cafe/2013-January/105993.html
+18:07:34 <MnO2> banana-split theorem.   wwwwwww
+18:28:00 <suhorng> XD
+18:51:32 <suhorng> 原來 banana split 是一種甜點喔www
+21:17:31 <_13h> 看起來好好吃的樣子XD

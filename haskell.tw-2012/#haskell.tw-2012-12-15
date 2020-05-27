@@ -1,0 +1,6 @@
+07:55:22 <Yu-Lin> 發現要 debug 還不如把 error message 丟到 google XD => debug 超好用的阿XD
+19:35:11 <mgccl> MnO2: 那是我
+19:35:21 <mgccl> 问题解决了, 用mutable array...
+19:37:06 <MnO2> mgccl: Great. At least as someone once said, Haskell is a great imperative language.
+19:37:23 <mgccl> https://gist.github.com/4291707 这个implmentation我的电脑上5秒解决长度10000的string...
+19:38:45 <MnO2> :)

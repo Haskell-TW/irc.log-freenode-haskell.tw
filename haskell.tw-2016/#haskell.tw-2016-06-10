@@ -1,0 +1,18 @@
+12:07:58 <suhorngM_> 原來 evaluate x = x `seq` return () 在 IO monad 裡面會出事XD
+12:08:23 <suhorngM_> (上次貼的那篇最後的例子)
+12:10:36 <suhorngM_> 有最佳化的情況下 (error "A") `seq` (error "B") 也沒有保證一定會是 error: A... http://research.microsoft.com/en-us/um/people/simonpj/Papers/imprecise-exn.htm
+14:18:46 <CindyLinz> 把 error "A" 列為 undefined behavior 吧!
+17:25:43 <suhorngM_> 不一定是 error, exception 都算
+17:52:38 <CindyLinz> exception 不要列為 UB... ^^|
+17:53:05 <CindyLinz> 沒有 catch 的話可以 :p
+18:15:10 <CindyLinz> hmm.... 因為「丟出與否」不會影響它是不是 WHNF?
+18:15:35 <CindyLinz> side-effect 要在 side-effect 的世界 (monad) 裡說清楚
+18:15:59 <CindyLinz> 用 exception >>= others, 然後由 IO monad 的 >>= 決定順序?
+18:25:38 <suhorngM_> CindyLinz: 比較像是故意的, 只要會丟 excpetion,  optimizer 並不在乎是哪個 exception 被丟出來
+22:25:39 <CindyLinz> 我覺得是因為 job steal 之類的附帶效果
+22:26:04 <CindyLinz> IO monad 的 >>= 串起來的東西, 才有順序上的語意
+22:26:42 <CindyLinz> seq 影響的是 WHNF.. 而 error 或 exception 都不是用「已發生」來代表 thunk 的 eval 完成..
+22:27:32 <CindyLinz> 就是... eval 完 throw exception 的 thunk 不代表 exception 已丟出去
+22:27:51 <CindyLinz> 不然 job steal 就不能偷它去算了.. 偷算算到大白鯊會悲劇
+22:56:25 <mno2> 不管是黑 exception 還是白 exception，只要會 crash 的都是好 exception  (誤
+22:57:50 <CindyLinz> 不行啊.. 要能 catch 啊 <囧>

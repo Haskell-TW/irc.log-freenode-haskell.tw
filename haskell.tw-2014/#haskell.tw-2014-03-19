@@ -1,0 +1,6 @@
+00:26:34 <CindyLinz> 但 $ 不是 haskell syntax 的一部分啊
+00:27:00 <CindyLinz> 只是大家共同的壞(?)習慣..
+00:30:35 <hashcat> 我猜$在那裡也是運算符
+00:33:11 <hashcat> 文件漏不少東西
+00:35:02 <hashcat> http://felix-lang.org/share/src/web/ref/lang/core/fun.fdoc
+00:35:16 <hashcat> 至少在這一頁看起來很像是

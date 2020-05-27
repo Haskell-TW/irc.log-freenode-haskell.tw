@@ -1,0 +1,71 @@
+09:34:04 <mno2> suhorngM_: 印象中小善是 favonia 洗腦的 xD
+10:57:43 <hychen1> 幹得好 XD
+10:59:55 <suhorngM_> mno2: 哈哈哈
+14:45:02 <CindyLinz> southp0105: 喔喔 是你! 我喜歡你介紹的 thor
+14:46:04 <CindyLinz> 那次才剛聽完小迪克在 OSDC 介紹的 thor.. 聽起來很 high, 可是感覺有一點點奇怪, 說不上來.. 但聽了你的介紹以後我突然就明白惹 :D
+14:46:47 <southp0105> CindyLinz: 哦哦～太好了 :D
+14:49:44 <southp0105> 不過我現在先去幫忙做Bistro了，與swift奮戰中，暫時沒繼續thor XD
+14:50:22 <CindyLinz> 是哪一個角度的奮戰 @@"
+14:50:49 <CindyLinz> 把 swift compile 成別的東西, 還是把別的東西 compile 成 swift?
+14:51:20 <southp0105> 哦哦，都不是，是單純的做iOS App
+14:51:38 <CindyLinz> 喔喔 直接寫 swift 喔?
+14:52:48 <southp0105> 是啊，只是我是第一次寫iOS app，從工具到語言都要學習一下
+14:53:13 <CindyLinz> 嗯嗯嗯..
+14:54:21 <CindyLinz> southp0105: 欸, 你之前沒有被 swift 的 bug 文章嚇走喔?
+14:55:11 <southp0105> 誒？我沒看到耶，跪求連結~
+14:55:28 <CindyLinz> 那時我看到, 就想說.... 嗯這個語言也許等半年或一年後再看看 ._.
+14:56:13 <au> XCode 6.1 裡的 bug 少很多了...
+14:56:28 <CindyLinz> 找找...
+14:56:58 <au> #但是我應該是會等它 open source 再來寫 XD
+14:57:19 <southp0105> 我昨天才因為XCode 6.0 beta的一些bug換到6.1
+14:57:27 <CindyLinz> au: swift 是 XCode 的一部分?
+14:57:31 <au> 是的
+14:57:54 <CindyLinz> southp0105: http://swiftwtf.tumblr.com/
+14:58:03 <southp0105> XCode 6.0才開始提供swift相關toolkit，好像沒有獨立的swift tool package可以用
+14:58:04 <CindyLinz> 喔喔! 那這網頁裡面的東西可能有的已經失效了
+14:58:33 <CindyLinz> 其中這一項看起來是台灣人 introduce 的 XD # var x = [["name": "胡博秋", "grades": ["國語": 69, "數學": 76, "社會": 65, "健康教育": 68, "自然": 99]], ["name": "林家茹", "grades": ["國語": 72, "數學": 100, "社會": 86, "健康教育": 59, "自然": 62]]]
+14:58:45 <CindyLinz> 看到一項是 zonble XD
+14:59:26 <CindyLinz> au: 想等到 open source.. 是為了踩到地雷的時候自己可以清除嗎?
+14:59:32 <southp0105> 嗯...看起來現在已經修正很多了 XD
+14:59:47 <au> CindyLinz: 對啊，還有可以跨平台
+15:00:08 <CindyLinz> 跨平台是 open 以後還要再等一等吧 ^^|
+15:00:28 <CindyLinz> 嗯 能自己清除真是個會令人心安的性質..
+15:00:55 <au> 已經有 android port 了
+15:01:18 <au> 還不只一個 port ... http://www.remobjects.com/elements/silver/faq.aspx
+15:01:53 <CindyLinz> 為什麼現在可以 port 啊 XD
+15:02:08 <au> 只是語言，不含 runtime
+15:02:19 <au> 所以其實只是把 llvm frontend 移過去
+15:02:26 <CindyLinz> 喔.. 那就是照 spec 自己重新實作一個.. o.o
+15:02:41 <au> 比較像逆向工程, but yeah
+15:02:51 <CindyLinz> 這比較髒 XD
+15:02:52 <whitglint> 透過 JNI call Java class 嗎...?
+15:03:04 <CindyLinz> 還可以全真重現所有官版 bug.. (X
+15:03:26 <au> whitglint: 不是，是編譯到 JVM 和 CLR
+15:03:37 <au> class 都只能用 target platform 的 native 的
+15:03:41 <au> 只是語法一樣而已
+15:14:40 <whitglint> 真有趣, 直接 import java.util
+15:15:10 <whitglint> 但這樣 android ios 還是得各寫一次, 只是用相同的語言
+15:16:26 <whitglint> 如果有免費的開發工具就玩玩看
+15:24:48 <CindyLinz> the AU way 就是寫一個 java -> swift compiler... (思)
+20:00:41 <CindyLinz> 覺得.. Judy array 的結構還蠻 pure 的呀~
+20:00:56 <CindyLinz> 不過 hackage 上面的 Judy array 是 mutable 的, 要過 IO.. XD
+20:01:41 <CindyLinz> 還沒有翻看它的 source, 也許它是直接包 FFI 來接 HP 的 Judy array 實作.. 所以就... IO 了 XD
+20:12:29 <CindyLinz> suhorngM_: 欸欸~ 如果把這個 Pure Judy 實作出來, 聽說它是實際上比常見的 hash, btree 什麼的都還快的資料結構喔~
+20:13:34 <CindyLinz> 就... hash 理論上是 O(1), 但這是理論.. 實際上還是 pure 結構的 Judy 比較快, 這樣有沒有激勵到的感覺? XD
+20:17:19 <CindyLinz> judy array # http://en.wikipedia.org/wiki/Judy_array
+20:39:09 <hychen1> 有點奇怪外什麼其他語言沒有引進applicative
+22:32:30 <suhorng> 大概在 Swift 成為通用的程式語言前都沒機會去碰他了
+22:33:25 <suhorng> 沒蘋果XD
+22:33:35 <suhorng> CindyLinz: Judy?
+22:34:55 <suhorng> hychen1: 其他語言也沒支援 monad, 大概不需要吧?
+22:36:04 <hychen1> suhorng: 不一定要有monad啊
+22:36:32 <suhorng> hychen1: 只是打個比方 應該說 Applicative 主要能帶來什麼好處?
+22:36:40 <hychen1> [cb, cb, cb] <*> [1,2,3]  <-- 這樣很不錯啊
+22:36:56 <hychen1> suhorng:可以少寫很多for....
+22:37:40 <hychen1> 在做data flow programming 滿不錯的, 有時你會需要對一組data做好幾種computation
+22:37:47 <suhorng> 哦XD 但是如果照他們包裝 monad 的作法, 其實就會變寫成 [cb, cb, cb].ap([1,2,3]) 吧
+22:38:16 <hychen1> ooops, 不要oo-style 啊
+22:38:38 <suhorng> 但是他們引用 monad 就是這樣, 加入 applicative 的方法應該也不會差太多
+22:39:29 <suhorng> 就有點囧, javascript 因為加入了 generator, callback hell 的問題就被解決了
+22:39:35 <suhorng> 有種很微妙的感覺
+23:57:41 <CindyLinz> suhorng: Judy array, 一種資料結構呀

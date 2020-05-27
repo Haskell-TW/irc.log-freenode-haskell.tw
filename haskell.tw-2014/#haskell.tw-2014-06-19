@@ -1,0 +1,77 @@
+01:02:08 <caasihuang> c9sloud: node 慘慘： https://gist.github.com/caasi/a4f9c2d0ec940576ce3a
+01:03:18 <caasihuang> c9sloud: irccloud 的預覽竟然只開了第一個檔案出來...
+01:06:31 <caasihuang> node-r3 大概只有 1/2~1/4 。
+01:13:15 <c9sloud> v8 比 c 慢是一定的呀
+01:13:34 <c9sloud> 跟 express router 比比看？
+01:25:07 <whitglint> 小心得罪 express # 誤
+01:25:47 <CindyLinz> XD
+01:26:01 <CindyLinz> (c9s 拿出 benchmark)
+01:26:24 <whitglint> ... and it's pure javascript
+01:26:56 <whitglint> pure javascript 有什麼好值得炫燿嗎 # 逃
+01:27:10 <whitglint> 炫耀
+01:28:31 <caasihuang> 好（加入 TODO
+01:29:19 <caasihuang> 大概要推坑誰寫個 pure js r3 比看看
+02:00:20 <c9sloud> caasihuang: 用 pathing ?
+02:00:24 <c9sloud> 最近貼的
+09:29:20 <mno2> http://www.infoq.com/presentations/haxl
+09:29:39 <mno2> [InfoQ] The Haxl Project at Facebook
+15:31:22 <c9sloud> https://launchpad.net/~r3-team/+archive/libr3-daily # libr3 daily build
+16:12:59 <whitglint> czchen 大大超熱心
+16:14:31 <CindyLinz> FB 掛掉了, 快叫 Simon Marlow 出來面對.. (誤)
+16:36:37 <twprogrammer> hi
+16:36:40 <twprogrammer> 問一下唷
+16:36:41 <twprogrammer> let fac n = if n == 0 then 1 else n * fac (n-1)
+16:36:43 <twprogrammer> 這我看得懂
+16:37:05 <twprogrammer> 只是想問fac還沒整個定義的時候, 其內就呼叫了fac
+16:37:17 <twprogrammer> 這是因為compiler幫忙處理了很多事的關係嗎
+16:37:50 <twprogrammer> 還是邏輯上電腦的原理or程式語言的原理, ?
+16:37:56 <twprogrammer> *可以接受這種東西
+16:38:03 <c9sloud> czchen++
+16:42:11 <CindyLinz> twprogrammer: 後面的 fac (n-1) 被 programmer 寫下來的時候, 代表將來執行到它的時候要呼叫, 而不是寫下它的時候就要呼叫呀
+16:42:37 <CindyLinz> twprogrammer: 而呼叫 fac (n-1) 的時候, 完整的 fac 已經整個定義了
+16:43:16 <twprogrammer> 這跟lazy evaluation有關嗎?
+16:43:36 <CindyLinz> twprogrammer: 沒有~ C 語言裡面也有這樣的東西
+16:43:40 <twprogrammer> 我記得C/C++也可以這樣寫
+16:43:41 <twprogrammer> 嗯嗯
+16:44:44 <CindyLinz> 如果寫..
+16:45:39 <CindyLinz> 想一下要怎麼寫 XD
+16:47:49 <CindyLinz> > let fac n = (fst (fac n), if n==0 then 1 else n * snd (fac (n-1))) in snd (fac 5)
+16:47:51 <lambdabot>  120
+16:48:04 <CindyLinz> 這個會有東西出來就跟 lazy 有關
+16:48:16 <CindyLinz> > let fac n = (fst (fac n), if n==0 then 1 else n * snd (fac (n-1))) in fac 5
+16:48:21 <lambdabot>  mueval-core: Time limit exceeded
+16:48:36 <CindyLinz> 這邊 fac 的 fst 這一項是出不來的
+16:49:16 <CindyLinz> 但如果剛好沒用到就不要緊 :p
+16:49:30 <twprogrammer> ha, 才初學第二天, 有些語法還沒學到:p   我把對話紀錄留下來, 之後再看~
+16:49:50 <CindyLinz> fst, snd 是用來取 (a, b) 的 a 和 b
+16:50:08 <CindyLinz> 都是函數啦, 不是特殊語法
+16:50:31 <CindyLinz> @type fst
+16:50:33 <lambdabot> (a, b) -> a
+16:50:39 <twprogrammer> in呢?
+16:52:48 <CindyLinz> twprogrammer: in 是配合 let 用的
+16:53:30 <CindyLinz> 例如說... 你寫一個 expression 的時候想把一部分抽出來取名字, 可能是為了會用到好幾次, 就把它們拿出來定義在 let 的部分, 剩下的原來的 expression 寫在 in 後面
+16:54:06 <CindyLinz> 把 3.14159 * 3.14159 寫成 let pi = 3.14159 in pi * pi 這樣
+16:54:47 <CindyLinz> 我會多寫 in 後面那些只是為了叫 lambdabot 現在當場算一下
+16:55:54 <twprogrammer> 不行 還不太熟 , 太卡了 我看到Learning you a haskell第四章再來看好了 xdxd
+16:56:58 <CindyLinz> 嗯嗯嗯
+17:19:01 <c9sloud> au: 請教一下... 那個 applicative functor 有什麼 pre-requirement 嗎? 可以先稍微預習這樣 XD
+17:24:25 <au> c9sloud: 用 attoparsec 或 trifecta 寫個小 parser 就自動學會嘍 :p
+17:26:46 <au> (pre-req 就是把 base 裡的 Control.Applicative Data.Foldable Data.Traversable 模組稍微看過就好了)
+17:26:59 <b4283> prerequisite
+17:29:20 <CindyLinz> au: 這有點大...... # 把 base 裡的 Control.Applicative Data.Foldable Data.Traversable 模組稍微看過
+17:29:58 <CindyLinz> 覺得可能是聽完 au 的 talk 以後, 才會有足夠的動力把它們看過... ._.
+17:32:34 <cibs> "稍微"
+17:32:40 <cibs> 這詞很微妙
+17:34:09 <CindyLinz> 看這三個, 應該會 imply 也看了 Data.Functor
+19:48:12 <caasihuang> c9sloud: pathing 自己的 benchmark 結果： https://gist.github.com/caasi/a4f9c2d0ec940576ce3a#file-pathing
+22:38:09 <c9sloud> 好慢 XD
+22:38:28 <c9sloud> au: 期待 XD
+22:38:50 <c9sloud> 希望聽得懂 XDDDDD
+22:41:01 <caasihuang> c9sloud: https://github.com/caasi/node-r3 慢了 othree 好一段時間才做好 XD
+22:41:16 <caasihuang> 所以變成 npm i node-libr3 XDDDD
+22:49:05 <c9sloud> XDDD
+22:49:15 <caasihuang> au: 期待演講，嘎，還沒看大象書
+22:49:26 <c9sloud> 不過 othree 是 ffi 做的
+22:51:35 <caasihuang> c9sloud: 晚點來讀讀 XD
+23:29:52 <au> c9sloud: 聽 cindy 的意見下修難度了，所以應該聽得懂
+23:30:57 <au> 改講 generators / list fusion, quickcheck / property-based testing, macro / rebindable syntax 這三個在其他語言裡比較多實作的 (因此應該也比較容易懂的) 概念

@@ -1,0 +1,395 @@
+00:01:26 <favonia> http 的標準好難實作（崩潰）
+00:01:52 <favonia> HTTP/1.1 caches SHOULD treat "Pragma: no-cache" as if the client had sent "Cache-Control: no-cache". No new Pragma directives will be defined in HTTP.
+00:02:02 <favonia> 還有這種的...
+00:03:42 <favonia> 我想我之前寫 http proxy 時可能有漏看這個規則
+00:08:13 <JuanitoFatas> 晚上好
+00:17:34 <favonia> JuanitoFatas:  好
+00:18:39 <JuanitoFatas> 大家都是夜貓子嗎
+00:24:26 <favonia> JuanitoFatas: 我這邊是早上 xD
+00:26:20 <JuanitoFatas> 原来如此!
+00:30:56 <JuanitoFatas> favonia是学生吗
+00:31:28 <favonia> JuanitoFatas: y
+00:32:55 <JuanitoFatas> 在國外讀書不簡單。
+00:38:42 <letoh> 模擬考 95 分XD
+01:22:17 <letoh> 考完了
+01:23:22 <letoh> 結果那考試不難，害我花兩天看完影片XD
+01:32:03 <letoh> "WHY IS COMPILATION TO JS USEFUL?"
+01:32:34 <letoh> 反正就是不要直接寫 JS (誤
+01:38:04 <letoh> http://kripken.github.com/mloc_emscripten_talk/
+07:11:42 <favonia> @pl (\t -> setHeader "ETag" $ t str)
+07:11:42 <lambdabot> setHeader "ETag" . ($ str)
+07:11:51 <favonia> lol
+07:12:00 <favonia> 還有 ($ xD) 這招
+11:58:04 <miaout17> @pl (\t -> setHeader "ETag" (t str))
+11:58:04 <lambdabot> setHeader "ETag" . ($ str)
+11:59:24 <miaout17> 我好想做practical code這種地方可不可以不要pointfree....XD
+11:59:27 <miaout17> 說
+12:02:44 <CindyLinz> 根據心理學的理論, 用 pointfree 的時候, 同時被 free 掉的 point 最多最多不可以超過 7 個? :p
+12:22:41 <_13h> 原來 java 8 有 lambda 了  http://openjdk.java.net/projects/lambda/
+12:27:42 <mno2> http://fpcomplete.com/announcing-case-studies/
+12:32:23 <_13h> 之前好像有誰說 facebook 內部有開 haskell 的訓練？
+12:33:39 <mno2> 我說的啊，bos 開的
+12:45:54 <favonia> miaout17: 最後變成 maybe id (setHeader "Etag" . quoteEtag) maybetag 啦
+12:46:45 <favonia> miaout17: 我覺得我做的很多事情只是因為 Snap 做得很不完美而已...
+12:47:01 <favonia> miaout17: 好奇其他 framework 有沒有把這些事情都處理掉...
+12:48:21 <UncleHandsome> 請問一下有人有看過這本書或是對ph有任何想法嘛XD? http://goo.gl/cu5q2
+12:51:15 <favonia> UncleHandsome: 我個人覺得應該用 Haskell - laziness 來當 pH 基礎，不過大概有點晚了 xD
+12:51:56 <favonia> miaout17: 總之最後那段程式碼應該沒有太嚇人 lol
+12:53:23 <UncleHandsome> favonia: 有點晚是指？？
+12:54:14 <favonia> 要重新發展另一個語言到像 Haskell 這樣成熟要花很多時間
+12:54:49 <UncleHandsome> 哦哦QQ
+12:55:08 <UncleHandsome> 那會推荐看那本嘛 或是說學pHXD
+12:57:27 <favonia> UncleHandsome: 不知道耶，沒學過 xD 我只是純粹就 Haskell 在這方面應用的缺點說的 xD
+12:57:38 <UncleHandsome> 哦哦 感謝www
+12:58:08 <favonia> UncleHandsome: 不過當然有 practical hacks 啊所以還是可以活得好好的
+12:58:35 <UncleHandsome> 嗯嗯
+12:59:17 <UncleHandsome> 感謝
+13:02:25 <UncleHandsome> 這本書翻了一下前面跟講的也有講XD
+13:04:03 <favonia> UncleHandsome: 「前面跟講的」是什麼意思
+13:06:08 <UncleHandsome> *該講
+13:06:23 <UncleHandsome> 只是大略翻一下而已XD
+13:07:10 <UncleHandsome> 先上課去了~~
+18:39:36 <suhorng> @pl (\a -> (f a, g a))
+18:39:36 <lambdabot> liftM2 (,) f g
+18:39:48 <suhorng> !!!!!!!!
+18:39:54 <suhorng> 還真的可以
+18:51:31 <suhorng> @pl \(a, b) -> a ++ "str" ++ b
+18:51:32 <lambdabot> uncurry ((. ("str" ++)) . (++))
+18:51:54 <suhorng> @pl \a -> f a (g a)
+18:51:54 <lambdabot> ap f g
+18:51:58 <suhorng> :t ap
+18:51:59 <lambdabot> Monad m => m (a -> b) -> m a -> m b
+18:52:46 <suhorng> 咦 請問有人知道為什麼嗎?
+19:01:02 <miaout17> 你在問哪一件事？我這塊也很弱不知道能不能回答
+19:01:29 <suhorng> 為什麼 \a -> f a (g a) 會變 ap XD
+19:06:55 <miaout17> 以前唸過，但我一時講不太清楚
+19:07:28 <miaout17> 首先 (->) b 是一Monad 參考 http://learnyouahaskell.com/for-a-few-monads-more#useful-monadic-functions
+19:08:17 <suhorng> 阿! Reader monad!
+19:08:22 <miaout17> @help
+19:08:22 <lambdabot> help <command>. Ask for help for <command>. Try 'list' for all commands
+19:08:26 <miaout17> @list
+19:08:26 <lambdabot> http://code.haskell.org/lambdabot/COMMANDS
+19:08:29 <miaout17> 不是耶
+19:08:56 <miaout17> :type (->)
+19:09:02 <miaout17> @type (->)
+19:09:04 <lambdabot> parse error on input `->'
+19:09:34 <suhorng> 唔..
+19:09:37 <suhorng> @kind (->)
+19:09:39 <lambdabot> * -> * -> *
+19:09:44 <miaout17> @info (->)
+19:09:45 <lambdabot>  Parse error at "->)" (column 2)
+19:10:03 <miaout17> 去ghci 打 import Control.Monad.Instances
+19:10:11 <miaout17> :info (->)
+19:10:19 <suhorng> 嗯
+19:10:36 <suhorng> 對呀 是 reader monad
+19:11:21 <suhorng> 吧?
+19:18:02 <miaout17> 啊對，型別一樣
+19:18:15 <miaout17> 我秀逗了...
+19:19:19 <suhorng> 謝謝你
+19:19:28 <suhorng> 原來 ap 還有這樣的用法XDD
+19:20:15 <suhorng> 我只是想說如果傳進來的參數若在不同的地方 要怎麼弄成 point-free ... 或是不是任何 Haskell 算式都可以弄成 point free
+19:21:20 <hychen> type-safety functional shell 這麼冷門嗎? 好幾篇文章都404 ... orz
+19:27:26 <miaout17> @pl \a -> a + a
+19:27:27 <lambdabot> join (+)
+19:27:37 <miaout17> @pl \a -> a + a + a
+19:27:38 <lambdabot> (+) =<< join (+)
+19:27:40 <miaout17> @pl \a -> a + a + a + a
+19:27:41 <lambdabot> (+) =<< (+) =<< join (+)
+19:31:24 <suhorng> :5 join
+19:31:26 <suhorng> :t join
+19:31:27 <lambdabot> Monad m => m (m a) -> m a
+19:31:34 <suhorng> 喔喔 這個joni
+19:34:25 <suhorng> @pl \a -> \b -> b + a*a
+19:34:25 <lambdabot> (+) . join (*)
+19:38:48 <suhorng> @pl \a -> (a+)
+19:38:49 <lambdabot> (+)
+19:54:39 <miaout17> @dice
+19:54:39 <lambdabot> unexpected end of input: expecting number
+19:54:46 <miaout17> @help dice
+19:54:46 <lambdabot> dice <expr>. Throw random dice. <expr> is of the form 3d6+2.
+19:54:54 <miaout17> @dice 3d6+2
+19:54:55 <lambdabot> 3d6+2 => 12
+19:54:58 <miaout17> @dice 3d6+2
+19:54:58 <lambdabot> 3d6+2 => 18
+20:13:08 <favonia> miaout17: 我很好奇其他 web framework 有做這麼多檢查嗎 orz orz
+20:14:03 <favonia> miaout17: 總覺得花很多時間在處理 HTTP
+20:28:47 <miaout17> favonia: 錯頻了嗎？XD 其他web framework很多都沒做吧
+20:29:29 <favonia> miaout17: 沒有錯頻啊。主要是我沒事不想引起一些無謂的 web framework / 語言大戰 xD
+20:29:35 <miaout17> 喔喔
+20:30:27 <favonia> miaout17: 你有看到我寫的程式碼嗎？我應該只有做 MUST 的部份
+20:30:38 <favonia> 還有一點點 SHOULD
+20:31:28 <hychen> letoh, 102分.....
+20:31:40 <hychen> letoh, 眼殘, 少看到一個選項....
+20:32:10 <favonia> hychen: type-safe shell 好像一直沒有一個計劃持續發展下去
+20:33:31 <hychen> favonia, 我覺得這個主題很有趣說 XD
+20:33:54 <favonia> hychen: 我們有些人想要做，只是因為種種原因進度緩慢
+20:34:09 <favonia> 我的計劃是先多寫一點 library
+20:34:13 <hychen> 非學術身份的人要怎麼才能下載到相關paper?
+20:34:37 <favonia> hychen: 你是要怎樣的 paper? CS 很多 paper 網路上都找得到
+20:35:08 <favonia> 找得到的意思是說，可能從作者網站或哪裡就可以下載了，不用通過出版社
+20:35:32 <favonia> hychen: 這樣才不會覺得只有一個好像理論上很漂亮的 shell
+20:35:33 <hychen> http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.80.7485
+20:35:40 <favonia> 但實際上什麼都不能用
+20:36:04 <favonia> hychen: 旁邊 PDF 按下去就有啦
+20:36:21 <hychen> favonia,  lol
+20:36:24 <hychen> favonia, 我搞笑了
+20:36:33 <hychen> favonia, 那如果paper是ACM的呢?
+20:36:47 <favonia> hychen: 就不要去 ACM 網站啊
+20:37:20 <hychen> favonia, 了
+20:37:35 <hychen> favonia, 多一點library指的是?
+20:37:54 <miaout17> favonia: 有些Framework有做一些，但像Content-Language這些好像不是MUST?
+20:37:57 <favonia> hychen: 例如現有的 Unix 常用指令要包好
+20:38:00 <hychen> 基本上沒有bash 相容的shell大概都沒戲唱
+20:38:04 <favonia> miaout17: 是 MUST
+20:38:20 <miaout17> favonia: 疑，哪裡標明MUST的啊？
+20:38:38 <favonia> miaout17: 9.6 PUT. 任何看不懂的 Content-* 都不能忽略
+20:39:00 <favonia> 而且一定要用 "501 沒實作"
+20:39:15 <miaout17> favonia: 但基本上我很少看到application層做那麼多檢查的。很多都交給framework/middleware/library處理
+20:39:35 <favonia> 問題是我現在很懷疑 framework 有做這麼多事情耶....
+20:40:35 <favonia> 像你覺得哪部份是 framework 處理的。例如 put + if-match 失敗時一定要傳回 412
+20:40:48 <favonia> 你用的 framework 有完全遵照這規則嗎 orz
+20:41:20 <miaout17> 沒有吧…
+20:41:55 <favonia> 是說細節實在太多了，我也不確定我有把 MUST (除了 Content-Type) 都弄完
+20:42:16 <favonia> 囧 如果是這樣的話這些 framework 根本都沒在管 HTTP xD
+20:42:20 <hychen> favonia, 你會不會作到本末倒置了 XD
+20:42:32 <hychen> favonia, 你只是要寫個applicaiton啊 orz
+20:42:39 <favonia> hychen: 沒有啊，我要做的事情幾乎都做完啦
+20:42:45 <favonia> 多花我一天而已
+20:43:11 <favonia> 還在進度上 xD
+20:43:25 <favonia> 不過如果沒寫這些東西應該可以多完成一個 API 沒錯...
+20:44:16 <miaout17> hychen: 真的學校外抓不到的論文，還可以看什麼學校可以免費使用無限網路。我記得像台大清大可以去圖書館申請無限網路臨時密碼，透過校園網路出去ACM/IEEE很多是可以抓的，整個流程應該完全合法。
+20:44:25 <miaout17> 現在不知道是不是還是這樣。
+20:44:45 <miaout17> 有學長學弟在唸書是最方便...XD
+20:44:46 <favonia> miaout17: 我想...只要不要學那個自殺的一直下載就好
+20:45:02 <hychen> 了解
+20:45:07 <miaout17> RIP Aaron Swartz
+20:45:57 <favonia> hychen: 我想要遵守 HTTP (至少 MUST 做完) 啊 lol
+20:47:21 <favonia> miaout17: Etag 大概花了 40-50 行。我覺得以 Haskell 的標準來說算很驚人 lol
+20:48:05 <favonia> miaout17: 20 行在做 parsing / matching
+20:48:39 <hychen> favonia, 如果作type-safety shell 你會打算用哪種語言實作?
+20:48:44 <hychen> favonia, haskell?
+20:49:06 <favonia> hychen: 不知道耶。這個答案一定會變的，因為選 Haskell 只是方便考量
+20:49:32 <favonia> hychen: 因為我猜測沒人用的原因是因為自己還要寫太多東西
+20:49:45 <favonia> 例如 ls 得要自己用 getdir 重新實作才好用
+20:49:58 <miaout17> 我其實到現在都還沒細看snaplet架構。我想很多其他開發環境etag都是做成library然後一行就可以掛上去。
+20:50:00 <favonia> 徹底放棄 Unix 哲學中第3點：文字串
+20:50:20 <favonia> miaout17: 我現在已經不太相信他們有完全遵守標準... xDDDD
+20:50:21 <miaout17> 當然如果可以刻一個etag snaplet讓後人可以一行掛上去也是功德無量
+20:51:34 <favonia> miaout17: 我的版本完全忽略 If-Unmodified-Since, 好像還不能給大家用
+20:51:44 <favonia> 目前只要是時間為基礎的一律拒絕 xD
+20:51:51 <hychen> 我反而不會想重做ls,  ls 不是 shell的一部分吧
+20:52:44 <hychen> 如果要連ls 都取代, 那是在 type-safety OS utilities
+20:52:52 <hychen> 這功就太大了
+20:54:39 <hychen> 目前我只要可以取代dash就好了 XD
+20:55:33 <favonia> hychen: 不知道耶可以試試看
+20:55:51 <favonia> miaout17: 天啊，他們對 ETag 的了解只有 conditional GET 嗎 o_O
+20:56:14 <favonia> miaout17: 那這種 support 根本是 broken 吧... 我寫的程式碼做得都比較多 xD
+21:05:47 <favonia> miaout17: RoR 好像沒有 conditional PUT o_O http://stackoverflow.com/questions/8915516/does-rails-3-1-support-conditional-put-like-it-does-conditional-get
+21:06:43 <mno2> favonia, hychen: 用 Haskell 的好處是可以用 GADT 作弊
+21:06:48 <CindyLinz> 印象中 RoR 的 put 是假貨..
+21:07:06 <favonia> CindyLinz: 我已經忽略那個 _method 了
+21:07:16 <CindyLinz> post 一個奇怪的 field 的時候, server 就假裝是 PUT..
+21:07:21 <favonia> 也許是早期瀏覽器還是怎樣的 workaround
+21:07:24 <CindyLinz> 喔喔
+21:07:34 <favonia> 但就算忽略那個
+21:07:41 <favonia> 沒有 conditional PUT 是怎樣...
+21:07:55 <CindyLinz> 哎我沒聽過 conditional PUT ^^|
+21:08:50 <CindyLinz> 不過你 proxy 實作完整可能也很浪費.. :|
+21:09:22 <CindyLinz> 因為新 client 都不相信 server 有實作.. 然後新 server 也不認為 client 會用到.. XD
+21:09:50 <favonia> CindyLinz: 既然用 Haskell 寫就要樹立一些好榜樣（咦）
+21:10:16 <favonia> 唉不過我已經不知道要說什麼了
+21:10:19 <CindyLinz> 我之前用過一個照 spec 正確實作的 fastcgi
+21:10:34 <favonia> 為了支援各種 conditional... 把程式碼 refactor 好幾次
+21:10:41 <favonia> 到現在這樣子我還算滿意啦
+21:10:42 <favonia> xD
+21:10:53 <CindyLinz> 結果它和 nginx 配在一起不能用
+21:11:05 <favonia> CindyLinz: why?
+21:11:20 <CindyLinz> 和一個叫作 cherokee 的配也不能用
+21:11:31 <CindyLinz> 主流 web server 根本就沒有人照 spec 做...||
+21:11:43 <CindyLinz> 照 fastcgi 的 spec 的話
+21:11:50 <favonia> CindyLinz: 但應該會相容啊。不相容是怎麼回事？
+21:12:17 <CindyLinz> web server 和 fastcgi app 之間會有一個可以一直用下去的 socket connection
+21:12:31 <favonia> 嗯？
+21:12:42 <CindyLinz> spec 上有定義「packet」, 然後每一個 packet 前面會有類似「channel」的編號
+21:12:48 <CindyLinz> 所以雖然只是一個 socket
+21:13:00 <CindyLinz> 可以同時有 N 個 request-response 在上面交錯著傳
+21:13:03 <favonia> 嗯嗯
+21:13:21 <CindyLinz> haskell 的那個 lib 就這樣實作了.. response 以後不會 disconnect
+21:13:40 <CindyLinz> nginx 和 cherokee 的實作是.. 只有 app disconnect 了, 才會 response 給 browser
+21:13:50 <CindyLinz> 所以就 hang 住啦~
+21:14:19 <favonia> 看標準吧。如果是 nginx 的 bug 那就要他們修掉啊 orz
+21:14:28 <CindyLinz> nginx 說不要!
+21:14:45 <CindyLinz> nginx 說 spec 定得不好... :Q
+21:14:47 <favonia> 這討論串在哪裡 xD
+21:14:54 <favonia> ...
+21:15:00 <CindyLinz> 很久以前的事 我找一下
+21:15:10 <CindyLinz> 不過 nginx 可能真的是蠻有道理的.. :Q
+21:15:29 <CindyLinz> 他說沒必要只用一個 socket, 而且每個斷開比較不容易錯
+21:15:40 <CindyLinz> 他說只用一個 socket 所想要省的東西其實不貴
+21:16:15 <favonia> 他文件沒寫對不對.........
+21:16:42 <CindyLinz> nginx 的?
+21:16:52 <favonia> anyway 但 conditional PUT 很有用啊
+21:16:56 <favonia> CindyLinz: 嗯
+21:17:30 <CindyLinz> 哎 不知道要怎麼找那討論串了..
+21:17:47 <CindyLinz> php 的 fastcgi 是這樣實作的.. 不知道是 nginx 先還是 php 先這樣搞
+21:17:57 <favonia> 算了也不是第一次發生 xD
+21:18:39 <CindyLinz> 有個 stackoverflow 的討論串.. http://stackoverflow.com/questions/7616601/nginx-fastcgi-and-open-sockets
+21:18:44 <favonia> CindyLinz: 是說我手賤實作了 HTTP 405 xD
+21:20:08 <favonia> CindyLinz: 可以說是搞笑用的... 簡單來說如果我不支援 PUT 我可以傳 405 跟你說 PUT 不支援
+21:20:39 <CindyLinz> 我比較愛 402.. @@"
+21:20:54 <favonia> 402 被標準鎖住了不能用
+21:21:02 <CindyLinz> 鎖住?
+21:21:09 <CindyLinz> 不就缺錢的時候用嗎? XD
+21:21:26 <favonia> xD
+21:22:12 <CindyLinz> favonia: 你 socket 用哪個 package?
+21:22:24 <CindyLinz> 最近要來寫個 project, 會用到 socket
+21:22:26 <favonia> CindyLinz: framework 解決了
+21:22:34 <favonia> CindyLinz: 喔喔你說自己寫喔
+21:22:37 <CindyLinz> framework 是怎樣? ^^|
+21:22:55 <favonia> 我不知道耶，每次 Haskell 都零零散散一堆功能重複的 package
+21:23:05 <favonia> 我要 survey 一下才知道哪個最好用
+21:23:08 <CindyLinz> 對啊, 公司內用的一組工具.. 從單純的開始, 一點一點入侵公司的 code base.. A_A
+21:23:23 <CindyLinz> 嗯, 想要一個不是用 [Char] 進出的 socket :p
+21:24:02 <favonia> CindyLinz: [Char] 是禁止的！！！
+21:24:14 <CindyLinz> 那, 也不要 String.. (咦)
+21:24:23 <favonia> CindyLinz: 不是一樣嗎
+21:24:27 <CindyLinz> favonia: 欸, 所以你這次不是直接寫 socket?
+21:24:36 <CindyLinz> 好吧那我再找找 ^^
+21:24:49 <favonia> CindyLinz: 不是，是寫 web application, 但我想讓他幾乎完全遵守 HTTP 1.1
+21:24:59 <favonia> 你想要寫什麼？如果是最低階 socket
+21:25:03 <favonia> 可以用 network
+21:25:13 <favonia> http://hackage.haskell.org/package/network
+21:25:42 <favonia> 這沒什麼意外的東西... 就只是 system call 簡單包一包
+21:26:34 <CindyLinz> 寫一個照玩家的成績排名的系統, 隨時把玩家現在成績更新進去, 然後可以隨時取得玩家現在的名次, 還有比他前面一名的成績
+21:26:43 <favonia> CindyLinz: 什麼 protocol?
+21:26:55 <CindyLinz> favonia: 可以自己訂.. 我猜我會用 memcached 的 text protocol
+21:27:13 <CindyLinz> 這樣 perl 或 php 都有現成的 client 可以用
+21:27:42 <favonia> CindyLinz: 好像有 memcached 這個 package
+21:27:45 <favonia> http://hackage.haskell.org/package/memcached
+21:28:21 <CindyLinz> 這個是 client 吧?
+21:28:24 <CindyLinz> 通常都是 client..
+21:28:33 <CindyLinz> 我在 perl 裡面以前也只有找到 client..
+21:28:41 <CindyLinz> 現在有 server 了..
+21:28:47 <CindyLinz> 不過是我寫的... orz
+21:28:58 <CindyLinz> client 倒是有很多....
+21:30:01 <CindyLinz> network 的版號這一大排!!
+21:30:39 <favonia> CindyLinz: 是有 server 啦...
+21:31:14 <CindyLinz> ??
+21:31:42 <CindyLinz> 因為 memcached 是一個已有的, C 寫的 server, 通常大家都沒有寫 server protocol 的需求呀 :Q
+21:31:59 <CindyLinz> 都是寫 client protocol, 接應用
+21:32:30 <favonia> https://github.com/tanakh/CurryDB/blob/master/Database/Memcached/Server.hs
+21:32:57 <CindyLinz> 這 url 怎麼點下去會變 404 @@"
+21:33:07 <favonia> https://github.com/tanakh/CurryDB/blob/master/Database/Memcached/Commands.hs
+21:33:09 <CindyLinz> 現在有了 @@"
+21:33:18 <CindyLinz> Server.hs 那個現在通了..
+21:33:57 <CindyLinz> 喔, CurryDB 的 memcached protocol 介面 :D
+21:34:02 <favonia> 感覺沒有太難耶～
+21:34:06 <CindyLinz> 我大概也是用這個 fu
+21:34:17 <CindyLinz> 就是它很單純所以選它啊^^
+21:34:33 <CindyLinz> 而且用這個好處是 client 那邊就不用寫 client lib 了
+21:35:17 <favonia> 唉
+21:35:25 <favonia> 為什麼要用垃圾 HTTP 協定呢（悶）
+21:35:40 <CindyLinz> ???
+21:35:47 <CindyLinz> 沒有要 HTTP 啊 o.o
+21:35:56 <favonia> 我是說我現在在寫的程式
+21:35:59 <CindyLinz> 喔 XD
+21:36:08 <CindyLinz> 還有疊在 HTTP 上面的 REST (Y)
+21:36:19 <favonia> REST 倒是不錯
+21:36:30 <CindyLinz> 來翻看一下你前面對 HTTP 的抱怨 :p
+21:36:33 <favonia> 讓大家願意好好發揮 HTTP 的潛力
+21:36:45 <favonia> 只是 HTTP 本身有些奇怪的問題
+21:39:50 <CindyLinz> hmm
+21:40:06 <CindyLinz> 感覺你是看 1.1 在實作..
+21:40:46 <CindyLinz> 也許該想像定義 http 的時候, web 不是要給人現在這樣用的 ^^|
+21:41:01 <CindyLinz> 某種角度來看是用壞了.....
+21:41:48 <favonia> 應該吧
+21:42:18 <favonia> CindyLinz: 但我還是覺得 RESTful 系列滿遵守 HTTP. 他儘量用 HTTP 本身的功能來做
+21:42:22 <favonia> 問題是.....
+21:42:33 <favonia> 要支援 HTTP "本身" 的功能不簡單啊...
+21:43:58 <CindyLinz> 這個是下面的問題, 上面的問題是, 很多人都在 REST 上面定非常複雜的 api, 所以只是跟 REST 相容, 可是感覺一點都不 REST.... XD
+21:44:34 <favonia> 這就是我喜歡 REST 的地方
+21:44:40 <favonia> 他沒有自己定奇怪的東西
+21:44:42 <favonia> 同樣的
+21:44:58 <favonia> 上面的 API 也可以儘量用 REST 有講的東西
+21:46:35 <CindyLinz> 可是如果 api 上面 ? 後面接一大串參數, 我覺得就不太對了啊..
+21:47:47 <CindyLinz> http://developers.gigya.com/010_Developer_Guide/85_REST/OAuth2
+21:49:15 <CindyLinz> 嘖嘖.. Network 的 high-level 用法就是 [Char] 進出
+21:49:26 <CindyLinz> sendTo :: HostName -> PortID -> String -> IO ()
+21:49:46 <favonia> CindyLinz: 不行啦。這世界上只有 ByteString xD
+21:50:06 <CindyLinz> 沒關係, 它還有提供 low level 版.. 來看一下....
+21:50:26 <CindyLinz> 用 [Char] 進出該不會比 perl 的 string 進出還慢? @@"
+21:52:34 <favonia> CindyLinz: 不知道（自動忽略）
+21:56:39 <CindyLinz> 唔.. 低階版的也是 String.. # send :: Socket -> String -> IO Int
+21:57:03 <CindyLinz> 不過低階版有個邪惡的 buffer 用法.. # sendBuf :: Socket -> Ptr Word8 -> Int -> IO Int
+21:57:21 <favonia> CindyLinz: http://hackage.haskell.org/packages/archive/network/2.3.0.14/doc/html/Network-Socket-ByteString.html
+21:57:28 <favonia> 不是有 ByteString 嗎...
+21:58:06 <favonia> CindyLinz: String 就算了吧（默）
+21:58:09 <CindyLinz> 奇怪.. tcp 用的 sendBuf 是 Ptr Word8.. udp 用的 sendBufTo 是 Ptr a.. 為什麼不一致啊... QQ
+21:58:36 <CindyLinz> favonia: 啊我從 Network.hs 的說明, 它說如果要低階的請移駕 Network::Socket.. XD
+21:58:48 <mno2> favnoa: comments 變成
+21:58:54 <CindyLinz> 所以就去到了 Network::Socket 而不是 ByteString 版 XD
+21:58:56 <mno2> comment ?
+21:59:03 <favonia> y
+21:59:16 <mno2> why ?
+21:59:28 <favonia> 我有哪裡忘了改嗎
+21:59:40 <favonia> er 因為其實只有一個註解？
+22:00:08 <mno2> 所以存的東西一樣只是改名字？
+22:00:21 <favonia> 對
+22:00:23 <mno2> OK
+22:00:33 <favonia> 記得原本要用 [Text] 還是啥的
+22:00:36 <favonia> 可是後來放棄了
+22:02:53 <mno2> 因為資料庫原本就是用 Text ， 所以我會以為你只想要有單則留言
+22:05:00 <favonia> 嗯
+22:05:07 <mno2> favonia: 那 blacklisted 不放在 CharInfo 中?
+22:05:15 <favonia> no
+22:05:23 <favonia> 那是另外的資料
+22:06:18 <mno2> blacklist 是 static 的 ?
+22:09:01 <favonia> 是
+22:09:14 <favonia> 那個用程式算就好了
+22:12:22 <favonia> 我的意思是說，雖然是 static 的，但好像沒必要浪費空間存
+22:12:26 <favonia> 因為規則很簡單
+22:17:54 <mno2> OK
+22:31:48 <CindyLinz> favonia: 那~ disk file IO 有推荐用什麼嗎? ^^
+22:32:11 <favonia> @google file IO haskell bytestring
+22:32:13 <lambdabot> http://www.haskell.org/haskellwiki/DealingWithBinaryData
+22:32:14 <lambdabot> Title: Dealing with binary data - HaskellWiki
+22:33:08 <favonia> @google file haskell bytestring
+22:33:12 <lambdabot> http://hackage.haskell.org/packages/archive/bytestring/0.9.2.1/doc/html/Data-ByteString.html
+22:33:13 <lambdabot> Title: Data.ByteString
+22:33:23 <favonia> 大概就這樣吧 xDDD
+22:36:08 <favonia> CindyLinz: 反正內建的 String 只是玩具
+22:38:22 <favonia> CindyLinz: 據說 attoparsec 很快，至少很多 package 好像都因為這樣改用他
+22:38:29 <favonia> CindyLinz: 裡面同樣用 ByteString
+22:39:04 <mno2> CindyLinz: disk IO 你需要存什麼?
+22:39:38 <mno2> 是會很多檔案嗎？
+22:45:09 <favonia> 我終於知道為什麼都看不到重複的了... Octocat 好多圖 http://octodex.github.com/
+22:45:23 <favonia> 我是說 GitHub 吉祥物 xD
+22:53:56 <CindyLinz> 檔案.. 大而少
+22:54:03 <CindyLinz> 打算一個檔案放一棵大 B-tree
+22:54:19 <CindyLinz> 還沒決定好要用 mmap 還是 fseek + read / write
+22:56:28 <CindyLinz> 先來讀這個 DealingWithBinaryData
+22:56:38 <CindyLinz> 每次想逃避現實的時候就躲到文件裡面
+23:09:28 <miaout17> 離開一陣子留言好多…XD
+23:10:32 <miaout17> Rails那個_method是很久以前的事了
+23:12:14 <miaout17> AGREE with CindyLinz > 主流 web server 根本就沒有人照 spec 做...||
+23:12:56 <CindyLinz> 主流瀏覽器也不打算照 spec 做.. XD
+23:13:19 <CindyLinz> 之前不知道哪邊看到反擊: 本標準不支援IE XD
+23:14:18 <miaout17> 而且現在正常架構大多在application server前擋一層CDN或reverse proxy，最簡單的架構也可能拿nginx當reverse proxy，有些東西前面的server不支援就沒戲唱了。
+23:14:58 <CindyLinz> 對 @@"
+23:15:32 <CindyLinz> 而且 nginx 這種 open 的東西通常支援算是比別的完整了..
+23:30:50 <favonia> miaout17: PUT 不能 cache, 前面有沒有檔沒差
+23:33:19 <favonia> 這些東西大都要靠後面原 server 解決...
+23:33:33 <favonia> 都不是可以 cache 的
+23:34:49 <CindyLinz> 我們有時需要不會 cache 的 GET
+23:35:08 <CindyLinz> 就在後面加一個無用的 random argument..
+23:35:13 <CindyLinz> 或是放 time
+23:35:44 <CindyLinz> browser 因此而 cache leak 的話就... 別人家的記憶體死不完了 :p
+23:35:56 <favonia> CindyLinz: 為什麼不用 POST 啊？
+23:36:16 <CindyLinz> 看情況, 有時候不方便
+23:36:30 <CindyLinz> POST 不能直接在瀏覽器直接打東西來測試
+23:36:56 <CindyLinz> 然後.. web server log 通常只會有 url 那一條
+23:37:04 <CindyLinz> 不會有 body
+23:37:51 <favonia> 那 no-cache 之類的都沒用嗎
+23:38:18 <CindyLinz> 不一定有用
+23:46:54 <favonia> 我剛才看了一下各方 bug report
+23:47:03 <favonia> 感覺又是 framework 炸掉

@@ -1,0 +1,41 @@
+12:35:14 <_13h> http://flyingfrogblog.blogspot.tw/2010/05/why-is-haskell-used-so-little-in.html  # Why is Haskell used so little in the industry?
+17:40:48 <Yu-Lin> 問一下，scm 在部落格寫到的 摺疊-映射融合定理，這個定理的英文名子是？
+17:43:10 <hashcat> fusion-fold
+17:43:22 <Yu-Lin> 謝謝
+17:43:37 <hashcat> 好像反了
+17:43:53 <hashcat> fold-fusion
+17:43:54 <Yu-Lin> XD
+17:44:11 <Yu-Lin> https://www.google.com.tw/search?q=fusion-fold&safe=off&sa=N&tbm=isch&tbo=u&source=univ&ei=YWfmUaHjIcHvkQWb4YBg&ved=0CHUQsAQ&biw=960&bih=477
+17:44:21 <Yu-Lin> 難怪圖的搜尋結果XDD
+17:44:39 <hashcat> 我最近看某agda slide剛好看到
+17:44:58 <_13h> fold fusion
+17:45:08 <_13h> 喔喔 後面有人回了
+17:59:21 <hashcat> :D
+18:44:35 <hashcat> 求Haskell工作
+18:52:59 <Yu-Lin> XD
+19:35:29 <Yu-Lin> 在 py 3.3 會因為某些 side-effect 而導致這定理不能用XD
+19:35:49 <Yu-Lin> 例如 dict 的 update.....
+19:38:24 <letoh> dict 的 update ?
+19:38:46 <letoh> Yu-Lin: 你平常也寫 python 啊?
+19:40:46 <Yu-Lin> 工作需要阿
+19:40:48 <Yu-Lin> XD
+19:40:50 <Yu-Lin> 準備下班
+19:52:10 <hashcat> 問個問題
+19:52:29 <hashcat> 從別人的github fork出來的東西藥怎merge回去阿
+19:57:33 <hashcat> 額會了
+19:58:55 <letoh> 發 pull request
+21:00:12 <hashcat> 我按出來了 ^^
+22:16:04 <hashcat> darcs有人用過嘛?
+22:16:48 <godfat1> 之前抓 agda 時用過一點
+22:17:36 <hashcat> 有沒什麼從git改用darcs的理由
+22:18:26 <godfat1> 之前聽到的說法都是 darcs 使用者介面比較友善，所以如果你習慣 git 了，我猜其實沒有
+22:18:26 <godfat1> 或是想把手上的東西都改成 haskell 的，這應該也是個理由吧 XD
+22:20:27 <hashcat> 我就是在想這個
+22:21:13 <godfat1> 那就換吧 XD
+22:21:16 <hashcat> 不過感覺很爛, 想補充些更有說服力的理由
+22:21:49 <godfat1> 隨著 git 愈來愈好，理由愈來愈少了..
+22:22:18 <hashcat> 那個darcs託管也看起來破破的
+22:23:39 <hashcat> 所以還是有吧~
+22:23:39 <hashcat> 有理由
+22:24:25 <godfat1> 我不太熟，不過兩者運作方式不太一樣，比較喜歡 darcs 的人一定有吧
+22:26:13 <hashcat> 好吧我自己再看看

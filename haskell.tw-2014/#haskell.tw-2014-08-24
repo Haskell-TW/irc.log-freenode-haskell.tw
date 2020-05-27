@@ -1,0 +1,30 @@
+00:05:47 <suhorng> 是說如果要實作 polymorphism, 想想好像資料結構都必須要支援某種通用的介面？例如改用 pointer 而不是直接存放資料
+00:06:23 <suhorng> 本來我想像 C++ template 一樣在 instantiate 的時候複製一份程式出來, 可是發現遇到 polymorphic datatype 會失敗...
+00:08:57 <monochrom> C++ 都有 polymorphic data type, 稱為 template class, 照計都只是更多複製
+00:09:57 <monochrom> 不想複製, 可改用 pointer.
+00:10:01 <suhorng> monochrom: 但是那個可以動態做嗎? (因為是 c++14 的東西, 還沒空看)
+00:10:49 <suhorng> 像是 let xs = [id] in   let ys = if SOME_DYNAMIC_COMPUTATION then xs else id:ys  in ... 這種動態的東西, 有辦法嗎?
+00:11:09 <monochrom> 不知道動態, 不知道 c++14, template class 是自古已有的事
+00:11:31 <suhorng> 喔, 想必我誤會了, template class 是 template<typename T> class C { .... } ; 這個吧?
+00:11:40 <suhorng> 那這個不支援多型呀
+00:11:50 <suhorng> 像 xs, ys 的型別都是 forall a. [a -> a]
+00:13:49 <monochrom> 請把上面未完成的 in ... 寫完, 之後我想我能說會發生甚麼事
+00:14:32 <suhorng> 好的, 我舉個例子
+00:19:28 <monochrom> 你應該會發覺, 所有想到的例子都可以用複製來解決. 這是因為你不用做 impredicative polymorphism
+00:20:45 <suhorng> 嗯...為什麼與 impredicative polymorphism 有關呢?
+00:23:18 <monochrom> 有一天, 你想做 [forall a. a -> a] 時, 那才真的頭痛. 但 [forall a. a -> a] 需要 impredicative polymorphism
+00:23:44 <suhorng> 嗯, 是, 這個確實是
+00:25:35 <monochrom> 至於 let {ys :: forall a. [a -> a]; ys = ...} in BBB, 那個 forall 實是小菜一碟, 因為在 BBB 裏對 a 做甚麼, 是有限和在 link time 已完全鎖定
+00:27:10 <suhorng> 好了, 我想舉的例子是這個 http://ideone.com/9Kvdub
+00:27:58 <suhorng> 這裡的狀況是: ys 在使用端的型別是編譯時期就已知的 (apply_all "XD", apply_all 5)
+00:28:43 <suhorng> 可是在計算 ys 那步, 若使用複製, 那等於是我之後用了幾種 ys, 處理資料的量就變數倍
+00:29:00 <suhorng> 有點想不太到該怎麼做
+00:30:07 <monochrom> 看來複製會很貴. 那麼, 用 pointer 吧, 這是 FP 界常做的
+00:30:19 <suhorng> 又或者, 複製的話, 我可以把原本的 ys :: forall a. [a -> a] 在編譯時期, 就變換成 ys' :: [int -> int] * [string -> string]?
+00:30:21 <suhorng> 嗯XD
+11:12:05 <suhorng> @src MonadPlus
+11:12:05 <lambdabot> Source not found. I don't think I can be your friend on Facebook anymore.
+11:12:58 <suhorng> @hoogle mplus
+11:13:00 <lambdabot> Control.Monad mplus :: MonadPlus m => m a -> m a -> m a
+21:54:23 <suhorng> 剛剛在想昨天那樣直接複製遇到可修改的變數會不會出錯
+21:54:40 <suhorng> 結果 Standard ML 真的超聰明的耶XD 因為有 value restriction 所以不會出事

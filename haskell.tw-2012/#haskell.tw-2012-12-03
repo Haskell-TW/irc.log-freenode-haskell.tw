@@ -1,0 +1,26 @@
+12:43:48 <MnO2> http://blog.codersbase.com/2012/12/haskell-community-project-ideas.html
+12:44:25 <MnO2> 有人要來作 project 嗎？ xD
+13:01:58 <MnO2> lambdabot 最近怎麼一直掛...
+13:20:03 <favonia> > 1+1
+13:20:08 <lambdabot>   mueval-core: Time limit exceeded
+13:48:45 <CindyLinz> 好像沒有入門款 QQ
+13:50:52 <MnO2> CindyLinz: Hackage/github/travis-ci integration
+13:51:10 <MnO2> CindyLinz: 這感覺比較簡單吧
+13:51:52 <CindyLinz> 竟然藏在最下面
+13:54:34 <CindyLinz> travis-ci 沒用過 :|
+13:57:12 <MnO2> CindyLinz: 還蠻簡易的，寫個設定檔就好了
+13:58:43 <CindyLinz> (小聲) 先繼續讀一點書好了...
+13:59:18 <CindyLinz> 最近在看 Generalising Monads To Arrows
+13:59:59 <CindyLinz> pdf 全 41 頁, 現在看到 22 頁.. 目前感覺還不錯, 前面會先把 Monad 的好處跟限制用實例再講一遍
+14:00:27 <CindyLinz> 我覺得 Monad 這種抽象的東西, 可以用好多好多面象來看, 多看例子有益身心健康 :p
+14:00:57 <CindyLinz> 等全看完覺得都不錯的話, 再去 FB 推荐 :p
+14:01:14 <CindyLinz> 它主要是要介紹比 Monad 再抽象一點的 Arrow...
+14:01:33 <MnO2> CindyLinz: 其實就跟普物學 F = m a 一樣，公式就這麼簡單。但要做很多習題...
+14:02:09 <CindyLinz> MnO2: 習題嗎... 可是場子都不一樣啊 @__@
+14:02:33 <MnO2> CindyLinz: 類比啦..
+14:12:59 <b4283> analogy
+18:50:19 <MnO2> http://en.wikipedia.org/wiki/Plan_9_from_Bell_Labs
+18:50:30 <MnO2> 我覺得 go 的吉祥物跟 Plan 9 的吉祥物好像
+18:54:17 <cataska> 都是同一個人設計的 http://en.wikipedia.org/wiki/Ren%C3%A9e_French
+18:54:32 <cataska> 原來是 Rob Pike 的老婆
+18:56:55 <MnO2> 原來如此!

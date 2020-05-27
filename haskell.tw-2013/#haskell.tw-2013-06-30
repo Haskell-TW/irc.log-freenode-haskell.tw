@@ -1,0 +1,14 @@
+00:02:50 <suhorng> > let fibs = 1:1:zipWith (+) fibs (tail fibs) in fibs
+00:02:51 <lambdabot>   [1,1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181,6765,10946,1...
+00:12:22 <hashcat> > let fibList = (1:scanl (+) 1 fibList) in fibList
+00:12:23 <lambdabot>   [1,1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181,6765,10946,1...
+04:44:28 <favonia> \msg lambdabot > fix (\x->x)
+04:47:28 <favonia> > fix$(1:).(1:).ap(zipWith(+))tail
+04:47:29 <lambdabot>   [1,1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181,6765,10946,1...
+04:57:12 <favonia> > fix$(1:).scanl(+)1
+04:57:13 <lambdabot>   [1,1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181,6765,10946,1...
+05:16:10 <monochrom> http://www.vex.net/~trebla/haskell/scanl.xhtml
+08:41:27 <suhorng> wow, 用 scanl 的寫法好有趣XD
+08:42:31 <suhorng> :t fix
+08:42:32 <lambdabot> (a -> a) -> a
+20:59:35 <MnO2> http://vimeo.com/69280214

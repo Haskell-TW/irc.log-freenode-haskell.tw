@@ -1,0 +1,13 @@
+11:57:12 <CindyLinz> MnO2: 不過... 我覺得 undecidable 在實際上也沒有非常可怕不能碰呀
+11:58:32 <CindyLinz> 實務上可以粗暴地加一條限制: 依我的特定搜尋方式, 總 step 在若干步以內, 找得到就算 valid, 找不到就算 invalid, 就要要求 programmer 要加更多 hint
+12:00:20 <CindyLinz> XD
+13:31:01 <MnO2> CindyLinz: 的確是一種想法，我相信應該有相關研究做過了？請 favonia 開示
+14:35:46 <CindyLinz> XD
+14:50:05 <b4283> http://www.shenlanguage.org/
+14:52:57 <CindyLinz> shenlanguage - 神之語言嗎? XD
+14:54:17 <b4283> 是神沒錯 XD
+15:28:45 <Yu-Lin> XD
+15:36:45 <b4283> http://blog.fogus.me/2011/10/18/programming-language-development-the-past-5-years/ 追到這篇
+16:01:57 <Mgccl> Google和fb有没有什么用haskell的project
+23:39:52 <favonia> MnO2: 實際上有在用的型態系統很多本來就 "incomplete"... 就是為了種種原因做限制，然後證明受限的系統有很多好性質
+23:42:59 <CindyLinz> favonia: 感覺有種... LR(1) → LALR 的感覺?

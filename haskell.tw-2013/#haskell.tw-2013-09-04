@@ -1,0 +1,104 @@
+12:40:02 <miaout17> Functional Thursday #5 目前只有12人報名耶 (其實我差點忘記，剛剛突然想起來)
+13:24:07 <Yu-Lin> 快開學的關係？
+14:14:25 <CindyLinz> 隔天是 Flolac 期末考.. 不知道影響多大 :p
+14:17:51 <miaout17> 總覺得穆老師開講，聽眾那麼少有點可惜
+14:22:42 <CindyLinz> 也許太難了 XD
+14:30:23 <Yu-Lin> 明天的主題都很有趣阿，我還蠻想聽舒跑的 toy vm XD
+14:31:15 <CindyLinz> 我也是 :p
+14:33:28 <godfat1> O_o 奇怪我以為今天是週四，我真的暈了
+14:34:02 <godfat1> 我貼貼連結看看能不能吸到更多人
+14:34:03 <CindyLinz> XDD
+14:40:02 <godfat> 前面提到 ruby 跟 eventmachine,
+14:40:02 <godfat> eventmachine 是提供 callback 的東西，
+14:40:02 <godfat> 類似 anyevent (我只知道名字)
+14:40:02 <godfat> 要避免 callback 要另外再加東西上去
+14:40:02 <godfat> 是有一些現有的有做，不過還沒很流行的
+14:40:02 <godfat> 現在用 ruby 的人大多還是 blocking 到底... (暫離)
+14:42:25 <CindyLinz> 反正 ruby 有 thread, blocking 能用呀~~
+14:56:44 <mno2> CindyLinz: ruby 有 thread ? 你是說 fiber 嗎？
+14:57:15 <CindyLinz> mno2: 忘咧, 反正我以前用過 ^^|
+14:57:59 <mno2> fiber 印象中是 coroutine 之類的東西？ （每個語言 context 底下講到 thread 定義都不一樣）
+15:13:09 <miaout17> Ruby有thread，可是有global interpreter lock
+15:14:21 <miaout17> 簡單來說就是，你可以create thread (OS thread)，但是在Ruby interpreter同時只會有一個thread在跑。
+15:14:54 <miaout17> 所以如果CPU intensive的pure ruby程式，開4個thread不會變快。
+15:15:39 <miaout17> 但如果跑到C extension，或者進blocking IO，interpreter lock就可以release給另一個thread跑
+15:16:01 <miaout17> 以上是指Ruby的C implementation (MRI之類的)，目前CPython也是差不多的狀況
+15:25:13 <_13h> 寫 python 的人都在想一些怪招避開 gil
+15:25:40 <_13h> ruby 不曉得有沒有這種狀況
+15:27:02 <_13h> 不過我覺得 ruby 本來就不快 (2.0 我覺得還是很慢)，避不避好像沒什麼差XD
+15:32:05 <CindyLinz> _13h: 是怕 dead lock 呀
+15:33:05 <_13h> 唔  我好像漏掉一段? gil 會 deadlock 嗎? XD
+15:42:40 <CindyLinz> _13h: 是我漏看「gil」.. :p
+15:43:35 <_13h> 喔喔喔  沒跟到更前面那一段 eventmachine 怎麼來的，只好先講一下後面的 gil XD
+15:59:54 <godfat> perl 是完全沒有 thread 嗎？ @@"
+16:00:17 <godfat> 不過 ruby 用 thread 的人也不多....
+16:07:03 <CindyLinz> godfat: 當作沒有吧.. XD
+16:07:18 <CindyLinz> 我是說 perl core 的部分, 不包含 cpan 的
+16:07:47 <CindyLinz> godfat: unstable 的 5.9 曾經出現過, 然後就被標 deprecated 了 XD
+16:09:31 <CindyLinz> godfat: ruby 用 thread 的人不多.. 那麼, 如果拿來寫服務好幾個交錯動作的 socket 的 server 程式通常用什麼方式寫?
+16:11:02 <Yu-Lin> 當年我在學 perl 時，曾經看到書上還有網路上討論說，perl 即將有真正的 thread
+16:11:24 <CindyLinz> 現在可能要寫: perl 曾經有真正的 thread.. (逃)
+16:11:49 <Yu-Lin> XD
+16:13:08 <CindyLinz> (怎麼覺得有些自動機相關的 paper 比較容易寫呢... :Q)
+16:13:24 <CindyLinz> (不知道是投怎樣的 conf)
+16:18:37 <godfat> CindyLinz,
+16:18:37 <godfat> cpan 上的是用 c extension 做 thread 嗎？
+16:18:38 <godfat> 不過為什麼要 deprecate 啊 @@"
+16:18:38 <godfat> 我覺得大多數用 ruby 的人就是寫 rails,
+16:18:38 <godfat> 然後基本上就是直腸子通到底.. 後來 eventmachine
+16:18:38 <godfat> 紅過一陣子，就是 callback, 然後 fiber/coroutine
+16:18:38 <godfat> 但現在好像又有點退燒了，因為問題也是不少吧..
+16:18:55 <godfat> ruby 這塊雖然有在發展，不過發展狀況我覺得不是很理想
+16:21:25 <CindyLinz> godfat: 我有用過一個叫 coro 的 lib. 品質應該算不錯, 它跑了 N 隻 perl interpreter 來存 context.. 我覺得這已經不只是一般 c extension 的程度的惡搞了
+16:21:50 <godfat> 這不會很吃記憶體嗎？ ~.~
+16:21:54 <CindyLinz> godfat: 然後我覺得 rails 上面的 app 不算是同時服務 N 個交錯 socket
+16:22:09 <CindyLinz> 交錯是在底層發生的, 不是在 app code 裡面
+16:22:11 <godfat> 所以我想說的其實是大部分的人不寫 :/
+16:22:17 <CindyLinz> 喔 XD
+16:23:03 <CindyLinz> 記憶體喔, 就吃啊.. multi-thread 就是要多吃記憶體才有天理啊(咦) 不過程式碼的部分可以 share, 只有 data 會多佔
+16:23:22 <godfat> 要做的話 ruby socket 有不少 nonblocking 的版本可以用
+16:23:23 <godfat> 還有像是 http://bogomips.org/kgio/
+16:23:23 <godfat> 這個好像差不多快合併進 ruby 了，就不需要額外裝
+16:23:52 <CindyLinz> 好, got 關鍵字 non-blocking 版本 :D
+16:24:09 <godfat> XDDDDD 跑在 heroku 上記憶體超吃緊的 :/
+16:24:48 <CindyLinz> perl 應該是相對省記憶體的了吧?
+16:25:38 <godfat> 還有這個 http://bogomips.org/sleepy_penguin/
+16:25:47 <godfat> 我跟 perl 完全不熟.. XD
+16:26:31 <godfat> perl socket 沒有 nonblocking 的版本嗎？
+16:52:46 <mno2> http://perldoc.perl.org/IO/Socket/INET.html
+16:52:52 <mno2> If Blocking is set to 0, the connection will be in nonblocking mode
+16:53:46 <mno2> 不過要降到 socket 層自己做的話，很苦啊...
+16:55:11 <godfat>  NOTE NOTE NOTE NOTE NOTE NOTE NOTE NOTE NOTE NOTE NOTE NOTE 是什麼 XDDD
+16:56:06 <godfat> 不是 socket 的話，底層就會是 callback/thread/coroutine 了？
+17:00:29 <mno2> 就看提供什麼樣抽象吧。thread 在有 side effect 的時候太難寫好。callback 的話 code base 變大會很難搞，感覺好像用狀態機寫程式。coroutine 個人認為是實作向後相容的前提下比較好的解法吧。
+17:03:00 <godfat> 是說還有 actor, 不過我一直看不太出來他有什麼特別的
+17:03:00 <godfat> 有 side effect 時最終都會有同步問題吧？
+17:04:00 <mno2> 對啊，同步的不同抽象又是另一門學問
+17:05:00 <mno2> actor 的話我沒研究過。只對他停留在就是不同 copy 的印象
+17:05:07 <godfat> 除去不可逆的 socket 外，我目前感覺 STM 是一條不錯的路
+17:05:09 <mno2> 不停
+17:05:28 <godfat> 類似 share nothing?
+17:05:34 <mno2> 對啊
+17:07:25 <mno2> STM 有蠻多好處的，只是好像目前實作都有點慢
+17:07:59 <godfat> XD ruby 沒有實作 ><
+17:10:07 <mno2> http://en.wikipedia.org/wiki/Software_transactional_memory
+17:10:12 <mno2> STM for Perl 6 has been implemented in Pugs via the Glasgow Haskell Compiler's STM library.
+17:10:26 <godfat> XDDDDD
+17:10:26 <mno2> au 的力作 xD
+17:10:36 <mno2> ruby 就靠 godfat 了
+17:10:47 <godfat> 趕快做個 ruby ghc binding
+17:11:57 <mno2> 可能要重新用 haskell 寫個 ruby 才有辦法走這條路 xD
+17:13:09 <godfat> 我猜在 ruby 裡也是用 TMVar.new 這樣用吧，不能用內建的 variable... XD
+17:13:32 <godfat> 然後裡面可能只能存純量之類的...
+17:17:42 <Yu-Lin> 我記得有個可以把 ruby 轉成別的語言，再轉回來的XDDD
+17:18:14 <godfat> 你是說宇宙大 quine 嗎？ XD
+17:18:14 <godfat> https://github.com/mame/quine-relay
+17:26:52 <Yu-Lin> 阿對XD
+17:27:40 <Yu-Lin> 這東西應該沒解決 haskell STM 轉到 ruby 的部分吧，有的話就可怕了XD
+17:28:33 <godfat> 這只是 quine 而已，沒有真的轉什麼東西 @_@
+17:30:57 <_13h> 宇宙大 quine XDXD
+17:31:11 <_13h> 執行後會有火山爆發嗎XD
+17:31:24 <godfat> 是燃燒的小宇宙
+17:56:07 <cataska> 執行後產出很多熵
+17:59:46 <hychen> 我是滿想聽的, 不過明天有事
+18:05:26 <hashcat> 產生很多負熵

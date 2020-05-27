@@ -1,0 +1,12 @@
+11:38:35 <darkx> pkmx: 你最好是新手 XD
+12:17:01 <petercommand> darkx: 我也是新手呦 啾咪^-*
+16:10:56 <darkx> petercommand: 不要騙 XDD
+16:31:21 <pkmx> 中手的定義... http://www.reddit.com/r/haskell/comments/2olrxn/what_is_an_intermediate_haskell_programmer/cmoex3m
+16:32:19 <CindyLinz> 強中自有強「中手」的中手?
+16:33:10 <CindyLinz> pkmx: 來轉貼 FB.. :p
+16:33:29 <pkmx> 咦 感覺定義好像被他修弱了 記得原本艱深很多啊
+17:36:12 <petercommand> 果然中手超強的XD
+21:33:59 <gansteed> 大家有什麼vim程式的haskell插件推薦嗎？
+21:52:13 <CindyLinz> 我只有用到 vim syntax color 的部分, 沒有用插件..
+21:53:55 <pkmx> M-x haskell-mode
+22:02:37 <gansteed> haskell-mode会带着emacs一起被装上

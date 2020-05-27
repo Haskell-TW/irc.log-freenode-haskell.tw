@@ -1,0 +1,33 @@
+10:50:38 <suhorngM_> 突然想到語法可以這樣玩XD https://github.com/suhorng/HaskellExercise/blob/master/ObjDot.hs
+10:50:54 <suhorngM_> the(...).XXXX $ \a -> ...
+11:58:18 <monochrom> 邪魔外道! :)
+12:39:44 <suhorngM_> monochrom: XD
+12:41:37 <suhorngM_> 每次都用 flip map ... 或 flip concatMap ... 寫有點怪
+13:09:40 <CindyLinz> XD
+13:33:24 <CindyLinz> suhorngM_: lens 的 (&) 也是 flip ($)
+13:33:43 <CindyLinz> 可是人家的 infix 用法看起來比你這個 the(xxx). 正派多惹~~
+13:44:35 <suhorngM_> CindyLinz: 他那個要怎麼做阿 不太瞭解怎麼達到 flip map 的效果
+13:49:12 <CindyLinz> 還沒有想過, 他的目的不是要這個就是.. @@"
+13:49:37 <CindyLinz> 他是因為要更新某個... record(?) 好幾個欄位的時候, 可以這樣寫:
+13:50:38 <CindyLinz> record & field1 .~ value1 & field2 .~ value2 ...
+13:51:07 <CindyLinz> 沒有 & 的話就是把 record & 改成在結尾寫 $ record
+13:53:31 <CindyLinz> (& map) 全等 map.... XD
+13:54:13 <CindyLinz> 就像 (map $) 全等 map 一樣無聊..ww
+13:59:31 <CindyLinz> 不過... flip map 如果用 token 數來看, 也已經是最簡了吧 QQ
+14:00:03 <CindyLinz> 覺得怪的話.. 那要不要用 let for = flip map ; concatFor = flip concatMap 再下去用呀?
+14:00:05 <suhorngM_> 嗯嗯嗯..QQ
+14:00:18 <CindyLinz> 就學... mapM 與 forM 的名字
+14:00:23 <suhorngM_> 有呀, 我原本是直接 for = flip map; concatFor = fliip concatMap
+14:00:27 <CindyLinz> 喔喔 :p
+14:00:41 <suhorngM_> 後來想說可不可以不要每個都寫一次
+14:01:37 <CindyLinz> 變成 the( .... ).concatMap  XD
+14:01:54 <CindyLinz> 跟 jquery 一樣邪門 XD
+14:07:36 <suhorngM_> XDDD
+14:07:54 <suhorngM_> 那個 `.` 有點扯 竟然可以這樣放XD
+14:12:21 <CindyLinz> . 的語法我覺得是 Haskell 缺陷 orz
+14:12:41 <CindyLinz> 因為跟 Module name 的 . 混得很像 orz
+14:12:59 <suhorngM_> 該換個名字了
+14:13:23 <suhorngM_> - op o;
+14:13:23 <suhorngM_> val it = fn : ('a -> 'b) * ('c -> 'a) -> 'c -> 'b
+14:13:23 <suhorngM_> - (fn x => x + 1) o (fn y => y * y);
+14:13:24 <suhorngM_> val it = fn : int -> int

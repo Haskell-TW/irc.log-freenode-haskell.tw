@@ -1,0 +1,4 @@
+16:15:00 <CindyLinz> @type (^)
+16:15:03 <lambdabot> (Num a, Integral b) => a -> b -> a
+16:15:07 <CindyLinz> @type (^^)
+16:15:09 <lambdabot> (Integral b, Fractional a) => a -> b -> a

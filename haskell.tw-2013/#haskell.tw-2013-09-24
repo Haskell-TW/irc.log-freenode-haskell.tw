@@ -1,0 +1,183 @@
+00:00:15 <hashcat> 就像haskell也有轉成eager的東西
+00:00:34 <hashcat> 但prolog從沒快過就是
+00:03:08 <hashcat> 我覺得應該可以寫翻譯器自動把Haskell翻譯成Idris
+00:03:21 <hashcat> 應該跟本幾乎不用翻譯
+00:05:09 <CindyLinz> hashcat: 那應該只是「能做」, 但是它的設計思想, 還有擁抱它的社群人們的心裡, 不會把另一半當重點啊 @@"
+00:05:44 <hashcat> 看不懂你在說啥
+00:05:51 <hashcat> 啥另一半
+00:05:57 <CindyLinz> eager <-> lazy
+00:07:03 <CindyLinz> 我看 Idris 首頁的 feature, 覺得它有想要把 Haskell 和 Agda 揉一揉, 然後把比較新的一些觀念都做進去
+00:07:12 <CindyLinz> (真的還蠻貪心的 XDD{
+00:07:14 <CindyLinz> (真的還蠻貪心的 XDD)
+00:07:50 <CindyLinz> 它標出它有 monad, do-notation, 但是就完全沒有提到 recursive do 了
+00:07:58 <hashcat> 我覺得他想挑戰C語言在嵌入系統的地位
+00:08:32 <letoh> 有一點很重要  要讓人很直覺知道寫出來的程式在記憶體中長什麼樣子
+00:08:35 <CindyLinz> 因為 recursive do 是只有 lazy 的世界才能出現的東西... 早期的 Haskell 98 裡面也還沒有想到要有這種東西
+00:09:11 <letoh> 會用到多少記憶體  做不到的語言應該連 c 的車尾燈都看不到XD
+00:09:19 <CindyLinz> 我想, Idris 已經從後來的研究裡面收集一堆好東西, 卻把這個漏掉, 是因為它的思維裡面, 算是沒有 lazy 這回事
+00:10:00 <petercommand> letoh: 出現亂碼了www 第1句
+00:10:14 <letoh> 唔  我這看是正常的耶? XD
+00:10:24 <letoh> "有一點很重要  要讓人很直覺知道寫出來的程式在記憶體中長什麼樣子"
+00:10:27 <CindyLinz> 我看也是.. 不過我 irssi 偶爾也會出現亂碼 :Q
+00:10:31 <letoh> 還是亂碼嗎?
+00:10:42 <hashcat> 我覺得要特性就再加就好
+00:10:45 <CindyLinz> 00:08 < letoh> 有一點很重要  要讓人很直覺知道寫出來的程式在記憶體中長什麼樣子
+00:11:27 <letoh> 不過現在所謂的嵌入式系統，幾乎都在講 linux, android 之類的平台... 很無聊
+00:11:50 <letoh> 除了比較有機會碰到 dma 外，跟一般 pc 其實沒兩樣
+00:11:52 <petercommand> letoh: 是說下一句的第1部份啦
+00:12:05 <CindyLinz> hashcat: 你看 Haskell 的 library, 從 standard 或 hackage 上面的, 幾乎都是 lazy 為主, strict 為輔.. 這是一個很重要的特徵, (嗯, 看場合, 不一定是好還是壞)
+00:12:34 <petercommand> letoh: (會用到...)這句
+00:12:40 <hashcat> 他要挑戰C語言就不能啥都lazy拉
+00:12:40 <CindyLinz> hashcat: 如果你所在的環境的 lib 幾乎都是 eager eval 的, 那麼偶爾出現的 lazy feature 威力會很小...
+00:12:49 <CindyLinz> 因為到處都被打斷
+00:12:50 <letoh> petercommand: "會用到多少記憶體  做不到的語言..."
+00:13:29 <petercommand> letoh: 正常了
+00:13:34 <CindyLinz> hashcat: 從首頁這些 feature 看, 我是沒感覺他想跟 C 怎樣, 倒是覺得它一直圍著 Haskell 和 Agda 打轉 ^^|
+00:14:02 <CindyLinz> 什麼 dependent type, totality check, monad, type class, let-binding... ^^|
+00:14:51 <CindyLinz> 然後 tactic (influenced by Coq) 可以擴大解讀為 Agda 的 emacs environment :p
+00:15:11 <CindyLinz> 我是說這頁.. http://www.idris-lang.org/
+00:16:18 <hashcat> 這語言怎看都有注重嵌入系統的傾向
+00:16:43 <letoh> 之前看了一下完全沒感覺耶XD
+00:16:55 <letoh> 不覺得我用得到XD
+00:17:05 <CindyLinz> letoh: 你有接觸過這個嗎? http://www.juluos.org/
+00:17:24 <letoh> 沒接觸過  但有留意過他們的活動
+00:17:24 <CindyLinz> letoh: 自己做 OS, 有沒有比較接近你想玩的東西?
+00:17:46 <letoh> 簡單的 boot loader / kernel 我是有寫過
+00:18:02 <letoh> 不過我主要還是想弄個全 forth 的環境XD
+00:18:18 <letoh> 被 c 綁著實在太不自由了
+00:18:41 <CindyLinz> letoh: 覺得還是沒有踩到地板的感覺?
+00:19:22 <hashcat> 全prolog
+00:19:44 <letoh> 其實也不是說特別想做某個方面  只是對語言的設計和某些應用之間的關係比較有興趣
+00:20:21 <letoh> 就像 idris 如果真的有考慮到 embedded system dev 的話，應該蠻有趣的吧，只是我一時沒看出有這個傾向XD
+00:20:45 <letoh> 寫 kernel 比較像是驗證的過程
+00:20:57 <CindyLinz> 私以為.. 如果 Idris 把 embedded system 當重點的話, 應該要在首頁多著墨一點.... ._.
+00:21:30 <letoh> hashcat: 你為什麼會有這種感覺阿? 是因為某一個 feature 嗎?
+00:21:48 <hashcat> 後端C又是eager
+00:21:57 <CindyLinz> 好像不是多著墨一點的問題, 是... 至少應該先提一點點吧...
+00:22:21 <hashcat> 忘記哪看到還有記憶體控制
+00:22:28 <letoh> 後端 c，又是 eager... 好像很多 scheme 都長這樣XD
+00:23:20 <hashcat> 補充靜態型別
+00:24:00 <letoh> 但這些對於 embedded system 的幫助好像不是那麼明顯
+00:24:05 <CindyLinz> mno2: jaiyalas 說.. 因為 10.9 找不到地點... ._.
+00:25:02 <letoh> backend 是 c 的話，其實還是得熟悉最後產生的 c 會是什麼樣子吧，就像 c 寫久了，最後會產生出什麼樣的 asm 大概會有個底
+00:25:49 <CindyLinz> embedded system 是不是有一派的作法, 整個程式是一個 busy loop?
+00:26:16 <letoh> 看什麼樣的系統/平台囉  沒有 timer 的話就只能用 busy loop
+00:26:24 <CindyLinz> 嗯, 只是突然覺得, 我超討厭有人用這種作法來寫手機 app 的!
+00:26:43 <CindyLinz> 然後 unity3D backend 疑似就是這樣搞.... = =
+00:27:09 <letoh> 習慣在有 os 的地方開發，應該會覺得這種方式不好
+00:27:28 <CindyLinz> 用到這種 app, 覺得明明就沒什麼在動的時候, 手機也超燙, 電池一下就沒力了.. 而且, 高溫還會永久性破壞電池存量 = =
+00:27:32 <letoh> 當然你也可以硬幹出一個小 os 啦，不過通常是沒必要，太浪費時間
+00:27:51 <CindyLinz> 手機 app 的環境有 OS 啊....
+00:28:07 <letoh> CindyLinz: 省電型平台的話，一般會有 interrupt 叫醒 cpu
+00:28:36 <letoh> 平常 cpu 會在睡覺狀態  甚至也有某一段記憶體不通電的設計
+00:28:40 <CindyLinz> letoh: 功能簡單的平台我可以接受這種作法啦..
+00:29:21 <letoh> 功能簡不簡單是另一回事啦  我只是講平台的機制而已  一般都會有
+00:29:59 <letoh> 而且話說回來，「明明就沒什麼在動的時候」這種感覺太模糊了  通常背景還是會有一堆苦工吧
+00:30:31 <letoh> 例如有跑 service 之類的...
+00:30:35 <CindyLinz> letoh: 我說的是遊戲呀, 背景是靜態圖, 然後前景有圖片滑動
+00:30:54 <CindyLinz> letoh: 如果遊戲背後給我跑什麼 service 我就真的要開始大大介意了 XD
+00:31:10 <letoh> 喔喔  遊戲的話，game loop 應該是很傳統的設計手法了?
+00:31:28 <CindyLinz> dos 我是有這樣寫過..
+00:31:38 <letoh> 我不太確定現在的 game engine 都怎麼做耶@_@  有什麼好架構嗎?
+00:31:50 <letoh> 就算是 event-driven 也是會有 loop 啊
+00:32:13 <CindyLinz> letoh: 如果瀏覽器開著的時候可以不發燙, 就表示做得到啊
+00:32:15 <letoh> 我覺得用硬體中斷才會真的沒有軟體的 loop XD
+00:32:34 <CindyLinz> letoh: 網頁上還有動態 gif 在跳呢
+00:33:05 <letoh> 這不是表示散熱設計太糟嗎? XD  多加幾片 fin 吧XD
+00:33:44 <CindyLinz> letoh: 不是啦.. 開著網頁的時候不發燙, 開著遊戲的靜止畫面就變成電暖器.. 這很明顯就是要 blame 一邊啊 XD
+00:34:30 <letoh> 這的確是有問題XD  那靜止畫面會是怎麼回是? real time rendering + 同一個場景嗎?
+00:35:11 <CindyLinz> 順便抱怨我們自己家的遊戲.. 可能是 cocos2D 寫的(?)   我手機用 USB 插著電腦, 擺在遊戲登入畫面, 然後我沒理它, 讓螢幕自己黑掉
+00:35:27 <CindyLinz> 過一陣子手機拿起來, 發現原本電量 22%, 已經變成 15%....
+00:35:52 <CindyLinz> 我真是難得遇到插著電腦 USB 還會電力透支的.... = =!
+00:36:15 <letoh> 我也沒遇過 usb 輸出撐不住XD
+00:36:31 <CindyLinz> 而且還是沒有任何動作的登入畫面....
+00:36:42 <letoh> 不過 usb 的電流本來就不大  就算進充電模式也是一樣
+00:36:52 <CindyLinz> 然後螢幕已經關閉了
+00:37:03 <letoh> 大概只能接著 adapter XD
+00:37:16 <letoh> 很明顯是程式的問題XD
+00:38:23 <CindyLinz> 不知道它是用怎樣高的頻率去重繪這個明明就完全一樣的畫面, 還是超高頻率去 polling 我的 input 帳號密碼欄位 orz
+00:38:56 <letoh> 也許做一次 profiling 就能抓出來了XD
+00:39:11 <CindyLinz> 牢騷發完就算了 XD
+00:39:27 <letoh> XD
+00:39:33 <CindyLinz> 啊 下次遇到講一下好了 XD
+00:39:52 <letoh> 所以這是出現在有上市的產品中嗎?
+00:39:56 <CindyLinz> 對啊
+00:40:16 <CindyLinz> 那次好像線上有一點問題, 所以我就開 app 去線上測測看
+00:40:27 <letoh> 真可怕... 我以為搞行動運算的人會特別注意耗電問題
+00:40:41 <CindyLinz> 測完了就一路退出到登入畫面, 只差一步還沒有關掉 app
+00:41:11 <letoh> 寫純軟都沒有 energy star 的規範XD
+00:41:33 <CindyLinz> 發燙遊戲又多又紅, 一般玩家就會把它視為正常現象了...
+00:41:50 <CindyLinz> 不知道會不會把它視為品質優良的象徵... (謎)
+00:42:04 <CindyLinz> 植物打殭屍也蠻燙的...
+00:42:10 <letoh> 冬天玩起來應該不錯? XD
+00:42:43 <letoh> 以前冬天還把手放在 pentium ii 的 cpu 上，蠻溫暖的XD
+00:42:53 <CindyLinz> .....
+00:42:53 <letoh> slot 1 那種
+00:43:05 <CindyLinz> 想暖手有更便宜便舒服的選擇.......
+00:44:08 <letoh> 因為在系電有好幾台電腦都開著，就順便XD
+00:44:33 <CindyLinz> 一定有塑化劑蒸氣...||
+00:44:41 <letoh> XDXD
+00:45:11 <letoh> 不曉得是天氣太冷還是怎樣  只覺得手碰起來溫度剛好XD
+01:02:11 <monochrom> 在 PC 上的遊戲都是這樣. 把遊戲 pause 了, CPU 使用率仍然高企. 我猜, 所有的 3D rendering engine (包括 OpenGL, Direct3D, SDL) 內部流程都是: 每秒必須重畫 n 次, 不論有沒有變, 不論甚麼機.
+01:03:01 <monochrom> P.S. 我愛塑化劑蒸氣, 常給我新機的愉悅 XD
+01:03:48 <letoh> 一般情況可能因為背景有 npc 在跑，所以使用者不動的話還是得繼續算一些東西吧，但 pause 好像應該要全部停下來才對?
+01:11:41 <CindyLinz> 我之前寫 Html5 遊戲的時候用到一個叫作 requestAnimationFrame 的東西, 它在系統沒 lag 的時候會以 30Hz 或 60Hz 的頻率呼叫
+01:11:54 <CindyLinz> (如果 lag 的話, 頻率會顯注下降 XDD)
+01:12:15 <CindyLinz> 但是如果我被呼叫的時候, 快快就 return 回去的話
+01:12:21 <CindyLinz> CPU 使用率就還是可以保持很低
+01:13:14 <CindyLinz> 如果我沒去管畫面上哪些該重繪哪些不需要, 全都重頭來的話... 就會覺得溫暖.. orz
+01:16:32 <hashcat> 現在不都用GPU繪圖?
+01:16:33 <letoh> requestAnimationFrame 感覺像是以前寫 gui 的 OnInvalidated handler
+01:18:06 <CindyLinz> 嗯, 用它作動畫會比較順
+01:18:16 <CindyLinz> 比起..... window.setTimeout 或 setInterval XD
+20:47:58 <suhorng> >> #prolog 邏輯式好有趣XD 最近剛入手 The Reasoned Schemer, 正在學
+20:48:49 <letoh> 我知道 prolog 也是可以寫一堆遞迴程式後有點嚇到
+20:49:04 <letoh> cut 也蠻有趣的
+20:50:07 <suhorng> 還沒有看到那邊XD miniKanren 的遞迴順序讓我頭好昏
+20:50:44 <suhorng> http://minikanren.org/ HaskellKanren (HK) lol
+20:51:44 <letoh> 這本我也蠻想看的  需要先把前兩本看完嗎?
+20:51:45 <suhorng> Oleg就在Haskell裡面實作了一個monad (transformer) LogicT, 拿來弄backtracking, 好像跟 miniKanren 在 Scheme 裡面用的是同樣的
+20:52:01 <suhorng> 不用, 能讀一點 Scheme 程式就夠了
+20:52:13 <letoh> 喔喔，那就放心了
+20:53:01 <letoh> 外國人的專案名字好愛用日文
+20:54:37 <letoh> 像 armin 的  jinja (神社)  不曉得這跟 template engine 有啥關係XD
+20:55:13 <suhorng> 嘛, 至少 Kanren 有關w
+20:55:24 <letoh> 對啊
+21:04:34 <suhorng> https://gist.github.com/suhorng/6669945 昨天把玩了一下XD 試了加法跟乘法
+21:05:00 <suhorng> //名字結尾的那個 o 是順著書中命名習慣, 不過打印出來應該要上標的
+21:06:01 <letoh> 你不覺得多加那個 o... 感覺變可愛了嗎XD
+21:06:51 <suhorng> 我比較喜歡上標呀w 看起來像關係似的
+21:07:48 <suhorng> 建 cons 是用 (conso car-in cdr-in pair-out), 解構也可以用 (conso car-out cdrd-out pair-in), 或是隨便怎樣的關係真的很有趣
+21:09:24 <suhorng> https://github.com/JaimieMurdock/HK/blob/master/src/Language/HK.hs 別人已經幫寫好了 backtracking monad 實作起來就超方便www 而且 lazy 在這裡很好用 XD
+21:10:16 <suhorng>  Kanren 官網首頁上拿他來寫的 HM type system 好像除了給 term 推出 type 也可以給 type 反推!
+21:10:38 <letoh> 反推XD
+21:10:51 <suhorng> "Does it run backwards?" XDD
+21:10:58 <letoh> 我也想到這個XD
+21:20:55 <suhorng> 不過感覺怎麼安排適當的 "==" 順序, 還有 backtrack 順序真的很難=_=|||
+22:22:19 <CindyLinz> 考慮再下一次 talk 的標題叫作: Alan Turing 教會我的10件事.. # http://www.techbang.com/posts/14929
+22:27:50 <suhorng> 是說我一直很好奇, 為什麼有時候說話帳號前面會有 *** 號?
+22:28:09 <letoh> ctcp action 吧
+22:28:40 <CindyLinz> 用 /me 講話
+22:30:37 <letoh> 為什麼一定是 10 件事...為了湊標題  萬一寫太爽多寫了一件還得忍痛刪掉XD
+22:32:04 <CindyLinz> letoh: 10的倍數比較響亮... 教學文裡面說的 XDD
+22:32:27 <petercommand> techbang都用10件事...
+22:32:49 <letoh> 我一看到「你放心，有事情，我負全責。」就笑了
+22:33:05 <letoh> 不曉得為什麼整篇掃過去直接看到這句話XD
+22:35:08 <petercommand> 二樓的留言XD
+22:35:33 <letoh> 很明顯是湊出來的XD
+22:36:55 <suhorng> !
+22:37:33 <suhorng> 馬上來嘗試
+22:37:57 <suhorng> There are 10 kinds of people in the world
+22:38:10 <suhorng> * Those who understand ternary
+22:38:15 <suhorng> * Those who don't
+22:38:23 <CindyLinz> 這樣不就兩種分完了... ._.
+22:38:49 <suhorng> * Those who are convinced this joke is old news until they reread it.
+22:39:15 <petercommand> * Those who partially understand
+22:39:18 <suhorng> ( http://qr.ae/Nt655 )
+22:40:34 <petercommand> suhorng: ternary是甚麼呀
+22:41:18 <suhorng> 三進制XD
+22:41:58 <petercommand> @@
+22:42:16 <petercommand> XD
+22:42:27 <suhorng> 原本那個笑話是 binary
+22:44:47 <petercommand> 我終於知道笑點在哪了XD
+22:54:42 <hychen> 有沒有人用過 http://hledger.org/?

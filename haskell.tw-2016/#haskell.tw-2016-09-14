@@ -1,0 +1,59 @@
+05:00:33 <caasih> @quote oasis
+05:00:34 <lambdabot> chromatic says: My productivity increased when Autrijus told me about Haskell's trace function. He called it a refreshing desert in the oasis of referential transparency.
+19:49:54 <CindyLinz> 放假了, 來洗幾題 hackerrank 好了 XD
+21:33:29 <CindyLinz> hackerrank 的 haskell sample code 看起來都不像在寫 haskell...
+21:33:44 <CindyLinz> imperative 的味道很重..
+21:38:13 <pkmx> 是先用 newIORef 開場嗎 ... XD
+21:39:09 <CindyLinz> 長這樣 # https://gist.github.com/CindyLinz/4e499ade0d91fbdca6a7b8634d8e2e00
+21:40:14 <CindyLinz> 我不知道那個 getMultipleLines 在這邊是幹什麼吃的... XD
+21:42:29 <pkmx> 感覺還好啊XD"
+21:43:04 <pkmx> 只是對 haskell 比較熟的可能直接用 replicateM 就解決了 不用另外寫一個
+21:43:57 <pkmx> 話說 main 那樣 let 結尾 ok 嗎 ...?
+21:44:48 <CindyLinz> 網站提供樣版 code, 給使用者填其他部分
+21:44:58 <CindyLinz> 他都已經 import Control.Monad 了...
+21:45:59 <pkmx> 搞不好這是機器產生的xd
+21:47:39 <CindyLinz> 那個 n1, n2, n3 應該合起來寫 [n1, n2, n3] <- fmap (map read . words) getLine :: IO [Int] 或是把 fmap 換成 <$>
+21:55:39 <pkmx> 恩...
+21:57:21 <pkmx> 其實我之前才發現
+21:58:17 <pkmx> 我不知道要如何只從 stdin 讀一個 Int 進來 (不包含換行) 然後其他東西留在 stdin 裡面 (掩面
+22:01:27 <CindyLinz> 可以用 getContents XD
+22:01:39 <CindyLinz> 邪惡的 lazy IO
+22:02:49 <CindyLinz> getContents 會得到一個 [Char] 的 promise, 可以對它作 takeWhile isDigit 拿出最前面的數字部分
+22:03:57 <pkmx> 這樣你下次 getLine 就沒東西了啊 全部東西都要從 getContents 得到的 String parse XD
+22:04:35 <CindyLinz> 如果可以用 GHC.IO 的話, 有 hLookAHead 和 hGetChar
+22:04:53 <CindyLinz> 應該有不 h 的版本 for stdin
+22:05:13 <CindyLinz> hLookAHead 只有 h 版
+22:05:45 <pkmx> 是不是 stdin 不是重點 XD"
+22:06:31 <CindyLinz> 好啦 XD
+22:06:49 <CindyLinz> 至少這幾個應該可以用.. 就可以堆自己的函數這樣 :p
+22:07:03 <CindyLinz> 假設不去 hackage 翻的話...
+22:09:33 <pkmx> 而且 getContents 應該會有 space leak ?
+22:10:08 <CindyLinz> 抓著那個 [Char] 頭才會吧?
+22:10:37 <pkmx> 恩
+22:13:19 <pkmx> 原本在 reddit 上面的題目是這樣的
+22:15:01 <pkmx> 讀一行有 n (n未知, 讀到 EOF 結束, n > 100m) 個空白分隔的 integer (假設可塞進Int) 到一個 Data.Vector.Unboxed Int 裡面
+22:15:20 <pkmx> 然後要用最少的 memory
+22:15:37 <CindyLinz> Unboxed 是不是只能一口氣塞給它一個 [Int]?
+22:16:03 <pkmx> 你可以用 mutable 版本然後 unsafeFreeze 它
+22:16:09 <CindyLinz> 也是哄
+22:16:14 <CindyLinz> unsafe.. QQ
+22:17:17 <CindyLinz> 試試..
+22:19:24 <CindyLinz> 欸等等.. 一開始不知道 n 多大啊....
+22:19:32 <pkmx> 對...不知道
+22:19:43 <CindyLinz> 然後只考慮記憶體不考慮時間嘛..... OAO
+22:20:27 <CindyLinz> 因為其實有一個要選擇的是那個 vector 要用什麼方式長大....
+22:20:41 <CindyLinz> 如果每次只大一項, 應該會是比較省記憶體, 可是慢到很難受....w
+22:21:13 <pkmx> 可以就折衷 * 1.5 吧 =p
+22:21:19 <CindyLinz> XD
+23:05:49 <CindyLinz> pkmx: 有沒有什麼方便的工具可以統計一個程式執行時用到的最大記憶體量?
+23:11:12 <pkmx> time -v?
+23:11:19 <pkmx> /usr/bin/time -v
+23:11:34 <CindyLinz> 原來 time 有記錄記憶體的功能 OAO
+23:12:03 <pkmx> 要 executable 那個才有 shell builtin 的似乎都沒有 XD
+23:12:04 <CindyLinz> 沒有這個程式w
+23:12:10 <CindyLinz> 喔..
+23:25:10 <CindyLinz> 這個版本 2.7g https://gist.github.com/CindyLinz/8530ef4815564f614e2b9bf8e2d8388a
+23:27:11 <pkmx> 其實原本是還要用 Data.Text.Lazy.Read.decimal 去 parse 數字 XD
+23:48:12 <CindyLinz> 那個會是關鍵嗎? o.o
+23:48:25 <CindyLinz> 我預期自己程式部分應該是用 1.6g..
+23:52:05 <CindyLinz> 跑 1m 個整數, 用了 15m

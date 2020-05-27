@@ -1,0 +1,10 @@
+16:51:37 <godfat> :source all
+16:51:53 <godfat> @source all
+16:51:53 <lambdabot> Unknown command, try @list
+16:52:37 <godfat> @src all
+16:52:38 <lambdabot> all p =  and . map p
+16:55:30 <godfat> 最近很喜歡用這種寫法，不過常常擔心碰到 false 沒有提早跳出，haskell 就不用擔心
+16:56:44 <CindyLinz> (Y)
+16:58:38 <CindyLinz> hmm... 雖然說是 pure expression, 但如果 p 有可能算出 bottom, 其順序還是很重要 @@"
+16:59:22 <godfat> 唔，我接受就藏住那個 bottom XD
+16:59:57 <CindyLinz> XD

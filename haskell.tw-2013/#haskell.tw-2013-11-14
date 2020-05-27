@@ -1,0 +1,141 @@
+13:07:01 <UncleHandsome> hashcat: 感謝大大XD
+13:39:41 <CindyLinz> UncleHandsome: 拿去欺負強者你同事啦 XD https://www.facebook.com/tienren.chen/posts/10202048092071406
+13:39:50 <CindyLinz> 先別給他看文章
+13:40:46 <CindyLinz> 請他回答 int haha() { while(1) { if(0) return 0; } return 1; } 這個函數會 return 什麼, 不清楚的話可以查「標準」... (逃)
+13:44:21 <CindyLinz> 是說, 我也蠻崇拜這位學弟的... >///<
+13:46:08 <CindyLinz> 想到有很多老遊戲都是用空迴圈來作 delay 的.....
+13:48:32 <UncleHandsome> CindyLinz: 我想他對這些事情應該滿了解的XD
+13:49:03 <kanru> guess.. return 1?
+13:50:18 <CindyLinz> UncleHandsome: 不有趣 /_\
+13:50:19 <kanru> ..
+13:50:31 <CindyLinz> kanru: 猜完以後可以點文章看答案 XD
+13:52:55 <kanru> 那要怎麼寫 safe 的 infinite loop XD
+13:53:16 <CindyLinz> 放 printf 在裡面啊 :p
+13:53:32 <CindyLinz> 改到 loop 外面的變數應該也可以
+13:54:30 <CindyLinz> 通常我寫 inf loop 都是在寫 server, daemon 性質的東西, 在 loop body 裡面都會去讀取資料, 寫出資料
+13:55:25 <b4283> 實際跑的結果是 doesn't return
+13:55:25 <CindyLinz> 只是原 po 講到如果是寫 low level 的 code.. 我就不知道了 :Q
+13:55:33 <kanru> 我是 follow if(0) 可以 optimize, while(1){} 可以拿掉的路想到是 1 的, 沒想到它是 infinite loop XD
+13:56:44 <CindyLinz> 我想這種定法應該是想把 for(int i=0; i<10000000; ++i){ assert(data[i]==0); } 在 release mode 的時候整個拿掉
+13:57:54 <UncleHandsome> 就我的認為compiler是不該把他優化掉啦 至少我知道clang不會XD...
+13:58:42 <kanru> clang compile 出來的 binary 會 exit(232)
+13:59:16 <UncleHandsome> 我這邊的3.3不會ㄟ(?
+13:59:26 <CindyLinz> 從原 po 舉例的三種可能來看... 最接近的是 rm -fr / 了... XD
+13:59:35 <kanru> XD
+14:02:20 <kanru> http://lpaste.net/95637
+14:04:06 <UncleHandsome> 不能用優化呀
+14:04:26 <CindyLinz> 就是優化的時候的問題啊
+14:04:39 <CindyLinz> 而且優化真的常常會開啊 ^^|
+14:06:13 <b4283> 我的 gcc -O3 和 clang -O3 一樣是無窮迴圈
+14:06:14 <kanru> gcc 則是把 while(1){} inline 了...
+14:06:33 <UncleHandsome> 優化本來就不能保證程式行為的正確
+14:06:41 <kanru> main:
+14:06:41 <kanru> .L4:
+14:06:41 <kanru>      jmp .L4
+14:07:11 <b4283> kanru: 一樣的, jmp .L4
+14:07:22 <CindyLinz> UncleHandsome: 不不, 這邊無論怎樣做都是正確的... by spec
+14:09:03 <CindyLinz> 想到十年前我為了測試電腦速度, 用迴圈寫一個類似梯型加總的程式, 想說在 loop body 裡面做點事讓它不會整個被消掉
+14:09:28 <CindyLinz> 結果 Visual C++ 還是給我瞬間跑完, 數值還正確... OAO
+14:09:36 <kanru> XDD
+14:09:52 <CindyLinz> 真是邪惡的商用 compiler, 一定有內建梯型公式..... www
+14:12:50 <UncleHandsome> 優化理論本身用數學證明就是對的 而且也經過很多驗證 也不能說他錯 但是用了優化之後的行為本來就是不能保證的
+14:15:42 <CindyLinz> UncleHandsome: 所以你是說, 考慮 C 語言是否可信賴的時候我們只考慮不開優化的情況; 但是實際拿去給別人用的, 是開了優化的版本? orz
+14:16:08 <CindyLinz> 這樣的確是很棒的行銷手法啦 orz
+14:16:51 <CindyLinz> 你們的程式正確嗎? 行歐~ C語言是可靠可信賴的! 你們的程式快嗎? 快歐~ C語言可以開優化!
+14:19:03 <CindyLinz> 奇怪我講話怎麼這麼刺, 一定是還沒睡醒.... 算了不要理我好了... orz
+14:19:11 <UncleHandsome> 哈 不會啦
+14:19:42 <CindyLinz> 我是 YinWang (無誤)
+14:19:44 <UncleHandsome> 不過我想優化過後的程式不保證行為的一致應該是滿重要的概念
+14:20:01 <UncleHandsome> linux kernel跟gcc關係會這麼密切我想也是這個原因
+14:20:10 <CindyLinz> 但我不能接受這個概念 orz
+14:20:24 <CindyLinz> 因為我們用的程式應該通常是優化過的程式
+14:20:27 <b4283> 無誤....
+14:20:35 <CindyLinz> 而開發者寫的時候是寫沒有優化的程式碼...
+14:23:34 <UncleHandsome> QQ
+14:23:51 <UncleHandsome> 我的認知優化真的只有理論正確 會生出什麼東西真的難講QQ
+14:25:34 <CindyLinz> 你知道我才剛搭完由電腦程式控制的空中巴士嗎.... (抖)
+14:25:46 <CindyLinz> 雖然飛機程式可能是 Ada 寫的..
+14:26:04 <UncleHandsome> 喔 那可放心 嵌入式系統的開發
+14:27:49 <UncleHandsome> 尤其是軍用醫療飛航等等相關的 它們的spec還有開發人員都真的很強
+14:29:16 <b4283> 我想很有機會是 Ada 寫的
+14:29:19 <b4283> wow
+14:29:49 <b4283> 小舟上只剩三人漂洋
+14:30:42 <CindyLinz> 他們是在另一條比較大的舟上... orz
+14:30:56 <CindyLinz> 不過 log 在我這邊 XD
+14:33:05 <b4283> XD
+15:05:51 <b4283> 突然想不起來 gcc 的中介碼叫什麼名字
+15:05:54 <b4283> ginger 還什麼的
+15:06:43 <b4283> GIMPLE
+15:08:15 <CindyLinz> 我不知道 @@"
+15:08:30 <CindyLinz> 你現在在這只剩 darkx 可以問了 XD
+15:13:01 <b4283> 我找到啦
+15:28:49 <darkx> 慘遭點名
+15:29:05 <darkx> http://gcc.gnu.org/onlinedocs/gccint/GIMPLE.html?
+15:35:01 <b4283> 哼，才不問你呢！
+15:35:22 <CindyLinz> XD
+15:39:47 <darkx> QQ
+15:59:51 <b4283> 這次 split 也太久了吧
+16:03:50 <darkx> QQ
+16:13:05 <darkx> GCC 應該是 RTL /  GENERIC /  GIMPLE
+16:31:57 <CindyLinz> Hi :p
+16:56:18 <b4283> huh
+16:57:47 <CindyLinz> b4283: 我剛只是想把 screen 換成 tmux, 所以就重連 irc
+16:57:56 <CindyLinz> 沒想到就上到大船來了 ^^
+16:58:19 <b4283> :P
+16:58:52 <CindyLinz> 換過來才發現 tmux 沒有轉 charset 的功能 orz
+17:09:26 <cibs> CindyLinz: 只好 embed 一個 screen 在裡頭轉
+17:10:07 <CindyLinz> 是個方法 orz
+17:10:44 <kanru> 用 luit
+17:15:03 <CindyLinz> FreeBSD ports 分類竟然是擺在 x11/ 下面 @@"
+17:15:13 <kanru> or bug5 :P
+17:15:47 <kanru> 嗯, luit 是 xterm 的
+17:16:04 <godfat> bug5! https://github.com/buganini/bug5
+17:17:16 <CindyLinz> 這樣在沒有螢幕的電腦上面裝, 是不是會裝一大票用不到的東西啊 orz
+17:18:00 <CindyLinz> 下 make 以後就開始裝 X11lib.. orz
+17:19:53 <kanru> hmm... 我這 luit 的 dependency 只有 libfontenc, libz, libc
+22:20:32 <suhorng> CindyLinz: 你是怎麼debug Happy的錯誤訊息的阿orz
+22:34:22 <CindyLinz> 看哪一種... conflict 的話看 .info 檔, syntax error 的話看生出來的 .hs 檔
+22:35:38 <suhorng> 嗯 剛剛打開 .hs 發現我看得懂命名規則= =+　(return happy_var_2:happy_var_1)
+22:36:16 <suhorng> 原來 .info 這麼好用!
+22:47:49 <suhorng> 我們compiler課最近作業寫到 parser, 我同學用 Converge 寫
+22:48:11 <suhorng> http://convergepl.org/documentation/2.0/ctmp/ 十分神奇XD 搜尋 "[|" 會發現熟悉的語法 (?)
+22:50:39 <suhorng> 他自己寫了一個 parser generator, 不同於 code generator (e.g. yacc), 是程式內的語法, 而且一樣是compile time生成XD
+22:51:39 <letoh> 不太懂  是說用 dsl 的方式寫?
+22:54:19 <suhorng> 對, Converge的特點不只是定dsl, 而且是 compile time 可以做各種計算
+22:54:38 <suhorng> 像 TemplateHaskell 是 compile time 執行那樣
+22:55:01 <letoh> 嗯嗯
+22:55:31 <suhorng> 這邊我在想他跟 Scheme 哪個比較像, macro 還是 quasi-quote..?
+22:55:54 <suhorng> macro的話好像不能做計算 @@?
+22:56:09 <letoh> 不行嗎?
+22:56:41 <suhorng> 我不會用QQ
+22:56:42 <letoh> 我不太確定你是指什麼樣的計算，不過 macro 不是單純的展開取代而已
+22:57:08 <suhorng> 還可以像怎樣用阿XD
+22:58:09 <suhorng> 計算例如說 lexer generator 會讀了 spec 後建NFA => 轉DFA => 最佳化
+22:58:15 <suhorng> 類似這樣
+22:58:47 <letoh> 唔  雖然沒試過  但應該有機會做到  就配合 ' , @ 之類的
+22:59:04 <suhorng> 喔喔~!
+22:59:10 <petercommand> 這樣compile會要很久嗎?
+22:59:37 <suhorng> 我不知道他要怎麼停下來耶 還有(會不會)寫出無窮迴圈之類
+22:59:45 <suhorng> ` , @ 各種強大
+23:00:15 <letoh> 我只用 forth 寫過這種 macro，不過可以 eval 的話應該很多事都做得到吧
+23:00:45 <letoh> 只是得搞清楚哪些是要展開用的 (quote)  哪些是要先執行，哪些是展開後才執行
+23:00:55 <suhorng> 喔喔
+23:01:37 <letoh> 應該有人玩過吧  來找找看有沒有人討論過這種玩法
+23:02:01 <letoh> 我其實是開始練習 scheme macro 後才學會寫 forth macro 的
+23:02:19 <letoh> (然後有被笑過為什麼繞那麼大一圈XD)
+23:03:22 <suhorng> 這XD
+23:04:38 <letoh> forth macro 看的就是我剛剛講的那三個  compile time / interpret time / run time   可以控制任意程式碼在任意時期執行就可以了
+23:05:03 <letoh> 從 scheme 領悟到的XD
+23:06:21 <suhorng> 三個是 ' , @ 還是後面說的 compile time / interpret time / run time? (雖然不太懂 interpret time 跟 run time 差別在哪)
+23:06:59 <letoh> interpret 時還可以再產生新的程式碼  然後再執行
+23:07:38 <suhorng> 意思是 run time 不行囉?
+23:07:41 <suhorng> 好像也是orz
+23:07:53 <suhorng> 用了 eval 就比較變 interpret 了?
+23:07:58 <letoh> 都要 run 了  除非你還有下一個 stage 吧  看你怎麼定義囉
+23:08:02 <letoh> 對  就是 eval
+23:08:24 <letoh> 講 eval 應該比較容易懂XD
+23:08:38 <suhorng> XD
+23:13:41 <petercommand> 甚麼是interpret time呀?
+23:16:16 <petercommand> compiler跑完->執行
+23:17:38 <suhorng> 我猜指把程式碼解釋執行的時候
+23:17:45 <suhorng> 例如 eval

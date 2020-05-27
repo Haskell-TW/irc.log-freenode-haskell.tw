@@ -1,0 +1,99 @@
+00:02:02 <MnO2> CindyLinz 今天短髮造型還不錯
+00:04:09 <MnO2> 話說這些聚會的 slides 要不要集中保存？
+00:04:58 <letoh> 看得到了嗎?
+00:08:04 <MnO2> letoh: 你說 slides?
+00:15:38 <letoh> 嗯嗯
+00:18:07 <MnO2> 還沒有，要問 CindyLinz 要
+00:18:17 <MnO2> scm 的話就.. 要寄信去問
+00:19:24 <letoh> 嗯嗯  今天人很多嗎?
+00:19:30 <MnO2> 還蠻多的
+00:20:43 <letoh> 唔.. FP 的號召力真不錯:p
+00:23:06 <MnO2> 看一次不準的
+00:46:32 <CindyLinz> 呼, 剛剛在補公司的班...
+00:46:52 <CindyLinz> 今天剛好需要加班.. 同事在公司忙, 我就先跑了... orz
+00:47:19 <CindyLinz> 我覺得我的 slide 不太具有分享的價值啊 ^^|
+00:47:46 <CindyLinz> code 倒是需要..
+00:48:06 <CindyLinz> 要 share style 自己也不太喜歡的 code 真是有點難為情 :|
+00:54:32 <MnO2> hmmm 不知道耶，而且要留紀錄也不知道要用什麼名字。今天就有問 godfat  FPUG 跟 functional thursday 是不同群人嗎？
+00:54:42 <MnO2> 但其實好像差不多是同一群
+00:56:59 <MnO2> https://github.com/haskell/haskell-platform/blob/pre-release/haskell-platform.cabal  haskell-platform 2013.02 的 draft
+01:26:27 <MnO2> logbot test 2
+01:49:56 <MnO2> logbot test 3
+01:50:27 <MnO2> logbot test 4
+12:03:53 <miaout17> (閒聊)不知道是不是我的問題，我到現在還是覺得scheme(lisp, racket)比haskell難理解
+12:06:21 <miaout17> 總覺得haskell理解一些關鍵就好(雖然很難理解…我還搞不太懂Category)，可是Racket有好多人為定義的東西要記
+12:10:25 <MnO2> 主要是考量到對於初學者提出想了解所謂「Functional」的概念的時候。覺得什麼概念最能代表 Functional
+12:11:28 <MnO2> Haskell 會撞到 Monad, Bottom。ghc 實作還會撞到 Monomorphism Restriction
+12:11:58 <MnO2> 這些東西好像不是能代表 Functional 概念詞的東西
+12:13:05 <_13h> haskell 這些觀念不算人為定義的東西嗎？@_@
+12:14:23 <MnO2> _13h: 不太懂你的意思。是人為定義的但說到 Functional 不會第一個聯想到
+12:15:05 <_13h> 嗯，我是看到 miaout17 說 racket 有很多人為定義的東西要記，不太確定是指什麼@_@
+12:15:15 <MnO2> 喔喔
+12:15:37 <_13h> 如果是指函式庫的話，好像各語言都差不多？
+12:15:52 <MnO2> 我不知道，問一下 miaout17
+12:15:58 <_13h> asm 反而是最大贏家XD
+12:16:04 <_13h> 嗯嗯
+12:26:56 <cataska`> _13h 的意思應該是 lisp 比 scheme 難理解 XD
+12:28:06 <_13h> cataska`: 無誤XD
+12:29:59 <suhorng> 我覺得反過來耶(Haskell v.s. Scheme), Scheme系列只要理解 S-expression 會被如何解讀(對於從 C like syntax 過來的人), 剩下就可以專注在 FP
+12:30:02 <_13h> 我覺得抽象層次越高的東西，雖說隱藏了很多細節，但有可能變得更難理解
+12:30:44 <_13h> 因為每個人抽象的觀點可能不一樣，變得得先理解設計者是往哪個方向思考
+12:36:00 <_13h> suhorng: 從語法來看也不錯，像 c++ 想學到真正的 oop，得先熟悉一堆語法 (雖然還不是全部XD)，但這就足以成為入門的門檻了
+12:37:03 <suhorng> 不過我覺得會少掉 datatype 跟 (static?) type system 這兩個XD 那大概要靠 ML 或 Haskell 補完了
+12:37:28 <suhorng> ()真的超乾淨的, 不過我也是第一次遇到多加括弧意思會不一樣的語言XD
+12:37:44 <_13h> 那要看專注的點在哪。我比較有問題的還是 FP 的範圍，包含 data type/type system 嗎？
+12:37:56 <suhorng> 好問題
+12:38:12 <suhorng> 最主要的還是函式地位跟大家一樣吧？
+12:38:50 <_13h> 如果原提問者的目的是學習 FP 而不是學習語言，也許建議 haskell 未必適當，因為額外的負擔太多了
+12:39:06 <suhorng> 嗯
+12:39:59 <_13h> 當然學習 haskell 還是很有趣啦，只是要看問的人到底想學什麼，接不接受多學一點不一樣的概念
+12:40:34 <CindyLinz> 抽象層次不是越高越難理解.. 是中間最難理解... 差不多就是 Monad 上下的部分 :Q
+12:41:04 <CindyLinz> 因為抽象的話性質很少, 所以... 也很 trivial XD
+12:41:14 <CindyLinz> 具體的話, 不需要想像, 所以也很好理解
+12:41:16 <_13h> 也許吧，更高的部份上不去，所以暫時無感XD
+12:41:18 <CindyLinz> 中間就很難了
+12:41:24 <CindyLinz> 不會不會...
+12:41:47 <CindyLinz> 如果抽象到只剩下一個 Set, 沒有 operator
+12:41:51 <CindyLinz> 應該是非常好理解? :p
+12:42:31 <suhorng> Monad我一直很不能接受QQ
+12:43:04 <suhorng> 之前在 FLOLAC 學 FP 的時候, 講 λ-calculus 給我一個很好得印象是, 我知道 "functions are first-class citizens" 從這裡可以很自然的出現, 然後 type system 也冒出來
+12:43:05 <_13h> 這種說法就沒問題了  但我覺得這也只是你的抽象剛好走向比較簡單的方向?
+12:43:20 <suhorng> 反倒 datatype 怎麼蹦出來的
+12:43:34 <suhorng> *反倒不知道
+12:43:54 <_13h> 我覺得抽象不一定代表 trivial，要說的話應該是對已經熟悉某些概念的人會變得 trivial
+14:25:47 <b4283> first-class citizen
+14:44:56 <miaout17> 其實我的問題就只是，我自學過Erlang和Haskell，但還是覺得Racket有點難理解。可能該跟一次coursera的funprog課程吧
+15:05:04 <_13h> 那課程其實不是專門講 racket 的，提到的比例也是最少的
+15:05:44 <_13h> 我個人感覺介紹的比例 sml >> ruby > racket
+15:07:34 <_13h> 我之前曾提過，在發現 haskell 有些語法跟 scheme 很像以後，理解範例的速度就快很多了 (不然每次都要查語法XD
+15:09:04 <_13h> 在寫練習題時也是，寫不出來時先寫出 scheme 版，再試著翻譯成 haskell，比較容易成功XD
+15:10:52 <_13h> erlang 我也有看過一點，不過我覺得比 scheme 還難親近XD  現在也是封印狀態
+15:18:27 <CindyLinz> 可能熟悉寫程式的人比較容易會覺得 scheme 比 haskell 親近; 外人是 haskell 比較親近
+15:20:14 <_13h> 外人是指？
+15:20:35 <CindyLinz> (等等 在跟同事講話)
+15:28:23 <_13h> 其實我覺得 haskell 也不到難親近，像 pointfree 我還蠻喜歡的，有點 forth 的味道... 不過我還不太會寫就是
+15:30:26 <CindyLinz> 外人是指不會寫程式或比較不常用程式的方式思考的人
+15:31:07 <CindyLinz> 我昨天想到一個不錯的例子
+15:31:28 <CindyLinz> 在 haskell 裡面, 有別的語言比較難接受的 a = 1 : a 這種東西
+15:31:59 <CindyLinz> 不過我們國中的時候學等比級數求和
+15:32:15 <CindyLinz> S = a + ar + ar2 + ar3 + .. + ar^(n-1)
+15:33:10 <CindyLinz> 課本上給的算法是 a+S*r = S + ar^n
+15:33:57 <CindyLinz> 然後再去整理等式, 整理出 S = a (r^n - 1 ) / ( r - 1 )
+15:34:11 <CindyLinz> 說這個叫作... 好像是「擾動法」
+15:34:52 <CindyLinz> 我覺得這個 a + S*r = S + ar^n 是一般人可接受的, 但是在 Haskell 之外的語言很難接受的
+15:35:23 <CindyLinz> 一般人.. 國中就能接受的東西
+15:44:37 <_13h> 因為思考方式已經改造過了?
+15:49:47 <CindyLinz> 算是 :Q
+15:50:55 <CindyLinz> 程式寫多了, 看到東西會很快就先去想它計算的順序, 用怎樣的步驟可以把東西製造出來
+15:51:40 <CindyLinz> 好處是我們不會像沒有程式背景的 PM 比較容易天馬行空開出一堆無法實現的 spec
+15:52:08 <CindyLinz> 缺點就是創意也殺了一堆...   能殺菌的機制也會破壞養份
+19:46:33 <c9s> CindyLinz: 所以沒事要多學一點東西 XD
+20:29:33 <hychen> data type 是從logic 來的
+20:29:43 <hychen> a function is a fold operation of a set
+20:29:48 <hychen> and a set is a data type
+20:30:21 <hychen> a fold operation is a logic proposition  of a set.
+20:30:36 <hychen> 我從flolac上課時聽到的
+22:38:48 <letoh> http://bone.twbbs.org.tw/blog/2013-04-22-OSDCTW2013.html  這裡有一點對 miaout17 在 osdc.tw 的講題的評論
+22:40:11 <letoh> 「他們內建的函式庫的編程典範都是 mutable data，我實在不覺得他們可以稱得上是 Functional Programming Language」
+23:44:17 <MnO2> hmm 我不是很喜歡辯論一個定義不明確的名詞。不過這一篇評論他舉的例子沒有回應到 miaout17 的宣稱吧。（姑且不論第一個 Functional Programming 應該打成 Functional Programming Language）
+23:44:59 <letoh> 嗯  他應該是針對 `Language'

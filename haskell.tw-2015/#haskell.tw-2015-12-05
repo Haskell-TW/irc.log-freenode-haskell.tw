@@ -1,0 +1,86 @@
+11:54:47 <caasih> 追 BYOHC 進度時看到這段： `count !acc (TyFun _ other) = count (acc + 1) other`
+11:55:02 <caasih> 出處 https://github.com/CindyLinz/Haskell.js/blob/master/trans/src/Main.hs#L199
+11:56:04 <caasih> 不懂 ! 在這邊的意思，而且照寫不給編
+12:00:03 <suhorngT> 檔案開頭加上 {-# LANGUAGE BangPatterns #-}
+12:01:03 <suhorngT> ! 指定當 count x 被 evaluate 時, 強制 acc 要先被算(到一定的程度)
+12:03:09 <caasih> 原來如此，而這個例子的 BangPatterns 寫在 https://github.com/CindyLinz/Haskell.js/blob/master/trans/trans.cabal#L33
+12:03:48 <caasih> 忘記有在 trans.cabal 裡看到那行，難怪不給我用...
+12:04:44 <caasih> 這和用 seq 有什麼不同？
+12:26:18 <suhorngT> 不知道...比較好寫? XD   BangPatterns 放在裡面的位置時(像 GHC manual 的範例), 不知道用 seq 要怎麼寫
+12:31:32 <suhorngT> caasih: GHC manual 裡面就是用 seq 來定義 ! 的 (在處理 pattern 的地方)
+13:22:38 <caasih> suhorngT: 感恩，來看看 manual 跟 reddit
+13:28:15 <CindyLinz> caasih: 和 seq 完全一樣, 只是少打一些字
+13:28:36 <CindyLinz> f !a = ... 就相當於 f a = a `seq` ...
+13:29:22 <CindyLinz> 不過... ! 大約有 3 個位置的加法, 用意都是加 seq, 然後意思有些微不同
+13:29:55 <CindyLinz> 像這個加在一整個參數的開頭的, 就是把 seq 加在函數 body 之前
+13:30:13 <CindyLinz> (不過如果有好幾個參數的話, 我不知道參數之間誰要先 seq 有沒有定義)
+13:30:44 <CindyLinz> 也有加在 pattern 內部的, 還有 let/where bind 的一條整個 binding 的.... 嗯, 可以看 GHC extension 的說明
+13:30:56 <caasih> 有好幾個參數，是指 f !a !b = ... 這種？
+13:30:57 <CindyLinz> 或... 星期四的時候 yen3 建議看那個 24 days for GHC extension
+13:30:59 <CindyLinz> caasih: 對
+13:31:06 <CindyLinz> 我不知道 a 和 b 的順序有沒有規定
+13:31:33 <caasih> 剛剛也 google 到那個 24 days of GHC extension
+13:31:48 <CindyLinz> 我沒有看過那個.. 以前是直接啃 GHC manual.... ><
+13:31:57 <caasih> 星期四沒去，看不到假膝上...(X
+13:31:58 <CindyLinz> 啃一啃會啃到 paper 好幾份.... orz
+13:32:15 <CindyLinz> 然後 paper 裡面用的符號跟 GHC 不一樣....... 看得超痛苦 QQ
+13:32:17 <petercommand> google 很容易找到 24 days of GHC extension XD
+13:32:19 <caasih> paper 好幾份 0rz
+13:32:27 <CindyLinz> paper 很喜歡用奇怪的花體符號
+13:32:48 <CindyLinz> 然後以前我又不知道哪一個 extension 是重要的, 所以就全讀... @@"
+13:33:17 <CindyLinz> 現在有在用就有點感覺..... 可是要先讀過了才會開始用....orz
+13:35:40 <caasih> 全讀...，看來 BYOHC 又要變成紀錄了 0rz
+13:35:59 <caasih> * !繼續
+13:44:51 <petercommand> 有的 extension 用到了， compiler 就會提醒你要開 extension XD
+13:53:13 <CindyLinz> BYOHC 變成紀錄是什麼意思？
+13:56:22 <caasih> CindyLinz: /me 變成 BYOHC 的記錄員 XD
+13:58:19 <CindyLinz> 這 BangPattern 有那麼嚴重嗎 @@  它只影響一點效能，不加也會跑出結果呀
+14:00:17 <caasih> 啊，是指全讀過這件事，現在看你的 code 也是都讀，然後打算看 alex_lu 的
+14:00:51 <caasih> 24 days 講到 PangPattern 也有舉用 seq 要怎麼寫 @@
+14:01:59 <CindyLinz> 這這 跟 BYOHC 無關啦～ 不用一次會，實作 desugar 的時候一個一個順著學就好，實作一個學一個
+14:04:03 <CindyLinz> 覺得有了 GADT 與 lambda calculus 的 data 編碼 (Scott encoding) 以後，有好幾個 extension 可以一次理解
+14:15:38 <suhorngT> CindyLinz: 假如好幾個參數是指 f !a !b 而不是 f (!a,!b) 的話, 這個因為是 curry 所以有吧?
+14:15:55 <suhorngT> 當然就算 fully applied 的時候編譯器要改順序也不影響就是
+15:27:26 <CindyLinz> GHC 有這樣說嗎？ 嗯.. 有 curry 不代表 seq 要依 curry 的順序加 XD
+15:31:17 <suhorngT> CindyLinz: 不這樣的話 partial apply 語義不對吧?
+15:32:14 <suhorngT> 忘了 desugar 後的 Core 是不是都只有單參數
+15:32:39 <suhorngT> 倒是記得看到有評語說 GHC 不太在乎有 seq 時一些程式最佳化是不是正確 XDDD
+15:41:12 <CindyLinz> 我知道的規定是 eval body 以前 參數要先變成 WHNF，所以 partial apply 時要不要先把已經吃到的參數 WHNF 一下... 這樣好像沒有規定到
+15:41:29 <CindyLinz> 因為 body 還沒有要 eval
+15:42:17 <CindyLinz> 「最佳化正確」是指什麼啊？
+16:45:41 <suhorngT> 恩, 剛剛查發現我錯了, \p1 p2 -> e 是變成 \x1 x2 -> case (x1, x2) of (p1, p2) -> e 不是分開變
+16:52:18 <suhorngT> 最佳化那個就是不知有沒有 rewrite rule 遇到 seq 會壞掉XD
+17:10:49 <CindyLinz> 壞掉... 但還不知道正確是什麼 @@
+21:16:47 <petercommand> suhorngT: 後面那個 case 是原本 haskell 的 case 語義嗎? 還是是 core 的
+21:20:26 <petercommand> f = \p1 p2 -> undefined 會變成\ (@ t_ahy) (@ t1_ahz) (@ a_ahA) _ _ -> GHC.Err.undefined @ a_ahA
+21:20:59 <petercommand> 還好像是因為我寫 f f f 的關係..XD
+21:21:14 <petercommand> 不是..
+21:21:22 <petercommand> 換成 f 1 2 也是這樣
+21:21:59 <petercommand> 變成5個參數了..
+21:22:38 <petercommand> 應該是最後面那兩個底線才是參數XD
+21:45:12 <CindyLinz> 前面三個看起來是 type 參數
+21:46:06 <CindyLinz> 你放在參數的 pattetn 都是變數，不是比較複雜的 pattern
+21:46:41 <CindyLinz> 那個 case 是要解開複雜 pattern 才會出現
+21:47:04 <CindyLinz> 變數不用 WHNF
+21:50:29 <suhorngT> petercommand: 這是 report 定的呀.
+21:50:54 <suhorngT> 你那個明顯是 GHC 用的 System FC 之類的吧
+21:54:44 <b4283> SFC
+21:57:09 <petercommand> CindyLinz: 可以舉個例子嗎?
+22:01:07 <petercommand> 對 System FC
+22:01:48 <petercommand> -ddump-simpl 出來的
+22:03:19 <petercommand> CindyLinz: 看起來有 constructor 就會出現 case
+22:04:01 <petercommand> 應該就是 WHNF..
+22:05:39 <petercommand> suhorngT:  \p1 p2 -> e 變成  \x1 x2 -> case (x1, x2) of (p1, p2) -> e 這樣不是會 evaluate x1, x2 嗎?
+22:06:41 <suhorngT> petercommand: 不是我原先想的 \p1 p2 -> e  =>  \p1 -> \p2 -> e  =>  \x1 -> case x1 of p1 -> \x2 -> case x2 of p2 -> e
+22:06:58 <petercommand> > (\p1 p2 -> 1) undefined undefined
+22:07:01 <lambdabot>  1
+22:07:21 <petercommand> > (\x1 x2 -> case (x1, x2) of (p1, p2) -> 1) undefined undefined
+22:07:24 <lambdabot>  1
+22:08:00 <suhorngT> p1 p2 要是 pattern XD
+22:09:17 <petercommand> > (\x1 -> case x1 of p1 -> \x2 -> case x2 of p2 -> 1) undefined undefined
+22:09:19 <lambdabot>  1
+22:10:26 <suhorngT> 恩?不會 evaluate x1, x2 呀怎麼了@@
+22:11:16 <petercommand> 應該是要實際的 constructor pattern 之類的才會 evaluate x1, x2..?
+22:11:49 <suhorngT> 或是 seq
+22:14:14 <petercommand> 恩恩
+22:46:27 <petercommand> 看到 report 寫的了 \ p1 … pn -> e = \ x1 … xn -> case (x1, …, xn) of (p1, …, pn) -> e

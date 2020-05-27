@@ -1,0 +1,21 @@
+10:24:42 <MnO2> http://www.byvoid.com/blog/cpp-constructor-exception?utm_source=feedly
+10:25:01 <MnO2> 關於錯誤處理不知道有沒有研究文獻可以參考
+11:30:15 <sayuan> 搞笑談軟工 在 exception handling 分類中的頭幾篇有列文獻，例如第一篇 http://goo.gl/Xr9ah2
+11:55:15 <MnO2> the page http://goo.gl/Xr9ah2 does not exist.
+12:06:01 <_13h> 404
+12:36:37 <sayuan> 怪...貼完之後我還立刻點了一次 @@
+12:37:37 <sayuan> 抱歉，好像是我多按了一個 2  : http://goo.gl/Xr9ah
+14:39:47 <JuanitoFatas> 推薦一個工具 OpenCC 繁簡轉換。
+23:34:17 <suhorng> http://typeof.net/c/shi-mao-zhi-test.html C -> 8, C++ -> 16, Lisp/Scheme/Erlang/Haskell -> 32 ... XD
+23:37:26 <letoh> 神船是什麼?
+23:38:30 <suhorng> 大概是對岸筆電的品牌或產品吧
+23:40:01 <suhorng> 這家 http://www.hasee.com/cn/index.html
+23:40:29 <letoh> 等等... 選了 emacs 再勾同時用 vim... 跑出那啥嚇人東西啊XD
+23:41:50 <letoh> 我勾選 python 為什麼沒加分XD
+23:42:00 <suhorng> 哈哈哈~ 同時用vim跟emacs XD
+23:44:09 <letoh> 用記事本的分數好高
+23:45:35 <suhorng> 編程語言使用欄, 用HDL 自己做芯片也很高..XD
+23:45:54 <letoh> 對啊  然後那個從來不寫文檔的...
+23:47:06 <b4283> 分數最高的是「自己的著名專案」
+23:47:08 <suhorng> 連註釋也不寫lol
+23:47:09 <suhorng> XDD

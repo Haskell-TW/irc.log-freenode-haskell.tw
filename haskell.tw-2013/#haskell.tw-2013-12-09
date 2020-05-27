@@ -1,0 +1,68 @@
+00:01:04 <mno2> 最終奧義:   量子電腦 -> Sky Net ->  Terminator ->  人類被消滅
+00:01:11 <suhorng> mno2: C++ will do the job.# http://james-iry.blogspot.tw/2009/05/brief-incomplete-and-mostly-wrong.html again
+00:01:34 <CindyLinz> QQ
+00:02:14 <CindyLinz> 不過我覺得 lim 計算能力強化 /= 自覺 XD
+01:54:32 <monochrom> "量子暴力"似乎會是個很酷的名子 :)
+15:17:04 <mno2> 成立了海外分部 : http://www.meetup.com/HASKELL-SG   xD
+15:21:21 <b4283> show girl
+15:22:26 <CindyLinz> o.o
+15:34:08 <mno2> show girl ?
+15:34:28 <mno2> haskell girls ?
+15:35:12 <mno2> 其實也不是我要成立，但莫名其妙就變成我在弄了..
+15:37:02 <b4283> mno2: 看到 SG 直覺想到 show girl 了.. 對不起 ._.
+15:38:37 <b4283> google 圖片查 sg 出現一堆吉他..
+15:39:49 <mno2> 原來如此 xD   有 show girl 應該會紅吧 wwww
+16:11:37 <CindyLinz> Eva ST 好像有答應要 cosplay (逃)
+16:49:32 <mno2> template haskell 跟 c++ libs 不合….
+16:50:02 <CindyLinz> 嗄? Template Haskell 會管到 FFI 喔? @@"
+16:54:40 <mno2> CindyLinz: 因為 template haskell 似乎是用 ghci  那一套來解析的，而 ghci 無法 load C++ symbol .. so 會發生 unknown symbol
+16:55:40 <CindyLinz> 這樣能加一層純 C 的中介層來解決嗎? @@"
+16:58:31 <mno2> 似乎不行..  應該是 ghci 的問題
+16:59:27 <CindyLinz> 嗯... 所以是 TemplateHaskell 生出來的程式碼不可以叫用 C++ 寫的東西?
+17:00:04 <CindyLinz> 那用不是 TemplateHaskell 的 Haskell 來叫 C++, 然後 TemplateHaskell 生出來的再去叫用 Haskell 的呢?
+17:01:37 <godfat> abi 的問題？
+17:11:11 <mno2> 不知道，有點複雜..
+17:11:19 <mno2> http://nochair.net/posts/2011/10-03-ghc-and-cxx.html
+17:18:17 <mno2> 似乎 template haskell compile time 有另外一個 linker
+17:22:11 <CindyLinz> mno2: 欸.. 出問題的是生出來的 code 要用 C++ lib, 還是生的過程要用到 C++ lib?
+17:23:40 <mno2> 是前者，但 Snap framework 不知道為什麼弄一弄就在生的階段也 load 進去了
+17:23:50 <mno2> 然後就 unknown symbol
+17:23:59 <CindyLinz> 噢..
+17:24:15 <CindyLinz> 覺得是 snap 才會這樣嗎? @@"
+17:24:41 <mno2> 有可能，因為他為了開發方便，好像有做一些奇特的招式
+17:29:36 <CindyLinz> Template Haskell 不能有 circular 的 dep, 覺得應該可以自己 workaround 做兩個 pass 來弄之類的 @@"
+17:29:53 <CindyLinz> 啊不過使用 Template Haskell 的程式是埋在 snap 裡面, 那就麻煩了 orz
+17:36:39 <mno2> 用 nm 看那個 symbol 並不是 weak symbol ，搞不好是其他的 bug..
+17:38:46 <CindyLinz> 覺得 Template Haskell 結尾的 |] 不能自訂, 有點討厭 :Q
+17:39:03 <godfat> 感覺 haskell 雖然很理想，但實作問題真的不少... XD 我猜 llvm 應該有助於慢慢釐清這樣的狀況 @@
+17:39:20 <CindyLinz> 它也許可以把語法定為: [d|xxdd| .... |xxdd]
+17:39:35 <CindyLinz> 有點像 mysql 的 quote
+17:44:53 <mno2> 當然也有可能是 Mac 的問題。 xD
+17:48:52 <CindyLinz> ._.
+17:53:05 <mno2> 太複雜了，不太會修..
+17:54:28 <CindyLinz> mno2: 那就簡易黑箱修法, 拿一台 Linux 試試看啊?
+18:08:35 <mno2> 先把 snap TH 的部份移掉 :p   (其實只是方便開發的一小塊)
+18:13:54 <CindyLinz> 去掉方便開發的一小塊, 開發起來更方便了 (Y)
+18:51:58 <mno2> 在 Linux 上無法重現，大概是 Mac 的問題了 xD
+18:53:57 <mno2> BTW,  http://probcomp.csail.mit.edu/bayesdb/index.html  這個還蠻酷的
+18:54:05 <mno2> 跟昨天的話題有點關聯
+18:56:46 <mno2> https://github.com/Sarwat/recdb-postgresql   沒有東西可以阻止 postgres 了 xD
+21:11:20 <CindyLinz> 有趣..
+21:34:12 <CindyLinz> 噢.. Foreign.Storable 的 sizeOf :: a -> Int 要求實作不可以去看 a 的 value, 所以支援 Foreign.Storable 的都應該是固定長度的 type
+21:35:16 <CindyLinz> 而 hackage 上面有個 Data.Storable, 它對應的 sizeOfM 會去看 a 的值, 所以可以用可變長度的 type
+21:35:51 <mno2> 為什麼 CindyLinz 要突然看 Storable?
+21:36:10 <CindyLinz> 我之前不是說要弄一個 TCP UDP 的 tunnel
+21:36:39 <CindyLinz> 然後想用 Storable 來把資料變成 bytes, 所以就看了
+21:36:47 <CindyLinz> 雖然後來是選用 Data.Binary
+21:37:55 <mno2> CindyLinz: 用麥片 (cereal) 就好啦
+21:38:32 <CindyLinz> 然後發現.... Data.Binary (binary package) 在 < 0.7 的時候, decode (從 binary -> data) 不會知道吃掉了多長的 binary
+21:39:07 <CindyLinz> 一直到 0.7 才加了一個 decodeOrFail, 可以在「失敗」的時候知道吃了多少發現失敗.. 但是 0.7.1 才開始知道成功時吃了多少 orz
+21:40:18 <CindyLinz> 麥片好像就跟 < 0.7 的 binary 一樣, 不知道吃了多長欸 @@"
+21:40:33 <CindyLinz> 這樣不知道下一個要從哪開始啊 @@"
+21:40:47 <CindyLinz> 用在 TCP 的部分
+21:42:05 <CindyLinz> cereal 和 binary 的功能還真是重疊啊 ^^|
+21:42:18 <mno2> 不是用固定長的 type 嗎？
+21:42:48 <CindyLinz> 不是, 我一個「包」用來表示從某處 UDP 捎來的一個 datagram
+21:42:57 <CindyLinz> 長度是不一定的
+21:45:16 <CindyLinz> 好像也不是很大的問題啦, 可以另外再寫一個可以計算長度的函數 :Q
+21:45:33 <CindyLinz> 不過既然 0.7.1 之後的 binary 可以用, 就方便用就好了 :p

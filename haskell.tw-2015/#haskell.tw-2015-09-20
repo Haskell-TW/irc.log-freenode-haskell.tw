@@ -1,0 +1,10 @@
+16:44:22 <petercommand> :t put
+16:44:23 <lambdabot> MonadState s m => s -> m ()
+16:44:33 <petercommand> :t Control.Monad.put
+16:44:35 <lambdabot>     Not in scope: ‘Control.Monad.put’
+16:44:35 <lambdabot>     Perhaps you meant one of these:
+16:44:35 <lambdabot>       ‘Control.Monad.mplus’ (imported from Control.Monad),
+16:44:43 <petercommand> :t Control.Arrow.put
+16:44:45 <lambdabot>     Not in scope: ‘Control.Arrow.put’
+16:44:47 <lambdabot>     Perhaps you meant one of these:
+16:44:49 <lambdabot>       ‘Control.Arrow.arr’ (imported from Control.Arrow),

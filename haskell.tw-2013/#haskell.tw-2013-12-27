@@ -1,0 +1,309 @@
+03:59:35 <CindyLinz> Design pattern 的確是誤我良多啊... (遠目)
+04:05:50 <monochrom> design patterns 沒有錯, 錯的是程式語言. 某程式語言不准你做某 abstraction, 那麼你唯把那個 abstraction 轉為一個 design pattern
+04:07:05 <monochrom> 例如說 Command 吧, 分明是程式語言沒有簡易 lambda 所致
+04:07:39 <monochrom> 又例如 Composite, 只因為程式語言沒有 algebraic data type
+04:09:55 <monochrom> Visitor 更開宗明義扮 CLOS 的 multiple dispatch
+11:58:09 <CindyLinz> monochrom: 可是我剛學 design pattern 的那日子....
+11:58:14 <CindyLinz> 會有一種 fu
+11:58:39 <CindyLinz> 就好像在寫程式的時候, 每多用一個有名字的 pattern, 就可以 +5 點攻擊力
+11:58:51 <CindyLinz> 所以花了很多力氣在找哪裡可以套 pattern...
+11:59:08 <monochrom> 我也是
+11:59:18 <monochrom> 夢醒了!
+11:59:23 <CindyLinz> 這部分的確錯在 design pattern 這本書吧 XDDD
+11:59:30 <favonia> CindyLinz: 那現在你覺得有哪些 pattern 是可以講的 xD
+11:59:32 <CindyLinz> 好啦, 錯在我啦 XD
+11:59:48 <CindyLinz> builder 還不錯啊... 如果沒有 monad 的話..
+12:00:11 <CindyLinz> facade 也不算是製造問題, 只是有說等於沒說 XD
+12:00:31 <favonia> CindyLinz: 我記得 GoF 好像也沒有說他們覺得這個很好？？？可能我記憶有錯就是了
+12:00:42 <CindyLinz> 我也很久沒看了.. 
+12:00:52 <CindyLinz> 只是我後來還修了一門 OOAD 的課, 就是在教 design pattern
+12:01:01 <CindyLinz> 土木系的喔 XD
+12:01:18 <favonia> 然後他們好像不支持繼承
+12:01:36 <CindyLinz> 修課的時候有時候被要求要把一團程式硬分為什麼 pattern
+12:01:58 <CindyLinz> 可是那明明就是從不同的角度去看, 就會看到不同的 pattern 啊 @@"
+12:02:19 <CindyLinz> delegation 還不錯.. 但它就是一個 callback.. :Q
+12:03:31 <favonia> 我覺得裡面所有跟 singleton 相關的都很蠢 xD
+12:03:32 <CindyLinz> 類似的 template 也不錯, 雖然現在看, 覺得它是 applicative 或 monad
+12:03:42 <CindyLinz> singleton 還有別的相關的喔? ^^|
+12:04:03 <favonia> 有吧但我太久沒看了
+12:04:21 <CindyLinz> singleton 那時看就覺得這有點糟 XD
+12:05:16 <CindyLinz> 覺得 private, public, protected 的設計也不好
+12:05:26 <CindyLinz> 這不是工程師之間 spec 講好就好了嗎 @@"
+12:06:17 <favonia> CindyLinz: 問題在於繼承吧
+12:07:13 <favonia> 喔還有一堆 parametric polymorphism 可以解決的問題
+12:07:46 <favonia> 我印象中 Proxy pattern 的限制根本是語言本身太爛 xDDD
+12:07:53 <CindyLinz> 所以遇到有人在罵 design pattern 的文章, 不管其他部分的內容如何, 先 +10 分.. XD
+12:08:16 <favonia> 噗
+12:15:22 <favonia> 當時為了要解釋為什麼那 23 個 design patterns 很多都是因為他參考的語言太爛，才認真看的（哭
+12:45:34 <hashcat_> 又可以趁機吹prolog
+13:17:08 <CindyLinz> 那如果寫個文章用 functional style 來一一對應解決這些 pattern 有沒有搞頭呢? @@"
+13:25:52 <suhorng> 哇 沒跟到 design pattern 的討論
+13:26:36 <suhorng> monochrom: 太同意了 這學期參加個DP讀書會, 感想是很多 design pattern 是用來展示 "純粹OO" 的缺點...
+13:31:05 <godfat> 我覺得倒也不一定是 OO, 像上面提到 CLOS
+13:32:15 <godfat> CindyLinz, 不過我覺得還是要看語言就是了，
+13:32:15 <godfat> 提到一堆好方法，結果 java 不能用還是沒用？
+13:32:19 <_13h> 亂入一個問題..  昨天提到 curry 的時候想到的，currying 跟 partial application 怎麼區分？還是根本一樣？
+13:32:56 <godfat> curried function 可以被 partially apply?
+13:33:49 <_13h> 我以為產生 curried function 的過程就是在做 partial apply 了？
+13:35:29 <godfat> map 是 curried function, map f 是 partial application to map?
+13:36:15 <_13h> 唔，看來我對 curried function 這個詞的理解有問題，我先確認一下XD
+13:37:30 <godfat> 話說回來，看到很多像是 design patterns in ruby 也覺得滿蠢的
+13:37:30 <godfat> 不知道內容都寫些啥，懶得翻...
+13:38:34 <_13h> wikipedia: "Note, however, that currying, while similar, is not the same operation as partial function application."
+13:38:48 <godfat> 以 haskell 而言的話... 類似這樣
+13:38:48 <godfat> curried function: fst = \a -> \b -> a
+13:38:48 <godfat> uncurried function: fst = \(a, b) -> a
+13:38:57 <CindyLinz> godfat: 可以用: 這裡不會有這個問題, 也算是一種展示法呀 ^^
+13:39:13 <CindyLinz> 我指的「搞頭」是... 拿來當 FP 的宣傳 XD
+13:39:46 <godfat> XDDD 好吧，不過我覺得很多用主流語言的人，心裡其實對其他東西是漠不關心的，能用就能用，更好用就更好用，所以呢？...
+13:41:23 <_13h> 再亂入一下，這幾天才在 g+ 看到一篇文章，大致是說宣傳還是廣告之類的，應該是讓對方知道用了以後會有什麼變化，而不是被宣傳的東西本身有多好  (記不得原始內容，用自己的理解隨便翻譯
+13:42:08 <suhorng> 喔喔, 好像知道 CLOS multiple dispatch 那個在說什麼XD
+13:42:50 <CindyLinz> _13h: 可是 curry function 還是可以 fully apply 啊..
+13:43:27 <_13h> 原來 curried function 中文翻譯是 鞣製函式   之前好像有看過，但每次都記不起來XD
+13:43:39 <CindyLinz> 台灣翻譯嗎? @@"
+13:43:42 <_13h> 嗯... 原來如此
+13:44:12 <suhorng> ...完全不會唸的字
+13:44:16 <b4283> 還用革部的，是什麼皮制品嗎
+13:44:16 <godfat> 我記得我當年看 visitor 也是看好久，現在回想起來那書其實有點誤導，不過很久沒看，也不記得確切用語
+13:44:16 <godfat> 那時候的印象是，他的意思是「這個東西就是要這樣寫」
+13:44:16 <godfat> 而不是「因為我們要什麼，但有這個限制，所以只好這樣」
+13:44:16 <b4283> godfat 打字好快
+13:44:16 <godfat> 不如說咖哩函數好了 @@
+13:44:16 <suhorng> 話說用 functional 來對應 GoF 那些 pattern 有很多人寫過了
+13:44:16 <_13h> 那個翻譯是在一個看起來像台灣人維護的 blog 上看到的XD
+13:44:18 <godfat> 還好耶，我打字不算快的 @@
+13:44:22 <_13h> 咖哩函數++
+13:44:25 <CindyLinz> 可是 haskell 裡面的 fst = \(a, b) -> a 其實是視為一個只有一個函數的函教吧?
+13:44:28 <suhorng> 但是 functional language 也有自己的某些patttern...
+13:44:33 <b4283> 剛剛瞬間打了三行 XD
+13:44:41 <CindyLinz> 只是這個參數的 type 是 pair
+13:44:41 <suhorng> 可以打好一次送出吧XD
+13:44:52 <suhorng> 對話突然變multiple thread了
+13:44:57 <godfat> uncurry 不是這樣嗎？
+13:45:18 <CindyLinz> godfat: 是這樣啊.. 也許該說, haskell 裡面只有 curry 的作法..
+13:45:23 <CindyLinz> uncurry 是在 hack.. XD
+13:45:26 <godfat> 是說也有人說 monad 是 pattern, 我覺得這樣說也沒啥錯
+13:45:36 <suhorng> 我想他可能是想說 uncurry f (a, b) = f a b?
+13:45:41 <godfat> 是沒錯，但是要解釋也只能這樣了？ XD
+13:45:49 <CindyLinz> suhorng: 這樣依然是一個 pair 參數啊 ^^|
+13:46:03 <suhorng> 是啦, 因為沒有那種"多"參數..XD
+13:46:15 <b4283> 用 SML 就可以 XD
+13:46:30 <CindyLinz> godfat: 不過 haskell 裡的 monad 是實際可以使用的 code
+13:46:41 <CindyLinz> 覺得 pattern 是實際上不能直接用的 code
+13:46:42 <suhorng> SML其實也是tuple
+13:46:47 <CindyLinz> 常常要重新寫, 只是寫起來很像
+13:47:06 <suhorng> Scheme大概就是有沒有curry有差...括弧用法不一樣
+13:47:19 <CindyLinz> haskell monad 太具體了, 就會覺得該叫 lib, 而不叫 pattern 了 XD
+13:47:26 <_13h> 我好像搞懂我誤解的地方了  像剛剛 godfat 說的 \a -> \b -> a ，curried function 只是說允許 partial application
+13:47:32 <suhorng> 話說雖然說monad直接可以用, 可是當萬事萬物都得用monad就各種麻煩...
+13:47:51 <CindyLinz> 那是.. 歷史因素? XD
+13:47:58 <CindyLinz> 因為 Arrow 太晚發展了.. XD
+13:48:08 <suhorng> QQ
+13:48:23 <CindyLinz> 不然就萬事萬物都得用 Arrow... XD
+13:48:29 <suhorng> 最近寫code常常需要在某個地方加入 "產生fresh symbol" 這種東西
+13:48:42 <suhorng> 然後code就要全部翻修了...
+13:48:59 <_13h> val curry = fn f => fn x => fn y => f(x, y);
+13:49:01 <suhorng> 這種除非一開始就知道整個程式架構不然總是要翻修orz
+13:49:04 <CindyLinz> performUnsafeIO 可以救贖你..? XD
+13:50:08 <suhorng> _13h: fun uncurry f a b = f (a, b);
+13:50:34 <suhorng> 與其unsafePerformIO不如跳槽QQQ
+13:50:53 <CindyLinz> 嗯, 如果不是 Haskell 這種 non-strict 的, 可能就沒必要特別把是不是一個 tuple 參數和真的 N 個參數分開看了
+13:51:07 <CindyLinz> 啊... GHC 的 Haskell 可以寫 f (# a, b #) ?
+13:51:18 <suhorng> unboxed..
+13:51:33 <CindyLinz> 好... GHC 的 Haskell 有 uncurry.. XD
+13:52:19 <CindyLinz> XD # 13:50 < suhorng> 與其unsafePerformIO不如跳槽QQQ
+13:52:36 <CindyLinz> 只是人生一個小汙點嘛 :p
+13:53:29 <godfat> 一顆老鼠屎 XD
+13:53:32 <suhorng> 難過
+13:54:15 <b4283> scheme 有 curry 呀？
+13:54:52 <suhorng> b4283: 這是肯定句還是問句？
+13:55:22 <b4283> 問句~
+13:57:40 <suhorng> 可能就是意思類似的東西吧, 但用起來因為括弧長相不一樣了
+13:58:08 <suhorng> (define curry (lambda (f) (lambda (a) (lambda (b) (f a b)))))
+13:58:23 <CindyLinz> 用 Haskell 來實作 flyweight pattern:
+13:58:30 <suhorng> (define uncurry (lambda (f) (lambda (a b) ((f a) b))))
+13:58:41 <CindyLinz> 天天都在 flyweight (完)
+13:59:21 <b4283> 喔，我以為你說的是 scheme 有 curry 的 syntax
+13:59:38 <suhorng> 喔喔XD
+14:01:04 <suhorng> http://blog.ezyang.com/2010/05/design-patterns-in-haskel/ 這種文章感覺超多的...而且好像大家對裡面的design pattern理解都有點微妙的差距 XDD
+14:04:19 <cataska> http://norvig.com/design-patterns/design-patterns.pdf
+14:04:52 <b4283> 公司的名字很有意思
+14:05:07 <b4283> Harlequin Inc.  讓我想到 Harley Quinn
+14:06:21 <suhorng> 還有 Haskell的反擊：The category design pattern, the functor design pattern XDD
+14:06:25 <suhorng> http://www.haskellforall.com/2012/08/the-category-design-pattern.html
+14:06:27 <suhorng> http://www.haskellforall.com/2012/09/the-functor-design-pattern.html
+14:06:40 <CindyLinz> 那來中譯就好了.. ww
+14:45:39 <CindyLinz> 覺得邪教的特性之一是會有他們特有的禁忌, 或是特定的舉動, 這好像有助於提升向心力?
+14:46:17 <CindyLinz> 然後, 這個 symbol 最好不能太難實行, 不然實際上很少做, 也就沒效果了...
+14:46:42 <CindyLinz> 嗯, 我只是在想, 可以設計某個特定的 symbol
+14:46:55 <CindyLinz> 以後寫程式的時候就要求要打進去.. XD
+14:47:15 <CindyLinz> 不能太難記.. XD
+14:48:28 <monochrom> 我喜歡咖喱羊肉 curry lamb :)
+14:50:52 <godfat> 像這樣？
+14:50:53 <godfat> {-# LANGUAGE TemplateHaskell #-}
+14:52:26 <CindyLinz> 呃.. 這好像不夠特殊沒啥心理上的凝聚力 XD
+14:52:45 <CindyLinz> 然後別的語言也要可以用啊 :p
+14:53:03 <CindyLinz> 大概是個放在註解裡的東西吧 @@"
+14:53:43 <CindyLinz> 像是 Slogan.. Functions rule the world!
+14:53:52 <godfat> 我也可以放在 ruby 裡 XDDD
+14:53:53 <godfat> 可惜要放在註解裡就是了
+14:54:44 <godfat> 找個可以不用當註解放在各種語言裡的
+14:57:30 <CindyLinz> 不用當註解放各語言嗎!?
+14:57:36 <CindyLinz> 這也太難了 orz
+14:58:04 <CindyLinz> 大小寫來歪一下好了? fUnctIOn
+14:58:19 <godfat> 參考一下 XD
+14:58:19 <godfat> http://en.wikipedia.org/wiki/Polyglot_%28computing%29
+14:58:59 <CindyLinz> 這句也不錯.. 只是有點長 @@" A monad is just a monoid in the category of endofunctors
+14:59:17 <CindyLinz> godfat: 可是這個補不完吧 QQ
+15:07:41 <b4283> Does it run backwards?
+15:08:11 <CindyLinz> 這個也不錯.. ._.
+15:08:52 <suhorng> it runs backwards XDDDD
+15:09:41 <CindyLinz> 也可以打在投影片裡, 夾帶著當浮水印 :p
+15:16:50 <suhorng> 突然想到之前看到一句話: "functional language嘛, 寫完就functional"
+15:19:41 <CindyLinz> 這啥情況 ^^|
+15:56:37 <godfat> ++Does it run backwards?
+16:10:56 <CindyLinz> :p
+18:19:38 <mno2> http://quangchien.wordpress.com/tag/haskell/page/2/    有越南版了
+20:01:54 <hashcat_> http://peaker.github.io/lamdu/
+20:03:23 <hashcat_> 不用打字直接操作語法樹的程式, haskell-like
+20:04:01 <hashcat_> 這樣學函數式也太方便
+21:31:23 <CindyLinz> 看起來很棒.. # lamdu
+21:35:56 <CindyLinz> 中譯就叫「懶惰」好了.. XD
+21:56:01 <letoh> 印象中好像有人講過自己的 diff 程式也是以語法樹的操作為基礎做的?
+21:59:48 <letoh> g+ 社群那邊好像被奇怪的東西入侵了?
+22:04:23 <CindyLinz> letoh: 就... 王垠的 ydiff? https://github.com/yinwang0/ydiff
+22:05:48 <letoh> 好像是吧  不過我一看到語法樹的操作第一個想到的還是 s-exp @_@
+22:06:00 <CindyLinz> 他也是從 s-exp 發想來的
+22:07:04 <letoh> 看起來語法比較接近 haskell，這樣操作起來會不會沒那麼直覺?
+22:07:44 <CindyLinz> 你這什麼歧視言論.. ww
+22:07:58 <CindyLinz> (逃)
+22:08:07 <letoh> XDXD 語法的型式上感覺還是有差啊
+22:08:44 <CindyLinz> 哼我覺得 Haskell 很直覺啊!! (大聲)
+22:09:19 <letoh> 直接看 haskell 當然是很直覺啦  我是指語法樹的部份  sexp 是連視覺上都像樹XD
+22:09:51 <CindyLinz> hmm..
+22:10:40 <letoh> 這 ide 好像不錯，會標示型別
+22:13:57 <letoh> 看了一下圖，感覺好像有點類似 blockly 那種東西...
+22:14:22 <letoh> 只是美工的部份沒那麼漂亮而已
+22:15:15 <CindyLinz> 這提示方式比 GHC 的 type error 提示好多了 QQ
+22:15:50 <letoh> 一般的 ide 大概都會做成移動過去才跳個 tooltip 顯示
+22:16:20 <letoh> 不過很吃 type inference 的語言好像這樣會方便一點
+22:16:54 <CindyLinz> C++ (誤)
+22:17:01 <letoh> XD
+22:17:15 <letoh> C++ 不是直接跳個 T 出來嗎?
+22:17:56 <CindyLinz> 想到 C++11 的 auto @@"
+22:18:35 <letoh> 為什麼之前會突然跑出一堆 design pattern 的討論@_@
+22:19:26 <CindyLinz> 因為王垠的新文章.. http://yinwang0.wordpress.com/2013/12/24/oop/
+22:20:28 <letoh> 喔喔喔  這篇好長，所以只看了開頭XD
+22:20:58 <letoh> 我最近忽然又覺得 design pattern 還是挺重要的
+22:21:08 <CindyLinz> 我覺得這篇開頭兩段還蠻不錯的..
+22:21:19 <CindyLinz> 到後面就開始激動了起來... XD
+22:22:12 <letoh> 實作就隨便啦，但我覺得對某種問題的某種解決方案  在交流時有共通的語言這一點，design pattern 還是幫上不少忙 (其他部份可能都是幫倒忙比較多XD
+22:24:01 <letoh> 就像一講 queue/stack 對方馬上可以意會到需要什麼特性，或問題的本質之類的，這種感覺還不錯
+22:37:48 <letoh> "I don’t like OO at all. I use none of the OO techniques even when I write Java."   這點要怎麼辦到?  entry class 不算嗎?
+22:38:28 <godfat> "I wrote everything in static in java" (設計對白)
+22:38:38 <letoh> XD
+22:39:19 <letoh> 阿我知道了... 他說的 OO 是 message passing 那種，所以 java 沒問題的
+22:39:42 <letoh> 其實就是照平常方式寫的意思 (誤
+22:40:38 <godfat> ?
+22:40:38 <godfat> 有 late binding 不就是了？
+22:40:38 <godfat> java 裡用很多吧？
+22:41:05 <letoh> 這倒是  所以還是得避開某些寫法XD
+22:41:32 <godfat> stdlib 一堆都是，要完全避開我真不知道要怎麼寫
+22:42:15 <letoh> 我忘記那本書還說 java 是 pure oopl... 很多年前看的就是
+22:42:25 <godfat> XDD
+22:42:56 <letoh> 超過十年了所以一時想不起書名  但我記得是暢銷書
+22:43:22 <letoh> 而且我看的是中譯本，就隨手拿起來翻一下序的部份而已
+22:43:40 <godfat> (聳肩)
+22:43:59 <godfat> 我覺得程式語言的謬論真的到處都是..
+22:45:36 <letoh> 不過我應該被騙蠻久的  因為那時我只會 c++... 但我一直覺得 c++ 所謂的 oo 很複雜，所以看到 pure oopl 的說法好像有點相信XD 不過一直沒去碰 java 就是
+22:46:02 <letoh> (因為學 c++ 就花了太多時間 沒空再學 java XD)
+22:46:30 <godfat> 反正 java 裡也沒啥特別的，我覺得 c++ 摸熟後 java 剩的也沒多少了 XD
+22:47:02 <letoh> 很久以前的印象，感覺就只是一直 casting 很煩XD
+22:47:27 <godfat> 那也是...
+22:47:53 <letoh> 然後跟 xml 是好朋友這點也很討厭
+22:48:35 <godfat> 我覺得最煩的是類似 new BufferedReader(new StreamReader(new FileReader(...))) 之類的
+22:48:51 <letoh> scala 改善不少XD
+22:49:44 <godfat> 不過我覺得 scala 也有夠瘋狂，甚至比 c++ 還瘋.. XD
+22:49:45 <godfat> 雖然這樣說，其實我也還算喜歡就是了
+22:49:45 <godfat> 反正一堆詭異的東西就.. 不要用 XD
+22:50:16 <godfat> 有一部分原因是 jvm 就是了
+22:51:47 <hashcat_> scala有啥詭異
+22:52:14 <hashcat_> 我覺得很多特性都缺不了
+22:53:01 <godfat> 你的意思是很多都是必要的？我上次看到 scala 有 typed macro
+22:53:29 <hashcat_> 第一次聽過
+22:54:24 <hashcat_> 好像還不錯
+22:55:00 <godfat> 這個？ http://docs.scala-lang.org/overviews/macros/overview.html
+22:56:03 <godfat> 上次 scala 作者 (Martin ...) 有個 talk 在說 type 的問題與麻煩
+22:56:03 <godfat> Harper 就在 twitter 上回應說那是 scala 的問題
+22:56:03 <godfat> XD
+22:59:48 <hashcat_> 我覺得他有區分實驗跟非實驗很好
+23:00:10 <godfat> 工程是做得不錯
+23:00:16 <hashcat_> 其他貌似都沒明白在分
+23:00:37 <godfat> 這方向對不對我就不敢說了（目前傾向是錯的）
+23:00:49 <godfat> ghc 算有吧？
+23:01:13 <hashcat_> 我喜歡實驗的概念
+23:01:26 <hashcat_> 貌似也沒有
+23:01:39 <hashcat_> 只有分擴展跟標準
+23:01:52 <godfat> 我是把擴充都當成實驗的意思.. XD
+23:02:08 <hashcat_> 新特性用陣子熟了突然給你拿掉
+23:02:31 <hashcat_> 擴展也有是已經成熟但沒進標準的
+23:02:45 <hashcat_> 實驗特性原本就有會大規模改變或拿掉的意思
+23:03:29 <hashcat_> 還可以讓不知道內部原理的不會誤用可能出包的新特性
+23:06:07 <hashcat_> GADTs就可以說是實驗期已過了
+23:06:33 <hashcat_> 是不是實驗貌似可以看jhc有沒有當標準
+23:12:15 <hashcat_> 改一下前一句話, 看了下貌似標點符號太少
+23:12:34 <hashcat_>  是不是實驗, 貌似可以看jhc有沒有實現, 來當標準
+23:17:42 <godfat> 也是一個方法 XD
+23:36:10 <suhorng> hashcat: lamdu好酷!!!!!
+23:39:06 <suhorng> letoh: 話說...跳個T出來完全無法看阿T^T
+23:39:18 <suhorng> 他檢查時都直接帶入, 帶入錯誤的話就所有訊息都噴出來....
+23:40:16 <letoh> 其實程式碼都直接告訴你 typename T 了，不用 ide 輔助也知道XD
+23:41:17 <suhorng> 另一方面來講, 我也可寫 fun :: forall t. φ (逃)
+23:42:53 <suhorng> 真的覺得template至少有種的 parametric polymorphism + dependent type 奇怪混合體的味道...
+23:43:00 <suhorng> 不過機制差很多就是
+23:43:13 <letoh> 結果你有去找那本書來看嗎?
+23:43:44 <suhorng> 哪一本呢?
+23:43:56 <hashcat_> suhorng: 在想像lamdu的prolog版
+23:43:57 <letoh> 你不是有在問 template 的書嗎?
+23:44:08 <letoh> 好像在 plurk 看到的XD
+23:44:42 <suhorng> 有呀 最近獲得了兩本template的書XD
+23:45:03 <letoh> 有兩本? 除了藍皮之外還有哪一本?
+23:45:27 <suhorng> dependently typed language雖然很強, 但我一直好奇用在個比較廣泛使用的語言長怎樣
+23:46:11 <suhorng> 我這邊一本是C++ Template Metaprogramming, 另一本是C++ Templates The Complete Guide
+23:46:21 <hashcat_> suhorng: 應該像X10那樣
+23:46:27 <suhorng> X10?
+23:46:42 <hashcat_> x10-lang.org
+23:46:51 <suhorng> 我有聽過的 感覺最接近實用的是 Coq 跟 Idris 兩個
+23:47:03 <suhorng> 可是兩個目的都不是那類型的實用..XD
+23:47:11 <hashcat_> X10是很大尾的語言
+23:47:17 <letoh> 原來是那本... 那本我沒看過XD
+23:47:34 <suhorng> 有專門的workshop耶...
+23:47:53 <hashcat_> 企業很大尾, 目標也很大尾
+23:47:53 <suhorng> letoh: 那你說的是XD?
+23:47:53 <letoh> C++ Template Metaprogramming 好像沒有中譯版? (有的話公司就會有人買了XD
+23:48:11 <letoh> 我手上有的是 C++ Templates: The Complete Guide
+23:48:22 <suhorng> 這我不知道XD 後者我知道有中譯..圖書館有XD
+23:48:37 <letoh> 我也知道有中譯  因為公司有XD
+23:48:58 <suhorng> C++ Template Metaprogramming看來裡面講很多 C++03 時代 boost 的作法XD
+23:49:01 <letoh> 不過後來我自己買一本就是
+23:49:23 <godfat> 我兩本都有... 現在想想覺得好羞愧 (?)
+23:49:29 <letoh> 還是蠻有參考價值
+23:50:29 <suhorng> 我現在有點期待 Effective C++11 XD
+23:51:28 <suhorng> X01乍看之下有點奇怪lol
+23:51:40 <suhorng> http://x10.sourceforge.net/documentation/intro/latest/html/img26.png type definition..?
+23:51:42 <suhorng> *X10
+23:52:22 <letoh> 印象中 scot meyers 好像有說要寫 effective c++11 ?
+23:52:25 <letoh> scott
+23:52:46 <mno2> 話說，一則關於 Coq 的軼聞是，法國人故意取一個名字讓英國人唸起來像 Cock
+23:54:00 <mno2> 就好像有人發明一個語言叫做 GG，然後台灣人唸起來就會很像「雞雞」。你用雞雞寫程式...
+23:54:23 <letoh> XD
+23:54:28 <mno2> 我不知道是不是真的 xD
+23:55:26 <hashcat_> GG本身也夠恐怖
+23:55:35 <hashcat_> 寫程式GG
+23:55:45 <suhorng> 寫程式GG XDD
+23:56:34 <hashcat_> suhorng:你給我個圖片我還真看不懂要表達啥奇怪
+23:58:11 <hashcat_> suhorng: X10 的賣點是 GPU 跟 CPU 混合的集群是用一樣的語言寫的
+23:58:54 <hashcat_> suhorng: 還可以宣告記憶體在各個集群的佈局
+23:59:01 <suhorng> 應該是我對 object oriented 很不習慣...
+23:59:22 <suhorng> GPU跟CPU混合..ThorScript好像也是做這個, 不過ThorScript一直還沒release
+23:59:30 <hashcat_> suhorng: 順便有了dependent type, IBM真是無法無視

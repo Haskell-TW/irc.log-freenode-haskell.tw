@@ -1,0 +1,57 @@
+20:54:06 <mno2> 今天 FLOLAC 上了什麼內容？
+20:55:42 <CindyLinz> 邏輯
+20:55:59 <CindyLinz> 有 Truth table 的 Sentential Logic
+20:56:05 <CindyLinz> 還有 First Order Logic
+20:56:29 <CindyLinz> 然後... 有很多反證法..
+20:57:36 <favonia> CindyLinz: 今年又不是 FP~~~
+20:59:12 <CindyLinz> 明天好像要用個用 OCaml 寫的東東啊 XD
+21:00:01 <yulin> 聽起來真棒
+21:00:20 <CindyLinz> 這個 http://nusmv.fbk.eu/
+21:04:10 <favonia> CindyLinz: 酷耶
+21:04:44 <CindyLinz> 還沒有看... 有點累.. (遮臉)
+22:39:08 <suhorng> 迪摩根定律好奇怪@@ not (A or B) <-> (not A) and (not B) 證得出來, not (A and B) <-> (not A) or (not B) 只有一邊證的出來, 好不對稱
+22:41:51 <favonia> suhorng: 改成 (A \/ B) -> _|_ 和 (A -> _|_) * (B -> _|_) 會不會比較簡單
+22:42:19 <favonia> 另一個是 (A * B) -> _|_ 和 (A -> _|_) + (B -> _|_)
+22:42:54 <suhorng> 對對 我是想這樣
+22:43:12 <suhorng> 另外一個這樣真的寫不出程式..吧?
+22:43:49 <suhorng> 假如我只獲得 A 或只獲得 B, 沒辦法湊出 A * B, 就弄不出 _|_?
+22:46:09 <suhorng> 反過來說 ((A -> _|_) + (B -> _|_)) -> (A * B) -> _|_ 很簡單寫...
+22:48:33 <hashcat> -B
+22:48:50 <hashcat> 我這只看到一堆墨鏡臉
+22:51:06 <favonia> hashcat: 你是用什麼 client...
+22:51:28 <hashcat> chatzilla
+22:52:13 <hashcat> B)
+22:52:20 <hashcat> 還是墨鏡臉暈
+22:52:26 <suhorng> 小寫呢? b)
+22:53:01 <petercommand> chatzilla XD
+22:53:06 <hashcat> 沒被換掉了
+22:53:41 <petercommand> 0_o
+22:54:25 <hashcat> 不是有一個對稱原理
+22:56:05 <suhorng> 不太懂
+23:00:50 <hashcat> 因為and跟or的運算律一樣, 所以兩個互換就是一個成立的定理
+23:04:02 <hashcat> 講錯, 不是對稱是對偶
+23:04:39 <suhorng> 噢
+23:04:43 <hashcat> http://en.wikipedia.org/wiki/Duality_%28mathematics%29#Duality_in_logic_and_set_theory
+23:04:48 <hashcat> 這個這個
+23:05:06 <suhorng> 那有辦法建構式的證出來嗎?
+23:05:07 <hashcat> 只要把第一個證明過程符號互換
+23:05:13 <suhorng> duality theorem Orz 好神奇
+23:05:17 <hashcat> 就第二個了
+23:08:14 <hashcat> 建構式邏輯沒法這樣了
+23:08:31 <suhorng> QQ........
+23:09:06 <suhorng> 不過布爾代數對換可以成立感覺好神奇XD
+23:12:19 <hashcat> constructive logic拔掉了一些性質
+23:12:43 <favonia> 可能可以看 linear logic...?
+23:13:03 <hashcat> 可以先假設你在經典邏輯, 用對偶法把另一個得證
+23:13:20 <hashcat> 然後檢查哪個步驟在建構邏輯違法
+23:13:45 <hashcat> 就可以知道拔掉的性質影響到啥了
+23:14:16 <suhorng> 沒學過 linear logic XD
+23:15:08 <hashcat> 說真的沒啥好學
+23:15:38 <suhorng> 古典邏輯有點囧, 我會直接把他反過來, p -> q 變成證 ~q -> ~p...可能要多想想還能怎麼弄 XD
+23:26:54 <hashcat> 現在自創邏輯系統蔚為風潮
+23:29:16 <hashcat> 那些東西有個統整之前不怎想看
+23:45:29 <hashcat> 喔~
+23:45:40 <hashcat> 還真有人打算要統整
+23:46:33 <hashcat> 2003新出爐, 換成是麵包早壞掉了
+23:47:43 <hashcat> http://www.cis.upenn.edu/~giorgi/cl.html
+23:54:03 <monochrom> 摩根定律對稱. 不對稱的是 intuitionistic logic.

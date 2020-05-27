@@ -1,0 +1,21 @@
+19:39:50 <caasih> @alex_lu stack 可以跟 cabal 並存嗎？
+19:39:51 <lambdabot> Unknown command, try @list
+19:40:01 <caasih> 為什麼我會加 @ ...
+19:45:45 <alex_lu> caasih: 像是這樣？
+19:45:48 <alex_lu> https://www.reddit.com/r/haskell/comments/3bw95a/using_cabal_and_stack_together/
+19:47:06 <caasih> alex_lu: 感恩，來試看看
+20:05:45 <caasih> alex_lu: 想乖乖用 stack 跑跑看你的 transpiler ，我到 gitter 問你？
+20:06:20 <caasih> 現在遇到他說我的 ghc 版本不對...
+20:50:09 <caasih> stack build 完後 stack exec 說 path 不對 0rz
+20:50:19 <caasih> 算了，先這樣
+22:35:45 <alex_lu> caasih: 回遲了，你有下 stack setup 嗎
+22:36:20 <caasih> alex_lu: 讓我重現一下...
+22:36:56 <t7> 怎麽還不愛haskell？
+22:38:33 <caasih> alex_lu: 先清過了 cabal ，按你給的連結跑了一次，他要我到 project 目錄下做。
+22:39:15 <caasih> 於是切到你的 transpiler 下，跑了 `stack setup`, `stack build`, `stack exec transpiler` ，結果得到：
+22:39:30 <caasih> `Executable named transpiler not found on path: <我的 PATH>`
+22:40:24 <caasih> t7: 想愛，但是不懂怎麼學才快
+22:41:04 <alex_lu> caasih:  exec 後面應該是接 transpiler-exe
+22:41:05 <t7> 每天好好學習啊
+22:41:48 <caasih> alex_lu: 原來要加 `-exe` ，感謝！
+22:43:22 <caasih> t7: 是，我會的。

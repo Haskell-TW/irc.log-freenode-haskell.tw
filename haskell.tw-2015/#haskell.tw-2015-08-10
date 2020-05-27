@@ -1,0 +1,5 @@
+16:12:19 <mno2> 嘗試用了 stack 當作 build tool 不過感覺整合還沒完整
+16:12:36 <mno2> hdevtools 沒辦法 load 到相對應的 modules
+17:00:12 <mno2> 現在才發覺有 TupleSections 這個 extension，感覺蠻方便的
+17:09:48 <CindyLinz> 喜歡 TupleSections :p
+19:57:38 <cibs> TupleSections 看起來真的挺方便的

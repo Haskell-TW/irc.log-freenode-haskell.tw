@@ -1,0 +1,58 @@
+00:50:07 <CindyLinz> yesod book 裡面都乖乖(呆呆?)用 `mappend` 而不用 <> 耶 @@"
+00:52:33 <CindyLinz> :t (***)
+00:52:34 <lambdabot> Arrow a => a b c -> a b' c' -> a (b, b') (c, c')
+01:02:07 <suhorng> :t (&&&)
+01:02:07 <lambdabot> Arrow a => a b c -> a b c' -> a b (c, c')
+01:02:13 <suhorng> :t (|||)
+01:02:14 <lambdabot> ArrowChoice a => a b d -> a c d -> a (Either b c) d
+01:02:39 <CindyLinz> 這幾個好像應該背起來..
+01:03:22 <CindyLinz> (***) 用在對一個 Map 處理很方便....
+01:04:00 <CindyLinz> toList 以後塞給 map, 然後 map 用的處理函數就是一個用 (***) 串起來的東西, 前面負責處理 key, 後面負責處理 value
+01:28:33 <monochrom> yesod book 寫時未有 <>
+01:30:25 <monochrom> 古時, 買打印機, 會問「幾多CPS」(characters per second)
+01:39:17 <CindyLinz> 噢.. 原來.. # 01:28 < monochrom> yesod book 寫時未有 <>
+09:48:14 <miaoski> CindyLinz: yesod 沒有把原始碼放上 github 嗎？ QQ
+09:49:10 <miaoski> 現在連上去是好的啦
+16:44:34 <CindyLinz> miaoski: yesod 整個在 hackage 都有呀
+16:46:46 <CindyLinz> miaoski: 有在 github 上欸~ https://github.com/yesodweb/yesod
+17:54:16 <miaoski> CindyLinz: 所以 clone github 不用 wget -m ? :P
+17:54:45 <CindyLinz> miaoski: 這個是 yesod 不是書啊
+17:54:55 <miaoski> 科科好吧 那妳還是得 wget -m
+17:55:49 <CindyLinz> 一下就 mi 完啦~ 而且還不小心就把不同版本都拉下來了 ^^|
+17:56:59 <miaoski> XD
+18:28:44 <petercommand> mi?
+18:29:31 <CindyLinz> mirror
+18:29:41 <petercommand> XD
+18:57:47 <suhorng> <3 慢慢來讀 http://takenobu-hs.github.io/downloads/haskell_ghc_illustrated.pdf
+19:54:59 <petercommand> 來看看 continuation monad ~~
+20:47:21 <CindyLinz> suhorng: 欸欸, 自然演繹法可以這樣嗎? @@ 「根據implication rule, p->q 等價於 ~p v q」
+20:53:16 <suhorng> CindyLinz: 他的自然演繹法寫在下面 6,7,8,9
+20:53:43 <suhorng> 前面不是自然演繹 是轉 CNF 用 resolution
+20:56:40 <CindyLinz> 喔喔...
+20:57:45 <CindyLinz> 不過自然演繹到底哪裡自然了呢.... >w<
+21:00:40 <suhorng> 規則讓人很可以接受XD
+23:01:49 <CindyLinz> yesod 好像也可以隨手用欸.. 覺得以前可能誤會它了....
+23:29:19 <petercommand> haskell 要 parse command line option 有什麼推薦的 library 嗎?
+23:30:24 <petercommand> 像 C 的 getopt 之類的
+23:31:19 <CindyLinz> petercommand: 有~ 我找一下
+23:31:59 <CindyLinz> petercommand: stdlib 就有.. XD # https://downloads.haskell.org/~ghc/7.8.3/docs/html/libraries/base-4.7.0.1/System-Console-GetOpt.html
+23:32:12 <petercommand> XDXD
+23:32:15 <petercommand> thx
+23:32:25 <CindyLinz> petercommand: 有人嫌那個用起來複雜, 包了一個簡單版介面... # http://hackage.haskell.org/package/getopt-simple-0.1.0.2/docs/System-Console-GetOpt-Simple.html
+23:33:04 <CindyLinz> stdlib 那個我用過... 不小心就會把訊息弄得看起來很專業.... :Q
+23:33:06 <petercommand> 感謝...來試試看:p
+23:33:14 <petercommand> XD
+23:33:59 <suhorng> CindyLinz: 有很專業的截圖可以看嗎DX
+23:33:59 <pkmx> optparse-applicative ?
+23:34:00 <suhorng> XD
+23:34:54 <petercommand> 先試試看內建的好了~~
+23:35:34 <CindyLinz> suhorng: 自己看 sample 啊.. XD # https://downloads.haskell.org/~ghc/7.8.3/docs/html/libraries/base-4.7.0.1/System-Console-GetOpt.html#g:2
+23:36:12 <CindyLinz> 印 message 的時候, 會自動幫你排版好喔~
+23:36:30 <suhorng> 好像比 argparse 複雜一點
+23:36:37 <suhorng> 自動排版耶XDD
+23:51:11 <petercommand> Option ['L']     ["libdir"]  (ReqArg LibDir "DIR") "library directory" #這裏的 "DIR" 的用途是什麼呀?
+23:51:28 <petercommand> 剛剛那個網頁裡的例子
+23:52:05 <petercommand> 他寫收一個 String，可是不曉得用途是啥..
+23:58:19 <au> 說明文字。-L DIR
+23:58:29 <au> "library directory" 是註釋
+23:59:29 <au> DIR 是參數描述 (給使用者看的說明，不是型別)

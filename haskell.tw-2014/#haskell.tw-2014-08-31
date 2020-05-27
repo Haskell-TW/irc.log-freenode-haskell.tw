@@ -1,0 +1,66 @@
+00:02:06 <suhorng> !
+00:04:28 <suhorng> 恩...想必 qualified 跟我原本想的不太一樣
+00:04:48 <suhorng> 或者說我一定沒給清楚 Haskell 對名稱的處理XD
+00:35:35 <CindyLinz> 重新 export B?
+00:35:40 <CindyLinz> B 是 alias 啊?
+00:45:56 <monochrom> 首先, 因為 as B, 所以沒有東西叫 A, 所有東西都叫 B.
+00:46:39 <monochrom> 然後, 因為 qualified, 所以沒有短名.
+00:47:28 <monochrom> 最後, 因為沒有短名, 所以 module ReExport(module B) 是空的
+00:48:27 <monochrom> 讀完我的鉅著就會南柯夢醒了!
+06:30:45 <drbean_> module Origin where
+06:30:47 <drbean_>   genus = "genus"      -- entity #2
+06:32:27 <drbean_> module Exporter(module Q
+06:32:29 <drbean_> where
+06:32:31 <drbean_>   import qualified Origin as Q  -- line (B)
+06:35:57 <drbean_> entity  has Q.e long name  has short name  exported
+06:36:00 <drbean_> #2      ✓        Q.genus   ✕               ✕
+06:42:53 <drbean_> 了解
+10:48:48 <suhorng> 突然覺得這是個有道理的設計XD 例如我 import qualified 是為了避免撞名, 但是允許 re-export 的話不就會撞名了嗎
+19:20:47 <suhorng> CindyLinz: 是說你現在如果 state monad 裡面想要很多個變數的話
+19:21:03 <suhorng> 是自己訂個 record 然後寫 setter/getter, 或是用 Lens 產生之類的嗎?
+19:22:23 <CindyLinz> 我現在在嘗試的是自己訂一個 monad 把我覺得應該會用得到的東西都寫好 accessor
+19:23:04 <CindyLinz> 欸, 純 state monad 就夠用的話.....
+19:23:09 <suhorng> 唔, accessor 並不是 getter/setter?
+19:23:18 <CindyLinz> 喔因為有些有 IO 啦 :p
+19:23:34 <suhorng> 不一定, 不過先只考慮 state
+19:23:36 <suhorng> 喔喔
+19:23:46 <CindyLinz> 例如說 execute "delete from user where uid=?" (Only 3)
+19:23:49 <CindyLinz> 這個 execute
+19:24:06 <CindyLinz> 我就不用再 liftIO, 也不用 pass db connection
+19:24:36 <CindyLinz> 如果 state 就夠用的話, 可能是用 record 配 lens 吧
+19:25:22 <CindyLinz> 還在嘗試中, 目前覺得好像還可以.. 只是準備 monad 和 accessor 的過程要打不少字 :/
+19:26:01 <CindyLinz> 隱隱覺得準備一個 monad 的過程, 就像用別的語言寫程式在拆模組, 拆物件的感覺
+19:26:57 <CindyLinz> state / record / lens 的 lens 部分不一定是用它的 template 直接產生, 有可能會自己準備
+19:27:27 <CindyLinz> 比較能生一些奇怪的 XD
+19:30:05 <suhorng> 於原來如此
+19:30:18 <suhorng> 某方面來說也可以多包一些其他常用到的 IO action...
+19:30:45 <suhorng> 那邊真的很多時候很煩而且很機械化QQ
+19:33:34 <miaoski> 寫一個 macro^H^H^H^H^H
+19:37:52 <suhorng> 應該真的可以用 macro 自動產生 XDD
+19:37:56 <suhorng> lens
+20:55:53 <CindyLinz> haskell 的 macro 就是 template 啊 ^^
+20:57:16 <CindyLinz> edwardk 的 control.lens 的確就有提供用 template 生成 lens 的功能
+20:57:30 <CindyLinz> 只是我不太熟悉那樣的用法..
+20:57:59 <CindyLinz> 不過 haskell 還有個多出來的問題(?)
+20:58:55 <CindyLinz> 就是用 haskell 寫 parser 太容易, 然後如果是面對 haskell 語法的話又有現成的 haskell-src-ext 可以用, 所以會誘惑我們直接寫一層 pre-parser 出來...ww
+20:59:17 <suhorng> CindyLinz: pre-parser 是什麼意思阿?
+21:00:09 <CindyLinz> suhorng: 就像... 類比的話就是, 你想讓寫 js 的過程開心一點, 所以不小心就發明了 coffeescript...
+21:01:02 <CindyLinz> 然後因為 haskell-src-ext 是現成的 parse haskell 語法的東西, 所以就算只是加個小東西, 也會很方便塞進去, 讓剩下不想動到的部分由 haskell-src-ext 處理掉
+21:13:04 <suhorng> XDDD
+21:13:12 <suhorng> 原來如此
+22:01:40 <miaoski> CindyLinz: 明明就是 C Preprocessor ... /flee
+22:02:17 <CindyLinz> miaoski: 你說 ghc 本體嗎? XD
+22:02:40 <CindyLinz> 那是以前便宜行事的時候嘛 :p
+22:02:55 <CindyLinz> 想當年 php 也只是個 perl preprocessor (?
+22:03:20 <suhorng> 原來有這回事!!!
+22:03:36 <suhorng> 難怪他用 "$"?
+22:04:12 <CindyLinz> $ 是學 perl, 不過應該跟它是用 perl 實作不需要有相關? ^^|
+22:04:24 <CindyLinz> 畢竟它 array 還是用 $, 不像 perl 用 @
+22:04:41 <CindyLinz> 應該只是為了 string interpolation 方便
+22:05:11 <CindyLinz> ruby 沒有 $, 所以要用 #{...} 多兩個字元, 而且 {} 的按鍵通常都很難按..
+22:05:49 <CindyLinz> perl 的 $ 我猜是從 shell 學的
+22:15:44 <mno2> preprocessor is the root of all evil ，想當年 C++ 也只是 C 的 preprocessor
+22:15:55 <CindyLinz> XDXD
+22:16:51 <CindyLinz> fortran 應該也算是? 聽聽這名字: FORmula TRANslate
+22:31:16 <mno2> 最近常常碰到一隻流浪貓，我在想要不要給它取個名字，叫做 Kleisli xD
+22:32:03 <mno2> "Kleisli Cat"

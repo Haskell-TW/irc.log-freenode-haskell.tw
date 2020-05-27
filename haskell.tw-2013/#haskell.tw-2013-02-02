@@ -1,0 +1,104 @@
+07:33:26 <favonia> 寫太多 Haskell 結果剛才碰 JavaScript 一直想找 Array.map ...
+09:52:26 <suhorng> 終於進到 school of Haskell 了 (dance)
+09:53:24 <suhorng> 說到 javascript 我想到 PLT 板 #1EMPX7ZA 這篇XD
+09:53:40 <suhorng> alert(xs.map(sq).filter(gt5).length); /o/
+17:51:04 <MnO2> http://hackage.haskell.org/cgi-bin/hackage-scripts/package/language-c
+17:51:42 <MnO2> 之前好像是問 C compiler ? 還是 C++ ? 我忘了
+17:54:02 <b4283> 是 c，
+17:54:15 <b4283> MnO2: 是 c，長見識了 :P
+17:55:12 <letoh> 我建好帳號了，不過看到的教學跟之前 blog 上給的一樣啊@_@  沒有新的
+17:56:01 <letoh> 可以線上執行 haskell code
+17:59:24 <letoh> 弄好 coursera 帳號，但來不及交第二次作業了XD
+18:09:26 <MnO2> https://haskell.fpcomplete.com/user/MnO2/learn-you-a-haskell-for-great-good-ch-4-snippet-01
+18:10:00 <MnO2> 希望 school of haskell 可以開放 API, 這樣就可以把 code 全部換成 active haskell 了
+18:10:46 <letoh> active haskell 是指可以線上 eval 那種嗎?
+18:10:55 <MnO2> 對啊
+18:11:04 <letoh> 看到了  這樣很方便
+18:11:21 <MnO2> 另一種方式就是， re-compile 成 SoH markdown，直接貼到他們網站上，然後 go public
+18:11:23 <letoh> Not in scope: `Main.main'
+18:13:44 <MnO2> 寫 feedback 給他們好了，至少希望有程式 submit tutorial 的界面
+18:14:57 <letoh> 有 create group 功能
+18:15:28 <letoh> 我連到你的 tutorial 了
+18:16:42 <MnO2> 嗯
+18:16:50 <letoh> 你會收到通知嗎?
+18:17:48 <MnO2> 似乎沒有
+18:18:44 <letoh> 唔，亂加東西會戳一下好像是 social website 的基本功能? XD
+18:19:19 <MnO2> 可以寫在 feedback 中 xD
+18:20:15 <letoh> 晚點再研究  先來搞定 sml 環境@_@
+19:23:31 <hychen> letoh, 第三週的課程反無聊了點..  我只多學了一個名詞叫lexical score....
+19:24:11 <hychen> letoh, 不得不再提一次, flolac 學到的東西實在是很多啊
+19:27:40 <hychen> letoh, 另外第三週的video有說清楚之前favonia 解釋過得binding , assignment 的概念 !
+19:34:59 <letoh> 我應該來不及交前兩次的作業了... 想先來準備禮拜一的考試XD
+19:35:28 <hychen> 星期一有考試???
+19:35:29 <letoh> 我知道啊.. flolac 的東西從第一次開始就有在追
+19:35:35 <letoh> 我有考試啦
+19:35:47 <hychen> oh
+19:35:52 <hychen> 強者letoh
+19:36:39 <letoh> 有追跟有看懂是兩回事XD  programming 的東西大概能看懂一點，logic 的部份完全不熟
+19:37:23 <hychen> 話說我對all_same_color([]) 的回傳值是true 這件事一直無法接受....
+19:38:13 <hychen> 你怎麼能對一個空集合下結論呢....
+19:38:37 <letoh> 看定義?
+19:38:41 <hychen> 一週大概要花2~3小時看video
+19:38:49 <hychen> 作業大概要化5~6小時
+19:39:08 <hychen> 因為homework instructions不是很清楚...
+19:39:09 <letoh> 對啊  所以我說可能來不及交第二次作業  就算今天交好像也只剩一半分數?
+19:39:14 <hychen> yap
+19:39:20 <hychen> does score matter?
+19:39:48 <hychen> 我得回公司去拿電源線....
+19:39:53 <hychen> laptop要沒電了
+19:39:54 <letoh> 我是不在意啦  但就像打電動一樣  拿不到成就總是有點遺憾XD
+19:39:59 <letoh> XDXD
+19:40:20 <letoh> 無接點充電XD
+19:58:35 <letoh> http://www.cis.upenn.edu/~byorgey/haskell-alphabet/  字母歌該更新了? (誤
+22:30:48 <suhorng> 對了, HW2 的 pattern matching 一定要用 case of 寫嗎?
+22:31:15 <suhorng> 我可不可以用
+22:31:15 <suhorng> fun sum [] = 0
+22:31:15 <suhorng>    |  sum (x:xs) = x + sum xs 這種寫法?
+23:15:55 <hychen> 可以啊
+23:15:58 <hychen> 我都是用這種
+23:16:05 <hychen> I like this more
+23:18:40 <CindyLinz> letoh: 無接點充電的瓦數很低呀... 記得是 5w?
+23:19:37 <MnO2> CindyLinz 最近很忙？
+23:19:48 <CindyLinz> MnO2: 忙死了... QQ
+23:19:59 <MnO2> 要上線了嗎？ xD
+23:20:12 <CindyLinz> 都是它害的.... → # http://www.gamesofa.com/gunsrush/
+23:20:43 <CindyLinz> 上線兩週了
+23:22:28 <MnO2> debug ?
+23:24:11 <CindyLinz> 可能說是 tune 比較貼切
+23:24:51 <CindyLinz> 例如說.. 人數到了某個程度的時候會覺得慢, 這樣好像不會定義為 bug XD
+23:41:39 <letoh> 跟規格不合的應該都算 bug ?
+23:42:57 <letoh> 日文好像都喜歡用「不具合」這個詞，意思是產品有缺陷.. 比較像 defect，而不是 bug
+23:43:43 <letoh> 阿...查了一下字典，說在電腦領域，「不具合」就代表有 bug 的意思XD
+23:43:51 <CindyLinz> letoh: 沒有規格啊
+23:44:18 <letoh> 例如說  預期要可以撐多少人之類的
+23:44:21 <favonia> letoh: 你是說像這種嗎？規格：每月 100 元台幣以下，能承受 1,000,000 人 uptime 99.99999% 的即時聊天室 xD
+23:44:35 <letoh> 隨便喊的也是規格啦  或者說規格都是隨便喊的? XD
+23:45:19 <letoh> 長官的感覺也算  「感覺頓頓的」... (一群人留下來加班 tune 效能
+23:45:48 <CindyLinz> 如果你的目標是一個 static freeze 的程式才會有那種規格
+23:46:07 <CindyLinz> 但是那問題會很大
+23:46:17 <CindyLinz> 你會在沒有那麼大需求的時候, 仍然給出那麼大的供給
+23:46:30 <CindyLinz> 公司會虧本, 或錯過時機...
+23:46:54 <CindyLinz> 所以 plan 就是用量有多少, 我們的效能就剛好給多少
+23:47:35 <letoh> 當然不可能無限改下去啊，嘴砲是嘴砲  現實歸現實，界線怎麼拿捏就看 PM 的口才了XD
+23:47:58 <CindyLinz> 所以上線初期, 成長曲線事先無法估計, 改來改去的情況會比較嚴重
+23:48:26 <CindyLinz> 如果是營運一段時間的老遊戲, 就會比較準確知道什麼時候會有多大用量
+23:48:37 <letoh> 我剛剛一直把那網址看成 gnucash...
+23:49:22 <CindyLinz> gnucash 是什麼奇怪的遊戲 XD
+23:49:37 <letoh> 很花錢的遊戲XD
+23:50:10 <letoh> 這 gunsrush 風格... 感覺很像 capcom 之前發行的某遊戲
+23:51:05 <letoh> 不過那個槍...
+23:52:03 <letoh> CindyLinz: 這看起來像 TPS... 槍是要用買的嗎?
+23:52:33 <CindyLinz> 開發代號的確是 TPS XD
+23:52:41 <letoh> XD
+23:52:43 <CindyLinz> 基本槍不用買
+23:53:24 <letoh> 喔  如果用 procedural generator 就可以生一堆槍出來賣了 (不過應該會被罵死
+23:53:52 <CindyLinz> 生一堆槍, 就賣不掉了 XD
+23:54:11 <letoh> 每一種槍都要不一樣啊
+23:55:24 <letoh> 一開始看起來像是 capcom 的 ex troppers... 但看了介紹又不太像了
+23:55:57 <CindyLinz> 應該會是上手比較快, 節奏也比較緊湊的設計
+23:56:56 <letoh> 唔，好像要帳號XD 有空再試試
+23:57:26 <CindyLinz> 嗯 XD
+23:57:34 <letoh> 這個應該不是用 haskell 開發的吧? XD
+23:58:03 <CindyLinz> 不是啊
+23:58:08 <CindyLinz> server 是 perl
+23:59:33 <letoh> 要做這種遊戲好像 TPS 比較適合，FPS 就沒辦法賣換裝道具了XD

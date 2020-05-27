@@ -1,0 +1,27 @@
+21:19:14 <haskellbot> i'm watching you slacker @undefined
+21:19:51 <suhorng> haskellbot?
+21:26:58 <miaoski> suhorng: 沒事，我剛剛在玩 slackbot. 後來想起來我家不能連 freenode 就放棄了 :P
+21:27:24 <miaoski> TOR relay / TOR exit 不能連正常的 freenode. 一定要連他們的 TOR 網址才行，然後很複雜
+21:30:17 <suhorng> miaoski: oh, cool :D
+21:31:10 <petercommand> miaoski: 用 irccloud 之類的呢XD
+21:38:23 <miaoski> petercommand: 之前 yhsiang (g0v channel) 有寫 irccloud 掛馬的程式，不過最近老是不能用，所以就跳槽了 ^^;
+23:31:49 <gansteed> 在do block里有一个Nothing， 整个do block最终的返回值就是Nothing， 这是为什么呢？
+23:32:55 <petercommand> > Nothing >>= \a -> Just 1 >>= \b -> Just 2
+23:32:56 <lambdabot>  Nothing
+23:33:27 <monochrom> 這是 Maybe 的 Monad instance 設下的
+23:39:17 <gansteed> 上面的Applicative我理解， 但是do block里 _ <- Nothing 并没有被应用到其后的操作中， 这样也会影响最后的值吗？
+23:40:10 <monochrom> 不, 上面的 >>= 是 Monad
+23:40:15 <suhorng> _ <- Nothing 會 desugar 成 Nothing >>= \_ -> ...
+23:43:03 <gansteed> http://learnyouahaskell.com/a-fistful-of-monads
+23:43:40 <gansteed> 麻烦看一下routine那一段代码， 在the list monad上面一部分
+23:44:52 <gansteed> Nothing desugur成Nothing >>= \_ -> ... 对之后second <- landRight 2 first以及最后do block值的影响是什么
+23:46:21 <monochrom> Nothing >>= (\second -> landRight 2 first >> landLeft 1 second)
+23:46:38 <monochrom> 而結果仍為 Nothing
+23:47:10 <petercommand> http://hackage.haskell.org/package/base-4.7.0.2/docs/src/Data-Maybe.html#Maybe
+23:47:31 <petercommand> Nothing  >>= _      = Nothing
+23:50:07 <gansteed> do block里的值是传递的， 这样理解对吗？每一行都会变成 >>=, 所以可以把do block变成类似 Nothing >>= \a -> Just 1 >>= \b -> Just 2这种？
+23:50:33 <monochrom> 是
+23:51:25 <gansteed> 找到原话了：It's important to remember that do expressions are just different syntax for chaining monadic values.
+23:51:38 <gansteed> 谢谢各位 ：）
+23:52:46 <suhorng> gansteed: 某方面來講,  "_ <- Nothing" 也可以理解成一個 "動作", 代表中斷接下來所有的程式 直接把結果變成 Nothing
+23:53:02 <suhorng> 當然這只是我們自己額外的想像 實際上的意思就是變成 (>>=) 來看

@@ -1,0 +1,20 @@
+00:25:12 <c9sloud> 剛剛在 php-src 做了一個 git gc --aggressive --prune=now 的動作
+00:25:29 <c9sloud> 然後 CPU 飆 100% 跑了 10 分鐘，整個動彈不得 XD
+00:30:20 <CindyLinz> 動彈不得通常是記憶體吃到 swap?
+00:30:30 <CindyLinz> 可是吃到 swap 的話 CPU 就不會是 100% 了..
+00:30:56 <CindyLinz> 不然你應該還是可以分到一部分 CPU 來作互動反應啊 ^^|
+01:28:05 <c9sloud> 有... 要等 10-20 seconds
+01:28:05 <c9sloud> XD
+01:33:36 <monochrom> 我是程式員的楷模. http://www.vex.net/~trebla/haskell/forwardconstraint/ForwardConstraint.html  說明書長度是程式長度的十倍 XD
+02:51:17 <au> monochrom++ # 10倍返し
+12:14:55 <c9sloud> XDD 十倍奉還
+14:11:49 <c9sloud> 還蠻想抱怨一下 PHP 的 Zend Engine ... 有時候是用 null-terminated string 有時候回傳又不是... 真想摔鍵盤
+14:16:06 <mno2_> 十倍奉還。多加一種回傳十個 null terminated 的 string (大誤)
+14:34:15 <c9sloud> API 很不一致 orz
+14:34:53 <c9sloud> zend_hash_get_current_key_ex 回傳的 key 是 null terminated
+14:48:30 <c9sloud> http://c.learncodethehardway.org/book/ex47.html 原來 learn c the hard way 有用 tree 來寫 routing XD 不過做的很簡單，只有 plain string match 而已
+15:20:28 <c9sloud> 嘖嘖 所以 null-terminated string 的原因是因為如果 key 已知，則可以直接 sizeof 少寫一個 -1
+15:20:42 <c9sloud> 可以減少運算 XD
+15:57:18 <c9sloud> 不過zend_read_property 的時候又要 sizeof(...) - 1
+16:44:02 <whitglint> 單純的 sizeof(...) - 1 在 compile time 就算完啦
+21:24:42 <c9sloud> 累了... 人肉 gc simulator XD

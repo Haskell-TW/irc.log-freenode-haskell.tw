@@ -1,0 +1,470 @@
+04:33:18 <caasihuang> 本日： cabal 在 raspberry pi 上運作起來很正常（很慢），但 SDL1.2 只有一片黑。不知道哪天用得上。
+04:37:01 <au> interesting. what about https://hackage.haskell.org/package/sdl2-1.1.0 ?
+04:39:42 <caasihuang> 明天來試試，但主力會放到 python 的 Pi3D 那邊去。
+04:39:49 <au> ++
+09:08:53 <c9sloud> https://github.com/thedrow/pyr3
+09:09:28 <c9sloud> 果然立刻有人開始動工 python binding XD
+09:17:11 <c9sloud> https://www.csail.mit.edu/node/2223
+11:54:13 <CindyLinz> 看了看 monad-loops package....
+11:54:30 <CindyLinz> 其實說 Haskell 沒有迴圈是謊話吧, 是假的吧!!
+11:55:51 <CindyLinz> 看看那個 whileM__  # https://hackage.haskell.org/package/monad-loops-0.4.2/docs/Control-Monad-Loops.html
+11:56:01 <CindyLinz> 啊多打一個底線 XD
+11:56:04 <CindyLinz> whileM_
+11:56:28 <CindyLinz> whileM_ :: Monad m => m Bool -> m a -> m ()
+12:17:09 <CindyLinz> 用 whileM_ 寫的 九九乘法表.. *_*  # http://lpaste.net/40190736292904960
+12:29:52 <b4283> 變乘法臉了
+13:06:12 <c9sloud> CindyLinz: 他實際上是 recursive ?
+13:16:42 <CindyLinz> c9sloud: 可以點 API 右邊的 source 看 XD
+13:17:18 <CindyLinz> c9sloud: 不過最後會不會變成組語的 jmp 而不是 call, 跟套的 monad 有關係
+13:17:37 <CindyLinz> 如果套的不是 IO, 而是 []..... (苦惱)
+13:20:48 <c9sloud> CindyLinz: 如果要改 binding 的話是改 R3.xs right?
+13:21:00 <c9sloud> fill source 會自動套?
+13:24:49 <c9sloud> CindyLinz: 咦我好像沒辦法再 fork 你的出來
+13:24:56 <c9sloud> 我 send 你 patch 好了
+13:25:28 <c9sloud> CindyLinz:  https://gist.github.com/c9s/27cd0bf9fb46a26a41af
+13:26:08 <c9sloud> 昨天思考了一下把 API 簡化了.. 有用 route struct 就用 insert_route 建 tree, 沒有用 route 就用 _match_route();
+13:26:47 <c9sloud> 所以現在 r3_tree_insert_path 不拿 route* 只拿 void* data
+13:32:53 <CindyLinz> 嗯 fill_source 會自動抓東西來塞
+13:33:37 <CindyLinz> c9sloud: 欸不可以手動給 length 嗎? 從 perl var 拿出來的字串都有長度, 一定要捨棄這個長度重算嗎? ^^|
+13:34:31 <c9sloud> 可以~
+13:34:36 <c9sloud> 我有留著
+13:34:47 <c9sloud> 像這樣 r3_tree_insert_pathl(n , "abc"       , strlen("abc")       , &route_data );
+13:35:13 <c9sloud> r3_tree_match_entry(n, entry); 的話會直接拿 entry->path, entry->path_len ;
+13:35:42 <CindyLinz> 喔喔你只有把 _test 裡面的因為不是  perl var 的換成沒有 length 的版本
+13:35:57 <c9sloud> 嗯嗯對
+13:36:21 <c9sloud> 本來 length 後面要丟兩個
+13:36:28 <c9sloud> 現在丟一個就好了
+13:36:59 <c9sloud> 其實突然覺得 *_new 跟 *_newl 好像比較符合 C-style XD
+13:37:22 <CindyLinz> 我不在意 XD
+13:42:15 <c9sloud> 先這樣好了懶得改 XD
+13:42:26 <c9sloud> CindyLinz: https://github.com/c9s/r3/issues/12 有人要來幫忙包了
+13:43:16 <CindyLinz> c9sloud: push 了~
+13:44:40 <c9sloud> CindyLinz++
+13:45:02 <c9sloud> 先不煩你了 XDDD
+13:45:34 <c9sloud> 第一版出來之前，除了 bug fix 之外應該不會再動 API
+13:46:42 <CindyLinz> 寫 doc 比較苦手... orz
+13:46:44 <CindyLinz> (痛)
+13:56:44 <c9sloud> CindyLinz: 辛苦了 @@
+13:57:00 <c9sloud> CindyLinz: 手還好嗎 @@
+13:58:28 <CindyLinz> 手沒事啊.. 苦手跟手沒關係啊 XD
+14:00:59 <CindyLinz> 我只是想到我好幾個 project 都是開發完, 測試完.. 停在 doc 這一關, 就沒有 release 了.....||
+14:27:16 <c9sloud> CindyLinz: 先上再補 doc ? XD
+14:32:11 <CindyLinz> 這樣嗎!
+14:33:49 <favonia> CindyLinz: 應該上傳到 hackage
+14:34:00 <favonia> CindyLinz: 這樣搜尋時就會不小心搜尋到
+14:34:14 <favonia> CindyLinz: 然後就有使用者強迫你寫 doc
+14:34:24 <favonia> 寫夠多以後就有人幫你寫 doc 和 code
+14:34:31 <favonia> 然後就可以放生了（逃
+14:35:49 <CindyLinz> 然後就抓交替叫那個人來維護嗎? XD
+14:59:04 <c9sloud> CindyLinz: 對呀，你先放上了才知道有沒有人想要用 XD
+14:59:10 <c9sloud> 有要用再補就好了
+14:59:59 <c9sloud> CindyLinz: 還可以用一招, 如果對方有送 PR, 就把它加到 co-authors (無形之中賦予其寫文件之責任感 XDDD
+15:00:39 <CindyLinz> c9sloud: 你這坑人王... (指)
+15:01:29 <c9sloud> XDDD
+15:01:51 <c9sloud> 有一次我在用 perl 的 App::CLI
+15:02:34 <c9sloud> 我就說奇怪怎麼都沒文件.. clk 就直接把 maintainer 轉到我身上了 XDD
+15:02:45 <CindyLinz> wwww
+15:03:09 <c9sloud> 但我後來就用 CLI:Framework 了 XD
+15:03:25 <c9sloud> 再來就沒繼續寫 perl 都快忘光了
+15:03:56 <CindyLinz> 原來是這樣學來的.....ww
+15:04:33 <c9sloud> XDD 但我覺得加 co-author 到名單裡面倒是無所謂啦
+15:04:38 <CindyLinz> 那先來 release AnyEvent::MySQL 好惹~
+15:04:47 <c9sloud> 一方面表示尊重對方的 contribution
+15:04:56 <c9sloud> 這我覺得也很重要
+15:05:15 <c9sloud> 但對方要不要繼續 contribute 就看個人意願 XD
+15:06:20 <CindyLinz> 已經在公司裡 production 用了兩年了...
+15:06:36 <CindyLinz> 一直沒有 release 到 cpan, 還擺在 github 裡 XD
+15:06:53 <c9sloud> XD
+15:07:04 <c9sloud> 放到 github 應該就算一種 release? :-p
+15:07:37 <CindyLinz> 算嗎? 我 github 一堆沒寫完的東西欸, 從 repository name 又看不出來哪個能用 XD
+15:24:50 <CindyLinz> c9sloud: 那你完成以後會去哪邊 announce 嗎?
+15:25:16 <CindyLinz> c9sloud: 該不會你 master 上面每一個 commit 都是正式 release 吧 OAO
+15:25:43 <c9sloud> c9sloud: 去 hacker news or mailing list XD
+15:25:49 <c9sloud> CindyLinz: 用 tag 呀
+15:26:03 <CindyLinz> c9sloud: 喔喔~
+15:26:13 <c9sloud> git tag 1.0.0 -F changelogs
+15:29:46 <c9sloud> 然後.. github 最近有新的功能
+15:29:52 <c9sloud> 可以用來發 release
+15:30:39 <c9sloud> CindyLinz: 像: https://github.com/CindyLinz/Perl-Router-R3/releases
+15:37:18 <CindyLinz> 噢
+15:37:34 <CindyLinz> 噗噗 CPAN 上面有一個 package 叫作 Cindy  >///<
+15:38:04 <CindyLinz> Content INjection into XML and HTML documents....ww
+15:40:59 <c9sloud> XDD
+15:41:07 <c9sloud> 感覺很像某 Scala 的 framework
+15:41:16 <c9sloud> 用 CSS selector 去套 template
+15:41:40 <CindyLinz> 內容不重要... for me XD
+15:51:12 <CindyLinz> 然後有次 in2 跟我說, 我做的那個 AnyEvent::MySQL 意外地有避開 mysql client lisence 的用途.. XD
+15:51:17 <CindyLinz> license..
+15:54:21 <c9sloud> mysql client 有什麼 license 的限制嗎?
+15:55:39 <c9sloud> 咦 看到了!
+15:55:40 <CindyLinz> GPL 啊~ 平常用是沒差, 但是考慮授權給陌生廠商經營我們遊戲的時候就怕怕的..
+15:55:47 <CindyLinz> 看到了?
+15:56:06 <CindyLinz> 然後 Oracle 也讓人怕怕的 ._.
+15:57:20 <c9sloud> 第一段的 "I thought" 可能要改成 "I think " 不然會變成 "我以為"   :p
+15:57:30 <c9sloud> 可能不小心打錯了
+15:58:04 <c9sloud> 是喔 GPL 不是沒有改 source code 基本上不違反嗎?
+15:58:39 <CindyLinz> c9sloud: 跟它 link 了的不就也要 open 嗎?
+15:59:04 <c9sloud> 我以為 link 還不算?
+15:59:09 <c9sloud> 還是那是 LGPL ?
+16:00:16 <CindyLinz> link 不算的是 LGPL
+16:00:26 <c9sloud> 嘖嘖
+16:00:34 <CindyLinz> 我都把它記成 Link-friendly GPL XDDD
+16:01:37 <CindyLinz> 然後 g++ 有怪怪 GPL, 因為 template 不太能用 link 的, 所以不能直接用 LGPL, 而是硬把 GPL 改成 LGPL 風味的版本
+16:02:11 <c9sloud> 是喔 http://programmers.stackexchange.com/questions/158789/can-i-link-to-a-gpl-library-from-a-closed-source-application
+16:02:16 <CindyLinz> c9sloud: 喔不是不小心打錯, 是我真的不會 *_*
+16:02:21 <c9sloud> 我剛剛看這個下面回答都不一樣好奇怪
+16:03:12 <c9sloud> XD
+16:05:02 <CindyLinz> 然後剛剛發現 2013 年有人放了一個也是 AnyEvent 的 MySQL, 用 mysql-client.c 的.
+16:06:28 <c9sloud> http://stackoverflow.com/questions/620696/mysql-licensing-and-gpl 這邊剛好有一個 mysql client + gpl 的討論
+16:06:42 <c9sloud> 看起來好像是放 server side + private 就可以 (?)
+16:08:59 <CindyLinz> 不用 release 給合作廠商嗎?
+17:10:25 <c9sloud> 突然覺得這邊快變成 #c 頻道了 XD
+17:10:44 <c9sloud> 我先自己消音 XD
+17:12:56 <godfat1> #c 猛一看看成 c#
+17:13:42 <CindyLinz> c9sloud: 我還是有用力講 Haskell 的東西啊 ._.
+17:13:54 <godfat> 說到這個就要抱怨 rails 把各種不同的東西全部做到同一個 function 上，然後無止盡的 options 根本搞不清楚要怎麼用，型態也亂七八糟
+17:14:01 <CindyLinz> 12:17 < CindyLinz> 用 whileM_ 寫的 九九乘法表.. *_*  # http://lpaste.net/40190736292904960
+17:14:31 <c9sloud> godfat: 對呀 有點變成濫用了
+17:14:49 <c9sloud> CindyLinz: XDDD 這太閃了我看不到
+17:14:54 <godfat> 效能也亂七八糟，因為原本 compile time 就知道要怎麼用的東西，全部變成 runtime 再去檢查
+17:15:05 <CindyLinz> c9sloud: 閃??
+17:15:25 <c9sloud> godfat: 感覺是開發者懶惰擺第一的框架 XD
+17:16:05 <godfat> c9sloud, 我不確定，我覺得他們想要的是這種東西 function('give me whatever i want, read my mind with my English')
+17:16:21 <c9sloud> godfat: 概念可能來自於 jQuery 簡潔的介面吧
+17:16:30 <c9sloud> 像 jQuery $() 什麼都可以吃
+17:16:43 <godfat> 可能吧，但 jquery 本來就沒什麼東西，rails 包的東西多太多了
+17:17:03 <c9sloud> jQuery 的確是介面簡潔極致
+17:17:38 <c9sloud> 以前寫 perl 也常用這種動態檢查 (runtime) 的 polymorphism
+17:17:40 <godfat> 我是覺得 render :text => 'text' 並沒有比 render_text('text') 來得簡潔...
+17:18:00 <c9sloud> 結果 option 越加越多寫一寫到最後都忘記自己該怎麼用了
+17:18:05 <godfat> =_=....
+17:18:12 <c9sloud> 還要去找 test code XD
+17:18:42 <c9sloud> godfat: 設計者可能很想要空白安插其中 XD
+17:18:59 <c9sloud> perl 裡面的確也蠻多這種的  run callback => sub { ... }
+17:19:06 <godfat> 再說，如果是 render_text, 我還能靠 reflection 找 API 用，render :text => '...' 這種不看 code 根本看不出來
+17:19:52 <godfat> 不想要底線這種就標準想要英文的思維，然後就有 123.should.be.equal.to 123 這種鬼東西出來
+17:20:46 <CindyLinz> 覺得喜歡這種寫法的話, 應該這語言可以另外設計一份專門用來寫這種東西的語法
+17:20:57 <CindyLinz> 而不是這樣惡搞原本給 OO 用的寫法..
+17:21:16 <godfat> 崩潰呀... XD
+17:21:20 <CindyLinz> 根本就 hack, 而且還很不好用.. 只能 left priority
+17:23:00 <CindyLinz> 還是用 lens 吧.. (被拖走)
+17:23:19 <godfat> XDD 還沒讀 lens 是做什麼的
+17:23:22 <c9sloud> 叫 DHH 寫 PHP 吧，那應該就會至少寫 renderJson instead of $this->render(array( 'text' => $text ));
+17:23:52 <c9sloud> 只點了 star => Lens 沒用過 XD
+17:24:09 <godfat> 倒是真的有 render :json => {'text' => 'text'}
+17:24:19 <c9sloud> 之前好像 au 還是 CindyLinz  有貼的樣子 https://github.com/ekmett/lens
+17:24:48 <CindyLinz> 喔我貼的, 我那篇是說 Haskell 玩符號玩好兇, 比 Perl 還兇.. XD
+17:25:01 <mno2> godfat:  software 中一切的問題都可以用一個 eval 來解決（誤）
+17:25:42 <CindyLinz> haha 函數.....
+17:25:44 <c9sloud> 阿對
+17:28:11 <godfat> mno2, eval 裡面再 eval 再 eval, multi-level language!
+17:32:38 <au> /home/audreyt/src/st/socialtext/plugins/widgets/share/widgets/page_tracker
+17:32:42 <au> /home/audreyt/src/st/socialtext/plugins/widgets/share/widgets/page_tracker
+17:33:15 <CindyLinz> 有 loop 感的 file path..ww
+17:33:45 <au> er sorry
+17:33:47 <au> wrong window
+17:34:08 <CindyLinz> 咦, 可是還蠻符合的, 以為是在接這句話 XD # 17:28 < godfat> mno2, eval 裡面再 eval 再 eval, multi-level language!
+17:34:15 <au> XDD
+17:35:48 <godfat> 我看一些 java 的路徑倒是真的常常覺得在迷宮裡... XD 之前試用 sbt 想取代 ant, 結果生出太多東西，後來就放棄了。我只是想要簡單地 compile..
+17:38:58 <c9sloud> au:  :p
+17:40:19 <CindyLinz> c9sloud: 欸欸~ 我也只是想要簡單地 compile.. Q_Q
+17:45:11 <c9sloud> CindyLinz: 你說 ant 嗎?
+17:45:34 <c9sloud> godfat: scala 好像就是用 sbt
+17:45:39 <c9sloud> 肥暴了
+17:45:41 <CindyLinz> c9sloud: 我說那堆設不起來的 autotool 啦.. XD
+17:46:01 <c9sloud> CindyLinz: 咦 現在還是不行嗎?
+17:46:09 <godfat> c9sloud, 我正是要用在 scala 上，後來還是繼續 ant, 相對簡單...
+17:46:11 <c9sloud> 我在 linux 上面跑過了說, 都 ok 耶
+17:46:12 <CindyLinz> c9sloud: fill_source.pl 寫完以後就沒試了.. ^^|
+17:46:50 <c9sloud> XD
+17:47:45 <c9sloud> github 掛了?
+17:47:56 <CindyLinz> 我連得到欸
+17:48:02 <godfat> up here
+17:48:12 <CindyLinz> c9sloud: 你用太兇, 被判定為 deny of service 哄!
+17:48:23 <c9sloud> 最近常常連不到 XD
+17:49:07 <c9sloud> 我連 search.cpan.org 也 504 Gateway Time-out
+17:49:31 <c9sloud> 又可以了... zz
+19:20:41 <c9sloud> clang 真的好聰明阿... note: please include the header <string.h> or explicitly provide a declaration for 'strlen'
+20:09:20 <c9sloud> CindyLinz: https://github.com/clibs/clib 這個看起來很讚耶
+20:27:05 <c9sloud> https://github.com/c9s/r3/pull/22 遇到這種 PR 不知道該不該收 orz
+20:28:05 <CindyLinz> c9sloud: 這我怎麼知道 XDDD
+20:28:17 <CindyLinz> c9sloud: 你原本 indent 很爛嗎? XD
+20:28:30 <CindyLinz> 不然如果也還好的話, style 不合就不用收啦
+20:29:32 <c9sloud> 沒吧.. 你覺得很亂嗎 XD
+20:29:56 <c9sloud> 感覺是個 python developer 風格  # 對於所有 indentation 都不順眼 XDDD
+20:32:57 <CindyLinz> 感覺還好 :|  我覺得不同的風格, 只要一致性還行, 就該予以尊重 :D
+20:33:36 <godfat> 老實講我是覺得沒有非常一致，雖然不嚴重
+20:33:37 <godfat> 例如這個是差比較多的 https://github.com/c9s/r3/blob/master/src/list.c
+20:34:08 <godfat> K&R 風格耶，好久沒見到 XD
+20:34:12 <CindyLinz> 畢竟硬改風格會影響心情, 影響產能 XD
+20:35:06 <godfat> 等等，我可能搞錯了，變數在大括號前那個應該怎麼稱呼呀？
+20:35:20 <c9sloud> godfat: 真害羞 XD
+20:35:32 <c9sloud> 那個本來 local 摳過來結果沒用到
+20:35:48 <godfat> XD 那直接刪除就結案好了？ XD
+20:36:13 <c9sloud> 本來想說一定會需要用到 linked list 但後來為了 iteration 快速，就直接用 array + index 索引了
+20:37:02 <darkx> classic C XD
+20:38:11 <hashcat_> 好東西 http://funscript.info/
+20:38:28 <CindyLinz> 快樂腳本
+20:38:42 <godfat> 簡稱快樂腳
+20:38:48 <c9sloud> 怎麼一天到晚都有一堆有趣的東西被生出來阿 XDDDD
+20:38:55 <c9sloud> 追都追不完 XD
+20:39:12 <letoh> F# 耶...
+20:39:19 <godfat> 不過我對 F# 沒啥興趣...
+20:39:35 <hashcat_> 那個有庫很實用
+20:40:07 <hashcat_> 對haskell比較有興趣的話purescript
+20:40:27 <letoh> godfat: 入侵 .net 世界很方便
+20:40:29 <hashcat_> 不過貌似比較少實用
+20:41:00 <godfat> letoh, 先被入侵之後反入侵回去很方便 (XD
+20:41:11 <letoh> XDXD
+20:41:38 <CindyLinz> 敵方的本能寺蓋到我家來了這樣?
+20:42:02 <letoh> 不是都已經滲透到 mono 了嗎? XD
+20:42:06 <godfat> 這什麼會生殖的本能寺？ XD
+20:42:27 <godfat> https://github.com/purescript/purescript 原來我有 star, 按完就忘了
+20:42:29 <letoh> 黑山老妖之類的?
+20:57:19 <hashcat_> 噗噗
+21:29:04 <c9sloud> 想請較一下，假設我另外寫一個 memory pool + buckets 一次做 allocation, 然後讓 data structure 的 memory pointer 全都從 mempool 拿的話，對走訪整個 tree structure 的速度有沒有幫助?
+21:29:25 <c9sloud>  s/請教
+21:30:36 <CindyLinz> memory allocate 很貴, 所以節省 memory allocate 的次數通常是有賺的
+21:31:04 <CindyLinz> 嗯, 而且 free 比 allocate 還貴
+21:31:09 <godfat> 先 profile?
+21:33:34 <CindyLinz> 我包 R3 的 perl 版時, 額外要存的部分有通通壓成一塊連續的記憶體, 只 allocate 一次.. 嗯, 這樣 locality 也會好一點
+21:43:09 <c9sloud> CindyLinz: 不過 memory allocation 只有在 constructing time 才會用到
+21:43:20 <c9sloud> match 的時候幾乎都不會 allocate
+21:43:31 <c9sloud> 所以我本來打算用 jemalloc 後來也用不太到了
+21:44:04 <c9sloud> CindyLinz: 妳說 locality 是指調用來的記憶體區塊比較連續嗎?
+21:48:19 <CindyLinz> c9sloud: 對啊, 就可以佔一點會一起被塞到 cpu cache 裡的便宜
+21:48:44 <c9sloud> 嗯嗯 看來值得花一點時間試試看
+21:49:00 <c9sloud> 我記得 jserv 以前寫的 iserv 就有自己寫 mempool
+21:49:05 <c9sloud> 看能不能拿來用
+21:49:20 <CindyLinz> c9sloud: 對, match 的時候沒賺到 allocate 次數的好處, 只有 locality 有一點好處
+21:49:51 <CindyLinz> 雖然說連著發 allocate 獲得的記憶體應該也是連續的機率很大.. XD
+21:50:24 <c9sloud> struct 不同的話 alignment 也會影響?
+21:50:33 <c9sloud> 通常 node -> 才接 edge 的 alignment
+21:50:42 <CindyLinz> alignment 的部分的影響我就不熟了 @@"
+21:50:43 <c9sloud> 所以可能是交叉交叉
+21:51:55 <CindyLinz> 啊不就跟他說 layout style 不合, 所以不適用就好了嗎? ^^|
+21:52:34 <CindyLinz> 還是你也想吸收他當 co-author?  我現在越來越了解你們這種人的技倆了 XDDD
+21:53:16 <c9sloud> 不管了直接 close XD
+21:53:32 <c9sloud> CindyLinz: 他下午送的 tree_dump PR 也寫的不好
+21:53:40 <CindyLinz> 好兇 XD
+21:53:50 <c9sloud> 有嗎 XDDDD
+21:54:23 <c9sloud> https://www.irccloud.com/pastebin/WBhaWKDa
+21:54:53 <c9sloud> 咦
+21:54:56 <c9sloud> 自動被 paste 了 orz
+21:56:26 <c9sloud> CindyLinz: 因為他還說要我選一個，他再重新 format 一次
+21:56:50 <CindyLinz> 喔還是有回答喔.. 以為直接已讀不回 close 掉 XD
+21:57:53 <c9sloud> CindyLinz: https://github.com/c9s/r3/pull/22
+21:57:55 <c9sloud> 有哇
+22:00:03 <CindyLinz> 這人...... 33 followers (這部分還好) 3.0k starred.. 這.........
+22:00:33 <CindyLinz> 不過發現你也有 1.3k.... XD
+22:00:47 <c9sloud> stared 好像是星星別人?
+22:01:04 <CindyLinz> 對啊.. 你們是怎麼有辦法關注那麼多 project 的啊  *__*
+22:01:30 <godfat> 現在 star 是沒有 notifications 了.. 所以似乎是沒差 :o 不過我以前是真的都有在看 feed
+22:01:33 <c9sloud> yeah https://github.com/stars/thedrow
+22:01:45 <c9sloud> godfat: github timeline 改了 style 之後就變得好難讀
+22:01:51 <c9sloud> 我本來都會認真看 orz
+22:02:02 <c9sloud> 而且我覺得 github 沒有很認真在改 timeline
+22:02:04 <godfat> 我一直都是只看 feed 就是了 XD
+22:02:16 <au> 話說本周五要和 github UX team meeting 討論 timeline/star system 怎麼改比較 friendly
+22:02:22 <CindyLinz> !
+22:02:28 <godfat> 我曾經想要清理 stars, 不過實在太多了，後來就懶了
+22:02:47 <c9sloud> !! au 突然出現 XD
+22:02:49 <CindyLinz> 我....完全不知道那些要怎麼看, 建議不了 orz
+22:03:00 <godfat> 分類？
+22:03:05 <c9sloud> 我覺得連續的 commits 可以 fold 起來..
+22:03:11 <c9sloud> 或是 tags ..
+22:03:38 <godfat> 我記得之前看 feed 是以 push 為主，說這次 push 有以下 commits 這樣
+22:03:40 <c9sloud> 之前每則都有頭像，辨識度很高，現在都沒有了
+22:03:52 <au> 我推坑他們開一個 hackpad 開放大家一起討論了... XD 但是還沒有下文, 所以先收集這邊的苦水^H^H意見列一下
+22:03:57 <c9sloud> 以前有頭像，可以看誰都是在亂 follow 亂 star 就把它 unfollow XD
+22:04:14 <c9sloud> XDDD
+22:04:42 <CindyLinz> 可以入侵 github 了 (誤)
+22:05:03 <c9sloud> 可能還是要過濾無意義的訊息... 像是有些 project 一次 push 20 個 tags ... 我的 timeline 就被洗版了
+22:05:21 <CindyLinz> local commit 積太久一次 push 也會嗎?
+22:05:34 <c9sloud> local commits 好像會被摺疊起來 倒是還好
+22:05:47 <c9sloud> 他好像是 git push --tags origin XD
+22:05:51 <CindyLinz> 喔, 要一一 push 才會這樣?
+22:06:26 <c9sloud> yeah 如果要釋放垃圾訊息的話就是 cycle -> commit + push
+22:06:59 <godfat> force push 連發的話連 commit 都不用 XD
+22:07:24 <c9sloud> force push 的話要有 new head 才行 XD
+22:07:54 <godfat> 這樣？
+22:07:55 <godfat> git push -f github :master
+22:07:55 <godfat> git push -f github master
+22:08:01 <CindyLinz> 為什麼在研究這個啦 XD
+22:08:20 <poga> 我習慣超差的... 都洗別人版（遮臉
+22:08:38 <c9sloud> godfat: new head 的話要有 commit
+22:09:09 <c9sloud> 如果不想 commit 的話也可以用 rebase XD
+22:09:32 <c9sloud> 或是兩個 branch 交換 force push XD
+22:09:48 <godfat> c9sloud, 你的意思是一定要新 sha1 才會在 timeline 上顯示嗎？
+22:10:18 <c9sloud> 嗯不是 是因為沒有新的 HEAD,  git repo 直接會跟你說 update-to-date
+22:10:29 <c9sloud> 所以 force 也沒用
+22:11:22 <godfat> 我是想說 delete 掉重傳就有了，或是 git push -f github master~n:master 這樣掃 XD
+22:11:39 <c9sloud> 這樣也是可以 XDDDDD
+22:12:30 <godfat> 不過說到這個，我記得 zedshaw 之前做了很多觀察 github 使用者行為的事，他有一些 scripts 可以找惡意使用者之類的
+22:13:27 <godfat> 關於對付惡意使用者這件事，他應該經驗十足... XD
+22:15:13 <petercommand> timeline的話我覺得是時間相近的相同repo的commit可以褶疊
+22:17:22 <c9sloud> 有些是同一個 network repo 應該也要可以摺疊才對
+22:17:29 <c9sloud> 因為都已經有 watch 了
+22:25:07 <c9sloud> CindyLinz: http://www.catb.org/esr/structure-packing/ Eric Raymond 寫的!
+22:25:09 <c9sloud> 值得一讀
+22:26:42 <CindyLinz> 喔 謝謝!
+22:27:03 <CindyLinz> 這篇好像硬硬der....
+22:27:23 <CindyLinz> 而且好長.... QQ
+22:28:48 <letoh> c 的 lost art 通常都是一些很可怕的東西...
+22:29:15 <b4283> lost ark
+22:29:47 <letoh> 不過我也常用就是  還常改 packing width
+22:32:59 <godfat> lost ark XDD
+22:33:20 <c9sloud> XDDDD
+22:33:46 <godfat> 請問這是你要找的方舟嗎？
+22:34:20 <b4283> godfat: 是法櫃 XD
+22:34:21 <c9sloud> CindyLinz: 好像還要搭配這個讀 http://docs.cs.uct.ac.za/gcc/Structure_002dPacking-Pragmas.html#Structure_002dPacking-Pragmas
+22:36:47 <CindyLinz> 越來越多了 OAO
+22:37:19 <godfat> b4283, @@ 忽然搞不懂這個字了 XD
+22:40:05 <b4283> :P
+22:40:35 <CindyLinz> c9sloud: 這樣不知道 malloc 取得的東西會怎樣 align?
+22:40:41 <CindyLinz> 一律 8x 嗎?
+22:40:59 <CindyLinz> 畢竟只有給總 size, 沒有給 element size 的 hint 呀
+22:41:00 <c9sloud> 不知道 還沒讀 我只有先 send to kindle 而已 XDD
+22:43:19 <letoh> 那個 align 跟 malloc 應該無關
+22:43:31 <petercommand> 甚麼是lost art呀
+22:43:38 <letoh> 主要是算 struct 的方式會受到影響
+22:43:58 <letoh> 包括 pointer 和 offset 計算之類的都會不一樣
+22:44:10 <CindyLinz> 嗯那我有沒有辦法怎樣強制說我要 malloc 怎樣的 align?
+22:44:27 <letoh> 你需要怎樣的結果  可以舉個例子嗎?
+22:44:28 <CindyLinz> 如果我弄來是放一排 pointer 的話, 8x 才快呀?
+22:44:41 <CindyLinz> malloc(sizeof(char*) * 1024)
+22:45:14 <letoh> 唔  這邊不會有 packing
+22:45:27 <letoh> 那個是指 struct 裡的 memory layout
+22:45:44 <CindyLinz> 嗯知道.. 但我可以要求 align 嗎?
+22:45:55 <CindyLinz> 畢竟如果剛好歪 1byte, 應該很虧吧?
+22:46:40 <letoh> 我不太懂你要 align 什麼... 透過 malloc 拿到的空間就是你指定的大小啊
+22:46:44 <letoh> 歪不歪跟它無關
+22:47:13 <letoh> 而是跟你存取方式有關... 如果你需要的是 address alignment 而不是 size alignment，那要另外處理
+22:47:51 <letoh> 像我這邊用的 malloc 因為是自己實作的，所以就直接在裡面處理好 alignment 了
+22:48:00 <CindyLinz> 例如說我拿到 char * mem = malloc(sizeof(char*) * 1024);
+22:48:03 <petercommand> 以前好像有看過page alignment, 這有甚麼用處嗎?
+22:48:10 <CindyLinz> 然後接下來裡面存滿 1024 個 char*
+22:48:18 <CindyLinz> char ** mem XD
+22:48:53 <letoh> 我遇過的情況，malloc 會牽涉的 alignment 應該只有 address alignment
+22:48:59 <CindyLinz> 如果它不是對齊邊界的, 那我如果直接用 mem[3] 來存取的話, 會比有對齊的時候慢啊
+22:49:29 <letoh> 嗯  那個就是把 address alignment 處理好就行了
+22:49:31 <CindyLinz> 就, 如果 mem 的 addr 不是 8 的位數的話
+22:50:00 <letoh> 但這個跟前面那兩篇連結沒什麼關係
+22:50:16 <letoh> 只是通常會搭配一起用而已
+22:50:19 <CindyLinz> 所以是怎樣, 我一次直接要個 sizeof(char*) * 1024 + sizeof(char*)-1, 然後要回來以後自己 shift 一個有對齊的 addr 開始用嗎? XD
+22:50:39 <letoh> 差不多是這樣
+22:50:47 <CindyLinz> (驚訝)
+22:50:55 <letoh> 還要把 shift 的 offset 記起來
+22:51:00 <letoh> 這樣 free 才會正常
+22:51:51 <letoh> 基本上實際配置出來的空間可能會比你指定的多出一些，因為常常需要記錄狀態
+22:52:36 <CindyLinz> 對還要記 offset... OAO
+22:52:54 <CindyLinz> 不過就那 sizeof(char*)-1 應該夠記了.. 只要這個 sizeof(char*)!=1 就好 XD
+22:53:37 <CindyLinz> 欸.. 這樣好像不夠, 因為不知道拿來記的東西存在前面還是後面 ww
+22:53:43 <letoh> 嗯  實際上可能有很多種實作  像我這邊前面其實是一個 header
+22:54:07 <letoh> 就規定好啊，反正 client code 不需要知道，它拿到的是已經 align 過的
+22:54:34 <letoh> free 時再取回當初的記錄，偷偷移回去就好
+22:55:08 <CindyLinz> 嗯嗯嗯
+22:59:18 <c9sloud> letoh: malloc 的 alignment 應該是跟 os paging 有關?
+22:59:19 <petercommand> CindyLinz: 為甚麼還要減1呀
+22:59:44 <letoh> 沒有  像我這根本沒有 os XD
+22:59:56 <petercommand> 多一個sizeof(char*)不就好了嗎
+23:04:01 <letoh> http://www.ibm.com/developerworks/library/pa-dalign/  這邊發現一張圖解 (內文我要看一下XD
+23:04:05 <c9sloud> letoh: 你說的 header 是指 libc 的 memory management 來的嗎?
+23:04:58 <letoh> 對，就一些 free list 之類的管理
+23:05:30 <letoh> 用 embedded pointer 的話，就會在 trunk 裡偷藏一些記錄
+23:05:49 <c9sloud> 32bits 的 machine 應該是一次 fetch 4bytes 的 instruction, 64bits machine 則是一次 8bytes，所以 alignment 應該只要以 4 為基數去 alignment 應該就可以了 (?)
+23:06:15 <c9sloud> 不過如果會藏 header 的話，說不定他的 header 也是 padding 過的 ?
+23:06:47 <letoh> 當然  但不一定  只要給使用者的位址有 alignment 就可以
+23:07:23 <letoh> 沒有 pack 好不一定會出事，看存取動作而定  但總是一個地雷...
+23:07:46 <c9sloud> letoh: 感謝說明 :D
+23:08:29 <letoh> 分享一些經驗 :) .. 64bit 我很少碰，要找機會 study 看看XD
+23:08:44 <c9sloud> letoh: 你平常是做 embedded linux 嗎?
+23:08:56 <letoh> embedded，沒有 linux
+23:09:36 <petercommand> letoh: 甚麼是embedded pointer呀
+23:09:41 <letoh> 所以基本上沒有 glibc 這種東西可以用。malloc/free 都是自己做的
+23:10:44 <letoh> petercommand: 通常是指你的資料裡面偷藏 pointer (或其他類型的記錄)
+23:16:23 <CindyLinz> petercommand: 喔, 剛剛沒有考慮額外 header 的空間, sizeof()-1 的話, 由鴿籠原理, 一定可以找到想要的 align addr... XD
+23:16:53 <CindyLinz> petercommand: 因為 shift 的可能量是 0~(n-1) 嘛 :p
+23:17:50 <petercommand> 原來如此
+23:18:36 <CindyLinz> 喔 Linux 的 malloc 有 align 好.. # The  malloc()  and  calloc()  functions return a pointer to the allocated memory that is suitably aligned for any kind of variable.
+23:18:52 <letoh> glibc
+23:18:57 <CindyLinz> 也對.. glibc
+23:19:18 <CindyLinz> 只是 BSD 的 glibc 和 Linux 的 glibc 會不會不一樣? @_@"
+23:20:48 <c9sloud> The malloc(), calloc(), valloc(), realloc(), and reallocf() functions allocate memory.  from BSD
+23:20:57 <c9sloud> 咦沒 copy 到
+23:20:59 <letoh> CindyLinz: 有一個 memalign
+23:21:06 <c9sloud> The allocated memory is aligned such that it
+23:21:07 <c9sloud>      can be used for any data type
+23:21:22 <c9sloud> 應該幾乎一樣的
+23:21:29 <CindyLinz> :D
+23:21:37 <letoh> 嗯  還有 posix_memalign
+23:22:21 <petercommand> 所以基本上linux上的C program不用煩惱這個呀XD
+23:22:24 <CindyLinz> malloc 如果一次要太小, 很虧的感覺.. 運費是商品售價兩倍之類的 ww
+23:22:46 <godfat> XDDDD
+23:22:47 <CindyLinz> 不行, 我直接要一整塊給 void* 然後裡面自己分配 field, 如果歪了會輸.. QQ
+23:22:48 <letoh> 神類比XDXD
+23:23:19 <c9sloud> XDD
+23:23:21 <CindyLinz> 就, 如果自己分配的部分有畸零 byte 的話.. ._.
+23:24:04 <c9sloud> CindyLinz: 不知道有沒有做  https://code.google.com/p/eserv/source/browse/libeserv/mempool.c
+23:24:24 <c9sloud> 好像沒有
+23:24:25 <letoh> 就 internal fragmentation XD
+23:25:31 <letoh> 跑在 linux 上應該不用擔心，記得有被處理掉了
+23:25:38 <c9sloud> 嗯嗯嗯嗯
+23:26:08 <letoh> turnkey app 或 bare-bone os 才需要特別注意
+23:26:17 <CindyLinz> 如果用一些超小 device, 也許因為 memory space 很小, 硬體設計上也就沒有弄 align 了, 每個 byte 開始都均一價?
+23:26:37 <letoh> CindyLinz: 還是會需要 alignment
+23:26:40 <CindyLinz> 記得要搞 align 的設計, 是可以省一點 address line, 因為尾數不用傳?
+23:27:11 <letoh> 嗯嗯嗯
+23:27:55 <letoh> 所以沒處理好會有鬼打牆的情況喔  尾數去掉後都寫在同一個地方
+23:31:21 <CindyLinz> 驚悚型的設計, addr line 都會完整帶到, 只是用了神祕的串聯式的 addr decoder, 最後幾個 bit 的訊號解出來比較弱, 有較高的機率變成 0, 所以建議盡量 align 好, 不然有比較高的機率出錯.... (誤)
+23:32:59 <petercommand> CindyLinz: 這是啥鬼....XD
+23:33:24 <CindyLinz> 驚悚型的設計... ._.
+23:35:04 <CindyLinz> 不知道 jserv 在做醫療系統的時候是怎麼跟系統要記憶體的... 也許用的是特化的 OS...
+23:35:32 <CindyLinz> 因為現在這 Linux 的 malloc 說他就算 return non-null 也不代表一定有足夠的記憶體
+23:35:49 <CindyLinz> 是實際用的時候才配, 萬一那時沒得配, 就直接把 process 砍了...
+23:36:23 <c9sloud> 直接 reset? xDDD
+23:36:25 <CindyLinz> 醫療系統這樣搞人會死掉啊, 那個 kill 不只 kill 了 process, 還 kill patient...||
+23:36:31 <letoh> 上次查了一下，好像有沒有回 non-null 都是對的，所以不能假設這個行為
+23:36:32 <CindyLinz> c9sloud: 只有砍那一個 process 就夠了
+23:37:00 <c9sloud> kill -9
+23:37:25 <CindyLinz> 差不多就那樣, 而且我想因為記憶體已經不夠了.. 也不知道能不能噴 core dump..
+23:38:00 <letoh> 一般那種情況記憶體會先設計好  不會出現要不到的情況吧
+23:38:19 <CindyLinz> letoh: 你說醫療系統的 process 嗎?
+23:38:43 <CindyLinz> 要有個機制讓我能預先確認某一塊記憶體真的是每一個 bit 我都能安全使用呀 ._.
+23:39:12 <letoh> 嗯嗯  我猜是這樣啦  設計成會出錯感覺太可怕了... 真的會 kill patient
+23:39:44 <CindyLinz> 以前的 dos 時代用的 malloc 不是這樣的啊 ._.
+23:40:17 <letoh> 我猜這類系統應該不會用 dos 做XD
+23:40:33 <CindyLinz> XD
+23:40:35 <letoh> 沒接觸過就是  我猜大概會是 vxworks 或什麼鬼的
+23:40:48 <monochrom> 用視窗吧! (逃)
+23:41:13 <letoh> monochrom: 真的要逃XD
+23:41:34 <monochrom> linux的做法原只為快
+23:42:24 <CindyLinz> 看得出來有比較快 XD
+23:42:49 <CindyLinz> 是死是活都有變快 *_*
+23:44:34 <CindyLinz> 不知道是不是用 brk/sbrk 就可以了.. brk/sbrk 的 man page 沒有提到這種假成功的事情
+23:44:36 <CindyLinz> malloc 才有
+23:45:18 <letoh> brk 是 system call 了吧
+23:45:34 <CindyLinz> 嗯 brk(2)
+23:46:21 <petercommand> brk.....要自己管理阿
+23:46:24 <monochrom> 不如這樣: 問linux拿記憶, 然後第一件事就狂寫那記憶. 如果寫的時候沒被殺, 那就過關了
+23:46:44 <godfat> 有理...
+23:47:13 <CindyLinz> 那就只能做固定 size 的 process 了
+23:47:32 <letoh> 但被殺就來不及了，不能 catch KilledException XD
+23:47:37 <CindyLinz> 啊, 可以用切割的! fork 一個 process 去試藥.... XD
+23:47:58 <CindyLinz> 如果它沒死, 就可以跟他通.... XD
+23:48:13 <CindyLinz> 死了就只有他死....
+23:48:45 <monochrom> 看看 man proc(5), 找 overcommit, 可能有辦法關掉
+23:48:48 <CindyLinz> 不過這前提是不能死的 process 都已經把自己用的記憶體洗過一遍, 不然他在那邊試藥的時候, 可能是別人死....ww
+23:50:00 <letoh> CindyLinz: 隨時養個試毒用的免洗 process XD
+23:50:26 <CindyLinz> 嗯 XD
+23:50:39 <letoh> 這樣好  反正可以抓 sigchild XD
+23:50:47 <CindyLinz> 這種寫法... 暗潮洶湧殺氣騰騰的醫療系統.....ww
+23:51:20 <petercommand> XDDD
+23:52:00 <petercommand> 如果brk沒要到應該不會這樣吧?
+23:52:12 <godfat> 各位活下來的都是強者
+23:52:30 <CindyLinz> 嗯 echo 一個 2 pipe 給 /proc/sys/vm/overcommit_memory 就可以把這個假成功現象關掉 (by proc (5))
+23:53:18 <monochrom> malloc最終也是用sbrk拿記憶, 沒理由malloc吹牛而sbrk不吹牛
+23:53:39 <CindyLinz> 可是 brk/sbrk 沒講... OAO
+23:54:11 <CindyLinz> malloc 另外有個 mmap 版就是 @@"
+23:54:16 <monochrom> 其實可以做個實驗
+23:59:52 <CindyLinz> c9sloud: 嘖嘖.. 只是包個軟軟的 Perl 的 package, 也要用到這麼硬的東西嗎..... XD

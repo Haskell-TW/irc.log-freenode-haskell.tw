@@ -1,0 +1,7 @@
+20:13:59 <mno2> 如果是要了解 haskell 的 type constructor 怎麼實現（就是 haskell98 的 kind 之類的）應該要看哪一天 paper?
+20:14:31 <mno2> 我現在有點有不透怎麼從 HM 延伸到可以自己構造 type，像是 Maybe 之類的
+20:14:47 <mno2> 更進一步，就是 List 這樣的 recursive type
+20:15:09 <mno2> 應該要在 unification 上動什麼手腳？
+23:54:02 <suhorng> Haskell platform 現在的地位真的有點微妙... 多出了 MinGHC (Windows) https://www.fpcomplete.com/blog/2015/03/minghc-ghc-7-10
+23:54:37 <suhorng> 然後首頁寫的敘述是 Many now recommend just using a bare compiler combined with sandboxed dependencies
+23:55:15 <suhorng> mno2: 實現是說什麼的實現? 對 type system 的影響? runtime representation?

@@ -1,0 +1,26 @@
+00:20:45 <CindyLinz> > let primes = flt [2..] ; flt (prime : others) = prime : flt (filter (\n -> n `mod` prime /= 0) others) in take 10 primes
+00:20:48 <lambdabot>  [2,3,5,7,11,13,17,19,23,29]
+00:21:19 <CindyLinz> > let primes = flt [2..] ; flt (prime : others) = prime : flt (filter (\n -> n `mod` prime /= 0) others) in length (filter (<= 100000) primes)
+00:21:24 <lambdabot>  mueval-core: Time limit exceeded
+00:21:37 <CindyLinz> 需要 sqrt 一下的感覺 @@"
+00:45:43 <c9s> CindyLinz: 這是剛剛那個題目嗎? @@
+00:46:12 <CindyLinz> 只是 prime 列表而已
+12:12:34 <suhorngT> @CindyLinz: 為何是 filter 不是 takeWhile...?
+12:12:34 <lambdabot> Unknown command, try @list
+12:16:53 <CindyLinz> suhorngT: 對哄 XD
+12:17:13 <CindyLinz> > let primes = flt [2..] ; flt (prime : others) = prime : flt (filter (\n -> n `mod` prime /= 0) others) in length (takeWhile (<= 100000) primes)
+12:17:17 <lambdabot>  mueval-core: Time limit exceeded
+12:17:28 <CindyLinz> suhorngT: 因為... 結果一樣 (咦
+12:21:12 <suhorngT> XDDD
+12:21:27 <suhorngT> _|_
+12:57:21 <monochrom> let primes = flt [2..] ; flt (prime : others) = prime : flt (filter (\n -> n `mod` prime /= 0) others) in length (filter (<= 100) primes)
+12:57:24 <monochrom> err
+12:58:06 <monochrom> > let primes = flt [2..] ; flt (prime : others) = prime : flt (filter (\n -> n `mod` prime /= 0) others) in length (takeWhile (<= 100) primes)
+12:58:08 <lambdabot>  25
+12:58:20 <monochrom> 100000 太大了
+12:59:04 <monochrom> 而 filter 則是大小通吃
+12:59:51 <monochrom> > length (filter (<0) (repeat 1))  -- 不會是0
+12:59:55 <lambdabot>  mueval-core: Time limit exceeded
+13:13:13 <petercommand> > let primes = flt [2..] ; flt (prime : others) = prime : flt (filter (\n -> n `mod` prime /= 0) others) in length (takeWhile (<= 100000) primes)
+13:13:17 <lambdabot>  mueval-core: Time limit exceeded
+14:27:10 <c9s> XD

@@ -1,0 +1,26 @@
+09:49:03 <MnO2> http://www.reddit.com/r/haskell/comments/1dcfso/a_monadic_joke/?utm_source=feedly
+09:49:11 <MnO2> What did the Haskeller eat for breakfast?
+09:49:11 <MnO2> Cocomonads.
+09:58:14 <MnO2> http://lambda-the-ultimate.org/node/4725 John C. Reynold 過世了
+09:58:21 <MnO2> http://en.wikipedia.org/wiki/John_C._Reynolds
+10:10:53 <b4283> cocomonad 蠻幽默的 XD
+11:01:31 <miaout17> 「原因与证明」還有一個發文後又刪掉的板本 XD 有用google reader subscribe的話還看的到
+11:08:35 <_13h> 竟然還有這招XD
+11:13:17 <miaout17> 原本沒subscribe的弄在丟atom進去也還來的及 XD cache是share的 XDDD
+11:16:59 <_13h> 看到了wwww
+11:17:26 <b4283> google reader 不是關了？
+11:17:51 <_13h> 還沒
+11:19:08 <miaout17> 七月shutdown吧
+11:25:04 <_13h> macro 那個例子真是血淋淋XD
+11:26:53 <_13h> 被刪掉的那篇很不錯呀，前半段比較嗆一點，但也不至於要重寫XD
+11:27:27 <hychen> 又有什麼新東西???
+11:28:07 <_13h> hychen: 王垠的文章
+11:28:40 <_13h> 這故事告訴我們，文章沒看個三次，最好先留在 draft XD
+11:45:35 <_13h> 慘.. 掉進 vim 坑的同事又多一位了XD
+16:26:28 <CindyLinz> _13h: 不推 vim 嗎?
+16:27:23 <_13h> 我沒有不推啊，而且我現在也還在用 (只限 windows 平台)
+17:31:04 <MnO2> https://github.com/Valloric/YouCompleteMe/tree/master/python/completers  看起來 YouCompleteMe 還沒有 Haskell binding
+17:32:21 <MnO2> 可以用 ghc-mod 做一個
+17:46:14 <hychen> 我有時候覺得自動補齊很煩
+18:52:15 <_13h> 我已經後悔把 yasnippet 接上去了，害我寫 lisp 時遇到一堆亂補的情況XD
+20:56:42 <suhorng> 他現在的文章都會編修好多次 過幾天去看會有些段落不一樣 (可以在github看commit history lol)

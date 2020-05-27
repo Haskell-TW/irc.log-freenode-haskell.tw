@@ -1,0 +1,10 @@
+10:45:23 <mno2> https://wiki.haskell.org/GHC/GHCi 發覺可以裝 goa 就可以在 ghci 裡面用 lambdabot
+10:53:21 <cibs> lambdabot 有什麼 ghci 沒有的東西嗎 @@
+11:30:16 <CindyLinz> 有 @hoogle
+11:30:28 <CindyLinz> 還有用 @@ 留言的功能 XD
+11:30:54 <CindyLinz> 還有 @pl @unpl
+11:43:52 <cibs> 用 @@ 留言的功能真的是很重要!!
+23:18:46 <__Z2suI3horI2ngE> @@
+23:19:06 <__Z2suI3horI2ngE> @@ lambdabot
+23:19:06 <lambdabot>  lambdabot
+23:19:10 <__Z2suI3horI2ngE> @@

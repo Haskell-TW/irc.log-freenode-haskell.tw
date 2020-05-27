@@ -1,0 +1,110 @@
+07:24:59 <monochrom> 小學中學教 "先乘除, 後加減" 及 "括號先". 這是把 parsing 次序和計算次序混為一談. 當然對大部份人來說沒所謂. 但 Haskell 人不是大部份人. 括號和優先次序其實只講 parsing.
+07:27:12 <monochrom> 又其實, 即使對大部份人來說, 也不是真的要混為一談吧? 0*(3902834+1632892), 你是不是老老實實先計算 3902834+1632892 ?
+07:28:49 <monochrom> 可惜中小學是不可能把 parsing 分開出來教的.
+11:33:29 <CindyLinz> 「Haskell 人不是大部份人」... (痛)
+11:40:45 <cibs> 謝謝 hashcat 和 Cindy 的講解，這樣我懂了 :) 我的確是把計算的順序和取值的順序搞混在一起了。
+11:40:55 <cibs> hashcat 目前不在，上線後再謝一次 XD
+11:42:18 <CindyLinz> XD
+11:42:29 <CindyLinz> 不知道 hashcat 會不會看 log..
+11:42:34 <CindyLinz> (指指 topic)
+11:44:18 <cibs> CindyLinz: 是我的話不會所以我猜大家都不會(誤
+11:45:15 <b4283> 看 log 跟話題還蠻好用的...
+11:46:01 <cibs> 糟了原來只有我不會 XD
+11:47:01 <CindyLinz> 這 channel 一開始就有推這個, 所以不太一樣 ^^|
+11:47:23 <CindyLinz> 因為 channel 剛開的時候, 發現大部分的人都不會掛在 24h channel 上.. 這樣聊東西會聊不起來
+11:47:38 <CindyLinz> 所以就放了 log 讓話題可以延續 XD
+11:47:57 <CindyLinz> 24h 掛在 channel 上... (為什麼會換順序.. orz)
+12:38:51 <cibs> CindyLinz: 大概妳打字是平行輸出的 (誤
+13:27:58 <CindyLinz> wwww
+14:03:07 <cibs> 糟了我又不懂了
+14:03:37 <cibs> foldl (\acc x -> odd x : acc) [] [1..] 那像這樣
+14:03:56 <cibs> 不是也是 a:(b:(c:(d:( THUNK )))) ?
+14:05:59 <CindyLinz> 想想.. XD
+14:06:50 <CindyLinz> 會逆序吧
+14:07:19 <CindyLinz> > foldl (\acc x -> x : acc) [] [1..5]
+14:07:20 <lambdabot>  [5,4,3,2,1]
+14:08:01 <cibs> 喔喔對可是我是說這樣也會跑不完 @@
+14:08:18 <CindyLinz> 應該是會跑不完..
+14:08:19 <CindyLinz> > foldl (\acc x -> x : acc) [] [1..]
+14:08:23 <lambdabot>  mueval-core: Time limit exceeded
+14:08:46 <cibs> 可是如果也是 a:(b:(c:(THUNK))) 的話為什麼不能被截掉? @@
+14:08:50 <CindyLinz> 當 haskell 想要取出這整個 foldl 出來的結果(的開頭)的時候
+14:09:09 <CindyLinz> 從 foldl (\acc x -> x : acc) [] [1..] 開始
+14:10:03 <CindyLinz> (這樣寫好長喔.. XD)
+14:10:09 <cibs> XD
+14:11:32 <CindyLinz> 先列一下 foldl 的 source 好了
+14:11:35 <CindyLinz> @src foldl
+14:11:36 <lambdabot> foldl f z []     = z
+14:11:36 <lambdabot> foldl f z (x:xs) = foldl f (f z x) xs
+14:12:07 <CindyLinz> foldl (\acc x -> x : acc) [] [1..]   ...(會走第二個 branch 因為 [1..] 不是 [])...
+14:12:30 <CindyLinz> = foldl (\acc x -> x : acc) ((\acc x -> x : acc) [] 1) [2..]
+14:13:14 <CindyLinz> = fold (\acc x -> x : acc) ((\acc x -> x : acc) ((\acc x -> x : acc) [] 1) 2) [3..]
+14:13:16 <CindyLinz> = ...
+14:13:25 <CindyLinz> 呃 那個 fold 是 foldl
+14:13:32 <cibs> 嗯嗯我知道
+14:13:41 <CindyLinz> 因為 haskell 一直看到這個函數是一個函數帶頭的東西
+14:13:49 <CindyLinz> 所以就只好繼續把這個函數「解開」
+14:14:08 <CindyLinz> 「解開」也就是把參數「貼」到函數 body 裡面展開
+14:15:02 <CindyLinz> 你看 foldl 的定義那邊 foldl .... = foldl .... 就注定了它一定要有朝一日走到第一個 branch foldl .... = z 的時候才有機會停下來了
+14:15:36 <CindyLinz> 能停的條件是: 遇到一個 data constructor 開頭的東西 (例如說 list 用到的 (:)) 或是參數沒給完整的函數
+14:16:27 <cibs> 感謝，這樣好像清楚多了!!
+14:16:32 <cibs> 原來可以用 @src XD
+14:16:38 <CindyLinz> ^^
+14:16:47 <CindyLinz> 我 @src 也是第一次用... XD
+14:17:09 <cibs> @src foldr
+14:17:10 <lambdabot> foldr f z []     = z
+14:17:10 <lambdabot> foldr f z (x:xs) = f x (foldr f z xs)
+14:17:14 <cibs> 拿來比較一下 XD
+14:17:28 <CindyLinz> foldr 能不能提早停, 就看這個帶頭的 f 給不給面子了..
+14:18:11 <CindyLinz> 如果 f 是 (+).. 那它會逼後半的 foldr 表態.. 所以最終也是非得 foldr .... = z 出現才能停
+14:18:46 <CindyLinz> 嗯嗯, 想想這個「停」也可以說成是: 拿得出能看的成果
+14:19:26 <cibs> 有有，這樣了解多了!
+14:19:33 <CindyLinz> :D
+16:34:10 <CindyLinz> 更好用的 GDB # http://tech.mozilla.com.tw/posts/3826/cgdb-%E6%9B%B4%E5%A5%BD%E7%94%A8%E7%9A%84-gdb
+16:34:18 <CindyLinz> 我也想要更好用的 GHCi.. QQ
+16:35:06 <CindyLinz> 不過這功能好像 tmux + vim + ghci extension 寫一寫就好了?
+16:35:28 <CindyLinz> 如果 ghci 裡面也彩色就更好了 :p
+16:35:44 <CindyLinz> 使用 haskell.. 人生是彩色的!
+16:46:19 <godfat> 我之前想做，可是用 ghci 的 api 會造成整個 ghc crash, 查不到文件，source 太多看不懂，求助無門，就放棄了...
+16:59:46 <CindyLinz> 這是什麼啊... 囧 # 可是用 ghci 的 api 會造成整個 ghc crash
+17:00:10 <CindyLinz> 那可不可以從 terminal 端套一層來做, parse ghci 的輸出格式..... wwww
+17:00:35 <godfat> 可以不要嗎... orz
+17:00:40 <godfat> https://github.com/godfat/sandbox/blob/master/haskell/ghci.hs
+17:01:17 <godfat> 上面那段我查 source 弄超久才弄出來的
+17:01:18 <godfat> 結果會 crash... orz
+17:02:35 <CindyLinz> 還是很厲害.. @@"
+17:02:59 <godfat> crash 得很厲害嗎？ XDD 我猜其實那些東西隨便弄都很容易 crash orz...
+17:03:11 <CindyLinz> 他說: the 'impossible' happened
+17:03:24 <CindyLinz> 這就很厲害了啊....
+17:03:42 <godfat> XDDDDDD
+17:03:43 <godfat> 不過我猜用這些跟用 unsafe 大概差不多..
+17:04:05 <CindyLinz> 幫不上忙 ^^|
+17:06:24 <godfat> XD... 真可惜
+17:59:22 <favonia> the impossible happened!
+18:17:21 <letoh> cgdb 沒有更好用啊
+18:18:44 <CindyLinz> 沒用過的都說好(?)
+18:18:56 <letoh> 不過我要感謝它
+18:19:01 <letoh> 讓我遇到 emacs XD
+18:19:04 <CindyLinz> wwww
+18:19:22 <letoh> 就是因為太難用只好改用 emacs
+18:21:06 <letoh> 如果只需要 source listing 的話， xxgdb 也可以辦到，還可以圖形表示資料結構
+18:21:36 <letoh> 「我們在開發過程中，常常會使用 GDB 來找 bug，但是它是純文字介面，使用上還是有些不便」  結果找了 cgdb 也是純文字界面啊
+18:22:25 <godfat> XDDDD
+18:24:45 <letoh> 剛剛講錯了  好像不是叫 xxgdb.. 而是叫 ddd。xxgdb 我沒用過
+18:25:44 <godfat> 跟 dd 有關嗎 = =
+18:25:54 <letoh> 沒有關係耶XD
+18:26:09 <godfat> 是說我也不懂為啥叫 dd...
+18:26:16 <letoh> ddd 像這樣 http://cocoadevcentral.com/articles/imgs/ddd.png
+18:26:39 <letoh> 我用來推薦給 vs.net 中毒者的工具
+18:26:56 <godfat> delete! delete! delete! == ddd
+18:26:56 <godfat> 燒燬！燒燬！燒燬！ == 燒燒燒
+18:27:02 <letoh> XD
+18:29:17 <letoh> gdb7 以後搭配 python script 也可以做到類似 ddd 的圖，但對一般使用者來說還是不太方便
+18:31:37 <godfat> 細看了一下圖，寫 c 真可怕呀... :o
+18:31:37 <godfat> 是說 haskell 的 data 應該也可以展開就是了，不知道有沒有這種工具？
+18:52:36 <letoh> 這算是 runtime 展開的，應該要 runtime 可以拿到這些資訊才可以吧... haskell 可以做到嗎?
+19:09:19 <godfat> 既然都有 trace 了... XD
+23:13:07 <CindyLinz> letoh: 我看過一個名字是 vis 開頭的 project # 18:31 < godfat> 是說 haskell 的 data 應該也可以展開就是了，不知道有沒有這種工具？
+23:13:24 <CindyLinz> 不對 結尾是 vis.. XD
+23:13:40 <CindyLinz> http://hackage.haskell.org/package/ghc-vis
+23:14:30 <godfat> 好像不錯 XD

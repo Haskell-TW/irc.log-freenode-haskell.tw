@@ -1,0 +1,17 @@
+07:44:58 <monochrom> 是不是有點遲了呢? f (x A.:+ y) = (x, y)
+07:45:38 <monochrom> 亦可以: f ((A.:+) x y) = (x, y)
+08:30:23 <monochrom> 我想, 其實最重要的是, 不要寫 A . :+, 因為要維持 A.:+ 是單一 token 很重要.
+15:45:35 <CindyLinz> 我想了一段給 Haskell 的 :p # http://bjorn.tipling.com/if-programming-languages-were-weapons
+15:45:46 <CindyLinz> Haskell is Merlin's black magic. It can morphs the whole world by re-cursing. But it always curses your mind into an inductive brain first.
+15:46:03 <CindyLinz> 可能有英文沒寫好的地方 @@"
+15:50:14 <CindyLinz> 前面 Merlin's black magic 前面要不要加冠詞 a 呢?
+16:14:25 <southp01_> 應該不用加，已經有所有格Merlin's在前面了
+16:15:38 <CindyLinz> 喔 ^^
+16:18:15 <southp01_> CindyLinz: 你這句寫得真好，小弟最近剛學Haskell，很有感觸 XD
+16:18:29 <CindyLinz> 謝謝 >///<
+16:21:44 <CindyLinz> lambdabot 退出惹
+16:22:04 <CindyLinz> 回來惹 XD
+16:22:42 <CindyLinz> lambdabot 的 ircname 叫作 Lambda_Robots:_100%_Loyal 是怎樣 XD
+17:16:09 <cibs> CindyLinz: 表示它不會背叛妳
+17:16:49 <CindyLinz> 我覺得是 lambda 宗教.. XD
+22:29:14 <suhorng> monochrom: thanks

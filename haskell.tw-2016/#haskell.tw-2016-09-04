@@ -1,0 +1,140 @@
+01:00:08 <pkmx> soft_job 板居然有人在戰 haskell O.o
+01:01:01 <pkmx> 看起來是不知道 GADT 是什麼的人在到處亂噴XD
+01:02:54 <caasih> 有人投了餌，就害 l 什麼 ptt 的憤愾兩個小時 XD
+01:16:41 <letoh> 哪一篇啊?
+01:28:27 <CindyLinz> 我只是想說代表 Haskell 社群裡的一份子發個言... (?
+01:29:21 <letoh> 原來是藏在推文裡...感覺只是有人很寂寞想找人抬槓而已XD
+01:34:27 <CindyLinz> 他的仇恨值太高了....
+01:35:04 <CindyLinz> 我覺得這一定是曾跟 au 有過過節, 或是怎樣受過傷...
+01:35:53 <CindyLinz> 過節可以是 au 有參與的, 或是 au 很無辜的... 例如說他的父母從小拿 au 當榜樣來笑他不成材之類的
+01:36:35 <CindyLinz> 或是說覺得自己也很不錯也很努力, 可是為什麼機會剛好都跑到 au 那裡去... 或是 au 只是在他心中借代為軟體業的代表
+01:37:11 <CindyLinz> 不過, 在台灣我覺得軟體業比硬體業機會差得多, 應該沒有什麼好眼紅的 ~_~
+01:38:14 <monochrom> 哈哈 "他的父母從小拿 au 當榜樣來笑他不成材之類"
+01:38:55 <CindyLinz> 欸.. 我不認識他, 只是我就自己在台灣長大的經驗..... 我覺得不少家庭會這樣 @@"
+01:39:08 <monochrom> 之不過, 正好相反, 業界越差才越多內爭
+01:39:45 <monochrom> 這是我讀中史學懂的.
+01:39:57 <CindyLinz> 因為沒辦法汲汲營營往外賺了?
+01:40:14 <CindyLinz> 餅不能作大, 那就來爭最大的一塊......
+01:41:09 <CindyLinz> btw, 我覺得父母拿外人的表現來批評自己的小孩, 是很變態糟糕的一件事情..... :Q
+01:42:03 <monochrom> 元末明初, 元朝廷避走漠北, 但還未亡, 不過已是轄區很小的小朝廷. 然而這時才更多鬼打鬼
+01:43:20 <monochrom> 好了, 明末清初, 南明小朝廷, 又是這樣. 不去抗清, 只顧自己爭權玩 musical chair
+01:43:45 <monochrom> 其實南宋後期都是
+01:44:56 <CindyLinz> 我覺得初期也有欸.. 只是那個什麼趙匡胤內鬥鬥贏了, 我們就不再追究了 (X
+01:45:20 <CindyLinz> 也可以視為前朝的末期就是 ^^|
+01:45:45 <caasih> 看了《成長戰爭》的家長可能會做這種事情吧 XD 還好我媽沒看過...
+01:45:49 <CindyLinz> 所謂.. 亂世奸雄!
+01:49:46 <monochrom> 怎麼說呢? 其實大帝國的大位, 價值高, 值得爭. 但北元南明的小朝廷, 轄區這麼小, 爭得到都沒價值吧
+01:51:18 <monochrom> 基本上只不過是 "我爭到相位了" 或 "我爭到王位了" 的自爽. 喂, 你這王位和相位管得了幾多人口呢?
+01:51:35 <CindyLinz> 在小朝廷裡爭的人的目標只是想要擁有這個小朝廷就滿足了嗎?
+01:51:51 <monochrom> 顯然就是啦.
+01:51:53 <CindyLinz> 還是說他也是想打出去, 只是從結果看失敗了而已...
+01:52:57 <CindyLinz> 我們家蔣經國曾經也是想反攻大陸的! (咦
+01:53:05 <monochrom> 從他們的部署(或沒部署)看, 我想根本沒想打出去
+01:53:21 <CindyLinz> "或 沒部署".. XD
+01:53:48 <CindyLinz> 金正恩也是會喊說要統一南韓... XD
+01:55:29 <monochrom> 老蔣都叫做有部署, 起碼有佈防.
+01:56:21 <monochrom> 北元和南明那些好像連自衛都沒做
+01:56:25 <CindyLinz> ww
+02:00:37 <monochrom> 而北韓的陸軍很強大的, 起碼人數多. 專家都說, 如沒美軍守南韓, 北韓只需72小時就統一半島了.
+02:01:10 <monochrom> 怎似北元南明手無搏雞之力.
+17:34:04 <petercommand> 話說，雖然有聽過 au 說他有弄一些 ghc 有關 GADT 部分的 code，我其實也不曉得詳細這部分 au 做了啥XD
+17:34:59 <petercommand> 這塊歷史我不太了解XD
+17:54:44 <petercommand> 嗯，北韓真的士兵超多，大量義務役士兵，超長服役年限
+18:38:14 <letoh> 請那人去把 commit history 翻出來  一行一行做 code review 好了XD
+19:18:45 <petercommand> XDD
+19:22:29 <kuanyui_acer> petercommand: 南韓兵役也很病態啊orz
+20:02:45 <pkmx> https://git.haskell.org/ghc.git?a=search&h=HEAD&st=author&s=audreyt git上面只有這些 @@
+20:02:55 <pkmx> 不知道是不是有更早的
+20:20:50 <letoh> 也許 mail list 或 irc 有討論過的話應該也可以算進去?
+20:31:40 <CindyLinz> 更早的話 git 還沒出生... ^^|
+20:32:10 <CindyLinz> 不對啊.. 2006.. git 有這麼老嗎?
+20:32:33 <CindyLinz> 有耶!! 2005.4 是 initial release
+20:32:34 <letoh> git 十年了
+20:32:56 <letoh> 之前有 linus 的 git 十年訪談
+20:36:38 <kuanyui_acer> 十年之前～
+20:56:34 <CindyLinz> petercommand: 翻了 log 以後發現你那時明明也有參與討論 XD
+20:56:46 <CindyLinz> http://cindy.csie.org/irc.log/haskell.tw/haskell.tw-2014/%23haskell.tw-2014-07-04
+20:56:52 <CindyLinz> 23:14:24 處開始
+21:08:56 <letoh> 我也是 fvwm+emacs
+21:09:23 <CindyLinz> letoh: 你是在回應誰啊?
+21:09:24 <kuanyui_acer> letoh: 想買這個來做Emacs腳踏板+翻譜器 https://www.adafruit.com/product/1535
+21:09:34 <kuanyui_acer> CindyLinz: 那個log
+21:09:40 <CindyLinz> 這......
+21:09:45 <letoh> XD
+21:09:48 <CindyLinz> 時光對話w
+21:10:04 <CindyLinz> 那個兩年多了耶, 草都已經長這麼高了... (比比
+21:11:30 <letoh> kuanyui_acer: 如果不要求無線，只是要 hid 的話好像有更好的選擇
+21:11:45 <kuanyui_acer> letoh: 有嗎？求關鍵字
+21:12:12 <letoh> 走 usb 就好啦
+21:12:34 <kuanyui_acer> letoh: 我不會硬體啦QAQ
+21:12:42 <kuanyui_acer> 現成的板子比較快...
+21:12:45 <CindyLinz> kuanyui_acer: 弄完就會了...
+21:12:55 <kuanyui_acer> 我是想說買一張藍芽的，做成兩用踏板，這樣也可以用在平板翻譜
+21:13:16 <kuanyui_acer> CindyLinz: 沒頭路
+21:13:35 <letoh> kuanyui_acer: 單純要簡單的話  像 arduino 就有一堆模擬鍵盤的程式碼  下載後就可以用XD
+21:13:54 <letoh> 我說的下載是說燒進 arduino 裡
+21:13:56 <kuanyui_acer> letoh: 重點是...Arduino不會比較便宜啊啊啊
+21:14:46 <CindyLinz> kuanyui_acer: 不是每個興趣都要拿來賺錢嘛 @@"
+21:14:48 <letoh> 是沒錯啦  除非單獨買 avr
+21:15:03 <kuanyui_acer> letoh: 話說hid是啥
+21:15:16 <CindyLinz> 聽起來就是 USB id 的感覺...
+21:15:25 <letoh> human interface device
+21:15:28 <kuanyui_acer> CindyLinz: 如果有人教我或者有我能看懂的教學我也想自幹啊
+21:15:45 <kuanyui_acer> Rails 101那種等級的爛書就不行
+21:15:47 <CindyLinz> 我被扣關的示波器應該快要到貨了!
+21:16:05 <letoh> 是 usb 那邊來的...講習慣了XD  就是指模擬輸入裝置啦
+21:16:23 <kuanyui_acer> CindyLinz: 現在是處在不知其門而入orz
+21:16:28 <letoh> 目前的話大概 usb 跟 bluetooth 比較方便
+21:16:58 <letoh> 單純走 wireless 的話沒試過  大概要自己另外寫 driver 模擬
+21:17:37 <CindyLinz> kuanyui_acer: USB 太高階了我還沒有讀.. 我只有讀比較低階的 SPI 和 IIC protocol
+21:18:05 <kuanyui_acer> letoh: 花的那些時間我還是用現成板子好了
+21:18:17 <kuanyui_acer> 我對於自己的懶惰非常有自信（挺胸）
+21:18:27 <CindyLinz> kuanyui_acer: 等拿到示波器以後待我先摸索一陣子... ^^|
+21:18:33 <letoh> spi 跟 i2c 沒有現成的 input device 規範... 所以沒推薦這個
+21:19:02 <kuanyui_acer> CindyLinz: 是坡器跟這有什麼關係
+21:19:06 <letoh> 不過的確很多 input device 會走 spi/i2c 沒錯
+21:19:09 <kuanyui_acer> 不太懂@@
+21:21:19 <letoh> usb 的話  我猜 st 的實驗板就可以了
+21:21:44 <kuanyui_acer> 這堆對話太多縮寫了啦想google都沒頭路orz
+21:22:05 <letoh> st 是公司名字XD
+21:22:10 <kuanyui_acer> 這就是我說的不知其門而入的狀態orz
+21:22:45 <kuanyui_acer> s/頭路/頭緒/
+21:23:53 <letoh> 你的翻譜要用什麼程式做? 還是要自己寫?
+21:24:07 <CindyLinz> kuanyui_acer: 因為要 debug, 可以在接口看一下我送的訊號是不是符合我的預期呀
+21:24:15 <kuanyui_acer> 只要傳page dn/up進去就好了吧
+21:24:41 <CindyLinz> kuanyui_acer: 你同時 google spi iic
+21:24:47 <CindyLinz> 或是 spi i2c
+21:25:45 <letoh> 去買 numpad 然後重新 mapping 成 page dn/up 比較快  這樣就解決所有電子問題  只剩機構
+21:26:04 <kuanyui_acer> 喔喔？！
+21:26:14 <kuanyui_acer> 重新mapping!
+21:26:17 <letoh> 發現 numpad 上面就有 page up/dn XD
+21:26:19 <kuanyui_acer> 這什麼妖術！
+21:26:28 <kuanyui_acer> 我還要ctrl
+21:26:35 <kuanyui_acer> 跟mata XD
+21:26:47 <letoh> 喔  就把沒用到的鍵拿來 remap 就好了吧? XD
+21:27:11 <letoh> numpad 是指 fullsize keyboard 右邊那一塊數字區... 有單獨在賣
+21:27:22 <kuanyui_acer> 我知道啊
+21:27:46 <kuanyui_acer> 只是不知該怎麼remapping（總不是(global-set-key)吧），我查一下
+21:27:53 <petercommand> CindyLinz: 那是我剛開始學 haskell 的時候耶XD
+21:27:56 <letoh> kuanyui_acer: remapping 就像一般 emacs 在改 ctrl/capslock 那樣...
+21:28:11 <kuanyui_acer> 但平板怎麼辦...
+21:29:00 <letoh> 平板看 os 吧，通常不跑 x11 所以可能需要有 driver...
+21:29:13 <kuanyui_acer> 算了orz乖乖買bluefruit
+21:29:47 <kuanyui_acer> 開始工作後就覺得時間比價格重要orz
+21:29:51 <letoh> 你只買這個應該也是逃不掉硬體部份  需要自己處理 button 和 debounce
+21:30:20 <petercommand> CindyLinz: 那段我剛剛只剩下模糊的印象了XD 剛好可以補回來^^
+21:30:24 <letoh> 然後應該要自己寫 firmware
+21:30:39 <caasih> permutation city 也是那天提到的啊...
+21:30:58 <kuanyui_acer> 真的嗎...OAO
+21:31:18 <letoh> 你以為買了這板子就會變出你要的東西嗎? XD
+21:31:46 <kuanyui_acer> 外行人啊～(煙)
+21:32:03 <kuanyui_acer> 倫家外行人咩
+21:32:30 <letoh> 其實應該讓你買一次看看  這樣你自己才知道還缺什麼XD
+21:33:27 <letoh> kuanyui_acer: 你看那個專案底下的圖  wireless foot switch 應該就是你要的吧
+21:34:10 <kuanyui_acer> 哪個？
+21:34:17 <letoh> kuanyui_acer: https://learn.adafruit.com/bluefruit-bluetooth-wireless-foot-pedal-switch
+21:34:41 <letoh> kuanyui_acer: 看起來是教學  內容我沒仔細看就是
+21:35:57 <kuanyui_acer> 總之...先買來再說
+21:37:15 <letoh> 考慮到平板的話  bluetooth 應該是不錯的方向啦
+21:37:42 <letoh> 不想自己寫 host driver 的話  走現成的會簡單很多
+21:37:55 <kuanyui_acer> 想說做個小開關可以切換 Ctrl + Alt 跟 Page up/ down這樣

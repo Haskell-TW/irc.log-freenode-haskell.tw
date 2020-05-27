@@ -1,0 +1,223 @@
+09:18:55 <hychen> 還好法國人講話速度有放慢
+09:21:55 <CindyLinz> 對啊, 他講的不太像印象中的法式 :p
+09:22:10 <CindyLinz> 不過現實中我沒聽過法式, 只聽過義式 XD
+09:22:40 <hychen> 就是音與音之間不容易分辨
+09:25:20 <CindyLinz> 現在正在業配 XD
+09:25:35 <CindyLinz> 感覺不錯 :p
+09:25:51 <hychen> 業配?
+09:25:57 <CindyLinz> 廣告文啦 :p
+09:26:08 <hychen> XD
+09:29:17 <CindyLinz> "如果 Coq 說你是對的, 那你就是對的!"
+09:32:21 <CindyLinz> 沒有 bug 的 C compiler!
+09:33:01 <jaiyalas> 畢竟是來教 coq 的嘛
+09:33:02 <hychen> 上面那句聽起來就不太可能 XD
+09:33:15 <jaiyalas> 總不能說「其實 coq 不太好用」.. :p
+09:34:46 <CindyLinz> jserv 在 COSCUP 介紹他在維護的 新酷音.. 第一句就說「我不是要來說它有多好用, 我是要說它有多難用...」 XD
+09:36:03 <CindyLinz> hychen: 可是他說那個是已經證明的耶 ^^|
+09:36:30 <CindyLinz> CompCert C Compiler
+09:36:32 <hychen> 那個*號是作啥的?
+09:36:50 <CindyLinz> hychen: 應該跟 OCaml 的 'a * 'b 的意思一樣
+09:37:15 <CindyLinz> 只是「放在一起」的意思
+09:37:21 <hychen> got it
+09:40:36 <MnO2> http://skillsmatter.com/event-details/home/haskell-exchange-2012/
+09:40:41 <MnO2> haskell-exchange
+09:58:17 <yen3> Logic 上課錄音檔好難對齊啊 ... Orz
+09:59:32 <kanru> @_@
+10:03:52 <CindyLinz> 對齊.. 好像可以寫一個程式來對?
+10:04:19 <CindyLinz> 可以去對 local peak 的時間點
+10:17:03 <CindyLinz> coqide 只要開著, 就固定吃掉我 8% CPU o.o
+10:17:21 <jaiyalas> 很快大家就都沒電了 XD
+10:17:31 <hychen> 我覺得學生很多買mac ㄟ
+10:17:48 <CindyLinz> 先關掉, 等下再開 ^^|
+10:18:05 <hychen> coqlid 吃我cpu 20% !!!!
+10:18:14 <_13h> 因為有學生方案之類的?
+10:18:20 <CindyLinz> 都不用開 top, 可以直接用身體感受有熱風吹出來 ^^|
+10:18:26 <hychen> 因為 rich....
+10:18:57 <CindyLinz> MBA 沒有特別貴呀, 不過他們看起來是 MBP
+10:19:28 <_13h> 縮寫又出現了XD
+10:19:38 <b4283> MVP
+10:19:40 <CindyLinz> 這常看的沒辦法啊 QQ
+10:20:11 <kanru> MacBookPro
+10:20:22 <_13h> google 一下看到答案了
+10:20:33 <_13h> A 是指 Air 嗎?
+10:20:37 <CindyLinz> 對呀
+10:20:37 <kanru> yea
+10:20:39 <CindyLinz> 1000USD
+10:20:57 <hychen> 這裡真多人用mac...
+10:21:05 <b4283> 我還以為是管理碩士
+10:21:12 <hychen> haha
+10:21:14 <CindyLinz> 覺得 Mac 用起來很麻煩啊 XD
+10:21:18 <CindyLinz> 經過這兩週.. XD
+10:23:52 <CindyLinz> 看到一台電腦
+10:24:01 <CindyLinz> 觸控板是寬扁型的
+10:24:16 <CindyLinz> 然後左鍵在觸控板的最左邊, 右鍵在最右邊... @@"
+10:25:04 <CindyLinz> 突然聽到 yen3 罵髒話 XD
+10:28:50 <jaiyalas> XDDDD
+10:28:52 <jaiyalas> 我有聽到
+10:29:34 <yen3> 對不起，我坐在激動姐旁邊被同化了 XD (其實根本沒有關係 XD)
+10:29:45 <hychen> 所以誰是誰???
+10:29:50 <jaiyalas> 你們根本是同一國的
+10:29:54 <hychen> 看id 我認不出來
+10:30:12 <yen3> 我剛剛一直坐在激動姐旁邊，柯教授後面 XD
+10:30:42 <hychen> 是剛才有在聊數學系寫程式有優勢的那個嗎?
+10:30:53 <yen3> 應該是吧，我說了 4$
+10:30:57 <hychen> 剛才有同學問我windows 要怎麼設coq..... (默)
+10:31:02 <yen3> 所以你是 hychen ?
+10:31:03 <hychen> yen3, 那我知道你是誰了
+10:31:05 <hychen> yen3, yes
+10:31:10 <yen3> 你好~
+10:31:53 <yen3> hychen: Step 1. 灌 Linux XD
+10:32:19 <yen3> 我只是對錄音檔很煩跑去玩 XD
+10:32:54 <hychen> 錄音檔有問題?
+10:33:57 <yen3> 不是，因為我前幾分鐘沒錄到，所以正在對 CindyLinz 的錄音檔。 XD
+10:35:50 <yen3> 我自己錄到的聲音雜訊較少，所以想要對齊。
+10:48:06 <CindyLinz> 竟然用費馬最後定理當例子....
+10:48:46 <favonia> CindyLinz: lol 怎麼了
+10:48:58 <favonia> CindyLinz: 那個有 Coq 的證明嗎？？？
+10:49:47 <MnO2> Coq: I know a proof, but I am out of memory, so cannot print it out.
+10:49:57 <yen3> XDDD
+10:50:17 <CindyLinz> favonia: 現在只教到把它們定義出來, 還沒證
+10:50:35 <CindyLinz> favonia: 我猜是不會去證了, 教授說那是 another story XD
+10:50:44 <favonia> 喔搞不好證明不出來也說不定啊（茶）
+10:50:52 <CindyLinz> XD
+10:51:26 <favonia> （沒仔細讀過證明）
+10:52:27 <CindyLinz> yen3: 所以你原本不激動嗎?
+10:52:43 <CindyLinz> yen3: 這兩天開始聽到你講話比較多, 我以為你的個性就這樣耶 :p
+10:53:49 <yen3> CindyLinz: 其實我原本就這樣子啦 XD
+10:53:59 <yen3> CindyLinz: 剛剛是在搞笑啦 XD
+10:55:41 <favonia> yen3: 可惡丟私人訊息就不理我 lol
+10:56:55 <yen3> XD 對不起，我不太習慣 irssi XD
+10:58:29 <jaiyalas> favonia: 我網站上那個改過了有看到嗎？ :o
+10:58:42 <favonia> jaiyalas: 有～～
+10:58:54 <favonia> jaiyalas: 雖然我原本想說我改好丟給你
+11:04:43 <favonia> 我來 diff 一下好了～
+11:05:16 <jaiyalas> XD
+11:08:23 <favonia> jaiyalas: 你有空白沒消掉 xD
+11:10:37 <CindyLinz> 要來證明 False is True 了!
+11:11:59 <jaiyalas> favonia: 那邊? XD
+11:13:44 <favonia> 那個 ... 換成 … 是自動的嗎？
+11:14:58 <jaiyalas> 我看看 orz
+11:15:50 <favonia> 我丟給你了
+11:15:54 <jaiyalas> favonia: 是自動的， editor 上顯示是三個點沒錯
+11:15:56 <favonia> 我還是用 "..."
+11:18:08 <jaiyalas> ok
+11:18:36 <jaiyalas> 我放上去了，請客官看看使否滿意~ XD
+11:19:07 <yen3> jaiyalas: 指的是特別演講嗎 ?
+11:19:41 <jaiyalas> 不告訴你
+11:19:46 <yen3> 哭哭~
+11:19:53 <jaiyalas> 哭屁呀
+11:19:59 <yen3> 屁屁不能哭
+11:20:31 <jaiyalas> 我不知道你的可不可以，搞不好就你的可以？！
+11:20:57 <yen3> jaiyalas: 我知道我的肯定不行 XD
+11:21:48 <jaiyalas> 你確定你知道?
+11:22:33 <yen3> jaiyalas: 我決定轉戰私人頻道 XD
+11:22:56 <jaiyalas> 可見你不確定嘛...
+11:23:15 <yen3> jaiyalas: 我只是不想浪費公眾資源 XD
+11:23:43 <jason2506> 明明兩個人就坐在旁邊還硬要在這邊吵XD
+11:23:55 <favonia> 唉我太晚看到這個笑話了... 前幾天有朋友丟給我 http://ideapit.net/p4191.html
+11:26:18 <yen3> 我要把我的電腦拿去充電了 XD
+12:04:15 <jaiyalas> 便當來了~
+12:04:23 <jaiyalas> 不過今天的好像不太好吃 orz
+13:33:43 <CindyLinz> 哎呀... scm 的 OCaml 越來越 Haskell 了 XD
+13:54:18 <MnO2> YC ling也有上FLOLAC?
+13:58:30 <CindyLinz> functional pearls # http://www.haskell.org/haskellwiki/Research_papers/Functional_pearls
+14:01:19 <MnO2> 要看好多Paper啊 xD
+14:02:35 <CindyLinz> MnO2: London.... orz
+14:02:43 <CindyLinz> MnO2: Haskell eXchange
+14:03:20 <MnO2> 可以建議一下live streaming xD
+14:03:31 <CindyLinz> MnO2: scm 說, 收在 Functional Pearls 的東西, 不一定是新的理論, 但都是很簡短, 很漂亮的證明
+14:04:06 <CindyLinz> ← 人微言輕 ^^|
+14:07:50 <MnO2> CindyLinz: paper要慢慢消化xD
+14:18:50 <CindyLinz> scm 好會挑眉 :p
+14:36:51 <hychen> 老師現在說的事的鄉民口語版: http://www.codemud.net/~thinker/GinGin_CGI.py/show_id_doc/445
+14:37:00 <hychen> 從結果推回前提
+14:53:55 <yen3> scm 說沒有迴圈的程式都很簡單，所以 Haskell 的程式都很簡單 (某人說的)
+14:54:10 <hychen> 遞迴就是迴圈啊 orz
+14:55:09 <yen3> XD
+14:57:14 <CindyLinz> 遞迴是天上的迴圈.. XD
+14:58:08 <CindyLinz> yen3: 你的錄音檔也是 wav 嗎?
+14:59:09 <hychen> 遞迴只應天上有，凡人應當用迴圈...
+14:59:38 <jason2506> yen3 曰: 是 mp3
+14:59:52 <CindyLinz> XD
+15:00:24 <CindyLinz> 不要用遞迴, 改用 Y-combinator.. (誤)
+15:00:35 <jason2506> yen3 表示筆電快沒電, 懶得開電腦XD
+15:00:40 <jason2506> 幫他回一下
+15:00:45 <CindyLinz> XD
+15:00:52 <hychen> 這時就證明了9cell電池的重要性
+15:00:56 <CindyLinz> 我明天要考慮多帶一顆小電池了
+15:01:04 <CindyLinz> 早上那個 coqide 很耗電..
+15:01:35 <hychen> 一個9cell 的電池可以頂一天的conference
+15:01:54 <CindyLinz> 我不知道我的電池有幾 cell ^^|
+15:02:49 <hychen> 我的電池還可以撐2hr
+15:03:07 <CindyLinz> 我還有 2:25
+15:03:28 <CindyLinz> 可是只要一開 coqide, 這個估計值馬上變小 XD
+15:03:31 <hychen> 那應該跟我一樣9cell吧
+15:04:05 <hychen> 日系的laptop 電池比較有擋頭
+15:37:39 <hychen> CindyLinz, http://ubuntuforums.org/showthread.php?t=1861588
+15:38:15 <hychen> CindyLinz, this may be the root symptom
+15:39:19 <hychen> CindyLinz, ext4_orphan_cleanup: deleting unreferenced inode
+15:39:48 <hychen> CindyLinz, it happens when you are trying heavy hard-disk activity
+15:42:57 <CindyLinz> !
+15:48:54 <MnO2> 原來audreyT還有在寫haskell
+15:48:54 <MnO2> http://hackage.haskell.org/package/regex-genex-0.5.0
+15:51:11 <CindyLinz> hychen: 欸... 所以我可以無腦解法改用 ext3 嗎? ^^|
+15:52:18 <CindyLinz> regex.. 我之前在找, 在 haskell 裡面要用哪個 regex lib 方便.. (因為平常在 perl 裡面 regex 用太兇)
+15:52:23 <hychen> CindyLinz, 要先做一些實驗, 看你在做大量hard IO時, 當掉的機率高不高
+15:52:45 <hychen> CindyLinz, 如果很高, 我們才能以這個symptom 為起點, 繼續narrow down.
+15:53:21 <CindyLinz> 看著看著, 突然覺得, 在 haskell 裡面好像直接用 Parsec 不一定比較不方便 o.o
+15:53:39 <CindyLinz> 因為 haskell 裡面的 regex 用起來也不太方便 ^^|
+15:54:00 <CindyLinz> hychen: 這樣實驗的過程資料毀掉的機會大不大啊? ^^|
+15:55:37 <hychen> CindyLinz, 應該不會吧,  反正你就多傳FTP或開VBOX, 再觀察syslog有沒有那個symptom
+15:56:12 <_13h> MnO2: 請問一下，GG 的原作者有把 repo 放出來嗎？昨天在 github 上看到一份，但好像不是原作者放的
+15:56:15 <CindyLinz> 來裝 cabal package.. 這樣也用很大 XD
+15:57:23 <MnO2> CindyLinz: pcre-lite 或 regexpr 吧
+15:57:39 <MnO2> _13h: 好像沒有
+16:25:36 <_13h> MnO2: 所以那些原稿是自己重新排版的?
+17:55:11 <MnO2> _13h: 對，不過我是直接接fleurer的東西，所以目前是用之前fleurer改的版
+17:55:47 <_13h> 瞭解，因為看到每個人的格式都不太一樣@_@
+17:57:26 <MnO2> 看到隔壁頻道的消息就想到我的raspberry pi又要延後一個月才能到
+17:58:32 <_13h> 我從預購開始等四個月
+17:59:01 <_13h> 要拿來跑 haskell 嗎?
+18:00:28 <MnO2> 沒有耶，隨便亂玩。不過都友人已經port cloud haskell了
+18:00:35 <MnO2> 有
+18:02:53 <_13h> 嗯嗯，我已經把 linux 砍掉在玩其他東西了XD
+18:05:48 <MnO2> 有什麼可以玩?
+18:07:14 <_13h> 目前大概就熟悉一下 boot sequence，可能把 forth 搬進去當 OS 吧
+18:08:07 <_13h> 我昨天在嘗試用 haskell 寫，不過有些東西搞不太清楚怎麼做，還在亂踹
+18:10:31 <MnO2> 嗯嗯
+18:12:36 <_13h> 舉個例子好了，假設我今天想改 list 中某一筆資料，我該怎麼做比較好?  有點類似 c 裡面寫 data[index] = 0xe8
+18:13:40 <_13h> 我操作 list 的時候傳回來的都是複本，不太確定一般有什麼寫作風格可以參考
+18:14:26 <favonia> _13h: 用 unboxed array　就好啦
+18:14:34 <favonia> _13h: 如果你不想改其他程式
+18:14:50 <favonia> _13h: 如果你不想改程式其他部份
+18:15:17 <_13h> thanks, 我回家再研究看，我還在實驗語法，所以亂改大改重寫都是沒問題的
+18:15:57 <favonia> _13h: 通常整個程式重想會比較好一點（？）
+18:16:14 <_13h> 對呀，我是想盡量習慣新的風格
+18:16:32 <_13h> 不然我可能又會把 haskell 寫成 forth XD
+18:58:15 <_13h> foreign import ... 感覺好可怕
+22:18:10 <letoh> unboxed array 看起來有點像後門...
+22:27:04 <CindyLinz> letoh: 重度汙染的重工業區集中管理就別怕啊 XD
+22:27:28 <CindyLinz> letoh: 欸.. unboxed array 應該還好吧 @@"
+22:27:38 <CindyLinz> 還是 pure 的啊
+22:34:10 <letoh> 那 Foreign.Ptr 呢? 看到這東西有點抖 (雖然蠻高興的XD
+22:35:02 <CindyLinz> letoh: 那就真的是你朝思慕想(?)的東西了 XD
+22:35:21 <letoh> 有種發現綠洲(?)的感覺XD
+22:35:33 <CindyLinz> letoh: 這心態不太健康 XD
+22:35:38 <letoh> XDXD
+22:36:45 <letoh> 換個說法，突然發現跟 Haskell 也能好好相處了
+22:36:46 <CindyLinz> letoh: 要蓋重度汙染的核電廠以前請三思, 配套措施要規劃好 XD
+22:37:14 <CindyLinz> letoh: 至少別讓它盤根錯結到跟你整個程式糾結在一起 ^^|
+22:37:27 <letoh> 努力看看XD
+22:37:32 <CindyLinz> 不然 Haskell 帶來的好處就都不見了 :Q
+22:38:53 <letoh> 應該先研究一下其他用 haskell 實作的 compiler 看看
+22:39:25 <CindyLinz> ghc? (逃)
+22:39:46 <letoh> 不要一下子就挑戰大魔王吧XD
+22:39:56 <CindyLinz> (飛也似地逃了)
+22:40:33 <letoh> 感覺好像被推了一把  轉身一看沒半個人XD
+22:41:31 <CindyLinz> letoh: 這是.. 鬼月的故事嗎?
+22:42:35 <letoh> 時間好像差不多XD
+22:43:09 <letoh> haskellwiki 真是好地方
+22:45:01 <letoh> http://hackage.haskell.org/package/atom/  查到一個奇怪的東西
+22:48:03 <CindyLinz> 唔
+23:04:11 <letoh> 看了 atom 的介紹有點暈  有空再看XD
+23:06:28 <CindyLinz> XD

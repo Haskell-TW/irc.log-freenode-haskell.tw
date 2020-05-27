@@ -1,0 +1,18 @@
+09:23:16 <mno2> http://brandon.si/code/announcing-hashabler-like-hashable/
+09:23:29 <mno2> 多一種選擇
+09:44:17 <mno2> https://github.com/lukexi/halive/
+09:44:24 <mno2> [Live recompiler for Haskell]
+09:59:36 <mno2> http://hackage.haskell.org/package/graphmod
+10:00:01 <mno2> [This package contains a program that computes dot graphs from the dependencies of a number of Haskell modules.]
+10:00:32 <mno2> http://taylor.fausak.me/2014/03/04/haskeleton-a-haskell-project-skeleton/
+10:00:41 <mno2> [Haskeleton: a Haskell project skeleton]
+10:04:38 <mno2> https://www.fpcomplete.com/blog/2015/05/haskell-at-front-row
+10:04:48 <mno2> [Guest post: Haskell at Front Row]
+10:17:14 <mno2> https://github.com/jaspervdj/stylish-haskell
+10:17:21 <mno2> [Haskell code prettifier]
+10:19:25 <mno2> https://github.com/drKraken/haskell-must-watch
+15:30:04 <petercommand> https://hackage.haskell.org/package/HaTeX 剛剛看到這個，haskell latex XD
+22:10:12 <suhorngM_> 有人接觸過 HM(X) 嗎?
+22:16:20 <mno2> 那是什麼？
+22:25:50 <suhorngM_> 我也不太確定 看到的描述是 "HM(X), a parameterized Hindley-Milner type system, ... has been demonstrated with a wide range of program analyses, such as overloading, conditional constriants, or flow inference. It has also been extended by abstract polymorphic data types and guarded algebraic data types."
+22:26:14 <suhorngM_> 好像是這篇 http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.40.1443 Type inference with constrained types

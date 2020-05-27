@@ -1,0 +1,95 @@
+13:52:53 <petercommand> haskell 有 type, kind (type of type), 應該也可以有 type of type of type, type of type of type of type...之類的XD
+13:58:48 <petercommand> 看起來 Idiris 就是這樣XD
+16:42:07 <CindyLinz> petercommand: DataKind 就是讓 kind 可以不要都是分不出差異的 *
+16:42:21 <CindyLinz> petercommand: 但沒有繼續往上疊層次 XD
+17:02:12 <petercommand> 恩恩..
+17:15:00 <CindyLinz> 從有些角度看.. Haskell 的 type class 有 type 當 value 用的性質在..
+17:16:01 <CindyLinz> 有的實作方式是遇到像 Eq a => a -> a 這種函數的時候, 轉換為多傳一個參數, 傳 type 為 Eq 的 method table (類似 C++ vtable)
+17:16:35 <CindyLinz> 這一個參數的 value 就是實際 a 這個 type 在 Eq class 上的投影
+17:19:13 <CindyLinz> 如果 a 在 Eq 沒有投影, 那就 compile error
+17:34:14 <petercommand> https://wiki.haskell.org/Implicit_parameters 之前看到了這個...感覺毛毛的XD
+17:36:03 <petercommand> 給人喪失了 referential transparency 的感覺..ww
+17:37:27 <CindyLinz> 喔不用這個.. 我講的是實作層面的事, 寫 Haskell 時不會碰到, 而且也不是一定這樣實作, 只是也可以從這個觀點來理解而已 ^^
+17:37:47 <petercommand> 恩，兩個不一樣呀
+17:38:21 <petercommand> haskell 就是這樣實作的樣子
+17:38:44 <CindyLinz> 這個應該也不會影響 referential transparency... 我是理解為傳參數的 syntax sugar...
+17:38:52 <CindyLinz> 呃, 不過 Haskell 幾乎都是 syntax sugar....||
+17:41:14 <CindyLinz> 那個 type class 投影 table value 如果呼叫函數的時候 a 是已知, 那麼這個投影參數就會是個常數, 如果這次函數呼叫有被 inline 展開, 或是這個函數有被這一個 a type 呼叫很多次, 而有生成 a type 特化版. 那這一個參數應該可以輕易地 inline 消掉, 使得裡面呼叫 class method 都可以變成直接呼叫, 而不用查表.... (我是這樣想 :p)
+17:42:13 <petercommand> https://www.youtube.com/watch?v=6COvD8oynmI&list=RD2IZQx7WNOMs&index=2 #之前看這個影片就有提 type class 實作
+17:42:42 <CindyLinz> 怎麼又是他 XD
+17:42:48 <petercommand> XDD
+17:42:51 <CindyLinz> 他的名字我看得有點膩了!!
+17:43:13 <petercommand> :p
+17:44:29 <petercommand> CindyLinz: 呼叫的時候，a 未知的話應該不能編譯吧?
+17:44:47 <CindyLinz> petercommand: 配合 existential type 的時候可以
+17:44:52 <petercommand> 像是 show $ read "test"
+17:45:17 <petercommand> 來看一下 existential..
+17:45:38 <CindyLinz> data ShowableObj = forall a. Show a => ShowableObj a
+17:46:53 <CindyLinz> showThem :: [ShowableObj] -> [String];     showThem = map (\(Showable a) -> show a)
+17:47:17 <CindyLinz> showThem [ShowableObj 'a', ShowableObj (3 :: Int)]
+17:47:27 <CindyLinz> (未實測... ._.)
+17:49:10 <CindyLinz> Referential Transparency 應該可以視為一種唯心論的具體實現?
+17:50:00 <petercommand> CindyLinz: 這樣每個 a 還是在編譯的時候都知道 type 的呀?
+17:50:03 <CindyLinz> "abc" 讓我們覺得有個字串 abc, 但它是不是真的在那裡... 不一定也不重要, 反正我們覺得有, 我們要用到這個字串的時候它也會如期出現
+17:51:19 <CindyLinz> petercommand: 可以依 IO 輸入來決定要給哪一種欸
+17:53:41 <CindyLinz> 嗯.. 我現在常常在想實作的事... 用 js 實作 Haskell runtime 的話, 對於一個 "abc", 背後可以真的是一個字一個字接成 List, 也可以兩個三個字不等長地組成.. 反正只要遇到 take, head 之類的時候可以生出人家要的對應的字就好, 背後到底是不是真的 list of char 不重要
+17:54:05 <petercommand> 依 IO 來決定還是要在 compile time 決定輸入會變成甚麼呀?
+17:55:26 <petercommand> CindyLinz: 對阿，list of char 是使用方式呀，不一定是實作方式
+17:55:43 <petercommand> list of char 是 interface
+17:56:56 <CindyLinz> 例如說.... forM [1..10] (liftM read getLine >>= \case {1 -> return (ShowableObj 'a'); _ -> return (ShowableObj (3 :: Int))} ) 拿到的 list, 就不能在 compile 的時候知道每一個元素的 a 會是什麼 type
+17:57:49 <petercommand> 恩，就是 read..
+17:58:01 <petercommand> 參數裡沒有 a
+17:58:12 <CindyLinz> 欸.. 這邊用到的 read 一定是 :: String -> Int
+17:58:29 <CindyLinz> 會變動的是 ShowableObj 裡面裝的東西
+17:58:38 <petercommand> 對耶..
+17:58:42 <petercommand> XD
+17:59:20 <CindyLinz> 所以實作方式... 大概不意外地都會讓 ShowableObj 多帶一個 method table 欄位吧
+17:59:35 <CindyLinz> 也許有人會選擇把 method table 的 method 們展開?
+17:59:48 <CindyLinz> 使用時可以少一次 dereference, 但是 element 會變胖
+18:00:06 <petercommand> 感覺看 constraint 加在裡，就把 method table 放那裡就好了
+18:00:16 <petercommand> 感覺看 constraint 加在哪裡，就把 method table 放那裡就好了
+18:00:19 <CindyLinz> 但 Show 只有一個 method show, 所以展開 Z>B... XD
+18:00:25 <CindyLinz> 嗯嗯嗯
+18:00:58 <CindyLinz> 所以我覺得實作上 type class 在 type inference 完成以後應該可以看成 syntax sugar 就好 :p
+18:01:31 <petercommand> 恩恩
+18:03:13 <CindyLinz> ShowableObj 也可以不要用 class Show, 而寫成   data ShowableObj2 = forall a. ShowableObj2 (a -> String) a
+18:03:34 <CindyLinz> 那就可以... 隨自己高興就算同一種 type 的 a 也每次都換不同的顯示法
+18:04:44 <petercommand> 差別就在 ShowableObj 可以用 method table reference， ShowablObj2 只能用 method table
+18:04:56 <CindyLinz> 嗯...
+18:05:03 <petercommand> 這也不是 table 了啦XD
+18:06:09 <CindyLinz> 所有的有 constraint 的 polymorphic 函數也都可以改寫成這樣: 請給我 (==), 請給我 show, 請給我 (+).. 累死使用者 XD
+18:07:08 <CindyLinz> 然後 (+) 和 (-) 的 type signature 應該都會長得一樣, 所以有時候會傳錯也是應該的 (逃
+18:07:30 <petercommand> 可以餵 lambda table 嗎XD
+18:07:38 <petercommand> 當參數
+18:07:44 <CindyLinz> 什麼是 lambda table? ^^|
+18:08:05 <petercommand> 臨時指定的 implementation
+18:08:42 <CindyLinz> 再根據傳入的參數決定給誰喔?
+18:09:16 <petercommand> 恩
+18:10:34 <petercommand> 手動傳入 method table XD
+18:13:42 <CindyLinz> 嗯嗯嗯 :p
+21:55:24 <suhorng> http://dev.stephendiehl.com/hask/ 這個維基真是越加越多頁好厲害耶....
+21:56:21 <suhorng> 現在居然連 final interpreters, final tagless 都有了(這怎麼看都很難歸類阿XD 也比較不屬於 Haskell 語言特性)
+21:57:09 <suhorng> 還有 SAT/SMT solvers 是怎麼回事啦XD 這為何是 "What I Wish I Knew When Learning Haskell"...
+22:08:59 <CindyLinz> XDDDD
+22:09:07 <CindyLinz> 向宇宙許願了
+22:13:27 <suhorng> 不過 GHC type system 也已經有人拿去接 SMT solver, 也許不太壞(喂
+22:14:13 <CindyLinz> 用 SMT solver 來推 Haskell 的 undecidable instances 嗎?
+22:14:52 <suhorng> 不是, 拿來去計算 type level number arithmetic
+22:15:02 <CindyLinz> SMT 和 SAT 不一樣?
+22:15:20 <suhorng> 好像不一樣...
+22:15:40 <suhorng> SAT 只是一個式子而已, SMT 還有其它的東西,
+22:17:19 <CindyLinz> 唔.. 嗯.... 我不知道 type level number arithmetic 要算什麼 :p
+22:20:12 <suhorng> 唔~"~ 只找到 paper 一時找不到網頁 "Improving Haskell Types with SMT"    google出來有看得到的 pdf
+22:24:43 <CindyLinz> improve 是哪個方向的改進呀
+22:24:55 <CindyLinz> 是變快, 還是可以處理的範圍更大
+22:25:50 <suhorng> 有多了 reasoning 的功能
+22:26:08 <suhorng> 例如 (n + m) + k ~ n + (m + k)    {- type level -}
+22:26:14 <CindyLinz> 不但可以說出你哪裡錯, 現在也可以說出你為什麼對! ww
+23:39:38 <monochrom> petercommand: GHC 有個叫 BOX, 就是在 kind 之上
+23:42:20 <monochrom> Coq 則開宗明義有 Type 0, Type 1, Type 2, ..., Type n, Type n+1, ... 不設上限
+23:42:53 <monochrom> 如來神掌都只到第9重或第10重
+23:45:20 <CindyLinz> 如果 Haskell 也作 N 重天, 會跟什麼既有的東西打架嗎?
+23:45:35 <CindyLinz> 嗯... 除了 identity 大小寫這部分以外?
+23:52:11 <monochrom> 不會打架. 不過也沒用途.
+23:57:44 <CindyLinz> 咦?
+23:58:19 <CindyLinz> 加上去不會讓 Haskell 跟 dependent type 更接近一點嗎?

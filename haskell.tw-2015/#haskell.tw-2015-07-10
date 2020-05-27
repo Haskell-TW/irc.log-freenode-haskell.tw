@@ -1,0 +1,9 @@
+14:00:47 <__Z2suI3horI2ngE> @unpl ((:) .) . (,)
+14:00:48 <lambdabot> (\ d g -> ((:)) (((,)) d g))
+14:28:05 <CindyLinz> @type ((:) .) . (,)
+14:28:06 <lambdabot> a1 -> a -> [(a1, a)] -> [(a1, a)]
+14:28:48 <CindyLinz> type 比程式好懂... :/
+15:09:43 <au> 一般情況下，定理是比證明過程好懂沒錯...
+15:27:45 <__Z2suI3horI2ngE> XDDD 我覺得是它 unpl 的關係, 原本手動 pl 前的 code 是 \x t cxt -> (x,t):cxt
+15:27:58 <__Z2suI3horI2ngE> @pl \x t cxt -> (x,t):cxt
+15:27:58 <lambdabot> ((:) .) . (,)

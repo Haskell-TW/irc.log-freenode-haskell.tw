@@ -1,0 +1,13 @@
+10:19:59 <hashcat> haskell.tw好像人數減少
+10:20:19 <hashcat> 丟出兩個東西回覆記憶
+10:20:33 <hashcat> http://www.impredicative.com/ur/ a Domain-Specific Functional Programming Language for Modern Web Applications
+10:22:46 <hashcat> http://www.metasepi.org/ 放棄Haskell轉向ATS的
+10:24:32 <hashcat> 有點看不懂他們成果是啥
+10:24:49 <hashcat> metasepi
+17:03:56 <pkmx> 之前不是要用ajhc寫netbsd的kernel module?
+21:40:49 <miaoski> 大家都掛著不講話，等 CindyLinz 來開課 (誤)
+21:41:27 <letoh> 還沒進入夜間模式?
+21:41:51 <hashcat> pkmx: 收了, 說是換成ATS但過很久沒動靜
+21:45:18 <letoh> 有換 ats 嗎? 我以為只是剛好有成員在玩 ats 而已
+21:46:14 <hashcat> 是在網站宣佈要換成ATS阿
+21:46:24 <hashcat> ajhc永久報廢

@@ -1,0 +1,25 @@
+22:02:56 <hashcat> 整個頻道都是我登入又登出的訊息 ==
+22:14:15 <CindyLinz> XD
+22:16:16 <cataska_> 可以 ignore 登入登出訊息的...
+22:25:32 <hashcat> 不用android上得andchat了
+22:27:27 <CindyLinz> 3G 換基地台的時候就會斷線重登喔?
+22:28:19 <hashcat> 貌似不是
+22:28:24 <hashcat> 是bug
+22:29:38 <hashcat> Excess Flood不知道是啥意思
+22:31:30 <hashcat> 我設定是每五秒重登, 一直跑到最大次數
+22:31:41 <hashcat> 結果就真的給我跑到最大次數
+22:34:14 <CindyLinz> Flood 看起來就..... XD
+22:36:34 <hashcat> 就什麼
+22:37:06 <CindyLinz> 就很兇殘啊 XD
+22:37:23 <CindyLinz> 像是.. 洗頁也叫 flooding.. XD
+22:38:03 <CindyLinz> 然後我們常用一個叫作 ping 的指令嘛, 平常都是一秒發一個
+22:38:19 <CindyLinz> 有個 -f 選項, 說明寫: Flood ping.
+22:38:29 <CindyLinz> 就是極速狂發... XD
+22:38:38 <CindyLinz> 通常是只有 root 可以用
+22:38:49 <hashcat> irc系統覺得我在洗版就是
+22:39:14 <CindyLinz> "it sets interval to zero and outputs packets as fast as they com back or one hundred times per second, whichever is more"
+22:40:02 <CindyLinz> 然後 excess: a. 過量的, 額外的.. XDD
+22:42:19 <hashcat> 原來就是洗版的意思
+23:12:03 <petercommand> ping的--help沒有-f耶XD
+23:12:58 <petercommand> 有點恐怖...
+23:34:26 <CindyLinz> man ping 看的

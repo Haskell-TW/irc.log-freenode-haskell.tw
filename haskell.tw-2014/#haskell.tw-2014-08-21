@@ -1,0 +1,68 @@
+22:00:29 <mathist1> 大家好~~ 這幾個禮拜我haskell沒有在碰, 但我遇到一個問題, 感覺很貼近函數式編程的思想, 想來問一下. haskell的語法我有點生澀了 Q_Q
+22:00:59 <mathist1> 我想問一下, 用正常方式宣告的, 譬如單變數函數, 對他細節的內容的定義等等(譬如參數型態的要求)
+22:01:06 <mathist1> 可以作到很細
+22:01:15 <mathist1> 那是不是用lambda函數, 就不能做到跟他一樣細
+22:02:37 <mathist1> 譬如用lambda函數可以定義(\x -> x^2)，但如果我要對一個函數的自變數做一些苛刻的要求，或要定得比較複雜以敷使用，用lambda的方式是不是比較難做到
+22:05:13 <CindyLinz> 不會 ^^
+22:05:15 <au> 就是要多寫一些 case x of ... 吧
+22:05:24 <CindyLinz> 嗯 有可能打的字比較多而已 :p
+22:05:26 <au> f x = ... 和 f = \x -> ... 是等價的，但是前者有很多語法糖
+22:05:53 <au> 語法糖融化 (desugar) 之後仍然是 lambda 函數。
+22:05:59 <CindyLinz> XD
+22:06:38 <mathist1> 那問一下喔 非匿名函數有指名 Int --> Int 之類，lambda要指明的話, 要怎麼寫
+22:06:57 <mathist1> 感覺找不到地方塞進去 ><
+22:06:59 <mathist1> xd
+22:07:27 <CindyLinz> (\x -> x) :: Int -> Int
+22:07:33 <mathist1> OKOK!
+22:07:55 <mathist1> 所以在haskell裡, 就像au大說的, 兩者100%等價
+22:08:56 <CindyLinz> 嗯, 若忽略各家 compiler 可能各自作的若干最佳化, 等價
+22:13:28 <mathist1> ok, thanks!!
+22:19:46 <mathist1> 話說我最近念高微 都習慣把 d(3x^2)/dx寫成(x|->3x^2)'
+22:20:00 <mathist1> 感覺這比較elegant
+22:21:30 <CindyLinz> 那如果要 d(x+y) 怎麼辦?
+22:23:49 <mathist1> Q_Q?
+22:23:52 <mathist1> differential form嗎
+22:24:00 <mathist1> 那我還沒學到 冏..
+22:24:50 <CindyLinz> 我只是想說如果 / 後面的 d 不是一個變數, 是一個複雜一點的 expression, 那你要怎麼寫.. XD
+22:27:18 <mathist1> 譬如說 f(x,y)=sin x +y ^2  先對x微，再對y微嗎?
+22:27:43 <CindyLinz> 不是.. 是直接對 (x+y) 微 XD
+22:27:51 <mathist1> @@!
+22:27:54 <mathist1> 這我還沒學到...
+22:28:23 <CindyLinz> 就... 假設原本你要對 f(u) = sin u 作 d f(u) / d u
+22:28:50 <CindyLinz> 然後作一個沒事找事的變數代換, 作 d sin (x+y) / d (x+y)  XD
+22:29:29 <CindyLinz> 怎麼算不是重點啦, 我只是好奇表達式會想怎麼寫.. ^^|
+22:29:45 <CindyLinz> (x+y|->sin(x+y))' 嗎?
+22:35:52 <mathist1> (u |-> sinu )'  (x+y) 嗎?
+22:36:06 <CindyLinz> 喔喔 可以唷! :D
+22:36:09 <mathist1> 我知道你是說 chain rule 的那個 有些人會那樣寫
+22:36:24 <mathist1> 我超不習慣看/寫 d(x+y)
+22:37:17 <mathist1> 以前不知道有 lambda 時, 好像是寫 df(g(x))/dx = [df(y)/ dy  | y= g (x)]   *  dg(x)/dx
+22:37:20 <CindyLinz> f' 和 dx/dy 應該前面是牛頓的符號, 後面是萊布尼茲的符號
+22:37:32 <mathist1> 其中 | y= g (x)是取值符號
+22:37:39 <mathist1> 嗯嗯
+22:37:44 <mathist1> 我討厭萊布尼茲
+22:38:05 <CindyLinz> 可是萊布尼茲的符號比較方便欸?
+22:38:28 <mathist1> 你這樣講 讓我有點為難
+22:38:31 <mathist1> :(
+22:38:31 <CindyLinz> 因為 f'(x) 這樣寫法... 不方便寫函數的定義出來啊 o.o
+22:38:47 <mathist1> 欸 是啦 xd
+22:38:58 <CindyLinz> 萊布尼茲的符號有時候會看到把 /dx 移到等號左邊的寫法
+22:39:23 <CindyLinz> 然後 chain rule 下去的時候看起來就像分數一樣好開心 XD
+22:39:25 <mathist1> 譬如微分方程的 separable 解法
+22:39:28 <mathist1> 那好噁心....
+22:39:48 <CindyLinz> 啊還有人是光把 operator 的部分抽出來計算的
+22:40:02 <mathist1> 看到老師直接把 dx, dy 乘來乘去的那天, 放學回家走在路上, 我哭了
+22:40:03 <CindyLinz> f'(x) 的寫法.. 只搬 ' 一個字元的話, 訊息量太少了 XD
+22:40:06 <CindyLinz> XDXD
+22:41:51 <CindyLinz> 記得理查費曼也有自己發明奇怪的符號, 跟別人討論東西的時候別人都崩潰了 XD
+22:42:23 <mathist1> 因為 dy/dx | x=a 實際上是一個極限 lim_x->a  [f(x)-f(a)]/(x-a), 怎麼可以視為分數, 把分母分子搬來搬去
+22:42:27 <mathist1> 嗯哼
+22:43:54 <mathist1> 然後微分方程separable of variable的解法, 兩邊把dx dy鬼抬轎之後, 又左右一起取積分
+22:44:24 <CindyLinz> XD
+22:44:28 <mathist1> 我又哭了
+22:44:34 <CindyLinz> 初微都不講清楚為什麼可以這樣搞 XD
+22:45:14 <mathist1> 對呀
+22:50:36 <CindyLinz> 唔 不對, 最近比較流行的語法是: ....跟別人討論東西的時候, 大家都震驚了
+22:55:06 <au> dx dy 乘來乘去不是很自然嗎 XD
+22:55:29 <au> # https://zh.wikipedia.org/zh-tw/%E9%9D%9E%E6%A8%99%E6%BA%96%E5%88%86%E6%9E%90
+23:02:09 <mno2> 操作規則的確是蠻自然的，但總是用的心慌慌的，一開始覺得搬來搬去總覺得哪裡怪怪的。

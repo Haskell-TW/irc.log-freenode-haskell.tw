@@ -1,0 +1,127 @@
+00:01:06 <letoh> mips 算嗎?
+00:01:24 <letoh> 不過我也不太懂為什麼 masm/nasm 也算@_@
+00:01:51 <CindyLinz> 因為這四種寫起來我覺得都一樣啊 XD
+00:02:24 <CindyLinz> 不過 mips 的指令不一樣, 另外三個我都是寫 8086 血統的, 超像..
+00:02:41 <CindyLinz> 差異只在以前用 dos / bios 的服務, 現在用 linux 的服務
+00:02:56 <letoh> 喔喔喔  我以為是說跟 stack machine 很像
+00:03:04 <CindyLinz> 欸?
+00:03:13 <CindyLinz> 好像誤解 godfat 了... @@"
+00:03:28 <CindyLinz> 他說的 stack based 是 llvm 喔?
+00:03:38 <CindyLinz> 那好吧, 我寫的都是 register based XDD
+00:03:41 <letoh> llvm 應該是 register based ?
+00:03:49 <CindyLinz> 呃...
+00:03:58 <suhorng> x86/MIPS/ARM不算吧?
+00:03:59 <CindyLinz> godfat: 那你為什麼要查這個啊 XD
+00:04:01 <letoh> 現在要碰到 stack machine 應該很難@_@
+00:04:07 <suhorng> LLVM是register based阿
+00:04:17 <CindyLinz> 那 MASM 咧?
+00:04:20 <suhorng> x86/MIPS/ARM主要也都是register, 只不過有stack
+00:04:21 <letoh> 我以為 j1 那種才算
+00:04:32 <CindyLinz> LLVM 沒有 stack?
+00:04:37 <suhorng> lisp machine那類型(像上次那個 toy machine)的才算吧XD
+00:04:43 <letoh> 但那不叫 stack-based machine 啊XD
+00:04:50 <CindyLinz> 所以要自己拿 heap 當 stack 用?
+00:05:03 <letoh> suhorng: 我也以為是那樣
+00:05:05 <suhorng> forth也算?
+00:05:11 <CindyLinz> forth 超標準的 stack based...
+00:05:16 <letoh> 很難說... forth cpu 才算
+00:05:17 <suhorng> 呃 奠基的
+00:05:20 <suhorng> 對
+00:05:28 <CindyLinz> 不過我看 godfat 那樣講的時候, 我的確是把 stack based 理解成有 stack 的環境
+00:05:30 <letoh> forth 不算  所以我剛剛說 j1 那種才算
+00:06:04 <letoh> x86 的 stack 使用，我覺得那是模擬出來的XD
+00:06:47 <CindyLinz> letoh: 因為 sp 可以亂搞?
+00:07:09 <CindyLinz> 來等 godfat 解釋好了 XD
+00:07:21 <suhorng> 對llvm不是很有印象, 他好像不需要顯式的stack吧.. register數量"無上限"
+00:07:24 <letoh> 嗯  反正就用記憶體跟某個 register 配合就可以弄出 stack 了不是嗎? XD
+00:07:33 <CindyLinz> register 無上限..... (默)
+00:07:44 <CindyLinz> 真是太過份了......
+00:08:19 <suhorng> 就只是個 SSA XD
+00:08:27 <mno2> http://skillsmatter.com/podcast/home/simon-marlow  video 出來了
+00:08:58 <CindyLinz> 我沒法直接播, 會說什麼我的環境設定不對
+00:09:04 <suhorng> simon marlow http://ro-che.info/ccc/19
+00:09:12 <CindyLinz> 所以昨天我就去翻它的 url, 把 mp4 下載下來用 mplayer 開 XDDD
+00:09:47 <CindyLinz> XDDD
+00:10:10 <letoh> http://www.ece.cmu.edu/~koopman/stack_computers/sec4_4.html  novix 也是很有名的 stack cpu
+00:11:19 <suhorng> 今天的內容忽然很硬體lol
+00:11:54 <letoh> 比前在 bbs 的古文聽說台大有  不過應該是很古老的事了
+00:12:11 <letoh> 應該是某個 lab 的財產吧
+00:13:06 <CindyLinz> 日本東京的 rails meetup 幾乎沒有日本人參加, 都是白人和大陸人... 忍不住還是笑了.. :p # https://www.facebook.com/xdite/posts/10151961185373552
+00:14:21 <monochrom> 是不是日本人不喜歡西人盜用了 ruby 一詞呢? XD
+00:14:52 <letoh> ruby 這詞也不是日本的吧?
+00:15:01 <CindyLinz> 「剛開始這個 Meetup 雖然是英國人 Miles 創辦的，但在一開始其實是有日本人參加的。但是因為國情不同，白種 Developer 在 Meetup 通常會很熱情的認識陌生人："Hi, dude, where are you come from? What kind of project are you working on?"」
+00:15:10 <CindyLinz> 「但是很多日本人的英文程度是很爛的 XDDDD 他們沒辦法應付這種社交場合，要用英文聊天是一種是巨大的社交壓力！於是雖然會有日本人參加，但他們只會來一次，下次就不來了！！」
+00:15:19 <CindyLinz> 「但是白種 Developer 參加這種 Event 會覺得很開心，於是他們也把他們的朋友拖來，不管他是不是也是寫 Rails 的。結果這個 Meetup 最後就只剩下白種 Developers 和 Greater China 的 Developer 在參加 orz.....」
+00:15:57 <suhorng> /o/
+00:16:54 <monochrom> 在日本開會用英文, 很不正常啊
+00:17:28 <letoh> 上次開會  會場有一半日本人  但還是全程用英文
+00:18:33 <CindyLinz> 日本人應該聽英文還是很厲害吧? 只是比較沒自信一點所以不想講, 我猜其實還是會講吧 @@"
+00:19:11 <letoh> 會講  但發音問題不太好改善... 我是把他們講的都當作日文來聽  很自然就能聽懂XD
+00:19:36 <letoh> 當成英文來理解應該會陣亡XD
+00:20:23 <CindyLinz> letoh: 我現在漸漸覺得... 說發音有問題, 其實是聽的人英文不夠好才會聽不懂.. ._.
+00:20:46 <CindyLinz> 我聽印度腔英文聽得很痛苦, 美國人卻是聽得很順的... QQ
+00:21:08 <letoh> 這當然也是一個問題啦  可能要強到聽不懂的部份也可以腦補
+00:21:29 <mno2> 那是因為台灣接觸到的 training data 都太美式了
+00:21:38 <letoh> 我聽日文可以  漏掉一些我也補的起來  但聽英文還不行，只要漏掉幾個字就完了XD
+00:21:44 <CindyLinz> 你字還沒講出來他就已經猜到了, 等你字講出來, 只是讓他作 verify 而已? XD
+00:22:14 <mno2> 上課應該要播不同口音的才實用
+00:22:18 <letoh> 練外語聽力應該都要練到這種程度?
+00:22:56 <CindyLinz> 覺得聽演講比實際對話難, 因為講的人不會停下來等我理解... @@"
+00:23:05 <monochrom> 你們聽過香港腔的國語嗎? XD
+00:23:07 <CindyLinz> 不過演講錄影就沒問題了, 可以重播 A_A
+00:23:34 <CindyLinz> 有啊, 以前有遇過僑生 ^^
+00:23:54 <letoh> 感覺不會特別奇怪啊  還是聽得懂的程度
+00:24:47 <CindyLinz> 表示我們中文夠好 :D
+00:24:51 <letoh> 是指像是港星講普通話那種感覺嗎?
+00:24:57 <letoh> 唔  應該是XD
+00:25:08 <CindyLinz> letoh: 港星... 其實講得有比較好懂了說
+13:10:39 <suhorng> 昨天想到stack machine..我突然想到最明顯的例子就是 JVM XDDD
+13:11:54 <suhorng> 至少看一些bytecode的感覺是(汗" http://en.wikipedia.org/wiki/Java_bytecode#Example
+13:37:26 <CindyLinz> 突然開始讀一堆組語... (汗)
+14:53:13 <godfat> 呃 XD 我太不熟了，所以我的意思是能不能用 push/pop
+14:53:13 <godfat> 現在看起來 llvm 中是沒有類似的指令，所以得用 register
+14:53:13 <godfat> 比方說最後 double 那個 function 是長這樣：
+14:53:14 <godfat>   %val.addr = alloca i32
+14:53:15 <godfat>   store i32 %arg, i32* %val.addr
+14:53:15 <godfat>   %0 = load i32* %val.addr
+14:53:15 <godfat>   store i32 %arg, i32* %val.addr
+14:53:15 <godfat>   %1 = load i32* %val.addr
+14:53:15 <godfat>   %2 = add nsw i32 %0, %1
+14:53:15 <godfat>   store i32 %2, i32* %val.addr
+14:53:16 <godfat>   %val = load i32* %val.addr
+14:53:16 <godfat>   ret i32 %val
+14:54:03 <godfat> 我本來也想重複利用 register, 不過後來發現不行...
+14:54:03 <godfat> 但是名稱可以重複，所以就變成用 %0, %1, %2 去遞增...
+14:54:26 <godfat> 然後這好像也是 llvm 標準手法 ~.~ 他甚至會去檢查你的數字遞增對不對
+14:55:00 <godfat> 中間我沒打 label 時，他會自動給 label 名字，導致我的數字少了
+14:55:00 <godfat> 這一點我也是查好久才找到原因的...
+15:22:03 <suhorng> 不能重複assign
+15:22:47 <suhorng> 如果有什麼分支的 需要把東西並起來的話好像用 Φ (phi)
+15:22:58 <suhorng> 完全是SSA的樣子...
+15:26:04 <CindyLinz> 所以如果想用 stack, 就是去找一段記憶體, 然後自己找一個固定的 address 來保存 SP 這樣?
+15:27:41 <suhorng> 大概是吧..
+17:55:28 <petercommand> CindyLinz: 我記得日本人說的中文也很難懂
+17:56:40 <petercommand> 之前有日本的交換學校來 他們代表上台致詞的時候聽的很辛苦
+17:56:47 <petercommand> 之前有日本的交換學校來 他們的代表上台致詞的時候聽的很辛苦
+18:01:45 <CindyLinz> 我沒聽過日本人說中文 ._.
+18:03:13 <letoh> 我常常聽XD
+18:05:56 <letoh> petercommand: 像瀬上剛講中文那種感覺?
+18:06:52 <petercommand> 不知道他是誰= =
+18:07:20 <petercommand> 有聲音可以聽聽看嗎?
+18:07:31 <letoh> 日本牙技師，有主持台灣的旅遊節目
+18:07:55 <letoh> petercommand: 算蠻有名的，你 youtube 找一下就有
+18:08:08 <petercommand> ok
+18:09:23 <letoh> 我還蠻喜歡看的，可以學一下怎麼用日文介紹台灣XD
+18:09:30 <petercommand> letoh: 他是講日文阿
+18:09:44 <letoh> 他跟台灣人說話就是講中文  自言自語時是日文沒錯
+18:10:06 <petercommand> XD
+18:10:44 <letoh> petercommand: https://www.youtube.com/watch?v=drzMmX8Jmjc#t=3m30s  隨便找的
+18:11:07 <letoh> 我的老師也超愛講中文  明明是我要去學日文，結果都在聽中文XD
+18:11:53 <petercommand> letoh: 他中文講的很好阿XD
+18:12:39 <letoh> 他在台灣也很久了啦  像我的老師來台灣不到一年  講中文沒那麼標準，但也是聽得懂的程度
+18:12:55 <letoh> 聽得出是外國人就是
+18:14:09 <b4283> letoh: 他沒用很多「就是」，肯定不是台灣人！
+18:14:18 <letoh> XDXD
+18:14:53 <letoh> 就是說啊  (這樣有像台灣人嗎?XD
+18:15:15 <petercommand> XD
+18:15:15 <CindyLinz> well...

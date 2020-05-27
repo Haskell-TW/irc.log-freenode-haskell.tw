@@ -1,0 +1,85 @@
+00:13:49 <pkmx> :t let f = ask in f :: a -> a
+00:13:50 <lambdabot> a -> a
+00:17:52 <pkmx> 原來有instance MonadReader r ((->) r) ...
+00:38:07 <pkmx> Haskell'是不是已經胎死腹中了...
+00:38:46 <pkmx> 每次.hs最前面都是一長串的LANGUAGE pragma ... 感覺應該差不多要把某些extension納入standard裡面了
+00:46:41 <CindyLinz> 蠻愛用 MonadReader r ((->) r) 的..
+00:54:03 <pkmx> 那怎麼沒有 instance Monoid w => MonadWriter w (a, w) 呢 ... XD
+00:54:44 <pkmx> 咦 好像無法orz
+00:59:33 <CindyLinz> 無法? o.o
+00:59:48 <CindyLinz> 我想應該沒有什麼理由.. 只是作者不爽作而已? XD
+01:01:23 <pkmx> 應該不是無法 只是還要寫Monad的instance
+01:08:33 <pkmx> ._.
+01:09:00 <pkmx> instance Monoid w => Monad (,w)
+01:09:06 <pkmx> 發現好像寫不出這種東西 ._.
+01:09:38 <CindyLinz> syntax 問題 orz.. 要 newtype 一下 @@"
+01:09:59 <pkmx> newtype完就是Writer了啊 =_=
+01:10:07 <pkmx> 就是想寫沒有newtype過der
+01:11:13 <CindyLinz> 我以前有找過... 如果 type variable 的順序沒有「剛剛好」的話, class 要怎麼 implement..
+01:11:32 <CindyLinz> 例如說... State s m a 如果寫成 State a s m
+01:12:04 <CindyLinz> 那要怎麼 instance Monad (\a -> State a s m)
+01:12:20 <CindyLinz> 找到的回答是說.... 不可以! 所以順序很重要!
+01:12:21 <CindyLinz> ww
+01:12:32 <pkmx> \type-level lambda/
+01:12:34 <CindyLinz> XD
+01:12:49 <CindyLinz> 啊你改成 instance Monoid w => Monad (w,) 呢?
+01:12:54 <pkmx> 這樣ok啊
+01:12:58 <CindyLinz> mmm
+01:13:02 <pkmx> 只是通常w都是放後面不是
+01:13:18 <pkmx> 雖然其實沒差 只是習慣問題
+01:13:21 <CindyLinz> XD
+01:14:47 <CindyLinz> xrandr --output LVDS1 --reflect x 一下就好了... (逃
+01:15:53 <pkmx> ? (w,) danoM <= w dionoM ecnatsni
+01:16:14 <CindyLinz> 對 XDXD
+01:18:47 <pkmx> 其實我也好想要這個instance 可是需要OverlappingInstance...
+01:19:04 <pkmx> instance Monad m => Monoid (a -> m a)
+01:19:40 <pkmx> mempty = return ; mappend = (>=>)
+05:39:58 <pkmx> > [(1, 'a'), (2, 'b')] & partsOf (traversed . _2) .~ [True, False]
+05:40:00 <lambdabot>  No instance for (GHC.Num.Num t) arising from the literal ‘1’
+05:40:00 <lambdabot>  Possible fix:
+05:40:00 <lambdabot>    add (GHC.Num.Num t) to the context of
+05:41:04 <pkmx> > [(1, 'a'), (2, 'b')] & partsOf (traversed . _2) .~ ['c', 'd']
+05:41:06 <lambdabot>  [(1,'c'),(2,'d')]
+05:41:12 <pkmx> > [(1, 'a'), (2, 'b')] & partsOf (traversed . _2) .~ ['c']
+05:41:14 <lambdabot>  [(1,'c'),(2,'b')]
+05:41:17 <pkmx> > [(1, 'a'), (2, 'b')] & partsOf (traversed . _2) .~ ['c', 'd', 'e']
+05:41:19 <lambdabot>  [(1,'c'),(2,'d')]
+05:43:08 <pkmx> > [(1, 'a'), (2, 'b')] & partsOf (traversed . _2) %~ map succ
+05:43:09 <lambdabot>  [(1,'b'),(2,'c')]
+05:50:46 <pkmx> > (42 :: Int) & bits %~ not
+05:50:49 <lambdabot>  -43
+06:16:17 <pkmx> > (1, 2, 3) ^.. (_1 <> _3)
+06:16:19 <lambdabot>  [1,3]
+06:16:29 <pkmx> > (1, 2, 3) & (_1 <> _3) %~ succ
+06:16:30 <lambdabot>  No instance for (GHC.Show.Show t1)
+06:16:31 <lambdabot>    arising from a use of ‘M896125247089254235015788.show_M8961252470892542350...
+06:16:31 <lambdabot>  The type variable ‘t1’ is ambiguous
+06:27:34 <pkmx> :t (:|)
+06:27:36 <lambdabot>     Not in scope: data constructor ‘:|’
+06:27:36 <lambdabot>     Perhaps you meant one of these:
+06:27:36 <lambdabot>       ‘:+’ (imported from Data.Complex),
+06:27:46 <pkmx> :t Data.List.NonEmpty.(:|)
+06:27:47 <lambdabot>     Not in scope: data constructor ‘Data.List.NonEmpty’
+06:27:48 <lambdabot>     Not in scope: data constructor ‘:|’
+06:27:48 <lambdabot>     Perhaps you meant one of these:
+06:28:02 <pkmx> :t Data.List.NonEmpty.map
+06:28:03 <lambdabot> (a -> b) -> Data.List.NonEmpty.NonEmpty a -> Data.List.NonEmpty.NonEmpty b
+06:28:48 <pkmx> :t Data.List.NonEmpty.:|
+06:28:49 <lambdabot> parse error on input ‘Data.List.NonEmpty.:|’
+16:11:24 <CindyLinz> suhorngM_: 1566 過了.. Wrong Answer 是因為沒發現 2^31 /= 2^31-1, 用 Int32 爆炸ww
+18:43:50 <petercommand> 有人玩過 AspectAG 嗎?
+18:43:54 <petercommand> https://hackage.haskell.org/package/AspectAG-0.3.6.1/docs/Language-Grammars-AspectAG.html
+18:44:06 <petercommand> https://hackage.haskell.org/package/AspectAG
+18:46:55 <petercommand> 好像蠻有趣的
+18:49:57 <petercommand> 編失敗了...XD
+20:40:02 <CindyLinz> 這麼難裝? orz
+20:40:08 <CindyLinz> 那不想玩了... (咦
+20:45:15 <pkmx> Uploaded Thu Aug 2 19:32:28 UTC 2012
+20:45:23 <pkmx> 看起來是被拋棄了
+20:45:44 <pkmx> graft :: (HasField' b e (HCons (LVPair e v2) a3) v, HasField' b e (HCons (LVPair e (Record HNil)) a2) v1, HasField e t2 ip1, RecordLabels t ls2, HEq e e b, HRLabelSet a1, HRLabelSet (HCons (LVPair e (Record HNil)) a2), HRLabelSet a3, HRLabelSet (HCons (LVPair e e) r1), HRLabelSet (HCons (LVPair e v2) a3), HRLabelSet (HCons (LVPair e v) r'), HRLabelSet (HCons (LVPair e v1) r'1), HRLabelSet a2, HRLabelSet
+20:45:45 <pkmx> a, MapLR r ico1 r3, MapLR (HCons (LVPair e e) r1) ico (Record t2), MapRL r1 (Record (HCons (LVPair e (Record HNil)) a2)) (Record r'1), MapRL r (Record a1) sc, MapRL r (Record a) ici, MapRL r1 (Record (HCons (LVPair e v2) a3)) (Record r'), H2ProjectByLabels ls t1 a1 b2, H2ProjectByLabels ls1 t1 a3 b4, H2ProjectByLabels (HCons e HNil) t2 t3 t4, H2ProjectByLabels ls1 t a2 b3, H2ProjectByLabels ls t a b1,
+20:45:47 <pkmx> RecordValues r1 ls1, RecordValues r ls, HLeftUnion r3 (Record t4) (Record r2), HRearrange ls2 r2 r'2, HLabelSet ls2) => Rule lf hof (Record (HCons (LVPair e v) r')) ip li hoi (Record (HCons (LVPair e v1) r'1)) spi li1 hoi1 ico p -> Record r1 -> e -> Rule lf hof sc ip1 li1 hoi1 ici (Record HNil) l ho ico1 v2 -> Record r -> Fam lf hof (Record t1) ip -> Fam li hoi (Record t) spi -> Fam l ho (Record r'2)
+20:45:50 <pkmx> pSource
+20:46:19 <pkmx> 這裡面的type比lens還要不友善很多啊...
+20:46:38 <CindyLinz> lens 被拿來這樣用......wwww
+20:47:36 <petercommand> 那個 type 看起來很可怕XD

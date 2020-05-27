@@ -1,0 +1,41 @@
+12:30:10 <MnO2> c9s 也許會有興趣: http://codeutopia.net/blog/2013/01/16/parsing-and-evaluating-php-in-haskell-part-1/
+12:36:48 <CindyLinz> 我覺得另一個方向比較有趣啊 QQ
+12:38:10 <_13h> 所以乾脆兩個方向結合起來 (神經病XD
+13:06:47 <favonia> CindyLinz: 用 PHP 執行 Haskell 嗎？
+13:07:07 <favonia> CindyLinz: system("runghc xxx.hs") ?
+13:08:14 <favonia> 認真的，如果只是要可以執行，Haskell 最困難的地方不是在 parsing
+13:08:22 <favonia> 而是徹底了解那些 types
+13:12:06 <MnO2> CindyLinz 的意思應該是 compile haskell to PHP / PHP bytecode 吧
+13:12:26 <MnO2> 我貼這個只是 c9s 好像想做 coffee php ?
+13:25:59 <_13h> 不是把 haskell interpreter 做起來喔? XD
+13:26:46 <_13h> http://blog.greweb.fr/2013/01/be-careful-with-js-numbers/
+13:26:59 <_13h> 為什麼允許這種事情存在XD
+13:41:00 <cataska`> [1,2,3,11,22].sort() --> 1,11,2,22,3
+13:43:55 <_13h> 邪惡...
+13:53:54 <CindyLinz> favonia: system runghc 那樣也是行啦 XD
+13:54:18 <CindyLinz> favonia: 不過如果「真正」的在 php 裡面執行 haskell 的話, haskell 應該可以直接 access 外面的 php 變數什麼的
+13:54:37 <CindyLinz> 可能透過一個 getPHPVar "varname" 之類的
+13:55:10 <favonia> _13h: 要寫 type checker 啊 不然用 Haskell 一點好處都沒有 xD
+13:58:30 <b4283> > 10000000000000000 === 10000000000000001
+13:58:31 <lambdabot>   False
+13:58:37 <b4283> > 10000000000000000.0 == 10000000000000001.0
+13:58:38 <lambdabot>   True
+14:00:24 <CindyLinz> 浮點數 XD
+14:00:54 <favonia> :t (===)
+14:00:55 <lambdabot> (Eq b, Typeable a, Typeable b) => a -> b -> Bool
+14:01:08 <favonia> b4283: 你用到奇怪的東西了？
+14:01:36 <favonia> :t 1000000000000000000000000000000
+14:01:37 <lambdabot> Num a => a
+14:01:52 <favonia> > 1000000000000000000000000000000 == 1000000000000000000000000000001
+14:01:54 <lambdabot>   False
+14:02:02 <favonia> 預設應該是 Integer 之類的 xD
+14:02:49 <b4283> favonia: 上面 _13h 貼的那篇有提到 python，我就順便試一下其他的
+14:03:21 <favonia> b4283: 喔我是說 (===) 和 (==) 不一樣
+14:03:43 <b4283> 喔喔，我剛剛打錯，結果它真的有 :P
+17:34:55 <b4283> :t (==)
+17:34:56 <lambdabot> Eq a => a -> a -> Bool
+17:48:31 <CindyLinz> Typeable 是 haskell 裡面邪惡的 dynamic type (指)
+17:54:45 <MnO2> CindyLinz: 一開始還不知道是什麼東西，後來知道之後覺得取名還蠻直覺的
+18:03:38 <CindyLinz> MnO2: 嗯 :D
+22:51:22 <MnO2> 大家來吃 Kleiski Fish
+22:51:54 <MnO2> http://haskellrescue.blogspot.tw/2011/03/cooking-delicious-fish.html

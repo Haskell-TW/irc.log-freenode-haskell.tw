@@ -1,0 +1,104 @@
+15:05:51 <CindyLinz> 嗯, GHC 的 MultiParamClasses extension 也很重要....
+15:07:10 <CindyLinz> TypeSynonymInstances 非必要.. 但我也是覺得沒有會很苦命 XD
+15:40:25 <CindyLinz> 問問題...
+15:40:38 <CindyLinz> Foreign.C.String 裡面有個 newCString
+15:41:01 <CindyLinz> 是 String -> IO (CString)  其中 type CString = Ptr CChar
+15:41:25 <CindyLinz> 這邊給出來的 CString 是需要自己手動去 free 的
+15:41:45 <CindyLinz> 另外有個 withCString
+15:41:48 <CindyLinz> :t withCSTring
+15:41:49 <lambdabot> Not in scope: `withCSTring'
+15:41:52 <CindyLinz> :t withCString
+15:41:53 <lambdabot> Not in scope: `withCString'
+15:41:56 <CindyLinz> orz
+15:42:12 <CindyLinz> withCString :: String -> (CString -> IO a) -> IO a
+15:42:31 <CindyLinz> 它會在我第二個參數的 action 用完以後自動幫我回收.... (很開心)
+15:43:24 <CindyLinz> 現在的問題是, 我是在一個底下墊 MonadIO 的 monad transformer 裡面做事情
+15:43:37 <CindyLinz> 那個 CString 是要在這個 monad transformer 裡面用的
+15:43:56 <CindyLinz> 如果我用 liftIO $ withCString str $ \cstr -> do ... 的話
+15:44:17 <CindyLinz> 最後面那個 action 是 IO a, 沒辦法用我 monad transformer 的函數 @@"
+15:44:47 <CindyLinz> 所以現在只能用 newCString 這種, 然後最後再自己記得 free 掉 @@"
+15:45:25 <CindyLinz> 我要怎麼使用這種 bracket 長相的用法呢?
+15:45:50 <godfat> 弄個 withCStringM ...?
+15:46:25 <CindyLinz> 好兇 XD
+15:47:03 <CindyLinz> 把那些 IO a 都換成 MonadIO m => m a 的版本?
+15:47:48 <godfat> 之類的... XD
+15:50:42 <CindyLinz> mmm
+15:51:35 <CindyLinz> 那麼, 我要怎麼處理 exception 呢? 希望裡面 throw exception 的時候, 我可以先 free 了, 再 re-throw..
+15:51:53 <CindyLinz> Control.Exception 裡面的 catch, try 看起來都是 IO a 的 @@"
+15:53:29 <suhorng> 咦？我以為 IO a 的 catch try 是 Prelude 的
+15:53:39 <godfat> 這些都重做好像工程有點大，而且不見得能做..? XD
+15:53:40 <godfat> 欸，說真的有時候覺得 ghc 的 api 有些缺東缺西...
+15:53:40 <godfat> 雖然好像大多都是 IO 的部份
+15:54:09 <suhorng> 喔喔 是說 IO (Either...)
+15:54:12 <CindyLinz> 好像, 在 IO a 那邊我重新 run 自己的 monad transformer 是一種作法.. 不過我的 monad transformer 有模仿 ST 那樣, 有一個 forall s. 在裡面, 而且我的 run 會做一些應該不能在前一個 run 結束以前再 run 第二次的動作 @@"
+15:54:55 <CindyLinz> suhorng: 原本是 Prelude, 不過 GHC (或 Haskell2010?) 有把它做得更完整. Prelude 還是能用就是
+15:55:13 <CindyLinz> 現在有做成像 Java 樹狀的 exception 家族那樣
+15:55:53 <suhorng> 嗯嗯
+15:56:17 <CindyLinz> 我想想看我能不能分出一個類似 re-run 的函數出來, 讓它不要做原本 run 會有的初始化和結束的部分, 只是讓它可以套在 IO 裡面..
+15:57:45 <CindyLinz> GHC api 都喜歡著重: 這邊是個 Monoid!, 這邊有個 Dual!, 這是個最小的 FixPoint!..... ww
+15:58:53 <godfat> 不知道該說啥
+15:58:54 <godfat> 有時候寫寫 ruby 會想說能用 haskell 多好啊
+15:58:54 <godfat> 可是實際上真的要用又一堆問題 orz
+16:00:37 <CindyLinz> godfat: 工程師! 快來吧~~~ (招手)
+16:01:03 <godfat> 這有點雞蛋問題呀... ~.~
+16:01:18 <godfat> 尤其一堆「工程師」都保守到不行...
+16:02:01 <CindyLinz> 昨天跟 wens 聊天, 講到 perl 的過去版本相容性非常好.. 甚至 doc 裡面還會寫: 這邊會有這樣這樣的行為, 它是一個 unfixable bug, 因為如果修掉了, 會使得很多 third-party lib 壞掉.
+16:02:32 <CindyLinz> 然後想到, Larry Wall 以前是 system admin. system admin 最需要相容性了.. XD
+16:02:52 <CindyLinz> 所以要工程師跳進來 Haskell, 才會讓它適合工程師用 :D
+16:03:20 <CindyLinz> 不能都是數學家這樣... ^^|
+16:05:17 <suhorng> http://www.reddit.com/r/haskell/comments/1br0ls/haskell_beats_c_using_generalised_stream_fusion/ 看看這個能不能吸引一點工程師好了 (炸)
+16:10:52 <CindyLinz> godfat: 來幫我打造 withCStringM 嘛~~ (扭)
+16:11:26 <CindyLinz> suhorng: 來幫我打造 withCStringM 嘛~~ (扭)
+16:11:34 <CindyLinz> 見者有份歐~~ (咦)
+16:15:41 <suhorng> 好難..XD
+16:17:43 <CindyLinz> ~_~
+16:20:40 <godfat> 所以說起來， sysadmin 用的語言應該要跟 app programmer 不一樣才對 XD
+16:20:41 <godfat> 後者可以用相容性低的東西...
+16:20:41 <godfat> XDDDD 最近太忙了，都沒空玩 haskell... ~.~
+16:21:21 <suhorng> exception真的有辦法解決嗎..?
+16:21:34 <CindyLinz> 解決?
+16:21:49 <CindyLinz> 給 godfat 一個 exception, 他就有空玩 haskell 了這樣?
+16:22:00 <godfat> XDDDD
+16:22:03 <suhorng> XDDD
+16:23:12 <CindyLinz> suhorng: 你問的是什麼啦 XD
+16:24:02 <suhorng> 我想想 ~"~
+16:26:27 <CindyLinz> 我剛剛遇到的情況, 嗯, 可以用純的 unXxxT 解決
+16:27:36 <CindyLinz> 假設我的 monad trans 是 newtype XxxT .... = XxxT { unXxxT :: xxState -> m (xxState, a) }
+16:29:22 <CindyLinz> 假設我想要跑的一個 act :: CString -> XxxT m a 那我就可以用 liftIO $ withCString str $ \cstr -> unXxxT cstr act xxState
+16:30:28 <CindyLinz> 因為我是寫這個 monad trans 的人, 所以我可以直接拿到 xxState
+16:31:06 <suhorng> 唔...實在想不到 exception 能怎麼配上 MonadIO
+16:31:09 <suhorng> 嗯嗯
+16:31:37 <CindyLinz> 這樣就算是有處理到 exception 啦 ^^   因為那個 withCString 就是會處理 exception 的
+16:31:52 <CindyLinz> 而 bracket 應該也可以一樣的包法
+16:32:25 <CindyLinz> 我這個方法, 不適用任意的 MonadIO.. 我得拿得到 internal state 才行 :Q
+16:32:28 <suhorng> 喔~
+16:32:47 <suhorng> 遇到奇怪的 MonadIO 的話也不行XD
+16:33:09 <CindyLinz> 嗯, 有可能是 monad trans 提供者才能做..
+16:36:53 <CindyLinz> 咦.. 寫錯了..
+16:37:09 <CindyLinz> 假設我想要跑的一個 act :: CString -> XxxT m a 那我就可以用 liftIO $ withCString str $ \cstr -> unXxxT (act cstr) xxState
+16:37:12 <CindyLinz> 這樣才對
+17:05:00 <CindyLinz> 突然覺得自己現在竟然能很順地寫出這種東西很不可思議.. # liftIO $ withCString str $ \cstr -> unXxxT (act cstr) xxState
+17:05:12 <CindyLinz> 以前讀別人的 code 寫這東西超崩潰的...ww
+17:06:42 <kanru> XDD
+18:02:30 <suhorng> 嗯... try :: Exception e => IO a -> IO (Either e a)  這類函式是不是真的沒辦法變成 MonadIO m => m a -> m (Either e a) ...？
+18:06:47 <suhorng> 好像真的無可避免
+18:10:12 <CindyLinz> 好像應該要舉一個反例出來證明變不出來...
+18:10:30 <suhorng> 我好像笨了
+18:10:35 <suhorng> 好像可以
+18:11:32 <suhorng> ..不對 不可以那樣做 XDDDD 可以弄出 type correct 但是沒有 try 效果的 Exception e => m a -> m (Either e a)
+18:12:30 <CindyLinz> tryM :: MonadIO m => m a -> m (Either e a)    tryM = tryM ? (誤)
+18:14:19 <suhorng> \ma -> do { a <- ma; liftIO (try (return a)) }，我剛剛竟然在想這個，真是太呆了
+18:15:52 <CindyLinz> 那個 try 就是這個 tryM 哄? XD
+18:16:05 <CindyLinz> 那的確就是 tryM = tryM... XD
+18:17:19 <suhorng> 不是吧Q_Q 這個是 tryM = liftM Right
+18:18:24 <CindyLinz> 喔喔.. 事情都在前面的 a <- ma 做完了 XD
+18:18:56 <CindyLinz> a <- ma 地方可以確認這個 ma 會 return
+23:22:56 <CindyLinz> 我想從 haskell pass 一個 list 給 C 函數跑迴圈.. 有沒有什麼辦法不要「複製」出東西的方法啊 @@"
+23:24:13 <CindyLinz> 只能一開始就選別的 container 像是 storable array 或 storable vector 嗎...
+23:32:54 <hashcat_> list 是有點複雜的結構  就算傳指標過去也不堪c直接用
+23:33:26 <CindyLinz> 只是好奇能不能 access ghc internal.. XD
+23:34:29 <hashcat_> 破壞haskell封裝
+23:38:49 <CindyLinz> 在 C 層次了誰管它什麼封裝啊.... ww
+23:39:14 <CindyLinz> 這邊是公海.. (咦)
+23:43:38 <hashcat_> 指標傳過去後我就沒輒
+23:44:00 <hashcat_> list沒有對應的ctype

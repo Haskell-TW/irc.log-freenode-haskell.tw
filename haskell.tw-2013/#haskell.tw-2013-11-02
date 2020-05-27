@@ -1,0 +1,259 @@
+00:00:09 <hashcat> 你怎會想到這能pattern matching
+00:00:49 <CindyLinz> 我就是還想不到能怎麼 pattern matching 所以才問啊 XD
+00:02:23 <hashcat> 你想要這麼作的話
+00:02:33 <suhorng> 嗯...我覺得不太算"直接判斷"
+00:02:34 <hashcat> 要另外宣告一個型別
+00:02:50 <suhorng> 不過沒有去研究他的演算法...
+00:03:03 <suhorng> 應該是真的會下去跑吧..?
+00:03:03 <hashcat> 保存in-set的命題
+00:03:56 <hashcat> 把in-set變成建構子
+00:04:28 <CindyLinz> 所以就是用一個 data type 來表示 in-set 的效果.. 有 in-set 的例子, 會對應這個 type 裡的一組 instance?
+00:04:43 <hashcat> 嗯嗯
+00:04:58 <hashcat> 可能你講的就是我的意思
+00:05:50 <CindyLinz> 好
+00:05:57 <hashcat> 型別即命題
+00:06:24 <suhorng> 那其實就不用 in-set ... XD
+00:06:33 <hashcat> 貌似每種程序語言都有句話能點破天機
+00:06:35 <CindyLinz> 剛剛寫起來覺得.. 寫成 data type 的表示法, 比計算 Bool 的方式難寫.. 是真的比較難寫, 還是我還沒想到寫起來類似 Bool 函數的寫法?
+00:06:49 <hashcat> 程序即資料是lisp
+00:07:04 <suhorng> CindyLinz: http://www.cse.chalmers.se/~ulfn/papers/afp08/tutorial.pdf
+00:07:33 <suhorng> 計算Bool..其實計算不就是一樣 in-set 算的?
+00:07:51 <hashcat> Bool不是一個有保存你所需資訊的型別
+00:08:29 <suhorng> CindyLinz: 2.5節的example
+00:08:50 <suhorng> 真的XD 這樣寫體會到 bool 不保存資訊那個論點
+00:09:26 <hashcat> 這種講法我是覺得怪怪啦
+00:09:39 <hashcat> 不過詞窮了
+00:09:39 <CindyLinz> 我也不知道, 不知道為什麼好像寫 return Bool 的函數, 就很順手 @_@"
+00:09:50 <suhorng> 那是個 proposition
+00:10:09 <hashcat> 對啦對啦換個講法
+00:10:18 <suhorng> 然後 bool 只是得到那個 proposition 被證為真還是被證偽 沒有保存proof
+00:10:20 <CindyLinz> 然後寫 data type 的時候有一種不太舒服的感覺...
+00:10:27 <hashcat> Bool的true,false不是命題
+00:10:34 <CindyLinz> 就是我不知道我有沒有漏列該有的 case @@"
+00:10:49 <CindyLinz> 寫 Bool 函數的時候, Agda 會提醒我有沒有考慮過所有的 case
+00:11:28 <hashcat> Idris :D
+00:11:47 <hashcat> 來看看idris最近怎樣
+00:13:36 <hashcat> 嗯沒怎樣
+00:14:12 <hashcat> 看到有沒考慮所有case就想到idris
+00:15:04 <CindyLinz> Agda 在寫函數的時候會考慮啊
+00:15:37 <CindyLinz> 還是我定完 data type 以後, 再對我想考慮的目標寫一個函數
+00:15:58 <CindyLinz> 讓它在符合我希望的前提的時候會 return 這個 type...
+00:16:13 <CindyLinz> 這樣好像又回到要怎麼 extract 這個前提的計算過程的問題 orz
+00:17:40 <hashcat> 貌似我又看不懂了
+00:17:45 <CindyLinz> XD
+00:18:00 <CindyLinz> 一邊在心中想一邊講的下場 XD
+00:18:04 <hashcat> 反正命題的真偽跟Bool不一樣
+00:18:11 <CindyLinz> 你看到的是我腦中的 IR.. XDD
+00:18:45 <hashcat> 最近比較關心 X10
+00:18:50 <hashcat> 要不看下
+00:19:08 <hashcat> X10語法比較噁心噗噗
+00:19:17 <CindyLinz> 我正在練習 Agda 啊..
+00:19:53 <hashcat> 也有比較噁心的dependent type
+00:21:27 <hashcat> 他後端有集群+gpu
+00:21:52 <hashcat> 物件導向+dependent type
+00:23:03 <hashcat> 扯遠..加油吧
+00:23:24 <CindyLinz> XD
+00:24:21 <suhorng> 就想到這個lol http://existentialtype.wordpress.com/2011/03/15/boolean-blindness/
+00:25:33 <CindyLinz> 那先來看一下 suhorng 大大提供的 tutorial 好了 ._.
+00:25:51 <CindyLinz> 咦 跟我看的是同一本 XD
+00:26:15 <suhorng> XD
+00:26:29 <CindyLinz> 喔他是說可以這樣做, 沒有說它是唯一解啊.. 這情境怎麼跟在定義 data type 的時候一樣. 囧
+00:26:34 <suhorng> 我也是再看這本 做了一點習題 可是到 lambda calculus type checker 就卡住了
+00:26:44 <suhorng> 對阿 習題還給了一些不同定義
+00:26:51 <suhorng> 聽說 Agda 最難的(之一)就是定 data type
+00:27:02 <CindyLinz> 我要怎麼知道我沒有少定啊 orz
+00:27:21 <CindyLinz> 不然我證明了一個命題.. 但是不知道這個命題是不是我要的 orz
+01:05:55 <CindyLinz> unify 不出來 :(
+02:55:40 <monochrom> dependent variable 譯作「因變量」(是不是?). 可不可以把 dependent type 譯作「因型別」?
+03:38:24 <CindyLinz> 相依變數, 相依型別?
+03:38:45 <CindyLinz> 線性獨立 <-> 線性相依
+03:39:28 <CindyLinz> 我覺得我需要 Agda 推演的演算法才寫得下去.. trial-error 不是我的 style... orz
+05:14:29 <monochrom> 呀, 「相依」比較好 :)
+05:21:03 <monochrom> "如果一定要給這個相依型別函數定下期限, 我會說是一萬萬年" :)
+08:19:37 <xcycl> 在 Agda 的命題的 type 是 Set
+08:19:49 <xcycl>  寫成 Bool 是 decidable
+08:25:33 <xcycl> 不管怎樣, 都沒辦法對 Set 做 pattern matching 的 ...
+09:10:22 <xcycl> 不過這樣說不大對
+09:10:35 <xcycl> in-set 可以寫成以下這樣：
+09:10:37 <xcycl> in-set : {n : ℕ } → ℕ → Vec ℕ (suc n) → Set
+09:10:37 <xcycl> in-set n (x ∷ []) = n ≡ x
+09:10:38 <xcycl> in-set n (x ∷ y ∷ xs) = n ≡ x ⊎ in-set n (y ∷ xs)
+09:12:01 <xcycl> 直覺上說 若 n 在 (x : xs) 裡頭的話，要嘛 n = x 要嘛 n 在 xs, 可是這對 singleton 不成立要另外看
+09:12:15 <xcycl> 所以寫成上面那樣
+09:12:45 <xcycl> 所以要用以上的證明的時候，通常也要分成兩個 cases 討論
+09:13:27 <xcycl> 我可以定義 pos，只要有 in-set n xs 的證明，就去算那個 n 在 xs 的哪裡
+09:13:35 <xcycl> pos : {m : ℕ} → (n : ℕ) → (xs : Vec ℕ (suc m)) → in-set n xs → ℕ
+09:13:36 <xcycl> pos .x (x ∷ []) refl = 0
+09:13:37 <xcycl> pos .x (x ∷ x₁ ∷ xs) (inj₁ refl) = 0
+09:13:37 <xcycl> pos n (x ∷ x₁ ∷ xs) (inj₂ y) = 1 + pos n (x₁ ∷ xs) y
+09:17:43 <xcycl> 這時候因為 Agda 可以 normalise 了，如果是 x :: [] 的話，in-set 的證明就是 x = n, 因為有 K rule (應該是?) 所以只有 refl 這個證明, 所以第三個 input 的 case 就都掃光了
+09:17:49 <xcycl> 剩下就差不多這樣 ...
+09:19:52 <xcycl> 至於把命題定成 data type 還是用現成的 sigma, pi type 去定, 就只是 externalism 跟 internalise 的差異，Josh 在做的東西就是這樣
+11:10:08 <CindyLinz> 對耶! in-set 的 return 可以直接就是個 Set!
+11:20:54 <CindyLinz> 覺得在哪個參數打 . 真是很巧妙 ._.
+13:39:06 <CindyLinz> 唔我不知道用 data 定出一個 type 和用 function return 一個 Set 有什麼不一樣 orz
+13:39:28 <CindyLinz> 用 function return 一個 Set 就不能 pattern matching 嗎?
+15:45:08 <CindyLinz> 我像在把 data Asc-Set : List -> Set where 的 instance 讀作: 對某一個 list 為遞增的證明...
+15:45:12 <CindyLinz> 我現在把 data Asc-Set : List -> Set where 的 instance 讀作: 對某一個 list 為遞增的證明...
+16:07:08 <CindyLinz> 咦.. Agda 沒有原生的 tuple 喔? QQ
+16:09:47 <hychen> !!
+19:29:19 <liang-ting> Josh 解釋 type function  跟 inductive families (跟 vector 一起寫在 data type 裡頭)：
+19:29:25 <liang-ting> 用 type functions 有侷限 XD
+19:29:25 <liang-ting> 如果 index 變動像 vector 那樣很規矩可以，一亂動就爆了 XD
+19:29:27 <liang-ting> 就算寫 coinductively generated type
+19:29:28 <liang-ting> 這時就沒辦法保證 inhabitant 的大小有窮 XD
+19:29:29 <liang-ting> inductive families 才有辦法在 index 隨著物件解構愈變愈大時還能保證物件有窮 XD
+19:29:30 <xcycl> 這是 index-first datatypes 和 (coinductive) type functions 的決定性差異 XD
+19:49:37 <xcycl> tuple 是 pi 或是 sigma 的特例
+19:52:04 <xcycl> btw, 請忽略掉  "跟 inductive families (跟 vector 一起寫在 data type 裡頭)" 這句後面的括號
+19:52:12 <xcycl> 我剛誤解了
+22:15:16 <CindyLinz> xcycl: 我的程度還無法理解這種解釋... QQ  我再補課一會子教材好了 ._. (coinductively generated type, inhabitant 大小有窮.. orz)
+22:15:45 <CindyLinz> 我找到一份 71 頁的 PDF, 貌似不錯... 標題是 An Agda proof of the correctness of
+22:15:45 <CindyLinz> Valiant’s algorithm for context free
+22:15:47 <CindyLinz> parsing
+22:16:24 <xcycl> 可以看以下這個例子
+22:16:25 <xcycl> data in-set' (n : ℕ) : {n : ℕ} → Vec ℕ (suc n) → Set where
+22:16:26 <xcycl>   in-head   : {m : ℕ} {xs : Vec ℕ m} → in-set' n (n ∷ xs)
+22:16:27 <xcycl>   somewhere : {x y m : ℕ} {xs : Vec ℕ m} →
+22:16:28 <xcycl>               in-set' n (x ∷ xs) → in-set' n (y ∷ x ∷ xs)
+22:18:04 <xcycl> 前面的做法沒辦法對 set 做 pattern matching, 是對 input 做 pattern matching
+22:20:39 <CindyLinz> data ... : ... where 這邊, type 放在 : 的左邊和右邊的差異是什麼啊? 書上寫說左邊是 parameter, 右邊是 index, 然後實際上知道有時候寫在右邊會 compile 不過, 放左邊就會過.. 但還是不知道實際上的差異是什麼 @@
+22:21:33 <xcycl> 放在左邊的話，可以想成同時定義了 List ℕ, List Bool, ...  對所有 type
+22:22:03 <CindyLinz> 對左邊的 type 參數 是「total」的?
+22:22:08 <CindyLinz> 右邊的可以 partial
+22:22:10 <CindyLinz> 這樣?
+22:22:18 <xcycl> 不是
+22:22:21 <xcycl> 右邊是 function
+22:22:49 <xcycl> Vec (A : Set) : ℕ -> Set
+22:24:09 <xcycl> 定義一個 ℕ ->  Set 的函數
+22:24:35 <xcycl> 召喚 josh 進來好了 xD
+22:24:54 <CindyLinz> 如果把 data _<=_ : Nat -> Nat -> Set where 寫成 data _<=_ (a b : Nat) -> Set where 會怎麼樣?
+22:25:57 <xcycl> constructor 的 return type 要跟定義的 type 一致喔
+22:26:36 <CindyLinz> constructor 的 return type 是只要跟 : 右邊一致, 還是左邊+右邊一致?
+22:26:49 <xcycl> 左邊
+22:27:04 <CindyLinz> 咦?
+22:27:08 <xcycl> 像是 Vec
+22:27:49 <xcycl> index 可以變動
+22:28:02 <xcycl> 但是元素的 index 要固定
+22:28:18 <CindyLinz> 你這個 index 指的是 Vec 的長度?
+22:28:39 <xcycl> 啊啊
+22:28:40 <CindyLinz> 元素指的是每一個 Vec 的實體, 而不是 Vec 實體裡面的元素?
+22:28:41 <xcycl> 講錯了
+22:28:57 <xcycl> 像是 Vec
+22:28:57 <xcycl> index 可以變動
+22:28:58 <xcycl> 但是元素的 type 要固定
+22:30:06 <CindyLinz> immutable 的 Vec 不是一寫下來就不會動了, 連 index 也固定了?
+22:30:48 <xcycl> _∷_ 的 type 是 A -> Vec A n -> Vec A (suc n) 啊
+22:30:54 <xcycl> index 可以變
+22:31:28 <CindyLinz> 在 constructor 裡面 refer 到這個 Vec 的時候, 後面都一定要跟同一個 A 的意思?
+22:31:43 <xcycl> 恩
+22:32:05 <xcycl> 最後的 return 要是同一個 A
+22:32:05 <CindyLinz> 不能寫 _::_ : {B : Set} -> A -> Vec B n -> Vec A (suc n) ?
+22:32:32 <CindyLinz> 喔喔 跟這無關
+22:34:17 <xcycl> 恩恩 無關，可是這沒辦法在 Agda 上寫
+22:34:32 <xcycl> 因為 Set 比較大
+22:34:52 <xcycl> Vec A (suc n) 在 Set 裏面
+22:35:01 <xcycl> 但是 Set 在 Set1
+22:35:43 <xcycl> 要換成 "data Vec' (A : Set) : ℕ → Set₁ where ..."
+22:37:45 <CindyLinz> 我想我可能還是先補教材好了 ._.
+22:40:17 <CindyLinz> 舊的怪物還沒處理好, 問一問不小心又引出新的怪物 XD
+22:40:27 <xcycl> 我記得 Ulf Norell 跟 James Chapman 寫的還不錯
+22:42:50 <CindyLinz> 那一本看了.. 記得他寫的是: 你可以這樣寫, 也可以這樣寫, 或是這樣寫就會更精簡歐~
+22:43:04 <xcycl> XD
+22:43:15 <CindyLinz> 可是我開始練習以後, Agda compiler 才開始跟我說, 你不可以這樣寫, 因為 Error....
+22:43:29 <hashcat> 我覺得問題出在沒搞清楚 Curry-Howard isomorphism
+22:50:13 <xcycl> 乾脆一點從 type theory 開始學, 不過應該專業的可以推薦學習書單 xD
+22:50:58 <CindyLinz> 真的有必要這麼乾脆嗎 XD
+22:50:59 <hashcat> 型別即命題, 型別的函數即命題的函數
+22:51:09 <hashcat> 命題的函數即謂詞
+22:51:29 <xcycl> P(x) predicate
+22:51:51 <hashcat> dependent type可以把數值當作謂詞的參數
+22:52:19 <xcycl> 學 type theory 跟學 mathematical logic 幾乎是一樣的東西
+22:52:23 <hashcat> 找個有講到curry-howard isomorphism的dependent type教程吧
+22:53:07 <hashcat> CindyLinz:不然你一直二百五的點都是一樣的概念
+22:53:58 <hashcat> xcycl: 其實同構就是一樣了, 保持不同的名詞是方便
+22:54:33 <hashcat> 也不能說是方便, 那些名詞有數學以外的意義
+22:54:44 <xcycl> 傳統的 mathematical logic 還有其他東西，像是 Stone duality 之類的
+22:56:28 <xcycl> 但 representation 對學 type theory 幫助不大 xD
+22:56:42 <CindyLinz> hashcat: 我以為我是知道那個觀念的, 而你講這些, 對我遇到的 Agda parse error 並沒有幫助
+22:56:54 <hashcat> 我type theory連看都沒看哈
+22:56:59 <CindyLinz> 我不知道這些觀念在 Agda 裡面要以怎樣的語法來表示
+22:57:05 <hashcat> 直接套數理邏輯
+22:57:51 <xcycl> 數理邏輯一般討論古典的東西，跟 Martin-Lof type theory 還是不大一樣
+22:58:37 <xcycl> 像是"選擇公設"在 Martin-Lof type theory 成立
+22:58:40 <hashcat> 我找找有沒同時搞定這幾種概念的教程
+22:58:54 <xcycl> （雖然說選擇公設的意義不大一樣了 ..）
+22:59:25 <hashcat> 挖太深會喚醒古老的惡魔(?)
+23:00:40 <hashcat> CindyLinz啥嚜剖析錯誤?
+23:01:54 <CindyLinz> 我有了 data Set-Eq : List -> List -> Set where                                                                                                                        
+23:02:03 <CindyLinz> data Asc-Set : List -> Set where                                                                                                                               
+23:02:15 <xcycl> (有問題可以在 PLT 上多問一下，Josh 說看到會回 xD)
+23:02:29 <CindyLinz> Set-Eq 是兩個 List 當集合看的時候為同一個 Set
+23:02:31 <CindyLinz> 好 XD
+23:02:50 <CindyLinz> Asc-Set (可能應該叫 Asc-List) 是指這個 List 為非降序列
+23:03:03 <CindyLinz> 然後我有 data _x_x_ (A B C : Set) : Set where                                                                                                                           
+23:03:10 <CindyLinz> 只是個 tuple
+23:03:49 <CindyLinz> 我想要寫一個這樣的東西
+23:03:49 <CindyLinz> qsort : (as : List) -> _x_x_ (bs : List) (Asc-Set bs) (Set-Eq as bs)                                                                                           
+23:05:04 <favonia> xcycl: 慫恿 josh 上 IRC 感覺比較快（逃
+23:05:09 <hashcat> 那個x該不會是字母吧
+23:05:17 <CindyLinz> 然後我不覺得 Curry-Howard correspondenc 和 Set 要分為 Set1 Set2 Set3 ... 有什麼相關..
+23:05:33 <CindyLinz> x 是字母啊
+23:05:54 <xcycl> 沒辦法寫 cartesian product , 因為後面的 Asc-Set 跟 Set-Eq 是 depend on bs 的
+23:06:19 <CindyLinz> 啊對 Agda 說: Parse
+23:06:19 <CindyLinz> error :<ERROR> List) (Asc-Set bs) (Set-Eq as...
+23:06:24 <xcycl> _x_x_ 的話代表三個 type 沒有依賴
+23:07:11 <xcycl> favonia: 他好像不大願意 xD
+23:08:52 <CindyLinz> 那這 parse error?
+23:09:33 <hashcat> 我只看到前半段
+23:09:58 <xcycl> 你換成 existential type (sigma type) 就知道了
+23:12:29 <CindyLinz> 可是 parse error 應該是語法上某個限制? 是 Agda 限制一個 type 的描述本身不可以有巢狀的描述?
+23:12:49 <CindyLinz> 一定要把 component 用到的, 先抽出來寫在左邊取名字, 然後再拿它的名字代進去?
+23:15:30 <xcycl> 看不大懂 xD
+23:17:06 <xcycl> (bs : List) (Asc-Set bs) (Set-Eq as bs) 的第二跟第三個 type 是 Asc-Set(bs), Set-Eq(as, bs)
+23:18:22 <CindyLinz> 噢, 括號是加在這邊?
+23:18:56 <xcycl> 如果你要描述 "有一個 list 滿足 A 條件"
+23:19:16 <CindyLinz> 嗯, 不能直接用 cartesian product 大概知道意思..
+23:19:37 <xcycl> 要寫成 Σ (List Nat) A
+23:19:53 <xcycl> A 的 type 是 List Nat -> Set
+23:20:03 <CindyLinz> 喔我 List 偷懶直接就寫死是 Nat 的 list XD
+23:20:16 <xcycl> 我也是偷懶，不過這個沒差啦
+23:22:03 <hashcat> CindyLinz:他的關係是數理邏輯上不能構造的命題, Type也不能構造
+23:22:08 <CindyLinz> 用這個 sigma 來要求要存在 fst 塞到 snd 函數的證明?
+23:22:43 <CindyLinz> 如果只用 cartesian 的話, 可以給一個 List, 和一個要代別的 List 才會存在的證明, 就沒有限制到了?
+23:23:17 <xcycl> cartesian product A x B 是 ΣA (\_ -> B)
+23:23:33 <xcycl> cartesian product A x B 是 ΣA (\_ -> B )
+23:25:31 <hashcat> Set才要分Set1, 2, 3啥的, 不然就有悖論
+23:26:22 <xcycl>  set theory 也有分 set, class 喔
+23:26:42 <hashcat> 貌似NBG集合論
+23:27:15 <hashcat> 若是你要命題的運算, 像是且或啥的, 也要按照對應同構來作
+23:28:22 <hashcat> http://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence#General_formulation
+23:29:10 <hashcat> 先用數理邏輯的概念去思考命題, 再用那張表轉換
+23:29:42 <CindyLinz> hashcat: 你解釋的時候啊, 如果用到像「對應」「同構」「相當於」這樣的描述方式, 要先確認聽的人對於你想類比的對象是熟悉的才行啊 @@"
+23:30:11 <hashcat> 有些集合論沒有class的概念, 我也是覺得有class比較快樂
+23:30:36 <xcycl> 如果只是 first-order 或是  second-order logic 的話, 對應的是 System T 或是 F 還用不到 dependent type theory
+23:32:09 <hashcat> 我的意思是先用謂詞邏輯的概念去規劃自己要的命題
+23:33:08 <hashcat> 再用那張表找出對應, 構造出來
+23:33:36 <hashcat> 遵循這種步驟, 應該就不會二百五了
+23:40:09 <hashcat> CindyLinz: 感覺你是混搖了不同領域的概念
+23:40:39 <hashcat> 在我看來是跟之前誤把Bool當命題真偽有點像
+23:45:04 <hashcat> CindyLinz: 我解釋的怎樣?
+23:45:57 <CindyLinz> hashcat: 你解釋了我不可能是對的, 但沒有說出我是哪裡錯... ._.
+23:48:29 <hashcat> _x_x_ 是一種謂詞, 不是對命題的運算
+23:50:02 <hashcat> 你每創造一種新的data的時候, 對應到邏輯中的命題或者謂詞
+23:50:54 <CindyLinz> 謂詞??
+23:51:27 <hashcat> 謂詞可以大略地當作產生命題的函數
+23:52:57 <hashcat> 思考怎樣可以一句解決中
+23:53:06 <CindyLinz> 欸, 還是不要一句解決吧 X
+23:53:07 <CindyLinz> XD
+23:53:24 <CindyLinz> 你終於想出一句了, 解決掉的是我.. XD
+23:53:31 <CindyLinz> 不是問題...
+23:54:39 <CindyLinz> 只是我真的覺得我洞很多, 我後來一直在想阻止你們努力解釋出來 orz
+23:55:14 <CindyLinz> 等我再讀一些東西以後再回頭來看你們已經講的解釋就好
+23:56:08 <hashcat> 反正你不能把明明是命題邏輯(型別)系統外面的東西,  加進來之後期待他會有命題邏輯的功能
+23:56:43 <suhorng> 謂詞英文是predicate
+23:56:51 <hashcat> 之前的 Bool 跟現在的 _x_x_ 都是命題系統外面的東西
+23:57:57 <hashcat> 兩次都是你把他們硬是加進來, 然後期待他有命題的功能
+23:58:11 <hashcat> 請看此表 http://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence#General_formulation
+23:58:30 <hashcat> 記得每定義一種data就是定義一種謂詞或者命題
+23:59:32 <hashcat> 請用命題邏輯的概念去規劃命題, 再用那表轉換成對應的型別

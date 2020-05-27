@@ -1,0 +1,75 @@
+09:34:54 <jhe__> 請問一下 有人在 Linux 上 寫 haskell 嘛＠＠？
+09:35:03 <jhe__> 我是初學者 :t elem
+09:35:17 <jhe__> 出現 elem :: (Eq a, Foldable t) => a -> t a -> Bool
+09:35:53 <jhe__> 跟書上的不太一樣
+09:42:44 <petercommand> 我出現 elem :: Eq a => a -> [a] -> Bool 耶
+09:43:29 <petercommand> 應該跟最近的 bridge proposal 有關
+09:45:47 <petercommand> :t elem
+09:45:48 <lambdabot> (Eq a, Foldable t) => a -> t a -> Bool
+09:47:46 <petercommand> jhe__: [] 有實作 foldable ，所以 (Eq a,Foldable t) => t a 是有包含 (Eq a) => [a] 的
+09:51:33 <jhe__> petercommand: 我是第一次看到 t a 這種＠＠
+09:52:31 <jhe__> 原本的顯示還挺直觀的
+09:52:42 <jhe__> 這樣我不太懂好處是什麼
+09:58:57 <petercommand> 這樣你可以拿除了 []  的資料結構來用
+09:59:52 <petercommand> 只要該型別有實做 Foldable 所定義的函數
+10:02:13 <petercommand> 算是比較通用
+10:04:46 <jhe__> 除了 [] 還有其他
+10:04:49 <jhe__> ？
+10:05:34 <jhe__> :i Foldable
+10:05:45 <petercommand> 對啊，譬如說二元樹
+10:05:50 <jhe__> 裡看到的 好像也都是 對 [] 處了的函數
+10:05:57 <jhe__> 處理*
+10:06:48 <petercommand> 什麼意思?
+10:07:21 <jhe__> 就像是 null , length, sum ...
+10:07:33 <jhe__> 這類的函數 完全是對 [] 的操作
+10:07:58 <jhe__> :t null
+10:07:59 <lambdabot> Foldable t => t a -> Bool
+10:08:46 <petercommand> jhe__: 這些是最近版本的 ghc 改的
+10:09:48 <petercommand> jhe__: 原本應該會在 Data.Foldable 下面
+10:10:02 <petercommand> https://wiki.haskell.org/Foldable_Traversable_In_Prelude
+10:11:20 <petercommand> ghc 7.10 後改的
+10:11:26 <petercommand> https://ghc.haskell.org/trac/ghc/wiki/Prelude710/FTP
+10:12:32 <petercommand> jhe__: 你可以試試看 import qualified Data.Foldable as F ，然後看 :t F.sum 之類的
+10:14:37 <jhe__> 所以廣義來說 它撇除了 只有 [] 的可能性
+10:15:08 <jhe__> 擴展程只要有在 Foldable 之列 它都可以使用那個函數就是了＠＠？
+10:15:16 <jhe__> 成*
+10:15:16 <petercommand> 對
+10:15:44 <jhe__> 發現總是要看好幾次 haskell 每次都有新感覺 ...
+12:51:14 <CindyLinz> jhe__: 我都在 Linux 寫 Haskell... ^^
+12:51:32 <CindyLinz> 不過我認識的裡面會寫 Haskell 的比較多是用 Mac..
+12:52:04 <CindyLinz> 偶爾就聽他們在麻煩什麼 ports 還是 homebrew 的問題, 我就更不想碰 Mac 了....ww
+14:23:26 <yen3> 我在 Mac 上用 haskell platform 其實倒也是過著很平靜的生活 XD。
+14:26:04 <yen3> 可能是因為我還在學習 XD。
+15:45:07 <__Z2suI31orI2ngE> jhe__: 那要不要 downgrade 回 7.8 XDD
+15:51:53 <CindyLinz> 不要吧... ^^|
+16:50:32 <cibs> CindyLinz: Mac 不錯啊我也是用 Mac
+16:50:53 <cibs> CindyLinz: 然後 remote 到 Linux 寫 Haskell..
+16:55:15 <CindyLinz> re.......||
+16:56:01 <CindyLinz> 想到小時候都用 Windows.. 開機以後第一件事就是用 putty 連主機, 可能是 remote 主機, 或是本機的 virtualbox linux......||
+17:34:02 <lancetw> PieTTY
+19:17:41 <jhe__> CindyLinz: Linux 讚！
+19:18:18 <jhe__> haskell 感覺要學久一點 我重複看好幾次了＠＠
+20:09:30 <CindyLinz> jhe__: 我覺得很值得鑽研, 就算不是使用 Haskell, 也還是有好處
+20:22:41 <lancetw> CindyLinz: brew install 很 nice 的，90% 的 google 工程師都在用，一定有什麼誤會
+20:23:58 <CindyLinz> lancetw: 90% 的 google 工程師有多少人拿 brew install haskell?
+20:25:00 <CindyLinz> 寫 haskell 的應該會 tree 反轉的比例就很高了, tutorial 都會大量扯到 tree... XD
+20:27:23 <lancetw> CindyLinz: 不過我記得我用 brew 裝 Haskell 有問題 wwww
+20:27:34 <lancetw> 後來用另外的方法ww
+20:28:23 <jhe__> CindyLinz: 是的, 我本身常寫 python 因為 想要 接觸不同的世界來學 haskell 發現自己越來越苗小了 XDD
+21:07:02 <__Z2suI3horI2ngE> 是說 Haskell 在沒有 -XDataKinds 之前, kind 是不是沒有 pair kind （像... (*,*) 之類）?
+21:26:22 <CindyLinz> __Z2suI3horI2ngE: (,) 這種 value 造型的東西, 的確原本是不能用在 type 的
+21:27:13 <CindyLinz> 還是說... Either 算是一個?
+21:28:39 <__Z2suI3horI2ngE> 不, Either 不算. 是說我是在想 kind
+21:28:57 <__Z2suI3horI2ngE> 嗯...所以無法理解 (*, *) 是什麼樣的概念="=
+21:29:20 <CindyLinz> Either :: * -> * -> * 所以不算?
+21:31:30 <__Z2suI3horI2ngE> 這個分在 function XD
+21:32:00 <__Z2suI3horI2ngE> 因為很怪, 還有 fst 跟 snd 是哪招... function 就比較正常, 是 application
+21:32:28 <__Z2suI3horI2ngE> 例如 data A f x = A (f x) 就可以看成 λf. λx. (f x)
+21:34:09 <__Z2suI3horI2ngE> CindyLinz: 阿, 應該說 (*, *) 並不是 *
+21:36:17 <CindyLinz> 想到.......
+21:36:50 <CindyLinz> 可以用 lambda calculus 的 pair 嗎? XD
+21:40:35 <__Z2suI3horI2ngE> 這個嗎XD λa. λb. λp. p a b          * -> * -> (* -> * -> *) -> *
+21:46:02 <CindyLinz> 對!
+21:49:27 <__Z2suI3horI2ngE> 剛剛想了一下, 這樣有兩個困難要克服, 一個是我們沒有 forall, 不能確保它真的是個 pair, 另一個是這沒有 kind polymorphism (像 pair 可以有 (* -> *, * -> * -> *) )
+23:46:20 <monochrom> jhe__: 我用 linux
+23:49:13 <monochrom> 如果跟著 https://github.com/bitemyapp/learnhaskell 來學, 可能較扎實, 不用學幾次

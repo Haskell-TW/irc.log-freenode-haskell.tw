@@ -1,0 +1,30 @@
+13:06:53 <c9s> 升級完 Ubuntu 16
+13:06:58 <c9s> 回來了 XD
+13:08:19 <c9s> CindyLinz: 所以 haskell stdlib 也有亂做的地方嗎 XDDD
+13:09:12 <c9s> monochrom: 了解.. 感謝!
+13:09:59 <c9s> mno2: strict 就是要化約到完，不過不 lazy 只是說不是什麼都不做，但也不等於完全化約到沒辦法化約 # XD
+13:10:26 <CindyLinz> c9s: 說亂做是要看基於是什麼規則判斷的
+13:10:52 <CindyLinz> c9s: 記得那幾個是為了教學容易而作的設計
+13:12:21 <c9s> 哦哦!!
+13:12:33 <c9s> 所以說 newtype 其實是 construct a value with a newtype
+13:12:51 <c9s> 而不是 construct a new type
+13:13:07 <c9s> ?
+13:13:18 <c9s> 結果講完自己也不確定自己懂不懂 XD
+13:13:32 <CindyLinz> 其實都有吧.. 新增一個 type, 與其對應的 value 們
+13:14:24 <c9s> 嗯嗯恩
+20:38:04 <suhorngM_> 是一個新的 type 但是有限制 例如要單一 field
+20:38:26 <suhorngM_> 結果雖然是單一的 type 但實作時可以 inline 變成其實(實作時)沒有一個新的 constructor
+20:39:10 <caasih> suhorngM_: 可是 pattern matching 的行為跟 data 做出來的 type 不一樣，而且 LYaH 只介紹了這個現象，沒有提到實作...
+21:03:53 <CindyLinz> caasih: pattern matching 應該是一樣.. 不一樣的是, 那一個 field 必須是 strict 的
+21:04:08 <CindyLinz> caasih: 你看到的例子應該是在那個欄位放了像 undefined 之類的東西吧?
+21:05:35 <caasih> CindyLinz: LYaH 上的例子就是以 undefined 為例，
+21:06:10 <caasih> 我記得 core 的 pattern matching 是 strict 的，所以可以理解為什麼一般的 pattern matching 是 strict
+21:06:33 <caasih> 但就不懂為什麼 newtype 的可以不是？莫非在 core 兩者長得完全不同？
+21:08:52 <caasih> CindyLinz: 順便問問，下次的 BYOHC 跟 FT 的時間，想把 TaPL 台北場的時間跟這些活動（還有 Rust, Clojure 小聚）錯開
+21:09:07 <CindyLinz> core 和 haskell 的差異只有在整個 pattern 就是一個變數的時候有差
+21:09:15 <CindyLinz> 6.29 啊
+21:09:25 <CindyLinz> 一個都是每月第一個週四
+21:09:31 <CindyLinz> 一個是第二和最後一個週四
+21:11:49 <caasih> 6.30? 6.29 是週三（艸
+21:15:08 <CindyLinz> 那就6.30
+21:16:00 <caasih> 瞭解，於是 FT 就是 7.7 ...

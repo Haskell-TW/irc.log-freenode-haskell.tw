@@ -1,0 +1,13 @@
+18:32:50 <CindyLinz> 想取一個 list 的 head, 如果這 list 是 [] 的時候取預設值 def
+18:32:53 <CindyLinz> 寫成這樣好嗎?
+18:33:08 <CindyLinz> head (list ++ [def])
+18:33:18 <CindyLinz> O(1)
+18:33:39 <CindyLinz> 如果用 maybeHead 寫成
+18:34:07 <CindyLinz> maybe def id $ maybeHead list 好冗?
+18:38:17 <cibs> 好像沒什麼不好
+18:38:33 <cibs> 如果只有取 head
+18:39:20 <CindyLinz> :D
+19:59:51 <xcycl> (飄)
+20:40:54 <CindyLinz> 大大只丟一個飄字是怎樣 XD
+22:19:37 <mno2> 雖然只取 head 結果上是沒錯，但覺得那樣的寫法意義不明
+22:49:24 <CindyLinz> let defaultHead :: a -> [a] -> a; defaultHead def list = head (list ++ [def]) 就明了 (?

@@ -1,0 +1,17 @@
+00:01:47 <suhorng> 看到了/o/
+00:01:52 <suhorng> 先下了 掰掰XD
+01:36:46 <mno2> 這段翻譯是我翻的，先出來面對 wwwww
+01:37:05 <letoh> 辛苦了XD
+01:37:22 <mno2> "並不是"的'不是"不知道就為什麼就掉字了 xD
+01:38:00 <letoh> 剛剛因為看不懂英文  自暴自棄開始改起標點了...
+01:41:52 <mno2> 感謝你幫忙改作文 xD
+01:42:58 <letoh> XD 本來只想改一下意思完全相反的地方
+01:44:49 <letoh> instance 的範例感覺像是在做 c++ 的 partial specialization
+01:51:07 <favonia> letoh: 有點像。 C++ 常用的 template 都可以用 typeclass 以更安全的方法做出來
+01:53:14 <letoh> 嗯嗯  c++ 應該只能靠 programmer 小心一點吧@_@
+02:05:05 <letoh> 看到 if expression 鐘擺了
+02:32:43 <letoh> 覺得應該還是辦得到  但可能會變噁心XD
+15:32:51 <suhorng> HW3 challenge的題目意思有點難理解..
+15:33:29 <suhorng> https://class.coursera.org/proglang-2012-001/forum/thread?thread_id=1820&post_id=8891 一些clarification
+22:46:11 <suhorng> 我放棄 HW3 challenge 了...差一分不知道錯在哪(還是我誤解了題意)
+22:47:02 <suhorng> 寫起來不難(不麻煩), 不過還是不太清楚 Constructor 的 pattern 那邊要求怎樣...

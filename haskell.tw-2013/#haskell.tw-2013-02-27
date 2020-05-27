@@ -1,0 +1,16 @@
+05:59:17 <favonia> @eval 1+1
+05:59:28 <favonia> @google lambdabot
+05:59:30 <lambdabot> http://www.haskell.org/haskellwiki/Lambdabot
+05:59:30 <lambdabot> Title: Lambdabot - HaskellWiki
+13:36:52 <mno2> hackage 上的數量 > 5000 了
+13:54:04 <favonia> mno2: 我們也趕快去灌水！（誤）
+13:54:49 <mno2> favonia: 像 yesod 那樣把 package 拆掉 xDD
+13:54:57 <favonia> pulse-types
+13:55:01 <favonia> pulse-ffi
+13:55:10 <favonia> pulse-core
+13:55:25 <favonia> pulse-monad
+13:55:45 <favonia> pulse-inspect-core-internal-ffi-prelink-0
+13:56:31 <mno2> 每次 yesod 更新, recent-update 都會被洗版
+13:56:49 <favonia> pulse-temporary-dynamic-loading-classy-snapshot
+13:56:54 <favonia> pulse-temporary-dynamic-loading-classy-snapshot-conduit
+13:57:56 <mno2> classy 太靠杯了 xDDD

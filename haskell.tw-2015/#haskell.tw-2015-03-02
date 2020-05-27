@@ -1,0 +1,6 @@
+00:24:10 <pkmx> 有der
+00:24:24 <monochrom> 支持成立 Prelude.Tutorial, Prelude.Production, Prelude.Edwardk, Prelude.MichaelSnoyman, 最後是 Prelude.Twitter
+00:27:49 <monochrom> Prelude.Twitter 包含所有 140 字符以內寫得出的東西, 作用是搪塞那些問 "為甚麼沒有只我想得出, 只我認為有用的函數" 的人之口 :)
+01:07:09 <au> > log $ (2 ^ 21) ^ 140
+01:07:11 <lambdabot>  Infinity
+12:03:31 <CindyLinz> XD

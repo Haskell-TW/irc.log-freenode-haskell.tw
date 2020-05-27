@@ -1,0 +1,6 @@
+23:56:01 <caasih> 看了一遍 Philip Wadler 的 the essence of functional programming ，
+23:56:57 <caasih> 由於之前按課本做過一次 interpreter ，對前面他介紹怎麼用 monads 來為 interpreter 增加功能很有感覺，
+23:57:20 <caasih> 但是後面講 monad 和 CPS 的關係就看不太懂了 XD[
+23:58:44 <caasih> 另外一個有趣的點是，那時還沒有 type class ，所以各種 monad 有對應的 unit 和 bind
+23:59:04 <caasih> 於是會有 unitM, bindM; unitE, bindE XD
+23:59:56 <caasih> 那時看來也沒有 do notation ，他建議的語法是 letM a <- m in k a

@@ -1,0 +1,14 @@
+12:34:48 <Yu-Lin>  不是只建立自解檔 是(自動找temp資料夾)解壓縮後自動執行什麼程式 -> 我之前就有用 7zip 做過這樣的事情
+12:35:03 <Yu-Lin> 現在想想，科技發展還真可怕
+12:39:17 <petercommand> 不就是executable file嗎= =
+12:39:31 <petercommand> 不就是executable file而已嗎= =
+14:22:56 <letoh> 那個解壓縮跟自動執行是同一件事啊
+14:23:25 <letoh> 反正就是在檔案前面塞一段程式把想做的事做完...
+14:37:48 <MnO2> http://www.youtube.com/watch?v=1PhArSujR_A&t=2m5s
+14:38:16 <MnO2> John Carmack's keynote at Quakecon  --> 有講到他對 functional PL 的一些看法
+14:38:50 <MnO2> (John Carmack 是德軍總部的 author)
+23:05:05 <Yu-Lin> 目前無法撥放該影片Orz||
+23:53:30 <hashcat> 發現原來ghci能強制停用解釋器只用object
+23:54:11 <hashcat> ghci -fobject-code -fllvm -O3
+23:54:29 <hashcat> 這樣在裡面load任何原始碼都一定會被編譯
+23:57:00 <favonia> hashcat: 感覺 ghc 好辛苦。不要再虐待他了（咦）

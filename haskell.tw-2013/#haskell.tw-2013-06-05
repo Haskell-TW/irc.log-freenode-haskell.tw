@@ -1,0 +1,7 @@
+21:30:32 <Yu-Lin> 太久沒用 haskell
+21:30:58 <Yu-Lin> 現在才發現 ghc 7.6.2 沒有 foldl' 了
+23:46:40 <JuanitoFatas> Learn You a Haskell for Great Good! 纸质版: 征集试读 & Wait for your pull request http://book.douban.com/review/6003123/
+23:48:12 <letoh> 唔  前陣子在看前八章的部份，小問題還不少XD
+23:51:30 <JuanitoFatas> 哈趕緊在 6/17 前告訴 fleuria
+23:53:27 <letoh> 我目前的修正是都會放上 github 上，pull request 還沒送出去就是
+23:59:29 <JuanitoFatas> :+1:

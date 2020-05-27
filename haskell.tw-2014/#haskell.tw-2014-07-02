@@ -1,0 +1,309 @@
+00:00:08 <DreamLinuxer> empty set -> any set 是{{}}
+00:01:14 <lcamel> A x B = { (a, b) | a in A, b in B }   是 { {} } 而不是 { } ?
+00:01:35 <monochrom> (\x -> x) :: ⊥ -> ⊥
+00:02:15 <CindyLinz> ⊥ -> ⊥  不是 ⊥  x ⊥  啊
+00:02:26 <monochrom> "如果 ⊥, 就得到 ⊥" 證明 ⊥ -> ⊥
+00:03:00 <DreamLinuxer> A -> B其實是set of functions
+00:03:13 <DreamLinuxer> 所以是{{}}
+00:03:52 <DreamLinuxer> empty set -> any set就是一個只有0個mapping的function
+00:04:35 <CindyLinz> DreamLinuxer: 你就順手寫了一個爆炸引理? XD
+00:05:02 <DreamLinuxer> empty set是Set category的initial啊
+00:05:08 <lcamel> 如果拿 set 來想, 那 0.  A -> B 應該是 subset of  A x B 吧... ? 如果 1.  A x B 是 {} , 那 2. subset of {} 應該也只能是 {} , 所以 3. A -> B 也只能是 {}   哪步不正確...
+00:05:56 <DreamLinuxer> f is in A -> B 是f is a subset of AxB
+00:06:15 <monochrom> 深夜邏輯冤驚魂 :)
+00:06:45 <CindyLinz> lcamel: 有種... 0/0 的感覺?
+00:07:37 <yllan> 什麼是 set category 的 initial？
+00:07:54 <yllan> 應該先問什麼是 set category? XD
+00:08:12 <lcamel> CindyLinz: 你是說... empty x emtpy 反而是唯一 x 出來不是 empty 的這樣... ?
+00:08:13 <DreamLinuxer> 因為empty set -> any set都是存在且唯一
+00:08:30 <lcamel> DreamLinuxer: by definition ?
+00:08:34 <CindyLinz> yllan: 可以直接套用這句來回答, 而不用管每一個專有名辭在講什麼.. (逃) # 00:05 < DreamLinuxer> empty set是Set category的initial啊
+00:09:22 <CindyLinz> lcamel: 我在捉摸 A -> B 應該是 subset of  A x B 吧 這句 XD
+00:10:34 <au> error :: String -> ⊥   -- 也可以這樣看
+00:10:53 <lcamel> CindyLinz: 這句是用 set theory 和 type theory 完全無關的講法來講
+00:11:12 <CindyLinz> lcamel: 我在想這句是不是對的 & 什麼時候會有例外
+00:11:40 <xcycl> >如果拿 set 來想, 那 0.  A -> B 應該是 subset of  A x B 吧... ? 如果 1.  A x B 是 {} , 那 2. subset of {} 應該也只能是 {} , 所以 3. A -> B 也只能是 {}   哪步不正確...
+00:11:58 <xcycl> Ａ x B 的 subset 是 {}, 跟 { {} }
+00:12:27 <lcamel> CindyLinz: "A function f from X to Y is a subset of the Cartesian product X × Y ..."   http://en.wikipedia.org/wiki/Function_(mathematics)
+00:12:58 <xcycl> 那個是 set theory 下的 function.
+00:13:20 <lcamel> xcycl: 那.. 這邊不一樣?
+00:13:26 <CindyLinz> lcamel: 只是今天 josh ko 還講到什麼 set of sets 這種超越 set 的鬼東西, 害我什麼都要重想一下 XD
+00:13:57 <lcamel> CindyLinz: 或許明天(今天) 就把 set of sets 拋棄了
+00:14:13 <CindyLinz> lcamel: Agda 裡面有 N 重 set of sets.. o.o
+00:14:46 <lcamel> CindyLinz: 是 Russell 那種一層層上去的?
+00:14:55 <xcycl> 在 set theory 底下所有的東西都要編成 set, order pair (a, b) 是 {{a}, {a, b}}
+00:14:58 <CindyLinz> 丟了一層還有一層.. OAO
+00:15:18 <xcycl> 但在其他的數學基礎，像是 type theory 就沒有這種需求
+00:15:34 <DreamLinuxer> 那怎麼處理universal set的問題?
+00:15:49 <xcycl> 明天會講 ..
+00:16:27 <CindyLinz> 「因為明天要講的很複雜」..ww
+00:16:35 <lcamel> xcycl: 所以, 在這邊, 不用管 subset of AxB, 直接有 {} -> {} = {{}} 這樣嗎... ?
+00:17:33 <lcamel> 既然東西被放在明天講必定是複雜的 還不如通通塞在今天一天講完吧 (?)
+00:17:37 <xcycl> well, 兩個問題
+00:17:47 <DreamLinuxer> A->B應該就是一個set of subset of AxB不是嗎@@
+00:18:19 <xcycl> 1. ⊥ -> ⊥ 在 type theory 底下就是 \ x . x
+00:18:26 <lcamel> DreamLinuxer: 我了解你的意思了
+00:19:53 <xcycl> 2 集合論下 A->B 是 { R \subseteq A \times B : R 是 functional }, 就算 A, B, A x B 是空集合
+00:20:40 <xcycl> 但是 空集合 有一個 子集合, 就是空集合啊
+00:20:56 <CindyLinz> 這個是為了編碼順序用的? # order pair (a, b) 是 {{a}, {a, b}}
+00:21:03 <xcycl> yep
+00:21:12 <CindyLinz> mmm
+00:21:27 <xcycl> 集合論下的自然數編碼很噁心
+00:21:38 <xcycl> 1 是 { 0 }
+00:21:46 <xcycl> 依此類推
+00:21:48 <xcycl> 2 是 {0, 1}
+00:21:51 <xcycl> 0 是空集合
+00:21:55 <CindyLinz> 只列 1 這樣推不下去.. XD
+00:22:05 <yllan> 我以前有想過為什麼不用 {{{0}}} ?
+00:22:15 <CindyLinz> 我以為是 {} {{}} {{{}}} ....
+00:22:28 <yllan> CindyLinz: 握手
+00:22:35 <CindyLinz> yllan: ^^
+00:23:26 <xcycl> 好像可以? 只是性質不好用
+00:23:35 <CindyLinz> 如果只看最前面兩項, 還符合耶.. 怎知道繼續類推到 2 的時候就分開了 XD
+00:24:01 <xcycl> 就是 n + 1 = {0, ..., n}
+00:24:50 <xcycl> 集合操作會問基數，有限的情況就是集合內的元素個數
+00:25:10 <au> yllan: https://research.microsoft.com/en-us/um/people/simonpj/papers/not-not-ml/ # ...論文亂入，其中 ﹁A 在直構邏輯裡操作定義成 A 的續繼 (也就是接受 A 為參數，之後程式就結束了，不再回傳)，而惰性求值的 thunk A 相當於 ﹁﹁A
+00:26:03 <xcycl> 用 { {} }, {{{}}} 來通通都變一個而已..
+00:26:31 <CindyLinz> 是因為.. 集合論有 builtin 的 size 函數可用嗎?
+00:26:58 <xcycl> 沒... 沒有
+00:27:02 <CindyLinz> QQ
+00:27:12 <yllan> 嗯嗯，原來如此……不對啊！我根本不知道 thunk 是啥 XD;;
+00:27:32 <xcycl> type theory 好用多了, 麻煩請忘記 set theory ..........QQ
+00:27:54 <xcycl> ... XD
+00:27:57 <lcamel> DreamLinuxer: xcycl: 我符號用錯了 感謝.
+00:28:13 <DreamLinuxer> 那category theory要怎麼處理?
+00:28:16 <lcamel> 若 f : ⊥ -> ⊥,  by definition(of set theory), f is a subset of ⊥ x ⊥ = {}, 只能是 {} 這個 subset (mapping)
+00:28:29 <evast> 要好好睡覺明天才會有精神聽課呀 XD
+00:28:32 <xcycl> category theory 的 internal language 是 type theory.... XD
+00:29:14 <xcycl> 今天唐鳳列出一排書中左邊數來第三本書在講這個 xD
+00:29:44 <xcycl> lcamel: yes.
+00:33:00 <monochrom> 問: {} : {} -> B 真還是假? 答: 看3個條件.
+00:33:35 <caasih_> 曠了課，現在才有點看懂怎麼推出 \f b a -> f a b
+00:33:51 <monochrom> 1. {} ⊆ {}×B 真假? 真.
+00:35:22 <monochrom> 2. for all x∈{}, exists y∈B, (x,y) ∈ {} 真假? 真, 因為 "for all x∈{}, 隨便說甚麼" 都真
+00:36:29 <monochrom> 3. for all x∈{}, for all y1,y2∈B, if (x,y1)∈{} and (x,y2)∈{}, then y1=y2 真假? 真, 同理.
+00:39:09 <CindyLinz> 該睡覺了? 真 ><
+00:39:18 <monochrom> 哈哈
+00:39:29 <CindyLinz> Flolac 真不適合我的時區啊 ><
+00:39:35 <evast> 所謂 (for all x∈{}, P x) : true 不就是 explosion rule 嗎 ><
+00:39:46 <evast> 晚安
+00:40:18 <monochrom> 我看是 implosion, 因為 vacuously true. vacuum. suction. implosion.
+01:07:55 <au> (thunk 就是 take 1 [1..] 裡 [2..] 的部分，因為沒人要用所以沒有算出來)
+11:10:43 <evst> scm 的聲音越來越像邪教教主了wwww 甜蜜柔和 wwwwwww
+11:11:10 <evst> 「我們發現這一行應該是不可能 run 到的…… hmmm……]
+11:11:14 <evst> XD
+11:13:33 <CindyLinz> wwww
+11:29:17 <caasih_> 場中傳來「我的 \ 打出來是 ¥ 耶」
+11:30:02 <CindyLinz> 日文字型吧
+11:55:05 <au> 據說 λ  倒著寫成 ¥ 的字形使用者，比較不會受到無上嵐達神教的影響~
+11:57:51 <cibs> 這什麼都市傳說w
+12:01:22 <CindyLinz> 咦 突然想到昨天沒有講 Haskell 腦 XD
+12:02:11 <CindyLinz> Josh Ko 果然是大魔王.. 就算是 scm 上的課也會被染指啊啊~~
+12:41:19 <caasih_> emacs 中 C-, 跟 C-. 打不出來有解嗎？
+13:04:41 <caasih_> 只好看 jaiyalas .emacs 了 D:
+13:10:45 <cataska> FLOLAC 推坑 emacs ?
+13:16:20 <c9sloud> 話說我 types and programming language 到現在還沒看 XD
+13:17:34 <caasih_> cataska: agda 得跟 emacs 一起用
+13:17:49 <CindyLinz> 是 agda mode
+13:17:55 <CindyLinz> agda 可以獨立使用
+13:18:12 <CindyLinz> 我之前就是直接用 vim 寫 *.agda 程式, 然後用 agda compile
+13:22:14 <caasih_> CindyLinz: unicode 字怎麼辦？
+13:22:24 <CindyLinz> caasih_: 我都用 ascii
+13:22:35 <caasih_> \ascii/
+13:22:49 <CindyLinz> caasih_: uncode 字的問題主要是字型啦.. 不然 vim script 很好加
+13:23:08 <CindyLinz> caasih_: 可是字型除了要顯示得出來以外, 還有字寬要處理, 不然排版就爛了
+13:24:19 <caasih_> 用 vi 是不是也沒有方便的填洞功能？
+13:24:55 <CindyLinz> caasih_: 有疑似壞掉的 agda-vim.. 
+13:25:26 <CindyLinz> caasih_: 如果研究出來怎麼用可以教我.. QQ # https://github.com/derekelkins/agda-vim
+13:25:39 <caasih_> 回家再查好了，剛查到要改一堆東西 0rz
+13:25:51 <CindyLinz> caasih_: 這是個 open issue.... orz # https://github.com/derekelkins/agda-vim/issues/1
+13:26:00 <CindyLinz> "Any chance of some documentation?"
+13:26:03 <caasih_> CindyLinz: 感謝連結
+13:33:55 <CindyLinz> 耶~ 成功使用反向順序的 or 用在 find1st 了 (呼~~)
+13:34:17 <CindyLinz> 就是  _ or true = true ; a or false = a 的 or
+13:37:09 <CindyLinz> 覺得 Josh 的邪教屬性也點得很高.. :p  不過和 scm 是不同 type 的.. >///<
+13:37:52 <jaiyalas> Josh 可是大護法呢
+13:47:49 <CindyLinz> 覺得是支派了.. :p
+14:35:32 <jaiyalas> 其實是蘋果派(?)
+14:36:44 <CindyLinz> 他講到「排中律就偷偷進來了」的時候, 還會把手舉高, 指頭向前微微顫抖...
+14:43:00 <CindyLinz> jaiyalas: 然後他介紹東西的時候手勢跟這邊耶穌一樣! # http://pic2.nipic.com/20090401/111259_213041011_2.jpg
+14:45:11 <jaiyalas> 這是在暗示 josh 應該自己成立一個新的邪教嗎? = =+
+14:46:01 <CindyLinz> 快了快了, 他傳教比 scm 還積極啊~ (or 是 scm 手法太高了.. XD)
+14:47:01 <jaiyalas> 當然是後者, 教主不是被叫假的 XD
+14:47:13 <CindyLinz> hmmmmm...
+15:13:44 <caasih_> 「我一次做三步（Introduction）」「實際上不可以這樣寫啦」 XDDD
+15:14:37 <CindyLinz> 「好像省略太多步」
+15:15:24 <jaiyalas> Josh 進入自己的世界了 XD
+15:17:47 <CindyLinz> XD
+15:34:47 <evst> \nick evast
+15:34:53 <evst> 打錯了 XD
+15:35:50 <evast> 剛剛看到一個旁聽的學生離開了……
+15:36:36 <CindyLinz> evast: 前年見到的那個伯伯今天有來.. 現在還在 :D
+15:37:08 <jaiyalas> 已經陸續有人消失啦
+15:39:04 <CindyLinz> 現在講的講法真是有點玄, 參了不少形而上的字眼 XD
+15:39:30 <CindyLinz> 和諧的關係, 好系統, 有意義的事情, 引進與抓出來必須達成一個和諧
+15:39:49 <CindyLinz> 更深的體悟
+15:40:13 <evast> wwwwww
+15:40:13 <jaiyalas> 之後就會開始賣向上牌心靈測量機了(誤)
+15:40:23 <CindyLinz> 更明確的完全..
+15:40:28 <whitglint> 看了以上的討論覺得根本是靈修課程?
+15:40:43 <evast> slideshare category <- Spiritual
+15:40:43 <jaiyalas> 是呀！
+15:40:59 <evast> 新世代的觀點
+15:40:59 <CindyLinz> 他只是在講 fst (a, b) = a 啊啊啊 OAO
+15:41:38 <jaiyalas> 1+1=2 都可以有三百頁了, 講 fst (a, b) = a 時順便傳傳教也只是剛好而已= =+
+15:41:44 <CindyLinz> orz
+15:42:42 <evast> 順道問一下，所以現在 \in 用於等號， colon 用於屬於？
+15:43:05 <CindyLinz> : 後面放 type?
+15:43:09 <evast> 我看到了 XD
+15:43:43 <evast> 之前 Martin Löf Type Theory 把兩個都視為 type 的一部分 XD
+15:43:52 <evast> syntax 分開寫真好看 <3
+15:44:27 <CindyLinz> o.o
+15:46:31 <evast> agda 之所以會偷偷幫忙看 IsTrue (p x v somewhere xs) 是因為 agda 上面有 Set, Set_1, … 所以 agda 中可以對 type 做計算嗎？
+15:48:04 <CindyLinz> evast: 有 type inference 的 language 都能對 type 作計算的, 只是 agda 能用在 type 的表達式比較豐富
+15:48:20 <CindyLinz> evast: 別的語言有的貧乏到我們可能不太想承認它是計算 XD
+15:49:17 <CindyLinz> 嗯, 應該有 type 的語言都有去算吧, 只是現在對「type inference」這個辭好像限制在變數的 type 需不需要手動指定
+15:49:34 <CindyLinz> 其實在 C 裡面任意 expression 的 type 還是一直都有自動算的..
+15:51:21 <CindyLinz> 我應該專心一點....
+15:51:37 <CindyLinz> (專心收集心法語錄..)
+15:51:59 <CindyLinz> 一眼還看不出來, 但終究看得出來, 只要你願意...
+15:53:54 <evast> CindyLinz: xDDDD
+15:54:36 <jaiyalas> 科教授語錄
+15:56:23 <CindyLinz> 我們暫時假設宇宙是無限的
+15:56:29 <evast> 宇宙論
+15:56:35 <evast> 有窮時間內舉出一個東西……
+15:56:54 <CindyLinz> 因為人是會死的...
+15:57:34 <evast> 你要做的就是把這條規則加入你的系統裡面……
+15:57:54 <evast> 那你就可以證明所有的……
+15:58:28 <CindyLinz> 但是你的權威性(canonicity)就爆了
+16:04:12 <evast> XDDDD
+16:04:30 <evast> 今年有關直構邏輯跟古典邏輯的辯論好不優哦
+16:06:10 <CindyLinz> evast 挑戰新柯(?)教主
+16:07:00 <CindyLinz> Josh: 你竟然沒有再追問oo, 那你不要再問了!
+16:07:10 <evast> XDDDDDD
+16:07:31 <evast> 聽到「比較強的敘述」這種模糊的語句就很想挑戰一下
+16:07:34 <jaiyalas> 看來 evast 下課要去踢館了 XD
+16:07:50 <evast> 今晚要趕回中壢吃蝦子，太可惜了
+16:07:56 <evast> 留待明天再戰
+16:09:40 <evast> 來了來了 Set 1
+16:10:11 <CindyLinz> 開始講 N重天了!
+16:10:56 <evast> 上層之上還有更上層
+16:11:00 <evast> 不可質疑妳的上層
+16:11:17 <evast> 下層的語句無法描述上層
+16:11:27 <CindyLinz> 但可以加入上層.. XD (但 agda 不支援)
+16:11:48 <jaiyalas> evast: 越來越像在組織管理(?)
+16:11:50 <evast> 但 agda 不支援 XDDDDDDDDDDDD
+16:12:09 <jaiyalas> 所以 agda 是嚴格的階級社會..
+16:12:46 <CindyLinz> 「你都要感謝, 這一連串的 universes」
+16:13:06 <evast> CindyLinz 每次抓的關鍵字都很棒 (y)
+16:13:27 <CindyLinz> XD
+16:13:49 <CindyLinz> 「解除你的焦慮」
+16:13:49 <jaiyalas> 應該只會更焦慮吧 XD
+16:13:53 <evast> 希望這些可以解除妳的焦慮
+16:14:02 <evast> 「解除焦慮」XDDDDD
+16:15:47 <LCamel_> 現在放棄 就不會焦慮了 (?)
+16:16:07 <caasih_> Sets all the way down XDD
+16:16:17 <jaiyalas> 一定會是超複雜 XD
+16:42:00 <CindyLinz> 徵得 Josh Ko 同意, 貼到 FB.. XD
+16:58:33 <CindyLinz> @src catch
+16:58:33 <lambdabot> catch m k = catchException m handler where handler (IOException err) = k err
+18:25:50 <cibs> @info catch
+18:25:50 <lambdabot> catch
+18:25:56 <cibs> @@ catch
+18:25:56 <lambdabot>  catch
+18:26:06 <cibs> @@catch
+21:46:19 <c9sloud> http://packages.qa.debian.org/libr/libr3/news/20140702T130008Z.html 上 debian unstable 了
+21:46:44 <CindyLinz> 真衝.. :D
+22:42:06 <whitglint> 按個讚! (Y)
+22:54:52 <yllan> agda 的 C-c C-a 太邪惡了！
+22:55:35 <letoh> 那個 fp 的作業  是第一天就要做完五大題交出去啊?
+22:56:33 <yllan> letoh: 好像沒有要全交？另外旁聽可以交作業嗎？ XD 總覺得老師會忙死
+22:56:53 <letoh> 那沒旁聽可以交嗎? (累死老師XD
+22:57:44 <letoh> 昨天寫完前三題  剛剛寫了第四題  還剩一題
+23:01:33 <DreamLinuxer> 我是第一天把五大題做完寄給老師  老師有看完給comment
+23:01:33 <CindyLinz> yllan: (Y)
+23:02:10 <CindyLinz> letoh: 只要寫第三題的四個小題, 題號忘了.. 反正就是比較簡單的四小題 XD
+23:02:41 <yllan> CindyLinz: 好多題都是完全沒思考，習慣性先按 C-c C-a 結果就出來了
+23:02:46 <DreamLinuxer> 不是五題都要寫嗎@@
+23:03:00 <CindyLinz> yllan: 以往老師都說旁聽的也可以教, 他會盡量改.. 不過今年我不知道他會不會盡量了還是改不完 ^^|
+23:03:01 <letoh> 喔喔  昨天寫一半網路斷掉  害我連不上有裝 haskell 的電腦XD
+23:03:16 <CindyLinz> yllan: 壞習慣!
+23:03:55 <CindyLinz> yllan: 千萬別這麼做, 做了也千萬不要講出來, 以免他們以為寫 Agda 的人都不用腦.. (逃)
+23:06:17 <DreamLinuxer> c-c c-a就直接跑答案出來了耶@@
+23:06:54 <DreamLinuxer> 這麼好用老師怎麼沒講
+23:06:54 <CindyLinz> yllan: 欸其實我好像聽 Josh / jaiyalas 他們作研究時遇到要寫 Agda 的時候都是盡量用 c-c c-a, 沒出來才想.. XD
+23:07:17 <CindyLinz> DreamLinuxer: cheat sheet 上面有 XD
+23:07:21 <yllan> DreamLinuxer: 我也是聽 CindyLinz 講才知道
+23:08:02 <CindyLinz> 我只是說有, 沒有說要用啊... (左看右看)
+23:09:23 <CindyLinz> 嗯, 這個就是說 Agda 會自己寫程式的部分 ._.
+23:31:10 <superbil> 剛剛助教有偷偷教耶，我有聽到!
+23:32:46 <CindyLinz> 哦 XD
+23:33:00 <letoh> superbil: 你有報名?
+23:34:42 <superbil> letoh: 有阿 我有在聽課
+23:35:14 <letoh> 請假去聽課? 真熱血!
+23:38:27 <monochrom> 究竟是甚麼課程講座, 又和諧又完全的?
+23:38:31 <superbil> letoh: 最近在自我學習阿，打工什麼的目前沒有 XD
+23:38:34 <hashcat> 聽什麼課
+23:39:02 <b4283> FLOLAC 2014
+23:39:04 <letoh> superbil: 原來如此
+23:39:25 <b4283> monochrom, hashcat: http://flolac.iis.sinica.edu.tw/flolac14/doku.php?id=zh-tw:start
+23:39:33 <hashcat> 程序員無腦化
+23:41:13 <whitglint> 不是爆腦?
+23:41:17 <hashcat> 邏輯有沒有prolog
+23:42:01 <CindyLinz> monochrom: 我那些是故意斷章取義啦 XD
+23:42:02 <hashcat> 掛邏輯賣證明器
+23:42:27 <monochrom> "依值型別"譯得好. "dependent type"字面沒說 depend on 甚麼, 其實是 depend on value. "依值"就字面上也講明了.
+23:43:18 <hashcat> 依賴型別就是讓程序員依賴編譯器
+23:43:31 <monochrom> 不過聽眾不斷消失, 可猜想真的有問題
+23:43:52 <hashcat> 就是沒有教學prolog啦
+23:45:06 <monochrom> prolog 的邏輯太淺 XD
+23:45:53 <banacorn> 依 C-c C-a 編程 <3
+23:46:26 <hashcat> 不如prolog
+23:46:53 <hashcat> 不會綁在emacs
+23:47:08 <monochrom> 建議大家學 denotational semantics. (以後我就不用解釋了!)
+23:48:11 <CindyLinz> 這一次有排耶~
+23:48:12 <evast> FLOLAC 會教 denotational semantics u87
+23:48:16 <monochrom> 不過我相信講者還是會講得太深太快
+23:48:51 <CindyLinz> 嗯 就是偶爾出現的 xcycl
+23:49:07 <banacorn> 呼喚 xcycl
+23:49:10 <evast> 其實不是 XD
+23:49:25 <evast> denotational semantics 的講者是 莊廷瑞 老師～
+23:49:39 <CindyLinz> 咦?
+23:49:49 <DreamLinuxer> 今天投影片第三頁的那個exercise的程式是什麼啊?
+23:50:53 <evast> 亮廷要上 operational semantics + DeS 和 OpS 的等價
+23:51:18 <CindyLinz> OAO
+23:51:18 <evast> 大家今天狀況都還好嗎？
+23:51:25 <banacorn> 什麼跟什麼 A_A
+23:51:41 <CindyLinz> DreamLinuxer: 上午的?
+23:51:51 <DreamLinuxer> 下午
+23:52:01 <evast> 有沒有感冒、頭痛、流鼻水…之類的症狀？
+23:52:09 <banacorn> dependent sum 那題嘛?
+23:52:16 <DreamLinuxer> yes
+23:52:18 <evast> 或是覺得渾身輕飄飄、頭暈、想吐…？
+23:52:19 <yllan> 我講義不見了 QQ
+23:52:27 <caasih_> 已經有人被傳染了嗎？
+23:52:41 <banacorn> evast: QQ
+23:52:57 <DreamLinuxer> 感冒?
+23:53:04 <evast> 對呀
+23:53:21 <evast> 希望沒有人被傳染
+23:53:34 <CindyLinz> 彷彿能找到過去一直在尋找的東西, 對世界萬物就有了全新的看法 (逃)
+23:53:59 <CindyLinz> DreamLinuxer: 問.. 直觀意義嗎?
+23:54:15 <DreamLinuxer> 我要問那個proof的程式
+23:54:31 <banacorn> λf.((fst (fst f)), ((snd (fst f)), (snd f)))
+23:54:36 <monochrom> evast: DeS 和 OpS 指甚麼?
+23:54:41 <banacorn> term 嘛？
+23:54:50 <banacorn> 嗯嗯程式
+23:54:51 <CindyLinz> DreamLinuxer: 如果用 Agda 寫嗎?
+23:54:55 <hashcat> 居然說prolog邏輯太淺
+23:54:59 <hashcat> 明明就是一樣的東西
+23:55:10 <DreamLinuxer> 最後那個snd f那段是怎麼証的啊
+23:55:19 <DreamLinuxer> 我卡在那邊
+23:55:50 <banacorn> https://www.facebook.com/photo.php?fbid=10204721684506136&set=a.1753065630592.2102379.1357466415&type=1
+23:55:53 <banacorn> XD
+23:56:08 <DreamLinuxer> GJ
+23:56:11 <DreamLinuxer> thx
+23:58:20 <monochrom> 為甚麼會出到 ∃ 的?
+23:58:53 <DreamLinuxer> C x y 怎麼可以變成C (fst (fst q)) y
+23:59:02 <DreamLinuxer> 是用哪條rule
+23:59:25 <hashcat> 是在說啥證明
+23:59:54 <banacorn> 那條是 ∃ introduction

@@ -1,0 +1,54 @@
+06:37:01 <favonia> CindyLinz: 對話紀錄的清單...可以按照時間倒著排序嗎？
+06:37:23 <favonia> CindyLinz: 總覺得最新的在最上面比較合理
+14:47:04 <mno2> http://goo.gl/A7JlEU  Lisp 大法好！
+14:47:39 <mno2> 真的變邪教了
+14:47:49 <mno2> xD
+14:47:55 <CindyLinz> favonia: nginx 最陽春的 autoindex 好像沒有調整順序的功能 orz # http://nginx.org/en/docs/http/ngx_http_autoindex_module.html
+14:48:16 <CindyLinz> ..............||
+14:48:21 <CindyLinz> (來轉 XD)
+15:14:15 <CindyLinz> 應該只有中國說「那個」是邪教吧.. XD
+15:19:59 <b4283> "you know what"
+15:21:43 <CindyLinz> 避開那個名詞, 這樣大陸來的朋友才看得到 log... XD
+15:36:13 <hashcat_> 轉輪子神功
+15:50:47 <hashcat_> 是那個嘛
+15:52:14 <hashcat_> 那個跟山達基高度相似
+20:01:39 <suhorng> 想問問有沒有推薦的給CS看的範疇書 XD
+20:03:32 <suhorng> 有搜到一些包含「categories」跟「computer science」/「computing」/「computational」，不過看了目錄不知道有什麼差別@@
+20:05:15 <mno2> 最經典的不就是 category theory for computing science
+20:05:42 <mno2> http://www.cs.toronto.edu/~sme/presentations/cat101.pdf  這算嗎？
+20:06:49 <hashcat_> 我的意見是沒有
+20:07:41 <suhorng> mno2: 謝推薦！不知道有經典的說XD
+20:07:54 <suhorng> 投影片也可阿w
+20:08:38 <mno2> http://www.quora.com/Category-Theory/What-is-the-best-textbook-for-Category-theory   或是參考 Edward Kmett 的答案 xD
+20:09:03 <mno2> http://www.quora.com/Category-Theory/What-is-category-theory-23346
+20:10:22 <mno2> yinwang 最近生活好像不錯，文章連連發
+20:11:21 <hashcat_> 範疇論在沒有一系列數學前後文的狀況下沒辦法知道意義
+20:12:25 <suhorng> 喔~好
+20:12:43 <suhorng> 當然是拿在程式的範圍下討論囉~Haskell或ML之類的
+20:13:16 <hashcat_> 至少應該舉些像是矩陣或圖論的cs熟悉的數學物件
+20:13:57 <suhorng> 嗯嗯
+20:14:05 <hashcat_> 範疇論是要抓住不同中共同的東西
+20:14:10 <suhorng> 嗯哼
+20:15:04 <hashcat_> 範疇論從頭到尾只討論一種不知有何意義可言
+20:16:00 <hashcat_> 找數學的範疇論  忽略不熟的範疇
+20:17:18 <hashcat_> 從頭到尾只討論一種結構的話範疇論根本只是多加上的名字
+20:19:06 <hashcat_> 找一般的範疇論挑範例看吧
+20:19:14 <suhorng> 恩XD
+20:20:17 <mno2> http://www.youtube.com/watch?v=jk3xBhqcjqY   下一次有人問，就給他看這個影片，說這就是 Cat Theory (誤)
+20:21:18 <mno2> 貓理論
+20:23:42 <suhorng> 貓理論www
+20:25:50 <mno2> 宇宙的萬物都可以用喵星人來表示~
+20:27:55 <hashcat_> http://www.mathematik.uni-muenchen.de/~pareigis/Vorlesungen/04SS/Cats1.pdf
+20:28:25 <hashcat_> 貓群1.pdf
+20:32:22 <hashcat_> 有矩陣 集合 自動機 群範疇
+20:32:42 <hashcat_> 這些cs比較熟的
+20:34:30 <suhorng1> 喔喔 謝謝!!研究看看XD
+20:35:00 <hashcat_> 從頭到尾都在講型別的就別看拉  根本是另外取名而已
+20:35:26 <suhorng1> www
+20:35:34 <hashcat_> www
+21:43:37 <CindyLinz> favonia: 用了個折衷的辦法, 開目錄把 2012, 2013 的記錄裝起來 ^^
+22:24:52 <CindyLinz> 覺得.. 如果把 edwardk 的 lens package 整個讀透透, 會巡一遍 category 裡面不少東西.. 好多專有名辭的感覺..ww
+22:25:44 <suhorng1> http://ro-che.info/ccc/23
+22:28:08 <CindyLinz> profunctor, contravariant, arrow, functor, monad, traversable, distributive, applicative, alternative, foldable, backwards, comonad, comonadapply, effective, monadfix...
+22:28:30 <CindyLinz> XDDD
+22:29:26 <CindyLinz> 這漫畫, 如果情境是刪除 cabal 裡的 package 也說得通... XD

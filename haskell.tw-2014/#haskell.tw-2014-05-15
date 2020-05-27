@@ -1,0 +1,246 @@
+00:00:00 <monochrom> 簡直 infinite list 啦!
+00:03:37 <CindyLinz> 演員演得不錯, 那個表情就有到位.. # http://img3.wikia.nocookie.net/__cb20120107161615/csi/images/c/cf/NateHaskell.jpg
+00:04:21 <c9sloud> CindyLinz: XDDDD
+00:05:00 <c9sloud> 上次吃晚餐的時候看 travel & living 看到: 「食物只有兩種，好吃跟不好吃」 XD
+00:06:31 <c9sloud> 讓我想到這樣... XD
+00:07:53 <monochrom> 思考方法有兩種, 二分法及非二分法 :)
+00:08:16 <monochrom> 此外, 你們有聽過 "人分10種" 嗎? :)
+00:13:59 <CindyLinz> 有 XD
+00:14:22 <mno2> CindyLinz: 太多東西是大象了啦，嚴重 overload。Hadoop, Postgres。PHP 也有人說是
+00:14:27 <CindyLinz> wwww
+00:14:41 <whitglint> 大象崇拜
+00:15:03 <mno2> http://www.zhihu.com/question/21027085
+00:19:11 <monochrom> 盲人摸象? "有幾個腦盲程式員在動物園看大象. 一個說, 大象有如PHP. 另一個說, 大象有如Haskell..."
+00:20:01 <monochrom> "最後, 那個叫 monochrom 的說, 大象有如電影 Ice Age 裏的一個角色..." :)
+00:20:32 <mno2> https://groups.google.com/forum/#!topic/haskell-cafe/TbwUHtfqs6I
+00:20:48 <mno2> Da the lamb, lol
+00:21:10 <c9sloud> 不知道 judy array 是不是現在最快的 hash table 實作
+00:21:20 <monochrom> 我也喜歡羊咩呀!
+00:21:51 <mno2> 我喜歡 Kleisli fish,  走 xkcd 風
+00:21:57 <monochrom> 不過為甚麼上次在 google groups 找不到 haskell-cafe 了?
+00:22:06 <caa51> Tux Kart 裡的 php 車手的確是大象
+00:22:07 <c9sloud> 那 Haskell 可以用什麼動物象徵 ? XD
+00:22:13 <mno2> so long and thanks for all the kleiisli fish.
+00:22:21 <monochrom> 天呀! 我還未看是日 xkcd
+00:26:28 <hashcat_> 陸龜
+00:26:44 <godfat> XDDD so long and thanks for all the 42 kleisli fish.
+00:27:56 <hashcat_> 型別殼很硬, 生長期長, 很長壽不容易死掉
+00:28:37 <monochrom> 還有一說到 I/O 就縮起來? XD
+00:29:06 <hashcat_> XD
+00:30:22 <godfat> "We called him tortoise because he taught us!"
+00:32:22 <CindyLinz> 而且快絕種了? orz
+00:37:11 <hashcat_> 哈哈真的很像
+00:37:35 <b4283> emacs 還可以煮咖啡呢
+00:38:59 <monochrom> emacs 只差一個 thread scheduler, 就成為完整 OS 了
+00:41:41 <c9sloud> monochrom: 不是已經是 OS 了嗎 XD
+00:42:47 <monochrom> 不, 沒有 time slicing 我還不滿意
+00:42:52 <CindyLinz> emacs 也會寫程式.... (看看 Josh 的 emacs..)
+00:44:35 <monochrom> 我真的試過把它當 OS 用才這樣說的. 當它的 web browser 在等候是, 全世界都停頓, 我不能同時繼續寫程式或看電郵
+00:45:15 <letoh> 你一定是用 w3 ?
+00:45:58 <monochrom> 是
+00:46:30 <letoh> w3 的問題蠻有名的，可以換外部 browser 試試... w3m buffer 我覺得已經夠用了
+00:47:07 <monochrom> 又或者, 電郵那邊在運算時, 也是全世界停頓. etc etc
+00:47:48 <letoh> 這個就沒辦法，如果是用 gnus 之類的，是整個 emacs 動搖國本，傾全力幫你收信:p
+00:48:07 <letoh> 除非也是接到外面的 MUA
+00:48:10 <monochrom> 我確是用 gnus, 好好用
+00:48:28 <letoh> 不過這樣的話就只是把 emacs 當作 shell 和 terminal emulator 來用而已XD
+10:45:09 <kanru> http://www.cse.chalmers.se/~rjmh/afp-arrows.pdf # Programming with Arrows
+11:27:09 <mno2> CindyLinz: 其實 yin 系統就是 yin-emacs, lol
+13:41:12 <darkx> XDDD
+14:11:51 <CindyLinz> 好東西啊~~ 用來緩解一個 type 對一個 class 只能有一個 instance 的問題 ^^ # http://hackage.haskell.org/package/newtype-0.2/docs/Control-Newtype.html
+14:21:22 <CindyLinz> @type foldMaps
+14:21:23 <lambdabot>     Not in scope: ‘foldMaps’
+14:21:23 <lambdabot>     Perhaps you meant one of these:
+14:21:23 <lambdabot>       ‘foldMap’ (imported from Data.Foldable),
+14:21:29 <CindyLinz> @type Data.Foldable.foldMaps
+14:21:30 <lambdabot>     Not in scope: ‘Data.Foldable.foldMaps’
+14:21:31 <lambdabot>     Perhaps you meant one of these:
+14:21:31 <lambdabot>       ‘Data.Foldable.foldMap’ (imported from Data.Foldable),
+14:21:42 <CindyLinz> @type Data.Foldable.foldMap
+14:21:43 <lambdabot> (Monoid m, Foldable t) => (a -> m) -> t a -> m
+14:27:41 <mno2> CindyLinz: 你會常常碰到要多個 instance 的情況嗎？
+14:32:50 <CindyLinz> 不失
+14:32:52 <CindyLinz> 不失
+14:32:54 <CindyLinz> 不常
+14:32:59 <CindyLinz> (奇怪..ww)
+14:34:20 <CindyLinz> 不過資料要塞 Map/Set 的時候就需要了
+17:02:28 <CindyLinz> haskell 的語法... 有個缺點, 用 syntax non-aware 的 editor 要跳到函數定義處比較不容易
+17:02:37 <CindyLinz> 因為沒有特別的 symbol 標出函數..
+17:03:09 <CindyLinz> 如果是 perl 的話, 依我的寫作習慣, 在 vim 裡面 /sub 函數名prefix 就可以找到了
+17:03:23 <CindyLinz> php 的話就是 /tion 函數名prefix
+17:05:30 <godfat> 呢？ /函數名.+=/
+17:05:54 <godfat> 函數名 :: 可能更簡單些？
+17:06:08 <CindyLinz> 可是我有可能會換行欸 @@"
+17:06:30 <CindyLinz> 寫 haddock 的東西的時候 :: 會換行 @@"
+17:06:45 <godfat> 那... 還是 regexp XD
+17:07:00 <CindyLinz> 這樣也會抓到呼叫處 @@"
+17:07:04 <au> hothasktags ?
+17:07:22 <au> (for syntax-nonaware 但支援 ctags 語法，如 vim)
+17:07:27 <CindyLinz> tags 類還待學... ._.
+17:08:34 <au> find . | egrep '\.hs$' | xargs hothasktags > tags 之後在 vim 裡 ctrl-] 就好了
+17:09:28 <CindyLinz> 原來只要生一個 tags 擺著以後就能用了喔? ^^
+17:09:35 <au> 對啊
+17:09:52 <CindyLinz> 以為要改很多 config 害我一直很怕 :p
+17:10:20 <CindyLinz> 唔.. 前面應該可以換成 find . -name '*.hs' ?
+17:10:34 <au> yeah
+17:10:58 <CindyLinz> find . -name '*.hs' -exec hothasktags '{}' \; > tags
+17:11:01 <au> 然後如果要存檔時自動生成，也許搭配 autotags http://www.vim.org/scripts/script.php?script_id=1343 之類的
+17:11:08 <au> # 這個我就沒有試過了
+17:11:15 <CindyLinz> 對 自動存檔生成好重要!
+17:13:31 <CindyLinz> 有收在 apt 裡耶~
+17:15:12 <CindyLinz> 啊... 囧
+17:15:31 <CindyLinz> hothasktags 不會一些 ghc extension 的 syntax..
+17:15:55 <CindyLinz> LambdaCase 的 \case o ->
+17:17:53 <au> 那是 haskell-src-exts 還沒跟上... ?
+17:18:38 <CindyLinz> 來看一下 haskell-src-exts 的語法..
+17:19:09 <au> https://github.com/haskell-suite/haskell-src-exts/blob/master/tests/examples/LambdaCase.hs
+17:19:12 <au> 有跟上了
+17:19:39 <au> 所以只要 pullreq 一下 https://github.com/luqui/hothasktags 昇到新的 haskell-src-exts
+17:19:51 <au> 應該就可以了
+17:20:33 <CindyLinz> 我來試試 cabal 裡的 :p
+17:20:40 <CindyLinz> apt 通常比較舊
+17:22:02 <CindyLinz> 唔 cabal 的看起來也很舊.. XD
+17:22:28 <au> use the source, luke (palmer)...
+17:22:46 <CindyLinz> XD
+17:27:30 <CindyLinz> 唔.. hothasktags 對 haskell-src-exts 的版號沒設上限, 所以可能直接重 build 就好了...
+17:27:36 <CindyLinz> (building...)
+17:28:17 <au> build 完如果會動還可以發 issue ping 一下 luqui 做 release
+17:28:42 <CindyLinz> 可是這樣他不是不用改東西嗎?
+17:29:14 <au> hackage 上的是 haskell-src-exts >= 1.11 && < 1.14
+17:29:32 <godfat> XDD 話說我 dependency 也不設上限的，但這樣會被 rubygems 警告
+17:29:57 <au> 對，所以 release 前還是設一下為妙
+17:30:27 <godfat> 也是..
+17:30:31 <CindyLinz> 噢 對哄我是拿 git 上面的, 是 haskell-src-exts >= 1.14
+17:31:37 <au> luqui 是當年一起從 perl6 design team 跳船到 haskell 的朋友，時不時會活躍一陣子... 趁他現在看來能動，pullreq 應該會回 XD
+17:34:28 <CindyLinz> hothasktags 可以執行沒有出現 parse error 了..
+17:34:40 <CindyLinz> 只不過還是跳不到定義處就不知道是怎樣了 ^^|
+17:35:12 <CindyLinz> 喔 可能只能跳 top-level 的定義 @@"
+17:39:30 <au> yeah, 如果要 where 裡的定義的話，要改一下 https://github.com/luqui/hothasktags/blob/master/Main.hs#L22 ，連 binding body 一起 extract
+17:39:44 <au> 也許可以變成參數
+17:39:45 <CindyLinz> Open issue 了
+17:39:52 <au> CindyLinz++
+17:40:49 <CindyLinz> 他是不是怕會打架? 在不同函數裡面的同名函數
+17:41:56 <au> 是，但可以 assign 一個 ctag kind 給 local definition
+17:43:14 <CindyLinz> 嗯
+17:43:17 <au> 然後和 toplevel kind 重名時以 toplevel 優先，之類的
+17:44:10 <CindyLinz> 喔, 在沒打架的時候可以用, 打架的時候就算了亂跳這樣?
+17:46:36 <au> 打架就以 toplevel 優先，同一個檔案 local 之間打架的話就先到先贏, etc
+17:48:09 <CindyLinz> 嗯嗯嗯
+17:48:25 <au> (exctags spec 裡原本就有 "file" 這個關鍵字代表 file-local scope)
+17:48:55 <CindyLinz> 就這樣學了 tags... ^^
+17:51:24 <CindyLinz> 喔, 所以這格式是從同一個檔內的同一個關鍵字出發的話, 一定只能去同一個目標的
+17:53:13 <mno2> 聽起來只能去一個地方聽起來像是 vim 本身的限制 ?
+17:53:19 <au> 可以用 2 Ctrl-] 跳到第二個
+17:53:41 <au> 或是 :ts 列出 stack
+17:53:58 <au> 或是 :sts 另開一窗
+17:54:05 <CindyLinz> 這樣也是可以... XDD
+17:54:25 <au> ( :ts 簡寫為 g] )
+17:54:33 <CindyLinz> mno2: 因為我看那個 tags 檔案的長相, 前面就是一個 keyword 然後第二項是檔名..   這應該代表要跳躍的起點
+17:56:26 <mno2> CindyLinz: 從你的描述感覺 tags 就是一個 inverted index 吧。跟一般搜尋引擎做的沒有什麼不同。資料結構就那樣，只是瀏覽要怎麼做就是 vim 操作的問題。這樣看起來可以一次看 stack 是蠻方便的。
+17:57:18 <CindyLinz> mno2: 我當然是希望它能跳到正確的那個就好啊 ^^|
+17:58:26 <CindyLinz> 只是如果細到 keyword filename lineno 這樣的話, 那麼如果我正在編輯這個檔案就壞掉了.... ^^|
+17:58:55 <CindyLinz> 欸.. 其實現況在跳躍的終點檔案被編輯的時候應該也是會壞啦 @@"
+17:59:31 <mno2> 這就跟 google 要 re-index 是同樣的道理吧 xD
+18:00:23 <CindyLinz> 拿來純閱讀別人的程式就應該還不錯 @@"
+18:00:36 <CindyLinz> 啊... 來把剛剛那個 fork repository 刪了 XD
+18:12:48 <c9sloud> hothasktags! 學到了! :D
+18:15:55 <CindyLinz> c9sloud: 這跟你昨天貼的那個 vim extension 沒有衝突嗎? @@"
+18:16:08 <c9sloud> 應該沒有
+18:16:15 <c9sloud> 我貼的那個是做 completion 的
+18:16:23 <CindyLinz> 喔~~
+18:16:25 <c9sloud> C-x C-t 是 tags completion 沒記錯的話...
+18:16:41 <c9sloud> 昨天貼的是 Omni completion (算是外掛 completion) XD
+18:20:08 <c9sloud> 好像是靠 ghc-mod 做 syntax parsing 的，所以 completion 效果應該不錯
+18:22:18 <b4283> C-x C-t 是 swap lines
+18:25:25 <c9sloud> 那是 emacs 啦 XD
+18:25:27 <cataska> b4283: 那是 emacs 的按鍵吧
+18:27:09 <CindyLinz> c9sloud: 你怎麼什麼都會 ._.
+18:27:48 <CindyLinz> 一般不是 vim 和 emacs 選一個會才正常嗎 XD
+18:27:53 <c9sloud> 東學西學結果都不精 XD
+18:28:20 <c9sloud> 上一代的大神都是用 emacs 所以覺得應該也要學一下
+18:28:28 <cataska> 不會按錯嗎？
+18:28:43 <c9sloud> emacs 有些東西真的很厲害 像 elisp
+18:29:06 <c9sloud> cataska: 還好耶 就像說語言中文英文交換一樣
+18:30:09 <cataska> c9sloud: 厲害
+18:30:13 <c9sloud> emacs 的 window split 按鍵超不直覺
+18:30:48 <kanru> 怎麼會 2 是橫的 3 是直得 :Q
+18:31:14 <c9sloud> cataska: 我不厲害... gugod 比較厲害 他 keyboard 都換 DVORAK 了 還可以很順 XD
+18:31:16 <cataska> emacs 還是要調校過才會好用
+18:31:48 <cataska> vim 不用調校就不錯了
+18:32:17 <cataska> c9sloud: 也想來試試 DVORAK www
+18:33:25 <CindyLinz> 嗯, 用了 dvorak 以後 hjkl 就飛掉了.. XD
+18:33:59 <CindyLinz> 可是按久了, 也不覺得他們一定得靠在一起
+18:35:31 <kanru> jk 還是在一起
+18:35:33 <kanru> hl 就..
+18:36:25 <cataska> Tim O'reilly 說過當他的 emacs 設定檔不見之後，就改用 vi 了 www
+18:37:19 <CindyLinz> 可惜 vim 不是用 qwer 來移動, 不然把移動鍵改成 dvor 也蠻有梗的 XD
+18:44:58 <c9sloud> 加改一個 --enable-dvor option XDdd
+18:45:31 <c9sloud> Patch 不知道又沒有機會進 XDD
+18:47:41 <CindyLinz> 覺得沒機會 XD
+20:15:20 <c9sloud> 只好 fork 出來一個 dvorak-vim 了 XD
+20:19:52 <c9sloud> 剛剛看了一下 pcre 才發現 pcre 也可以 JIT 了 XD
+20:20:07 <c9sloud> pcre_study 可以做一點 optimization 的樣子
+20:43:42 <c9sloud> 好像不是只有一點點 ... XDD
+20:43:49 <c9sloud> http://sljit.sourceforge.net/pcre.html
+20:46:09 <c9sloud> 原來 re2 是 powered by google
+20:47:34 <godfat> 如果不需要複雜的 regexp, 是否可以不用 pcre?
+20:47:34 <godfat> http://swtch.com/~rsc/regexp/regexp1.html
+20:52:16 <c9sloud> 咦 Russ Cox
+20:52:28 <c9sloud> 好像在哪聽過這個名字 XD
+20:53:44 <godfat> 點開來似乎是做過滿多東西 XD http://swtch.com/~rsc/
+20:54:02 <b4283> 這篇文篇出現至少是第三次了 XD
+20:54:11 <b4283> Plan 9?
+20:54:45 <godfat> XD
+20:54:46 <godfat> 說到 plan9, 之前想裝在 mac 上結果打不開.. 不知道為什麼
+20:55:30 <c9sloud> 太強了
+20:55:53 <c9sloud> 阿靠   是 go programming language 的
+20:56:07 <c9sloud> 好像之前也是寫 perl 後來跑去寫go
+20:56:26 <godfat> 然後又跑去寫 haskell? XD
+20:58:11 <c9sloud> 跟那個 memcache, gearman 的作者一樣的樣子
+20:58:16 <c9sloud> 後來都跑去寫 go 了 XD
+20:58:24 <b4283> 就 go 那一掛的啊
+20:58:30 <b4283> cat-v.org
+20:59:24 <godfat> 說到這，不知道 groupcache 怎麼樣了？不能修改的 cache 真的滿妙的
+21:00:15 <godfat> cat-v Considered harmful 是啥 XDD
+21:00:40 <godfat> XDD "If you are interested in world domination you can join our perpetual trolling and creative infighting in various places:"
+21:01:41 <c9sloud> 沒 try 過 groupcache
+21:01:51 <c9sloud> 似乎跟一般的 kv storage 不同
+21:02:27 <godfat> 就我所知跟 memcached 不一樣的地方是不能修改 cache, 寫入就不動了，也不能 invalidate
+21:04:49 <c9sloud> godfat: regex 有 capture group 嗎?
+21:06:26 <godfat> c9sloud, 你說剛剛那篇裡的東西嗎？不知道，沒細讀過 XDD 不過我是猜他大概就是做到跟 grep 差不多
+21:10:33 <godfat> 原來那個 Thompson 就是 Ken Thompson XD
+21:50:59 <mno2> http://www.meetup.com/HASKELL-SG/events/183232992/  如果有人剛好要度假的話，可以順道來聽 xD
+22:03:45 <mno2> https://www.youtube.com/watch?v=lqG3mURwUxo    Parallel and concurrent programming in Haskell - Simon Marlow at USI !
+22:59:31 <CindyLinz> mno2: 這樣休閒指數就掉下去了.. XD
+23:00:46 <mno2> CindyLinz: 所謂走火入魔就是寫 Haskell 當休閒啊 xD
+23:01:17 <c9sloud> CindyLinz:  https://gist.github.com/c9s/fcfb8b64a18e3789c7d6 tree dump 出來有沒有什麼比較好看的表示法呀? XD
+23:06:44 <CindyLinz> mno2: wwww
+23:07:52 <CindyLinz> c9sloud: 可以用 unicode 符號嗎? (或 Big5 符號 XD)
+23:08:15 <CindyLinz> 不過純用 ascii 的話, 也是可以加 | 輔助線啦~
+23:09:16 <CindyLinz> c9sloud: http://etutorials.org/shared/images/tutorials/tutorial_145/xmlh_0310.gif
+23:09:53 <CindyLinz> 不過這個看起來是在畫 XML, 所以有把 child tag 和 attr 畫成不同樣子
+23:09:59 <c9sloud> yyhhh
+23:10:01 <c9sloud> 阿我知道了
+23:10:05 <c9sloud> 可以參考 tree -d
+23:10:39 <CindyLinz> c9sloud: 你應該不會想畫橫式的吧? XD # http://www.nyu.edu/pages/linguistics/workbook/compare/christop.gif
+23:11:29 <c9sloud> 如果你可以幫忙寫橫式的話 這樣更好 XDDDDDD
+23:11:54 <CindyLinz> 這如果很寬的話用起來不會很累嗎? ._.
+23:12:54 <mno2> 感覺程式直式要把橫式要好寫很多啊 xD
+23:14:00 <CindyLinz> @type transpose
+23:14:02 <lambdabot> [[a]] -> [[a]]
+23:14:09 <CindyLinz> 就靠它了! (逃)
+23:14:20 <c9sloud> 阿對了.. 應該用 dot
+23:14:33 <c9sloud> 寫個函數生 dot 好了
+23:23:10 <CindyLinz> PHD 這東東, 沒事還是別碰為妙? XDXD
+23:30:21 <monochrom> 其實, 我的確不隨便勸有才華的人讀博士. 讀博士不是能解難題就行, 還要能自己找問題來解. 後者難倒很多有才華的人.
+23:32:10 <monochrom> 我是很幸運, 命中註定要遇到一個我喜歡的問題, 這才成功. 不少同學卻苦惱於"博士論文應該做甚麼好?"
+23:33:27 <mno2> PHD 跟 PHP 只有一字之差
+23:33:50 <mno2> 或是一豎之差
+23:34:35 <b4283> 好可怕
+23:37:14 <CindyLinz> 話題歪了歪了
+23:38:30 <petercommand> 王垠念了三次PHD XD
+23:39:33 <monochrom> 怎麼弄到念三次的田地啊! XD
+23:40:07 <CindyLinz> 一直開除老闆?
+23:40:36 <petercommand> monochrom: http://yinwang0.lofter.com/post/183ec2_47a02c 第一個phd
+23:40:43 <monochrom> (有如說, 某某求婚經驗豐富, 求過幾十次婚 XD )
+23:50:14 <monochrom> 啊, 原來是退婚經驗豐富嗎? XD

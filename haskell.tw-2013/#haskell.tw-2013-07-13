@@ -1,0 +1,162 @@
+10:57:05 <Jhe__> 這個問題在這問好像怪怪的
+10:57:19 <Jhe__> GitHub 要怎麼用呀@@
+10:57:29 <Jhe__> 網路上看很多介紹或教學
+10:57:36 <Jhe__> 不過都好複雜
+10:58:41 <Yu-Lin> 就先申請 github 帳號
+10:58:47 <b4284> Jhe__: 你會用 git 嗎
+10:59:00 <Jhe__> 聽過而已 沒用過 ...
+10:59:09 <Yu-Lin> ,,,,,冏
+10:59:13 <Jhe__> 去查資料 就一堆 版本控制的歷史 =@=
+10:59:23 <b4284> 會用 git 就會用 github 了 XD~
+10:59:44 <b4284> 他就是在你版本庫裡面加一個新的 server 而已
+11:00:01 <b4284> github 只是方便讓其他人看說你有這個東西
+11:00:30 <Jhe__> 所以只是 local 跟 server 上同步而已嗎?
+11:01:05 <b4284> yes
+11:01:12 <Jhe__> 喔@@
+11:02:25 <petercommand> github還有一些管理repo的功能
+11:04:58 <petercommand> 像issue tracker之類的
+11:05:12 <Jhe__> 是開放討論意思@@?
+11:06:41 <petercommand> 就可以討論issue阿
+11:07:06 <petercommand> Jhe__: 你是要在上面建repo嘛?
+11:08:15 <Jhe__> 只用過GUI 示的
+11:08:31 <Jhe__> 就拖曳上去 他會同步到 GitHub 上
+11:08:32 <petercommand> github就是一個git-integrated的service
+11:09:10 <petercommand> Jhe__: git我只用過cli的= =
+11:09:42 <Jhe__> cli ?
+11:10:01 <b4284> ilc
+11:10:27 <petercommand> 就文字介面
+11:10:48 <petercommand> b4284: ilc是啥呀
+11:10:55 <b4284> i love cataska
+11:11:03 <petercommand> XD
+11:11:51 <Jhe__> 我不習慣這個講法XD
+11:13:23 <petercommand> Jhe__: 是說cli?
+11:13:58 <Jhe__> 恩@@
+11:14:19 <petercommand> 那你都怎麼講阿@@
+11:20:01 <Jhe__> 都用講的=@=
+11:20:25 <Jhe__> cli 常常會會意成 client ..
+11:25:31 <Jhe__> 源自於 寫一些 S/C 時的亂縮寫 ...
+11:44:03 <Jhe__> [x | x <- xs]
+11:44:22 <Jhe__> 聽人說不能理解為 iterator
+11:44:27 <Jhe__> 那我該當他是什麼?
+11:55:56 <monochrom> [x | x <- xs] = xs
+11:57:05 <Jhe__> monochrom: @@?
+11:59:48 <b4284> [x | x <- [1,2,3]] => [1,2,3]
+12:07:57 <Jhe__> 不能算是 iterator ?
+12:08:48 <monochrom> 甚麼為之 iterator?
+12:15:07 <Jhe__> 可跌代
+12:16:18 <Jhe__> 像是可以用 for in 依 list 順序取值
+12:29:06 <monochrom> haskell 可以從 xs 順序取值, 但不是用 for in. 這樣算 iterator 嗎?
+12:37:16 <Jhe__> 我覺得像是 但是 有人說不是 我也不知道該怎麼辦@@
+12:47:29 <monochrom> 這是不是很重要的問題呢? 還是, 熟悉 haskell list 的用法和用處才重要?
+12:48:53 <hashcat> Haskell 有個很像其他語言的list叫Vector
+12:49:46 <hashcat> cli不是command line interface?
+12:49:52 <Jhe__> 是
+12:50:21 <hashcat> 時間複雜度跟空間複雜度來說
+12:50:48 <hashcat> Haskell的list跟iterater
+12:52:35 <hashcat> 至少時間複雜度是一樣的
+14:30:45 <letoh> Jhe__: cli = command line interface，這是很常見的說法啊
+15:45:50 <hashcat> 我只是想說怎會變成client的縮寫
+16:02:03 <letoh> http://langref.org/haskell  # haskell 28% complete
+16:03:11 <hashcat> 這是要捐贈程序嘛
+16:04:07 <letoh> 有點像 code snippet / recipe 收集?
+16:08:24 <hashcat> 這是收集要做啥的
+16:08:31 <hashcat> 什麼比賽嘛
+16:10:18 <letoh> 應該就只是收集而已吧
+16:10:56 <hashcat> 我昨天昨天看到個文章說是說是Haskell能拼得跟C差不多快
+16:11:01 <letoh> http://rosettacode.org/wiki/Rosetta_Code  另一個類似的站是這裡
+16:11:30 <letoh> 一般性的速度嗎? 還是針對特別的問題?
+16:13:30 <hashcat> 他只示範一個問題
+16:13:38 <hashcat> 不過用得方法很一般
+16:13:57 <hashcat> http://lambda.jstolarek.com/2013/04/haskell-as-fast-as-c-a-case-study/
+16:14:16 <hashcat> 一開始他用很髒的程序實現
+16:14:50 <hashcat> 後來有人補充一個跟未優化程序碼幾乎一樣的實現
+16:16:02 <hashcat> 只是把List換成Unboxed Vector
+16:16:48 <hashcat> 避用了 Unboxed Vector 裡實現的 filter
+16:17:36 <hashcat> 結果就是只比C慢一丁點
+16:18:41 <hashcat> 若是連平行化的成本比拼下去就完勝C了
+16:19:42 <hashcat> 一般的程式大都會使用List和map之類的
+16:20:09 <hashcat> 所以猜測應該是一般的問題都可以用這種替換顯著提昇
+16:21:25 <hashcat> 最近還出現一個論文Generalized Stream Fusion
+16:21:33 <hashcat> 其實出現很久
+16:21:41 <hashcat> 我最近看到罷了
+16:21:55 <hashcat> 號稱完勝C的技術
+16:23:10 <letoh> 我覺得要說完勝 c 好像有點誇張，整體來看 c 應該還是很難打敗的對手吧
+16:23:48 <hashcat> 額
+16:24:02 <hashcat> 據稱是因為C語言離現代的機器越來越遠
+16:24:31 <letoh> 不過 haskell 如果針對一般問題都可以變快的話倒是不錯
+16:25:05 <hashcat> 有部分新技術其實C是沒辦法簡單地優化的
+16:26:01 <hashcat> 比較抽象沒貼死在機器的語言開始有優勢了
+16:26:23 <letoh> 那部份不熟，不過我認為超越 c 的技術一定存在，只是通常到最後還是沒辦法普及實用啊
+16:26:53 <letoh> 變成只有學術界比較常看到，業界可能完全沒聽過orz
+16:27:20 <hashcat> 誰來搞一家就有了
+16:28:29 <letoh> 只有一家聽過沒用啊，還是跟封閉技術一樣  除非變成熱門商品的核心技術，大概會比較有機會流行起來
+16:28:45 <hashcat> 其實FPComplete的case study有幾家在吹Haskell
+16:29:20 <hashcat> 說啥可以很簡單地擴展尺度,不論多核還是集群
+16:29:38 <hashcat> scaling翻譯成尺度不知道正確不
+16:29:44 <hashcat> 規模
+16:29:49 <hashcat> 應該說規模
+16:29:53 <letoh> 像我們搞 embedded system 的最後還只能寫 c 跟 asm，真苦...
+16:29:58 <letoh> 規模吧
+16:30:16 <hashcat> Haskell的編譯目標滿多的
+16:30:27 <letoh> arm 可以了嗎?
+16:30:34 <hashcat> arm架構可以
+16:30:44 <hashcat> 我在平板跑過ghc
+16:30:45 <letoh> 不過其實不是只有編譯目標支援就夠...
+16:31:07 <hashcat> 呼叫C語言界面用FFI
+16:31:08 <letoh> 不能自由操作記憶體的話  很多事情很難做
+16:31:21 <hashcat> Haskell有指標
+16:31:28 <hashcat> 這應該比較少人知道嘿嘿
+16:31:42 <letoh> 嗯  我可以自由安排物件的 memory layout 嗎?
+16:31:55 <letoh> c 是可以  但高階語言要做這件事總覺得很麻煩
+16:32:14 <letoh> 另外就是... embedded system 的記憶體架構未必是 flat
+16:33:01 <hashcat> Haskell連作業系統都有人寫過
+16:33:02 <letoh> 不過高階一點的 task 的確是有機會用高階語言完成啦
+16:33:25 <letoh> 喔  那個作業系統可以在 1k memory 的系統運作嗎?
+16:34:01 <letoh> 不過 1k 有點欺負人.. 10k 好了XD
+16:34:21 <hashcat> 真小
+16:34:50 <letoh> 各種各樣的系統都有呀
+16:35:19 <hashcat> 我對嵌入式沒啥經驗
+16:35:41 <hashcat> 給個規格看哪裡買個板子我挑戰下
+16:35:54 <letoh> 唔  其實也不用強調嵌入式  就是不同的電腦系統而已
+16:37:11 <hashcat> 這是寫東西的好題材
+16:37:18 <letoh> 我們有 cortex m0/m3 也有用 msp430   當然要資源多一點的就 cortex a8 或舊一點的 arm9/arm11-based asic
+16:37:42 <hashcat> 要是能在多個什麼成功在在1k記憶體執行的Haskell文章
+16:38:14 <letoh> 只有 subset 也可以，這樣就比純 asm 開發還要方便了XD
+16:38:41 <letoh> 對我們來說目前最方便的當然還是 c
+16:38:52 <letoh> 連 c++ 都不太敢用XD
+16:40:06 <hashcat> 我看到一個專案
+16:40:13 <hashcat> 不是直接用Haskell開發嵌入式
+16:40:48 <hashcat> 是由Haskell設計的edsl寫嵌入式系統
+16:40:59 <letoh> 好像有看過
+16:41:01 <hashcat> 最後會產生C代碼
+16:41:41 <hashcat> http://stackoverflow.com/questions/1263711/using-haskell-for-sizable-real-time-systems-how-if
+16:41:47 <hashcat> 這裡有幾個可以考慮下
+16:41:58 <letoh> 其實只有 c 代碼的話可能要看情況  因為以我遇過的一些情況  物件能用多少記憶體都是要可以控制的
+16:42:13 <letoh> 連 struct 的宣告都要調整半天XD
+16:42:38 <hashcat> 原來Galois在搞這個
+16:43:09 <hashcat> 一票人在弄Haskell嵌入式
+16:43:54 <hashcat> 去拉肚子
+16:43:58 <letoh> XD
+18:41:21 <CindyLinz> Haskell 在用到 fusion 的時候我覺得她贏 C 是合理的說
+18:41:36 <CindyLinz> 雖說理論上 C 很貼硬體, 所以可以 tune 得很快
+18:42:06 <CindyLinz> 但是在寫複雜東西的時候, 實際上不會希望一直複製貼上程式碼, 或是全用 macro 做
+18:42:30 <CindyLinz> C 裡面開始用函數作抽象化之後, 沒有很厲害的 fusion 下去搞, 就會輸了...
+18:43:37 <CindyLinz> 像是那種 data stream 套 N 層 filter 的情況, 用 C 來寫, 通常會寫成 N 層 buffer. 每過一層 filter 就要 buffer 一次
+18:45:18 <letoh> 那種用 c 寫的話就只能手動最佳化了吧?
+18:45:37 <CindyLinz> 那會複製貼上很多程式碼呀
+18:46:11 <CindyLinz> 那些 filter 就不能再是真正下去 call 的函數了吧
+18:54:31 <hashcat> 就多層cache多核cpu和分佈式系統來說
+18:54:48 <hashcat> C已經沒比較貼近硬體了
+18:56:47 <godfat> 會不會還有比較貼近現代硬體的低高階語言又被發明出來？ XD
+18:57:00 <godfat> go?
+18:57:02 <CindyLinz> llvm 算不算? (咦)
+18:57:10 <hashcat> map,fold那些就語意上比光用迴圈容易依照各狀況優化
+18:57:16 <godfat> llvm 我覺得好像超越了語言的層次了 XD
+18:58:27 <hashcat> llvm算編譯工具包吧
+18:59:21 <hashcat> 那語言特性沒多到可以搞定一般編程任務
+19:00:59 <hashcat> 編譯器後端工具包
+19:03:15 <hashcat> 未來還有嵌入式和網路即計算機的分佈式計算方向
+19:03:33 <hashcat> 我下注Haskell完全可以勝任這兩方向
+19:04:07 <godfat> 我不敢下注但我希望 XD
+19:38:46 <letoh> 如果只是單純做計算的話，高階語言的發展還是可以期待的
+22:37:33 <suhorng> http://okmij.org/ftp/Computation/fixed-point-combinators.html Many faces of the fixed-point combinator

@@ -1,0 +1,91 @@
+00:47:08 <CindyLinz> :D
+01:01:39 <monochrom> 我的師父(論文導師)乾脆教我: 真的要分開"執行時"與"編譯時"嗎?
+01:03:02 <godfat> 我想看語言吧 XD
+01:05:34 <CindyLinz> 還是有傾向的啊 ^^|  像是程式證明用的就是編譯時的檢查, 編譯時就保守估計執行時的所有可能...
+01:25:31 <hychen> CindyLinz: "compile pass 比較模糊" # 可以解釋一下這個嗎? 我不太懂
+01:27:14 <CindyLinz> hychen: 像是 javascript v8 的 just-in-time compile.. 它是 compile, 但是是 runtime 的時候做的
+01:27:29 <letoh> 因為 jit 嗎?
+01:27:34 <letoh> 喔喔喔
+01:28:08 <CindyLinz> 然後.... 這種 jit 至少還能說出 compile phase 是在什麼時候, 雖然已經是藏在 runtime 裡了...
+01:28:28 <CindyLinz> 如果(想像中)是用某 lazy evaluation 做的 vm..
+01:28:49 <CindyLinz> 它這個 jit compile 會給你 compile 到一半, 就叫你先去跑已經生出來的 op code..
+01:29:01 <CindyLinz> 剩下的嘛... 等你要用的時候我再生...
+01:29:43 <hychen> 這樣type checking沒問題? @@
+01:29:56 <godfat> 讓我想到 partial evaluation XD
+01:30:16 <CindyLinz> 有問題啊.. javascript 不就偶爾會有拿 undefined 當函數 call 的 exception? :p
+01:32:05 <CindyLinz> 唔.. partial evaluation 指的是已經在跑的程式, 偶爾還會重新 compile 自己, 重新生出更有效率的程式出來跑?
+01:34:02 <CindyLinz> hychen: 我前一陣子看王垠的文章講這個, 他另外提到.. op code -> 執行, 也可以算是一種 compile
+01:34:34 <CindyLinz> compile 成 in-memory 的一段 interpreter 的程式碼, 馬上吃掉作出動作
+01:36:00 <letoh> 一般的 jit 不就是這樣嗎?
+01:36:20 <CindyLinz> 他說的比較極端啊.. 像是 java 已經都生成 .class 檔了
+01:36:42 <CindyLinz> 他覺得執行 .class 的這一部分還是有 compile 的成份
+01:37:14 <letoh> 但 bytecode 畢竟還是得 vm 來解譯執行  所以在這邊做 jit 才合理呀
+01:38:32 <CindyLinz> letoh: 他的文章是要說 compile 和 interpret 的界限很模糊, 他這邊是要說, 一般我們會覺得這一段很明顯是 interpret 了, 仍然可以視為 compile
+01:39:59 <letoh> 嗯嗯  就是因為有 jit 的關係呀... 執行 bytecode 是很沒效率的XD
+01:40:02 <godfat> 好像不是？不過我還是不要解釋好了，現在腦袋有點模糊 XD
+01:40:02 <godfat> 總之我覺得 partial evaluation 也是模糊了 compile time 跟 runtime
+01:40:02 <godfat> 其實只是看把那條線放在哪裡而已，左邊是 compile time, 右邊是 runtime
+01:40:02 <godfat> 都是相對的
+01:42:20 <CindyLinz> 對對, 我也覺得這樣.. 沒有明確的界限, 可是是用來描述兩類不同的性質, 思考問題或規劃語言都是蠻有用的
+01:53:52 <godfat> 對啊，所以就算在 ruby 裡我也常常會說 compile time XD
+01:53:53 <godfat> 不過有時候會講成 parse time 以免誤會...
+01:57:22 <monochrom> 到最後, 我認為, 理論上不必分開, 實際上分開為了方便工作. 因此怎樣分法只看方便, 沒有固定分法.
+01:58:40 <godfat> 同意
+02:03:36 <monochrom> 就正如, "編譯時"本身還再細分"詞法"(lexicon, 用regular grammar), "語法"(context-free grammar), "型別檢查", "出機械碼". 把它們分開了, 每一個都容易做. 但誰說一定要分開呢? 把四個迴圈用 fusion law 合成一個絕到可能, 只不過你會成為瘋狂科學家而已. XD
+02:08:16 <monochrom> 唔! 有一天要試做一下!
+02:14:41 <CindyLinz> perl 的 yapp 和 haskell 的 happy 就沒有特別一個 regular 處理的 lexer 了. 它們都是直接接受 token list, 而這 token list 的產生
+02:15:20 <CindyLinz> perl 的 regex 是 context free grammar; 然後 haskell 就隨意寫函數來生, 算是.... turing complete 等級? XD
+02:16:05 <monochrom> 通常用 lex (C) 或 alex (Haskell)
+02:16:39 <CindyLinz> 我看 Happy 自己的 tutorial 就直接寫一排函數做了 ^^|
+02:17:54 <monochrom> 哈哈
+02:23:35 <CindyLinz> 來看看... 好奇 alex 有什麼特出之處 :Q   因為 Haskell 裡面 regex 的 lib 也好多個, 不知道 alex 有什麼獨立存在的意義
+02:26:12 <monochrom> 形而上 (meta) 問題: 怎麼逢星期四晚, 星期五凌晨, 各位台灣的朋友不願睡呢? XD
+02:27:14 <monochrom> "今夜不睡覺, 明天開派對"? XD
+02:29:11 <monochrom> "奉獻青春給公司, 不如奉獻春宵給 Haskell, 回到公司再睡過"? XD
+02:30:59 <monochrom> P.S. 昨晚因咖啡而不眠, 結果拿起書學 category theory 裏的 adjunction!
+02:33:52 <monochrom> 如果你自己用 regex lib, 你仍要自己加一些配套來出 token. 如果用 alex, 它替你加配套.
+02:35:12 <monochrom> 正如在 C 界有 lex 一樣
+09:06:47 <MnO2> https://plus.google.com/115504368969270249241/posts/EpQodRSVQ3r   要開 strict 的 pragma 了 xD
+09:38:02 <MnO2> http://www.cs.cmu.edu/~rwh/talks/mlw13.pdf  Harper @mlw13
+09:41:38 <MnO2> http://splashcon.org/2013/ <-- OOP 的 top conference
+09:45:35 <MnO2> https://mail.mozilla.org/pipermail/rust-dev/2013-September/005804.html  <-- rust 0.8 !
+11:15:00 <CindyLinz> #hime 其實是政治版對吧 ._.
+11:27:42 <_13h> CindyLinz: 的確是有些人比較喜歡政治話題啦，不過還有遊戲 linux 或音樂相關話題
+11:31:03 <CindyLinz> 我以為 #hime 是一個輸入法啊.. XD
+11:32:02 <b4283> 從 #gcin 時代以來一直都是這個風格 XD
+11:54:54 <kanru> so I /part #hime :P
+12:00:19 <_13h> 還有沒有可以聊輸入法的 irc channel ? XD
+13:41:30 <CindyLinz> cschat 可以吧?
+13:41:44 <CindyLinz> 欸, 還是說 hime 的 maintainer 都在 #hime, 所以... ^^|
+13:42:18 <_13h> 當然都在那邊啊
+13:44:25 <_13h> 我是有訂 chewing 的 mail list... 不過我不太喜歡 mail list 的型式XD
+17:33:11 <b4283> 形式
+17:48:05 <letoh> 嗯  形式
+21:56:51 <suhorng> hashcat: 你知道resolution在弄什麼嗎?
+22:00:02 <suhorng> 查Prolog發現有提到resolution, 可是不知道為什麼會有關@@
+22:06:39 <hashcat> 什麼跟啥嚜有關
+22:09:04 <suhorng> 不知道為什麼 Prolog 會提到 resolution? miniKanren 的實作重頭到尾只有提到 unification, 書的介紹完全沒提到 resolution, 我也不知道那是什麼囧
+22:10:35 <hashcat> resolution就是把左邊的unification結果, 帶入右邊的變數後繼續作這樣
+22:11:58 <suhorng>  ":-" 的左邊跟右邊嗎?
+22:12:16 <hashcat> 嗯嗯
+22:12:36 <suhorng> 原來如此
+22:55:31 <hashcat> http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.68.2227
+22:56:07 <hashcat> 比較新的prolog vm
+22:56:43 <letoh> warren 的是 1977 那篇嗎?
+22:57:52 <hashcat> 我只記得是70年代
+23:00:49 <suhorng> 主要是我最近看 The Reasoned Schemer 學 miniKanren, 他跟 Prolog 有點像又不一樣...
+23:01:12 <hashcat> 老中青三代
+23:01:36 <hashcat> 也沒看過長一樣的
+23:02:15 <suhorng> 他寫的時候是可以弄 fresh variable, 然後寫很多 goals (== v w) 之類(也可以是data)
+23:02:46 <letoh> https://github.com/clojure/core.logic/wiki/Differences-from-The-Reasoned-Schemer
+23:02:47 <suhorng> 再加上 cond 控制 structure (backtracking在這部份)
+23:02:57 <suhorng> _13h: (woot)
+23:03:47 <suhorng> 咦? 這是code跟書上講的的差別? 我載下來的 code 跟他這個描述完全不同耶
+23:04:01 <letoh> 應該是說 clojure 的實作?
+23:04:10 <suhorng> 喔!原來是這樣
+23:04:17 <letoh> core.logic
+23:05:25 <suhorng> 他書的寫法讓我好想跟 Agda 程式一樣大量用符號, 可是很多 Scheme implementation 在 Windows 上 unicode 支援又不太好 XD
+23:20:24 <CindyLinz> 用顏文字啦~~~
+23:31:43 <Yu_Lin> type Bool = T_T | ^_^ 這樣嗎？XD
+23:33:20 <CindyLinz> Yu_Lin: 我想的主要是原本想用數學符號, 改成 |-  _|_ 之類的去接啦 XD
+23:49:35 <suhorng> CindyLinz: constructor用冒號開頭也可以用符號XD

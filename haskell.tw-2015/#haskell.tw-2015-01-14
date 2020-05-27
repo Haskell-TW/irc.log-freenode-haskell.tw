@@ -1,0 +1,107 @@
+00:38:03 <suhorng> 我喜歡這個講解法XDD # <CindyLinz> .zip 是一個 Functor where fmap = mount
+00:38:37 <CindyLinz> XD
+00:39:03 <petercommand> :p
+01:08:58 <monochrom> "心裏說這東東不會執行到" 是不是 少女的祈禱? https://www.youtube.com/results?search_query=maiden%27s+prayer
+01:10:35 <CindyLinz> 我想的只是先把眼睛閉起來... 假裝再張開眼的時候所看到的東西是憑空獲得的 XD
+01:11:22 <monochrom> (為何少女的祈禱都是老伯伯演奏的? 是不是正如: 在網上扮少女的, 多是老伯伯? XD )
+01:13:17 <monochrom> 哈哈, 我又想到: 魔法少女 Debug 大戰
+01:13:48 <CindyLinz> (接不了話了 ^^|)
+01:19:11 <CindyLinz> > generalCategory '魔'
+01:19:12 <lambdabot>  OtherLetter
+01:19:17 <CindyLinz> > generalCategory '，'
+01:19:19 <lambdabot>  OtherPunctuation
+01:19:30 <CindyLinz> > generalCategory '壹'
+01:19:32 <lambdabot>  OtherLetter
+01:19:34 <CindyLinz> > generalCategory '1'
+01:19:36 <lambdabot>  DecimalNumber
+01:19:53 <CindyLinz> 「壹」為什麼不是「OtherNumber」.. XD
+01:20:05 <CindyLinz> > generalCategory '１'
+01:20:06 <lambdabot>  DecimalNumber
+01:20:16 <CindyLinz> > generalCategory '①'
+01:20:18 <lambdabot>  OtherNumber
+01:20:25 <CindyLinz> OtherNumber 出現了....ww
+01:20:34 <CindyLinz> > generalCategory '➊'
+01:20:36 <lambdabot>  OtherNumber
+01:35:37 <CindyLinz> 真是莫菲定律啊.. 自從我 mirror 了 yesod book... yesod book 官網就再也沒壞掉過了.... :Q
+12:37:31 <miaoski> CindyLinz 大神開始教 monad 惹
+12:37:31 <miaoski> 每個教 monad 的都說它很簡單... CindyLinz 一定覺得它很簡單 QQ
+12:38:52 <miaoski> 所以 monad 有輔助輪嗎 QQ
+13:48:28 <miaoski> CindyLinz 說有個程式很變態，要現場寫
+13:51:45 <miaoski> filterM (const [True, False]) [1, 2, 3]
+15:03:08 <caasihuang> `filterM (const [True, False])` in Livescript: https://gist.github.com/caasi/423fa622d52b863f6268 #warning: without the real monad
+15:10:03 <caasihuang> 還在查真正的 Monad 是怎麼把 concatMap 變不見的 0rz
+15:12:28 <au> https://github.com/ghc/packages-base/blob/master/GHC/Base.lhs#L257
+15:12:43 <petercommand> au++
+15:13:05 <caasihuang> au++
+15:16:55 <godfat> 不大懂為什麼這邊這樣寫會比直接用 concatMap 快，假設 concatMap 可以被 inline?
+15:17:41 <au> https://github.com/ghc/packages-base/blob/master/GHC/List.lhs#L586
+15:17:46 <au> 一樣的 code
+15:18:02 <godfat> 對呀，那為何不直接 concatMap? XD
+15:18:10 <au> GHC.List imports GHC.Base
+15:18:21 <au> avoid mutual recursive import during bootstrap
+15:18:40 <godfat> orz... 難怪，那這邊寫 concatMap = (>>=) 如何？ XDD
+15:18:49 <au> 就沒有表意功能了
+15:18:57 <au> 是寫給人看的 XD
+15:19:06 <godfat> 好吧 XDDD
+15:26:11 <CindyLinz> caasihuang: 「純」的 monad 不一定是 list.. 所以通常沒有 concatMap, 不能把 concatMap 變不見, 也不能作 powerset XD
+15:27:18 <caasihuang> 喔喔，我誤會了，所以該說達成這點的是 Monad [] 不是 Monad ？
+15:27:48 <petercommand> instance
+15:27:52 <CindyLinz> 嗯嗯..
+15:27:54 <petercommand> instance Monad []
+15:27:55 <godfat> 其他的 monad 也可以跑，但是跑出來不會是 powerset
+15:28:27 <CindyLinz> 其他 monad.. 就不能寫 const [True, False] 了
+15:28:35 <godfat> 喔對 XD
+15:28:46 <godfat> const (Maybe True)
+15:28:49 <CindyLinz> [True, False] 的 [ ] 就是這邊 monad [] 的 []
+15:28:57 <caasihuang> petercommand: 謝謝，正在補看趣學指南（還沒讀完 0rz
+15:29:16 <CindyLinz> const (Just True)
+15:29:23 <CindyLinz> const (return True)
+15:30:00 <CindyLinz> > filterM (const (return True)) [1,2,3] :: Maybe [Int]
+15:30:04 <godfat> =_=... 忘記 constructor 是 Just
+15:30:04 <lambdabot>  Just [1,2,3]
+15:30:14 <CindyLinz> > filterM (const (return True)) [1,2,3] :: Either String [Int]
+15:30:16 <lambdabot>  Right [1,2,3]
+15:32:17 <CindyLinz> miaoski: COUT 這次是不是沒有報名頁啊?
+15:35:24 <miaoski> CindyLinz: 對 我問一下 freak
+15:35:27 <miaoski> 改到 1/23 (五) 晚上了
+15:35:48 <CindyLinz> 娃~ 尾牙日
+16:07:23 <CindyLinz> miaoski: 可以不要 1/23 嗎 QQ
+16:07:40 <miaoski> CindyLinz: 沒辦法，借不到會議室惹
+16:10:21 <CindyLinz> QQ
+16:11:22 <CindyLinz> 結果我只能提題目, 不能聽內容 QQ
+16:30:59 <CindyLinz> cibs, miaoski: 投影片上線嘍~
+16:35:46 <cibs> CindyLinz++
+16:46:33 <mno2> http://haskell-servant.github.io/
+16:46:38 <mno2> 朋友寫的，幫推一下。
+16:47:06 <CindyLinz> 竟然還有附圖 :D
+16:47:40 <mno2> https://github.com/mgajda/json-autotype  這也是朋友寫的，我覺得蠻方便的
+16:48:36 <miaoski> CindyLinz: 我問能不能幫妳錄影 (看吧，錄影很重要)
+16:49:31 <CindyLinz> miaoski: 有時候很重要啊 XD
+16:49:45 <CindyLinz> miaoski: 不過今天的應該錄影沒什麼用... :p
+16:50:10 <miaoski> ......今天不需要啊
+21:47:15 <suhorng> @djinn (P -> Q -> R) -> (P -> Q) -> (P -> R)
+21:47:16 <lambdabot> Error: Undefined type P
+21:47:24 <suhorng> @djinn (A -> B -> C) -> (A -> B) -> (A -> C)
+21:47:24 <lambdabot> Error: Undefined type A
+21:47:42 <suhorng> @djinn (u -> v -> w) -> (u -> v) -> (u -> w)
+21:47:42 <lambdabot> f a b c = a c (b c)
+21:47:55 <suhorng> @djinn (u -> v) -> (u -> w) -> (u -> v -> w)
+21:47:55 <lambdabot> f _ a b _ = a b
+21:48:32 <suhorng> @pl \f p q -> f p
+21:48:33 <lambdabot> (const .)
+21:48:38 <suhorng> ... :O
+23:31:27 <mno2> 今天辦 haskell.sg 有人提議不用長 talk 的形式，而是 lightning talk + hackathon
+23:31:52 <suhorng> hackathon...
+23:31:54 <mno2> 在想 haskell 相對於其他一些語言，應該有更有趣一些 hackathon 可以玩的形式
+23:32:06 <mno2> 不過有點 running out of ideas.
+23:32:18 <suhorng> lightning talk 在 #cschat.tw 也有人提過, 不過到最近一直沒什麼人要講 QQ
+23:32:18 <mno2> 也許有人有些想法可以建議 xD
+23:32:44 <mno2> 對啊，我是覺得提議的時候都會講得很開心。實際下去跑就會鳥掉
+23:32:57 <suhorng> 這種 hackathon 會多久?
+23:33:37 <mno2> 不知道，應該是半天吧。不是那種比賽式的 hacathon。而是純粹碰面一起喝酒的 hackathon
+23:35:43 <mno2> 歐洲很多 meetup 都是這樣搞。其實都不像我們是給長 talk
+23:37:55 <suhorng> 嗯嗯@@ 就變辦在週末?
+23:40:01 <mno2> 大概吧
+23:40:46 <mno2> 不過說實在我自己假日不太會想參加活動就是了
+23:41:09 <mno2> 除非是一年一次的大拜拜
+23:41:20 <suhorng> 真XD

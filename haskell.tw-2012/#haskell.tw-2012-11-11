@@ -1,0 +1,11 @@
+00:00:19 <CindyLinz> paper 在這 (Lightweight Monadic Regions) http://www.cs.rutgers.edu/~ccshan/capability/region-io.pdf
+00:10:39 <CindyLinz> 作者另一人就是之前上 Flolac 的時候聽說的那個同事寫 C 他寫 Scheme 的 Oleg 耶? XD
+00:13:05 <MnO2> 對啊
+00:14:47 <MnO2> CindyLinz: 他應該算是Haskell community的扛霸子吧... 還有人幫他做了一件T-shirt
+00:16:15 <MnO2> CindyLinz: 上面印了類似 「有問題嗎？找Oleg 就沒問題 」
+00:16:37 <CindyLinz> XDDD
+00:16:51 <CindyLinz> 師爺
+00:22:27 <MnO2> https://circleci.com/
+00:22:39 <MnO2> 又一家做ci的
+01:11:22 <MnO2> http://stackoverflow.com/questions/7700619/standard-web-server-interface-equivalent-to-wsgi-rack-for-haskell
+01:11:42 <MnO2> 難怪snap到現在還沒支持wai

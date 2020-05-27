@@ -1,0 +1,26 @@
+00:04:06 <c9s> 哦哦哦!
+00:04:22 <c9s> 結果本來要寫 compiler 變成在寫 opt parser XD
+00:04:34 <c9s> 然後超展開變成在寫 zsh completion generator XD
+00:04:45 <c9s> https://github.com/c9s/CLIFramework
+00:04:46 <c9s> zz
+00:05:11 <CindyLinz> c9s: 你可以先寫一個 opt compiler.. :D
+00:05:42 <c9s> XD
+00:06:02 <c9s> getopt parse 完要 compile 成什麼
+00:06:50 <c9s> 也是.. 直接跳去做 compiler 也跳太大了...
+00:07:16 <c9s> 噯 不行.. 要趕快回去工作 不能再玩了 XD
+00:07:50 <CindyLinz> 我覺得 Haskell 要從核心功能寫起比較順
+00:08:00 <CindyLinz> 跟 script (ex. perl) 的順序相反
+00:08:17 <CindyLinz> script 是從流程入口開始寫
+00:43:06 <c9s> 哦哦
+00:43:08 <c9s> 有道理
+00:43:17 <c9s> 我這次動工.. 有發現這點 XD
+00:43:23 <c9s> 只是每次都野心太大
+00:43:29 <c9s> 最後就無法動彈 XD
+00:48:38 <CindyLinz> 從核心開始的話... 野心大沒關係, 東西不會白寫的 ^^
+00:49:00 <CindyLinz> 但是同一個 project 的規摩不同... 入口可能就需要廢棄重作了
+00:49:29 <CindyLinz> 原本的大門現在變成某個小隔間的門而已
+00:50:44 <c9s> 對 XD
+23:34:57 <c9s> CindyLinz: 今天去吃烤山豬喔?!
+23:35:09 <c9s> 我最近都跟社群脫節了 XDDD
+23:52:41 <petercommand> 後來發現不是忘記 eval 到 head normal form 的問題..還是沒有解決OAO
+23:53:41 <petercommand> eval 到 head normal form 後，那個 closure 的 tag bit 是 0 耶..#haskell 有人說這是有可能的，要 gc 後才會更新

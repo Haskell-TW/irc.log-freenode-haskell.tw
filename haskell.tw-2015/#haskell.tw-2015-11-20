@@ -1,0 +1,34 @@
+11:00:17 <gansteed> 请问`:::`的用法在哪里有说明？
+11:00:29 <gansteed> learnyouahaskell上没有相关说明
+11:04:23 <CindyLinz> (:::) 應該是某個 library 自訂的 data constructor 或 type constructor.. 不是 Haskell 標準函式庫內建的, 要去找出定義它的 library 來看
+11:06:21 <gansteed> 好的，谢谢 :)
+11:06:26 <CindyLinz> ^^
+11:06:50 <gansteed> CindyLinz, 我是在这里看到的：http://yannesposito.com/Scratch/en/blog/Haskell-the-Hard-Way/#recursive-type
+11:07:43 <CindyLinz> 原來是部落格文章.. 那來源就是作者了.. (誤
+11:07:53 <CindyLinz> data List a = Nil | a ::: (List a)
+11:08:04 <CindyLinz> 這裡就是定義 (:::) 的地方
+11:08:22 <CindyLinz> 這個 (:::) 的地位和那個 Nil 一樣
+11:08:43 <CindyLinz> 只是 Nil 是文字版, default 要寫成 prefix form; 而 (:::) 是符號版, default 是 infix form
+11:09:30 <CindyLinz> Nil 是作者自訂的 data constructor; (:::) 也是
+11:11:12 <gansteed> 哦~了解了 :D
+11:11:46 <CindyLinz> :D
+11:11:56 <gansteed> 我發現自己總是被命令式語言的思維影響
+11:12:07 <CindyLinz> 那你原本一定很熟悉寫程式... XD
+11:12:33 <gansteed> 我先學的c和python
+11:12:40 <CindyLinz> 嗯嗯嗯
+11:12:59 <CindyLinz> 你的心已經不單純(pure)了.. XD
+11:13:17 <gansteed> 哈哈哈
+11:13:53 <CindyLinz> 我也是啊.. QQ
+11:15:09 <gansteed> 還得多寫haskell才能扭轉過來XD
+11:15:30 <CindyLinz> 有時候也可以看一看 lambda calculus
+11:15:42 <CindyLinz> 我自己的經驗是對於扭轉觀點的幫助很大... :D
+11:16:05 <CindyLinz> 就是從 wikipedia 看一看 lambda calculus 的定義, 然後自己練習用 lambda calculus 來寫程式
+11:16:44 <CindyLinz> 我覺得是因為它東西很少, 甚至沒有 if..else, 所以不太會喚起我心中對 C 的直覺...
+11:17:31 <CindyLinz> 然後 lambda calculus 和 Haskell 的本質很像, Haskell 就像是疊在 lambda calculus 上面的巨集, 所以玩過 lambda 以後對理解 Haskell 的思維很有幫助
+11:18:49 <gansteed> 嗯~好的~
+11:19:40 <CindyLinz> 不過這不包含 type, type class 方面的事情..  反正 type 跟指令式與否無關 :p
+11:21:05 <gansteed> 對啊，然而問題在於我的工作還是用命令式，命令式思維又被喚醒了XD
+11:21:50 <CindyLinz> 那沒辦法 XDDD
+11:22:12 <CindyLinz> 用 Haskell 的時候不要喚醒就謝天謝地了 XD
+11:22:50 <gansteed> 嗯，哈哈
+22:28:29 <pm5> mno2: yeah it's me XD

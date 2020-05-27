@@ -1,0 +1,43 @@
+15:00:49 <MnO2> CindyLinz: 你的web-server掛了
+15:01:08 <CindyLinz> 喔 好 :p
+15:01:15 <CindyLinz> 剛剛重開機忘記開哩
+15:59:23 <_13h> 這樣會掉 log 嗎?
+15:59:31 <_13h> 還是沒有東西可以掉? XD
+16:14:11 <CindyLinz> 我不在 channel 的時候會掉
+16:14:21 <CindyLinz> webserver 只有看的功能 不影響
+16:17:13 <MnO2> 反正這兩天也沒有東西 :p
+16:26:34 <CindyLinz> QQ
+16:26:53 <CindyLinz> 我關機重開頂多也一個小時內的事啦
+16:26:57 <CindyLinz> 應該半小時以內
+16:47:31 <MnO2> http://smallcultfollowing.com/babysteps/
+16:47:50 <MnO2> rust contributor的blog
+18:15:55 <MnO2> godfat終於回來了
+18:16:13 <godfat> XD 正好有事打開 @@
+18:16:36 <MnO2> 剛好我可以問你問題xD
+18:17:22 <MnO2> godfat: 你知道gem可不可以指定depends on某個系統package?
+18:17:59 <godfat> XDD 不行哩，所以有些 system 的 package manager 才會放原本 gem 可以安裝的東西
+18:18:44 <godfat> 應該沒有語言的 package manager 有做到這步？
+18:19:08 <MnO2> 我google半天的印象也是沒辦法，只是跟比較熟的人再確定一次xD
+18:19:17 <godfat> 了解 XDD
+18:19:18 <MnO2> godfat: cabal可以唷xD
+18:19:27 <godfat> 有支援哪些 os?
+18:19:47 <MnO2> 不知道，至少ubuntu可以
+18:19:59 <godfat> 我記得之前 arch 有一些 cabal 相關的 package 論戰，不過我搞不清楚是什麼情況
+18:20:30 <MnO2> 有link?
+18:20:32 <godfat> 不過居然有人願意做這種苦工 @_@
+18:20:37 <godfat> 找找看
+18:21:40 <godfat> https://wiki.archlinux.org/index.php/Haskell_Package_Guidelines
+18:21:41 <godfat> """The AUR packages, especially those owned by archhaskell, are deprecated. It is better to use and contribute to the [haskell] repository.
+18:21:41 <godfat> The community around Haskell on Arch is dying but in the process of revival, so your help is especially welcome!"""
+18:21:45 <MnO2> 所以一般寫ruby binding的套件會是怎樣寫gemspec來檢查.so?
+18:24:10 <godfat> 好像沒有直接去用 so 檔的，一定要先 compile ruby binding
+18:24:11 <godfat> 如果要 compile 的話，就會用 extconf.rb 跑 configuration,
+18:24:11 <godfat> 這邊會幫你檢查系統 package
+18:24:11 <godfat> 都過的話就會透過 mkmf.rb 產生 Makefile 來 compile
+18:24:11 <godfat> compile 好的 so 檔會放在 ruby 的 lib 下，以後就 require 得到
+18:25:03 <godfat> 另外有一套工具是 rake-compiler 可以幫你處理這些雜事，還有 cross-compiling 的問題
+18:25:57 <godfat> 也是有用例如 ffi 這種，那就是使用者自己要給位置，或是 lib 實作者要自己想辦法找到
+18:26:19 <godfat> gemspec 應該沒辦法指定這件事，所以會是 configure 時爛掉
+18:26:22 <godfat> 如果有缺 lib
+21:51:31 <MnO2> godfat: 我現在就是用ffi, 那看來是沒救了>
+22:45:14 <godfat> XDDD ffi 的話真的就沒辦法了，不然就是自己 bundle XD

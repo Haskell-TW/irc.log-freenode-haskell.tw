@@ -1,0 +1,43 @@
+00:09:43 <CindyLinz> XD
+00:09:51 <CindyLinz> 民謠等級..
+00:15:09 <b4283> folklore
+00:54:57 <letoh> CindyLinz: 那個 pop 搞到那麼複雜是因為最後都要從 list 頭操作的關係嗎
+01:04:20 <CindyLinz> letoh: Realtime 版?
+01:04:28 <CindyLinz> letoh: 還是 amortized 版?
+01:04:39 <letoh> amortized
+01:05:34 <CindyLinz> 就 dequeue buffer 空的時候, 把 enqueue buffer 裡的東西 reverse 過來用呀
+01:05:50 <CindyLinz> 然後天生有一個複雜處是要檢查是不是空了
+01:05:58 <CindyLinz> 空了要 Nothing, 有東西才 Just
+01:06:09 <letoh> 嗯
+01:06:18 <CindyLinz> 剛好講了三個 case XD
+09:37:17 <KaiJia> 频道上介绍的短链服务好像转发错了
+09:37:33 <KaiJia> [中1] http://goo.gl/d5yBQ [中2]  http://goo.gl/0TEq6
+11:09:27 <petercommand> 恩，"中二" 是壞的
+11:10:51 <caasih> 中二... XD
+11:53:46 <CindyLinz> 只好把「中二」趕走惹....
+11:56:01 <ChanServ> [TOPIC] 台灣 | 對話紀錄  http://goo.gl/hmk0CQ | G+ http://goo.gl/t48uq | 入門書 Learn You a Haskell for Great Good! [英] http://goo.gl/XdyKi [中]
+12:15:41 <KaiJia> 最后的[中]看着好难受，强迫症忍不了~
+12:19:43 <caasih> mno2 的翻譯，是這份新 http://repo.tiye.me/learnyouahaskell/public/zh-tw/chapters.html ？
+12:19:57 <caasih> 還是這份新 http://learnyoua.haskell.sg/ ？
+12:48:50 <petercommand> CindyLinz: 中一的連結也消失了XD
+12:49:15 <petercommand> 指指 topic
+13:10:10 <mno2> cassih: http://learnyoua.haskell.sg/
+13:10:28 <mno2> 我不知道前者是誰幫忙 host 的
+13:11:05 <mno2> http://repo.tiye.me/actions-recorder-talk/presentation.html#slide2  看起來是其中一位 contributor
+13:46:52 <caasih> mno2: 謝解惑 o___o
+15:03:54 <CindyLinz> petercommand: 只有一中, 就不用各表了!
+15:04:07 <CindyLinz> 咦 連結沒有了 囧
+15:04:47 <ChanServ> [TOPIC] 台灣 | 對話紀錄  http://goo.gl/hmk0CQ | G+ http://goo.gl/t48uq | 入門書 Learn You a Haskell for Great Good! [英] http://goo.gl/XdyKi [中] http://goo.gl/d5yBQ
+15:29:07 <petercommand> 還有最前面只剩台灣了XD
+15:31:04 <CindyLinz> 一個台灣不對嗎 QQ
+15:31:14 <ChanServ> [TOPIC] Haskell 台灣 | 對話紀錄  http://goo.gl/hmk0CQ | G+ http://goo.gl/t48uq | 入門書 Learn You a Haskell for Great Good! [英] http://goo.gl/XdyKi [中] http://goo.gl/d5yBQ
+15:31:34 <petercommand> OAO
+16:39:40 <__z3isuhorng__> CindyLinz: 喔喔喔 感謝投影片
+16:40:30 <__z3isuhorng__> letoh: 你提到的那個其實就是用兩個 stack 去實作一個 queue? 為了均攤線性才弄成那樣, 可是還是沒辦法當持久資料結構用
+16:47:05 <CindyLinz> __z3isuhorng__: 可以當持久資料結構用啊... 「不計工本」!
+16:47:24 <__z3isuhorng__> CindyLinz: 不計那這樣寫就沒意義啦XDDD
+16:48:50 <__z3isuhorng__> 天啊那個 Queue...簡直要融化了>////<
+17:31:27 <CindyLinz> 融化是怎樣w
+17:36:03 <__z3isuhorng__> so cute that i melted
+17:40:09 <CindyLinz> XD
+19:43:16 <darkx> 看到解接就要溶化惹 >///<

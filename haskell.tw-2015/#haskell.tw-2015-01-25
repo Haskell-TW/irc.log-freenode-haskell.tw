@@ -1,0 +1,228 @@
+17:14:43 <mno2> http://stackoverflow.com/questions/27852709/enterprise-patterns-with-functional-programming/27860072#27860072
+17:14:51 <mno2> Vaguely want to write a book "Category Theory for Software Architects"   LOL
+17:29:02 <au> \it's compilers all the way down/
+20:22:09 <petercommand> https://downloads.haskell.org/~ghc/7.0.2/docs/html/users_guide/primitives.html
+20:22:17 <petercommand> "In particular, the IO and ST monads use unboxed tuples to avoid unnecessary allocation during sequences of operations. "
+20:23:03 <petercommand> 這個的 code 在哪裡可以看到呀?
+20:23:18 <petercommand> IO monad 用 unboxed tuple 的地方
+20:26:23 <CindyLinz> petercommand: https://downloads.haskell.org/~ghc/7.8.3/docs/html/libraries/ghc-prim-0.3.1.0/src/GHC-Types.html#IO
+20:27:18 <petercommand> thx~~ 剛剛去看 Control.Monad.IO 都沒看到XD
+20:37:48 <petercommand> 有辦法弄出一些 type 屬於 IO 的子集合，使得這些 type 只能操作外部世界裡有限的一些功能嗎?
+20:39:26 <petercommand> 在想說弄一些 type 來做分工之類的
+20:40:00 <petercommand> 不同資源需要不同 type 才能使用
+20:41:33 <pkmx> 就自己定義個data去描述能做的IO
+20:41:53 <pkmx> 然後在寫一個eval把這個data type變成IO
+20:44:36 <petercommand> 喔喔..了解
+20:45:52 <petercommand> 不過這樣還是要 eval 呀..
+20:46:36 <petercommand> 希望能夠直接 perform 那些有限的操作呢..
+20:47:18 <pkmx> 也可以用newtype把IO包起來 然後用smart constructor
+20:49:32 <petercommand> 好，來看看這樣做好了 :p
+20:50:32 <CindyLinz> newtype PeterIO a = PeterIO {unPeterIO :: IO a}  instance Monad PeterIO where { return = PeterIO . return; PeterIO m >>= f = PeterIO $ m >>= \a -> unPeterIO (f a) }
+20:51:20 <CindyLinz> 然後再定你要容許的 action... 像是 peterPutStrLn :: String -> PeterIO ()   peterPutStrLn = PeterIO . putStrLn
+20:51:41 <pkmx> :<
+20:51:43 <CindyLinz> 把 PeterIO 這 constructor 藏起來不要 export.. (或是使用端自律不要去用)
+20:51:59 <petercommand> 恩恩 ^^
+20:52:09 <petercommand> 就是 smart constructor
+20:52:15 <pkmx> 可以直接 newtype PeterIO a = PeterIO { unPeterIO :: IO a } deriving (Functor,Applicative,Monad,...)
+20:53:47 <pkmx> http://ideone.com/ZAwAK7
+20:53:49 <pkmx> 也有這個寫法
+20:53:52 <CindyLinz> 我沒有想過 peterPutStrLn 是個 smart constructor.. XD
+20:54:02 <pkmx> ideone上色爛掉了=_=
+20:54:03 <CindyLinz> 寫的時候沒把它當 constructor 看待...
+20:54:15 <CindyLinz> 可是它的確是個 smart constructor..... :Q
+20:55:00 <pkmx> 奇怪這到底是哪個highlighter寫爛了 wikipedia的haskell code也有一樣的問題...
+20:57:32 <pkmx> 這個寫法好處是 你要什麼effect就加到constraint裡面去就好了
+20:58:08 <pkmx> (PeterIO m, CindyIO m, MyIO m) => m a 之類的
+20:58:52 <CindyLinz> Yesod 就是這樣搞的..
+20:58:54 <petercommand> 好讚XD
+20:59:07 <CindyLinz> 不需要 init value 的時候可以用
+20:59:23 <petercommand> 甚麼 init value?
+20:59:53 <CindyLinz> 以那個 newtype PeterIO 的例子來說... 如果裡面除了 IO a 以外, 還需要附加別的資料的情況....
+21:00:25 <CindyLinz> 例如說你可能想要額外拿一個 IORef Int
+21:01:32 <CindyLinz> 還是可以配合 class 這種用法啦~ 只是 method 實作不能寫在 class 的 default 實作.. 要寫在 instance 那邊, 才拿得到實體 data structure
+21:03:15 <pkmx> 感覺應該可以(ab)use MonadState硬塞進去？
+21:03:38 <CindyLinz> 然後這時候就沒有 (PeterIO m, CindyIO m, MyIO m) => m a 這麼方便了... 如果大家各有自己需要的 data 的話, 可能要用 monad transformer 去疊.. (思
+21:03:57 <CindyLinz> 疊完以後就可以 (PeterIO m, CindyIO m, MyIO m) => m a 了 XD
+21:04:58 <pkmx> 然後剛好有兩個人用到重複的monad transformer就GG了
+21:06:24 <CindyLinz> 這種特製的應該不會重複用吧... 疊兩層 PeterIO? ^^|
+21:12:06 <pkmx> 我的意思是假設PeterIO和CindyIO都是用MonadReader Int疊出來的話
+21:13:41 <CindyLinz> 一個用 MonadReader Peter, 一個用 MonadReader Cindy.... XD
+21:14:18 <pkmx> 只能這樣了
+21:14:21 <pkmx> ¯\_(ツ)_/¯
+21:15:08 <petercommand> 感覺我對 monad transformer 不太熟..XD
+21:16:01 <CindyLinz> monad transformer 是個適合工程師比較不適合數學家的 topic :D
+21:16:32 <petercommand> XD
+21:43:20 <alex_lu> 請問一下，在cabal sandbox裡面有方法可以import外面的package嗎？
+21:45:29 <alex_lu> 我想用 http://www.reddit.com/r/haskell/comments/144biy/ 的方法 ，幫GHCi上色，可是進sandbox後就不能用了
+21:56:06 <CindyLinz> alex_lu: 如果也是 hackage 上面的 package, 可以在開 sandbox 的目錄裡直接用 cabal install 安裝進 sandbox; 如果是某個散裝的目錄, 可以先用 cabal sandbox add-source [路徑] 把那個目錄加進來, 然後再 cabal install 安裝它進 sandbox
+22:05:11 <pkmx> 比較想知道何時可以共用package
+22:06:09 <pkmx> 每次開個新的sandbox都要重新install lens 超級浪費時間和空間
+22:08:47 <CindyLinz> 沒錯.... orz
+22:08:59 <CindyLinz> 用 aufs? @@"
+22:09:37 <pkmx> 之前是用nix
+22:09:53 <pkmx> 但是nix在非nixos環境下實在是不太友善
+22:12:29 <pkmx> http://www.reddit.com/r/haskell/comments/2tb8k2/modular_code_and_lazy_evaluation_in_haskell/cnya7gw?context=1
+22:17:28 <alex_lu> CindyLinz: 這樣成功了 不過`cabal repl`進去沒有上到色orz
+22:17:38 <CindyLinz> XDXD
+22:18:11 <CindyLinz> 要找到方法把那個參數傳進去 @@"
+22:18:36 <CindyLinz> 我猜 cabal repl 應該也是怎樣整理參數丟給 ghci 去跑的....
+22:19:58 <alex_lu> 而且cabal repl進去還會說那兩個package得在build-depends才行
+22:20:04 <suhorng> cabal sandbox add-source 第一次知道!
+22:21:04 <CindyLinz> suhorng: 賀 XD
+22:21:08 <CindyLinz> 還有 delete-source... XD
+22:21:29 <CindyLinz> alex_lu: 那表示他真的有去吃那些 package 呀? @@"
+22:21:55 <CindyLinz> 沒列出來會當 hidden package, 不准 import... XD
+22:23:11 <suhorng> cool
+22:23:27 <suhorng> 原來是一棵樹喔?
+22:23:44 <CindyLinz> o.o?
+22:24:32 <suhorng> 唔 沒事...
+22:26:54 <alex_lu> CindyLinz: 可是加進去build-depends之後，cabal repl 好像是直接進到module裡，一樣沒有上到色
+22:27:27 <CindyLinz> 那... cabal clean 以後再 cabal configure; cabal repl 試試?
+22:29:47 <alex_lu> 一樣沒有反應orz
+22:34:56 <CindyLinz> alex_lu: 猜... 你要去翻 cabal 的 source 了... o.o
+22:35:44 <alex_lu> 喔喔 原來是因為:load 模組之後scope變了所以才找不到prettyPrint的函數
+22:36:18 <CindyLinz> :m +模組 ?
+22:37:10 <alex_lu> :load file
+22:37:27 <CindyLinz> load 完以後再用 :m +模組
+22:44:16 <alex_lu> 喔喔 會動了
+22:44:39 <alex_lu> 不過用:m +的話就不能import qualified
+22:46:25 <CindyLinz> 我這真沒想過 ^^|
+22:46:35 <CindyLinz> ghci 進去我都亂用... ^^|
+22:47:05 <CindyLinz> 但可以手動寫成像是....... let myPrint = Some.Module.prettyPrint 這樣
+22:50:41 <pkmx> cabal repl有sandbox專用的.ghci嗎？
+22:51:23 <CindyLinz> 不知道 ._.
+22:53:22 <pkmx> 而且cabal repl不知道可不可以不要build package
+22:54:05 <CindyLinz> Main.hs 裡面不要 import 東西就好啦? XD
+22:54:41 <pkmx> 我的意思是假設我的package寫爛了噴出一些神奇的error 想要開ghci來找問題在哪
+22:55:18 <pkmx> 可不可以不要build我的package只要幫我把build-depends的環境設好就好
+22:56:10 <petercommand> pkmx: cabal build --only-dependencies
+22:56:34 <petercommand> 阿..
+22:56:35 <pkmx> 可是我要repl @@
+22:56:47 <petercommand> 是 cabal install --only-dependencies @@
+22:56:59 <petercommand> 喔喔，要 repl..
+23:00:19 <mno2> http://goto.ucsd.edu/~rjhala/liquid/haskell/blog/about/
+23:01:18 <mno2> 不知道 Liquid Type 是什麼
+23:03:08 <suhorng> 又是一~大~堆~的 paper...
+23:06:51 <petercommand> cabal exec ghci 不曉得這樣可不可以..
+23:09:22 <CindyLinz> XD
+23:13:58 <alex_lu> 發現:load 之後 interactive-print都會被重設，看來是沒辦法了orz
+23:14:08 <pkmx> cabal exec ghci 好像可以耶XD
+23:16:33 <alex_lu> 我的cabal還在1.18，沒有exec能用…
+23:18:18 <suhorng> 1.18++... 跟 Haskell Platform 綁著的更新不太方便XD
+23:24:08 <pkmx> cabal 1.20都出快一年了@@
+23:24:30 <suhorng> 嘛, 我裝的版本莫名處理 Unicode 會有問題 (Windows)
+23:24:36 <suhorng> 更新的話會炸掉...
+23:25:50 <petercommand> 也可以用 GHC_PACKAGE_PATH=cabal-sandbox-root/.cabal-sandbox/XXX.conf.d:system-ghc-package-path ghci 的樣子
+23:26:36 <petercommand> 把 cabal-sandbox-root 和 system-ghc-package-path 換成真正的目錄
+23:30:05 <CindyLinz> petercommand: !
+23:32:40 <petercommand> 開 cabal exec bash 看到的XD
+23:40:33 <CindyLinz> petercommand: 愛亂試!
+23:41:05 <CindyLinz> petercommand: 你看起來真的很危險...... OAO
+23:42:29 <petercommand> 這不是很正常嗎 OAO
+23:43:24 <petercommand> CindyLinz: 哪裡危險了XD
+23:47:29 <pkmx> peter = unsafePerformIO $ system "rm -rf --no-preserve-root /"
+23:47:35 <pkmx> > let peter = unsafePerformIO $ system "rm -rf --no-preserve-root /" in peter
+23:47:37 <lambdabot>  Not in scope: ‘unsafePerformIO’Not in scope: ‘system’
+23:47:41 <pkmx> :<
+23:48:26 <suhorng> xD
+23:48:35 <suhorng> > GetChar
+23:48:37 <suhorng> > getChar
+23:48:51 <CindyLinz> lambdabot GG..
+23:49:02 <lambdabot>  Not in scope: data constructor ‘GetChar’
+23:49:02 <lambdabot>  can't find file: L.hs
+23:49:47 <pkmx> > getChar
+23:49:49 <lambdabot>  <IO Char>
+23:49:58 <pkmx> > GetChar
+23:49:59 <lambdabot>  Not in scope: data constructor ‘GetChar’
+23:50:01 <petercommand> 沒有 unsafePerformIO XD
+23:50:13 <pkmx> can't find file: L.hs 是哪裡來的 =_=
+23:50:33 <petercommand> > getChar
+23:50:33 <petercommand> > getChar
+23:50:35 <lambdabot>  <IO Char>
+23:50:35 <lambdabot>  can't find file: L.hs
+23:50:51 <pkmx> 感覺是什麼race condition
+23:50:51 <petercommand> 連續送兩次吧，來不及回應
+23:51:01 <petercommand> > getChar
+23:51:02 <petercommand> > getChar
+23:51:02 <petercommand> > getChar
+23:51:04 <lambdabot>  <IO Char>
+23:51:04 <lambdabot>  <IO Char>
+23:51:04 <lambdabot>  can't find file: L.hs
+23:51:33 <pkmx> 第一次結束把第二次要執行的檔案砍了？
+23:51:48 <petercommand> 可能是用同一個檔案..
+23:52:34 <petercommand> > getChar
+23:52:36 <petercommand> > 1
+23:52:36 <lambdabot>  <IO Char>
+23:52:38 <lambdabot>  1
+23:52:42 <pkmx> > 1
+23:52:43 <petercommand> > getChar
+23:52:44 <pkmx> > 1
+23:52:44 <lambdabot>  1
+23:52:44 <lambdabot>  can't find file: L.hs
+23:52:46 <lambdabot>  1
+23:52:46 <pkmx> > 1
+23:52:48 <lambdabot>  1
+23:52:49 <petercommand> > 1
+23:52:51 <lambdabot>  1
+23:52:58 <petercommand> > 1
+23:52:58 <petercommand> > getChar
+23:53:00 <lambdabot>  1
+23:53:00 <lambdabot>  can't find file: L.hs
+23:53:20 <pkmx> > 1
+23:53:20 <lambdabot>  1
+23:53:21 <pkmx> > 1
+23:53:23 <lambdabot>  1
+23:53:23 <pkmx> > 1
+23:53:24 <lambdabot>  1
+23:53:55 <pkmx> putStrLn "ker"
+23:54:14 <pkmx> > putStrLn "ker"
+23:54:16 <lambdabot>  <IO ()>
+23:54:17 <pkmx> > getChar
+23:54:18 <lambdabot>  <IO Char>
+23:54:26 <pkmx> > putStrLn "ker"
+23:54:28 <lambdabot>  <IO ()>
+23:54:29 <pkmx> > getChar
+23:54:30 <lambdabot>  <IO Char>
+23:54:45 <pkmx> > getChar
+23:54:46 <lambdabot>  <IO Char>
+23:54:47 <pkmx> > getChar
+23:54:48 <lambdabot>  <IO Char>
+23:55:00 <pkmx> @@
+23:55:23 <petercommand> > let f () = f () in f ()
+23:55:27 <lambdabot>  mueval-core: Time limit exceeded
+23:55:42 <suhorng> > (return 5 :: IO Int)
+23:55:44 <lambdabot>  <IO Int>
+23:56:14 <petercommand> > let f () = f () in f ()
+23:56:14 <petercommand> > let f () = f () in f ()
+23:56:15 <lambdabot>  can't find file: L.hs
+23:56:18 <lambdabot>  mueval-core: Time limit exceeded
+23:56:27 <petercommand> 順序變了XD
+23:56:34 <pkmx> let x = x in x
+23:56:36 <pkmx> > let x = x in x
+23:56:40 <lambdabot>  mueval-core: Time limit exceeded
+23:56:45 <pkmx> > let x = x in x
+23:56:47 <pkmx> > let x = x in x
+23:56:49 <lambdabot>  mueval-core: Time limit exceeded
+23:56:51 <lambdabot>  mueval-core: Time limit exceeded
+23:57:04 <pkmx> > let x = x in x
+23:57:07 <pkmx> > let x = x in x
+23:57:08 <lambdabot>  mueval-core: Time limit exceeded
+23:57:12 <lambdabot>  mueval-core: Time limit exceeded
+23:57:15 <petercommand> > let f () = f () in f ()
+23:57:16 <petercommand> > let f () = f () in f ()
+23:57:17 <lambdabot>  can't find file: L.hs
+23:57:19 <lambdabot>  mueval-core: Time limit exceeded
+23:57:32 <pkmx> > let f () = f () in f ()
+23:57:35 <pkmx> > let f () = f () in f ()
+23:57:36 <lambdabot>  mueval-core: Time limit exceeded
+23:57:39 <lambdabot>  mueval-core: Time limit exceeded
+23:57:45 <pkmx> 為什麼我跑就ok =_=
+23:57:48 <petercommand> 神奇XD
+23:58:00 <petercommand> > let x = x in x
+23:58:00 <petercommand> > let x = x in x
+23:58:02 <lambdabot>  can't find file: L.hs
+23:58:04 <lambdabot>  mueval-core: Time limit exceeded
+23:59:01 <pkmx> > fix succ :: Int
+23:59:05 <pkmx> > fix succ :: Int
+23:59:05 <lambdabot>  mueval-core: Time limit exceeded
+23:59:08 <lambdabot>  mueval-core: Time limit exceeded

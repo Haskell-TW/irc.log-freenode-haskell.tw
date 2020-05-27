@@ -1,0 +1,44 @@
+00:40:24 <CindyLinz> 唔.. 發現 Codeforces 的 Haskell 更新到 GHC 7.6 了
+01:12:26 <CindyLinz> 偷閒來玩幾題簡單題好了 :p
+16:13:40 <CindyLinz> 奇怪... haskell standard lib 裡面是不是沒有對 MArray 的排序啊? @@"
+16:45:35 <CindyLinz> @src sort
+16:45:36 <lambdabot> sort = sortBy compare
+16:45:39 <CindyLinz> @src sortBy
+16:45:40 <lambdabot> sortBy cmp = foldr (insertBy cmp) []
+16:45:52 <CindyLinz> @src insertBy
+16:45:52 <lambdabot> insertBy _   x [] = [x]
+16:45:53 <lambdabot> insertBy cmp x ys@(y:ys') = case cmp x y of
+16:45:53 <lambdabot>                                  GT -> y : insertBy cmp x ys'
+16:45:53 <lambdabot>                                  _  -> x : ys
+16:53:24 <CindyLinz> 怎麼長得不像 qsort @_@"
+16:54:40 <CindyLinz> 被欺騙的感覺..... Q__Q
+17:03:57 <CindyLinz> 和 base 4.6.0.1 的 sort 的 source 不一樣 @@"
+17:04:09 <CindyLinz> base 4.6.0.1 的 sort 是 merge sort
+17:45:02 <CindyLinz> @version
+17:45:02 <lambdabot> lambdabot 5.0-int-e
+17:45:03 <lambdabot> git clone git://github.com/int-e/lambdabot.git
+17:46:02 <CindyLinz> > length (sort [1..100000])
+17:46:03 <lambdabot>  100000
+17:46:07 <CindyLinz> > length (sort [1..1000000])
+17:46:09 <lambdabot>  1000000
+17:46:20 <CindyLinz> 這速度... @_@"
+17:47:00 <CindyLinz> > sum (sort [1..1000000])
+17:47:02 <lambdabot>  *Exception: stack overflow
+17:47:08 <CindyLinz> > sum (sort [1..100000])
+17:47:10 <lambdabot>  5000050000
+17:47:35 <CindyLinz> > sum (sort $ reverse [1..100000])
+17:47:36 <lambdabot>  5000050000
+21:17:07 <CindyLinz> 覺得.. 如果有人把 Yesod 弄熟了, 到 Functional Thursday 或是 Coscup / OSDC 介紹, 殺傷力應該蠻強的.. ._.
+21:17:58 <CindyLinz> Snap 比較零碎, 所以我猜這個整體介紹比較不好做, 講起來的炫度也會差一點
+22:52:15 <mno2> CindyLinz: 你心中想的殺傷力是指快速做 blog ?
+22:58:35 <CindyLinz> mno2: 殺傷力是讓聽眾覺得炫, 覺得有興趣.....   快速做 blog 可以是個方法, 不過我沒有想到 ^^|
+23:00:06 <mno2> yesod 真的比較完整，但就覺得有點醜..
+23:00:50 <CindyLinz> 醜嗎? 我只是覺得它整合得太緊密, 比較不合我味口..
+23:03:11 <CindyLinz> 是因為用了 Quasiquotion 和 template haskell 所以覺得醜嗎?
+23:03:27 <mno2> 對啊，萬一寫錯了不知道怎麼 debug ..
+23:04:07 <CindyLinz> 啊不就瀏覽器開起來看就好了嗎? XD
+23:04:21 <mno2> 是 compile 不過吧
+23:04:28 <CindyLinz> 喔喔 ^^|
+23:04:51 <CindyLinz> compile 不過不就把部分東西拿掉, binary search 哪一條有問題嗎? ^^
+23:06:04 <mno2> 但問題是就算知道哪一條有問題，也要有足夠的知識看出來要怎麼修吧
+23:11:32 <CindyLinz> 沒去用, 還沒辦法體會 ^^|

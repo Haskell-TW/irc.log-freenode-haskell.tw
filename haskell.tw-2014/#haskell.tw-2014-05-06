@@ -1,0 +1,71 @@
+00:31:17 <CindyLinz> haskell 2.0?
+00:40:54 <suhorng> 不知道耶
+00:41:16 <suhorng> 應該只是個標題...?
+00:46:52 <hashcat_> 應該是指文章
+00:47:02 <hashcat_> 是第二版本
+00:49:15 <CindyLinz> 喔
+00:50:44 <hashcat_> 剛剛發現haskell版本沒出過高於1.x的
+00:51:43 <hashcat_> 1.4之後莫名其妙地拿年份當版本
+00:53:40 <godfat> 我以為版本號是 7.8.x (誤
+00:55:37 <hashcat_> ghc
+00:56:20 <CindyLinz> hashcat_: 已經出到兩千多版了耶~~ (逃)
+00:58:08 <suhorng> 7.8.x xDD
+00:58:38 <hashcat_> 2~97,99~2010黑歷史
+00:58:45 <hashcat_> 2009
+01:00:20 <hashcat_> 直接跳2010說明那是兩千多版的進步
+01:02:24 <hashcat_> 慢慢增加的版本號無法顯示這種進步
+01:02:24 <CindyLinz> XD
+01:25:50 <CindyLinz> 唔.. cabal-install 出 1.20 了
+03:56:08 <monochrom> 我只是隨機抽讀, 幸運抽中那段. 有幸有不幸.
+04:41:54 <CindyLinz> 原來... cabal sandbox add-source 加完 source 以後, 要再 cabal install 它一次, 才能夠用..
+17:19:55 <CindyLinz> GHC 的 extension DoRec 改名 RecursiveDo
+17:20:03 <CindyLinz> 用 DoRec 會被 warning deprecated XD
+17:22:23 <godfat> Do Recording
+17:22:23 <godfat> 話說形容詞到底應該放前面還是後面，我現在還想不透
+17:23:15 <b4283> RecursiveDoReMi
+17:26:39 <CindyLinz> 寫一般的應用用到 rec 還是感覺有點抖抖的, 像做壞事的感覺.. @@"
+17:27:53 <CindyLinz> 這一段 code 現在長這樣: http://lpaste.net/2744390566346227712
+17:28:42 <CindyLinz> 這樣寫, 好不好啊? @@"
+17:29:29 <godfat> 我想我忘記 do rec 是什麼意思了.. XD
+17:30:04 <CindyLinz> 就是 <- 和 let 生出來的 name binding 可以後面幾行產生的, 卻在前面用
+17:30:24 <b4283> 喔，像是 letrec ?
+17:30:36 <CindyLinz> 嗯, 只是是 monad 版
+17:30:45 <CindyLinz> 因為 haskell 的 let 本來就已經是 letrec 了
+17:31:15 <CindyLinz> 我這邊是最下面的 let stateHdr = ... 拿到前幾行的 forkIO 那邊用
+17:32:17 <CindyLinz> 嗯, rec 應該可以只包到 forkIO 和以下的部分就好
+17:32:22 <godfat> 感覺是一個糾結的結構，可以的話我會試著避免..
+17:32:56 <b4283> letrec 的 reference implementation 是一個超複雜 macro
+17:33:23 <CindyLinz> 就那兩個 thread 裡面會用到這個 state holder, 然後自己的 ID 又想存在這個 state holder 裡面, 而且因為終生不變, 所以就沒放 IORef 給它
+17:34:39 <godfat> 可以改成讓兩個 thread 透過 channel 溝通之類的？
+17:39:00 <CindyLinz> 用 MVar 自主檢查嗎?.. 我原本想用 throwTo.. XD
+17:40:20 <godfat> 不知道耶，看怎麼寫比較順 (安全) orz... concurrent 程式真是難在那 1%..
+17:41:18 <CindyLinz> 用你前幾天在講的那個 mask 啊 XD
+17:41:43 <CindyLinz> N95面罩, 抗 sars 安全!
+17:42:32 <CindyLinz> 用自主檢查好了 :|
+17:42:59 <godfat> XDDD 不過翻來看去發現好複雜，我一時沒看完，不確定是不是有用錯的風險
+17:43:00 <godfat> 是說覺得想買那本書，後來發現是 Simon 寫的 XD
+17:43:53 <CindyLinz> SPJ/
+17:44:59 <godfat> Simon Marlow
+17:45:47 <godfat> 我發現這兩個人我搞不好搞混了
+17:45:49 <CindyLinz> 喔
+17:45:57 <CindyLinz> SM/
+17:46:25 <CindyLinz> SML/ 好了.. ww
+17:46:34 <godfat> XDDDD
+17:47:06 <godfat> 我一定有在哪裡搞混他們過... 可惡西方人的名字不太會記
+17:47:29 <b4283> Marlow 很好記啊
+17:47:46 <godfat> 都怪我常常只記得 first name XD
+17:47:56 <b4283> marshmallow XD
+17:48:09 <godfat> XDDDD 棉花糖++
+17:48:11 <b4283> 賽門棉花糖
+17:48:33 <godfat> 同時販售
+17:48:34 <CindyLinz> b4283: 這字看起來好像賤兔 ww
+17:50:02 <godfat> facebook 有些 post 能看不能 like 好討厭
+21:50:50 <gansteed> random :: (RandomGen g, Random a) => g -> (a, g), 请问如果给同一个a, 返回的新的generator也是一样的吗？
+22:51:50 <CindyLinz> gansteed: 啊對, 上次你問的問題, 你離線以後有人回答你... 你可以翻 log 看看 ^^|
+22:52:43 <CindyLinz> gansteed: 然後這邊... 不是只能給 g 嗎? a 在輸出裡面啊
+23:10:29 <monochrom> RecursiveDoReMi: http://article.gmane.org/gmane.comp.lang.haskell.cafe/91920/  我寫的!
+23:13:34 <CindyLinz> 還以為是正經的教學文咧 XD
+23:14:38 <letoh> 蠻有趣的
+23:15:41 <b4283> nice
+23:28:36 <monochrom> 我寫教學文也越來越不正經啦! 在 I/O tutorial 你會見到: "嗨! 又是我 fine print, 你一見到我就知我想講甚麼"...
+23:33:09 <CindyLinz> 這還算正經教學文可接受的範圍 XD

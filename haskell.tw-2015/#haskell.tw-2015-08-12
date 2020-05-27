@@ -1,0 +1,29 @@
+08:38:39 <c9sould__> access control framework 真是千變萬化 XD
+18:56:08 <cataska> 問一下: myFoldl f z xs = foldr step id xs z
+18:56:09 <cataska>     where step x g a = g (f a x)
+18:56:19 <cataska> 看不懂 Orz
+19:21:29 <petercommand> :t \f z xs -> foldr (\x g a -> g (f a x)) id xs z
+19:21:31 <lambdabot> Foldable t => (a1 -> a -> a1) -> a1 -> t a -> a1
+19:32:14 <petercommand> :t foldr
+19:32:15 <lambdabot> Foldable t => (a -> b -> b) -> b -> t a -> b
+19:33:58 <CindyLinz> cataska: foldr 有一種直覺看法是.. 把 list 中間的 (:) 換成 step, 把最後面的 [] 換成 z
+19:38:23 <petercommand> 這裡 [] 應該是換成 id 阿?
+19:39:59 <petercommand> 最後面應該是 x_n `step` id
+19:40:22 <petercommand> 變成 \a -> id (f a x_x)
+19:41:09 <petercommand> 變成 \a -> id (f a x_n)
+19:42:10 <CindyLinz> petercommand: 因為平常參數用 z.. 就像 myFoldl 那邊的 z... XD
+19:42:31 <petercommand> 對阿XDD
+19:46:35 <petercommand> cataska: 下一步 x_n-1 `step` (\a -> id (f a x_n)) == (\a -> (\b -> f b x_n) (f a x_n-1)) == (\a -> f (f a x_n-1) x_n)
+19:47:00 <petercommand> 這樣一直套下去
+19:47:39 <CindyLinz> 看一下 type 好了? 可以幫助思考
+19:48:01 <CindyLinz> 有幫助到嗎?
+19:48:23 <CindyLinz> 換順序好像不會 encode 在 type 裡..  ^^|
+19:48:44 <petercommand> 這個例子看 type 不好XD
+19:49:15 <petercommand> 效果看不出來
+19:49:57 <petercommand> 實際去套一下就知道在做甚麼了 ^^
+19:51:58 <cataska> 第一個問題：foldr 不是三個參數怎麼變四個
+19:53:35 <petercommand> 先套用前3個
+19:53:49 <petercommand> 出來會是一個函數
+19:54:00 <petercommand> 再把第四個套進去
+19:55:17 <petercommand> 套完3個，結果就會像是前面的 (\a -> f (f a x_n-1) x_n) 這樣
+21:17:18 <cataska> 我先自己導導看喔

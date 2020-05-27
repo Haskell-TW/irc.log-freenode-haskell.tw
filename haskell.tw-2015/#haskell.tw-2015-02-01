@@ -1,0 +1,71 @@
+00:00:03 <pkmx> 手癢把cabal升級到1.22結果ghc-mod就炸裂了...
+00:00:16 <pkmx> TL;DR Cabal-1.22 is not supported unless you're using GHC-7.10. # https://github.com/kazu-yamamoto/ghc-mod/issues/429
+00:00:25 <pkmx> GG
+00:00:51 <CindyLinz> 欸.. 我的 cabal 也是 1.22 欸.. 配 7.8.3 可以用
+00:01:44 <pkmx> 把dist/砍掉搞不好就會炸了=p
+00:02:13 <CindyLinz> 我都是用 cabal sandbox 就是了...
+00:02:31 <pkmx> 我也是用sandbox @@
+00:05:54 <pkmx> 只好暫時屈服裝回1.20了@@
+01:19:33 <monochrom> 只要移除 Cabal-1.22 就是了
+01:20:15 <monochrom> 打完齋不要和尚, build 完 cabal-install 1.22 就不再要 Cabal-1.22 了
+01:29:00 <monochrom> 所以其實最實惠是在沙盒裏 build cabal-install, 然後丟掉沙盒, 即用即棄
+03:38:38 <jeffcyt> 請教各位大大 如果有兩個list 要compare equality, 會採取什麼樣的做法呢？
+03:42:30 <jeffcyt> signature 如下 Eq a => [a] -> [a] -> Bool
+03:42:57 <jeffcyt> 或是 Eq a => [a] -> [a] -> [Bool]
+03:43:19 <pkmx> > [1,2,3] == [1,2,3]
+03:43:21 <lambdabot>  True
+03:43:36 <pkmx> > zipWith (==) [1,2,3] [1,2,4]
+03:43:38 <lambdabot>  [True,True,False]
+03:44:18 <jeffcyt> [1..] == [1..]
+03:44:30 <jeffcyt> > zipWith [1..4] [1..]
+03:44:32 <lambdabot>  Couldn't match expected type ‘a0 -> b -> c’ with actual type ‘[t0]’
+03:44:46 <jeffcyt> > zipWith (==) [1..4] [1..]
+03:44:49 <lambdabot>  [True,True,True,True]
+03:45:34 <jeffcyt> 兩個 list 都有 potentially infinite
+03:47:37 <pkmx> > zipWith (==) [0..] [0..]
+03:47:39 <lambdabot>  [True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,...
+03:49:17 <jeffcyt> 但是 [1..4] 不等於 [1..] ？
+03:49:44 <pkmx> > [1..4] == [1..]
+03:49:46 <lambdabot>  False
+04:20:17 <jeffcyt> thanks 會再思考自己的問題
+06:03:47 <favonia> jeffcyt: 內建的 List 有實作 (==)
+08:33:52 <monochrom> 如果兩個列都無限, 而又不能作些假設, 那麼就是 undecidable 及 co-recognizable
+20:06:12 <pkmx> 原來可以用-v0叫ghc閉嘴不要亂噴TH link的訊息
+20:51:36 <CindyLinz> TH link?
+21:04:22 <pkmx> Loading package line-noise-for-fun-and-profit-666.0.0.0 ... linking ... done.
+21:05:55 <pkmx> Loading package depended-by-lens-because-why-not-0.0.0.1 ... linking ... done.
+21:08:57 <CindyLinz> 學起來!! :D
+21:10:48 <au> Loading package aeson-derive-json-but-actually-only-using-fromjson-0.8.0.2 ... linking ... done.
+21:15:37 <au> pkmx++ # 發現寫在 {-# OPTIONS_GHC #-} 裡也有用 https://github.com/audreyt/MoeDict.hs/blob/63979e78/MoeDict.hs#L2
+21:16:22 <pkmx> :D
+21:16:30 <pkmx> 不過聽說 7.10 之後就不會噴了
+21:24:32 <CindyLinz> OPTIONS_GHC 要加在.. 第一個 .hs 檔裡面嗎?
+21:33:11 <pkmx> 第一個= =?
+21:37:41 <au> 我現在是每一個用到 TemplateHaskell 的都加
+21:37:42 <CindyLinz> 就... ooo.cabal 裡面的 main-is: 指定的 .hs 檔? XD
+21:38:03 <CindyLinz> 咦 這個參數是 per-module 的喔? @@"
+21:39:15 <au> 應該不是 (你說得對, 加在 entry 裡就可以了)
+21:39:45 <au> 我只是 ghci 單一模組比較方便 (但是其實也可以 alias ghci='ghci -v0')
+21:43:13 <CindyLinz> 喔喔 ghci 用也是個情況 ^^
+21:45:34 <pkmx> $ ghci -v0
+21:45:38 <pkmx> λ:1>
+21:45:45 <pkmx> WOW 乾淨多了
+21:57:25 <CindyLinz> 河蟹的概念 XD
+23:47:57 <petercommand> https://ideone.com/zxW0eP
+23:48:28 <petercommand> 想拿 StateT Integer (State Integer) () 來寫 factorial，可是症個寫起來怪怪的QQ
+23:48:31 <petercommand> 整個
+23:49:39 <CindyLinz> 這問題比較適合 functional style 呀?
+23:49:57 <petercommand> 甚麼意思?
+23:50:42 <petercommand> 話說為甚麼 ideone 要 flash...XD
+23:50:59 <CindyLinz> factorial 不是 f n = n * f(n-1) 之類的嗎? 這樣比較順啊? XD
+23:51:08 <petercommand> CindyLinz: 就是想玩玩看:p
+23:51:37 <CindyLinz> 欸... 我覺得在 monad action 裡面出現自己的 evalXX, runXX 真的會很怪...
+23:52:13 <petercommand> 我也是想寫遞迴
+23:52:15 <CindyLinz> 如果在 do 裡面還要自己手動寫 evalXX, runXX 的話... 這個 monad + do-notation 就沒意義了呀.....
+23:53:26 <petercommand> CindyLinz: 的確沒甚麼意義沒錯，就是玩玩看XD
+23:54:19 <CindyLinz> 所以你是故意不用 MonadState 的 method, 然後自己去組裝 State 嗎? @@"
+23:56:40 <petercommand> CindyLinz: 不是..是還沒有看 MonadState 有甚麼 method..@@
+23:57:09 <CindyLinz> petercommand: 這.. XD # https://hackage.haskell.org/package/mtl-1.1.0.2/docs/Control-Monad-State-Class.html
+23:57:38 <petercommand> 剛剛在看那個 functional dependency..
+23:58:56 <CindyLinz> 不要理它 XD
+23:59:23 <petercommand> XD

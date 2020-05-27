@@ -1,0 +1,22 @@
+15:43:48 <suhorng> Haskell 寫久了也有點會限制思考QQ 完全沒想到可以在 datatype 中放 reference
+15:46:14 <suhorng> 不過 Haskell 也不可能直接對 那個 ref 做 pattern matching, 寫起來有點小不悅XD
+15:52:05 <CindyLinz> suhorng: 用 view pattern?
+15:53:19 <suhorng> CindyLinz: 出來是 IO someType 的話該怎麼辦呢?
+15:54:13 <CindyLinz> 只好 unsafePerformIO 惹.. QQ
+15:54:32 <suhorng> 不~~~~
+15:57:10 <CindyLinz> 我想這邊的 ref 是類似 IORef 的東西... 其內容物的確會隨時間變化, 這東西作 pattern matching 不可能是個 pure 東西吧? @@"
+15:58:06 <suhorng> 沒錯沒錯
+15:58:20 <suhorng> 出來的是 IO xxx
+15:59:08 <suhorng> 於是現在我只好手動寫XD   f (Var x) = do { x' <- readIORef x; .... }
+15:59:17 <CindyLinz> 嗯, 所以是說 haskell 缺少了一個 impure pattern match?
+15:59:36 <CindyLinz> 欸對呀用 >>= 搭配 lambda case 好了?
+15:59:57 <suhorng> 阿 這樣嗎:
+16:00:07 <suhorng> f (Var x) = readIORef >>= \case ...？
+16:00:14 <suhorng> 對耶 可以這樣做XD
+16:00:16 <CindyLinz> 對
+16:00:24 <suhorng> 至少寫起來還滿像 pattern matching
+16:01:36 <CindyLinz> 什麼像~ 人家貨真價實 XD
+16:01:54 <CindyLinz> 只是前面要先用 >>= 脫衣服 :Q
+16:01:59 <suhorng> XDDDDDDD
+23:20:11 <suhorng> 如果我 import qualified A as B 的話好像就不能重新 export B...難過QQ
+23:58:16 <monochrom> suhorng: 請看我的 http://www.vex.net/~trebla/haskell/module.xhtml , 有真相

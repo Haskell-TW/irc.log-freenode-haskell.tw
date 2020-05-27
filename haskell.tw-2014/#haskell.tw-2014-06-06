@@ -1,0 +1,88 @@
+01:16:51 <godfat> c9sloud, r3 formula 進 homebrew 了 https://github.com/Homebrew/homebrew/commit/9cbb2c5536ca85078c70e18370eb63812b8361c1
+09:46:36 <mno2> Vagrant 現在支援 NixOS 了耶：https://github.com/mitchellh/vagrant/blob/v1.6.3/CHANGELOG.md
+09:47:10 <mno2> GH-3830
+09:47:24 <mno2> NixOS - Supports changing host names and setting networks
+11:35:00 <c9sloud> godfat: 賀!
+11:35:05 <c9sloud> godfat++
+13:23:28 <c9sloud> case sensitive / case insensitive 的地方也需特別注意
+13:31:21 <c9sloud> 累的話應該是 http server 不是 header parsing XDD
+13:41:12 <c9sloud> 好像得到 rfc3986 超展開
+15:23:36 <whitglint> c9sloud: 開始做 parser 了？
+15:37:09 <c9sloud> yeah
+15:37:17 <c9sloud> 只先做了 RequestLine 的 parsing XD
+15:43:15 <c9sloud> perforce 每次 commit 完檔案都變成 read only 還蠻惱人的
+15:43:22 <c9sloud> 要編輯還要先 edit ...
+15:43:42 <godfat> 為何用 perforce 啊？雖然聽說不錯
+15:52:25 <c9sloud> 客戶是用 perforce 所以只好跟著用 XD
+15:53:01 <c9sloud> 話說 Google 也用 perforce.. 而且聽說 Google 全球有 80+ perforce replication
+15:53:17 <godfat> XDDD 難怪。不過 commit 完變 read only 的概念滿有趣的
+15:53:34 <c9sloud> godfat: 他的概念就是你要改之前一定要跟 perforce 說
+15:53:40 <c9sloud> 他 allow 你改才可以改
+15:53:58 <c9sloud> 比較類似 cvs
+15:54:53 <godfat> 可能是最好的 central source managent?
+15:54:54 <godfat> 喔是這樣喔，那就有點麻煩..... 我可能要跨很多檔案要編輯耶 = =
+15:57:08 <c9sloud> 而且有時候叫 p4 edit 了
+15:57:17 <c9sloud> 沒實際改到，就要去 revert
+15:57:26 <c9sloud> 不然他會 commit empty diff 進去
+15:57:54 <godfat> 我笑了... 難用 (蓋章)
+15:58:11 <c9sloud> 所以我現在是寫了一個 script 把 hg commit rebase 到 perforce 去 XD
+15:58:43 <godfat> 不是 git? XD
+15:59:00 <c9sloud> 恩恩 這個 project 有些平台考量所以是用 hg
+15:59:30 <godfat> 需要用 python 操作 hg..?
+15:59:58 <godfat> 這麼說來 perforce 真的是超級老古板..
+16:01:24 <c9sloud> godfat: python Windows 整合還不賴.. 因為設計師都是用 Windows
+16:01:30 <c9sloud> 所以就決定用 hg
+16:01:56 <c9sloud> godfat: 喔操作 hg 我是用 bash XD
+16:02:14 <godfat> 熊熊忘記 windows 的存在... XD 不過我記得 TortoiseGit 現在發展也不錯？
+16:04:41 <c9sloud> 好像還要 mingw 什麼的
+16:04:53 <c9sloud> git 概念上對設計師來說比較難理解
+16:05:08 <c9sloud> 所以懶得慢慢解說所以就用 hg  XD
+16:05:22 <c9sloud> 用上傳跟下載的概念秒殺解釋 XD
+16:07:48 <godfat> TortoiseGit 我不確定要不要，不過在那之前，windows 上用 git 真的滿麻煩的，不只要 mingw, 還要 msysgit 之類的...
+16:07:49 <godfat> XDD 我沒真的用過 hg, 只拉過別人的 repository, 沒 commit 過
+16:07:49 <godfat> 反倒是 darcs 用過一點點
+16:08:53 <godfat> 是說 git 之前我是用 svk XDD
+16:32:20 <superbil> windows 之前是用 gitextensions 這套比較直覺，而且包了 msysgit
+17:56:05 <c9sloud> whitglint: h3 基本的 parser 好了耶 XD
+17:56:30 <c9sloud> 不過還沒整理
+17:58:36 <whitglint> c9sloud: 這麼快！！！
+17:58:55 <whitglint> c9sloud 替身使者無誤
+17:59:09 <c9sloud> whitglint: 我的想法很簡單... 所以目前只有 200行左右..
+17:59:18 <c9sloud> 真正的 header field value parsing 比較費工夫
+17:59:30 <whitglint> c9sloud: 純 parse 就好，不要跟 socket 綁在一起
+17:59:54 <c9sloud> 譬如說 h3_header_parse_date(header); 之類的..
+18:00:03 <c9sloud> 這類的會是第二層 API
+18:01:28 <c9sloud> whitglint: 當然不會綁 socket XD
+18:01:38 <c9sloud> socket 是 server side 的事情 i think
+18:02:20 <whitglint> Good
+18:05:48 <c9sloud> 然後要簡潔+效率的關係，所以還是用 C XDDD
+18:13:52 <whitglint> C 很好啊 XD
+19:32:16 <c9sloud> whitglint: 你一個人創業嗎
+19:42:11 <whitglint> c9sloud: 還有我朋友，不過這已經成為過去式了 XD
+19:49:16 <c9sloud> 接下來有什麼計劃嗎？
+19:53:02 <whitglint> 邊哭邊找工作
+19:53:41 <whitglint> 開玩笑的 # 這裡有 log
+19:55:37 <c9sloud> xDD
+19:56:01 <c9sloud> 你有包過 Qt app for Windows 嗎
+20:01:53 <whitglint> 有包過免安裝版，就把缺的 dll 放在 exe 同目錄
+20:02:49 <whitglint> 可以試試 dependency walker 類似 ldd 功能
+20:04:51 <c9sloud> 哦哦
+20:04:54 <c9sloud> ？
+20:05:35 <whitglint> http://www.dependencywalker.com/
+20:05:38 <godfat> 我應該用過，滿不錯的，可以把所有 dependency 用 tree 的方式列出？
+20:07:30 <whitglint> 對呀，但是 qt plugin 列不出來，大概是用 LoadLibrary() 載入的
+20:10:39 <godfat> @@" 那好像只能跑跑看
+21:01:11 <hashcat> whitglint: 創haskell業?
+22:27:44 <c9sloud> https://gist.github.com/c9s/b567a2f286525bc5f676
+22:27:52 <c9sloud> H3 API Synopsis
+22:28:02 <c9sloud> 兩種版本..
+22:28:07 <c9sloud> 一種是直接 h3_get...
+22:28:14 <c9sloud> 另一種是分 h3_request_header_get ...
+22:28:29 <c9sloud> 因為除了要 parse request header
+22:28:36 <c9sloud> 也要處理 parse response header
+22:29:21 <c9sloud> 所以在想命名成:  h3_request_header_get_accept 或 h3_request_get_accept OR h3_reqhd_get_accept 之類的
+22:35:23 <c9sloud> CindyLinz: https://github.com/kentaro/cpan-src/blob/master/main.go
+23:04:49 <c9sloud> 呃.. 我覺得 h3_request_header_get_proxy_authorization 之類的實在太長了... XD
+23:19:30 <c9sloud> 咦今天晚上都沒人 XD 因為 Friday night 嗎
+23:22:21 <whitglint> 在改履歷 XD
+23:22:27 <monochrom> 忙

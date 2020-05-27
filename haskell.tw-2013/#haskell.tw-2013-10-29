@@ -1,0 +1,51 @@
+11:15:05 <MnO2> 接下來這次 Functional Thursday 是在 11/7 ?
+17:37:08 <MnO2> 我之後可能好一陣子沒辦法參加 Functional Thursday 了
+17:38:40 <MnO2> 最近找到一份 Haskell 的工作，不在台灣。
+17:46:12 <b4283> very cool
+17:51:47 <petercommand> MnO2: 線上視訊^^
+17:52:39 <miaout17__> MnO2: 恭喜~~
+17:53:11 <MnO2> 除了錄影可以開 Hangout or Skype 嗎？ xD
+17:58:31 <CindyLinz> MnO2: 恭喜!!
+18:08:56 <godfat1> MnO2, 恭喜！
+18:09:15 <MnO2> godfat1: 也恭喜你 :p
+18:09:28 <godfat> 謝謝 XDD
+18:11:03 <MnO2> http://www.shellcheck.net/about.html 感覺不錯
+18:12:33 <godfat> 不要用 sh/bash 就好了... orz
+18:13:04 <godfat> 一堆毛都是用那語言的關係 :o 寫起 bash 真的超痛苦，更甚 js...
+18:14:21 <MnO2> 主要是要接手別人的東西 ...
+18:14:33 <godfat> ~.~
+18:38:14 <caasih> MnO2: 恭喜！
+18:41:14 <MnO2> thanks
+18:55:59 <miaout17__> godfat: Will you work at TW or be relocated?
+18:56:26 <MnO2> caasih: 原來 au 的外號是魔法生物 xD
+18:56:56 <MnO2> 他是兩邊都有辦公室嗎？
+18:56:58 <godfat> would be in TW in foreseen future, no further plan for now
+18:57:06 <godfat> work remotely
+18:57:13 <miaout17__> Cool.
+18:58:16 <caasih> MnO2: 記得是 ETBlue 取的XDD
+18:58:26 <MnO2> godfat: 主要還是寫 ruby 嗎？
+18:58:39 <MnO2> caasih: 好可愛的名字
+18:59:45 <godfat> MnO2, 應該是 @@" 或是說至少目前現有的東西是 ruby, 其他要做什麼就再討論這樣
+19:00:09 <caasih> godfat: 已到 codementor 排隊，哪天來消費，贊助 godfat XD
+19:01:11 <godfat> XDDD 我兩邊都有註冊，不過 mentor 那邊又收到一封信要把資料補完，有點懶，就先放著了 @_@.... 目前還不清楚是什麼機制，還沒細看程式 XD
+19:01:34 <MnO2> miaout17__: 對 start-up 要贊助 H1B 還是太貴了，我覺得 work remotely 很正常
+19:03:50 <MnO2> codementor可以mentor Haskell耶
+19:05:35 <MnO2> https://www.codementor.io/byvoid 大神 byvoid
+19:06:14 <MnO2> https://www.codementor.io/ekmett 好像蠻受歡迎的 xD
+19:06:30 <godfat> staging server 上也有 Edward Kmett... XD
+19:06:30 <godfat> 15min / $75!
+19:06:30 <godfat> 可惜 production server 上沒有他 @_@
+19:06:46 <godfat> 喔喔喔，出現了啊，我下午看時還沒有 @_@
+19:10:32 <MnO2> godfat: 他填這個數字好高啊 xD,  4 * 75 * 8 * 20 * 12 = 576000
+19:10:45 <MnO2> 難不成他年薪可以到 50w USD
+19:11:41 <petercommand> 1min $5 XD
+19:36:08 <godfat> 我後來轉念一想，大概意思也是無誠勿擾吧.... XD
+19:36:28 <godfat> 以後用 haskell 寫網站，然後吃自己狗食問他問題 @_@
+19:37:59 <petercommand> 價格太恐怖啦XDD
+19:41:39 <suhorng> mno2: 哇 恭喜~!
+19:48:11 <suhorng> 喔喔喔 http://www.yinwang.org/blog-cn/2013/10/29/pysonar2/ 「『PySonar2 开源』」 「经过 Google 的许可，我决定把 PySonar 第二版本开源，.......」
+19:55:48 <godfat> wow
+21:13:31 <favonia> godfat: bash 很好寫啊，不就兩行，第2行是 runhaskell xxx.hs $@ ?
+21:14:54 <favonia> js 感覺寫起來就比較麻煩
+21:15:35 <letoh> 看兩次才看懂XDXD
+21:26:35 <CindyLinz> ...||

@@ -1,0 +1,10 @@
+00:38:14 <kcwu> http://en.wikipedia.org/wiki/Fibonacci_search_technique 這邊說 "non-uniform access memory storage" 有好處, 不過我看不懂為何
+00:39:18 <CindyLinz> 左邊(index偏小)的 access 比右邊快的 memory 設計嗎? XD
+00:40:39 <CindyLinz> 依 wiki 的括號說明 (i.e., the time needed to access a storage location varies depending on the location previously accessed)
+00:41:10 <CindyLinz> 感覺是看近一點的地方有好處..
+00:41:54 <CindyLinz> 具體機制不知道 @@"
+00:42:54 <kcwu> 用同樣的道理的話, 改成 1/3, 2/3 search 應該也有效果?
+00:44:37 <CindyLinz> 嗯..
+00:44:55 <CindyLinz> 然後下面有講到可以把 array 塞不進 cache 的也視為 non-uniform access memory
+00:46:17 <CindyLinz> 不過 cache 應該常見的是 32bytes 或 64bytes 為單位.. 這樣要很近很近才有效的感覺
+00:47:05 <CindyLinz> 欸.. 如果把 binary search 的「比較」, 改成把同一個 cache line 上面所有的 element 都掃過 (其實也就掃頭尾兩處就好 ^^|) 應該可以再快一咪咪? :p

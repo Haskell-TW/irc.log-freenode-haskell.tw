@@ -1,0 +1,34 @@
+19:00:27 <hashcat> agda真是神一般的存在
+19:01:05 <hashcat> type-level 跟 functional-level 渾然一體
+22:40:32 <favonia> hashcat: 你開始在寫 Agda 嗎？
+22:40:48 <hashcat> 額看很久
+22:41:22 <hashcat> favonia: 幾個月前看了現在又看了
+22:41:30 <favonia> 嗯嗯
+22:42:34 <hashcat> 沒拿來寫
+22:42:58 <hashcat> 看起來就是把type也當value了
+22:43:55 <hashcat> 所以可以搞出接受非type的value產生新type
+22:44:42 <hashcat> 隱參數的參數推論取代多態
+22:47:55 <favonia> hashcat: 非 type 的 value 是指？
+22:48:15 <hashcat> 1,2,3這種
+22:48:47 <hashcat> 因為agda把type和type of type都當value了
+22:49:07 <hashcat> 才會有非type的value這說法
+22:49:23 <favonia> hashcat: 喔我剛才斷句斷錯了。
+22:50:44 <favonia> 對了，多態本來就不需要是隱藏的...。 Haskell 是隱藏的沒錯。
+22:51:05 <favonia> （在沒有開外掛前）
+22:52:35 <hashcat> 看不太懂
+22:52:58 <hashcat> 是說Agda有隱參數的設計
+22:56:18 <hashcat> 怎會變成說Haskell隱藏的
+22:56:40 <hashcat> Agda其實是單態
+22:56:45 <favonia> hashcat: 對。我的意思是說多態的的型態變數和 forall (像 forall a.a->a 的 forall a) 本來就不需要藏起來
+22:57:00 <hashcat> 但因為有些參數可以藉由推論推導出來
+22:57:05 <favonia> Agda 就看你怎麼看啦
+22:57:23 <hashcat> 可以用語法設定隱藏掉
+22:57:36 <hashcat> 不用輸入, 看起來就像多態了
+22:59:37 <favonia> 我的意思是說多態本身不代表像剛才的 "forall a" 要藏起來，不代表我用一個多態的函式時不需要指定上面的 a 要用什麼帶入
+22:59:53 <favonia> 但 Haskell 是這樣設計沒錯
+23:00:15 <hashcat> forall也可以寫出來
+23:00:28 <hashcat> 預設不用寫比較方便吧
+23:01:49 <favonia> hashcat: 我想一部份原因是因為 Haskell 的型態系統（跟 Agda 比起來）很簡單所以偷懶還不會出（太多）狀況
+23:03:58 <hashcat> 期待有擴展能讓haskell變成agda
+23:04:07 <hashcat> 兼容haskell
+23:09:10 <hashcat> Haskell型別系統一直在擴展

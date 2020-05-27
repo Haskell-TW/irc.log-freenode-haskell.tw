@@ -1,0 +1,17 @@
+16:44:50 <CindyLinz> 在 Agda 裡面, module ... where 之後打一個 mutual, 然後把之後所有的程式碼加一個縮排, 就可以讓前面的程式使用後面的定義了 :p
+21:33:26 <suhorng> Haskell的module name應該怎樣才正確阿?
+21:33:29 <suhorng> 假設是:
+21:33:44 <suhorng> ./  A.hs   -- import B.C
+21:33:51 <suhorng>     B/C.hs
+21:34:04 <suhorng> 那麼 C.hs 應該寫 module C 還是 module B.C？
+21:34:16 <suhorng> 我原本直覺是前面不過好像後面才是對的QQQ
+21:40:38 <suhorng> http://www.haskell.org/ghc/docs/7.4.1/html/users_guide/syntax-extns.html#hierarchical-modules  .....原來有 "." 的是 GHC extension...
+21:45:15 <suhorng> 原來大家都寫後者 後者才是對的orz
+22:09:54 <favonia> CindyLinz: 新版 agda 已經不用 mutual 了...
+22:10:06 <favonia> CindyLinz: 你只要把宣告往前移動就好
+22:11:15 <favonia> suhorng: Agda 也照抄... lol
+22:13:24 <suhorng> 原來 Agda 也是這樣!!!
+22:13:46 <suhorng> 沒想到 Haskell98 的模組竟然是平的orz
+22:30:59 <CindyLinz> favonia: 可是用了 mutual 的話, declare 也不用往前放耶~
+22:31:18 <favonia> CindyLinz: 現在 mutual 只是 syntax sugar lol
+22:31:31 <CindyLinz> favonia: 在用 literate 的方式寫文章的話, 順序可以隨意比較好寫

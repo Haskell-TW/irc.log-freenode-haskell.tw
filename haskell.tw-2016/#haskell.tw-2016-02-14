@@ -1,0 +1,30 @@
+07:40:56 <pkmx> @pl \p -> _Wrapped . ix p
+07:40:56 <lambdabot> (line 1, column 7):
+07:40:56 <lambdabot> unexpected "_"
+07:40:56 <lambdabot> expecting lambda abstraction or expression
+07:41:01 <pkmx> @pl \p -> Wrapped . ix p
+07:41:01 <lambdabot> (Wrapped .) . ix
+07:41:55 <pkmx> pl居然不吃名子有_ =.=
+07:42:21 <pkmx> @pl \x -> camel_case x
+07:42:22 <lambdabot> camel_case
+07:42:27 <pkmx> @pl \x -> _camel_case x
+07:42:27 <lambdabot> (line 1, column 7):
+07:42:27 <lambdabot> unexpected "_"
+07:42:27 <lambdabot> expecting lambda abstraction or expression
+07:42:50 <pkmx> 原來是不能放在頭:p
+07:51:44 <monochrom>  @pl 用自家製 parser, 不完全.
+10:31:19 <petercommand> @unpl Wrapped . ix
+10:31:20 <lambdabot> (\ c -> (Wrapped) (ix c))
+10:45:41 <petercommand> @unpl \p -> Wrapped_ . ix p
+10:45:42 <lambdabot> \ p c -> (Wrapped_) (ix p c)
+10:45:46 <petercommand> @unpl \p -> _Wrapped_ . ix p
+10:45:46 <lambdabot> \ p c -> _Wrapped_ (ix p c)
+10:45:59 <petercommand> @pl \p -> _Wrapped_ . ix p
+10:45:59 <lambdabot> (line 1, column 7):
+10:45:59 <lambdabot> unexpected "_"
+10:45:59 <lambdabot> expecting lambda abstraction or expression
+10:46:34 <petercommand> @unpl \p -> (_Wrapped_ .) . ix p
+10:46:35 <lambdabot> \ p d g -> _Wrapped_ (ix p d g)
+10:46:45 <petercommand> @unpl (_Wrapped_ .) . ix
+10:46:46 <lambdabot> (\ d g -> _Wrapped_ (ix d g))
+10:47:05 <petercommand>  @unpl 可以耶XD

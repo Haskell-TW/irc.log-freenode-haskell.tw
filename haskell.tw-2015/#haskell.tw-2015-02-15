@@ -1,0 +1,49 @@
+00:44:59 <CindyLinz> > (+3, +4, *2, sin) & each %~ ($ 5)
+00:45:01 <lambdabot>  A section must be enclosed in parentheses thus: (+ 3)A section must be enclo...
+00:45:13 <CindyLinz> > ((+3), (+4), (*2), sin) & each %~ ($ 5)
+00:45:16 <lambdabot>  (8.0,9.0,10.0,-0.9589242746631385)
+00:45:22 <CindyLinz> 好東西 :D
+00:46:00 <suhorng> lens 0.0
+00:46:09 <suhorng> 黑科技
+00:48:45 <CindyLinz> 等等.. 這也算黑嗎? XD
+00:48:49 <CindyLinz> type safe 耶 XD
+00:49:04 <CindyLinz> pkmx 那個才是黑科技... (指指 shell code
+00:49:23 <suhorng> 那個是黑黑的白科技
+00:59:41 <pkmx> Control.Lens.Plated 裡面的才是黑科技
+01:02:06 <CindyLinz> > (((+), sin) & each %~ ($ 5)) & _1 %~ ($ 3)
+01:02:08 <lambdabot>  Occurs check: cannot construct the infinite type: a ~ a -> a
+01:02:50 <CindyLinz> QQ
+01:04:41 <suhorng> -rectypes
+01:06:12 <monochrom> 世事無論黑白灰, 都是 monochrome :)
+01:09:21 <CindyLinz> 以為只要吃同一種 type 的函數都行.. QQ
+01:22:17 <pkmx> 哇 Data.Bifunctor 被收到 base 裡面了 https://hackage.haskell.org/package/base-4.8.0.0/candidate/docs/Data-Bifunctor.html
+01:24:40 <pkmx> 發現新的haddock signature偷用UnicodeSyntax
+01:24:48 <pkmx> 然後instances有source的link了@@
+01:25:11 <CindyLinz> 喔喔喔 這個好! # 01:24 < pkmx> 然後instances有source的link了@@
+01:25:50 <CindyLinz> 以後會有 Data.Trifunctor Data.Quadfunctor Data.Pentafunctor... 嗎?
+01:45:44 <pkmx> Bitraversable, Tritraversable, ..., Octotraversable
+17:18:51 <CindyLinz> 受不了了... 開始在 .cabal 檔裡面寫 default-extensions:....
+17:19:11 <CindyLinz> 每次開檔寫一大排 {-# LANGUAGE .. #-} 太累惹
+18:26:58 <pkmx> CindyLinz 我之前也屈服了XDrz
+18:27:56 <CindyLinz> pkmx: (Y)
+18:28:40 <pkmx> default-extensions: FlexibleContexts FlexibleInstances FunctionalDependencies LambdaCase MultiParamTypeClasses MultiWayIf NoImplicitPrelude OverloadedStrings ScopedTypeVariables TupleSections ViewPatterns
+18:29:59 <pkmx> 這些應該都是無害的extensions XD
+18:46:41 <CindyLinz> NoImplicitPrelude.. OAO
+18:47:21 <CindyLinz> 我還開了 QuasiQuotes, TemplateHaskell, TypeFamilies, TypeSynonymInstances..
+18:47:28 <CindyLinz> 喔 有些是被 yesod 逼開的 XD
+18:47:45 <CindyLinz> GeneralizedNewtypeDeriving
+18:48:20 <CindyLinz> GADTs, EmptyDataDecls, DerivingDataTypeable
+18:50:48 <pkmx> 喔對啊 因為我是用自己的Prelude re-export ClassyPrelude + 自己的helper functions
+18:53:20 <pkmx> EmptyDataDecls 有必要都開嗎 @@
+18:58:02 <pkmx> 新的首頁上線了 # https://www.haskell.org/
+19:04:27 <CindyLinz> pkmx: 反正無害 XD
+19:05:30 <CindyLinz> 網頁左邊就是個 ghci 耶!!
+19:05:44 <CindyLinz> 不對.. 不能 :t.. XD
+19:06:06 <pkmx> 那個應該是tryhaskell的那個吧?
+19:06:33 <CindyLinz> 反應好慢 XD
+19:06:36 <pkmx> 我的直覺告訴我那個東西用手機開就會break
+19:08:00 <pkmx> 果然爛了...
+19:08:21 <pkmx> ¯\_(ツ)_/¯
+19:09:14 <CindyLinz> XD
+19:34:36 <suhorng> https://hackage.haskell.org/package/pure-io-0.2.0/docs/PureIO.html#g:2 新首頁看到的東西.....XD
+20:51:39 <mno2> https://www.haskell.org/?new  變新版首頁了

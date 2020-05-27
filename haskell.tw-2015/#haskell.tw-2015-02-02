@@ -1,0 +1,190 @@
+00:01:11 <petercommand> CindyLinz: 這樣會很不舒服呀XD
+00:01:31 <petercommand> 而且都已經看下去了XD
+00:02:39 <petercommand> a b -> c
+00:03:14 <petercommand> This tells Haskell that c is uniquely determined from a and b.
+00:03:27 <petercommand> 不太曉得這是甚麼意思..
+00:06:11 <petercommand> 先不管這個好了.. 那段程式碼到底哪裡寫錯了呢XD
+00:07:16 <CindyLinz> petercommand: 我也練習了, 等下你練完可以一起來對答案 ^^ # https://ideone.com/v4eBQF
+00:07:59 <CindyLinz> petercommand: 如果沒放 fun dep 的話... Haskell 是這樣: 先不看 class 限制, 先自己想辦法從別的途徑找出這裡用到的 a b c 分別是什麼 type
+00:08:14 <CindyLinz> 然後才去看看這 a b c 有沒有符合 class 的限制
+00:08:25 <CindyLinz> 而如果有加上 | a b -> c 的話...
+00:09:07 <CindyLinz> Haskell 只需要先想辦法找 a b 的 type.. 然後再去看看這 class 有沒有哪個 instance 的 a b 符合, 然後再拿這個 instance 的 c 當作這裡的 c
+00:14:51 <petercommand> 喔喔..了解..
+00:15:40 <CindyLinz> (evalState (execStateT factorial (x-1)) 1)
+00:17:10 <CindyLinz> 內層 execStateT 會把 input 放到.. 外層 evalState 的 a, 然後.. evalState 會把它的 a 丟出來
+00:17:33 <CindyLinz> 然後我看這 code 好像都沒有去改 input, 所以應該就直接是 x-1 吧
+00:18:03 <CindyLinz> 所以... x=10, x-1=9..
+00:19:29 <petercommand> 對耶...我再想想看..
+00:24:22 <CindyLinz> 然後我覺得... 能避免的話就不要疊兩層同一種 monad class 啦... ^^|  用 access 和 lift . access 來分層, 跟那種無意義變數一樣恐怖 :Q
+00:25:01 <petercommand> XDDD
+00:30:36 <pkmx> > runST $ return ()
+00:30:38 <lambdabot>  ()
+00:33:54 <pkmx> > succ ()
+00:33:55 <lambdabot>  *Exception: Prelude.Enum.().succ: bad argument
+00:33:59 <pkmx> > pred ()
+00:34:00 <lambdabot>  *Exception: Prelude.Enum.().pred: bad argument
+00:34:29 <pkmx> > [()..]
+00:34:31 <lambdabot>  [()]
+00:34:43 <pkmx> 好廢的instance...
+00:35:21 <pkmx> > [(),()..()]
+00:35:22 <lambdabot>  [(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),...
+00:36:31 <CindyLinz> pkmx: 記得還有人弄一個更廢的 data Void..
+00:36:47 <suhorng> data Void = Void Void -- XD?
+00:36:51 <CindyLinz> 沒有 data constructor.... 什麼都寫不出來 XD
+00:36:56 <CindyLinz> suhorng: 比這個廢唷~~ XD
+00:37:01 <suhorng> 0..0
+00:39:54 <petercommand> CindyLinz: https://ideone.com/zxW0eP #改成了這樣XD
+00:39:57 <CindyLinz> @type succ
+00:39:58 <lambdabot> Enum a => a -> a
+00:40:08 <CindyLinz> @hoogle Enum a => a -> Maybe a
+00:40:11 <lambdabot> Prelude Just :: a -> Maybe a
+00:40:12 <lambdabot> Data.Maybe Just :: a -> Maybe a
+00:40:12 <lambdabot> Prelude pred :: Enum a => a -> a
+00:40:34 <CindyLinz> petercommand: 好像會動了!
+00:41:13 <pkmx> > (undefined :: Void) == (undefined :: Void)
+00:41:14 <lambdabot>  Not in scope: type constructor or class ‘Void’Not in scope: type constructor...
+00:41:27 <pkmx> > (undefined :: Data.Void) == (undefined :: Data.Void)
+00:41:28 <lambdabot>  Not in scope: type constructor or class ‘Data.Void’Not in scope: type constr...
+00:41:35 <pkmx> > (undefined :: Data.Void.Void) == (undefined :: Data.Void.Void)
+00:41:37 <lambdabot>  Not in scope: type constructor or class ‘Data.Void.Void’
+00:41:37 <lambdabot>  Perhaps you meant ‘Data.Word.Word’ (imported from Data.Word)Not in scope: ty...
+00:41:37 <lambdabot>  Perhaps you meant ‘Data.Word.Word’ (imported from Data.Word)
+00:41:38 <CindyLinz> petercommand: 只不過那串.. (execState (execStateT factorial (x-1)) (x * y)) 根本就是 acc style 遞迴啊 XD
+00:41:49 <petercommand> 對呀XDD
+00:42:19 <CindyLinz> petercommand: 你把 input 放進 State, 可是都沒有 modify 它欸, 這樣刻以嗎 XDXD
+00:43:02 <petercommand> XDXD
+00:43:17 <petercommand> 不太正常的寫法
+00:45:01 <petercommand> CindyLinz: 你會比較喜歡用 catch 還是 reads 呢?
+00:45:17 <CindyLinz> 嗯.. 我通常會在同一個 Monad 裡面再作遞迴.. 這樣才比較有利用到 monad 的功能...
+00:45:42 <CindyLinz> 如果在 monad 裡面再怎樣手動生一個同一種 monad 的話.. 通常會是想用 join 串回來
+00:45:48 <CindyLinz> petercommand: 我不知道有 reads.. XD
+00:46:34 <CindyLinz> petercommand: 我猜還是 catch 吧... 我不太想碰有用到 unsafeInterleaveIO 的東西
+00:46:49 <CindyLinz> reads 給的東西應該是 lazy 給的?
+00:48:48 <pkmx> reads 是啥 @@
+00:48:54 <CindyLinz> @type reads
+00:48:55 <lambdabot> Read a => ReadS a
+00:49:00 <CindyLinz> 感覺不是這個 :/
+00:49:01 <petercommand> 咦?  reads 有用 unsafeInterleaveIO?
+00:49:29 <petercommand> 不曉得是 lazy 還是 strict 的..
+00:49:59 <CindyLinz> 我不知道 reads.. 但我猜是個類似用 getContents 把 stdin 拉進來, 然後全部丟進 read parse 的東西?
+00:50:25 <pkmx> @info ReadS
+00:50:26 <lambdabot> ReadS
+00:50:37 <petercommand> CindyLinz: 他是 pure 的呀?
+00:51:07 <pkmx> type ReadS a = String -> [(a, String)]
+00:51:44 <CindyLinz> petercommand: 欸.. 真的是這個 @@"
+00:52:00 <petercommand> 對，是這個沒錯
+00:52:18 <CindyLinz> 喔喔.. 就是不要用 read 來碰 exception, 是自己手動處理喔?
+00:52:38 <petercommand> 對阿..
+00:52:52 <petercommand> 好多層的 pattern matching XD
+00:53:02 <CindyLinz> 那餵給它的 input string 是不是就用 getContents 拿了啊?
+00:53:06 <CindyLinz> @type getContents
+00:53:07 <lambdabot> IO String
+00:53:19 <pkmx> > reads "1" :: [(Int, String)]
+00:53:20 <lambdabot>  [(1,"")]
+00:53:24 <petercommand> 是餵 string 呀
+00:53:30 <pkmx> > reads "kerker" :: [(Int, String)]
+00:53:31 <lambdabot>  []
+00:53:33 <CindyLinz> petercommand: 這 string 怎麼來的? @@"
+00:53:44 <petercommand> CindyLinz: 參數呀?
+00:53:54 <monochrom> reads 沒有 IO, 連 unsafe 的都沒有
+00:53:59 <pkmx> > readEither "kerker" :: Either String Int
+00:54:00 <lambdabot>  Not in scope: ‘readEither’
+00:54:00 <lambdabot>  Perhaps you meant one of these:
+00:54:00 <lambdabot>    ‘readLitChar’ (imported from Data.Char),
+00:54:04 <CindyLinz> petercommand: 你從拿裡取得這個可以給它的參數?
+00:54:24 <pkmx> readEither 不是 Prelude 裡面的嗎 =_=
+00:54:42 <pkmx> 喔沒事 不是 =p
+00:55:17 <petercommand> CindyLinz: do { x <- getLine; let result = reads x; } 類似這樣?
+00:56:07 <CindyLinz> petercommand: 喔喔 這樣沒有 unsafeInterleaveIO
+00:56:22 <petercommand> CindyLinz: read 不是也是這樣用嗎XD
+00:57:05 <CindyLinz> 可是 reads 會給它吃剩的字串, 所以把整個 input stream 丟給它再一路做也是很合理的...
+00:57:12 <CindyLinz> 而 read 一定不會這樣用
+00:57:17 <CindyLinz> @hoogle 
+00:57:18 <lambdabot> No query entered
+00:57:18 <lambdabot> Try --help for command line options
+00:57:33 <CindyLinz> @hoogle Read a => String -> Maybe a
+00:57:34 <lambdabot> Network.CGI.Protocol maybeRead :: Read a => String -> Maybe a
+00:57:35 <lambdabot> Network.CGI readCookie :: (Read a, MonadCGI m) => String -> m (Maybe a)
+00:57:35 <lambdabot> Network.CGI readInput :: (Read a, MonadCGI m) => String -> m (Maybe a)
+00:57:59 <CindyLinz> petercommand: 如果有個 Read a => String -> Maybe a 的函數可以用, 我可能會拿它代替 read
+00:58:06 <petercommand> CindyLinz++
+00:58:18 <CindyLinz> reads 的 type 太麻煩了 :Q
+00:58:23 <monochrom> Text.Read
+00:58:24 <pkmx> > Text.Read.readMaybe "1" :: Maybe Int
+00:58:25 <lambdabot>  Not in scope: ‘Text.Read.readMaybe’
+00:58:36 <pkmx> :t Text.Read.readMaybe
+00:58:37 <lambdabot> Read a => String -> Maybe a
+00:58:46 <petercommand> 讚!
+00:58:57 <CindyLinz> ++
+00:59:09 <pkmx> @lambdabot 為什麼你不import Text.Read QQ
+00:59:10 <lambdabot> Unknown command, try @list
+01:00:34 <pkmx> 不過通常用read都是簡短的script input不對就直接丟exception跳開沒差=p
+01:00:58 <CindyLinz> 可是 catch 的 handler 要標 type 有點煩 XD
+01:01:04 <pkmx> 複雜一點的就直接寫parser了
+01:02:47 <petercommand> @readMaybe :: Read a => String -> Maybe a ; readMaybe = \x -> case reads x of { [(a, "")] -> Just a; _ -> Nothing }
+01:02:47 <lambdabot> Unknown command, try @list
+01:02:59 <petercommand> @let readMaybe :: Read a => String -> Maybe a ; readMaybe = \x -> case reads x of { [(a, "")] -> Just a; _ -> Nothing }
+01:03:02 <lambdabot>  Defined.
+01:03:48 <CindyLinz> > readMaybe "25" :: Maybe Int
+01:03:50 <lambdabot>  Just 25
+01:03:54 <CindyLinz> > readMaybe "25-" :: Maybe Int
+01:03:55 <lambdabot>  Nothing
+01:04:00 <CindyLinz> petercommand: 謝謝 :D
+01:04:21 <pkmx> > readMaybe "(25)" :: Maybe Int
+01:04:21 <lambdabot>  Just 25
+01:04:28 <pkmx> > readMaybe "(((((25)))))" :: Maybe Int
+01:04:30 <lambdabot>  Just 25
+01:04:35 <CindyLinz> 咦.. 範圍這麼大 @@"
+01:04:52 <pkmx> > readMaybe "((((()))))" :: Maybe ()
+01:04:53 <lambdabot>  Just ()
+01:05:16 <petercommand> :t ()
+01:05:17 <lambdabot> ()
+01:05:56 <pkmx> > readMaybe "((Just (1)))" :: Maybe (Maybe Int)
+01:05:58 <lambdabot>  Just (Just 1)
+01:06:05 <pkmx> > readMaybe "(((Just) (1)))" :: Maybe (Maybe Int)
+01:06:06 <lambdabot>  Nothing
+01:06:27 <petercommand> > (Just) (1)
+01:06:28 <lambdabot>  Just 1
+01:06:51 <petercommand> > readMaybe "(((Just) (1)))" :: Maybe $ Maybe Int
+01:06:52 <lambdabot>  Not in scope: type constructor or class ‘$’
+01:07:41 <petercommand> 有這種東西嗎XD
+01:07:50 <monochrom> 沒有
+01:09:39 <petercommand> 感覺可以做成 type operator 之類的東西耶XD
+01:12:29 <CindyLinz> type ($) a b = a b ?
+01:12:52 <CindyLinz> 可以不是 type constructor 開頭的東西嗎? @@"
+01:15:59 <pkmx> http://ideone.com/TR7u1G
+01:16:28 <CindyLinz> 哇~~
+01:16:43 <petercommand> pkmx++
+01:17:39 <pkmx> 寫成 type f $ a = f a 也可以
+01:18:08 <pkmx> 太好了 終於不用在signature寫一堆(((())))了
+01:19:06 <CindyLinz> ++
+01:21:40 <CindyLinz> 不知道可不可以直接用 ('$).. 
+01:39:11 <pkmx> -XDependentHaskell (?)
+01:42:22 <CindyLinz> 好像不行 QQ # http://ideone.com/xT2KLR
+01:44:08 <pkmx> 你需要DataKinds的兄弟LetTypes =p
+01:45:38 <CindyLinz> pkmx: 這是 7.10 的祕密武器嗎 OAO
+01:50:07 <pkmx> 該召喚@idris-ircslave了...
+18:03:08 <CindyLinz> 一個 $ 比 . 方便的時機....
+18:04:05 <CindyLinz> 算了 再看看 XD
+18:04:27 <CindyLinz> 問一下好了...
+18:04:37 <CindyLinz> lift $ lift act 和 lift . lift $ act 寫哪個好?
+18:50:39 <pkmx> 看心情 =p
+18:51:01 <pkmx> 後面的好處是之後要做eta reduction比較方便
+20:22:27 <pkmx> monad-levels # https://ivanmiljenovic.wordpress.com/2015/02/02/monadic-yak-shaving/
+20:23:34 <pkmx> 所以現在有 mtl, extensible-effects, layers ... 然後又多了這個 monad-levels (?)
+20:26:06 <CindyLinz> hmmmmm..... XD
+20:26:36 <CindyLinz> (筆記)
+20:53:17 <petercommand> 大家會怎麼定義 library 的 operator 呀...感覺很容易重複XD
+20:54:41 <pkmx> 例如？
+20:55:01 <petercommand> 像 $ $$ $$$
+20:55:23 <pkmx> @hoogle ($$)
+20:55:25 <lambdabot> Text.PrettyPrint.HughesPJ ($$) :: Doc -> Doc -> Doc
+20:55:26 <lambdabot> Text.PrettyPrint ($$) :: Doc -> Doc -> Doc
+20:55:26 <lambdabot> Language.Haskell.TH.PprLib ($$) :: Doc -> Doc -> Doc
+20:55:28 <pkmx> @hoogle ($$$)
+20:55:28 <lambdabot> No results found
+20:56:13 <pkmx> 感覺還好啊 =p
+20:56:43 <petercommand> http://hayoo.fh-wedel.de/?query=%28%24%24%24%29
+20:56:54 <petercommand> XD
+20:57:56 <pkmx> (%$!) :: forall f x. Sing f -> Sing x -> Sing ((($!$) @@ f) @@ x)
+20:58:06 <pkmx> @@

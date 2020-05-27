@@ -1,0 +1,81 @@
+12:22:54 <MnO2> http://www.infoq.com/presentations/Concurrent-Haskell
+22:19:48 <suhorng> > ks = replicate 6 1 ++ (map (Data.Bits.xor) $ zip ks (tail ks))
+22:19:49 <lambdabot>   <hint>:1:4: parse error on input `='
+22:20:01 <suhorng> > let ks = replicate 6 1 ++ (map (uncurry Data.Bits.xor) $ zip ks (tail ks))
+22:20:04 <lambdabot>   not an expression: `let ks = replicate 6 1 ++ (map (uncurry Data.Bits.xor) ...
+22:20:13 <letoh> 惡夢結束了XD
+22:20:31 <suhorng> letoh: 我才剛要開始寫orzzzzz 有點想放棄
+22:20:43 <letoh> 寫哪個?
+22:20:46 <suhorng> > let ks = replicate 6 1 ++ (map (uncurry Data.Bits.xor) $ zip ks (tail ks)) in ks
+22:20:48 <lambdabot>   [1,1,1,1,1,1,0,0,0,0,0,1,0,0,0,0,1,1,0,0,0,1,0,1,0,0,1,1,1,1,0,1,0,0,0,1,1,...
+22:20:50 <suhorng> letoh: Ruby作業
+22:20:53 <letoh> hw6?
+22:21:03 <suhorng> yup
+22:21:05 <letoh> hw7 我還沒看
+22:21:11 <letoh> hw6 很簡單
+22:21:24 <suhorng> 是說我分不出來剛才那樣寫空間到底是 O(n) 還是更糟糕的 QQ
+22:21:38 <letoh> suhorng: 惡夢是 hw5 的 peer review...
+22:21:47 <suhorng> 喔喔wwww
+22:27:50 <suhorng> 要推坑別人學 Haskell 真不容易..
+22:28:04 <letoh> 看要推誰吧
+22:29:03 <letoh> 前陣子不小心向同事展示了我怎麼用 python 處理工作，結果今天接到電話問某某 lib 去哪下載了
+22:29:29 <suhorng> 嗯..身邊一些學過程式 對functional programming沒有特別興趣(或說沒怎麼聽過)的朋友...
+22:29:36 <suhorng> wow
+22:29:58 <letoh> 我完全沒有想過要推坑就是，就單純隨便展示
+22:30:18 <letoh> 沒聽過 functional programming 的話，有點難
+22:30:54 <letoh> 話說還有位同事聽我一直念 sicp，真的跑去看了...
+22:31:17 <suhorng> 一直唸就去看是哪招 XDD
+22:31:33 <letoh> 我當然不是在旁邊一直念 "sicp" 啊XD
+22:32:01 <letoh> 我是說裡面有些內容改變我對程式的看法  之類的東西吧
+22:33:25 <letoh> suhorng: 你還記得 hw4 有一題照片互換的 lazy list 嗎
+22:34:22 <hychen> hw6的確簡單....
+22:34:23 <letoh> dan 和 dog... 有人說我的寫法不錯  但不喜歡變數的命名方式XD  我直接用 dan 跟 dog
+22:34:30 <hychen> 可是我討厭ruby...
+22:34:40 <letoh> hychen: 大大威武!!
+22:34:57 <letoh> 是說 provided code 有 bug XD
+22:34:59 <suhorng> letoh: 照片互換? 題目是什麼 我都沒有用他的測試code..
+22:35:04 <hychen> where??
+22:35:12 <letoh> suhorng: dan.jpg dog.jpg
+22:35:26 <suhorng> 喔喔~ dan 跟dog XDD
+22:35:43 <suhorng> 我全部都用自定義的函式(類似unfold)寫..然後就被扣爆了XD
+22:35:46 <letoh> suhorng: 然後我把 dog assign 給 dan XD
+22:36:08 <letoh> hychen: 在判斷移動的地方
+22:36:20 <suhorng> letoh: assign!?
+22:36:21 <letoh> 不過我不曉得這是不是作業的一部份耶
+22:36:55 <hychen> 可是我現在不太想動腦...
+22:36:56 <letoh> 嚴格來說也不是 assignment，我用交換的方式產生交錯的 list
+22:37:11 <hychen> 我覺得我今天應該寫不出來
+22:37:19 <letoh> hychen: 你寫完有玩玩看嗎? 那個 bug 不修會當掉
+22:37:30 <hychen> suhorng, 用太進階的方式會分數不高
+22:37:31 <letoh> 在消方塊時也會有 bug
+22:37:35 <hychen> letoh, 我還沒寫完啦
+22:37:45 <letoh> 喔  那你寫完玩玩看就知道了
+22:37:58 <letoh> 我以為你寫完了XD
+22:38:22 <letoh> suhorng: peer 1 → I like the idea of swapping the 2 arguments, but I don't like the names for the arguments though.
+22:38:25 <suhorng> hychen: 好像是(明明也不太算進階呀!).. 我只是覺得每次都手動寫 (lambda () ...) 很容易寫錯而已..
+22:38:34 <suhorng> 哈哈哈
+22:38:37 <letoh> 剛剛看到的評語XD
+22:38:41 <hychen> extend 完的code才會爆吧
+22:43:03 <letoh> hychen: 作業喔  原本的應該不會爆  我沒有仔細看
+22:44:12 <letoh> sec7 的影片好像都很長  不太想看XD
+22:49:21 <suhorng> sec7我是直接看reading notes @_@"
+22:51:39 <suhorng> 不知道 Seven Languages in Seven Weeks 裡面介紹 Haskell 介紹得如何XD
+22:54:47 <letoh> 唔  我覺得有點鳥
+22:55:25 <letoh> 我只看過兩章.. Io 跟 Haskell... 我覺得都不太好@_@
+23:36:32 <CindyLinz> 以前想開始學 Haskell, 只是單純覺得好像喜歡 Haskell 的人都很厲害.. 所以趕快來喜歡看看, 也許有一天也可以變成很厲害的人...  完全是把倒果為因 XD
+23:40:37 <CindyLinz> 慢慢推吧.. 推廣這東東要走的路應該還有點長... @@"
+23:52:16 <suhorng> 嗯..
+23:53:20 <CindyLinz> 最近在寫的東西, 有覺得 Haskell 恐怖之處... (就是前幾天分享的悲劇)
+23:53:24 <CindyLinz> 也有很棒的地方呢
+23:53:55 <CindyLinz> 不過最近有別的東西在忙, 進度暫時停滯了..
+23:54:45 <suhorng> 真的XD 後來發現寫Haskell很難估計時間空間時非常驚恐..
+23:54:45 <CindyLinz> Haskell 寫起來感覺很棒的地方, 真是在別的主流語言中找不到的...
+23:55:20 <CindyLinz> suhorng: 很難估計時間空間 -> 很難估計 worst case 時間空間.. XD
+23:55:25 <CindyLinz> amortize 沒問題的 XD
+23:56:08 <suhorng> amortize是對什麼amortize @@
+23:56:29 <CindyLinz> 好吧.. 時間 XD
+23:56:35 <suhorng> Q_Q
+23:56:36 <CindyLinz> 空間通常考慮的是瞬間用量
+23:56:53 <CindyLinz> 所以好像沒什麼聽說在考慮 amortize 的 XD
+23:57:19 <suhorng> 向之前看到例子是同樣相等的 infinite list, 一個寫法是 O(n), 一個是 O(n^2) Orz
+23:57:48 <CindyLinz> 要算什麼的啊?

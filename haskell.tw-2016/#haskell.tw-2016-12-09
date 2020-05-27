@@ -1,0 +1,3 @@
+04:19:07 <caasih> 找 Miranda 的 layn 時發現這個用 Lisp 實作的 Yale Haskell https://github.com/haskell-lisp/yale-haskell
+04:19:23 <caasih> 查了一下，原來是 1991~1993 的老東西
+04:20:30 <caasih> Miranda 有的 functions 在 https://github.com/haskell-lisp/yale-haskell/blob/master/progs/lib/hbc/Miranda.hs

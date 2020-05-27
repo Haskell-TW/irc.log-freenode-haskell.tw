@@ -1,0 +1,5 @@
+12:02:22 <petercommand> https://ghc.haskell.org/trac/ghc/wiki/Commentary/Rts/STM#DataInvariants #咦，這個 newNonNegativeAccount 一開始就不滿足那個 invariant 了XD
+12:30:02 <petercommand> :t atomically
+12:30:05 <lambdabot> error: Variable not in scope: atomically
+12:30:56 <petercommand> QQ
+13:31:22 <monochrom> 咦, 果然!

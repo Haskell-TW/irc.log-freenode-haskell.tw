@@ -1,0 +1,232 @@
+06:26:23 <monochrom> (回舊文)
+06:27:58 <monochrom> non-strict 只是很簡單地說, f ⊥ ≠ ⊥ 有可能. 舉例: const () ⊥ = () ≠ ⊥.
+06:28:38 <monochrom> 在 SML, const () ⊥ = ⊥
+06:29:57 <monochrom> 是不是 non-strict, 跟 error 是不是 ⊥, 無關.
+06:34:44 <monochrom> 你們又有沒有見過我的 https://plus.google.com/102208456519922110915/posts/DZsZ6mvA4T6 呢? :)
+06:37:45 <monochrom> C 語言是可以信賴的, 優化亦是可以信賴的, 只要你先熟讀標準, 倒背如流.
+06:38:24 <monochrom> (結論: 還是孫子兵法容易些 XD )
+16:15:08 <hashcat> IBM watson釋出api
+16:56:45 <hashcat> http://gigaom.com/2013/11/14/have-at-it-programmers-ibm-makes-watson-available-via-api/
+17:00:21 <CindyLinz> monochrom: cool.. 我用 gcc 2.7.3 也是一樣的結果...
+17:01:00 <CindyLinz> 只是標準說: 這邊沒有標準. 的時候, 我信了一個空集合啊 XD
+17:02:38 <hashcat> 優化器可以用prolog寫
+17:05:07 <UncleHandsome> monochrom: 真的 我覺得最厲害的C/C++工程師不只要熟讀標準 還要懂compiler&系統 一整個很辛苦OTZ
+17:07:03 <UncleHandsome> CindyLinz: 我後來想想應該寫spec人的知道有人會這樣寫 然後有人會這樣優化 但又不能禁止這樣的行為 只好寫個未知惹XD...
+17:09:37 <CindyLinz> 應該是想定進標準的時候, 既有的若干知名 compiler 已經各用各的作法了....
+17:10:17 <hashcat> 我只覺得C++會流行真是災難
+17:10:51 <hashcat> 不管對制定者, 維護還是使用者都是
+17:11:34 <hashcat> 耗費人力成本無數
+17:11:37 <CindyLinz> XDDD
+17:11:57 <CindyLinz> 這說出... workaround 是很容易流行的作法..... zz
+17:13:38 <CindyLinz> monochrom: 我可以轉貼在我 FB 嗎?
+17:15:19 <hashcat> C++各種細節看到就討厭
+17:16:09 <CindyLinz> 初版 C++ 應該就只是 C, 然後額外加了一坨 macro 來模擬那些物件之類的特性
+17:17:04 <CindyLinz> 上課時聽來的, 可是隨手找找沒找到資料 orz
+17:17:13 <hashcat> 不科學, 因為科學傾向有普遍可用的原則
+17:18:10 <hashcat> C++設計超多那種概念不能重用的特例
+17:19:05 <hashcat> 用符號方式也像是隨性塗鴉之作
+17:22:15 <hashcat> 星號同時當乘法和指標, 大於小於有時候被當成括號用
+17:22:35 <hashcat> 特性還會用詭異的方式互相干擾
+17:23:04 <hashcat> 打住好了
+17:23:05 <CindyLinz> *a = *b/*c + *d;
+17:24:26 <hashcat> 暈
+17:25:15 <hashcat> 像這狀況教一個人還得花力氣解釋為啥星號會變成另一種意思
+17:25:19 <CindyLinz> C/C++ 用的人多, 所以鬼故事也多很多 XD
+17:26:06 <godfat> 不過不知道 c 的替代品是什麼？難道是 go 嗎？ XD
+17:26:17 <hashcat> 之前還看過怎看都是大於小於的用法, 卻因為template的效果變成其他東西
+17:26:46 <hashcat> 有個寫C++說希望Rust能取代C++
+17:27:23 <CindyLinz> godfat: 要先講應用的方向, 才能選替代品吧 ^^|
+17:27:30 <godfat> 感覺 rust 也還滿初期的
+17:27:31 <godfat> 正好在看這串討論
+17:27:31 <godfat> https://mail.mozilla.org/pipermail/rust-dev/2013-November/006550.html
+17:27:46 <godfat> 例如實作 linux kernel 之類的 :P
+17:28:03 <CindyLinz> godfat: 實作 linux kernel 的話, C 是無可取代的啊...
+17:28:21 <godfat> XD
+17:28:25 <CindyLinz> godfat: 至少有不用跟 Linus Trovalds 吵架的優勢...
+17:28:35 <godfat> XDDDDDDDDDDDD
+17:37:49 <hashcat> http://commons.ada.cx/Operating_Systems_written_in_Ada
+17:37:58 <hashcat> 找到啦
+17:38:06 <hashcat> 很久以前看到的
+17:39:05 <hashcat> 都快死光就是
+17:40:02 <hashcat> 有一個存活的還滿強的
+17:40:04 <hashcat> http://marte.unican.es/index.htm
+17:40:12 <godfat> 之前看 ada 沒有很好的印象，寫起來很囉唆又麻煩
+17:40:52 <CindyLinz> godfat: 很賺錢呢!
+17:41:52 <CindyLinz> 不知一般計算 language 流行程度是用哪個量度, 是人數? 公司數? 程式碼行數? project數? 還是總金額..
+17:42:08 <CindyLinz> 覺得 Ada 是那種人數公司數 project 數很少, 但是金額極大的語言...
+17:42:18 <godfat> XDDDD.... 不過如果考慮賺錢總量的話，我想流行的語言應該更賺
+17:42:18 <godfat> 之前看比較有名的是用 search engine 的搜尋量
+17:42:54 <godfat> 因此短時間紅起來的平台 (i.e. objective-c) 就會忽然竄起來
+17:43:09 <CindyLinz> 我相信有一堆 Ada 的黑帳... 表面上用來蓋國防部某 building 的錢, 挪去用 Ada 開發秘密武器的系統.....
+17:44:08 <godfat> ...@_@ 記得聽說 jserv 做過跟武器有關的東西，也許他知道一些？ XD
+17:44:41 <CindyLinz> 可是他做的好底層欸 ^^|
+17:45:14 <godfat> 你的意思 ada 是拿來做 application 這樣嗎？
+17:46:18 <hashcat> Ada可能因為過於囉唆不能適應瞬息萬變的IT
+17:46:24 <CindyLinz> godfat: 對啊, F22 的控制系統不是嗎?
+17:47:26 <godfat> hashcat, 我想是這樣沒錯
+17:47:27 <godfat> CindyLinz, 我不知道... XD
+17:48:59 <CindyLinz> google F22 Ada 可以找到一些文章.. http://www.defensenews.com/article/20110519/DEFSECT05/105190304/F-22-Upgrade-Taking-Too-Much-Time-Money
+17:49:12 <CindyLinz> Loren Thompson, an analyst at the Lexington Institute, said the F-22's software is written largely in Ada, a programming language that was once a DoD standard but whose use has waned in the past 15 years.
+17:50:13 <godfat> 曾聽過有人說 prolog 跟 ada 都是 DoD 花大錢沒做起來的東西 XD
+17:50:46 <hashcat> Ada拿來玩的話可以DIY自動直昇機
+17:51:05 <CindyLinz> 沒做起來? @_@"
+17:51:06 <hashcat> 是做起來就很低調的東西
+17:51:23 <CindyLinz> 不是到處飛起來了嗎 @_@"
+17:51:40 <godfat> XDD 我的意思是沒成為主流語言
+17:51:53 <hashcat> 你幾時看過忍者會四處炫耀自己發明的祕密武器
+17:52:11 <b4283> 「一個普遍的關於歐洲太空總署亞利安5號運載火箭失敗的說法是因為Ada語言在編譯過程的檢查失敗導致的。 將大的浮點數轉換成整數是一種常見的程序錯誤來源。1996年6月4日，對於亞利安5號運載火箭的初次航行來說，這樣一個錯誤產生了災難性的後果。發射後僅僅37秒，火箭偏離它的飛行路徑，解體並爆炸了。」
+17:52:27 <godfat> 怎麼說，他可以炫耀他用的金屬材料，看看有沒有人可以把那金屬變得更好 XD
+17:52:29 <b4283> 不是美國的就給他爆炸
+17:52:44 <hashcat> 有心發掘的話, 就會發現那些根本都是超級武器
+17:52:47 <godfat> compile 時要給 secret code
+17:52:52 <CindyLinz> 我們這次去日本, 有個同事買了某個長得像忍者鏢的飾品..
+17:53:01 <CindyLinz> 飛機也順利搭了
+17:53:03 <b4283> 手裡劍
+17:53:15 <CindyLinz> 可是回來要進台灣海關的時候被沒收了.. ww
+17:53:25 <godfat> .... orz
+17:53:31 <b4283> XD
+17:53:42 <godfat> 飾品要好好收起來 XD
+17:53:45 <cataska> 謠傳 Jobs 也想帶一些回去...
+17:53:55 <CindyLinz> 收在行李箱啊, 被 X-ray 找出來...
+17:54:04 <b4283> 沒有開鋒也不行喔?
+17:54:12 <godfat> 這樣也行喔 = = 我以為是帶在身上
+17:54:19 <CindyLinz> 帶身上會不能上飛機 XD
+17:54:31 <CindyLinz> 刀子利器什麼的只能拖運
+17:54:47 <godfat> 我以為像是手機吊飾那樣
+17:55:27 <CindyLinz> 長得跟真的一樣, 只是其中一個刃上面有打一個洞, 可以穿線吊起來
+17:55:37 <CindyLinz> 我不知道真正的武器是不是其實也有那個洞 :p
+17:56:39 <godfat> 聽起來應該不便宜... XD 真可惜
+17:57:42 <CindyLinz> 然後另一個同事聽說了, 說.. 好奇怪喔, 我也有買, 沒被攔欸....
+17:58:11 <b4283> 哈哈
+17:58:13 <godfat> @@" 果然是運氣問題呀？
+17:58:23 <CindyLinz> 嗯 XD
+18:02:22 <CindyLinz> 覺得浮點數真是可怕的東西..... 可靠性重要的地方完全不能用
+18:09:05 <hashcat> 可以估計誤差吧
+18:10:33 <hashcat> 可以把他當成是對區間作算術
+18:10:36 <CindyLinz> 很難用好 @@"
+18:10:55 <CindyLinz> 例如說, 我猜知道不能用高斯消去法的人不多.... @@"
+18:11:06 <CindyLinz> 高斯消去法的精確度不到 1 digit
+18:14:18 <hashcat> 只能事前證明了
+18:14:31 <hashcat> 又是prolog用得上的地方
+18:15:10 <hashcat> 我還真不知道不能用高斯消去法
+18:17:16 <hashcat> 還滿恐怖的唉
+18:17:23 <hashcat> 誤差會變動
+18:17:54 <hashcat> http://possiblywrong.wordpress.com/2013/11/15/floating-point-equality-its-worse-than-you-think/
+18:18:05 <hashcat> 剛好reddit有一篇
+18:19:50 <CindyLinz> hashcat: 可是.. prolog 證明出來.... 跟你說精確度不到一位以後, 怎麼辦啊... XD
+18:20:20 <godfat> 不要用浮點數？ XD
+18:20:49 <hashcat> 改用分數, 或者用符號計算出符號解, 再一次用數值解
+18:20:49 <CindyLinz> 嗯, 整數, 或是 Zp field 的高斯消去法就沒有問題了
+18:21:59 <hashcat> 或者改用克拉馬法
+18:23:30 <hashcat> 有機會造成大誤差的大都是除法
+18:24:34 <hashcat> 乘法是可能溢位
+19:51:03 <CindyLinz> hashcat: 誤差不是來自除法
+19:51:08 <CindyLinz> hashcat: 是兩個大數相減
+19:51:37 <CindyLinz> 兩個相近的大數相減時, 會把它們的精確位數對消掉
+19:52:16 <CindyLinz> 所以可能原本兩個數字精確度都7位, 減完以後全部都不精確了 ^^|
+22:11:52 <hashcat> CindyLinz: 加法的誤差應該是跟減法差不多吧
+22:13:06 <hashcat> 兩個絕對值一樣的負數跟正數在浮點數只差一個位
+22:13:42 <hashcat> 換掉那一位再用加法, 應該沒除法不穩
+22:13:44 <hashcat> 猜測
+22:15:15 <hashcat> 除法的話光是3的倒數, 誤差就起飛了
+22:20:38 <hashcat> 溫哥華證券交易所曾開發了一項股票指數. 當其在1982年推出時，指數的值是1000.000。在後來的重新計算時多次運用舍入到小數點後三位的操作。22個月以後，指數的值是524.881，然而事實上應該是1009.811。
+22:20:45 <hashcat> 也差太多
+22:27:03 <hashcat> 不過貌似都是誤差累積
+22:27:43 <hashcat> 嚴格控制浮點數運算的次數應該就還好
+22:28:38 <godfat> 這想法滿好玩的，float 本身帶一個運算次數的整數
+22:28:38 <godfat> 某些運算可以要求最終運算結果的浮點數的運算次數不能過多 XD
+22:29:30 <godfat> 有點像是病毒感染.... 感染太多次就沒救了
+22:30:32 <hashcat> 小病不鳥變大病
+22:31:36 <suhorng> monochrom: 感謝
+22:32:38 <suhorng> 我是有在想要是不用lazy而是每次都重複算, 有沒有可能讓副作用出事XD 但是沒仔細想會怎樣, 也許不會影響
+22:33:50 <petercommand> 之前好像看到一本書專門講這個
+22:37:30 <CindyLinz> hashcat: 加法是啊, 當然我是指兩相近正數相減, 或是兩絕對值相近, 符號相反的數字相加... 那用前者的講法比較順嘛 XD
+22:37:47 <CindyLinz> 只是乘除對精確度的影響不大
+22:40:10 <CindyLinz> hashcat: 考慮精確度的時候, 不是去看不精確的部分的位數越來越多, 而是看精確的位數是不是越來越少
+22:40:25 <petercommand> CindyLinz: 還是不要用float的好^_^ (誤
+22:41:12 <CindyLinz> petercommand: 可靠性不要求的地方很多啦, 那些地方還是繼續用, 很開心啊 XD
+22:42:06 <godfat> 貨幣還是不要有小數點比較好... XD
+22:42:20 <CindyLinz> 貨幣應該是用 fixed point 吧?
+22:43:01 <CindyLinz> 不過交易的時候有時候會出現「零頭不算!」這種對話.. 浮點數就出現了 XD
+22:43:21 <godfat> fixed point 是保證精確位數？
+22:43:24 <hashcat> 不是看相對誤差喔
+22:43:32 <hashcat> 那是看是欠錢還是還錢
+22:43:59 <hashcat> 兩套標準可以暗扛不少
+22:44:18 <petercommand> XDD
+22:44:55 <godfat> 原來還有貨幣專用的型別...
+22:44:55 <godfat> http://www.postgresql.org/docs/9.3/static/datatype-money.html
+22:45:12 <hashcat> fixed point就是跟整數差不多吧
+22:46:15 <godfat> c 裡面有這個嗎？還是就是要自己做？
+22:46:26 <hashcat> 自己作
+22:47:11 <godfat> 嗯嗯，那大概就是要 8 位小數就整數加八個零之類的...
+22:47:27 <godfat> 為啥我輸入法的有「小樹」這個詞...
+22:48:10 <CindyLinz> hashcat: 其實還是相對誤差啦, 你把誤差可能發生的最大範圍, 除以理論上的真實數值, 反應出來的就是看有效的位數有幾位呀
+22:48:16 <petercommand> godfat: 他算一個詞阿XD
+22:48:29 <CindyLinz> 如果是看無效位數有幾位的話, 那比較像是在看絕對誤差
+22:48:49 <godfat> petercommand, 我想我說小數的時候通常是指小數，不會是小樹... :s
+22:49:55 <letoh> 不曉得為什麼想到少年小樹之歌
+22:50:42 <CindyLinz> 平常計算, 我想大概只用到代數數 + 各種三角函數和 log, 尤拉常數能表示得出來的數吧?
+22:51:30 <CindyLinz> 只是這種「精確值」用起來可能每個數都要算一陣子, 而且算一陣子以後可能會變很大一坨 XDD
+22:53:46 <suhorng> computable reals!
+22:54:01 <suhorng> 用柯西序列(誤)
+22:54:24 <CindyLinz> suhorng: 我覺得只需要用到能用簡單 rule 描述的科西序列就夠了
+22:56:39 <suhorng> 嗯XD
+22:57:12 <hashcat> 就一般的實數來說, 沒有一般的算法能計算兩個實數是否相等
+22:57:19 <hashcat> 有理數就有了
+22:58:17 <CindyLinz> 可是有理數又太少了.. 我們還蠻常用到三角函數和指數對數的..
+22:58:26 <CindyLinz> 只是這些再加上去, 還是可數多個 :D
+23:01:29 <hashcat> 邏輯編程真是各種方便
+23:01:58 <CindyLinz> XD
+23:02:54 <CindyLinz> 只是丟給我兩串用三角函數, 指數對數, 多項式加減乘除湊在一起的「數」
+23:03:05 <CindyLinz> 我還是不知道要怎麼比對它們兩個一樣 orz
+23:03:40 <hashcat> 用複數就好
+23:04:09 <hashcat> 三角函數就化成指數對數
+23:05:33 <CindyLinz> 有 deterministic 機械化的方法喔?
+23:05:46 <CindyLinz> 還是需要局部搜索一下? @@"
+23:06:14 <hashcat> 有三角函數不能用複數才需要搜索吧
+23:06:46 <CindyLinz> 那應該是我們可以先定一個「normal form」出來?
+23:07:00 <hashcat> 指數跟對數互為反函數的
+23:07:05 <CindyLinz> 嗯嗯
+23:07:15 <hashcat> 就消到不能消
+23:07:59 <suhorng> 有辦法有normal form?
+23:10:16 <CindyLinz> 從來沒有想過耶..
+23:10:28 <CindyLinz> 如果有 normal form, 就直接拿來定成資料結構了 ^^
+23:10:49 <CindyLinz> 解決了相等的問題, 接下來就是給了兩坨這種數字, 怎麼比較大小
+23:11:08 <petercommand> normal form是?
+23:11:20 <CindyLinz> petercommand: 約定好一個「標準的」表示法
+23:11:38 <CindyLinz> 例如說... 1+1+1, 4-1, 9/3, 3 都是同一個數
+23:11:48 <CindyLinz> 我們選其中一個當它的標準表示法
+23:11:52 <hashcat> 我喜歡形式講法
+23:11:55 <petercommand> 喔喔
+23:11:58 <CindyLinz> 能選得出來的話.... 有很多好處 XD
+23:12:35 <hashcat> 有一個演算法使得任意兩個等價的東西, 可以變成一樣的形式
+23:13:07 <hashcat> 那種形式通常是可以用遞歸比較每個細節, 確定是否相等
+23:15:59 <hashcat> 任何在exp的加號, 都變成兩個exp相乘, 在log的乘號變成兩個log相加
+23:17:57 <hashcat> norm form更鳥的講法就是唯一的不動點
+23:19:09 <hashcat> norm form繼續變換下去還是norm form而且不會有兩個長不一樣的這樣
+23:20:12 <CindyLinz> normal form 的存在, 不代表存在 deterministic 的演算法來化簡對不對?
+23:20:34 <CindyLinz> 也許有的化簡路徑可以一直走下去轉不出來
+23:20:52 <CindyLinz> 像是... lambda 的 Y=QQ
+23:21:23 <CindyLinz> 欸不對 這個例子好像又不太對, 我根本不知道 Y=QQ 的 normal form 該長什麼樣 orz
+23:21:30 <hashcat> 那貌似叫週期點
+23:22:49 <suhorng> CindyLinz: 沒有 normal form 啦XD
+23:23:53 <CindyLinz> 嗯 XD
+23:24:16 <petercommand> why?
+23:24:26 <CindyLinz> 應該有: 明明就有 normal form, 只是你的演算法老是找不到它   的情況吧 XD
+23:24:51 <CindyLinz> petercommand: 因為總是有函數, 還有預備好的參數給他, 等著他 apply
+23:25:36 <CindyLinz> Q = \x -> x x,   Y = Q Q
+23:25:47 <petercommand> @@
+23:26:34 <CindyLinz> Y = (\x -> x x) (\x -> x x) = (\x -> x x) (\x -> x x) = ... 一直下去算不完
+23:27:38 <suhorng> petercommand: lambda calculus 那個 normal form 最常見的定義是沒有 beta redex
+23:28:58 <petercommand> 對lambda calculus不太熟@@
+23:32:26 <CindyLinz> petercommand: 不過你應該已經看完 lambda calculus 的所有運算能力的展示了... (Y)
+23:32:30 <CindyLinz> 哎呀 跑了 XD
+23:33:57 <hashcat> combinator logic怎貌似沒動搖lambda calculus的樣子
+23:35:23 <suhorng> (想到unlambda...XD)
+23:36:58 <CindyLinz> 想拿「紙包雞」訂成 lambda calculus 的語言啦 XD
+23:50:26 <hashcat> 紙包雞
+23:51:44 <letoh> 麥太嗎? XD
+23:54:19 <hashcat> 看不懂
+23:56:37 <hashcat> 亂入一下chapel
+23:57:02 <hashcat> 最新release支持HDFS檔案系統
+23:57:57 <CindyLinz> letoh: 對啊.. 紙包雞 包 雞包紙 包 雞 :D

@@ -1,0 +1,78 @@
+13:37:25 <mno2> http://roscidus.com/blog/blog/2014/06/06/python-to-ocaml-retrospective/
+13:37:35 <mno2> [Python to OCaml: Retrospective]
+18:37:55 <caasihuang> c9sloud CindyLinz: 原來不能把 V8 的 Persistent 傳回去，改用 Local 什麼的， gc 總算會動了。
+18:39:43 <caasihuang> au: 現在 MakeWeak 那部份沒有用到 nan ，但目標包含搞清楚怎麼用 nan 做這塊，晚上繼續...
+18:41:07 <au> ++
+18:42:02 <au> 搞清楚了教我 XD https://github.com/audreyt/node-webworker-threads/issues/16 懸而未決久矣
+18:43:01 <au> (@senditu 似乎是 port 完了可是不會動)
+18:46:21 <caasihuang> 瞭解，希望到時幫得上忙 XD
+18:46:31 <au> caasihuang++
+19:50:27 <c9sloud> caasihuang: nice!
+21:40:35 <c9sloud> au: https://github.com/c9s/following 不知道 GitHub 能不能在 following page 上加上較多的資訊.. 譬如說各 follower 們最新狀態以及每個人的 follower / repo 數量之類的 XD 或是獨立出來一個 dashboard page 之類的, time line 很難有一個完整的 overview ...
+21:41:51 <au> makes sense
+21:42:11 <au> c9sloud: 到 https://gist.github.com/audreyt/3c65adc2598e59e4fb67 留言吧 XD
+21:42:23 <c9sloud> ohoh ok XD
+21:42:28 <au> 上次在討論 l10n
+21:42:54 <au> 不過這部份各種意見很多... 也許挑容易改的先改
+21:54:46 <godfat> au, 也許這有點扯遠了，不過 sourcegraph 上的 who's using my code 是我會想知道的 https://sourcegraph.com/godfat
+21:54:46 <godfat> 不以 source 為出發點的話，也許我會想知道我的 followers 和 star gazers 的活動？
+21:56:26 <au> 就是反向 follow 的意思吧?
+21:56:43 <godfat> 我想應該是？
+21:57:13 <au> 要想一下，這個 semantic 有點怪 XD
+21:57:48 <godfat> XD 出發點可能是，我想找值得 follow 的人，但不知從何找起；或是想找目標讀者是哪些人？
+21:58:03 <au> *nod*
+21:58:27 <au> 可是前者似乎比較適合用「你 follow 的人 follow/star 的人」
+21:59:10 <au> 想想後者是有意義的，也歡迎留言 XD
+21:59:16 <godfat> 或許是，所以有個清單可以看所有我 follow 的人的 stars/followings?
+21:59:21 <au> yeah
+22:09:34 <c9sloud> yeah.. 的確是很有爭議的部分 :-p
+22:10:07 <c9sloud> godfat: 想要找值得 follow 的人好像可以用 explore
+22:10:25 <c9sloud> https://github.com/explore
+22:11:20 <godfat> 隱私考量嗎？
+22:11:34 <c9sloud> Explore 其實還蠻 powerful 的應該有 match 你的需求?
+22:12:37 <au> c9sloud: pull request 要翻成「徵求合併」「併取請求」「徵求修正」就要想很久了 XD
+22:13:17 <godfat> 合體希望 (誤
+22:13:22 <au> wwww
+22:13:32 <godfat> c9sloud, 我不確定耶，翻著翻著沒啥感覺 XD
+22:14:22 <godfat> 可能是數量太少的關係，只有六筆？
+22:16:20 <c9sloud> 真的... UI 相關的東西沒有絕對的對跟錯... 這種人多了意見跟著多很難有結論 XDDDD
+22:16:47 <c9sloud> godfat: 沒阿很多耶
+22:17:02 <c9sloud> godfat: https://github.com/trending
+22:17:10 <c9sloud> https://github.com/stars
+22:17:19 <c9sloud> 算是從不同角度切入
+22:18:38 <godfat> trending 沒啥興趣 @@
+22:18:38 <godfat> 我比較想看 Starred by people you follow
+22:18:38 <godfat> 不過這在 feed 裡應該就看得到了，只是沒有方便的整理
+22:18:39 <c9sloud> au: 多加兩個「合併請求」「拉回請求」這樣又可以多討論一週了 wwwwwwww
+22:19:48 <c9sloud> godfat: 可能 detail page 還沒作吧
+22:20:02 <c9sloud> 照那個 layout 看起來應該是 header 右邊會有個 more
+22:20:11 <c9sloud> 點下去之後單純看個別的項目
+22:20:34 <godfat> 我剛剛才注意到 trending 有那個按鈕，只是別的沒有 XD
+22:21:32 <godfat> 之所以對 trending 沒興趣是因為，根據經驗，大部分的 trending 我都沒興趣，所以...
+22:22:24 <c9sloud> https://github.com/trending/developers?l=haskell&since=monthly 這個還不賴
+22:22:25 <c9sloud> XD
+22:22:36 <c9sloud> 可以找不同 field 的人 follow
+22:24:01 <godfat> 噢，原來也有人的
+22:24:53 <c9sloud> yeah 我覺得 2nd level tab 離第一層 tab 太遠了
+22:24:58 <c9sloud> 不太容易注意到
+22:25:25 <c9sloud> 而且 page header 位置照階層來看好像不太對
+22:26:00 <c9sloud> https://github.com/trending/developers?l=haskell&since=monthly # 這頁來說，"Trending developers" 應該是分頁裡面的內容.. 點下方分頁上方 title 變動好像有點怪異
+22:26:38 <c9sloud> 不過也可能是因為這樣排比較好看
+22:27:08 <godfat> 確實，可以按的按鈕位置很多 XD
+22:27:08 <godfat> 可能放到語言的上面當 tab 會容易注意到些
+22:27:16 <c9sloud> https://github.com/stars?language=perl 這個要找 stared project 方便多了 :-p
+22:28:30 <godfat> 是說我 star 完後好像也很少回頭去看|||b
+22:29:09 <c9sloud> 其實因為太忙.. 根本很少在翻 trending project
+22:29:20 <c9sloud> 剛剛偶然一看發現 dc-js 還不賴 http://dc-js.github.io/dc.js/
+22:29:27 <godfat> 我剛剛才想說以前好像比較有空亂翻 github |||b
+22:30:04 <c9sloud> QQ
+22:30:33 <c9sloud> https://github.com/mooz/percol # wtf... 這個一定要用看看
+22:31:14 <c9sloud> 有點算是 cpan.vim / unit.vim 之類的變化 XD
+22:31:39 <c9sloud> 試了一下.. python 版本有點慢 orz
+22:34:31 <godfat> 我跑速度還不錯，不覺得慢。另外發現 ctrl+f 不能翻頁 XD
+22:35:53 <c9sloud> 突然想起 2009 年寫的東西 https://www.youtube.com/watch?v=erF0NWUIbr4 XD
+22:38:17 <godfat> 還不錯，不過目前想不太到我什麼時候會需要 @@
+22:51:12 <c9sloud> http://parall.ax/vtop
+22:51:13 <c9sloud> vtop
+23:40:35 <c9sloud> google blogger 好慢
+23:57:08 <c9sloud> pthread 裡面好像有點難做到像 Goroutine + Channel 一樣的事... @@

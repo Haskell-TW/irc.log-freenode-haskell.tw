@@ -1,0 +1,61 @@
+03:32:22 <letoh> https://github.com/chrisdone/lisk  寫成這樣蠻可怕的...
+03:33:44 <letoh> @version
+03:33:44 <lambdabot> lambdabot 4.2.2.1
+03:33:44 <lambdabot> darcs get http://code.haskell.org/lambdabot
+03:33:53 <letoh> @help
+03:33:54 <lambdabot> help <command>. Ask for help for <command>. Try 'list' for all commands
+03:34:00 <letoh> @list
+03:34:00 <lambdabot> http://code.haskell.org/lambdabot/COMMANDS
+03:34:18 <letoh> @type map
+03:34:19 <lambdabot> forall a b. (a -> b) -> [a] -> [b]
+03:34:28 <letoh> @type show
+03:34:29 <lambdabot> forall a. (Show a) => a -> String
+03:35:16 <letoh> @hoogle data
+03:35:16 <lambdabot> Data.Data class Typeable a => Data a
+03:35:16 <lambdabot> Data.Data module Data.Data
+03:35:16 <lambdabot> Data.Data dataCast1 :: (Data a, Typeable1 t) => (forall d. Data d => c (t d)) -> Maybe (c a)
+03:35:31 <letoh> @haddock
+03:35:32 <lambdabot> Unknown command, try @list
+03:36:08 <letoh> @search lisk
+03:36:09 <lambdabot> Unknown command, try @list
+04:02:05 <favonia> @google lisk
+04:02:07 <lambdabot> http://www.gwlisk.com/
+04:02:07 <lambdabot> Title: Custom Solenoids, Solenoid Valves, LVDTs and Flame Arrestors from GW Lisk
+09:41:36 <MnO2> http://fpcomplete.com/ten-things-you-should-know-about-haskell-syntax/
+09:41:46 <MnO2> Bartosz Milewski  的介紹文
+14:54:16 <CindyLinz> > a = b; b = not a
+14:54:17 <lambdabot>   <no location info>: parse error on input `='
+14:56:30 <CindyLinz> > let a = if b then False else True; b = if a then True else False
+14:56:31 <lambdabot>   not an expression: `let a = if b then False else True; b = if a then True e...
+14:57:41 <_13h> 我想問一下，現在兩個中譯版有整合的計劃嗎？
+14:58:18 <CindyLinz> MnO2: (戳戳)
+14:58:28 <_13h> 之前好像有提到，但是忘了結論是什麼
+15:51:47 <CindyLinz> Goodstein sequence -- 鴿子蛋序列 XD
+16:29:56 <MnO2> CindyLinz: yes?
+16:46:56 <CindyLinz> _13h: 問你問題啊 ^^| # 14:57 < _13h> 我想問一下，現在兩個中譯版有整合的計劃嗎？
+16:47:45 <_13h> thanks, 他剛剛回答我了
+19:07:13 <favonia> 啊我時間搞錯了... flolac 還有一天 xD
+19:15:51 <letoh> 要回去了?
+19:27:48 <favonia> letoh: 什麼東西要回去了？
+19:42:28 <letoh> 你啊  要回學校了?
+19:47:20 <favonia> letoh: 我已經回去啦
+19:49:00 <letoh> 喔喔喔  我還以為你的意思是沒參加到最後一天很可惜
+19:53:29 <favonia> letoh: 最後一天不是考試嗎 xD
+19:53:46 <letoh> 原來還有考試...
+22:50:11 <CindyLinz> 糟糕, 現在程式寫起來沒有以前那麼有樂趣了... 囧
+22:52:30 <CindyLinz> 為什麼合作廠商總是能夠把簡單單純的事情搞一個很複雜的流程呢...
+22:53:02 <CindyLinz> 寫了好幾頁的規格, 還附了 Sequencial diagram...
+22:55:00 <CindyLinz> 好吧, 可能是我看到他們的網址是 .aspx 結尾就先入為主地反感了 orz
+23:18:48 <favonia> CindyLinz: 該不會你覺得 Coq 才有趣吧... (誤)
+23:18:55 <letoh> 剛剛才發現 jason 有掛 python 頻道
+23:19:39 <jason2506> 被發現了
+23:19:56 <letoh> 難怪我一直覺得在哪看過@_@
+23:24:08 <jason2506> letoh: 來這個 channel 之前就有一段時間都掛在那邊，只是從沒發過聲XD
+23:24:38 <CindyLinz> 厚, 一份流程裡面怎麼有時候是 XML response, 有時候是 |(pipe) seperated string, 有時候是 redirect user, 有時候又要 soap 連出去啦.... orz
+23:25:13 <letoh> jason2506: 其實我都不開 user list，所以不太清楚頻道裡到底有哪些人  好幾次發現有趣的帳號問半天，才發現根本就在頻道裡
+23:25:19 <CindyLinz> favonia: Coq 是不錯... (思)
+23:25:32 <CindyLinz> favonia: 可是還難以掌握... 它好 free-form 啊~
+23:25:38 <CindyLinz> 現在最熟的指令只有三個...
+23:25:47 <CindyLinz> intros, simpl, auto... (默)
+23:26:07 <CindyLinz> 打 /names 可以看到 :p
+23:33:09 <CindyLinz> favonia: 你現在也是天天吃 Agda 度日喔?

@@ -1,0 +1,59 @@
+00:25:00 <MnO2> http://docs.julialang.org/en/release-0.1/packages/packagelist.html
+00:25:09 <MnO2> julia 成長的好像也蠻快的
+00:28:32 <letoh> 如果用 -std=c99 編譯應該會死一票專案XD
+10:20:06 <MnO2> https://twitter.com/donsbot/statuses/324608663333523456  看起來日本的 Haskell 社群壯大到被注意到了
+10:31:02 <MnO2> http://hackage.haskell.org/package/snaplet-coffee-0.1.0.2
+10:31:09 <MnO2> snaplet coffeescript
+16:41:16 <miaout17> MnO2: < MnO2> OSDC 已經有強者 miaout17 延續議題的熱度 -> 小弟不是強者，這邊很多人對FP理解比我透徹，還滿怕講不好的 (最近schedule爆炸了，剛剛往前翻留言看到這句話)
+16:41:33 <miaout17> < MnO2> CindyLinz 趕快報名 COSCUP ，講題是「我如何讓 Haskell 從進修學習變成公司 Project 」 > ++，推推
+16:43:39 <miaout17> 在這講一下我想講什麼好了。看到太多人說Functional Programming表示沒有side-effect，資料結構是不可變的，所以blah blah.... (Ex. Google "Functional programming concurrent"第一個結果 http://goo.gl/ugmgv )
+16:45:26 <miaout17> 覺得這樣的講法太武斷了，現今「函數語言」其實是一大堆具有不同特性語言的集合
+16:48:25 <miaout17> 很多說法會讓人覺得「用了FP就沒有side effect, 沒有mutable state, 不用擔心race condition和lock的問題」，但軟體界沒有萬靈丹，FP也不是
+16:50:43 <miaout17> 大多數FP語言其實沒有在語言層面保證immutable和side effect，除了像Erlang (Single-assignment), Haskell (Single-assignment, Monad) 等語言，才在語言層面有額外的gurantee
+16:54:33 <miaout17> 並不是用了函數語言，所有的問題都會迎刃而解。但學習函數語言，對於精準的思考這些概念有很大的幫助。
+17:00:42 <miaout17> 我的用意是避免帶給新手對FP錯誤的期盼，釐清函數語言的一些特性。但又很怕拿捏不好，造成大家對函數語言失去興趣的反效果。
+17:00:52 <miaout17> Any suggestion are welcome
+17:04:57 <_13h> 會有實例探討嗎？不曉得是只針對 FP 還是要討論特定語言？如果只是要講 FP，只從 Haskell / Erlang 這些語言切入好像不太好 (普及度還不夠高)
+17:09:22 <CindyLinz> 我自己從 Haskell 開始入手, 是因為它很純.. 這樣才有 fu 啊... 不然學半天覺得很像 java 就白學了 XD
+17:11:08 <CindyLinz> 推廣的話.. 哎我也不知道怎樣的 strategy 比較好 @@"
+17:11:19 <_13h> 嗯，我想說的是，miaout17 在介紹 FP 時，目標聽眾只限學過 Haskell / Erlang 嗎？我覺得有些語法對完全沒接觸過的人，不是那麼好理解@_@
+17:13:04 <CindyLinz> 以前都聽人家說, FP 有什麼
+17:13:05 <_13h> 如果連示例都要花點時間理解，還要再探討背後的觀念就會有點障礙 (我是說我啦...
+17:13:17 <CindyLinz> 可是太多 FP 的性質都被偷去用了
+17:13:24 <CindyLinz> 現在應該改說, FP 沒有什麼 :p
+17:13:31 <CindyLinz> 這樣可能比較準一點 XD
+17:14:01 <CindyLinz> 不然有 lambda 的 C++11 也只好歸類 FP 了... (嘆)
+17:14:31 <_13h> 這個.. 情感上有點難接受XD
+17:15:23 <_13h> 不過這類支援 multi paradigm 的語言，也很難只用單一面向來定位啊
+17:16:41 <_13h> 印象中 STL 的作者都說不是用 OO 的觀念在設計了，這樣強調 C++ 是 OOPL 好像也怪怪的
+17:19:37 <_13h> 一時找不到來源，先忘了 C++ 的部份好了XD
+17:22:14 <_13h> http://blog.csdn.net/myan/article/details/1902  # STL之父访谈录(一万二千字的大块头）
+17:23:02 <_13h> 隨便找的，可能是這篇吧... 一開始有提到另一個函數式語言 Tecton... 完全沒聽過XD
+17:24:54 <miaout17> 我有一些簡單的sample code (階乘之類的) ，然後會說sample code不用完全看懂。
+17:25:27 <_13h> 嗯嗯嗯
+17:27:09 <miaout17> 例如Side-Effect, pure function，我會舉例Scala建議盡量用val達成immutable；Erlang則是single-assignment，但還是可以呼叫impure function(ex. IO)；Haskell則是用IO Monad把impure區隔開來
+17:28:42 <miaout17> 其實最後都沒有要「深入討論」，只是大略的介紹一些特性，希望大家思考一下好處是語言帶來的，還是編程典範帶來的。
+17:31:05 <miaout17> 不過確實我還是很怕放了sample code講不好，聽者會因為不熟悉的語言卡住。感謝提醒，我應該在簡化sample/改善講法上再用點功。
+17:33:23 <_13h> 其實我很少研究類似的演講，不確定一般都是怎麼介紹這些概念。以我的狀態來說，可能用 scheme 或 python 會比較熟XD Haskell / Scala / Erlang 雖然都拿來寫過練習題，但畢竟不是慣用工具，理解的速度會慢一點
+17:37:41 <_13h> 不過我覺得例子應該蠻重要的，面對一個不熟悉或完全沒接觸過的風格/技巧，沒有好的例子只會讓人想放空XD
+22:49:14 <suhorng> http://registrano.com/events/55c147 耶耶 Functional Thusday 要來了~
+22:55:05 <letoh> 又是 registrano  好多活動都用這個
+22:56:53 <hychen> suhorng, cool cool!
+22:57:04 <hychen> letoh, will you be in OSDC tomorrow
+22:59:18 <letoh> 明天不是得上班嗎  沒有公假可以請XD
+23:00:45 <suhorng> hychen: jaiyalas跟scm老師辦的XD
+23:00:57 <hychen> suhorng, cool, 我要參加!
+23:01:22 <hychen> letoh, 我們有4天 conference day.
+23:01:27 <hychen> 可以參加會議
+23:02:37 <letoh> conference day? 那是什麼?
+23:03:18 <hychen> 就4天公假
+23:03:31 <letoh> 喔喔喔  好福利!!
+23:04:06 <letoh> 明天問一下人資好了XD
+23:05:03 <letoh> hychen: 請完假回來需要寫報告嗎?
+23:06:51 <suhorng> 也已報名 XD
+23:07:48 <letoh> 沒有會員的人好可憐  放在「其他人」那一邊XD
+23:14:08 <hychen> letoh, ya
+23:20:08 <hychen> 報名完畢
+23:46:57 <miaout17> FP Tuesday 報名序號#13
+23:47:45 <miaout17> Sorry 是Thursday
+23:55:04 <suhorng1> 原來 Oleg 有來過 FLOLAC http://flolac.iis.sinica.edu.tw/flolac08/abs-value.html

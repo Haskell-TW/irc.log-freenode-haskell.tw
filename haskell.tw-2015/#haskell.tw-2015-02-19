@@ -1,0 +1,96 @@
+00:11:25 <CindyLinz> 嗯.. 其實用 Int# 這些累了想偷懶的時候, 可以套一下 I# 然後繼續用 XD
+00:11:44 <CindyLinz> 犧牲一點效能這樣 :p
+00:16:39 <petercommand> :t I#
+00:16:40 <lambdabot>     Not in scope: data constructor ‘I#’
+00:16:41 <lambdabot>     Perhaps you meant ‘In’ (imported from Lambdabot.Plugin.Haskell.Eval.Trusted)
+00:16:44 <petercommand> :t Int#
+00:16:45 <lambdabot> Not in scope: data constructor ‘Int#’
+00:16:52 <petercommand> 沒有耶XD
+00:16:57 <petercommand> :t GHC.Prim.Int#
+00:16:58 <lambdabot> Not in scope: data constructor ‘GHC.Prim.Int#’
+00:17:53 <pkmx> 這裡 # http://hackage.haskell.org/package/ghc-prim-0.3.1.0/docs/GHC-Types.html#t:Int
+00:18:20 <petercommand> http://hackage.haskell.org/package/base-4.7.0.2/docs/GHC-Exts.html#v:I-35-
+00:18:33 <petercommand> 這裡也看到了耶XD
+00:19:40 <pkmx> :t GHC.Types.I#
+00:19:40 <lambdabot> GHC.Prim.Int# -> Int
+00:19:52 <suhorng> > 5#
+00:19:54 <lambdabot>  Kind incompatibility when matching types:
+00:19:54 <lambdabot>    a0 :: *
+00:19:54 <lambdabot>    GHC.Prim.Int# :: #
+00:20:07 <suhorng> > GHC.Types.I# 8#
+00:20:09 <lambdabot>  Not in scope: data constructor ‘GHC.Types.I#’
+00:26:11 <CindyLinz> 就... 例如說, let a = 25# in take (I# a) [1..]
+00:26:47 <petercommand> 咦...這會變快嗎XD
+00:26:47 <CindyLinz> 只是哄.. 這邊 I# a 不可以寫 I# $ a 這樣.. 會被 GHC 罵說.. ($) 只能吃 * 不能吃 #.. :Q
+00:27:11 <CindyLinz> petercommand: 當然會變慢啊.....ww
+00:27:23 <petercommand> XDD
+00:27:25 <CindyLinz> 只是, 就懶得寫一個 take# 的時候, 將就用一下 ._.
+00:30:35 <petercommand> 感覺...這應該也要是 polymorphism 包含的範圍呀XD
+00:30:44 <petercommand> code reuse
+00:32:10 <pkmx> GHC 沒有 unboxed type polymorphism @@
+00:34:26 <CindyLinz> 是不是 Haskell 根本沒有 unboxed type? 是 GHC 加的?
+00:34:40 <pkmx> 對啊
+00:34:56 <petercommand> XDXD
+00:35:28 <petercommand> 原來如此..
+00:35:43 <petercommand> 我都沒去看過 haskell report  XD
+00:38:08 <petercommand> 到底哪部份是 Haskell 哪些是 GHC 加的 好像很難分... Haskell 也會把 GHC 加的東西 merge 進去
+00:39:02 <pkmx> 不就是有在report裡面的就是haskell 不在裡面的就是GHC自己加的@@
+00:40:05 <petercommand> 恩..但...就是懶的去看，找功能的時候也不管這些XD
+00:44:07 <pkmx> 反正當下寫得出來 GHC 可以跑最重要 (?)
+00:44:25 <pkmx> 至於其它的compilers或舊版GHC就管他的 (?)
+00:47:32 <petercommand> 完全就是這樣XD
+05:55:33 <monochrom> 啊, 新年啊, 不過多倫多這邊時區上還是慢了十二小時
+05:56:31 <monochrom> 我有熟讀 Haskell Report. 可以問我. :)
+11:13:50 <suhorng> :t GHC.Types.I#
+11:13:51 <lambdabot> GHC.Prim.Int# -> Int
+11:14:12 <suhorng> petercommand: 它都已經在 GHC.Types 裡面了XD
+11:15:19 <suhorng> 不過 unboxed type 的 kind 也不一樣, 要支援多型的話是不是至少需要 kind polymorphism?
+11:15:33 <petercommand> :p
+11:16:01 <suhorng> > (# 3# , 5# #)
+11:16:03 <lambdabot>  Kind incompatibility when matching types:
+11:16:04 <lambdabot>    a0 :: *
+11:16:04 <lambdabot>    (# GHC.Prim.Int#, GHC.Prim.Int# #) :: #
+11:16:09 <suhorng> oops XD
+11:16:19 <suhorng> 印不出來
+11:21:50 <monochrom> 是, 你可能要 kind polymorphism
+11:26:11 <suhorng> 說來 Haskell report 可以聽到有人豪氣的說 "我讀完了", C++ standard 就...XD
+11:28:35 <monochrom> "我寫完了"
+11:29:40 <petercommand> 這更豪氣了XD
+11:30:57 <monochrom> 那麼, "我寫完了, 但我不想校對"呢? XD
+11:32:54 <petercommand> 更加豪氣了XD
+11:34:16 <monochrom> 我覺得更像是: 我自知寫了個怪獸出來, 現在想洗手不幹
+11:35:20 <monochrom> "我寫完了, 現在我想出家"
+11:43:12 <suhorng> 這就是所謂的會動就好嗎XD
+13:41:22 <mno2> https://hackage.haskell.org/package/http2 結果 kazu 已經開始在寫了 lol
+13:41:22 <CindyLinz> 連瀏覽器裡面都要放 asm 了... Haskell 配 shellcode 應該也不是來亂的呀 XD # http://blogs.msdn.com/b/ie/archive/2015/02/18/bringing-asm-js-to-the-chakra-javascript-engine-in-windows-10.aspx
+13:42:33 <suhorng> IEBlog...
+13:42:47 <suhorng> IE耶, 竟然會使用 asm.js?
+13:42:58 <CindyLinz> 不是 IE 吧?
+13:43:06 <CindyLinz> 不是說 Win10 的瀏覽器要改名字? XD
+13:43:29 <suhorng> spartan
+13:44:04 <monochrom> 等等, asm.js 是不是真的和組合語有闗了?!
+13:44:12 <suhorng> Chakra JavaScript engine o'_'o
+13:44:17 <suhorng> monochrom: 應該沒有....
+13:45:01 <mno2> 對應的邏輯應該是 asm.hs 吧 xD
+13:45:28 <suhorng> 就決定用 GHC Core 了!
+13:46:28 <mno2> 我的 Windows 10 還沒看到 spartan
+13:46:32 <mno2> 還是 IE
+13:48:16 <monochrom> Lookup(Δ, Γ, x)
+13:48:50 <monochrom> 看見熟悉的希臘字母, 真有親切感 :)
+13:49:15 <suhorng> XD
+13:50:52 <monochrom> 啊, 也是時候多倫多的新年快樂了!
+13:51:31 <monochrom> 還有半炷香時間就過了子時哩!
+13:55:22 <monochrom> 恭喜發財! 恭喜大家的 code base 都增大一倍!
+13:56:10 <monochrom> 年年有 code 寫, 歲歲有 bug 捉
+13:56:17 <suhorng> 新年外ㄌㄜwwww
+13:56:23 <suhorng> 這個後半句就算了XDDD
+13:59:28 <letoh> 後半句算祝福嗎? XD
+14:00:00 <monochrom> 不知呢! 或者有 bug 捉才有錢收...
+14:00:13 <suhorng> wwww Dijkstra 好像是這麼描述過
+14:03:25 <monochrom> google 的 doodle 也慶祝羊年
+15:10:17 <pkmx> 不知道agda-mode的input method有沒有standalone的版本?
+15:10:29 <pkmx> 我之前都偷偷把他幹來haskell-mode用=p
+15:12:23 <monochrom> 我不知道, 但我自己用 ctrl-\ 然後說 tex
+15:13:12 <monochrom> 這是放諸 emacs 四海皆準的 :)
+15:16:01 <pkmx> 好像不錯 :D
+15:16:28 <pkmx> agda-mode 你可以洗洗睡了

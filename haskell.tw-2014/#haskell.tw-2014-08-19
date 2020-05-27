@@ -1,0 +1,20 @@
+00:40:36 <petercommand> @src (:<)
+00:40:36 <lambdabot> Source not found. Wrong!  You cheating scum!
+00:40:42 <petercommand> @src (:<:)
+00:40:42 <lambdabot> Source not found. Are you typing with your feet?
+13:53:08 <petercommand> data Set (cxt :: * -> *) a = Set [a]
+13:53:20 <petercommand> 這裡的cxt用途是甚麼呀?
+13:53:59 <petercommand> http://www.haskell.org/ghc/docs/7.2.1/html/users_guide/other-type-extensions.html
+13:54:03 <petercommand> 這裡看到的
+14:04:08 <au> Set [1,2,3] :: Set IO Int
+14:04:25 <au> 就是給一個 tag 說這個 set 是給哪個 context 用的
+14:11:20 <petercommand> 喔喔，了解
+16:31:55 <petercommand> haskell有辦法對abstract data type的type constructor進行pattern matching嗎?
+16:32:16 <petercommand> 像剛剛的那個cxt
+16:35:10 <au> typeclass / type family?
+16:42:47 <petercommand>  恩..我看一下
+18:30:08 <CindyLinz> miaoski: hitcon ctf 的題目會公佈嗎?
+18:33:53 <miaoski> CindyLinz: 現在都還在 ctf 的首頁上啊
+18:34:11 <miaoski> 只是有些後端關掉了，要去 217 落人
+18:34:17 <miaoski> https://ctf2014.hitcon.org/dashboard
+18:44:55 <CindyLinz> 噗噗我看的是這頁... http://hitcon.org/2014/CTF/

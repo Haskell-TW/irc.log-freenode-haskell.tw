@@ -1,0 +1,53 @@
+09:46:46 <mno2> https://www.reddit.com/r/haskell/comments/3sts2t/strict_haskell_xstrict_has_landed/   -XStrict landed!
+11:30:32 <CindyLinz> strict haskell..
+20:06:33 <suhorngT> CindyLinz: mno2: http://blog.johantibell.com/2015/11/the-design-of-strict-haskell-pragma.html
+20:22:32 <CindyLinz> 原來只是自動幫忙在有加 pragma 的 module 裡定義的 data field 加上 bang pattern 啊?
+20:22:55 <CindyLinz> StrictData 的話
+20:23:24 <CindyLinz> 不對.. 誤會 XD
+20:23:36 <CindyLinz> 是程式裡面所有的 constructor fields 都加 bang pattern
+20:24:13 <CindyLinz> Strict 的話就除了上述以外, 在所有的 bindings (let, where, case, function arguments) 也都自動加上 bang pattern
+20:24:26 <suhorngT> constructor + let + function argument
+20:24:27 <suhorngT> 對
+20:25:11 <suhorngT> 別的 module 不會影響 (不然怎麼想 GHC 都很難改). 接下來是挑戰 GHC 在 Strict 狀況下的醉佳話能力了嗎?
+20:25:24 <CindyLinz> 覺得少了一個地方... 其實自己手動 strict 的時候也會想加的地方
+20:25:30 <CindyLinz> 就是 function 的 result..
+20:26:13 <suhorngT> 耶? 怎麼想都加不上去吧?
+20:26:52 <CindyLinz> 例如說 add !a !b = a + b 會手動寫成 add !a !b = let !x = a + b in x 或是 add !a !b = let x = a + b in x `seq` x
+20:27:12 <CindyLinz> 好啦 Strict 一開, 就只要寫成 add a b = res where res = a + b 吧
+20:28:29 <suhorngT> 可是, let !x = a + b 跟 a + b 有差別嗎?
+20:28:48 <CindyLinz> in 開始以前 !x 會先執行
+20:28:51 <suhorngT> x 不會去算的話 let !x = a + b in x 也還是不會去算?
+20:29:02 <suhorngT> 這樣說好了, add 1 2 整個是一個 thunk, 所以還是 thunk
+20:29:22 <CindyLinz> 上次說的呀, 整個 binding 最前面的 ! 和 pattern 裡面的 ! 意思不一樣
+20:29:47 <CindyLinz> 那... add a b = [res] where res = a + b 行了吧 XD
+20:29:58 <suhorngT> 是 add 1 2 整個東西都不會去被計算的問題. 一旦 add 1 2 被 force 了, 自然會去算裡麵的 a + b
+20:30:14 <suhorngT> 即使是 [res], add 1 2 還是一整個 thunk 不是嗎?
+20:30:40 <CindyLinz> 當然是考慮 add 1 2 要被 seq 的時候啊
+20:30:51 <CindyLinz> 好吧, 最外一層是沒差
+20:31:21 <suhorngT> 那 add 1 2 被 seq 的話 [res] where res = a + b 這種程度已經是希望每個 expression 的中間值都被用 let! 包起來了吧...
+20:31:27 <CindyLinz> 沒把 res 獨立寫的話... seq 完會拿到 [a + b] 而不是 [res] 吧
+20:31:53 <suhorngT> 這樣子跟 function result 加上 '!' 沒有關聯
+20:32:02 <CindyLinz> 就是會變成 [Thunk(a + b)] 而不是 [a + b]
+20:32:08 <CindyLinz> 對.. result 只有那個 [] 而已
+20:32:27 <suhorngT> 所以是要某種 CPS transform! 好啦其實不是 CPS
+20:35:34 <CindyLinz> 你貼的 link 後面說... 會自動有 {-# UNPACK #-} 的效果....
+20:37:33 <CindyLinz> 所以是 data A = A Int 也會自動變成 data A = A !Int 然後再自動開那個 unbox strict field 嗎...
+20:38:29 <suhorngT> 是 John Tibell 說的, 他開發 cabel 應該 Haskell 有用的很兇吧, 我相信他(欸)
+20:38:55 <CindyLinz> 開了 Strict 以後要怎麼局部關掉呢?
+20:39:02 <CindyLinz> 用 ~ 嗎?
+20:39:27 <suhorngT> hmmm...
+20:39:49 <CindyLinz> 然後, 我覺得 GHC 的 {-# UNPACK #-} 很弱.. orz
+20:40:08 <suhorngT> 可是不知道內部怎麼處理 Strict => (+= !), 就不知道 ~ 放的位置對不對....
+20:40:11 <CindyLinz> data A = A {-# UNPACK #-} !Bool 就無效了
+20:40:49 <suhorngT> 真難過
+20:40:54 <CindyLinz> 想要有個可以塞進去的 Bool... 要改用 Int, 然後再放些 S.M.A.R.T constructor 來對應
+20:41:04 <suhorngT> 我們果然需要 type Bol = Int
+20:41:07 <CindyLinz> 然後用 case 取代 if
+20:41:10 <suhorngT> null = 0
+20:41:16 <suhorngT> 嗚嗚...
+20:41:46 <CindyLinz> 習慣用 case 取代 if 的話.... 可以考慮用 unboxed type 了 XD
+20:42:03 <CindyLinz> case a <# 3# of 0# -> ... ; _ -> ...
+20:42:23 <suhorngT> wwww 習慣用 case 取代 if 只好直接寫 Core
+20:43:14 <CindyLinz> Core, 就不是 Haskell 了.... 
+20:44:10 <suhorngT> Hascore
+21:59:07 <CindyLinz> 嗯不過 Strict 和 StrictData 這樣設計... 那麼自己要加進去就也不會太難 :p

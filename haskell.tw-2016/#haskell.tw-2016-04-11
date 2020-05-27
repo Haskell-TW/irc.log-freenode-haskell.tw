@@ -1,0 +1,18 @@
+03:38:53 <CindyLinz> @pl \(a, b) -> a >>= return . (, b)
+03:38:54 <lambdabot> (line 1, column 29):
+03:38:54 <lambdabot> unexpected ','
+03:38:54 <lambdabot> expecting expression
+03:39:02 <CindyLinz> @pl \(a, b) -> a >>= \a' -> return (a', b)
+03:39:03 <lambdabot> uncurry (flip (fmap . flip (,)))
+03:39:12 <CindyLinz> 有點恐怖..w
+03:40:03 <CindyLinz> @t uncurry (flip (fmap . flip (,)))
+03:40:03 <lambdabot> Maybe you meant: tell thank you thanks thesaurus thx tic-tac-toe ticker time todo todo-add todo-delete type v @ ? .
+03:40:06 <CindyLinz> @type uncurry (flip (fmap . flip (,)))
+03:40:08 <lambdabot> Functor f => (f a, b) -> f (a, b)
+05:43:57 <caasih> 有人用過 markdown-unlit 嗎？
+05:44:05 <caasih> 一直遇到：
+05:44:12 <caasih> No local directories found as children of Test.lhs
+11:40:57 <CindyLinz> 是不是需要加個章節目錄之類的東西?
+12:14:12 <caasih> CindyLinz: 章節目錄？是指之後的 Workshop 筆記？還是 markdown-unlit ？
+13:18:40 <CindyLinz> 這個訊息 # No local directories found as children of Test.lhs
+13:21:59 <caasih> CindyLinz: 收到。晚上我加看看 Test/ 看有沒有救

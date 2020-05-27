@@ -1,0 +1,350 @@
+00:02:19 <monochrom> 不, 並沒有優化. 基本的 lazy evaluator 都會這樣做.
+00:04:47 <monochrom> foldl1 (+) [x, y, z] 首先化成 (x+y)+z, 這記在 heap 裏.
+00:06:28 <monochrom> 然後 "欲征服 (x+y)+z, 必先征服 x+y, 然後回頭再 +z". 為了那個回頭, 就用 stack 記著回哪裏的頭.
+00:10:18 <monochrom> foldr 過程有點不同, 但最終還是同樣多的回頭. 詳見 http://www.vex.net/~trebla/haskell/lazy.xhtml
+00:11:05 <monochrom> 我應該要加些 anchors
+00:11:50 <monochrom> 暫時來說, 找尋 "Case Study: foldr" 吧!
+01:33:50 <au> http://www.slideshare.net/autang/commercial-uses-of-functional-programming
+01:34:06 <au> = http://audreyt.org/tmp/FLOLAC14.pdf 初稿，歡迎斧正!
+01:36:54 <au> -> zzz, 明天再來貼逐字稿
+01:41:54 <caasihuang> au++
+01:46:05 <au> (p97 p98 是 redundant 的，之後會拿掉)
+01:57:19 <whitglint> 立刻下載~
+02:03:58 <caasihuang> 好多故事，期待一號聽講 XD
+09:45:09 <caasihuang> 要裝 emacs ...
+09:45:57 <CindyLinz> 3G(2G) 訊號超弱... XD
+09:46:12 <CindyLinz> 勉強用一下 irc 還行..
+09:46:30 <CindyLinz> gmail 就不行了 XD
+09:46:46 <CindyLinz> (祈禱)
+09:46:57 <CindyLinz> emacs 可以晚上再裝, 明天再用
+09:49:35 <caasihuang> 先偷用 vim XDDD
+10:28:58 <superbil> 我試著用 emacs 然後打開網路上找的 agda-example 有些字元顯示不出來,  aquamacs 反而可以 (怪
+10:33:50 <superbil> https://gist.github.com/anonymous/30df161ddfdba50b7bc4
+10:36:35 <CindyLinz> 字型問題就是另一層面的問題了.... 我討厭 unicode 寫程式派 XD
+10:37:46 <CindyLinz> 嗯, 如果用得太兇, 用了一堆常常會看不到, 或是看起來太像的字元的話 ._.
+11:17:58 <CindyLinz> 不知道要不要介紹 irc channel.. 可是人好多看起來好可怕 o.o
+11:31:32 <caasih> XDDDD
+11:32:41 <mno2_> 現場多少人啊？（好像在轉播演唱會）
+11:33:25 <CindyLinz> 150 吧
+11:33:30 <CindyLinz> 還是 110?
+11:34:03 <caasih> 修課學生沒上來，旁聽的我也不太敢在這邊問問題
+11:35:06 <au> IRC channel +1 # 這樣可以一面演講一面看 feedback
+11:35:18 <CindyLinz> caasih: 這邊氣氛這麼輕鬆有什麼不能講? XD
+11:35:33 <au> 據說借了兩百多人的教室然後借了一下午三小時...
+11:35:47 <CindyLinz> au: 有明天會換教室.. XD
+11:35:50 <CindyLinz> au: 有聽說明天會換教室.. XD
+11:37:33 <CindyLinz> 然後我發現教授+助教群, 根本沒有人在這 channel 啊... OAO
+11:37:35 <caasih> 快要八十人？
+11:37:44 <caasih> 猜是 110 ，點人頭大概 54 + 38 ，有漏算
+11:37:44 <caasih> > let swap = (a,b) -> (b,a) in swap (1, 'a')
+11:37:45 <lambdabot>  <hint>:1:18: parse error on input ‘->’
+11:38:08 <CindyLinz> > let swap = \(a, b) -> (b, a) in swap (1, 'a')
+11:38:10 <lambdabot>  ('a',1)
+11:38:14 <CindyLinz> 少一個 \
+11:38:53 <CindyLinz> 就覺得更怕了 XD # 11:37 < CindyLinz> 然後我發現教授+助教群, 根本沒有人在這 channel 啊... OAO
+11:38:54 <caasih> > let swap = (a,b) = (b,a) in swap (1, 'a')
+11:38:54 <caasih> > let swap (a,b) = (b,a) in swap (1, 'a')
+11:38:55 <lambdabot>  <hint>:1:18: parse error on input ‘=’
+11:38:55 <lambdabot>  can't find file: L.hs
+11:39:42 <CindyLinz> 奇怪 我沒看出錯..
+11:39:44 <CindyLinz> > let swap (a,b) = (b,a) in swap (1, 'a')
+11:39:46 <lambdabot>  ('a',1)
+11:39:48 <CindyLinz> wwww
+11:40:17 <caasih> 講義有一題，是要求用 case 定義這個 swap ，求提示
+11:40:33 <CindyLinz> 用 case..of 的語法
+11:40:41 <caasih> 前一個多打了 = ， 然後 3G 太慢 lag
+11:40:51 <caasih> CindyLinz: 好，我查查看...
+11:41:41 <superbil> CindyLinz: 太好了，我也不喜歡 unicode 寫 code (太麻煩)
+11:42:05 <cibs> CindyLinz: 地下教授！ # 11:38 < CindyLinz> 就覺得更怕了 XD # 11:37 < CindyLinz> 然後我發現教授+助教群, 根本沒有人在這 channel 啊... OAO
+11:42:22 <yhsiang> CindyLinz: 嘖嘖
+11:42:25 <yhsiang> CindyLinz: 你在現場？
+11:43:00 <au> caasih: let swap = \x -> case x of ... -> ... in swap (1, 'a')
+11:43:23 <caasih> jaiyalas 的位子在我旁邊，要請他上線嗎？ XD
+11:43:34 <yhsiang> caasih: 你也在！！
+11:44:06 <au> 講義有線上網址嗎?
+11:44:51 <yhsiang> 好像沒有?
+11:45:23 <caasih> au: 穆老師好像有放在 github ，但網站上沒有給連結
+11:45:36 <caasih> au: 我試試看 # case
+11:45:51 <CindyLinz> yhsiang: 在現場呀
+11:46:53 <cibs> CindyLinz: 妳這樣算請公假嗎? XD 還是貴社就是有這麼多假，還是特權！
+11:47:10 <CindyLinz> cibs: 算教育訓練進修的公假
+11:47:38 <cibs> CindyLinz: 真好！
+11:47:43 <caasih> yhsiang: o/ 對啊，也在 XD
+11:47:59 <b4283> ABBA
+11:48:06 <yhsiang> 所以午餐要吃什麼 :p
+11:48:23 <caasih> let swap'' = \x -> case x of (a, b) -> (b, a) in swap(1, 'a')
+11:48:28 <caasih> > let swap'' = \x -> case x of (a, b) -> (b, a) in swap(1, 'a')
+11:48:30 <lambdabot>  ('a',1)
+11:48:31 <CindyLinz> 鹿鳴堂? XD
+11:48:45 <caasih> > let swap' = (a, b) -> (b, a) in swap(1, 'a')
+11:48:46 <lambdabot>  <hint>:1:20: parse error on input ‘->’
+11:48:53 <caasih> > let swap' (a, b) = (b, a) in swap(1, 'a')
+11:48:55 <lambdabot>  ('a',1)
+11:49:28 <au> > let swap = \(a, b) -> (b, a) in swap(1, 'a')
+11:49:30 <lambdabot>  ('a',1)
+11:49:50 <caasih> yhsiang CindyLinz: 吃飯++ ，不知道這附近有啥好吃的
+11:50:20 <CindyLinz> 在鹿鳴堂吃飯可以幻想自己還是學生 XD
+11:50:23 <caasih> au++ 原來可以 \(a, b) ，學習了
+11:51:17 <petercommand> > let swap' = (\a b -> b a) in swap 1 'a'
+11:51:18 <lambdabot>  Couldn't match expected type ‘GHC.Types.Char -> t’
+11:51:18 <lambdabot>              with actual type ‘(b0, a0)’
+11:51:48 <petercommand> > let swap' = (\a b -> (b, a)) in swap 1 'a'
+11:51:49 <lambdabot>  Couldn't match expected type ‘GHC.Types.Char -> t’
+11:51:49 <lambdabot>              with actual type ‘(b0, a0)’
+11:52:01 <petercommand> > let swap' = (\a b -> (b, a)) in swap' 1 'a'
+11:52:03 <lambdabot>  ('a',1)
+11:52:11 <petercommand> > let swap' = (\a b -> b a) in swap' 1 'a'
+11:52:12 <lambdabot>  Couldn't match expected type ‘t0 -> t’
+11:52:13 <lambdabot>              with actual type ‘GHC.Types.Char’
+11:52:42 <caasih> CindyLinz: jaiyalas 也說你是地下教授 XD
+11:52:56 <CindyLinz> petercommand: b a 表示把 b 當函數 a 當參數塞給 b 喔
+11:53:14 <petercommand> 喔喔
+11:53:33 <petercommand> 怪不得XD
+11:54:40 <b4283> 後面出去有一些東西可吃
+11:54:45 <b4283> *後門
+11:55:00 <CindyLinz> 辛亥路的後門嗎 OAO
+11:55:31 <b4283> 摩斯那個後門，還沒到辛亥
+11:55:59 <CindyLinz> 唔, 不是接 118 巷那個嗎?
+11:56:17 <petercommand> > let a `swap'` b = (b, a) in 1 `swap'` 'a'
+11:56:18 <lambdabot>  ('a',1)
+11:56:28 <b4283> 對，是那個
+11:56:44 <yhsiang> CindyLinz: 地下教授～妳好～
+11:56:51 <CindyLinz> 囧
+11:57:14 <b4283> 喔，我搞錯了，那條是辛亥路沒錯
+11:57:19 <CindyLinz> 我是重修學姊.... OAO
+11:58:07 <cataska> 要在此頻直播嗎
+11:58:39 <cibs> 118 巷東西不錯吃
+11:59:19 <CindyLinz> 直播嗎...  嗯, 我有看到有攝影機啦.. 應該之後可以看重播?
+12:00:17 <yhsiang> 需要嗎 我有直播工具
+12:00:23 <yhsiang> 我可以現場直播 XD
+12:00:32 <yhsiang> 但是需要一直用電源 orz...
+12:00:33 <CindyLinz> yhsiang: 可能要問一下教授..
+12:00:47 <yhsiang> CindyLinz: 不是問地下教授嗎～ *flee*
+12:00:59 <CindyLinz> yhsiang: 剛剛有講錯話的記錄, 表示之後可能還會有 (?  也許會想後製剪掉 XD
+12:01:03 <yhsiang> CindyLinz: 我想也是要問才行 *認真*
+12:01:13 <yhsiang> 講錯話超可愛的 XDD
+12:03:41 <jaiyalas> 之後會放重播啦
+12:04:04 <caasih> jaiyalas: 助教出現了！
+12:04:22 <jaiyalas> (逃
+12:05:38 <yhsiang> 所以午餐要吃什麼 ...
+12:05:42 <CindyLinz> 真的逃了..ww
+12:05:55 <caasih> > let g = \f x -> f x x; f = undefined in g f 1
+12:05:56 <lambdabot>  *Exception: Prelude.undefined
+12:06:31 <caasih> > let g = \f x -> f x x; f x = 2 in g f 1
+12:06:33 <lambdabot>  Could not deduce (GHC.Num.Num (t0 -> t))
+12:06:33 <lambdabot>    arising from the ambiguity check for ‘e_121’
+12:06:33 <lambdabot>  from the context (GHC.Num.Num (t1 -> t), GHC.Num.Num t1)
+12:06:33 <lambdabot>    bound by the inferred type for ‘e_121’:
+12:06:33 <lambdabot>               (GHC.Num.Num (t1 -> t), GHC.Num.Num t1) => t
+12:07:08 <mno2_> 我已經不知道 118 巷有哪些店還活著了 xD  親來應該還在吧
+12:07:39 <CindyLinz> 我也不知道 XD
+14:00:15 <CindyLinz> 囧
+14:00:48 <yhsiang> ?
+14:02:19 <CindyLinz> 剛 email 被打在螢幕上 XD
+14:07:31 <yhsiang> CindyLinz: 你的email?
+14:07:41 <yhsiang> Either到底要怎麼用啊 @@
+14:08:09 <CindyLinz> yhsiang: 你是問, 用在什麼情境嗎?
+14:08:18 <yhsiang> CindyLinz: half
+14:08:47 <CindyLinz> 那用一個例子好了:
+14:08:59 <yhsiang> CindyLinz: 講個祕訣吧～
+14:09:47 <CindyLinz> > let myDiv :: Int -> Int -> Either String Int ; myDiv a b = if b==0 then Left "不能除" else Right (div a b) in myDiv 2 0
+14:09:49 <lambdabot>  Left "\19981\33021\38500"
+14:09:52 <CindyLinz> > let myDiv :: Int -> Int -> Either String Int ; myDiv a b = if b==0 then Left "不能除" else Right (div a b) in myDiv 2 1
+14:09:53 <lambdabot>  Right 2
+14:10:13 <CindyLinz> yhsiang: 常見的一種用法是在 Right 放正常的結果, Left 放失敗的理由
+14:10:23 <yhsiang> oh 好像有點懂
+14:10:36 <CindyLinz> 其實是個英文冷笑話的用法... Right 是對的
+14:10:49 <CindyLinz> 但 Either 裡的 Right 只是右邊....
+14:11:07 <CindyLinz> 我要去一下小七 :Q
+14:14:09 <au> "War does not determine who is right - only who is left." — Bertrand Russell
+14:17:24 <yhsiang> 突然懂了 :D 謝謝大家幫忙
+14:19:14 <CindyLinz> 來不及了 下一節再去 XD
+14:20:38 <caasih> 看到一題是要求做一個傳回 list 中第一個偶數的 function
+14:20:50 <caasih> 好奇失敗通常該傳回什麼？
+14:21:15 <caasih> 是用 Either 或 Maybe 之類的嗎？
+14:21:35 <CindyLinz> 也有可能... 就不傳回了 XD
+14:21:38 <CindyLinz> (當了)
+14:22:18 <CindyLinz> 像這種失敗理由比較空虛的, 用 Maybe 的比較多
+14:22:43 <CindyLinz> 然後, 有的是多給一個參數請你提供找不到時所用的 default 值
+14:23:01 <CindyLinz> 最懶的就是直接擺爛
+14:23:09 <yhsiang> hmm..
+14:23:19 <yhsiang> CindyLinz: m(_ _)m
+14:23:31 <CindyLinz> 擺爛也有比較懶和比較不懶的.. 最懶的是這樣:
+14:23:35 <caasih> 題目先寫死成 [Int] -> Int 讓我好困惑
+14:23:54 <CindyLinz> > let myHead :: [Int] -> Int ; myHead (x:xs) = x in myHead []
+14:23:55 <lambdabot>  *Exception: <interactive>:3:30-46: Non-exhaustive patterns in function myHead
+14:24:11 <yhsiang> haskell真有趣 hmm..
+14:24:12 <CindyLinz> 比較不懶的擺爛是這樣:
+14:24:33 <CindyLinz> > let myHead :: [Int] -> Int ; myHead (x:xs) = x ; myHead [] = error "QQ" in myHead [];
+14:24:34 <lambdabot>  <hint>:1:85: parse error on input ‘;’
+14:24:54 <CindyLinz> > let myHead :: [Int] -> Int ; myHead (x:xs) = x ; myHead [] = error "QQ" in myHead []
+14:24:55 <lambdabot>  *Exception: QQ
+14:25:50 <caasih> 喔喔喔喔，原來有 error XD
+14:26:09 <CindyLinz> default 值的缺點是分不出是不是正確找到的答案剛好就是那個 default; 除非給的 default 很微妙, 剛好是正常值不會出現的
+14:26:10 <b4283> QQ in my head ...
+14:26:44 <yhsiang> 單手寫程式 wwww
+14:26:53 <CindyLinz> 而 Maybe 法的問題是, 有時候用起來比較麻煩; 不過如果有一連串都是 Maybe 的操作, 那又會剛好很方便 :Q
+14:28:34 <yhsiang> caasih: maybe ... maybe
+14:29:04 <lcamel_> 字典 left :  form of Old English lyft- "weak, foolish"
+14:29:08 <CindyLinz> 嗯, 如果你指的是它像是一個「盒子」把真正想要的資料裝起來的話, 這一點是像的...
+14:30:54 <caasih> au: 這個哏好沈重 # the quete of Bertrand Russell
+14:31:47 <caasih> CindyLinz: godfat 之前示範時，我只注意到盒子那個部份，還有用 <- 取值
+14:34:17 <CindyLinz> jaiyalas: 我有幫忙回答問題唷~~ :p
+14:34:35 <yhsiang> 這裡有地下教授真好 \CindyLinz/
+14:35:44 <caasih> 偷偷推廣 irc 頻道中，有個彰師大的同學說他有上過 freenode 但不知道有這個頻道。
+14:36:20 <CindyLinz> 不是教授啊.. 我在這常被罵的好嗎 XD
+14:37:36 <yhsiang> haskell猜猜樂的概念 ...hmm..
+14:39:48 <yhsiang> XD
+14:40:03 <CindyLinz> orz
+14:40:24 <caasih> 師："Cindy 不算" XDDD
+14:41:54 <CindyLinz> 我還會有限步數內解出 type 的演算法
+14:42:06 <CindyLinz> 略略想就是一直 refine 到沒得 refine 為止 XD
+14:42:48 <CindyLinz> 呃..
+14:42:57 <CindyLinz> 我還不會有限步數內解出 type 的演算法 (漏字 orz)
+14:43:02 <yhsiang> Cindy不算這應該要上topic :p
+14:43:15 <CindyLinz> 又不是 Flolac channel XD
+15:02:30 <cibs> CindyLinz: 翻到舊訊 # 12:41 < CindyLinz> 助教有寄旁聽確認信喔~ 要記得回~~
+15:02:44 <cibs> CindyLinz: 我只有報 au 場好像就沒有收到，SPAM 裡也沒有
+15:11:01 <caasih> 原來這課用不到之前玩 fibs 那招 QQ
+15:12:15 <caasih> jaiyalas 說他一直 timeout
+15:22:49 <caasih> 為什麼這行拿掉 (Eq a) 就爛了，我比的是 list 不是裡面的東西
+15:22:52 <caasih> https://github.com/caasi/FLOLAC-2014/blob/master/FP/0.hs#L93
+15:31:27 <caasih> 沒事了， jaiyalas 說會一個一個比裡面的東西 XD
+16:04:08 <CindyLinz> 呼 回到教室了 >,
+16:04:31 <CindyLinz> ><
+16:17:58 <xcycl> Cindy 要幫忙裝 Agda 嗎～
+16:44:49 <cibs> au 明天的 talk 是三個小時是要連講三個小時還是有實習啊?
+16:51:35 <au> cibs: 講一小時，沒有實習
+16:51:59 <au> 兩個小時純閒聊，可以要我講別的，想提早下課也可以~
+16:55:18 <au> 也歡迎一面聽一面在 #haskell 提問題或想法
+16:58:53 <cibs> *clap*
+17:18:35 <CindyLinz> 結果今天沒有介紹 #haskell.tw ^^|
+17:19:30 <caasih_> 我的左邊跟右右邊看來都不是修課的學生，都卡卡的
+17:19:42 <caasih_> 右前方看來很厲害
+17:21:05 <caasih_> 對我來說有 irc 可以問有差，希望可以介紹
+17:26:22 <b4283>  直接在黑板左上角寫 :P
+17:48:01 <cataska> 可以在黑板上寫 <marquee>#haskell.tw</marquee> (逃
+20:36:36 <au>  逐字稿共筆 (待補完): https://hackpad.com/CUFP-FLOLAC14-PoPV1V9wVse
+20:37:25 <au> 才打了八分之一... 晚上來看看能補到多少
+21:48:26 <yhsiang> au++
+21:56:35 <superbil> au ++
+21:57:56 <yllan> 突然發現在 haskell channel 用 ++ 會不會怪怪的 wwww
+21:59:00 <au> 意思是 au `mappend`
+21:59:44 <hashcat> 放錯東西編譯不過
+22:16:08 <CindyLinz> au++
+22:17:33 <hashcat> > au++
+22:17:35 <lambdabot>  <hint>:1:5:
+22:17:35 <lambdabot>      parse error (possibly incorrect indentation or mismatched brackets)
+22:18:03 <hashcat> > let au=au in au++
+22:18:04 <lambdabot>  <hint>:1:18:
+22:18:05 <lambdabot>      parse error (possibly incorrect indentation or mismatched brackets)
+22:21:54 <au> > let (++) = (+1); au=1 in (au++)
+22:21:56 <lambdabot>  2
+22:23:20 <CindyLinz> XD
+22:25:13 <hashcat> > let au=au ; au++
+22:25:15 <lambdabot>  <hint>:1:17:
+22:25:15 <lambdabot>      parse error (possibly incorrect indentation or mismatched brackets)
+22:29:54 <yllan> au: 我在 ghci 會遇到  No instance for (Num (t0 -> t1)) arising from the literal `1' ，這是什麼意思呢？
+22:30:44 <hashcat> 真多沒看過的帳號
+22:30:53 <hashcat> 跟我剛上irc的時候一樣
+22:32:06 <hashcat> 直接翻是沒有基於Num的實例
+22:32:23 <CindyLinz> yllan: 我想你是在應該是數字的東西後面放了另一個東西
+22:32:40 <hashcat> 你想把某個函數當數字計算
+22:32:40 <CindyLinz> 使得語法上看起來你想把這個數字當函數用
+22:32:54 <CindyLinz> 咦對耶 我講反了
+22:32:58 <CindyLinz> hashcat 說的才對
+22:33:06 <CindyLinz> 例如說.....
+22:33:09 <CindyLinz> > sin + 1
+22:33:11 <lambdabot>  No instance for (Data.Typeable.Internal.Typeable a0)
+22:33:11 <lambdabot>    arising from a use of ‘M239538120852668457426592.show_M2395381208526684574...
+22:33:11 <lambdabot>  The type variable ‘a0’ is ambiguous
+22:33:11 <lambdabot>  Note: there are several potential instances:
+22:33:11 <lambdabot>    instance Data.Typeable.Internal.Typeable Data.Dynamic.Dynamic
+22:33:26 <CindyLinz> 娃.. lambdabot 的訊息好難看 XD
+22:33:31 <hashcat> 這lambdabot真囉唆
+22:33:34 <yllan> 我是把這行 let (++) = (+1); au=1 in (au++) 貼到 ghci，為什麼 lambdabot 可以算出 2?
+22:33:54 <CindyLinz> 他們套好的!
+22:34:01 <CindyLinz> (誤)
+22:34:55 <hashcat> 定義被複寫拉
+22:35:09 <au> yllan: ghci -XPostfixOperators
+22:35:26 <CindyLinz> 不知道有這個!
+22:35:41 <CindyLinz> 這樣.. 就可以有自訂的 unary operator 了?
+22:35:46 <au> 對啊
+22:35:50 <hashcat> 我也不知道
+22:36:22 <yllan> 喔喔！ 所以在我的 ghci 就是把 1++ 看成 1 是個 function……
+22:36:24 <CindyLinz> 我之前查資料還聽到人家在講說 sorry haskell 沒有自訂的 unary operator, 只有系統例外那個負號..
+22:36:35 <hashcat> lambda有開啟擴展
+22:36:45 <hashcat> 偷開
+22:36:52 <hashcat> @@
+22:37:00 <hashcat> lambdabot偷開擴展
+22:37:39 <hashcat> 那不是例外吧
+22:37:40 <CindyLinz> 他一定要開的, 因為不許我們手動開 ._.
+22:37:53 <hashcat> 那個負號根本不是函數
+22:38:01 <hashcat> 是數字表示的一部分
+22:38:05 <CindyLinz> hashcat: 是例外呀, 如果不考慮那些 extension 的話, 我們定義不出任何的 unary operator
+22:38:08 <hashcat> 跟10e3的e
+22:38:22 <CindyLinz> 喔 你要這樣看也可以啦
+22:38:26 <au> 它是 syntactic form, 可以用 -XNoImplicitPrelude 來重新定義
+22:38:40 <hashcat> e怎看都不是函數吧
+22:38:43 <au> #這個 lambdabot 就不會開了
+22:38:45 <hashcat> 是數字的一部分
+22:38:50 <CindyLinz> > let x = 10 in -10
+22:38:51 <lambdabot>  -10
+22:38:56 <hashcat> 0x123
+22:39:02 <CindyLinz> hashcat: 不對欸 - 不是 literal 的一部分 @@"
+22:39:14 <CindyLinz> 我在寫什麼 orz
+22:39:17 <CindyLinz> > let x = 10 in -x
+22:39:19 <lambdabot>  -10
+22:39:25 <CindyLinz> 好結論一樣 XD
+22:39:52 <caasih_> > let (++) = \x -> [x]; au = [] in (au++)
+22:39:53 <lambdabot>  [[]]
+22:40:40 <hashcat> 結果負號實做就是函數
+22:40:43 <hashcat> ??
+22:41:13 <CindyLinz> hashcat: 很怪.. 因為寫成 2 - 1 的時候它又變成 binary operator 了
+22:41:38 <hashcat> 怎讓他顯示出(-) :: Num a => a -> a的型別
+22:41:57 <CindyLinz> au: 戳戳 XD
+22:42:13 <petercommand> partial application也不對呀...XD
+22:42:24 <au> 它是  syntactic form XD
+22:42:26 <au> http://www.haskell.org/onlinereport/haskell2010/haskellch3.html#x8-280003.4
+22:42:30 <hashcat> 若是負是函數的話應該會在Num裡面
+22:42:44 <au> 展開成 negate
+22:42:54 <CindyLinz> 就是 negate @@"
+22:43:19 <CindyLinz> 覺得如果沒有它的話, Haskell 會更漂亮... 不過一定會一天到晚被拿來嘲笑 XD
+22:44:25 <hashcat> :t (0-)
+22:44:26 <lambdabot> Num a => a -> a
+22:44:51 <hashcat> 這樣比較一致
+22:45:00 <CindyLinz> hashcat: 嗯 我以前有時候就這樣寫... 畢竟對 - 的規則不太熟, 就去給它寫一個安全牌 @@"
+22:45:37 <hashcat> 恩罷了
+22:45:41 <hashcat> 畢竟是給人寫的
+22:45:52 <hashcat> 合情合理
+22:46:00 <au> 其實這個在 haskell2010 的時候大家吵了很久沒有結論 XD https://ghc.haskell.org/trac/haskell-prime/wiki/PrefixMinusResolution https://ghc.haskell.org/trac/haskell-prime/wiki/NegationBindsTightly https://ghc.haskell.org/trac/haskell-prime/wiki/NegativeSyntax
+22:46:10 <au> 所以... 先照舊
+22:47:05 <CindyLinz> 哎哎.. 好難的問題 XD
+22:47:08 <hashcat> 額還有吵過了
+22:48:19 <hashcat> e就真的是表達式了
+22:48:22 <hashcat> 剛試過噗噗
+23:18:20 <monochrom> SML 負數 literal 寫成 ~1, 結果淪為沒人知的冷知識 :)
+23:18:22 <whitglint> 簡報還是要配合逐字稿一起看比較好
+23:21:19 <CindyLinz> monochrom: 紅了就會被笑了 XD
+23:28:06 <letoh> 實際上需要寫負數 literal 的情況好像不太多?
+23:29:58 <CindyLinz> letoh: 所以完全是個防禦性設計嗎 -- 寫不出來的話被拿出來笑的機會會變很多 XD
+23:31:20 <letoh> 我倒覺得這種情況反而不太會被笑  總覺得跑得特別慢的比較容易變成話題XD
+23:32:54 <b4283> 真的好像很少寫到負數的 literal
+23:33:14 <b4283> 所以用一個 negate(Num) 取代 ? XD
+23:33:42 <letoh> 寫 c 的時候偶爾會看到某些變數的初始值設成 -1
+23:34:03 <letoh> (結果那個變數的 type 是 unsigned
+23:34:14 <b4283> maximum value ?
+23:34:49 <letoh> 沒有啦  就很多情況 < 0 代表異常情況
+23:36:31 <letoh> 運氣夠好的時候  就會遇到這種需要正負值的時候，卻找了一個 unsigned 來裝
+23:42:06 <monochrom> 啊, 那是因為 C 缺乏 Maybe
+23:44:39 <letoh> 然後拿了一個 unsigned 去做 < 0 的比較卻又無視 compiler 的警告
+23:47:49 <monochrom> 無視警告是非常危險的.
+23:48:53 <CindyLinz> 不可質疑你的 compiler
+23:49:54 <monochrom> 我的奇遇: https://plus.google.com/102208456519922110915/posts/DZsZ6mvA4T6
+23:52:05 <CindyLinz> 哈哈這個 我前幾天有拿出來聊 XD
+23:52:40 <yllan> C 的 undefined behaviour 好像很多，我都不知道該怎麼寫出正確的 C program 了 ._.
+23:53:40 <monochrom> 其實嘛, 把 C 當作 Algol 的 subset 來寫, 就不會出事了 XD
+23:54:08 <letoh> yllan: 這樣代表隨便寫都是對的? XD
+23:55:43 <yllan> letoh: 我說的「對」，是指「寫出來的就是做我想做的事情」，這樣隨便寫就很容易錯啦～
+23:57:10 <letoh> 用組合語言寫會不會比較踏實一點? XD
+23:57:22 <hashcat> frama-c

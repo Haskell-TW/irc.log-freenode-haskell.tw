@@ -1,0 +1,149 @@
+13:13:00 <mathist> 我想做一個 f(x,y)=x^2+y^2的函數
+13:13:16 <mathist> x |->  (y |-> x^2+y^2) 我知道要這樣做
+13:13:44 <mathist> 假如把第一個 ->  的函數稱為f, 後面 y|-> x^2+y^2 稱為g
+13:14:42 <mathist> 假如haskell 程式碼我不想寫成 (func x) y = x^2+y^2
+13:15:38 <mathist> 我想寫說 func x = 「y|-> x^2+y^2」
+13:15:42 <mathist> 辦得到嗎?
+13:15:47 <mathist>  func x = g
+13:16:10 <mathist> 我想了一下 邏輯上好像寫不出來
+13:16:18 <CindyLinz> 可以.. 你可以塞 g 進去, 如果懶得取 g 這一個名字的話, 就用那個 lambda
+13:16:37 <au> > let func x = g where g y = x ^ 2 + y ^ 2 in func 3 4
+13:16:39 <lambdabot>  25
+13:17:07 <mathist> 可是那個g阿, 受制於x, 也要同時表現出它自變數有y, 這樣就變成g也是個雙變數函數
+13:17:19 <au> 不是的，這叫 closure
+13:17:27 <CindyLinz> mathist: g 可以定義在 f 的裡面, 就不用多一個參數
+13:17:45 <au> 也就是 g 裡的 free variable x 被它的上下文環境的 x 決定
+13:17:54 <CindyLinz> 這樣 f 的參數, 從 g 的角度來看就像是一個眾所週知的「環境」
+13:18:44 <mathist> 喔喔 都看懂了
+13:18:46 <mathist>  let func x = g where g y = x ^ 2 + y ^ 2 in func 3 4
+13:18:50 <mathist> 那如果不用let, where
+13:18:54 <mathist> 是不是寫不出來呢
+13:19:09 <mathist> 我第一次自己在想的時候沒想到let where xd
+13:19:19 <au> func x = \y -> x ^ 2 + y ^ 2
+13:19:36 <au> 就是 cindy 剛說的 lambda，仍然是 closure
+13:19:54 <CindyLinz> where 寫得出來的時候, 功能差不多和 let..in 是一樣的
+13:20:12 <mathist> 喔  我還沒讀到lambda  我的書curried function和lambda沒一起教
+13:20:19 <mathist> 了解~
+13:21:50 <au> 一般來說，這樣用 free variable 稱為 lexical scope binding (上下文範圍綁定)。絕大部份的 haskell 程式裡的 scope binding 是這樣實現的...
+13:22:55 <CindyLinz> 我好想要在函數裡面定義 data, newtype, type..... QQ
+13:23:05 <mathist> 阿再問一個, (x->x^2) 9
+13:23:11 <mathist> 用lambda可以寫出來嗎
+13:23:20 <au> > \(x -> x ^ 2) 9
+13:23:22 <lambdabot>  <hint>:1:8: Parse error in pattern: x ^ 2
+13:23:28 <au> > (\x -> x ^ 2) 9
+13:23:30 <lambdabot>  81
+13:23:36 <mathist> ok!
+13:23:42 <au> > (^ 2) 9
+13:23:43 <lambdabot>  81
+13:23:57 <mathist> 為什麼不能允許 (x->x^2+3*x+8) 100 的寫法阿
+13:24:06 <mathist> without lambda
+13:24:18 <CindyLinz> mathist: 這只是語法吧?
+13:24:26 <CindyLinz> 加一個反斜線這麼痛苦嗎? XD
+13:24:41 <mathist> 邏輯上不輸服 有疙瘩
+13:24:43 <mathist> xDXD
+13:25:56 <CindyLinz> mathist: 程式語言要定義得好辨認啊~ 再把 haskell 別的功能放進來的時候, 要避免有不同的功能但寫法一樣看不出來
+13:26:06 <au> mathist: 要如何區別
+13:26:16 <au> x -> y 和 x (-> y)
+13:26:21 <au> 如果沒有 \ 的話
+13:26:32 <au> x y -> z 和 x (y -> z)
+13:26:56 <au> 在 coffeescript / livescript 裡的解法是參數一定要加括號
+13:27:39 <au> 這樣 (x) -> (y) -> z 和 x (y) -> z 就分別對應到 \x -> \y -> z 和 x \y -> z
+13:28:11 <au> haskell 語法設計上只是盡量省括號而已
+13:33:05 <mathist> 嗯嗯
+13:33:28 <mathist> 完全看不懂ˋ= =  我之後再回來讀你這段話
+13:33:36 <mathist> 先存著 :p
+13:34:50 <au> ok... 再試一次。如果可以允許 lambda 不加 \
+13:34:55 <au> x y -> z
+13:35:16 <au> 就有岐義，到底是呼叫 x 以 y->z 為引數呢
+13:35:33 <au> 還是定義 x y 為參數的函數呢
+13:36:00 <au> 兩個用法都很常見，所以要區別。有些語言用 () 區別，haskell 則是用 \
+13:36:48 <mathist> 可是haskell不是有一律沒有雙變數函數的前規則嗎, 應該是"呼叫 x函數 以 y->z 為引數"
+13:36:49 <au> 因為喜歡按 ( ) 符號的人有 scheme/lisp 可以用... 所以 haskell 盡量用別的符號，例如 \ $ 之類的。(完)
+13:37:16 <au> haskell 也有前規則，就是 \x -> y -> z 可以簡寫稱 \x y -> z
+13:37:30 <au> er,
+13:37:36 <au> haskell 也有前規則，就是 \x -> \y -> z 可以簡寫稱 \x y -> z
+13:37:56 <au> > (\x y -> x * y) 3 4
+13:37:58 <lambdabot>  12
+13:38:55 <au> 所以 \x y -> z 和 x \y -> z 不同，但去掉 \ 之後字面上沒有差別。
+13:40:32 <CindyLinz> 應該不只是這個因素就能決定要用哪個語言吧 XDXD # 13:36 < au> 因為喜歡按 ( ) 符號的人有 scheme/lisp 可以用... 所以 haskell 盡量用別的符號，例如 \ $ 之類的。(完)
+14:26:30 <au> 很難說，我覺得 JSON 比 XML 流行的原因很大一部份是 {} 比 </> 好看 XD
+14:35:14 <mathist> 我覺得mathematica的語法也蠻elegant的
+15:18:23 <mathist> 函數的compositon怎麼寫?
+15:18:38 <mathist> com = sin cos  ?
+15:48:06 <CindyLinz> com = sin . cos
+15:48:18 <CindyLinz> @src (.)
+15:48:19 <lambdabot> (f . g) x = f (g x)
+15:48:20 <lambdabot> NB: In lambdabot,  (.) = fmap
+15:59:26 <mathist> 如果是有寫出自變數的函數定義法, 就可以寫com x= sin cos x
+15:59:41 <mathist> 如果是寫出函數名稱的函數定義法, 就寫 com = sin . cos ?
+16:04:51 <mathist> >let foo y = sin y
+16:05:02 <mathist> >let foo' y = sin.y
+16:05:40 <mathist> >let com x= (foo cos) x
+16:05:43 <mathist> > com 8
+16:05:44 <lambdabot>  Not in scope: ‘com’
+16:05:45 <lambdabot>  Perhaps you meant one of these:
+16:05:45 <lambdabot>    ‘cos’ (imported from Prelude),
+16:05:45 <lambdabot>    ‘con’ (imported from Data.Number.Symbolic)
+16:06:02 <mathist> >let com x= (foo' cos) x
+16:06:06 <mathist> > com 8
+16:06:08 <lambdabot>  Not in scope: ‘com’
+16:06:08 <lambdabot>  Perhaps you meant one of these:
+16:06:08 <lambdabot>    ‘cos’ (imported from Prelude),
+16:06:08 <lambdabot>    ‘con’ (imported from Data.Number.Symbolic)
+16:06:38 <mathist> :'(
+16:07:16 <petercommand> >let com x= (foo' cos) x;
+16:07:29 <petercommand> >let com x= (foo' cos) x;com 8;
+16:07:55 <mathist> >com 8
+16:08:13 <mathist> :'(
+16:34:42 <au> > let foo' y = sin y; com x= (foo' . cos) x in com 8
+16:34:44 <lambdabot>  -0.14498719803267052
+16:35:08 <au> 全部放在一行，行首 > 後面要補空白。
+16:48:43 <mathist> > let com x= (foo' cos) x;com 8;
+16:48:44 <lambdabot>  <hint>:1:30: parse error on input ‘;’
+16:48:54 <mathist> > let com x= (foo' cos) x
+16:48:56 <lambdabot>  not an expression: ‘let com x= (foo' cos) x’
+16:49:14 <mathist> > let foo' y = sin.y
+16:49:16 <lambdabot>  not an expression: ‘let foo' y = sin.y’
+16:50:09 <mathist> > (let foo' y = sin y; com x= (foo' . cos) x in com) 8
+16:50:10 <lambdabot>  -0.14498719803267052
+16:50:51 <mathist> 好麻煩的感覺
+16:50:55 <mathist> 總覺得不太順手
+16:51:01 <au> > (sin . cos) 8
+16:51:03 <lambdabot>  -0.14498719803267052
+16:51:23 <au> > let foo = sin ; com = (foo . cos) in com 8
+16:51:25 <lambdabot>  -0.14498719803267052
+16:51:40 <au> 以上這種不出現變數名稱的寫法稱為 point-free style
+16:51:48 <mathist> 喔喔
+18:26:44 <mathist> 我書的高階函數念得差不多了
+18:26:57 <mathist> 最後問個問題:  (^6).sin 7 為啥不能run Q_Q
+18:27:46 <mathist> 噢 括號@@  I see
+20:14:33 <mno2> 重感冒結果一個禮拜幾乎沒心情看 IRC.. lol
+20:15:12 <mno2> 話說不知道為什麼 ghc 有 -e 的選項來寫 one liner ，但卻沒有 module loading 的選項
+20:15:13 <mno2> https://www.haskell.org/ghc/docs/7.8.1/html/users_guide/modes.html
+20:15:23 <mno2> 像是 perl -M 或是 python -m
+20:15:56 <mno2> 結果變成想用 module 都要寫在 ghci.conf 裏面
+20:16:08 <mno2> 才會 load 進來
+20:16:55 <mno2> 有了 ghc 就不越來越少寫 ruby 或 perl one liner 了。
+20:17:05 <mno2> 有了 ghc 就越來越少寫 ruby 或 perl one liner 了。
+20:28:09 <CindyLinz> 不能在 -e 裡面 import 嗎?
+20:29:55 <hashcat> ajhc居然掛了
+20:36:29 <mno2> CindyLinz: 試過但 expression 就不跑了。也沒有錯誤訊息。也許可以做到，但至少不是直覺上直接 import 就好。
+20:37:48 <CindyLinz> orz
+21:01:31 <mathist> er.. 問一下一個邏輯問題
+21:02:07 <mathist> 實算上回傳函數的函數, 通常會出現在要幹什麼的地方
+21:02:23 <mathist> 書上給的範例太少了 無法意會其重要性
+21:02:45 <mathist> 假如我故意不寫這種語法呢. 除了curried function之外, 有什麼事不能做嗎
+21:08:28 <au> well, Haskell 裡最重要的函數也許就是 (.) f g = \x -> f (g x) 這個了... 如果沒有 . 的話，幾乎什麼也不能做。
+21:09:16 <au> 但是實務上如果刻意避開 point-free style，每步都給變數名稱，除了多打字之外，表達力是相同的
+21:11:03 <au> 所以 high-order function 例如 ($), (.), flip 很重要，但如果只是應用的話，可以只使用它們。
+21:14:34 <mathist> 喔喔
+21:17:28 <hashcat> 額具體點想就明白啦
+21:18:18 <hashcat> 直接給例子
+21:18:51 <hashcat> 最常用就是map, filter, scanl, scanr啥的
+21:19:19 <hashcat> 有沒有在寫python
+21:19:59 <hashcat> 有一部分用途是像python的decorator
+21:22:36 <hashcat> 對了還有要看typeclass
+21:22:39 <hashcat> http://www.haskell.org/haskellwiki/Typeclassopedia
+21:23:14 <hashcat> 沒有high-order function連最簡單的functor都沒系唱
+21:24:57 <hashcat> 解釋那些typeclass都很簡單
+21:25:10 <hashcat> 有的是盒子, 有的是水管

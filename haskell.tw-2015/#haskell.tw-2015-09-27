@@ -1,0 +1,63 @@
+02:08:46 <monochrom> 月餅 ♥
+16:13:09 <suhorngT> 沒想到 pattern matching 時的 pattern 也是有優先權來 parse, 跟一般 expr 大概一樣XD
+16:13:48 <suhorngT> data Sum = Int :+: Int       infixl :+:        fn (a :+: b :+: c) = ....
+16:17:27 <CindyLinz> 覺得只要是 infix operator 就有 priority 設計的必要 @@"
+16:17:45 <CindyLinz> 如果 infix 還強制要放一堆括號, 那就太瞎了
+16:50:24 <suhorngT> pattern matching 一直給我一種要加括號的印象
+16:53:41 <CindyLinz> parenthesis matching
+20:36:07 <suhorngT> 即使是簡單的 dependent type 也好難寫喔, 像 Agda 那樣定義 xxx = yyy 還得特殊處理, 不在 type system 中
+20:36:28 <suhorngT> 這種眉眉角角平常只看 type system 時實在很難瞭解
+20:40:15 <CindyLinz> 因為只用 lambda, 沒有原生等號的關係嗎?
+20:40:52 <suhorngT> 糟了不太懂這個問題XD
+20:49:11 <CindyLinz> 那你要處理什麼問題?
+21:39:54 <suhorngT> 一是 let 不能用 syntactic sugar 做(因為 lambda 看不到它實際上的參數內容是什麼), 二是 let 也不能直接 substitute 進去(type signature 會消失), 三是 let 要動到 type system, 因為原先 type system 中 definitional equality 只用來換 type
+21:41:53 <suhorngT> 我現在都是直接處理 terms, evaluation 時就直接 substitution 進去, 但是 let 不能直接 substitute 進去, 那改用 environment 的作法就會變很麻煩, 會有 closure 出現..
+21:42:47 <CindyLinz> 你現在 expression 含 type 是怎麼寫呀? (好奇
+21:45:56 <suhorngT> 我乖乖的去掉 Let 改加 Anno (標 type) XD
+21:46:03 <suhorngT> 原先沒有 Anno
+21:46:56 <CindyLinz> suhorngT: 就是想看寫起來像怎樣 :p
+21:47:34 <suhorngT> CindyLinz: 嗯..例如 Lam "x" "x" `Anno` polyid :@ U :@ (U :=> U)
+21:47:38 <CindyLinz> 去掉 Anno 以後的部分長得就是 Lambda Calculus 嗎?
+21:47:45 <CindyLinz> 喔喔~~
+21:48:03 <suhorngT> 其中 polyid = Lam "A" (Lam "x" "x") `Anno` Pi "A" U ("A" :=> "A")
+21:48:47 <CindyLinz> :@ 是什麼意思啊?
+21:48:59 <suhorngT> Ap
+21:49:28 <CindyLinz> Lam "x" "x" 是 id 函數嗎?
+21:50:18 <suhorngT> 沒錯 XD (monomorphic 的)
+21:50:52 <CindyLinz> (想一下)
+21:51:36 <CindyLinz> polyid 的 "A" 會吃到 U, 然後 "x" 會吃到 U :=> U ?
+21:52:01 <suhorngT> 沒錯XD
+21:54:19 <CindyLinz> Lam "A" (Lam "x" "x") 想要描述的是怎樣的 type 啊?
+21:54:58 <suhorngT> 這是 polymorphic identity function
+21:55:15 <suhorngT> 型別是 Π[ A : U ] A → A
+21:56:13 <CindyLinz> Pi "A" U ("A" :=> "A")
+21:56:51 <CindyLinz> U 是 Set0 嗎?
+21:56:58 <CindyLinz> Agda 的 Set_0 ?
+21:57:20 <suhorngT> U 是 the set of all set (also a set itself) ww
+21:57:30 <suhorngT> U : U
+21:57:36 <CindyLinz> 喔 這邊所有的 Set 都是一體的
+21:57:47 <suhorngT> 所以有羅素悖論
+21:57:49 <CindyLinz> 宇宙大覺集
+21:58:00 <suhorngT> XDDDDD
+22:01:35 <CindyLinz> (繼續想...)
+22:05:14 <CindyLinz> 好, pass..
+22:06:05 <suhorngT> <Cindy> 使出了 <It's trivial>
+22:06:13 <CindyLinz> 哪是 OAO
+22:06:49 <CindyLinz> 那 Π[ A : U ] A → A 是什麼意思? XD
+22:07:59 <suhorngT> 一般上課不是老師遇到 trivial 就 pass 回家自己驗嗎 XDDD
+22:08:15 <suhorngT> Pi 可以類比於 forall, 於是就是 forall A : Type, A → A
+22:08:18 <CindyLinz> 是遇到十分鐘內解不出來的時候喔~~
+22:08:59 <suhorngT> XDDD
+22:09:14 <CindyLinz> 那個 Pure Functional Data Structure 那本啊, 有介紹紅黑樹(之類的)
+22:09:18 <CindyLinz> 他說很簡單
+22:09:50 <suhorngT> 噗 其實刪除是最複雜的這樣
+22:09:51 <CindyLinz> 然後讀到那一節最後一句.. 說把 insert 和 find/query 的實作出來了, delete 就留給讀者吧~~
+22:10:28 <CindyLinz> 如果有草草翻過演算法課本, 光看篇幅也知道 delete 才是重點啊 <囧>
+22:11:04 <CindyLinz> suhorngT: Pi 只能 introduce 一個 type variable?
+22:11:16 <CindyLinz> suhorngT: 就像是恰好只有一個參數的 lambda 設計嗎?
+22:14:40 <CindyLinz> 為什麼整個式子不是 Lam "x" "x" `Anno` Pi "A" U ("A" :=> "A"), 而要多過一層 polyid 啊?
+22:22:53 <suhorngT> CindyLinz: 是, 就一個
+22:23:19 <suhorngT> 因為我在其他 test case 中重用 polyid XD    polyid = .... 這個是 Haskell 程式
+22:23:25 <CindyLinz> 剛好一樣喔? 喔~ 所以多套一次是為了炫技這樣?
+22:24:01 <suhorngT> 是為了其他測資不要重複寫 polyid
+22:24:13 <CindyLinz> 喔 那個是分開寫的.. 會一直用 :Q

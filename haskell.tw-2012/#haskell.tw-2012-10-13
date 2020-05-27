@@ -1,0 +1,28 @@
+11:22:02 <Yu-Lin> 大家早
+12:56:21 <favonia> Yu-Lin: 早～
+14:14:37 <Yu-Lin> 目前大家都用 haskell 做什麼？XD
+14:18:43 <MnO2> Yu-Lin: 之前有開發 libpulse 的 binding， 不過到一個milestone就停滯了，現在處理完翻譯可以再撿回來xD
+14:29:46 <Yu-Lin> 喔喔！翻譯XD
+14:51:23 <Yu-Lin> 先出門
+14:51:25 <Yu-Lin> 掰掰
+16:59:09 <MnO2> 請問有強者大大對ruby gem熟嗎？ 如果我想指定ffi用到的C library版號的話，要怎麼寫呢？
+16:59:24 <MnO2> http://rubygems.rubyforge.org/rubygems-update/Gem/Specification.html#method-i-add_dependency
+16:59:35 <MnO2> 好像只有看到對gem的dependency
+17:16:57 <CindyLinz> godfat 應該很熟, 不過現在不在...  你去 ruby 板留言找他好了 ^^|
+17:20:49 <MnO2> 他都很少po文了xD
+17:22:17 <MnO2> CindyLinz: 那改問perl的問題好了
+17:22:21 <MnO2> xD
+17:22:30 <MnO2> 你有用過dancer嗎？
+17:23:21 <MnO2> 或catalyst
+17:23:54 <MnO2> 只是好奇哪一套你比較喜歡
+17:43:12 <CindyLinz> no.. 我的個性不喜歡 framework orz
+17:43:29 <CindyLinz> 這兩套都沒有用過 ^^|
+18:08:34 <MnO2> 所以你都直接套plack疊library?
+18:09:08 <CindyLinz> 公司的程式要跟著用舊的 CGI.pm   自己寫的話的確是用 plack 隨意接
+18:10:49 <MnO2> I see
+18:13:27 <MnO2> 我自己寫還是會想要一個小小的framework，至少幫我把XSS跟CSRF處理掉
+18:16:47 <CindyLinz> 如果從我的喜好來講的話, 就是我會希望這個東西就只專心幫我處理 XSS 和 CSRF 就好.. 不要去規定我其他程式要放在什麼目錄, 資料庫一定要用複數名詞字尾之類的... XD
+18:20:53 <MnO2> 嗯嗯
+21:40:46 <MnO2> http://learnyouahaskell-zh-tw.csie.org/zh-cn/chapters.html
+21:40:55 <MnO2> 簡體中文
+21:41:15 <MnO2> 雖然hostname還是zh-tw xD

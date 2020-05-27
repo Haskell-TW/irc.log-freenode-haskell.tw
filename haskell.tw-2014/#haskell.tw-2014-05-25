@@ -1,0 +1,192 @@
+13:44:23 <CindyLinz> 我發現某一個情況下 (True, something) / (False, undefined) 比 Just something / Nothing 方便欸 @@"
+13:44:58 <CindyLinz> 就如果我有 a list of 這些東西, 然後要取出 True / Just 的 something 排成一個 list 的話
+13:45:27 <CindyLinz> 前者我可以用 map snd . filter fst 來取
+13:46:26 <CindyLinz> 後者會寫成 map (\(Just x) -> x) . filter (\mm -> case mm of Just x -> True ; _ -> False)
+13:46:42 <CindyLinz> 唔, 還是我可以利用一點 MonadPlus 的東西 :Q
+13:46:51 <CindyLinz> @type msum
+13:46:53 <lambdabot> MonadPlus m => [m a] -> m a
+13:47:46 <CindyLinz> @hoogle [m a] -> [a]
+13:47:49 <lambdabot> Data.Maybe catMaybes :: [Maybe a] -> [a]
+13:47:49 <lambdabot> Data.Graph flattenSCCs :: [SCC a] -> [a]
+13:47:49 <lambdabot> Data.Graph.Inductive.Basic postorderF :: [Tree a] -> [a]
+13:48:09 <CindyLinz> hmm... catMaybes
+13:48:12 <CindyLinz> @src catMaybes
+13:48:12 <lambdabot> catMaybes ls = [x | Just x <- ls]
+13:48:37 <CindyLinz> !
+13:50:03 <CindyLinz> 可惡這種寫法不能無點流啊 ._.
+13:57:52 <CindyLinz> 試試大絕 :p
+13:58:03 <CindyLinz> @pl \ls -> [x | Just x <- ls]
+13:58:04 <lambdabot> return . ((x | Just x) <-)
+13:59:08 <CindyLinz> 沒看過 <- 的右邊可以沒東西的寫法 ._.
+14:00:38 <CindyLinz> 這個 x | Just x 也是沒看過這種用法.. 有點像是拿 Just x 去 match, 然後把 x 當作結果..
+16:22:11 <letoh> 那本有點普通...
+16:25:21 <letoh> 印象中那本是寫給已經學過 c，想知道一點 c99/c11 的人看的
+16:26:38 <letoh> 然後裡面大概有 1/3 是講其他工具 (make 之類的)
+16:39:27 <c9sloud> XD
+16:40:05 <letoh> 印象中還有 git 什麼的，很雜就是了，所以買的人翻一翻就不想看丟給我
+16:44:09 <c9sloud> 嗯嗯嗯 對 他好像還談到文件
+16:44:49 <c9sloud> 話說好像有辦法 http header field name 做出 no collision 的 hash table?
+16:47:15 <c9sloud> 針對 ascii charactar 用的 perfect hashing func 之類的
+16:48:32 <CindyLinz> c99 聽起來比 c11 厲害很多... (誤)
+16:49:21 <CindyLinz> c9sloud: 那直接用 array[256] 就好了啊, 幹嘛還 hash 啦 XD
+16:49:48 <c9sloud> CindyLinz: 可是要用 "Content-Length" 當 key 耶
+16:49:56 <c9sloud> 不是 single char
+16:52:48 <c9sloud> djb2
+16:54:17 <c9sloud> 好像可行
+16:54:23 <c9sloud> 不過 FNV1A_Hash_Yorikke 聽說比 djb2 好
+16:55:06 <c9sloud> http://www.strchr.com/hash_functions 這個厲害
+16:55:30 <c9sloud> 敝人智商不高... 這年頭有 Google 真好
+16:57:49 <c9sloud> 下面有一個 Words data 做 collision testing 的
+16:57:51 <c9sloud> 很不賴
+17:01:45 <CindyLinz> 喔不是 single char 喔? XD
+17:05:11 <mno2_> CindyLinz: 想不到什麼好方法來實作 MonadIO m => Int -> m a
+17:05:37 <mno2_> 就是 handler index -> handler
+17:05:38 <CindyLinz> 這這這是什麼? ^^|
+17:05:52 <CindyLinz> 這有需要 MonadIO 嗎?
+17:06:03 <CindyLinz> 不是一個 IArray 就好了?
+17:07:28 <mno2_> class IArray a e where  (e 可以放 m a 嗎？）
+17:07:55 <CindyLinz> e 當然可以放 m a, 拿出來是一個還沒「執行」的 action
+17:08:29 <CindyLinz> 不過.. 這個 handler index -> handler 是指什麼地方呀?
+17:10:21 <mno2_> (Ix i, Eq e) => Eq (Array i e)  他下面的限制 Eq e 應該只是假設 e 有 Eq ?
+17:10:51 <CindyLinz> 對
+17:10:59 <CindyLinz> 嗯不過 m a 好像不太可能有 Eq?
+17:11:24 <CindyLinz> 看是哪種 m.. ^^|   IO 好像沒什麼機會
+17:12:12 <mno2_> 就是 r3 node data 就存個 index, 然後 match 到去找對應的 handler
+17:12:32 <CindyLinz> mno2_: 嗯, 所以這邊的 IO 其實是因為 FFI 而來的?
+17:13:11 <CindyLinz> 覺得應該是一個適合用 unsafePerformIO 的地方?
+17:13:26 <mno2_> 我有用啊
+17:13:40 <CindyLinz> 那不是 IO 就可以拿掉了嗎? :p
+17:13:55 <mno2_> 高階的界面沒有 IO 啊
+17:14:15 <CindyLinz> 喔喔 這邊是 handler 讓 user 可以用 IO...
+17:14:21 <mno2_> 對啊
+17:14:31 <CindyLinz> 嗯嗯嗯
+17:14:48 <CindyLinz> 那, Eq (Array i e) 是作什麼用的啊?
+17:15:42 <mno2_> 沒有用到耶。只是我不知道哪來的印象，就是覺得 HashMap, IntMap, Array 之類 value 不能隨意塞 function 或 monadic function
+17:15:54 <mno2_> 所以就在查 contraint
+17:16:07 <CindyLinz> 嗯, 如果把 handler 的 type 定為 a -> b  其中 a 你想傳給 handler 的資訊, 可能有 index, 或是 url.. 然後, b 是任意
+17:16:12 <mno2_> 如果有強制 Eq 那就鐵定不行
+17:16:21 <CindyLinz> 這樣 user 就可以自己看要放函數或是 monad action 都適用呀
+17:17:05 <CindyLinz> 嗯嗯, 要整個能 Eq 就不行了.. 不過這可以讓 user 自己選擇
+17:17:22 <mno2_> 那樣高階界面暴露太多資訊了吧？
+17:17:26 <CindyLinz> 他如果把 b 放 Int 的話, 他就可以繼續 Eq; 如果他想放函數, 他就不能 Eq
+17:17:37 <CindyLinz> 哪一個部分? 放 b 的話什麼都沒有呀
+17:18:12 <CindyLinz> a 是你自己決定一下, 甚至完全不想給也是個選擇
+17:18:38 <CindyLinz> 喔 不過如果長成 a -> b 這形狀, 就已經註定不會有 Eq 了哄
+17:20:09 <mno2_> b 可以同時是函數或 monadic action 嗎？這樣 type check 會過？
+17:20:56 <CindyLinz> mno2_: 不能同時.. 一定要一樣..  但是可以由使用者選而不是你規定
+17:21:49 <CindyLinz> 使用者真想混用的話, 可以定一個 sum type 塞進去, 其中一支是函數, 另一支是 monad action 這樣 @@"
+17:21:54 <mno2_> 直接用 monadic action 應該就行了？因為 function 可以 lift 上去，但反過來不行
+17:22:06 <CindyLinz> 我舉個例子...
+17:22:11 <CindyLinz> 有個函數叫 maybe
+17:22:13 <CindyLinz> @type maybe
+17:22:15 <lambdabot> b -> (a -> b) -> Maybe a -> b
+17:22:24 <CindyLinz> 這邊的 b 可以都放 monad action
+17:22:40 <CindyLinz> 就變成 maybeM 的感覺.. (所以沒有 maybeM)
+17:23:33 <CindyLinz> @type maybe (putStrLn "Nothing") (\a -> putStrLn $ "Just " ++ show a)
+17:23:35 <lambdabot> Show a => Maybe a -> IO ()
+17:24:19 <CindyLinz> 然後我想, 這裡 Array i e 的 e, 就相當於這個 maybe 的 b
+17:28:37 <mno2_> 恩，那看起來 handler 應該就是 MonadIO m :: Info -> m a
+17:29:06 <CindyLinz> 這邊這個 m 可以不用由 r3 來限定呀
+17:29:38 <CindyLinz> 因為 MonadIO m => m a 是在任意 (未限定的) b 裡面
+17:30:18 <CindyLinz> 所以 Info -> a 應該也可以讓想放 MonadIO m :: Info -> m a 的人用
+17:31:49 <CindyLinz> 嗯, 如果你想提供一些額外功能, 讓 handler 裡面可以取用.. 而這些功能是需要用到 IO 的話
+17:32:50 <CindyLinz> 也是可以照樣提供, 其形狀長得像是 MonadIO m => m a, 那麼, 如果這 handler 想用, 它就一定要長成像 MonadIO m :: Info -> m a, 而如果他不想用, 他想要用 pure 的 type 也可以
+17:33:08 <c9sloud> 好像用一些簡單的算法就可以達成 perfect hashing 了
+17:33:20 <c9sloud> 我把 http header keys 全部丟進去算
+17:34:35 <mno2_> 我的想法是 pure 都可以 lift，比起混用然後 type error 一開始寫明 m a 應該比較清楚
+17:36:49 <CindyLinz> pure 的人要硬塞 Identity monad 這樣嗎? 囧
+17:39:18 <CindyLinz> hmm.. 我覺得這個 r3 放的東西不一定要是個 action 就是 @@"  覺得放一堆要 proxy 的網址也是很正常的用法
+17:42:12 <mno2_> OK, point.
+17:42:27 <CindyLinz> 耶.. 不行, 你限制了 MonadIO m, 那就不能塞 Identity 了..
+17:44:45 <mno2_> 但如果放 Monad 的話，可以放 IO 疊上來的 Monad 嗎？
+17:45:04 <mno2_> 這邊我一直分不清楚
+17:48:52 <CindyLinz> 嗯, 除非你加了 forall m (或沒 m 的話用 forall a) 不然使用者可以決定的
+17:49:49 <CindyLinz> 如果你放了 forall 在那邊, 那使用者就要提供一樣 general 的 type 才行
+17:51:30 <hashcat> r3是啥
+17:51:49 <hashcat> 我一直想到python上的mapreduce也叫r3
+17:56:52 <mno2_> CindyLinz: 我以為不寫就是 forall ？還是 type contraint 裡面的 forall 是不一樣意思？
+17:58:32 <hashcat> r3 -> 高雄捷運小港站
+18:05:28 <whitglint> c9sloud: 也有看過一種 get http header 的 function 是設計成可以丟索引也可以丟字串進去
+18:06:26 <whitglint> 我猜是把常用的那幾個放在固定位置然後定義幾個索引值，不常用的就用字串去查
+18:08:50 <c9sloud> whitglint: 咦已經有人做了嗎？
+18:09:08 <CindyLinz> mno2_: 最外面的會自動加 forall, 但是參數為函數, 這個函數吃的 type 有沒有加就是有差異的了
+18:09:50 <CindyLinz> hashcat: 最近 c9sloud 寫的一個超快的 web url router
+18:10:17 <mno2_> 了解
+18:11:13 <hashcat> 看起來跟haskell沒關係
+18:11:39 <CindyLinz> hashcat: 有關係! 因為 mno2_ 正在寫它的 haskell binding.. XD
+18:13:19 <hashcat> 好吧有關係
+18:14:53 <CindyLinz> mno2_: 我作一點實驗確認一下 @_@"
+18:21:31 <CindyLinz> mno2_: 我剛剛跟你講的 forall 有誤..
+18:21:53 <CindyLinz> mno2_: 剛剛那個 m 是參數函數的輸出而不是輸入, 所以 forall 有加沒加都是一樣的
+18:22:50 <mno2_> 其實也沒說錯？只是就只是 m 是輸出而已
+18:22:53 <CindyLinz> mno2_: 都是只要使用者給的 type 比你要求的嚴就好 (就是例如說你指定 Monad m, 他就可以給 IO, Reader 之類)
+18:23:24 <CindyLinz> mno2_: 只是應該沒辦法要求使用者一定要給出一樣鬆的東西... 加了 forall 也沒差
+18:23:25 <mno2_> yeah
+19:11:54 <CindyLinz> @hoogle [Either a b] -> ([a], [b])
+19:11:57 <lambdabot> Data.Either partitionEithers :: [Either a b] -> ([a], [b])
+19:13:15 <whitglint> c9sloud: http://qt-project.org/doc/qt-5/qnetworkrequest.html 可以看一下 header() 它的參數是 enum，如果要用 header name 取 header value 可以看 rawHeader()
+19:13:22 <whitglint> 好像離題了 XD
+19:16:28 <whitglint> c9sloud: http://docs.oracle.com/javase/7/docs/api/java/net/URLConnection.html Java 的話它針對常用的 header 直接定義對應的 method，例如  getContentLength()
+19:24:47 <CindyLinz> @src lookup
+19:24:48 <lambdabot> lookup _key []          =  Nothing
+19:24:48 <lambdabot> lookup  key ((x,y):xys) | key == x  = Just y
+19:24:48 <lambdabot>                         | otherwise = lookup key xys
+19:52:35 <CindyLinz> @hoogle (a -> b) -> Int -> a -> b
+19:52:38 <lambdabot> Data.Sequence iterateN :: Int -> (a -> a) -> a -> Seq a
+19:52:39 <lambdabot> Prelude maybe :: b -> (a -> b) -> Maybe a -> b
+19:52:39 <lambdabot> Data.Maybe maybe :: b -> (a -> b) -> Maybe a -> b
+19:54:34 <c9sloud> 原來 whitglint 是 C++ 高手
+19:55:17 <c9sloud> whitglint: 你講的這兩個 approach 我有考慮做進去
+19:55:49 <whitglint> c9sloud: 我絕對不是高手什麼的，call call api 誰都會呀 XD
+19:56:37 <c9sloud> 然後 prefix tree 應該不適合.. construction time 消耗太高
+19:56:57 <c9sloud> 所以我現在在想有沒有可能用 perfect hashing func
+20:05:08 <c9sloud> https://gist.github.com/c9s/bf4c665f18b4fd33f310 # 現在是 "Content-Language" 跟 "From" 會 collision XD
+20:05:11 <c9sloud> 其他都 OK
+20:23:32 <c9sloud> haskell 怎麼沒有 hsdoc 之類的 XD
+20:23:58 <c9sloud> 文件看了老半天沒有 sample code 可以玩玩 XDDD
+20:24:25 <c9sloud> 想寫一個 collision 統計程式，有什麼好建議嗎?
+20:25:17 <au> 直接用 cmph ?
+20:25:30 <au> # http://hackage.haskell.org/package/PerfectHash 是它的 binding
+20:25:54 <c9sloud> ! au++
+20:26:03 <c9sloud> 立刻來看一下
+20:27:16 <c9sloud> CMPH 很讚耶
+20:27:22 <c9sloud> 節省很多時間
+20:47:18 <c9sloud> https://github.com/c9s/r3/pull/39 # 只為了 dump tree str => char * 結果把一整個 library 整個 pull 進來 @@
+21:09:15 <c9sloud> 為何老外喜歡把字級調整到 10px 呀，讀起來有夠痛苦
+22:03:06 <CindyLinz> c9sloud: hsdoc 是怎樣的東西啊?
+22:06:00 <au> 應該相當於 haddock? haddock 生的 html 都會連到 source... 但是比較沒有附上 synopsis / repl sample 的文化
+22:08:15 <CindyLinz> 喔喔...
+22:08:54 <CindyLinz> Hackage 社群的文件常常是蠻懶的 XD   不過也可能是 perl lib 太多, 我只有注意到那些文件有寫好的? 其實爛的更多這樣? XDXD
+22:09:20 <CindyLinz> 覺得常常讀 hackage lib 文件, 都會讀到 source 裡面去....ww
+22:12:25 <au> module-starter 或之前舊的 h2xs 都會自動生成以程式碼用例為範本的 synopsis
+22:12:44 <CindyLinz> 對呀.. 而且還會在裡面放很機車的預設說明
+22:12:51 <CindyLinz> 如果 author 忘記改掉就會自婊.....ww
+22:13:02 <au> 所以會有改掉的動力 XD cabal init 只會提示 package description, 但不附用例
+22:13:56 <mno2_> 訓練大家看 type 的能力 wwww
+22:14:43 <CindyLinz> "Stub documentation for xx, created by h2xs. It looks like the author of the extension was negligent enough to leave the stub unedited."
+22:19:22 <au> <- 現在發佈 hackage module 時，再懶還是會寫 repl sample
+22:19:35 <au> e.g. https://github.com/audreyt/quickcheck-relaxng#quickcheck-relaxng http://hackage.haskell.org/package/quickcheck-regex-0.0.3/docs/Test-QuickCheck-Regex.html
+22:20:47 <CindyLinz> au: 此風必須長 XD
+22:21:36 <CindyLinz> au: 咦你這 README.md 是自動生的, 還是手動寫的第二份啊?
+22:21:48 <au> copy and paste 的
+22:22:06 <CindyLinz> 好吧 手動寫 ^^|
+23:46:55 <c9sloud> au++ # repl sample
+23:47:00 <c9sloud> 太感人了 QQ
+23:47:27 <c9sloud> 我看了幾個 hackage .. 沒有 repl 連 test code 都沒有 QQ
+23:48:08 <c9sloud> 雖然說看 type 可以知一二.. 但總是要知道 data 怎麼用
+23:48:09 <c9sloud> XD
+23:48:34 <CindyLinz> author 表示: ghc 證明過了, 沒 bug! 不用測試了 XD
+23:48:54 <c9sloud> QQ
+23:49:06 <au> author 通常還會表示: 請看 paper.ps
+23:49:21 <c9sloud> XDDDD
+23:49:49 <c9sloud> haskell hacker: 生命就該浪費在 paper 上
+23:49:51 <au> (新一代稍微友善一點，至少會用 .pdf)
+23:50:41 <CindyLinz> 不覺得有比較好啊.. ._.
+23:50:59 <c9sloud> 至少字體比較美
+23:51:02 <au> 至少 firefox 可以直接開 www
+23:51:24 <c9sloud> OK 現在至少有兩個我們想得到的優點了 XD
+23:51:49 <CindyLinz> 我想要 html.... QQ
+23:52:08 <c9sloud> 那發 bug XD
+23:52:33 <c9sloud> "The HTML format doc is missing, did you forget to commit?" XD
+23:53:29 <CindyLinz> paper 裡面用的符號還會不一樣 orz
+23:53:45 <CindyLinz> 直接轉成 html 也是不堪讀的....ww

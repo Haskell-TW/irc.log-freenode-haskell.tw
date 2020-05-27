@@ -1,0 +1,7 @@
+18:02:31 <CindyLinz> Functional 風格的 GUI framework 應該長什麼樣比較好呢?  reactive programming 為底還是物件為底?
+18:53:07 <cibs> 各寫一個然後看哪個被市場淘汰
+19:01:02 <CindyLinz> 這種推論法也太不負責任了 XDD
+19:01:54 <CindyLinz> 要怎麼排除自己的設計或實作瑕疵咧 ^^|
+20:09:24 <suhorngM_> :t Control.Monad.State.put
+20:09:25 <lambdabot> MonadState s m => s -> m ()
+20:21:18 <petercommand> suhorngM_: 我是在找 arrow 那篇文章裡的 stream processor: get put

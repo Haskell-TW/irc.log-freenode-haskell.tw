@@ -1,0 +1,24 @@
+16:53:00 <CindyLinz> 我 xmonad 有作一個設定, 當沒有開雙螢幕而且目前桌面裡只有一個窗的時候, 就不顯示框, 把整個畫面都拿來用
+16:53:06 <CindyLinz> 全螢幕模式也會
+16:53:41 <CindyLinz> 除了多了很多 pixel 可以顯示畫面以外, 我覺得最重要的是用滑鼠點像是瀏覽器 tab 的時候, 可以直接往上推到底再點
+16:53:50 <CindyLinz> 有框的時候就要小心不要剛好點在框上, 會無效
+16:54:11 <CindyLinz> 雙螢幕會需要框, 應該是為了提示 focus
+16:54:25 <CindyLinz> 我現在覺得就算需要提示... 也應該可以改成省略上邊
+16:54:31 <CindyLinz> 或是左邊與上邊... :p
+16:54:41 <CindyLinz> 因為 tab 通常會出現在上面或左邊..
+17:10:19 <capisce> 我這幾天也在安裝xmonad
+17:25:47 <CindyLinz> petercommand: 現在才開 request 是不是太晚了... QQ
+22:30:07 <petercommand> CindyLinz: 我的瀏覽器不行..推到底再點是瀏覽器的框 (chrome)..
+22:32:03 <petercommand> 推到底再點是為了換視窗嘛，還是換 tab?
+22:32:24 <petercommand> 喔喔，我知道你的意思了
+22:32:38 <petercommand> 點框框不能換視窗
+22:34:31 <petercommand> CindyLinz: 我的瀏覽器大部分時候都是在單獨的 workspace..XD
+22:36:46 <CindyLinz> 換 tab
+22:36:55 <CindyLinz> 我也是都會在單獨的桌面..
+22:37:01 <CindyLinz> 但是我有時候會接兩個螢幕
+22:37:26 <CindyLinz> 又.. 有時候會讓瀏覽器跟終端機並列, 一邊打 code 一邊看參考資料
+22:38:06 <CindyLinz> 你瀏覽器推到底是瀏覽器的框? o.o 真奇怪, 我 chrome 和 firefox 都可以推到底再點..
+22:39:15 <CindyLinz> 嗯.... chrome settings 裡面 appearance 選 use system title bar and borders 嗎?
+22:48:10 <petercommand> 恩恩，是這個選項..XD
+22:50:23 <petercommand> CindyLinz: 不過目前應該沒甚麼時間在 talk 之前試了..QQ
+23:16:47 <CindyLinz> 果然太晚點餐了 QQ

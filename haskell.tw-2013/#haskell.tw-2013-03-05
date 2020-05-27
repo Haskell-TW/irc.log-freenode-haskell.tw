@@ -1,0 +1,165 @@
+01:06:30 <suhorng> 阿阿阿寫完了(崩潰)
+01:06:42 <letoh> 賀!!!
+01:06:56 <suhorng> 不過也沒寫 challenging problem QQ
+01:07:12 <letoh> 其實我忘了 hw5test.rkt 裡就有提示第一題要怎麼寫
+01:07:30 <letoh> 我以為 racketlist 是指 (1 2 3 4) 這種東西
+01:07:42 <suhorng> 驚 沒發現有這個檔案...
+01:07:53 <suhorng> letoh: 所以你額外把他轉成 MUPL value?
+01:07:57 <letoh> 下載 hw5.rkt 的地方就有啦
+01:08:08 <letoh> 嗯  所以第一次就掛掉了  被扣 9 分XD
+01:08:15 <suhorng> 喔喔
+01:08:15 <suhorng> QQ
+01:08:29 <letoh> 而且一次兩題都沒了... 轉回去也一樣爛掉
+01:08:40 <suhorng> 很痛..
+01:09:15 <letoh> 對啊，後來看了 test case 才知道是誤會
+01:09:18 <suhorng> 嗯
+01:10:14 <suhorng> Racket的 peer review 有點崩潰orz
+01:10:24 <letoh> hw4 的嗎? XD
+01:10:41 <suhorng> 對..
+01:10:45 <suhorng> hw5大概會更崩潰囧
+01:11:28 <letoh> 我昨天晚上總算搞定... 看別人的程式很痛苦XD  我還每一個函式都實際跑跑看，因為遇到一堆寫法完全不同的...
+01:11:47 <suhorng> 好用心!
+01:12:13 <letoh> 最後只要跑得出答案就算對XD
+01:18:51 <letoh> https://plus.google.com/u/0/105792929719283190873/posts/LECNUgi4t6R
+01:21:21 <suhorng> 噗w
+01:21:59 <letoh> 之前幾次砍掉重練好像都只是搞出另一個怪物XD
+01:25:41 <letoh> http://www.realworldocaml.org/  好像也只能挑這隻動物了...
+01:25:57 <letoh> oreilly 的書常常撞動物嗎?
+01:27:40 <suhorng> XDDDDDDD
+01:27:50 <suhorng> 動物種類應該很多的!
+01:28:14 <suhorng> 沒想到有 Real World Haskell 也有 Real World OCaml... 我以為 OCaml 已經很 real world 的說
+01:28:48 <letoh> 相對 sml 來說應該是吧?
+01:29:45 <letoh> 我以前覺得 ocaml 很酷，但從來沒認真學會它... 單純就是這名字看起來很酷XD
+01:31:16 <letoh> suhorng: 我想到了... 沒撞動物喔
+01:31:32 <suhorng> 唔..這本書有目錄可以看嗎?
+01:31:35 <letoh> suhorng: 這本是雙峰的  另一本是單峰
+01:31:35 <suhorng> @@
+01:31:40 <suhorng> 這www
+01:31:46 <letoh> :p
+01:32:06 <letoh> 剛剛特地查了一下，果然有考慮到撞動物的問題吧XD
+01:32:35 <CindyLinz> 只好以亞種也算不同的方式解套 XD
+01:32:43 <letoh> XDXD
+01:32:54 <suhorng> 好用心XD
+01:33:56 <letoh> 我可以說 perl 是封面動物蟑螂嗎?  http://akamaicovers.oreilly.com/images/9780596003135/cat.gif  幹麻搶那麼多種動物....
+01:34:27 <letoh> http://akamaicovers.oreilly.com/images/0636920018452/cat.gif  又一隻
+01:34:56 <letoh> 該不會通通都是 camel ? XD
+01:35:15 <letoh> http://akamaicovers.oreilly.com/images/0636920012689/cat.gif  你看又一隻不一樣的
+01:37:11 <letoh> suhorng: 點連結好像要授權耶  不曉得想幹嘛
+01:37:20 <suhorng> 對呀..
+01:37:33 <letoh> 我之前可能有抓到 pdf... 找找看
+01:38:55 <letoh> 嗯  沒有，手上的 pdf 是另外一本
+01:39:57 <CindyLinz> 昨天說遇到的還沒找到原因的問題, 好像是 nc 的問題 :Q
+01:40:08 <suhorng> 沒關係 我在找找看有沒有目錄XD
+01:40:28 <CindyLinz> 如果我寫的 server 屯了太多 nc 送來的資料未處理, nc 就不理人了....
+01:40:41 <suhorng> 阿...Publication Date: April 22, 2013
+01:40:42 <CindyLinz> 連我寫回給他的東西他也不理
+01:41:00 <suhorng> October 22, 2013
+01:41:24 <CindyLinz> 所以我這邊 output buffer 也滿了....
+01:43:18 <letoh> 到處都沒有耶  這本書那♀麼神秘嗎
+01:43:25 <letoh> 到處都沒有耶  這本書那神秘嗎
+01:43:38 <letoh> 唔  刪錯字XD
+01:44:26 <suhorng> 還沒出版(?
+01:45:44 <CindyLinz> 不對.. 好像不是我猜的那樣 :|
+02:11:48 <CindyLinz> 覺得 nc 的行為模式是重要關鍵.. 可是有種一個巴掌拍不響的感覺..
+02:13:20 <CindyLinz> 因為我用 perl 的寫的 server 對到 nc 的時候, 就算我 perl 給它 sleep 一下才回應狂灌 input 的 nc
+02:13:36 <CindyLinz> nc 會暫時看起來好像停住, 即使 perl 回應的時候他也不印出來
+02:14:05 <CindyLinz> 可是過一陣子, nc 會嘩啦啦一口氣噴一大堆, 然後再進入休眠, 然後再印一堆..
+02:14:37 <CindyLinz> 可是 Haskell server 對到 nc 的時候, 一旦 nc 停下來了... 它們就會一直無窮無盡睡下去
+02:24:33 <CindyLinz> 好像又猜錯了.. 我可能要再多實驗 :|
+12:03:52 <cataska> letoh: hw5 的 challenge 有做嗎
+12:04:56 <_13h> 還沒耶，今天晚上有空的話應該會試試
+12:05:13 <_13h> 最近都在準備工作上要用的報告，時間不太夠用XD
+12:06:00 <_13h> 第一題大概想到做法了，第二題只要先把第一題搞出來應該不難
+12:09:38 <cataska> _13h: 寫了 compute-free-vars 但是 auto-grading 說有錯，所以想來問你看看
+12:12:56 <_13h> 嗯，我還沒寫，這幾天只是先抽空想一下而已..
+12:16:10 <cataska> 看它給了兩個輸入，一個是 (fun "f" "x" (var "y"))，一個是 (int 5)，參考一下
+12:19:54 <_13h> ok  感謝!
+14:12:49 <hychen> 我也還沒寫 XD
+14:30:05 <favonia> cataska: 第一個差不多是 f = \x -> y 的意思嗎
+14:34:32 <hychen> favonia, fun f x = y
+14:34:52 <favonia> hychen: 感覺一樣????
+14:35:32 <favonia> 嗯
+14:35:47 <hychen> favonia, 那是lisp 的寫法
+14:35:56 <favonia> 喔
+14:36:06 <hychen> favonia, 變數用let定義
+14:36:23 <favonia> 那為什麼不是 'f 和 'x
+14:36:43 <hychen> (fun "nameopt" "formal" "body")
+14:37:26 <favonia> 我不懂的是有 symbol 不用用 string 想幹嘛 xD
+14:38:03 <hychen> favonia, 因為他是在racket 裡面實作類racket的語言
+14:38:19 <hychen> favonia, 不直接用symbol 比較不會搞混
+14:38:29 <favonia> 好ㄅ
+14:38:34 <favonia> 雖然我覺得沒啥差
+14:39:06 <hychen> favonia, 因為要實作closure, 所以還是有差吧 XD
+14:39:25 <favonia> 只要可以比較是不是相同就好
+14:39:34 <favonia> string 和 symbol 都做得到
+14:40:32 <favonia> 只要可以 eq? 就夠了
+14:42:27 <hychen> 怕學生搞混吧
+14:43:37 <favonia> 好ㄅ
+14:44:18 <hychen> http://this-plt-life.tumblr.com/post/44462204757/simon-peyton-jones-adding-the-io-monad-to-haskell
+14:44:29 <hychen> 昨天看到這個文章，覺得很好笑
+14:49:44 <_13h> hychen: 其實是沒差，只是他把語法設計成這樣而已...
+14:50:21 <_13h> 然後那個東西基本上是 ast... 你要說類 racket 好像也不能算錯啦
+14:50:50 <favonia> 我個人有意見的原因是 "字串" 不是最貼近的抽象概念 xD
+14:50:54 <favonia> symbol 才是
+14:51:01 <_13h> 對啊
+14:51:09 <hychen> _13h, 他是ast 沒錯
+14:51:16 <_13h> 在 lisp 裡最自然的應該是操作 symbol 吧@_@
+14:51:19 <hychen> favonia, 他是ast沒錯
+14:51:37 <hychen> _13h, 因為他想講struct 跟 pattern match 的關係
+14:52:03 <hychen> _13h, another term of the struct, tag of a value
+14:52:14 <_13h> 我不曉得他想講什麼，因為我幾乎沒上課，只看了 soundness 而已XD
+14:52:56 <hychen> _13h, 他有講SML的datatype , pattern match 跟Section 6用strcut用做AST 的關係
+14:53:30 <_13h> 喔喔，那其實都是類似的東西吧...
+14:54:06 <hychen> 是啊
+14:55:56 <hychen> 問個問題, SICP如果看完了，下一本書應該接什麼來看?
+14:56:06 <_13h> 你看完了!!!
+14:56:31 <hychen> 還沒啦.
+14:56:38 <hychen> 只是先問一下 orz
+14:57:15 <hychen> 要做一下讀書排程
+14:57:24 <_13h> stackoverflow 很多書單XD
+14:58:05 <hychen> ....
+14:58:13 <hychen> 時間有限啊 orz
+15:11:53 <cataska> favonia 不在，來不及回答 XD
+15:13:26 <kanru> hychen: SCIP 看完了!!
+15:13:59 <cataska> kanru: 大大！
+15:15:16 <b4283> cataska: 你忘記跪了
+15:16:08 <cataska> 如果 kanru 大大說裡頭的習題都寫了，就真的要跪了 XD
+15:16:14 <b4283> XD
+15:23:14 <hychen> kanru, 為了要追上您的腳步，我計畫4月底前把SICP看完
+15:23:43 <hychen> letoh, 我感覺SICP講得東西跟我們上課的內容差不多ㄟ
+15:23:46 <kanru> hychen: 我沒有看完啊..
+15:24:17 <kanru> hychen: 為了要追上您的腳步，我4月也來看SICP好了..
+15:26:42 <_13h> hychen: 所以我說這兩週的東西都不太需要看啊@_@
+15:27:08 <hychen> _13h, 為了追上您的腳步，我會趕快把SICP看完...
+15:27:12 <cataska> hychen: The Little Schemer, The Seasoned Schemer, The Reasoned Schemer
+15:28:14 <hychen> http://jonathan.tang.name/files/scheme_in_48/tutorial/overview.html
+15:28:26 <hychen> 我想就追尋au的腳步好了....
+15:29:31 <_13h> 我根本忘了有沒有看完，很久以前看的
+15:30:02 <_13h> little schemer 還不錯  上次不是有人弄了個網頁版?
+15:30:31 <hychen> little schemer 我覺得我不需要看耶
+15:30:45 <_13h> 不過這些應該都是 scheme 相關的吧? 你確定要一直看這方面的資料嗎?@_@
+15:31:08 <cataska> 聽說後面兩本弄出一個 logic programming language (?)
+15:32:30 <_13h> 記得是第三本?
+15:32:38 <_13h> reasoned
+15:33:14 <cataska> _13h: 不確定哪一本 XD
+15:33:59 <cataska> 應該是 reasoned
+15:34:09 <cataska> http://kanren.sourceforge.net/
+15:34:36 <hychen> http://www.eopl3.com/preface.html
+15:34:45 <hychen> 也許換看這本?
+15:36:09 <hychen> http://www.librarything.com/work/195742/book/89606001
+15:36:11 <hychen> 還有這本
+15:36:29 <hychen> 不過我手上沒有, 3/9號去天龍訂好了XD
+15:38:25 <_13h> eopl 我也想看，不過時間沒那麼多XD
+15:40:58 <hychen> 我也覺得
+15:41:04 <hychen> 4月份還要上邏輯
+15:42:02 <hychen> http://sicp.readthedocs.org/en/latest/
+15:42:13 <hychen> sicp還有解答ㄟ XD
+15:42:23 <hychen> 簡中版
+15:56:16 <cataska> hw5 challenge 寫完了但是不知道錯在哪，真討厭
+20:03:25 <_13h> http://www.jayway.com/2013/03/03/git-is-a-purely-functional-data-structure/  好像混了奇怪的關鍵字進去了XD
+23:34:36 <suhorng> :t undefined
+23:34:37 <lambdabot> a
+23:35:35 <suhorng> :t (\x -> \f -> case x of Left a -> (undefined (f a)) | Right b -> b)
+23:35:36 <lambdabot> parse error on input `|'
+23:35:48 <suhorng> :t (\x -> \f -> case x of Left a -> (undefined (f a)); Right b -> b)
+23:35:49 <lambdabot> Either t t1 -> (t -> t2) -> t1

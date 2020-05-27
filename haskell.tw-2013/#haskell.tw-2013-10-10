@@ -1,0 +1,49 @@
+04:27:24 <CindyLinz> Const functor 真是作弊的傢伙!
+04:28:11 <CindyLinz> (正在聽這個演講.. # 20:03 < mno2> http://skillsmatter.com/podcast/scala/lenses-compositional-data-access-and-manipulation/te-8510 )
+11:17:08 <godfat> CindyLinz, 本來想試試把你的 .y 改成 parsec 的方式（或是 Text.Parser? 不知道差在哪），結果發現 as 沒辦法 assemble XD 看來得先改成 llvm asm @_@ 好吧，本來就是計畫中的，只是順序變了 XD
+13:31:04 <godfat> 唔唔，llvm 似乎是 register based... 沒有 push/pop @_@
+17:16:30 <godfat> 好不容易 orz
+17:16:31 <godfat> 果然就算是 llvm 這麼高階的東西，組語不會就是不會 XD
+17:16:31 <godfat> https://github.com/godfat/Talk-HappyMonadFix-Easy-NPassCompiler/commit/6f683cc6f37d656c93e9a5fbf29ea6f872d5eccf
+17:24:01 <godfat> 我覺得我需要 string interpolation 和 asm emitter
+17:24:01 <godfat> assembly 裡一堆一樣的動作...
+17:28:37 <mno2> llvm hack age 上有 library 可以寫 DSL
+17:28:47 <mno2> 雖然沒有全部功能不過還蠻方便的
+17:29:21 <godfat> hack age... XD
+17:29:52 <mno2> 輸入自己斷字..
+17:29:57 <mno2> https://github.com/MnO2/kaleidoscope-plus 可以參考這邊
+17:30:45 <godfat> 剛剛是翻到這個
+17:30:45 <godfat> https://github.com/bos/llvm/blob/master/examples/Fibonacci.hs
+17:31:38 <mno2> 喔，同一個東西，都可以
+17:33:49 <godfat> 不過像是 appendBasicBlock 之類的東西，
+17:33:49 <godfat> 會比直接寫 llvm assembly 容易嗎？ @_@
+17:33:49 <godfat> 我之前有直接用 c++ 寫過，覺得要記好多 API @@
+17:34:51 <godfat> 另外則是比對從 c compile 過來的 llvm asm,
+17:34:51 <godfat> 覺得如果語言本身夠像 c 的話，compile 成 c
+17:34:51 <godfat> 還有好處是 -O3 最佳化看起來不錯... XD
+17:34:51 <godfat> 剛剛測直接用 llvm asm 的狀況，好像看不太出來差別
+17:35:41 <mno2> block 是 flow chart 的概念，抽象程度比較好操作一些
+17:36:32 <mno2> 不過必須要先了解一下標準寫 compiler 的架構啦..
+17:36:35 <godfat> 嗯嗯，還有寫在 haskell 裡有 type 也好很多吧，我猜
+17:36:36 <godfat> 我剛剛 i32* 那個 * 少打，看半天搞好久最後才注意到是我少打 orz...
+17:37:07 <mno2> 那個 library 裡面超多神奇的 type，我都看不懂
+17:37:42 <godfat> 倒是 llvm 給的錯誤訊息都滿豐富的，亂寫也都會有明確的錯誤，很不錯
+17:37:42 <godfat> 我想算是滿安全的組合語言。可惜的是我還是看不懂，都要查好久才搞清楚狀況 orz
+17:37:43 <godfat> XDDDD
+17:38:14 <mno2> 弄清楚之後就蠻好懂的
+17:39:09 <godfat> 我相信 XDDD 果然沒白吃的午餐 XDDD
+17:39:09 <godfat> 我弄到一半還在查 stack based machine 要怎麼轉 register based machine... ~.~
+17:39:09 <godfat> 忽然間才想通其實很單純 @@
+17:40:02 <mno2> compiler 就是一個容易寫，但不好測的東西。所以寫這種東西我都會希望 type 會豐富一點
+17:41:40 <godfat> 結果 haskell llvm binding 就一堆奇怪的 type? XDD
+17:42:07 <godfat> 不過愈用愈覺得 llvm 真的是神器啊 XDD
+17:42:46 <mno2> 他那是為了建 DSL 才弄的吧，使用者不會看到
+17:42:54 <mno2> 我是好奇才追進去看
+17:43:42 <godfat> 原來是內部的 XD 之前看 frp 裡的東西也一堆怪怪的 type ~.~
+17:43:42 <godfat> 想起以前用 c++ template 也是寫了一堆內部用的奇怪東西
+22:04:18 <Yu_lin> 昨天那個 nodeos 的圖，裡面的 root 是指 shell 吧？叫 NodeOS 我還真的以為有人要用 javascript 重新寫一個新的 OS 了XD
+23:51:25 <suhorng> wow, 意思是改成 llvm 板的已經寫完嗎XD
+23:56:50 <CindyLinz> godfat: 原來就直接這樣 fork 繼續寫喔 XD
+23:58:28 <CindyLinz> 這... @_@" # 17:39 < godfat> 我弄到一半還在查 stack based machine 要怎麼轉 register based machine... ~.~
+23:58:51 <CindyLinz> 我突然覺得還好我選了 gnu as, 沒有選 llvm..... orz
+23:59:48 <CindyLinz> 從小到大只有寫過 stack based machine... -- MASM & NASM & mips(spim)...

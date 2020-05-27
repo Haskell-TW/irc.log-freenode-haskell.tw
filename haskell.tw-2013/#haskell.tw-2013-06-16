@@ -1,0 +1,26 @@
+00:11:14 <banacorn> 123
+00:11:31 <banacorn> anybody home?
+00:21:08 <favonia> banacorn: ?
+00:36:16 <monochrom> 午安
+00:36:58 <UncleHandsome> 晚安lol
+00:37:23 <monochrom> 我在加拿大多倫多
+00:39:43 <UncleHandsome> 我在NCTU XD
+00:41:05 <monochrom> 哦, 國立交通大學, 是嗎?
+00:41:45 <UncleHandsome> 嗯嗯
+00:55:30 <CindyLinz> 我在家 :p # 00:11 < banacorn> anybody home?
+02:55:23 <banacorn> 我也在 NCTU!
+02:56:43 <banacorn> @UncleHandsome 天啊我好像認識你!!! @@
+02:56:44 <lambdabot> Unknown command, try @list
+03:07:35 <banacorn> @UncleHandsome oops 抱歉我想我認錯了，但能遇到同校同系的同學還是好興奮好感動 ><
+03:07:36 <lambdabot> Unknown command, try @list
+03:23:15 <letoh> banacorn: 名字前面可以不用加 @
+03:24:57 <banacorn> letoh 嗯嗯謝謝!   我還是 IRC 新手請多多指教 ><
+03:26:05 <letoh> 其實沒有什麼規定啦  不過因為這邊有個 bot 會認 @，所以建議別加
+03:26:57 <banacorn> @hoogle a b c -> a c d -> a b d
+03:26:57 <lambdabot> Control.Category (>>>) :: Category cat => cat a b -> cat b c -> cat a c
+03:26:57 <lambdabot> Control.Arrow (>>>) :: Category cat => cat a b -> cat b c -> cat a c
+03:26:57 <lambdabot> Control.Category (.) :: Category cat => cat b c -> cat a b -> cat a c
+03:27:08 <banacorn> 哇屋 XD
+03:27:55 <banacorn> >  1 + 1
+03:27:57 <lambdabot>   2
+11:06:22 <b4283> 看起來不像新手 XD

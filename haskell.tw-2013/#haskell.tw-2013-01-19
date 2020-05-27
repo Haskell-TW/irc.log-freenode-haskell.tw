@@ -1,0 +1,59 @@
+00:59:47 <paulliu> hello..我遇到 ocaml 編譯不過的問題不知可否幫我看看
+00:59:54 <paulliu> http://paste.ubuntu.com/1546036/
+01:00:28 <paulliu> sjs3 那一行編譯不過..似乎只要有弄到 a0~ff 範圍的字元我就編譯不過..
+01:00:42 <paulliu> 編譯指令是 ocamlfind ocamldep -package bigarray,unix,extlib,ulex08 -syntax camlp5o -ppopt pa_macro.cmo test.ml
+01:01:07 <letoh> 咦
+01:01:27 <paulliu> 很怪吧.. 但 80~9f 還會過
+01:01:38 <paulliu> 都是 > 128 居然有差別待遇
+01:01:53 <letoh> 好神奇的問題
+01:02:14 <paulliu> File "test.ml", line 10, characters 34-35:
+01:02:15 <paulliu> Parse error: ']' expected after [ch_class] (in [regexp])
+01:02:17 <paulliu> 錯誤訊息
+01:02:32 <letoh> 咦... paulliu!
+01:03:27 <letoh> 現在手邊的電腦沒裝  找一台來試試@_@
+01:03:35 <paulliu> 嗯...這段 code 出現在 rldev 這個計畫裡面.. -.- 就是解 KEY 社遊戲資料用的~
+01:04:01 <letoh> 果然是同一個人XD
+01:04:41 <letoh> 沒想到是用 ocaml 開發的
+01:18:05 <letoh> 一樣的錯誤XD
+01:19:20 <CindyLinz> 這樣聽起來是 \x 後面直接放英文字的時候會 error... o.o
+01:20:00 <paulliu> CindyLinz: hmm..也有可能~
+01:20:16 <letoh> This expression has type char but an expression was expected of type int
+01:20:36 <CindyLinz> 雖然這邊看起來是合法的.. http://askra.de/software/ocaml-doc/3.12/lex.html#xhtoc4
+01:21:37 <paulliu> 唔..扯的是.. 我改成用大寫 居然就過了..
+01:21:59 <CindyLinz> :D
+01:22:11 <letoh> parser 的問題?
+01:22:43 <CindyLinz> ocaml 希望你用 camel case.. (逃)
+01:27:27 <letoh> 為什麼有的語言要限制 type 的命名必須大寫開頭呢?
+01:29:04 <letoh> 強迫程式有良好風格嗎?
+01:30:05 <CindyLinz> parser 有可能會變好寫
+01:30:47 <letoh> 嗯嗯  的確是
+03:16:46 <favonia> paulliu: 我還沒用過 ocaml-find... 試試看 xD
+03:22:20 <letoh> 以前看 ocaml 覺得很可怕，現在好像變可愛了XD
+03:26:57 <favonia> letoh: 恭喜（被）洗腦成功
+04:07:17 <letoh> 唔，應該找點比較實際的程式來研究一下比較快，以前看 real world haskell 一直覺得這是哪門子 real world...
+18:20:50 <MnO2> favonia: 有沒有介紹設計簡單型別系統的書啊？
+18:21:26 <MnO2> favonia: 這幾天在看 LLVM，他裡面有一個 toy language: Kaleidoscope
+18:22:21 <letoh> 好像很有趣
+18:22:25 <MnO2> favonia: 我想說自己去延伸他的語言，增加簡單型別跟型別推論系統，但有沒有一些彙整經驗的文章說，增加什麼功能會讓型別系統爛掉？
+18:23:02 <MnO2> 其實像 rust 他們去年底的演講也有說，他們還沒證明他們設計的系統是 sound
+18:23:20 <MnO2> 有沒有彙整一些經驗的文章
+18:23:40 <MnO2> 像Godel's T 又太簡單，Hindley Milner 好像要滿足一些條件才行
+18:25:09 <MnO2> 落在中間的究竟是什麼？ 主流語言常見的特性拿掉哪些可以變成一個漂亮、簡單有型別推論的系統？
+18:27:12 <MnO2> 又，讓使用者自己定義型別的時候，有什麼讓使用者做了一定會爛掉的東西不能做？
+18:36:46 <MnO2> 還是實務上最多就像是 C++ auto 或是 go 那樣針對一個 expression 從assignment 右邊去推論新建的 variable?
+21:39:01 <CindyLinz> MnO2: Hindley Milner 算是 un-sound 嗎? (上次看「當然我是在扯淡」裡面講的)
+21:46:57 <favonia> MnO2: 我覺得通常可以先試試看 bidirectional 的 type checking
+21:48:24 <favonia> MnO2: 語言安全基本性質：progress (型態正確的程式可以有「下一步」或是已經是 value) & preservation (型態正確的程式執行一步後型態不變)
+21:49:24 <favonia> MnO2: 型態推論基本安全性質：程式真的可以是推論出來的型態 / 理想的性質：推論出來的型態是程式所能擁有最一般的型態
+21:50:22 <favonia> MnO2: 次理想的性質：推論出來的型態是程式所能擁有最一般的 *某種* 型態... 像 HM 不就要求 forall forall 一定要在最前面
+21:51:17 <favonia> 我不知道哪裡有書耶 基本上就是一邊設計一邊證明 如果證明發現哪個例子有反例 代表設計錯誤
+21:54:06 <favonia> MnO2: 有一些 well-known 的系統應該已經有人證明符合「理想性質」是不可能的
+21:55:03 <favonia> MnO2: C++ 和 go 那個就算了吧（。。。。）
+22:01:40 <MnO2> favonia: 我不知道什麼是 bidirectional 的 type checking ，可以大略講一下嗎？這樣我自己查資料會有點概念
+22:03:14 <favonia> MnO2: 我不知道這有沒有幫助 http://www.cs.cmu.edu/~fp/courses/15312-f04/handouts/15-bidirectional.pdf
+22:03:24 <MnO2> favonia: 另外，有符合理想性質，平易近人但又不trivial的嗎？
+22:03:38 <MnO2> 的 well-known 系統嗎？
+22:08:16 <favonia> MnO2: 不曉得耶... 感覺很多都沒有很困難 @@ 就跟這 PDF 開頭講的... 加上 universal/existential/recursive 會更麻煩，然後如果你還想要 subtyping 會超麻煩... 我沒有認真蒐集過文獻 orz
+22:11:07 <MnO2> favonia: 那你可以提示幾個關鍵字嗎？
+22:12:00 <favonia> MnO2: 我覺得剛才那篇 PDF 應該已經提供基本的東西了（？？）我猜的啦
+22:12:26 <MnO2> favonia: 好吧，我先看完再說

@@ -1,0 +1,68 @@
+04:58:56 <cebrusfs> exit
+05:02:16 <cebrusfs> @src map
+05:02:16 <lambdabot> map _ []     = []
+05:02:17 <lambdabot> map f (x:xs) = f x : map f xs
+05:02:33 <cebrusfs> @src scanl
+05:02:34 <lambdabot> scanl f q ls = q : case ls of
+05:02:34 <lambdabot>     []   -> []
+05:02:34 <lambdabot>     x:xs -> scanl f (f q x) xs
+22:47:44 <CindyLinz> @pl \n -> let { fib 0 = 1 ; fib 1 = 1 ; fib n = fib (n - 1) + fib (n - 2) } in fib n
+22:47:45 <lambdabot> (line 1, column 11):
+22:47:45 <lambdabot> unexpected "{"
+22:47:45 <lambdabot> expecting "()", natural, identifier or "in"
+22:48:04 <CindyLinz> @pl \n -> let fib 0 = 1 ; fib 1 = 1 ; fib n = fib (n - 1) + fib (n - 2) in fib n
+22:48:05 <lambdabot> ap ((+) . ap id (subtract 1)) (ap id (subtract 2))
+22:53:12 <suhorng> 看不懂..XD
+22:54:38 <CindyLinz> > ap ((+) . ap id (subtract 1)) (ap id (subtract 2)) 1
+22:54:40 <lambdabot>  Occurs check: cannot construct the infinite type: a0 ~ a0 -> b
+22:54:41 <lambdabot>  Expected type: (a0 -> b) -> a0
+22:54:41 <lambdabot>    Actual type: (a0 -> b) -> a0 -> bOccurs check: cannot construct the infini...
+22:54:41 <lambdabot>  Expected type: (a0 -> b) -> a0
+22:54:41 <lambdabot>    Actual type: (a0 -> b) -> a0 -> b
+22:54:49 <CindyLinz> > ap ((+) . ap id (subtract 1)) (ap id (subtract 2)) $ 1
+22:54:51 <lambdabot>  Occurs check: cannot construct the infinite type: a0 ~ a0 -> b
+22:54:51 <lambdabot>  Expected type: (a0 -> b) -> a0
+22:54:51 <lambdabot>    Actual type: (a0 -> b) -> a0 -> bOccurs check: cannot construct the infini...
+22:54:51 <lambdabot>  Expected type: (a0 -> b) -> a0
+22:54:51 <lambdabot>    Actual type: (a0 -> b) -> a0 -> b
+22:54:58 <CindyLinz> > (ap ((+) . ap id (subtract 1)) (ap id (subtract 2))) 1
+22:55:00 <lambdabot>  Occurs check: cannot construct the infinite type: a0 ~ a0 -> b
+22:55:00 <lambdabot>  Expected type: (a0 -> b) -> a0
+22:55:00 <lambdabot>    Actual type: (a0 -> b) -> a0 -> bOccurs check: cannot construct the infini...
+22:55:00 <lambdabot>  Expected type: (a0 -> b) -> a0
+22:55:01 <lambdabot>    Actual type: (a0 -> b) -> a0 -> b
+22:55:05 <CindyLinz> 這東西是能用嗎 orz
+22:55:16 <CindyLinz> > (\n -> let fib 0 = 1 ; fib 1 = 1 ; fib n = fib (n - 1) + fib (n - 2) in fib n) 1
+22:55:18 <lambdabot>  1
+22:55:25 <CindyLinz> > (\n -> let fib 0 = 1 ; fib 1 = 1 ; fib n = fib (n - 1) + fib (n - 2) in fib n) 3
+22:55:27 <lambdabot>  3
+22:55:28 <CindyLinz> > (\n -> let fib 0 = 1 ; fib 1 = 1 ; fib n = fib (n - 1) + fib (n - 2) in fib n) 4
+22:55:30 <lambdabot>  5
+22:55:31 <CindyLinz> > (\n -> let fib 0 = 1 ; fib 1 = 1 ; fib n = fib (n - 1) + fib (n - 2) in fib n) 5
+22:55:33 <lambdabot>  8
+22:55:38 <CindyLinz> 原本沒寫錯啊.. QQ
+22:57:19 <suhorng> 是括弧括錯了吧..
+22:57:35 <suhorng> > (       ap ((+) . ap id (subtract 1)) (ap id (subtract 2))     )    1
+22:57:37 <lambdabot>  Occurs check: cannot construct the infinite type: a0 ~ a0 -> b
+22:57:37 <lambdabot>  Expected type: (a0 -> b) -> a0
+22:57:37 <lambdabot>    Actual type: (a0 -> b) -> a0 -> bOccurs check: cannot construct the infini...
+22:57:37 <lambdabot>  Expected type: (a0 -> b) -> a0
+22:57:37 <lambdabot>    Actual type: (a0 -> b) -> a0 -> b
+22:57:44 <suhorng> GG..
+22:59:51 <CindyLinz> 我剛最後一次有括啊 XD
+23:00:03 <suhorng> 沒看到,sorry
+23:00:33 <CindyLinz> 而且這個 error.... 竟然是參數個數不對的 error.. orz  如果只是 ambiguous type 還有點希望 ^^|
+23:13:25 <suhorng> http://www.haskellforall.com/2014/04/how-continuation-monad-works.html 把 ContT 重命名 xDDD
+23:17:13 <suhorng> (>>-) 這樣把他變中序的瞬間長相變熟悉
+23:20:30 <CindyLinz> 呼, 好像不該再逃避 ContT 了.....ww
+23:22:54 <suhorng> 不學 goto 應該沒什麼關係啦XD
+23:53:29 <monochrom> 也看看我的 http://www.vex.net/~trebla/haskell/cont-monad.xhtml
+23:53:57 <CindyLinz> 好 XD
+23:54:50 <CindyLinz> monochrom: 喔喔這個太好了, 不是只講基本定義定理, 是有應用的
+23:55:38 <monochrom> 他的那個 >>- 頗有意思. 可惜他沒再解. 有得解的, 並不是僥倖.
+23:56:49 <suhorng> 以前看到有一篇古老的文章在 argue 說 continuation passing style 跟 monadic programming 很像
+23:57:00 <suhorng> 寫成 (>>-) 感覺就是這樣一個結果?
+23:57:24 <monochrom> 是的, 正是那個緣故.
+23:58:59 <CindyLinz> 我的第一本 Haskell 書 Yet Another Haskell Tutorial 在講 Monad 的時候, 就是先講 continuation passing style, 然後就直接變成 Monad...
+23:59:33 <CindyLinz> 然後我就卡了兩週....
+23:59:56 <monochrom> 哈哈

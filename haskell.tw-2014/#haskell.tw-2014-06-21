@@ -1,0 +1,104 @@
+11:52:51 <yllan__> 奇怪，我也找不到 ^^;
+11:53:57 <yllan__> c9sloud: 在 #yinwang.talk
+19:10:58 <twprogrammer> applyTwice :: (Num a) => a->(a->a)
+19:10:59 <twprogrammer> applyTwice x y = x+y
+19:11:26 <twprogrammer> 我把 applyTwice x y 解釋成 模式匹配 (applyTwice x) y 這樣正確嗎
+19:12:08 <twprogrammer> 可是這樣一來(就是說可以解釋成模式匹配), 寫applyTwice x = x+9 這樣也可以吧
+19:12:18 <twprogrammer> 可惜無法過~
+19:15:58 <au> 這樣正確
+19:16:12 <au> > let applyTwice x = x+9 in applyTwice 42
+19:16:14 <lambdabot>  51
+19:16:21 <au> 可以過啊
+19:16:30 <CindyLinz> 不是模式匹配.. 嗯
+19:16:39 <twprogrammer> > applyTwice :: (Num a) => a->(a->a)
+19:16:41 <lambdabot>  Not in scope: ‘applyTwice’
+19:16:53 <twprogrammer> Q_Q
+19:16:55 <CindyLinz> 模式匹配的時候都是 data constructor 開頭或是 literal 之類的東西
+19:17:08 <twprogrammer> data constructor是啥?
+19:17:24 <twprogrammer> 我目前學過的 有  a:ab,   [a],  a 這種
+19:17:27 <CindyLinz> 忽略我.. 我眼花了 XD
+19:17:41 <CindyLinz> 我剛剛講的都不算喔 XD
+19:18:01 <au> > let applyTwice :: (Num a) => a-> a; applyTwice x = x+9 in applyTwice 42
+19:18:03 <lambdabot>  51
+19:18:42 <au> > let applyTwice :: (Num a) => a->(a->a); applyTwice x = (+x) in applyTwice 12 34
+19:18:44 <lambdabot>  46
+19:19:17 <au> twprogrammer: 以上兩個例子看得出差別嗎?
+19:20:37 <twprogrammer> applyTwice x = (+x) in applyTwice 12 34
+19:20:40 <twprogrammer> 我要想一下~
+19:20:45 <twprogrammer> 有學過 有點生疏
+19:21:59 <twprogrammer> 我學過的let是let [bindings] in [expressions]
+19:22:11 <twprogrammer> 阿[expression]  是 applyTwice 12 34吧
+19:22:26 <twprogrammer> [binding] 是 applyTwice x = (+x)
+19:22:33 <twprogrammer> 可是感覺兠不起來
+19:22:38 <twprogrammer> 兜
+19:32:58 <au> 沒錯啊。applyTwice x = (+x) 就是
+19:33:07 <au> applyTwice x = \y -> y + x 的簡寫
+19:33:15 <au> let applyTwice x = \y -> y + x in applyTwice 12 34 就是
+19:33:37 <au> (\y -> y + 12) 34
+19:33:40 <au> 34 + 12
+19:33:51 <au> 以上叫 equational reasoning
+19:36:13 <twprogrammer> \y 是合法符號嗎?
+19:36:19 <CindyLinz> lambda 呀
+19:36:29 <twprogrammer> learning u a haskell在介紹高階函數時沒介紹這個
+19:36:43 <twprogrammer> 那應該是我還沒讀到lambda
+21:55:34 <twprogrammer> 假設有個函數是 f :: a -> ( a -> a), 回傳一個函數的函數, 假如它回傳的那個a->a就是之前定義過的某個函數g
+21:55:43 <twprogrammer> 我可不可以寫 f x = g 阿
+21:59:01 <CindyLinz> 可以
+22:00:18 <twprogrammer> 太好了
+22:00:28 <twprogrammer> 這樣就跟數學系的慣用習慣一致了
+22:00:56 <twprogrammer> 不然為了迎合程式語言, 要特地迴避掉這種寫法, 會造成大腦負擔
+22:00:58 <au> haskell 跟數學系的習慣不一致的地方不多 :p
+22:01:23 <twprogrammer> 我覺得把多變數函數解釋成  a-> (a->a) 就腦腦的@@
+22:01:40 <au> 多變數函數是 (a, b) -> c
+22:01:52 <au> 只是可以用 curry/uncurry 做 partial application
+22:03:39 <twprogrammer> 對阿 你這是數學系的, 可是書上說是解釋成a打到另一個函數 h, 那個函數h是 something->something的
+22:03:47 <twprogrammer> 用這樣去解讀雙變數函數
+22:04:43 <twprogrammer> 所以a當自變數 , 得到某個函數h, 再把b送進那個函數h, 得到c, 也就是我們數學習慣說的f((a,b))
+22:04:47 <twprogrammer> 超麻煩..
+22:05:37 <au> 基本上雙變數會寫成 data Point = P { x :: Int, y :: Int }
+22:06:14 <au> type Distance = Rational ; distance :: Point -> Distance
+22:06:42 <au> 所以是把兩個變數放進資料結構的欄位裡
+22:06:44 <CindyLinz> 是為複變函數... (超大誤)
+22:06:48 <au> lol
+22:07:38 <twprogrammer> 所以http://learnyouahaskell-zh-tw.csie.org/zh-tw/high-order-function.html#Curried_functions
+22:07:46 <twprogrammer> 開頭說的那種
+22:08:01 <CindyLinz> twprogrammer: 這樣描述的好處是處理性質或定理的時候, 不失一般性, 只要考慮單變數函數就好啊 :D
+22:08:16 <twprogrammer> 只是某個實作雙變數, 三變數方法之一, 一般人也不會這樣coding囉
+22:08:47 <au> 應該是這樣講。如果 binary function 描述一個 binary relation
+22:09:02 <au> 那就會 a -> b -> c，因為 (max 4) 是有意義的
+22:09:35 <CindyLinz> 在 haskell 裡面.. 一般的確會這樣寫欸.. 主因可能是... 看起來比較潮, 或是可以少寫括號和逗號比較省事 ^^|
+22:09:44 <au> 但是如果雙變數通常一起出現，例如 #亂舉例子 (Buffer, Len) 是一組
+22:10:22 <au> 那就會用 tuple 或 data type 綁在一起做 (a, b) -> c，而不會 curry 成 a -> b -> c
+22:10:34 <CindyLinz> CStringLen 算是個例子..
+22:11:27 <monochrom> 啊, twoprogrammer 這麼快就走了.
+22:11:58 <twprogrammer> 大致看得懂, 前面如果 binary function 描述一個 binary relation
+22:12:02 <CindyLinz> type CStringLen = (Ptr CChar, Int)
+22:12:11 <CindyLinz> http://www.haskell.org/ghc/docs/latest/html/libraries/base-4.7.0.0/Foreign-C-String.html
+22:12:16 <twprogrammer> 好吧 這是代數問題 xd binary function這個字
+22:12:21 <twprogrammer> 我沒聽過
+22:12:22 <monochrom> 咦, 不是啊! 看錯了! :)
+22:12:47 <twprogrammer> 只聽過binary operator/ binary relation
+22:12:48 <au> binary function 這裡指的是 "function of two variables"
+22:12:48 <CindyLinz> twprogrammer: binary relation 要的是 a -> b -> Bool 嗎?
+22:13:21 <twprogrammer> ok i see~
+22:13:38 <monochrom> "f x y 代表 (f x) y" 跟匹配無關, 純粹是語法而已.
+22:14:00 <twprogrammer> monnochrom: ok!
+22:14:21 <twprogrammer> Cindylinz: ??
+22:17:27 <monochrom> 數學上的 X^2 -> X, 寫程式時究竟應寫成 X->X->X 還是 (X,X)->X, 這基本上只是文化差異. 在 SML 多數寫 (X,X)->X, 在 Haskell 多數寫 X->X->X.
+22:22:25 <CindyLinz> twprogrammer: binary relation 裡面兩方沒有一定要 1-1 對應啊, 所以不能表示為 a -> b   可能有一個 a 可以對到兩個不同的 b
+22:22:26 <monochrom> 還有個很小的技術上分別. 為了 non-strictness, 在 Haskell 裏 (X,X)->X 稍為貴些. 但這只是指未優化前.
+22:22:45 <CindyLinz> 例如說 (<) 這個 relation 就是.. @@"
+22:24:46 <twprogrammer> 嗯嗯
+22:26:54 <monochrom> A->Bool 是一種寫 "A 的子集" 的方法. 同理, (A,B)->Bool 是一種寫 "AxB 的子集" 的方法. 然後又把 (A,B)->Bool 轉成 A->B->Bool.
+22:31:52 <twprogrammer2> 換個irc client掛網-.-
+22:31:57 <twprogrammer2> xchat sucks...
+23:00:48 <CindyLinz> 這樣看起來好多人的樣子... XD  Eric, Guest14692, lovelysong, EricH, dreamed1, mathist
+23:06:46 <mathist> 一直找不到好的名字~"~
+23:07:07 <mathist> 板上的諸位都是數學系的嗎？
+23:07:14 <mathist> 我是二升三的學生~
+23:07:53 <monochrom> 我離開數學系很久了!
+23:08:00 <mathist> 嗯嗯
+23:08:01 <CindyLinz> 曾經有讀過..
+23:09:47 <monochrom> 至於名字, 我也是改了多次才定下來
+23:10:15 <petercommand> 果然談haskell會被當成數學系的 (誤
+23:10:23 <mathist> haha

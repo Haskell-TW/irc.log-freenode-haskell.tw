@@ -1,0 +1,48 @@
+13:56:51 <Ferdin> Hi 有人在吗
+13:57:00 <petercommand> 有喔~
+13:58:00 <Ferdin> 你好 可以请教一个问题吗
+13:58:38 <Ferdin> 我在学习haskell 看的http://www.cis.upenn.edu/~cis194/spring13/lectures/01-intro.html这篇教程.里面有一处:hailstoneSeq :: Integer -> [Integer] hailstoneSeq 1 = [1] hailstoneSeq n = n : hailstoneSeq (hailstone n)
+13:58:57 <Ferdin> 最后的hailstone 应该是笔误, 但是正确写法应该怎么写,不知道
+13:59:01 <Ferdin> 可以告诉我吗?
+14:02:16 <petercommand> > let hailstone n = if n `mod` 2 == 0 then n `div` 2 else 3 * n + 1; hailstoneSeq 1 = [1]; hailstoneSeq n = n : hailstoneSeq (hailstone n) in hailstoneSeq 10
+14:02:19 <lambdabot>  [10,5,16,8,4,2,1]
+14:02:27 <petercommand> 沒錯阿?
+14:03:24 <petercommand> 他希望把整個數列記下來
+14:05:02 <Ferdin> 对,我是希望吧12345转为[1,2,3,4,5]
+14:05:51 <petercommand> 他的目標不是這個阿XD
+14:06:22 <petercommand> 這個就是另外一個問題了~
+14:06:46 <Ferdin> 我的理解可能错误了,但是hailstoneSeq 1 = [1]; hailstoneSeq n = n : hailstoneSeq (hailstone n) in hailstoneSeq 10 本身这个上下文没有hailstone, 是不可以这么做的吧.
+14:07:10 <petercommand> 他是用前面定義的 hailstone
+14:07:32 <petercommand> 你搜尋一下~
+14:08:12 <Ferdin> 谢谢,是我粗心了.抱歉.
+14:08:47 <Ferdin> 不过还是想请教下,如果想把一串数字变成一个list里的每一个元素,该怎么操作呢?
+14:15:04 <petercommand> 可以試試一直除以 10, 拿餘數，遞迴下去~
+14:18:11 <petercommand> > let toList 0 = []; toList n = (n `mod` 10) : toList (n `div` 10) in reverse $ toList 12345
+14:18:14 <lambdabot>  [1,2,3,4,5]
+14:18:24 <petercommand> 像是這樣~
+14:19:33 <Ferdin> toDigits :: Integer -> [Integer] toDigits 0 = [] toDigits x = toDigits( x `div` 10  ) : []
+14:20:03 <Ferdin> 我这么写的,但是类型不正确,最后是[[elem]] 而不是 [elem]
+14:20:16 <petercommand> :t (:)
+14:20:18 <lambdabot> a -> [a] -> [a]
+14:20:48 <petercommand> 你的 toDigit (x `div` 10) 是 [Integer] ，而不是 Integer 呀
+14:25:24 <Ferdin> 其实我一直迷惑怎么去把list给连接起来.
+14:25:36 <petercommand> :t (++)
+14:25:37 <lambdabot> [a] -> [a] -> [a]
+14:25:50 <petercommand> > [1,2,3] ++ [4,5,6]
+14:25:52 <lambdabot>  [1,2,3,4,5,6]
+14:26:34 <petercommand> 是這個意思嘛?
+14:27:22 <Ferdin> 嗯, 类似 toDigits( x `div` 10  ) ++ []
+14:27:49 <petercommand> 這樣還是空的喔，你只有遞迴下去，沒有產生東西~
+14:28:04 <petercommand> 你可以用 > 跑跑看~
+14:28:22 <petercommand> > 後面記得要有個空白，換行用 ; 代替
+14:28:25 <lambdabot>  <hint>:1:15: error: parse error on input ‘;’
+14:31:50 <Ferdin> 我不知道toDigits 0 = [] toDigits x = toDigits( x `div` 10 ) 怎么把特殊条件和一般情况下的值给连接起来 XD
+14:32:09 <petercommand> 特殊條件是指甚麼?
+14:32:28 <Ferdin> 就是递归结束条件  0
+14:33:13 <petercommand> 你現在都沒有值阿...
+14:37:48 <Ferdin> toDigits( x `div` 10 ) 把这个每一次的结果都送进list,最后reverse下就好了. 但是不知道如何写这种方式.
+14:39:54 <petercommand> Ferdin: 你有看到我寫的嘛~
+14:42:51 <Ferdin> 谢谢,问题解决了,之前思路有问题. toDigits :: Integer -> [Integer] toDigits 0 = [] toDigits x = toDigits( x `div` 10 ) ++ [x `mod` 10]
+14:42:59 <Ferdin> 这样写就好了
+14:44:29 <petercommand> :P
+14:45:20 <Ferdin> 之前太关注怎么把list给连起来了.....

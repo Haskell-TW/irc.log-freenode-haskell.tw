@@ -1,0 +1,1 @@
+01:05:35 <favonia> monochrom: newtype 不是重點，用 data 也行。主要是讓 t 和 t -> a 是 isomorphic

@@ -1,0 +1,16 @@
+04:07:48 <caasih> CindyLinz: 在準備 Workshop 時有注意到這篇嗎 http://www.aosabook.org/en/ghc.html
+07:06:26 <suhorngT> petercommand: 酷, 長知識
+11:56:23 <mno2> https://docs.google.com/presentation/d/1lh9_QlLKtW4L5WsFkgRggyIFORXAkTUu6Y470VkM4uI/edit#slide=id.gcd1b236cb_0_49
+11:56:27 <mno2> 蠻有趣的想法
+15:42:44 <CindyLinz> caasih: 沒有讀過 XD
+16:01:51 <suhorngT> Haskell 有任何 extension 支援 pattern mathcing 的 "Or" 嗎...?
+16:03:16 <suhorngT> 用法類似  case (e1, e2) of { (Var x, t) | (t, Var x) -> ...; } 只不過每個 Or pattern 必須 bind 完全一樣名字跟型別的變數
+17:24:26 <CindyLinz> 半手動算嗎? XD
+17:28:56 <CindyLinz> case (e1, e2) of { (\case (e1, e2) of {(Var x, t) -> (x, t) ; (t, Var x) -> (x, t)}) -> (x, t) ->  ... }
+21:00:29 <caasih> CindyLinz: 看起來 Workshop 是想丟掉 Core 以 lambda calculus 取代？
+22:35:50 <CindyLinz> 也是可以這樣想啦 ^^|
+22:36:09 <CindyLinz> 出發點只是找看起來成功率比較高的路..
+22:36:18 <CindyLinz> 覺得 Core 的東西好多 @@"
+22:36:46 <CindyLinz> 然後再想想這個好像不必要, 拔掉! 那個好像不必要, 也拔掉! 然後剩下來的再看一看.... 嗯, 好像從 lambda 出發不錯
+22:36:53 <CindyLinz> 而且正當性感覺就很充份!
+22:37:11 <CindyLinz> 接觸的人如果兩個都沒碰過的話, lambda 應該會比較有趣比較有啟發效果..

@@ -1,0 +1,317 @@
+02:11:31 <pkmx> https://hackage.haskell.org/package/rawr-0.0.0.0/docs/Data-Rawr.html
+02:22:16 <monochrom> 原來是你! 很可怕啊!
+08:45:32 <jhe__> :t
+08:45:36 <jhe__> \m
+09:41:05 <jhe__> :t Int
+09:41:07 <lambdabot> error:
+09:41:07 <lambdabot>     • Data constructor not in scope: Int
+09:41:07 <lambdabot>     • Perhaps you meant one of these:
+09:41:21 <jhe__> :t (\f x -> f x x)
+09:41:23 <lambdabot> (t -> t -> t1) -> t -> t1
+11:18:02 <pkmx> :t join
+11:18:04 <lambdabot> Monad m => m (m a) -> m a
+11:18:15 <pkmx> :t join :: (t -> t -> t1) -> t -> t1
+11:18:17 <lambdabot> (t -> t -> t1) -> t -> t1
+11:22:45 <jhe__> 看那個 type 越來越混亂了＠＠
+11:23:17 <pkmx> 沒關係 不要管我XDrz
+11:23:37 <jhe__> 本來以為自己懂了
+11:23:45 <jhe__> 結果 多看幾個以後又不懂了 ...
+11:24:06 <jhe__> 有人可以解釋一下 為什麼 (\f x -> f x x) 會是這樣嘛 ＠＠？ 感謝
+12:08:12 <caasih> 設 f x x 的 type 是 a ， x 的是 b
+12:08:20 <caasih> f x x :: a
+12:08:28 <caasih> f x :: b -> a
+12:08:37 <caasih> f :: b -> b -> a
+12:08:45 <caasih> (\f x -> f x x) :: (b -> b -> a) -> b -> a
+12:19:36 <jhe__> @caasih f 不是也是一個 參數嘛＠＠？
+12:19:37 <lambdabot> Unknown command, try @list
+12:19:54 <jhe__> 為什麼它不需要 型態呢？
+12:21:13 <caasih> f 的 type 是 (b -> b -> a)
+12:22:05 <caasih> (b -> b -> a) -> b -> a
+12:22:17 <caasih> ^^^^^^^^^^^^^    ^    ^
+12:22:40 <caasih> f                x    (f x x)
+12:24:15 <jhe__> 前面 (b -> b -> a) 可以理解
+12:24:26 <jhe__> 喔喔喔喔
+12:24:50 <jhe__> 裡面只用到一個 x 所以就 不用給兩個 b 他了
+12:25:45 <jhe__> @caasih, 感謝
+12:25:45 <lambdabot> Unknown command, try @list
+12:25:55 <caasih> lambda (\) 裡的 -> 和 type 的 -> 是無關的東西
+12:26:02 <jhe__> @list
+12:26:02 <lambdabot> What module?  Try @listmodules for some ideas.
+12:26:06 <caasih> 不會 0rz
+12:26:35 <jhe__> 我對他的理解是
+12:26:49 <jhe__> 跟 function signature 類似
+12:26:52 <jhe__> 這樣對嘛？
+12:27:16 <caasih> 聽不太懂，請解釋一下
+12:27:22 <jhe__> 就是
+12:27:37 <jhe__> 寫 function 可以 先定義他的 參數型態
+12:27:37 <jhe__> 像是
+12:27:52 <jhe__> swap :: (a, b) -> (b, a)
+12:27:54 <jhe__> 這樣
+12:30:26 <caasih> 那在你的 swap 中， swap t 的 type 會是？
+12:30:46 <caasih> （吃一個參數後的 swap 的 type 會是？）
+12:31:49 <jhe__> 下面實做是 swap (a, b) = (b, a)
+12:32:14 <jhe__> 如果要 swap t 的話 t 得是 tuple 才行＠＠
+12:32:42 <caasih> t 是 tuple 的話， `:t (swap t)` 會看到什麼 @@
+12:34:12 <jhe__> swap t 的 t 是指？
+12:34:15 <caasih> 抱歉，這太傻了，換個問法 XD
+12:35:01 <caasih> (\f x -> f x) 的 f 如果是 swap ，那把 type 都寫出來會長怎樣？ XD
+12:37:00 <jhe__> (a, b) -> (b, a) ?
+12:37:33 <jhe__> 喔喔
+12:37:34 <jhe__> 是
+12:37:49 <jhe__> (a -> b) -> a -> b
+12:38:08 <caasih> 嗯嗯
+12:41:32 <jhe__> 可是可是＠＠
+12:41:38 <caasih> jhe__: 你看的是什麼教材啊？我正在看 haskellbook.com
+12:41:46 <jhe__> 這個意思就是
+12:41:47 <caasih> jhe__: 可是...是？
+12:41:56 <jhe__> (a, b) 跟 (a, b)
+12:42:03 <jhe__> 是不同 type 就是了
+12:42:20 <jhe__> 如果那邊 f 是 swap x 是 tuple 的話
+12:42:27 <caasih> 是，他們的 type 不同
+12:43:12 <jhe__> 我是前幾天看到 FLOFLAC 的影片
+12:44:21 <jhe__> 有看過 IRC 上面寫的那一本
+12:44:36 <jhe__> 看的有點 燒腦 跟平常直覺不太一樣
+12:44:42 <jhe__> 我的直覺*
+12:44:58 <caasih> 對啊，看那本我也燒了好幾個月的腦
+12:47:50 <pkmx> 不是 (a, b) 一個是 pattern 一個是 type 嗎 ...?
+12:48:57 <caasih> 願聞其詳
+12:50:08 <pkmx> :t (\(a, b) -> (b, a)) :: (a, b) -> (b, a)
+12:50:10 <lambdabot> (a, b) -> (b, a)
+12:50:17 <pkmx> 我以為他是在說這兩個 (a, b)
+12:52:49 <caasih> 其實我不懂為何 jhe__ 要舉 swap 這個例子，但 (\f x -> f x) 的 type 他說得沒錯，
+12:53:23 <caasih> 且我猜他知道他說 (a -> b) -> a -> b 時的 a 和 b 跟他自己舉例的 a 和 b 是不同的東西
+12:54:19 <pkmx> 嗯嗯
+12:54:28 <caasih> 本來以為會看到 ((a, b) -> (b, a)) -> (a, b) -> (b, a) 的
+12:55:11 <pkmx> 我也在想為什麼不是這個
+12:55:36 <pkmx> :t \f x -> (f `asTypeOf` swap) x
+12:55:38 <lambdabot> ((a, b) -> (b, a)) -> (a, b) -> (b, a)
+12:58:05 <caasih> 哇，第一次知道 asTypeOf XD
+13:08:39 <jhe__> 他說 f 是 swap 的話＠＠
+13:08:49 <jhe__> x 就應該是 (a, b) 對吧？
+13:13:04 <caasih> 嗯嗯
+13:14:27 <jhe__> 這樣的話那一個才正確呀＠＠
+13:14:29 <jhe__> 還是 條件不同
+13:14:32 <jhe__> 都可以解釋呢？
+13:33:20 <caasih> jhe__: 都對？你把 (a, b) 換成 t ， (b, a) 換成 u ，就成了 (t -> u) -> t -> u 了
+13:37:47 <jhe__> 所以 type 歸 type , pattern 歸 pattern @@>
+13:37:48 <jhe__> ?
+13:39:42 <jhe__> 會這樣問是因為 我看 (\f x -> fst(f x))
+13:39:46 <jhe__> :t (\f x -> fst(f x))
+13:39:48 <lambdabot> (t -> (a, b)) -> t -> a
+13:40:03 <jhe__> (a, b) 直接被寫出來了＠＠
+13:46:24 <caasih> :t fst
+13:46:26 <lambdabot> (a, b) -> a
+13:48:45 <caasih> 如果不把 (a, b) 寫出來，只寫個... u 好了，那我就不知道 a 和 u 有關係了
+13:50:36 <caasih> 但剛剛的 ((a, b) -> (b, a)) -> (a, b) -> (b, a) ，不知道 (a, b) 和 (b, a) 是什麼 type 也沒有關係
+13:50:50 <jhe__> 因為是 tuple 內的交換嘛？
+13:51:51 <caasih> 交換或者做了別的，都是 (\f x -> f x) 中的 f 的工作，整個 (\f x -> f x) 根本不用知道 f 做了什麼
+13:53:17 <jhe__> 喔喔 了解
+13:58:47 <jhe__> 感覺跟這種不太一樣
+13:58:55 <jhe__> :t (\x y -> x)
+13:58:57 <lambdabot> t -> t1 -> t
+13:59:08 <jhe__> 這個就是單純的 a -> b -> a
+13:59:21 <jhe__> 好像跟上面那個例子理解方式不同？
+14:01:43 <caasih> a -> b -> a 的兩個 a type 一樣 ，就像 (t, u) -> t 的 t 也是一樣的 t ？
+14:02:43 <jhe__> 應該是吧  我的裡解釋這樣沒錯＠＠
+14:02:54 <jhe__> 所以我才說像是 function signature
+14:02:59 <caasih> 把 (\x y -> x) 寫成 (\x -> (\y -> x)) 有幫助嗎？
+14:03:38 <jhe__> 這個還挺好理解的
+14:03:43 <caasih> jhe__: 你之前慣用的語言是什麼啊？
+14:03:48 <jhe__> 可是 跟上面的 理解方式 感覺不太一樣
+14:03:51 <jhe__> 我寫 python
+14:04:14 <caasih> 喔喔...我是 js （慚愧
+14:04:23 <jhe__> 跟你剛剛解釋 (\f x -> f x x)
+14:04:30 <jhe__> 的感覺不太一樣
+14:04:32 <jhe__> ？
+14:04:59 <caasih> (\f x -> f x x) 也就是 (\f -> (\x -> f x x))
+14:05:05 <caasih> 怎麼樣的「感覺」？
+14:06:28 <jhe__> (\x -> \y -> x) 感覺挺直覺的
+14:06:39 <jhe__> 就好像是 一個 function 取兩的函數 回傳 後面那一個
+14:06:56 <jhe__> 可是 剛剛照你說的
+14:07:08 <jhe__> f 的 type 是 (b -> b -> a)
+14:07:21 <jhe__> 不是 單純一個 type 像是  a 或 b 等等
+14:08:12 <caasih> python 不能把 function 當參數嗎？
+14:09:28 <jhe__> 可以
+14:09:43 <caasih> 我覺得 Haskell 把 function 當參數時，可以靠 type 限制那個 function 一定要長某個特別的樣子
+14:09:48 <jhe__> 我的意思是 那我什麼時候要把它當 函數看
+14:09:54 <jhe__> 什麼時候當 單一參數看＠＠
+14:09:58 <jhe__> 有點搞不清楚
+14:11:08 <caasih> (b -> b -> a) -> b -> a 裡的 (b -> b -> a) 如果換成 u ，那就看不出來 u 和 b, a 的關係了
+14:13:02 <caasih> 把單一參數當成吃 0 個參數的函數看（？
+14:16:39 <jhe__> :t (\f x y -> f y x)
+14:16:41 <lambdabot> (t -> t1 -> t2) -> t1 -> t -> t2
+14:27:02 <jhe__> 我以為這個是 f :: c -> b -> a
+14:27:15 <jhe__> (c -> b -> a) -> c -> b -> a 這樣＠＠
+14:27:47 <jhe__> 跟他的有點反
+14:30:13 <caasih> 你調換了 x, y 的次序啊
+14:30:33 <caasih> 你後來給的 type 沒換
+14:31:07 <caasih> 這個沒換 14:27:15 <jhe__> (c -> b -> a) -> c -> b -> a 這樣＠＠
+14:31:25 <jhe__> 釐清一下
+14:31:54 <jhe__> 這邊的 x 是 b , y 是 c ?
+14:32:12 <jhe__> 我嘗試著照剛剛 (\f x -> f x x) 的範例寫的
+14:32:25 <caasih> x 是 c
+14:33:40 <caasih> * 物理移動
+14:38:46 <jhe__> 是從 前面先推出來的嘛？
+14:38:48 <jhe__> 我以為是從後面
+14:39:04 <jhe__> (f y x) 那個部份
+14:49:25 <caasih> 我不知道 lambdabot 骨子裡怎麼做的，只是提一種可能的推法
+14:50:01 <CindyLinz> 解方程式
+14:50:07 <CindyLinz> 所以沒有固定順序
+14:50:15 <CindyLinz> 總知就變出一個結果了.....
+14:57:09 <monochrom> 幾時把 f 當函數看? 答: 被迫把 f 當函數看時就是了.
+14:58:52 <monochrom> 怎樣算被迫? 答: 你見到 "f x" 時, f 不就是被迫做函數了嗎?
+14:59:14 <CindyLinz> 我覺得.. 把 Haskell 所有的東西都視為函數是個不錯的選擇..
+14:59:29 <CindyLinz> a = 3 是一個不用吃參數的函數
+14:59:33 <jhe__> ＠＠
+14:59:38 <jhe__> 是我理解錯誤嘛
+14:59:49 <CindyLinz> 我只是提供一種選擇而已 ^^|
+14:59:59 <CindyLinz> 如果選了這一個選擇, 你可以少一個煩惱
+15:00:09 <CindyLinz> 你不用再煩惱「什麼時候是函數」
+15:00:13 <jhe__> ghci 也是一樣
+15:00:14 <CindyLinz> 因為永遠都是 ^^|
+15:00:18 <jhe__> 給我這個
+15:00:22 <monochrom> 不, 型別有沒有 -> 很重要.
+15:00:38 <CindyLinz> monochrom: 就差在參數數量嘛.. 只要接受了 0 個參數.... XD
+15:02:11 <caasih> monochrom: 願聞其詳
+15:02:17 <jhe__> monochrom: 怎麼說 -> 很重要＠＠。
+15:02:31 <jhe__> 因為 lambda 表示嘛？
+15:02:37 <monochrom> 這只能轉換名目, 並沒有消除煩惱. 你始終還要分辨型別.
+15:03:21 <jhe__> 我以為只有 () 包起來的情況 才是 視為函數
+15:03:23 <jhe__> 看來我錯了
+15:03:36 <CindyLinz> jhe__: Haskell 的函數呼叫不是都可以不打括號嗎?
+15:03:46 <jhe__> 也是XDD
+15:03:57 <jhe__> 所以我更分不出來了
+15:04:25 <jhe__> 這種型別推導？(我不確定是否如此稱呼)
+15:04:30 <jhe__> 有一個專有名詞嘛？
+15:04:50 <monochrom> Bool 跟 ()->Bool 是不同型別, 這並不是把它們兩個都稱呼為函數就可以一筆勾消的.
+15:05:41 <CindyLinz> Bool 跟 () -> Bool 的確不一樣啊.. 就像 Int -> Bool 與 Char -> Char 也不一樣呀~
+15:05:50 <monochrom> 型別推導已是專有名詞
+15:06:38 <jhe__> 寫的人應該要了解嘛？
+15:06:49 <jhe__> 就是 推出來要跟 ghci 一樣之類的
+15:06:55 <CindyLinz> jhe__: 最好要....
+15:07:06 <CindyLinz> jhe__: ghc / ghci 的推導只是讓你偷懶的
+15:07:16 <monochrom> OK, 總之你見到 "f x" 字樣, f 的型別就被迫要有 ->
+15:07:32 <jhe__> 所以 5k4u10
+15:07:42 <jhe__> 這邊 f 跟 x 都不是單純 變數
+15:07:43 <monochrom> 剩下的就是解方程式.
+15:07:47 <jhe__> 有可能都是 function
+15:07:48 <jhe__> ?
+15:07:55 <CindyLinz> jhe__: 對..
+15:08:17 <CindyLinz> 從呼叫的樣子可以判斷有人一定要吃東西
+15:08:22 <CindyLinz> 但是看不出來它吃飽了沒有....
+15:08:34 <jhe__> 好難rrrrr
+15:08:41 <CindyLinz> 因為你看到他正在吃嘛 ^^|
+15:09:22 <CindyLinz> jhe__: 如果你學 Haskell 是想要寫東西來應用的話
+15:09:40 <CindyLinz> jhe__: 嗯, 也許.. 這個推導是怎麼進行的, 可以不用現在知道
+15:09:56 <CindyLinz> jhe__: 反正你自己應該會以自己的方式知道某個東西應該是什麼 type
+15:10:07 <jhe__> 我看了 一段時間 還是不知道怎麼產一個完整程式＠＠
+15:10:11 <jhe__> 慚愧
+15:10:11 <caasih> jhe__: haskellbook 前面第一章也特別先介紹 lambda calculus ，第二章甚至舉怎麼把 let 變成 lambda ，也許你會有興趣
+15:10:27 <CindyLinz> 當你覺得 ghc 推得很奇怪的時候, 你可以強力干預, 出手寫出你認為 type 應該要怎麼樣
+15:10:53 <jhe__> 我以為要符合他的才對 ...
+15:11:05 <jhe__> 畢竟它比較了解自己(？！
+15:11:33 <CindyLinz> jhe__: 你也許某個情境是, 你知道你想要用 Int -> Int.. 只是 GHC 不裀道你的目的是什麼, 它看程式碼的形狀, 以為是 a -> a
+15:11:41 <CindyLinz> 這沒有說誰是對的誰是錯的呀~
+15:11:52 <jhe__> 對 常常它會給我
+15:11:58 <jhe__> Num a -> a -> a
+15:12:07 <jhe__> 感覺他是想的比我多 XDD
+15:12:54 <CindyLinz> 可是他多想的部分又用不到 XD
+15:12:56 <jhe__> caasih: 好的 我會看看
+15:13:24 <CindyLinz> 你可以去標一下你心中的 type
+15:13:41 <CindyLinz> 然後再在旁邊加註解: -- GHC 你想太多了
+15:13:41 <jhe__> CindyLinz: 我怕是 因為我不夠了解它 才會出現奇歧義 XD
+15:14:30 <CindyLinz> jhe__: 心中要有 type..
+15:14:49 <CindyLinz> GHC 的 type inference 只能當偷懶用, 因為每個都手寫出來.. 嫌累 ^^|
+15:15:12 <jhe__> 不知道正式 應用的時候是怎樣＠＠
+15:16:29 <jhe__> caasih: 這個是要買書嘛？
+15:16:51 <monochrom> 憑感覺做, 一定難.
+15:16:51 <monochrom> 順著邏輯規矩做, 就沒有選擇, 就很易.
+15:16:55 <monochrom> 亦無須擔心它吃飽不. 你見到它吃幾多, 就寫幾多. 何必想太多? 算到甚麼就是甚麼. 不要想, 只要算.
+15:17:33 <jhe__> monochrom: 抓不到感覺 如履薄冰
+15:17:35 <CindyLinz> jhe__: 我覺得很熟很熟的情況就是, 你跟 GHC 的默契很好, 你知道偷懶到什麼程度 GHC 也不會亂掉.. 然後你考慮的是 type 要標到什麼程度, 可以讓別人或未來的你理解程式理解得比較快, 這跟程式能不能 run 的相關比較小了
+15:17:40 <caasih> jhe__: 我想說的是，先學一點 lambda calculus 有幫助 XD
+15:18:14 <kuanyui_hp> CindyLinz: 太可怕了...
+15:18:34 <CindyLinz> kuanyui_hp: 嗄? o.o
+15:20:15 <kuanyui_hp> 我之前都是自己寫type一直炸掉，把type移掉讓GHC猜反而可以跑orz #然後就放棄Haskell了
+15:20:25 <CindyLinz> jhe__: 這是一個實際應用, 而且是程式碼沒有經過規劃整理, 糊來糊去的寫法的樣貌.... # https://github.com/CindyLinz/GCryptDrive/blob/master/src/My/Crypt.hs
+15:20:48 <CindyLinz> jhe__: 裡面還有整段註解掉不跑的 code, 很糟糕的 coding style..
+15:20:53 <CindyLinz> 可以視為一種底限 XD
+15:21:03 <CindyLinz> 87分亂, 不能再亂了.... XDDD
+15:21:13 <monochrom> 如履薄冰是因為你給自己設下期限, 幾年幾月之前一定要學得可以寫實用程式. 然後發覺無法達標.
+15:22:43 <CindyLinz> kuanyui_hp: 我猜你只差一兩個關卡, 像是... 人群 不是 人, 之類的概念混到了而已?
+15:22:50 <CindyLinz> 白馬 不是 馬...
+15:23:56 <kuanyui_hp> 那時就...發現要把發現要把Haskell學到能拿來實際做些事情還得花很多很多心力
+15:24:25 <kuanyui_hp> 都還沒碰monad勒
+15:24:31 <monochrom> 我學的時候也不見得一學就曉從不犯錯, 但我的感覺不是如履薄冰, 而是探索未知世界真有趣. 這是因為我沒有限著自己要做到甚麼所謂目標, 我只是好奇做實驗.
+15:26:06 <CindyLinz> kuanyui_hp: 你 type 自己算的不會過, GHC 算才過的時候, 應該把那個案例拿出來討論的 ^^
+15:26:40 <kuanyui_hp> 探索未知我也覺得很有趣，但探索相當時間後還是無法拿來做一點實際應用我就覺得相當不有趣了...
+15:27:22 <monochrom> 然而正因為平常心才學得快學得穩, 結果還是比別人更快達到可應用的地步. 這是欲速則不達.
+15:27:25 <kuanyui_hp> C++我才學一個禮拜就能開始寫Qt了，覺得Haskell真是痛苦orz
+15:27:34 <CindyLinz> kuanyui_hp: C++ 就是上手快啊... (攤
+15:27:43 <kuanyui_hp> 原來是這樣啊orz
+15:27:44 <CindyLinz> (只有上手的部分快....)
+15:28:08 <CindyLinz> 越學越多就發現很多地方以前都在騙自己.....w
+15:28:37 <monochrom> python 也是超易上手, 後患無窮
+15:28:44 <kuanyui_hp> XD
+15:28:46 <CindyLinz> 後患... XD
+15:29:54 <kuanyui_hp> Python超易上手...我是不覺得，反而覺得Lisp還比較好上手一點，比Python更單純
+15:30:43 <kuanyui_hp> /me 雖然學來除了用在Emacs跟AutoCAD外沒啥屁用
+15:30:46 <monochrom> 學 Haskell 很需要冷靜邏輯, 甚至冷血.
+15:30:49 <CindyLinz> kuanyui_hp: 相對, 相對嘛.. ^^|
+15:30:59 <CindyLinz> kuanyui_hp: 沒有要比上手第一名啦 XDXD
+15:31:21 <kuanyui_hp> 我學Python有些概念花了不少時間 太笨orz
+15:32:00 <CindyLinz> kuanyui_hp: 其實是你初學的時候就發現了人家的後患...
+15:32:17 <CindyLinz> 看到不該看的東西 (誤
+15:32:35 <kuanyui_hp> CindyLinz: 沒那麼誇張吧，只是我真的不是那種學概念能學得很快的人
+15:33:06 <kuanyui_hp> 主要是學Python之前我完全不會OOP
+15:33:34 <CindyLinz> kuanyui_hp: 我不知道你說的是哪些概念嘛 ^^|  我知道有人是 indent 規則卡住...
+15:33:51 <CindyLinz> kuanyui_hp: 不會OOP! 清流啊.. QQ
+15:34:28 <kuanyui_hp> 一開始就...繼承、多重繼承、super()裡面那噁爛的參數、class跟instance那些
+15:34:45 <kuanyui_hp> 還有self
+15:35:28 <kuanyui_hp> CindyLinz: 因為第一個學的是Emacs Lisp...
+15:35:49 <CindyLinz> 學到後來會學到說多重繼承與深度繼承是 anti-pattern.....
+15:35:51 <monochrom> 啊, OOP 一點也不易. 我是由 Turbo Pascal 4 新增基本 OOP 開始學的.
+15:36:32 <kuanyui_hp> CindyLinz: PyQt跟Django裡面滿滿的多重繼承
+15:36:42 <CindyLinz> kuanyui_hp: XD
+15:36:48 <monochrom> 都廿多年前的事了!
+15:37:02 <CindyLinz> kuanyui_hp: Qt 可能不是 python 設計的架構 ^^|
+15:37:15 <CindyLinz> 雖然是別的語言, 但仍是 OOP...
+15:37:31 <CindyLinz> kuanyui_hp: 不過只要自己不維護, anti-pattern 也不用怕 XD
+15:37:33 <kuanyui_hp> 不過Django用更凶
+15:37:44 <CindyLinz> 只要不當 Django 的維護者就好了 XD
+15:38:14 <jhe__> 覺得 Haskell 拿來寫演算法很直覺
+15:38:20 <jhe__> 其他的就＠＠
+15:38:24 <monochrom> 哈哈只要自己不維護. 多邪惡 XD
+15:39:23 <CindyLinz> jhe__: 定義子語言也很棒
+15:42:44 <CindyLinz> jhe__: 方便定義子語言的意思是, 就可以隨手創造順手的 framework 了
+15:43:23 <CindyLinz> 這就是「程式 語言」的本質 ^^
+15:43:28 <jhe__> CindyLinz: 自定義 syntax sugar 嘛？
+15:44:27 <CindyLinz> jhe__: 可以只是個 Haskell 的子語言, 仍然是 Haskell, 可是在那個限定的空間裡, 講的是專門適合那個任務的用語
+15:44:50 <jhe__> 從來有有做過這種事＠＠
+15:44:56 <jhe__> 連一個語言 都還掌握不好的感覺
+15:44:59 <CindyLinz> 如果要完全獨立地定義語言, 工會比較大些.. 不過用 Haskell 的工還是比別的語言小
+15:45:04 <jhe__> 這種利用感覺 很高深
+15:46:38 <CindyLinz> jhe__: 例如這是我用來畫圖的.. # https://github.com/CindyLinz/Haskell-HVG/blob/master/test/Graph.hs
+15:47:22 <CindyLinz> 至於畫出來的圖...
+15:49:08 <CindyLinz> 圖在這 http://cindylinz.github.io/Haskell-HVG/sample.html
+15:49:39 <jhe__> CindyLinz: 很不錯呀 XDD
+15:50:15 <jhe__> 這邊看起來有點像 描述 圖的某些語言
+15:50:20 <jhe__> flow chart 那種
+15:50:25 <CindyLinz> 嗯嗯嗯
+15:51:19 <CindyLinz> 我覺得 Haskell 適合邏輯複雜, 或是邏輯很不確定 (老闆一直亂改) 的情況..
+15:51:39 <CindyLinz> (但不會特別適合細節複雜的程式)
+15:52:04 <jhe__> 我只知道 好像寫 compiler 的 有一定程度 會用 這個寫
+15:52:15 <CindyLinz> 因為最最複雜或是彈性的時候, 大絕招就是定義一個語言給你講.. 說! 你到底要什麼!?
+15:52:28 <kuanyui_hp> CindyLinz: 好奇神來也內部有用到Haskell嗎
+15:52:37 <CindyLinz> 有一點點
+15:52:49 <CindyLinz> 二人麻將裡面有用 Haskell 計算胡牌的牌面
+15:52:57 <kuanyui_hp> XD
+15:53:48 <CindyLinz> 而細節複雜的例子.. 像是 md5 的計算, 用 Haskell 就不會特別好寫了 # https://en.wikipedia.org/wiki/MD5#Pseudocode
+15:54:18 <CindyLinz> 裡面那什麼 i*5 如果不小心寫成 i*55.. Haskell 的 type system 是不會救你的.... ^^|
+15:54:53 <CindyLinz> 或是那個 K table..
+15:55:44 <CindyLinz> 我作那個畫圖的東西來用, 就是因為我一邊畫的時候, 一邊沒有想好我到底想畫什麼, 我是一邊畫一邊構思的....
+15:56:07 <CindyLinz> 所以我希望這個語言的組織順序與我思路的順序剛好一樣
+15:56:47 <CindyLinz> 我思路中比較肯定的部分可以比較不好改, 比較不確定的部分希望要很好改...
+15:59:47 <jhe__> 看來還是好多要學＠＠
+16:47:02 <caasih> jhe__: 莫急莫慌莫害怕 XD
+23:43:07 <monochrom> 其實 Haskell 順序是超彈性的. 你在第5行寫 f x = x + 1, 然後1000行後才補上 f :: Int -> Int, 沒問題!

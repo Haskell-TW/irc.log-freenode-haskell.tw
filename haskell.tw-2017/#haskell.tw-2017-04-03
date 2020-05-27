@@ -1,0 +1,94 @@
+00:48:11 <monochrom> 我要學生網上交功課時 (勁多 math 及圖), 好多學生都用拍照.
+01:02:32 <CindyLinz> 嗯而且畫出來應該很容易比 ASCII 好看 XD
+09:42:08 <abel-abel> 大家好，問一個問題啊。在GHci裏面輸入一個漢字字符串，輸出是這樣的：Prelude> "蘇軾" "\34311\36606"，有沒有辦法讓它輸出漢字呢？
+09:42:28 <monochrom> putStrLn
+11:18:58 <abel-abel> monochrom, 謝謝！是一個辦法，有別的方法麼？
+12:36:21 <CindyLinz> 還有 putStr
+12:58:53 <abel-abel> 我的意思是不用putStr之類的方法啊。
+13:09:33 <monochrom> 如果是在程式內, 相信你都接受要用 putStr, 你總不會預期 main = "蘇軾" 行得通吧?
+13:09:59 <monochrom> 所以我估你是問在 GHCi 內.
+13:10:26 <monochrom> 但 GHCi 是異數.
+13:12:01 <caasih> 畫圖好像不會比較快（會比較好懂是真的）...
+13:12:16 <caasih> 不知道當天有沒有白板可以借？
+13:12:55 <caasih> 場地現有的那塊似乎拿來紀錄別的事情，不能隨便擦掉 XD
+13:14:41 <monochrom> 如果你知道 Show 這 typeclass, GHCi 是盡量用它的, 然而 String 的 Show 會用 escape code, 及加引號, 並非直接輸出字串.
+13:14:46 <CindyLinz> 不知道可不可以把場地那塊拍照下來, 演講的時候就用.. 講完以後再依照照片畫回來...
+13:15:08 <caasih> 預覽 http://caasi.github.io/Talk-GMachine/#30
+13:15:29 <caasih> 有一步一步跑的感覺嗎 XD
+13:15:52 <caasih> CindyLinz: 場地那塊上畫的場地圖好像有用尺畫...
+13:18:10 <CindyLinz> caasih: 那就一定會有尺! XD
+13:18:44 <CindyLinz> 感覺不錯..
+13:19:06 <CindyLinz> 你原本想畫的就是這個?
+13:19:11 <CindyLinz> 那就不用改了 XDD
+13:20:15 <monochrom> 你很 ambitious, 講 G machine.
+13:21:59 <caasih> Ok 不用改 XD
+13:22:26 <caasih> monochrom: 沒搞懂怎麼運作不安心，但開始學才發現超過負荷
+13:22:49 <caasih> monochrom: 本來希望能了解 STG ，結果光 G-machine 就花了好多個月
+13:23:16 <caasih> 不知道哪時才能對 STG 有基本認識 XD
+13:23:46 <monochrom> 其實可以直接學 STG machine
+13:24:52 <monochrom> 我就係, 我沒有追究早過 STG 的東西.
+13:25:54 <monochrom> (其實有, 我學過 SECD machine, 但那是為純 lambda calculus, 不是為 Haskell)
+13:26:26 <monochrom> (而且 SECD machine 做的是 eager evaluation.)
+13:27:39 <monochrom> 相信直接學 STG machine 不會難過單學 G machine.
+13:29:26 <caasih> monochrom: scm 給的建議也是直接看 STG machine ，但知道這件事時，我已經看完 template instantiation ，正在看 G-machine 了
+13:30:36 <CindyLinz> 捨不得沈沒成本...
+13:30:50 <CindyLinz> 這樣註定會常常吃大虧的.....
+13:31:34 <monochrom> 成大事者不拘 sunk cost! :)
+13:31:37 <CindyLinz> 我覺得捨不得沈沒成本是一種普遍的天性
+13:31:48 <caasih> letoh 好像說他也看過 SECD machine 。這次看到演講講 FP history ， ISWIM 也是 Peter Landin
+13:31:54 <caasih> 看來遲早會看到 XD
+13:32:20 <CindyLinz> 不知道跟不願(對自己)承認錯誤的心理是不是有相關.. 我覺得有一點相關, 剛好也是普遍的天性 :p
+13:32:41 <caasih> 半途而廢的事情太多了，讓我把這件事做完嘛 XD
+13:33:01 <CindyLinz> 半途而廢不是問題
+13:33:08 <CindyLinz> 問題是決定廢棄的原因是什麼
+13:33:40 <CindyLinz> 你看, 我都支持大半輩子國民黨了.... (欸?
+13:33:40 <caasih> 我承認錯了喔，一開始好好看 STG 的話就不用繞路，但是承認了還是想做完
+13:33:56 <caasih> 做完了心裡比較舒坦
+13:34:08 <CindyLinz> 我也大半輩子擁護三民主義統一中國的.... (嘆
+13:34:44 <CindyLinz> 結果兩個我都放棄了.... (悠悠
+13:35:15 <caasih> 我小時候西潮跟異域兩書都看到哭啊，後來調整對世界的認知...
+13:35:51 <caasih> 發現會在意那時的人的苦難，就更該討厭國民黨才對
+13:36:07 <caasih> 這樣就不衝突了（握
+13:36:41 <caasih> 不對啦，怎麼會歪到 KMT 去...
+13:36:49 <CindyLinz> 我比較在意現在的國民黨.... XD
+13:37:17 <CindyLinz> 喔, 就是個走到半途, 然後要被而廢的東西... XD
+13:37:46 <caasih> 那你可以注意一下，國民黨的粉絲頁經營能力是不是上升了
+13:38:19 <CindyLinz> 王金平的粉絲頁也很厲害過啊
+13:38:37 <caasih> 根據敝公司前輩的推測，被新政府忽視的 SNS 經營者，開始流向藍營了
+13:39:08 <caasih> 我猜國民黨不會那麼快死，但不知道會變成怎樣
+13:39:37 <CindyLinz> 啊我沒有說他快死.. 你看新黨都能夠叫作沒死了 XD
+13:39:57 <CindyLinz> 可是就算你曾經支持他很多年, 也不該構成你繼續支持的理由
+13:39:58 <caasih> 然後商人就是商人，只要環境合適又有錢，沒有什麼不能做的
+13:40:10 <CindyLinz> 你如果繼續支持它, 應該要有別的理由, 這才是重點...
+13:40:20 <CindyLinz> 曾經支持過很久, 是不該在意的沈沒成本
+13:40:44 <caasih> 我想說的是，可以不支持、承認錯誤，但不代表要整個丟掉
+13:41:17 <caasih> 覺得對像我這種沒有好好學過 programming language 和 compiler 的人來說，
+13:41:22 <CindyLinz> 你要不要丟掉或是撿一部分來用要有別的理由, 要把已經支持很久這個理由完全丟掉
+13:41:47 <caasih> 看 G-machine 是有點幫助的，有補上一些洞
+13:42:38 <CindyLinz> 而且「已經支持很久」這個理由, 常是一個很強烈的不理性理由, 你自己不刻意壓制它的話, 沒有人(包括自己)都沒辦法用道理說服
+13:42:54 <CindyLinz> 我最後一句的雙重否定好像用錯了 XD
+13:42:59 <caasih> XDDD
+13:43:22 <CindyLinz> 然後如果你不第一步就刻意壓制它, 你會自己去生出理由來把決定合理化
+13:45:59 <caasih> 你壓住的東西不會哪天再跳出來嗎？
+13:46:19 <caasih> 還是說時間久了這個不理性理由會慢慢消失？（純好奇
+13:48:11 <CindyLinz> 壓住的東西?
+13:48:41 <CindyLinz> 我不是說要壓住 G-machine, 我是說壓住那個因為已經投入很多而造成作決定時情感上的偏斜 ^^|
+13:49:09 <caasih> 我講的也不是壓住 G-machine
+13:49:10 <CindyLinz> 它不是一個東西啊, 決定的時刻過了就過了.. 不過你下次作別的決定的時候還是要再壓制的
+13:49:49 <CindyLinz> 我覺得應該不會消失吧, 作這種決定應該每次都會很痛苦 XD
+13:50:00 <caasih> 把生出來的理由都拆掉，就只剩下「想看完」，這「想看完」的背後的動機，才是要壓制的...
+13:50:24 <caasih> 啊，的確，每次都很痛苦...
+13:50:31 <caasih> 那我的問題被解答了 XD
+13:51:16 <monochrom> 所以有些老人家有貯物癖. 年青時壓抑的非理性 sunk cost 情緒, 退休後發作出來. (誤)
+13:51:56 <caasih> monochrom: 有個朋友的父親就這樣啊，她跟她母親的應對之道是，常常搬家順便丟東西
+13:56:06 <CindyLinz> 我有遇過突然發病的老人家.. o.o
+13:56:28 <CindyLinz> 變化太快了, 感覺像是疾病而不是個性轉變.....
+15:03:00 <caasih> 我爺爺最後還會囤食物，可能是國共戰爭留下的陰影
+15:04:22 <CindyLinz> 最可怕的是腐敗了也不丟...
+15:04:44 <CindyLinz> 我遇到的是鄰居, 會從他家裡面臭到外面, 整個樓梯間都是 orz
+18:27:41 <abel-abel> monochrom, 原來如此，明白了。謝謝！
+21:09:44 <caasih> 囤起來還吃，身體一下子就壞掉了 :((((
+21:09:52 <caasih> 補上 let 和 letrec 的部分了
+21:09:58 <caasih> letrec 的例子是 Y
+21:10:10 <caasih> 還有 primitives 跟 case ... of XD
+21:55:00 <CindyLinz> 發病以後大概三四年就死了... 我不知道具體原因, 不過年紀很大再加上精神異常, 很快死掉的機會蠻大的..:Q

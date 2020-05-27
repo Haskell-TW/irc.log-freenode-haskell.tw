@@ -1,0 +1,10 @@
+02:21:27 <monochrom> 用 GHC Core 來理解或解釋 newtype 我認為不智.
+02:24:52 <monochrom> 習慣了事事尋實作, 會失去高階思想能力和想像力.
+02:26:55 <monochrom> micro-management 就是這樣形成的. 相信你不會喜歡被 micro-managed, 而且只有壞處. 放手和留餘地更明智.
+02:28:22 <monochrom> 理解程式語言, 可以分兩部份然後雙管齊下, 就是人稱 static semantics 和 dynamic semantics
+02:29:27 <monochrom> static semantics 主要講 static typing. dynamic semantics 主要講執行程式會發生甚麼事.
+02:35:13 <monochrom> newtype 的 static semantics 就是獲得一個型別, 與其他型別不等, 甚至與所包型別不等. (這方面與 data 類同, 除了 newtype 限制 單constructor.)
+02:42:26 <monochrom> 而 dynamic semantics 則說它的 data constructor 如同不存在. 具體就是 第(k)條 case N v of { N p -> e; _ -> e' } 如同 case v of { p -> e; _ -> e' }, 和第(l)條 case ⊥ of { N p -> e; ... } 如同 case ⊥ of { p -> e }
+02:43:05 <monochrom> 兩條規則在說, 見N就當它無到.
+02:43:37 <monochrom> 所以這方面就不類同 data 了
+02:51:28 <monochrom> 總結來說 newtype 靜態上給你新型別, 動態上運算仍是舊運算.

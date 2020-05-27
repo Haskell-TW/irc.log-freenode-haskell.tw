@@ -1,0 +1,55 @@
+02:14:06 <CindyLinz> JVM in TypeScript... orz # https://github.com/int3/doppio
+02:15:21 <letoh> 會不會有人用 (alt)js 搞個 dalvik 以後，整個 android 搬到 nodejs 上跑?
+02:20:27 <CindyLinz> 這樣有... 降低穩定性的好處? orz
+02:20:50 <letoh> 大概吧XD
+06:48:38 <favonia> CindyLinz: 這樣子就有 jpu 出現啦---javascript process unit
+09:00:07 <suhorng1> https://github.com/ekmett/js-parsers/blob/master/parsers.js 竟然是js
+09:03:05 <monochrom> 它的 readme 不是開宗明義說: 給 javascript 用嗎?
+09:03:39 <suhorng1> 對阿對阿
+09:05:41 <monochrom> 其實, 可以說 "parser combinators for javascript" 模梭兩可. 第一可: 用來讀 javascript. 第二可: 用在 javascript 內.
+09:06:49 <monochrom> "for" 字一向都很多問題 :)
+09:07:10 <suhorng1> 也是這樣說啦XD
+09:07:57 <suhorng1> 是想說, 我這學期修了編譯器, 上課講 LL, LR 之類的, 講 LL 時倒是完全沒提到有 parser combinator 這種好用的東西XD 很可惜
+09:08:59 <monochrom> 教師從沒想過 combinator, 或認為講了也沒學生明白
+09:10:14 <monochrom> combinator 這概念需要很強的程式語言才成事. 例如, 用 BASIC 時 combinator 是妄想
+09:10:25 <suhorng1> 真難過
+09:10:42 <suhorng1> 好吧..我們從頭到尾的示範都用 C =_=||| 沒什麼好講的
+09:10:50 <monochrom> 未見過函式語言就跟本不會明 combinator
+09:11:40 <suhorng1> 想說 C++ 至少也有用起來很像的 boost::spirit
+09:11:53 <monochrom> 當然了, C 比 BASIC 好些 :)
+09:14:12 <suhorng1> 裡面講的一些東西感覺就是比較針對 C 實作的問題XD
+09:15:36 <suhorng1> 助教給的程式還手寫vector XDD
+09:18:28 <monochrom> 分得出重點與末節的人有福了
+09:33:48 <suhorng1> 好難過, Appel 的 Modern Compiler Implementation in C, in Java 都有進口代理, 唯獨 in ML 沒有(兩倍價格...)
+09:36:55 <monochrom> 很久以前趁書局不知何解有, 價錢又不貴, 買了 :)
+09:37:15 <monochrom> 不過, 畢竟是加拿大
+09:38:37 <suhorng1> 真的是書局部知道為何有 XD
+09:38:50 <monochrom> 又不過, 加拿大都有弊處. 有一年, 加元對美元甚弱, 書店就大肆加價. 之後, 沒有怎樣減.
+09:39:38 <monochrom> 美元$10 的書賣加元 $15 都試過
+09:43:07 <monochrom> 更加離奇的是, Andrew Gordon 的博士論文, functional programming and input/output, 都在連鎖書店找到
+09:43:51 <petercommand> monochrom: 一般書店?
+09:44:09 <monochrom> (也是馬上買了. 竟讓我碰到, 簡直是天意, 天意不可違!)
+09:44:32 <monochrom> 是呀! 加拿大的連鎖書店 Chapters
+09:45:48 <monochrom> 當然不會每間分店都有. 應該是只一間分店有, 只有一本, 給我遇到了. 天意!
+09:46:46 <suhorng1> 好神奇
+09:47:37 <monochrom> Chapters 是舊名. 現叫 Indigo, 因為轉老闆. 但網站保留舊名, 叫 chapters.indigo.ca
+09:48:02 <suhorng1> (!)
+09:54:33 <monochrom> 我想, 有得解的. 那是2000年左右, 互聯網股泡沫時. 所以, 書店也認為所有電腦書, 不分青紅皀白都有市.
+09:56:17 <monochrom> 事實證明的確有市, 就是我 :)
+10:00:01 <monochrom> 嘩, 即使在 amazon.com, Appel 的 in ML 都很貴. 租都要 us$35, 買就要 us$62. 而且只是軟皮
+10:01:13 <monochrom> 咦, 原來我那時買都貴, cdn$77, 不過我有硬皮 XD
+10:01:34 <suhorng1> in Java也很貴？
+10:01:47 <monochrom> 讓我看看
+10:01:47 <suhorng1> 國際版的才比較便宜..
+10:03:48 <monochrom> in Java 硬皮 us$76, 找不到軟皮.
+10:06:05 <monochrom> 啊, 有第三者在 amazon 寄賣軟皮, 可以低到 us$26
+10:06:15 <suhorng1> 喔喔
+10:06:39 <suhorng1> java還是比較人 QQ
+10:07:22 <suhorng1> 哈哈, amazon在 in ML 書下方推薦的：「Frequently Bought Together: ..in ML + Compiling with Continuations」
+10:08:00 <monochrom> continuation 簡直是 Appel 看家本領啦
+10:15:06 <monochrom> 幾時有 in javascript 呢, 那就功德完滿了 XD
+10:15:27 <monochrom> 呀, 圓滿!
+10:15:51 <monochrom> (死啦, 中文退步了)
+10:18:04 <monochrom> 有了! "compiler implementation in javascript with continuations" 會是驚世駭作! XD
+10:18:13 <suhorng1> wwwwww
+10:18:30 <suhorng1> 把 continuations 改成 callbacks (誤)

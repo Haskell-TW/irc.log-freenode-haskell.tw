@@ -1,0 +1,163 @@
+00:04:49 <godfat> \me 立志背 power of 0
+00:05:30 <c9sloud> Power of 1 好像也不賴
+00:05:43 <godfat> XDD 0 與 1 最好了
+00:06:23 <c9sloud> 0 與 1 的我最愛了
+00:06:30 <c9sloud> XDD
+00:06:39 <godfat> 這世界上有 10 種人... XD
+00:07:02 <c9sloud> XDDD
+00:29:22 <hychen> godfat++
+00:49:38 <darkx> 是說我會背 power of 2 到 268435456 耶 ._.
+00:50:25 <darkx> 是說我學 C 也是從 K&R 碰，然後後來就去念 ANSI C spec 惹 XDD
+01:02:38 <c9sloud> r3 rpm 上了！
+01:02:42 <c9sloud> https://build.opensuse.org/package/show/home:bluebat/libr3
+01:42:11 <c9sloud> 請問與 GPL 無直係血緣關係之 library 需要開放程式碼嗎？
+01:42:46 <godfat> 什麼意思？跟 GPL 有什麼樣的關係？
+01:43:16 <c9sloud> 譬如說我某 app A 用了 GPL library B, 跟 closed source library C
+01:43:32 <c9sloud> A 要開放我理解
+01:43:57 <c9sloud> 那 C 需要連帶開放嗎？
+01:44:16 <godfat> 我「猜」如果 B 是 GPL, 則 C 不用開放，但如果 B 是 AGPL, 則 C 要
+01:44:18 <c9sloud> 還是只要能 linking 即可
+01:45:15 <c9sloud> 我記得 GPL 要讓下游可以 re distribute
+01:46:16 <c9sloud> 那如果我 open A 但全部都 static linking 是否可行？
+01:47:14 <godfat> 正在快速翻過看看能不能找到相關字句，不過是 GPL2 還是 3? XD
+01:48:19 <c9sloud>  GPL3
+01:48:30 <c9sloud> Or LGPL
+01:48:46 <godfat> LGPL 也有分 2 或 3 呀 XD
+01:48:59 <CindyLinz> 3 > 2 啦!
+01:49:03 <CindyLinz> > 3 > 2
+01:49:04 <c9sloud> 某 Q 開頭 SDK....QQ
+01:49:05 <lambdabot>  True
+01:49:20 <c9sloud> lambdabot: so true
+01:49:21 <godfat> Qt~
+01:49:36 <CindyLinz> > z > b
+01:49:38 <lambdabot>  True
+01:49:46 <CindyLinz> > z < b
+01:49:48 <c9sloud> XDDD
+01:49:48 <lambdabot>  False
+01:49:51 <CindyLinz> > z
+01:49:52 <lambdabot>  z
+01:50:00 <CindyLinz> 他到底比了什麼? 囧
+01:50:04 <c9sloud> > zz
+01:50:06 <lambdabot>  Not in scope: ‘zz’
+01:50:06 <lambdabot>  Perhaps you meant ‘z’ (imported from Debug.SimpleReflect)
+01:50:11 <CindyLinz> @type z
+01:50:12 <godfat> > show z
+01:50:13 <lambdabot> Expr
+01:50:14 <lambdabot>  "z"
+01:50:19 <c9sloud> > w
+01:50:21 <lambdabot>  w
+01:50:32 <godfat> > cycle w
+01:50:33 <CindyLinz> @info Expr
+01:50:33 <lambdabot>  Couldn't match expected type ‘[a]’
+01:50:33 <lambdabot>              with actual type ‘Debug.SimpleReflect.Expr.Expr’
+01:50:33 <lambdabot> Expr
+01:50:35 <c9sloud> > show GPL
+01:50:37 <lambdabot>  Not in scope: data constructor ‘GPL’
+01:50:42 <godfat> > cycle [w]
+01:50:43 <lambdabot>  [w,w,w,w,w,w,w,w,w,w,w,w,w,w,w,w,w,w,w,w,w,w,w,w,w,w,w,w,w,w,w,w,w,w,w,w,w,w...
+01:50:55 <c9sloud> Not in scope~~~ oh yeahh
+01:52:04 <c9sloud> 目前看起來 Apple 比 Qt 好搞多了
+01:52:31 <c9sloud> Qt 好貴
+01:53:24 <c9sloud> License 每個月要燒近萬
+01:54:57 <c9sloud> 看來還是乖乖學 Windows App 開發
+01:56:17 <godfat> 我們換個角度想好了... 假設你不是 C 的作者，那你當然無從 distribute C source. 所以問題或許可以換成，GPL 允許我同時使用其他 closed source library 嗎？
+01:57:30 <godfat> 我想起之前一個避開 GPL 的問題，就是讓使用者自己 link...
+02:00:47 <c9sloud> LGPL 可以 close source and dynamic linking
+02:01:07 <godfat> 對，但 GPL 不行
+02:01:16 <c9sloud> Yeah
+02:01:53 <godfat> 所以才說避開 GPL 的其中一個取巧的方式不是開發者 link, 是由使用者 link, 這樣雖然違反 gpl, 但不是開發者的責任.. XD
+02:02:44 <c9sloud> 但這樣難賣 XD 說明書還要教 user linking CDDDDD
+02:03:18 <godfat> 是，不然大家都這樣做，GPL 就要想辦法對付這招了我想 XD
+02:05:34 <godfat> ok, 根據這個，答案是不行，除非你的 closed source 是透過某種 standard interface, 例如給別人做外掛用的介面，然後別人的外掛可以不用 open source
+02:05:35 <godfat> http://stackoverflow.com/questions/528931/using-closed-source-api-in-a-gpl-application
+02:06:30 <godfat> 這樣真的滿嚴格的...
+02:08:36 <CindyLinz> c9sloud: 你乾脆一次放 N 種, 讓使用的人自己決定想用哪一種吧
+02:08:54 <CindyLinz> c9sloud: 看起來你並沒有非常介意別人怎麼用, 只擔心不能用?
+02:14:54 <c9sloud> 因為我是打算做 A 也做 C...
+02:15:37 <c9sloud> 算了還是去學 visual c++ 好了 XD
+02:16:08 <godfat> 不過我記得 Qt 改成 LGPL 了？
+02:16:46 <c9sloud> 恩恩但是不能 static linking...
+02:17:04 <godfat> dynamic linking 可以的話何不就 dynamic linking?
+02:17:21 <c9sloud> 最主要還是想 static linking
+02:18:14 <c9sloud> 我再思考看看好了
+02:19:04 <godfat> 根據我很多年前用 Qt 的經驗，寫 GUI 我不會想用別套 XD
+02:25:05 <c9sloud> 對... QQ
+02:28:41 <CindyLinz> godfat: Qt 這麼棒!?
+02:29:15 <godfat> 其實我也不會覺得說是 Qt 超棒，而是其他的都好爛... =_=...
+02:31:09 <godfat> 其中一個經驗是，那時候我想改一個 button 的行為，其他 toolkit 我文件看半天也不知道怎麼弄。 Qt 文件相對清楚，而且我跳下去看 source 就很快弄出來了 XD
+02:31:14 <CindyLinz> godfat: 差不多意思...ww
+02:31:29 <CindyLinz> godfat: 可是 Qt 的 license 聽起來很麻煩? orz
+02:32:00 <godfat> 不過也有人不喜歡 Qt 因為 Qt 其實透過 qmake 做了一些比較特別的 macro 手腳
+02:32:19 <godfat> 我記得已經放寬了，以前就是 GPL 或貴森森
+02:32:20 <CindyLinz> godfat: 那你會想 fork 一個類似 Qt api 介面的東西嗎?
+02:32:35 <godfat> 工程有點浩大... XD
+02:32:52 <CindyLinz> ← 推坑失敗
+02:33:09 <godfat> XDDDD 這坑有點太大，需要先填一點
+03:54:39 <monochrom> 我覺得 gtk 沒甚麼不好. 其實是因為 gtk2hs 好. :)
+08:46:58 <c9sloud> 寫一個類 Qt 的東西...工程不是有點浩大而已吧 XDDDDD
+08:47:35 <c9sloud> 不過 Qt 寫起來真的很乾淨.. 我是 2007 年 try 的
+08:49:04 <c9sloud> http://cms.mcuapps.com/devscenes/ds0001/ 這篇不錯
+08:50:56 <letoh> mcuapps blog 好久沒新文章了
+08:51:20 <letoh> 唔  舊文章都不見了XD
+10:02:56 <c9sloud> 做類 Qt 的東西.. 第一關是 C++ 怎麼包 Objective-C 寫的 Cocoa 或 CoreFoundation ?
+11:36:13 <c9sloud> wxWidget 不只是 LGPL, 而且還有 exceptions
+11:36:47 <c9sloud> 2. The exception is that you may use, copy, link, modify and distribute
+11:36:47 <c9sloud> under your own terms, binary object code versions of works based on the
+11:36:47 <c9sloud> Library.
+11:37:00 <c9sloud> 只是還不知道好不好用...
+11:37:03 <c9sloud> 有人有用過嗎
+11:37:59 <c9sloud> http://en.wikipedia.org/wiki/Category:Software_that_uses_wxWidgets
+11:38:32 <c9sloud> http://en.wikipedia.org/wiki/Category:Software_that_uses_Qt 好像可以參考一下 :p
+11:44:40 <mno2> reactive banan 也是用 wxWidgets 當 demo
+11:44:43 <mno2> banana
+12:10:34 <c9sloud> #j rtos
+12:30:24 <cataska> wxWidget 源碼長的像 MFC, 還是不要用了吧
+12:32:44 <c9sloud> 看來最好的 technical solution 還是 Qt... 但 Dynamic linking 做 distribution 的話就得寫 installer script 了 qq
+13:58:21 <mno2> 寫 installer script 可能比寫 MFC 要好 xD
+15:50:54 <c9sloud> 恩 XD 好久不見得 NSIS Script
+15:59:37 <whitglint> 一個還滿優雅的 C Web Framework http://www.mcuapps.com//blog/2012/06/19/an-elegant-c-web-framework/
+16:01:20 <whitglint> 優雅是文章標題，不是我說的喔
+16:02:49 <whitglint> c9sloud: Qt 有跨 OS X，包 Cocoa 應該沒問題？
+16:03:25 <c9sloud> 恩恩對 Qt 有跨 OS X 我知道
+16:03:27 <CindyLinz> fork 一個 Qt 介面, 然後輸出到 html/js/css 的, 就也可以跨平台了? XD
+16:03:28 <whitglint> cataska: 我都跟朋友說 wxWidgets 是跨平台的 MFC
+16:03:29 <c9sloud> 不過是怎麼做到的
+16:03:33 <c9sloud> 真神祕...
+16:03:47 <c9sloud> 因為 Cocoa 幾乎都是 Objective-C
+16:04:09 <whitglint> 也許有用 Objective-C++
+16:05:37 <aksatac_> whitglint: MFC 本身就是罪惡
+16:05:55 <CindyLinz> 那 KFC.. (亂)
+16:06:10 <whitglint> aksatac_: MFC 我不屑用...
+16:06:37 <aksatac_> whitglint: 讚！
+16:06:52 <whitglint> 很少用 windows only 的東西了
+16:06:55 <CindyLinz> whitglint: 想當年, 跟 IDE 整合在一起用 wizard 自動接好 handler 什麼的還蠻炫的啊 ^^
+16:07:29 <whitglint> CindyLinz: 用過 vb6 的話 vc6 還用得下？
+16:07:45 <aksatac_> 一堆巨集什麼的最討厭了
+16:07:55 <CindyLinz> aksatac_: 別看不該看的地方嘛 XDXD
+16:08:12 <CindyLinz> whitglint: 沒有用 VB6.. QQ
+16:09:01 <aksatac_> CindyLinz: 都是侯捷害的 XDD
+16:09:35 <whitglint> 侯捷的書我拒買，無法接受大陸用語
+16:10:17 <whitglint> 表面上是繁體字但都是大陸用語
+16:10:24 <CindyLinz> 唔.. 原來筆名用兩個字, 可能也是為了大陸市場 @@"
+16:13:26 <whitglint> Qt static linking 就要花錢啦
+16:14:36 <whitglint> qt quick 有人用過嗎？
+16:23:01 <c9sloud> 沒有 XD
+16:23:22 <c9sloud> 我是七年前寫 Qt XD 年代久遠
+16:23:24 <c9sloud> 早忘了
+16:24:30 <c9sloud> http://www.qtcentre.org/wiki/index.php?title=Deploying_Qt_Applications
+16:26:25 <whitglint> 我兩年前，用 Qt 4 覺得還不錯
+16:27:02 <c9sloud> 看起來 Windows 還是要寫 installer
+16:27:03 <whitglint> 雖然還不能在元件上面點兩下就打 code
+16:27:19 <whitglint> 也可以把 dll 和 exe 放在同一目錄
+16:27:23 <c9sloud> 我目前 QML 時代的東西只有看過沒真的用過
+16:27:26 <c9sloud> yeah
+16:27:39 <c9sloud> WIndows 會自動去看.. 但這樣感覺蠻寒酸的 XD
+16:27:40 <whitglint> 就變成綠色免安裝版
+16:28:12 <CindyLinz> 打包成病毒, 這樣就不用手動下載安裝了..
+16:28:36 <c9sloud> XDDD
+16:30:30 <aksatac_> 用過 QML
+16:52:52 <mno2> 只用過 SML (大誤)
+16:54:55 <mno2> CindyLinz: 好聽一點叫做一鍵 root, lol
+16:57:01 <CindyLinz> XD
+21:24:35 <CindyLinz> plhaskell # https://github.com/ocharles/plhaskell
+21:24:51 <CindyLinz> 用 haskell 寫 postgres stored procedure

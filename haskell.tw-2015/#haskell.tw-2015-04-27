@@ -1,0 +1,47 @@
+11:01:24 <caasihuang> CindyLinz: 聽演講看到這個 https://github.com/damelang/nile ，想起你的 CanvasDesigner #DSL?
+11:21:30 <CindyLinz> (Y)
+11:26:12 <CindyLinz> caasihuang: 可是我是隨手亂寫的, 這個看起來好認真 XD
+11:27:51 <caasihuang> 那演講中，說該作者是和身為數學老師的母親一起做這個的 XD
+11:28:48 <caasihuang> * 正在找時間點
+11:32:09 <caasihuang> CindyLinz: https://youtu.be/ubaX1Smg6pY?t=3173 但是講到他媽的那段，在同材料的另外一場演講，那個時間沒有連結
+11:34:09 <caasihuang> 這個 http://www.tele-task.de/archive/video/flash/14029/ ，應該在後四分之一，播放器難用
+11:35:08 <CindyLinz> 看起來像是實用考量的語言, 為什麼要用 unicode 符號呢.. /_\
+20:52:00 <mno2> http://stackoverflow.com/questions/22116363/what-is-the-purpose-of-data-proxy
+20:52:43 <mno2> 我還是不是很懂 Data.Proxy 的用處，感覺配合 PolyKind 才比較有用處一點啊
+20:57:42 <CindyLinz> 覺得就是為了配合 PolyKind 用的呀..
+20:58:26 <CindyLinz> 跟有些地方設計了一個無用參數放 undefined 來當 type hint 有點像的感覺
+21:14:27 <mno2> 可是感覺 PolyKind 前時代就有了耶
+21:15:02 <mno2> 是說拿來讓 Tagged 好看一點也怪怪的
+21:17:37 <CindyLinz> 好看一點的 undefined.. XD
+21:21:42 <suhorngM_> mno2: 我覺得 existenetial type 那個有比較簡單的解釋 XD
+21:23:17 <suhorngM_> 我的想法是參照 http://flolac.iis.sinica.edu.tw/flolac12/zh-tw/logic.html lecture 1 裡面 exists quantifier 的演繹規則
+21:23:27 <mno2> 我覺得目前自己想像力還是太過貧乏，就算有這些 type level literals 我還是想不太到實際工程上的應用，直覺沒鍛鍊出來
+21:24:22 <suhorngM_> 以及我們對於 abstract type 的要求, 會有一個 provider 跟一個 consumer
+21:25:30 <suhorngM_> 他們之間藉由一個介面溝通, 這個介面的 type 就是∃ t. φ(t)
+21:25:36 <mno2> 是 51 頁嗎？
+21:25:46 <suhorngM_> 沒錯
+21:26:51 <suhorngM_> 然後, 提供 instance 的 provider 就需要一個函數 phi(SOME_TRUE_TYPE) → ∃t. phi(t)
+21:27:20 <suhorngM_> 而使用這個 abstract type 的使用者因為必須獨立於實作 (只能知道 ∃t. phi(t) 這個介面)
+21:27:51 <suhorngM_> 因此實際上就是 polymorphic in t, i.e. ∀t. phi(t) → r
+21:28:41 <suhorngM_> 而讓 "使用者" 去使用實際上這個 ∃t. phi(t)  物件的函數就會變成了
+21:30:29 <suhorngM_> open :(∃t. phi(t)) → ∀r. (∀t. phi(t) → r) → r
+21:31:14 <suhorngM_> 當然這樣弄成一個 open 函數(而不是直接給一個
+21:31:41 <suhorngM_> 直接給一個 ∀t. phi(t) → r 還有原因, 因為要保證 r 不能去參考到 t
+21:32:00 <suhorngM_> open 的型別中 r 就真的保證了不能去參考到 t, 因為 t 的 scope 在裡面
+21:33:38 <suhorngM_> 阿, http://www.cs.cmu.edu/~rwh/plbook/book.pdf 的 21.2-21.4 也是講這個 (p.186-)
+21:37:07 <mno2> 我覺得這個方向的 encoding 我可以理解，但是反過來這個 encoding 有沒有包進 existential 不具有的能力這個部分我想不太清楚。甚至我不太確定在邏輯中這樣想是不是對的。一般來說證明不都是要兩個方向嗎？
+21:44:58 <suhorngM_> 不太理解最後一句 "證明兩個方向" 指什麼, 我也不確定這樣邏輯上對不對, 不過我這邊提的 provider 的那個函數, 跟 open 函數直接對應到 p.51 的兩條 deduction rule
+21:46:35 <mno2> 就是一般來說要證明等價關係，不是要證明包含跟被包含
+21:46:45 <mno2> 我覺得這樣的直覺好像只有一邊
+21:47:33 <mno2> 但我不確定我以上的想法是不是對的，因為我們是在探討邏輯這個 meta subject，一般證明上的想法這樣套嗎？
+21:48:22 <mno2> 因為我總覺得這樣是 encode 到 higher rank 沒錯，但我不知道這個 encoding 會不會有其他東西也可以這樣 encode ?
+21:48:36 <mno2> 但他又不是 existential
+21:49:41 <mno2> 沒有去上過 FLOLAC 就基礎比較差 xD
+21:51:10 <suhorngM_> 喔~ 我懂了 這裡是討論這樣 encode 有沒有好好的 "符合" 那兩條規則, 確實之前沒想到這問題
+21:55:34 <mno2> 不過如果只是要用 higher rank 來實作 existential 好像這樣一邊就夠了？
+21:55:48 <mno2> 雖然 ghc 好像不是這樣實作
+22:12:41 <suhorngM_> 唔wwww 你這樣一講我突然又被說服了
+22:13:25 <suhorngM_> 唔 好像有不對 XD 不能只證一邊
+22:14:29 <suhorngM_> 描述清楚的話, 我們要問的應該就是說, 是否存在 System F 中的 term, e, 使得 e : ∀r. (∀t. phi(t) → r) → r
+22:15:07 <suhorngM_> 但是不存在 (exist type 的那個系統) 中的 term, e', 滿足 [[ e' ]] = e
+22:15:13 <suhorngM_> 阿~ 這樣講也還是不對XD

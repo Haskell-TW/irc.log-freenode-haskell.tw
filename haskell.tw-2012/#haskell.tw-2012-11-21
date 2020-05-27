@@ -1,0 +1,7 @@
+00:10:57 <CindyLinz> MnO2: 哎呀~ 這份 Design Pattern 的 pdf 是 12頁投影片, 超簡略
+00:11:46 <CindyLinz> 不無小補啦 XD
+00:11:50 <CindyLinz> MnO2: 還是謝謝 :p
+21:42:20 <b4283> "When the R7RS Scheme process is complete, the relative sizes in the Lisp world will be R5RS < R7RS-small < R6RS < Common Lisp < R7RS-large, but the standard libraries of R7RS-large will be optional for conformance rather than mandatory, so Common Lisp may still be larger in practice."
+21:42:37 <b4283> r7rs-large 會比 clisp 還大！
+21:49:17 <letoh> 有沒有 r7rs-tiny 或 r7rs-embedded XD
+21:52:41 <b4283> small 很小了啦 XD

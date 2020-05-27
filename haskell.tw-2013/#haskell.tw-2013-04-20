@@ -1,0 +1,217 @@
+00:11:00 <CindyLinz> 不會 ._.
+00:12:57 <CindyLinz> 欸...
+00:13:16 <CindyLinz> 你 let f = ... 裡面的 k 和 f ( \k -> k 5 ) 的 k 是不一樣的東西欸
+00:13:34 <CindyLinz> let f 裡面的 k = apply 時的 (\k -> k 5)
+00:13:57 <suhorng> 什麼!!!!
+00:14:08 <suhorng> 竟然不一樣!?
+00:14:15 <CindyLinz> apply 時, 整個 (\k -> k 5) 是傳給 f 的參數啊
+00:14:22 <suhorng> 對
+00:14:36 <CindyLinz> 那就是 let f 裡面的 k 了
+00:15:07 <CindyLinz> 所以 (\k -> k 5) 的 k 可以放 id 的話, 就通了
+00:16:16 <CindyLinz> 你可以換個變數名嗎, 頭好痛 XD
+00:16:29 <suhorng> 前面那樣 let f = .. 後 :t f 看起來的 type 也是 ((forall a. a -> a) -> r) -> r 的說..
+00:16:42 <suhorng> 重弄變數名好了XDD
+00:17:46 <CindyLinz> 那就是 (\k -> k 5) 要能夠 :: (forall a. a -> a) -> r
+00:18:59 <CindyLinz> 然後 k :: a -> a, k 5 :: r   => a === r === Int
+00:20:06 <suhorng> 嗯...
+00:22:13 <suhorng> 好怪XD 這樣到底是在哪裡把 forall 丟掉的...
+00:22:31 <suhorng> f(\k' -> k' 5) 可以過, 不過分開寫就沒辦法了
+00:24:39 <CindyLinz> 怎樣的分開寫?
+00:26:19 <suhorng> let return5 = \k' -> k' 5 之後 f return5 過不了 type check
+00:28:21 <CindyLinz> 那 let return5 = \k' -> k' 5 :: (forall a. a -> a) -> Int 可以嗎? @@"
+00:29:54 <suhorng> 對耶...
+00:30:19 <suhorng> 嗯 不過為什麼這個會 type check...
+00:30:31 <CindyLinz> 記得 ghc 拿 forall 戳記作為不用 Hindley-Milner 的標示
+00:31:13 <CindyLinz> 但是沒有很清楚確切規則.. 只是想說遇到這種像是 Hindley-Milner 限制的地方, 加有機會過 ^^|
+00:31:14 <suhorng> 好神秘噢明明 k' 就用在 k' 5 為什麼這還會過啦Q__Q
+00:32:34 <CindyLinz> a -> a 和 forall a. a -> a 都可以用在 k' 5 呀
+00:32:54 <suhorng> 對耶 Orz
+00:37:59 <suhorng> 提到這個是上次看 yinwang 的 A Fresh View at Type Inference 提到的 Gen_λ 一直想不通的地方
+00:39:05 <suhorng> 在想說會不會有什麼程式在 Gen_λ 下 untypable 但是 HM typable...但是這樣感覺不太會@@
+00:39:23 <CindyLinz> 嗯, 後者是 superset
+00:39:40 <CindyLinz> 但有機會 HM 解得出來, Gen 版 compiler 跑不完...
+00:40:07 <CindyLinz> GHC 是說你開了這個東東以後, 萬一跑不完... 是你的事
+00:40:19 <suhorng> XDDD
+00:40:29 <CindyLinz> 不過它另外又有個 heuristic 給你設限說最多遞迴幾層
+00:40:39 <CindyLinz> 那個層數內找不到解, 就放棄當失敗
+00:42:57 <CindyLinz> 我記得好像有印象說, 只要 top level 函數都有人工寫出 type 的話, 就一定都解得出來的樣子
+00:43:15 <suhorng> 那條件還滿寬的....
+00:44:10 <CindyLinz> 不是非常肯定.. 不過我是覺得除了那些作理論的人去刻意循找 corner case, 我們一般應用不太容易遇到吧?
+00:44:44 <CindyLinz> 就像雖然知道 max-flow 最基本的作法的 worst case 是 O(VEE), 但我從來就不知道這種 case 要怎麼造.. @@"
+00:45:17 <suhorng> 而且在寫函數的時候把 top level 的 type 寫出來感覺比較好XD
+00:45:27 <CindyLinz> 沒寫會被 GHC warning
+00:45:52 <suhorng> !! 是開了什麼 warning 選項嗎
+00:46:21 <CindyLinz> 有可能.. 我都找人家的 .cabal 檔來用, 可能不小心就抄到了 XD
+00:46:31 <suhorng> XDD
+00:46:43 <CindyLinz> 還有那種定義了又不用的函數也會被警告...
+00:46:56 <CindyLinz> export 就算是有用到 :p
+00:47:27 <CindyLinz> 但是 monad 裡面如果最後一個指令是 a <- xxx 這樣, 那就會被罵了 XD
+00:47:30 <suhorng> (max-flow的部份, 倒是我覺得原因是更緊的時間複雜度不好分析 XDDDD)
+00:47:34 <suhorng> 啊哈哈哈
+00:47:51 <CindyLinz> 聽說那個 VEE 是真的存在欸 @@"
+00:48:27 <suhorng> 這樣噢...
+10:49:51 <miaout17> letoh: 我來回昨天的問題了 (在思考這段IRC Log之後需不需要消音 XD)
+10:49:57 <miaout17> Reply to: 我看完了，可以先問問題嗎? XD 感覺把一些誤會解釋得很清楚，但我還是不懂 FP 怎麼解決 concurrency 的問題
+10:50:00 <miaout17> 其實我的真心話(個人意見)是，FP與concurrent的關聯並沒有那麼強。
+10:50:06 <miaout17> Immutable data和pure function的確有助於multithread，而FP有很多時候建議(或強制)immutable or pure。
+10:50:09 <miaout17> 但其實*不使用FP也可以實作出immutable data structure和pure function*，所以我覺得FP與concurrent的關聯性是很間接的。
+10:50:12 <miaout17> 我的確覺得練習FP會加強immutable和pure function的概念，但這些*概念搬回imperative也能用*。
+10:50:15 <miaout17> 不過很多前輩都用「函數語言XXXOOO所以適合並行程式」的說法推廣函數語言。
+10:50:19 <miaout17> 個人是覺得這樣的敘述不能說錯誤，但是過強了。
+10:50:21 <miaout17> 但也不適合公然反駁這種說法，畢竟這吸引了許多人關注FP(包括我XD)
+10:50:27 <miaout17> 所以我想用一個talk稍微釐清這些事，但又不是直接反駁前人的說法。
+10:50:30 <miaout17> 但看來大家的解讀和我的預期很不一樣 XDrz
+10:50:32 <miaout17> 至於實用面，需要case by case討論並把效能考量進去。
+10:50:35 <miaout17> 有興趣的話可以選一個主題來討論(Ex. Actor model, STM, Haskell的MVar)
+10:50:38 <miaout17> 但我覺得肯定的是，*當語言或框架加上了一些限制時，就會消滅一些最佳化的可能性*
+10:53:43 <monochrom> 我就認為, 消滅一些人手最佳化的可能性, 但開通了自動最佳化的可能性.
+10:56:43 <miaout17> 嗯嗯，我上面的說法不清確，你說的沒錯
+11:06:22 <MnO2> 我沒有仔細想過要把 Actor Model, STM 之類的操作方式加進已經存在的主流語言是否可能。不過我個人認為比較不容易寫錯的 synchronization 方式也是一個重點。（只要速度在大多數應用情境下都可以接受的前提下）
+11:14:05 <MnO2> http://nickknowlson.com/blog/2013/04/16/why-maybe-is-better-than-null/   懶人包
+11:26:36 <miaout17> 關於Actor Model的話，Akka 2.x支援Scala和Java
+12:44:14 <suhorng> 期待GHC 7.8 XD http://www.haskell.org/haskellwiki/GHC/TypeHoles
+13:23:14 <CindyLinz> Haskell 的大好處是把這些 feature 加進去以後, 還能保持語法的一致性連貫性, 而且遇到越複雜的 framework, 通常使用前會有一堆東西要設定, 使用後有一堆東西要清理, 使用中也要改來改去來跟別的 framework 相接.. Haskell 可以讓 compiler 幫助你不會漏寫或寫壞
+13:23:34 <CindyLinz> 保持語法一致連貫, 使得 Haskell 不會變成 livescript.. (咦)
+13:25:10 <CindyLinz> 例如說, 在 Java 裡面用 builder pattern 來蓋房子好了.. 假設一定要先蓋地板, 再蓋牆再蓋屋頂.. Java 沒辦法避免 programmer 不小心蓋錯順序, 只能等到執行真的蓋下去的時候才丟 runtime exception
+14:27:20 <letoh> miaout17: 感謝回應! 我以前看到這種說法，只是在想 FP 大概有什麼尚未廣為人所知的神奇觀念可以對付 concurrency programming 的難題，畢竟對一般人 (我) 來說，FP 有點像是行銷名詞，抓不太到技術的邊界
+14:33:44 <CindyLinz> letoh: Haskell 裡面 standard lib 有個 par :: a -> b -> b 函數, 可以把 a 和 b 分別安排到不同的 thread 執行
+14:33:54 <letoh> miaout17: 另外，concurrent programming 會需要的 FP 特性，在 data 部份除了 immutable 外，我記得還有 persistent，不過在你的 talk 裡好像沒針對這部份說明
+14:34:13 <CindyLinz> 我覺得它在嘗試說什麼地方要拆, 什麼地方不用拆, 應該是個蠻厲害的武器
+14:34:34 <CindyLinz> 一般寫 multi-thread 程式, programmer 應該都是要一開始就安排好要怎麼拆, 然後再下去寫
+14:34:47 <letoh> 喔喔喔!! 有點像以前在寫 multi-cpu 程式
+14:34:50 <CindyLinz> 而用這個 par 的話, 就可以隨意試了
+14:36:09 <CindyLinz> letoh: 我以為 multi-cpu 程式寫起來超煩? 就像用 CUDA, 要想好哪邊要用, 要在那個部分套特殊的資料結構, 然後再用特殊寫法來 dispatch 和 collect?
+14:36:56 <letoh> 類似這樣，如果語言層面可以幫上忙，會輕鬆很多
+14:38:46 <CindyLinz> 嗯嗯
+14:39:10 <letoh> 不過像 multi-core dsp (ti c6xxx 那種)，一般都是做苦工
+14:39:35 <CindyLinz> 不過這個 par 沒聽過有人介紹.. 可能它是 Haskell only, 而介紹的人通常都是講什麼 Scala, Ruby 或 javascript...
+14:40:00 <letoh> 最近比較常聽到 concurrency 的可能是 clojure
+14:40:25 <CindyLinz> hmm
+14:40:56 <CindyLinz> XD
+14:41:45 <letoh> `concurrency' 就出現兩個 r...常常打完跑出一個不認得的單字XD
+14:43:13 <letoh> http://www.haskell.org/haskellwiki/Parallel  我最討厭 haskellwiki 的一點就是，一點進去全部都是 link，到底要看到什麼時候XD
+14:43:19 <CindyLinz> letoh: 換用 dvorak layout, 這樣 r 就會換位置嘍 XD
+14:43:30 <CindyLinz> r 會跑到你現在 o 的位置 :p
+14:43:30 <letoh> 但是會少其他字啊XD
+14:43:45 <CindyLinz> 原本的 r 的位置是 p
+14:43:50 <CindyLinz> 你可以要打 p 的時候再切回來 XD
+14:44:09 <letoh> 那想輸入 programming 時怎麼辦XD
+14:44:22 <CindyLinz> letoh: 全都是 link 才是 wiki 本色啊~~ (咦)
+14:44:54 <CindyLinz> letoh: dvorak 熟的話, 只有 p 才用 qwerty; 反之就只有 r 的時候才切 dvorak XD
+14:44:54 <letoh> 弄個腳踏板，像鋼琴一樣要換的時候踩下去，打完 r 再放開就會換回來了XD
+14:45:05 <CindyLinz> 這樣好!
+14:45:22 <letoh> 不是吧... 光想就覺得很麻煩XD
+14:45:25 <CindyLinz> 那好像直接設個怎樣的組合鍵就好了.....
+14:45:35 <CindyLinz> alt-e === r 這樣
+14:46:06 <letoh> 這倒是不錯，不過在 emacs 裡會跟其他功能打架XD
+14:47:05 <letoh> http://community.haskell.org/~simonmar/slides/CUFP.pdf  # par monad
+14:47:36 <CindyLinz> 又 monad 了.. @@"
+14:48:19 <letoh> 我現在看到 monad 就會想到光線還是電線的比喻XD
+14:49:19 <CindyLinz> XD
+14:52:09 <letoh> 我之前在看 monad 的教學時只有一個感想... 神經病XD 為什麼我在最後面發生一個錯誤，得一路往上傳出去...，算出一個值也是得一路傳出去 (雖然單看語法看不出來
+14:52:33 <letoh> 不過倒是覺得這種行為跟 cps 有點像
+14:52:59 <CindyLinz> 雖然說是「往上」, 不過從程式碼來看是「往後」
+14:53:05 <letoh> 對啊
+14:53:20 <CindyLinz> 那個真的無法 optimize 掉嗎 @@"
+14:53:44 <letoh> 應該可以吧  如果都是 tail call 的話，可能全部換成 jump 就好了?
+14:53:48 <CindyLinz> 不過如果假設 錯誤===Exception 的話, 應該會假設它不常發生, 沒必要 optimize
+14:54:10 <CindyLinz> 但是像 Maybe / Either 裡面的, 就會用在不是 Exception 的場合 @@"
+14:54:32 <letoh> 說到這個 Exception，在 python 常看到一種用法，不曉得是不是誤用
+14:54:52 <CindyLinz> 嗯, 因為 monad 一進 fail 就萬刦不復, 所以可以跳才對 @@"
+14:55:03 <CindyLinz> 嗯?
+14:55:09 <letoh> 看過很多程式為了相容不同版本的 python，會 try: import xxx; except: xxx
+14:55:21 <letoh> 用這種方式來決定版本跟需要 import 的 module
+14:55:42 <letoh> 有點像在用 exception 做流程控制
+14:56:03 <CindyLinz> 拿滅火器當日用品.. :|
+14:56:15 <CindyLinz> 拿安全護網當跳床... = =
+14:56:40 <letoh> 我一開始覺得很怪.. exception 一般是錯誤才丟出去，但很多 python 程式的開頭就在做這件事
+14:56:47 <letoh> 看久也慢慢習慣了XD
+14:56:48 <CindyLinz> 只用在 import 那邊可能還好啦
+14:57:00 <letoh> 還有換掉某些 function
+14:57:32 <CindyLinz> 畢竟 import 比較像是 compile 階段的感覺的事, 然後通常用量也不會大, 不會 repeat 著一直做
+14:57:41 <letoh> 例如 py3 沒有 xrange，所以加一行 xrange = range
+14:58:20 <letoh> import 喔，如果用在 plugin system 就是 runtime 的行為啦
+14:58:28 <letoh> python 可以 runtime impot module
+14:58:36 <CindyLinz> 嗯嗯嗯, 這種時候 programmer 本來就是在作 hack.. hack 的時候可以不限制用法啦 :p
+14:58:38 <letoh> r 又逃走了XD
+14:58:47 <letoh> 這麼說也是
+14:59:55 <letoh> 以前 java 圈常常在吵 exception 的用法，很多人主張不能拿來做流程控制，不曉得後來結論是什麼@_@
+15:01:02 <CindyLinz> 1.4 -> 1.5 改進效能蠻多的, 而 exception 的部分是主線調快一點點, 支線調慢一大堆 :Q
+15:02:12 <letoh> 如果支線錯誤處理，那調慢應該還算可以接受 (不過為什麼不能都調快呢?
+15:04:10 <CindyLinz> 應該是怎樣把判斷的順序改過
+15:04:21 <CindyLinz> 主線的調慢是用支線變慢換來的啊
+15:04:32 <CindyLinz> 寫反 主線的調快是用支線變慢換來的啊
+15:05:25 <letoh> 所謂的變快變慢是執行的整體效率嗎? 還是指 branch prediction 這類機制?
+15:06:24 <CindyLinz> 也有極端點的作法就是主線就先繼續跑, 但其實有發生 exception 的時候, 處理的資料很多已經是 garbage 了.. 偶爾才回頭 check 一下要不要去 catch exception 並 rollback :p
+15:07:48 <letoh> 這種做法好像比較實際
+15:07:59 <CindyLinz> rollback 聽起來好困難啊 ^^|
+15:08:26 <letoh> 用 escape continuation 之類的東西來做?
+15:08:50 <letoh> 不過好像也只能跳回去，得想辦法把某些狀態記起來
+15:09:01 <CindyLinz> 對啊.. 要記下來.... 可能會更貴 ^^|
+15:09:31 <letoh> setjmp/longjmp XD
+15:10:05 <letoh> exception 處理真麻煩@_@
+15:11:03 <letoh> 像 FP 語言中的資料常常是 immutable，rollback 回去也許會簡單一點?
+15:11:32 <letoh> 只是指回之前的某一筆資料 (假設還沒被回收掉的...)
+15:12:24 <letoh> 感覺要做 immutable 就是改變狀態時又重新建構新的資料，所以舊的資料應該還留著?
+15:15:04 <letoh> http://www.haskell.org/haskellwiki/Par_and_seq  好怪... par/par2 可以互相定義
+15:15:54 <CindyLinz> letoh: 舊的資料會依還有沒有繼續用到的機會而留著
+15:16:07 <CindyLinz> 在這種有可能需要 rollback 的情況, 就一定會留了
+15:16:15 <letoh> 嗯嗯
+15:16:39 <CindyLinz> 我覺得這有點像是... 反正我已經花一堆錢買了某個貴鬆鬆的設備了... 那就用吧 |_|
+15:16:56 <CindyLinz> java / c 的話, 還沒買, 就要考慮要不要買了 XD
+15:17:14 <letoh> 這說法還蠻貼切的XD
+15:20:23 <letoh> 剛剛那個 par monad 的 slide，裡面放程式碼的樣式應該比較有利於投影機
+15:20:38 <letoh> (只注意到奇怪的事XD)
+15:20:45 <CindyLinz> 這個同時也是 Arrow 做的 parser 可以比 Monad 做的 parser 省記憶體的原因... Monad 版沒法告訴 runtime 說, 我現在決定走某 branch 了, 而且我告訴你, 另一個 branch 一定用不到
+15:21:13 <CindyLinz> 所以 Monad 版 parser 遇到 branch 的時候, runtime 一定會 keep 住所有的, 已經用過的 input tokens
+15:21:28 <letoh> 但以 parser 來說，如果沒辦法做 prediction，很難說某個 branch 一定用不到啊?
+15:21:45 <CindyLinz> letoh: 設計語言的時候會想辦法讓它可以 prediction 啊
+15:21:51 <letoh> 不然就是文法設計上要處理過
+15:21:52 <letoh> 嗯
+15:21:55 <CindyLinz> 像是 LL(1) LR(1) 的那個 (1) 的部分
+15:22:06 <CindyLinz> 就是為了 predict
+15:22:43 <letoh> monad 版比較像是可以做 backtracking 的 parser
+15:23:10 <CindyLinz> 對, always backtrack
+15:23:11 <letoh> 之前 favonia 示範 zipper 的用法，也是記住所有東西XD
+15:23:29 <CindyLinz> zipper 是應用場合就非記不可啊.. ^^|
+15:24:34 <letoh> 嗯  也是.. 我只是在想除了 backtracking 外，大概都不需要記住歷史
+15:24:48 <CindyLinz> 對呀
+15:26:07 <letoh> 不過話說回來，我之前復習了一下 parsing 的東西，覺得 backtracking 還是方便一點，設計文法可以少做很多事XD
+15:26:13 <CindyLinz> zipper 運用的地方, 其實它本來在走的那個「大地圖」就是 static 一直被記著的, zipper 多出來的其實只有那一條路線上的一排 reference
+15:26:26 <CindyLinz> 但有時候會 parse 不完啊 XD
+15:26:54 <letoh> 你是說 left recursion 那種情況嗎?
+15:27:22 <MnO2> CindyLinz, letoh: 看到前面的文，不太確定有沒有澄清過。不過在 Haskell 社群裡面 concurrency 跟 parallel  跟其他地方兩者交叉使用互為同義詞是不一樣的
+15:27:35 <MnO2> 兩者是被區分開來的
+15:27:48 <letoh> 對  剛剛在看 wiki 時也覺得有點怪
+15:27:55 <MnO2> par 是用來把可以 parallel 的部份 parallel 跑
+15:28:04 <MnO2> 跟 concurrency 無關
+15:29:26 <MnO2> http://ofps.oreilly.com/titles/9781449335946/draft_00000003.html 我不知道我在 g+ 貼過大家有沒有空看 xD
+15:29:54 <letoh> 那個 wiki 已經看不完了XD
+15:30:01 <CindyLinz> letoh: left recursion 就算了啦.. 我指的是程式碼很長的時候, 而 parser 又沒有好 predict, 先挑了一個一定會失敗, 可是陷進去要跑好.....久的 branch
+15:30:29 <letoh> 就像 pattern matching 只能每一種情況都試試@_@
+15:30:45 <letoh> 不過可能會跑到很後面才知道是死路XD
+15:32:24 <CindyLinz> 對對 就是那種情況 @@"
+15:32:37 <CindyLinz> MnO2: 剛剛沒有澄清這個 XD
+15:33:28 <letoh> 原來 MnO2 貼的文章是一本書裡的內容
+15:33:48 <MnO2> Simon Marlow 親自寫的，解釋得蠻清楚的
+19:55:44 <favonia> （回覆之前一堆紀錄）我想有一個重點是 parallelism 和 concurrency 在某派裡面完全不一樣
+20:00:22 <letoh> 某派?
+20:03:26 <suhorng> 像這個XD? http://existentialtype.wordpress.com/2011/03/17/parallelism-is-not-concurrency/
+20:03:46 <suhorng> (我只看了前面幾段)
+20:05:15 <letoh> 剛剛 mno2 給的文章的開頭就有名詞解釋，我覺得還蠻清楚的
+20:06:16 <CindyLinz> 我覺得中文的「完全不一樣」會隱含有互斥的意味: 如果某個東西是 parallel 的, 那它就一定不是 concurrent 的 @@"
+20:06:38 <letoh> 看完以後，我覺得兩個詞不完全互斥
+20:06:58 <CindyLinz> 我覺得講成兩個 獨立概念 更好一點 
+20:07:03 <letoh> 我是說看完 simon marlow 的第一章
+21:13:18 <favonia> 喔我的意思是獨立概念...
+22:08:18 <MnO2> http://www.infoq.com/interviews/peyton-jones-cas
+22:10:04 <miaout17> 其實我投影片裡有寫「並行、平行」，不過沒名詞解釋....(hmm...這樣不好)
+22:11:06 <letoh> 大陸好像是用「並發」這個詞?
+22:14:39 <miaout17> reply> 另外，concurrent programming 會需要的 FP 特性，在 data 部份除了 immutable 外，我記得還有 persistent，不過在你的 talk 裡好像沒針對這部份說明
+22:14:54 <miaout17> letoh: 我想你是指persistent data structure，而不是資料庫的persistent。(這個字單獨出現時常會想到資料庫)
+22:14:57 <miaout17> 不知道我的理解有沒有錯誤，immutable是表面上的特性，而persistence data structure是指涉到實作細節。
+22:15:01 <miaout17> 原本想說討論到performance才需要討論到這一塊
+22:15:41 <letoh> 對  data structure
+22:17:34 <letoh> http://en.wikipedia.org/wiki/Persistent_data_structure
+22:37:57 <miaout17> :q
+22:38:01 <miaout17> sorry typo

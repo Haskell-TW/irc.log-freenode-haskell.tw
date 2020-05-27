@@ -1,0 +1,378 @@
+00:08:04 <MnO2> godfat: 我想請教一下ruby.tw社群是否有跟大陸或是日本交流的經驗?
+00:09:00 <godfat> 我不知道耶，或是該說 ruby.tw 的社群是指什麼？ XDD
+00:09:00 <godfat> 創辦人 ihower 是有跟日本和中國交流過幾次就是了
+00:09:56 <MnO2> 我也不知道，只是你有掛名在上面所以想說你可能知道ruby.tw究竟範圍在哪xD
+00:11:13 <b4283> 有#ruby.tw嗎？
+00:11:14 <godfat> XDDDD 應該是沒有一個明確範圍，我想
+00:11:24 <MnO2> 之前不是好像在ruby.tw要創立網站的時候，ruby-china還有反對的聲音嗎?
+00:11:35 <godfat> 之前好像有個 #rug.tw 之類的？
+00:11:41 <godfat> 真的！？
+00:11:43 <letoh> 為什麼要反對?
+00:12:01 <MnO2> 我不確定是不是真的，只是"好像"
+00:12:19 <MnO2> 可能這樣會減少人數?
+00:12:37 <letoh> ruby-cn 會怕減少人數?
+00:12:42 <godfat> XDDDDDDDD
+00:12:56 <MnO2> 可能當時還沒有很多人吧?
+00:12:57 <letoh> 相對來看也減不多吧? XD
+00:13:34 <MnO2> 如果godfat都不清楚，我也只是隨便講講我的模糊印象而已
+00:14:08 <godfat> 如果說有比較明確的台灣 ruby 社群的話，大概是 ruby tuesday, rails tuesday 這兩個比較大吧
+00:14:08 <godfat> rubyconf.tw 一年才一次，所以先不算
+00:14:31 <MnO2> 所以跨國交流也主要限於個人就是
+00:14:59 <godfat> 就我所知是這樣沒錯
+00:15:06 <MnO2> 了解
+00:15:23 <MnO2> 我是蠻想去接觸日本社群的，可惜我日文還不夠好
+00:16:21 <godfat> 要接觸日本社群，感覺沒日文真的不行 XDD 而且可能還要相當不錯的日文我猜...
+00:16:21 <godfat> 也是可以從 ruby-core 接觸就是了（如果是 ruby），那邊都是用英文
+00:16:21 <godfat> 但是會看的日本人就沒有很多了，只有幾個核心成員
+00:16:33 <MnO2> 日本社群帶頭的據我所知有幾個也是研究PL的
+00:17:06 <godfat> 至少穆老師那邊常常聽到一些合作 XD
+00:17:06 <letoh> 日本的 ruby 社群嗎?
+00:17:08 <MnO2> 我也是認為要打入日本社群用英文不行xD
+00:18:10 <MnO2> 其中一些成員搞不好CindyLinz還有交手過xDD
+00:19:02 <godfat> 怎麼個交手法？ XDD
+00:19:21 <MnO2> ICPC啊~
+00:20:08 <godfat> 不清楚 XD
+00:21:35 <MnO2> 我想想看好了，看起來沒那麼容易xD
+00:22:07 <letoh> 我有個問題.. PL 研究的交流為什麼要走 ruby 這條路?
+00:22:17 <letoh> 不能直接找 haskell.jp 之類的嗎?
+00:22:24 <letoh> 或 pl.jp (?
+00:23:15 <MnO2> godfat 應該只是說是一種手段吧, 可能ruby-core裡面也有PL researcher?
+00:23:16 <letoh> 像你上次說的活動，應該可以先混進去玩玩
+00:23:44 <MnO2> 嗯嗯，也是一種方式
+00:24:34 <letoh> 嗯  因為我對 ruby 不熟，但我覺得 ruby 社群應該大部份是在玩 rails? 要說有人在玩 PL 也不是不可能  但好像不是比較有效率的找法@_@
+00:25:26 <letoh> 我覺得就算有  大概也不會只用 ruby 來研究，多半也會接觸 haskell 或其他語言吧?
+00:25:29 <MnO2> 不知道，我也沒接觸過
+00:25:47 <godfat> 日本 ruby 社群應該是不玩 rails 的
+00:25:54 <letoh> 是喔?!!!
+00:26:07 <letoh> 有趣  那邊流行什麼?
+00:26:26 <MnO2> 而且日本社群好像溝通方式多半都是用twitter
+00:26:29 <godfat> 原來大部份人的印象都是這樣呀？ @_@ 其實日本 ruby 社群跟其他地方都不太一樣... XD
+00:26:40 <letoh> 對.. twitter
+00:26:45 <MnO2> 像freenode #haskell.jp人比這邊還少..
+00:27:19 <letoh> godfat: 意思是除了日本 ruby 社群外，其他社群還是以 rails 開發佔多數嗎?
+00:28:00 <letoh> 混進去看看XD
+00:28:22 <godfat> 應該也沒有說特別流行什麼，就想像成 perl 或 python 吧 @@ 對他們來說就是另一個 scripting language
+00:28:22 <godfat> 他們要用 ruby 做東西，也常常是跟用別人（其他地區）不一樣的方式
+00:28:22 <godfat> 例如自己的 web framework 之類的
+00:28:22 <godfat> 總之整個生態圈都不同
+00:28:23 <godfat> 台灣的話確實是以 rails 為主，其他國家我不確定
+00:28:23 <godfat> 但還是有滿多地方不是在用 rails 的
+00:28:49 <godfat> XDDDDDDDDDDDDDD
+00:28:59 <MnO2> 本來是失望嗎? xD
+00:29:18 <letoh> 也沒有失望啦，只是覺得 rails 實在不是我的菜
+00:29:30 <godfat> (握)
+00:30:05 <MnO2> 那godfat公司用什麼? 自己刻一個?
+00:30:06 <letoh> 雖然還算喜歡這個語言  但看到整個氛圍都是這樣就不太想跳進去XD
+00:30:48 <MnO2> 我也常常有人多的地方不想去的感覺xD
+00:31:23 <letoh> 哈  大概是這個意思  但不是說就討厭它了
+00:31:27 <godfat> 還是 rails, 不過我執意在裡面嵌入了個 sinatra XD
+00:31:27 <godfat> 之前也有用過 ramaze
+00:31:27 <godfat> 說真的我還滿討厭 rails 社群，不過 ruby 社群 (excluding rails) 我覺得還好
+00:31:48 <b4283> sinatra 不錯，簡單易用
+00:32:34 <MnO2> Rifur: welcome
+00:32:42 <Rifur> MnO2: Hi!
+00:33:10 <MnO2> Rifur: 你是上FLOLAC的同學嗎? xD
+00:33:19 <godfat> 不過我覺得 sinatra 也有點太複雜了，以後想試 https://github.com/soveran/cuba
+00:33:42 <Rifur> MnO2: 是的XD
+00:33:46 <b4283> 不過有時候我覺得 ruby library 會弄些 DSL 反而不好懂
+00:33:59 <letoh> 是看到廣告才來的嗎?
+00:34:12 <letoh> (感覺像問卷)
+00:34:29 <MnO2> godfat:  有機會再試試看好了xD 不過ruby相關的東西priority現在在我清單中算比較後面
+00:34:49 <b4283> 今年幾歲了？工作多少錢？有車有房嗎？ (誤)
+00:35:00 <MnO2> favonia 的廣告還是有用的~
+00:35:01 <godfat> b4283, 我也覺得很多 overkill...
+00:35:02 <godfat> MnO2, ok XD 有想到啥再問我 XD
+00:35:49 <b4283> letoh: 看了 io 初步感覺是和 ruby 非常像
+00:36:11 <letoh> 因為 block 嗎?
+00:37:08 <b4283> block 是一個，還有 class hierachy 和 message passing
+00:37:15 <MnO2> 突然發現又遞減成 b4283 了 xD
+00:37:34 <letoh> lol
+00:37:51 <letoh> 好像打個嗝就會變身  習慣就好 (誤
+00:38:13 <b4283> 不過我覺得 io 更簡單更好
+00:38:34 <letoh> 是啊  不過 io 在台灣好像比較少人提
+00:38:37 <godfat> 上次看 io 我也覺得不錯
+00:38:41 <b4283> (manual 看到一半)
+00:40:37 <letoh> 你不是 scheme 廚嗎? 轉職了?
+00:41:11 <b4283> 說我嗎？偶爾弄些 guile 而已啦
+00:41:48 <b4283> guile 太方便了，有些時候覺得不是在寫 scheme XD
+00:42:10 <b4283> 2.0 還多一個內建的 httpd 呢
+00:42:16 <letoh> 其實後來也覺得不錯，就懶得找其他 scheme 了
+00:42:43 <letoh> 我的 2.0 還沒裝進系統，還在跑 1.8
+00:43:57 <letoh> 不過我覺得這幾年這樣東玩西玩  最後都會忘光  應該要專心一點XD
+00:47:51 <MnO2> io vm還蠻小的，感覺可以當作教材xD
+00:48:01 <letoh> http://www.jssst.or.jp/sig/detail/id=30  # プログラミング論研究会 (PPL)
+00:48:25 <letoh> 之前看的時候  好像不少人在重新實作 io vm
+00:51:51 <letoh> MnO2: 不太清楚 PL 研究大概有啥方向，可以給幾個 keyword 嗎?
+00:52:05 <letoh> 我找プログラミング論不曉得對不對
+00:52:58 <letoh> 第10回プログラミングおよびプログラミング言語に関するサマースクール  2012年8月
+00:53:11 <letoh> 看起來是類似 flolac 的活動
+00:53:57 <MnO2> letoh: 我不知道耶，我不是做PL的xD
+00:54:24 <letoh> XD  你不是想找日本做 PL 的人嗎?
+00:55:20 <MnO2> letoh: 其實是Haskell社群xD，只是他們常常剛好是PL researcher
+00:55:38 <letoh> 第15回プログラミングおよびプログラミング言語ワークショップ (PPL2013)  2013年3月4日(月)〜6日(水) 場所: 会津若松市 東山温泉「御宿東鳳」
+00:55:52 <letoh> MnO2: 去參加這個? 應該整場的人都是XD
+00:56:45 <letoh> summer school 上禮拜剛結束
+00:57:00 <letoh> 主題似乎是這個：関数型言語ベースの先進的Webフレームワーク
+00:59:35 <MnO2> google這個主題就看到熟面孔了
+00:59:37 <MnO2> https://twitter.com/kazu_yamamoto/status/235891345967951872
+01:00:04 <letoh> 那個 vm image 是一個 ubuntu image XD
+01:00:07 <letoh> 剛剛看到了
+01:01:10 <letoh> 子育て真っ最中の Haskeller
+01:01:36 <letoh> 先記一下他的 blog
+01:02:28 <MnO2> 他的文章都可以看看啊~ 還不錯
+01:08:49 <letoh> 看到有趣的了
+01:09:00 <letoh> http://f.hatena.ne.jp/kazu-yamamoto/20120606120541
+01:09:02 <letoh> 哈哈
+01:10:50 <letoh> http://d.hatena.ne.jp/kazu-yamamoto/20120606/1338957783  # Haskell でのデバッグ   好像是我需要的XD
+01:16:00 <letoh> http://bach.istc.kobe-u.ac.jp/lect/ProLang/  這課表也有＼（＾ ＾）／
+01:20:54 <letoh> http://odz.sakura.ne.jp/projecteuler/  日語版XD
+01:31:38 <letoh> http://partake.in/events/e2f99b6b-a96f-4819-80d5-c5d61d2b427c  haskell 讀書會?
+01:32:52 <letoh> http://wiki.haskell.jp/Workshop  # 勉強会まとめ
+01:33:13 <letoh> 活動好像還不少... 還有讀 ghc 程式碼的活動
+01:35:23 <letoh> http://d.hatena.ne.jp/moznion/20120702/1341239039  # 明明是程式語言實作  怎麼覺得怪怪的XD
+11:24:11 <Rifur> sig_: Hi
+11:25:38 <sig_> Hi
+11:41:36 <CindyLinz> Hi
+11:44:48 <Rifur> Hi
+11:45:38 <CindyLinz> 聊天室記錄在這 :p  http://cindy.csie.org/irc.log/
+11:48:43 <Rifur> wow!!
+11:53:00 <CindyLinz> 方便不能一直掛線的人 ^^|
+11:53:08 <Rifur> 謝謝 :D
+12:30:00 <b4283> CindyLinz: set topic ?
+12:37:47 <letoh> 好像是因為沒有權限
+12:44:06 <CindyLinz> 對啊 沒權限 QQ
+12:58:42 <MnO2> CindyLinz: http://stackoverflow.com/questions/12076475/overloading-of-operators
+12:58:59 <MnO2> CindyLinz: 解答的第二個範例就是associative type
+13:24:42 <CindyLinz> MnO2: 咦咦 你是要回答我嗎?
+13:25:02 <CindyLinz> favonia: 欸欸, 是不是沒有人可以改 channel topic 啦?
+13:25:17 <favonia> CindyLinz: 你要可以改嗎
+13:25:18 <CindyLinz> favonia: 我把 channel log 放在這邊 http://cindy.csie.org/irc.log/
+13:25:28 <favonia> 喔喔原來有 log
+13:25:30 <CindyLinz> favonia: 想把 log url 放到 topic
+13:26:02 <CindyLinz> favonia: 我有在看的 channel 都會留 log, 只是通常沒有公開而已 ^^
+13:26:54 <favonia> CindyLinz: 我如果現在才公佈的話
+13:27:05 <favonia> 我覺得之前的 log 不要公開比較好
+13:27:20 <CindyLinz> favonia: 驚..
+13:27:40 <CindyLinz> 好那我把八月以前的 log 刪掉
+13:27:43 <favonia> 我是說有可能有人沒有警覺到會有公開 log
+13:27:50 <CindyLinz> XD
+13:27:56 <CindyLinz> 想要的私下跟我要.. (誤)
+13:28:44 <CindyLinz> 好哩 只留下今天(9.1) 開始的
+13:29:32 <CindyLinz> 因為我看好多在上課的人都不是一直掛著的, 這樣對話串就不容易延續了..
+13:29:38 <CindyLinz> 也不容易加入討論..
+13:29:45 <favonia> CindyLinz: 我知道，就從現在開始吧
+13:29:53 <favonia> 我只是覺得這事情需要大家都知道
+13:30:17 <CindyLinz> 嗯嗯
+13:30:23 <CindyLinz> 那... topic.. ^^|
+13:30:43 <CindyLinz> 不然就要改 script 每當有 user join 的時候就跟他講 XD
+13:32:32 <favonia> CindyLinz: 頻道 topic 會在 join 的時候講
+13:32:36 <CindyLinz> 喔喔 :D
+13:32:44 <favonia> 這樣應該算明顯的了（？？？）
+13:32:48 <CindyLinz> favonia: 能改 topic 就行啦
+13:32:57 <CindyLinz> favonia: 剛剛是因為改不了嘛 :p
+13:33:06 <favonia> CindyLinz: 你要可以改嗎 xDDD
+13:33:13 <CindyLinz> favonia: 好啊
+13:33:26 <CindyLinz> favonia: 你是怎麼叫 ChanServ 改的呀?
+13:33:33 <CindyLinz> favonia: 我只會 /topic
+13:35:33 <favonia> CindyLinz: 你的帳號沒有註冊過 orz
+13:35:43 <CindyLinz> favonia: 噢..
+13:35:50 <CindyLinz> favonia: 我從來不知道註冊這回事 orz
+13:35:56 <favonia> 你可以 google freenode ChanServ
+13:36:00 <CindyLinz> 好
+13:37:18 <favonia> 我現在擁有至高無上的權力（？）啊，現在人很少我就用部落方式（？）解決頻道的問題... 酋長說得算 xD
+13:37:29 <CindyLinz> XDD
+13:38:33 <Rifur> XD
+13:38:44 <CindyLinz> 好那改天在說好了.. 現在正在忙別的事 ^^|
+13:38:49 <CindyLinz> 反正 url 已經加好了
+13:39:07 <favonia> 有願意管理版的歡迎向我報名 xDDD
+13:39:10 <MnO2> CindyLinz: 只是補充? 就前天講的。因為我覺得這個例子舉得夠簡單明瞭
+13:40:18 <CindyLinz> MnO2: 我等晚上再來看喔 @@"
+13:40:46 <CindyLinz> 這邊討論的東西通常都要消耗蠻多 MP 的...
+13:45:22 <MnO2> MP是Mind Power嗎? xDD
+13:47:25 <CindyLinz> 差不多是那個意思
+13:50:06 <letoh> MnO2: 昨天找到一個有玩 haskell 跟 ruby 的人
+13:50:13 <letoh> 搞不好你認識
+13:54:33 <letoh> 沒看到名字  nick 是 tmaeda
+13:58:31 <letoh> http://longgate.co.jp/products.html  這本書內容有 Haskell 和 Coq.. 還有其他，感覺有點雜
+14:00:59 <letoh> 不過從那幾個人名可以再連出去
+14:01:45 <letoh> http://partake.in/events/30381166-394a-4fab-a5ea-5984d051de01  # Theorem Proving Advent Calendar 2011
+14:54:17 <MnO2> letoh: 我知道他，但我不認識
+15:03:51 <letoh> 喔喔喔
+15:04:06 <letoh> 昨天隨便找了一下好像還蠻好找的
+17:04:12 <letoh> MnO2: 看到「繼續發進」時笑出來了XD
+17:04:49 <MnO2> letoh: ?
+17:05:01 <letoh> 翻譯
+17:06:23 <MnO2> 哪一章?
+17:06:49 <letoh> syntax in functions
+17:07:33 <letoh> 你的日文強大到寫中文時會混在一起了w
+17:09:23 <MnO2> 那個應該是fleurer翻的xD
+17:09:45 <letoh> 喔喔喔
+17:10:05 <letoh> 蠻有趣的  常常看到日式中文XD
+17:10:47 <MnO2> 還有很多簡中用法，目標是全部都拿掉xD
+17:11:02 <letoh> 難怪，前面很多怪中文
+17:12:07 <MnO2> 前九章我只是用簡轉繁跑一遍，然後做一點基本的s/abc/def/g
+17:12:22 <letoh> 嗯嗯
+17:12:47 <MnO2> 只有第一章有認真重新看過
+17:13:13 <letoh> 我是先看一次英文版  再掃一次中文版看有沒有漏的
+17:13:47 <MnO2> 說錯，前八章
+17:13:59 <MnO2> 第九是我自己翻的
+17:15:10 <letoh> 要整本翻完真是大工程
+17:15:32 <CindyLinz> MnO2: 想到 jason 昨天有講到一個問題, 就是你們兩個翻譯的版本可能譯出來的專有名詞不一樣
+17:15:50 <CindyLinz> MnO2: 之前 gugod 他們一堆人翻譯某本 perl 的書
+17:16:16 <CindyLinz> 他們的作法是一遇到覺得應該是專有名詞的東西就抽出來, 然後用 reference 的方式引用那個專有名詞
+17:16:29 <CindyLinz> 這樣不同人翻譯不同章節的時候, 至少專有名詞會一致
+17:16:36 <CindyLinz> 另一個好處是, 索引自動就建好了 XD
+17:16:42 <MnO2> letoh: 我已經進行七，八個月了，很想趕快翻完解脫xD
+17:17:19 <letoh> 辛苦了  我以前曾經想要邊看邊翻譯 yaht，但搞一搞覺得好累，看一看就算了XD
+17:17:51 <letoh> 而且很多東西不熟怕翻錯
+17:18:46 <letoh> 一般翻譯專用的軟體好像也是強調管理單詞  前後會比較一致
+17:20:41 <MnO2> CindyLinz: 我覺得專有名詞反而是比較容易解決的問題，有個架構後再來處理也沒差，現在editor這麼強
+17:22:04 <CindyLinz> MnO2: 是喔, 那是別的原因嘍 o.o
+17:22:59 <MnO2> letoh: 我覺得應該可能是更強的功能也做不上去，所以也只能強調管理單詞
+17:23:20 <MnO2> CindyLinz: 什麼原因?
+17:23:34 <letoh> 我不太清楚翻譯實務上還有什麼麻煩事要管理，所以也只注意到這個XD
+17:27:13 <MnO2> letoh: 假如今天google translate自動化或是像dualingo那樣crowdsourcing的方式可以作到一定程度，譬如說每一個段落可以跳出好幾種翻譯風格，然後讓編輯自己選擇一種偏好。那管理單詞就變成是一種原始的功能了
+17:27:25 <MnO2> letoh: 只是現在可能還沒那麼容易做到
+17:29:43 <letoh> 嗯嗯  現在機械翻譯應該也很難做到這樣吧?
+17:31:41 <MnO2> 我猜測對於特定種類的翻譯可以作到蠻強的，但對口語可能還不行
+17:31:58 <MnO2> 口語大概就是暴力做
+17:47:12 <letoh> 有些詞越來越習慣簡中用法  不曉得繁中怎麼講XD
+17:47:34 <letoh> 例如  binding -> 綁定
+17:49:03 <letoh> 範例程式好像跟英文版不太一樣
+17:49:15 <MnO2> 可能英文版有改過
+17:49:23 <MnO2> 因為英文版也一直在加東西
+17:49:55 <letoh> 不過這個應該是有漏  看一下 http://learnyouahaskell-zh-tw.csie.org/syntax-on-function.html  where 那一節的最後一個程式
+17:50:15 <letoh> calcBmis xs = [bmi w h | (w, h)   到這邊就沒了
+17:50:59 <CindyLinz> MnO2: 我不知道呀, 只是覺得你們兩個人都好辛苦, 如果能一起做, 那就只要辛苦一半了
+17:51:04 <letoh> 突然想到  像這種情況可能也需要軟體管理  因為翻譯完的文和原文已經很難 diff 了
+17:51:21 <letoh> 萬一原文一直改，翻譯很難追
+17:52:09 <MnO2> letoh: 已補上，晚點推上去
+17:52:35 <letoh> 辛苦了  有看到其他問題再回報
+17:53:03 <letoh> 印象中小問題還不少  不過不影響閱讀就自動跳過了XD
+17:54:33 <letoh> "It's a common idiom" 翻譯成 "有個已被廣泛接受的理念" 好像怪怪的?
+17:56:13 <MnO2> 嗯，應該改成 "有個常見的寫法"
+17:56:31 <letoh> 這樣的表達就比較習慣了
+18:05:34 <letoh> MnO2: 你的 repo 也放 github 嗎? 還是我直接到那邊回報 issue 就好了?
+18:05:49 <letoh> 還是你用 darcs ? XD
+18:06:26 <MnO2> https://github.com/learnyouahaskell-zh-tw
+18:07:39 <letoh> 先 watch 了
+18:08:14 <letoh> 疑  我設過 star XD
+18:08:33 <MnO2> xD
+18:09:41 <letoh> 這翻譯是直接改 html 呀?
+18:09:47 <letoh> 這樣不會很累嗎?
+18:10:12 <MnO2> letoh: 你切source branch
+18:11:03 <MnO2> letoh: master是拿來放頁面, 跟octopress作法一樣
+18:11:37 <letoh> 好
+18:16:12 <letoh> 直接 clone 下來好了  我待在 shell 環境比較多.. web 少開
+18:17:01 <letoh> jason 的也順便
+18:17:57 <MnO2> 如果要產生的話就要裝rake
+18:18:35 <letoh> 唔... 我現在系統完全沒有 ruby 相關工具XD
+18:18:45 <letoh> 沒關係  我看純文字檔比較習慣
+18:22:23 <MnO2> 真是太硬派了xD
+18:22:53 <letoh> 我比較習慣 terminal 生活XD
+18:24:36 <CindyLinz> letoh: 你也是那種希望直接看 .tex 而不是 .pdf 或 .dvi 的人嗎 =口=
+18:25:12 <letoh> 我現在其實比較常用 muse 編輯閱讀，有需要才轉成 .tex -> .pdf XD
+18:25:54 <letoh> 我在公司的文件和報告也都這樣搞的，平常寫 muse，要交出去就轉 pdf 丟出去
+18:26:23 <letoh> 直接寫 .tex 大概只剩下寫 beamer 的時候吧@_@
+18:28:59 <letoh> MnO2: 你有在看 2ch 嗎?
+18:29:29 <letoh> 剛剛隨便找一下發現好像有 haskell thread
+18:30:40 <MnO2> 我沒有耶，裡面討論活躍嗎?
+18:31:54 <letoh> 我剛剛才發現的，是一直有討論，但內容很多看不懂的XD
+18:32:09 <letoh> 有些專有名詞的日文翻譯還沒看熟XD
+18:33:18 <letoh> 在 program 那一區找一下就有了  還有 ml 之類的討論
+18:34:32 <letoh> MnO2: http://lyrical.bugyo.tk/download.html  有看過這個嗎?
+18:34:52 <MnO2> 沒有
+18:35:54 <MnO2> 所以用Lisp的人可以稱呼他為魔法少年/女嗎？xD
+18:36:26 <letoh> 照這邊的說法應該可以吧XD   記得在 nico 上看到教學影片
+18:44:19 <letoh> 原來 shibuya.lisp 也有 haskell 相關的分享錄影
+18:47:57 <MnO2> 喔喔，看起來不錯
+18:48:25 <letoh> 剛看完 higepon 的分享  不過他是寫 scheme 的
+18:57:10 <letoh> 放棄 nico .. 那邊是 lisp 的天下
+18:58:59 <favonia> lisp 和 scheme 有這麼不相容嗎（？？）
+18:59:17 <letoh> 基本上是 lisp 跟 scheme 的天下
+19:00:17 <favonia> 喔喔
+19:00:43 <favonia> MnO2: 我以為用 C++11 才是魔法少女？
+19:01:16 <MnO2> favonia: 梗的ref?
+19:01:17 <favonia> 喔另一部卡通 xD
+19:01:27 <favonia> s/卡通/動畫/
+19:01:40 <favonia> （我知道有人不在乎可是我還是想要改掉 orz）
+19:01:42 <letoh> MnO2: 好像是北海道 c++ group 的分享
+19:01:58 <letoh> 有錄影  要找一下XD
+19:02:37 <MnO2> favonia: anime?
+19:02:44 <favonia> MnO2: y
+19:02:55 <letoh> 札幌C++勉強会 的分享
+19:04:10 <letoh> MnO2: http://www.ustream.tv/recorded/15304975
+19:04:19 <letoh> 這音質還蠻不錯的XD
+19:05:50 <favonia> MnO2: 算了不要理我剛才在說什麼 xD
+19:07:00 <letoh> https://groups.google.com/forum/?fromgroups=#!forum/haskell-jp
+19:08:01 <letoh> 本物のプログラマはHaskellを使う  (Real programmers write Haskell?)
+19:09:02 <letoh> http://itpro.nikkeibp.co.jp/article/COLUMN/20060915/248215/  這一串連載已經到 5x 回了
+19:09:20 <MnO2> letoh: 我有貼過喔 :p
+19:09:35 <letoh> 喔喔喔
+19:09:54 <letoh> 太長了不曉得怎麼看XD
+19:14:16 <letoh> itpro 有不少有趣的連載，可惜都沒有中譯
+19:14:48 <letoh> 啊.. matz 的文章出書後有中譯版
+19:55:18 <letoh> "expression匹配合適的模式。如料，第一個模式若匹配..."  又回去對照英文大概看懂 "如料" 是什麼意思XD
+20:48:13 <favonia> CindyLinz: 總之謝謝你提供 log 服務 xD 你跟 freenode 註冊一下帳號我可以給你改 topic 權限。我想這樣你也比較方便（例如如果要改位置的話）
+20:48:58 <favonia> letoh: 我猜是 "as expected,"
+20:58:41 <MnO2> 我改了
+23:38:11 <CindyLinz> hychen: 嗨嗨, 昨天有當掉一次.. 我試了鍵盤.. capslock / scrolllock 什麼的都沒有作用
+23:38:27 <CindyLinz> hychen: 然後 magic sysrq 也沒有作用
+23:38:35 <CindyLinz> hychen: 看起來很像鍵盤死掉了...
+23:40:05 <CindyLinz> log 的話.. 我看當掉之前5分鐘內都沒有 log..   嗯, 不過我還沒有開 debug mode, 也許開了就會有時間點比較近的 log 可看 ^^|
+23:40:51 <CindyLinz> 如果猜是鍵盤出問題, 也是有機會.. 畢竟我用鍵盤比滑鼠多很多... 用了 xmonad 就更多了 XD   有可能每次當掉的時候我都正在用鍵盤...
+23:41:04 <CindyLinz> 但是之前因為沒有這樣猜測, 所以也沒有特別留意
+23:41:27 <CindyLinz> 我用的鍵盤是日文鍵盤, 比正常鍵盤多五個鍵, 不知道這樣有沒有影響 ^^|
+23:41:47 <letoh> 為什麼用日文鍵盤?
+23:42:00 <hychen> 鍵盤應該是不太會有影響
+23:45:28 <CindyLinz> letoh: 因為是 Panasonic Let's Note 筆電.. 筆電的鍵盤是日文的
+23:45:52 <CindyLinz> letoh: 換成國際版要加 5000~6000 塊, 還少五個鍵... XD
+23:46:07 <CindyLinz> letoh: 而且, 有可能會破壞保固, 店家不保證 o.o
+23:46:17 <letoh> 我也打算弄一個日文鍵盤來用
+23:46:33 <CindyLinz> letoh: 現在用了感覺不錯, 因為多了鍵 XD
+23:46:48 <CindyLinz> letoh: 我把 xmonad 要用的 meta 鍵設到多出來的鍵上
+23:46:48 <letoh> 你會用到那五個鍵嗎? 變成自訂鍵?
+23:46:53 <letoh> 喔喔喔  真棒
+23:47:07 <CindyLinz> 因為我工作需要, 有時候要開 virtual box 裡面開 win8
+23:47:18 <CindyLinz> 所以一般大部分的人用 win 鍵來當 xmonad meta
+23:47:24 <CindyLinz> 我在 win8 裡面的時候就會很干擾
+23:47:30 <letoh> 我現在的鍵盤有少鍵  可是有 tracepoint 又找不到替代品XD
+23:47:55 <CindyLinz> virtualbox 很討厭, 右 ctrl 是 toggle 要不要被 vm capture 按鍵
+23:48:16 <CindyLinz> 可是全螢幕的時候沒有什麼提示可以看出目前是什麼 state
+23:48:22 <CindyLinz> 都要用 try 的 orz
+23:48:50 <CindyLinz> letoh: lenovo 有賣鍵盤啊, 一個大概 2400~2600 左右 :|
+23:49:07 <CindyLinz> thinkpad 鍵盤... 的確是蠻好用的 :Q
+23:49:08 <letoh> virtualbox 有裝 driver 應該是無縫切換的?
+23:49:27 <letoh> 我現在就是啊 ultranav... 還沒換 lenovo 時買的
+23:49:40 <CindyLinz> 那如果我有時候真的要按在 vm 裡面怎麼辦?
+23:49:50 <letoh> focus 要移到 vm
+23:50:01 <CindyLinz> 我開全螢幕, focus 一定在裡面 ^^|
+23:50:24 <letoh> 印象中這樣輸入就會在 vm 裡面呀
+23:50:45 <CindyLinz> 然後就要按右 ctrl 出來, 可是又不確定現在是在裡面還是在外面 orz
+23:50:59 <CindyLinz> 因為如果原本在外面, 那再按一下就會跑進去....
+23:51:01 <letoh> 我後來在使用時不曉得為什麼，變得不需要按 toggle key 就能在 vm 和 host 之間切換
+23:51:27 <hychen> meta 我都設成Super Key
+23:51:37 <CindyLinz> letoh: 你一定是在頭腦裡面 mirror 了一個同步的 state machine!
+23:51:44 <hychen> 話說Super Key基本上其他OS是不能用的
+23:51:45 <letoh> 其實我很少直接這樣用，我就算開了 vbox 也是 ssh 進去操作
+23:51:45 <CindyLinz> hychen: super key 就是 win 鍵呀
+23:52:01 <letoh> ultranav 剛好沒有 win key XD
+23:52:14 <CindyLinz> letoh: 別叫我 ssh 到 win8 裡面啊 Q__Q
+23:52:22 <hychen> CindyLinz, 我以為你碩的其他key是設成日文keyboard才有的key
+23:52:31 <hychen> letoh, 有喔, 我買的就有
+23:52:44 <letoh> 喔喔  你是在 vbox 裝 win8 啊  這樣我就不曉得怎麼玩了XD
+23:52:51 <CindyLinz> hychen: 呃 我說的的確是日文鍵... 叫什麼「無變換」.. 完全不知道原本是什麼意思 ^^|
+23:52:52 <hychen> super key 是因為 license 問題 XD
+23:52:55 <letoh> hychen: 你買的是 ibm 的嗎? 還是 lenovo ?
+23:52:57 <CindyLinz> 喔喔
+23:53:02 <hychen> letoh, lenovo
+23:53:13 <letoh> 我的是 ibm 時代的XD
+23:53:43 <letoh> 還有 touchpad 那一款
+23:54:23 <letoh> http://www.amazon.com/dp/B00009APTK  這個，現在好像買不到了@_@
+23:54:33 <hychen> letoh, ibm的比較好...
+23:54:44 <hychen> 話說我小紅點用久了食指超痛
+23:54:55 <hychen> 就因為這個因故我換到xmonad...
+23:54:59 <letoh> 我沒有比較過耶，不曉得 lenovo 的用起來怎麼樣
+23:55:36 <letoh> 我的小紅點是輔助用，因為我一般都在 terminal，不太需要 pointer...
+23:55:37 <hychen> letoh, lenovo logo看豈不順眼
+23:58:31 <hychen> CindyLinz, 我星期五又聽柯教授講了一次dependent type, 有點抓到那是啥東東 XD

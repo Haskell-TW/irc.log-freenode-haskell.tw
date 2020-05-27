@@ -1,0 +1,5 @@
+18:13:05 <CindyLinz> Monad 的 join :: Monad m => m (m a) -> m a, 有 Functor 或 Applicative 版的嗎?
+19:24:08 <capisce> CindyLinz: 應該沒有
+19:25:28 <capisce> CindyLinz: 有join就可以實現bind
+19:26:13 <capisce> 如果Functor或Applicative有join, 它們跟Monad就是一樣的
+20:26:57 <CindyLinz> 好 謝謝 ._.

@@ -1,0 +1,22 @@
+15:06:47 <suhorngM_> :i (:=:)
+15:06:54 <suhorngM_> :t Refl
+15:06:55 <lambdabot> forall (k :: BOX) (b :: k). b :~: b
+15:07:11 <suhorngM_> !?
+15:07:15 <suhorngM_> :t ($)
+15:07:16 <lambdabot> (a -> b) -> a -> b
+15:08:09 <suhorngM_> Haskell 有這種東西啊... https://hackage.haskell.org/package/type-equality-0.1.0.2/docs/Data-Type-Equality.html
+15:08:24 <suhorngM_> :t Data.Type.Equality.Refl
+15:08:25 <lambdabot> forall (k :: BOX) (b :: k). b :~: b
+15:08:30 <suhorngM_> :t trans
+15:08:31 <lambdabot> Not in scope: ‘trans’
+15:08:31 <suhorngM_> :t subst
+15:08:32 <lambdabot> (Eq a, Num a) => String -> Sym a -> Sym a -> Sym a
+15:08:40 <suhorngM_> :t Data.Type.Equality.trans
+15:08:41 <lambdabot> forall (k :: BOX) (a :: k) (b :: k) (c :: k). a :~: b -> b :~: c -> a :~: c
+15:08:44 <suhorngM_> :t Data.Type.Equality.subst
+15:08:45 <lambdabot> Not in scope: ‘Data.Type.Equality.subst’
+15:16:41 <petercommand> 問題是， haskell 沒有 termination check 阿XD
+15:20:55 <petercommand> suhorngM_: 不過蠻神奇的XD
+19:43:35 <CindyLinz> 有限深度搜索就好啦? 有限深度找不到就說失敗 XD
+19:43:59 <CindyLinz> C/C++ 都這樣, 也沒什麼聽到抱怨... 嗯, 雖然我抱怨過 XD
+19:48:47 <CindyLinz> 是說.. Agda 作過 termination check 以後也沒保證在該台電腦的記憶體限制內能跑得完啦 ^^|

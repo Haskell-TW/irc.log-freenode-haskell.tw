@@ -1,0 +1,149 @@
+00:11:40 <CindyLinz> 別的語言的 generic programming 就是有參數的 type 吧?
+00:13:47 <suhorng> 嗯 然後用的時候代我們要的型態進去
+00:58:07 <suhorng> http://ft.jaiyalas.org/ 嗚呼呼
+00:58:47 <suhorng> 不過地點還在找 :(
+01:00:10 <CindyLinz> 上次的內容有什麼啊, 怎麼還在 TBA... XD
+01:00:31 <suhorng> 這是第一次唷! scm打算辦的~
+01:01:13 <CindyLinz> 哦.. 原來是 2.26 post 的, 不是 2.26 辦的 XD
+01:01:17 <suhorng> 其實現在也還在 call for talks Orz
+01:01:18 <suhorng> XD
+01:01:44 <CindyLinz> 那.. 趕快多踩幾個地雷, 就可以去分享了?
+01:01:53 <CindyLinz> 然後就把剛入門者嚇跑了... wwww
+01:02:00 <suhorng> XDD
+01:02:35 <suhorng> scm是希望這個分享偏業界、實務向(?)
+01:03:16 <suhorng> > jaiyalas 寫道：
+01:03:16 <lambdabot>   mueval: recoverEncode: invalid argument (invalid character)
+01:03:17 <suhorng> >> 基本上我們設定的聽眾是以業界的人為主
+01:03:17 <suhorng> >> 議題設定上也會比較希望是偏向實務上的講題
+01:03:17 <suhorng> >> 當然也不限定 haskell
+01:03:19 <CindyLinz> 「WE WANT YOU! (小標) FP 是個危險的領域.. (換行) 你．準備好了嗎?」
+01:03:42 <suhorng> CindyLinz: 好險 logo 沒有 λ
+01:03:56 <CindyLinz> λ怎麼樣了嗎?
+01:04:59 <suhorng> λ不是FP邪教常用的標誌嗎(大誤)
+01:05:36 <CindyLinz> 喔.. XD
+01:05:48 <CindyLinz> 我想到了刺青.... XD
+01:11:31 <suhorng> letoh: ShikChen: 你們有興趣嗎~？
+01:11:41 <letoh> meetup ?
+01:11:42 <suhorng> 雖然是第一次辦, 可能不太穩定
+01:11:50 <letoh> 可是我不在台北呀@_@
+01:11:58 <suhorng> 噢噢QQ
+01:12:18 <CindyLinz> 也就是如果不參加的話, 以後也可能就沒機會了, 請積極把握.. :D
+01:12:24 <letoh> 我現在只固定去 pyhug... 原因是回家順路XD
+01:12:38 <letoh> 剛好在公司跟住處的中間XD
+01:13:09 <suhorng> 嗯@_@ 這真的沒辦法了 我也有認識幾位朋友但都不在台北..
+01:13:21 <letoh> CindyLinz: 你已經預知了結局嗎? XD
+01:13:31 <CindyLinz> letoh: 這是廣告詞!
+01:14:10 <CindyLinz> 就像我家附近夜市裡有好幾間店, 衣服或鞋子的都有, 結束營業清倉拍賣已經持續一年多了.....
+01:14:49 <suhorng> letoh: 這個性質是小聚會 分享會這樣, 看時間是會有兩個講者(?)、分別三十分鐘
+01:15:20 <letoh> 大概就跟 pyhug meetup 差不多吧  每次兩個小時左右
+01:15:58 <suhorng> 嗯!
+01:16:32 <CindyLinz> 不過我覺得 functional programming 的應用的例子... 比 python 少非常多呀
+01:16:41 <CindyLinz> 不知道老師會怎樣生主題呢 :|
+01:17:25 <letoh> 我覺得 python 也沒有想像中的多，感覺科學研究類的比較多
+01:17:52 <CindyLinz> 那可能平常在應用的人去的比較少?
+01:18:21 <CindyLinz> 可以去拋一個問題, 然後大家一起來 debug 嗎? :p
+01:18:32 <letoh> 大概吧，不過 python 已經做好 numpy 這些工具，用起來很方便
+01:18:38 <suhorng> 真的, 而且 Haskell 到 "實用" 的話感覺門檻有點高
+01:18:57 <CindyLinz> 遇到問題沒人問啊... :(
+01:19:19 <suhorng> 拋問題那個可能也要寄信問問看 jaiyalas XD
+01:20:30 <suhorng> 明早有課 先下了 :Q
+01:20:36 <CindyLinz> 掰掰 :p
+01:24:16 <letoh> 可以叫 hychen 去，他應該有興趣
+10:46:19 <cataska> 想去，打打醬油
+11:42:50 <favonia> MnO2: 早知道就用 io-stream 先寫個什麼 parser 都好...
+11:43:07 <favonia> 可以 10 分鐘後馬上 release
+11:44:09 <favonia> 是說不知道能不能跟 C++ 的人說「喔！有啊我們有 iostream （誤）」
+13:04:14 <CindyLinz> favonia: 留言給你 :p
+13:06:00 <CindyLinz> 上次那個我想用 switch..case 的情, 發現 ghc 7.6 有個 extension http://www.haskell.org/ghc/docs/7.6-latest/html/users_guide/syntax-extns.html#multi-way-if
+13:06:10 <CindyLinz> 7.4 好像還沒有
+13:06:24 <CindyLinz> 不過它倒是提示了一個 old-style method XD
+13:06:53 <CindyLinz> case () of _ -> guard1 -> ... ; _ -> guard2 -> ...
+13:08:23 <CindyLinz> 另外, 昨天那個 profiling 的問題
+13:08:41 <CindyLinz> 我悄悄發現 ubuntu 有個 ghc-prof 套件..
+13:08:51 <CindyLinz> 裝了它.. base 就有 profiling 版了
+13:09:04 <CindyLinz> 不過還是有一堆 package 沒有 profiling 要重編
+13:09:36 <CindyLinz> 它們重編倒還算順利.. 雖然會一再 report 說, 又發現新的需要重編的 package....
+13:09:45 <CindyLinz> 時間花下去, 就編出來了 :Q
+13:23:32 <mno2_> CindyLinz: base 跟 ghc 綁一起，所以基本上一定要裝系統或整個重 build ghc 吧
+13:25:55 <CindyLinz> 不早說 XD
+13:47:25 <miaout17> 王垠又把他的文章貼回來了 http://blog.sina.com.cn/s/blog_5d90e82f0101ip7f.html
+13:47:34 <CindyLinz> XDD
+13:47:40 <CindyLinz> 他到底在糾結什麼啦
+13:48:06 <CindyLinz> 不過我也是覺得 linux 的 X 的走向很悲劇
+13:48:14 <_13h> 快備份XD
+13:48:58 <CindyLinz> 覺得它現在的方向是要讓 user 覺得親和.. 但是做得很不好呀.. 反而讓它穩定與功能豐富的特性減色了
+13:49:00 <_13h> CindyLinz: 有的系統，有編輯文章的話，文章會暫時回到 draft pool
+13:49:15 <_13h> 不會馬上被放出來
+13:49:28 <_13h> 曾經 publish 過也一樣
+13:51:03 <CindyLinz> 嗯嗯
+13:55:50 <cataska> 這個人太錯亂了
+14:01:49 <b4283> _13h: 有提到 fvwm XD
+14:02:04 <_13h> 我看看XD
+14:02:41 <b4283> 他還罵 Knuth 的東西沒人懂XD
+14:16:49 <CindyLinz> 可是他講的東西感覺還蠻有料的說
+14:28:18 <b4283> 看到他用 Writer 那段，最後面完全不懂為啥 return (a*b) 會有 context，重看了一遍 Do notation 那一節...
+14:29:30 <b4283> 現在的疑問是不知道該怎麼看待 logNumber 3 >>= (\x -> logNumber 5 >>= (\y -> return (x*y))) 這段代碼的 evaluation order
+14:33:30 <b4283> 另外我想用 Control.Monad.Writer 發現那個 module 好像換定義了，example code 用不上
+14:33:43 <b4283> 變成 WriterT (?)
+14:54:28 <CindyLinz> Writer w a = WriterT w Identity a
+14:54:43 <CindyLinz> 就是 WriterT 下面墊一個 Identity monad
+14:54:53 <CindyLinz> 這樣他就只要寫 WriterT, 不用再寫一遍 Writer
+15:08:30 <b4283> 不曉得 Identity @@
+15:09:27 <CindyLinz> 一個很無聊的 monad
+15:09:33 <CindyLinz> 什麼事都沒做, 也沒有 state
+15:09:41 <CindyLinz> 根本就是 pure 的 XD
+15:10:37 <CindyLinz> http://hackage.haskell.org/packages/archive/transformers/0.3.0.0/doc/html/Data-Functor-Identity.html
+15:10:55 <_13h> 類似 lambda x: x 嗎?
+15:11:13 <CindyLinz> 是
+15:11:24 <CindyLinz> lambda x: x 是 function 的單位元
+15:11:30 <CindyLinz> Identity 是 monad 的單位元
+15:18:09 <miaout17> @pl \x -> x
+15:18:10 <lambdabot> id
+15:18:53 <miaout17> @run map id [1,2,3]
+15:18:55 <lambdabot>   [1,2,3]
+15:27:23 <CindyLinz> 也有 IdentityT.. XD
+20:29:18 <mno2> http://blog.sina.com.cn/s/blog_5d90e82f0101iq0n.html
+20:29:23 <mno2> http://blog.sina.com.cn/s/blog_5d90e82f0101ipap.html
+20:29:39 <mno2> 要看的請快，免得又消失了 wwwww
+20:30:12 <letoh> 竟然是 oberon
+20:30:37 <letoh> design pattern 今天才看完  還丟給主管看XD
+20:30:50 <suhorng> 喔喔喔耶耶!!
+20:31:36 <suhorng> 快備份(X
+20:32:01 <letoh> niklaus wirth 有很多有趣的東西  像 lilith 電腦
+20:33:11 <letoh> 然後我看的第一本資料結構的書，用 modula-2 實作範例程式
+20:39:42 <letoh> 先丟到 kindle 裡備份XD
+20:39:43 <suhorng> 他說的作業系統聽起來好玄@_@"
+20:39:54 <letoh> oberon 嗎?
+20:39:55 <suhorng> 很難想像會有那麼高階的硬體來支援
+20:40:27 <suhorng> 不是，那個「这里是我的设想：」接下來一大段
+20:41:49 <suhorng> 或說..就算使用現有的硬體, 如果是這麼高級的語言要轉成能給機器執行的碼也不容易吧？
+20:52:31 <mno2> 我記得 lisp machine 有做出來，只是很貴的樣子
+20:52:43 <letoh> 有照片吧?
+20:53:41 <letoh> suhorng: 他設想的那個  好像 forth os...不過 forth 基本上沒有 type
+20:55:41 <letoh> 每個程式都是一個函式，ipc 是靠 stack (也可以用其他方式)
+20:57:44 <suhorng> mno2: 有聽說過@_@
+20:58:15 <suhorng> 可是後來 PC 發展太快速度超過了 就沒了的樣子
+20:59:06 <suhorng> letoh: 好像也可以用 forth 疊出來XD 不過這樣我對下面記憶體之類的架構就更不理解了QQ
+20:59:17 <mno2> 這時候要套用 劣即是夯嗎？ wwww
+20:59:58 <letoh> 完美的 forth sysmte 就是從 cpu 到 os 都是 forth 啊
+21:00:24 <letoh> 不過 forth cpu 不多，現在有的也都是用 fpga 搞出來的 (例如 j1)
+21:02:13 <suhorng> 歷史的慣性.. :| x86裡面很多糟糕的為了向下相容的東西....
+21:04:53 <mno2> 如果有個系統 cpu 跟 os 都是 whitespace 的話好像蠻有梗的 wwwwwww
+21:05:25 <mno2> 還有變形版，草泥馬
+21:05:34 <letoh> XDXD
+21:07:34 <suhorng> XDD
+21:08:22 <letoh> 以前不是有個笑話說黑進 gnu 的主機，結果拿一堆括號出來證明嗎... 如果是 whitespace 的話...
+21:10:10 <suhorng> (... (..) (... (...) ...) (...) ... ( ... ( .... .... ))))))))))))))))
+21:11:59 <letoh> Io 也可以搭配 L4 變成 IoL4
+21:13:18 <letoh> 剛剛 google 一下發現  "TFLC is a very small and experimental Haskell engine."
+21:17:05 <letoh> 好像有 compiler
+21:20:08 <letoh> http://www.a2.ethz.ch/  # oberon 開發的 os ?
+21:23:06 <suhorng> letoh: http://not.meko.dk/Hacks/hacks.html This?
+21:23:40 <letoh> 看一下這個版本有沒有比較新
+21:24:21 <suhorng> TFLC實在找不到什麼資料..
+21:24:28 <letoh> suhorng: 上次不是有聊到把 c 當 vm 指令嗎... 你可以看一下這一套的實作XD
+21:24:57 <letoh> 我手邊的也是 0.16... 現在編譯會有問題
+21:26:57 <suhorng> QQ
+21:45:59 <mno2> http://www.youtube.com/user/cdsmithgoogle
+21:46:17 <mno2> Haskell Video Collection on youtube
+22:49:28 <b4283> mno2: nice link

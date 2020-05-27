@@ -1,0 +1,3 @@
+06:34:53 <caasihuang> 看到一個還沒有 GC 跟 lazy eval 的 Haskell to wasm compiler
+06:34:59 <caasihuang> https://dhc.dfinity.org/
+06:35:31 <caasihuang> 來源 https://www.reddit.com/r/haskell/comments/7cy86h/a_haskell_to_wasm_compiler_wow/?st=JA074GLF&sh=0e9d6bcc

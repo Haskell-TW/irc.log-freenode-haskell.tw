@@ -1,0 +1,71 @@
+09:08:41 <gansteed> >:t return
+09:10:08 <gansteed> return :: Monad m => a -> m a, learnuahaskell上总是说return/pure是put a value in a minimal context, minimal context该怎么理解呢？
+09:10:38 <gansteed> PS, 有lambdabot的使用说明吗？
+09:26:18 <petercommand> @help
+09:26:19 <lambdabot> help <command>. Ask for help for <command>. Try 'list' for all commands
+09:26:40 <petercommand> @list
+09:26:40 <lambdabot> What module?  Try @listmodules for some ideas.
+09:28:51 <petercommand> gansteed: https://wiki.haskell.org/Lambdabot #這裡有一些簡單的說明
+09:33:19 <gansteed> petercommand, thanks, :)
+09:59:41 <suhorngM_> gansteed: 私心覺得那些解釋(minimal context)不懂無妨
+10:00:57 <suhorngM_> gansteed: 從例子下手熟悉之後再回來看, 可能是不錯的方向
+10:01:20 <petercommand> ++
+10:34:34 <CindyLinz> ++
+10:41:33 <gansteed> 嗯， 好的， 谢谢
+10:42:09 <gansteed> 看多了几个还是有点感觉的
+11:00:59 <suhorngM_> * 覺得那些描述是比喻
+11:01:38 <suhorngM_> 像是說, State Int a 就是帶著一個 Int 狀態的 context
+11:01:55 <suhorngM_> return x 就把 x 放進這樣的一個 context 中
+11:13:58 <CindyLinz> 那些是給數學家開心的比喻, 因為他們的背景知識對這種性質比較熟; 對非數學家來說, 反而是比 Haskell 程式本身還陌生的東西
+11:14:38 <CindyLinz> 欸可能不是比喻啦.. 是真有那個性質 ^^|
+11:59:08 <suhorngM_> 唔, context 是個數學描述嗎
+12:06:53 <CindyLinz> minimal 這種形容詞怎麼看怎麼像 XD
+12:07:48 <suhorngM_> XDD
+12:07:52 <CindyLinz> 理解了這個..... 也沒什麼幫助啊 :Q
+12:08:04 <CindyLinz> 就像 fix 裡寫個... minimal fix point..
+12:08:13 <CindyLinz> 所以咧?
+12:08:17 <CindyLinz> 好棒棒...
+12:09:23 <suhorngM_> _|_
+12:09:47 <CindyLinz> 不對 這個不是 minimal... 是 least... 雖然我覺得好像同義 XD
+12:10:30 <CindyLinz> 書本沒頭沒尾丟這個辭出來嗎? @@"  如果沒有附上什麼叫作 context 的比大小, 這樣很不負責任吧 XD
+20:18:43 <suhorngM_> 嗯...剛才本來想要 foldr (>=>) return, 想想才發現不能這樣做囧, 我原本想要的是後面接不同 type 的 monad action
+20:39:30 <CindyLinz> suhorngM_: 那就來個 sum type.. (X
+20:42:56 <petercommand> :t (>=>)
+20:42:56 <lambdabot> Monad m => (a -> m b) -> (b -> m c) -> a -> m c
+20:43:15 <petercommand> :t foldr
+20:43:16 <lambdabot> (a -> b -> b) -> b -> [a] -> b
+20:46:08 <petercommand> suhorngM_: 不太懂你的意思..XD
+20:46:43 <CindyLinz> :t foldr (>=>)
+20:46:45 <lambdabot> Monad m => (b -> m c) -> [b -> m b] -> b -> m c
+20:47:05 <CindyLinz> 可是他想要的 action 不是 b -> m b, input 和 output 的 type 不一樣.. so...
+20:47:22 <petercommand> 阿...我把 (>=>) 看成 infix operator 了..www
+20:48:49 <petercommand> 這樣不能用 [] 吧..
+20:50:33 <petercommand> [] 接不下去呀..XD
+20:50:58 <petercommand> [forall b c . b -> m c]
+20:51:44 <suhorngM_> petercommand: 這樣也不行XD 前後串不起來
+20:52:06 <petercommand> 對阿，這樣限制太少了..XD
+20:52:30 <suhorngM_> 需要能表達 exists a1 a2 a3 a4 .... a -> m a1 a1 -> m a2 a2 -> m a3 ...
+20:54:19 <suhorngM_> 說錯, 不是串不起來...一般不是這麼 general 的 type
+20:58:01 <pkmx> 只好用 Data.Dynamic 了 =p
+21:22:18 <CindyLinz> suhorngM_: 可以給一下你要的 action 實際上是什麼 type 嗎?
+21:28:42 <suhorngM_> CindyLinz: 剛才是想要弄 Account → Maybe Address, Address → Maybe City, City → Maybe String
+22:00:48 <CindyLinz> 然後不想寫兩次 >>= 違法 DRY 原則喔? @@"
+22:13:41 <suhorngM_> 不是, 一時興起以為可以寫 dependentSequence [getAddress, getCity, getName] 之類的東西
+22:13:51 <suhorngM_> 是用 (>=>) 跟 return 串起來這樣
+22:44:02 <pkmx> 你需要這樣的東西 =p # http://ideone.com/eauCk9
+22:48:17 <CindyLinz> 看起來好像更長呀.. (汗
+22:52:01 <suhorngM_> (:::)....總之是好好的把 type 保存下來了www
+22:52:09 <suhorngM_> 看起來真是 Agda
+22:54:23 <CindyLinz> suhorngM_: HList 可以用嗎? XD
+22:55:24 <pkmx> CindyLinz: 只要有一點語法糖就不會長xk7
+22:55:30 <pkmx> 了*
+22:55:39 <suhorngM_> 對耶! Hlist 是 IsList 嗎?
+22:56:01 <pkmx> 不是...
+22:56:13 <suhorngM_> QQ.....
+22:56:20 <CindyLinz> pkmx: 語法糖是權貴才能用的 QQ
+22:56:51 <suhorngM_> RebindableSyntax
+22:57:24 <CindyLinz> RedefinedableHaskell
+22:57:58 <suhorngM_> Idris
+22:58:04 <pkmx> 沒辦法的話就用 [arrowList|const getLine, putStrLn|] 反正跟原本 List 長得差不多 (?)
+22:58:45 <pkmx> 再加上instance arugment位置可以變換就搞定了!
+23:00:12 <suhorngM_> XDDDDD

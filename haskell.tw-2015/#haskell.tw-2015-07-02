@@ -1,0 +1,23 @@
+00:51:44 <mno2> 結果今天講 hindley milner 台下一片眼神死..
+00:52:11 <mno2> 這主題要講好太難了，下次不要挑這麼吃力不討好的主題了 xD
+00:52:27 <mno2> __Z2suI3horI2ngE 明天請加油！
+00:52:31 <CindyLinz> 幹嘛嚇 __Z2suI3horI2ngE  XD
+00:52:58 <mno2> 我還已經吸取第一次的經驗把投影片再改更詳細了
+00:53:18 <mno2> 我真的想不出來要怎麼要能講得更簡單了
+00:53:43 <CindyLinz> 你第一次經驗... 沒辦法從聽眾的表情作 feedback @@"
+00:53:55 <CindyLinz> 出現代溝惹 XDXD
+00:54:21 <mno2> 我可以從頻道一片靜寂了解到 xD
+00:55:38 <mno2> 下次還是講點 project 之類的東西
+00:56:20 <CindyLinz> 剛學會的時候最容易教人
+00:56:56 <monochrom> 可能不應詳細
+00:57:27 <mno2> monochrom: 那你看過最好的教法是？
+00:57:48 <mno2> 但 unification algo 一定要講吧？
+00:57:56 <monochrom> 亦可能不應原汁原味的 hindley milner
+00:58:32 <monochrom> 我最喜歡 Types and Programming Languages 裏的說法
+00:58:50 <mno2> 沒看過那一本，改天拿出來翻翻
+01:00:04 <mno2> 我覺得不要詳細的方向是對的
+01:00:19 <mno2> 但 hindley milner 但難用譬喻法去描述了
+01:00:32 <monochrom> 先見過 type checking rules (注意未 inference, 一會才是). 然後頗有系統地改成 type inference rules.
+01:01:15 <monochrom> 但 type inference rules 也未說 unification, 只說生出甚麼 equations 待解
+01:03:31 <monochrom> 最後才說 unification 識解. 但也未必一定教原汁原味, 最優化的算法. 可能教個慢些但道出主旨的算法
+01:04:43 <mno2> 我還沒理解到那個境界，知道怎麼修改變形最簡單

@@ -1,0 +1,19 @@
+00:02:18 <suhorng> Haskell 提供的 array 原來都會好好的檢查 index....
+00:03:40 <suhorng> vanilla array XDDD https://hackage.haskell.org/package/AC-VanillaArray-1.1.2/docs/Data-Array-Vanilla-Unsafe.html
+00:03:53 <suhorng> 取名字很可愛
+00:09:17 <CindyLinz> suhorng: 主打 Efficient Arrays 的 Data.Vector 就會有 unsafe 版本不檢查邊界的 access 函數.. :p # http://hackage.haskell.org/package/vector-0.10.12.3/docs/Data-Vector-Mutable.html
+00:09:40 <CindyLinz> http://hackage.haskell.org/package/vector-0.10.12.3/docs/Data-Vector-Mutable.html#g:10
+00:10:23 <CindyLinz> suhorng: 來用 vector 的 unsafeRead unsafeWrite unsafeSwap 實作 unsafeCoerce 吧~~
+00:12:08 <suhorng> CindyLinz: !!!!! 糟了完全沒聽過 Data.Vector, 這樣講應該用這個的
+00:13:10 <suhorng> 喔喔 一堆 "!" 真好
+00:13:35 <CindyLinz> 這個是實用向的..
+00:13:41 <CindyLinz> 可食用..
+00:15:10 <suhorng> (Y)
+00:15:42 <suhorng> (!?) :: Unbox a => Vector a -> Int -> Maybe a    -- O(1) safe indexing XDDDDDDD
+00:16:12 <suhorng> 是某種 (arr!?5).map(....).unwarp() 的概念嗎（誤）
+00:16:19 <suhorng> .unwrap
+00:16:40 <CindyLinz> maybe "sad" id (myData !? 20)
+00:17:08 <CindyLinz> 算了.. Haskell 不適合寫詩
+00:17:47 <suhorng> xDDDDD
+00:17:59 <suhorng> Perl 優勢可大了
+00:18:38 <CindyLinz> XD

@@ -1,0 +1,25 @@
+01:14:53 <CindyLinz> 啊啊, 趕快來準備 orz
+01:53:13 <monochrom> MonadFix 很好玩 :)
+22:50:44 <hashcat> idris真強大
+22:58:03 <yulin> 怎麼會談到 idris 很強大？我錯過了什麼嗎？
+22:59:20 <hashcat> 我看著亂入的
+22:59:23 <letoh> 應該超展開XD
+23:00:52 <hashcat> macro不是lisp的專利了
+23:01:05 <letoh> 本來就不是啊
+23:01:21 <hashcat> 有前例?
+23:01:40 <letoh> 不過 lisp 的強大有一部份來自 macro，我想這點應該沒異議
+23:02:42 <hashcat> idris的syntax extension貌似還強大過lisp的macro
+23:03:29 <letoh> lisp macro 還不夠強嗎?
+23:04:22 <hashcat> idris沒套滿括號了
+23:04:39 <hashcat> 看起來就是可以設計另一個語言
+23:04:52 <hashcat> 順便沿用型別系統的各功能
+23:06:09 <hashcat> main = do for x in [1..10]:
+23:06:11 <hashcat>                     putStrLn ("Number " ++ show x)
+23:06:12 <hashcat>                     putStrLn "Done!"
+23:06:20 <hashcat> 排版爛了
+23:06:45 <hashcat> 一個長得跟python一樣的for
+23:11:28 <hashcat> 還能自訂型別要不隱轉換
+23:13:01 <letoh> idris 看起來真像 haskell
+23:22:49 <hashcat> 另一個dependent type
+23:23:05 <hashcat> 沿用haskell語法的程度比Agda多
+23:44:44 <YuLin> 看到 for 還真有點不舒服

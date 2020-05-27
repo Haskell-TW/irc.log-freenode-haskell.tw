@@ -1,0 +1,45 @@
+00:26:33 <favonia> CindyLinz: 感覺 network 套件是給你一個"低階"但是很慢的建議 xD
+00:28:14 <CindyLinz> favonia: 它的 connectTo / listenOn / accept 有比較高階啦
+00:28:27 <CindyLinz> 就不用選什麼 FAMILY 那些的 XD
+04:53:55 <favonia> miaout17: 我把 HTTP 相關的程式碼移出去變成新的模組了
+04:54:02 <favonia> 現在程式碼又變得更漂亮了哈哈
+11:25:22 <miaout17> favonia++
+11:25:36 <miaout17> https://github.com/g0v/encoding-mashup-server/blob/new-server/src/Utils.hs#L88-L92 小問題，Content-Range重複了
+11:26:05 <favonia> lol 顯然是複製貼上時改錯了 lol
+11:26:48 <favonia> miaout17: 我現在已經不敢看 RoR 有沒有正確 parse If-Match 了...
+11:27:13 <favonia> Python 那個好像無法 parse "If-Match: *"
+11:28:11 <favonia> 其實我也不確定我有沒有寫對，但我相信至少結構是對的（也就是說也許有 bug 但不用改太多就可以改好）
+11:36:51 <favonia> miaout17: 嗯應該是多的。我剛才檢查一下 Content-* 清單
+11:37:56 <favonia> miaout17: 這個其實算有用的，就是未來如果多新格式，伺服器不會無緣無故無限「向上相容」
+11:38:03 <favonia> 類似版本相依有個上界這樣
+11:38:15 <favonia> 如果現在不檢查，以後就是看起來可以跑但結果整個爆炸
+11:38:32 <favonia> 例如以後大家惡搞 JSON 弄出像是 jsonp 還是什麼東西之類的
+11:39:00 <favonia> 不檢查 Content-Type 根本不知道已經爆炸了
+11:39:37 <favonia> 要是碰巧格式跟原來 JSON 有相近之處，正好 parse 成功，就多了一個永遠沒辦法 de 的 bug xDDD
+12:45:54 <favonia> miaout17: 天啊，我仔細再讀 HTTP 1.1 又發現很多實作不精確的地方 lol
+12:46:30 <favonia> 這種文件到底是給誰看的...
+12:57:33 <CindyLinz> IE 都看附檔名不看 content-type 的... orz
+15:18:31 <miaout17> 在看LiveScript....語法像Haskell很有趣，但syntax sugar實在好多…
+15:21:39 <CindyLinz> 不是 sugar, 是 sweetener..!
+15:22:29 <CindyLinz> syntax sugar 吃多了只會致癌而已..
+15:23:38 <c9s> 你確定 livescript 那個是 syntax sugar 嗎 XDDD
+15:23:42 <miaout17> favonia: 講到HTTP(1.0/1.1)撞過不少有趣(?)的問題。例如HTTP 1.1沒有明文說GET不能帶request body，其實是可以帶的，但99%的人不會想到
+15:24:21 <miaout17> CindyLinz: c9s: 讓我想想他會不會致癌…
+15:57:41 <b4283> sweetener 吃多了才會致癌吧？
+16:27:17 <CindyLinz> b4283: syntax sugar 吃多了會致癌是諺語啦 :p
+16:27:29 <CindyLinz> 原文是這樣 Syntactic Sugar Causes Cancer of the Semicolon
+16:33:07 <b4283> ahh :D
+18:20:43 <favonia> miaout17: 那你知道 DELETE 也沒有明文說不能帶 body 嗎 xD
+20:21:13 <mno2> https://www.coursera.org/course/fe   ,  CindyLinz 有興趣嗎？
+20:35:19 <favonia> miaout17: mno2: 我覺得我寫出可怕的東西了 xD https://github.com/g0v/encoding-mashup-server/blob/93fee10a098033143418777331ea26d0dc98c604/src/Utils.hs#L72
+20:43:21 <mno2> favonia: assigned 是指？
+20:43:53 <favonia> 有 handlers 的 method
+20:51:26 <mno2> 還好吧？ 你的可怕是指也許應該Framework要處理掉？
+20:59:17 <favonia> mno2: 我不太確定
+20:59:27 <favonia> mno2: 這是 refactor 幾次以後才變成這樣子 xD
+21:51:02 <mno2> favonia, miaout17: 我把CSS改成用Clay，要改CSS請改Clay然後生成
+21:58:59 <mno2> 話說 js 版的 diablo 真是蠻誇張的
+22:14:56 <miaout17> js版diablo我打開一下就關了，有何特殊之處嗎？
+22:28:19 <mno2> 誇張的意思是說，什麼東西都要變 web,  xD
+22:43:30 <CindyLinz> mno2: financial.. 不熟 :|
+22:44:46 <mno2> 好吧

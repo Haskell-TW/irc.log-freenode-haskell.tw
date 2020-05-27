@@ -1,0 +1,8 @@
+19:40:08 <savi0r`> hi
+20:16:13 <savi0r> 新手求教
+20:17:46 <savi0r> http://paste.ubuntu.com/15478948/  这个函数我不知道是什么意思呢?
+20:17:53 <savi0r> 没有看明白
+21:46:46 <CindyLinz> 那你執行看看呀?
+21:47:58 <CindyLinz> 它會比對吃進來的字串是不是 "downright frosty yo"
+23:18:11 <pkmx> @djinn [[a] -> a] -> [a]
+23:18:11 <lambdabot> Error: Undefined type []

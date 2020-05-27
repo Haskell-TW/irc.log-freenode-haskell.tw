@@ -1,0 +1,9 @@
+16:11:35 <suhorng_________> http://cpptruths.blogspot.tw/2014/03/fun-with-lambdas-c14-style-part-1.html
+16:11:37 <suhorng_________> http://cpptruths.blogspot.tw/2014/05/fun-with-lambdas-c14-style-part-2.html
+16:30:19 <suhorng_________> @pl \a -> ContT $ \_ -> k (Left a)
+16:30:21 <lambdabot> ContT . const . k . Left
+18:06:13 <petercommand> au: 用了一下atom後，感覺他的自動縮排的功能不是很好用...
+18:18:10 <au> petercommand: OK~ source 都可以改，也可以開 issue 請人改...
+18:19:52 <petercommand> 恩
+22:28:23 <suhorng> https://www.cs.utah.edu/~mflatt/past-courses/cs7520/public_html/s06/notes.pdf 剛開始看，入門但也滿流暢好看的XD （src: https://www.cs.utah.edu/~mflatt/past-courses/cs7520/public_html/s06/）
+22:28:42 <suhorng> 這是後來找到的最新版lol http://www.cs.utah.edu/plt/publications/pllc.pdf

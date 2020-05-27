@@ -1,0 +1,95 @@
+12:10:45 <mgccl> 哇
+12:10:49 <mgccl> https://haskell.fpcomplete.com/beta school of haskell
+12:12:01 <favonia> logo 要怎麼看出是 FP?
+12:13:33 <_13h> favonia: 3D ?
+12:13:54 <_13h> 把 FP 兩個字扭在一起，就變那樣了？
+12:14:15 <mgccl> 我看出了F和C...
+12:14:18 <_13h> 灰色的是 C(omplete)
+13:20:45 <MnO2> 如果可以進入他們 beta site 的話可以再去試一下 unicode 的問題
+13:22:03 <favonia> 隨便按按就可以進入了（？）
+13:33:04 <cataska> 填上 email 沒多久就收到邀請了
+13:33:04 <MnO2> 我打  "測試unicode"
+13:33:13 <MnO2> 他會回 "\28204\35430unicode"
+13:34:42 <MnO2> 原則上是沒錯，不過好像顯示中文會比較好？
+13:36:52 <MnO2> 用類似 lambda bot 的方式解析，而且還禁用不少 function, 應該是用白名單的方式
+13:44:48 <mgccl> 没多久收到邀请.. 是多久...
+13:46:30 <_13h> 睡一覺醒來發現信箱中出現...(ry
+13:47:07 <mgccl> 好久啊受不了了>.<
+14:01:22 <MnO2> 我大概是一個多小時收到
+14:12:04 <cataska> mgccl: 一個小時內
+14:12:22 <mgccl> 估计申请的人太多了我到现在都没有拿到...
+14:12:49 <cataska> 大概是因為上了 Hacker News 的關係...
+16:07:53 <hychen> 申請什麼?
+16:14:42 <_13h> 我還沒收到信耶XD 大概中午填的
+16:14:56 <_13h> hychen: school of haskell
+16:15:11 <hychen> where is the link?
+16:15:22 <_13h> https://haskell.fpcomplete.com/beta
+16:15:58 <suhorng> 還沒收到+1
+16:16:08 <hychen> sent!
+16:16:44 <_13h> hychen: 你現在才申請，可能要等一個月 (大誤
+16:16:54 <hychen> _13h, ....
+16:17:19 <hychen> _13h, section 3 開始講high order function , closure了, 主菜上場
+16:17:30 <_13h> 哇!! 想聽 closure
+16:18:20 <_13h> 我對 closure 的行為有點問題  還沒空去找答案XD
+16:19:05 <_13h> hychen: 你現在修多少課啊?
+16:19:17 <hychen> _13h, only 1
+16:19:29 <_13h> 這樣感覺好像還好?
+16:20:00 <_13h> fpcomplete 的 school of haskell 之前好像有先放出三段影片，但我沒看@_@
+16:20:57 <hychen> _13h, 每週有兩個晚上上英文...
+16:21:32 <hychen> _13h, 一個課一星期大概要花10小時左右
+16:21:37 <_13h> 所以你除了數學課還有英文課啊? 開始感覺累了XD
+16:21:49 <hychen> _13h, 我指coursra
+16:22:14 <_13h> 喔喔，一門課要上兩天/週... 也是累XD
+16:23:33 <cataska> 我也有修 Programming Languages XD
+16:25:06 <_13h> "Please use a modern browser with JavaScript enabled to use Coursera."
+16:25:21 <_13h> 幹嘛排擠我的 chrome...
+16:26:11 <_13h> 哇  我想試試 NLP，不過完全沒基礎不曉得會不會鴨子聽雷XD
+16:26:50 <cataska> 最近有時候會出現這一串字...
+16:26:52 <_13h> cataska: 現在來得及旁聽嗎?
+16:26:57 <hychen> cataska, 我challenge 的作業都沒做 XD
+16:27:18 <cataska> _13h: 可以啊才到第三周
+16:28:09 <cataska> hychen: 第三周的還沒看，第二周的 challenge 不會寫 XD
+16:28:31 <hychen> _13h, 應該可enroll吧
+16:28:53 <hychen> 我覺得跟PL concept 沒太大關係, 所以就沒做了
+16:29:34 <cataska> 第二周作業一堆 case of 看起來好醜
+16:30:53 <hychen> 不用case啊
+16:30:58 <hychen> 我都沒用case
+16:30:59 <_13h> 竟然還有音樂課...
+16:33:26 <cataska> hychen: 第二周不是規定要用 pattern matching ?
+16:34:05 <cataska> 難道我被騙了？
+16:35:46 <_13h> hychen: 你說的 intro to logic 是四月開的那個嗎?
+16:54:43 <mgccl> ...大家都在讨论上课, 感觉像是学生时代...
+17:14:09 <hychen> _13h, yes
+17:14:22 <hychen> cataska, 可以用nested pattern matching不是嗎?
+17:14:43 <hychen> cataska, 然後可以用 function pattern matching
+17:14:52 <hychen> cataska, 這樣就不須要case
+17:17:26 <hychen> oh, 我還是有用case啦, 但是很少
+17:17:37 <cataska> hychen: 我體會一下...
+17:18:21 <hychen> case match 可以轉成 function match
+17:18:26 <hychen> 這video上有說
+17:18:32 <hychen> 然後說你可以挑一個喜歡的
+17:18:38 <hychen> 我比較喜歡function match
+17:18:52 <hychen> 比較像數學
+17:19:20 <cataska> 像 haskell 這樣
+17:22:26 <_13h> http://www.scs.stanford.edu/11au-cs240h/notes/ghc-slides.html#(7)  # Pipeline of GHC
+19:00:18 <suhorng> http://www.haskell.org/haskellwiki/The_JavaScript_Problem
+19:00:25 <suhorng> 真的什麼都可以編成 javascript 嗎 XDDDD
+19:00:57 <hychen> 那這樣也可以編成python吧 XD
+19:01:01 <hychen> keyword 也很少
+19:04:15 <suhorng> XDD
+19:05:08 <suhorng> https://github.com/jashkenas/coffee-script/wiki/List-of-languages-that-compile-to-JS
+19:05:19 <suhorng> list of languages that compile to JS..是有沒有這麼多
+19:08:07 <_13h> 編成 python 可以有什麼好處嗎？
+19:26:08 <_13h> 我覺得編譯成 python 還不如編譯成 jvm bytecode 或 dalvik bytecode，還可以丟到某些平台跑
+19:36:35 <suhorng> 編成 jvm bytecode 感覺不錯
+19:53:19 <hychen> cataska, 作業2的all_same_color, 當輸入[]時，他要的answer是什麼?
+20:11:38 <hychen> https://class.coursera.org/proglang-2012-001/forum/thread?thread_id=1681&post_id=8392
+20:11:50 <hychen> 正確答案居然是true...
+20:26:13 <letoh> 沒 login 看不到XD
+20:33:47 <hychen> all_same_color([])
+20:34:11 <hychen> the topic discuss the except result of all_same_color
+20:37:05 <hychen> 這堂課的問題是作業題目有點難懂....
+20:39:18 <hychen> 終於弄成100/100...
+20:39:39 <hychen> 我看到all_same_color 第一個念頭就是raise Exception...
+20:59:50 <hychen> http://en.wikipedia.org/wiki/Vacuous_truth
+20:59:56 <hychen> 還不是很懂這是什麼...

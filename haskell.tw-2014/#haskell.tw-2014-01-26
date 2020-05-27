@@ -1,0 +1,47 @@
+00:00:19 <CindyLinz> haskell 接 perl 目前實驗了一些些會動, 要開始寫正經一點的了 :p  https://github.com/CindyLinz/Haskell-Perl
+00:00:23 <hashcat> 你是後端啥都能用就是
+00:00:55 <CindyLinz> 什麼意思??
+00:01:07 <hashcat> 就是前端 perl
+00:01:11 <CindyLinz> Non-windows only
+00:01:23 <hashcat> 後端什麼語言都沒限制
+00:01:40 <CindyLinz> 其實前端也沒限制.... socket 出去就行
+00:02:05 <CindyLinz> 只是一定要透過 socket 的話, 整合性比較差, 必須是本身足夠完整的子系統才行
+00:02:17 <CindyLinz> 如果能揉在一起的話, 只換一個函數塞進去都行
+00:02:17 <hashcat> 啥麼公司做什麼的
+00:02:54 <CindyLinz> 營運自己開發的遊戲的公司~ http://www.gamesofa.com/
+00:04:07 <hashcat> 哦
+00:04:14 <hashcat> 原來是王老闆
+00:04:29 <CindyLinz> 啊? 老闆不姓王啊 @_@"
+00:04:53 <hashcat> 當我沒說好了
+00:05:35 <CindyLinz> @@"
+00:07:29 <hashcat> 我看成你是老闆
+00:08:45 <CindyLinz> ._.
+00:09:20 <CindyLinz> 那句的「自己」指的是公司不是我啦.. XD
+00:10:12 <hashcat> 想不出自己還能是啥
+00:11:40 <hashcat> 還有這種用法
+00:11:53 <hashcat> 公司自己
+00:13:19 <CindyLinz> 我玩遊戲不夠重度... 如果遊戲是我設計.... 應該會作出只有我自己想玩的遊戲
+00:13:32 <CindyLinz> 而且我自己也玩一陣子就膩了..ww
+00:13:38 <petercommand> CindyLinz: XD
+00:14:24 <CindyLinz> 前一陣子發現一個無邊界的多人踩地雷遊戲覺得很好玩... http://mienfield.com/
+00:14:34 <CindyLinz> 結果只有我覺得好玩....持續兩天 orz
+00:16:32 <hashcat> 整個創意100分, 有趣0分的遊戲
+00:16:49 <CindyLinz> 有必要說這麼狠嗎.....QQ
+00:18:01 <hashcat> 不過還是可以理解, 就跟我寫prolog的時候一樣
+00:18:27 <hashcat> 結果只有我覺得好玩....持續三個月 orz
+00:20:24 <hashcat> 擴展perl可以用haskell, 表示擴展python可以用idris
+00:21:31 <hashcat> =D
+00:34:06 <hashcat> 問了下idris還只能在單核跑 ==
+00:44:17 <CindyLinz> 這是什麼推論啊.... XD
+00:45:46 <hashcat> 在跟idriser討論加進平行化, 能不就像是在產生的C code加上openmp pragma
+00:47:07 <CindyLinz> 嗯, 有很多系統呼叫要換用加上 _r 自尾的版本
+00:47:10 <CindyLinz> 嗯, 有很多系統呼叫要換用加上 _r 字尾的版本
+00:49:11 <hashcat> _r是啥?
+00:50:19 <CindyLinz> 很多 C 的標準 lib 函數, 例如說 string.h 裡面的 strtok, 會用到自己內建的 static 的 buffer
+00:50:41 <CindyLinz> 而 strtok_r 可以由呼叫端給 buffer
+00:51:13 <CindyLinz> 用內建 static buffer 在 multi-thread 的時候, 如果發生不同的 thread 都去採同一個 static buffer 會悲劇
+00:55:48 <hashcat> 哦
+00:56:55 <hashcat> 睡覺
+01:52:51 <CindyLinz> Dryman 寫的 Monad 教學 http://www.idryman.org/blog/2014/01/23/yet-another-monad-tutorial/
+01:52:54 <CindyLinz> 還沒看 :p
+01:55:02 <CindyLinz> 這張圖解不錯 ^^ http://www.idryman.org/images/monad/monad-structure.png

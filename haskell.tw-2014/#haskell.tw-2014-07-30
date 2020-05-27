@@ -1,0 +1,2 @@
+00:30:00 <aksatac__> 原來 seL4 跟 haskell 有關
+10:17:20 <monochrom> 想在 Haskell 做類似 (\x -> x x), 可參考 http://okmij.org/ftp/Computation/fixed-point-combinators.html . 主要是經 newtype 過關

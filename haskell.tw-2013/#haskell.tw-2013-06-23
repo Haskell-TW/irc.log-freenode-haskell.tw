@@ -1,0 +1,16 @@
+00:32:48 <miaout17> 想說自己包個Randon Monad好像沒很難，Google一下好像也有人做了 http://goo.gl/cDtma
+00:36:56 <miaout17> 測試用IO monad和Random monad還是有差的，Random monad從形別上保證結果deterministic，給予同樣random seed產生同樣結果 (只要沒有用unsafeXXOO XD)
+01:19:20 <banacorn> 交大小黃的本科也是數學 XD
+01:20:12 <banacorn> 但是交大的程式語言也要從必修變成選修了 QQ
+09:49:14 <suhorng> 話說..  雖然yinwang把之前那兩篇文章砍了 可是其實commit log還看得到 :P
+09:49:22 <suhorng> github.com/yinwang0/blog-cn
+10:04:00 <suhorng> http://www.yinwang.org/blog-cn/2013/06/22/one-lang/ assert跟assume XDD
+10:04:37 <suhorng> "。当然，你也许能因此拿到 Fields Medal（因为你碰巧证明了哥德巴赫猜想不成立），也有可能因此而丧生（因为这代码位于你坐的宇宙飞船的自动着陆系统）" XDDDDDDD
+10:46:02 <UncleHandsome> oberon!!!
+10:58:52 <UncleHandsome> Partial Evaluation and Automatic Program Generation
+11:04:08 <UncleHandsome> http://www.yinwang.org/blog-cn/2013/04/01/lazy-evaluation/
+11:54:35 <suhorng> http://flolac.iis.sinica.edu.tw/flolac08/partial-eval.html 我還不確定是不是同一個東西XD
+11:54:36 <suhorng> 應該是(?
+12:14:29 <UncleHandsome> 剛剛看王垠的文章連到的XD
+12:14:30 <UncleHandsome> http://www.itu.dk/~sestoft/pebook/pebook.html
+23:20:43 <monochrom> 注意, 不同語言, 以至不同人, 對 assert 及 assume 定義完全不同. 即, A君的 assert, assume 不同於B君的 assert, assume

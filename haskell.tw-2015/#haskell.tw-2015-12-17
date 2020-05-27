@@ -1,0 +1,25 @@
+00:44:34 <caasih> 今天在看 CindyLinz 的新莊 FP 作品時，
+00:44:57 <caasih> 發現 netwire 在 7.10 沒辦法用。該怎麼辦才好？
+00:45:16 <caasih> * 沒參加新莊 FP ，純 github 上偷看...
+00:58:37 <CindyLinz> caasih: 你有在用 cabal sandbox 嗎?
+00:59:11 <caasih> 有喔，每次都有用
+01:08:38 <CindyLinz> 欸? 我看 netwire 的 base 限制是 >=4.5, <5
+01:08:53 <CindyLinz> 然後 7.10.2 (latest) 的 base 是 4.8
+01:09:08 <CindyLinz> 你看到的 error message 是什麼呀?
+01:12:43 <caasih> CindyLinz: 正在重跑 cabal install --only-dependencies
+01:14:57 <caasih> CindyLinz: https://gist.github.com/caasi/56a4bb740ac48e150e77
+01:19:27 <CindyLinz> caasih: 你去把 netwire 的 source 下載解開在一個目錄裡, 然後把它的 netwire.cabal 檔裡面 profunctors 的限制 <5 試改為 <6
+01:20:04 <CindyLinz> 然後把你開 zoomcraft 的 sandbox addsource to 那個改過的 netwire 目錄
+01:20:13 <CindyLinz> 然後再 install --only-dependencies 一次試試
+01:20:44 <caasih> 好，現在試
+01:55:15 <caasih> CindyLinz: 可以編了但還有別的問題，我先整理一下...
+01:56:14 <caasih> 新的 netwire -> profunctors -> distributive -> transformers-compat -> transformers >= 0.4.1 && < 0.5
+01:56:48 <caasih> 但 zoomcraft 現在只要 transformers ==0.3.*
+01:57:25 <caasih> 改了這個和你說的 netwire 的 profunctors 就能編了
+01:59:31 <CindyLinz> 好 (Y)
+01:59:46 <CindyLinz> 我還在跟 texture 奮戰 orz
+02:00:00 <CindyLinz> 有 texture 就可以放圖片了 QQ
+02:00:28 <caasih> 就可以有土跟草了！
+02:00:50 <caasih> 嗯，剩下的問題是我打錯字，成功開出視窗 ._.
+02:02:50 <CindyLinz> 還沒有立體喔 XD
+02:03:30 <caasih> 咦？沒關係我遲早會讀 code 讀到...

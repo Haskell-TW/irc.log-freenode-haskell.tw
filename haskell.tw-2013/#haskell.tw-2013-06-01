@@ -1,0 +1,200 @@
+00:11:12 <suhorng> 請問有人知道 Prasec 的 document 要去哪裡找嗎 orz
+00:11:30 <suhorng> 像是 ... http://hackage.haskell.org/packages/archive/parsec/2.1.0.0/doc/html/Text-ParserCombinators-Parsec-Char.html 這是要我看 source 的意思嗎 Q_Q
+00:12:41 <CindyLinz> 我看 hackage 常常覺得是這樣 @@"
+00:12:51 <CindyLinz> 雖然 Haskell 的 type 會說出很多事...
+00:13:05 <CindyLinz> 不過, 我還是比較想看給人看的文字 QQ
+00:14:31 <letoh> http://legacy.cs.uu.nl/daan/download/parsec/parsec.html  這個算嗎?
+00:15:24 <CindyLinz> 有 User Guide 感覺好多了 XD
+00:15:48 <CindyLinz> 不過.. parsec 的話好像很多人有幫他寫
+00:16:05 <CindyLinz> 像是.. the real world haskell 裡面應該也 embed 了一份? :p
+00:16:33 <letoh> http://research.microsoft.com/en-us/um/people/daan/download/parsec/parsec.html  掛在 MS 的網域看起來比較厲害一點XD
+00:17:06 <letoh> http://blog.moertel.com/posts/2005-08-27-power-parsing-with-haskell-and-parsec.html  # Power parsing with Haskell and Parsec
+00:17:33 <letoh> 老實說  之前花了一點時間試玩  但看半天還是不太會用XD  只會最基本的
+00:18:31 <suhorng> YA感謝
+00:18:39 <CindyLinz> 基本的.. 不夠嗎? @@"
+00:19:00 <CindyLinz> 我是想說.. 進階的話.. 就變成自己直接寫了呀
+00:19:12 <letoh> 唔  應該是我對 haskell 的其他部份太不熟了  所以還是沒辦法做太多事XD
+00:19:16 <suhorng> letoh: 正在看 Realworld Haskell 學, Parsec的概念很多都有在Introduction to Functional Programming Using Haskell 中介紹
+00:19:27 <suhorng> 不過我還想學Arrow..monadic parser好慢orz
+00:20:01 <CindyLinz> 你要 parse 巨大的 source 喔?
+00:20:17 <monochrom> 基本的 parsec, 可先看 letoh君提供的連結
+00:20:54 <suhorng> CindyLinz: 像我看到他說 string 會吃 input 這個就不懂了...
+00:20:57 <letoh> 其實巨不巨大並不重要  主要是 parse 完的東西要拿來做事
+00:21:18 <monochrom> (是很舊的指南, 今日很多名都變了, 不幸沒人想寫新的. 或者有一天我寫)
+00:21:36 <suhorng> 我是把他轉成 C++ 再來用, 然後就..世界慢
+00:22:32 <letoh> 只看單純 parsing 的部份，因為我常常在其他語言實作，多少還有一點基本概念... 但要做其他事就不能只會 parsing 了XD
+00:23:13 <letoh> 其實我看起來感覺有點像 PEG parser 的做法，但加入 monadic 以後就看不出哪裡不同了@_@
+00:24:43 <CindyLinz> letoh: 啊我是要丟 suhorng ^^|
+00:24:55 <CindyLinz> 因為他嫌 monadic parser 慢 XD
+00:25:00 <letoh> 喔喔喔
+00:25:03 <suhorng> XD
+00:25:23 <suhorng> 目前狀況是會碰到幾筆巨大的測資 (好幾十KB)
+00:25:26 <CindyLinz> 如果 source 很小.. 我覺得應該 O(2^n) 都可接受啊.. (逃)
+00:25:37 <suhorng> 以及一筆11MB的測資
+00:25:51 <CindyLinz> 11MB 那真的非常大.. @@"
+00:26:03 <letoh> 今天下午看了一點 newtype 的用法  覺得看半天還是很模糊XD
+00:26:57 <letoh> 我通常需要 parse 一些機器的 log.. 放了一兩天後都是幾百 MB 在算的XD
+00:26:58 <CindyLinz> monochrom: 對願意寫教學的人都覺得很敬佩 @@"
+00:27:22 <monochrom> 如此, 你需要我寫的 http://www.vex.net/~trebla/haskell/parsec-generally.xhtml#yield-intro
+00:27:35 <letoh> 然後我現在都是用 python 在做這件事... 要分析跟畫成圖方便一點
+00:27:35 <suhorng> CindyLinz: 11MB用我建立出來的parser要跑半小時...雖然一個最大的元兇應該是原封不動搬到C++, 而C++又無法對lambda做優化
+00:27:41 <letoh> 如果可以快一點的話...
+00:29:08 <suhorng> http://carlo-hamalainen.net/blog/2011/02/11/parsing-with-monads-can-be-slow/ Parsing with monads (can be) slow
+00:29:31 <suhorng> 所以我就想學arrow了XD
+00:29:36 <monochrom> 噢, 趁人齊, 介紹我的兩個新作: http://www.vex.net/~trebla/haskell/cabal-cabal.xhtml  http://www.vex.net/~trebla/haskell/so.xhtml
+00:29:49 <letoh> 我覺得好像差不多? 用了 arrow 會好一點嗎?
+00:30:40 <CindyLinz> monadic 要快的話.. 想辦法讓註定會失敗的選擇盡早失敗
+00:30:54 <suhorng> 嗯!
+00:31:16 <suhorng> 可能是慢在大量backtrace吧
+00:31:27 <CindyLinz> 通常是呀 :Q
+00:31:31 <letoh> 說到這個  之前看了半天 ArrowChoice 的 fanin，還是不太懂要怎麼用在 parsing
+00:32:07 <CindyLinz> 然後.. 11MB 的 source 就算整個都 keep 在記憶體裡應該不會有什麼影響, 所以應該不太需要考慮能夠把沒用到的舊 source 丟掉的機制
+00:33:55 <monochrom> 11MB的輸入隨時變成300MB的記憶, 特別是如果你用 [Char]
+00:33:57 <suhorng> 我現在的作法是每個parser都是 data Parser token a = [token] -> [(a, token)] 形式, 這在C++中大量list建構解構可能也是問題...
+00:34:04 <CindyLinz> [Char] !
+00:34:07 <suhorng> [Char] orz
+00:34:45 <suhorng> 話說 http://en.wikibooks.org/wiki/Haskell/Understanding_arrows 我真得很喜歡那個輸送帶的圖XDDD
+00:35:08 <letoh> 嗯  很棒
+00:35:30 <letoh> 我看到這圖以後  想到 factor 的文件如果有那麼精美的圖就好了XD
+00:37:07 <CindyLinz> 如果用 Data.Foldable.Foldable token (class) 配合 Data.Sequence.Seq token 當實體, 不知道有沒有搞頭...
+00:38:09 <CindyLinz> 就.. 函數是作用在 Foldable token 上, 然後實際餵進去的資料是裝在 Seq token 裡
+00:39:05 <suhorng> (糟糕 ... 不懂)
+00:39:22 <CindyLinz> 你現在函數是作用在 [token] 上, 資料是裝在 [token] 裡
+00:39:51 <CindyLinz> 那.. class Foldable a 我覺得是一個根本就是描述 [a] 的 class
+00:40:29 <suhorng> 嗯@@
+00:40:46 <CindyLinz> 所以我覺得你的程式應該可以直接換一下 type 宣告, 就變成可以處理 Foldable token 的函數; 然後換一個比較有效率的, 而且符合 Foldable token 的容器來用
+00:40:50 <suhorng> 阿阿!!!
+00:40:56 <suhorng> 原來我打錯了 真糟糕
+00:41:28 <suhorng> data Parser token a = [token] -> [(a, [token])] 才對, 就是可能吃一些 [token], 傳回剩下沒吃的 [token]
+00:42:15 <suhorng> 原本是因為 [token]  ----> token 長的像fold嗎？
+00:42:28 <CindyLinz> [token] 長得像 Foldable token
+00:42:36 <letoh> 不是 [Char] -> token ?
+00:43:13 <CindyLinz> 因為我想他用 token 而不是 Char, 可能是已經預處理過, 變成某種比較抽象的 token 呀
+00:43:20 <CindyLinz> 所以可能就不能用 ByteString 了
+00:43:25 <suhorng> 原本是 Parser a = String -> [(a, String)], 後來發現我裡面不一定是拿來parse Char所以就變成可以換的形式
+00:43:27 <suhorng> 嗯@@
+00:43:53 <letoh> 那只是把前面的工作分出去給 lexer 做完而已吧?
+00:44:09 <letoh> 如果只是講後面的動作  的確只剩 token
+00:44:41 <monochrom> [Char] -> Either ParseError whatever 是一種 fold
+00:45:00 <CindyLinz> 咦.. Seq 可能沒有比較快.. orz
+00:45:13 <CindyLinz> 標的時間複雜度看起來像是 tree..
+00:45:27 <suhorng> QQ
+00:47:37 <suhorng> monochrom: 這部份我還在想, 原本 String -> [(a, String)] 的話有很多個結果, 然後丟給使用者自己選他要的...
+00:48:05 <CindyLinz> 看起來是個用 Data.Vector 的時機.. http://hackage.haskell.org/packages/archive/vector/0.9.1/doc/html/Data-Vector.html
+00:48:19 <CindyLinz> 不過不在 ghc standard library 裡面
+00:48:44 <monochrom> String -> [(a, String)] 代表一步. [Char] -> Either ParseError whatever 代表整體
+00:49:41 <suhorng> 喔喔XD 的確可以用vector
+00:49:46 <monochrom> 用 Vector: http://www.vex.net/~trebla/haskell/parsec-generally.xhtml#stream :)
+00:50:04 <suhorng> nice!
+00:50:10 <CindyLinz> 嗯, 其實我也是沒看很懂為什麼 Parser 的 return type 是 [(a, String)] 而不是 (a, String) ^^|
+00:50:26 <suhorng> 用nondeterminism
+00:50:31 <CindyLinz> !
+00:50:40 <letoh> a 是 token type ?
+00:50:45 <CindyLinz> a 是 result
+00:50:45 <monochrom> 是
+00:50:48 <suhorng> 呃, 這樣比較方便啦XD.   a是一個parser的result
+00:50:51 <letoh> 嗯
+00:50:59 <CindyLinz> 咦? a 不是最後出來的.... 程式 嗎?
+00:51:12 <monochrom> oops, String=[Char], Char 是 token type
+00:51:41 <suhorng> 不一定呀 a可能只是小的parser回傳的結果
+00:51:53 <CindyLinz> 嗯, 應該是一步的結果
+00:51:53 <suhorng> 最後組起來大的parser回傳的才是 "程式"
+00:52:07 <CindyLinz> 因為參數也沒給前面步驟的結果
+00:52:58 <suhorng> 嗯@@ 然後 instance Parser where ... 這樣 (其實是個 state monad 加上 list monad...state是input讀到哪裡)
+00:53:58 <suhorng> 是說我覺得仍然不是 [token] 上的 fold 耶...fold一個list的話每一步不是都要做一樣的事嗎？
+00:54:17 <suhorng> 還是說應該要怎麼看？
+00:57:52 <letoh> 每一步做的事是指 parsing ? 這樣就可以套到 fold 上了?
+00:58:27 <suhorng> 不過做的parsing不一樣的說
+00:58:32 <CindyLinz> suhorng: Foldable token 不代表就要用 fold 啊
+00:59:16 <CindyLinz> 可以 toList (誤)
+00:59:51 <monochrom> 哈哈
+00:59:56 <CindyLinz> 哎唷.. 我以為 Foldable 裡面有 head 可以用 orz
+01:00:02 <CindyLinz> 我想你應該最想用的是 head
+01:00:14 <monochrom> 想來也是
+01:00:47 <monochrom> 用 Vector 啦! 或者 Bytestring 等等
+01:00:59 <suhorng> 不懂foldable XD
+01:01:03 <suhorng> 等等看個資料w
+01:03:34 <CindyLinz> 整個 parser 程式應該是一個 foldr, 或是 foldM, 然後這個 Parser token a 就是要丟進這個 foldr 或 foldM 的函數吧 (思)
+01:04:01 <CindyLinz> 這樣就一次只能看一個 token 了 orz
+01:04:27 <miaout17> CindyLinz: 有投上COSCUP耶，要來推Haskell嗎？ XD
+01:04:30 <CindyLinz> 要能往後偷看的好像就不能這樣..
+01:04:52 <CindyLinz> miaout17: 沒有, 要講 perl, 一個我之前寫的在公司裡用快兩年的 lib
+01:05:05 <CindyLinz> 因為要講遊戲啊..
+01:05:15 <MnO2> CindyLinz: 臨時抽換議題!
+01:05:25 <CindyLinz> 可是是 game track 耶.. ^^|
+01:06:05 <suhorng> XDD
+01:06:18 <suhorng> 似乎是
+01:06:27 <suhorng> (*是fold..這樣看的話)
+01:13:43 <MnO2> 原本沒有想報 coscup 的，看了議程覺得還不錯
+01:15:16 <letoh> 等等  6.3 是工作日吧@_@  怎麼都在這種時間開放XD
+01:15:52 <CindyLinz> OSDC 還在工作日舉辦咧 orz
+01:16:39 <letoh> 我前兩年想參加看看  結果下班後就沒票了
+01:17:06 <MnO2> 可惜開發者專案 5/31 就截止了
+01:18:24 <CindyLinz> 要幫忙搶票嗎?
+01:19:04 <MnO2> 幫忙搶票是什麼意思？
+01:19:36 <letoh> 寫搶票機? XD
+01:20:10 <CindyLinz> 就是幫忙報名啊
+01:20:17 <CindyLinz> 沒那麼暴力啦 XD
+01:20:29 <CindyLinz> 只是多個人報名多一個機會這樣 ^^|
+01:20:58 <CindyLinz> 哇, 我要講的時間被排在早上耶.. 一定要用力起床了 ^^|
+01:21:21 <CindyLinz> 不能聽 B2G 了 ._.
+01:22:30 <letoh> 謝謝  我還是碰運氣好了  老天覺得我可以去的話，應該搶得到票XD
+01:25:34 <MnO2> CindyLinz 有要買 Firefox Phone 嗎？
+01:25:46 <letoh> 這次的議程的確很有趣  不過怎麼那麼多 jserv XD
+01:25:50 <MnO2> computex 我對 pebble 有興趣
+01:26:03 <CindyLinz> MnO2: 有點想.. 不過希望它..... 沒有之前說的那麼慢得誇張 ._.
+01:26:23 <CindyLinz> 之前聽到的消息是, 預期它是 android 的 3~4 倍慢
+01:26:25 <MnO2> 不是硬體規格好嗎？ xD
+01:26:29 <CindyLinz> 實際上是 30~40 倍...
+01:26:43 <MnO2> xDDD
+01:27:10 <letoh> pebble 是那隻手錶?
+01:27:15 <MnO2> letoh: yes
+01:28:09 <letoh> 最大賣點好像就是 e-ink display ?
+01:28:48 <MnO2> 只是很想摸實體機 xD
+01:28:59 <MnO2> 體驗一下
+01:29:36 <letoh> 之前應該只有 ti 做類似的東西
+01:31:04 <letoh> pebble 顯示比較酷XD
+01:32:02 <MnO2> 這兩年太多新玩具想玩了
+10:59:46 <hychen> CindyLinz, 去mozilla借台機器玩就好了
+11:00:01 <hychen> CindyLinz, 我想聽haskell...
+12:06:13 <darkx> Perl++
+14:33:02 <MnO2> http://newslamp.com/post/108958/running-a-startup-on-haskell-video   剛剛在看 snowmantw 貼在 g+ 的，裡面有一段超好笑
+14:33:42 <MnO2> 大概十年前有一版 ghc，如果你的程式有 type error，他就會把你的 source code 砍掉 wwwwwwww
+14:37:19 <letoh> 這也太可怕了...
+14:37:47 <MnO2> 就是 compiler 的 bug 啊。
+14:38:24 <MnO2> 我腦中浮現 programmer 被 compiler 巴頭的畫面
+14:38:42 <MnO2> 然後對白：回去練練再來
+14:40:01 <letoh> XDXD
+14:40:14 <letoh> 太有畫面了
+16:55:38 <CindyLinz> hychen: 想聽 haskell 不是去 Functional Thursday 就有很多可以聽了嗎 XD
+17:04:09 <letoh> 說到這個... 上次的 slide 有公開嗎?
+17:04:37 <CindyLinz> 沒公開 slide, 不過我有寄 code 給助教.. 不知道後來怎樣了 ^^|
+17:04:56 <CindyLinz> 我那 slide 沒內容啊.. ^^|
+17:05:01 <letoh> 嗯嗯  收藏起來了? XD
+17:05:10 <letoh> 咦?
+17:05:16 <CindyLinz> 6.6 去逼問他就行了 XD
+22:11:50 <c9s> CindyLinz: 你 COSCUP 要來講喔?
+22:11:54 <c9s> cooool~~!!
+22:12:56 <c9s> 話說原來有 Functional Thursday 這個東西呀
+22:13:36 <c9s> 所以 haskell 做 parsing 很慢? 還是只有 monadic parser 慢?
+22:13:47 <c9s> parsec performance 如何?
+22:30:26 <MnO2> http://hackage.haskell.org/package/hruby
+22:30:41 <MnO2> embed ruby in your haskell program ...
+22:39:07 <MnO2> 我不確定 suhorng 作的事情，不過應該是指 monadic parser 慢。
+22:40:11 <MnO2> parsec 我沒找到 benchmark，不過用 text 的話猜測應該 performance 至少在合理範圍內。要 parse 非 unicode 的話，attoparsec 蠻快的。
+23:44:18 <c9s> 我在想用 golang 會不會比 haskell 快 (逃)
+23:45:55 <monochrom> 其實呢, 程式快不快視乎技巧多過語言
+23:47:39 <suhorng> 我是把它直接轉成C++ code唷, 所以 functional language 該有的優化全都沒有..
+23:48:54 <suhorng> 也會發生某段字常常被重複parse的情形, 不過暫時不想改語法, 目前parse明顯合乎語法比較重要
+23:49:35 <CindyLinz> c9s: parsec is slow, because it's monadic, that cannot look ahead for early stop on wrong branch
+23:50:07 <CindyLinz> Go vs GHC benchmark? # http://benchmarksgame.alioth.debian.org/u32/benchmark.php?test=all&lang=go&lang2=ghc&data=u32
+23:50:45 <CindyLinz> GHC seems 3x faster than go in average?
+23:55:49 <c9s> ohoh, 所以沒有 lookahead
+23:55:57 <c9s> @@
+23:56:14 <c9s> 沒有 lookahead 的話應該很難 powerful ?
+23:56:32 <c9s> parsec 是 LL 嗎？還是 LR?
+23:56:51 <letoh> LL 吧
+23:57:37 <suhorng> LL
+23:58:45 <c9s> CindyLinz: 那個 golang 的 example 寫的很差呀.. len() 重複 call...
+23:59:11 <c9s> 光是同一個 len(line) 就重複算了三次
+23:59:32 <CindyLinz> c9s: Then you should create one... XD

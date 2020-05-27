@@ -1,0 +1,10 @@
+23:19:40 <suhorngM_> 咦~ 之前關於 IO <=> 食譜的類比 是不是從這篇來的阿 http://www.seas.upenn.edu/~cis194/spring13/lectures/08-IO.html
+23:20:09 <suhorngM_> 後來還是沒看完 "What is a Purely Functional Language?" 這篇..orz
+23:41:38 <pkmx> 可惡...這裡居然也有宵夜文w
+23:43:17 <suhorngM_> pkmx: 不, Recipe Cake 裡面只有食譜, 沒有旦糕的
+23:43:20 <suhorngM_> (誤)
+23:44:21 <pkmx> 那 suppose you have c :: Cake 是怎麼回事w
+23:46:54 <suhorngM_> 這是... immutable, eternal 的 Cake
+23:48:28 <pkmx> 所以是...看得到但吃不到的 Cake ?
+23:50:04 <suhorngM_> 完美的 理想的, 像這個.... https://plus.google.com/+ConradParker/posts/Armn9rcrK8g
+23:50:21 <monochrom> 西諺: you can't have your cake and eat it too :)

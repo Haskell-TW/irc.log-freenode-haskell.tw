@@ -1,0 +1,14 @@
+03:35:39 <CindyLinz> @type fix
+03:35:41 <lambdabot> (a -> a) -> a
+03:36:55 <CindyLinz> > fix (0:)
+03:36:58 <lambdabot>  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0...
+03:38:33 <CindyLinz> @type mapM_ id
+03:38:35 <lambdabot> (Foldable t, Monad m) => t (m b) -> m ()
+03:38:50 <CindyLinz> @pl mapM_ id
+03:38:51 <lambdabot> mapM_ id
+03:39:10 <CindyLinz> @type sequence
+03:39:12 <lambdabot> (Traversable t, Monad m) => t (m a) -> m (t a)
+03:39:19 <CindyLinz> @type sequence_
+03:39:21 <lambdabot> (Foldable t, Monad m) => t (m a) -> m ()
+17:47:03 <CindyLinz> @type sort
+17:47:05 <lambdabot> Ord a => [a] -> [a]

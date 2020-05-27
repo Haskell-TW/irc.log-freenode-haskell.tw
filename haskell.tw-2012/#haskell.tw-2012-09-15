@@ -1,0 +1,49 @@
+00:30:24 <MnO2> touch
+00:30:55 <_13h> down
+00:31:15 <MnO2> 每天換種語言好了xD
+00:31:16 <MnO2> 触れる
+00:31:31 <_13h> www 會的語言不多
+00:31:43 <MnO2> google translate xDD
+00:31:53 <_13h> 厲害XD
+00:32:36 <MnO2> 這樣經過一個禮拜就會touch in seven languages了
+00:34:49 <_13h> XDXD
+01:55:51 <CindyLinz> Newtype package 真讚..
+09:22:44 <yen3> 請問一下，通常 Scheme 都是裝那一個 compiler 呢 ? 目前看到的似乎是 Racket
+10:54:39 <CindyLinz> yen3: 你需要空間放錄音嗎?
+11:19:41 <yen3> CindyLinz: 可能需要，不過我還沒問柯教授 XD。這幾天都在忙 XD。
+11:20:00 <yen3> CindyLinz: 先謝謝你，我今天會問一問，然後再跟你說~。
+11:22:51 <CindyLinz> yen3: 嗯嗯
+11:23:00 <CindyLinz> yen3: 你的時間在倒數唷~ (逃)
+11:53:47 <yen3> CindyLinz: XD
+16:57:17 <MnO2> Haskell in Halle/Saale
+16:57:22 <MnO2> http://iba-cg.de/hal7.html
+16:57:29 <MnO2> 如果看得懂德文的話xD
+16:59:43 <CindyLinz> 你該去貼 #haskell.de XD
+17:07:14 <yen3> ls
+17:07:24 <yen3> 我又打錯視窗了 ... Orz
+17:09:12 <CindyLinz> :p
+20:28:06 <MnO2> http://www.haskell.org/haskellwiki/HaskellImplementorsWorkshop/2012
+20:30:57 <CindyLinz> JIT compiler for Haskell... 嘖嘖
+21:59:31 <MnO2> http://www.youtube.com/channel/UCP9g4dLR7xt6KzCYntNqYcw?&desktop_uri=%2Fchannel%2FUCP9g4dLR7xt6KzCYntNqYcw
+21:59:50 <MnO2> 這次ICFP跟Haskell Symposium的影片
+22:02:40 <MnO2> http://archive.org/details/ExplanationOfGeneralizedAlgebraicDataTypesgadts
+22:02:43 <MnO2> 解釋GADT
+22:04:27 <MnO2> http://bonus500.github.com/sc2blog/#title-slide
+22:04:30 <MnO2> intro to snap
+22:10:09 <MnO2> http://www.masterbaboon.com/2012/03/cobol-for-lisp-developers/
+22:10:49 <CindyLinz> 好多東西..
+22:10:49 <MnO2> 叛逃統計xD
+22:11:31 <MnO2> 塞爆大家xDD
+22:17:34 <jason2506> 11:20 < yen3> CindyLinz: 先謝謝你，我今天會問一問，然後再跟你說~。
+22:17:55 <jason2506> sorry, 不曉得按到什麼就發訊息了=.=
+22:17:55 <MnO2> ikeay的github也太多人follow了吧...
+22:40:45 <MnO2> 據說 xkcd 的網站有一大部份是 haskell 寫的...
+22:41:22 <MnO2> https://github.com/davean
+22:44:23 <CindyLinz> 他的聲音好有磁性 >///< # 22:02 < MnO2> http://archive.org/details/ExplanationOfGeneralizedAlgebraicDataTypesgadts
+22:46:55 <CindyLinz> 但我不懂為什麼他有時候字要用手寫的, 有時候用打的 ^^|
+23:20:28 <MnO2> 有 3000 个苹果要运往 1000 公里外, 现有破皮卡一辆, 最多一次载 1000 个苹果, 而且每走一公里折损一个苹果. 问最后最多能有多少个苹果送达? 小学数学, 限时一分钟作答.
+23:21:04 <MnO2> 據說是Jane Street的面試題
+23:24:43 <CindyLinz> 我已經離開小學了, 難怪答不出來.. (逃)
+23:35:13 <CindyLinz> 應該大約是 500 個 o.o
+23:35:28 <CindyLinz> 不對不對
+23:35:42 <CindyLinz> 833

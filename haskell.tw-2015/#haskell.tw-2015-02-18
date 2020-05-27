@@ -1,0 +1,133 @@
+00:09:21 <CindyLinz> 其實用 primitive 髒不髒是一回事.. (欸, 我覺得好像還在 type safe 的範圍, 不算髒?)
+00:09:27 <CindyLinz> 比較要命的是寫起來好累 :Q
+00:09:42 <CindyLinz> 一堆常用的 Prelude 函數都不能用了..
+00:10:05 <CindyLinz> 然後... 泛型函數也不能用.. ghc 會跟你叫 :: * 和 :: # 不一致
+00:10:21 <CindyLinz> 所以原本的 + - * /, 甚至 < == > /= 都不能用
+00:10:33 <suhorng> 喔喔喔 kind 不同
+00:10:40 <CindyLinz> 也不能丟 if..then..else  因為它要吃 Bool
+00:10:44 <CindyLinz> primitive 沒有 Bool
+00:10:56 <CindyLinz> 我現在對 Int# 作比較是這樣寫的....
+00:11:23 <CindyLinz> case a <# 20# of 0# -> (做 a >= 20 的事); _ -> (做 a < 20 的事)
+00:11:37 <CindyLinz> 我不知道有沒有比較聰明的寫法 :Q
+00:11:56 <CindyLinz> 還好 pattern matching 還沒壞 (?
+00:12:17 <suhorng> wwww
+00:12:33 <suhorng> 用 case 做感覺好合理
+00:12:54 <pkmx> RebindableSyntax?
+00:13:01 <CindyLinz> 然後可以自己包 min# :: Int# -> Int# -> Int#   min# a b = case a <# b of 0# -> b; _ -> a
+00:13:09 <pkmx> RebindableSyntax可以bind成kind不是*的嗎？
+00:13:22 <CindyLinz> 要先寫 false 的 branch 很不習慣 XD
+00:13:34 <CindyLinz> pkmx: 來查查 RebindableSyntax.. :p
+00:14:19 <petercommand> rebindable syntax++
+00:15:09 <petercommand> 我記得有些 type 可以自己指定呀
+00:15:48 <petercommand> https://downloads.haskell.org/~ghc/7.4.2/docs/html/users_guide/syntax-extns.html#rebindable-syntax
+00:16:45 <petercommand> https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/syntax-extns.html#rebindable-syntax
+00:17:14 <CindyLinz> 欸... 用了這個 extension 以後, 然後是..... 自己提供一份 # 用的 prelude 函數?
+00:17:49 <pkmx> 可以耶www
+00:17:53 <suhorng> RebindableSyntax....orz
+00:18:23 <CindyLinz> 這樣不是還是要再包一次.. ^^|
+00:18:33 <CindyLinz> 而且原本的 Prelude 就壞惹... XD
+00:19:02 <petercommand> 可以集中在一個 file 裡XD
+00:19:21 <CindyLinz> 這樣沒有省到啊... 只有省到說我的 min# 可以把名字取成 min 不怕打架
+00:19:42 <petercommand> 對呀..
+00:19:43 <CindyLinz> 但... 能多型嗎? min# 吃 Int# 和 Char# ?
+00:19:55 <CindyLinz> 這樣沒什麼賺頭 orz
+00:20:21 <CindyLinz> 同一個檔案裡面通常還是會有需要 Prelude 的時候 QQ
+00:20:54 <CindyLinz> 欸... 這樣要把例如說 take, drop, splitAt, length 這些通通都自己再實作一遍欸 OAO
+00:21:36 <petercommand> 可以 import Prelude hiding (blah) 呀
+00:22:12 <CindyLinz> petercommand: 就不能混用了耶?
+00:22:37 <CindyLinz> petercommand: 如果要混用, 把原本的 Prelude 取一個別的 alias... 那用的時候要加兩個字元, 比加 # 還虧 XD
+00:24:52 <petercommand> hmm..對呀
+00:25:39 <pkmx> http://ideone.com/u3Rauf
+00:26:06 <pkmx> ghc-7.8才編得過...
+00:27:06 <CindyLinz> 真的要來 lambda calculus 惹... ._.
+00:27:25 <petercommand> CindyLinz: 咦?
+00:27:26 <CindyLinz> pkmx: 那個.. 不能用 1#..
+00:27:39 <CindyLinz> pkmx: 有可能不是 1#..... 只能用 0# 和 _
+00:28:10 <pkmx> 修了XD
+00:28:18 <CindyLinz> (Y)
+00:28:45 <CindyLinz> petercommand: 欸.. 不像.. XD
+00:28:59 <CindyLinz> lambda calculus 沒有 pattern matching, 都用函數 XD
+00:30:01 <petercommand> 可怕的函數...
+00:32:06 <CindyLinz> 我那時候有被感動到..
+00:33:50 <CindyLinz> 覺得 Haskell 需要在語言上提供一個機制, 讓 programmer 承諾說某一段程式一定不會發生 bottom, 萬一發生了, 就 undefined behavior
+00:34:06 <suhorng> !?....
+00:34:34 <CindyLinz> 這樣才能作一些 reorder 或化簡, 或是把互相沒有 dependency 的計算丟到不同的 core 同時跑
+00:35:14 <CindyLinz> 因為有可能在 lazy eval 的假設下, 一定不會先執行到的 bottom 被提前跑了.. 那結果就不確定了
+00:35:35 <suhorng> 嗯....
+00:35:45 <suhorng> so hard XD
+00:35:47 <CindyLinz> 但如果 programmer 能承諾說不會有 bottom, 那 GHC runtime 就不用擔心這種問題
+00:36:02 <suhorng> %default total -- idris
+00:36:27 <CindyLinz> 有了這個東西, GHC 就可以開始把一些 lazy program 直接變成 strict 化簡掉
+00:39:50 <petercommand> CindyLinz: 聽來好像很可怕XD
+00:39:58 <CindyLinz> petercommand: why? @@"
+00:40:15 <CindyLinz> petercommand: 沒有要你去宣稱 main 不會遇到 bottom 啊
+00:40:35 <petercommand> 喔喔..
+00:40:36 <CindyLinz> petercommand: 你總會有一些還蠻單純的, 但是計算量蠻大的東西吧?
+00:40:43 <CindyLinz> petercommand: 你沒寫過 C?
+00:40:48 <petercommand> 有
+00:41:01 <CindyLinz> petercommand: 那.....你都活到現在了怕什麼 XD
+00:41:07 <petercommand> XDD
+00:41:43 <CindyLinz> 只要用了任何一家的 C compiler, 就自動作了定型化承諾, 我的程式一定沒有 UB 耶 XD
+00:42:00 <pkmx> 你只要想你現在身邊用的各種東西 裡面都是用C + 一堆global variable + state 到處亂改 就會覺得很安全了w
+00:42:13 <CindyLinz> XD
+00:45:16 <pkmx> unlifted types 根本就是次等公民 什麼都不能用...
+00:45:54 <CindyLinz> pkmx: 寫一寫生氣了, 就直接 FFI 了事....? ^^|
+00:46:20 <CindyLinz> 不過.. 我實際跑, 真的會有快一點 :p
+00:46:42 <pkmx> 我也覺得應該是直接FFI會比較輕鬆 何必跟自己過不去=p
+00:47:51 <CindyLinz> tioj 害的.. XD
+00:48:21 <CindyLinz> 啊不過.. FFI 真的危險, unlifted types 只是累, 還不危險 XD
+00:48:21 <suhorng> lol
+00:48:32 <suhorng> CindyLinz: 話說那題後來 rejudge 了XD 好像測資檔案有壞掉
+00:49:47 <CindyLinz> QQ MLE
+00:49:49 <pkmx> 找看看有沒有Prelude.Unboxed之類的東西 =p
+00:50:10 <CindyLinz> pkmx: 又要衝 hackage 惹!
+00:50:42 <suhorng> Acme.Prelude.Unboxed
+00:50:46 <pkmx> 或是什麼神奇的 $(deriveUnboxed 'max)  =p
+00:54:18 <monochrom> FFI 可能還慢過 unlifted type
+00:54:46 <CindyLinz> monochrom: 計算太小團的時候, FFI overhead 太大?
+00:54:53 <monochrom> 對
+00:54:55 <CindyLinz> 兩邊跳來跳去的時候
+00:55:03 <monochrom> 所以, 認命吧!
+00:55:23 <CindyLinz> 整大塊都變成 C.. 也是一種認命法 QAQ
+00:55:27 <pkmx> 最快的solution應該就是acme-shellcode了=p
+00:55:37 <pkmx> 要多快就有多快!
+00:55:38 <suhorng> wwwwwwwww
+00:56:02 <CindyLinz> wwwwwwwwwwwwwwwww
+00:56:30 <CindyLinz> #cschat.tw-2015-02-14:17:52:39 <CindyLinz> whitglint: Haskell 也能寫 shell code, 到底哪裡有效能問題? XDXD
+00:56:43 <monochrom> 說起來, 要為今年四月一日準備了!
+00:57:23 <CindyLinz> 賊賊的..
+00:57:29 <whitglint> 為什麼被點名了 XD
+00:57:52 <CindyLinz> whitglint: 因為你聽到不該聽的話 (?
+00:57:56 <monochrom> 在 hackage 上找不到 acme-shellcode. 應該在哪裏找?
+00:58:14 <pkmx> https://github.com/PkmX/acme-shellcode
+00:59:54 <CindyLinz> pkmx: 把 acme 拿掉, 然後上傳 hackage 嘛~~ ^^
+01:00:52 <monochrom> 可以保留 acme 前置詞. in fact, 通常鼓勵保留
+01:01:10 <CindyLinz> 可是這個不無用啊 OAO
+01:01:39 <monochrom> 整個 acme 類都是說笑用的!
+01:02:02 <monochrom> 啊, 說笑與有用, 沒衝突!
+01:02:08 <pkmx> 其實我還蠻想用這個的 ... # https://hackage.haskell.org/package/acme-omitted-2.0.0.0/docs/Acme-Omitted.html
+01:02:11 <suhorng> 談笑間，
+01:02:35 <suhorng> > (...)
+01:02:37 <lambdabot>  No instance for (Data.Typeable.Internal.Typeable b0)
+01:02:38 <lambdabot>    arising from a use of ‘M692377189806102235422082.show_M6923771898061022354...
+01:02:38 <lambdabot>  The type variable ‘b0’ is ambiguous
+01:02:44 <CindyLinz> 可是標了 acme.. 這樣在做正經事找東西的時候會很容易忽略它 :|
+01:02:46 <pkmx> :t (...)
+01:02:47 <lambdabot> (Plated c, Applicative f) => LensLike f s t c c -> Over p f c c a b -> Over p f s t a b
+01:02:48 <suhorng> > (...) :: Int
+01:02:49 <lambdabot>  Couldn't match expected type ‘GHC.Types.Int’
+01:02:50 <lambdabot>              with actual type ‘Control.Lens.Type.LensLike f0 s0 t0 c0 c0
+01:02:50 <lambdabot>                                -> Control.Lens.Type.Over p0 f0 c0 c0 a0 b0
+01:02:54 <suhorng> lens....
+01:02:56 <CindyLinz> 如果標 unsafe 之類的倒不錯 XD
+01:03:00 <suhorng> > omitted
+01:03:01 <lambdabot>  Not in scope: ‘omitted’
+01:03:07 <monochrom> 我想, 其實無人敢用 :)
+01:04:58 <monochrom> 要自己寫機械語. 況且, x86-32 與 x86-64 也不同. (calling convention 不同)
+01:05:20 <CindyLinz> 對啊.. 用的人知道啦 XD
+01:09:46 <suhorng> https://hackage.haskell.org/package/acme-cadre-0.1/docs/Acme-Cadre.html for S-expr lovers
+13:10:19 <mno2> https://twitter.com/bos31337/status/567528864209838080/photo/1  這個太好笑了
+13:15:58 <b4283> 有人推三羊開泰
+23:40:39 <jiang42> 大家新年快乐～～
+23:42:14 <petercommand> 新年快樂 :p
+23:43:18 <suhorng> 新年快樂 :D

@@ -1,0 +1,57 @@
+10:55:18 <yen3> touch
+10:55:39 <yen3> 準備回軍營了 XD~8
+11:20:14 <CindyLinz> 掰掰.. (不過你下週才會看到 ^^|)
+14:16:31 <CindyLinz> yesodweb.com 的 favicon 剛好是把 haskell.org 的 favicon 上下顛倒耶 XD
+14:16:48 <CindyLinz> haskell.org 是 λ, yesodweb.com 是 y  XD
+19:13:21 <a127a127> 看成favonia= =+。  yesod好像多一槓，仿製還晉升一階，果真是反了 XD。
+20:05:50 <CindyLinz> XD
+20:21:22 <favonia> a127a127: xD
+22:04:53 <MnO2> 今天是開始紀錄log滿月，該慶祝一下
+22:08:45 <CindyLinz> 喔喔 :D
+22:38:01 <MnO2> 我懷疑lyhk的作者出去雲遊了... 聯繫不上
+22:42:21 <MnO2> 還有我的Raspberry Pi終於到了
+22:47:32 <CindyLinz> 要拿 Raspberry Pi 做什麼應用呀?
+22:47:35 <letoh> 賀!
+22:47:39 <letoh> 你的是哪一版?
+22:48:40 <letoh> grep Revision /proc/cpuinfo  看一下
+22:50:36 <MnO2> 我還沒開耶xD
+22:50:50 <letoh> 喔喔喔喔  念力... (誤
+22:51:12 <MnO2> 只是很便宜所以就敗了，也沒特別想做什麼
+22:51:27 <MnO2> CindyLinz 要推薦project嗎? xD
+22:51:49 <CindyLinz> MnO2: 其實我是不知道能幹嘛所以問... ._.
+22:51:52 <letoh> 是喔  我還有很多便宜的玩具，要介紹嗎? XD
+22:52:07 <CindyLinz> 看起來記憶體很小, 可是東西很多.. GPU / HDMI / SD卡 都有
+22:52:48 <letoh> 要玩的話建議可以考慮 mk802，記憶體是大多了
+22:52:50 <CindyLinz> 喔 還有 audio!
+22:54:08 <CindyLinz> 想到家裡還擺著兩包兩年前買的, 還沒拆封的麵包板和 pci io 卡... (默)
+22:54:13 <MnO2> 可惜沒有鏡頭，要不然可以讓他飛向宇宙
+22:54:26 <letoh> 有在準備了
+22:54:50 <letoh> 上面有 connector for camera module
+22:55:05 <CindyLinz> MnO2: 那還要有個夠力的能量來源 :|
+22:55:30 <letoh> 丟到太空應該不錯，因為有點熱，丟上去可以冷靜一下XD
+22:56:23 <MnO2> CindyLinz: http://news.cnet.com/8301-17938_105-10354588-1.html
+22:57:12 <CindyLinz> 喔喔, 用氣球就好了
+22:57:26 <letoh> http://www.appledaily.com.tw/realtimenews/article/international/20120925/144165  前幾天的新聞
+22:57:44 <MnO2> 對啊，他花$150，可以挑戰比他更低價xD
+22:58:29 <MnO2> 其實我很想做一遍，但我不知道台灣對應航空局的單位是什麼xD
+22:58:40 <MnO2> 而且台灣四周都是海，會不會掉到海上..
+22:58:58 <letoh> 好像有個單位會丟氣象氣球?
+22:58:59 <CindyLinz> MnO2: 有必要考慮掉下來的問題嗎 o.o
+22:59:08 <CindyLinz> MnO2: 呃.. 你想要去接啊? @@"
+22:59:08 <MnO2> MIT都有把step by step步驟放出來的樣子
+22:59:15 <CindyLinz> open source!
+22:59:33 <MnO2> 他的影像應該不是即時傳輸的吧，應該是掉下來把記憶卡拔出來
+22:59:49 <letoh> MnO2: 你可以問一下 BV1AL，他也許知道一些相關資訊
+23:00:02 <MnO2> 喔喔xD
+23:00:02 <CindyLinz> 我以為那樣摔下來應該就壞了 o.o
+23:00:26 <MnO2> 只要耐得住終端速度，然後不要燒掉就好了？
+23:01:26 <MnO2> 我甚至想過這樣求婚好像蠻浪漫的
+23:03:15 <CindyLinz> 終端求婚...
+23:03:33 <CindyLinz> MnO2: 來自宇宙的繡球
+23:03:58 <letoh> 不會被飛碟接走嗎?
+23:04:08 <MnO2> 掉到現場，然後把記憶卡取出播放太空中的I love you
+23:04:52 <CindyLinz> MnO2: 要精準掉到現場應該真的厲害了 @@"
+23:05:51 <CindyLinz> 那 MnO2 會嫁給外星人嗎? # 23:03 < letoh> 不會被飛碟接走嗎?
+23:06:38 <letoh> 首次星際聯姻? XD
+23:07:36 <MnO2> 如果是出包王女那樣好像不錯xDD
+23:08:26 <letoh> XD

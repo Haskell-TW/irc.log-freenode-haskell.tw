@@ -1,0 +1,189 @@
+00:42:10 <GH_J> 請問一下 在  learn you a haskell 裡 字定義 Type 與TypeClasses 的部份
+00:42:36 <GH_J> data Shape = Circle Float Float Float | Rectangle Float Float Float Float
+00:42:58 <GH_J> 這算是兩個Type 嗎？？
+00:43:02 <GH_J> 有點不瞭解
+00:46:09 <CindyLinz> GH_J: 一個 type, 兩種變化
+00:46:24 <GH_J> CindyLinz: 不是很懂＠＠
+00:46:36 <GH_J> CindyLinz: 像是 data Bool = True | False 很明確
+00:46:39 <CindyLinz> GH_J: 你之前有在用 C 嗎? 可以用 C 的 union 去理解
+00:46:54 <GH_J> CindyLinz: 喔喔～
+00:46:59 <CindyLinz> 不過 Haskell 會有額外的 tag 分辨是走哪一邊..
+00:47:18 <GH_J> CindyLinz: 額外＠＠？
+00:47:42 <hashcat_> 可以用型別代數理解
+00:48:03 <CindyLinz> GH_J: 就.. 你可以看一個 Bool 現在是 True 還是 False 嘛? 如果是 C 的 union { int a; char b; }; 的話, 直接拿到一個 union 的變數, 是看不出來現在是 a 還是 b 的
+00:48:24 <hashcat_> http://en.m.wikipedia.org/wiki/Algebraic_data_type
+00:49:02 <hashcat_> 消滅腦裡的c語言神經元
+00:49:47 <whitglint> tagged union
+00:50:28 <hashcat_> c語言沒法解釋pattern matching
+00:50:48 <CindyLinz> hashcat_: 可以先對 tag field 作 switch case.. XD
+00:51:28 <hashcat_> sum type跟product type是關鍵字
+00:51:28 <CindyLinz> 其實應該是一整排 if..elsif... 因為 haskell 還有 guard...
+00:52:06 <hashcat_> 可以理解成組合學的generating function
+00:52:07 <GH_J> 感覺像是 function overloading 嗎 ？
+00:52:25 <CindyLinz> 欸 不像.. 這邊是純粹資料的 @@"
+00:53:15 <hashcat_> 果然沒點理論, 會理解成狗屁不通的東西暈
+00:53:35 <godfat> 口語上就是.. Shape 是一個 type, 裡面的資料可能是 Circle 也可能是 Rectangle, 不會有其他可能
+00:53:37 <CindyLinz> GH_J: 嗯, 不過如果你類比的是 runtime 的時候可以得知它存什麼的話, 那是可以
+00:54:21 <hashcat_> 離散數學裡的生成函數
+00:54:39 <whitglint> struct { int tag; union { ... }; }; 這樣？
+00:54:50 <hashcat_> 來類比差距很小
+00:55:08 <CindyLinz> whitglint: 嗯 這樣類比..
+00:55:22 <hashcat_> c語言不是自成有的東西
+00:55:43 <CindyLinz> whitglint: 然後再加一個可能還沒算的話要有 thunk.. 就可以開始寫 interpreter 了 (誤)
+00:56:15 <hashcat_> 要深入學haskell, 理論躲不掉
+00:56:31 <CindyLinz> 我也在想怎麼入 Haskell 門好...
+00:56:35 <CindyLinz> 從什麼角度好..
+00:56:42 <hashcat_> 早死早超生
+00:56:55 <godfat> 從自己原有的背景出發吧？
+00:56:56 <whitglint> 從國中數學 f(g(x)) 開始...
+00:56:57 <CindyLinz> 學線性代數可以從矩陣開始體會, 也可以從代數開始
+00:57:16 <CindyLinz> 我覺得跑去跟 C 類比的話, 有點像從矩陣角度來學線性代數
+00:57:48 <hashcat_> 晚死更痛苦
+00:57:50 <CindyLinz> 是會有些線性代數的東西用矩陣作不出來, 可是可以體會蠻多部分的...
+00:58:56 <hashcat_> haskell社群也沒啥人吃這套吧
+00:59:36 <CindyLinz> hashcat_: 那不重要啊 @@" 反正他們不是新手 ^^|
+01:00:10 <CindyLinz> 老手可以直著看, 橫著看, 斜著看, 躺著看都沒關係的嘛 :p
+01:00:19 <GH_J> 看起來像是 資料結構 可是不太理解為什麼 還要分開＠＠
+01:00:27 <hashcat_> 不吃理論, 永遠是新手
+01:00:55 <CindyLinz> GH_J: 你想像的「不分開」是什麼意思呀? Bool 的 True 與 False 不就很自然地分開了嗎? 是 True 就不會是 False
+01:01:38 <CindyLinz> GH_J: 你可以理解為用 data 的 | 來描述不一樣的部分
+01:01:44 <GH_J> CindyLinz: 剛剛那個例子 我想是 data Circle = Float Float Float
+01:02:35 <CindyLinz> GH_J: 你可以這樣: data Circle = Circle Float Float Float     data Rect = Rect Float Float Float Float    然後再一個 data Shape = ShapeCircle Circle | ShapeRect Rect
+01:02:52 <CindyLinz> GH_J: 如果你只要用 Circle, 那就只用 Circle 就好
+01:03:01 <CindyLinz> GH_J: 有需要混用的時候, 才用 Shape
+01:05:59 <hashcat_> 就看一下algebraic data type
+01:06:03 <hashcat_> http://chris-taylor.github.io/blog/2013/02/11/the-algebra-of-algebraic-data-types-part-ii/
+01:06:09 <CindyLinz> GH_J: = 右邊 | 分開的每一項, 開頭的字就是那個 tag
+01:06:16 <hashcat_> 這個不錯
+01:06:34 <b4283> hmm
+01:07:05 <hashcat_> 每個型別都是一個多項式
+01:09:08 <GH_J> hashcat_: 謝謝提供資料
+01:13:38 <hashcat_> data A b c = X b c | Y b 就是 A(b,c) =  X((b,c) + Y(b);
+01:16:29 <hashcat_> A(b,c) = b*c + c
+01:19:07 <hashcat_> 那個有簡化
+01:23:38 <GH_J> 像是多項式函數 根據情況 return 值 ？
+01:25:06 <whitglint> 還好我沒有學 haskell # 誤
+01:27:02 <hashcat_> 我換種寫法好了
+01:28:52 <hashcat_> data F x y = C1 x y | C2 x 類比 F(x,y) = C1 x*y + C2 x
+01:29:33 <hashcat_> 這樣比較符合數學習慣
+01:29:41 <GH_J> 那 C1 跟 C2 是＠＠？
+01:30:25 <hashcat_> 左邊是建構子或tag, 右邊叫係數
+01:34:06 <hashcat_> 或者當成線性代數的向量空間基底
+01:34:58 <hashcat_> 這樣pattern matching就對應投影到基底了
+01:36:22 <CindyLinz> GH_J: 你想從 C 角度看的時候再來問我好了... ._.
+01:36:41 <GH_J> CindyLinz: 我盡量各方吸收＠＠
+01:37:58 <hashcat_> haskell的型別可以這樣代數操作
+01:39:06 <hashcat_> 到有必要討論型別和元素的時候, 才把他當成型別
+01:40:24 <hashcat_> 還可以掌握到從c語言型別沒法解釋的性質
+01:40:44 <GH_J> hashcat_: 有進行的簡單例子嗎＠＠？
+01:41:32 <hashcat_> 額
+01:41:59 <hashcat_> 左邊跟右邊對應關係很清楚吧
+01:42:13 <CindyLinz> GH_J: 你是不是想要寫什麼東西出來?
+01:43:38 <GH_J> CindyLinz: 看書看到這個章節 不是很懂
+01:44:13 <CindyLinz> GH_J: 你糾結的是不知道他的目的為何, 還是說這樣一放會變成什麼東西?
+01:44:30 <hashcat_> 型別對應多項式 型別名對應函數, 建構子對應基底或者係數, 型別變數就對應自變數
+01:45:03 <GH_J> CindyLinz: 都不知道 我以為會像是 一般 Type 一樣
+01:45:51 <whitglint> 我覺得先確認 GH_J 比較熟 C 還是數學 XD
+01:46:12 <GH_J> whitglint: 跟數學比的話一定是 C 的 XDD
+01:47:11 <hashcat_> data F x = C1 | C2 (F x) 就變成 F(x) = C1 + C2 F(x)
+01:48:14 <GH_J> hashcat_: 這是 linked list 嗎＠＠？
+01:49:30 <CindyLinz> GH_J: 那就是一個 type 為 Shape 的 variable 有兩種可能: 可能裡面存 Circle 的長相, 會外帶三個 float; 可能存 Rectangle 的長相, 會外帶四個 float..
+01:49:34 <hashcat_> F(x) = C1 + C2 (C1 + C2 F(x)) = C1 + C1 C2 + C2 C2 F(x)
+01:49:54 <CindyLinz> GH_J: 至於你說為什麼要分, 為什麼不直接用 Circle 就好了..
+01:50:07 <hashcat_> 其中兩基底的積可以當向量内積
+01:50:27 <CindyLinz> GH_J: 那是他剛好想這樣用啊 ._.  如果你想要定一個 type 只有 Circle 這一種長相, 那也是 ok 的~
+01:50:56 <GH_J> CindyLinz: 用在現實中的樣子是＠＠？
+01:51:37 <hashcat_> 應該說投影, 於是C1 C2 = 0, C2 C2= C2
+01:51:55 <hashcat_> 不是內積
+01:53:04 <hashcat_> C1 + C1 C2 + C2 C2 F(x) = C1 + C2 F(x)
+01:53:29 <hashcat_> 變回來了噗噗
+01:53:31 <CindyLinz> GH_J: 例如變數 aCircle = Circle 1 2 1
+01:53:36 <CindyLinz> 是一個長得像 Circle 的
+01:53:40 <CindyLinz> aRect = Rectangle 1 2 3 4
+01:53:44 <CindyLinz> aListOfShapes = [aCircle, aRect, Circle 2 3 2, Rectangle 4 3 2 1, Rectangle 5 4 3 2]
+01:54:11 <hashcat_> 不搞代數了暈
+01:54:12 <CindyLinz> aCircle :: Shape, aRect :: Shape, aListOfShapes :: [Shape]
+01:55:15 <CindyLinz> ↑ 這一行是說這三個變數的 type
+01:56:12 <hashcat_> 說用例的話, c語言switch-case的用例, 大都可以變成constructor跟pattern matching的組合
+01:56:40 <hashcat_> 不同constructor對應不同case
+01:56:49 <CindyLinz> hashcat_: 嗯, 除了那個 C 沒放 break; 會往下跑的那種 ^^|
+01:57:59 <hashcat_> 強力支持代數觀點
+01:59:16 <hashcat_> 像是linked list 就很經典
+02:00:02 <hashcat_> data List a = Nil | LLL a
+02:00:42 <hashcat_> 剛好就說明List有兩個case得處理
+02:02:32 <hashcat_> 需要處理的, 沒有第三種可能狀況, 且少處理任何一種狀況的函數得死在編譯器裡
+02:03:07 <GH_J> hashcat_: 喔喔喔喔~~
+02:03:09 <hashcat_> 不會等到執行才突然給你死掉
+02:03:24 <GH_J> hashcat_: 原來這就是一種 資料的 pattern matching
+02:04:48 <hashcat_> 代數觀點也考慮一下
+02:05:27 <hashcat_> 學typeclass就可以直接殺到範疇論了
+02:05:38 <CindyLinz> 覺得 GH_J 可以 Haskell 學好以後再去學代數? 現在可能代數比 Haskell 還陌生? @@"
+02:06:11 <GH_J> CindyLinz: 我剛剛說得對吧
+02:06:18 <hashcat_> 怎可能, 離散數學學哪了
+02:06:47 <CindyLinz> GH_J: 你剛剛哪一句啊? # 02:03 < GH_J> hashcat_: 原來這就是一種 資料的 pattern matching
+02:07:02 <GH_J> CindyLinz: 嗯
+02:07:10 <CindyLinz> GH_J: Haskell 裡面你想取出這個 aRect 或 aCircle 裡面的東西, 有這樣的寫法:
+02:07:57 <CindyLinz> case aCircle of { Circle x y r -> ... 對 x y r 做一些事 ... ; Rectangle x1 y1 x2 y2 -> ... 對 x1 y1 x2 y2 做一些事... }
+02:08:14 <CindyLinz> 然後因為 aCircle 長得是 Circle 樣, 所以會走第一個 branch
+02:08:23 <hashcat_> 看到c語言不舒服
+02:08:48 <CindyLinz> GH_J: hashcat_ 的意思是 data List a 有 Nil 和 LLL a 兩種變化, 所以到時候用 case .. of 去寫的時候, 就恰恰好就處理這兩種就好
+02:08:56 <CindyLinz> 而不像 C 的 tag 會是個 int
+02:09:14 <CindyLinz> 然後, 我們實際上也不會去處理 2^32 種變化
+02:09:15 <b4283> 開始有噁心倦怠感
+02:09:21 <CindyLinz> 只有用到其中兩種這樣
+02:09:37 <c9sloud> 呃 飽了 XD
+02:10:00 <CindyLinz> case..of 是 Haskell 不是 C 啊.... Q____Q
+02:10:06 <hashcat_> 不舒服到想來睡了
+02:10:40 <hashcat_> 尖括號必須死
+02:10:43 <c9sloud> 範疇論.. 英文是什麼
+02:10:48 <c9sloud> category theory ?
+02:10:50 <CindyLinz> irc 不方便寫多行啊 ._.
+02:10:51 <b4283> category
+02:10:53 <hashcat_> 先來睡死
+02:10:57 <c9sloud> 哦哦哦
+02:11:06 <c9sloud> 手邊好多 category theory 的書 沒一本看得懂
+02:11:19 <c9sloud> 打開第一頁 preface 就飽了
+02:11:50 <CindyLinz> c9sloud: 我以為可以看(自以為)懂前 50%?
+02:12:09 <CindyLinz> 然後往第 51% 前進的時候發現前面都是誤解..........||
+02:15:42 <hashcat_> 其實範疇論很像公車路線圖
+02:16:35 <hashcat_> object當站點, Arrow是單向道
+02:17:31 <hashcat_> 範疇就變成不同路的公車路線圖了
+02:18:28 <c9sloud> 搞懂了就可以開公司了
+02:19:09 <hashcat_> 當有人發現兩個不同世界,兩個世界的兩個地方有相同的路線結構
+02:19:19 <c9sloud> 開客運公司
+02:19:32 <hashcat_> 只是站名不一樣
+02:20:27 <hashcat_> 就會用functor把站名改一改
+02:21:32 <hashcat_> 若是又有人發現兩個funtor其實都是在做一樣的事
+02:22:01 <c9sloud> 併購的時候到了
+02:22:26 <hashcat_> 只是名稱不一樣, 就是nature transformation了
+02:24:01 <hashcat_> 生產funtor機器的工廠
+02:24:02 <c9sloud> 恩恩恩
+02:24:28 <hashcat_> 講完來睡覺
+02:30:35 <hashcat_> 向量空間國公車路線圖, 群代數國火車路線圖的故事
+03:13:56 <monochrom> 銀河鐵道999, 無限空間軌道 ♥
+03:15:13 <monochrom> 無限空間軌道的空間可能不是歐幾里得空間 :)
+03:19:13 <monochrom> 覺悟了! 原來松本零仕想教我們範疇論!
+03:21:47 <monochrom> 他想教的可不淺, 那個無限空間軌道很可能代表 fibre bundle
+09:57:30 <c9sloud> google c++ style class member naming suffix 要底線...
+11:33:47 <monochrom> 怎麼, 它越過了你的底線嗎? (逃)
+12:20:26 <jiajun> 有人用xmonad吗？ 如果我连续按两次Ctrl键就会打开chrome， 该怎么实现呢？
+13:40:27 <c9sloud> monochrom: XDD
+22:31:18 <mno2> http://www.zhihu.com/question/20462152  三元一次方程還真的看不懂 lol
+22:44:08 <CindyLinz> 如果要 parse stream 有什麼建議的嗎?
+22:44:45 <CindyLinz> 在考慮 happy.. 可是那樣要先預處理一下產生程式碼感覺比較不開心 QQ
+22:44:59 <CindyLinz> parsec 的話, 會把整條 stream 一直 keep 住對不對? @@"
+22:47:10 <CindyLinz> 欸.. happy 官網的 banner 真是好療癒啊 XDDDD # http://www.haskell.org/happy/
+22:57:24 <monochrom> parsec 會不會把整條輸入keep住, 視乎你怎樣寫. 用少些try, 就keep少些.
+23:00:52 <CindyLinz> 不可能沒 branch 啊 orz
+23:01:24 <monochrom> 有 branch.
+23:03:33 <CindyLinz> 要讓它 branch 左邊先失敗掉, 然後開始走右邊, 才會放掉用過的 input 對不對?
+23:05:11 <monochrom> 才不呢! 讓我舉個例子
+23:06:23 <monochrom> (char 'a' >> char 'b') <|> (char 'a' >> char 'c')  試給它餵 "ac", 你會得到失敗, 因為...
+23:07:04 <CindyLinz> 對這為什麼會失敗啦 XD
+23:08:19 <monochrom> 因為 <|> 的意思是, 如果左邊有 non-empty prefix 成功, 就忘記右邊. 也所以, 可以放掉輸入
+23:09:02 <CindyLinz> 喔喔...
+23:09:18 <CindyLinz> 這樣好像不太好 ^^|
+23:09:38 <CindyLinz> 這樣我就要人工把 common prefix 合併才行..
+23:10:45 <monochrom> 而 try 就告訴它, keep住輸入, 不要放棄右邊. (try (char 'a') >> char 'b') <|> (char 'a' >> char 'c') 就會接受 "ac"
+23:11:57 <CindyLinz> 暫時先交給 happy 預處理好了 ._.
+23:13:58 <CindyLinz> 果然有人做這種東西 XD http://hackage.haskell.org/package/happy-meta-0.2.0.5/docs/Text-Happy-Quote.html

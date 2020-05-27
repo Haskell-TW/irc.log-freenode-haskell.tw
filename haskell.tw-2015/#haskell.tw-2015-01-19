@@ -1,0 +1,128 @@
+00:26:55 <suhorng> http://okmij.org/ftp/continuations/undelimited.html "Undelimited continuations are co-values rather than functions"
+00:27:09 <suhorng> 真是看不太懂他的論點 (還有 co-values 什麼的)
+00:27:53 <CindyLinz> co 開頭的東西都頗難懂 orz
+00:28:00 <CindyLinz> 像是.... code (咦
+00:28:21 <CindyLinz> continuation 也是.. (咦
+00:30:34 <suhorng> komett (?
+00:31:28 <suhorng> 另外雖然說 call/cc 得到的東西會 abort 很奇怪, 但是如果不 abort, 還算是 "undelimited continuation" 嗎....
+00:33:54 <CindyLinz> 不知道 undelimited continuation 是什麼東西 ^^|
+00:34:59 <suhorng> *據說* call/cc 得到的東西就是
+00:43:08 <monochrom> shift-reset 是 delimited continuation 的例子
+00:44:45 <monochrom> 如果未見過 delimited, 那麼亦不必操心甚麼叫 undelimited. (正如未嘗過苦, 就不必操心甚麼叫苦 :) )
+00:45:25 <suhorng> delimited 是苦XD?
+00:46:25 <monochrom> 呀, 應該說, 如果未見過 delimited, 那麼見過的都是 undelimited. (套套邏輯? :) )
+00:46:32 <suhorng> XD
+00:51:40 <monochrom> 我都覺得 callcc 較不好用. 例如想寫 yield, 用 callcc 寫得較難明及不雅, shift-reset 寫得較易明及美觀
+00:54:56 <monochrom> 要去到像 C 的 setjmp-longjmp 那種粗暴地 global jump 才覺得 callcc 合適, 但有多少時候真的要絕對的 global jump 而不是相對的 local jump?
+00:54:57 <suhorng> monochrom: 恩, 確實比較複雜, 每次都要先 call/cc 一次得到把值丟回去的點, 再 call/cc 一次把當前狀態存下來?
+00:55:32 <suhorng> 不懂 local jump 跟 global jump 的比喻QQ
+00:56:52 <suhorng> monochrom: 想請問一下, 會 "abort" 這件事是 undelimited continuation 一定會有的嗎?
+00:57:10 <au> co-value，就是接一個值就停機的東西... 一直不傳值給他就一直不會 abort... function (including delimited continuation) 是接一個值會還一個值的東西
+00:57:21 <au> 傳不傳值給他都不會 abort
+01:01:25 <monochrom> undelimited continuation 會 abort 所有現有的. delimited continuation 會 abort 到一個你事先劃的界限.
+01:01:54 <suhorng> 嗯哼
+01:04:50 <suhorng> 這樣的話, 好像可以透過只在最外層包一個 delimiter 來用 delimited continuation 模擬 undelimited continuation
+01:05:24 <monochrom> 是
+01:08:18 <monochrom> 我用一個不是 haskell, 但相信是不解自明的語言做例. 它用 call-by-value.
+01:12:51 <suhorng> 好的?
+01:15:37 <monochrom> main = 3 + callcc (\k -> ...)  那個 k 儲起的是 3+[_], 即是程式由頭到 callcc. 將來使用 k 的話, 例如呼叫 k 4, 也是把程式連根拔起, 代之以 3+4
+01:16:25 <suhorng> 是
+01:20:01 <monochrom> main = 3 + reset (5 + shift (\j -> ...))  那個 j 儲起的是 5+[_], 即是由 reset 到 shift, 不是由頭起.
+01:20:15 <suhorng> 嗯哼
+01:21:50 <monochrom> 不過呢, shift 是順手幫你 abort, abort 到 reset 的界. 即是說, 3 + reset (5 + shift (\j -> 4)) = 3 + reset 4
+01:21:59 <suhorng> 但若現在定義 callcc', 得到的 k 使用時不把程式連根拔起, 這樣還能算 "undelimited" 嗎?
+01:22:08 <monochrom> 然後再 = 3 + 4
+01:22:32 <suhorng> 嗯嗯
+01:22:44 <CindyLinz> 如果 haskell 的話.... callcc 就是拔到 runContT 為止?
+01:23:09 <CindyLinz> 然後 shift / reset 可以在同一個 ContT 裡面陸續設不同的中斷點使用這樣?
+01:23:30 <monochrom> CindyLinz: 是
+01:23:46 <CindyLinz> 嗯嗯嗯....
+01:24:03 <CindyLinz> 覺得 reset 有像 ReaderT 的 local 函數的感覺... (思
+01:26:32 <suhorng> undelimited continuation 使用 k 時把整個程式連根拔起
+01:26:53 <CindyLinz> unroot
+01:26:56 <suhorng> 我可以解釋成 undelimited 的版本會捕捉到程式最後的 exit(0) 嗎? 所以等同於 abort 調
+01:27:52 <monochrom> 是
+01:28:28 <suhorng> 好的...
+01:30:19 <monochrom> 3 + reset (6 * shift (\j -> j 1 + j 2)) = 3 + reset (j 1 + j 2),  j 儲起了 6*[_], 或者其實準確地說是 reset(6*[_]).
+01:30:35 <monochrom> = 3 + reset (reset (6*1) + reset (6*2))
+01:30:50 <monochrom> = 3 + (6*1 + 6*2)
+01:32:55 <CindyLinz> 欸..  main = 3 + reset (5 + shift (\j -> ...)) 和 main = 3 + (5 + callcc (\j -> ...)) 的執行結果有什麼不一樣? @@"
+01:34:14 <suhorng> \j -> j 1 + j 2 就會不一樣了
+01:34:38 <suhorng> 假設從左算到右, call/cc 的 j 在 j 1 就會 abort 掉
+01:35:18 <petercommand> 這是假設左邊會先 evaluate 吧?
+01:35:36 <monochrom> 你不如寫 main = 3 + (5 + callcc (\k -> ...)).  k 儲起 3 + (5 + [_]) 而不只是 5 + [_]
+01:36:36 <petercommand> 阿..沒看到假設
+01:37:59 <petercommand> shift reset 會用在甚麼地方呀?
+01:38:58 <CindyLinz> 聽說 scala 用在... deprecated 列表上.. (咦
+01:39:38 <CindyLinz> suhorng: 欸欸.. 你話別講一半啊~ XD  那 shift reset 遇到 \j -> j 1 + j 2 是怎樣計算過程? @@"
+01:40:51 <suhorng> 原來我只講了一半XD
+01:42:45 <suhorng> 咦 其實 monochrom 已經講了
+01:43:07 <suhorng> <monochrom> 3 + reset (6 * shift (\j -> j 1 + j 2)) = 3 + reset (j 1 + j 2),  j 儲起了 6*[_], 或者其實準確地說是 reset(6*[_]).
+01:43:18 <suhorng> <monochrom> = 3 + reset (reset (6*1) + reset (6*2))
+01:43:21 <suhorng> 這樣
+01:45:19 <CindyLinz> 欸?
+01:47:47 <CindyLinz> main = 3 + (5 + callcc (\j -> j 1 + j 2)) = (\j -> j 1 + j 2) (3 + (5 + [_])) = (3 + (5 + 1)) + (3 + (5 + 2)) = 19 ?
+01:48:56 <CindyLinz> main = 3 + reset (5 + shift (\j -> j 1 + j 2)) = 3 + (\j -> j 1 + j 2) (5 + [_]) = 3 + ((5 + 1) + (5 + 2)) = 16 ?
+01:49:13 <suhorng> 不是唷, 3 + (5 + callcc (\j -> j 1 + j 2)) = (\j -> j 1 + j 2) (\v -> abort(3 + (5 + [v]))) = 9
+01:50:12 <CindyLinz> 欸? 那這個 j 應該會是個 monad action, 不能直接寫在 pure expression 裡面?
+01:50:18 <suhorng> 3 + reset (5 + shift (\j -> j 1 + j 2)) = 16 沒錯
+01:50:28 <suhorng> 這裡總之不是 Haskell XD
+01:50:55 <suhorng> 不然 shift/reset 也不是 pure 的
+01:50:59 <CindyLinz> Haskell 比較方便思考 XD
+01:51:23 <CindyLinz> 也不是 pure 嗎? 可是看起來可以 pure 啊? :p
+01:51:40 <suhorng> reset 可以是沒錯, shift 不行
+01:52:22 <CindyLinz> 也不行? 不過這代換過程看起來好純啊 @@"
+01:52:54 <suhorng> shift 會把當前的東西換掉耶XD
+01:53:16 <suhorng> 把外面的 5 + 拉進來不是純的吧
+01:53:21 <monochrom> 所以一開始說 "不是 haskell, 但相信是不解自明的語言做例. 它用 call-by-value." :)
+01:53:44 <CindyLinz> 也對 shift 要吃 context
+02:24:19 <CindyLinz> @hoogle Monad m => (m a, m b) -> m (a, b)
+02:24:22 <lambdabot> No results found
+02:25:43 <CindyLinz> @type (,) <$> fst <*> snd
+02:25:44 <lambdabot> (a1, a) -> (a1, a)
+02:31:21 <monochrom> @type uncurry liftM2
+02:31:22 <lambdabot> Monad m => (a1 -> a2 -> r, m a1) -> m a2 -> m r
+02:31:34 <monochrom> @type liftA2
+02:31:35 <lambdabot> Applicative f => (a -> b -> c) -> f a -> f b -> f c
+02:31:49 <monochrom> @type uncurry liftM2 (,)
+02:31:49 <lambdabot>     Couldn't match expected type ‘(a10 -> a2 -> r, m a10)’
+02:31:50 <lambdabot>                 with actual type ‘a0 -> b0 -> (a0, b0)’
+02:31:50 <lambdabot>     Probable cause: ‘(,)’ is applied to too few arguments
+02:31:55 <monochrom> @type uncurry (liftM2 (,))
+02:31:56 <lambdabot> Monad m => (m a1, m a2) -> m (a1, a2)
+02:32:09 <monochrom> 就是這樣
+02:32:46 <CindyLinz> 喔喔!
+02:32:51 <CindyLinz> 謝謝 ^^
+02:33:26 <CindyLinz> @type liftM2
+02:33:27 <lambdabot> Monad m => (a1 -> a2 -> r) -> m a1 -> m a2 -> m r
+02:47:39 <petercommand> @type uncurry
+02:47:40 <lambdabot> (a -> b -> c) -> (a, b) -> c
+02:50:49 <petercommand> @type liftM2 (,)
+02:50:50 <lambdabot> Monad m => m a1 -> m a2 -> m (a1, a2)
+02:51:00 <petercommand> @type curry
+02:51:01 <lambdabot> ((a, b) -> c) -> a -> b -> c
+03:12:40 <CindyLinz> 欸.. monad 沒有 (<<) ?
+03:12:44 <CindyLinz> @type (<<)
+03:12:45 <lambdabot>     Not in scope: ‘<<’
+03:12:45 <lambdabot>     Perhaps you meant one of these:
+03:12:45 <lambdabot>       ‘=<<’ (imported from Control.Monad.Writer),
+03:13:01 <CindyLinz> 為什麼為什麼 ^^|
+16:24:50 <pkmx> 我之前也發現了沒有(<<)這個事實...
+16:27:58 <CindyLinz> 為什麼會這樣呢 orz  我想用啊 QQ
+16:30:01 <pkmx> 就只好自己(<<) = flip (>>)吧XD
+16:30:22 <pkmx> 我的Monad utility functions集合越來越多了 哈哈哈
+16:31:50 <CindyLinz> 對喔 flip (>>) 就可以了 :Q
+16:32:30 <CindyLinz> 我還試了一下 ((\_ -> oooooo) <<) $ do 和 (const (oooooo) <<) $ do 覺得好醜
+16:33:15 <CindyLinz> 那就可以寫成 flip (>>) (oooooo) $ do     嗯, 有比較好嗎?
+16:34:31 <pkmx> :t flip (>>) return $ return
+16:34:32 <lambdabot>     Could not deduce (Monad m0) arising from a use of ‘return’
+16:34:32 <lambdabot>     from the context (Monad m)
+16:34:32 <lambdabot>       bound by the inferred type of it :: Monad m => a -> m a
+16:34:41 <pkmx> :t flip (>>) (return ()) $ return ()
+16:34:42 <lambdabot> Monad m => m ()
+16:36:44 <pkmx> http://nikita-volkov.github.io/record/
+16:38:23 <CindyLinz> 這 lib... 有點意思 :Q
+16:50:50 <petercommand> 看起來很讚 :P
+16:58:34 <mno2> TH 大法好
+17:17:04 <au> Type-level String Literal 大好
+20:34:56 <miaoski> CindyLinz: 別介意了，clojure 只有 -> 和 ->>

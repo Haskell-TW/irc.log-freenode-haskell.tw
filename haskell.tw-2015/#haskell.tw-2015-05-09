@@ -1,0 +1,10 @@
+13:45:23 <mno2> 為什麼 SML 不會有 haskell 的問題啊？
+13:45:33 <mno2> val f = fn x => x
+13:45:39 <mno2> val _ = (f "foo"; f 13)
+13:45:54 <mno2> the expression fn x => x is syntactically a value, so f has polymorphic type 'a -> 'a and both calls to f type check
+13:46:21 <mno2> haskell 沒開 higher-rank 就會掛？
+13:46:58 <mno2> 還是其實等價的是 val f = let in fn x => x end  ?
+23:40:19 <monochrom> haskell 有問題嗎?
+23:40:32 <monochrom> > let f = \x -> x in (f "foo", f 13)
+23:40:33 <lambdabot>  ("foo",13)
+23:42:23 <monochrom> 還有各變種(例如 f = \x -> x 放在 top level)都沒問題

@@ -1,0 +1,38 @@
+14:14:44 <CindyLinz> miaoski, cibs: 明天想講 lens. 想說 arrow 已經有一份現成的 40 頁的報告, 而且我覺得寫得很棒
+14:14:54 <miaoski> OK cool
+14:15:47 <CindyLinz> 雖然一樣是一堆骨頭, 要麻煩大家長肉... ._.
+14:25:33 <miaoski> Q.Q
+14:26:10 <CindyLinz> 最後一次了嘛.. 接下來就無限期寒假了, 要多倒點 ._.
+15:14:40 <cibs> 講 lens ok, 真希望不是最後一次啊
+15:14:43 <cibs> miaoski: 快去爭取!
+15:14:57 <miaoski> ?!
+15:14:58 <lambdabot> Maybe you meant: v @ ? .
+15:15:05 <miaoski> =,= 笨蛋 lambdabot
+15:52:11 <cibs> 感覺上面那句好傲嬌
+16:00:45 <jiang42> 对啊。。。
+18:50:19 <pkmx> @hoogle Applicative f => f (b -> c) -> f (a -> b) -> f (a -> c)
+18:50:22 <lambdabot> Data.Generics.Schemes everywhereBut :: GenericQ Bool -> GenericT -> GenericT
+18:51:14 <pkmx> :t liftA2 (.)
+18:51:16 <lambdabot> Applicative f => f (b -> c) -> f (a -> b) -> f (a -> c)
+18:57:42 <pkmx> @hoogle Applicative f => (b -> f c) -> (a -> f b) -> (a -> f c)
+18:57:44 <lambdabot> Control.Monad (<=<) :: Monad m => (b -> m c) -> (a -> m b) -> (a -> m c)
+18:57:45 <lambdabot> Control.Monad (>=>) :: Monad m => (a -> m b) -> (b -> m c) -> (a -> m c)
+18:57:45 <lambdabot> Control.Exception.Base bracket :: IO a -> (a -> IO b) -> (a -> IO c) -> IO c
+18:59:12 <pkmx> @hoogle Applicative f => (b -> c) -> (a -> f b) -> (a -> f c)
+18:59:13 <lambdabot> Control.Parallel.Strategies ($|) :: (a -> b) -> Strategy a -> a -> b
+18:59:13 <lambdabot> Control.Parallel.Strategies ($||) :: (a -> b) -> Strategy a -> a -> b
+18:59:13 <lambdabot> Control.Parallel.Strategies (.|) :: (b -> c) -> Strategy b -> (a -> b) -> (a -> c)
+19:07:34 <pkmx> :t \f (Kleisli -> g) -> runKleisli $ f ^<< g
+19:07:36 <lambdabot> Monad m => (c -> b) -> (a -> m c) -> a -> m b
+19:07:54 <pkmx> 好噁心喔.....
+19:09:46 <pkmx> :t \f g -> return . f <=< g
+19:09:47 <lambdabot> Monad m => (b -> c) -> (a -> m b) -> a -> m c
+19:10:47 <pkmx> @let f ^=< g = return . f <=< g
+19:10:47 <lambdabot>  Parse failed: Ambiguous infix expression
+19:11:02 <pkmx> @let (^=<) = \f g -> return . f <=< g
+19:11:03 <lambdabot>  Parse failed: Ambiguous infix expression
+19:11:20 <pkmx> > let (^=<) = \f g -> return . f <=< g in ()
+19:11:22 <lambdabot>  ()
+20:01:47 <pkmx> Drastic Prelude changes imminent # https://www.haskell.org/pipermail/libraries/2015-January/024777.html
+23:58:35 <CindyLinz> > fix $ \t -> 1 : map (2*) t
+23:58:37 <lambdabot>  [1,2,4,8,16,32,64,128,256,512,1024,2048,4096,8192,16384,32768,65536,131072,2...

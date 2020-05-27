@@ -1,0 +1,5 @@
+12:09:07 <cibs> https://github.com/purescript/purescript/wiki/Differences-from-Haskell
+16:08:30 <mno2> http://www.reddit.com/r/haskell/comments/365yvj/haskell_job_open_source_berlin_or_remote/  這應該就是很久很久之前有說過的 liquid democracy 中有在用 haskell 的 project
+16:10:51 <mno2> http://mitpress.mit.edu/books/little-prover 這好像是 yinwang 指導教授出的？
+16:15:23 <mno2> http://begriffs.com/posts/2015-05-15-haskell-god-mode-sandbox.html
+16:15:42 <mno2> build all of hackage into a huge shared sandbox pinned to a given Stackage LTS version. This would take forever, right? Yep, it did. Over a week on my Mac running around the clock.

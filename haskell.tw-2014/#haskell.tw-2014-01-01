@@ -1,0 +1,25 @@
+02:16:16 <monochrom> ⊢P 是用符號化規則證P, ⊩P 是用語義證P
+02:17:15 <monochrom> 打錯字. ⊨P 是用語義證P
+17:07:15 <hashcat_> 吾見一語言形似Haskell, 名曰Curry, 俱理則(logic)同函數, 琴瑟和鳴. 然缺typeclass, 實不可直視之劣處, 嗚呼哀哉
+17:08:41 <hashcat_> 若增typeclass, 如虎添翼, 則Haskell危矣
+17:52:39 <letoh> 前幾天正想跟你說 Curry 這語言
+17:59:13 <suhorng> typeclass有什麼特別的好處阿？
+17:59:22 <suhorng> 怎麼感覺很多用 typeclass 的都是靠 GHC extension
+18:31:25 <CindyLinz> typeclass 就是 Haskell 的 class 嗎?
+20:42:01 <hashcat> 余識得Curry已久,侯typeclass多時
+20:42:35 <hashcat> 不見其蹤至今
+20:43:23 <hashcat> 故未論之
+20:44:37 <hashcat> 時至今已無所期
+20:50:09 <hashcat> 重載, 舊律新用者也
+21:02:41 <hashcat> 眾用當循其本. 重複造車,橫生枝節,實有弊無利.
+21:03:44 <hashcat> 算術及monad可為例.
+21:04:19 <hashcat> CindyLinz 然也
+21:07:48 <hashcat> 爾等習haskell非兩三日,既得算術及monad之利甚多
+21:09:10 <hashcat> , 不詳typeclass之利, 敝人匪夷所思
+21:13:11 <hashcat> 若無typeclass, 相異數值型別之算術將各自為政, 符號各異, 同義異字
+21:14:42 <hashcat> 這樣講話要想好久XD
+21:16:20 <hashcat> suhorng居然噴出這問題
+21:18:44 <hashcat> 他們都用typeclass的擴展了,貌似更沒理由連typeclass都沒有
+21:19:03 <hashcat> curry偏沒有
+21:23:46 <hashcat_> 古文新用之例 : http://zh-classical.wikipedia.org/wiki/%E6%B6%BC%E5%AE%AE%E6%98%A5%E6%97%A5%E7%B3%BB%E5%88%97
+21:25:12 <hashcat_> 舊律新用, 同typeclass之理

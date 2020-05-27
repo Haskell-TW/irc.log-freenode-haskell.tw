@@ -1,0 +1,26 @@
+19:58:17 <CindyLinz> 缺了「含樹語言」XD # http://weibo.chinatimes.com/funny/3745716960676827
+20:18:21 <au> CindyLinz: 這樣嗎 https://i.imgur.com/InRWuZR.png
+20:33:08 <CindyLinz> au: 被你碰過的樹也會變得怪怪der.... XD
+20:41:58 <petercommand> 很好奇大家都是怎麼打特殊符號的呀?
+20:42:38 <petercommand> 像lambda，或是尾巴往右邊靠的;
+20:45:48 <suhorng> \lambda in Agda, or Ctrl+\ in Racket
+20:45:55 <suhorng> *DrRacket
+20:47:53 <petercommand> 我竟然忘了我用的輸入法有提供希臘文...XD
+20:48:05 <suhorng> λ
+20:48:50 <CindyLinz> petercommand: 先教你第一招.. 我覺得最實用的
+20:48:54 <CindyLinz> petercommand: 複製 貼上 (Y)
+20:52:22 <petercommand> XDDD
+20:55:02 <letoh> 實用++
+20:56:56 <petercommand> 所以大家都是複製貼上嗎XDD
+20:57:02 <au> vim 是 Ctrl-K * L
+20:58:14 <letoh> emacs 有輸入法可以輸入
+20:58:44 <au> 倒分號用的是自己寫的 App::Uni 附的 uni 這個 script ( https://metacpan.org/release/App-Uni )
+20:58:51 <au> $ uni rev.*semi
+20:58:53 <au> 204F ⁏ REVERSED SEMICOLON
+20:58:56 <au> 再複製貼上
+21:04:29 <petercommand> 真是有趣的工具呢XD
+21:05:23 <letoh> 好方便
+21:05:56 <au> $ uni lig.*allah # 例如可以列出阿拉伯文的阿拉連寫
+21:06:01 <au> FDFA ﷺ
+21:39:12 <CindyLinz> petercommand: 我有時候會去 google unicode 出來複製 :p
+21:39:23 <CindyLinz> petercommand: 但是要考慮大家的字型檔有沒有它

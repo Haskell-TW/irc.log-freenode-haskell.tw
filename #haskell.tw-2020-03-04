@@ -1,0 +1,24 @@
+22:51:48 <Neduck>  >fix f = let {x = f x} in x
+22:52:03 <Neduck>  > let fix f = let {x = f x} in x
+22:52:14 <Neduck> :t fix
+22:52:16 <lambdabot> (a -> a) -> a
+22:53:19 <Neduck> > let f = (\next guess tol val -> if abs(guess^2-val) < tol then guess else                     next ((guess + val / guess) / 2.0) tol val)
+22:53:21 <lambdabot>  <no location info>: error:
+22:53:21 <lambdabot>      not an expression: ‘let f = (\next guess tol val -> if abs(guess^2-val) ...
+22:53:38 <Neduck> > let f = (\next guess tol val -> if abs(guess^2-val) < tol then guess else next ((guess + val / guess) / 2.0) tol val)
+22:53:40 <lambdabot>  <no location info>: error:
+22:53:40 <lambdabot>      not an expression: ‘let f = (\next guess tol val -> if abs(guess^2-val) ...
+22:55:51 <Neduck> 有人可以解釋這邊發生什麼事嗎？
+22:55:53 <Neduck> https://en.wikibooks.org/wiki/Haskell/Fix_and_recursion
+22:56:14 <Neduck> 在算square root的那邊
+22:57:13 <Neduck> > fix (\next guess tol val -> if abs(guess^2-val) < tol then guess else next ((guess + val / guess) / 2.0) tol val) 2.0 0.0001 25.0
+22:57:15 <lambdabot>  5.000000000016778
+23:21:07 <caasih> next 就是你要遞迴的函數？
+23:52:41 <Neduck_> 好像不是耶，要遞迴的是
+23:52:54 <Neduck_> (\next guess tol val -> if abs(guess^2-val) < tol then guess else next ((guess + val / guess) / 2.0) tol val)
+23:53:01 <Neduck_> 整個耶？
+23:53:45 <Neduck_> 然後就卡在上面那駝的type不是 a -> a
+23:53:56 <Neduck_> :t fix
+23:53:58 <lambdabot> (a -> a) -> a
+23:55:13 <Neduck_> :t (\next guess tol val -> if abs(guess^2-val) < tol then guess else next ((guess + val / guess) / 2.0) tol val)
+23:55:16 <lambdabot> (Fractional t, Ord t) => (t -> t -> t -> t) -> t -> t -> t -> t

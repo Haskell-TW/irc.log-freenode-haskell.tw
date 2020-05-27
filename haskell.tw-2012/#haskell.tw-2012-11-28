@@ -1,0 +1,58 @@
+12:02:24 <MnO2> http://hackage.haskell.org/package/language-puppet-0.3.0.0
+12:02:54 <MnO2> 如果有人有在用 puppet 的話可以看看
+15:40:52 <c9s> puppet!
+16:11:24 <cataska> Dan Boneh !! # http://blog.ezyang.com/2012/11/functional-encryption/
+16:13:20 <cataska> 有在上 Dan Boneh 在 coursera 開的 Introduction to Cryptography，都不會.... orz
+16:14:02 <MnO2> https://www.coursera.org/course/crypto
+16:14:09 <MnO2> https://www.coursera.org/course/crypto2
+16:14:17 <MnO2> 還有下學期xD
+16:15:02 <cataska> 第一周的 Discrete probability 就把我擊沈了...
+16:16:37 <feiyin> 大家好
+16:17:04 <MnO2> feiyin: hi
+16:17:45 <feiyin> Hi
+16:23:17 <MnO2> feiyin: 甘肅的朋友？
+16:28:43 <feiyin> 对啊
+16:28:46 <feiyin> 你怎么知道
+16:29:16 <MnO2> feiyin: ip address
+16:30:39 <feiyin> 哈哈
+16:31:37 <MnO2> feiyin: 有在寫 haskell ?
+16:32:40 <feiyin> 没啊
+16:34:11 <feiyin> 我头一次应用这个 Xchat  ，就进来看看
+16:34:31 <feiyin> 这里人很多啊
+16:35:53 <MnO2> feiyin: 這邊算很少的 :p   有其他更多的channel
+16:36:10 <feiyin> 对阿
+16:36:39 <feiyin> 其他的频道人家都是英语交流   没办法就出来了
+16:38:15 <MnO2> 哈
+16:38:47 <b4283> 甘肅天氣好嗎
+16:39:05 <feiyin> 兰州这最近很冷
+16:39:17 <feiyin> 其他城市也好不到哪去
+16:39:25 <feiyin> 你们都是那个地方的
+16:40:19 <MnO2> feiyin: 台灣。頻道的結尾是 .tw
+16:41:54 <MnO2> feiyin: 通常會看到後墜    . country domain
+16:41:56 <feiyin> 我才这么想呢   你们全是台湾的  ？
+16:44:22 <MnO2> feiyin: 據我所知應該都是
+16:44:57 <feiyin> 哦
+16:46:55 <b4283> 綴
+16:47:04 <b4283> decorator
+16:47:21 <MnO2> b4283: thanks
+16:54:58 <_13h> 這邊不是應該叫 suffix 嗎?
+16:56:45 <b4283> _13h: 我隨意亂說的，哈哈
+16:57:48 <_13h> 喔喔隨意啦  我也不熟XD
+20:49:29 <MnO2> http://haskelllive.com/
+20:49:48 <MnO2> Haskell Live TV
+21:02:56 <feiyin> 我头次听说 haskell
+21:03:10 <feiyin> 头一次
+21:03:30 <CindyLinz> 好的開始 :D
+21:04:52 <feiyin> 真的  ， 我都不知道这个有什么特点
+21:05:00 <CindyLinz> XD
+21:05:26 <CindyLinz> 你是什麼專業背景的呀?
+21:05:48 <feiyin> 网络啊
+21:06:39 <CindyLinz> hmm, 那可能短期還用不太上, 頂多當個業餘興趣看看就好
+21:07:00 <b4283> 可以用 haskell 寫個 iptables gui
+21:07:04 <b4283> (誤)
+21:07:12 <feiyin> 是啊  业余看看
+21:07:34 <feiyin> 哦
+23:28:19 <MnO2> http://hackage.haskell.org/package/language-java
+23:28:32 <MnO2> 大家都用 haskell 來寫 front end 就是...
+23:50:35 <favonia> 為什麼這樣是 frontend
+23:50:43 <favonia> 感覺是在寫 compiler 吧

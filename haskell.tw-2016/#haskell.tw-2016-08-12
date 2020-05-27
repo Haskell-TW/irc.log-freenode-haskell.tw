@@ -1,0 +1,13 @@
+15:59:54 <pkmx> @pl \x y -> AppT (PromotedConsT `AppT` x) y
+15:59:54 <lambdabot> AppT . (PromotedConsT `AppT`)
+16:00:57 <pkmx> @pl \x y -> (PromotedConsT `AppT` x) `AppT` y
+16:00:57 <lambdabot> AppT . (PromotedConsT `AppT`)
+16:03:10 <petercommand> :t AppT
+16:03:11 <lambdabot> Not in scope: data constructor ‘AppT’
+16:03:23 <petercommand> :k AppT
+16:03:24 <lambdabot> Not in scope: type constructor or class ‘AppT’
+16:04:01 <petercommand> 阿，只是某個 variable 而已XD
+16:04:13 <pkmx> :t Language.Haskell.TH.AppT
+16:04:14 <lambdabot> Language.Haskell.TH.Syntax.Type -> Language.Haskell.TH.Syntax.Type -> Language.Haskell.TH.Syntax.Type
+16:04:25 <pkmx> 是這個 AppT
+17:08:13 <petercommand> 喔喔喔

@@ -1,0 +1,47 @@
+00:52:00 <monochrom> 我不寫 bottom. 又或者, 若真有 bottom, 我願意不知幾時發作
+00:53:05 <godfat> "cannot allocate memory"
+00:53:39 <monochrom> 你用盡記憶了?
+00:53:55 <godfat> 你上一句話是什麼？ (XD
+00:54:21 <CindyLinz> 00:52 < monochrom> 我不寫 bottom. 又或者, 若真有 bottom, 我願意不知幾時發作
+00:54:38 <godfat> "cannot allocate memory"
+00:54:39 <CindyLinz> 我想是在回應下午那個 any . map p XD
+00:55:06 <monochrom> 啊, 你是說, 如果 bottom 顯為用盡記憶, 我願意不知道幾時發生嗎? 我願意.
+00:56:00 <godfat> XD
+00:56:01 <godfat> 只是開記憶玩笑
+00:56:01 <godfat> 對，我也願意不知道幾時發生，反正我只需要知道該添購記憶體了
+00:57:43 <monochrom> 是呀, 我不擔心 p x 是 bottom
+01:01:38 <monochrom> 寫程式真難! :)
+01:02:15 <monochrom> 呀, 亂寫很容易. 應該是: 寫好程式真難!
+01:02:31 <CindyLinz> 改審美觀就好了.. (鏡)
+01:02:38 <godfat> 知道程式好不好也很難
+01:03:20 <CindyLinz> 只是如果對我重要的人搭上那台可能會有 bottom 的程式輔助的飛機上的時候.... 我就超擔心的... ww
+01:04:04 <godfat> "cannot retrieve more fuel"
+01:05:59 <monochrom> 而我的那種"願意不知道, 反正我不會錯"更難. 我這麼成熟, 當然做到. 但怎能同樣要求學生呢? 學習之時一定會錯, 錯而又不知幾時發作, 怎樣從錯誤中學習呢?
+01:07:01 <godfat> 從摔車開始，之後再摔飛機 XD
+01:07:35 <monochrom> 或者因此, Haskell 果真比別的語言難學.
+01:08:16 <CindyLinz> trace GHC code 就知道會幾時發生啦 XD
+01:08:42 <monochrom> 我們不應未學行先學車. 所以, 摔交先, 然後摔車... XD
+01:09:58 <monochrom> 之後可以摔飛機大炮手榴彈 XD
+01:11:12 <godfat> 摔手榴彈是什麼情況... XD
+01:12:02 <monochrom> 總有一天, 連手榴彈也有firmware, 有Y2K bug之類的 XD
+01:12:53 <monochrom> "2038年1月某日, 整批手榴彈自行引爆"
+01:13:39 <godfat> "研判這批手榴彈集體罷工" (?)
+01:13:53 <CindyLinz> signed int32 滿了..
+01:14:02 <monochrom> "總參謀長說, 早知用 64 bit"...
+01:16:00 <CindyLinz> 不過我記成 12 月 :Q
+01:16:06 <monochrom> 手榴彈本就不應內有電腦. 有一天有的話, 人類沒希望了
+01:16:41 <godfat> PDA 可以充當手榴彈，不錯呀 XD
+01:17:00 <monochrom> 我以前曾笑視窗: "是不是有一天, 你連螺絲都要 device driver"?
+01:17:37 <godfat> 把電腦當螺絲就行了，就像真空管時代似的
+01:17:51 <CindyLinz> 之前看到敘利亞的反政府軍, 拿 smart phone 校正飛彈方位...
+01:17:53 <godfat> 是說也許超級電腦也是如此
+01:18:06 <godfat> 不是聽說還有 ps2 還 ps3 的？ XD
+01:18:40 <CindyLinz> 然後拿一個像大鐵盒一樣的東西當戰車, 裡面有貌似電漿電視的東西來看潛望鏡, 還有遊戲用搖桿來控制...
+01:18:57 <monochrom> bonus: 螺絲的 device driver 也就是 screw driver 了 XD
+01:20:08 <godfat> 兩個都: XDDDDD
+01:20:40 <monochrom> 用來還真玩起 Battlefield 及 Call of Duty 了...
+01:20:51 <monochrom> s/用/看
+19:40:28 <hashcat> http://rtw.ml.cmu.edu/rtw/
+19:41:39 <hashcat> 天網
+21:16:50 <CindyLinz> ww
+21:21:28 <hashcat_> ww

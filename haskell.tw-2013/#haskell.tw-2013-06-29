@@ -1,0 +1,38 @@
+01:10:21 <hashcat> > import Text.Printf
+01:10:25 <lambdabot>   <hint>:1:1: parse error on input `import'
+01:12:14 <monochrom> lambdabot 不讓你 import. 安全理由.
+01:46:50 <hashcat> 好吧
+07:01:41 <hashcat> Haskell is the world’s finest imperative programming language. - Simon Peyton Jones
+15:38:24 <suhorng> 有什麼辦法給 multi-line function 弄個區域函數嗎?
+15:38:38 <suhorng> myfun pattern1 = definition1 use local function
+15:38:49 <suhorng> myfun pattern 2 = definition2 use local function
+15:39:01 <suhorng> 　where local function = ... --類似這種效果
+15:39:14 <suhorng> 然後原來 ghci 支援多行輸入@@ http://stackoverflow.com/questions/2846050/how-to-define-a-function-in-ghci-across-multiple-lines
+16:09:46 <CindyLinz> 應該不行, 如果這個 local function 要用到 pattern1 或 pattern2 裡面的變數, 沒法同時使用
+16:10:03 <CindyLinz> 因為跑的時候只有 match 到一邊
+16:10:21 <CindyLinz> 而如果你的 local function 不需要用到 pattern1 或 pattern2 的變數
+16:10:38 <CindyLinz> 那麼這個 local function 其實就不需要是 local 的, 可以寫在外面呀
+16:11:13 <CindyLinz> 折衷作法可以只寫一個 universal pattern, 然後再 case .. of 的方式來 pattern match
+16:12:22 <CindyLinz> 這個 local function 就可以寫在 function 裡面, case 外面的地方
+16:14:29 <suhorng> 瞭解
+16:14:45 <suhorng> 對耶有區域變數的問題...
+16:15:45 <suhorng> 雖然說這個函式可以變 top level, 不過性質是專為 myfun 弄的輔助函數
+16:15:54 <suhorng> 雖然說可以不要把他 export.. (module)
+16:17:43 <suhorng> @hoogle (a -> m b) -> (m a -> m b)
+16:17:44 <lambdabot> Prelude (=<<) :: Monad m => (a -> m b) -> m a -> m b
+16:17:44 <lambdabot> Control.Monad (=<<) :: Monad m => (a -> m b) -> m a -> m b
+16:17:44 <lambdabot> Prelude (>>=) :: Monad m => m a -> (a -> m b) -> m b
+16:18:00 <suhorng> 天阿好有道理
+16:50:20 <CindyLinz> suhorng: 用 universal pattern 再在內部 case .. of 的話, 就可以讓 local function 不會浮到 top level :p
+17:07:05 <suhorng> 喔! 原來是這個意思
+17:07:09 <suhorng> 知道怎麼做了
+17:26:26 <petercommand> " Russian authorities have said Snowden is outside Russian control in a transit area of the Moscow airport, which is technically not Russian territory."
+17:26:49 <petercommand> http://www.washingtonpost.com/politics/federal_government/nsa-leakers-father-says-son-would-return-to-face-charges-us-renews-calls-for-his-return/2013/06/28/f4363520-e038-11e2-8cf3-35c1113cfcc5_story.html
+23:48:46 <hashcat> > let fabList = 1:1:[ n + (fabList !! (n-1)) + (fabList !! (n-2)) | n <- [2..]]
+23:48:47 <lambdabot>   not an expression: `let fabList = 1:1:[ n + (fabList !! (n-1)) + (fabList !...
+23:49:08 <hashcat> > let fabList = 1:1:[ n + (fabList !! (n-1)) + (fabList !! (n-2)) | n <- [2..]] in fabList
+23:49:09 <lambdabot>   [1,1,4,8,16,29,51,87,146,242,398,651,1061,1725,2800,4540,7356,11913,19287,3...
+23:49:47 <hashcat> > let fabList = 1:1:[(fabList !! (n-1)) + (fabList !! (n-2)) | n <- [2..]]
+23:49:48 <lambdabot>   not an expression: `let fabList = 1:1:[(fabList !! (n-1)) + (fabList !! (n-...
+23:50:07 <hashcat> > let fabList = 1:1:[(fabList !! (n-1)) + (fabList !! (n-2)) | n <- [2..]] in fabList
+23:50:08 <lambdabot>   [1,1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181,6765,10946,1...

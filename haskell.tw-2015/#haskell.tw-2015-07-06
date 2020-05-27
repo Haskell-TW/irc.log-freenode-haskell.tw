@@ -1,0 +1,20 @@
+00:13:11 <__Z2suI3horI2ngE> 如果一個地方需要的東西比要少 polymorphic, 我們替換成更 polymorphic 的東西應該是可以的(?
+00:13:22 <__Z2suI3horI2ngE> 所以把 more polymorphic 的東西放左邊這樣
+00:14:17 <__Z2suI3horI2ngE> CindyLinz: xDD
+11:41:19 <CindyLinz> haskell ghc standard library 的網頁最近是怎麼回事, 點 source 都會 404.... orz
+21:17:08 <CindyLinz> 用 perl 幫 xmonad 加了一個功能..  按 mod-z 以後點選一個視窗, 就可以 suspend/resume 它
+21:17:22 <CindyLinz> 用來叫閒置的 browser 不要吃 CPU.. :p
+21:41:08 <petercommand> 感覺好可怕XDD
+21:41:44 <petercommand> 停太久不知道會不會有問題
+21:58:45 <CindyLinz> 不會啊
+21:58:57 <CindyLinz> kill -9 browser 重開也不會怎樣呀
+21:59:12 <CindyLinz> 然後, 我原本就會把電腦整能 suspend to ram
+21:59:14 <CindyLinz> 整台
+22:39:01 <CindyLinz> 這個 https://gist.github.com/CindyLinz/ee29f943d332d700568a
+22:39:23 <CindyLinz> 好像跟 haskell 沒什麼關係, 只是在 xmonad 熱鍵裡面加一個 "spawn suspend_xwin.pl" 而已
+22:43:11 <CindyLinz> 執行以後滑鼠游標會變成一個十字, 然後瞄準要 toggle suspend 的視窗點下去
+23:04:18 <petercommand> 喔喔，我只是怕 resume 起來就開始比 resume 前還吃資源XD
+23:05:25 <petercommand> 之前在 linux suspend to ram，醒來要好久來會變正常XD
+23:06:03 <petercommand> 不對，醒來好久才變正常的是 suspend to disk
+23:06:06 <petercommand> XD
+23:32:28 <CindyLinz> 嗯... 如果不考慮這種被丟到 disk 的情況, 被 suspend 的 process 應該不會積很多工作..... 如果有別的在等它的 process, 可能那邊會積一大堆 XD

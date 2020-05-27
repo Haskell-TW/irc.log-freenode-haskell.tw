@@ -1,0 +1,4 @@
+04:31:43 <pkmx> @pl \x y -> f $ g (x, y)
+04:31:43 <lambdabot> ((f . g) .) . (,)
+17:32:38 <CindyLinz> edwardk 風格就是要一堆奇怪 operator 就對了.... XDDD
+17:32:43 <CindyLinz> https://hackage.haskell.org/package/linear-1.20.4/docs/Linear-Matrix.html

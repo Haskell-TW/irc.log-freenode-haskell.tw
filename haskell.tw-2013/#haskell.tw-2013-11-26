@@ -1,0 +1,81 @@
+05:34:23 <monochrom> 我就說過: 在另一平行世界, Haskell 是低階語言, C 被編譯成 Haskell. 在那個樂土, 人們常問: "為甚麼 C 比 Haskell 慢數倍呢?" 然後人們就答: "因為把 C 編譯成 Haskell 後, 要用七重 monad transformers"
+10:57:59 <darkx> lol
+12:05:37 <mno2> 聽起來好像武功很高強的樣子~
+19:42:31 <UncleHandsome> monochrom: 太GJ惹XDD
+22:14:06 <CindyLinz> 想到幾天前 mno2 分享 Simon Marlow 的事情
+22:14:43 <mno2> http://www.haskellcast.com/episode/004-simon-marlow-on-parallelism-and-concurrency/
+22:14:50 <CindyLinz> 聯想到小時候聽到「清香油」的廣告: 用清香油炒菜, 不必放肉絲
+22:15:02 <CindyLinz> 那麼..... 用 Haskell 寫程式, 不必測試!
+22:15:04 <mno2> Cast 出來了，可以自己看。不過我還沒看不確定到底有沒有那段
+22:16:21 <CindyLinz> 剛剛在 g0v.tw channel 看到有人講: 「沒測多少case ..可能有很大問題 XD」的時候就想到了 XD
+22:16:43 <CindyLinz> 可是不敢講出去 XD
+22:17:24 <mno2> 能夠理解的人都跟邪教有接觸過吧 xD
+22:17:52 <mno2> http://www.haskell.sg/   我 haskell.tw 沒買到，買到 sg  ...
+22:18:01 <CindyLinz> 可是真的理解的人, 會知道這句不是真的啊.... XDD
+22:19:04 <CindyLinz> A: 用 Haskell 寫程式, 不必測試! B: 你又不是 Simon Marlow..
+22:19:22 <CindyLinz> .sg... XD
+22:19:31 <mno2> 其實前提是因為他是 Simon Marlow   xDDD
+22:19:50 <mno2> 還有 Facebook 那群妖怪工程師 xD
+22:20:04 <CindyLinz> haskell.tw 會不會是因為本 channel 的名字... 所以就被自動蟑螂註冊了? @_@"
+22:20:04 <mno2> 感覺就可以搞成 meme  xDD
+22:20:24 <mno2> 應該是我查過價錢，所以就被蟑螂註冊掉了
+22:20:28 <CindyLinz> haskell.tw created on 2013-04-05... QQ
+22:20:52 <mno2> 不知道蟑螂有沒有釋放機制
+22:20:59 <letoh> 發現賣不掉會放出來嗎?
+22:21:03 <CindyLinz> 有吧.. 不然他是賠本生意啊
+22:21:11 <CindyLinz> 他就是要賣的啊
+22:23:07 <letoh> 我是說蟑螂啦  應該會發現沒什麼用就不再續了?
+22:23:08 <mno2> 但 tw 域名也不貴，所以也不知道會不會就養著
+22:23:15 <suhorng> 那我去瘋狂查的話, 會不會讓他一直買?
+22:23:22 <letoh> XDXD
+22:23:36 <mno2> 也許喔，如果機器蟑螂不夠聰明的話
+22:26:00 <letoh> 剛剛聽到電視在廣告紙包雞XD
+22:26:07 <CindyLinz> KFC.. XD
+22:26:30 <letoh> 怎麼沒有請麥太代言XD
+22:28:52 <CindyLinz> 請他代言是要吃翻面的紙嗎..... www
+22:29:00 <letoh> XDXD
+22:29:09 <letoh> 看可以包成什麼樣子XD
+22:29:30 <CindyLinz> 把雞包上面的紙, 小心地撕下來, 然後翻面!
+22:29:37 <CindyLinz> 我是不想吃 XD
+22:30:10 <suhorng> :t flip
+22:30:11 <lambdabot> (a -> b -> c) -> b -> a -> c
+22:35:44 <mno2> 我最近覺得 Haskell 的 library 除了有稍嫌不足的問題外，也有跟 C++ STL 類似的問題
+22:36:05 <mno2> 就是很少人改得動 xD
+22:36:46 <mno2> 尤其是用到 edward kmett 的 lib，最好祈禱你有用的 feature 他都有寫到
+22:37:03 <mno2> 不然要加東西，你可能會需要個 PhD...
+22:38:37 <CindyLinz> 不喜歡這樣.. QQ
+22:38:53 <hashcat> 沒有reflection就是問題
+22:39:42 <CindyLinz> 還好有 open source, 稍微好一點 :p
+22:39:55 <suhorng> 還有個很麻煩的是有些 library 戳下去想找說明 連結是paper |||
+22:40:39 <CindyLinz> 而且是 pdf 格式... XD
+22:43:14 <mno2> paper 是還好，只要寫得能讓人懂就好…
+22:43:34 <mno2> 如果是一大堆證明，就 GG 了
+22:44:02 <CindyLinz> 像是這樣的描述? # A monad is just a monoid in the category of endofunctors, what's the problem?
+22:44:11 <suhorng> 撇除掉證明, paper為了塞進12頁, 裡面的表達(程式 etc)實在有點難懂
+22:44:15 <CindyLinz> 下面詳列所用到的 reference...zz
+22:44:26 <suhorng> 一般tutorial或說明文件通常好讀多了
+22:44:40 <hashcat> paper -> abstract -> sample and figure
+22:45:27 <hashcat> 證明不用讀吧, 給同行評議看的
+22:46:10 <hashcat> 要看就輪到定理證明機出場了
+22:47:22 <CindyLinz> 對剛剛那一句, 這個推文真不錯 XD "hopefully one that can be understood by someone who doesn't have much haskell experience" Whether or not someone can understand this quote has little to do with his Haskell experience and a lot with his maths experience/knowledge about category theory. Also understanding this quote will tell you nothing about how monads in Haskell work and how to use them. So if that's your intention, you should not use this quote as a starting point (and probably forget that monads come from category theory altogether unless you want to understand why they are named monads). –  sepp2k Oct 6 '10 at 8:03
+22:47:33 <CindyLinz> 就是 A monad is just .... 那句
+22:49:12 <petercommand> 紙包雞到底是甚麼呀@@
+22:49:34 <CindyLinz> KFC 的餐
+22:49:55 <petercommand> XD
+22:50:05 <b4283> petercommand: 吳君如...
+22:51:28 <hashcat>  A monad is just a monoid in the category of endofunctors, what's the problem? 這是在描述跟外界的關係, 一個東西之所以為東西在於他跟他外部的東西有關系或聯繫
+22:51:52 <b4283> petercommand: https://www.youtube.com/watch?v=m3lzdVJHIXc
+22:53:28 <petercommand> b4283: 這...XD
+22:53:42 <hashcat> 如果有一種物質跟我們沒有任何物理上的關係, 看不見聽不到摸不著也沒有任何物理手段可偵測, 他存在與否貌似對我們來說也沒啥意義
+22:55:08 <hashcat> 數學也有了這種轉向, 探討本身內部是啥不如看他跟外界是啥關係, 能牽起越多跟外部東西的關係, 他是怎樣的存在就愈明朗
+23:03:50 <hashcat> 那句話比較麻煩的是對不少人來說兩種都不能算很熟悉的東西, 先讓他們兩種概念各自建立各自的關係網再兩者聯繫, 就能搞定這互解釋怪圈了
+23:04:48 <hashcat> 雖說追根究底整個世界的概念都會陷入互解釋怪圈
+23:20:17 <favonia> hashcat: 寫下 X 所有性質，定義為 X', 然後說 X = free X' 就好啦（逃
+23:21:03 <suhorng> X = free X' XDDDDD
+23:23:32 <CindyLinz> 寫下 X 所有性質 ← 這是一個不會 terminate 的程序... ww
+23:24:21 <favonia> 好吧我的意思是說寫下「重要」的性質
+23:24:40 <favonia> 然後加個 final/initial/free 之類的就可以變出你要的東西了！耶！
+23:25:01 <CindyLinz> XD
+23:29:02 <hashcat> 通常討論到在大家都能接受的地方就終結了
+23:29:22 <hashcat> 數學公設作的比較徹底
+23:51:24 <xcycl> 不過 Haskell 的 data declaration 就是 free X' 啊 ...

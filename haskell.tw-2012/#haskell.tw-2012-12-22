@@ -1,0 +1,26 @@
+01:20:31 <CindyLinz> favonia: 真有趣.. lcs' 那段我要想一想 ^^|
+02:02:53 <CindyLinz> 神祕.. 長度 1000 以下的時候, 這個沒有 array 的版本花的時間都在我的版本的一半以下
+02:03:30 <CindyLinz> 不過到 2000 以上的時候時間就會漸漸超過我的版本
+02:21:58 <favonia> CindyLinz: 喔喔我亂寫的沒有經過什麼最佳化～
+02:29:34 <CindyLinz> 那個 lcs' 看起來一次處理一個 row
+02:29:49 <CindyLinz> hmm, 因為其實沒有那麼 random access, 所以可以不用 array
+02:31:31 <CindyLinz> 不對 也不是一個 row
+02:31:52 <CindyLinz> 啊 是一個 row.. (亂)
+02:33:29 <CindyLinz> 覺得神祕是因為它不是穩定地慢或快一個固定的倍數, 有點像是時間複雜度不一樣的感覺
+02:33:54 <CindyLinz> 會不會是這邊: let current = ... in current : lcs' current ...
+02:35:31 <CindyLinz> current 被重算, 然後計算 current 所需要的 diag 或 up 或 left 也連帶重算了?
+02:35:52 <CindyLinz> 來 seq 看看
+02:41:01 <CindyLinz> 嗯, N=2000~5000 的時候, 都只花我的版本的 90% 時間了
+02:42:11 <CindyLinz> 我是這樣加的: let current = ... in current `seq` current ...
+02:43:25 <CindyLinz> N=500 的時候剩 1/3 @@"
+02:43:36 <CindyLinz> 成長率還是有一點怪..
+02:50:09 <favonia> CindyLinz: 你有用 profiling 嗎
+02:53:19 <CindyLinz> 沒有, 亂猜的 ^^|
+02:54:01 <CindyLinz> 來看一下怎麼用好了...
+02:56:54 <CindyLinz> 太累了, 今天先到這邊先去睡覺好了 ^^|
+21:54:42 <JuanitoFatas> : )
+21:59:15 <YuLin> hi
+22:36:05 <favonia> JuanitoFatas: hi!
+23:20:31 <JuanitoFatas> 有人讀過 The Little Schemer 嗎？
+23:21:45 <JuanitoFatas> 沒讀過也無妨 Try this: http://vivid.chengyichao.info/
+23:21:55 <JuanitoFatas> ;)

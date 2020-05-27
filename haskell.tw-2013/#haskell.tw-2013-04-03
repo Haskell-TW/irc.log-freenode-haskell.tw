@@ -1,0 +1,12 @@
+22:08:01 <suhorng> 看到的一個小例子XD 首先我們寫一個 match 0^n1^n 的函式 https://gist.github.com/suhorng/5204442
+22:08:30 <suhorng> 接著把他改寫成 continuation passing style https://gist.github.com/suhorng/5204636
+22:09:20 <suhorng> 最後我們把 continuation 的部份 全部都用自己宣告的 datatype 取代 (datatype 還要負責抓 free variables), 讓高階函式消失
+22:09:40 <suhorng> https://gist.github.com/suhorng/5205283 就得到了一個 2 個 state 的 PDA!
+22:10:45 <suhorng> 〈Defunctionalization at Work〉文章裡還有其他例子, 像他把 datatype 跟 Church encoding 視作某種程度的對應, 不過看沒有很懂
+22:26:39 <suhorng> 還有另一篇〈A Functional Correspondence between Evaluators and Abstract Machines〉也滿有趣 透過類似的手法(把高階函數改用 datatype 來傳遞並另外寫"函式", 有點像 closure-conversion, 然後改寫成 CPS, 最後再把 continuation 改成 datatype) 把 interpreter 變成 abstract machine 的模樣
+22:29:57 <suhorng> 不過他得到的都是 stack 類型的抽象機器
+22:30:40 <suhorng> 最後有提到一點點 Categorical Abstract Machine... 好像跟 Caml 有關?
+22:35:37 <suhorng> 貼一下 http://lambda-the-ultimate.org/node/2423 下面有人提到好像也有其他方法可以變成 register based machine
+22:54:55 <suhorng> 不過好多連結都失效了 囧
+22:59:42 <letoh> 找一下 web archive
+23:08:18 <suhorng> http://www.iis.sinica.edu.tw/~scm/2007/deriving-a-virtual-machine/ 搜尋到穆老師的 blog 耶XD

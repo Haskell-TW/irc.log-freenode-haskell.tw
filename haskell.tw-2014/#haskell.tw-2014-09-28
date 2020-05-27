@@ -1,0 +1,93 @@
+01:21:26 <suhorng> 囧 之前抱怨 Text.PrettyPrint 陽春, 原來是我自己不會用...
+01:21:43 <suhorng> 應該要用 paragraph fill 的我用到 sep..
+10:01:37 <kyun> 大家好~
+10:01:58 <mno2> kyun: 你好
+10:04:00 <kyun> 以後多多指教
+10:05:16 <mno2> kyun: 太正式了啦 lol,  有問題就丟著會有人回答的
+10:06:32 <kyun> 剛有的禮節還是要的嘛，那問個問題，你們用甚麼寫haskell，emacs？
+10:10:59 <mno2> 我自己還是用 vim，但我知道有些人是用 emacs
+10:13:13 <kyun> 我的emacs也是加evil的，vim按鍵熟點
+10:14:59 <mno2> 之前有嘗試過 aquaemacs + evil。不過還是不太習慣就懶掉了。
+10:19:38 <kyun> emacs本來就沒vim易上手
+10:19:56 <kyun> 很多時候vim很簡單的，在emacs也麻煩
+10:27:26 <mno2> 現在比較考慮 light table，不考慮 emacs
+10:31:59 <kyun> light table寫clojure出奇方便，寫haskell也可以嗎
+10:35:10 <mno2> 喔喔，我只是一般性的編輯器討論。 用它來寫 Haskell 還沒研究過，是有看到 haskell plugin ，但沒試過
+10:35:31 <mno2> 只是最近因為工作上的關係要寫 clojure，發覺他好像還蠻好用的
+10:40:59 <kyun> clojure好實用的lisp啊
+10:42:48 <kyun> light table有時不太穏定
+11:19:25 <miaoski> mno2: !!! 哪家公司可以寫 Clojure ?
+11:19:38 <miaoski> 我在我們公司是因為一人 project 所以我愛用什麼就用什麼... XD
+12:03:35 <mno2> miaoski: 小公司: http://www.brand-karma.com ，其實不止 clojure，repo 裡面還有我的 Haskell, lol
+12:04:00 <mno2> 只是因為要跟 lucene 打交道，又不想寫 java 就只好選 clojure
+12:05:04 <mno2> 大部份還是 python，不過你想寫什麼都可以討論。現在很缺人力，有的話請仲介給我 xDD
+12:06:24 <miaoski> mno2: 果然，我是因為要和 hadoop 打交道，不想寫 Java 所以寫 clojure ...
+12:08:55 <mno2> clojure 還蠻不錯的，其實寫了 clojure 會有點不想寫 Haskell, xD
+14:21:44 <kyun> 對了，一般縮進要幾個空格的
+14:25:08 <CindyLinz> 我寫 haskell 用 2 個
+14:25:25 <CindyLinz> 因為覺得縮排層數有點多... @@"
+14:32:36 <kyun> 這個應該沒有規定的吧
+14:32:42 <kyun> 我也喜歡兩個
+14:35:53 <CindyLinz> 沒規定呀~ 你可以用 41 格 :D
+14:42:07 <mno2> 用 42，Answer to the Ultimate Question of Life, the Universe, and Everything.
+14:53:49 <whitglint> 縮排四十幾格是怎樣的概念... XD
+14:57:10 <CindyLinz> 我建議 41 有個因素是因為..  它是質數 XD
+15:12:14 <kyun> 那用一個吧\hh
+16:03:06 <kyun> 標準包括正規嗎
+16:04:25 <CindyLinz> 這什麼意思? @@"
+16:12:19 <kyun> regexp，你們這邊中文叫甚麼啊啊
+16:15:33 <petercommand> 正規表達式
+16:19:27 <kyun> 嗯，haskell標準有沒這個呢
+19:29:25 <yony45> https://www.facebook.com/SoccerTips4Sure
+22:08:27 <miaoski> mno2: 我不會寫 Haskell 啦。不過習慣了 LISP 就開始覺得別的語言好奇怪 (咦)
+22:08:53 <miaoski> 雖然也不是真的習慣.. macro 我還是不懂 @@ 可是不懂 macro 就等於不懂 lisp.
+22:09:39 <miaoski> 不知道有沒有 Clojure for the Impatient.  Scala 那本真的寫的很好入門 :)
+22:10:09 <CindyLinz> for the impatient... XD
+22:12:43 <mno2> miaoski: http://yogthos.github.io/ClojureDistilled.html
+22:13:22 <miaoski> mno2: XD
+22:26:26 <sam_lee> 我的認知macro就是compile前會先被執行, 然後展開程式碼
+22:26:49 <sam_lee> 主要是因為LISP code is data的特性
+22:27:12 <sam_lee> 所以就像操作data (list)一樣產生出你的程式碼
+22:27:36 <sam_lee> http://misgod.github.io/slide-clojure101/#46
+22:31:36 <sam_lee> macro看起來跟function差不多,只是macro是在compile time執行,然後大部分都是回傳list,因為clojure中function call就是list的型態
+22:34:47 <miaoski> sam_lee: 道理很好懂，可是看到別人寫的 macro ... 讀不懂，寫不出來 ^^;
+22:36:01 <sam_lee> XD...的確讀懂別人寫的比較困難
+22:36:35 <suhorng> 說到這, 我有點好奇 quote, quasi-quote, unquote 被歸在哪一類?
+22:36:52 <suhorng> quasiquote 多於 unquote 又是否有用呢?
+22:38:07 <CindyLinz> unquote?
+22:38:57 <suhorng> ,
+22:39:38 <suhorng> (let ([x 'apple]) `(hi ,x))
+22:42:08 <CindyLinz> 原來不是 haskell XD
+22:42:25 <suhorng> Haskell 也有
+22:44:31 <suhorng> 我不記得 Haskell 用什麼符號了....
+22:44:56 <CindyLinz> makeLens ''record   這樣的東西嗎?
+22:48:41 <suhorng> 不是耶, 比較像在 [| ... |] 中讓你可以放入變數的東西
+22:49:19 <suhorng> 嗯... [|  |] 中的 $(...) 嗎....？
+22:54:12 <sam_lee> suhorng: 可以解釋一下歸類的意思嗎?
+22:54:40 <suhorng> 他算是 macro 嗎? (這樣問有點怪...)
+22:54:47 <sam_lee> 喔...
+22:54:54 <sam_lee> quote應該不是
+22:54:56 <suhorng> 還是 macro 僅限 define-synatx
+22:55:18 <suhorng> sam_lee: 比較只是為了方便建資料嗎XD
+22:57:36 <CindyLinz> suhorng: 覺得還是要 define 一個 keyword 或附上幾個參數的才算 macro
+22:57:43 <CindyLinz> quasiquote 太複雜了
+22:58:14 <suhorng> 嗯嗯...
+22:58:20 <CindyLinz> 例如說我們用 photoshop 也是可以錄巨集.. 但都是簡單指令重複播放而已 
+22:58:38 <CindyLinz> 而在使用 maya (3D) 的話, 會說那是寫 script
+22:59:07 <suhorng> Racket 的巨集好像可以寫巨複雜的東西....
+23:01:24 <CindyLinz> 也許可以用 parser 的複雜度來判斷 XD
+23:02:54 <sam_lee> XD..我覺得我好像不太懂
+23:03:08 <sam_lee> 不過在clojure ' ` ~ 看起來都是macro
+23:09:21 <sam_lee> '(+ 1 1) => (quote (+ 1 1))
+23:09:38 <sam_lee> ~(+ 1 1) => (unquote (+ 1 1))
+23:11:04 <sam_lee> `(+ 1 1) =>  (seq (concat (list (quote +)) (list 1) (list 1)))
+23:11:07 <suhorng> 神秘
+23:11:37 <suhorng> 所以他的 ~ 是 Scheme 的 ,   但 ` 看起來不太像 quasi-quote @@?
+23:17:05 <sam_lee> 老實說我不知道quasiquote看起來像怎樣..XD
+23:18:30 <sam_lee> `(+ ~(+ 1 1) 2)
+23:18:46 <sam_lee> => (+ 2 2)
+23:18:51 <suhorng> 嗯嗯!!
+23:20:09 <sam_lee> 怕有人誤會..我剛剛打的是執行結果,不是macro展開
+23:20:36 <suhorng> XD 出來是 (list (quote +) 2 2)
+23:39:33 <sam_lee> 剛剛很好奇的去看了一下他的' ` ~ macro到底怎麼寫的,發現它其實是實作在LispReader,針對syntax quote去做處理
+23:40:14 <sam_lee> 不是一般的 macro...

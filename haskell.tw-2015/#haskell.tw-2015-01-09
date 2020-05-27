@@ -1,0 +1,26 @@
+00:44:38 <suhorng> https://plus.google.com/115504368969270249241/posts/8ku5mz9nAgj 這提議有點道理XD API 的 document 也是都沒有提及 laziness
+00:46:45 <suhorng> https://plus.google.com/115504368969270249241/posts/U8Pp2F4NgCY 不過實際上也滿難說的...像是只有某些條件才是 lazy 的
+00:49:35 <CindyLinz> 我比較常遇到的問題是 document 沒有提及....... 任何事.   Gosh! 除了 type signature 以外, 根本就是空的, 空的啊 OAO
+00:50:55 <suhorng> 沒有提及任何事XDDDDDDDDD
+00:50:57 <CindyLinz> 然後就開始讀 code.... 還好 Haskell 通常還蠻好讀的.. QQ
+00:50:59 <suhorng> 挺有感
+00:51:05 <suhorng> 除了 lenses XD?
+00:51:17 <CindyLinz> lenses 有很多說明..... XD
+00:51:29 <CindyLinz> 有文字版還有影音版 XD
+00:56:07 <suhorng> XD
+00:56:13 <suhorng> 這個沒說明就完蛋了 看不懂
+00:56:19 <CindyLinz> 沒錯 orz
+00:56:45 <CindyLinz> lense 是個 type 比 code 還長的囧程式...
+00:56:52 <CindyLinz> lenses
+09:49:52 <mno2> API document 也是 lazy。沒有人用不會有人寫 xD
+11:05:44 <cibs> pure lazy language, including documentation
+14:30:08 <CindyLinz> @pl \f a b c -> f c a b
+14:30:08 <lambdabot> (flip .) . flip
+14:30:18 <CindyLinz> @pl \f a b c -> f c b a
+14:30:18 <lambdabot> flip . (flip .) . flip
+15:52:39 <CindyLinz> 更新 list 內容的函數.. 給它定義成這樣 (!<-) :: Int -> (a -> a) -> [a] -> [a] 然後 infixr 9 !<-
+15:52:50 <CindyLinz> 就可以這樣子更新二維 list..
+15:53:19 <CindyLinz> board' = r !<- c !<- const newElem $ board
+15:53:33 <CindyLinz> (r,c) 那一格指定成 newElem
+15:54:54 <CindyLinz> 如果參數那個 (a -> a) 改成直接放 value a 的話, 串成二維就會很不方便..
+15:57:55 <CindyLinz> 作成 a -> a 可以剛好跟 [a] -> [a] 套起來 :p

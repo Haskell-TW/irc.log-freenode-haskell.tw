@@ -1,0 +1,212 @@
+00:16:20 <b4283> godfat: http://paste.debian.net/190896/
+00:17:12 <godfat> b4283, 感謝，來想一下
+00:18:22 <godfat> (set! a k) 是把 k 寫入 a 嗎？
+00:19:35 <letoh> bind
+00:20:05 <godfat> bind 可以兩次以上喔？ @_@
+00:20:26 <godfat> 正在裝 guile 來試試
+00:23:13 <b4283> 據說 2.0 比較好
+00:26:33 <godfat> 這正常嗎？
+00:26:33 <godfat> ERROR: Missing expression in (define a).
+00:27:10 <b4283> 我的可以跑耶 @@
+00:27:41 <godfat> 00:26 /p/tmp> guile -v
+00:27:41 <godfat> Guile 1.8.8
+00:27:56 <letoh> debian ?
+00:27:59 <godfat> mac XD
+00:28:51 <godfat> 改試 arch 看看
+00:29:03 <b4283> (define <variable) (2nd form)
+00:29:21 <b4283> the 2nd form is equivelent to (define <variable> <unspecified>)
+00:29:46 <b4283> 記得 arch 也是 1.x
+00:30:21 <godfat> 你是說試 (define <a) 嗎？這樣的話是一樣
+00:31:13 <b4283> 不然就隨便先給一個值吧
+00:32:43 <godfat> 看到想要的 exception 了
+00:32:44 <godfat> ERROR: invoking continuation would cross continuation barrier: #<continuation 69 @ 1002072e0>
+00:32:51 <b4283> mod_perl 是自已就是 interpreter 就像 mod_php 一樣嗎？
+00:37:35 <CindyLinz> 我們用的那個叫 ModPerl2 的樣子.. 我不知道 mod_php 是怎麼做.. 不過我可以解釋一下 perl 的
+00:38:28 <CindyLinz> 它會把要執行到的 *.pl 檔讀進來.. 然後亂數生一個函數(名稱)出來, 把這個檔案的 code 塞進去
+00:38:32 <CindyLinz> 然後呼叫它
+00:39:06 <letoh> 好眼熟的方法XD
+00:39:07 <godfat> 也是 prefork 嗎？
+00:39:08 <CindyLinz> 如果載入過的 pl 檔沒有動到, 那就繼續呼叫這個函數, 不再重新載入
+00:39:21 <CindyLinz> godfat: Apache 的話當然是 prefork 了
+00:39:36 <godfat> 不是另有 worker 的？ XD
+00:39:39 <CindyLinz> 所有的 code 都是活著的
+00:39:48 <CindyLinz> 如果在 *.pl 裡面有用到 package
+00:39:50 <b4283> It's alive, it's alive !!
+00:39:56 <CindyLinz> 那麼這些 package 會載入, 一直存續
+00:40:11 <CindyLinz> 所以像 php 裡面的 mysql_pconnect 這種東西, 實作起來就很自然
+00:40:38 <godfat> 聽起來我猜跟 mod_php 應該差不多？
+00:40:39 <CindyLinz> 不過因為是把 *.pl 的 code 塞到函數裡面, 所以行為和純的 *.pl 檔不太一樣
+00:40:52 <CindyLinz> 通常一樣... ^^|
+00:41:40 <CindyLinz> 如果在 *.pl 裡面最外層用 my 宣告了變數, 那.. 它是在被 mod_perl 生出來的函數裡面的自動變數
+00:41:53 <CindyLinz> 而不是 *.pl 裡面, 是在函數外的自動變數
+00:42:30 <godfat> 是每次都會 reset 的意思嗎？
+00:43:04 <CindyLinz> 如果你的 *.pl 裡面有宣告「有名字的函數」的話
+00:43:24 <CindyLinz> perl 對「有名字的函數」和「沒有名字的函數」, 在 closure 方面的行為是不一樣的
+00:43:39 <CindyLinz> 「沒有名字的函數」是標準的 closure
+00:43:53 <CindyLinz> 而「有名字的函數」不是 closure
+00:44:23 <CindyLinz> 如果在 closure 的情況下, 函數內用外面的變數, 就是... 我們一般習慣的樣子
+00:45:05 <CindyLinz> 「有名字的函數」用函數外面的變數的話, 為了跟舊版相容, 它會去記住「第一次用到」的變數
+00:45:28 <CindyLinz> 所以這函數第二次被呼叫的時候, 它還是用舊的變數, 有點像 C 裡面 static var 的感覺
+00:46:13 <godfat> 感覺就是避免使用這種行為就是了... XD
+00:46:14 <CindyLinz> 如果想要用類似 global var 感覺的變數
+00:46:29 <CindyLinz> 可以用 our 變數, 也就是 package 變數
+00:46:40 <CindyLinz> 不要在最外層用 my 這種自動變數
+00:46:50 <CindyLinz> 因為它現在真的不在最外層了...
+00:46:58 <CindyLinz> (mod_perl 的話)
+00:47:24 <CindyLinz> 第二次呼叫這個 mod_perl 生出來的函數時, 會生出第二份「自以為最外層」的 my 變數
+00:47:44 <CindyLinz> 然而「有名字的函數」還是會用第一份, 忽略這個第二份
+00:48:23 <b4283> 聽起來行為是和正常 perl 不太一樣是嗎
+00:49:03 <b4283> 還是說只是要用多一層函數來理解，寫的時候要自已預設 XD
+00:49:35 <CindyLinz> b4283: 這問題不太好回答 ^^|   行為是一樣的, 可是平常寫在 *.pl 裡面的最外層的程式, 我們都假設只會執行一遍
+00:49:51 <CindyLinz> 所以沒有什麼第二份的問題
+00:50:05 <CindyLinz> 現在會被執行兩次以上了, 就會開始有第二份, 第三份.. 的問題
+00:50:33 <b4283> 喔喔，原來如此
+00:52:27 <godfat> 所以 ModPerl2 就是使得不會產生第二份 my 變數嗎？還是反過來，永遠產生新的？
+00:54:10 <CindyLinz> godfat: ModPerl2 裡面 最外層 my 變數就是一個函數的自動變數, 這個函數被呼叫第二次的話, 當然會生一份全新的自動變數呀
+00:54:45 <CindyLinz> godfat: 只是「有名字的函數」會記得他用過的外層變數是哪一個, 繼續用原來那一個.. 「有名字的函數」不是 closure
+00:55:09 <CindyLinz> (即使「有名字的函數」的定義有可能寫在別的函數的裡面, 但它就不是 closure)
+00:55:47 <godfat> 如果不是 closure, 那為什麼會記得原本用過的呀？ @_@
+00:56:10 <b4283> 但是假如一個 pl 不變的話，造出來的假函數不會執行第二次對吧？
+00:56:13 <CindyLinz> 有名字的函數是可以直接用名字呼叫的, 被呼叫的時候也沒把握外層函數是在執行中.. 把有名字的函數定義寫在別的函數裡面, 應該是不正常的用法
+00:56:35 <CindyLinz> 它是維持語法的一致性而存在, 不是正常用法
+00:56:57 <CindyLinz> 但是在 ModPerl 裡面剛好就會湊出這種怪用法...
+00:57:09 <b4283> 所以如果線上改 pl，apache 發現 source code 變了，可能就會弄失 global my var，因為等於是 new 一個 object 起來了
+00:57:11 <CindyLinz> godfat: closure 不會記得原本用過的, 會記住當下的
+00:57:23 <CindyLinz> b4283: global var 應該要用 package var
+00:57:35 <b4283> 嗯..
+00:57:46 <CindyLinz> b4283: 不過這是一個很特殊的用法喔
+00:58:03 <CindyLinz> b4283: 你看我們在 php 裡面, 不去寫 php 底層的話, 根本沒有這種 global var
+00:58:15 <CindyLinz> b4283: 所謂的 global var 都活不過一個 request-response
+00:58:50 <b4283> 我知道 php 有 global $var 前輟，不是這個意思1
+00:58:55 <b4283> ？
+00:59:17 <CindyLinz> b4283: php 的 global $var 不是我現在在 perl 裡面講的 global var
+00:59:26 <b4283> 還是 global 其實是 extern XD
+00:59:32 <CindyLinz> 我現在講的 global var 是整個 apache 重新啟動才會不見的 global var
+00:59:47 <CindyLinz> 你可以把它當 DB 用.. (誤)
+01:01:29 <CindyLinz> 不過... 應該是維護舊 perl code 的人才需要碰 ModPerl 吧... ^^|
+01:01:41 <CindyLinz> 新的程式應該用 Plack 就好了啊
+01:02:17 <CindyLinz> Plack 才是 perl way.. ModPerl 整個就是 hack 啊... QQ
+01:02:19 <godfat> 這句話不太懂 @@
+01:02:19 <godfat> > 只是「有名字的函數」會記得他用過的外層變數是哪一個, 繼續用原來那一個.. 「有名字的函數」不是 closure
+01:02:19 <godfat> 為什麼不是 closure 卻會記得原本的東西？
+01:02:20 <lambdabot>   <no location info>: lexical error at character '\12300'
+01:02:43 <godfat> 果然大家都在捨棄 mod_ooo 呀，那我就放心了 @_@
+01:03:24 <b4283> psgi @@
+01:03:54 <CindyLinz> b4283: 對, 應該用 Plack / psgi 那一系..
+01:07:31 <CindyLinz> godfat: 舉例好了.. 如果是 closure 的話... 應該是這樣 sub f { my $x = $_[0]; return sub { return $_[0] + $x } }
+01:08:29 <CindyLinz> f(1)->(2);  f(2)->(3);  $a = $f(3);   $a->(4);  $a->(5);
+01:08:50 <CindyLinz> 這樣應該會有 1+2=3, 2+3=5, 3+4=7, 3+5=8
+01:09:17 <CindyLinz> 前面 f(1) f(2) 和 $a 裡面的 $x 都是不一樣的
+01:09:27 <CindyLinz> (我中間的 $a = $f(3); 應該改成 $a = f(3))
+01:09:39 <CindyLinz> 不一樣的 $x, 這是 closure
+01:09:56 <CindyLinz> 當然.. $a 被用的兩次, 這兩次的 $x 當然是同一個
+01:11:20 <CindyLinz> 非 closure 的例子 sub f { my $x = $_[0]; sub g { return $_[0] + $x } return \&g }
+01:11:28 <godfat> 那是因為裡面那個是 closure 不是嗎？
+01:11:28 <CindyLinz> 然後 f(1)->(2); f(2)->(3);
+01:11:38 <CindyLinz> 第一個是 1+2=3
+01:11:58 <CindyLinz> 但是第二個.. g 第二次被呼叫時, 它用的 $x 是第一個.. 也就是存著 1 的那個
+01:12:07 <CindyLinz> 所以輸出是 4 而不是 5
+01:12:40 <godfat> 喔喔，這樣我覺得那個 g 也是 closure 呀... XD
+01:12:53 <CindyLinz> 如果是 closure 的話, g 應該要輸出 2+3 吧?
+01:12:56 <CindyLinz> 還有..
+01:13:01 <CindyLinz> 有 g 的這個程式
+01:13:18 <CindyLinz> 可以在完全沒呼叫 f 的情況下, 直接呼叫 g(2) 
+01:13:40 <CindyLinz> 那.. 會生出一個 $x = undef
+01:13:45 <CindyLinz> 然後得到 undef + 2 = 2
+01:14:12 <godfat> 如果我先叫 f(1)
+01:14:13 <godfat> 然後 g(2) 呢？
+01:14:13 <CindyLinz> 有名字的函數應該是放在最外層的.
+01:14:17 <CindyLinz> 那就會是 3
+01:14:43 <godfat> ok, 那我的理解應該沒錯，只是這到底該不該叫 closure... XD
+01:15:09 <godfat> 以 ruby 的情況的話，基本上是不能這樣寫的，$x 會永遠是 undefined
+01:15:46 <CindyLinz> perl 會在 doc 裡面註明: 千萬不要這樣寫, 除非你知道你在做什麼
+01:16:11 <CindyLinz> ruby 能夠跳過外層, 直接呼叫內層函數嗎?
+01:16:42 <godfat> 沒有內層這種事，如果真的那樣寫，會等同於 f 跟 g 分開寫
+01:16:42 <godfat> 因此 $x 永遠是沒有被定義的，一呼叫就會噴錯
+01:16:57 <CindyLinz> f 和 g 的確應該分開寫
+01:17:24 <godfat> 感謝，終於懂了 XD
+01:18:10 <godfat> 我想我對於 closure 的定義是，只要有抓到東西，就是了
+01:18:11 <godfat> 一開始一直搞不懂大概是因為這樣
+01:19:21 <CindyLinz> perl 的 nested named function 的行為我沒有在別的地方看過 ^^|
+01:19:40 <CindyLinz> nested anonymous function 就很標準了
+01:19:50 <CindyLinz> 說是 anonymous 啦..
+01:20:02 <CindyLinz> 其實也就寫成 my $g = sub { ... }; 就可以了
+01:20:11 <CindyLinz> 不要寫成 sub g { ... }
+01:20:31 <b4283> 我好像明白了
+01:20:32 <godfat> python 不知道會怎麼做？
+01:20:52 <CindyLinz> python.. 哄, 我在寫 coffeescript 的時候有個疑惑
+01:21:21 <CindyLinz> coffeescript 裡面, 變數是不用(也不能)宣告的
+01:21:39 <b4283> sub <func> 的語法不管放在第 x 層，都是在宣告第一層的函數，是這樣嗎？
+01:21:48 <CindyLinz> 跟我以前用 ruby 的時候感覺一樣, 就是外層如果出現過, 那就是用外層的, 如果沒出現過, 就是內層新的
+01:22:12 <CindyLinz> 如果我有一個大函數, 裡面包一堆小函數 (closure)
+01:22:23 <CindyLinz> 每個函數都不長, 大函數自己的程式碼也不長
+01:22:30 <CindyLinz> 不過這一堆小函數加起來可能就很長了
+01:22:45 <b4283> 這也是一種另類的 closure....
+01:22:55 <godfat> 聽起來就是全部都是 closure
+01:22:56 <CindyLinz> 我在寫後面的小函數的時候, 會不小心拿到大函數的變數來當自動變數
+01:23:14 <CindyLinz> 論壇上面有人說, 這樣就是你寫的方式錯了
+01:23:19 <CindyLinz> 你不該有很長的函數
+01:23:30 <godfat> 是啊，我正想問為啥要全包在一起 XD
+01:23:31 <CindyLinz> 可是如果不能有很長的外層函數....
+01:23:35 <b4283> 後面的程式可以靠前面的程式生長出來
+01:23:43 <CindyLinz> 那 closure 就很難用了...
+01:24:00 <CindyLinz> godfat: 把那個外層大函數想成一個像是 reader monad 的東西?
+01:24:10 <CindyLinz> godfat: 它的任務就是一個 context
+01:24:28 <godfat> 喔，你忽然讓我想起來 ruby 1.9 裡面新增加個 closure local, 我從來沒用過，也想不要為什麼要用
+01:24:29 <godfat> 看來就是這裡要用了...
+01:25:22 <CindyLinz> 我想宣告啊 QQ
+01:25:33 <godfat> a = 1
+01:25:34 <godfat> lambda{ |;a| a = 2 }.call
+01:25:34 <godfat> a # still 1
+01:25:35 <CindyLinz> livescript 裡面, 是用 := 來使用外層, = 使用內層
+01:25:48 <CindyLinz> godfat: 我在那個 case 炸過...
+01:25:51 <godfat> ok... XD
+01:26:06 <CindyLinz> godfat: 我真沒想到 ruby 會直接拿我的外層變數來用在參數列.........||
+01:26:11 <godfat> 就是那個 ; 區分是不是 local 的
+01:26:15 <b4283> 就是這個
+01:26:31 <godfat> 可是 closure 不都是這樣嗎？ XDD
+01:26:50 <b4283> python 好像有個這種情況 scope 的地雷
+01:27:08 <CindyLinz> godfat: 參數列的值來自函數呼叫.. 設計上通常都是新的變數啊
+01:27:14 <CindyLinz> godfat: 連 C 都是...
+01:27:24 <CindyLinz> godfat: javascript 也是...
+01:27:46 <godfat> 喔喔，你是說 lambda{ |a| a = 2 }.call 這樣嗎？
+01:27:46 <godfat> 1.9 改掉了，現在這樣是 local
+01:28:01 <godfat> 仔細想想，這樣的話好像也是不用 ; 區分了
+01:28:11 <CindyLinz> 呃.... ^^|
+01:28:28 <godfat> 以前 ruby 1.8 時，那個其實是 assignment... 我猜是實作上偷懶的關係
+01:28:46 <CindyLinz> 以前我記得還有個, 就是如果 lambda 參數列只有放一個參數的話
+01:29:01 <CindyLinz> 如果呼叫的時候放了好幾個
+01:29:08 <CindyLinz> 那它們會變成 array 給我..
+01:29:13 <CindyLinz> 如果放一個, 那就會直接給我
+01:29:18 <CindyLinz> 都用這一個參數接
+01:29:24 <godfat> 1.9 也改掉了 :P 現在 lambda 會完全檢查，一定要完全一致
+01:29:26 <CindyLinz> 我莫名覺得毛毛的 @@"
+01:30:09 <godfat> 不過 proc{ } 的行為好像不太一樣... 我是完全沒在用，反正都用 lambda :s
+01:30:16 <CindyLinz> 啊對 應該是 proc
+01:30:39 <godfat> 我真的覺得那個怪怪的，所以每次理解完就忘記了 XD
+01:31:23 <CindyLinz> 我被驚嚇得刻骨銘心.... @@!
+01:31:33 <b4283> ruby 這麼多種構造感覺很混亂
+01:31:47 <godfat> ....XD i'm sorry about that (?)
+01:32:03 <godfat> 還有 Proc.new{ } 咧，記得好像也不太一樣
+01:32:07 <CindyLinz> godfat: 幹什麼, ruby 是你生的嗎! (逃)
+01:32:07 <b4283> 記得是 block <-> proc 可以互換
+01:32:19 <b4283> lambda <-> method 是嗎
+01:32:33 <godfat> 洋人不常常會說 i'm sorry 喔，應該接 hear about that 嗎？ XDD
+01:33:14 <CindyLinz> 喔 原來是 遺憾
+01:33:26 <godfat> 呃，忘記 proc 的話，lambda 和 block 是可互換沒錯
+01:33:27 <godfat> method 是另一回事
+01:33:27 <godfat> proc 我真的忘了，也不是很關心 :P
+01:33:33 <CindyLinz> 裡面還可以 yield
+01:33:55 <godfat> yield 應該是要用在 method 裡
+01:34:06 <CindyLinz> 不是 proc {} 嗎?
+01:34:13 <godfat> 等於呼叫 method 的 block
+01:34:41 <godfat> proc{ } 的行為我忘了.... XD
+08:53:49 <pseudorandom> Hello, I need to get short english letter translated to english (doesn't have to be perfect). If anyone knows the language and has 15 minutes....pm? :) (sorry for off-topic, #defocus didn't help)
+09:52:49 <MnO2> 大家太有前途了，早上log size就已經14xxx了~
+10:09:20 <MnO2> http://chrisdone.com/posts/2012-09-20-fay-ide.html
+10:09:24 <MnO2> mini-ide for fay
+21:43:06 <favonia> MnO2: 明明就代表大家都熬夜（逃
+21:47:38 <CindyLinz> 02:00 以前不算熬夜啦 :p
+21:48:03 <CindyLinz> 比較慘的是內容都是 perl 和 ruby...||
+22:20:18 <letoh> 在 google ad 看到這個廣告 "OCaml Hackers Wanted Hard problems, great pay. - janestreet.com - Work with technology you love."
+22:22:34 <CindyLinz> 好像查 haskell 什麼的也會看到..

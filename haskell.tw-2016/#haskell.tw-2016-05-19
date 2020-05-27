@@ -1,0 +1,38 @@
+00:15:21 <lancetw> 請問 Warning: Defaulting the following constraint(s) to type ‘Integer’ 這種警告有辦法透過改寫程式消除嗎？看了書寫說可以當作沒看到 XD  https://goo.gl/rVMtd8
+00:19:19 <monochrm> CindyLinz: Haskell 既無 subtyping 亦無 row polymorphism. 夢想來說, 夢到 row polymorphism 是美夢, subtyping 是噩夢.
+00:21:53 <monochrm> lancetw: 如果你願意使用 Integer 的話, 就沒問題. 如果想沒有警告的話, 用 type signature 指明想用甚麼.
+02:07:20 <lancetw> monochrm: 謝謝，我知道怎麼指明了
+02:09:43 <lancetw> f lst = [ x | (i, x) <- (zip [0..]) lst :: [(Integer, Integer)], odd i]  — 改寫成這樣就沒有警告了 XD
+02:10:44 <monochrm> 其實開一行 f :: [(Integer, Integer)] -> [Integer] 會最好
+02:12:25 <lancetw> monochrm: 有的我有放，我的編輯環境會提示要我加上
+02:13:06 <lancetw> monochrm: 之前是有放 f :: 也會有警告
+02:42:54 <CindyLinz> monochrm: 原來只是夢啊.... Q__Q
+02:43:56 <CindyLinz> 只放 f :: 也會有警告.. 應該是因為 i 沒有「露」出去, 所以標 f 的 type 標不到 i..
+02:44:51 <CindyLinz> 我覺得 list comprehensive 這樣用起來... 反而不太好讀啊 @@"
+02:45:28 <CindyLinz> 都用 list comprehension 了, 就別混用 zip 了啦 ^^|
+02:46:46 <CindyLinz> 或是用了 zip 就別 list comprehension 了 XD
+02:47:42 <monochrm> zip 不能換掉, 除非你去到盡, 用 parallel list comprehension
+02:47:42 <CindyLinz> 剛剛在想說用 parallel list comprehension.. 不過想不到怎麼讓 odd i 可以影響到 lst 那一串
+02:49:37 <CindyLinz> f lst = map snd . filter (odd . fst) $ zip [0..] lst  # 想想..
+02:50:27 <CindyLinz> 覺得混合 list comprehension 以後, 閱讀的順序要跳來跳去的感覺
+02:50:50 <monochrm> 不妨用 do-notation
+02:51:07 <CindyLinz> 可以多寫幾行 XD
+02:52:00 <monochrm> http://www.vex.net/~trebla/haskell/forwardconstraint/ForwardConstraint.hs
+02:52:02 <CindyLinz> do { (i, x) <- zip [0..] lst ; when (odd i) (pure x) }
+02:52:46 <monochrm> 用了 do-notation 才叫做有5行. 如果用 list comprehension 的話...
+02:53:10 <monochrm> 那麼 code:doc 比例就要 1:100 了!
+02:53:16 <CindyLinz> wwwwwwww
+02:53:30 <CindyLinz> 可以把 doc 的換行都去掉 XDDDD
+02:54:06 <CindyLinz> 你是用 list comprehension 啊?
+02:54:25 <CindyLinz> 噢, 有一組 do.. 看成註解了 XD
+02:54:27 <monochrm> * 是程式員的典範
+02:54:45 <CindyLinz> { 後面空一格就寫 -- 看起來很像 block comment 的開頭 ^^|
+02:55:14 <CindyLinz> 最近在練習改習慣, 把 return 都寫成 pure
+02:56:42 <monochrm> * 此刻才發現在用後備 nick
+02:57:02 <monochrm> 讓我強搶回來
+03:03:03 <CindyLinz> XD
+03:04:58 <monochrom> 其實我使用 {;}, 及把 ; 寫在前頭, 是為了幫助當年較笨的 haskell-mode indentation (emacs)
+03:05:44 <monochrom> 今日的版本不笨了, 應該改回正常人的寫法
+03:05:47 <CindyLinz> 我發現 C++ 也會有這種縮排法..
+03:06:35 <CindyLinz> 遇到 {0, 1, 2, 3} 的時候, 因為尾巴不能寫多餘的 , 就跟 Haskell 的 record syntax 或 { ; ; ; } 很像
+17:49:58 <CindyLinz> 剛用了一下 GHC 的 type hole.. 看看提示訊息才知道現在已經有 PartialTypeSignatures 了.. :p

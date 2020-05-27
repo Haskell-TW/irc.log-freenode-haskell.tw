@@ -1,0 +1,49 @@
+15:48:33 <CindyLinz> cataska: 這篇的解說你讀過了嗎? # 13:42 < cataska> https://github.com/quchen/articles/blob/master/loeb-moeb.md
+15:48:48 <CindyLinz> 我才剛看完 XD
+17:40:25 <cataska> CindyLinz: 看不太懂呀，所以才要各位長輩解惑 orz
+17:46:05 <CindyLinz> cataska: 你講一下你已經懂到哪邊, 然後還有哪邊讓你覺得「不夠懂」? 我覺得每個人對「懂」的 threshold 不一樣, 可能我其實了解的比你還少, 但我已經覺得我很懂了 XD
+17:51:17 <CindyLinz> 你是對原 po 舉的 list 的例子為什麼會動沒有看懂嗎? 或是對 為什麼它 rs 的定義裡面是吃 rs 的 return 值當參數覺得很詭異?
+18:08:21 <hashcat> 遞歸有三寶: 樹圖, 代換, 不動點
+18:09:52 <CindyLinz> 最後一個要押韻啦! XD
+18:10:22 <CindyLinz> 推不倒?
+18:10:30 <hashcat> 代換是把自引用或者無窮下去的部分, 換成能中止的點, 或者看起來很普通的沒有遞歸的方程式
+18:10:35 <hashcat> 什麼推不倒
+18:10:41 <CindyLinz> 不動點推不倒 XD
+18:10:52 <cataska> 看了一兩段都看不懂就卡住求救了 XD
+18:11:14 <CindyLinz> cataska: 那你先接著看下去好了, 前面是嚇人的, 後面比較親切 XD
+18:11:14 <cataska> 我再來體會一下好了 (嗯)
+18:11:34 <hashcat> 會搞這麼複雜還有一個原因
+18:11:45 <hashcat> 因為多態特性
+18:12:03 <CindyLinz> cataska: 看到實例的時候可能心中會有亮起來的感覺 ^^
+18:12:28 <hashcat> 其實有時候一個名稱一樣函數, 根本不能算是同一種東西
+18:19:30 <CindyLinz> hashcat: 有一點好奇, 你專有名辭的中文版是怎樣學起來的?
+18:19:58 <CindyLinz> 我覺得我也很常用中文版的專有名辭, 可是好像跟你用的是不同套 @@"
+18:20:11 <hashcat> 當然是特別去查的
+18:20:26 <CindyLinz> 我習慣的是 遞迴, 多型.. 不過你用的是 遞歸, 多態
+18:20:55 <hashcat> 我承認我是共匪好了
+18:21:08 <CindyLinz> 不是這意思啊 囧
+18:21:23 <hashcat> 因為覺得台灣常翻譯得莫名其妙
+18:22:26 <CindyLinz> 所以是故意避開台版中文喔?
+18:22:37 <hashcat> 嗯嗯
+18:23:13 <hashcat> 還有避開音譯這樣
+18:23:29 <CindyLinz> 魯棒 ← 這個嗎? XD
+18:23:49 <hashcat> 音譯就算了還翻成這樣
+18:23:54 <CindyLinz> XDDD
+18:25:36 <cataska> 一開始還以為魯棒是水滸傳裡的人物
+18:26:37 <CindyLinz> 以前剛開始接觸大陸人的時候, 覺得他們把一連串中文專有名辭接在一起講很有趣.. :p
+18:27:20 <CindyLinz> 那時在看機房的建置: 我們有魯棒的冗餘雙線迴路
+18:30:25 <hashcat> 冗餘聽起來有負面的意思, 感覺也不是很好, 強健抗變換的多重備用雙線迴路
+18:31:02 <CindyLinz> 我這是原汁原味 XD
+18:31:26 <hashcat> 我是不要跟通用的差太多就好
+18:32:46 <cataska> 原來 hashcat 不是這位啊 https://twitter.com/hSATAC
+18:32:48 <hashcat> cataska: 你有沒在用ghci debugger
+18:33:17 <hashcat> 他是誰阿
+18:33:34 <cataska> hashcat: 就台灣同胞...
+18:34:24 <hashcat> 這哽在哪
+18:34:38 <cataska> hashcat: id 很像
+18:35:50 <cataska> 沒在用 ghci debugger...
+18:37:56 <hashcat> 用ghci debugger看看, 看資料一步一步長大
+18:39:38 <cataska> hashcat: 好的
+18:42:12 <hashcat> 順便說下我 Ruby, Golang, PHP, ios一概不懂
+18:47:33 <hashcat> http://felsin9.de/nnis/ghc-vis/
+18:47:42 <hashcat> 這個有視覺化

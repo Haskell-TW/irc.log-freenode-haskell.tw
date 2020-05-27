@@ -1,0 +1,92 @@
+10:09:57 <MnO2> http://www.yinwang.org/blog-cn/2013/06/23/one-lang-not-exist/
+11:22:30 <suhorng> monochrom: 是阿 還好他這裡講得夠清楚XD 他也有說這兩個是類型標記
+11:23:52 <miaout17> One語言只存活了一天 o.o/
+11:30:03 <suhorng> miaout17: 只不過One語言不再是唯一的語言了 XDDD
+11:39:13 <suhorng> _13h: 請問你有什麼推薦的Scheme macro介紹的文章嗎？我正在看 http://www.willdonnelly.net/blog/scheme-syntax-rules/ 這篇
+11:42:36 <Yu-LIn> 只有一天的神之語言
+11:46:25 <CindyLinz> 你們是說, 有一個語言叫作 one? 不是 blog 指的「one」?
+11:46:49 <b4283> Neo The One
+11:47:00 <CindyLinz> orz
+11:47:10 <suhorng1> CindyLinz: yinwang 昨天那篇文章講他設計語言的想法 打算取名叫one (?
+11:47:25 <suhorng1> 這樣就要叫 "The One Language"
+11:47:38 <CindyLinz> 噢, 沒往前翻.. ._.
+11:47:50 <CindyLinz> 那他就可以當 key man 了..
+11:48:14 <CindyLinz> matrix 裡面那個 key man 角色真是冷死了....||
+11:48:34 <suhorng1> XDD
+11:49:50 <b4283> key maker
+11:50:10 <b4283> return to The Source => The Architect
+11:50:50 <b4283> CindyLinz: 相當於 ssh-keygen 的角色 XD
+11:59:41 <CindyLinz> 那時候我看中文字幕一直講 關鍵人物, 關鍵人物.. 然後看到一個全身掛滿鑰匙的人轉過身來, 突然就聽懂了............||
+12:00:24 <b4283> matrix 的官方翻譯是差了點
+12:00:37 <b4283> 看英文版比較好 XD~
+12:01:28 <CindyLinz> 雖說我也不知道這種英文雙關語的中文要怎麼翻 ^^|
+12:01:38 <CindyLinz> 打括號那種也很遜啊 XD
+12:02:16 <Yu-LIn> XDD
+12:02:59 <b4283> 製鑰人 XD
+12:03:19 <b4283> 鎖匠 XD
+12:08:15 <_13h> suhorng1: 你需要的是 macro 介紹，還是 scheme macro 介紹呢？
+12:09:31 <suhorng1> _13h: 我不知道這兩者差別多大. macro可以, 但我主要在學 Scheme
+12:11:22 <b4283> rxrs 系列其實寫得不錯，很易懂
+12:12:47 <_13h> 我是先學 lisp，所以其實我先學會的是 lisp macro，但同樣觀念寫 scheme macro 沒什麼問題就是 (語法有點不同而已)
+12:13:46 <suhorng1> 好 沒問題!
+12:13:57 <suhorng1> (Common?) Lisp 可XD
+12:14:25 <_13h> 然後 macro 的資料往 lisp 方面找也比較多，那邊對 macro 的使用已經累積了很多基礎了，可以看到很多怪東西XD
+12:15:47 <_13h> suhorng1: 你知道 let over lambda 嗎？
+12:16:00 <cataska> http://acl.readthedocs.org/en/latest/zhTW/ch10.html # 宏
+12:16:03 <_13h> suhorng1: http://letoverlambda.com/
+12:16:12 <suhorng1> _13h: 不知道耶
+12:16:18 <suhorng1> 喔喔!! Cool
+12:16:52 <_13h> ansi common lisp 也是可以看的 (不過我沒看完就是  我其實不太喜歡 lisp.. 雖然它長得跟 scheme 很像XD)
+12:16:58 <cataska> Paul Graham 寫的書
+12:17:22 <suhorng1> 竟然是他寫的
+12:18:29 <cataska> 其實除了當創投外，他其實是一名阿宅
+12:18:42 <_13h> 他在 lisp 圈也是有名人啊，寫了不少 lisp 文章
+12:19:10 <cataska> 竟然寫了兩個『其實』...
+12:19:23 <b4283> 名符其實
+12:19:25 <suhorng1> 寫教學很偉大 XDD
+12:20:36 <cataska> 他寫的『駭客與畫家』裡面都是在說 lisp 很棒快來學，學會了可以征服世界之類的
+12:21:35 <cataska> 還有『我就是用 lisp 賺了很多錢』
+12:22:19 <_13h> 那本可以當床邊故事集翻一翻XD
+12:22:36 <cataska> XD
+12:24:13 <_13h> suhorng1: http://hipster.home.xs4all.nl/lib/scheme/gauche/define-syntax-primer.txt   # scheme macro 比較多人提的文章是這一篇，也可以稍微看一下
+12:25:41 <_13h> 不過我個人覺得，其實用 macro 的想法跟我平常在 c 裡用 macro 不會差太多...
+12:26:30 <_13h> 王垠提到的 miniKanren 這名字，聽起來就像日文
+12:27:37 <suhorng1> 喔喔!!
+12:28:03 <suhorng1> _13h: miniKanren他在 Friedman 那篇有提過
+12:28:32 <suhorng1> 不過 C 的 macro 滿受限的說？至少我想加入 pattern matching 就做不到...
+12:29:53 <_13h> 嗯嗯，剛剛查了一下發現了。kanren 當成日文解讀的話就是「關聯」(日文寫成「関連」)，很適合當作邏輯語言的名字
+12:30:28 <_13h> c macro 的語法限制是比較多，所以我只說使用 macro 的想法上是很類似的
+12:31:06 <suhorng1> 瞭解
+12:31:34 <suhorng1> CPPGM pa5 剛寫完一個半精簡的 C++ preprocessor...
+12:32:20 <_13h> (其實我很想說後來會用的契機是因為學了 forth... 不過這東西實在太偏門還是算了XD)
+12:32:45 <_13h> 竟然到 pa5 了... 我的 pa1 剛開始就放棄了XD
+12:34:24 <suhorng1> Forth驚訝...
+12:34:38 <suhorng1> 其實出到 PA6 了. PA6 終於要進入 parse syntax tree 了..
+12:34:56 <_13h> suhorng1: 對了，如果你要學 macro，至少要撐到 reader，我覺得學過這個以後比較有學到 macro 的感覺XD (可能是個人喜好XD
+12:35:06 <suhorng1> OK!
+12:35:22 <_13h> 因為 reader 是寫 edsl 的利器XD
+12:35:38 <suhorng1> lol
+12:36:27 <_13h> let over lambda (也是 lol XD) 有介紹
+12:37:43 <_13h> 不過我也只是大概看一下而已，我自己喜歡的還是 forth 的 reader
+12:41:20 <_13h> suhorng1: http://en.wikipedia.org/wiki/Lisp_reader
+12:42:10 <suhorng1> 嗯 !!
+12:42:23 <suhorng1> 哇 又是有一整個維基頁面的
+12:42:26 <_13h> 其實我覺得不能讓我做這種語法前處理的語言，使用起來很不安XD
+12:43:01 <suhorng1> 語法前處理是什麼意思阿?
+12:43:03 <_13h> suhorng1: 那是 lisp 強大的原因之一啊，雖然很少人提這個特性就是
+12:43:19 <_13h> 就是類似 macro expansion
+12:43:24 <_13h> 或 translation
+12:43:53 <suhorng1> parse-time execution?
+12:44:00 <suhorng1> 好像不一樣XD
+12:47:44 <_13h> 就是在真正執行前，允許我對程式碼的樣子做一些微調XD
+12:49:32 <suhorng1> 喔喔
+12:50:03 <suhorng1> 不是compile time的事情, 像 C/C++ 這種比較低階的語言就做不到了吧...
+12:51:23 <_13h> c/c++ 裡就是用 macro 呀，雖說能做的有限就是
+12:52:36 <_13h> suhorng1: 說到這個  不曉得你有沒有聽過 imake 這個工具，有用 x11 的話大概會知道
+12:53:00 <suhorng1> 嗯..剛剛弄錯真正執行前的意思了
+12:53:06 <suhorng1> 沒有耶 QQ
+12:53:23 <_13h> imake 其實就是讓 makefile 有使用 c macro 做前處理的能力，真是帥
+12:53:30 <suhorng1> ``is implemented on top of the C preprocessor and make" wow
+12:54:20 <_13h> 嗯  所以有機會不靠 autotools 就弄出很複雜的編譯條件，都靠 c preprocessor 處理掉
+13:58:53 <cataska> 我也喜歡程式語言可以有像 c/c++ 的 macro
+13:59:22 <cataska> or preprocessor

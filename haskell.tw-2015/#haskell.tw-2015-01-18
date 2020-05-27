@@ -1,0 +1,103 @@
+00:58:14 <pkmx> 這輩子終於第一次用到dorec...
+00:59:58 <CindyLinz> 用在哪? ^^
+01:00:32 <pkmx> 模擬lazy attribute grammar =p
+01:01:02 <CindyLinz> 以懶制懶
+01:01:39 <pkmx> 然後立刻被我抓到haskforce不會把mdo或rec當作keyword
+01:01:53 <pkmx> 用rec還會讓他的tokenizer炸裂
+01:02:08 <CindyLinz> haskforce 是 editor 喔?
+01:02:25 <pkmx> intellij idea的haskell plugin
+01:02:56 <monochrom> CPS 跟 monad >>= 很有關係, x >>= f 就可看成 (x >>=) f, (x >>=) 是單一件東西, f 是給它的 continuation. 我在 http://www.vex.net/~trebla/haskell/IO.xhtml 也是這樣解的, 只不過把 continuation 說成 callback, 正所謂 continuation passing style = CPS = callback promise style
+01:05:25 <pkmx> 因為emacs的config被我玩到不知道為何有時會自己hang住卡死@@...沒空debug只好先拿別人包好的來用XD
+01:06:34 <CindyLinz> mdo / rec 要開 extension 才會有..
+01:06:47 <CindyLinz> pkmx: 欸.. 那 extension 都沒開的時候, forall 會變顏色嗎?
+01:08:05 <pkmx> 不會...
+01:08:08 <pkmx> orz
+01:08:13 <CindyLinz> XD
+01:08:31 <monochrom> 早幾天才獲告知: 世上有 #haskell-emacs :)
+01:08:34 <CindyLinz> 那開了會變嗎?
+01:08:45 <pkmx> 也不會XD
+01:09:07 <pkmx> 看來他根本就不會去判斷開了什麼extension
+01:09:18 <CindyLinz> 我覺得會去看 {-# LANGUAGE ... #-} 而那麼微細地改變顏色的 editor.... 是非常有誠意.. (Y)
+01:10:19 <monochrom> 我不信誠意, 我較信重賞.
+01:11:01 <monochrom> 正所謂"如果四十歲還信共產主義, 就太沒腦了" XD
+01:11:35 <pkmx> 這種東西如果直接去問ghc不知道效率如何
+01:12:07 <CindyLinz> monochrom: XD
+01:12:41 <monochrom> <-- 那麼這個人為甚麼還免費寫那麼多文章呢?
+01:13:01 <CindyLinz> pkmx: 如果 ghci 開著, 然後可以用 pipe 跟它互通的話, 應該非常快 :p
+01:15:26 <pkmx> 感覺這種東西本來就應該直接去問ghc最準
+01:15:49 <pkmx> 要不然每次都是每個ide/editor自己寫一個parser 然後只要遇到極端一點的case就會完全炸裂這樣...
+01:16:12 <monochrom> 甚麼?! ExplicitForAll?! 不是 ExplicitForall?!
+01:16:42 <CindyLinz> pkmx: 有這個.. 所以可以直接用在自己程式裡.........如果程式是 Haskell 寫的 XD # https://hackage.haskell.org/package/haskell-src-exts
+01:21:02 <pkmx> haskell-src-exts 之前過了7.6出了好久才支援LambdaCase和MultiWayif 害我好一段時間只要開了這兩個ghc-mod/hlint就一直噴錯QQ
+01:21:25 <CindyLinz> pkmx: 嗯... 而且 7.8 的 MultiWayIf 和 7.6 不一樣
+01:21:34 <CindyLinz> 我覺得 7.8 的才堪用.... XD
+01:22:08 <pkmx> 其實MultiWayIf很少用... 我主要在意的是LambdaCase
+01:22:08 <CindyLinz> 7.6 是雞肋.. 我寧願寫 case () of _ | 條件 -> ... | 條件 -> ...
+01:22:20 <CindyLinz> pkmx: 是太難用了才少用.. XD
+01:22:33 <CindyLinz> 欸.. 7.8 這個可以巢狀的 MultiWayIf 啊...
+01:22:40 <CindyLinz> 其實就是 guard 嘛?
+01:23:09 <CindyLinz> guard 裡面可以 let 定義變數, 可以用 pattern guard 作 matching, 可以用 view patterns extend pattern... 混搭很厲害的耶 :D
+01:24:10 <CindyLinz> view pattern 裡面又可以再寫新的 case..of 喔呵呵.. XDD
+01:24:42 <petercommand> 可以寫 case _ of _ | cond -> ... | cond -> ... 嗎? 把 case 裏面也換成 _
+01:24:43 <pkmx> 好像有點強
+01:25:01 <CindyLinz> petercommand: 不行啦.. 那邊是 expression 不是 pattern
+01:25:13 <CindyLinz> _ 只能用在 pattern
+01:25:15 <petercommand> 喔喔..
+01:25:26 <petercommand> case undefined of ...
+01:25:33 <pkmx> 好奇何時ghc才要加入idiom brackets
+01:25:40 <CindyLinz> petercommand: 這麼長不累嗎 OAO
+01:25:51 <petercommand> XD
+01:26:51 <CindyLinz> 何時才能讓 QuasiQuote 可以巢狀..
+01:33:38 <CindyLinz> > case 0 of _ | False -> 2 | True -> 5
+01:33:40 <lambdabot>  5
+01:33:45 <CindyLinz> petercommand: 用 0 吧 XD
+01:37:00 <petercommand> :p
+01:52:36 <pkmx> @hoggle mapAccumM
+01:52:38 <lambdabot> Data.Generics.Twins gmapAccumM :: (Data d, Monad m) => (forall e. Data e => a -> e -> (a, m e)) -> a -> d -> (a, m d)
+01:52:57 <pkmx> 居然沒有...
+02:00:53 <pkmx> @hoggle Monad m => (a -> b -> m (a, c)) -> a -> [b] -> m (a, [c])
+02:00:54 <lambdabot> No results found
+02:01:45 <pkmx> @hoggle Monad m, Traversable t => (a -> b -> m (a, c)) -> a -> t b -> m (a, t c)
+02:01:45 <lambdabot> Parse error:
+02:01:45 <lambdabot>   Monad m, Traversable t => (a -> b -> m (a, c)) -> a -> t b -> m (a, t c)
+02:01:45 <lambdabot>          ^
+02:01:51 <pkmx> @hoggle (Monad m, Traversable t) => (a -> b -> m (a, c)) -> a -> t b -> m (a, t c)
+02:01:52 <lambdabot> No results found
+02:02:02 <pkmx> =.=
+02:07:00 <pkmx> :t \f -> flip (execStateT . traverse (StateT . flip f))
+02:07:01 <lambdabot> (Traversable t, Functor m, Monad m) => (b -> a -> m (b1, b)) -> b -> t a -> m b
+02:07:07 <pkmx> :t \f -> flip (runStateT . traverse (StateT . flip f))
+02:07:08 <lambdabot> (Traversable t, Functor m, Monad m) => (b -> a -> m (b1, b)) -> b -> t a -> m (t b1, b)
+02:07:39 <pkmx> @hoggle (a, b) -> (b, a)
+02:07:40 <lambdabot> Data.Tuple swap :: (a, b) -> (b, a)
+02:07:40 <lambdabot> Data.Graph.Inductive.Query.Monad (><) :: (a -> b) -> (c -> d) -> (a, c) -> (b, d)
+02:07:40 <lambdabot> Data.Graph.Inductive.Query.Monad mapSnd :: (a -> b) -> (c, a) -> (c, b)
+02:09:12 <CindyLinz> pkmx: 這參數的 type 看起來有一點怪怪的? # (a -> b -> m (a, c))
+02:10:20 <CindyLinz> 這個 c 和它的參數都沒有關聯喔? o.o
+02:11:01 <pkmx> 對啊...mapAccumL本來不就這樣@@
+02:11:04 <pkmx> :t mapAccumL
+02:11:06 <lambdabot> (acc -> x -> (acc, y)) -> acc -> [x] -> (acc, [y])
+02:11:24 <pkmx> 我只是把他包在Monad m裡面而已
+02:11:25 <CindyLinz> 對啊 為什麼啊? XD
+02:11:48 <pkmx> 因為可以你可以生出完全不一樣的東西吧@@
+02:12:15 <CindyLinz> 喔 反正沒有 forall.. 所以函數知道那個 x 的 type 是什麼
+02:12:29 <CindyLinz> 可以強制一個 x 的某 value 對應 y 的某 value... @@"
+02:13:05 <pkmx> > mapAccumL (\_ _ -> (0, True)) 0 [1..10]
+02:13:07 <lambdabot>  (0,[True,True,True,True,True,True,True,True,True,True])
+02:13:23 <CindyLinz> pkmx: 無視參數的太特殊啦 XD
+02:13:34 <pkmx> 這個就只是map和fold加在一起做而已XD
+02:14:05 <pkmx> > mapAccumL (\x y -> (x, y > 5)) 0 [1..10]
+02:14:06 <lambdabot>  (0,[False,False,False,False,False,True,True,True,True,True])
+02:14:16 <CindyLinz> 嗯嗯
+02:25:54 <pkmx> 好奇有RS Monad嗎...
+02:26:24 <pkmx> 每次都覺得RWS那個W很雞助...
+02:27:56 <pkmx> > () <> ()
+02:27:58 <lambdabot>  ()
+02:28:03 <caasihuang> monochrom++ #受教了
+02:28:22 <pkmx> type RS r s = RWS r () s ? =pppp
+02:28:53 <monochrom> :)
+06:11:04 <pkmx> :t fix . flip (\xs -> map (_2 %~ either (join . (`lookup` xs)) Just))
+06:11:05 <lambdabot> Eq a => [(a, Either a a1)] -> [(a, Maybe a1)]
+10:55:33 <petercommand> @unpl fix . flip (\xs -> map (_2 %~ either (join . (`lookup` xs)) Just))
+10:55:33 <lambdabot> (\ g -> fix (\ c -> map (_2 %~ (either (\ j -> (lookup j c) >>= \ k -> k) Just)) g))
+22:07:58 <suhorng> http://blog.jle.im/entry/intro-to-machines-arrows-part-1-stream-and FRP again

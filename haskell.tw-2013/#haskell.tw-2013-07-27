@@ -1,0 +1,24 @@
+02:02:25 <godfat> !! 看起來不錯
+02:02:26 <godfat> 可惜我 cairo 因為缺少 xcb-shm 什麼的，灌不起來 ><
+04:23:07 <letoh> 不要裝 xcb backend 就好了XD
+04:24:31 <godfat> cabal install cairo # how to disable xcb?
+04:25:01 <letoh> 沒裝 cabal XD
+04:25:29 <letoh> 你竟然還醒著XD
+04:25:51 <godfat> XDD
+04:26:26 <godfat> ….orz...
+04:33:17 <favonia> godfat: .cabal 檔裡面應該會寫吧
+04:34:49 <godfat> favonia, mu, 先記著，我該睡了 orz
+04:36:22 <favonia> letoh: 因為我們可能是日不落頻道
+04:36:41 <letoh> 日不落頻道++
+04:37:29 <monochrom> +1
+04:39:59 <letoh> http://www.ptt.cc/bbs/Editor/M.1374731436.A.16A.html  # [問題]附語音功能的編輯器
+04:40:13 <letoh> 像 haskell code 一堆符號，要怎麼念? XD
+04:40:35 <letoh> +++ &&& ||| >>> 之類的
+04:42:57 <favonia> triple bar? triple plus?
+04:43:12 <letoh> tts engine 應該沒有那麼厲害XD
+04:43:55 <favonia> doubleplusgood
+04:47:30 <letoh> 我後悔請咕狗姐示範了XD
+04:47:59 <letoh> spanish 還不錯XD
+04:49:26 <letoh> >>= 可以念耶..XD
+05:09:53 <monochrom> haha doubleplusgood
+10:39:46 <mno2> http://ocharles.org.uk/blog/posts/2013-07-26-a-comparison-between-perl-and-haskell.html

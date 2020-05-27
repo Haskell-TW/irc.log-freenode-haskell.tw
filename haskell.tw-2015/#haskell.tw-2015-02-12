@@ -1,0 +1,57 @@
+00:03:05 <suhorng> @CindyLinz: 咦~ 真的喔 感覺很難想笑耶
+00:03:05 <lambdabot> Unknown command, try @list
+00:03:10 <suhorng> 很難寫, 可是很好讀@@?
+00:03:22 <suhorng> *想像
+00:08:47 <CindyLinz> suhorng: loeb 是個例子...
+00:09:13 <CindyLinz> suhorng: 看過一次以後, 把它的長相背起來... 從此就是一個很難寫(自己想出來), 但是很好讀的東西 XD
+00:11:58 <CindyLinz> 欸... 就是會把它當作一個 pattern, 用身體記住
+00:16:40 <suhorng> 呃...把 loeb 寫成 @pl 嗎 O_Q
+00:17:42 <CindyLinz> 不是啦.. 這是舉例難寫好讀的東西 ^^|
+00:18:43 <suhorng> 好吧XD
+00:19:04 <suhorng> 好像是有點 不過還是跟 pl 的難寫好讀頗有段距離阿
+00:23:49 <CindyLinz> suhorng: \(a, b) -> (a*2, b+3) 變成 (2 *) *** (3 +) 算是個 pl 的例子呀
+00:24:37 <CindyLinz> 當然... 這個 IDE 最好也附一個 @unpl 在旁邊 XD
+00:43:49 <suhorng> 這一類型的會非常難說左邊右邊哪邊比較好吧...XD
+00:45:16 <CindyLinz> 這個... 端視要不要把 arrow 用法列為必備常識而定 ^^|
+00:46:16 <CindyLinz> 我覺得這個使用方式不會太扭曲, 而且應用範圍又相當廣泛的東西, 可以列為必備... (認真
+00:47:09 <suhorng> 尤其是中間的資料結構被 combinator 隱藏起來了, 一長串的時候真的滿難讀的
+00:47:55 <suhorng> 如果真的必備常識像 map, filter 應該到最後就隨手寫得出來吧XD
+00:48:24 <CindyLinz> suhorng: 啊就太笨了想不到不行嗎 QAQ
+00:48:55 <CindyLinz> 個位數乘法不可以按計算機嗎 >w<
+00:49:34 <suhorng> 我還是比較傾向直覺沒寫出來 => 直覺讀不出來這樣子...
+00:50:11 <CindyLinz> 用 @pl 生出來以後背起來, 以後就直覺寫得出來了.. 這只是個 bootstrap.. XD
+00:50:18 <suhorng> orz
+00:50:40 <CindyLinz> @pl 生出來以後, 判斷一下這個值不值得背啦 ^^|
+00:50:40 <lambdabot> (line 1, column 2):
+00:50:41 <lambdabot> unexpected '\148'
+00:50:41 <lambdabot> expecting letter or digit, variable, "(", operator or end of input
+00:50:54 <CindyLinz> orz
+10:20:52 <mno2> http://www.reddit.com/r/haskell/comments/2vji4t/pcreheavy_a_usable_regex_library_on_top_of_pcre/
+10:20:56 <mno2> [pcre-heavy]
+10:23:03 <mno2> pcre-light 跟 regex-pcre-builtin 好像都沒辦法很方便用在 Data.Text  (or IsString) 上？
+10:25:09 <mno2> 不過他用這個 https://hackage.haskell.org/package/stringable 感覺會把不少 overhead 藏起來
+10:29:14 <CindyLinz> heavy XD
+10:31:23 <mno2> CindyLinz 可以寫個 pcre-dark   (黑黑的 pcre)
+10:31:38 <CindyLinz> 你少亂講 = =
+10:32:14 <CindyLinz> 這個 stringable 漏了 Char8 版的 ByteString 和 UTF-8 版的 ByteString
+10:35:27 <mno2> 你是指 utf8-string ?
+10:35:38 <mno2> （後者（
+10:35:51 <mno2> 另外發現新版好像還有 https://hackage.haskell.org/package/bytestring-0.10.4.1/docs/Data-ByteString-Short.html
+10:37:28 <CindyLinz> mno2: 就 stringable 裡面沒有列到呀
+10:38:23 <mno2> 我知道沒有列到，只是我不確定你講的是哪一套
+10:38:41 <CindyLinz> 不是這套
+10:39:44 <CindyLinz> http://hackage.haskell.org/package/utf8-string-1/docs/Data-ByteString-UTF8.html
+10:44:19 <mno2> 居然有 utf8-string-1  xD
+10:45:08 <CindyLinz> mno2: 突然覺得可能我想的也不是這個.. 只是這個裡面出現的介面用法剛好跟我印象中的一樣 ._.
+10:45:23 <CindyLinz> 因為沒有印像什麼 utf8-string-1 這種 package name.. XD
+11:09:58 <CindyLinz> 如果要作 DFS, 不知道是用一般遞迴作比較快, 還是用 [a] stack + 尾遞迴比較快 @@"
+12:28:24 <pkmx> [a] stack 是啥 @@
+13:03:59 <CindyLinz> [a] 當 stack 用 XD
+14:31:53 <CindyLinz> @pl \a b -> min a (fst b)
+14:31:54 <lambdabot> (. fst) . min
+14:32:32 <CindyLinz> @pl \a -> min a . fst
+14:32:33 <lambdabot> (. fst) . min
+14:32:48 <CindyLinz> (.) in section.. XD
+14:37:45 <petercommand> 真的覺得這樣很不直觀XD
+15:00:54 <CindyLinz> 最後採用 \a -> min a . fst 的寫法 ^^|
+16:31:54 <CindyLinz> let f ..3 g

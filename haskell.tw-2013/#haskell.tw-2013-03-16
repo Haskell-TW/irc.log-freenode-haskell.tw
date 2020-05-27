@@ -1,0 +1,75 @@
+00:00:06 <suhorng> CindyLinz: 噢成功了耶XD
+00:00:11 <suhorng> 原來是我打錯囧
+00:01:02 <CindyLinz> 這樣寫起來 syntax 應該就比較像 perl 或 c 或 java 了吧?
+00:01:14 <CindyLinz> suhorng: 分享一下? :p
+00:01:15 <suhorng> 對
+00:01:19 <CindyLinz> 其實我沒真的那樣寫過
+00:01:24 <suhorng> 啊..純粹少打分號而已
+00:01:28 <suhorng> f a b = x - y / z + w
+00:01:28 <suhorng>   where {x = (a + b)/2.0;
+00:01:28 <suhorng>   y = (a - b)/2.0;
+00:01:28 <suhorng>      z = a*b;
+00:01:28 <suhorng>  w = a/b
+00:01:29 <suhorng> }
+00:01:39 <CindyLinz> 我都跑去模仿人家寫縮排.. 還有我以前不習慣的... 逗號放前面的寫法
+00:01:56 <letoh> 對  為什麼要放前面啊  好怪
+00:02:02 <CindyLinz> suhorng: 我是覺得你 where { 後面的東東要換行.....
+00:02:07 <suhorng> 對阿XD
+00:02:20 <CindyLinz> 然後, 雖然不用強制縮排了, 還是對齊縮一下吧 XD
+00:02:24 <suhorng> CindyLinz: 換行也可以過呀 我只是亂測一下
+00:02:30 <suhorng> 所以故意弄不等寬
+00:02:30 <CindyLinz> letoh: 後來覺得有好處耶
+00:02:38 <CindyLinz> suhorng: 嗯 XD
+00:03:45 <letoh> 唔  我以為只是某種怪風格XD
+00:04:08 <CindyLinz> 我指的是像這樣的.. https://gist.github.com/CindyLinz/28aa9736c39469d83c37
+00:04:18 <CindyLinz> 不過這其實是個不用縮排的場合
+00:04:43 <letoh> 嗯  我想的也是 data 語法
+00:04:58 <CindyLinz> 再來一個函數 signature 的....
+00:05:29 <letoh> 越看越覺得不奇怪了XD
+00:06:22 <CindyLinz> https://gist.github.com/CindyLinz/8f0611e7d70446041a2d
+00:06:24 <suhorng> 好像 module 也很多人這樣寫..?
+00:06:37 <CindyLinz> 嗯, 就是語法上一串 list
+00:06:45 <suhorng> 函數 signature 看起來比較沒那麼怪ww
+00:06:52 <letoh> CindyLinz: 感覺像舊風格的 c 宣告... k&r 的
+00:07:01 <CindyLinz> 通常是 開頭 元素 分隔 元素 分隔 元素 ... 元素 結尾
+00:07:19 <CindyLinz> 把 開頭 元素 放一列, 分隔 元素 放一列.. 最後 結尾 自己一列
+00:08:07 <CindyLinz> suhorng: 可能我有放 haddock 形式註解就讓它更自然了 :p
+00:08:25 <CindyLinz> 不這樣寫, 還真不知道 haddock 要怎麼塞....
+00:08:49 <suhorng> 也是滿有道理!
+00:08:59 <CindyLinz> 只是在前面沒有 class contraint 的時候, 就會沒那個 =>, 然後第一列就會有點怪 :|
+00:10:08 <CindyLinz> letoh: 我沒見過舊風格的 c 宣告 ^^|
+00:10:58 <CindyLinz> 我覺得這個排版方式用來因應一個 haskell 語法限制(缺陷) 不錯
+00:11:17 <CindyLinz> 就是 Haskell 的 list 型式的東西, 最後一項後面不可以多放一個分隔符號..
+00:11:40 <CindyLinz> 像 perl  php coffeescript 都是可以的, 例如說陣列 [1,2,3] 可以寫成 [1,2,3,]
+00:11:58 <CindyLinz> 所以寫成 [\n1,\n2,\n3,\n] 沒問題
+00:12:07 <suhorng> 嗯
+00:12:09 <CindyLinz> 之後要加項減項都很方便
+00:12:27 <CindyLinz> haskell 這樣寫就很不方便, 因為最後一項要去掉逗點..
+00:12:48 <letoh> 嗯  類似  void foo(n)\n int n;\n { ... }
+00:13:00 <letoh> 很久沒寫了有點忘記XD
+00:13:49 <letoh> 很多參數就繼續寫下去  都放在函式名字和大括號中間
+00:13:50 <CindyLinz> 我覺你要把那個分號放到下一行的最前面比較像 :p
+00:14:01 <CindyLinz> 初看感覺真是不舒服....
+00:14:24 <CindyLinz> 尤其寫文章的排版都會避免標點符號放在列首... ^^|
+00:14:34 <letoh> 對啊
+00:18:53 <suhorng> 話說..大家學語言時, 會去看標準嗎？像是 Haskell98 report 之類
+00:19:54 <letoh> 有些會看一下，像 c 或 scheme
+00:20:24 <CindyLinz> 我後來習慣直接讀 spec... 和 standard library reference
+00:20:35 <CindyLinz> 不過沒有回去看 C++ 的.... zz
+00:20:41 <suhorng> Scheme 的 r5rs (好像很舊了orz) 很短所以還好……
+00:21:00 <letoh> suhorng: brainfuck 算嗎? XD
+00:21:24 <suhorng> C 的還是沒看過QQ 不然不看好像常常會碰到不知道正確情況會怎樣 evaluate，又或者哪些是 undefined behavior..
+00:21:30 <suhorng> brainf*ck 應該不算啦XDD
+00:21:31 <letoh> forth 的我是有看，不過那種東西 forth 圈很多人都不喜歡
+13:56:25 <MnO2_> https://www.fpcomplete.com/user/nubis/type-families-and-pokemon
+13:57:03 <MnO2_> 學 Haskell 成為神奇寶貝大師（誤）
+13:57:32 <letoh> XDXD
+13:58:25 <letoh> 昨天看了一下 secd，竟然是 stack-based machine...
+14:18:26 <letoh> 優先權這件事對 parsing 實在有點麻煩...
+14:19:01 <letoh> 剛剛看到 Jack 的說明有  "explicit order of operations using parens"，這樣做好像簡單一點
+14:19:39 <letoh> https://github.com/creationix/jack
+14:35:55 <letoh> http://mattgemmell.com/2011/11/01/on-off-switches/
+14:36:06 <letoh> 開關的設計真麻煩
+22:15:31 <JuanitoFatas> Haskell Style Guide… https://code.google.com/p/ganeti/wiki/HaskellStyleGuide
+22:26:17 <MnO2> http://skillsmatter.com/podcast/java-jee/keynote-3842
+22:34:37 <CindyLinz> JuanitoFatas: 實用 :D

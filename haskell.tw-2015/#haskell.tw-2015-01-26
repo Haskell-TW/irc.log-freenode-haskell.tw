@@ -1,0 +1,90 @@
+00:01:43 <pkmx> 原來()是Enum的instance....
+00:01:50 <pkmx> @info ()
+00:01:51 <lambdabot> ()
+00:02:02 <pkmx> @info Enum
+00:02:02 <lambdabot> Enum
+00:03:37 <petercommand> :t Debug.Trace
+00:03:38 <lambdabot> Not in scope: data constructor ‘Debug.Trace’
+00:03:49 <pkmx> :t traceShow
+00:03:50 <lambdabot> Not in scope: ‘traceShow’
+00:03:53 <pkmx> :t trace
+00:03:54 <lambdabot> Not in scope: ‘trace’
+00:04:00 <pkmx> :t Debug.Trace.trace
+00:04:01 <lambdabot> String -> a -> a
+00:04:11 <suhorng> 欸www
+00:04:18 <pkmx> 嘿嘿嘿
+00:04:26 <petercommand> > Debug.Trace.trace "hello" ()
+00:04:27 <suhorng> 要試嗎XD?
+00:04:28 <lambdabot>  Not in scope: ‘Debug.Trace.trace’
+00:04:31 <suhorng> wwwwwwwwwwww
+00:04:33 <petercommand> XDD
+00:04:49 <petercommand> > trace "hello" ()
+00:04:50 <lambdabot>  Not in scope: ‘trace’
+00:04:52 <suhorng> > unsafeCoerce
+00:04:54 <lambdabot>  No instance for (Data.Typeable.Internal.Typeable b0)
+00:04:54 <lambdabot>    arising from a use of ‘M74353058778613030215787.show_M74353058778613030215...
+00:04:54 <lambdabot>  The type variable ‘b0’ is ambiguous
+00:05:04 <suhorng> !?
+00:05:08 <suhorng> > unsafePerformIO
+00:05:10 <lambdabot>  Not in scope: ‘unsafePerformIO’
+00:05:17 <petercommand> unsafeCoerce www
+00:05:42 <pkmx> > unsafeCoerce (putStrLn "ker") :: Int
+00:05:43 <lambdabot>  *Exception: what did you think was going to happen?
+00:06:40 <CindyLinz> pkmx: 被抓到了! XD
+00:07:23 <pkmx> > unsafeCoerce 1 :: Int
+00:07:24 <lambdabot>  *Exception: what did you think was going to happen?
+00:07:45 <pkmx> @src unsafeCoerece
+00:07:46 <lambdabot> Source not found. My brain just exploded
+00:07:58 <pkmx> @src unsafeCoerce
+00:07:58 <lambdabot> Source not found. Just try something else.
+00:08:50 <pkmx> :t System.IO.Unsafe.unsafePerformIO
+00:08:51 <lambdabot> IO a -> a
+00:08:57 <pkmx> > System.IO.Unsafe.unsafePerformIO
+00:08:58 <lambdabot>  Not in scope: ‘System.IO.Unsafe.unsafePerformIO’
+00:10:42 <pkmx> 之前GeneralizedNewtypeDeriving的loop hole叫啥去了@@
+00:10:55 <suhorng> xDDD
+00:11:21 <suhorng> 欸竟然要找 GHC 的 bug 丟給它嗎wwww
+00:12:03 <pkmx> 喔 找到了 # https://ghc.haskell.org/trac/ghc/wiki/Roles
+00:13:07 <pkmx> 不過lambdabot應該沒辦法定義newtype?
+00:13:25 <pkmx> > newtype A = A { unA :: Int }
+00:13:28 <lambdabot>  <hint>:1:1: parse error on input ‘newtype’
+00:13:53 <suhorng> sad
+00:14:45 <pkmx> 該來翻ghc trac了www
+00:14:59 <CindyLinz> LiquidType 有沒有簡單一點的介紹啊?
+00:15:05 <CindyLinz> 直接就從 paper 入手嗎 OAO
+00:16:03 <suhorng> Haskell的優良(X)傳統
+00:16:09 <pkmx> http://goto.ucsd.edu/~rjhala/liquid/haskell/blog/blog/2013/01/01/refinement-types-101.lhs
+00:21:37 <CindyLinz> pkmx: 謝謝 :D
+01:35:19 <CindyLinz> LiquidType 看起來好令人興奮呀..
+01:39:59 <CindyLinz> 雖然還不了解它用的證明機制..
+02:23:28 <CindyLinz> > (1,2) & both .~ 5
+02:23:30 <lambdabot>  (5,5)
+02:24:20 <CindyLinz> > (1,'x') & both .~ 5
+02:24:22 <lambdabot>  Could not deduce (GHC.Num.Num GHC.Types.Char)
+02:24:22 <lambdabot>    arising from the literal ‘1’
+02:24:22 <lambdabot>  from the context (GHC.Num.Num b)
+02:24:31 <CindyLinz> > ("abc",'x') & both .~ 'y'
+02:24:33 <lambdabot>  Couldn't match type ‘[GHC.Types.Char]’ with ‘GHC.Types.Char’
+02:24:33 <lambdabot>  Expected type: Control.Lens.Setter.ASetter
+02:24:33 <lambdabot>                   ([GHC.Types.Char], GHC.Types.Char)
+02:40:45 <pkmx> > let f = const 5 in bimap f f (1, 'x')
+02:40:47 <lambdabot>  (5,5)
+02:45:43 <pkmx> 不過等ghc真的有dependent types... liquidhaskell就廢了吧
+02:59:10 <CindyLinz> 哪一種寫證明會比較符合直覺呢?
+03:00:09 <CindyLinz> @type bimap
+03:00:11 <lambdabot> Bifunctor p => (a -> b) -> (c -> d) -> p a c -> p b d
+03:01:19 <pkmx> 都不直覺 (默...
+03:01:23 <CindyLinz> > (2, ("abc",'x')) & _2 %~ bimap length succ
+03:01:26 <lambdabot>  (2,(3,'y'))
+03:01:29 <CindyLinz> 呃.. orz
+03:01:48 <CindyLinz> 你貼的那個 tutorial 看起來還蠻開心的啦 :p
+03:02:30 <pkmx> 就跟dependent type的tutorial只會一直重複教你寫vector一樣=p
+03:02:32 <CindyLinz> 可是它用起來彷彿只要寫 pre-condition / post-condition.. 中間都可以不用補東西.. 感覺有詐 XD
+03:02:49 <CindyLinz> 一定不是這樣子天天過年的 ._.
+03:04:04 <CindyLinz> 一直寫 fib / qsort 的 Haskell 與一直定義自然數和 Vector 的 Agda.... XD
+05:53:36 <pkmx> 話說LiquidHaskell不就寫說他是拿SAT solver去跑(proof search)？
+05:53:55 <pkmx> SMT solver*
+10:46:29 <CindyLinz> 噢! 所以寫的都是 boolean expression 這樣?
+10:47:03 <CindyLinz> 嗯, 我只接觸比較多 Agda 那種 dependent type 方式的 @@"
+11:09:04 <mno2> https://haskellonheroku.com/
+21:08:10 <mno2> 原來 ghc 7.8 預設把 monomorphism restriction 給勾掉了

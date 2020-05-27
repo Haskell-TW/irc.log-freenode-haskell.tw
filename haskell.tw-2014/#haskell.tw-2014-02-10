@@ -1,0 +1,167 @@
+00:31:23 <monochrom> Haskell 很簡單. (\x -> x + x) (rand 6) = rand 6 + rand 6 就是最簡單的法則. 這法則在 Haskell 成立, 所以 Haskell 簡單. 這法則在很多別的語言不成立, 所以它們複雜.
+00:31:40 <monochrom> http://www.vex.net/~trebla/haskell/prerequisite.xhtml#leibniz
+00:39:51 <monochrom> 任何方便程式作者的捷徑都必然複雜, 因為必然增加讀者負荷. 程式開發是作者與讀者之間的辯證階級鬥爭!
+00:51:08 <CindyLinz> (Y)
+00:53:14 <monochrom> 關於一般語言的隨便容許加插作用(effects), 由 Algol Pascal C Java 以至 Lisp Scheme SML OCaml, 我最大的不滿如下:
+00:57:23 <monochrom> 例如 f(g(x), h(x)), 作用的次序並非碼的順序 f, g, h, 亦非碼的逆序 h, g, f. 而是碼的第2位 g, 然後第3位 h, 最後由跳回第1位 f. 既非完全順序, 亦非完全逆序, 還能說簡單嗎? 我就說不簡單.
+00:58:20 <monochrom> 然後再加上 C 講明未必 g, h, f.
+00:59:39 <CindyLinz> 嗯, C 只有 g => f 和 h => f, 但 g 和 h 的順序未定義....
+01:00:08 <monochrom> 這還不只. 日前我在隔壁講起這個, 獲告知: 在 OCaml, 視乎 interpret 還是 compile, 其中一個會給你 h, g, f!
+01:00:52 <CindyLinz> 但是 interpret 的順序和 compile 的順序都分別是明確定義的?
+01:01:39 <monochrom> 這就是我說的, 給予作者方便(可隨時增刪作用), 但讀者就要猜謎語了.
+01:02:29 <CindyLinz> 這個... 比起把 f(g(x), h(x)) 的順序定義為 g, h, f 的語言... Haskell 有比較好嗎? @_@"
+01:02:57 <monochrom> 回看 Haskell, 不論用 do notation 或 >>=, 碼順序 = 作用次序, 這才叫做簡單.
+01:03:02 <CindyLinz> Haskell 不是甚至連 g 或 h 會不會執行都不能從這行看出來了?
+01:04:09 <monochrom> 在 Haskell, 當你寫 f(g(x), h(x)), g(x) 和 h(x) 就沒有 effects
+01:04:25 <CindyLinz> 對
+01:04:37 <CindyLinz> 也不一定 @_@"
+01:06:00 <monochrom> 如果 g(x), h(x) 有 effects, 你會被逼寫成: do { gx <- g(x); hx <- h(x); f(gx,hx) }. 這就是我說的, 碼順序 = effect 次序
+01:06:06 <CindyLinz> :t mapMaybeT
+01:06:09 <lambdabot>     Not in scope: `mapMaybeT'
+01:06:09 <lambdabot>     Perhaps you meant one of these:
+01:06:09 <lambdabot>       `mapMaybe' (imported from Data.Maybe),
+01:06:11 <CindyLinz> orz
+01:07:30 <CindyLinz> 應該是控制 action 間結合的順序, 而 effect 產生的順序還是不一定啊 @@"
+01:07:38 <monochrom> 而 "g 或 f 會不會執行都不知", 就是我昨日說的操控狂了! 你知來作甚?
+01:08:06 <CindyLinz> 我沒有覺得不知道是壞事啦 ^^
+01:08:43 <CindyLinz> 只是覺得這個不知道, 和 C 的 g, h 的順序未定是很類似的, 只是這一部分 Haskell 做得更遠
+01:10:06 <CindyLinz> 所以覺得, 拿這一個特性把 Haskell 與比較順的函數語言放一邊, 然後把 C 和別的 imperitive 語言放一邊.. 有一點點怪, 覺得這邊 C 和 Haskell 反而是同一邊 @@"
+01:10:25 <CindyLinz> 比較純..不是比較順 orz
+01:10:33 <monochrom> 就咁, 如果 g(x) 有 effect, 你是應該問次序的, 但在 Haskell 反正是 do { gx <- g(x); hx <- h(x); f(gx,hx) }, 次序就這樣定了.
+01:11:11 <monochrom> 但如果 g(x) 沒有 effect, 那麼你應只問答案, 不問次序.
+01:17:04 <monochrom> 我選用 "操控狂" 這詞, 是因為英文 control freak, 而我選 control freak 是因為 control flow.
+01:17:33 <monochrom> 程式員太著眼 control flow 了, 於是我稱之為 control freak
+01:18:10 <CindyLinz> (思考中)
+01:18:46 <monochrom> 就咁, 在 C 是要問 control flow 的, 因為一點一劃都隠藏著 effect 殺機
+01:19:36 <monochrom> 但不能把同樣思維搬到 Haskell. 在 IO 以外是不用知 control flow 的.
+01:21:44 <CindyLinz> 不過, 就著推廣這種高限語言為目的來說, 可以不要太在意現在這一批程式員.. 現在已經有很多非程式員在寫程式......
+01:22:31 <CindyLinz> 先別管寫出來的程式品質如何 XD  但是是有可能有些語言適合這些非程式員的個性的 ^^
+01:23:21 <CindyLinz> 品質不好, 可能只是因為讓這些不愛控制, 不善控制的人去寫必須控制一切的程式.....
+01:24:31 <CindyLinz> 像是... 不知道什麼是 race condition 的人寫 share memory 的 multithread 程式... orz
+01:37:22 <monochrom> 我從來不推廣 :)
+01:40:12 <CindyLinz> 好 XD
+01:42:12 <monochrom> 已經很多非程式員使用 excel 非常成功, 而 excel, 正如 Simon Peyton Jones 說, 是一個純函式語言.
+01:43:07 <monochrom> (它就只是型態方面貧乏點, 及沒有高秩函數罷.)
+01:44:12 <monochrom> 我都要用 excel 幫我計稅! (其實是 libreoffice calc)
+01:46:00 <CindyLinz> 那是遮眼假裝 VBScript 不存在啊... @@"
+01:46:10 <monochrom> 哈哈
+01:46:56 <CindyLinz> 之前我們公司 PM 在考慮脅迫工程師寫 Excel script 去 fetch CGI, 還有 sync MySQL 裡面的資料.....
+01:47:04 <CindyLinz> 我覺得它一點都不 pure....ww
+01:48:03 <CindyLinz> Calc 的話應該可以配 python script 和 perl script.. (艸)
+01:48:21 <CindyLinz> 還好我們擋下來了... :p
+01:48:54 <monochrom> 讓我們暫時假設非程式員不敢碰 VBScript 那部份... 反正等如 unsafePerformIO 和 ghc-prim XD
+01:48:59 <CindyLinz> XDDD
+01:55:07 <CindyLinz> 我今天一直打錯字 :(
+01:56:47 <monochrom> 招聘一位打字員 :)
+01:56:54 <CindyLinz> 還有些專門管 DB 的 DBA, 會寫 store procedure.. 不過最常用的 SQL 指令蠻 pure 的...
+01:57:49 <CindyLinz> 雖然會去更動 DB 的內容, 不過他在組合 SQL 指令的部分通常是 pure 的.... 很偶爾才會用一些寫變數的怪招..
+03:39:52 <letoh> f(g(x), h(x)) 在某個語言會寫成 x g x h f   這樣寫碼順序好像就符合計算順序了? XD
+04:12:41 <CindyLinz> forth!
+04:14:02 <CindyLinz> monochrom: 就咁 是舉例的意思嗎?
+04:16:55 <letoh> 準備要睡了... 不過那只是單純就「順序」而言，要講到 effect 的話又是另一回事了，要做不少努力才能像 haskell 那樣
+04:18:57 <letoh> 不過一般那個語言的使用很少有變數就是，大部份都在拼湊 stack effect
+10:05:44 <monochrom> "就咁" 可寫成 "事情是這樣的". 兩個的意思都是: 請容我細說.
+11:33:49 <CindyLinz> monochrom: 嗯嗯 ^^
+14:08:45 <CindyLinz> godfat: yinwang 有做 ruby 的靜態分析器 RubySonar 耶~ 不知道好不好用.. http://www.yinwang.org/blog-cn/2014/01/28/rubysonar/
+14:09:04 <CindyLinz> 他可能不會去做 PerlSonar... (淚)
+14:09:55 <CindyLinz> 唔, 是用 Java 寫的
+16:48:27 <godfat> CindyLinz, 喔喔， ruby 靜態分析我是用過幾個，效果其實滿差的
+16:48:27 <godfat> 來看看王垠功力如何？ XD 不過基本上我想 ruby 的靜態分析大多要用猜的...
+16:48:27 <godfat> 不然其實就要實際跑一次了（這樣也算嗎？）
+16:49:24 <godfat> maven... 上次聽說有替代品了
+16:49:53 <godfat> 用 irb 的 interpreter... doh, 應該不太準
+16:54:01 <CindyLinz> 王垠應該不會想用實際跑的作法吧? @@"
+16:54:32 <godfat> 所以我很好奇他能做到哪？ XD
+16:54:34 <CindyLinz> 用激烈點的辭: 王垠應該不屑用實際跑的作法吧....
+16:54:38 <godfat> XDDD
+16:54:48 <godfat> 他想做就讓我很意外了 (?)
+16:55:02 <CindyLinz> XD
+16:58:49 <godfat> 為啥他能接受這麼囉唆的 java...
+16:59:15 <CindyLinz> 他有講理由.. 還為此發了一篇文 XD
+16:59:27 <CindyLinz> http://www.yinwang.org/blog-cn/2014/02/04/pl-tool/
+16:59:36 <CindyLinz> 程序语言与它们的工具
+17:06:08 <godfat> 原來不是用 irb 的 parser... 實際上他是用 ripper (內建的 ruby parser) 轉成 sexp 再轉成 json, 而且這部份是他用 ruby 自己寫的。irb 只負責跟 ruby 溝通而已
+17:09:56 <godfat> XDDD > 雖然那看起來是 Java，但是其實 Scheme 的靈魂已經融入到其中了
+17:25:57 <godfat> 也許我該試著不要用 each, 剛剛看半天一直搞不懂為什麼，才注意到我不是用 map 是用 each...
+17:28:15 <godfat> 所以 Yin 用 java bootstrap 起來後，也要用 Yin 改寫？
+17:28:15 <godfat> > 而且由於以上的經歷，Yin 語言從一開頭就為方便工具的設計做出了努力。
+17:28:16 <lambdabot>  <hint>:1:36:
+17:28:17 <lambdabot>      parse error (possibly incorrect indentation or mismatched brackets)
+17:28:29 <godfat> oops, sorry lambdabot
+17:29:19 <CindyLinz> XD
+17:32:14 <CindyLinz> godfat: ruby 的底層實作透明度高不高啊?
+17:32:45 <godfat> 怎麼樣算透明度高啊？ XD
+17:33:25 <CindyLinz> 有文件跟你解說其資料結構是怎樣, 要用哪些 api 來操作, 哪些 api 是 stable 安全的, 哪些是 experimental
+17:33:54 <CindyLinz> stable 指的不是 bug free.. 而是未來版本仍然可用
+17:34:03 <godfat> 算有一部分吧，不過大抵上還是看 source 為主 XD
+17:34:03 <CindyLinz> bug free 是另一回事... ^^|
+17:34:10 <hashcat> prolog可以當透明度高的標準~
+17:34:20 <b4284> CindyLinz: guile 這塊作得很好
+17:34:24 <CindyLinz> 看 source 的話只有現在這一版會動, 未來都沒有人承諾啊 QQ
+17:34:29 <hashcat> 核心小, 擴展大
+17:35:08 <CindyLinz> 其實只是在試著推坑 godfat... ._.
+17:35:52 <hashcat> http://www.swi-prolog.org/FAQ/PrologLAMP.html
+17:35:53 <b4284> 結果被推坑了
+17:36:19 <hashcat> 有人入prolog坑了嘛
+17:36:31 <CindyLinz> 沒有啊我還沒亮坑怎麼推.... QQ
+17:36:57 <cataska> 我還在 prolog 坑旁張望
+17:37:09 <b4284> https://www.gnu.org/software/guile/manual/html_node/Web.html
+17:38:00 <hashcat> 複雜建模沒有能比Prolog短的!!
+17:39:41 <hashcat> cataska:要入的話先以swi-prolog為主吧
+17:40:56 <cataska> hashcat: 收到
+17:41:31 <hashcat> gprolog跟logtalk, 如果是其他prolog都是應用在跟這裡比較沾不上邊的
+17:42:57 <cataska> 比如說哪方面？
+17:45:00 <hashcat> yap就一票詭異的擴展, 但完全沒有網站框架
+17:45:03 <hashcat> http://eclipseclp.org/
+17:46:07 <hashcat> 這個實現上面就寫得很清楚了, 各種條件限制建模
+17:46:18 <hashcat> 這個貌似也不錯用
+17:47:54 <hashcat> logtalk是建立在其他prolog上的類smalltalkOO
+17:51:47 <godfat> CindyLinz, 主要是看這個，算是 extension 用的 API 文件
+17:51:47 <godfat> https://github.com/ruby/ruby/blob/trunk/README.EXT
+17:53:33 <CindyLinz> 可以把 ruby interpreter 嵌在 C 程式裡面嗎?
+17:54:31 <CindyLinz> 雖然總是可以用的方法就是 fork 一隻 ruby process, 然後再把之間要傳的所有資料都 serialize pipe...
+17:54:51 <CindyLinz> 那融合的感覺會受限一點就是
+17:57:55 <godfat> 可以啊，因為 ruby 完全是 c 寫的，這樣做是標準作法 XD
+17:58:32 <hashcat> cataska: eclipseclp is released by cisco
+18:04:08 <CindyLinz> godfat: 發現坑已經填好了... XD http://hackage.haskell.org/package/hruby
+18:04:21 <CindyLinz> 好不好用就不知道了 ^^|
+18:06:07 <godfat> 我是玩過這個 XD
+18:06:07 <godfat> https://github.com/godfat/sandbox/blob/master/haskell/ffi-ruby/ffi-ruby.hs
+18:06:52 <godfat> 說來好像差不多就是這樣了，剩下的就是對照的苦功夫... O_o
+18:06:52 <godfat> https://github.com/bartavelle/hruby/blob/master/Foreign/Ruby.hs
+18:11:59 <godfat> wow, 所以王垠在做 sourcegraph.com ?
+18:11:59 <godfat> 看起來滿好用的
+18:17:23 <godfat> 哇靠，簡直就是把 github 抓來整個做分析
+18:17:24 <godfat> 他抓到我在其他 repository 的 commit
+18:17:46 <godfat> 應該不只四個才對，可能他還沒分析完
+18:18:33 <godfat> 為啥 gugod 用了我的程式 8 次啊？看不出來...
+18:18:34 <godfat> https://sourcegraph.com/gugod
+18:19:52 <b4284> godfat: 你的頭像是 18 級的神奇寶貝嗎？XD
+18:20:16 <godfat> XD 是 HP 18 的水靈兔 (from 精靈幻境 (Spiritual Soul))
+18:20:19 <godfat> Lv1
+18:21:42 <godfat> 雖然資料看起來不完整，但 sourcegraph 的速度好快啊，明明 server 在美國，反應時間超快的
+20:23:16 <letoh> http://www.plurk.com/m/p/jpc623  看到有人討論 subtyping 跟 inheritance
+20:30:12 <hashcat> http://www.lauradhamilton.com/random-lessons-online-poker-exploit
+20:35:10 <hashcat> CindyLinz:讓你公司輸到脫褲子
+22:01:02 <suhorng> 是說, 有人知道 OCaml 的 let (top level)、let in、雙分號到底怎麼用嗎…？
+22:01:21 <suhorng> 而且寫在檔案裡面不用雙分號……？
+22:03:56 <suhorng> ML類無法簡單的寫 type signature 有點不習慣 (除了另外寫在一個 SIGNATURE)
+22:09:02 <letoh> 在檔案裡有換行的話就不用雙分號吧?
+22:14:22 <suhorng> 嗯...原來他會用換行判斷嗎@_@"
+22:15:24 <letoh> 沒有深入研究  如果寫在同一行好像就要.. shell 裡也要
+22:16:58 <suhorng> 好奇怪唷, 本來以為他是判縮排, 可是也不是 (難道說他的語法沒有歧異嗎0.0)
+22:17:15 <letoh> ml 好像都不看縮排的?
+22:18:23 <suhorng> Standard ML 可以理解, OCaml 理解不能..
+22:24:06 <suhorng> 嗯..寫在檔案裡面好像連換行也不看
+22:24:27 <letoh> 你是說可以接在同一行嗎?
+22:24:40 <suhorng> > let a = 3 let b = 5
+22:24:41 <suhorng> 對
+22:24:42 <lambdabot>  <hint>:1:11: parse error on input `let'
+22:25:40 <letoh> 我把 let 跟 match 全部接在一行  還真的可以
+22:26:37 <suhorng> 寫在 REPL 裡面也可以耶..XDD
+22:26:45 <suhorng> > let a = 3 let b = 5;;
+22:26:46 <lambdabot>  <hint>:1:11: parse error on input `let'
+22:26:51 <letoh> 可是最後還是要有一個 ;;
+22:27:11 <letoh> 所以 ;; 只是要告訴 shell 說這邊可以告一個段落這樣?
+22:27:38 <suhorng> 嗯, 可是感覺應該還有其他功能..
+23:15:39 <CindyLinz> hashcat: 我們公司不會輸啦, 我們又沒跟玩家對賭 XD

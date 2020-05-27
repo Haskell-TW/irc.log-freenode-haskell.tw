@@ -1,0 +1,319 @@
+00:29:50 <CindyLinz> 覺得 Data.ByteString 裡面一些像是 span :: (Word8 -> Bool) -> ByteString -> (ByteString -> ByteString) 這樣的函數
+00:29:56 <CindyLinz> 缺了 monadic 版本...
+00:30:38 <CindyLinz> 想要 spanM :: Monad m => (Word8 -> m Bool) -> ByteString -> m (ByteString, ByteString)
+00:30:52 <CindyLinz> (剛剛前面那個的 return type 寫錯了, 要寫成 pair 才對 :p)
+00:31:39 <CindyLinz> 沒有 monadic 版本, 也沒有可以額外 carry 自備 payload 的參數
+00:32:07 <CindyLinz> 不知道要怎麼寫一次拿兩個字來作判斷的作法
+00:32:20 <CindyLinz> 像是想要找 \r\n 來作為切斷點...
+00:32:45 <godfat> 我上次好像有在找類似的東西
+00:33:52 <CindyLinz> 現在看起來只能先用 foldl :: (a -> Char -> a) -> a -> ByteString -> a 爬一遍
+00:34:25 <CindyLinz> 算出位置, 然後再拿這個位置去 splitAt :: Int -> ByteString -> (ByteString, ByteString)
+00:34:45 <CindyLinz> 但這樣就不能 on-the-fly 做了
+00:35:26 <CindyLinz> godfat: 有找到嗎!
+00:35:26 <godfat> 覺得說來微妙，很多都做起來簡單，但 library 裡好像就沒有
+00:35:26 <godfat> 有時候會想乾脆把 ruby 裡的操作都實作一次算了..
+00:35:35 <CindyLinz> 聽起來沒有 QQ
+00:36:10 <CindyLinz> 可是這個用 foldl 爬一遍的作法, 如果 \r\n 之前的 ByteString 很長的話
+00:36:26 <CindyLinz> 這一段超長的 ByteString 就要整個都 keep 在記憶體裡面...
+00:36:27 <godfat> 我正在翻 source.. 印象中是沒有
+00:36:27 <godfat> String 跟 ByteString 又不一樣有時候也滿討厭的
+00:36:43 <CindyLinz> 因為拿 foldl 算位置的時候, 它是一口氣算完的 @@"
+00:37:33 <godfat> 用 foldr 呢？
+00:38:09 <CindyLinz> 我要它出來的結果是一個數字.... 它怎樣都會是一口氣出來吧?
+00:38:37 <CindyLinz> 因為我要嘛就是還用不到這個數字, 要嘛就是馬上要拿這數字做事了
+00:38:41 <godfat> 實際上要處理的問題是？
+00:39:07 <CindyLinz> 實際上我是要找 */ 來把 ByteString 切斷
+00:39:46 <godfat> 我可以想成把 comment 移除嗎？ XD
+00:39:49 <CindyLinz> 對
+00:40:20 <CindyLinz> 正在試圖 parse sass..
+00:41:00 <godfat> 話說如果用 parser 應該不用這樣處理？
+00:41:16 <CindyLinz> 在寫 lexer 的部分 XD
+00:41:28 <CindyLinz> 想用 lexer 就把註解吃掉
+00:41:39 <godfat> 找到了，我是用 split package...
+00:41:39 <godfat> http://hackage.haskell.org/package/split-0.2.1.1/docs/Data-List-Split.html
+00:42:50 <godfat> 用 parser combinator 的話不用特別做 lexer?
+00:42:51 <godfat> 或是說就是不想在語法裡處理 comment?
+00:43:31 <CindyLinz> 想說用 lexer 比較省啊 XD
+00:44:03 <CindyLinz> 直接用 parser (or parsec?) 的話, 就是用把 Char 當 token 用的 default lexer
+00:44:14 <godfat> 我想說搞不好 sass 有超肥的 XD
+00:46:11 <CindyLinz> 想.... :Q 如果把 [Char] 拿去給我們寫出來的 parser 吃, 應該每一個 Char 的 list node 都會依序被建出來, 不會被 fusion 吃掉..
+00:46:38 <godfat> 所以這樣反而超慢嗎？
+00:47:22 <CindyLinz> 一個 list node 有 1個ref到value, 1個ref到next, 1個constructor(:), 然後再這個 Char 本身, 共 5bytes
+00:48:06 <CindyLinz> 主要就慢在這 2.5 倍的記憶體, 還有 allocate 和 derefrence 的時間
+00:48:35 <CindyLinz> 應該不會同時都建出來吃光記憶體, 只是動作都會需要走過
+00:49:37 <CindyLinz> 那我想用 lexer 吃成比較大顆的 token, 內附一個 ByteString.UTF8
+00:50:10 <CindyLinz> 實用的時候常常會有像是 border-width 這樣子一整串的字
+00:50:24 <CindyLinz> 就省了 11 組 reference :p
+00:50:37 <godfat> cool~
+00:52:10 <CindyLinz> 然後.. 剛剛我前面說的如果 */ 之前的字太長.. 其實是我額外想的延伸問題, 我現在其實不打算把它丟掉 ^^|
+00:52:39 <godfat> 難怪要 span XD
+00:52:42 <CindyLinz> 我只是想說, 存在這樣的情境會是無法處理的....
+00:52:57 <CindyLinz> 嗯, 不然好像應該用 drop.. :p
+00:53:10 <CindyLinz> 但還是很想 on-the-fly 做呀 :|
+00:53:36 <godfat> 自己遞回？
+00:54:22 <CindyLinz> 不知道怎麼摸它的內部資料
+00:54:46 <godfat> ByteString?
+00:55:11 <CindyLinz> 我用 ByteString.UTF8...
+00:55:21 <CindyLinz> 欸... 突然覺得我應該直接回去用 ByteString 就好
+00:55:34 <CindyLinz> 因為所有有特別意義的字元都在 ascii 裡面..
+00:55:51 <godfat> 如果有人 variable 用 utf-8?
+00:56:07 <CindyLinz> sass 是說它支援任何 encoding.. 不過我想現在都 2013 了, 獨尊 UTF-8 就好了 XD
+00:56:37 <CindyLinz> 我想我可以只把我想認的那幾個符號字元列出來, 剩下就都當「字」
+00:56:49 <godfat> 除非他 variable 只准 ascii-7bit, 不然不能支援任何 encoding 吧？
+00:57:03 <CindyLinz> 然後 unicode 額外定的空白字元就給他 sorry 了 XD
+00:57:22 <CindyLinz> sass 規定可以在一開始寫 @charset XXXX 來指定
+00:57:41 <godfat> 可是我 @charset unknown 他要怎麼處理？
+00:57:55 <CindyLinz> 我打算 ignore 這一條, 直接當它 UTF-8, 想用別的 encoding 的人請自己先用 iconv 轉 ^^|
+00:58:27 <godfat> iconv 轉 big5 問題一堆 XD
+00:58:27 <godfat> 愛用 bsdconv @_@
+00:58:27 <godfat> https://github.com/buganini/bsdconv
+00:58:37 <CindyLinz> 沒試過, 應該就是丟 error, 或是出 warning 然後繼續當它 UTF-8
+00:58:43 <CindyLinz> 是喔 XD
+00:58:45 <godfat> XDDDDDD
+00:59:19 <godfat> 之前花過不少時間考證 iconv, 啊啊啊最後 blog post 沒寫出來 ><
+00:59:19 <godfat> 幾年前了 :o
+00:59:19 <godfat> 總之結論是不要用 iconv 轉 big5
+00:59:21 <CindyLinz> 那我翻一下 ByteString 的資料... 用 UTF-8 連要直接跳第 N 個字都沒法 constant time... orz
+00:59:30 <CindyLinz> 好! XD
+01:00:12 <godfat> utf8 好像本來就不能 constant time 抓第 n 個字？
+01:00:27 <CindyLinz> 對啊.. 所以你剛剛說 recursion 讓我也很苦惱 XD
+01:00:41 <CindyLinz> 起碼它得給我個什麼 iterator
+01:00:44 <godfat> 可能還是要照 char 去切..
+01:00:58 <CindyLinz> 而直接用它的 foldl 那些, 就還是不能自己遞迴了
+01:01:18 <godfat> 不然就要看 utf8 spec, 自己寫 parser 了 (?) XDDD
+01:01:55 <godfat> -- | Traverse a bytestring (left biased).
+01:01:55 <godfat> -- This fuction is strict in the acumulator.
+01:01:55 <godfat> foldl :: (a -> Char -> a) -> a -> B.ByteString -> a
+01:01:55 <godfat> foldl add acc cs  = case uncons cs of
+01:01:55 <godfat>                       Just (a,as) -> let v = add acc a
+01:01:55 <godfat>                                      in seq v (foldl add v as)
+01:01:55 <godfat>                       Nothing     -> acc
+01:01:59 <godfat> http://hackage.haskell.org/package/utf8-string-0.3/docs/src/Data-ByteString-UTF8.html#foldl
+01:02:17 <godfat> 用 uncons?
+01:04:19 <CindyLinz> 對喔 uncons..
+01:04:29 <CindyLinz> 就用它了!
+01:04:52 <CindyLinz> 不過還是換回沒有 UTF8 的 ByteString 好了
+01:06:10 <CindyLinz> 我有用到 uncons, 卻沒想到要拿來遞迴 ._.
+01:07:33 <godfat> XDD
+01:07:33 <godfat> 不過我覺得我沒很搞懂， foldl 應該也不會把整段 bytestring 抓住？
+01:08:44 <CindyLinz> 不會
+01:09:10 <CindyLinz> 但是我接下來會拿這個出來的位置再去 drop
+01:09:22 <CindyLinz> 為了讓 drop 能執行, 它就會把 bytestring keep 住
+01:13:39 <godfat> 直接把 drop/span 要做的事情放到 foldl 裡面？
+01:13:39 <godfat> 例如給他的 function 最後拿 (Int, (ByteString, ByteString))
+01:13:53 <godfat> 這樣兩件事一次做完？ @_@
+01:14:51 <CindyLinz> drop 的好像可以..
+01:15:08 <CindyLinz> 就把滿足條件那一次的 uncons 的結果輸出就好
+01:15:28 <CindyLinz> span 的話要把左邊接回來有點痛苦
+01:15:58 <CindyLinz> 所以說, 沒 monadic 版, 是因為真的用不到嗎 ._.
+01:16:38 <godfat> 唔唔，我猜 span 可能真的要自己寫 rec function 了
+01:16:39 <godfat> 用 foldl 看來真的會很痛苦 XD
+01:17:33 <CindyLinz> 可是把 ByteString 「接回來」這樣的動作, 會生出新的 ByteString, 不能直接把原始的那個 ByteString 「框出來」 @@"
+01:17:42 <godfat> monadic 版我不知道.. 感覺所有排列組合都做滿多的 :o
+01:17:42 <godfat> 有時候我覺得 haskell 裡可以很簡單自己寫的東西，
+01:17:42 <godfat> 都沒有提供 std function..
+01:17:59 <godfat> 自己遞迴應該就可以了？
+01:18:16 <CindyLinz> leave you as an exercise XD
+01:18:25 <godfat> XDDD....
+01:18:42 <godfat> Haskell the Tutor
+01:19:26 <CindyLinz> 好像要去摸 ByteString 的 internal 結構才行...?
+01:20:01 <CindyLinz> 我希望能夠不用 keep 住整個前段, 而又不用生出新的 ByteString 的話
+01:20:02 <godfat> 不知道能不能 chunk by chunk...?
+01:20:08 <CindyLinz> 我最好是能夠一次放一個 chunk
+01:20:15 <CindyLinz> 要跟原始的長得一樣
+01:20:43 <CindyLinz> 嗯嗯嗯
+01:21:25 <godfat> 乾脆試試 conduit (誤
+01:21:29 <CindyLinz> 不過... 把 UTF8 去掉以後, 我找到直接就是我要的函數了: breakSubstring :: ByteString -> ByteString -> (ByteString, ByteString)
+01:21:51 <godfat> ....=_=...
+01:22:29 <CindyLinz> 雖然我要找的只有兩個字, 包成 ByteString 稍嫌貴了點, 不過也就是 1 塊錢的影印費漲價成 4 塊錢這樣.. 漲幅大, 還是不太痛 :p
+01:22:49 <godfat> 看印多少.... XD
+01:23:17 <CindyLinz> 正常當然不會是一大堆空行吧 XD
+01:23:43 <godfat> 話說... 可以去神來也玩 haskell 嗎？ XDD
+01:23:45 <CindyLinz> 嗯, 我 //.....\n 要找的是一個字的 \n 不會有這問題; 而兩個字的 */ 應該正常不會一堆空的 XD
+01:24:09 <CindyLinz> 現在來還不會有能隨意寫 haskell 的地方 orz
+01:24:11 <godfat> 話說 nested comment 有處理嗎？
+01:24:25 <CindyLinz> sass 的說明沒看出來, 我也不打算處理
+01:24:29 <godfat> 有機會就不錯了 XD
+01:24:58 <CindyLinz> 如果需要處理 nested 的話.. 我這邊就白糾結了 XD
+01:25:09 <godfat> XDDDD
+01:25:22 <CindyLinz> 沒有講到, 那我猜應該是沒有..
+01:25:22 <godfat> 我想不起來 ruby 有沒有，不過印象中好像沒問題
+01:25:38 <CindyLinz> 有的話就不能用 lexer 找 comment 了呀
+01:26:01 <CindyLinz> 啊不對... 我這邊 lexer 根本有 turing complete 的 power.....||
+01:26:08 <godfat> 可以多 pass 到沒有 comment 為止？ XDD
+01:26:22 <CindyLinz> 真 lexer 沒辦法啦 XD
+01:26:29 <CindyLinz> 真．lexer XD
+01:27:27 <monochrom> 照計 sass 的作者不會自找麻煩, sass 的用者也不會那麼邪惡 :)
+01:27:58 <godfat> 用 comment 暫時拿掉程式時應該滿容易碰到的說
+01:28:00 <CindyLinz> sass 的用者應該主要是設計師..
+01:28:25 <CindyLinz> 嗯, 可是主流語言都會爆, 所以就養成習慣用整排 // 來拿掉 XD
+01:29:05 <godfat> editor 好像都是這樣做 :o
+01:29:43 <CindyLinz> 而且還可以作出巢狀的歷史效果 :D
+01:29:57 <CindyLinz> 最早被拿掉的部分, 前面積的 // 會比較厚 XD
+01:30:32 <godfat> 我沒記錯的話，textmate 用快鍵加 comment 會有 toggle 的效果
+01:30:32 <godfat> 所以已經被 comment 不是多一層，而是被 uncomment XD
+01:31:06 <CindyLinz> xor XD
+01:32:15 <monochrom> xor 會造成很趣怪的效果啊!
+01:32:50 <CindyLinz> 可聽起來的確是 xor 啊 XD
+01:33:38 <CindyLinz> 我是用 vim, 把想加 comment 的那幾行都 mark 起來, 然後 :s!^!//
+01:34:04 <monochrom> haha
+01:39:17 <CindyLinz> godfat: 公司現在主要還是在徵 php.. 然後徵進來再看志趣教 perl.. @@"
+01:40:19 <godfat> ...XD perl 我可以試，php 免了 -_-...
+01:40:48 <CindyLinz> 歐歐真的嗎!
+01:41:00 <CindyLinz> 主要沒徵 perl 是因為徵不到....
+01:41:11 <godfat> 是啊，我也一直很想知道 perl 好在哪裡 XD
+01:41:11 <godfat> 一直不知道從何下手
+01:41:39 <godfat> 老實講聽你講 perl 的事也讓我不懂 perl 好在哪... XD
+01:41:56 <monochrom> 我想, 你大可以加入, 反正加入後也派你用perl
+01:42:16 <CindyLinz> php 還是常常得碰啦 orz
+01:42:22 <godfat> 不過我沒有任何 perl 經驗說
+01:43:14 <CindyLinz> 這樣就不知道要怎麼講了 orz
+01:43:52 <godfat> XDDD
+01:43:52 <godfat> 我的 perl 經驗是 cpan ...
+01:43:52 <godfat> 然後用那個東西
+01:44:20 <hashcat> 看是誰設計的就知道是怎樣了
+01:44:21 <CindyLinz> 如果跟 ruby 對照.. 好處是可以不用想著物件?
+01:45:20 <CindyLinz> 不過如果硬是要想物件我也沒辦法...
+01:45:24 <hashcat> C是系統hacker, perl是語言學家, python是數學家
+01:45:27 <godfat> 不過我很習慣物件耶 XD
+01:45:29 <CindyLinz> 有好幾個同事就這樣..... QQ
+01:45:38 <monochrom> 我反轉來看. ruby 跟 perl 對照, ruby好處是不用想著 dictionary
+01:46:23 <godfat> perl 要大量處理 dictionary?
+01:46:45 <CindyLinz> dictionary?
+01:47:00 <CindyLinz> 我的話是大量的 callback, closure 什麼的 ._.
+01:47:13 <monochrom> 兩害取其輕, "萬物皆object" 還是好過 "萬物皆 hash table"
+01:47:21 <CindyLinz> 大量 dictionary 我猜是 python 或 lua 的特色?
+01:47:43 <CindyLinz> 嗯, 如果還想著物件的話會拿 hash 來模擬物件
+01:47:55 <godfat> callback... XD 做在 AnyEvent 上嗎？
+01:48:08 <hashcat> 看要做啥領域的東西, 在看那作者跟你領域有沒一樣就好了
+01:48:22 <CindyLinz> 摸到比較低階的話現在的確是 AnyEvent
+01:49:00 <godfat> 想想目前應該是比較怕符號，其他應該還好
+01:49:01 <godfat> 倒是符號也應該是熟悉問題
+01:49:18 <CindyLinz> 但是像遊戲裡, 某玩家向另一個玩家邀請入組之類的, 寫成抽象一點的函數, 還是有 callback, 但是就看不到 AnyEvent 了
+01:49:45 <monochrom> 不只物件哩! 其實我只想要record, 在perl也變成dictionary, 真覺得很低階.
+01:49:47 <godfat> 讓我想到前幾天在改遊戲的程式（作弊），
+01:49:47 <godfat> 裡面的 lua 有好多 callback
+01:51:13 <CindyLinz> XD
+01:51:36 <godfat> 不過老實講我真的覺得 lua 好難用...
+01:51:42 <CindyLinz> 我也不喜歡..
+01:51:47 <CindyLinz> monochrom: 看你要不要包..
+01:52:08 <godfat> 我目前大概是 lua > php > javascript
+01:52:14 <CindyLinz> monochrom: 如果整個 project 蠻複雜的, 那就會在底部舖一層讓自己看得舒服順眼一點
+01:52:45 <godfat> 主流是 perl 5.8 嗎？一般會用 perlbrew?
+01:53:12 <CindyLinz> 有時候偶爾會寫 { keepAlive(); sleep 1; redo } 這種程式.. 應該就不用再物件了吧.... /_\
+01:53:29 <CindyLinz> godfat: 我們公司現在主流是 5.14~5.16
+01:53:56 <godfat> 原來我電腦上也是 5.14, 我記憶停留在太久之前了 XD
+01:54:05 <CindyLinz> godfat: 我覺得一般應該是開發許多外包專案, 或是專門測試各種 perl 相容性的才會用 perlbrew
+01:55:01 <CindyLinz> 自己用的話, 當然是戳 MIS 要盡量讓環境一致啊... 搞多個版本都不一樣的作法, 這成本......wwww
+01:55:14 <godfat> 寫成一般 script 時自然不會包在物件裡，我 ruby 也是直白地寫
+01:55:14 <godfat> 不過要重用的就都會寫成物件了
+01:55:14 <godfat> 嗯嗯，同感，我也覺得 rvm 是沒必要的
+01:56:30 <CindyLinz> 唉, 只是覺得同事有時候為物件而物件, member method 不知道要往哪個 class 塞, 結果把一個動作拆成兩個 class 都放一點...
+01:57:03 <CindyLinz> 後來發現原來的作法太簡單不夠需求, 而加進來的 code 又是兩邊都要塞.. 而且變成 N pass 來來回回好幾次....
+01:57:38 <CindyLinz> 其中一個 class 是玩家, 一個 class 是一個遊戲場
+01:57:47 <godfat> XDDDDDD 原來是這樣
+01:57:47 <godfat> 那我倒也是很習慣只用一個 module 加上一堆 module_function 這樣
+01:57:47 <godfat> 有些工具真的不用多拆成好幾塊
+01:57:47 <godfat> 暫離 @@
+01:58:43 <CindyLinz> field 分類容易.. 反正可依個人積分和場地狀態來分開
+01:59:07 <CindyLinz> method 就很難搞了.... 幾乎每一個動作都是兩邊都要動到
+01:59:31 <CindyLinz> 寫著寫著, 玩家class對場地class全知, 場地class也對玩家class全知...
+01:59:46 <CindyLinz> 這 class 只剩下 namespace 的意義了....
+02:00:46 <CindyLinz> 然後又想要去守住: 由玩家method來改玩家field, 場地method改場地field..
+02:01:26 <CindyLinz> 又難以找出除了對單個 field 的 getter/setter 以外的獨立操作單位...
+02:01:53 <CindyLinz> 好像抱怨太多, 負面能量積了起來... 先休息好了 XD
+02:10:49 <godfat> XDD 聽起來情況滿複雜的..
+02:10:49 <godfat> 也先睡了
+02:39:12 <monochrom> https://twitter.com/fijall/status/389782873269497856
+10:28:26 <mno2> CindyLinz: 不是有 breakSubstring ?
+11:13:42 <hychen> CindyLinz: perl!
+11:14:00 <hychen> CindyLinz: 想當年我那個bless一直搞不懂那是啥
+13:22:02 <CindyLinz> mno2: 用啦 :p
+13:22:27 <CindyLinz> mno2: 只是起先用 .UTF8 的沒有這功能
+13:24:46 <mno2> CindyLinz: I see
+13:56:06 <CindyLinz> hychen: 可能是你把它這個隨便的東西看得太認真了 ^^|
+17:14:57 <godfat> 看起來 php 還是應該不列入考量..... -_-
+17:15:57 <CindyLinz> 考量...公司?
+17:16:22 <godfat> 不知道公司或是工作哪個比較貼切 XD
+17:16:47 <CindyLinz> 差不多啦, 你這樣回答就差不多聽懂了 XD
+17:17:10 <godfat> XDDDD 剛剛聽到 php composer, 正在看做得如何
+17:20:31 <godfat> 總覺得好像看到簡化的 maven....
+17:31:42 <CindyLinz> php 的 package store 有好幾個 orz
+17:36:28 <godfat> composer 這個看起來以 git 為主
+17:38:04 <godfat> 嗯，看起來還是有個地方蒐集清單
+17:38:04 <godfat> https://packagist.org/
+17:38:04 <godfat> 然後裡面再指向別的地方
+17:41:23 <godfat> 算了，我看 php 還是跳過好了 orz...
+17:41:24 <godfat> 反正其他地方也沒那麼吸引人 ~.~
+23:03:18 <suhorng> @hoogle a -> Maybe b -> Either a b
+23:03:19 <lambdabot> Text.Parsec.Prim runP :: Stream s Identity t => Parsec s u a -> u -> SourceName -> s -> Either ParseError a
+23:03:19 <lambdabot> Text.Parsec.Prim runParser :: Stream s Identity t => Parsec s u a -> u -> SourceName -> s -> Either ParseError a
+23:03:19 <lambdabot> Text.ParserCombinators.Parsec.Prim runParser :: GenParser tok st a -> st -> SourceName -> [tok] -> Either ParseError a
+23:03:23 <suhorng> QQ
+23:09:01 <CindyLinz> :t \a b -> maybe (Left a) Right b
+23:09:03 <lambdabot> a -> Maybe b -> Either a b
+23:11:39 <suhorng> 嗯...!
+23:11:53 <suhorng> @pl (\a b -> maybe (Left a) Right b)
+23:11:56 <lambdabot> flip (maybe . Left) Right
+23:11:56 <lambdabot> optimization suspended, use @pl-resume to continue.
+23:12:54 <suhorng> 是說看到同學用singleton = (:[]) 覺得超有道理 xDDDD
+23:13:38 <CindyLinz> 不好體會 orz
+23:13:56 <CindyLinz> 只覺得是個橫躺的機器人臉... :Q
+23:14:43 <CindyLinz> 如果遇到.. flip (maybe . Left) Right 還真要想一陣子 orz
+23:14:52 <suhorng> XDD
+23:14:58 <suhorng> :-&
+23:15:27 <CindyLinz> 不過 (:[]) 可以比較快看懂.. 因為跟 List 的原型很像..
+23:15:39 <CindyLinz> 根本就是 List 的原型 XD
+23:15:41 <suhorng> 也是
+23:15:44 <suhorng> 啊哈哈XD
+23:34:17 <CindyLinz> 每次要生一組 monad trans former 就要用小腦寫一堆 code... @@"
+23:34:39 <CindyLinz> 而且還不完整.....
+23:34:53 <CindyLinz> 以後都直接套 StateT 好了.... ~_~
+23:36:41 <CindyLinz> 不完整是說, 可能我就沒去定義 MonadIO, MonadFix, 之類自己用不到, 但不知道別人會不會想用的東西 :Q
+23:43:47 <Yu_lin> Perl 是我開始搞懂什麼叫寫程式的第一個語言XD
+23:44:10 <letoh> 為什麼這話聽起來蠻可怕的XD
+23:44:47 <CindyLinz> Yu_lin ← Perl native speaker
+23:45:53 <Yu_lin> 不過我的第一個語言應該是 java，第二個語言是 perl，當年學 java 後讓我覺得寫程式好難懂好困難，就放棄了，直到跑去玩 perl
+23:47:21 <letoh> 說到這個  我那時候寫 c++ 寫到很煩  怒學 java 後發現世界真是美好.... 誰知道原來也是個可怕的東西XD
+23:47:29 <Yu_lin> XD
+23:48:10 <Yu_lin> 不過從我開始接觸 haskell 之後，就沒寫過 Perl 了，不知道改變多大
+23:48:39 <CindyLinz> Perl 沒什麼變化, 骨幹還是一樣, 只有加點新東西...
+23:50:03 <Yu_lin> Perl6 的東西跟新 oo 工具嗎?
+23:51:03 <CindyLinz> Perl6 不是 Perl 啦 XD
+23:51:26 <letoh> 1s變黑歷史?
+23:51:28 <CindyLinz> > "Perl6" == "Perl"
+23:51:29 <Yu_lin> 我想說是不是加了 Perl6 的部分語法進去XD
+23:51:30 <lambdabot>   False
+23:51:36 <Yu_lin> XDDD
+23:51:39 <CindyLinz> 你看 lambdabot 也這樣說.. (逃)
+23:51:41 <letoh> XDXD
+23:51:44 <godfat> XDDDDD
+23:52:32 <CindyLinz> Yu_lin: regex 變成 push down automata 應該是從 perl6 拿的
+23:53:20 <CindyLinz> 然後有一個設計壞掉的, 一點都不 smart 的 smart matching 應該也是從 perl6 拿的
+23:53:35 <suhorng> Perl8呢..xDDD
+23:54:59 <suhorng> http://perl8.com/
+23:55:00 <Yu_lin> 用過 python 後，我深深體會到 perl 的 regex 是多麼巧妙又好用的東西Orz|||
+23:55:07 <suhorng> 上次喔哩貼過的XD
+23:55:31 <letoh> Yu_lin: 沒幾個語言的 regex 可以比 perl 好用吧
+23:55:37 <CindyLinz> 這到底是什麼東西呢... (思)  http://www.soimort.org/posts/152/
+23:55:59 <CindyLinz> Haskell 有人整理 regex lib 說: 全世界只有兩種 regex
+23:56:04 <CindyLinz> Posix 和 Perl
+23:56:15 <godfat> perl8 是怎麼回事...
+23:56:15 <godfat> 不過 perl 有什麼 regexp 怪招？ruby 能用的也滿誇張的
+23:56:25 <CindyLinz> 不過我不知道 vim 是哪一種....||
+23:57:00 <CindyLinz> perl 的 regex 有 C lib 呀, 應該大家就拿去用了?
+23:57:10 <CindyLinz> godfat: 這個... (?數字)
+23:57:22 <CindyLinz> (?數字) (?+數字) (?-數字)
+23:57:35 <CindyLinz> 套用另一個 capture 的 regex
+23:58:22 <CindyLinz> 所以可以這樣寫: print <> =~ /^((\((?1)\))*)$/ ? "YES\n" : "NO\n"
+23:58:26 <godfat> 這是什麼意思？ XD
+23:58:27 <godfat> ruby 的 regex 也可以 capture
+23:58:27 <godfat> 啊有個我想要的老是沒看到的是，
+23:58:27 <godfat> 類似 invert match..?
+23:58:27 <godfat> 像是 [^abc] 是不含 a 或 b 或 c
+23:58:27 <godfat> 我想要就是不要包含有 abc 這種的
+23:58:41 <letoh> 可以 recursive
+23:58:57 <godfat> ruby 的也可以是 recursive
+23:58:57 <CindyLinz> 我寫的這一條可以看 input 的第一行, 是不是批配的小括號
+23:59:22 <godfat> 喔喔，這 ruby 應該也行，不過我要試試看 XD
+23:59:27 <letoh> 原來如此  我只用 ruby 寫過作業  不太熟XD

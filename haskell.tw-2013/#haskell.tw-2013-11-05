@@ -1,0 +1,118 @@
+21:33:26 <suhorng> Racket這麼厲害..? http://yinwang0.wordpress.com/2013/11/04/scheme-benchmarking/
+21:34:08 <suhorng> 不過他啟動速度好慢 好像也沒辦法直接編成exe @@
+21:34:37 <suhorng> s/exe/machine code/g
+21:35:39 <letoh> 唔  你是指 native compiler ?
+21:36:19 <letoh> 如果只要求 standalone 是可以.. native 的話要查一下
+21:37:25 <suhorng> letoh: native. standalone好像每次開都會jit一下XD
+21:37:35 <letoh> 對啊XD
+21:37:39 <suhorng> 檔案比ghc弄出來的還大lol
+21:38:19 <letoh> 只記得不小  但不曉得跟 ghc 比怎樣... 我只有 arm 版本的 ghc，編譯出來超大
+21:40:09 <suhorng> letoh: 對了, Racket會把每個算出來的算式都印出來, 有辦法避免這個嗎?
+21:40:44 <letoh> 沒有深入研究耶 你是希望不要 echo? 還是不要印出傳回值?
+21:42:37 <suhorng> 嗯..我不太知道這兩個差在哪XD
+21:43:12 <letoh> 你是指在 shell 裡輸入時會一直印出來? 還是直接執行時也會印?
+21:43:21 <suhorng> 執行時都一直印!
+21:43:28 <letoh> 印象中直接執行應該是不會.. shell 的話... 就 repl 嘛XD
+21:43:43 <suhorng> 噢,先假如我有個script,那執行時每個都會印出來
+21:43:48 <letoh> 有沒有測試檔? 我跑跑看?
+21:43:51 <suhorng> 弄成standalone executable也還會...
+21:44:01 <suhorng> okok
+21:47:38 <suhorng> letoh: http://ideone.com/Kljo49
+21:50:03 <letoh> 你這個... 會印出來好像蠻正常的XD
+21:50:25 <suhorng> 是這樣嗎QQ
+21:50:35 <letoh> 不過這個 script 有什麼作用?  只是測語法?
+21:50:47 <suhorng> 可是我也不是在REPL裡面跑呀, 弄成standalone也還是會印出來...
+21:51:04 <suhorng> 因為我不知道在Scheme這種語言裡面該怎麼寫 "main" 比較好 XD
+21:51:20 <letoh> 唔   (main)
+21:51:22 <suhorng> 所以就 (define main (lambda () ...)) 然後 (main)
+21:51:34 <suhorng> 於是(main)的值就被印出來了...
+21:52:12 <suhorng> 後來是用爛招啦, (define tt (main))
+21:52:53 <letoh> 你的好怪  我丟一個你跑跑看
+21:54:50 <letoh> suhorng: http://ideone.com/loSJoW   就這樣啊  這樣會跑出什麼?
+21:55:20 <letoh> suhorng: 阿我懂你的問題了
+21:55:26 <suhorng> 會很正常沒輸出, 但是我想那是因為 (newline) 最後是 (void)
+21:55:32 <letoh> 最後弄個 void 就好了XD
+21:55:38 <letoh> 嗯嗯
+21:55:50 <suhorng> XDD
+21:56:27 <letoh> 這倒沒想過  因為我之前拿來算 project euler，最後都是 display XD
+21:56:38 <letoh> 所以沒遇到你這問題XD
+21:56:56 <suhorng> 嗚嗚QQ
+21:57:11 <letoh> 來查一下文件
+22:04:41 <letoh> suhorng: -m, --main : Call `main' with command-line arguments, print results
+22:04:58 <letoh> racket 可以 (provide main) 後  透過 -m 直接呼叫 main
+22:05:17 <letoh> 不過好像還是會印出結果XD
+22:05:32 <letoh> 我試了其他的 scheme implementation 不會有這個行為XD
+22:06:27 <letoh> suhorng: http://docs.racket-lang.org/guide/scripts.html  你看這個.. helloworld 直接放個字串就好，所以應該算是 racket 的設計XD
+22:11:20 <letoh> suhorng: r6rs 可以接受嗎? XD
+22:13:38 <suhorng> 大驚...
+22:13:45 <suhorng> r6rs可阿XD
+22:14:13 <letoh> 跑 r6rs 模式好像就不會印出最後結果了.. 除非你需要 racket 特異功能@_@
+22:14:21 <suhorng> 喔喔~!XD
+22:14:44 <letoh> 最前面加兩行  #!r6rs\n(import (rnrs))\n
+22:14:52 <letoh> 拿掉 #lang 那一行
+22:16:26 <letoh> racket mode 我再研究一下XD
+22:17:22 <suhorng> 真神秘
+22:17:27 <suhorng> 來研究下 XDD
+22:17:54 <suhorng> 不知道r6rs mode下會不會有些模組不能用w
+22:18:07 <letoh> 應該會@_@
+22:18:54 <letoh> suhorng: http://docs.racket-lang.org/r6rs/Using_R6RS_with_DrRacket.html?q=r6rs
+22:18:58 <suhorng> 嗯..影響不大的話沒差
+22:19:27 <letoh> suhorng: 或是直接執行 plt-r6rs  但裡面好像就不能有 racket 語法了(?
+22:22:33 <letoh> suhorng: http://docs.racket-lang.org/guide/Module_Syntax.html?q=top-level&q=main%20function&q=r6rs#%28part._main-and-test%29
+22:22:51 <letoh> racket 的 main function 寫法...
+22:24:00 <suhorng> 喔喔 驚XD
+22:24:05 <suhorng> module* !
+22:24:18 <suhorng> 突然有種 module Main where main = .... 的感覺
+22:24:44 <suhorng> letoh: 太感謝啦XD!!!
+22:25:16 <letoh> racket 應該算是獨立的語言  很多怪東西XD
+22:25:37 <suhorng> 包了很多語言的大語言 XD?
+22:26:22 <letoh> 應該算是 language framework ?
+22:26:27 <suhorng> 嗯嗯
+22:27:34 <letoh> 但找不到阻止 top-level result 被印出來的方法XD
+22:29:02 <letoh> rackt 5.3.6 不曉得改了什麼
+22:29:06 <letoh> racket 5.3.6 不曉得改了什麼
+22:29:08 <suhorng> 唔 main那個也會
+22:29:27 <letoh> suhorng: 認命加個 (void) 吧XD
+22:30:07 <petercommand> suhorng: #lang racket/load
+22:30:09 <suhorng> QQ好像只有這樣做了
+22:30:52 <petercommand> 把那行lang改掉
+22:30:56 <suhorng> 驚
+22:31:17 <letoh> load 好像不行?
+22:31:37 <letoh> 用了 load 就不能用 module 語法了
+22:31:42 <suhorng> http://docs.racket-lang.org/guide/load.html cool
+22:31:45 <suhorng> 嗯 不能用module
+22:32:00 <petercommand> @@
+22:32:17 <letoh> 嗯  不過的確可以避免印出最後的計算結果
+22:32:21 <letoh> petercommand: 厲害!!
+22:32:50 <suhorng> "The load function runs a REPL script by reading S-expressions from a file, one by one, and passing them to eval." XDD
+22:33:14 <letoh> 文件說這個 load 也算是一個 language 耶
+22:34:35 <suhorng> 這...XD
+22:35:13 <letoh> http://docs.racket-lang.org/reference/load-lang.html
+22:35:40 <suhorng> 嗯, racket處理modlue/scoping比Scheme好多了...
+22:35:46 <suhorng> *module
+22:36:41 <letoh> racket 給我的感覺比較像是工業版 scheme
+22:37:55 <suhorng> 實用XD
+22:43:13 <petercommand> load也算language蠻奇特的XD
+22:44:00 <letoh> 應該是弄在 reader 那邊都算是 language
+23:26:14 <b4283> 王垠那個 benchmark 程式還真是天書，十幾層的 lambda ...
+23:29:40 <suhorng> b4283: 那是一個 curried 的 CPS-style interpreter
+23:30:42 <b4283> suhorng: 他有說明，可我連想看懂的欲望都沒有 :/
+23:34:08 <b4283> 喔喔... 因為是 curried 所以才那麼多層呀？
+23:34:28 <suhorng> 對
+23:34:39 <petercommand> 好吃的curry (大誤
+23:34:41 <suhorng> 外加 CPS- 再多一層
+23:34:43 <suhorng> XD
+23:35:09 <suhorng> 喔..還有他沒有primitive遞迴
+23:35:45 <suhorng> 用 Y, 所以寫遞迴code會再多個一層, 變成 ((Y (lambda (self) ...)) arg)
+23:43:24 <hashcat> 前陣子用了clojure結果龜縮回scala
+23:45:08 <suhorng> hashcat: 發生了什麼事?
+23:45:53 <hashcat> 消除不了的括號
+23:46:00 <suhorng> XDD
+23:46:06 <hashcat> 不算啥好理由
+23:46:14 <suhorng> (()(()((((())))()()))((())))()))))
+23:48:06 <hashcat> 大量括號應該可以算是冗餘
+23:49:47 <hashcat> 可能有某種規則, 可以識別其實有些括號不用出現這樣
+23:51:39 <hashcat> 用排縮取代括號?
+23:53:10 <suhorng> 不知道耶w
+23:53:16 <suhorng> 就另外定一套語法就好啦
+23:53:53 <hashcat> 感覺會變很好看, 我來提議一下

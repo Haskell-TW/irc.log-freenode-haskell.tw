@@ -1,0 +1,169 @@
+00:03:53 <CindyLinz> hmm
+00:04:11 <CindyLinz> favonia: type check 在 ghc 裡面佔的行數比較多嗎?
+00:05:31 <favonia> donno
+00:06:24 <CindyLinz> code gen 如果不去掉可能真的很麻煩.. 它在不同的平台要生不同的 code.. 這樣要嘛就是軟體的 binary 內要內建盡可能所有平台的 code gen 程式, 不然就是不同平台上的這個軟體的 binary 的 code gen 程式都會配放不同平台專用的..
+00:18:38 <mno2> CindyLinz: 預設 LLVM 當 backend ?
+00:33:36 <favonia> LLVM IR 據說不太跨平台
+00:36:02 <CindyLinz> 當 config 用的話, 為了好實作, 應該可以把 system call 都拔掉算了 :p
+10:12:59 <c9s> favonia: 咦 有嗎? 應該可以從 LLVM bitcode 轉
+10:14:10 <c9s> emscripten 用 llvm, 測試涵蓋 windows 8, ubuntu linux, mac os
+12:11:03 <favonia> c9s: 你確定嗎 :P http://lists.cs.uiuc.edu/pipermail/llvmdev/2011-October/043886.html
+12:11:27 <favonia> 看看 Emscripten 作者如何抱怨
+12:13:05 <favonia> c9s: 你看到的好結果... 我想是一堆 hack 堆出來的。
+12:16:35 <c9s> favonia: XDDD 前人已經鋪路了.. 可以踩著屍體過去了
+12:16:36 <c9s> XDDD
+12:16:54 <favonia> c9s: 不，還是不一樣
+12:17:22 <favonia> 因為如果要跟 native libc 連，跟 emscripten 不一樣
+12:18:29 <c9s> favonia: 喔喔抱歉我沒跟到，你現在正在做什麼東西呀? :)
+12:18:52 <favonia> ？？？只是 CindyLinz 隨口提的想法而已啊
+12:23:56 <favonia> c9s: http://mno2.csie.org:5000/channel/haskell.tw/today
+12:27:57 <c9s> favonia: 哦哦哦
+12:28:03 <c9s> CindyLinz: 話說 Marc Lehmann 真強 XD
+14:26:12 <mno2> (閒聊) 才嘗試用 puppet 來快速 restore 筆電就看到 github 放出 framework
+14:26:47 <mno2> 可惜看起來比較針對 Mac
+14:27:26 <letoh> framework?
+14:29:13 <mno2> 用 puppet 還是要針對自己需求寫不少 code 啊
+14:30:09 <mno2> 所以針對不同系統可能就有不同一套前人寫好的，需求可能跟你相近
+14:30:44 <letoh> 唔  其實我想問 puppet 是什麼XD
+14:31:25 <letoh> puppetlabs 那個嗎?
+14:31:29 <mno2> 對啊
+14:32:17 <letoh> 嗯嗯  感覺像 fabric 加強版
+14:32:50 <mno2> 還是不太一樣
+14:33:21 <letoh> 是喔  看起來像是自己定義一堆 task，方便執行的界面
+14:33:51 <mno2> puppet 比較像是用 image 裝好機器之後幫你將所有套件服務跑到某個狀態
+14:34:17 <mno2> fabric 還是比較像是 script
+14:35:02 <letoh> 唔  我還以為這界面已經無敵了，就算是 script 也可以做到 puppet 想做的事，只看 script 的內容怎麼填而已
+14:35:43 <mno2> 對啊，就是看你偷懶的程度
+14:36:33 <mno2> script 要自己檢查檔案存不存在， service 有沒有起來要寫比較多 code
+14:37:09 <mno2> puppet 就自己疊了一層，可以幫你檢查機器跟服務的狀態 (有針對不同平台)
+14:37:50 <mno2> 所以用他的 DSL 就可以少寫一些 code
+14:38:01 <letoh> 嗯  的確是有加強版的味道
+14:39:27 <letoh> ruby 建 dsl 真是方便，有點想投靠 ruby 了XD
+14:40:28 <mno2> Haskell 建 DSL 更方便啊，只是整體而言貢獻的人力太少 wwwww
+14:41:51 <letoh> haskell 是很方便沒錯  但對我來說還是很難快速應用  像各類函式庫  文件  最好有 snippet 可以簡單地剪貼修改XD
+14:42:38 <mno2> 對啊，就是基礎建設相對而言太少了
+14:42:46 <letoh> 需要 dsl 也只是想少寫一點程式而已 (懶上加懶)... 但其他東西不夠普及的話，有 dsl 也不夠啊XD
+14:43:49 <mno2> 要做雜事還是 ruby, perl, python 之類方便
+14:46:04 <CindyLinz> 做雜事還是花錢找工讀生方便.. (誤)
+14:46:19 <letoh> python 除了做 dsl 很麻煩外，暫時沒什麼怨言XD
+15:39:53 <letoh> coursera 的 pl 課第五週改用 racket (scheme) 了
+15:46:43 <letoh> 看到 ruby tut 裡在介紹物件導向，感覺很陌生XD
+15:54:54 <suhorng> Racket 是 Scheme 衍生的?
+15:55:20 <suhorng> 進度落後好多 不過ML終於要結束了嗎XD
+15:55:28 <suhorng> ^我
+15:57:27 <letoh> 最早是 scheme，改名成 racket 後多了很多怪東西...
+15:58:59 <letoh> 這幾天要完成期中考  我還在看 section 2 的影片XD  年假那麼多天根本都在外面跑來跑去XD
+16:05:07 <suhorng> 嗯 期中考快結束了
+16:05:29 <suhorng> 滿期待課程後面他要怎麼結合 functional paradigm 跟 object-oriented paradigm
+16:42:23 <suhorng> logbot怎麼了
+17:39:50 <mno2> 我覺得寫 Haskell 碰到 Varargs 的東西都會讓你抓狂，但這種東西還蠻常出現的
+17:39:55 <mno2> 1. Printf
+17:40:10 <mno2> 2. SQL bind
+17:41:09 <mno2> 3. AST 中的 function codegen
+17:50:21 <CindyLinz> mno2: 想到以前你貼過一個介紹 free monad 的 page
+18:00:15 <mno2> CindyLinz: 怎說？
+18:05:36 <CindyLinz> 要找找.. @@"   裡面就是拿 variable args 的 code gen 當例子
+18:07:26 <CindyLinz> 這個 http://www.haskellforall.com/2012/06/you-could-have-invented-free-monads.html
+18:07:57 <CindyLinz> 咦.. 好像不是你貼的
+18:08:06 <CindyLinz> 不對, 沒有人貼過... 噗
+18:12:24 <mno2> 沒看到有 varargs 啊？
+18:14:14 <CindyLinz> 這個不算嗎? Fix (Bell (Fix (Output 'A' (Fix Done))))
+18:14:35 <CindyLinz> 如果不要那麼早放 Done 的話, 可以一直串下去
+18:20:49 <mno2> 喔喔，這樣說也是啦，只是剛剛想到的不是這樣
+18:21:24 <mno2> 反正解法都是用遞迴去解，犧牲掉一點 type safe 讓他 pass
+18:27:41 <mno2> 每次看 augustss 或 edwardk 的文章都要想好久好久 ..    http://augustss.blogspot.tw/2009/06/more-llvm-recently-someone-asked-me-on.html
+18:28:40 <suhorng> 犧牲掉 type safe 的話, 不能像 Haskell 的 Text.Printf 那樣嗎?
+18:28:57 <suhorng> 用 type class (+ ghc extension)
+18:33:09 <mno2> Text.Printf 的確是這樣做的啊
+18:33:11 <mno2> http://stackoverflow.com/questions/7828072/how-does-haskell-printf-work
+18:35:56 <suhorng> 對呀 我是說就那樣做
+18:39:38 <mno2> 就只是覺得想要的東西是以前慣用到現在，然後突然要寫很多東西覺得很討厭而已 xD
+18:39:54 <suhorng> 喔喔XD
+20:02:23 <letoh> haskell 也可以處理 varargs 啊?
+20:02:36 <letoh> 當作 list 處理?
+20:16:53 <CindyLinz> 不是.. list 的話裡面每一項都同一個 type
+22:27:23 <letoh> 問一個小問題... Maybe -> Bool 不存在是因為定義嗎? 還是什麼設計考量?
+22:27:48 <favonia> @type isJust
+22:27:49 <lambdabot> Maybe a -> Bool
+22:27:59 <letoh> 雖然說 Maybe 不是完整的型別
+22:28:25 <letoh> 但沒辦法弄出 Maybe -> Bool 嗎? (不過我不曉得要這樣的東西能做什麼@_@)
+22:31:01 <letoh> "a Maybe -> Bool function can't exist (because Maybe isn't a concrete type), whereas a Maybe a -> Bool is fine and dandy"
+22:31:46 <favonia> er 你想要 Maybe -> Bool 做什麼？
+22:32:06 <CindyLinz> 對啊, Maybe 是什麼?
+22:32:33 <letoh> 不曉得XD 　那如果說 -> 的兩邊都是 type constructor 呢?
+22:32:56 <favonia> letoh: Haskell 型態系統沒這東西，所以得要問你想要幹嘛
+22:33:48 <favonia> letoh: 任何 expression 一定要是 "完整" 的那種（er 是有術語啦不過不重要 xD）
+22:33:54 <favonia> 我的意思是說
+22:34:02 <favonia> 任何 expression 的型態
+22:34:09 <favonia> 一定是「完整」的那種
+22:35:01 <letoh> 我本來以為 -> 只是想描述某種對應關係，只要可以定義出 Maybe 到 Bool 要做什麼事，應該還是可以存在這樣的函式吧?
+22:35:19 <favonia> -> 是一個處理 expression 的函式的型態。如果你 input 是 expression, 那 expression 的型態一定是「完整」的
+22:36:19 <letoh> 嗯，所以單純是因為 Maybe 本身在 haskell 的定義裡就不完整，所以沒辦法做到?
+22:37:07 <suhorng> 因為 Maybe 不是一個 type?
+22:37:11 <favonia> 不是，而是沒有任何 expression 的型態是 Maybe
+22:37:53 <favonia> 在 Haskell 想要用的系統裡面這不是因為設計不好所以沒辦法做到，而是因為不合理不想做到，或是因為設計好所以做不到。
+22:38:22 <favonia> 主要是沒有任何 expression 的型態是 Maybe
+22:38:33 <letoh> 嗯  所以只允許操作完整的 type
+22:38:38 <suhorng> 這麼一講忽然想到, Haskell 的型別系統應該不只是  HM?
+22:38:48 <suhorng> 如果先不管typeclasses的話
+22:39:03 <letoh> 因為 Maybe 不是 type，所以無法讓任一個 exp 的型態是 Maybe ?
+22:39:18 <favonia> suhorng: 不是... 他就是... Haskell xDDD
+22:39:29 <favonia> letoh: 嗯
+22:39:40 <suhorng> Haskell型別系統/o/ 是沒錯
+22:40:21 <favonia> 術語是，他的 kind 不是 *. 如果說 type 是用來分類 expression 的，那 kind 是用來分類 type (constructor) 的
+22:40:34 <favonia> Maybe 是 * -> *
+22:40:40 <favonia> @kind Maybe
+22:40:41 <lambdabot> * -> *
+22:40:52 <favonia> @kind (Maybe a)
+22:40:53 <lambdabot> Not in scope: type variable `a'
+22:40:56 <favonia> @kind (Maybe Int)
+22:40:57 <lambdabot> *
+22:41:03 <favonia> @kind Maybe (Maybe Int)
+22:41:04 <lambdabot> *
+22:41:10 <favonia> @kind Int
+22:41:12 <lambdabot> *
+22:41:13 <favonia> @kind Int -> Int
+22:41:15 <lambdabot> *
+22:41:32 <letoh> 嗯.. lyah 有提到 kind
+22:41:33 <favonia> 那些 * 的都代表可能可以有 expression
+22:41:38 <suhorng> @kind (Maybe -> Bool)
+22:41:39 <lambdabot>     Expecting one more argument to `Maybe'
+22:41:40 <lambdabot>     In a type in a GHCi command: Maybe -> Bool
+22:41:53 <favonia> @kind (->)
+22:41:55 <lambdabot> * -> * -> *
+22:42:13 <favonia> -> 要兩個 kind 是 * 的 type (constructor)
+22:42:29 <favonia> 然後吐出一個 kind 是 * 的 type
+22:42:50 <favonia> 這跟一般的 lambda calculus 規則一樣啊
+22:43:06 <favonia> @kind (Maybe Int)
+22:43:07 <lambdabot> *
+22:43:13 <favonia> @kind (->) (Maybe Int)
+22:43:14 <lambdabot> * -> *
+22:43:19 <favonia> @kind (->) (Maybe Int) Int
+22:43:20 <lambdabot> *
+22:43:32 <letoh> 嗯  我想的可能比較像 kind 那個層級做的事，就是單純操作 type (或 type constructor)   不過我不知道這是什麼東西，說不出來@_@
+22:43:39 <favonia> 最後一個（至少在 GHC 中）意思就是 Maybe Int -> Int
+22:44:48 <favonia> （忘記標準有沒有允許 (->) 這樣亂搞...）
+22:45:15 <favonia> letoh: GHC 有一些奇怪的外掛可以在 type-level 算東西
+22:45:29 <favonia> 不過好像還是會爆炸，請小心 xD
+22:46:40 <favonia> @kind SimpleLens
+22:46:41 <lambdabot> Top level:
+22:46:41 <lambdabot>     Type synonym `SimpleLens' should have 2 arguments, but has been given none
+22:46:41 <lambdabot>     In a type in a GHCi command: SimpleLens
+22:46:42 <favonia> @kind SimpleLen
+22:46:44 <lambdabot>     Not in scope: type constructor or class `SimpleLen'
+22:46:44 <lambdabot>     Perhaps you meant `SimpleLens' (imported from Control.Lens)
+22:47:00 <favonia> @kind Lens
+22:47:02 <lambdabot> Top level:
+22:47:02 <lambdabot>     Type synonym `Lens' should have 4 arguments, but has been given none
+22:47:02 <lambdabot>     In a type in a GHCi command: Lens
+22:47:15 <favonia> @kind Lens Int Int Int Int
+22:47:16 <lambdabot> *
+22:47:19 <favonia> @kind Lens Int Int Int
+22:47:21 <lambdabot> Top level:
+22:47:21 <lambdabot>     Type synonym `Lens' should have 4 arguments, but has been given 3
+22:47:21 <lambdabot>     In a type in a GHCi command: Lens Int Int Int
+22:47:30 <favonia> synonym 真煩
+22:48:50 <favonia> @kind StateT
+22:48:51 <lambdabot> * -> (* -> *) -> * -> *
+22:48:57 <favonia> 耶找到了
+22:49:17 <favonia> 像第二個就是要塞一個 kind 是 * -> * 的東西

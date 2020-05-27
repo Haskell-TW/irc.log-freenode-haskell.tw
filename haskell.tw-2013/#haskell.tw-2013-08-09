@@ -1,0 +1,210 @@
+00:30:20 <godfat1> http://axisofeval.blogspot.co.uk/2011/01/why-lisp-is-big-hack-and-haskell-is.html
+03:23:00 <CindyLinz> 在找 embedded haskell 的時候找到這篇.. http://www.palgorithm.co.uk/2010/05/why-isnt-haskell-popular-in-industry/
+09:28:29 <Yu_lin> 2013 Update: I was young and stupid when I wrote this.
+09:28:30 <Yu_lin> XD
+16:26:15 <Yu-Lin> 有多少人參加今天的 ICFP contest？XD
+16:28:22 <CindyLinz> not me.. QQ
+16:30:13 <Yu-Lin> not me, too...Orz|||
+16:30:49 <godfat1> 明天或後天我會去 @_@
+16:53:10 <Yu-Lin> 等九月試用期到，我就要回高雄了
+16:53:31 <Yu-Lin> 高雄沒有 FP 聚會，哭哭
+16:55:46 <b4283> 台南好像有 :
+16:55:48 <b4283> :p
+16:56:59 <_13h> b4283: 你不也在高雄嗎?
+16:57:07 <_13h> 有去參加台南的?
+16:57:09 <CindyLinz> 台灣 FP 這麼小眾, 是不是該考慮線上 meetup 呢?
+16:57:27 <b4283> 可是這樣就沒有點心吃了....
+16:57:32 <CindyLinz> 自己買啊 XD
+16:57:37 <Yu-Lin> 台南哪邊有？XD
+16:57:54 <CindyLinz> 這樣就只剩時差能把我們分開了, 好浪漫啊~~ (心)
+16:57:58 <Yu-Lin> 點心是促進交流的好東西啊XD
+16:58:18 <_13h> 點心++
+16:58:23 <CindyLinz> 那只好虛擬化點心了: 某某某送你一顆心心~~ XD
+16:58:38 <_13h> XDXD
+16:58:40 <b4283> XD~
+16:58:52 <_13h> 有商城可以逛嗎? XD
+16:59:23 <cataska> Air 點心
+16:59:56 <godfat1> 浪漫++
+17:01:04 <cataska> 參考影片 http://youtu.be/OR-oM3ZWR2g
+17:01:34 <CindyLinz> 我半夜貼的那篇啊, 有引用另一篇在檢討為什麼 haskell 不 popular 的, 嗯, 它列的原因和上次在這邊看到的另一篇的不一樣..
+17:02:27 <CindyLinz> 也許如果有 embedded haskell, 能讓想嘗試的人, 不用一踏進來就必須下決心全身都進來的話, 也許門檻可以低一點..
+17:04:12 <Yu-Lin> Why Lisp is a Big Hack (And Haskell is Doomed to Succeed)
+17:04:15 <Yu-Lin> 這篇嗎？
+17:04:42 <CindyLinz> 我在想, 如果要能方便 porting 到不同 language 裡面, 應該需要一個簡化過的 intermediate code, 實作到各語言時只要從這個簡化版譯到各語言就好, 不用從完整的 Haskell 開始, 至少可以跳過 type check 或 class 分析之類的
+17:04:55 <CindyLinz> 欸, 這篇~ 03:23 < CindyLinz> 在找 embedded haskell 的時候找到這篇.. http://www.palgorithm.co.uk/2010/05/why-isnt-haskell-popular-in-industry/
+17:05:17 <CindyLinz> 然後, 就去翻一下 Lua 的資料.. 想說它特色就是 embed 到別的語言裡面
+17:05:26 <b4283> 3:23 太晚了吧 @@
+17:05:51 <CindyLinz> 結果 Lua 跟我想的不一樣, 它不是一組 intermediate code, 而是一組較小的 C api
+17:06:01 <CindyLinz> b4283: 就說.. 時差能把我們分開了嘛.... wwwwwww
+17:06:18 <b4283> soga
+17:06:41 <CindyLinz> 雖然上午就到公司上班了.. 不過大約一兩個小時前我才覺得我已經清醒了 orz
+17:07:20 <CindyLinz> 然後查了一下有 bytecode 的 Yhc (York Haskell Compiler)
+17:08:04 <CindyLinz> 不過 Yhc bytecode 是定義了一個 virtual machine 模型.. 覺得如果要翻譯成一個目標語言, 弄到這麼低階可能又太過頭了
+17:16:48 <MnO2> CindyLinz: 較小一組 C API 的意思是，要嵌在其他語言的話，是透過 FFI 去 evaluate ?
+17:18:32 <MnO2> 線上 meetup 可以開 hangout? 之前 favonia 有作過
+17:20:54 <CindyLinz> MnO2: 我覺得是這樣沒錯..
+17:21:21 <CindyLinz> 優勢應該是因為小, 所以比較容易 porting
+17:22:27 <MnO2_> CindyLinz: Lua 有 GC 嗎？
+17:22:42 <godfat1> 有
+17:23:03 <MnO2_> 那他怎麼做到自己的 GC 跟其他的不會干擾 @@?
+17:23:30 <godfat1> 跟其他的是指什麼？記得 lua object 可以夾帶 c data
+17:24:54 <MnO2_> 就是 python 自己環境有 GC，那如果嵌在 python 裡面，那 call lua C API 等於是 link lua 的 runtime 進來
+17:25:19 <MnO2_> 那 link 進來的 lua runtime 的 GC 怎麼知道哪些是自己的 mem space ？
+17:26:42 <MnO2_> 反過來說，python 的 GC 怎麼會知道不要去 GC link 進來的  lua 部分
+17:26:46 <godfat1> lua 的東西應該都記在 lua state 裡，開一個 lua state 就像開一個 lua vm
+17:27:17 <CindyLinz> MnO2_: 這麼深入的我就不知道了 @@"
+17:27:43 <godfat1> 什麼情況下兩者會混在一起啊？
+17:28:12 <godfat1> 用 python object 去包 lua object 或反過來？
+17:29:09 <MnO2_> godfat1: 你說應用場景嗎？我不知道，只是剛剛說可以嵌在其他語言內
+17:29:17 <CindyLinz> 我希望的情況是, 可以作出一排的 haskell2c, haskell2java, haskell2perl, haskell2python, ... 還有.. haskell2haskell XD
+17:30:28 <MnO2_> godfat1: 那這樣 python object 的生存期間要能精準控制？不然 lua 跑一半就被 GC 掉了。或是說其實是就一直維持在那邊不 GC .. xD
+17:30:46 <CindyLinz> 而這個 guest haskell 裡面能不能 IO, 能不能 ForkOS, 是依選項控制. 應該就不用是個完整的環境了
+17:31:01 <Yu-Lin> 如果是 forth 社群，可能會說用各語言實作 forth vm，直接 pass address 給其他語言操作XD
+17:31:14 <_13h> "Getting code right is of no interest; getting code fast is what counts."  這還蠻重要的
+17:32:07 <godfat1> 我的想像是不能兩邊都用 gc, 所以應該是說其中一邊要精準控制沒錯吧我猜
+17:32:07 <godfat1> 是說 lua 我好像也沒聽過用在 c/c++ 以外的地方 @_@..
+17:32:19 <_13h> CindyLinz: 上次在 reddit 看 ocaml 的討論就有看到類似的做法，弄了一個 ocaml2java，然後就可以解雇那些被雇來寫 java 的人XD
+17:32:46 <CindyLinz> 或是, 也可以只用 Haskell 來定義資料結構和少數 method, 就直接嵌在平常用的語言 (例如我就是用 perl) 裡面.
+17:32:48 <MnO2_> godfat1: 用 C/C++ 就合理了
+17:33:19 <_13h> Yu-Lin: 在 forth 社群不會這樣想耶... forther 想的是：為什麼需要其他語言?
+17:33:49 <_13h> Yu-Lin: 用各語言實作 forth vm 是邪道...
+17:33:54 <caasih> godfat1: 下午安
+17:34:05 <godfat1> 下午安 XDDD
+17:34:05 <MnO2_> cassih: 午安
+17:34:07 <CindyLinz> THOSE Haskell 社群大頭也是想說為什麼需要其他語言吧... 那不就搞成今天這樣... XD
+17:34:14 <caasih> MnO2_: 午安XD
+17:34:40 <CindyLinz> 讓我這偶爾想用一下 Haskell 就困難重重.. QQ
+17:34:53 <godfat1> CindyLinz++
+17:34:54 <godfat1> 所以是各語言裡能執行簡化的 haskell 嗎？
+17:35:22 <CindyLinz> godfat1: 我覺得不用簡化 Haskell, 簡化限縮的只有 runtime environment
+17:35:35 <Yu-Lin> 那做法的確是邪道wwwww
+17:35:41 <CindyLinz> _13h: 我沒想那麼壞.. XD # 17:32 < _13h> CindyLinz: 上次在 reddit 看 ocaml 的討論就有看到類似的做法，弄了一個 ocaml2java，然後就可以解雇那些被雇來寫 java 的人XD
+17:36:14 <godfat1> 不過 ocaml2java 聽起來是把 ocaml compile 成 java?
+17:36:52 <_13h> 對
+17:37:28 <godfat1> 之前看來看去，覺得比較簡單的方式是跑在 jvm 上..
+17:37:28 <godfat1> https://github.com/Frege/frege
+17:38:01 <MnO2_> 如果不管 compile 出來的效率的話，大概還算是個容易的任務吧。要不然我覺得超難的
+17:38:08 <CindyLinz> perl 這麼慢都能拿來作射擊遊戲的 server 了, 如果 Haskell 實作, 一層一層 thunk 慢慢拆解的慢速執行可能也是行得通的啊 :p
+17:38:44 <CindyLinz> Haskell 是可以拿來跟 perl / python 比短的語言, 為什麼速度一定要跟 C 比呢 :p
+17:39:09 <godfat1> 因為要打趴 perl/python 太簡單了？ XD
+17:39:33 <_13h> "Citrix sell 100,000s of lines of Java code that I "wrote" by generating it all from a compiler written in OCaml (including javadoc comments!)."
+17:39:38 <_13h> 原討論我找一下...
+17:40:04 <Yu-Lin> XD
+17:40:06 <godfat1> 不過我也一直想要 scripting haskell,
+17:40:06 <godfat1> 其實我覺得欠的只有一個更完整的 library 而已
+17:40:10 <CindyLinz> godfat1: 搞不好是這樣才讓大家在 GHC 以外不敢發展別的 compiler
+17:40:25 <CindyLinz> godfat1: M$ 最愛搞專賣了!
+17:41:03 <CindyLinz> GHC 生的 code 最快, 然後把 Haskell 社群搞得很怕慢, GHC 就獨大了....
+17:41:46 <CindyLinz> godfat1: scripting haskell :D
+17:41:58 <_13h> http://www.reddit.com/r/programming/comments/bbnao/falling_out_of_love_with_a_language/c0lzapn  # That OCaml code replaced 30 Java programmers and saves them millions of dollars a year.
+17:42:09 <godfat1> ~.~ 說真的，ghc 快是快，常常碰到 binary 問題真的好煩
+17:42:12 <MnO2_> CindyLinz: 我覺得主要是因為有一段時間，非泛FP 外的社群都會幹醮 FPL 很慢
+17:42:25 <CindyLinz> 那時候 OCaml 沒有出來擋一下? XD
+17:42:49 <MnO2_> 其實不只 GHC, 各個語言都會跳出來說啊
+17:42:57 <MnO2_> OCaml 印象中有吧
+17:43:00 <CindyLinz> mmm
+17:43:09 <_13h> 我用 racket 編譯出來的程式，startup 會花一點時間，但開始執行後還可以接受
+17:43:25 <CindyLinz> 想說 OCaml 應該是實用上最快的 FP 吧? :p  以後效能方面的攻擊就由她去擋就好了 XDDD
+17:43:42 <_13h> 不曉得是不是一開始要做的 init 太多了@_@
+17:44:27 <MnO2_> PL 的歷史是很有趣的，想當年也是有人幹醮 structure programming 的 function call 太慢了，還是喜歡用 goto
+17:44:30 <_13h> ocaml 編譯好慢... 不過編譯出來效果還不錯
+17:45:09 <_13h> ghc 在 arm 上面的編譯也很慢，而且還生出一個很巨大的 binary XD
+17:45:41 <godfat1> _13h, 那篇有種工業革命的感覺 XD
+17:46:39 <_13h> 感覺像把其他語言都當作 target platform，寫一堆 compiler 去產出 target code XD
+17:46:50 <CindyLinz> 對呀對呀
+17:47:00 <CindyLinz> 只是我原以為 Lua 就是這樣做 @@"
+17:47:07 <Yu-Lin> Chez Scheme 呢？
+17:47:35 <godfat1> 我後來其實還滿怕這種產生器的，產生出來的品質常常不太好
+17:47:49 <CindyLinz> 你指的品質不好是會當掉嗎?
+17:48:06 <godfat1> 不是，比方說比較慢，很難 debug 之類的
+17:48:15 <_13h> chez 沒裝耶... 其實我寫最多的 scheme 程式好像是在解 project euler XD  因為隨便寫都比 python 快很多XD
+17:48:24 <CindyLinz> 不該拿生出來的 code debug 吧.. ^^|
+17:48:55 <godfat1> 比方說看到 runtime exception, backtrace 是 target code 不是嗎？ XD
+17:49:01 <_13h> 所以 godfat1 其實是 machine code 派的? XD
+17:49:22 <b4283> asm 流
+17:49:51 <CindyLinz> godfat1: 如果在 guest code 執行的期間發生 host exception, 我想是歸類為這個 embedded runtime 的 bug
+17:49:58 <godfat1> 我不會 machine code 也不會 assembly XD 只要品質好就好了 XD
+17:50:08 <CindyLinz> 就像在 perl 執行期間出現 segmentation fault
+17:50:29 <CindyLinz> 這邊是假設沒有像是一條記憶體突然壞掉之類的天災
+17:50:54 <godfat1> 是啊，所以我是說平均起來，感覺滿多的沒做很好
+17:51:44 <godfat1> 另一個比方大概是 dart hello world XD
+17:52:46 <_13h> asm/machine code 其實也是產生出來的 target code，產出品質要好的話有賴 compiler 技術的提升吧...
+17:52:51 <godfat1> 重登一下，把 1 拿掉
+17:53:17 <_13h> 可以直接改 nick 啊
+17:53:29 <godfat> XD 喔喔
+17:53:46 <CindyLinz> 你不能直接 /nick 嗎? @@"
+17:53:46 <_13h> irssi 可以用 /nick，我不曉得你用哪一個 client
+17:54:07 <godfat> 看起來是可以 XD
+17:54:26 <_13h> 賀! 看來以後可以廢掉 logout 功能了 (誤
+17:54:52 <godfat> logout = disconnect? XD
+17:55:01 <CindyLinz> code -> code 品質差, 可能是寫這東西的人心理上比較隨便.. 因為底下的 target code 比組語強力很多, 以為隨便做做就會動了
+17:55:44 <godfat> 很多我想也是開發時間的問題
+17:56:08 <CindyLinz> 都是臨時被逼著寫出來的嗎? XD
+17:56:42 <_13h> 那 coffeescript -> javascript 呢? XD
+17:57:06 <CindyLinz> 這就不只是實作的部分有問題了.... wwww
+17:57:15 <_13h> www
+17:57:23 <CindyLinz> 啊我看成 livescript 了 XD
+17:57:34 <CindyLinz> coffee... 的確是實作得蠻隨便的....
+17:57:53 <godfat> 我覺得這些轉成 js 的其實都差不多只是語法轉換而已 @@"
+17:57:54 <godfat> 這樣要做爛可能就真的很爛了.. XD
+17:57:56 <CindyLinz> 定義也有點隨便.. 好吧, 對象換為 coffeescript 也是說得通 XD
+17:58:30 <yulin> * > javascript?
+18:00:16 <MnO2_> 先閃~
+18:01:05 <CindyLinz> 哎哎, 那我們就別那麼隨便嘛 XD
+18:02:23 <godfat> XDDDD
+18:02:54 <godfat> 有沒有可能做到 llvm 上啊？ XD
+18:13:31 <CindyLinz> 做到 llvm 上, 我還是不能用啊 @_@"
+18:13:49 <CindyLinz> 不過如果你是說其中一個是 haskell2llvm.. 那就不用拒絕了..
+18:13:58 <CindyLinz> 雖然 GHC 好像有做
+18:14:27 <CindyLinz> 不知道 GHC 的實作能不能是不完整的.. 把其中某些 environment 拔掉之類的
+18:14:56 <godfat> 讓 host lang 用 llvm binding 來呼叫？ XD
+18:15:28 <CindyLinz> godfat: 你是說所有的 haskell2xxx 都透過 llvm?
+18:15:48 <godfat> 我是這樣想的，讓 llvm 大一統 XDDD
+18:16:00 <CindyLinz> 我不知道要怎麼在 perl 和 php 裡面跑 llvm @@"
+18:16:18 <godfat> ruby 是有幾個 binding @@" 雖然好像都沒很成熟
+18:16:26 <CindyLinz> 能夠不作重新 compile perl / php 這種傷元氣的事嗎?
+18:17:24 <godfat> 那直接 ffi 叫 haskell 呢？ XD
+18:18:44 <CindyLinz> 所以我們環境裡還是需要一個 GHC 嗎? @@"
+18:19:14 <godfat> hugs 不知道如何？
+18:21:20 <godfat> 不過如果有個沒有 I/O 的 haskell subset, 說不定真的不難做？
+18:22:57 <CindyLinz> 一個還蠻漂亮的結果是可以在程式 (例如說 php) 裡面這樣寫 <? $a = 3; evalHaskell('let refA = extern("$a"); modifyExternRef refA (\x -> x + 1); '); echo $a ?> 得到 4
+18:23:28 <CindyLinz> 這裡的 extern 或 modifyExternRef 當然是只能 platform (language) dependent
+18:24:05 <CindyLinz> 或是 <? $a = 3; runHaskellFile("XX.hs"); echo $a ?>
+18:24:46 <godfat> 我的想像是只用 string 或 number 溝通耶，這樣會很難用嗎？
+18:25:17 <CindyLinz> 這看現實考量啊, 能做到哪裡就提供到哪裡了.. ^^|
+18:25:38 <CindyLinz> 這樣可能會用 JSON 之類的東西作溝通?
+18:26:05 <godfat> 好像不錯 XD
+18:26:34 <CindyLinz> 我是覺得還好.. 可能我天天 script 習慣了.. 包 container 希鬆平常
+18:27:10 <CindyLinz> 我常常 DB quote, urlencode, JSON, php serialize 包好幾層來來去去.. for lagacy code.. QQ
+18:27:21 <godfat> XD 我也常常 hash 來 hash 去的
+18:28:47 <CindyLinz> 想像... 如果哪天這個做好了. 在公司裡面如果遇到 php 和 perl 要共用的函數
+18:28:58 <CindyLinz> haskell 就有一個額外好處: 寫一次就好了兩邊都可以用, 嘿嘿
+18:30:00 <godfat> XDDD 核心程式就都是 haskell 了
+18:30:19 <godfat> 我目前幾乎是只在用 ruby, 滿少跨語言需求 @_@
+18:30:35 <CindyLinz> 不用跨一下 javascript 嗎 哼哼 XD
+18:31:10 <CindyLinz> 那你少這一個額外好處了 :p
+18:31:27 <godfat> 不用耶... XD...
+18:31:42 <godfat> 或是說不想........
+18:31:44 <CindyLinz> XD
+18:33:00 <godfat> 很想說臭不可當... XD
+18:33:00 <godfat> 準備回去了
+22:23:24 <suhorng> Chez的免費版不能產生執行檔呀, 頂多當interpreter用
+22:23:36 <suhorng> 不過他的REPL真的超級友善 沒用過這麼友善的XD
+22:33:16 <letoh> 比 ipython 或 utop 之類的還厲害?
+23:06:36 <suhorng> 應該不太可能吧 XDDD 這只是個內建 REPL
+23:07:21 <letoh> 之前裝了 utop 來用，竟然有類似 ido 的 completion 功能XD
+23:07:58 <letoh> 太可怕了只好先關掉XD
+23:08:21 <suhorng> lol
+23:09:24 <suhorng> petite(是terminal)目前用的感覺是有括號匹配, 內建函數自動完成(跟ghci一樣), 沒打完按enter換下一行的話也會自動排版, 一樣有debugger(可是我不會用XD)
+23:09:51 <suhorng> 喔 自動完成不只限於內建函數
+23:09:58 <letoh> 你是裝哪一版?
+23:10:02 <suhorng> 不過錯誤訊息很不友善
+23:10:06 <letoh> 7.4d ?
+23:11:30 <suhorng> 8.4
+23:11:47 <letoh> 喔  我以為 8.4 是付費版
+23:12:17 <letoh> 看了一下又不是  也有免費版
+23:12:19 <suhorng> 8.4一樣也有petite
+23:16:02 <letoh> 只給 binary XD
+23:17:47 <suhorng> 對...
+23:17:50 <suhorng> 也沒有compile功能
+23:23:48 <letoh> 好有趣

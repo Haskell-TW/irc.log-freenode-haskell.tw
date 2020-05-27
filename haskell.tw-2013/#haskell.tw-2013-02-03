@@ -1,0 +1,346 @@
+00:00:22 <CindyLinz> TPS 也比較不暈, 新手要上手也比較容易一點
+00:00:27 <MnO2> 看成 gnucash +1
+00:00:37 <letoh> 我玩 TPS 才會暈耶XD
+00:02:03 <CindyLinz> letoh: 你一定是看了不該看的地方了... (思)
+00:02:45 <CindyLinz> TPS 的角比 FPS 高.. 離地面比較遠, 快速轉來轉去的現象會比較好些的啊 XD
+00:02:47 <letoh> 唔，我之前玩 socom4 還玩到有點想吐，但玩 battlefield3 一整天都沒事XD
+00:03:43 <letoh> 不曉得，我連玩賽車也只能是第一人稱視點  從車子後面看玩不久就受不了了@_@
+00:04:04 <CindyLinz> 也許考慮是 TPS/FPS 之外的暈的影響因素?
+00:04:28 <letoh> 應該是吧... 剛看了一下，這個要用 unity player，可以在 linux 平台玩嗎?
+00:04:51 <letoh> 看了 forum 好像沒有支援 linux
+00:05:35 <CindyLinz> letoh: unity 還沒出 linux 的 web player.. 只有 Windows 和 MAC
+00:05:48 <letoh> 看起來只能靠 chrome 的 nacl 來跑
+00:05:49 <CindyLinz> letoh: 所以我們正在出執行檔版本
+00:06:00 <CindyLinz> 可能這是我第一次包 .deb 檔 XD
+00:06:08 <CindyLinz> 不用可能了.. 根本就是..... wwww
+00:06:25 <letoh> 賀!!  deb 的規矩好像很囉唆
+00:06:29 <CindyLinz> 是喔?
+00:06:58 <CindyLinz> 那可能我還是包成一個 .tgz , 然後再很有誠意地放一個 INSTALL 說明好了.. (逃)
+00:07:03 <letoh> 主要應該是 license 吧  不過你們應該只是提供 .deb，不進 debian 的話應該還好?
+00:07:27 <letoh> 這裡有幾位應該蠻熟的，我不要亂講好了XD
+00:07:39 <CindyLinz> license 就沒差了, 反正 ubuntu 也是 .deb, 沒那麼多要求呀
+00:08:02 <CindyLinz> 只是像這種的呀... open source 是讓外掛容易開發吧 @@"
+00:08:15 <letoh> 開放 sdk 之類的就好?
+00:08:42 <CindyLinz> 只有要放 client 的部分呀
+00:08:51 <CindyLinz> sdk 是怎樣... add-on welcome 嗎 XD
+00:09:39 <letoh> 這種遊戲比較有樂趣XD  例如上古少女之類的
+00:09:48 <CindyLinz> 覺得這種可能是 open 的壞處比好處多的情形 @@"
+00:10:15 <letoh> 不過線上版遊戲的考量可能又不太一樣
+00:10:16 <CindyLinz> 讀到 source 的人沒幾個是想改進的, 都是想幹壞事的... ^^|
+00:10:27 <letoh> 好像是XD
+00:10:36 <letoh> 那不是進步的原動力嗎? XD
+00:11:13 <CindyLinz> 會讓別的玩家覺得不好玩啊 orz
+00:11:51 <letoh> 會被拿來作弊之類的?
+00:11:57 <CindyLinz> 對啊
+00:12:03 <CindyLinz> 自動描準之類的
+00:12:28 <CindyLinz> 或是自動閃避火箭.. 自動避開地雷
+00:12:50 <letoh> 嗯.. 大概只能開放改外觀之類比較無害的功能?
+00:13:04 <favonia> letoh: 這有害吧
+00:13:12 <favonia> letoh: 故意把頭變成透明的
+00:13:16 <CindyLinz> 透明........ orz
+00:13:20 <favonia> 讓人誤判位置之類的
+00:13:22 <letoh> XDXD
+00:13:41 <letoh> favonia: 你看起來就很像那種會惡搞的玩家耶XD
+00:13:45 <favonia> 要瞄準身體旁邊 3 公分
+00:13:53 <favonia> 才是正體www
+00:14:10 <letoh> 這倒是蠻有趣的  只好都用散彈槍了XD
+00:14:27 <favonia> 那這更簡單
+00:14:46 <favonia> 可以改變外觀讓別人以為我一直有散彈槍
+00:15:15 <favonia> 不確定那邊是正面（四面佛？）
+00:15:34 <favonia> www感覺可以任意改外觀的話很多東西可以玩
+00:15:39 <letoh> 其實散彈槍很難用啊  因為距離太短  也打不準  只能衝到敵人附近亂打一通
+00:15:46 <favonia> 對啊
+00:15:49 <favonia> 所以就這樣搞
+00:15:55 <favonia> 別人不敢靠近
+00:16:15 <letoh> 改外觀的話  可以把自己改成一棵樹嗎? 擬態XD
+00:16:28 <favonia> 通常遊戲還是看得出來吧
+00:16:45 <favonia> 旁邊會有什麼訊息之類的
+00:16:56 <letoh> 不說話應該就不會了?
+00:17:09 <favonia> 喔喔我以為滑鼠移過去可以點
+00:17:13 <favonia> 那這樣透明就好啦
+00:17:17 <favonia> 以上優點都有
+00:17:18 <letoh> 不過那種東西就是躲在路邊偷襲用的
+00:17:37 <b4283> 好可怕，以後千萬別跟你們玩(抖)
+00:17:49 <letoh> 但是透明的話上不了 youtube XD  改成有趣的東西比較能賺到點擊數
+00:18:09 <favonia> 透明的話還是會上 youtube
+00:18:22 <letoh> 例如把自己改成一把槍 (又不是 megatron...
+00:18:34 <favonia> 就是滿滿 f**k 的被揍影片
+00:18:39 <letoh> XDXD
+00:18:58 <favonia> letoh: 把自己改成很像掉落在地上的彈藥不錯啊
+00:19:03 <favonia> 感覺就是會被騙
+00:19:14 <letoh> 把自己的頭改成盆栽  這樣躲在窗口不會被發現
+00:19:15 <favonia> 只要拿透明小刀就可以幹掉所有槍的
+00:19:21 <letoh> 探頭出來看也沒事
+00:19:27 <favonia> 還是輸給透明
+00:19:45 <letoh> 透明太犯規了XD
+00:20:01 <favonia> 唉
+00:20:04 <favonia> 不如這樣好了
+00:20:10 <favonia> 天空色啦
+00:20:14 <favonia> 然後站在屋頂上
+00:20:14 <letoh> XDXD
+00:20:21 <letoh> 這招不錯!!
+00:20:23 <favonia> 這樣沒有透明總可以了吧
+00:20:29 <favonia> 真麻煩～～
+00:20:59 <favonia> 還是不懂要怎麼變成樹
+00:21:04 <favonia> 連大小都可以變的話
+00:21:09 <letoh> 還是別開放好了，怎麼隨便講講就一堆人要惡搞XD
+00:21:25 <favonia> 那不是變超小（但是殺傷力一樣）就必勝了
+00:21:26 <letoh> 不用變成太高的樹呀  盆栽之類的就好XD
+00:22:00 <favonia> 如果螞蟻一擊就可以打昏人的話人類早就滅亡了
+00:22:05 <letoh> XD
+00:22:30 <letoh> b4283: 你在線上遇到盆栽的話請小心
+00:22:50 <letoh> b4283: 別跑到屋頂看得到的地方XD
+00:22:55 <b4283> 好像什麼 rpg 遊戲...
+00:23:33 <b4283> 靠近盆栽會被咬那種怪物
+00:23:40 <letoh> super mario ?
+00:23:58 <b4283> :)
+00:26:17 <letoh> 把 type checking 應用在程式中... Player type 的外觀要有些限制
+00:26:32 <letoh> 亂改的話一上線就會被踢掉
+00:39:48 <CindyLinz> 考慮將 favonia 列入不受歡迎玩家... (誤)
+00:40:07 <favonia> CindyLinz: 應該把我加到 QA
+00:40:51 <CindyLinz> favonia: 反正就不能當玩家! XD
+00:41:14 <CindyLinz> server 是蠻想用 haskell 寫的... :Q
+00:41:31 <CindyLinz> haskell 在 FreeBSD 上面表現得如何呀?
+00:48:38 <CindyLinz> 不過.. 我還不知道怎麼弄好顯示卡 driver, 所以就算出了 Linux 執行檔版本, 玩起來還是會超卡 QQ
+00:49:06 <CindyLinz> 用 Win7 開機的時候顯示卡加速才有用到..
+00:49:24 <CindyLinz> 這是用 Chrome 的 WebGL 試的心得...
+01:01:37 <letoh> 用 nvidia driver ?
+01:02:35 <CindyLinz> 是 intel 的, 也可以嗎?
+01:03:01 <letoh> 不行XD
+01:03:20 <CindyLinz> 好吧 ^^|
+01:06:19 <letoh> intel 有什麼加速技術嗎? va api ?
+01:08:38 <CindyLinz> 不熟 orz
+01:09:23 <letoh> http://en.wikipedia.org/wiki/Video_Acceleration_API
+01:14:22 <CindyLinz> Intel(R) Core(TM) i5-3320M CPU @ 2.60GHz
+01:16:29 <CindyLinz> 來找一下 package~
+01:16:33 <CindyLinz> letoh: 謝謝 ^^
+01:17:12 <letoh> 我沒有試過 vaapi 有沒有用，可能要研究一下
+01:17:36 <letoh> 找一下 libva 之類的
+01:17:38 <b4283> z
+01:19:47 <letoh> nvidia 的 vdpau 是真的有用，看影片很好用XD  希望 vaapi 早點跟 vdpau 接起來
+01:20:04 <CindyLinz> 不過 wikipedia 看起來 vaapi 是用作 video processing
+01:20:06 <CindyLinz> encode / decode 的
+01:20:48 <letoh> 對呀  可能封裝過了  主要給 video player 使用，如果要用其他硬體加速的功能可要再找找
+01:21:27 <letoh> 比較完整的可能像是 nvidia 的 libcg ?
+01:21:47 <letoh> 有一些程式走 libcg 來加速
+01:21:52 <CindyLinz> libcg.. hmm
+01:22:11 <letoh> 那是指 nvidia 的 Cg toolkit
+01:22:35 <CindyLinz> 嗯 看到了.. ^^|
+01:22:56 <letoh> 不過這只能對付特定的顯示卡就是
+01:25:06 <CindyLinz> 找到這個東西.. intel 的 Linux driver # https://01.org/linuxgraphics/
+01:25:18 <letoh> c/cpp 板怎麼那麼多人對 cppgm 有興趣啊  好想參加XD
+01:27:52 <letoh> 這東西之前在 phoronix 有看到過
+01:29:37 <letoh> "Intel Begins Making Graphics Changes For Linux 3.9"
+01:59:27 <favonia> CindyLinz: Haskell 為什麼會跟 FreeBSD 有關係？
+02:02:42 <CindyLinz> 我指的是 GHC.. 支援度不知道好不好..
+02:03:27 <CindyLinz> 我上次.. 應該是一兩年前.. 沒裝成功.. @@"
+02:03:36 <favonia> CindyLinz: @@
+02:06:14 <CindyLinz> 我們家的 server 都是跑 FreeBSD, 如果能在 FreeBSD 上跑 GHC, 比較方便偷渡.. :p
+02:17:16 <favonia> CindyLinz: https://wiki.freebsd.org/Haskell 我相信效能不會有什麼巨大的差異 xDDDD
+02:17:29 <favonia> CindyLinz: 再慢都比 Python 快十倍
+02:42:20 <CindyLinz> 效能應該是不太擔心沒錯.. :p
+02:42:33 <CindyLinz> 我會再找空檔裝裝看..
+02:42:47 <CindyLinz> 裝不起來才會比較無力 ^^|
+02:48:59 <letoh> py 哭哭
+02:49:24 <letoh> http://i.imgur.com/OwDXtSn.gif  睡不著看一下這個好像挺有用?
+03:02:34 <CindyLinz> 這個不錯 BH
+03:02:37 <CindyLinz> XD
+03:06:26 <letoh> 有點想睡了  不過想把 sml 看完XD
+07:59:37 <mgccl> 做了hacker cup round 1, 其中一个题目需要写个类似segment tree的东西.. 感觉需要找时间implement一些data structure...
+10:45:10 <MnO2> hackage 上有 Data.SegmentTree ，但沒有實際用過。
+10:45:39 <MnO2> 要換語言比競賽的話， coding book 要全部換掉吧
+12:41:58 <mgccl> lambdabot: pf (\l->show$sum$take l$zipWith(/)(cycle[1,-1])[1,3..]).read)
+12:42:58 <mgccl> lambdabot: pl (\x-> f x)
+12:43:18 <favonia> @pl (\x -> f x)
+12:43:18 <lambdabot> f
+12:43:28 <mgccl> ooo, thx
+12:43:31 <favonia> @pl pf (\l->show$sum$take l$zipWith(/)(cycle[1,-1])[1,3..]).read)
+12:43:32 <lambdabot> (line 1, column 44):
+12:43:32 <lambdabot> unexpected "-"
+12:43:32 <lambdabot> expecting variable
+12:43:51 <favonia> @pf (\l->show$sum$take l$zipWith(/)(cycle[1,-1])[1,3..]).read)
+12:43:51 <lambdabot> Maybe you meant: bf pl
+12:43:54 <favonia> @pl (\l->show$sum$take l$zipWith(/)(cycle[1,-1])[1,3..]).read)
+12:43:54 <lambdabot> (line 1, column 41):
+12:43:54 <lambdabot> unexpected "-"
+12:43:54 <lambdabot> expecting variable
+12:44:36 <favonia> @pl (\l->show$sum$take l$zipWith(/)(cycle[a,b])[1,3..]).read)
+12:44:37 <lambdabot> (line 1, column 57):
+12:44:37 <lambdabot> unexpected ')'
+12:44:37 <lambdabot> expecting letter or digit, variable, "(", ".", "`", "!!", operator or end of input
+12:44:51 <favonia> @pl (\l->show$sum$take l$zipWith(/)(cycle[a,b])l2).read)
+12:44:51 <lambdabot> (line 1, column 52):
+12:44:51 <lambdabot> unexpected ')'
+12:44:51 <lambdabot> expecting letter or digit, variable, "(", ".", "`", "!!", operator or end of input
+12:45:03 <mgccl> @pl (\l->show$sum$take l$g).read)
+12:45:03 <lambdabot> (line 1, column 29):
+12:45:04 <lambdabot> unexpected ')'
+12:45:04 <lambdabot> expecting letter or digit, variable, "(", ".", "`", "!!", operator or end of input
+12:45:18 <favonia> @pl (\l -> show $ sum$take l $ zipWith (/) (cycle [a,b]) l2) . read)
+12:45:18 <lambdabot> (line 1, column 64):
+12:45:18 <lambdabot> unexpected ')'
+12:45:18 <lambdabot> expecting letter or digit, variable, "(", ".", "`", "!!", operator or end of input
+12:45:31 <favonia> er 原來原本就是錯的啊
+12:45:34 <favonia> @pl \l -> show $ sum$take l $ zipWith (/) (cycle [a,b]) l2) . read)
+12:45:34 <lambdabot> (line 1, column 55):
+12:45:35 <lambdabot> unexpected ')'
+12:45:35 <lambdabot> expecting variable, "(", operator, "$", "$!", "`seq`" or end of input
+12:45:46 <mgccl> oh right
+12:45:57 <mgccl> @pl (\l->show$sum$take l$g)
+12:45:57 <lambdabot> show . sum . flip take g
+12:45:57 <favonia> @pl (\l -> show $ sum$take l $ zipWith (/) (cycle [a,b]) l2 . read)
+12:45:57 <lambdabot> show . sum . ($ zipWith (/) (cycle [a, b]) l2 . read) . take
+12:46:04 <favonia> @pl (\l -> show $ sum$take l $ zipWith (/) (cycle [1,-1]) l2 . read)
+12:46:05 <lambdabot> (line 1, column 50):
+12:46:05 <lambdabot> unexpected "-"
+12:46:05 <lambdabot> expecting variable
+12:46:09 <favonia> @pl (\l -> show $ sum$take l $ zipWith (/) (cycle [a,b]) l2 . read)
+12:46:09 <lambdabot> show . sum . ($ zipWith (/) (cycle [a, b]) l2 . read) . take
+12:46:18 <favonia> 這 parser 也太遜了...
+12:46:26 <favonia> @pl (\l -> show $ sum$take l $ zipWith (/) (cycle [a,b]) [1,3..] . read)
+12:46:26 <lambdabot> show . sum . ($ zipWith (/) (cycle [a, b]) [1,3..] . read) . take
+12:46:57 <favonia> 這樣感覺根本沒有比較好懂 xD
+12:47:53 <mgccl> 某个比赛在试图用最短的语句解决一个问题... 然后perl获胜了...
+12:51:40 <mgccl> @pl (\x->a$b$c x)
+12:51:41 <lambdabot> a . b . c
+12:51:49 <mgccl> -___-
+13:08:10 <CindyLinz> haskell 的簡短不是短在字元數上啊 ^^|
+13:23:22 <favonia> mgccl: 這個程式到底在幹嘛
+13:23:47 <mgccl> favonia: http://cl.ly/image/3L1Q1Z3C0k2r 这个
+13:24:17 <mgccl> CindyLinz: 是的... 我感觉Haskell有个问题就是不能用unicode symbol做function name...
+13:24:28 <mgccl> 做function name的开始...
+13:25:21 <mgccl> 当然啦... perl之所以能获胜是因为没有人写APL...
+13:25:43 <CindyLinz> mgccl: perl 還有內建一大堆 side-effect 環境變數
+13:26:14 <CindyLinz> mgccl: 正常寫程式的時候不該去濫用, 可是參加這種奇怪比賽的時候就很好用
+13:27:31 <CindyLinz> mgccl: haskell 不能用 unicode symbol 作 function name 開頭?
+13:27:44 <CindyLinz> 要變成 (symbol) 這樣?
+13:28:26 <mgccl> 喔? 那是好久以前我做的那个时候了解Haskell可能不多... 我现在再来...
+13:28:54 <CindyLinz> perl 要 use utf8; 以後才可以用 unicode 的字作 function name
+13:29:12 <CindyLinz> 嗯.. 所以要考慮加了 use utf8; 這幾個字會不會反而虧到 ^^|
+13:30:02 <favonia> mgccl: 話說現在 lambdabot 的 Unicode 支援怪怪的... 請在自己 ghci 上玩
+13:30:13 <mgccl> 是的...
+13:30:27 <mgccl> CindyLinz: 似乎Haskell没法弄出utf的unary operator呢...
+13:31:07 <mgccl> binary operator的确可以utf... 啊不错...
+13:32:46 <CindyLinz> hmm
+13:33:03 <favonia> mgccl: 你是要怎樣的符號？ let 同 = id in 同 3 之類的可以嗎 xD
+13:33:26 <CindyLinz> 這樣多一個空格會不開心? :p
+13:34:16 <mgccl> let (⍋) = sort
+13:35:11 <mgccl> (⍋) [1,2,3]
+13:35:18 <mgccl> No instance for (Num ())
+13:35:18 <mgccl>       arising from the literal `1'
+13:35:43 <mgccl> (⍋) :: [()] -> [()]
+13:35:47 <mgccl> = = 好神奇
+13:36:11 <favonia> mgccl: er... lambdabot 會有些奇怪的地方
+13:36:28 <mgccl> 是直接在ghci里做的
+13:36:41 <favonia> mgccl: 那 let (⍋) = sort in (⍋) [1,2,3] 就好啦
+13:37:26 <mgccl> 啊... 这么说compiled版本里就不会有问题... 我试试
+13:38:27 <favonia> > let (⍋) _ = sort in 0⍋ [1,2,3]
+13:38:33 <lambdabot>   mueval: recoverEncode: invalid argument (invalid character)
+13:38:43 <favonia> 還是會炸（嘆）
+13:39:29 <mgccl> 啊, 我这没问题了...
+13:39:34 <favonia> let(⍋)_=sort in 0⍋[1,2,3]
+13:39:38 <favonia> 嗯
+13:39:40 <mgccl> 只是每次都要打一个括号...
+13:40:09 <favonia> mgccl: 看上面 xD
+13:40:36 <mgccl> 要多输入一个0...
+13:47:29 <mgccl> 嗯没办法Haskell似乎没这个功能- -
+13:49:43 <favonia> mgccl: 我覺得你上面的程式碼已經很短了啊... 再短下去也差不多了吧orz
+13:50:35 <mgccl> 啊, 不是, 我只是感觉编程的时候有的函数使用的次数非常多, 比如sort... 那么直接用symbol代替可能比较好...
+14:23:47 <favonia> mgccl: 嗯我個人平常可能會想保留 sort 全字 xD 感覺比較清楚
+14:23:53 <favonia> 有什麼符號合用嗎？
+14:30:43 <mgccl> 啊,APL里面有一堆符号.
+14:30:50 <mgccl> 里面有个grade up, 类似sort
+14:30:59 <mgccl> ⍋
+15:04:13 <MnO2> 最近體會到用  parsec 寫 parser 跟以前寫 parser 的習慣有一些細節蠻不一樣的，要適應一下
+15:04:37 <MnO2> 應該說最 naive 的用法有些細節上的不同
+15:05:13 <MnO2> 一般都是先過 lexer / scanner 做 tokenization
+15:05:46 <MnO2> 但 parsec 最 naive 的用法可以不用，library 現成的 interface 某種程度上也是鼓勵這樣
+15:06:13 <MnO2> 但這樣 LL(1) 的單位就會變成 char，就要小心到底要不要寫 try
+15:07:42 <MnO2> try 真的好用 (加了就是 LL(k)..)， 但也會降低效率
+15:09:12 <MnO2> 所以 Haskell 原則上不需要有 LL(k) generator 的套件的... parsec 就夠了
+15:15:20 <CindyLinz> 不過.. parsec 是 Monad 介面的, 所以遇到 branch, 如果正確路線是 left branch, 然後就開始走 left branch 一直走下去的時候, input stream 要一直 keep 住, 因為它不知道你哪一天會不會突然 left branch 走不下去要走 right branch..
+15:16:04 <CindyLinz> 所以.. 你那個 (1) 或 (k), 就只有在 left branch fail 的時候才有效果了...
+15:17:15 <MnO2> CindyLinz: 所以不要亂用 try ... xD
+15:17:38 <MnO2> CindyLinz: 不加 try 預設只有 LL(1)
+15:18:04 <favonia> MnO2: CindyLinz: 有沒有 branch 跟有沒有 try 無關吧 @@
+15:19:11 <CindyLinz> try 不就是 branch 的一種形式嗎?
+15:19:42 <MnO2> 應該是增加 backtracking 的深度吧
+15:20:12 <CindyLinz> try 裡面是 left branch; catch 裡面是 right branch?
+15:20:29 <favonia> 本來就有 branch...
+15:20:50 <MnO2> CindyLinz: 等等.. catch 是什麼?
+15:21:22 <CindyLinz> try...catch...throw 的 catch 啊? XD
+15:23:41 <CindyLinz> 喔.. parsec 有個函數叫作 try... # The parser try p behaves like parser p, except that it pretends that it hasn't consumed any input when an error occurs.
+15:25:23 <CindyLinz> 嗯, 因為我覺得那個 (1) 或 (k) 是讓 parser 在遇到 branch 的時候可以很快知道只有其中一邊有機會, 所以就可以往唯一剩下的一邊走, 而且不用準備隨時可能要 backtrack 回來
+15:26:27 <MnO2> 應該要講 LL(*) ?
+15:26:42 <CindyLinz> parsec 的 try 是一個深度的 test, 但是在 parsec 裡面, 沒辦法我先叫兩個 branch 都先 try 一下, 讓我能馬上去掉沒機會的 branch
+15:27:26 <CindyLinz> parsec 在 try 完左邊如果是成功的, 應該就要進左邊去走了不能先 try 右邊
+15:28:14 <MnO2> 不加 try 還是一樣左邊成功就走左邊啊
+15:28:40 <CindyLinz> 這個是 Monad 的限制, 不是 try 造成的啊
+15:28:41 <favonia> 有沒有 try 跟 left-recursion 無關
+15:29:19 <CindyLinz> MnO2: 我剛剛開始在想的時候, 其實是誤解 try 是 exception 的那個啊 :p
+15:32:20 <favonia> CindyLinz: 如果當兩個都有機會時你想要走某 branch, 把那個擺在第一個就對了
+15:32:43 <favonia> left-recursion 不是有沒有機會的問題，是能不能停下來的問題
+15:33:01 <CindyLinz> favonia: 先走成功率高的?
+15:33:16 <favonia> CindyLinz: 不是，先走你喜歡的
+15:33:16 <letoh> left-recursion 就停不下來了吧  不是得改寫嗎
+15:33:21 <CindyLinz> favonia: XD
+15:33:59 <CindyLinz> ! 是那個 left-recursion.. 剛剛想的不是這個 ^^|
+15:34:16 <favonia> letoh: 不一定... 有 combinator 可以組成會停下來的 parser (應該說比較像recognizer xD)
+15:34:38 <favonia> letoh: 不過當然沒事還是不要這樣亂搞
+15:34:38 <CindyLinz> favonia: 類似 BFS 的順序嗎?
+15:34:51 <favonia> CindyLinz: 不知道耶
+15:35:07 <CindyLinz> hm
+15:35:11 <letoh> 我是聽說好像有辦法停下來，但不曉得怎麼辦到的
+15:35:34 <letoh> 我的理解就是沒有終止條件的遞迴啊
+15:35:57 <letoh> 跑到 input 結束?
+15:36:03 <CindyLinz> letoh: 有點像 applicative reduction 和 normal reduction 的 fu 哄?
+15:36:26 <favonia> letoh: 不曉得，沒研究～～（逃
+15:37:40 <letoh> CindyLinz: 那兩個東西我都還沒學到XD
+15:37:51 <CindyLinz> letoh: 應該只是名字沒聽過而已啦 :p
+15:39:42 <CindyLinz> letoh: 就... let f x = x * x in f ( 2 + 2 ) 在執行的時候是: f(2+2) = f(4) = 4*4 = 16 還是 f(2+2) = (2+2)*(2+2) = 4*(2+2) = 4*4 = 16
+15:39:46 <letoh> 想起來了  像是 packrat parser 可以處理?  要再查查看
+15:40:50 <CindyLinz> 後面那個常常比較慢, 但前面那個出得來的時候後面那個一定出得來; 而有時候後面那個出得來的時候有時前面那個會出不來
+15:41:19 <letoh> 可以自己控制嗎?
+15:42:37 <letoh> 比較慢可以理解  但結果能不能出來這件事要再想想
+15:42:37 <CindyLinz> 是 compiler 的選擇呀.. (先忽略 optimize) 前面那個就像是 strict, 後面那個是 lazy
+15:42:45 <letoh> 嗯
+15:43:33 <CindyLinz> 不能出來的例子... let f a b = b in f undefined 3
+15:43:48 <CindyLinz> let undefined = undefined
+15:44:44 <letoh> 這樣不會變成 3 啊? 是因為 undefined 的關係?
+15:45:11 <letoh> 我跑了一下是 3 @_@
+15:45:23 <CindyLinz> 前面那個會先去算 undefined, 就卡在那邊呀.. 後面那個, 拆掉 f 的時候, 3 就跑出來了, undefined 就剛好不見了
+15:46:00 <letoh> 原來是這個意思  瞭解了  跟 eval 的方式有關
+15:46:22 <CindyLinz> 所以如果把 left-recursion 理解成這邊的 undefined..
+15:46:39 <CindyLinz> 感覺是有點像...
+15:47:04 <letoh> 唔  可是 left-recursion 不是不能算  也不會卡住  只是停不下來吧?
+15:47:27 <CindyLinz> undefined 的卡住其實就是不停下來呀~
+15:47:49 <CindyLinz> left-recursion 就是一直跑, 但是沒有吃下任何一個字
+15:48:07 <CindyLinz> 如果它偶爾就吃掉一個字, 我們就原諒它!
+15:48:12 <letoh> 唔  好像有點像 [1..]  這樣算卡住嗎?
+15:48:36 <CindyLinz> 這不算
+15:48:40 <CindyLinz> 因為它一直生東西出來
+15:48:47 <letoh> 嗯
+15:49:53 <CindyLinz> (雖然 parser 應該是吃掉東西, 不過用生出東西來 match 應該也算是一種 parser :p) 只要它一直生東西出來, 我們就可以繼續比對它有沒有跟 input 一致了
+15:50:00 <CindyLinz> 然後, 只要 input 是有限長, 它就一定會停
+15:50:15 <CindyLinz> 但它如果耍賴一直不出東西... 那就很討厭了
+15:51:05 <letoh> 生出來的東西要怎麼 match ? 這句不太懂
+15:51:26 <letoh> 跟 input 比嗎?
+15:51:35 <CindyLinz> letoh: 欸, 我把它想像成如果你能生出一個字串剛好跟 input 一樣, 那就是 parsed
+15:52:06 <CindyLinz> 對
+16:02:30 <MnO2> CindyLinz: 這比較像是 recognized 吧
+16:04:10 <CindyLinz> MnO2: 呃. 嗯嗯 :p
+16:18:41 <MnO2> SoH 上線兩天註冊  3600 多人
+19:49:26 <suhorng> @pl (\l -> show $ sum$take l $ zipWith (/) (cycle [1,-1]) l2 . read)
+19:49:26 <lambdabot> (line 1, column 50):
+19:49:26 <lambdabot> unexpected "-"
+19:49:26 <lambdabot> expecting variable
+19:49:31 <suhorng> @pl (\l -> show $ sum$take l $ zipWith (/) (cycle [1,(-1)]) l2 . read)
+19:49:31 <lambdabot> show . sum . ($ zipWith (/) (cycle [1, -1]) l2 . read) . take
+22:25:13 <MnO2> Pearls of Functional Algorithm Design 有 kindle 版了
+22:28:56 <letoh> 我最近都在 amazon 上按 kindle 化請求
+22:29:00 <letoh> 到處按XD
+22:33:11 <letoh> kindle 版還是很貴.. 先來個 sample 看看
+22:34:05 <letoh> MnO2: 你看到的價格是多少?
+22:34:12 <letoh> 36.96 ?
+22:35:37 <MnO2> yes
+22:36:02 <letoh> 唔  我登出以後變成 38

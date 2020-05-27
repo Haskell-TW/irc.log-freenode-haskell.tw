@@ -1,0 +1,4 @@
+03:59:10 <monochrom> 我收不到 pm spam 因為 freenode 預設給了我 user mode +R, 即收不到 unidentified users 的 pm.
+03:59:15 <monochrom> https://freenode.net/kb/answer/usermodes
+03:59:59 <monochrom> 你可以為自己手動做. 或者下次 reconnect 亦自動得到.
+04:00:37 <monochrom> 應該是以前不會自動, 但最近加了 (obviously)

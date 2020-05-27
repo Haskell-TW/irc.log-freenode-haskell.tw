@@ -1,0 +1,68 @@
+09:53:36 <c9sloud> PerfectHash 好像裝不起來
+09:54:11 <c9sloud> 他跟我 complain 說 Ambiguous module name `Prelude' it was found in multiple packages: base haskell98-2.0.0.2
+09:54:19 <c9sloud> 殘念
+10:43:27 <c9sloud> cmph minimal perfect hashing for large sets, gperf is for small sets
+10:43:37 <c9sloud> looks like gperf is better :-p
+10:43:43 <c9sloud> for this case
+10:45:42 <c9sloud> 不過如果用了 gperf 好像就得用 GPL 了
+10:50:43 <c9sloud> CMPH 上說 cmph 的 lookup 速度比 gperf 慢兩倍
+13:11:03 <monochrom> PerfectHash 在哪裏?
+13:12:41 <monochrom> 找到了. 可能頗舊, 你得到的 error message 是 ghc 從某版開始重組 standard library 的結果
+13:16:52 <monochrom> 在 PerfectHash.cabal 裏, 刪去 "haskell98"
+13:17:27 <monochrom> 在 Data/PerfectHash.lhs, 把 "import Array" 改為 "import Data.Array"
+13:18:07 <monochrom> 應該就此而已. 不過, 未測試, 未知有沒有別的問題
+14:04:10 <c9sloud> 哦哦 原來
+14:04:17 <c9sloud> 我本來是把 haskell98 拿掉
+14:04:24 <c9sloud> 後來就遇到 Array 的問題
+14:04:26 <c9sloud> 我來試試看
+14:05:04 <CindyLinz> c9sloud: 地方的 Dependency Hell 需要大大來整頓整頓.... QQ
+14:06:18 <c9sloud> 哇靠 還真的是大整頓 XD
+14:06:26 <c9sloud> 這次噴了十幾個 error 出來
+14:12:25 <CindyLinz> dep error 常常會越解越多....
+14:12:50 <CindyLinz> 因為要選 path.. 選好走過去常常都是柳暗花明又一村.. (誤)
+17:18:42 <c9sloud> XDD
+17:18:45 <c9sloud> 放棄...
+21:58:43 <mno2> http://michaelochurch.wordpress.com/2014/06/06/why-programmers-cant-make-any-money-dimensionality-and-the-eternal-haskell-tax/
+21:58:45 <mno2> QQ
+21:58:52 <mno2> [Why programmers can’t make any money: dimensionality and the Eternal Haskell Tax]
+22:03:57 <au> 不過重點還是 domain expertise 吧... people who sling C++ at banks with 30-year-old codebases 和 people who slings Haskell at banks with 30-year-old codebases 相比，後者收入相同而生活比較悠閒 XD
+22:09:12 <mno2> Bank 目前大概只能投靠 Don Stewart 了吧 lol,   Standard Chartered 的生活好像還算不錯。不過我還蠻訝異就是雖然 SCB 聚集了一堆 Haskell 專家，但其實 Team 上也不少人是後來猜開始慢慢學的
+22:11:46 <au> 有 ABN AMRO 啊
+22:12:20 <au> (那是 CUFP 有給 talk 的)... http://www.haskell.org/haskellwiki/Haskell_in_industry 有一堆 bank 但不知導入程度
+22:13:24 <au> 另外也有 simon marlow who slings Haskell at Facebook with 10-year-old codebase
+22:15:01 <au> 像 Haxl 這種專案就是 old codebase, functional refactor 的好例子，減少救火頻率，創造優質生活
+22:15:30 <mno2> 第一次聽到 Cyril Schmidt 這名字，希望有機會認識
+22:16:13 <mno2> 聽說 Haxl 都沒時間測的 lol ，人力不足 Compile 過就上了 xD
+22:17:05 <au> Haskell 嘛，Compile 過就上了也是很自然的 xD
+22:17:06 <mno2> 我想原因是也沒有現有的 Haskell code 給你 refactor，所以目前案例一定都是 refactor 別人的 code, lol
+22:18:41 <mno2> (TDD 梗）Simon Marlow 表示： TDD 是什麼？可以吃嗎？ hardcore programmer 就要跟 Knuth 一樣連 compile 都不 compile 就直接 submit 然後吃 AC  (誤)
+22:19:26 <au> 也有自己 refactor 自己的 code 的例子，像 Gabriel439/suns-search ( "An all-atom protein search engine powered by Haskell" ) 本來是 C 寫的
+22:20:30 <au> 我覺得 haskell 要做探索式程式設計 (自己都不知道自己要做什麼的階段) 並沒有特別悠閒，但是用來 refactor 無敵啊 :p
+22:23:29 <mno2> 咦，原來 Gabriel 也做過 protein 的東西。之前有聽過 hPDB 的作者講過 optimize Haskell 的經驗
+22:24:34 <mno2> Refactor 真的是無敵。每次接手別人的程式就會希望他是 Haskell 寫的
+22:32:46 <hychen> 有點難懂這裡的概念 orz
+22:33:10 <hychen> 為什麼refactor無敵?
+22:35:56 <au> hychen: 因為有一個性質叫 equational reasoning
+22:36:22 <au> # http://www.haskell.org/haskellwiki/Equational_reasoning_examples
+22:37:17 <au> 大致的意思是即使完全不瞭解程式的流程和目的，也可以做重構和最佳化，而且不會壞掉
+22:38:19 <au> 不會壞掉，是因為(幾乎)所有的 State 都寫在 type 裡了，type 裡沒提到的就不會出現
+22:42:36 <hashcat> 無副作用及狀態, 確定主作用不會改變, 就沒有其他副作用或狀態需要考慮了
+22:43:59 <hashcat> 其他程序改到會爆掉, 通常是副作用繁多導致狀態的改變不符預期
+22:44:41 <hashcat> 漏考慮半個會改變狀態的副作用, 就留下以後可能爆掉的bug了
+22:45:18 <mno2> 打個比方（也僅限於比方的程度），就是假設今天電腦強大到可以有完美的判斷，你只要用自然語言跟他說好 spec，他就可以自動保證你的東西是不是符合 spec
+22:46:18 <mno2> 譬如說麥當勞要做大麥克，只要電腦可以完美判斷他是大麥克，那不管後面製造怎麼亂搞，反正最後有個完美的判斷器把關
+22:46:31 <mno2> 只要做出錯的東西就會跳 warning
+22:46:51 <mno2> 那麥當勞就可以天馬行空地隨便加速製作流程不用怕最後出來的東西不是大麥克
+22:47:44 <mno2> 只是電腦還沒到達那種程度，但弱化到 Haskell 的型別系統還是辦得到不錯的程度
+22:47:58 <hashcat> Haskell不管從哪方面考慮都是比C簡單的東西
+22:53:58 <hashcat> 型別即命題, 程序即證明, 寫得出程序就已經是證明了
+22:57:45 <hashcat> 接電路就很像Haskell啦, C語言還沒法用接電路類比
+22:58:04 <hashcat> 有防呆亂接的型別系統
+22:59:26 <hychen> got it
+23:00:19 <hashcat> typeclass應該也可以做個類比
+23:01:24 <hashcat> 這個好像就凹不出來了
+23:04:13 <hashcat> 對了typeclass叫做型別類, 所以可以類比成防呆類
+23:05:40 <hashcat> 只要防呆按照typeclass的規範.. 哪些地方要安裝一樣的防呆裝置之類的規範
+23:06:05 <hashcat> 兩種防呆裝置有一對一關係就可以屬於同一個typeclass
+23:07:07 <hashcat> dependent type就變成可以電路控制的防呆裝置了
+23:33:59 <monochrom> 請參看我的 http://www.vex.net/~trebla/haskell/prerequisite.xhtml#leibniz

@@ -1,0 +1,44 @@
+18:02:26 <suhorng> Haskell Platform 好像快要出了！
+18:02:34 <CindyLinz> !
+18:03:20 <suhorng> 看到 mailing list 的討論已經在測試 alpha ver, 好像幸運的話這週會出 release candidate
+18:06:22 <poga> !!
+18:07:15 <suhorng> http://projects.haskell.org/pipermail/haskell-platform/2014-July/002954.html
+18:08:00 <CindyLinz> 只是不知道現在的 haskell-platform 有哪裡不好, 就不知道要期待新版的什麼 ^^|
+18:08:13 <suhorng> GHC 7.8
+18:08:38 <CindyLinz> 不是先裝好 ghc 再裝 haskell-platform 嗎? XD
+18:09:15 <suhorng> 沒學會怎麼弄 T_T
+18:10:28 <CindyLinz> 我只會無腦 apt-get 裝 ghc.. XD
+18:10:58 <suhorng> apt-get 抓到的不會是舊版嗎？
+18:14:13 <CindyLinz> 就是要等 ubuntu 更新啊 XD
+18:15:07 <suhorng> sad
+18:31:43 <mno2_> 我都不裝 haskell-platform 了，太常衝自己裝的東西。直接 by-project sandbox
+18:31:55 <mno2_> 只是一開始會 compile 很久
+18:40:28 <CindyLinz> 把 haskell-platform 當成 porting 到 windows 時的工具?
+18:46:46 <suhorng> 說到衝到，我是開始後回裝 Idris 時沒有用 cabal sandbox 了……可是又不想陷入 lens 地獄
+18:47:04 <suhorng> *後悔
+18:48:26 <suhorng> 不過 Idris 也還滿乾淨的，很容易手動砍掉
+18:48:54 <CindyLinz> 那 Idris 的 dependency 有砍掉嗎? ^^|
+18:52:30 <suhorng> 就留著啦～既然都忘了用沙盒
+18:53:46 <CindyLinz> 聽起來砍不乾淨 XD
+18:54:41 <CindyLinz> 你可以開一個沙盒, 然後以後正常的 project 都用沙盒 refer to 這個沙盒.. 這樣沙盒外就是個沙盒, 而這個沙盒才不是沙盒...
+18:55:55 <CindyLinz> suhorng: 欸, idris topic 呼聲最高耶~~
+18:56:37 <CindyLinz> OOP must die 雖然有 +1003.... 可是有人作弊 XD
+18:58:55 <suhorng> CindyLinz: 沒真的用 Idris 好好寫過什麼程式QQ 有寫才有得分享
+19:01:48 <suhorng> 而且他的 Effect package 看起來還是有點奇怪XD
+19:02:22 <CindyLinz> 可以帶大家初探啊~ 分上中下集那樣 XD
+19:03:25 <CindyLinz> snowman 說可以拿 topic 來當個人研究主題, 這樣就會有研究會的感覺 :p
+21:56:00 <CindyLinz> The haskell programming girl # http://girlloveshaskell.com/
+21:56:33 <CindyLinz> 極端主義份子吧 XDDD #  p.s. I don't usually listen to music, but when I do, I listen to it via a Haskell OAuth API.
+22:02:50 <petercommand> CindyLinz: 然後...右邊的can you red japanese下面寫you can if you learn haskell...XD
+22:03:02 <petercommand> s/red/read
+22:03:34 <CindyLinz> 對啊我不懂那個梗 XD
+23:43:33 <suhorng> 嗯...話說 IncoherentInstances 跟 OverlappingInstances 是糟糕的東西嗎...?
+23:44:25 <CindyLinz> 前者蠻恐怖的, 後者.... 可能好一點 ^^|
+23:44:48 <CindyLinz> OverlappingInstances 還算保守, compiler 一有疑慮就會叫
+23:47:08 <suhorng> 恩..感到恐懼
+23:49:30 <CindyLinz> scm 說他寫 Haskell 已經沒辦法不開 OverlappingInstances 了
+23:49:47 <CindyLinz> 這種成癮性不知是不是也算是致命缺點 XD
+23:50:14 <CindyLinz> 嗯 還有 UndecidableInstances.. XD
+23:50:29 <CindyLinz> 只要 compile 得完, 就表示這次有 decide 成功 XD
+23:57:33 <suhorng> XDDD
+23:58:09 <suhorng> UndecidableInstances 有印象中遞迴上限

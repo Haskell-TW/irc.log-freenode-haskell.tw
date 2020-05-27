@@ -1,0 +1,91 @@
+09:47:55 <mno2_> http://takenobu-hs.github.io/downloads/haskell_ghc_illustrated.pdf
+09:47:59 <mno2_> GHC illustrated
+17:31:27 <petercommand> 問一下，修改 MVar 的動作是 atomic 的嗎?
+17:32:10 <petercommand> modifyMVar_
+17:32:24 <CindyLinz> 是
+17:32:35 <petercommand> thx~~
+17:32:57 <CindyLinz> 它是先 take 再 put.. 所以... 別的地方也必須是對它先 take 再 put
+17:33:18 <CindyLinz> 這樣才會 atomic
+17:35:25 <petercommand> 喔喔..
+17:35:39 <petercommand> 了解
+20:53:08 <petercommand> > generateKeyPair (mkStdGen 111) 1024
+20:53:10 <lambdabot>  Not in scope: ‘generateKeyPair’
+20:53:52 <petercommand> 沒有這個 package XD
+20:55:38 <petercommand> 我在用 RSA package 的 generateKeyPair，他要 class Crypto.Random.CryptoRandomGen 的 random number generator..
+20:56:30 <petercommand> 不曉得要怎麼生出來..
+20:57:29 <petercommand> https://hackage.haskell.org/package/RSA-1.0.6.2/docs/Codec-Crypto-RSA.html
+21:09:06 <CindyLinz> petercommand: instance 一下, method 都不給.. (誤
+21:10:36 <petercommand> XD
+21:10:49 <CindyLinz> 這樣 compile 會過.. 不過..... XD
+21:12:10 <petercommand> XDD
+21:12:41 <petercommand> 亂度XD
+21:12:51 <CindyLinz> petercommand: 如果不想用現成的, 可以自己實作一個亂數啊? # https://hackage.haskell.org/package/random-1.0.1.1/docs/System-Random.html#t:RandomGen
+21:13:08 <CindyLinz> 沒有看到你說的 Crypto.Random.CryptoRandomGen @@"
+21:14:24 <petercommand> CindyLinz: http://pastebin.com/cPSH56eQ
+21:15:26 <petercommand> 跟網頁不一樣QQ
+21:15:30 <CindyLinz> 所以你的版本不一樣喔?
+21:15:45 <petercommand> 剛剛 cabal installl 的
+21:15:58 <CindyLinz> 那就看一下它需要實作哪些函數... 我猜會剛好跟那個 RandomGen 對應
+21:16:03 <petercommand> 咦..真的不一樣..
+21:16:14 <petercommand> 版本不同
+21:16:30 <CindyLinz> 然後你就可以實作 instance 的時候直接拿 RandomGen 的 method 去呼叫
+21:17:04 <petercommand> 了解
+21:17:11 <CindyLinz> 我有遇到有的 lib 想要降低 dependency, 所以就自己準備一套 interface 而不用別的 package 裡面的
+21:17:26 <CindyLinz> 不過實際上是一樣的.. 所以我們就是再抄一遍把它們糊起來 XDDD
+21:17:46 <petercommand> XDD
+21:18:26 <CindyLinz> 有好處... 至少在 build 自己 app 的時候不會被它胡亂拉一個莫名其妙版本的 dependency 出來, 然後跟別人 conflict 之類的
+21:18:51 <petercommand> 恩恩....
+21:40:52 <miaoski> CindyLinz: 聽起來好像自己準備一套 *.h 髒髒
+21:41:48 <CindyLinz> miaoski: 不要拿你骯髒的 C 思維套在 Haskell 身上
+21:42:14 <CindyLinz> C 的 *.h 在 include 的時候是直接貼進來汙染環境, Haskell 的 import 不會
+21:42:49 <CindyLinz> 而就算是 Java.. 如果一個 class implements 了兩個有同名 method 的 interface 會出事
+21:42:55 <petercommand> {-# LANGUAGE CPP #-} XD
+21:42:57 <pkmx> 大家都自己寫的結果就是程式裡面出現了好幾套data Void (?)
+21:43:02 <CindyLinz> (如果同名, 但是應該要做不同的事)
+21:43:37 <petercommand> CindyLinz: 好像要 import qualified 才不會呀?
+21:43:41 <CindyLinz> Haskell 是不會怎麼樣的.. 因為 method 屬於 class, 不屬於 instance..  而 Java 的 method 不屬於 interface, 而屬於實體
+21:44:25 <CindyLinz> petercommand: 對啊, 就是加 qualified
+21:44:36 <petercommand> overlapping instance XD
+21:44:37 <CindyLinz> petercommand: C 的 .h 你倒是加加看? XD
+21:45:02 <petercommand> XD
+21:45:53 <CindyLinz> petercommand: overlapping instance 開起來的時候 compiler 還是會擋下沒有 strictly specific 的重疊實作
+21:46:15 <petercommand> 恩恩
+21:47:32 <CindyLinz> 有一個 IncoherentInstances 就真的開啟了地獄之門....
+21:48:05 <CindyLinz> 就會變得很像 C/C++ 了.....
+21:48:35 <CindyLinz> (petercommand 一定馬上跑去讀... XD)
+21:48:56 <petercommand> @_@
+21:49:39 <CindyLinz> miaoski: Haskell 這邊倒是不會有什麼意外... 只是我常常習慣 C/Java 解析名字的方向, 寫 Haskell 的時候就會用反變得很卡很不方便 @@"
+21:50:57 <CindyLinz> IncoherentInstances 開起來以後, 我覺得行為和 C 程式的 linker 在找 global var 有點像.... @_@"
+21:52:14 <CindyLinz> 算惹... 我覺得我今天一整天火氣都很大 orz
+21:52:28 <CindyLinz> miaoski: 不要理我 QQ
+22:11:35 <miaoski> @CindyLinz 有感覺到，科科
+22:11:36 <lambdabot> Unknown command, try @list
+22:11:47 <miaoski> @lambdabot 我是在叫 @CindyLinz 不是叫你啦
+22:11:48 <lambdabot> Unknown command, try @list
+22:12:38 <miaoski>  @CindyLinz 不過既然這是少見的反常現象，就趁機會好好觀測 (咦)
+22:14:33 <CindyLinz> 早上對 letoh 丟訊息也很兇 QQ
+22:16:56 <miaoski>  @CindyLinz 大概水星逆行 (誤)
+22:19:10 <CindyLinz>  @miaoski 空一格 lambdabot 就不會叫嘍?
+22:19:17 <miaoski> yap
+22:19:21 <CindyLinz> @miaoski 不空一格 lambdabot 就會叫嘍?
+22:19:22 <lambdabot> Unknown command, try @list
+22:19:29 <miaoski> yap
+22:19:38 <CindyLinz> XD
+22:22:31 <letoh> 有嗎?
+22:23:14 <CindyLinz> letoh: 喔喔如果沒有感覺到就太好了~ 你什麼都不知道, 什麼都不知道~喔~~ ^_^
+22:23:22 <letoh> @_@
+22:23:48 <CindyLinz> 好啦我覺得「不能問嗎」很兇 @_@"
+22:24:19 <letoh> 喔喔  我覺得還好耶
+23:17:10 <suhorng> :t argmin
+23:17:10 <lambdabot> Not in scope: ‘argmin’
+23:17:14 <suhorng> QQ
+23:37:24 <CindyLinz> :t flip const
+23:37:25 <lambdabot> b -> c -> c
+23:37:30 <CindyLinz> :t \_ -> id
+23:37:31 <lambdabot> t -> a -> a
+23:42:26 <suhorng> :t flip const == const id
+23:42:27 <lambdabot>     No instance for (Eq (b0 -> c0 -> c0)) arising from a use of ‘==’
+23:42:27 <lambdabot>     In the expression: flip const == const id
+23:45:52 <CindyLinz> ww
+23:46:33 <CindyLinz> :t const id
+23:46:34 <lambdabot> b -> a -> a

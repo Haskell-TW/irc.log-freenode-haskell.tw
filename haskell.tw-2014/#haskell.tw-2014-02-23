@@ -1,0 +1,100 @@
+18:44:18 <hashcat> flora-2 http://flora.sourceforge.net/
+18:44:41 <hashcat> 教學值得一看
+18:45:50 <hashcat> 用語言本身寫得型別系統
+18:48:03 <CindyLinz> 名字很好聽...
+18:57:52 <hashcat> :D
+18:59:08 <hashcat> 貌似只有一家公司在用這個系統
+18:59:42 <CindyLinz> 是說.. Haskell 的前身 Miranda 也很好聽的啊.. 意思是: worthy of admiration
+18:59:44 <hashcat> 看錯是兩家
+19:02:25 <CindyLinz> Hmm... hackage 裡面 text 用的是 UTF-16, 要注意一下 o.o
+19:07:50 <hashcat> 那系統很有意思
+19:08:36 <hashcat> 不是經典邏輯也不是prolog語意, 是有可廢止推論三值邏輯
+19:11:32 <hashcat> 讓prolog遇到矛盾可以停下來, 且支持開放世界假設
+19:27:10 <CindyLinz> 問問.. Monoid 反過來叫作什麼?
+19:27:32 <CindyLinz> 我指的是, 可以一直拆解的意思
+19:27:39 <hashcat> Comonoid?
+19:27:48 <hashcat> 拆解啥
+19:27:52 <CindyLinz> 就這樣喔... 失望 (誤)
+19:28:44 <CindyLinz> 我準備要做一個東西.. 它把不同類型的東西串在一起作成 array.
+19:28:50 <CindyLinz> 然後我想弄一個 Builder
+19:29:01 <CindyLinz> Builder 應該會有 Monoid 的性質
+19:29:13 <CindyLinz> 然後反方向是把東西從這個 array 拆出來用
+19:29:20 <CindyLinz> 目前想說可能叫 Breaker.. XD
+19:29:32 <CindyLinz> 然後不知道對應類比 Monoid 的東西可能叫什麼
+19:30:52 <hashcat> 就是所有的箭頭反過來嘛
+19:31:12 <hashcat> 都加co就對了
+19:31:56 <CindyLinz> XD
+19:37:18 <CindyLinz> 嗯... comonoid 不知道能怎麼用 ^^|
+19:38:23 <CindyLinz> 隨便亂拆, 只是拆到最後一步的時候剛好拆出來的「節」數和接收端一樣多, 一個蘿蔔一個坑? (思)
+19:39:17 <hashcat_> 不是吧
+19:39:31 <hashcat_> 就是反過來組裝解封的管道
+19:40:45 <CindyLinz> 這樣感覺也是用 Monoid 的方式把解封的管道接好, 然後把它直接 apply 在目標上, 取得結果?
+19:40:50 <hashcat_> comonad可以參考下
+19:40:52 <hashcat_> http://hackage.haskell.org/package/comonad-4.0/docs/Control-Comonad.html
+19:41:11 <CindyLinz> 嗯, 我以前也是很好奇 comonad 有什麼應用 XD
+19:41:18 <CindyLinz> 也許現在就要遇到了 :D
+19:41:45 <hashcat_> extract :: w a -> a 對應 return :: a -> ma
+19:43:35 <CindyLinz> 嗯, 覺得其實用起來比較偏像 monad / comonad.. 而不是 monoid / comonoid... 不過 monoid / comonoid 可以理解為還沒 apply 到目標物上的「規劃中」的狀態
+19:44:04 <CindyLinz> hashcat_: 感謝 ^^
+19:44:53 <CindyLinz> 覺得好像有距離體會這句話近一點的感覺... XD # A monad is just a monoid in the category of endofunctors, what's the problem?
+19:44:54 <hashcat_> 回去看flora-2啦
+19:45:07 <CindyLinz> 在忙嘛.... QQ
+19:45:21 <hashcat_> 忙著沒事做
+19:45:22 <CindyLinz> 怕 OSDC 開天窗..||
+19:45:29 <hashcat_> OSDC
+19:45:30 <hashcat_> ?
+19:45:57 <CindyLinz> 這個呀 http://osdc.4pt.tw/schedule.html
+19:46:21 <CindyLinz> 正在寫揉合 Haskell 與 Perl 的東西...
+19:47:15 <CindyLinz> 希望能降低實戰應用 Haskell 的門檻
+19:47:19 <hashcat> 我覺得prolog系好玩多了
+19:48:10 <CindyLinz> 我覺得實用的時候要人下定決心把整個專案用 Haskell 寫, 風險很大, 所以敢這樣衝的人不多
+19:48:29 <CindyLinz> 時程拖到了, 被公司釘, 又講不出什麼好理由....
+19:48:43 <hashcat> 沒關係用prolog
+19:49:03 <CindyLinz> 但如果開發的方式進可攻退可守的話, 敢試的人就會比較多了...
+19:49:10 <hashcat> 用flora-2 with java
+19:49:16 <hashcat> with python
+19:49:31 <hashcat> 亂入prolog
+19:50:00 <hashcat> haskell推ajhc算了
+19:50:39 <hashcat> ghc重量級但模組系統也是不堪入目
+19:50:45 <hashcat> 這落差也太大
+19:51:10 <hashcat> 不如用輕量的, 還可以自己維護
+19:51:16 <CindyLinz> 我是選用 ghc, 我相信初學的人用 ghc, 心理上才會有「這是真的 Haskell」的感覺..
+19:51:42 <hashcat> 幻覺
+19:51:46 <CindyLinz> 不然書上寫一大堆可這樣用可那樣用, 然後實際上都看得到吃不到.. XD
+19:51:53 <hashcat> haskell就是haskell
+19:52:17 <hashcat> 什麼鳥書用一票實驗擴展
+19:52:57 <hashcat> haskell不就是要看看monad那些東西
+19:53:45 <hashcat> 要完整特性的話還有rust, scala在後頭
+19:54:23 <hashcat> 要是用下去, 結果一個月後特性不見啦
+19:55:14 <CindyLinz> 我不是指 feature 越多越好啦
+19:55:23 <CindyLinz> 我也是覺得 feature 越少越好
+19:55:43 <CindyLinz> 但也是不能太少啊....
+19:56:05 <CindyLinz> 主要是在 type 描述方面的一些 extension 吧...
+19:56:14 <CindyLinz> 可能比較重要的是 ghc 比較容易上手?
+19:56:28 <CindyLinz> 在各平台把 haskell platform 裝下去一鍵搞定了....
+19:56:37 <hashcat> 最近對haskell實在沒勁
+19:56:45 <CindyLinz> 初學者的學習興趣是要好好保護的啊
+19:56:57 <CindyLinz> 一上手就從 hack 開始, 就死光了.....
+19:58:41 <hashcat> flora-2強大
+19:59:55 <CindyLinz> 想實際一點的辦法導一堆人來玩, 不然這些工具就一直都是 bug plenty.. orz
+20:00:31 <hashcat> flora-2 no bug
+20:00:41 <hashcat> prolog社群很厲害
+20:00:47 <CindyLinz> 像是, 利用 dependent type 寫了沒有 bug 的 idris 程式
+20:00:52 <hashcat> 明明只有一小票人, bug卻一直修
+20:01:03 <CindyLinz> 只是 idris compiler 有 bug.. ._.
+20:01:09 <hashcat> 特性也一直加, 向後兼容也沒報銷
+20:03:05 <CindyLinz> 等這一波弄完, 可能想來寫遊戲... :|
+20:03:06 <hashcat> 所以覺得很有前景XD
+20:03:19 <CindyLinz> 寫那種, 能吸引大家一起來寫的遊戲...
+20:03:53 <CindyLinz> 大家不是大部分的人, 只是... 希望能還蠻多人的這樣 ^^|
+20:05:41 <hashcat> 為啥不是大家一起來玩的遊戲
+20:05:43 <hashcat> 不然就是寫程序本身是遊戲
+20:05:44 <hashcat> 遊戲內容是要寫程序發射飛彈打爆前蘇聯
+20:07:03 <hashcat> 寫完要自己駕駛 XD
+20:07:24 <hashcat> 我想到超扯的遊戲
+20:07:49 <hashcat> 應該是比較少人會想玩
+20:24:08 <hashcat> 不知道Haskell是少了什麼
+20:30:57 <hashcat> 可能是prolog能完全仿造還能附帶有沒符合運算律XD
+20:31:06 <hashcat> 的檢查
+21:13:08 <mno2> co-co-nut
+22:30:11 <CindyLinz> 也是要一起玩啊, 可是那是遊戲的基本嘛.. 當然是講些跟別的遊戲不一樣的特色啊 ^^|

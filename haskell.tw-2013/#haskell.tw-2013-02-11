@@ -1,0 +1,56 @@
+00:07:10 <favonia> miaout17: 我有空會想把你的 script 改寫成 Haskell
+00:07:15 <favonia> 然後直接加到後端去
+00:07:31 <favonia> 可以直接上傳 csv 檔更新 server 之類的 www
+07:03:10 <favonia> @pl maybe [] id
+07:03:10 <lambdabot> maybe [] id
+12:39:10 <miaout17> favonia: 嗯嗯，我就是想知道那些UI design的意義
+12:40:24 <miaout17> Good > 有空會想把你的 script 改寫成 Haskell
+12:40:40 <favonia> miaout17: 轉到 g0v.tw 上面講吧 xD 已經跟 Haskell 徹底無關了 xD
+12:44:54 <miaout17> XD
+12:44:55 <favonia> Snap 的問題可以放在這 xD
+12:44:55 <favonia> 或是要怎樣 server 產生程式碼之類的
+13:33:04 <favonia> mno2: sqlite 的 Haskell binding 有 raw SQL 嗎？
+13:33:17 <favonia> mno2: 還是他們覺得這功能很糟糕所以都藏起來了？
+13:33:40 <favonia> mno2: 我有看到 Persistent 有 rawSql 但我不想要用他的 Template Haskell 語法 xDDD
+13:34:19 <favonia> mno2: 還是說其實只要開個 pipe 就好了？
+13:39:52 <mno2> favonia: sqlite-simple 藏起來了, 要用 raw 的話要用 direct-sqlite: http://hackage.haskell.org/package/direct-sqlite-2.3.3.1
+13:40:03 <favonia> 好
+13:40:16 <mno2> favonia: sqlite-simple depends on direct-sqlite
+13:40:22 <favonia> lol
+13:40:34 <favonia> 如果只是要複製這個 script
+13:40:57 <favonia> 感覺都夠了
+13:41:16 <favonia> csv 不知道有幾百個 parser, 希望 bytestring-csv 還不會太爛？
+13:43:48 <mno2> favonia: don-stewart 寫的應該能信任，只是很久沒維護了
+13:46:17 <favonia> 反正 csv 也很久沒維護了
+14:29:30 <favonia> miaout17: mno2: 看來 Type 又要改了
+14:29:36 <favonia> CharName 應該是 ByteString
+14:29:41 <favonia> 不是 Text
+14:29:50 <favonia> URL 感覺應該是 ByteString
+14:31:33 <favonia> 因為 URI 是針對編碼後的 ByteString 做處理
+14:32:09 <favonia> 還好程式碼應該都不需要動...
+14:34:49 <mno2> 有用 type 是有好處的 xD
+14:36:11 <favonia> ByteString 進 SQLite 會發生什麼事情？
+14:37:32 <favonia> 天啊我看了 SQLite 的說明以後覺得好恐怖...
+14:38:24 <favonia> OK
+14:38:36 <favonia> 會變成 Blob
+14:38:45 <favonia> 這樣感覺還好
+14:50:44 <CindyLinz> mno2: 沒有 bug, 不用維護.. (Y)
+15:01:53 <mno2> CindyLinz: hackage 應該要有 tag 區分是年久失修還是沒有 bug,  wwwwww
+15:03:30 <CindyLinz> 要開放給別人標才有用 XD
+15:03:36 <CindyLinz> 其實就是個 rating :p
+15:04:42 <favonia> 美觀跟實用要分開
+15:04:54 <favonia> 這樣美觀那邊我就可以給 Yesod 兩顆星
+15:05:08 <favonia> (總共5顆)
+15:07:24 <mno2> 最好還要有評分者使用 Haskell 年紀的分佈
+15:07:44 <mno2> 這樣就可以看到Yesod全部偏向長年的 xD
+15:36:22 <CindyLinz> 是有多老啊 囧
+20:10:48 <mno2> 嘗試用 Snap.Snaplet.Test 一直失敗 .. Orz      一直丟 db name not specified.  但不確定怎麼塞 mock object 進去，用 with  xxxx  也無法
+20:13:39 <mno2> 如果懂得怎麼用的話是蠻好用的，直接把 request handler include 進來塞資料測
+21:33:51 <miaout17> 一分code才幾個月沒build，getArg就從System跑到System.Environment了
+21:37:25 <favonia> miaout17: lol
+21:37:42 <favonia> miaout17: `catch` 也從 Prelude 中移掉了
+21:41:16 <miaout17> 啊，是喔 XD
+21:41:58 <miaout17> 我另一份原本可以build的過的code現在要加-XFlexibleInstances
+21:42:04 <miaout17> 好多breaking changes QQ
+22:25:28 <favonia> miaout17: QQ
+22:26:05 <favonia> miaout17: 我只希望他們在往好的方向邁進（趁 Haskell 還不夠流行，亂改不會太多人抱怨時...）

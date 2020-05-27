@@ -1,0 +1,71 @@
+01:46:42 <CindyLinz> 之前幫 GHC 傷腦筋, 如果把不只一個 constructor, 而且不同 constructor 的長度還不一樣的 type 的 field unpack 要怎麼做..
+01:46:55 <CindyLinz> 現在知道實際的答案了...
+01:47:00 <CindyLinz> 就是不做..... www
+01:47:40 <CindyLinz> GHC 只會 unpack strict 而且 single constructor 的 type 的 field..
+13:27:54 <CindyLinz> 如果 OSDC 要開講, 有沒有什麼建議題目啊? :D
+13:35:29 <CindyLinz> 我初學程式, 那可意氣風發了, 說什麼 Object Oriented, Design Patterns, Agile programming, 當真是不要臉的胡吹法螺. 直到後來修習 Haskell, 才慢慢悟到了人生妙諦. 其後勤修 Type Theory, 數年之後, 終於明白了天人化生, 萬物滋長的要道.
+13:35:33 <CindyLinz> XDD
+13:41:20 <mno2> CindyLinz: 這是參考了邪教傳播手冊嗎？ xDD
+13:43:59 <CindyLinz> 不是歐
+13:44:11 <CindyLinz> 是金庸小說 XD
+13:44:30 <CindyLinz> 東方不敗對葵花寶典的贊辭..
+13:44:44 <mno2> 不過隨著 Haskell 越寫越多，我也漸漸有跟 yinwang 類似的感覺 xD
+13:44:53 <CindyLinz> 賀.. 囧
+13:45:14 <CindyLinz> 你明明就在寫 livescript... = 3=
+13:45:36 <mno2> CindyLinz: 那只是一部分啊 xD
+13:46:02 <mno2> 所以最近開始在看 clojure  :p
+13:46:35 <CindyLinz> 是要幫 clojure 程式作分析?
+13:47:40 <mno2> 沒有啦，只是覺得想找一個語言環境，覺得不那麼討厭，支援平台廣，但又不會被 type 綁死的時候寫。特別是一人 project 的時候
+13:48:20 <mno2> 如果是多人 project ，我還是會傾向於有 type system 的語言
+13:54:20 <CindyLinz> 嗯嗯嗯
+13:58:45 <mno2> 我漸漸地覺得，由於現今的 type system 還是不夠自然。寫起來會有鱉腳的感覺。有點像是你要用任何 framework 必須要去滿足 framework 的邏輯。只是 system F 的表達能力當然比較制式與深入探討過。
+13:59:09 <mno2> 但某些點你還是會撞到類似讓你討厭某種 framework 的情形
+14:00:15 <mno2> Haskell type system 是「強制」讓你繞不過去，所以大家必須被迫遵守，這樣看別人程式就輕鬆
+14:00:27 <mno2> 因為有相同邏輯
+14:00:53 <mno2> 只是起手的時候，就會需要投資一定時間，有撞牆期。
+14:01:40 <mno2> 但其他 dynamic type language 就感覺是對於 common case 的邏輯讓他變得很輕鬆，但複雜的時候，每個寫的人想法都不一樣，程式就隱藏微妙的邏輯差異
+14:02:02 <mno2> 所以最終來說，有種在探討朝三暮四或是朝四暮三的感覺 xD
+14:03:06 <mno2> 只是人類心理我認為還是比較喜歡朝三暮四 :p
+14:03:49 <CindyLinz> 我聽不出來你這個數字大代表的是比較輕鬆還是比較難過... ^^|
+14:04:12 <mno2> 喔喔，比較難過 xD
+14:04:31 <CindyLinz> 短視就對了 XD
+14:04:37 <mno2> yes
+14:05:27 <mno2> 但如果一人 project，短時間內因為邏輯都是統一的，所以我覺得我會傾向於不要被 type system 綁死
+14:05:45 <CindyLinz> 加個條件.. 而且不需要長期維護.. @@"
+14:05:57 <mno2> 是的
+14:06:20 <mno2> 只是大多數 project，你都不知道會不會要變成長期維護 xD
+14:06:56 <mno2> javascript 當初也只是被認為是交差了事的 project xD
+14:15:07 <CindyLinz> 我在公司的感想是一樣的....
+14:15:50 <CindyLinz> 有一個我當初敷衍亂寫的 project 被一直用下去了...
+14:16:50 <CindyLinz> 現在超過一半的玩家流量都會用到它... 而且它還開枝散葉, 別的工程式 fork 它繼續做新 project... orz
+14:17:05 <CindyLinz> 我認真寫的 project 大部分都滅了... zz
+14:18:10 <mno2> CindyLinz: 我認為這也是軟體開發的最大困難，你無法預知到底事情會怎樣進行。最好的方式就是不要預測，然後即時因應。但這也是有一定極限存在，甚至也有取捨。
+14:19:00 <mno2> CindyLinz 是反指標 xDDD  跟你合作 project 要反著做
+14:20:32 <CindyLinz> 那... 我 lazy-doc 還是亂寫亂寫比較好... zz
+14:21:14 <favonia> CindyLinz: 可以先定一個介面強迫大家用嗎
+14:21:22 <favonia> CindyLinz: 這樣子以後要整個改寫還有希望
+14:22:30 <favonia> CindyLinz: 不如 lazy-doc 就用 livescript 先亂寫吧（咦咦咦
+14:22:50 <CindyLinz> lazy-doc 是用 livescript 沒錯啊... ww
+14:23:02 <CindyLinz> 但是我都在裡面寫 `` javascript ``
+14:23:04 <CindyLinz> wwww
+14:23:11 <CindyLinz> 這是無聲的抗議....||
+14:23:12 <favonia> 這麼說來新的 shell 應該也要用 livescript 寫才對（咦）
+14:23:36 <mno2> 這才是劣即是夯的真義，亂寫的 project 比較容易紅 (誤)
+14:23:46 <favonia> 名稱可以叫作 jail 嗎
+14:23:51 <CindyLinz> shell 這樣... 會不會刪檔案的時候常刪錯啊... zz
+14:24:11 <favonia> CindyLinz: 反正又不會真的刪掉(??????)
+14:24:50 <favonia> 先閃人
+15:37:10 <CindyLinz> 喔, 你把名字叫 jail, 指的就只是一個 sandbox 喔 XD
+19:31:22 <mno2> CindyLinz: 我把 api.lazydoc.haskell.sg 指到那台後端了
+19:31:40 <mno2> 我沒有 haskell.tw 所以我只能指 haskell.sg  xD
+20:19:43 <suhorng> @hoogle Maybe (m a) -> m (Maybe a)
+20:19:44 <lambdabot> Data.Traversable sequenceA :: (Traversable t, Applicative f) => t (f a) -> f (t a)
+20:19:45 <lambdabot> Data.Traversable sequence :: (Traversable t, Monad m) => t (m a) -> m (t a)
+20:19:45 <lambdabot> Control.Applicative optional :: Alternative f => f a -> f (Maybe a)
+20:26:46 <CindyLinz> mno2: 反正你現在是 sg 人.. XD
+20:27:32 <suhorng> :t \x -> case x of {Just a -> return (Just a); Nothing -> mzero}
+20:27:33 <lambdabot> MonadPlus m => Maybe a -> m (Maybe a)
+20:28:13 <suhorng> :t \m -> m >>= \x -> case x of {Just a -> return a; Nothing -> mzero}
+20:28:13 <lambdabot> MonadPlus m => m (Maybe b) -> m b
+20:33:01 <suhorng> :t \x -> case x of {Just ma -> Just <$> ma; Nothing -> return Nothing}
+20:33:02 <lambdabot> (Monad f, Functor f) => Maybe (f a) -> f (Maybe a)

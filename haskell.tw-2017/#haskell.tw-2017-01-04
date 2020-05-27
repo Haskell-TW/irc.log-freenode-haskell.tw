@@ -1,0 +1,2 @@
+00:42:11 <caasih> @pl \f g a -> f . (g a)
+00:42:11 <lambdabot> (.) . (.)

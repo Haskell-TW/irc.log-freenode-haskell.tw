@@ -1,0 +1,36 @@
+00:12:49 <MnO2> favonia: 我知道，HM也是其中一種吧？ 我只是好奇有沒有某種像是complexity class的包含關係
+00:13:31 <MnO2> favonia: 譬如說CindyLinz提到的若干步內，這算是有人在研究的限制嗎？
+00:13:52 <MnO2> favonia: 可以舉些例子，除了HM之外的例子嗎？
+00:14:06 <MnO2> favonia: 只是關鍵字也好
+09:22:03 <MnO2> CindyLinz: http://blog.sina.com.cn/s/blog_5d90e82f0101dmhl.html
+09:22:15 <MnO2> CindyLinz: 我錯了...
+09:35:19 <favonia> MnO2: 我覺得拿「若干步」來當限制好像不怎麼有希望... 我也不知道有沒有人真的嘗試這樣設計系統過
+09:38:42 <MnO2> favonia: i see
+10:22:52 <b4283> 王垠把 blog 砍了 @@
+10:23:39 <_13h> google reader 應該有備份？
+10:37:37 <b4283> @@
+10:51:23 <favonia> b4283: 他還有留下一篇～
+10:52:56 <b4283> racket ...
+10:57:31 <favonia> b4283: racket?
+11:00:44 <_13h> 應該是指他在那篇文章中用 racket 實作吧
+11:00:47 <b4283> favonia: 他那篇的範例 code 是 racket
+16:02:51 <CindyLinz> MnO2: 為什麼說你錯了? @@"
+16:04:10 <MnO2> CindyLinz: 因為我說應該不至於不寫PL，但現在是都不寫了...
+16:04:29 <CindyLinz> 哎呀 @@"
+16:05:41 <CindyLinz> 不知道是誰去嗆他了? @@"
+16:06:00 <CindyLinz> 欸, 也可能是都沒有人要去嗆他....
+16:06:13 <CindyLinz> 所以很鬱悶
+16:06:23 <_13h> XD
+16:10:52 <CindyLinz> 想寫信鼓勵他繼續寫... 可是覺得寫這種東西對他自己似乎又沒什麼好處 @@"
+16:11:03 <CindyLinz> 只對我這種讀者有好處... zz
+16:11:08 <_13h> 所以突然刪文是有什麼內幕嗎?
+16:11:31 <CindyLinz> _13h: 從這個「最後一篇博文」看起來是他突然看破紅塵了... zz
+16:11:58 <hychen> 木秀於林....
+16:12:09 <CindyLinz> ??
+16:12:22 <hychen> 太惹眼, 被圍剿?
+21:37:17 <MnO2> http://stackoverflow.com/questions/13203471/the-math-behind-1-0999999999999999-in-haskell
+21:37:54 <MnO2> 剛剛居然不小心貼到#yesod去了 xD
+21:38:18 <MnO2> 我應該要睡多一點..
+21:44:26 <CindyLinz> XD
+21:48:40 <MnO2> http://stackoverflow.com/questions/13185632/is-it-possible-to-use-irrefutable-tilde-patterns-in-lambda-expressions
+22:15:15 <CindyLinz> 實用..

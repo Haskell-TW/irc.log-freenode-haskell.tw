@@ -1,0 +1,194 @@
+01:09:40 <monochrom> 各種ML語法沒有岐異. 主要因為要寫"end", 例如"let x=1 in x+1 end".
+01:10:56 <monochrom> 此外還有 "fun f [] = 4 | (x:xs) = 5 fun g x = x*x" 只要看到第二個"fun"就知第一個已完
+01:12:27 <monochrom> 你看, 基本上我不用分行 XD
+01:13:24 <letoh> 但習慣上還是會分一下吧? XD 混在一行不太好看，除錯也不方便
+01:13:35 <monochrom> 當然
+01:14:13 <monochrom> 在 REPL 裏, ;; 應該只是說"我講完"而已
+01:16:48 <monochrom> 呀, 對了, 試比較 "val x=1" 及 "val x=1 and y=10". 在REPL裏, 當電腦見到前者, 並不能知道你只要前者還是你還有後著, 即後者.
+01:17:18 <monochrom> 在檔案裏, 有EOF作指引
+01:18:23 <monochrom> 所以 ;; 是 REPL 裏的 "暫時EOF"
+01:21:27 <monochrom> 啓示! HTML 也是 ML 的一種!
+01:22:13 <monochrom> 試比較: "<p>f x = 1 <p>g x = 2" 及 "fun f x = 1 fun g x = 2"
+01:23:24 <letoh> 這好像不合法?
+01:23:39 <letoh> 現在的 html 好像有要求要 close tag ?
+01:23:51 <monochrom> 然後又比較: "<body> <p>f x = 1 <p>g x = 2 </body>" 及 "structure X = fun f x = 1 fun g x = 2 end"
+01:23:57 <letoh> 不過一般會相容 html4 以前的規格
+01:24:24 <CindyLinz> for REPL 的角度來說, ruby 的語法設計真是非常適合
+01:24:28 <monochrom> 合法. html5 都容許. 只 xhtml 不准
+01:25:04 <CindyLinz> 天生就是用換行當 statement 分界.. 想寫多行 statement 的話, 要用未關閉的括號, 或是尾巴是 binary operator
+01:25:48 <CindyLinz> letoh: html5 沒有要求 close tag,  xhtml 才有要求... 可是 xhtml 已經差不多算掰了 ^^|
+01:27:09 <letoh> 我知道是 xhtml 出現以後才有的要求  原來 html5 比較寬鬆啊... 印象中 single tag 也要最後加個 / 不是嗎?
+01:27:49 <monochrom> <br/> 也是 xhtml 的要求. HTML5 准 <br>
+01:29:10 <CindyLinz> xhtml1.0 在還沒有 html5 的時候就存在了... 然後 html5 要出來的時候說: 打算拿 html4 作延伸, 不考慮 xhtml.. 我就笑了 XD
+01:29:23 <CindyLinz> 我之前超恨 xhtml 的... XD
+01:29:55 <monochrom> 我對兩個都沒有恨
+01:30:07 <godfat> 為啥呀？我倒是比較恨 html...
+01:30:47 <CindyLinz> monochrom: 要一直被煩才會有(負面)感情啊.. XD
+01:31:06 <godfat> 不過我覺得 html5 倒是跟 javascript 哥倆好，都在打模糊仗
+01:31:08 <monochrom> xhtml 容易 parse 得很. 但我專重大部份人不想重寫已寫好多年的檔案
+01:31:10 <CindyLinz> 直接手寫 xhtml 變得超難讀啊..
+01:31:15 <letoh> 查了一下.. http://dev.w3.org/html5/spec-author-view/syntax.html#syntax-start-tag
+01:31:29 <CindyLinz> 那時拿 <table> 記表格
+01:31:54 <monochrom> 我手寫 xhtml 多年. http://www.vex.net/~trebla/haskell/ 全部都是
+01:32:04 <CindyLinz> 有一陣子故意都用 xhtml 的寫法當練習... 然後一整排的 <tr><td></td><td></td><td></td></tr>
+01:32:20 <CindyLinz> 要把內容塞進去的時候常常會塞錯格
+01:32:32 <CindyLinz> 然後 readonly="readonly" 這設計....
+01:32:35 <godfat> 我也是手寫 xhtml, 不過當然量不多
+01:32:36 <godfat> 但 table 在 html 不是一樣嗎？
+01:32:56 <CindyLinz> 在 html 的話少了 </td> 好很多..  中間每個 >...< 之間就是格子 :D
+01:33:03 <letoh> 看起來 / 在 html5 還是有意義的
+01:33:06 <monochrom> ok, 我係電腦, 這種事我覺得容易得很 XD
+01:33:14 <letoh> "This character has no effect on void elements, but on foreign elements it marks the start tag as self-closing."
+01:33:26 <godfat> html 可以少寫 </td> 嗎？ @@"....
+01:33:36 <CindyLinz> 可以唷... table 系的只有 </table> 一定要寫
+01:33:43 <letoh> 所以 <br> ok... 但是 foreign element 可能會需要 self-closing
+01:33:52 <godfat> 我之前最恨的是 <script src="..."/> 在 html 底下居然是死的
+01:34:15 <CindyLinz> 沒考慮 script 的部分 XD
+01:34:27 <letoh> 不過 foreign element 現在只有 mathml 和 svg
+01:34:38 <letoh> http://www.w3.org/html/wg/drafts/html/master/single-page.html#foreign-elements
+01:34:53 <monochrom> 而人類覺得容易得很的事, 例如賭錢時估你是不是 bluffing, 我就覺得很難了
+01:34:54 <letoh> 所以幾乎可以忘掉 self-closing 了
+01:35:17 <godfat> 人類應該沒有覺得是不是 bluffing 很好猜吧？ XDD
+01:35:24 <letoh> (應該沒有人手寫 svg ?)
+01:35:56 <godfat> 我是覺得 (x)html 本來就不太適合手寫，或是需要工具輔助
+01:35:57 <godfat> 更不能接受含糊的語法
+01:36:48 <CindyLinz> 我覺得 html 語法還算明確啊~ 亂的是語意.... ^^|
+01:36:53 <monochrom> 關於 table, 我其實同意 <td>x <td>y <td>z 方便很多, 亦沒實質岐異
+01:37:12 <letoh> "In HTML 4, <foo / means <foo> (which leads to <br /> meaning <br>&gt;"
+01:37:26 <CindyLinz> 有人會寫這種東西 XD <i>aaa<b>bbb</i>ccc</b>
+01:37:31 <letoh> 所以 godfat 舉的那個例子的確會跑出奇怪的東西
+01:38:17 <letoh> " and <title/hello/ meaning <title>hello</title>)."
+01:38:33 <letoh> html4 的語法真怪  第一次知道可以這樣寫
+01:39:17 <monochrom> 至於 <i>aaa<b>bbb</i>ccc</b>, 作者應該被打靶! XD
+01:39:45 <godfat> 我是碰過漏 </div> 之類的，版面會跑掉，不同 browser 結果不一樣
+01:40:12 <CindyLinz> 我想收回語法明確那句話.......ww
+01:40:18 <CindyLinz> letoh: 都你害的...
+01:40:24 <letoh> 對不起XD
+01:40:39 <godfat> 其他奇怪的例子我懶得想了 :o 反正一堆莫名其妙的狀況... ~.~
+01:40:39 <godfat> 上次才看到 gslin 在說跟 js 與 CDATA 有關的東西，超恐怖
+01:40:44 <letoh> 請忘了 html4 XD
+01:42:50 <monochrom> 4及5基本上是"大部份人愛寫的話, 只要電腦那邊不太困難就盡量容許".
+01:43:35 <monochrom> 凡是遷就人類的, 一定不可能簡單直接.
+01:43:54 <monochrom> http://www.vex.net/~trebla/humour/tautologies.html #1 XD
+01:44:28 <b4283> html 居然有這樣奇怪的，開眼界了
+01:44:36 <CindyLinz> 說到那個漏掉 </div> 的..  我們家網頁很多是 php 做的, php 裡面習慣會用 include('another_php_fragment.php') 的方式來拼出網頁
+01:44:51 <CindyLinz> 有一次我去改東西... 發現有的 fragment.php 裡面 tag 不是成對的.......ww
+01:45:19 <CindyLinz> 所以 include 它的時候前面要多放一個 <div> 再 include, 不然後半版面就全跑掉了.... orz
+01:45:22 <godfat> 然後 browser 都不抱怨，沒有人知道有錯，直到有一天他真的錯了
+01:46:03 <godfat> ...>6. The more you know, the more you know.
+01:46:17 <CindyLinz> 唔.. 原來這一頁是要看內容喔.. XD
+01:46:21 <CindyLinz> 我跑去看 html......ww
+01:46:30 <monochrom> 嘿嘿, 總之人類是萬惡之源!
+01:48:30 <godfat> 找到了
+01:48:31 <godfat> http://blog.gslin.org/archives/2014/01/06/4071/在-html-內嵌-json-object-時要注意的事情/
+01:51:14 <CindyLinz> 那個超煩...orz
+01:52:23 <godfat> 所以我認真覺得 xhtml 比較好
+01:52:39 <CindyLinz> xhtml 有改掉這個嗎? @@"
+01:53:01 <godfat> 與其說有改掉這個，不如說不是合法 xml 的話 browser 會噴錯
+01:53:07 <CindyLinz> 不過文中的解法好奇怪....
+01:53:21 <godfat> 我的結論是不要用黑魔法
+01:53:25 <CindyLinz> 如果字串長得是 "--><script>...." 的話不是就沒解到了嗎?
+01:53:55 <godfat> 沒細究，不知道 XD
+01:54:11 <CindyLinz> 可是這個在 xhtml 也是合法的啊? @@"
+01:54:54 <godfat> 你說 <!DOCTYPE HTML>
+01:54:55 <godfat> <html>
+01:54:55 <godfat> <body>
+01:54:55 <godfat> <script>
+01:54:55 <godfat> var a = "</script><script>alert(1);//";
+01:54:55 <godfat> </script>
+01:54:55 <godfat> </body>
+01:54:56 <godfat> </html>
+01:54:56 <godfat> 嗎？我試試看？
+01:55:54 <CindyLinz> 最前面用 <!Doctype html> 應該會變 html5?
+01:56:05 <monochrom> 是
+01:56:52 <godfat> 檔名用 xhtml 後用 firefox 開就會當 xml 了
+01:56:53 <godfat> 試了確實是合法的，不過原文考慮的是 php 的問題
+01:56:57 <CindyLinz> 喔喔喔
+01:57:43 <CindyLinz> 目前還是傾向讓這網站沒有攻擊價值的安全防護法.... (好消極... XD)
+01:58:19 <godfat> 加上 CDATA 後果然也是正常的呀，記得加 CDATA 就好了
+01:58:32 <godfat> 不過問題又變成如果 user input 有 CDATA end tag? XD
+01:59:42 <CindyLinz> 直覺覺得.... 如果 Dom parser 不去理解 javascript syntax 的話, 好像解不了? @@"
+02:00:11 <CindyLinz> 都用 <script src=xxxxx.php></script> 的方式, 把動態內容都藏在外面好了 @@"
+02:00:11 <monochrom> 我寫xhtml時, script例牌用CDATA. 不單只script啦, 在pre裏面示範haskell碼都是
+02:00:23 <godfat> 試了發現 user input 有 CDATA 好像沒辦法攻擊？兩種可能，一種是直接變錯的 xml, 另一種是沒有效果，不知道為什麼
+02:01:15 <godfat> 那照 gslin 的說法就是多一個 request
+02:01:36 <godfat> CDATA 應該可以解決大部分的問題，或至少比原本的 html 好多了...
+02:02:39 <CindyLinz> 那用 <script src=data:text/javascript;base64,xxxxxxxxxxxxxxxx></script> 好了... (怒)
+02:02:57 <CindyLinz> 只用過圖檔的用法, 沒用過 script 的 XD
+02:03:16 <godfat> 我記得圖檔這樣有限制大小，也沒聽過 script 的 XD
+02:03:23 <CindyLinz> 咦, 其實可以不用這個
+02:03:46 <CindyLinz> 自己寫了 javascript 的 base64 decode, 就可以把原本所有的程式變成 base64, 然後套 static 的 decode 解出來 eval
+02:04:17 <CindyLinz> 限制大小是 chrome 的限制, 其 url buffer 上限 2MB.. 超過直接 crash browser..ww
+02:04:19 <godfat> 也是
+02:04:31 <godfat> crash browser 是哪招...
+02:04:43 <CindyLinz> 會道歉..
+02:05:10 <letoh> 其實那個頁面還蠻可愛的XD
+02:05:11 <godfat> 露出胸部是常識（誤
+02:05:17 <CindyLinz> ....||
+02:05:23 <godfat> oh snap 嗎？
+02:10:22 <CindyLinz> https://code.google.com/p/chromium/issues/detail?id=103234
+02:10:56 <CindyLinz> 我那時 submit 的 test case
+02:10:59 <CindyLinz> https://gist.github.com/CindyLinz/39feeb6bdada8dc12530
+02:12:13 <godfat> @@" wow
+02:12:13 <godfat> 這可以玩 buffer overflow 然後 arbitrary code execution 嗎？ XD
+02:13:10 <CindyLinz> 我只是想要生出一個下載啊.... (無辜貌)
+02:13:12 <godfat> 成功 reproduce
+02:13:33 <CindyLinz> 我有個 pure browser 執行的 compiler, 要輸出 compiled 的結果 @_@"
+02:13:57 <godfat> html -> html?
+02:13:59 <CindyLinz> 後來就改用 blob 了..
+02:14:12 <CindyLinz> 一堆 javascript / coffeescript -> 一個 javascript
+02:14:23 <CindyLinz> Blob Object
+02:16:22 <CindyLinz> 這個 https://github.com/CindyLinz/JS-GreenDefine
+02:18:18 <godfat> 這意思是說 compiled 好的結果超過 2M..!?
+02:19:03 <CindyLinz> 對, 我那時做的遊戲 compile 完是 6MB
+02:19:09 <CindyLinz> 裡面有大量 SVG 圖檔.. XD
+02:19:22 <godfat> svg 也包進去喔？ ~.~
+02:19:47 <CindyLinz> 對啊, 是要放在 Win8 App store 的, 玩家安裝的時候會整包下載
+02:20:47 <CindyLinz> code 部分 500KB 而已..   最後那個 package 大約 20MB...
+02:20:58 <CindyLinz> 剩下 14MB 是音樂檔.... ._.
+02:21:17 <godfat> 該說好先進嗎.... XD
+02:21:50 <CindyLinz> 就很不想用 Visual Studio 嘛.... QQ
+02:22:06 <godfat> 不知道 unity 行不行？
+02:22:14 <letoh> 音樂有人做 progressive download 嗎?
+02:22:25 <godfat> streaming?
+02:22:29 <letoh> (先丟個 midi 檔讓玩家有聽到聲音XD)
+02:22:45 <CindyLinz> 對用 Wifi 的平版來說 20MB 一次下載完, 一下下而已啊?
+02:22:54 <CindyLinz> 反正頻寬是微軟出 (?
+02:23:01 <letoh> 喔喔喔  streaming 好像也可以
+02:24:33 <letoh> 然後我常收到要我換光纖的簡訊跟電話，所以我是網路釘子戶嗎? XD
+02:25:09 <CindyLinz> XDDD
+02:25:24 <CindyLinz> 你又不會害鄰居不能用光纖 XD
+02:25:47 <letoh> 那就好  繼續用 adsl XD
+02:25:53 <CindyLinz> wwww
+02:27:40 <mno2> 大家都還不睡覺 ^^"
+02:28:25 <letoh> 翻一下 racket 文件  其實覺得內容沒什麼  但不曉得為什麼就是很容易眼花XD
+02:38:17 <CindyLinz> mno2: 我睡著了!
+02:45:35 <monochrom> 哈哈哈哈哈 "先用 midi"
+17:26:55 <CindyLinz> (思) # 我刚到旧金山的几个月经常参加一些程序语言的“meetup”，后来我发现这种 meetup 都是宗教气氛非常浓厚的地方，跟传销大会差不多。
+17:27:24 <CindyLinz> Functional Thursday 擺明說自己邪教組織的倒是光明正大得多了... (咦)
+17:31:46 <hashcat> 只差沒三呼prolog萬歲了
+17:32:38 <CindyLinz> 會聽到老師跟助教哀哀叫說寫 Agda 好煩.... XD
+17:34:03 <hashcat> 為啥會用Agda寫
+17:34:57 <hashcat> 寫證明?
+17:35:03 <CindyLinz> 我不知道他們在研究什麼 ^^|
+20:23:44 <CindyLinz> 用 GHC API 來 interpret haskell 程式, 以及動態載入 GHC module 到這個 interpreter 的 context... 的教學 http://parenz.wordpress.com/2013/08/17/ghc-api-interpreted-compiled-and-package-modules/
+20:26:05 <godfat> 用這個做 better ghci!?
+20:34:48 <CindyLinz> yet another 沒問題, better 與否就不知道了 XDrz
+20:35:04 <godfat> 目標當然是 better 呀... XD
+20:35:09 <CindyLinz> 嗯 XD
+21:29:30 <godfat> http://www.yinwang.org/blog-cn/2014/02/09/programmer-mental/
+21:29:31 <godfat> XDDDDD
+21:29:31 <godfat> "然而我的水平顯然高過 Python 的創造者 Guido van Rossum 很多。"
+23:44:17 <monochrom> 我去的多倫多meetup並非宗教或傳銷. 這恐怕還是因為我做第二航手 XD
+23:45:28 <monochrom> 我們是很中肯的人 :)
+23:49:10 <godfat> 就某方面而言，我覺得他說的現象確實存在著..
+23:50:16 <hashcat> 寫個程序也能寫到有黨有元首的
+23:50:55 <godfat> 不過某方面其實我也覺得，每個領域多少都有這種現象
+23:51:07 <hashcat> C語言萬歲元首施拖慢萬歲
+23:51:18 <hashcat> 例如哪個領域
+23:54:00 <monochrom> 啊, 我從來都認為大部份程式員都是宗教狂熱, 這點無容置疑!
+23:54:56 <monochrom> 只要是有人的地方, 就會有萬惡的人性!
+23:57:18 <godfat> 例如哪個領域呀，比方說美術好了？我覺得權威確實無所不在呀 XD
+23:58:20 <godfat> 不過我覺得其實也不致於需要說是萬惡就是了.. XD 只是人性確實容易有這種傾向（聳肩）
+23:59:07 <monochrom> 當然了, "萬惡"一說只是我主觀看法而已 :)
+23:59:38 <godfat> XDD 有惡，那有善的嗎？

@@ -1,0 +1,13 @@
+00:01:00 <suhorngT> "在 Haskell98, 你可以使用 forall 作為型別中的一種型別變數. 但是當你打開那些名列前茅的型別, forall 就變成一個關鍵字, ..." -- 程式設計大師智慧結晶(Masterminds of Programming)中文版
+00:20:15 <monochrom> 甚麼是名列前茅的型別? 我覺得它在吐糟.
+00:25:36 <suhorngT> higher-ranked types
+00:26:33 <suhorngT> 還有另一段是這樣, 只是比較好"懂":  "只要你開始進行有副作用的程式順序, 評估的順序變得很重要."
+00:27:04 <suhorngT> s/程式順序/程式設計
+00:30:36 <monochrom> 究竟譯者是人還是機器? XD
+00:31:18 <suhorngT> 十分懷疑XD 譯者不瞭解 Haskell 專有名詞倒是. 這本書總共訪問了十七個語言的開發者
+00:33:25 <monochrom> "那些" 是敗筆, 是無中生有, 就算逐字譯, 照字面譯, 都不可能出現 "那些"
+10:04:15 <mno2> 昨天 Oleg 的 talk 如何啊？ CindyLinz
+11:37:26 <cibs> 這本我也有只是還沒看，是不是該改買英文版看...
+11:52:49 <CindyLinz> mno2: 內容不錯~ 也許我就拿來弄 Haskell 的 syntax, desugar, optimize 什麼的 :p
+11:56:26 <CindyLinz> 應該不是太新的東西, 雖然才剛是 Oleg 上個月的演講. 我猜是整理出來的教學這樣
+12:10:51 <CindyLinz> 然後... Oleg 演講的時候常常會在台上低聲 murmur 一大串... orz

@@ -1,0 +1,44 @@
+01:58:04 <suhorngM1> http://www.paolocapriotti.com/blog/2013/11/20/free-monads-part-1/ xcycl 給的~
+01:58:08 <suhorngM1> 還沒看完但覺得滿足XD
+01:58:39 <CindyLinz> 滿足........wwww
+01:59:13 <suhorngM1> 被治癒了
+02:09:31 <caasihuang> Haskell 工作越來越多了？ https://news.ycombinator.com/item?id=9108179
+02:16:52 <au> https://mail.haskell.org/pipermail/libraries/2015-February/025009.html 對 GHC 7.10 Plan FTP 表示意見的 800 多人裡， 58% 的人是 use haskell for real work，42% 的人是 hobbyist
+07:01:28 <Yulin> 我一直都有看對話紀錄阿，只是比較少上 irc
+07:05:21 <Yulin> 之前用 c 寫 forth 時，架構沒弄好，弄出了 circular include
+07:05:45 <Yulin> 所以先放著，等一段時間後才會回去改寫吧
+07:08:23 <Yulin> erlang 應該是前一段時間想學 ex11 跟嘗試用 erlang 做網站才看的吧
+08:14:53 <CindyLinz> @hoogle Monad m => m (Maybe a) -> m [a]
+08:14:54 <lambdabot> Prelude sequence :: Monad m => [m a] -> m [a]
+08:14:54 <lambdabot> Control.Monad sequence :: Monad m => [m a] -> m [a]
+08:14:54 <lambdabot> Control.Monad replicateM :: Monad m => Int -> m a -> m [a]
+09:46:14 <CindyLinz> hole 好用耶....
+09:46:45 <CindyLinz> 如果想知道一個 expr 裡面的某參數要用什麼 type.. 用 1 + 2 + _ 這樣
+09:47:01 <CindyLinz> 如果想知道一個 expr 整體是什麼 type
+09:47:28 <CindyLinz> 就寫 k = _ (...想了解 type 的 expr...)
+09:47:49 <CindyLinz> 然後 GHC 輸出這個 _ 的 type 的參數部分就是那個 expr 的 type
+09:57:39 <suhorngM1> CindyLinz: (Y) 常常需要這種東西...
+09:59:04 <suhorngM1> CindyLinz: 是說我之前想找這種東西: Maybe a -> (a -> m b) -> m (Maybe b)
+09:59:18 <suhorngM1> 函式庫中有類似的嗎?
+10:01:26 <CindyLinz> suhorngM1: traverse
+10:01:29 <suhorngM1> 咦!!!以前看沒發現 原來是 traverse
+10:01:32 <suhorngM1> CindyLinz: thx
+10:02:06 <suhorngM1> @hoogle Maybe a -> (a -> m b) -> m (Maybe b)
+10:02:07 <lambdabot> Data.Traversable forM :: (Traversable t, Monad m) => t a -> (a -> m b) -> m (t b)
+10:02:07 <lambdabot> Data.Traversable for :: (Traversable t, Applicative f) => t a -> (a -> f b) -> f (t b)
+10:02:07 <lambdabot> Data.Traversable mapM :: (Traversable t, Monad m) => (a -> m b) -> t a -> m (t b)
+10:02:25 <CindyLinz> @t traverse
+10:02:26 <lambdabot> Maybe you meant: tell thank you thanks thesaurus thx tic-tac-toe ticker time todo todo-add todo-delete type v @ ? .
+10:02:29 <CindyLinz> @type traverse
+10:02:30 <lambdabot> (Traversable t, Applicative f) => (a -> f b) -> t a -> f (t b)
+10:02:59 <suhorngM1> 唔...等到 Applicative 變成 Monad 的上級就沒差了xD
+10:03:23 <CindyLinz> 如果 m 是實體的話... 通常也沒差 XD
+10:05:18 <suhorngM1> 喔對XD 有道理
+11:33:28 <CindyLinz> 可惡... instance (Monoid a1, Monoid a2, ..) => Monoid (a1, a2, ..) 最多只到 5 個
+11:33:32 <CindyLinz> 我剛好要用 6 個.......ww
+11:33:50 <CindyLinz> 只好把第 5 個改成 (,).... XD
+15:54:02 <suhorngM1> CindyLinz: 當代 Haskell 程式需要 infixr 0 ,  XD  這樣就可以開新的 a , b , c , d , e , f 了!
+15:56:33 <CindyLinz> XD
+15:57:10 <CindyLinz> (,) 配合 HList..
+15:57:25 <CindyLinz> 把 HList 當 tuple 用
+16:04:29 <suhorngM1> (Y)

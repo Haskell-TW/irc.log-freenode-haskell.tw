@@ -1,0 +1,54 @@
+13:42:33 <miaoski> CindyLinz: Scala 髒髒der, 妳一定會喜歡
+14:02:47 <CindyLinz> miaoski: 我不喜歡髒東西啊~~
+14:03:14 <CindyLinz> 我喜歡的東西, 一致性都很高的... @@"
+14:08:03 <miaoski> CindyLinz: Perl ...?
+14:08:07 <miaoski> 一致性地髒 XD
+14:11:08 <CindyLinz> perl 的 syntax 和 semantic 真的很一致啊~
+14:11:28 <miaoski> (<$fh>) ...
+14:11:39 <CindyLinz> 你感覺不一致可能是來自 coding style 不一致.. 它沒有規定 coding style.
+14:11:59 <miaoski> 不，我的感覺來自它的語法和語意 mix 在一起
+14:11:59 <CindyLinz> 我不喜歡的東西是.. 有規定, 但是它的規定本身就不一致
+14:12:07 <miaoski> 那妳一定不喜歡 Scala
+14:12:19 <CindyLinz> (<$fh>) 有什麼問題嗎?
+14:12:33 <CindyLinz> miaoski: 我的確有預感我會不喜歡 Scala... ^^|
+14:12:40 <miaoski> 有，它預設把東西放在 $_ ? ← 這種事我完全記不起來
+14:12:46 <miaoski> 哦 然後  chomp;
+14:12:53 <miaoski> 沒有主詞也沒有受詞
+14:13:45 <CindyLinz> 這個不叫不一致啦.. 是你不喜歡這種設計, 但是它一路上一堆東西都一樣是這樣作, 那還是一致的呀
+14:15:50 <CindyLinz> map, for, grep, given.. 也都是預設把東西放到 $_ :p
+14:27:25 <cibs> miaoski: 奇怪那你 scala 怎麼沒有叫? 也是 List.map (_ * 2) 啊
+14:28:00 <miaoski> cibs: _ 那個和 %1 %2 ← Clojure 一樣啊
+14:28:03 <miaoski> 這個是可以理解的
+14:28:12 <miaoski> 不是看到 _ 就不爽 XD
+14:30:39 <cataska> (_ * _)
+14:30:54 <cataska> 菊花
+14:31:16 <cibs> Perl 的 $_ 也一樣啊，就是傳進 function 的東西啊 XD
+14:32:58 <cibs> 的確是可以 (1 to 10).toList.reduceLeft (_ * _) 這樣
+15:34:00 <miaoski> (_ * _) 雖然不漂亮，但還蠻好接受的
+15:34:07 <miaoski> 我也不知道為什麼 XDD
+16:55:54 <CindyLinz> miaoski: 講不出來.. 那不就是偏見 + 意識型態嘛 XD
+17:21:04 <miaoski> XDDDD 正是
+17:22:51 <CindyLinz> miaoski: 鐵py粉! (指)
+17:31:16 <CindyLinz> 好奇... 台灣講「方向鍵」, 在大陸也是叫「方向鍵」嗎? 還是叫「鍵頭鍵」?
+17:31:22 <CindyLinz> 「箭頭鍵」?
+17:46:49 <darkx> arrow keys!
+17:46:56 <darkx> CindyLinz: 姊姊髒髒 der ~
+18:11:27 <CindyLinz> Perl 版: reduce { $a * $b } 1..10
+18:13:41 <CindyLinz> miaoski: 這樣可以接受嗎? o.o
+18:41:47 <miaoski> CindyLinz: 我是鐵歹粉沒錯 XD
+18:42:09 <miaoski> CindyLinz: 不行... 為什麼 $a * $b ? ... 為什麼是 $a $b
+18:42:20 <miaoski> (顯示為崩潰)
+18:48:34 <CindyLinz> miaoski: 喔.. 一個的時候 $_, 兩個的時候 $a 和 $b 呀~
+18:49:00 <CindyLinz> 像是 Perl 的 sort 是這樣用的 sort { $a <=> $b } (1,4,3,2,6)
+18:49:26 <CindyLinz> miaoski: 為什用「歹」這個字啊?
+18:49:44 <CindyLinz> miaoski: 一個... 壞壞的概念? ^^|
+22:15:54 <miaoski> CindyLinz: py = 歹 啊
+22:16:03 <miaoski> pycon = 歹康
+22:16:25 <miaoski> CindyLinz: 一個 $_ 二個就 $a $b 這根本沒有內在統一嘛
+22:16:50 <miaoski> 只有輸入要 $_ 但同時有隱式輸入和輸出就可以 chomp;
+22:23:18 <CindyLinz> 省略主詞的時候, 以 $_ 作為主詞; 省略受詞的時候, 以 $_ 作為受詞呀~
+22:24:05 <CindyLinz> $a, $b 倒是沒有作為省略詞的用法.. 因為有兩個, 總是需要 explicitly 講出來哪個是哪個..
+22:24:12 <miaoski> 省略受詞，以 $_ 做為攻詞 (誤)
+22:24:22 <CindyLinz> 攻詞?
+22:24:45 <CindyLinz> 動詞倒是都直接用函數或 operator, 沒有省略的用法..
+22:54:54 <miaoski> 攻 vs. 受

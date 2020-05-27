@@ -1,0 +1,3 @@
+10:20:52 <mno2> plv8 在 Ubuntu 13.10 沒有現成套件，裝 12.04 LTS 的 libv8 版本也不對，真麻煩 ~"~
+12:55:44 <mno2> http://explainshell.com/  其實 explainshell 也可以做成 haskell 版本，甚至加進 lazy-doc 裡面
+12:56:00 <mno2> 基本上就是個 static analysis

@@ -1,0 +1,163 @@
+19:47:33 <suhorng> 說到 haskell 的型別, 我一直想去學 RankNTypes 那樣的擴展, 不過還沒時間XD
+19:49:34 <suhorng> 主要是 yinwang 在部落格中批評 HM type system 時提到 "在λ-abstraction 就把 free variable 做 quantification" 我一直想不出來是唬爛還是有辦法弄出實用的東西
+19:50:33 <suhorng> http://www.yinwang.org/blog-cn/2013/04/01/hindley-milner/ 這篇, 以及他的 A Fresh View at Type Inference
+19:55:30 <hashcat> RankNType 拿遞迴定義來講很好套用
+19:57:54 <suhorng> 他的type inference跟type checking不知道要怎麼做
+19:58:06 <hashcat> ??
+19:58:07 <suhorng> haskllwiki是有論文連結...orz
+19:58:15 <suhorng> RankNType
+19:59:44 <hashcat> 用相同的推論系統層層疊上去吧
+19:59:55 <hashcat> 遞迴定義的東西解決方式都是遞迴
+20:00:12 <suhorng> 不知道如果在λ就做generalization會不會讓某些程式沒法type check
+20:00:31 <hashcat> 啥意思?
+20:02:44 <suhorng> 噢 比較精確的敘述在那個投影片中
+20:03:23 <suhorng> 比如如果把 λf. f(λx. x) 推論成 ((forall a. a -> a) -> b) -> b, 有沒有可能讓某些 HM 下原本可以 typecheck 的東西無法再typecheck
+20:09:51 <hashcat> 理解不能
+20:10:43 <hashcat> 在lambda時推論出型別會讓HM無法繼續推論?
+20:12:18 <suhorng> 是說 HM 的 forall quantifiaction 都是放再最前面
+20:12:42 <hychen> letoh, 那天scm有解說了一下ArrowLoop
+20:12:47 <hychen> letoh, 我之前都理解錯了
+20:12:59 <suhorng> 要做 type checking 時就 instantiate 一下 (= 一次把所有forall都用完)
+20:13:37 <suhorng> 不過現在 forall 的位置會亂跳要怎麼做呢？
+20:14:42 <letoh> 嗯
+20:15:09 <letoh> 你是說你的 python 版嗎? 我覺得比較像別的東西，只是名字一樣而已XD
+20:15:17 <suhorng> hychen: http://ideone.com/6Uj7D1
+20:15:39 <letoh> 「那天」是指哪一天?
+20:15:43 <suhorng> arrow版本的 Y combinator XD?
+20:15:50 <hychen> letoh, functional thursday
+20:16:00 <hychen> 不太算
+20:16:32 <letoh> 喔喔喔  上次講遊戲那場?
+20:16:56 <hychen> 比較像建立一個flag, 這個flag是本身運算的結果
+20:17:41 <suhorng> letoh: 講遊戲那場的下一場 (7/4)
+20:17:42 <letoh> 我之前說我的理解是 closed loop control system，這樣跟 scm 的講解一樣嗎?
+20:17:43 <hychen> 因為haskell 的 lazyness 所以可以這樣寫
+20:18:14 <hychen> suhorng, 要說arrow版的y combinator也是啦
+20:18:41 <letoh> 嗯.. haskell 的 arrow loop 的確得用到 lazy，所以我覺得在 python 模仿一個很麻煩XD
+20:18:47 <hychen> http://fssnip.net/4D
+20:19:04 <hychen> 用arrow loop可以只要travel 一次
+20:19:31 <letoh> http://en.wikipedia.org/wiki/Closed-loop_transfer_function  我的理解是這個
+20:20:00 <letoh> 喔.. repmin 好像是 circular programming 裡給的範例?
+20:20:09 <hychen> letoh, yes
+20:25:12 <hychen> letoh,  closed loop control system 這是從哪邊跟arrow loop相關?
+20:25:23 <letoh> 求解的方式
+20:26:19 <hychen> 那個圖裡面的+跟-是什麼意思?
+20:26:30 <letoh> 我覺得這跟 pid controller 之類的都很類似 把所有的 loop 動作都封裝起來了
+20:26:40 <letoh> 你可以簡單想成誤差修正
+20:27:08 <hychen> hmmm
+20:27:14 <letoh> repmin 裡面不是有一些值會用到前一次的運算結果嗎?
+20:27:26 <letoh> 就跟這個過程有點像
+20:27:42 <hychen> 嗯 應該是
+20:27:54 <letoh> 所以之前看到 repmin 直覺想到大學時的作業XD
+20:28:07 <hychen> 不過scm那時的講法比較不是著重在這裡
+20:28:19 <letoh> 只是 arrowloop 用不同型式把這些計算的過程封裝起來
+20:28:54 <letoh> 我只是先從應用倒過來理解 arrowloop 而已  一開始沒想到有 lazy，所以看半天看不懂
+20:29:20 <hychen> 一開始會卡在那個feadback是哪來的
+20:30:01 <letoh> feedback 要從前一次的結果算出來呀 (要定義算出 feedback 的方式就是)
+20:30:13 <hychen> letoh, 我是說第一次執行
+20:30:24 <letoh> 喔  要給初始值
+20:30:43 <letoh> 例如先給個 0.. 所以一開始誤差可能會很大XD
+20:30:45 <hychen> letoh, 沒有需要給初始值ㄟ
+20:31:09 <suhorng> 像是直接短路起來
+20:31:14 <letoh> 喔.. arrowloop 是沒給初始值沒錯
+20:31:37 <hychen> f (b,d) = (drop (d-2) b, length b)
+20:31:40 <suhorng> 所以亂寫會爆炸 XDDD e.g. loop (\(x, y) -> (y, y+1))
+20:31:46 <hychen> loop f "abcderf"
+20:32:49 <hychen> 不過這個terminate 條件要怎麼計算?
+20:33:13 <suhorng> 一次到位的
+20:33:23 <letoh> 也是要定出來啊  例如誤差小於某個範圍  或長度達到某個限制
+20:33:35 <letoh> 不然 haskell 會一直跑不完
+20:33:40 <suhorng> loop f "abcderf" => 用到 drop (d-2) b => 用到 d => d是length b, 就終止了
+20:33:48 <letoh> 我之前隨便寫一下就變無窮迴圈XD
+20:34:41 <suhorng> 這就像對於 f("abcderf", 5) = (drop 5 "abcderf", 5) 這裡個 d 就是這個等式右邊的 "解" (不動點)
+20:35:05 <suhorng> 打錯XD 應該是 7
+20:35:32 <letoh> 不太懂這麼的不動點要怎麼看?
+20:35:44 <letoh> 等式右邊的解是什麼意思呢?
+20:35:58 <hychen> 我剛想成電路上你的output達到穩態就是terminated ...
+20:36:28 <letoh> 穩態也是定義出來的啊
+20:36:31 <suhorng> 對 是穩態
+20:36:51 <suhorng> 像loop (\(x, y) -> (y, y+1)) 這個會變 bottom (不會停止的計算)
+20:37:18 <hychen> 就是左邊的input跟右邊的feadback是一致的
+20:37:54 <suhorng> loop f = \input -> let (output, steady_state) = f (input, steady_state) in output
+20:38:08 <letoh> 嗯
+20:38:28 <letoh> 有點忘了原本的式子，看了以後就想起來了XD
+20:38:33 <suhorng> 這裡 steady_state 右邊代入 f 後左邊跑出來還是一樣 steady_state, 姑且稱為不動點 XDDD
+20:39:25 <letoh> 嗯，把不動點用穩態來解釋就可以理解了
+20:40:54 <hychen> suhorng, 我覺得arrow loop 要判斷會不會terminate對一般的programmer不太直覺
+20:41:26 <suhorng> 不知道要怎麼判斷阿ww
+20:43:08 <hychen> 有方法可以證嗎? ;p
+20:43:18 <hychen> 這直觀上看不到terminate條件
+20:43:30 <suhorng> 欸, 這跟寫一個遞迴函數問他對某個input會不會終止一樣吧?
+20:44:02 <hashcat> http://research.microsoft.com/en-us/um/people/simonpj/papers/higher-rank/putting.pdf
+20:44:13 <hashcat> 直接看第十二頁
+20:44:57 <suhorng> hashcat: 感謝
+20:45:15 <hashcat> 任意rank型別系統
+20:45:29 <letoh> 可是有些情況就是沒辦法直觀看出會不會終止呀? 例如要收斂一個函數，但實際資料餵進去以後卻一直在發散
+20:47:07 <hychen> suhorng, 一般function是programmer去寫guard, 可是loop看起來是ghc幫你作guard?
+20:47:20 <suhorng> 都一樣
+20:49:08 <suhorng> > loop (\(n, factorial) -> (factorial n, if n == 0 then 1 else n * factorial (n - 1))) 5
+20:49:09 <lambdabot>   Occurs check: cannot construct the infinite type: c0 = c0 -> c0
+20:49:09 <lambdabot>  Expected t...
+20:49:29 <suhorng> > loop (\(n, factorial) -> (factorial n, \m -> if m == 0 then 1 else m * factorial (m - 1))) 5
+20:49:30 <lambdabot>   120
+20:53:30 <hychen> 嗯, 我懂了
+20:53:50 <hychen> loop 沒有管terminat, 他只是單純做combine而已
+20:54:26 <hychen> 不過這東西實際上可以在那應用?
+20:55:39 <hashcat> 接反饋電路?
+20:56:17 <letoh> hychen: 我剛剛講的應用不算嗎?
+20:56:31 <hychen> letoh, 不用loop也可以做很好啊 XD
+20:56:48 <letoh> 那只是看要不要封裝而已吧
+20:56:53 <letoh> 當然都有辦法算
+20:59:23 <suhorng> 應用當然就是當作一個常用combinator來用 XDD
+20:59:49 <suhorng> 不然在arrow遞迴的定義東西時, 不用loop每次都要重新寫一遍
+20:59:59 <suhorng> arrow syntax有個rec就可以用loop來做
+21:01:19 <hashcat> 一直想到電路的東西
+21:01:41 <hashcat> 那種需要監控自己狀態的系統
+21:01:42 <hychen> hashcat, 是ㄚ, 都可以拿數位邏輯的東西來類比
+21:02:19 <hashcat> 一般機器也可以, 機器產生的溫度當輸出
+21:02:36 <hashcat> 接回機器, 過熱減速之類的
+21:02:37 <suhorng1> http://en.wikibooks.org/wiki/Haskell/StephensArrowTutorial#Recursive_bindings
+21:03:04 <favonia> hashcat: nice. 我不知道原來已經有人設計出演算法
+21:03:29 <suhorng1> 他這裡倒是明確的變成state, 不一定要變成state. 那是能做遞迴定義可以做的一件事
+21:04:16 <suhorng1> Yampa Arcade那個遊戲範例中則是遞迴定義速度 (加速度, 積分...orz)
+21:04:28 <favonia> hashcat: 應該這樣說，完整 n-rank 一定沒救，我不知道有人有設計出（至少他覺得）合理的 annotation
+21:05:45 <hashcat> favonia: 我只是直接找答案, 結果出現在第一頁
+21:06:16 <hychen> letoh, 你大學時讀控制的?
+21:06:50 <favonia> hashcat: 是說我現在弄的東西離「實用」語言好遠啊... Haskell 很久沒管了 xD
+21:07:04 <favonia> hashcat: 最近剛碰過 n-rank (但沒有 typeclass)
+21:07:10 <letoh> 算是吧
+21:07:25 <hashcat> favonia: 你在用啥實用很久的東西?
+21:07:38 <letoh> 喔 剛剛 suhorng1 提到 combinator 應該是最有用的吧
+21:07:46 <hychen> letoh, 嗯
+21:07:49 <favonia> hashcat: 「實用很久」是什麼意思？
+21:07:55 <letoh> 不然說真的要算的方式很多，沒必要封裝成這種樣子再算
+21:08:21 <hashcat> favonia: 講錯是很遠..
+21:08:25 <hashcat> 實用很遠
+21:10:16 <favonia> hashcat: 是指風格。充滿數學證明之類的。當然要用可以用，可以寫出編譯器之類來跑，可是要「直接」可以用（跟 Haskell 比）很遠...
+21:12:26 <letoh> 突然想到一個問題  當初 haskell 在設計時，有考慮到實用嗎? 還是只是驗證理論?
+21:12:48 <favonia> letoh: 應該都有吧我猜
+21:14:32 <hychen> 應該最終都會希望能實用吧
+21:14:48 <letoh> 或者應該說實用到哪個領域?
+21:15:19 <favonia> letoh: 不知道。但那個年代的資料應該還很好查到
+21:16:15 <hashcat> 其實當作新語言設計的參考很實用
+21:17:00 <hashcat> 其他語言都直接拿走haskell的東西換個語法變成自己的
+21:17:31 <suhorng1> XDD
+21:17:50 <letoh> 這是不是代表 haskell 的語法還是比較不大眾化? XD
+21:17:59 <hychen> hashcat++
+21:18:33 <hashcat> 大眾化好像也不好阿
+21:18:46 <hashcat> 什麼++
+21:20:09 <letoh> 其實沒什麼好不好的問題  大眾化只是感覺上接受度比較高吧
+21:20:35 <hychen> "其他語言都直接拿走haskell的東西換個語法變成自己的" 說的好 XD
+21:20:44 <hychen> letoh, http://www.icfpconference.org/contest.html
+21:20:51 <hychen> letoh, 那天scm 還有廣告這個
+21:21:08 <letoh> 喔  這好像每一屆都有
+21:21:34 <letoh> 有一年好像是實作 virtual machine ?
+21:21:39 <letoh> uvm 之類的  忘了
+21:26:39 <hychen> https://www.youtube.com/watch?v=gfURR3g6iXI
+21:26:45 <hychen> 我好想買這套牌組XD
+22:24:38 <favonia> letoh: 快報名啊，快開始了 xD
+23:24:53 <CindyLinz> 報名已經結束了? XD http://www.eventbrite.com/event/3795287808?ref=ebtnebregn&ebtv=C
+23:25:02 <CindyLinz> 啊不對 這是 2012 的
+23:25:34 <hashcat> 問個問題
+23:26:15 <hashcat> 跟haskell無關
+23:28:38 <hashcat> 為啥沒人用prolog做數學證明, 都用啥coq
+23:51:32 <CindyLinz> 你可能要等久一點看有沒有人能回答 ^^|

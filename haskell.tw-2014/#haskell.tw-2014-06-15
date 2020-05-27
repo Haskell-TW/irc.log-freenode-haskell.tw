@@ -1,0 +1,9 @@
+14:00:20 <caasihuang> c9sloud: match_entry 系列 function 之後會加上 r3 字首嗎？
+15:26:10 <c9sloud> 嗯嗯應該要
+15:26:18 <c9sloud> 但是我現在還不敢去動 XD
+15:26:46 <c9sloud> 應該會是在下一個版本
+15:26:46 <c9sloud> 把所有的 public symbol 都加上 r3 prefix
+15:41:49 <caasihuang> c9sloud++ 瞭解
+16:29:33 <c9sloud> 應該會是 minor version, not patch version
+16:29:37 <c9sloud> 1.4
+16:29:53 <c9sloud> so downstream may lock their version to 1.3.*

@@ -1,0 +1,20 @@
+00:08:54 <cataska> petercommand: 你的意思是這樣嗎 (foldr step id xs) z
+00:09:42 <petercommand> cataska: 函數套用是左結合的
+00:09:51 <petercommand> cataska: 對
+00:10:28 <cataska> ok
+00:11:35 <CindyLinz> (((foldr step) id) xs) z
+00:12:26 <CindyLinz> WLP
+00:13:08 <petercommand> WLP?
+00:13:47 <cataska> WLP?
+00:14:58 <CindyLinz> We Love Parenthesis
+00:15:08 <CindyLinz> 我剛剛發明的 (逃
+00:15:13 <petercommand> XDD
+00:15:41 <cataska> Lisper 最愛
+00:16:26 <petercommand> We Love Dollars => foldr $ step $ id $ xs $ z
+00:17:35 <CindyLinz> (Y)
+00:17:43 <CindyLinz> Money 更好 :p
+00:59:54 <cataska> petercommand: ((x_n-1 `step` (x_n `step` id)) z
+01:00:07 <cataska> 這樣嗎
+01:12:31 <petercommand>  對阿
+01:15:41 <cataska>  (x_n `step` id) 是怎麼轉成 (\a -> id (f a x_n)) 呀，不懂
+01:20:40 <cataska> 恩好，我懂了 www

@@ -1,0 +1,254 @@
+00:03:27 <mno2> http://www.quora.com/Jokes/What-are-some-good-math-jokes
+00:03:38 <mno2> 第一個回答很北七，但我笑了 xD
+00:05:05 <godfat> XDDDDDDDDD
+00:06:17 <mno2> http://www.quora.com/Lilly-Kuleshova/Posts/How-Japanese-school-children-learn-to-multiply  這個太強了 wwww
+00:08:53 <godfat> 我有聽過這個作法耶
+00:09:04 <b4283> 光是對準最後一個階段的加法就很累了 =_=
+00:09:39 <mno2> 我有看過，但沒看過乘那麼多位的
+00:09:57 <godfat> XDDD
+00:15:26 <godfat> http://www.wncinfosec.com/dropbox-opening-my-docs/
+00:15:27 <godfat> 有人特製一些軟體打開後會 callback 回去的文件，
+00:15:27 <godfat> 注意到 dropbox 會看你的文件內容
+00:26:31 <mno2> http://www.quora.com/Jokes/What-are-some-jokes-about-Windows-8
+00:30:29 <mno2> http://www.quora.com/What-is-it-like-to-have-a-name-that-is-regularly-rejected-as-fake-by-forms-on-web-sites
+00:33:23 <godfat> 我認真覺得名字不該有限制...
+00:35:08 <CindyLinz> 那我的名字可以叫作 "cindy' or 1 --" 嗎?
+00:35:39 <godfat> 可以，因為不行的話就是程式寫不好 XD
+00:35:43 <CindyLinz> XDDD
+14:02:43 <MnO2> godfat: unicorn 可以直接跑 rack 嗎?
+14:28:08 <MnO2> godfat: unicorn 我不知道哪裡弄不好，接 rack 都會狂拚甚麼 reload 裡面找不到 run Rack::URLMap 的東西
+14:28:14 <MnO2> 換用 thin 就好了
+14:28:32 <MnO2> (我有用 rvm, 不知道跟這有沒有關係)
+14:33:43 <MnO2> 換變成其他問題 xD
+14:33:56 <MnO2> 太慘惹
+14:44:05 <godfat> unicorn 可以跑 rack
+14:44:05 <godfat> URLMap 在 rack 裡，不應該沒有 @@
+14:44:06 <godfat> Gemfile 有改嗎？ thin 的錯誤是啥？
+14:47:57 <MnO2> !! Unexpected error while processing request: undefined method `each' for #<EventMachine::PeriodicTimer:0xa6f5900>
+14:47:58 <MnO2>  狂噴
+14:48:08 <MnO2> 噴一下後就掛了 <-- 這是用 thin 的錯誤
+14:48:43 <godfat> .....@@" 看來這要 debug 了... XD
+14:49:37 <MnO2> http://pastebin.com/j4qH3LRm   gemfile 都加了
+14:50:34 <MnO2> 不知道跟 openvz 有沒有關係
+14:50:56 <godfat> 奇怪，我看起來他好像寫不對... 原本會動嗎 @_@
+14:52:18 <godfat> 解釋一下好了... 看起來他是把 EventMachine::PeriodicTimer 當成 response body 丟回去了
+14:52:18 <godfat> 然後 https://github.com/g0v/Logbot/blob/master/app.rb#L72-L88
+14:52:18 <godfat> 這樣寫就很怪，怎麼會在 request cycle 裡面執行 event loop?
+14:52:18 <godfat> 結果就把這個 timer 傳回去了（推測）
+14:52:30 <MnO2> 用 shotgun 就會動 xD
+14:52:36 <godfat> ........
+14:52:48 <MnO2> 把 shotgun 拿掉就甚麼都動不了 xDD
+14:53:01 <godfat> 絕對寫壞了
+14:53:15 <godfat> shotgun:
+14:53:15 <godfat> The shotgun command starts one of Rack's supported servers (e.g., mongrel, thin,
+14:53:16 <godfat> webrick) and listens for requests but *does not load any part of the actual
+14:53:16 <godfat> application*.
+14:53:43 <MnO2> 原本就直接接 webrick 吧
+14:54:03 <MnO2> 應該是預設的 ?
+14:54:56 <godfat> webrick 是 stdlib 裡的 server, 純 ruby 寫成，很慢，而且常常有問題
+14:55:43 <b4283> stdlib 反而比較有問題 @@
+14:56:35 <godfat> 我猜是少人用吧，而且太慢沒辦法在 production 上跑
+14:56:54 <godfat> 碰到問題大部分的人解法也可能是就換一套，懶得修 XD
+14:57:24 <godfat> （包括我...畢竟有時候很難說到底是不是真問題，要花時間看）
+14:58:24 <godfat> web server 這種東西真是乍看之下都沒問題，承載量一大就見真章，
+14:58:25 <godfat> 然後又很難說為什麼有差 @@"...
+14:59:14 <b4283> 其實 log 放 webrick 就可以了啦 XD
+14:59:29 <b4283> 每天的 request 不曉得有沒有 10 個 XD
+15:00:48 <b4283> 喔喔，現有的是放在 nginx 上..
+15:00:58 <MnO2> b4283: 那一台 memory 不大，最近開始會把 memory 吃爆。所以想說要瘦身
+15:02:17 <godfat> orz 原本的寫法.... 他熟 ruby 嗎？ @@"
+15:02:18 <godfat> https://github.com/g0v/Logbot/commit/1b140d3d9cdb1c3045038bc67a0740d71cb98cd4
+15:03:17 <godfat> 我抓下來看看怎麼拿掉 shotgun 好了
+15:03:58 <MnO2> 太慘惹
+15:05:16 <MnO2> 我現在先弄回原來的設定，不過現在大概都是撐不到一天就會掛
+15:05:57 <MnO2> 理論上 god 應該要能夠重啟才對.. 不知道為什麼沒用
+15:08:55 <godfat> 暫離，回來再看
+16:32:42 <godfat> 寫得好詭異，看不太懂...
+16:40:25 <godfat> 我可能看懂了.... 我想想怎麼做比較對..
+19:25:19 <MnO2> godfat: 我似乎知道問題在哪了
+19:25:24 <MnO2> http://libraggi.rubyforge.org/async_sinatra/Sinatra/Async.html#method-i-aget
+19:25:42 <MnO2> 用 aget 之後就好了
+19:26:14 <MnO2> (只是 trial and error 試出來的，其實我還沒看完)
+19:26:25 <godfat> XD ok...
+19:26:26 <godfat> 我正在大改寫 -_-
+19:26:26 <godfat> async_sinatra 整個就是個 hack...
+19:27:14 <godfat> 大抵上是改好了，把整個 sinatra 和 eventmachine 拔掉了...
+19:27:15 <godfat> 不過 poll 的部份 http log 不見了，正在看要怎麼弄出來
+19:27:39 <MnO2> xD
+19:28:00 <MnO2> 你說 async sinatra 是 hack 是怎麼一回事
+19:28:14 <MnO2> 等你改完可以大概解釋一下嗎? xD
+19:28:33 <godfat> 我覺得那整個就是在一個歪掉的架構下用更歪的方式把東西弄出來
+19:28:33 <godfat> ok XD
+19:28:34 <godfat> 不過滿複雜的，可能要從很前面說起 XD
+19:28:38 <MnO2> 啊，另外有一個 hack 我想說有沒有好的 gem 可以簡單弄掉
+19:28:42 <MnO2> https://github.com/g0v/Logbot/blob/master/views/widget.erb#L20
+19:29:13 <MnO2> 這邊是在說，如果有人說一句話裡面有連結的話
+19:29:14 <godfat> url escape?
+19:29:39 <MnO2> web 介面顯示的時候希望換成 <a href="xxxx">xxxx</a>
+19:29:58 <MnO2> 然後 au 用了一個噁心的方式解掉 xD
+19:30:03 <MnO2> 原本他沒有 escape
+19:30:03 <godfat> 這個好多年前我有做過 XDD
+19:30:23 <godfat> https://github.com/godfat/friendly_format
+19:30:46 <godfat> 最後一次更新是兩年前，不知道還會不會動 XDD
+19:32:24 <MnO2> 看起來不錯
+19:32:45 <godfat> https://github.com/godfat/friendly_format/blob/master/lib/friendly_format.rb#L104-L123
+19:32:45 <godfat> 也是滿噁心的 XD
+19:32:45 <godfat> 不過 irc 裡面沒有 html 吧？這樣不用做這麼複雜
+19:33:11 <MnO2> 照他的邏輯是不用，只要 link 就好
+19:33:22 <MnO2> 其他就只是 escape 調
+19:34:05 <MnO2> 那個 rexpr 真是噁心..
+19:34:06 <godfat> ok, 我晚點看看，應該可以用很簡單的方式處理
+19:34:06 <godfat> friendly_format 會很複雜是因為要處理 html
+19:37:35 <godfat> 確認了 hijack 了之後 Rack::CommonLogger 不能動 @_@...
+19:37:36 <godfat> 我想想看怎麼處理...
+19:37:36 <godfat> 我用 hijack 處理 poll 應該會乾淨許多
+19:40:11 <MnO2> 為了修 Logbot 讓我對 ruby 生態系多了解不少 xD
+19:44:49 <godfat> 恭喜 XDD
+19:47:13 <godfat> 你知道 ajax 的 connection 會 keepalive 嗎？ @_@
+19:50:34 <godfat> 所以 hijack 後果然要自己處理 log orz...
+19:50:34 <godfat> https://github.com/rack/rack/pull/587
+19:59:11 <MnO2> keep alive 跟 hijack 有甚麼關係?
+19:59:59 <godfat> 因為我 hijack 寫得很單純，東西寫完就直接把 socket 關掉了
+19:59:59 <MnO2> hijack 可以理解成中間層對 request 動手腳嗎?
+19:59:59 <godfat> 如果說原本有 keep-alive, 不想因此把他弄壞 XD
+20:00:18 <godfat> 應該說對 response 動手腳，直接跟 web server 拿 socket
+20:01:51 <MnO2> 還可以跟 web server 拿 socket @@
+20:01:57 <MnO2> 總覺得怪怪的
+20:02:24 <godfat> 我不知道，但至少我覺得 streaming 這樣做比較正常 XD
+20:08:10 <MnO2> 是因為沒有辦法讓 web server 保持住 socket 嗎? 透過 web server 寫回去就會關掉?
+20:09:55 <godfat> 不是，因為原本 rack 的介面就很難做 streaming
+20:09:55 <godfat> 原本的想法是 response body 會是 enumerable,
+20:09:55 <godfat> 但實際上要建立這個 enumerable 很麻煩
+20:11:56 <MnO2> 喔喔，所以是 rack 他本身在抽象的時候就沒考慮進去
+20:12:20 <godfat> 我覺得算是考慮不健全 XD 然後後來就一堆奇怪的 hack...
+20:15:39 <MnO2> 那這樣的話，換 web server 就要重寫?
+20:16:25 <godfat> 有些奇怪的 hack, 其他 server 也支援..
+20:16:26 <godfat> rainbows 裡就支援了一些 eventmachine 上很詭異的 hack
+20:17:19 <godfat> 我問 unicorn/rainbows 作者為什麼要用這些奇怪的作法，不用其他比較正常的方式
+20:17:20 <godfat> 作者說... 因為其他 server 支援，做起來也不難，所以就做到支援這樣
+20:19:39 <MnO2> 恩..  聽起來跟 unix 用 . 開頭當隱藏檔是類似的情節 xD
+20:21:41 <godfat> 也許吧.. XD 不過 unix 的隱藏檔不會造成更多的錯誤，
+20:21:42 <godfat> rack 裡的 async.callback 等等東西，根本愈搞愈歪，
+20:21:42 <godfat> 最扯的是 rack-fiber_pool O_o
+20:22:12 <godfat> 講錯...
+20:22:53 <godfat> 是 async-rack
+20:22:53 <godfat> https://github.com/rkh/async-rack/tree/master/lib/async_rack
+20:22:54 <godfat> 全部的東西都重作一次 O_o
+20:24:40 <godfat> 用 async_sinatra 等於是打爛所有 rack 的 post processing,
+20:24:41 <godfat> 然後 async_rack 重作 rack 裡的東西，讓用 async_sinatra 時
+20:24:41 <godfat> rack 的 post processing 回復正常運作
+20:24:59 <godfat> 明明應該做在 server 上的東西，做到 application 上，整個就亂七八糟
+20:25:31 <MnO2> xD
+20:26:37 <MnO2> 大亂鬥
+20:28:58 <godfat> 我當時在看這些，為了搞懂這些花了很多心力
+20:28:58 <godfat> 覺得超複雜的... 要弄到好超難的
+20:28:58 <godfat> 但整個理解後，就覺得很詭異，明明在 server 做就好了
+20:28:58 <godfat> 在 application 上搞這些幹嘛 @_@
+20:28:58 <godfat> 變成 application 要詐騙 server, 然後東西再自己處理...
+20:29:47 <godfat> 嘛，仔細想想，我這裡也不用 hijack,
+20:29:48 <godfat> 改用 rainbows 的話直接卡在那裡就好了，
+20:29:48 <godfat> poll 也不是真的要做 streaming
+20:34:30 <MnO2> 這樣就是只能用 rainbows 嗎?
+20:35:06 <godfat> 也不是，如果不介意 server 被卡住的話，用啥都可以 XD
+20:36:03 <MnO2> 喔喔，其他 request 就讓他掉
+20:36:15 <godfat> 對
+20:36:18 <MnO2> 其實量也不大，應該是沒差
+20:36:39 <godfat> eventmachine 那段就改成這樣：
+20:36:40 <godfat>       # we simply block here because we're in a threaded server anyway
+20:36:41 <godfat>       n = 0
+20:36:41 <godfat>       loop do
+20:36:41 <godfat>         sleep 0.5
+20:36:41 <godfat>         msgs = fetch_messages(channel, date)
+20:36:41 <godfat>         if n <= 120 && json = extract_if(msgs, time)
+20:36:41 <godfat>           break json
+20:36:42 <godfat>         elsif n <= 120
+20:36:42 <godfat>           n += 1
+20:36:43 <godfat>         else
+20:36:43 <godfat>           break extract(msgs, time)
+20:36:44 <godfat>         end
+20:36:44 <godfat>       end
+20:39:12 <MnO2> break extrfact 是 ?
+20:40:17 <godfat> break value 就是跳出 loop 且 loop 的 value 是 value
+20:40:17 <godfat> extract(msgs, time) 會給 json
+20:40:59 <godfat> 所以這裡是找到資料就給 json,
+20:40:59 <godfat> 反之最多等 60 秒，每 0.5 秒看一次，
+20:41:00 <godfat> 還是沒東西，仍然吐個 json 回去
+20:42:26 <godfat> ok, 有興趣的話試試看 XD
+20:42:27 <godfat> https://github.com/godfat/Logbot
+20:42:27 <godfat> 我沒測過 foreman 和 god, 只照字面上調整而已
+20:42:57 <MnO2> OK
+20:47:29 <MnO2> Gemfile 裡面沒有 rainbows
+20:47:44 <godfat> orz 沒改到 XD
+20:48:06 <godfat> pushed
+20:52:04 <MnO2> https://gist.github.com/MnO2/6550273
+20:52:07 <MnO2> jellyfish crash
+20:52:33 <godfat> __dir__ 好像是 ruby 2.0 才有.. @_@
+20:52:50 <godfat> 能升級嗎？ XD
+20:53:06 <MnO2> 可
+20:53:30 <godfat> 太好了 XD 不過我還是加個相容介面
+20:56:28 <MnO2> 現在主流已經是 2.0 了嗎
+20:56:39 <godfat> 我想應該是？
+20:57:57 <MnO2> 亂碼 @@
+20:57:59 <MnO2> http://blog-mno2.csie.org/channel/codefortomorrow/2013-09-11
+20:58:50 <godfat> 我看起來正常，我加個 header 好了
+20:59:21 <MnO2> 我前面有擋 nginx 做 virtual host
+20:59:28 <MnO2> 可能是 header 沒有 forward
+21:01:15 <godfat> pushed
+21:01:16 <godfat> -use Rack::ContentType
+21:01:16 <godfat> +use Rack::ContentType, 'text/html; charset=utf-8'
+21:04:32 <MnO2> 好像可以正常工作了，喔耶!
+21:04:51 <godfat> 耶~~ 希望有比較瘦 XD
+21:04:52 <MnO2> 感謝 godfat
+21:04:56 <godfat> 不會 XD
+21:05:36 <MnO2> 看起來瘦了很多 www
+21:05:55 <godfat> 是喔 @_@ 還沒跑多久就看得出來？
+21:06:24 <MnO2> process 數就不同啊
+21:07:52 <godfat> XDD shotgun 一定有問題.. foreman 可以用 shell script 取代（我沒寫，想說才兩行 XD）
+21:07:53 <godfat> god 的話我覺得應該是不用才對... unicorn/rainbows 可能都比 god 穩 @_@
+21:09:04 <MnO2> 太慘了.. monitor 人家的比被 monitor 的還不穩..
+21:09:39 <godfat> 我也不知道為什麼 @_@ 不過還是滿多人愛用的，可能因為很有彈性吧
+21:13:46 <MnO2> 新版跑一陣子看看，為了感謝 godfat，取名叫 godfat-logbot
+21:14:50 <godfat> XDD
+21:15:04 <godfat> logfat
+21:15:43 <MnO2> 也可以 wwww
+21:22:15 <CindyLinz> wwww
+22:05:56 <godfat> 話說回來，為什麼是： @msgs[i]["msg"].gsub(/&(?!nbsp;)/, '&amp;') 呀？
+22:05:57 <godfat> 裡面要處理 html 嗎？
+22:08:46 <CindyLinz> 為什麼對 &nbsp; 特別處理啊? @@"
+22:09:12 <godfat> 整句是這樣：
+22:09:12 <godfat> <% linked_msg = @msgs[i]["msg"].gsub(/&(?!nbsp;)/, '&amp;').gsub(/<(?!\/?span)/, '&lt;').gsub(/http[s]*:\/\/[^\s]+/, '<a href="\0">\0</a>') %>
+22:09:25 <godfat> 我想不透 XD
+22:09:33 <CindyLinz> 原來還有 &lt; XD
+22:10:04 <CindyLinz> 咦不對 :p
+22:41:44 <godfat> 改成這樣看看
+22:41:45 <godfat> https://github.com/godfat/Logbot/commit/9ccfefe085c1d4c39540225d8dc83e10bdfdcf55
+22:41:46 <godfat>       def user_text text
+22:41:46 <godfat>         autolink(CGI.escape_html(text))
+22:41:46 <godfat>       end
+22:41:46 <godfat>       def autolink text
+22:41:47 <godfat>         text.gsub(%r{https?://\S+\b}, '<a href="\0">\0</a>')
+22:41:48 <godfat>       end
+22:42:02 <MnO2> 不用  html, 只是要跳掉 tag, 所以就直接把 < 變成 &lt;
+22:42:17 <MnO2> 這樣瀏覽器就不會認成 tag 了
+22:42:33 <godfat> ok, 那我這樣做應該沒問題
+22:46:06 <MnO2> 我以前都沒想過 escape  <  這種招數
+22:46:36 <godfat> 我還滿常這樣做的，寫起來比較快 XD
+22:47:08 <godfat> 不過不見得所有地方都有用就是了
+22:51:18 <MnO2> https://gist.github.com/MnO2/6551736
+22:51:22 <MnO2> 現在會噴這個訊息
+22:53:08 <godfat> 這個 TypeError: no implicit conversion of String into Integer
+22:53:08 <godfat> 通常表示錯把 array 當成 hash, 因為用字串去當 arrary index..
+22:55:22 <godfat> 看到問題了，原來我打錯 XD
+22:56:40 <godfat> pushed
+22:56:40 <godfat> https://github.com/godfat/Logbot/commit/a645ad4f818f8f9911b2a53330ca9d15c902d728
+22:56:40 <godfat> 原本的 msgs 跟 msg 太像了，看錯..
+22:56:45 <MnO2> 似乎少一層 index ?
+22:56:56 <godfat> 對
+22:56:57 <MnO2> OK
+23:28:02 <godfat> 啊啊啊，我知道為什麼是 &nbsp; 跟 /span 了...
+23:28:02 <godfat> 居然有這行
+23:28:03 <godfat> msg["msg"].gsub!(/^\u0001ACTION (.*)\u0001$/, "<span class=\"nick\">#{msg["nick"]}</span>&nbsp;\\1")
+23:29:32 <godfat> 修改原始資料不大對... 不過我改下去的話就跟原本格式不合了
+23:34:21 <MnO2> 那樣就還要再寫一隻做 migration xD
+23:35:21 <godfat> :/ 不跑 migration 的話大概就是有些人講話會出現 <span class... 這樣了 XD
+23:35:57 <godfat> 不過我現在因為一律 escape, 大概已經會開始看到了...

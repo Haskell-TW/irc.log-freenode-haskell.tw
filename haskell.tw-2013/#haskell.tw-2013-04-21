@@ -1,0 +1,9 @@
+13:26:39 <MnO2> http://stackoverflow.com/questions/15182496/why-does-this-code-print-hello-world  這什麼鬼招..
+13:29:14 <MnO2> http://www.yinwang.org/blog-cn/2013/04/18/language-design-mistake2/
+13:29:19 <MnO2> http://www.yinwang.org/blog-cn/2013/04/20/editor-ide/
+13:37:35 <CindyLinz> 這... # why-does-this-code-print-hello-world
+13:37:46 <CindyLinz> java 有定死 random 怎麼實作嗎 @@"
+14:02:15 <MnO2> 不知道..
+14:40:05 <letoh> emacs 在「跳转到定义」時可以不用瞎猜呀
+14:40:27 <letoh> 要不要讓 emacs 瞎猜是使用者的選擇
+23:16:10 <petercommand> random可以print hello world還蠻新奇的XDD

@@ -1,0 +1,3 @@
+13:42:02 <suhorng> functional dependency該不會是從資料庫借來的名字吧
+13:47:03 <suhorng> 不過寫錯的話, 在用到的時候才會報錯 XD http://stackoverflow.com/questions/7436109/haskell-functional-dependency-conflict　順便介紹type families...http://stackoverflow.com/questions/20040224/functional-dependencies-in-haskell
+18:00:00 <suhorng> http://byorgey.wordpress.com/2010/06/29/typed-type-level-programming-in-haskell-part-i-functional-dependencies/ nice introduction

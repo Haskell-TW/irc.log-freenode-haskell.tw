@@ -1,0 +1,166 @@
+00:16:09 <c9sloud> CindyLinz: 還是你要改用 cython ?
+00:16:18 <c9sloud> (逃
+00:16:37 <monochrom> 從前有一間程式員學堂. 學堂裏有一位學長, 寫了很多高超的程式, 深得很多學弟學妹景仰. 他在facebook寫了句名言, "class 如菩提樹, state 如明鏡台, 日日常測試, 莫使隱藏bug", 得到很多同學+1. 大家都認為, 下一任校長非他莫屬了. 有一天, 來了一位新學弟, 見了那名言後就留言, "菩提本無 class, 明鏡亦無 state, 本來無 object, 何處隠藏 bug". 校長驚訝他
+00:16:37 <monochrom> 年紀輕輕就參透了參透(第二個"參透"是"南無參照透明性"的簡稱), 潛質無可限量, 就決定下一任校長就是他.
+00:16:45 <CindyLinz> c9sloud: 那又沒解決問題
+00:16:56 <CindyLinz> c9sloud: cython 可以跑我們家的 perl 程式嗎?
+00:17:24 <c9sloud> 改用 python 寫 XDDD
+00:17:34 <CindyLinz> c9sloud: 那幹嘛不改用 haskell 寫? XD
+00:17:53 <godfat> monochrom, 參透了參透 XD 這是什麼真實故事改編？ XD
+00:18:12 <CindyLinz> 慧能?
+00:18:15 <c9sloud> 那就用 haskell 寫？（定案）
+00:18:23 <c9sloud> （自以為
+00:18:31 <CindyLinz> http://edba.ncl.edu.tw/ChijonTsai/SIX/six-02.htm
+00:18:53 <godfat> 我想說是有什麼時事... XD
+00:19:02 <CindyLinz> 菩提本無樹，明鏡亦非台， 本來無一物，何處惹塵埃。
+00:19:46 <b4283> 六祖慧能XD
+00:20:44 <b4283> 達摩「我的衣缽傳到六祖，便不需再傳，因禪宗法宗已在天下開結果。」
+00:20:50 <godfat> 另一句我滿喜歡的是「見山是山，見山不是山，見山又是山」
+00:20:51 <monochrom> 沒甚麼時事, 只是有一天同時想起 物, 禪宗, 不變.
+00:21:33 <godfat> 好像是「見山還是山」
+00:21:55 <CindyLinz> 那見 monad...
+00:22:42 <hashcat> 好像有個愛新覺羅啥的, 專門這樣形容程式
+00:22:46 <hashcat> forth的
+00:22:58 <godfat> 是 burritos
+00:23:19 <godfat> "Monads are Burritos" http://byorgey.wordpress.com/2009/01/12/abstraction-intuition-and-the-monad-tutorial-fallacy/
+00:23:28 <letoh> hashcat: 那是金城老師
+00:23:29 <hashcat> 墨西哥捲餅?
+00:23:33 <monochrom> 見 monad 高深莫測, 見 monad 不是高深莫測, 見 monad 又高深莫測
+00:25:05 <hashcat> 愛新覺羅.燾昍
+00:25:22 <hashcat> 找到了
+00:25:29 <b4283> 達摩傳 XD http://www.youtube.com/watch?v=_m4cC8A5P_4#t=5288
+00:26:15 <letoh> 你已經得到我的 monad 了 (誤
+00:26:33 <c9sloud> （羞
+00:26:39 <b4283> 哈哈
+00:27:42 <b4283> 你不可輕視執迷不悟之人，任何人在一念之差，都會棄惡從 haskell
+00:29:19 <monochrom> "haskell 教了二百年後, 就不用再教了, 因為到時人們已改用 agda"
+00:58:59 <darkx> letoh: 你已經得到我的 monad 了 <- 這是什麼可怕的發言 XD
+01:00:42 <letoh> darkx: 不是最高的評價嗎? XD
+01:01:36 <darkx> 感覺就好害羞 XD
+01:06:27 <b4283> 應該是「你總算得到…」
+01:06:50 <letoh> 喔喔  台詞沒記熟XD
+07:09:01 <c9sloud> 「...要丟到洗衣機... 當我要丟下去的時候，我看到有兩顆 Monad」
+07:09:02 <c9sloud> XD
+07:10:22 <c9sloud> 「真的很亮很漂亮」「五倍的 Monad」 XD
+07:11:12 <c9sloud> CindyLinz: 那個 perl type 仔細一看好像還在做
+07:12:02 <c9sloud> CindyLinz: http://search.cpan.org/dist/Opcodes/lib/Opcodes.pm
+07:25:19 <c9sloud> 咦奇怪.. 可是都 2011 年了，怎麼可能
+07:25:24 <c9sloud> 該不會被 reject 了?
+07:50:00 <c9sloud> https://twitter.com/c9s/status/474166435434872832 # C++ XD
+08:04:58 <monochrom> 其實, 那件東西是甚麼?
+08:20:03 <monochrom> 我串錯 otherwise 了! 寫了 otherwsie
+08:21:10 <monochrom> 正在寫一個對 substitution cipher 的 dictionary attack, 幫助玩 The 11th Hour
+10:58:15 <c9sloud> monochrom: 咖啡店的杯子 XD
+10:59:00 <monochrom> 那麼, 這咖啡店不簡單
+11:09:33 <b4283> 11th hour XD
+11:09:58 <b4283> 好像是«第七長廊»的新作
+11:10:06 <monochrom> 是
+11:10:42 <monochrom> 長廊? 英文是 The 7th Guest, 長廊不太對
+11:10:58 <b4283> The 7th Guest -- 中文應該記錯了
+11:11:12 <b4283> 依然有很多 cutscene 嗎 :P
+11:11:30 <c9sloud> 來寫 bison + flex XD
+11:12:15 <monochrom> 是
+11:13:08 <monochrom> "新作"早已不新, 都上世紀 DOS 年代了
+11:13:11 <b4283> 舊版的 cutscene 會讓我想到希區考克
+11:13:47 <monochrom> 雖然, 去年在 Steam 上再版
+11:13:49 <b4283> 呀，原來是在 steam 上重發而已
+11:14:33 <monochrom> 幾年前, The 7th Guest 也在 iOS 上再版, 但沒有 The 11th Hour
+11:14:34 <b4283> 見笑，我以為是這一兩年才出的
+11:15:23 <monochrom> 現在玩仍不遲呢! 可以化解跟老人家的代溝 XD
+11:15:42 <b4283> XD
+11:17:00 <b4283> o_o  "The makers of the game originally intended for it to contain more adult content [....] included several R-rated sex scenes."
+11:22:01 <b4283> winter coat => tonic water  , REALLY?
+11:22:15 <b4283> 這對我來講來太難了 XDD
+11:23:49 <monochrom> "mixer"提議你重組字母. 於是把 wintercoat 重組... 總的來說有很多字母重組及語帶相關的謎題.
+11:24:23 <b4283> anagram
+11:24:35 <monochrom> 最後我是用程式載入 /usr/share/dict/words 然後找 anagrams
+11:24:40 <b4283> XD
+11:25:35 <monochrom> 有時我都自己能猜到.
+11:26:18 <b4283> 場景與場景之間的接合倒是做得不錯
+11:26:35 <b4283> 對 1995 年來說簡直是外星科技
+11:28:39 <monochrom> 還不只字母重組及語帶相關呢! 有一個謎題, 提及了一個名字叫"Sounder". 卒之問 Google 才知, 這是某故事書裏的狗名. http://en.wikipedia.org/wiki/Sounder
+11:29:58 <monochrom> 基本上, 這遊戲要等出版了十年後, 有 Google 這樣好的搜尋器, 才懂得玩...
+11:31:08 <b4283> 非英語母語的人也許得帶一個文學博士才玩得懂
+11:32:14 <b4283> 聰明非博學 XD
+11:37:42 <b4283> 有另一個同時期的 game 叫 Phantasmagoria
+11:38:13 <b4283> 也挺酷的，角色動作是用真人攝影
+12:27:57 <hashcat> http://music-suite.github.io/docs/ref/
+12:28:22 <hashcat> Haskell編曲@@
+12:29:04 <hashcat> 比起居然有人坐的出這種東西, 更想說居然有人有心做這東西
+12:30:02 <hashcat> 推廣haskell到藝術的時候到了
+12:30:46 <hashcat> 學音樂聽到haskell的音樂可能也會對monad的意境大有興趣
+12:38:34 <hashcat> 看不懂是怎樣, 可能要看點樂理才知道他在作啥
+15:11:47 <c9sloud> CindyLinz: 妳已經有在用 Router::R3 了嗎?
+15:12:06 <c9sloud> 只是問問 :p
+15:16:59 <CindyLinz> c9sloud: 沒有啊.. 沒有需要 dispatch 的時候 ^^|
+15:17:16 <CindyLinz> 應該說, 沒有 static dispatch 的時候
+15:17:23 <c9sloud> 哦哦?
+15:17:31 <CindyLinz> 都是臨時掛一個新的 handler 上去, one-shot 就收掉的..
+15:17:57 <CindyLinz> 老程式的寫法有 static dispatch, 然後額外用 state variable 決定說現在這個 branch 不能用
+15:18:09 <c9sloud> soga 是長什麼樣的 handler 跟 URL ?
+15:18:25 <CindyLinz> c9sloud: 是 socket 指令啦, 玩遊戲的過程啊 ^^|
+15:18:31 <c9sloud> 看來應該做 tree_remove_path(); XD
+15:20:13 <c9sloud> 奇怪我最近 search.cpan.org 常常連不上
+15:20:19 <CindyLinz> 沒錯 @@"
+15:20:23 <c9sloud> CPAN 快完蛋了 (??)
+15:20:25 <c9sloud> @@
+15:20:38 <CindyLinz> cpan 是 write-only 的啊.. (無誤)
+15:20:45 <CindyLinz> 用 metacpan.org?
+15:21:01 <c9sloud> metacpan 好像又沒做什麼 SEO
+15:21:06 <c9sloud> XDD
+15:23:21 <CindyLinz> c9sloud: 覺得可能不適合欸? 你的設計是 match 的時候很快, 然後讓 build 和 compile 的時候慢一點沒關係
+15:23:41 <c9sloud> 恩恩對呀
+15:23:46 <CindyLinz> c9sloud: 如果我的使用方式是每一個掛上去的 path 最多用一次 (因為如果 timeout 的話就會直接拿掉變成0次)
+15:24:05 <CindyLinz> c9sloud: 這樣每掛上去或拿下來都 compile 一次.... orz
+15:24:35 <c9sloud> 恩恩的確 XD
+15:24:50 <c9sloud> 不過如果是 static path 的話倒是不用 compile
+15:25:01 <c9sloud> 主要都是為了 pcre XD
+15:27:12 <c9sloud> 本來想說要試試看 re2.. 結果發現是 C++
+15:31:14 <c9sloud> whitglint: https://github.com/kazuho/picohttpparser/blob/master/picohttpparser.c # 這個好像可以符合你的需求阿
+15:31:21 <c9sloud> Feersum 用的 http parser
+15:31:48 <c9sloud> 蠻快的
+15:33:06 <c9sloud> 好像很難比 picohttpparser 再更快了 XD 因為他太小了 XD
+15:34:10 <c9sloud> Feersum 真的很厲害... 寫 http server 前應該來研究一下
+15:36:07 <c9sloud> CindyLinz: Router::R3 可以加一個簡單的檢查嗎? 譬如說有找到 json-c/json.h 就 -DENABLE_JSON 給 CFLAGS ?
+15:36:59 <CindyLinz> 好啊
+15:37:53 <au> Feersum 誠徵 maintainer
+15:40:21 <au> 也許看有沒有機會昇到 libuv (或是把 uv 的部份像 r3 一樣抽出來)
+15:41:42 <c9sloud> 恩恩要研究一下 ^^
+15:45:12 <c9sloud> 看了 libuv feature highlight... 覺得一點也不 u 呀 XD
+15:45:54 <CindyLinz> u=unidentified (逃)
+16:01:42 <c9sloud> XD
+16:07:59 <c9sloud> CindyLinz: https://github.com/CindyLinz/Haskell-Hass 咦咦？次！
+16:08:16 <c9sloud> 按錯鍵
+16:08:18 <CindyLinz> XD
+16:08:22 <c9sloud> XD
+16:08:40 <CindyLinz> 不過那個沒打算繼續了.. 用 Shakespears Family 就好了
+16:08:56 <c9sloud> 哦哦
+16:09:12 <c9sloud> 名字不錯的說
+16:09:48 <CindyLinz> 仿 Sass 嘛.. 很多 Hackage package 都這樣取的啊? :p
+16:09:56 <c9sloud> 弄一個白居易 family ?
+16:10:09 <CindyLinz> 喔你是說那個 
+16:10:30 <c9sloud> hass 呀
+16:10:53 <CindyLinz> 反正就 H 開頭或是 Monad 結尾 XD
+16:11:00 <c9sloud> 貓語不是 haz 什麼的
+16:11:52 <c9sloud> kass => kick ass 也不賴哈
+16:13:45 <c9sloud> https://github.com/robbyrussell/oh-my-zsh/pull/2859 真熱血
+16:14:40 <darkx> Haskell-hshs (?)
+16:34:22 <c9sloud> CindyLinz: http://llvm.org/docs/BranchWeightMetadata.html 原來有這個
+17:57:27 <c9sloud> http header 的 start-line 其中 request-line.. 裡面有 http version
+17:57:32 <c9sloud> http version 好像是 optional ?
+18:06:07 <c9sloud> 是說為何  HTTP-Version 也可以寫成一篇漏漏長 http://tools.ietf.org/html/rfc2145
+18:06:08 <c9sloud> XD
+18:12:22 <c9sloud> 嘖嘖 Tolerant Applications
+18:57:29 <c9sloud> 公車太晃了...寫不了 code
+18:57:32 <c9sloud> zzz
+18:57:56 <godfat1> @@" 我閱讀都沒辦法了，還能寫 code 太強了。是說還是寫 code 不用閱讀？好像也有道理 XD
+18:58:31 <c9sloud> bus hackinggg
+18:59:11 <c9sloud> 讀 kindle 還可，今天狀況不佳
+18:59:18 <c9sloud> @@
+18:59:49 <godfat> @@" 注意視力，我視力是很糟.. XD
+19:02:21 <c9sloud> 你近視幾度？
+19:04:55 <godfat> 1200, 和閃光 250
+19:10:33 <whitglint> c9sloud: 大大好會找 lib 喔 XD
+19:13:18 <hychen> c9sloud: 珍惜眼睛啊!! 大大!!
+19:41:11 <c9sloud> xD
+19:41:58 <c9sloud> h3!

@@ -1,0 +1,199 @@
+00:00:37 <hychen> CindyLinz, 你當掉的syslog可以寄給我看嗎?
+00:29:46 <CindyLinz> hychen: 寄給你嘍~ ^^  剛好剛剛又當一次
+00:29:51 <CindyLinz> hychen: 所以 log 很新鮮 :p
+00:30:07 <hychen> CindyLinz, let me see
+00:30:09 <CindyLinz> hychen: 這次是我正在 xmonad 切換不同桌面的時候當掉
+00:30:23 <CindyLinz> hychen: 看起來正要畫 pidgin 的視窗的內容
+00:30:31 <CindyLinz> 卡住不動的時候 pidgin 的窗是灰的
+00:32:58 <CindyLinz> 只是重繪前啊 o.o
+00:33:15 <letoh> 嗯嗯
+00:33:37 <hychen> CindyLinz, syslog.1是當掉後重開機的內容?
+00:34:42 <CindyLinz> hychen: 重開機前
+00:34:48 <CindyLinz> hychen: 應該是被 rotate 了
+00:34:52 <CindyLinz> hychen: syslog 是重開機後
+00:35:09 <CindyLinz> hychen: 不過我看 syslog 最開頭幾行應該是當機前的最後遺作
+00:35:40 <CindyLinz> 那個 [0.0000xx] 應該表示開機後的秒數哄?
+00:36:11 <hychen> CindyLinz, 當機的狀況是不是只發生在你有用wireless的狀況?
+00:37:52 <CindyLinz> hychen: 我現在 wireless 是關著的
+00:37:55 <hychen> CindyLinz, 另外你之前有用hotkey去把wireless關掉嗎?
+00:37:59 <CindyLinz> hychen: 欸, 至少硬體是關著的
+00:38:11 <CindyLinz> hychen: 沒用過 hotkey
+00:38:30 <hychen> CindyLinz, 所以你有個hardware switch去切hotkey
+00:38:31 <CindyLinz> hychen: 今天一直到十點多, 那時候有用 wireless
+00:38:43 <CindyLinz> hychen: 然後後來回家的路上是 sdisk
+00:38:48 <CindyLinz> (suspend to disk)
+00:38:55 <hychen> CindyLinz, 你wireless driver有噴出kernel warning
+00:39:01 <CindyLinz> 回家啟動前把 wireless 硬體關掉
+00:39:22 <CindyLinz> 嗯嗯!
+00:39:38 <CindyLinz> 那我應該用什麼順序關呢?
+00:39:51 <CindyLinz> 先 dhclient wlan0 down 嗎?
+00:39:59 <CindyLinz> ifconfig wlan0 down :p
+00:40:14 <CindyLinz> favonia: 我註冊了 :p
+00:40:15 <hychen> CindyLinz, 我再想是不是因為kworker裡面的東西沒有處理正確, 造成kworker busy , 把cpu 吃掉
+00:40:41 <favonia> CindyLinz: 你可以改標題了
+00:40:59 <CindyLinz> hychen: 我可以試試看以後都記得用正確順序關掉 wireless, 然後觀察是不是就沒當了?
+00:41:00 <hychen> CindyLinz, 不過得先釐清是不是關掉wireless後會造成當機
+00:41:09 <CindyLinz> favonia: 我試試 :p
+00:41:28 <hychen> CindyLinz, hmm 我覺得是driver有bug耶, 我不曉得啥正常關機順序 XD
+00:41:32 <CindyLinz> 00:41 -!- #haskell.tw You're not a channel operator
+00:41:46 <CindyLinz> favonia: 不是用 /topic 喔?
+00:41:54 <hychen> CindyLinz, service network-manager stop ; ifconfig eth1 down ; rmmod $driver.ko
+00:42:00 <hychen> CindyLinz, 在ubuntu大概是這樣
+00:42:04 <favonia> CindyLinz: 不是，你要跟 ChenServ 講
+00:42:13 <CindyLinz> favonia: 喔喔 ^^|
+00:42:23 <CindyLinz> hychen: 關鍵是最後一個 rmmod 哄? XD
+00:42:43 <hychen> CindyLinz, 最後一個不是XD
+00:43:08 <CindyLinz> hychen: 我應該沒有裝 network-manager,  我是遇到無加密連線(如NTU)是用 iwconfig 設; 遇到加密連線用 wpa_supplicant -c /etc/wpa_supplicant.conf
+00:43:11 <CindyLinz> hychen: 咦?
+00:43:28 <hychen>  CindyLinz 關wireless 不用移除module啦 XD
+00:43:44 <hychen> CindyLinz, 除非你很care 電源
+00:44:15 <MnO2> godfat不在
+00:44:16 <MnO2> http://flolac.iis.sinica.edu.tw/lambdawan/map
+00:44:34 <hychen> CindyLinz, s/電源/wireless會不 會多耗電
+00:44:39 <MnO2> lambdawan是早期的集散地嗎?
+00:44:52 <CindyLinz> favonia: 真的可以改耶
+00:45:05 <CindyLinz> hychen: 好那我先試試都不要關...
+00:45:09 <hychen> CindyLinz, 你關wireless的動作作事是什麼?
+00:45:13 <CindyLinz> hychen: 那我現在是關著的狀態, 要打開嗎?
+00:45:36 <CindyLinz> hychen: 把一個滑釦推到另一邊 ^^|
+00:46:33 <hychen> CindyLinz, 你先打開, 重開機後, 再把wireless關掉
+00:46:44 <CindyLinz> 咦? 為什麼又要關掉? o.o
+00:46:48 <hychen> CindyLinz, 然後若當掉再把log寄給我
+00:46:49 <CindyLinz> 再給你 log 嗎?
+00:46:57 <CindyLinz> 好
+00:47:08 <CindyLinz> 那我 reboot 了...
+00:47:12 <hychen> CindyLinz, 嗯, 我假設當機的問題是發生在wireless關掉後的不久出現
+00:49:58 <CindyLinz> hychen: 我又回來了
+00:50:07 <CindyLinz> hychen: 現在 wireless 硬體是開著的
+00:50:15 <CindyLinz> hychen: 不過 ifconfig 沒有 up
+00:50:27 <CindyLinz> ifconfig -a 的時候會看到 wlan0
+00:50:32 <CindyLinz> 沒加 -a 的時候看不到
+00:50:41 <CindyLinz> 我要先 up 再關硬體嗎?
+00:51:57 <hychen> CindyLinz, 嗯, 先用wireless連上網路, 再用hardware switch 關掉wireless
+00:52:30 <CindyLinz> 噢, 原來要啟用到這個地步 :p
+00:53:42 <CindyLinz> hychen: 現在是用 wireless 的我.. :p
+00:54:36 <CindyLinz> hychen: 現在是用 wireNess 的我 :p
+00:54:48 <CindyLinz> hychen: 怪, ifconfig -a 還是看得到 wlan0
+00:55:04 <hychen> CindyLinz, 你看一下kworker
+00:55:17 <CindyLinz> 如果是我用手機 usb 上網.. 插拔前後 ifconfig -a 就會變化
+00:55:23 <CindyLinz> 看?
+00:55:25 <CindyLinz> top?
+00:55:28 <hychen> CindyLinz, yes
+00:56:00 <CindyLinz> hychen: 有 kworker, 不過 cpu 是 0.0
+00:56:18 <hychen> CindyLinz, 那rfkill list的output是什麼?
+00:56:30 <CindyLinz> rfkill ?
+00:56:43 <hychen> 開terminal 打rfkill list
+00:57:03 <CindyLinz> 我先裝一下 rfkill ^^|
+00:57:37 <CindyLinz> 2: phy0: Wireless LAN Soft blocked: no Hard blocked: yes
+00:57:44 <CindyLinz> 	Soft blocked: no
+00:57:47 <CindyLinz> 	Hard blocked: yes
+00:57:52 <CindyLinz> 就這樣
+00:58:09 <CindyLinz> 呃, 第一列到 LAN 為整
+00:58:11 <CindyLinz> 呃, 第一列到 LAN 為止
+00:58:30 <CindyLinz> 後面的其實是第二三列我重貼的
+00:59:19 <hychen> CindyLinz, 貼一下iwconfig的output
+01:00:10 <CindyLinz> https://gist.github.com/8f17b28d04e8c820117a
+01:01:44 <hychen> CindyLinz, 嗯, 我可以肯定你wireless會有某些問題, 不過跟system 會不會hang住不曉得有沒有關, 所以只好等看看你之後會不會當掉
+01:02:03 <CindyLinz> 那我來開一下 vbox.. (謎)
+11:40:23 <CindyLinz> 問問題....
+11:40:36 <CindyLinz> 這個是 yen3 嗎 ^^|  http://www.facebook.com/yen3rc
+11:50:25 <jason2506> CindyLinz: yes
+12:02:48 <CindyLinz> :D
+12:04:16 <CindyLinz> 他加我 FB, 可是他什麼資訊都沒有開放, 只看到一個看起來像女生的背影大頭照, 關於那邊寫性別男.. 最重要的, 還不開放丟訊息問他 ^^|
+12:09:11 <jason2506> 因為他為人低調(?)XD
+12:10:41 <CindyLinz> 我如果不是看 fb id 長得很像, 會不小心把 request 一直晾下去啊 ^^|
+12:13:25 <jason2506> 唔，不過 FB 確實會讓人想要把資料全部鎖起來....頂多只讓好友看
+12:15:55 <CindyLinz> 我的確是全鎖 :p  但是沒有擋陌生人丟訊息. 加好友的時候會丟對方訊息講一下, 因為對方大概看不出來我是誰 ^^|
+20:15:50 <yen3> > foldr (*10) [1..]
+20:15:52 <lambdabot>   Overlapping instances for GHC.Show.Show ([[t] -> [t]] -> [t])
+20:15:52 <lambdabot>    arising fr...
+20:16:07 <yen3> > foldr1 (*10) [1..]
+20:16:08 <lambdabot>   Occurs check: cannot construct the infinite type: a = a -> a
+20:18:02 <yen3> > foldr1 (*) [1..10]
+20:18:03 <lambdabot>   3628800
+20:30:02 <suhorng> 咦 所以這裡是有機器人 會跑 Haskell 嗎?
+20:31:23 <letoh> 有 lambdabot
+20:32:35 <CindyLinz> > putStrLn "你好"
+20:32:37 <lambdabot>   <IO ()>
+20:32:39 <CindyLinz> XD
+20:33:41 <CindyLinz> > "suhorng: 嗨~~"
+20:33:42 <lambdabot>   "suhorng: \21992~~"
+20:33:50 <CindyLinz> ...||
+21:00:50 <suhorng> 嗨XDD
+21:13:23 <cebrusfs> XD 好像有很好玩的機器人OAO
+21:14:27 <cebrusfs> > "meow"
+21:14:28 <lambdabot>   "meow"
+21:14:37 <ws23> 好像很好玩欸（欸
+21:15:16 <cebrusfs> 是啊
+21:15:33 <cebrusfs> 不知道跑奇怪的東西會不會當掉
+21:15:53 <ws23> 小可魚想做什麼怪事啊囧rzz
+21:15:55 <cebrusfs> 還是不要亂玩好了XDDD
+21:15:58 <ws23> XDDD
+21:16:20 <cebrusfs> 邪惡的事情還是在本機玩就好~
+21:27:53 <yen3> 會有一個時間限制
+21:28:12 <yen3> > \f -> f in f
+21:28:13 <lambdabot>   <no location info>: parse error on input `in'
+21:28:31 <yen3> > let f = f in f
+21:28:35 <lambdabot>   mueval-core: Time limit exceeded
+21:39:34 <suhorng> > let f = let id = \x -> x in id id
+21:39:35 <lambdabot>   not an expression: `let f = let id = \x -> x in id id'
+21:41:09 <suhorng> let f =
+21:41:09 <suhorng>   let id x = x
+21:41:09 <suhorng>   in id id
+21:41:09 <suhorng> in f 5
+21:41:27 <suhorng> 囧 多行原來是這樣
+21:41:34 <suhorng> > let f = let id x = x in id id in f 5
+21:41:35 <lambdabot>   5
+21:41:49 <suhorng> > let f = let id = \x -> x in id id in f 'a'
+21:41:50 <lambdabot>   'a'
+21:42:00 <suhorng> OCaml 就不能這樣 @"@...
+21:49:46 <CindyLinz> 那吃爆記憶體的不知道會怎樣 :p
+21:55:37 <CindyLinz> > sum [1..]
+21:55:42 <lambdabot>   mueval-core: Time limit exceeded
+21:55:43 <lambdabot>  mueval: ExitFailure 1
+21:55:43 <lambdabot>  mueval: Prelude.un...
+21:58:19 <yen3> 看來記憶體還沒有爆之前，時間就先爆了 XD
+21:59:26 <CindyLinz> 這樣很難讓記憶體爆... o.o
+21:59:38 <CindyLinz> 我在自己電腦上跑, 也是要一陣子才吃到好幾 G
+21:59:42 <yen3> 我也這樣子覺得 ...
+22:00:01 <yen3> 一陣子 ... 可能背後有動什麼手腳 XD
+22:00:04 <CindyLinz> 要用 FFI 快速 allocate 記憶體才行...
+22:00:21 <CindyLinz> 應該只是 malloc 太慢吧 XD
+22:00:56 <yen3> XD
+22:01:35 <yen3> 這機器人有支援 FFI 嗎 XD?
+22:06:26 <CindyLinz> > Data.Array.IArray.listArray (1,1000000000) [1..] :: Data.Array.Unboxed.UArray Int Int
+22:06:27 <lambdabot>   Not in scope: type constructor or class `Data.Array.Unboxed.UArray'Not in s...
+22:07:48 <yen3> foreign import ccall "math.h sin"
+22:07:52 <yen3> > foreign import ccall "math.h sin"
+22:07:53 <lambdabot>   <no location info>: parse error on input `foreign'
+22:08:55 <yen3> 顯然要先可以 import XD
+22:10:39 <CindyLinz> @help
+22:10:40 <lambdabot> help <command>. Ask for help for <command>. Try 'list' for all commands
+22:10:46 <CindyLinz> @help list
+22:10:46 <lambdabot> list [module|command]
+22:10:47 <lambdabot> show all commands or command for [module]. http://code.haskell.org/lambdabot/COMMANDS
+22:11:18 <CindyLinz> @version
+22:11:18 <lambdabot> lambdabot 4.2.2.1
+22:11:19 <lambdabot> darcs get http://code.haskell.org/lambdabot
+22:11:45 <yen3> 這難玩了，我還在邊看海綿寶寶 XD
+22:12:11 <CindyLinz> 應該是不預期會有 FFI 之類的 lib 啦
+22:13:05 <yen3> 也是 ~
+22:13:17 <CindyLinz> 可是 Array 什麼的應該可以有啊 XD
+22:13:53 <yen3> 是沒錯啦 XD
+22:19:47 <yen3> 來試試什麼有好了 XD
+22:50:52 <favonia> yen3: 危險的程式理論上都會被擋掉
+22:53:58 <favonia> yen3: *理論上*
+22:57:57 <yen3> 所以只要讓程式看起來不危險就好了 XD?
+22:58:02 <cebrusfs> 大家開始在玩奇怪的東西了XD
+23:03:35 <favonia> yen3: 加油～你突破限制的話就是找到新 bug xD
+23:05:54 <favonia> yen3: 怕吵到人的話你可以傳私人訊息 xD
+23:06:24 <favonia> Hackage 2 正式出現了...
+23:07:06 <yen3> 好~
+23:17:47 <CindyLinz> 我覺得資源用盡不算是「危險」欸
+23:18:03 <CindyLinz> 不算是 haskell 的責任這樣... ^^|
+23:18:10 <CindyLinz> 危險的是那種取得不該取得的東西
+23:18:23 <CindyLinz> favonia: Hackage2?
+23:26:31 <MnO2> CindyLinz: 應該是說 mirror 吧，hackage太常掛了
+23:27:16 <CindyLinz> MnO2: 喔喔 ^^
+23:57:15 <hychen> 程式碼寫出來跟可以寫出來是兩件事... orz (證明苦手)
+23:57:43 <letoh> 證明程式?

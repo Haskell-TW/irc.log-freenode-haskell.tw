@@ -1,0 +1,6 @@
+02:08:39 <monochrom> 以前是 single condition. https://www.haskell.org/onlinereport/exps.html#sect3.13
+15:39:37 <mno2> http://hackage.haskell.org/package/base-4.8.1.0/docs/GHC-Stack.html  沒注意到什麼時候多了 callstack
+15:39:42 <mno2> 感覺蠻方便的
+15:41:07 <mno2> https://ghc.haskell.org/trac/ghc/ticket/10656
+15:46:06 <mno2> http://eprints.whiterose.ac.uk/77401/
+16:15:58 <mno2> http://hackage.haskell.org/package/ghcid

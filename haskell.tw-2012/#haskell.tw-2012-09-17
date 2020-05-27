@@ -1,0 +1,169 @@
+00:00:05 <b4283> > "@@"
+00:00:06 <lambdabot>   "@@"
+00:06:15 <MnO2> 那如果下 :set -Wall 呢?
+00:06:55 <b4283> MnO2: 有出現 Warning: Non-exhaustive pattern
+00:07:34 <MnO2> hmm, 不知道耶，可能是ghci config有差吧
+00:12:37 <b4283> arch 的 makefile 只有一個 --prefix=/usr ..XD
+00:13:17 <b4283> ..不管它繼續往下看 XD
+00:13:39 <CindyLinz> 以後用 runghc 實驗好了? XD
+00:14:39 <b4283> 試試用 scheme 重製一下 qsort
+02:05:05 <b4283> 發現 haskell 也可以寫得像 scheme XD
+07:43:55 <yen3> http://blog.sina.com.cn/s/blog_5d90e82f0101bcg7.html Yin Wang 的新文章，他說他打算寫一連串的文章說明關於程式語言的入門。
+11:51:50 <cataska> 講 google 壞話的那一篇不見了
+12:06:50 <CindyLinz> !
+12:56:42 <MnO2> 這樣以後就沒有嗆文可以看了xD
+13:00:59 <yen3> http://blog.sina.com.cn/s/blog_5d90e82f0101b37r.html <- 這篇名字變了 XDXD
+13:01:15 <yen3> 還是是我記錯了 ...
+13:03:11 <MnO2> title 變了
+13:03:24 <MnO2> 原本好像是 不再推薦 Haskell
+13:03:31 <MnO2> 容易讓人誤會他的意思
+13:13:56 <yen3> 不過內容似乎沒有太大的變化
+13:46:24 <CindyLinz> "Haskell considered harmful" XD
+13:47:04 <CindyLinz> 我覺得這篇給剛剛在學 Haskell 的人看... 是 "Haskell considered harmful" considered harmful.... orz
+14:44:45 <MnO2> CindyLinz: 你的意思是說會嚇到人嗎？
+14:47:45 <CindyLinz> MnO2: 其實是嚇到我... XD
+14:52:45 <MnO2> CindyLinz: 都上過FLOLAC應該沒什麼可以嚇倒你吧
+14:55:52 <CindyLinz> MnO2: FLOLAC 只幫到第一點啊 ^^|
+14:57:06 <CindyLinz> 我貼一下: 1.類型系統過於複雜 2.參數和返迴值的類型標記很有必要 3."純函數式"並不是好主意 4.惰性求值(lazy evaluation)不是好主意 5.語法設計的弊端 6.設計模式
+14:57:51 <CindyLinz> 2. 我覺得是離題了點...  那應該是開發者的個人偏好, 跟 Haskell 與否無關
+14:59:33 <CindyLinz> 5. 指的是 indent layout 的問題, 我是有點認同... 它是我第一眼看不舒服 python 的原因 XD   這一點我覺得不是大問題.. 有必要的話再加一層 compile 就好.
+14:59:57 <CindyLinz> 3.4.6. 就真的痛到了... 要嘛拒絕這篇的論點, 要不然就很痛啊
+15:01:13 <CindyLinz> 6. 的話, 我真的深受其苦... 很想說他講得好, 可是我正在努力克服這個點... 他這樣一講, 會讓我覺得我是不是覺得難懂才是應該的 ^^|
+15:01:48 <CindyLinz> 3.4. 是 Haskell 很吸引我的地方... 卻被這樣狠狠地戳...
+15:02:56 <CindyLinz> 我講「剛剛學 Haskell 的人」, 是因為其實對他講的東西也還似懂非懂, 覺得好像有道理, 可是又沒法太共鳴, 只是會在學的時候的決心下降....
+15:07:22 <b4283> 還沒學到 monad 無影響
+15:12:51 <CindyLinz> 純函數式和惰性求值也沒有嗎 :|
+15:14:57 <b4283> 還不能判斷 lazy eval 或是 thunk thunk thunk 哪個比較好
+15:15:31 <b4283> 沒有寫 code 故....
+15:24:40 <b4283> incapable
+15:41:17 <MnO2> CindyLinz: 他的論點我認同的跟你都差不多啊~ 所以這個頻道可以關了嗎？xDDD
+15:53:35 <CindyLinz> MnO2: 把那篇刪掉不行嗎? XD
+15:53:57 <CindyLinz> 不是啦 XD
+15:55:48 <CindyLinz> 我覺得他在 3. 裡面用 wired 和 wireless 來比喻好像蠻不錯的
+15:56:59 <CindyLinz> Haskell 這種 wired nature 應該會讓 trace code 變得容易很多...
+15:58:04 <MnO2> 用電路的話應該就接地了吧xD
+16:12:05 <CindyLinz> 但我不太能體會 3. 說 Haskell 盲目排斥 side-effect 的部分...  用 monad 很麻煩嗎? :|
+16:27:15 <MnO2> monad 疊疊樂的時候會有點討厭
+16:28:40 <MnO2> 因為monad需要你把side-effect說清楚，但疊在一起的時候像之前提到的exception部份會有點討厭
+16:29:31 <MnO2> 我認為這一點也是取捨啦，其實1,2,3,4都不是完全分得開的
+16:30:32 <MnO2> side effect就是初學的時候寫得很爽，但就是取捨掉容易不小心就犯一些耍笨的bug
+16:36:03 <CindyLinz> MnO2: 就是無線網路用太兇的時候訊號會打架, channel 不夠用的問題... XD
+16:36:28 <MnO2> 可以這麼說xDD
+16:37:30 <CindyLinz> 我覺得 monad 疊疊樂的時候, 如果疊的每一層 monad 都是不同的 monad (就是各 monad 提供的 function name 可以錯開的話), 通通都用 class 自動 lift 上去還蠻方便的啊?
+16:39:55 <CindyLinz> 就直接 act :: (Monad m, MonadState s m, MonadWriter w m, MonadReader r m, MonadIO m) => ...
+16:40:10 <CindyLinz> 在 act 裡面不用管要 lift 幾層 ^^
+16:42:21 <CindyLinz> 如果有疊到同一種 monad, 可能最好還是自己客製(包)一個特定功能的 Monad 比較好...
+16:42:40 <CindyLinz> modify 改名為 modifyUsername 之類的
+16:43:20 <CindyLinz> > let 你會說中文嗎 = True in 你會說中文嗎
+16:43:22 <lambdabot>   True
+16:43:24 <CindyLinz> :D
+16:46:20 <MnO2> CindyLinz: 問題在於疊起來的App Monad對於callback lift不上去啊~
+16:46:33 <MnO2> CindyLinz: 請見 http://blog.ezyang.com/2012/01/modelling-io/
+16:46:45 <CindyLinz> 來看看..
+18:07:04 <MnO2> CindyLinz: http://www.yesodweb.com/blog/2011/08/monad-control
+18:07:35 <MnO2> CindyLinz: 看這幾篇都要耗損很多MP  xD
+18:19:56 <CindyLinz> QQ
+18:40:44 <letoh> 有被 google cache 起來嗎?
+18:41:05 <letoh> 唔  回太久以前的訊息了XD
+20:07:23 <CindyLinz> XD
+20:55:41 <CindyLinz> > let { gen :: [ forall a. a -> a ] ; gen = [ id ] } in head gen 1
+20:55:42 <lambdabot>   1
+20:57:43 <CindyLinz> @version
+20:57:44 <lambdabot> lambdabot 4.2.2.1
+20:57:44 <lambdabot> darcs get http://code.haskell.org/lambdabot
+21:08:23 <CindyLinz> 嘖嘖 Hindley-Milner 邪惡的 let..
+21:09:38 <b4283> 今早上看的 blog，說f haskell「一開始」用的是 HM，所以語言設計曾變過嗎？
+21:10:15 <CindyLinz> class 和 kind 是加上去的
+21:10:21 <CindyLinz> Hindley-Milner 沒有
+21:10:25 <b4283> 喔喔
+21:10:59 <CindyLinz> 然後... (聽說)還有一些額外的延伸, 使得 ghc 可以 derive Hindley-Milner 無法 derive 的 type
+21:11:07 <CindyLinz> 但我不確知是哪些部分
+21:12:38 <b4283> 昨天看到 LYHGG 解說 function currying 部份，總覺得和 continuation-passing 好像啊
+21:13:33 <CindyLinz> hmm?
+21:14:53 <b4283> 是不是兩者有關連還是只是我 brain damage
+21:15:04 <CindyLinz> 像? 還是說利用 function currying 用在 contiuation passing 的話, 會很方便?
+21:16:53 <b4283> 比如說 (3/) 算了一半的 expression，等於是把 3 抓起來當 closure
+21:20:47 <CindyLinz> 這部分感覺是 currying, 把 (/) 的第一個參數塞 3.. 可是看不出來有 passing 給誰 ^^|
+21:23:25 <b4283> 就傳送一個內容是 5 的 message 給 (3/) 嘛！ (smalltalk 調)
+21:24:18 <b4283> 嘿，你這樣一說可能我搞混了，再想想
+21:43:48 <CindyLinz> MnO2 
+21:44:26 <CindyLinz> MnO2 貼的這個, http://blog.ezyang.com/2012/01/modelling-io/ 主要是在講要怎麼設計 class 來處理 Exception
+21:44:47 <CindyLinz> 不知道要不要先讀過 Exception 一般有哪些處理法...
+21:46:09 <CindyLinz> 之前有找過一篇 paper.. google: asynchronous exceptions in haskell 可以看到 pdf
+21:46:21 <CindyLinz> 很久以前, 讀個開頭就讀不下去了... XD
+21:46:32 <CindyLinz> 不知道現在再去讀能不能讀完 ^^|
+21:50:10 <letoh> currying 和 continuation-passing 為什麼很像?
+21:54:16 <b4283> ((lambda (a k) (k (/ 3 a))) 5 (lambda (x) x)) 不像嗎 (誤)
+21:54:45 <b4283> (3/) <= 我把這玩意當 continuation
+21:54:46 <CindyLinz> b4283: 我覺得是你這一個式子裡面有 currying 的部分, 也有 continuation-passing 的部分..
+21:55:29 <CindyLinz> (/) 變成 (3/) 是 currying; 然後拿 (3/) 塞到別的函數作參數的部分, 在某些情境下是 continuation-passing
+21:55:51 <b4283> CindyLinz: soga..
+21:57:46 <b4283> 有另一個小問題
+21:58:25 <letoh> 我覺得這個 continuation-passing 感覺怪怪的
+21:59:28 <b4283> 為啥在 ghci 打 (3/) 出現的型態是寫 a0 而非 a，這裡面有什麼 convention 在嗎
+22:00:18 <CindyLinz> 應該沒有, 就當沒出現過的 fresh symbol 吧 ^^|
+22:00:46 <CindyLinz> b4283: 你寫的這個是 scheme 喔?
+22:01:22 <b4283> CindyLinz: 是 scheme, 但一般的 lisp 應該都可跑
+22:01:28 <b4283> 只有很小的差異
+22:02:06 <CindyLinz> 嗯嗯
+22:16:34 <b4283> 今天看到某 Monad tutorial
+22:17:25 <b4283> http://www.ccs.neu.edu/home/dherman/research/tutorials/monads-for-schemers.txt
+22:55:02 <CindyLinz> b4283: 這標題...
+22:55:11 <CindyLinz> XX for YY.... XD
+22:56:32 <b4283> yeah XD
+23:03:18 <CindyLinz> b4283: 可惜我不會這個 YY.. 要先學 YY 才看得懂這篇 ^^|
+23:07:25 <b4283> 之前看到好多，有的用 emacs lisp 解說，有的用 javascript 解說
+23:07:54 <b4283> 好像叫什麼 "maybe you invented it already"
+23:14:52 <letoh> 我覺得是因為 haskell 的關係才會特別去搞出一個 monad 吧
+23:18:15 <MnO2> 因為pure啊
+23:19:29 <CindyLinz> 不過 monad 不只能處理 impure 的問題呀?
+23:19:38 <letoh> 嗯  我是想說用其他語言的人應該不太需要自己建 monad ?
+23:19:47 <letoh> 應該有更方便的做法吧?
+23:20:31 <MnO2> 但最初可能是因為pure才引進的吧
+23:20:36 <CindyLinz> 嗯嗯
+23:21:25 <CindyLinz> 想找個工具打蚊子, 不小心就把大砲拿出來了..? XD
+23:24:40 <MnO2> 做理論的應該覺得這只是蒼蠅拍而已 xD
+23:27:01 <CindyLinz> 做理論的不知道哪個工具的功能大哪個工具的功能小啊....
+23:27:36 <CindyLinz> 有的要死後幾百年才被後人發覺應用...
+23:29:19 <MnO2> 蒼蠅拍擺上一百年就變成大砲了xDD
+23:29:53 <godfat> 因為蒼蠅也巨大化了嗎（誤
+23:34:05 <b4283> http://www.haskell.org/haskellwiki/Monad_tutorials_timeline
+23:42:27 <MnO2> godfat: 雖然rust還在發展，不過我真的覺得rust比go有趣多了，http://www.rust-lang.org/
+23:44:30 <godfat> 兩個我都是看過去就沒細究的 XD rust 我最早看到時還不是 mozilla 的計畫說
+23:44:30 <godfat> 那時候我還在想這看起來好混種的東西，開發還真頻繁 (github 上每天都 push 很多次)
+23:44:30 <godfat> 結果後來就變成 mozilla 的東西 @@
+23:44:30 <godfat> 在想 mozilla 真的要推這個嗎？
+23:45:33 <MnO2> 我不知道耶，要問kanru?
+23:46:47 <godfat> 如果 b2g 用 rust 我會很感興趣 XDDD
+23:47:28 <MnO2> 可是Bredan Eich都跳進來做了？應該代表要認真弄吧？
+23:47:45 <godfat> 不認識... XD
+23:48:02 <MnO2> javascript的作者...
+23:48:09 <MnO2> Brendan
+23:48:28 <godfat> 是喔 XDD 那... 感覺真的有希望
+23:49:16 <godfat> 不過印象中混種語言很多都沒啥好下場 @@ 雖然 scala 也是
+23:49:16 <godfat> 這樣說來新語言有滿多都是大混種？
+23:49:55 <MnO2> 我不知道你的混種是指？
+23:50:13 <MnO2> 你是說不同 paradigm 嗎？
+23:50:17 <godfat> 對
+23:50:38 <godfat> 使用者要記得很多東西才能開始對這語言比較了解
+23:51:36 <MnO2> 那這樣很多語言也漸漸變得所謂混種
+23:51:39 <MnO2> C++
+23:52:14 <godfat> 我以為 c++ 一直都是？ XD
+23:54:11 <MnO2> 照這樣定義perl大概也算吧xD   我只在乎語言的feature，還有他們之間的協調性而已
+23:54:38 <godfat> 我想應該是？或是說，又一個很難歸類的語言，像是這種感覺...
+23:55:18 <b4283> Eich 好像也是個 lispr
+23:55:26 <MnO2> 我不會想要幫一個語言貼標籤耶，特別是標籤的定義也不明的時候
+23:55:55 <b4283> 後來因為 90 年代 java 崛起，netscape 長官要求一定要長得像 java
+23:56:14 <b4283> 在十幾天內弄出現在的 javascript
+23:56:15 <MnO2> b4283: 或嚴格一點說 schemer
+23:56:17 <godfat> 雖然那很困難，但總覺還是想畫地圖，我不管看什麼都會先進入這種狀態 XD
+23:56:42 <b4283> MnO2: 喔喔，你有看那篇文章嗎
+23:56:55 <b4283> *看過*
+23:56:58 <godfat> 我以為原本叫 livescript, 後來因為 java 所以改名，跟設計沒關？
+23:57:12 <MnO2> 的確原本叫livescript
+23:57:34 <MnO2> 我只是看過歷史，可能包括好幾篇文章
+23:58:00 <MnO2> douglas crockford的演講也有講過js的歷史
+23:58:00 <b4283> 我是前幾天看到的
+23:59:10 <MnO2> 所以現在的 livescript 是刻意被叫成 livescript 的
+23:59:42 <b4283> 喔喔，就是那篇 dropbox 換成 coffeescript 的新聞
+23:59:58 <kanru`> Rust 是 Mozilla 的 project

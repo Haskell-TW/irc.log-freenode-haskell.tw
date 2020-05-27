@@ -1,0 +1,27 @@
+00:00:52 <letoh> 這篇文章這幾天好紅
+00:05:34 <MnO2> 有喔@@?
+00:05:50 <MnO2> 我沒有在其他地方看到，我是直接訂閱的
+00:08:44 <letoh> 昨天才知道原來是 hacker news
+09:39:27 <kanru`> letoh: ouch
+09:40:13 <kanru`> Semicolon sucks.. why not use explicit (void) or (values) like in lisp in the last expression :-/
+09:51:49 <MnO2> 他在文末有提到他不喜歡那樣？每個人喜好不同？
+17:14:55 <cataska> 各位大大有貼過嗎 https://github.com/Frege/frege
+17:16:29 <MnO2> 印象中沒有
+17:17:10 <_13h> MnO2 說沒有大概就是沒有
+17:18:36 <_13h> 之前好像在哪看到有人在問 jvm 上怎麼沒出現 haskell...
+17:19:38 <MnO2> stackoverflow上有人問過吧
+17:20:26 <MnO2> 不過JVM目前的限制在上面好像不太好做tail recursion elimination
+17:22:03 <_13h> 說到這個想到昨天在 #Io 才有人提到類似話題... Io 以前有處理 tail call，但不曉得哪一版開始就拿掉了... 不曉得啥原因還要再問問@_@
+17:26:12 <_13h> 唔，原來是這樣... "io used to have tailcall support, but it was removed because it was too hard to understand how to use properly, and someone broke it in a weird way that nobody knew how to fix"
+17:26:59 <_13h> 被搞爛修不好了，難怪更新以後舊程式就不能跑了XD
+17:28:34 <cataska> http://tryfrege.appspot.com/
+17:31:20 <_13h> http://ghosthitswall.com/questions   # victor 山寨的台版 stackoverflow
+17:34:57 <b4283> 好奇怪，不能 revert 嗎? XD
+17:36:24 <_13h> 不曉得，我好幾年沒追 io 的開發，前陣子一口氣更新到 git master 發現大爆炸XD 改了不少東西
+22:50:30 <b4283> b
+22:51:16 <letoh> ?
+22:52:07 <b4283> 不小心按到 @@
+23:37:57 <CindyLinz> b4283: 如果在那之後, 有很多重要 patch 的話, 就很難 revert 了
+23:39:27 <letoh> 所以只好把那功能拿掉XD
+23:44:15 <CindyLinz> 拿功能事小, 修 critical bug 事大 QQ
+23:46:09 <letoh> 是沒錯  寧可功能少一點  也不能丟出會爛掉的東西XD

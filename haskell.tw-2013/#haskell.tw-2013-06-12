@@ -1,0 +1,22 @@
+00:04:13 <monochrom> 你們大概知道 denotational semantics 嗎? (我知道)
+00:04:43 <hychen> no
+16:58:42 <MnO2> http://en.wikibooks.org/wiki/Haskell/Denotational_semantics
+17:00:33 <MnO2> monochrom: 我大概知道 denotational semantics,  logic, category theory，但一直沒有辦法清楚說出他們在 PL 理論中扮演的角色以及他們之間的關係
+20:29:24 <UncleHandsome> 請問一下大家 如果想要學functional language的實作和理論的話
+20:29:29 <UncleHandsome> 有什麼書推荐的嘛？
+20:29:47 <UncleHandsome> 我們老師有推荐Simon L. Peyton Jones的兩本書 一本理論一本實作搭配看QQ
+20:30:47 <UncleHandsome> 不知道大家有沒有更推荐的書呢？？
+20:30:53 <UncleHandsome> 謝謝
+20:39:11 <suhorng> 是很專業的實作嗎？(整個compiler）還是不那麼專門（各種interpreter, maybe..）
+20:40:02 <suhorng> 後者很多 programming languages
+20:40:17 <suhorng> 後者很多 programming languages 的書都會有
+20:40:45 <suhorng> 有的甚至包含 interpreter 上到下各種細節
+20:41:42 <suhorng> SPJ那兩本書我記得他好像有放在網路上XD（上次查的結果好像是做 non-strict functional langauge, 但不太確定）
+20:49:25 <UncleHandsome> suhorng: 希望可以專業一點XD
+20:50:07 <UncleHandsome> 我剛剛已經下載到The Implementation of Functional Programming Languages這本了XD
+20:51:34 <suhorng> 嗯 之前聽過的另一本是 Compiling with Continuations, ML一派的樣子
+20:55:22 <UncleHandsome> OK 感謝!!
+23:13:48 <favonia> UncleHandsome: 理論是要多理論 lol
+23:40:35 <UncleHandsome> 不要離實作太多就可以了   這樣的答案OK嘛XD?
+23:41:02 <UncleHandsome> 我之前有稍微翻過一本書principles of program analysis
+23:41:10 <UncleHandsome> 我覺得那樣的數學我還OK

@@ -1,0 +1,14 @@
+02:48:22 <monochrom> 是循環再用.
+02:50:23 <monochrom> @type \f -> foldr (const f) undefined (repeat undefined)
+02:50:24 <lambdabot> (b -> b) -> b
+02:51:13 <monochrom> @type \f -> foldr (const f) undefined (repeat ())
+02:51:14 <lambdabot> (b -> b) -> b
+02:51:15 <monochrom> :)
+11:41:22 <petercommand> haskell有辦法定義一個type使得這個type所包含的元素只有另一個type中符合特定規則的元素嗎?
+11:42:07 <petercommand> 例如定義一個type even只有Integer type中的偶數
+11:42:29 <petercommand> s/even/Even 開頭要大寫:p
+12:24:01 <mno2_> 有了 type-level arithemetic 應該可以，可能要開 GADT, DataKinds 等 extension
+12:24:34 <mno2_> 但純粹的 haskell98 或 haskell2010 應該沒辦法
+22:28:40 <suhorng> DTP 裡面的 sum type XD
+22:28:47 <suhorng> FLOLAC 剛學到!
+23:35:28 <monochrom> 不不, 是 predicate subtype. haskell 沒有.

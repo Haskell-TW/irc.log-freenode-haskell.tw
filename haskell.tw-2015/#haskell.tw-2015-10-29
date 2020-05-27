@@ -1,0 +1,10 @@
+07:18:08 <suhorngT> https://github.com/ekmett/concurrent/blob/master/cbits/atomic.cmm 好酷喔!! 原來 cmm 是可以直接寫的嗎
+07:18:24 <suhorngT> 不知道他這次又想玩什麼XD
+07:39:07 <monochrom> 真可怕. 萬聖節特備節目
+10:06:49 <mno2> https://www.reddit.com/r/haskell/comments/3qfkoa/ghcaniuse/
+10:09:19 <mno2> https://www.wagonhq.com/blog/square-tech-talk
+21:42:35 <mno2> Oleg 說他很希望把所有的 monad tutorial 都砍光光 :p
+21:44:28 <mno2> 說如果了解 Monad 的話，就會理解到 Monad 其實並不是什麼有太大意義的東西 xD
+21:45:09 <mno2> 他覺得 Applicative 比較有意義
+23:09:30 <mno2> 有人用過 PEG parsing lib 嗎？像是 frisby 之類的
+23:30:56 <capisce> "Freer Monads, More Extensible Effects", very nice paper

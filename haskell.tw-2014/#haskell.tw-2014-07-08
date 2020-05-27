@@ -1,0 +1,142 @@
+00:21:49 <xcycl> :quit
+08:19:52 <CindyLinz> 這雨... orz
+09:08:09 <caasih_> 現在小很多了。
+10:06:44 <student> 不好意思.. Flolac 有點意見想反應.. 希望下次能請熟的人來講解。講師在台上說我也不熟實在是...
+10:10:00 <CindyLinz> XD
+10:11:24 <banacorn> XD
+10:11:33 <yllan> 我蠻喜歡這老師的
+10:12:03 <yllan> 因為講話有種台語腔很好聽（？）
+10:13:59 <CindyLinz> 不過老師說的不熟應該是指 xcycl 自己定的那個語言?
+11:22:33 <evast> 外國講者出現啦 \ ^o^ /
+11:23:25 <CindyLinz> \ ^o^ /
+11:24:12 <CindyLinz> 現在學過的 continuous 函數有兩種定義了.... XD
+11:28:58 <suhorng> CindyLinz: 那個上次我有問過 Josh 欸XD 他說一般 metric space 上的 continuous 說不定可以寫成某種形式的 Scott-continuous
+11:29:24 <suhorng> 至少聽說 domain 上也可以定 topology, 然後這個 continuous 就是那個 topology 的 continuous
+11:32:58 <CindyLinz> 作了這麼多動作之後, 就能夠簡單無疑義地說 round 函數是不是 continuous 嗎? XD
+11:35:02 <suhorng> :t round
+11:35:03 <lambdabot> (RealFrac a, Integral b) => a -> b
+11:35:11 <suhorng> 這個 round 嗎？
+11:35:14 <CindyLinz> 在想.. 是不是就是因為 least fix point 沒辦法自動求解, 所以程式證明也總是沒辦法自動做了 @@#"
+11:35:16 <CindyLinz> 對啊
+11:35:34 <suhorng> 只好說他是不是 continuous 取決於你的 topology 了XD
+11:35:38 <CindyLinz> ._.
+11:35:47 <suhorng> 我覺得自動求解就是那個 Y 耶!!
+11:36:17 <CindyLinz> (想想..)
+11:36:36 <CindyLinz> 那不是只是擺一個符號在那裡嗎?
+11:36:57 <suhorng> 也是啦..寫成 μ(f) 的話確實只是擺一個符號在那裡
+11:37:35 <CindyLinz> let f 0 = 0 ; f n = 1 + f (n-1) 這個 f 函數, 擺個 Y 應該還是看不出來它就是 n -> n?
+11:38:12 <suhorng> 我覺得看不出來，但是如果真的要證出來 n -> n，不是需要去做函數的相等判斷了嗎？
+11:38:26 <CindyLinz> halting problem 又出現了的感覺.....www
+11:38:54 <suhorng> 阿 這樣問好了 求解一個函數的 least fixed point 能不能有個簡單的算出 "封閉解" 的方法XD
+11:40:56 <suhorng> 其實我也是覺得「求解」這裡有沒有一個簡單的說法
+11:42:28 <suhorng> 因為假若只要求出一個函數，使得那個函數實際上去計算時可以動，那 Y 就真的是一個解；可是要求封閉解好像(?)會有很難算出簡單式子的例子
+11:46:33 <CindyLinz> 那是不是要做自動證明程式行為的時候, 我們就該去對證明的目標作限制, 使得它總是很容易(在有限步之內)收斂之類的 (思)
+11:46:48 <CindyLinz> 但也不能太容易, 容易到沒意義 XD
+11:47:16 <suhorng> compactness 出現了！說好的 finite subcovering（誤）
+11:47:25 <CindyLinz> XD
+11:48:37 <CindyLinz> 好喜歡 xcycl 講的「涮涮看」, 以後我也要這樣講 :p
+11:49:14 <suhorng> 涮~~~然後有限多步就出來了
+11:50:20 <CindyLinz> XD
+13:29:43 <suhorng_> 唔，突然想到發散的計算是不是 big semantics 就弄不完呀
+13:30:17 <CindyLinz> 不是也可以「一眼看出」它會發散? XD
+13:30:36 <suhorng_> 假如我已知 [[ M ]] = _|_，那我能知道一定不存在 V 使得 M ↓ V 嗎？
+13:31:19 <CindyLinz> 存在不就矛盾了? @@"
+13:31:25 <suhorng_> 因為在想說 M ↓ V 右邊的 V 一定是 value，那一眼看出它發散之後應該就知道 M ↓ ？ 往上長就長不完了吧？
+13:31:29 <suhorng_> 喔喔對耶囧a
+13:31:50 <suhorng_> (﹁ B → ﹁ A) → A → B..
+13:32:13 <CindyLinz> 好禁忌的一條命題.. XD
+13:39:52 <au> @djinn (a -> b) -> (b -> bottom) -> (a -> bottom)
+13:39:53 <lambdabot> f a b c = b (a c)
+13:39:59 <au> @djinn ((b -> bottom) -> (a -> bottom)) -> a -> b
+13:39:59 <lambdabot> -- f cannot be realized.
+13:40:03 <au> djinn++
+13:40:10 <suhorng_> ++
+13:42:41 <evast> （冒出來）在 Domain 上把 upper set （d : D -> {e : D , d <= e}）定為 open set
+13:43:06 <evast> 這樣的 topology 就會使 least upper bound 就會是 limit point 喔
+13:43:53 <evast> 實數上的連續函數定義裡的 ε-δ 論證
+13:43:57 <CindyLinz> 先定好一個答案, 然後去調整 topology 使得這個答案符合 limit 的定義.... 感覺真是非常不舒服 XD
+13:44:28 <evast> 其實可以直接 embed 進 topological space 的連續定義
+13:45:02 <evast> ie. ε-δ 定義法 跟 topological space 中 preimage of open set is open 定義在實數函數上是等價的
+13:45:31 <evast> 可以用 topological space 的語言同時表述各種不同的 space 上的連續函數不好嗎 xD
+13:48:39 <CindyLinz> 同一個東西身上有兩種不同的 topological 的定義, 使得結果不一樣的時候就會討厭了.... XD
+14:01:54 <mno2_> @djinn (a -> b) -> m a -> m b
+14:01:55 <lambdabot> -- f cannot be realized.
+14:02:30 <au> @djinn Functor m => (a -> b) -> m a -> m b
+14:02:30 <lambdabot> Error: Class not found: Functor
+14:02:33 <au> heh
+14:02:49 <CindyLinz> 自動寫 code 的 haskell...!
+14:03:54 <au> @djinn class Functor a where fmap :: (a -> b) -> f a -> f b ; Functor m => (a -> b) -> m a -> m b
+14:03:54 <lambdabot> Cannot parse command
+14:04:11 <au> oh well, 命令列的完整版比較多功能 :p
+14:05:45 <CindyLinz> type 寫好, 就可以自動寫 code; type 的 type 寫好, 就可以自動寫 type; ... 以後來寫九重天上的九重 type.. (Y)
+14:05:48 <mno2_> theorem prover 叫做 Djinn 是什麼梗啊？
+14:05:50 <au> @djinn-add data Context a b t = Context (b -> t) a
+14:05:54 <au> @djinn (Context b c t -> r) -> Context a c t -> Context a b r
+14:05:54 <lambdabot> f a b =
+14:05:54 <lambdabot>     case b of
+14:05:54 <lambdabot>     Context c d -> Context (\ e -> a (Context c e)) d
+14:06:07 <au> mno2_: 神燈梗嘍 :p
+14:06:21 <au> @djinn-add class Functor a where fmap :: (a -> b) -> f a -> f b
+14:06:25 <mno2_> CindyLinz: manager 連奴隸都不用請了 xD
+14:06:28 <au> @djinn Functor m => (a -> b) -> m a -> m b
+14:06:28 <lambdabot> -- f cannot be realized.
+14:07:06 <CindyLinz> mno2_: XD
+14:07:38 <CindyLinz> @djinn (a, b) -> a
+14:07:40 <lambdabot> f (a, _) = a
+14:07:55 <mno2_> Les Djinns 是法文
+14:08:03 <CindyLinz> @djinn Show a => (a, b) -> String
+14:08:03 <lambdabot> Error: Undefined type String
+14:08:08 <CindyLinz> @djinn Show a => (a, b) -> [Char]
+14:08:09 <lambdabot> Error: Undefined type []
+14:08:16 <CindyLinz> O__O
+14:09:29 <au> @djinn-add class Functor f where fmap :: (a -> b) -> f a -> f b
+14:09:30 <au> @djinn (Functor f) => (a -> b) -> f a -> f b
+14:09:31 <lambdabot> -- f cannot be realized.
+14:09:38 <au> 好吧不玩了 XD
+14:10:17 <au> #很多年以前的版本是可以的 http://ircarchive.info/haskell/2007/5/6/86.html
+14:21:58 <CindyLinz> 某人板上看來的.. induction 梗 (?
+14:22:17 <CindyLinz> 十小時的 nyan cat https://www.youtube.com/watch?v=wZZ7oFKsKzY
+14:22:36 <CindyLinz> 實況看十小時的 nyan cat https://www.youtube.com/watch?v=wZZ7oFKsKzY
+14:23:37 <CindyLinz> 實況看十小時的(實況看十小時的 nyan cat) https://www.youtube.com/watch?v=wZZ7oFKsKzY
+14:23:53 <CindyLinz> 咦 我都貼到同一個 link ...
+14:24:14 <CindyLinz> 實況看十小時的 nyan cat https://www.youtube.com/watch?v=D6etnDBV2gY
+14:24:27 <CindyLinz> 實況看十小時的(實況看十小時的 nyan cat) https://www.youtube.com/watch?v=YLdxIvyWY2k
+14:30:15 <suhorng_> 然後呢 xDD
+14:31:41 <CindyLinz> 徵求下一個人接力? XD
+14:32:35 <au> 地方的 nyan cat 需要 fixpoint
+14:32:53 <CindyLinz> 一直看 nyan cat 的 nyan cat.. (誤)
+14:32:58 <whitglint> 某種邪教儀式...? XD
+14:33:45 <b4283> nyan cat abstraction
+14:35:42 <cataska> emacs 有 nyan cat mode
+16:05:46 <cibs> 這句好像有點糟糕是我的錯覺嗎 # 14:32 < au> 地方的 nyan cat 需要 fixpoint
+16:06:48 <au> 一定是錯覺~
+16:08:08 <cibs> 還以為走錯頻道 XD
+16:31:47 <superbil> monad 要怎麼學阿?
+16:33:40 <au> 先學 (applicative) functor?
+16:33:41 <au> http://learnyouahaskell-zh-tw.csie.org/zh-tw/functors-applicative-functors-and-monoids.html
+16:34:02 <au> 然後 http://learnyouahaskell-zh-tw.csie.org/zh-tw/a-fistful-of-monads.html 就比較容易懂了 (希望)
+16:36:56 <suhorng_> 先寫程式（大誤）
+19:29:41 <mno2_> 要 recursion 的東西都用 fix 來寫。就叫 fix-it oriendted programming (FOP) 嗎？ lol
+19:29:43 <mno2_> fix error
+19:29:46 <mno2_> fix nyan cat
+19:30:00 <mno2_> fix nyan_cat
+19:36:50 <yhsiang> nyan_cat fix nyan_cat
+19:38:16 <au> > mdo { xs <- Just (1:xs) ; return (map negate xs) }
+19:38:17 <lambdabot>  <hint>:1:10: parse error on input ‘<-’
+19:38:34 <au> alright, 沒開 -XRecursiveDo
+20:07:49 <petercommand> @src catch
+20:07:50 <lambdabot> catch m k = catchException m handler where handler (IOException err) = k err
+20:08:05 <petercommand> @src catchException
+20:08:05 <lambdabot> Source not found. This mission is too important for me to allow you to jeopardize it.
+20:33:17 <miaoski> yllan: 我明天中午會過去哦! 我會把你的硬碟還你，然後帶我自己的硬碟過去...
+20:33:45 <yllan> miaoski: OK!
+20:33:46 <miaoski> 還有一些要補完的 title 再麻煩大家了~
+23:34:19 <mno2_> https://twitter.com/kmett/status/273490287987404800 看不懂..
+23:37:36 <CindyLinz> "... is that evil agda or idris code?" XDD
+23:40:09 <au> mno2_: GHC typechecker bug
+23:40:27 <CindyLinz> 嗯, 覺得 pure/impure 其實也就是 explicit side effect / implicit side effect 嘛?
+23:41:32 <au> 是，但 explicit 也就是可以自定的意思... "monads are user-defined semicolons"
+23:42:37 <CindyLinz> 嗯嗯嗯
+23:48:18 <petercommand> 問一下，"lambda是無上的機械指令集"是哪一篇文章呀?找不到@@
+23:48:54 <petercommand> 我找了lambda the ultimate machine instruction 結果沒有XD
+23:54:56 <petercommand> au: 你的演講裡提到的^^

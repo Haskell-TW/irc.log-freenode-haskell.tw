@@ -1,0 +1,34 @@
+00:13:49 <CindyLinz> mno2: 你都沒有 commit 喔?
+00:13:54 <CindyLinz> 呃.. push
+00:14:23 <mno2> 我週間都沒有動啊 xD
+00:14:23 <mno2> 沒空
+00:35:48 <CindyLinz> 喔.. 我想說你 try 了什麼 backcall 寫法, 好奇是用在哪 :p
+00:40:48 <mno2> CindyLinz: 其實是用在工作的 project xD
+00:45:58 <CindyLinz> 工作用 livescript.... (嘆)
+11:03:09 <mno2> CindyLinz: 一人 project 啊，因為要寫前端，目前看來看去好像暫時也沒有比 livescript 好的。（有考慮過 clojurescript )
+11:37:17 <CindyLinz> 我是都先用 coffeescript 等著.. ^^|
+11:37:29 <CindyLinz> 等著....更好的 js language.. XD
+11:39:17 <mno2> CindyLinz: 你是用 iced coffeescript 還是原版的?
+11:55:00 <mno2> 新版 sourcegraph 還蠻好看的
+13:09:46 <CindyLinz> mno2: 原版的
+13:11:30 <CindyLinz> 我原本就很習慣 CPS 的寫法, 而且也很習慣局部平行化之類的動作, iced 的特殊語法帶來的幫助好像就沒有很大
+14:55:17 <CindyLinz> mno2: 咦, 你現在平常是在新加坡喔? 那連 digital ocean 的感受應該比我連還要卡?
+14:55:55 <mno2> 我不知道要怎麼跟你的感覺比較，但我的確是會 lag 一下
+14:56:11 <CindyLinz> 我現在 ping 大約是 125ms 上下
+14:56:30 <CindyLinz> 就打字的時候會感受到 latency, 但仍然是順的
+14:57:23 <CindyLinz> 不過我現在是在公司, 會比較快比較不準 ^^|  在家應該會再慢一截
+14:57:41 <mno2> 我大概 200ms
+14:58:06 <CindyLinz> mmmm
+14:59:46 <mno2> 等他有亞洲的點再說 xD
+15:01:21 <CindyLinz> 對啊這真可惜.. @@"  一般亞洲點會選日本和新家坡吧 ^^
+15:05:16 <mno2> 來新加坡我就超快了 xD
+15:10:58 <CindyLinz> 沒錯 XD
+15:11:31 <CindyLinz> mno2: 問問.. 在新加坡外面走路會不會壓力很大啊? 怕不小心丟了紙屑在地上之類的? @@"
+15:12:24 <mno2> CindyLinz: 不會啊，沒那麼嚴重啦
+15:14:47 <CindyLinz> 是明顯故意才會出事?
+15:35:19 <mno2> 我沒有實驗過啊，但不是故意的話都有說話的空間
+15:35:49 <CindyLinz> 嗯嗯嗯... 好 ^^  我從小就對新加坡的故事有陰影 ^^|
+15:36:45 <mno2> 而且也不是到處都有警察啊..
+15:36:53 <mno2> 新加坡其實警察人力很缺乏
+15:37:24 <mno2> 你大概只會在機場碰到警察，路上不太會碰到
+15:39:20 <CindyLinz> 是喔.. 我對新加坡的印象還停留在法律超嚴管超細的部分 @@"

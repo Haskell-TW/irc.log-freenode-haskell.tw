@@ -1,0 +1,10 @@
+00:44:17 <monochrom> 我重複三次都出不都 segfault
+00:46:23 <monochrom> 我認為壞在檔案, 或硬碟, 或硬件例如 RAM
+09:50:44 <mno2> https://haskell.kr/en/   Haskell KR
+09:51:24 <mno2> 去打個招呼？
+11:57:59 <CindyLinz> 補後續.. https://ghc.haskell.org/trac/ghc/ticket/10375
+11:59:28 <CindyLinz> ghci 在 arm 上實作出現的問題
+20:25:12 <suhorngT_> The Unreasonable Effectiveness of Lenses in Business Applications (9/9) https://twitter.com/kmett/status/641761888876032000
+22:13:02 <suhorngT_> CindyLinz: 認真的爬了一下 看來是 GHCi runtime loader 不會分辨 ARM 兩種 code 差別造成的
+22:18:19 <mno2> suhourngT_ 不轉一下 bottom 跟 topless 那一篇嗎？ lol
+22:20:16 <letoh> 怎麼會有 illegal instruction...

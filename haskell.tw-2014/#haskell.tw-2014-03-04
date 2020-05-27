@@ -1,0 +1,24 @@
+17:35:35 <CindyLinz> 如果 C 程式 call 入 haskell 函數, 然後這個 haskell 函數呼叫了一個會 longjmp 的 C 函數, 會發生什麼事 @@"
+17:36:01 <CindyLinz> C: setjmp -> Haskell: do something -> C: longjmp
+17:36:41 <CindyLinz> 完全一樣的標題耶 XD http://www.haskell.org/pipermail/glasgow-haskell-users/2010-March/018515.html
+17:38:07 <CindyLinz> 看起來會毫無意外地悲劇....ww
+19:30:13 <hychen_> CindyLinz: docker在mac有點悲劇...
+19:30:20 <hychen_> CindyLinz: 還是要跑個VM XD
+19:30:52 <CindyLinz> 我以為 docker 是 Linux only 耶? XD
+19:36:42 <mno2> CindyLinz: http://docs.docker.io/en/latest/installation/mac/
+19:37:06 <mno2> 其實還是疊了一層 VM 的樣子
+19:39:04 <godfat> Docker on OS X needs VirtualBox to run.
+19:39:04 <godfat> 都在騙人 @@
+20:03:29 <CindyLinz> XDD
+20:03:44 <CindyLinz> 沒看到它是墊在 node.js 上面就很感謝了? (逃)
+20:04:32 <godfat> ...orz atom.io...
+20:06:03 <CindyLinz> refactor haskell 程式, 真的有時候就是先改 type, 然後讓 ghc 帶路... XD
+20:06:26 <godfat> 我是常常用 test 帶路... XD
+20:08:17 <CindyLinz> test 是啥?
+20:08:22 <CindyLinz> 喔用測的...
+20:09:13 <godfat> test passed -- no problems
+20:09:14 <godfat> otherwise fix tests one by one...
+21:31:44 <mno2> atom.io 看起來像是 node.js 版的 emacs ?
+21:32:09 <godfat> 可能喔...
+21:32:33 <mno2> 還拿不到邀請碼 xD
+21:33:19 <godfat> 我的用完了 @@

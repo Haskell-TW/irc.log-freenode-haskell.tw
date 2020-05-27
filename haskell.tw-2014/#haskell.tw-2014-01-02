@@ -1,0 +1,41 @@
+00:40:05 <monochrom> 哈哈, 怎麼忽然文言起來了?
+00:46:32 <monochrom> 文言文者, 苦思而寫, 言簡意賅, 與 Haskell 同. XD
+01:33:23 <CindyLinz> 不是什麼好事.. XD
+12:05:37 <cataska_> 「用籌兮用嚴。井涸兮無礙」?
+14:36:12 <mno2> 哀哉，丙正正一十一令人費解矣。
+14:37:39 <letoh> 才過個年，大家是被什麼電波打到了? XD
+16:46:53 <petercommand> letoh: 近日於此頻道所見之文字著實令吾感艱澀難懂也也
+16:47:07 <petercommand> letoh: 近日於此頻道所見之文字著實令吾感艱澀難懂也
+17:44:25 <hashcat> 貧道書簡實劣 望海涵
+18:04:52 <cataska> 截起吾純風  賦小入大合 = chomp (my $z = <STDIN>);
+18:07:01 <hashcat_> 在下粗陋, 不通此文
+18:07:47 <cataska> https://github.com/audreyt/lingua-sinica-perlyuyan/blob/master/lib/Lingua/Sinica/PerlYuYan.pm
+18:11:17 <hashcat_> 此碼頗似駱駝語
+18:12:50 <cataska> 然
+18:12:54 <hashcat_> 在下不諳駱駝語
+18:14:28 <hashcat_> 愧甚
+21:02:23 <CindyLinz> highlight.js 幫 haskell 語法上色實在是有點弱 @@"
+21:02:42 <CindyLinz> 它認不得 -- 為註解, 所以 -- 後面的東西還會特殊變色
+21:03:20 <CindyLinz> 然後 haskell 程式裡面如果用 a' 這樣的變數名, 它一定會把 ' 當成獨立的單引號
+21:03:34 <CindyLinz> 然後後面都變成字串的顏色, 直到下一個單引號....
+21:05:41 <letoh> 該不會只是單純用 regex 處理?
+21:06:19 <CindyLinz> 這不知道.. 不過, 會覺得作者應該不知道 haskell 的語法.. orz
+21:06:37 <CindyLinz> haskell 沒有 '...........' 這樣的字串啊 @@"
+21:06:53 <CindyLinz> 只有一個字的字元 或是用 \ escape 的, 頂多兩個字 @@"
+22:52:10 <suhorng> CindyLinz: 你直接用官網default的highlight.js? 還是有自己打包?
+22:52:14 <suhorng> 我用有變色XD
+22:53:44 <suhorng> 不過 a' 這個真的有bug..
+22:57:11 <suhorng> 欸不對 我剛剛試 a' 也沒問題耶XD
+22:58:01 <suhorng> 不過不知道為什麼他沒有把 'a' 變色..
+23:11:29 <CindyLinz> 從官網抓的, 不過好幾個月前了.. 一直延用..
+23:15:13 <suhorng> CindyLinz: 官網抓的預設沒含Haskell吧?
+23:15:39 <suhorng> 喔喔 直接有custom package連結
+23:15:58 <suhorng> https://twitter.com/tomaspetricek/status/402827811297050624 xDDDD
+23:31:53 <suhorng> 關於昨天的 typeclass 話題, 我還沒有想清楚, 不過覺得不太喜歡 polymorphic numeral 的作法
+23:32:46 <suhorng> 我覺得比較明顯有種共通性質的是 Functor, Monad, Show 那類, 但是 Num 一系列的覺得有點怪
+23:35:05 <suhorng> 對於 overloading 到底怎樣做比較好一直覺得很困擾
+23:37:46 <suhorng> 再者, 像用 monad 那些需要用到 flexible contexts/instances 之後 type inference 的效果就一直都很差
+23:38:15 <suhorng> 何況還有很多有遞迴的情形會用到 undecidable instances 這個擴展...
+23:39:27 <suhorng> 就是說 很多的 extension 感覺都像是某個條件可以放鬆 就把他放鬆...或是加入一些部份的功能(functional dependency)
+23:57:53 <hashcat> 不是在說curry嘛
+23:58:32 <suhorng> 我說Haskell 囧

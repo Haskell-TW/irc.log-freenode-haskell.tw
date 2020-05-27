@@ -1,0 +1,92 @@
+22:16:39 <CindyLinz> @pl \(a, b) -> (f a, g b)
+22:16:40 <lambdabot> f *** g
+22:16:56 <CindyLinz> @pl \(a, b, c) -> (f a, g b, h c)
+22:16:57 <lambdabot> (line 1, column 9):
+22:16:57 <lambdabot> unexpected "c"
+22:16:57 <lambdabot> ambiguous use of a non associative operator
+22:17:16 <CindyLinz> ww
+22:17:21 <CindyLinz> @pl \(a, b, cc) -> (f a, g b, h cc)
+22:17:22 <lambdabot> (line 1, column 9):
+22:17:22 <lambdabot> unexpected "c"
+22:17:22 <lambdabot> ambiguous use of a non associative operator
+22:17:36 <CindyLinz> 這什麼情況 orz
+22:18:05 <CindyLinz> @pl \(a, b, ab) -> (f a, g b, h ab)
+22:18:06 <lambdabot> (line 1, column 9):
+22:18:07 <lambdabot> unexpected "a"
+22:18:07 <lambdabot> ambiguous use of a non associative operator
+22:18:14 <CindyLinz> @pl \(a, b, ab) -> (f a, g b, hhh ab)
+22:18:15 <lambdabot> (line 1, column 9):
+22:18:16 <lambdabot> unexpected "a"
+22:18:16 <lambdabot> ambiguous use of a non associative operator
+22:19:10 <petercommand> @pl \(a, (b, ab)) -> (f a, (g b, hhh ab))
+22:19:10 <lambdabot> uncurry ((`ap` snd) . (. fst) . (. ((. hhh) . (,) . g)) . (.) . (,) . f)
+22:19:46 <petercommand> @pl \(a, b, c) -> (a, b, c)
+22:19:47 <lambdabot> (line 1, column 9):
+22:19:47 <lambdabot> unexpected "c"
+22:19:47 <lambdabot> ambiguous use of a non associative operator
+22:20:00 <CindyLinz> @pl 敲敲
+22:20:01 <lambdabot> (line 1, column 2):
+22:20:01 <lambdabot> unexpected '\149'
+22:20:01 <lambdabot> expecting letter or digit, variable, "(", operator or end of input
+22:20:09 <petercommand> XD
+22:20:24 <petercommand> @pl \(a, b) -> (a, b)
+22:20:25 <lambdabot> id
+22:33:55 <suhorngT> @pl \f g h (a,b,c) -> (f a, g b, h c)
+22:33:55 <lambdabot> (line 1, column 13):
+22:33:55 <lambdabot> unexpected "c"
+22:33:55 <lambdabot> ambiguous use of a non associative operator
+22:34:10 <suhorngT> @pl \f -> f(a,b,c)
+22:34:10 <lambdabot> ($ (a, b, c))
+22:34:20 <suhorngT> @pl \(p,q,r) -> p
+22:34:20 <lambdabot> (line 1, column 7):
+22:34:20 <lambdabot> unexpected "r"
+22:34:20 <lambdabot> ambiguous use of a non associative operator
+22:34:42 <suhorngT> @pl \p -> case p of (a,b,c) -> (f a, g b, h c)
+22:34:43 <lambdabot> (line 1, column 27):
+22:34:43 <lambdabot> unexpected '>'
+22:34:43 <lambdabot> expecting operator
+22:34:49 <suhorngT> heh
+22:35:12 <suhorngT> @pl \p -> let (a,b,c) = p in (f a, g b, h c)
+22:35:12 <lambdabot> (line 1, column 11):
+22:35:12 <lambdabot> unexpected "("
+22:35:12 <lambdabot> expecting "()", natural, identifier or "in"
+22:35:29 <suhorngT> 沒處理 pair 以外的狀況@_@?
+22:36:01 <CindyLinz> 這麼多年了才發現 XD
+22:57:54 <petercommand> @pl let a = p in a
+22:57:55 <lambdabot> p
+22:58:11 <petercommand> @pl let p = (a,b) in p
+22:58:12 <lambdabot> (a, b)
+22:58:16 <petercommand> @pl let p = (a,b,c) in p
+22:58:16 <lambdabot> (a, b, c)
+22:58:23 <petercommand> @pl let p = (a,b,c) in p -> p
+22:58:23 <lambdabot> (line 1, column 24):
+22:58:23 <lambdabot> unexpected '>'
+22:58:23 <lambdabot> expecting operator
+22:59:14 <suhorngT> 等等, 為何後面有個 -> p XD
+22:59:14 <petercommand> @pl let p = (a,b,c) in p p
+22:59:15 <lambdabot> (a, b, c) (a, b, c)
+22:59:20 <petercommand> 寫錯XD
+22:59:30 <suhorngT> @pl \p -> (let (a,b,c) = p in (f a, g b, h c))
+22:59:30 <lambdabot> (line 1, column 12):
+22:59:30 <lambdabot> unexpected "("
+22:59:30 <lambdabot> expecting "()", natural, identifier or "in"
+22:59:42 <suhorngT> @pl \p -> (let (a,b,c) = p in ( (f a, g b, h c) ))
+22:59:43 <lambdabot> (line 1, column 12):
+22:59:43 <lambdabot> unexpected "("
+22:59:43 <lambdabot> expecting "()", natural, identifier or "in"
+23:00:03 <suhorngT> @pl \p -> let (a,b,c) = p in p
+23:00:04 <lambdabot> (line 1, column 11):
+23:00:04 <lambdabot> unexpected "("
+23:00:04 <lambdabot> expecting "()", natural, identifier or "in"
+23:00:51 <CindyLinz> @t let p = (a,b,c) in p p
+23:00:52 <lambdabot> Maybe you meant: tell thank you thanks thesaurus thx tic-tac-toe ticker time todo todo-add todo-delete type v @ ? .
+23:00:59 <CindyLinz> @type let p = (a,b,c) in p p
+23:01:00 <lambdabot>     Couldn't match expected type ‘(Expr, Expr, Expr) -> t’
+23:01:01 <lambdabot>                 with actual type ‘(Expr, Expr, Expr)’
+23:01:01 <lambdabot>     The function ‘p’ is applied to one argument,
+23:01:43 <suhorngT> petercommand: 壞掉的好像是寫在 pattern 位置的
+23:03:37 <petercommand> @pl let p (a, b, c) = (a, b, c) in p (a, b, c)
+23:03:37 <lambdabot> (line 1, column 14):
+23:03:37 <lambdabot> unexpected "c"
+23:03:37 <lambdabot> ambiguous use of a non associative operator
+23:03:55 <petercommand> suhorngT: 恩， pattern 位置的會壞掉..

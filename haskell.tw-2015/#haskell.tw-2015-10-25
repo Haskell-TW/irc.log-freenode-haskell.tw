@@ -1,0 +1,40 @@
+00:12:57 <monochrom> 哈哈 反服貿, 反反服貿, 反反反服貿
+00:56:57 <monochrom> CindyLinz: 我寫 f Player{a=b} p2@Player{c=d} = ...  可讀又不用括號
+17:48:00 <mno2> http://files.luite.com/hs15/#/
+17:48:11 <mno2> 直接用 ghcjs 做 interactive presentation
+17:49:11 <CindyLinz> monochrom: 我有時候也會那樣寫 :p
+17:57:13 <mno2> http://hackage.haskell.org/package/regex-applicative-0.3.2.1
+17:57:21 <mno2> The opposite seems to be valid about Haskell programmers -- they use parsing combinators (which recognize context-free or even context-sensitive grammars), even when the language is actually regular!
+17:57:24 <mno2> lol
+17:58:53 <CindyLinz> 嗯.. 這也是我以前找 haskell regex library 之後的感想...
+21:51:41 <suhorngT_> lol
+21:52:04 <suhorngT_> Parser Combinators are just a DSL, and all we need is a *sufficiently smart* compiler
+22:10:56 <capisce> yes
+22:12:15 <capisce> I'm still waiting
+22:14:37 <capisce> I think this compiler will be called "strong AI"
+22:34:04 <mno2> capisce 是新朋友？
+22:34:42 <capisce> 什么？我是挪威人
+22:37:19 <petercommand> Hi, capisce
+22:38:03 <capisce> hello :)
+23:04:15 <mno2> capisce: How did you know this channel ?
+23:04:53 <capisce> I think I used alis to search for Haskell related channels
+23:07:48 <mno2> I see. :)   But you are also interested in a Mandarin-dominant channel, apart from the main #haskell channel ?
+23:10:53 <capisce> good chance to learn Mandarin and Haskell at the same time ;)
+23:13:02 <mno2> Is there Haskell community in your city/town?
+23:14:35 <capisce> there seems to be a very small community in Oslo, not sure about other parts of Norway
+23:15:00 <capisce> although Oslo is a bit far from where I live
+23:18:42 <mno2> when you are saying small, is it less than the number of people in this channel?  :p
+23:19:24 <mno2> I think  this channel is about the haskell community size in Taiwan. (a little bit over-estimated)
+23:25:24 <capisce> yes, small as in 4-5 people maybe
+23:25:32 <capisce> though I'm not sure
+23:26:27 <capisce> but Haskell is quite a niche in most places I guess
+23:29:13 <mno2> comparing to the main stream langs, yes it is.  Even in bay area and NYC they have a few hundreds of people as registered members of meetup.com, still can't compare against meetup for main-stream lang.
+23:30:39 <mno2> but some of areas are getting some momentum in these two years.  like Japan and Singapore: http://www.meetup.com/HASKELL-SG
+23:31:12 <capisce> there are some Haskell jobs in Singapore I heard
+23:31:48 <mno2> Yes, a few.
+23:32:20 <capisce> and even the Prime Minister wants to learn Haskell
+23:32:57 <capisce> so maybe Singapore will become the Haskell Mecca
+23:34:02 <mno2> I would say it is still far from that, but things are moving in a positive direction.
+23:35:47 <mno2> Taiwan also has a sizeable community: http://www.meetup.com/Functional-Thursday
+23:35:59 <mno2> Almost none in China and South Korea.
+23:37:37 <capisce> considering the population difference that's a bit surprising

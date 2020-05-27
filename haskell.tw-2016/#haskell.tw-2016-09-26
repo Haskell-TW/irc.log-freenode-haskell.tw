@@ -1,0 +1,33 @@
+03:38:05 <caasih> Boston Haskell 算很活躍嗎？ https://www.youtube.com/channel/UCUCpgCWjaniUkX88wZrK_Ig
+20:16:44 <miaoski> https://www.fun-mooc.fr/courses/parisdiderot/56002S02/session02/courseware/W0/W0S0/
+20:22:39 <caasih> 給不想註冊的人 http://imgur.com/a/QqWwQ # Introduction, OCaml
+20:44:07 <miaoski> caasih: 其實 video 都有放在 YouTube. 如果不想做練習題，看 YouTube 就好
+20:44:31 <miaoski> Greetings: https://www.youtube.com/watch?v=ei61A4IqWYE
+20:44:50 <miaoski> Introduction to the Course: https://www.youtube.com/watch?v=cYNiNY1aSVg
+20:44:58 <caasih> miaoski: XDDD 我才剛體會到 type 的妙處，還卡在 Haskell 世界...
+20:47:52 <miaoski> FUNCTIONAL PROGRAMMING: HISTORY AND MOTIVATION
+20:47:58 <miaoski> https://www.youtube.com/watch?v=s6G7W_FkGO8
+20:49:44 <miaoski> caasih: 我其實還沒體會 XD
+20:50:43 <caasih> miaoski: 我是在 JS 體會的，應該不算真的體會 XD
+21:04:52 <miaoski> THE OCAML LANGUAGE: HISTORY AND KEY FEATURES: https://www.youtube.com/watch?v=nfH1WuU5NY8
+21:12:17 <miaoski> WHY THE OCAML LANGUAGE: MEET THE USERS: https://www.youtube.com/watch?v=YsG6o1R-gPo
+21:12:46 <letoh> ocaml 跑來這邊了XD
+21:13:50 <letoh> 那課程之前好像有法語的
+21:26:39 <letoh> miaoski: 你有加入這堂課嗎?
+21:32:49 <letoh> 看起來六週的課成只有講一些基本語法的部份
+22:01:59 <letoh> https://try.ocamlpro.com/fun-demo/tryocaml_index.html   loading 的動畫好可愛
+22:29:27 <miaoski> letoh: 有哦。
+22:29:40 <miaoski> 什麼有法語的? 我要上!
+22:45:34 <petercommand> 法語突然大改，實在很神奇XD
+22:51:37 <letoh> miaoski: 我記得之前看過是法語的  忘了是不是在這個平台了
+22:52:09 <letoh> 看起來介紹頁有點像... 以 ocaml 為主的 mooc 不多  也許找一下還在@_@
+22:53:53 <petercommand> miaoski: 看到你在 fb 的發文才曉得的XD
+22:56:28 <miaoski> petercommand: ?!
+22:58:02 <petercommand> miaoski: 法語大改的那篇文章啊，還是我記錯了XD
+23:01:03 <miaoski> petercommand: 哦，沒錯 :) 我前幾天和老師確認過了，他們國內目前還在吵成一團的階段，老師們當然也不希望改
+23:02:45 <miaoski> 畢竟原來的拼寫法是有道理的，有些詞也已經自然演變成新的拼法了。
+23:09:51 <petercommand> 畢竟似乎很少看到直接這樣大改語言的XD
+23:10:04 <petercommand> 簡中應該也算是這樣的例子
+23:14:26 <miaoski> petercommand: 德國 200x 也改了 Rechtschreibung
+23:15:10 <miaoski> https://de.wikipedia.org/wiki/Deutsche_Rechtschreibung
+23:15:32 <miaoski> 歷史上並不少見.

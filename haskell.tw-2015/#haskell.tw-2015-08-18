@@ -1,0 +1,31 @@
+11:44:51 <miaoski> http://www.infoq.com/cn/news/2015/08/Sigma-FXL-GHC
+11:44:55 <miaoski> Facebook 黑黑
+11:45:08 <miaoski> 「他们做了大量艰苦的工作，优化Haskell代码，确定和解决性能瓶颈，其中包括修改GHC的堆管理方式、修复Haskell JSON解析框架aeson的一个性能缺陷等。」
+12:25:11 <CindyLinz> Aeson....
+12:25:17 <CindyLinz> 我跟 Aeson 不合...... /_\
+12:25:49 <CindyLinz> 它總是會做我覺得很奇怪的行為, 可是又不能說它錯.... 但就是跟它不合..................||
+12:42:44 <au> deriveJSON 的規則確實怪怪的 (Data.Aeson.TH) ... 但手寫 FromJSON/ToJSON 我覺得還滿順的，不比 Data.Binary 差
+13:33:25 <mno2> 我在 host haskell.sg 以來，大概也聽過兩次 talk 對於 aeson 預設的行為抱怨過
+13:34:54 <CindyLinz> 我講一個最近的.....
+13:35:31 <CindyLinz> https://github.com/pbrisbin/google-drive/pull/3
+13:36:46 <CindyLinz> Aeson 對 UTCTime 的 encode to json.. 用的是 RFC 3339 格式.. 會輸出很長很長的小數點秒數.. 像這樣 2015-08-11T14:28:19.567000000000Z
+13:36:58 <CindyLinz> 以致於 Google API reject 說 format invalid..
+13:37:29 <CindyLinz> 跑去翻 RFC 3339 來看, 它沒有定義該有多長.. 所以嚴格來說 Aeson 沒有實作錯誤
+13:37:45 <CindyLinz> 但是..... 就有種你存心鬧事的感覺 /_\
+13:40:38 <CindyLinz> 嗯, 那串比 Google 容許的長度多三個字 XD
+13:41:52 <CindyLinz> mno2: 你是說.... talk 的主題就是抱怨 Aeson 的預設行為喔? XD
+13:42:29 <CindyLinz> 為什麼 miaoski 看任何事情都是黑黑的?
+13:43:20 <mno2> CindyLinz: 不是，是說實在 XXX project 的時候用到 Aeson，然後預設行為跟他預期的不一樣
+13:43:32 <CindyLinz> 喔喔 XD
+14:17:41 <miaoski> CindyLinz:
+14:18:12 <miaoski> CindyLinz: 這一定是蘇東坡和佛印的故事。
+15:15:08 <CindyLinz> miaoski: 黑絲基!
+16:10:42 <miaoski> CindyLinz: 要也是黑「斯基」不是「黑絲」基 ... 這樣斷詞怪怪der  :P
+16:12:19 <CindyLinz> miaoski: 黑．司機
+20:36:47 <CindyLinz> au: 問~~ 南無參照透明性的「南無」是什麼意思呀?
+20:46:29 <kuanyui> CindyLinz:  XD https://zh.wikipedia.org/zh-tw/%E5%8D%97%E7%84%A1
+20:55:29 <CindyLinz> 就是用這個意思嗎? XD
+20:56:20 <kuanyui> 應該吧=w=
+22:58:11 <au> CindyLinz: 就是用這個意思
+22:59:14 <CindyLinz> 當作是個增添宗教感的裝飾詞好了 ^^|
+23:28:52 <monochrom> 南無參照透明性, 照見變數皆空. 空即是變, 變即是空.

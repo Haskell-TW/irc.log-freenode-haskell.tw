@@ -1,0 +1,16 @@
+00:14:24 <petercommand> @pl \f -> let x = f (f x) in x
+00:14:25 <lambdabot> fix . join (.)
+01:57:40 <monochrom> http://www.vex.net/~trebla/haskell/fix.xhtml
+10:28:30 <cibs> lambdabot 很貼心的幫妳縮函式了 XD
+11:38:18 <cibs> 裝 haskell-platform 會順便幫你裝 x11... @@
+11:38:33 <cibs> 有點兒龐大
+11:40:32 <monochrom> 你是說透過你的 linux 裝嗎?
+11:46:03 <cibs> yes~
+11:46:09 <cibs> apt-get install haskell-platform~
+12:16:32 <monochrom> Haskell Platform 包 GLUT 和 OpenGL. 由此就牽扯出 X11.
+12:20:55 <monochrom> 如果你用 https://www.haskell.org/platform/#linux-generic 就不自動牽扯. 好不好就看你愛自動還是手動.
+12:54:50 <jokester> 只装ghc好象不带x11?
+14:11:34 <cibs> 可以只裝 cabal-install 剩下再用 cabal 裝 XD
+14:50:56 <jokester> 嗯，或者装stack再用stack装其他
+14:51:12 <CindyLinz> 如果是 haskell 開發者的話, 我覺得用 haskell stack 這工具不錯... 因為你可能會希望你的電腦上同時有好幾個不同版本的 ghc
+14:51:27 <CindyLinz> 然後各 hackage 也可能會希望同時有好幾個版本並存

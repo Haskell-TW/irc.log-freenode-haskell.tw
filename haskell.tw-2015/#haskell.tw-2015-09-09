@@ -1,0 +1,5 @@
+04:09:49 <caasihuang> 又看了一點 Functional Reactive Programming 那篇文章，可以在不知道未來會發生什麼事的情況下，遞迴組出整個 Behavior 滿有意思的。
+04:10:52 <caasihuang> lbp 裡面包的行為是 left button release 而不用包位置。位置可以靠 snapshot 從 mouse 取得就好。
+09:06:21 <mno2> https://www.reddit.com/r/haskell/comments/3jyapt/haskellr_programming_r_in_haskell/    HaskellR - Programming R in Haskell
+09:07:54 <mno2> https://www.youtube.com/playlist?list=PLnqUlCo055hV5dPC-4VWeXzhI8ooeTsVy
+09:08:00 <mno2> [Haskell Symposium 2015]

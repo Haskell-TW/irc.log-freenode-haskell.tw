@@ -1,0 +1,39 @@
+19:52:44 <suhorng> http://www.haskellforall.com/2013/05/program-imperatively-using-haskell.html G+ Haskell社群看到的
+19:52:53 <suhorng> lenses @@
+19:54:20 <suhorng> 最近嘗試在 C++ 中寫一些比較 functional 的東西, 例如小小的 Parser (有點類似 Parsec, 也就是 introduction to functional programming using haskell 的 parsing 那一章的東西)
+19:54:55 <suhorng> 不過速度完全悲劇.. 寫起來也有點麻煩. C++ 不手動優化程式好像幾乎不能跑QQ
+19:58:52 <letoh> 有多慘?
+20:01:05 <letoh> 你生一堆物件出來嗎?
+20:01:08 <suhorng> 是 cppgm 的 PA1, pptoken, 把純文字解析成一些 token. 跑一個 34K 的程式在我電腦上要 14 秒... (工作站上則要 3 秒)
+20:02:03 <suhorng> 對, 我每個小 Parser 的 type 都是 function<list<pair<A, XXiterator>>(XXiterator)> (aka iterator -> [(result, iterator)]0
+20:02:22 <suhorng> 光那一堆 list 應該就會佔掉大部分花費時間...
+20:02:39 <letoh> 唔  這個應該沒什麼問題  template 應該一開始就會全部建完了
+20:03:40 <suhorng> 問題我猜在那些 list, 因為我重載 operator>>= 把一堆這種東西串起來, 中間一堆 list 建構解構大概花費很大@@
+20:04:12 <suhorng> 另外也有些東西它優化不掉 例如我 >> 用 >>= 來實做, 跟 >> 自己實做自己的速度會差 4 秒
+20:04:42 <suhorng> (用>>=來實做>>是多包一層 [](A){ some code })
+20:05:05 <letoh> 我以為需要一直產生的只有 ast node
+20:05:36 <suhorng> ast node?
+20:05:44 <suhorng> 還沒有到 syntax tree
+20:05:47 <letoh> parse 完不用產生 tree 嗎?
+20:05:48 <letoh> 喔喔
+20:05:56 <suhorng> 這個作業還只到變成一堆 token
+20:06:15 <letoh> 我完全忘了這個東西... pa1 才 clone 下來而已XD
+20:07:00 <suhorng> letoh: 還沒寫的意思嗎？
+20:07:18 <letoh> 對  根本就忘了XD
+20:07:47 <suhorng> 嗯 一直都有新公告喔
+20:08:05 <letoh> 好像有收到信  但一回到家就忘了
+20:08:31 <letoh> 家裡的 emacs 一直開著其他程式 buffer  回來繼續改一改就忘了XD
+20:09:46 <suhorng> http://www.cppgm.org/ 還來得及在 05/19 前寫完然後apply for grading account XD
+20:29:32 <letoh> 這幾天找時間來趕一下好了XD
+20:29:46 <letoh> 最近連 coursera 的課都沒什麼時間看了XD
+21:19:20 <suhorng> 話說 python 的 lambda 那個例子, 感覺最大的問題在因為每次都是同一個 i？
+21:19:51 <suhorng> 如果 i 都是不變的然後對每一項都是一個新的 i 不會出事
+21:20:22 <suhorng> 否則真的用改變數跑 for 迴圈, 那 Scheme 也不會有 Haskell 的例子那樣的結果吧？
+21:22:01 <suhorng> 感覺問題也不只是「23:29:34 <favonia> 啊可能可以說 reference/value 混亂」
+21:24:27 <suhorng> 喔喔, 後看一天的紀錄, 那時有討論過了
+21:24:31 <suhorng> *漏看
+21:27:27 <suhorng> （at top level:） (define i 0) (define f (lambda (n) (+ n i))) (set! i 1) (f 1) ~~> 2
+21:31:40 <suhorng> letoh: 「01:51:01 <letoh> http://ideone.com/AwA5Vg  像這個就比較像我喜歡的行為」 這個例子其實不太一樣...用 int ref 就會有改掉後的behavior了. 一個是修改一個只是 shadowing...
+22:06:28 <letoh> 我知道啊
+22:08:23 <letoh> 主要是希望可以自己控制
+22:10:32 <letoh> 像 python 雖然 shadow 掉了，但因為 name resolution 的關係又抓到最後定義的

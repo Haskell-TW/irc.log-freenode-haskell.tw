@@ -1,0 +1,585 @@
+00:00:05 <favonia> mno2: 啊我的錯。實際上 exact 那邊3個都可能是空的
+00:00:54 <favonia> display_xxx 那邊的 NOT NULL 都要拿掉
+00:01:55 <mno2> favonia: OK
+00:02:37 <favonia> 更新了
+00:02:38 <favonia> sorry
+00:02:57 <favonia> mno2: 要不要 hidden 和 tabled 都加上預設 false
+00:03:01 <favonia> checked 預設 0
+00:03:06 <favonia> comments 預設空白之類的
+00:03:11 <mno2> OK
+00:04:40 <hychen> letoh, sml 有一個機制叫variable shadow
+00:04:42 <favonia> mno2: (SQL 原來沒有 Boolean 嗎 :/）
+00:04:53 <hychen> letoh, 此時就會產生新的binding.
+00:05:54 <letoh> 感覺還是跟 python 很像啊
+00:06:21 <miaout17> favonia: sqlite和MySQL都沒有
+00:06:42 <letoh> hychen: 我比較大的問題是  你怎麼分辨是換指標還是產生新 binding ?
+00:06:47 <mno2> favonia: sqlite 的 type 只有這些 ： http://www.sqlite.org/datatype3.html
+00:07:02 <hychen> letoh, 看type?
+00:07:24 <letoh> 如果 type 都一樣呢? a = 4; a = 5 這樣
+00:07:34 <hychen> letoh, type 會變 int ref, 而不是 int
+00:08:12 <hychen> letoh, 換指標的指的地方要用 :=
+00:08:17 <hychen> letoh,  不是 =
+00:08:34 <miaout17> favonia: mno2: 先請教設計問題，有打算做user login, change log嗎？
+00:09:00 <favonia> change log 可行~ user login 我不知道 xD
+00:09:14 <miaout17> 要不要考慮防惡搞，還是只做regular backup就好
+00:09:40 <miaout17> user login有什麼考量嗎？
+00:09:51 <letoh> hychen: sml 的話我倒是可以理解了，只是不太懂為什麼 python 就是換指標  因為語法看不出來，也沒有型別可以判斷
+00:10:18 <favonia> miaout17: 懶 xD
+00:10:20 <hychen> letoh, python 沒有binding吧...
+00:10:44 <favonia> miaout17: 我個人支持最小力氣防惡搞
+00:11:11 <hychen> letoh, 因為你可以update variable呀
+00:11:14 <letoh> hychen: http://docs.python.org/2/reference/executionmodel.html  不是這個嗎?
+00:11:44 <letoh> 我還是覺得你的說法有點混淆  但我還沒想清楚怎麼解釋我的問題XD
+00:12:15 <mno2> miaout17:  有人力做的話就OK,  因為snap看起來加進去不太困難，所以暫時先不理他
+00:12:25 <favonia> miaout17: 我並不反對，只是覺得對防惡搞不需要
+00:12:33 <hychen> letoh, python 的 binding default 綁在 ref 上
+00:12:51 <favonia> mno2: 你感受到 snaplet 的設計很可愛了嗎 xD
+00:13:22 <miaout17> 我還感受不到，晚下唯一的成就好像是能build過專案了 XD
+00:13:35 <letoh> hychen: 這樣我更混淆了，因為你剛剛說 python 沒有 binding，現在又說 binding 綁在 ref 上XD
+00:14:13 <hychen> letoh, 我精確的講. python的binding  跟 sml的binding不是同一個
+00:14:29 <hychen> letoh, 我所謂的python沒有binding是指, python 沒有 sml 那樣的binding
+00:14:37 <mno2> favonia: 我覺得他還蠻漂亮的，只是像是 connection pool 的話，不太確定是不是 MVar Pool 之類就解決了
+00:14:47 <hychen> 也就是name 綁在一個固定值上
+00:14:53 <letoh> (ID name, Object obj)  我以為 binding 就是做這件事而已
+00:14:54 <hychen> 綁住了就不能改
+00:15:03 <hychen> 但你可以產生另一組 name -> value
+00:15:05 <letoh> 只是 Object 可以是 int，也可以是 int ref
+00:15:30 <hychen> 是沒錯, 但是 Python 的 Object 都是 ref obj
+00:18:24 <letoh> shadowing 我覺得是另外的東西，因為已經要算成新的 environment 了吧?
+00:18:52 <hychen> 對
+00:19:24 <letoh> 但我覺得這跟 binding 以及能不能改其實是兩回事
+00:19:36 <hychen> 這兩個不相干啊
+00:20:07 <letoh> 唔  我再看一次你的文章好了  總覺得我好像把很多東西又混在一起了@_@
+00:20:27 <hychen> 你把 X =1 讀作  replace x to 1
+00:21:36 <hychen> 當 runtime時, X被換成 1, 所以X就沒了, 當然不能改
+00:22:06 <hychen> 可是當 X = ref 1 時,  X 會被換成 ref 1
+00:22:17 <hychen> 所以X會被換成 ref 1
+00:23:19 <miaout17> mno2: "字來源uri" 是對應 charname嗎？
+00:23:49 <letoh> hychen: 是用換的嗎? 不是 eval 完的結果?
+00:25:06 <hychen> letoh, 這是我自己的理解, 我把 variable 想成是數學上的variable
+00:25:44 <letoh> 我覺得你剛剛解釋「不能換」的說法有點怪...
+00:25:45 <mno2> miaout17:  我不確定，要問 favonia,  我是照 Type.hs 翻譯的 xD
+00:26:08 <miaout17> Oh oh
+00:26:12 <hychen> letoh, 你說哪一段?
+00:27:17 <letoh> hychen: 最後 eval 或你說的替換 X 的動作發生時，不就是參考對應的 env 內的 X，並計算得到的結果嗎? 但是要不要可以換這件事發生在 eval/替換 之前
+00:28:02 <hychen> letoh, 你所謂的可不可以換是指什麼?
+00:28:15 <hychen> 我所謂的替換是在compile time
+00:30:18 <letoh> x = 1; x = 2; y = x + 1;   以這個例子來說好了，你剛剛說的「當 runtime時, X被換成 1, 所以X就沒了, 當然不能改」這句話好像怪怪的
+00:30:19 <hychen> f  x y = x + y ;  a = 1; b = 2;  f a b ;  f a b 會等同  a + b =   1 + 2
+00:30:50 <miaout17> mno2: favonia: 照Type.hs我覺得要拿掉charname，照hackerpad少了uri。另，不需要big5欄位是因為只有造字需要，而填到pua就好嗎？
+00:30:50 <hychen> hmmm
+00:31:11 <hychen> 那把X就沒了改成X已經被綁在一個值上
+00:31:30 <letoh> 總覺得是拿後面會發生的事去限制前面不能做某個動作
+00:31:34 <favonia> miaout17: 是
+00:32:05 <favonia> miaout17: 其實我覺得 moe:xxx 很不對
+00:32:10 <favonia> 應該是 revised:xxx
+00:32:45 <favonia> miaout17: "http://dict.revised.moe.edu.tw/" 取 revised 之類的
+00:33:13 <favonia> miaout17: 反正有個方法可以表示就好 xD
+00:33:28 <miaout17> 私心想把serial改叫id，不過這個不重要
+00:33:45 <miaout17> 那charname TEXT是多的嘛？
+00:33:56 <hychen>  letoh  hmmm
+00:33:59 <hychen> letoh, 不是
+00:34:05 <mno2> charname 是 Map 的 key
+00:35:31 <hychen> x = 1; x = 2; y = x + 1;   # 在sml裡, 第二個x跟第一個x不是同一個東西
+00:36:49 <letoh> hychen: 我對這些東西的理解是來自 lisp/shceme，所以可能不太精確... 不過我還是覺得，即使在上面掛了很多額外的概念限制某些操作，這些操作的本質應該沒那麼複雜才對@_@
+00:36:56 <hychen> x = ref 1; x := 2 ; y = x + 1 # 這樣才是assigment, x 還是同一個value
+00:37:34 <hychen> letoh, 其實我覺得只是差在你的name是綁在data還是reference吧
+00:38:09 <letoh> 我覺得是同一件事耶  不管綁在哪都是 binding
+00:38:16 <hychen> letoh, 綁在refrence , 你才可以update你的variable , 否則就會產生新的variable
+00:38:27 <letoh> 嗯  這個我同意
+00:39:09 <hychen> 所以才會吵說, python 裡面所謂的變數, 不能稱為variable , 要被稱為assigment
+00:39:19 <hychen> s/python/其他語言/
+00:41:18 <CindyLinz> 其實這邊中文用的字比英文精準?
+00:42:00 <hychen> 我覺得只是我中文不好....
+00:42:01 <letoh> 至於能不能改值，則是看 binding 的操作  例如用 = 跟 := 來區分
+00:42:52 <hychen> := 不是binding
+00:43:36 <hychen> a =1 , b = ref 2是binding, b := 2 是 assign
+00:43:45 <hychen> 在 sml  裡面
+00:45:15 <letoh> 嗯  這個沒問題
+00:48:24 <hychen> 其實我對這個的理解很大的程度是依靠lambda calculus + closure
+00:48:26 <letoh> 唔  這些行為 forth 都有  但底層其實很單純，所以我原本以為我應該懂這些操作之間的差異，但現在講一講覺得還是有不少地方講不清楚XD
+00:48:57 <letoh> 不管是 binding, shadowing, 改指標, 改變數值這些東作
+00:48:59 <letoh> 動作
+00:49:41 <hychen> hmm, variable 可能翻成代數比較好...
+00:50:01 <hychen> 不過在程式裡, 直接叫代名詞搞不好比較好點 XD
+00:51:18 <letoh> 所以依照那篇文章，變數其實是不可以變的? XD
+00:51:26 <letoh> 「Binding 指的是將一個符號綁定在一個值，綁定後就不可修改，這個符號稱之為變數」
+00:51:33 <hychen> orz
+00:52:07 <hychen> 這時只好以"歷史共業"來解釋了...
+00:52:18 <hychen> 從小被教導這個是變數....
+00:52:52 <favonia> hychen: 從小學的是數學多項式 y(x) = x^2 + x + 3
+00:53:38 <hychen> 數學上variable翻成變數?
+00:54:26 <miaout17> favonia: 想釐清一下，Map當key的charname是啥？
+00:54:38 <letoh> hychen: int a = 0; /* a 是變數 */  const int b = 0; /* b 是不能變的變數 */
+00:55:03 <favonia> miaout17: 一個人類看得懂的名稱，例如教育部重編字典用的造字 9270
+00:55:33 <miaout17> "教育部重編字典用的造字 9270" 這樣？
+00:56:15 <favonia> 喔喔還沒定死，目前是 moe:revised/9270
+00:56:45 <miaout17> Oh, OK. 我多問些問題喔
+00:56:50 <letoh> hychen: 那篇文章你修正過了吧? 但 val result + PI 好像還在
+00:57:25 <miaout17> display_uni是什麼格式？unicode碼還是UTF8字串？ e.g. "EEFB" or "萌"?
+00:57:31 <hychen> letoh, hmm , 忘了deploy...
+00:57:59 <miaout17> 2. display_ids 是人類閱讀的中文敘述嗎？
+00:58:00 <favonia> miaout17: 直接 "萌"... 因為我想不出來寫 EEFB 有什麼好處
+00:58:05 <favonia> 2. 不是
+00:58:43 <miaout17> 那是？
+00:58:45 <favonia> 2. 像 ⿰亻壯
+00:59:03 <miaout17> Oh
+00:59:07 <miaout17> 了解
+00:59:10 <CindyLinz> favonia: EEFB 在缺字型的時候用 :p
+00:59:25 <miaout17> 3. pua的格式？
+00:59:27 <favonia> CindyLinz: 缺字型也不管他
+00:59:32 <CindyLinz> XD
+00:59:48 <favonia> miaout17: 跟uni一樣
+00:59:52 <miaout17> 我才想把你講的東西當範例更新上hackerpad，就看到你已經在做了....
+00:59:58 <favonia> 但故意用使用者造字
+01:00:05 <miaout17> 我想pua是big5對吧？
+01:00:12 <miaout17> big5的使用者造字
+01:00:39 <favonia> miaout17: 不
+01:00:45 <favonia> 是使用 Unicode 使用者造字
+01:00:45 <miaout17> 嗯？
+01:00:52 <miaout17> 疑
+01:00:54 <letoh> hychen: 我突然想到，可能是「代換」這個說法讓我覺得混淆
+01:00:59 <favonia> 另外澄清一下，這個世界沒有 big5, 只有 bug5
+01:01:02 <miaout17> 我大概又誤解了什麼~~
+01:01:07 <miaout17> ....XD
+01:01:08 <hychen> favonia++
+01:01:14 <miaout17> favonia++
+01:01:22 <hychen> letoh, 我其實也找不到太好的說詞
+01:03:05 <letoh> hychen: 小問題...「3.14 這個值得指標指標」->「3.14 這個值的指標」?
+01:03:19 <CindyLinz> if( success ) { // 成功
+01:03:24 <hychen> letoh, 的
+01:03:31 <hychen> letoh, you are right...
+01:03:44 <favonia> miaout17: 我例子都加上去了
+01:05:21 <favonia> miaout17: 那個 charName 是儘量遵照 URI
+01:05:28 <favonia> 其他欄位就隨便 xDDD
+01:06:31 <favonia> miaout17: 如果你覺得 revised 應該擺在 protocol 我也沒意見
+01:06:36 <favonia> mno2: miaout17: 如果你覺得 revised 應該擺在 protocol 我也沒意見
+01:06:54 <favonia> CindyLinz: hychen: 我們會不會洗版得太誇張
+01:07:10 <hychen> favonia, 什麼洗版???
+01:07:27 <favonia> hychen: 喔好我收到答案了
+01:09:40 <mno2> favonia, miaout17: 我沒意見
+01:10:47 <CindyLinz> 我說的話很少啊~~ XD (撇清)
+01:11:02 <letoh> 我趁機問一下 twitter 好了，這網站到底是怎麼設計的，為什麼我看一個人的 profile 會看到一堆其他人的訊息?
+01:11:14 <hychen> 我們公司常常一個channel 好幾個topic 同時run
+01:11:18 <hychen> 所以我很習慣了
+01:11:44 <letoh> 是因為 retweet 嗎?
+01:12:07 <hychen> no idea
+01:12:42 <letoh> 喔我看到了...是 retweet.. 因為那段字對比很低，沒看清楚被我略過了XD
+01:12:59 <hychen> letoh, 我那天跟人聊closure, 發現不是很多人知道什麼是closure耶
+01:13:20 <letoh> 唔  我其實也不太懂XD
+01:13:35 <letoh> 連到底有沒有用到都不曉得XD
+01:14:05 <hychen> 有用到callback 都會用到吧
+01:14:11 <hychen> js裡面
+01:14:21 <letoh> 唔，不一定吧
+01:14:33 <hychen> closure 用python講其實比較清楚 XD
+01:14:38 <letoh> 如果不需要存取到外面的變數的話... (變數又出來了)
+01:14:59 <hychen> 因為python的function 有func_global 可以觀察
+01:15:24 <letoh> hychen: 所以 python 的 closure 設計到底有沒有問題呢? 我一直搞不懂
+01:15:55 <letoh> 查了很多資料，好像有些人不喜歡 python 的 closure
+01:16:13 <hychen> letoh, 記得好像只有做半套
+01:16:17 <letoh> 嗯
+01:16:29 <hychen> 但這樣我就夠用了 XD
+01:16:57 <favonia> 為什麼 Web Framework 的範例竟然沒有正確的處理 HEAD 呢（思考）
+01:17:14 <favonia> 按照標準 HEAD 要跟 GET 的 header 一樣啊...
+01:17:25 <hychen> favonia, 用來確認他寫的文章有沒有人看
+01:17:27 <letoh> hychen: 設計半套的好處是什麼呢? 你知道嗎?
+01:17:35 <hychen> letoh, 不知道ㄟ
+01:17:45 <hychen> letoh, 我其實還不清楚全套的closure是什麼
+01:18:18 <letoh> 有人說 python 的 closure 有些情況會是 constant，也就是參考到的東西不能改
+01:18:35 <letoh> 但包成一個 mutable object 又變得可以改...
+01:19:23 <hychen> 自成寫了sml, 現在不是很喜歡mutable 跟 immutable 混在一起的語言...
+01:19:41 <hychen> python 的 def f(a=[]) 就是個隱藏地雷...
+01:19:50 <CindyLinz> favonia: leave it to the reader as a practice.. (逃)
+01:20:15 <letoh> hychen: 對... 我自己的遞迴函式踩過這個地雷好幾次XD
+01:20:50 <hychen> letoh, 還好我都習慣寫None
+01:21:12 <letoh> 不行  那是不同情況
+01:21:23 <letoh> 有些時候就是需要空的 container 呀
+01:21:36 <hychen> letoh, 我知道啊, 但是以前我不會寫遞迴 XD
+01:21:45 <letoh> 喔喔XD
+01:21:59 <letoh> 寫成 None 好像也可以啦，只是要多做一些判斷
+01:34:44 <miaout17> favonia: 說實話我又搞混校對的目的了。Google Doc第一列「造字碼」其實是unicode的造字區嗎？
+01:35:01 <favonia> miaout17: 是教育部自己發明的 xD
+01:35:06 <favonia> miaout17: 是 big5 區
+01:35:25 <miaout17> 嗯嗯，我原本對這塊沒誤解
+01:35:48 <miaout17> 那新的系統不需要這個碼？
+01:36:17 <miaout17> favonia: 看起來沒地方填這個教育部big5的造字碼
+01:36:33 <favonia> moe:revised/XXXX
+01:36:39 <favonia> 就是 id
+01:36:50 <miaout17> 啊，原來這個XXXX就是教育部造字big5
+01:38:25 <miaout17> favonia: 那前後端有考慮要怎麼串嗎？
+01:39:06 <favonia> miaout17: 怎麼串的意思是？
+01:39:28 <miaout17> 我指的是1.傳統網頁，後端直接render HTML 2.以JS為主，前端都直接AJAX打後端rest API
+01:40:06 <favonia> 2.
+01:40:11 <miaout17> Nice
+01:40:21 <favonia> 不然寫辛酸的xD
+01:42:48 <miaout17> 前端一次把所有字拉回來嗎？/api/chars/all GET
+01:43:21 <miaout17> (不知道會不會太多)
+01:43:56 <CindyLinz> 3. 以 Haskell 為主, 前後端都在 snap framework 裡面.. (拉回 channel 主題)
+01:44:09 <CindyLinz> 好啦別理我 orz
+01:45:53 <favonia> CindyLinz: 4. 前端用 snaplet-fay~~~
+01:52:09 <miaout17> favonia: 你目前有在做哪一塊嗎？想說可以挑你沒在做的來做 (不過要睡覺了，明天續戰)
+01:52:18 <favonia> miaout17: 前端 xDDDD
+01:52:27 <favonia> 我在弄 JSON
+01:52:33 <favonia> 我還沒碰前端
+01:54:48 <miaout17> 嗯嗯，原本想說來串sqlite的，看明天還剩什麼沒串吧 (我現在正職在做Ruby後端，前端懂一點但沒有很熟)
+09:29:40 <favonia> mno2: 我開啟 snap 邪惡模式了
+09:29:56 <favonia> 就跟 yesod 一樣更改程式碼自己重新編譯
+09:30:09 <mno2> favonia: OK
+09:30:25 <favonia> 而且我發現編譯錯誤訊息還會在網頁上顯示
+09:30:47 <favonia> 所以開瀏覽器跟 Vim 就好了
+09:32:32 <favonia> mno2: 另外你可以準備好一個空的 sqlite
+09:32:36 <favonia> 直接丟進去
+09:33:01 <favonia> makeSnaplet 有個參數是用來複製預設設定的
+09:33:22 <mno2> 位置我看他是寫在 resources/db ?
+09:33:44 <favonia> 那是他自己怎麼決定都可以
+09:35:24 <favonia> mno2: sqliteInit = makeSnaplet "sqlite-simple" description datadir $ do ...
+09:35:34 <favonia> ... datadir = Just $ liftM (++"/resources/db") getDataDir
+09:35:45 <favonia> import Paths_snaplet_sqlite_simple
+09:35:51 <favonia> 這三行是關鍵
+09:36:38 <mno2> 那 getDataDir 會從 .cabal 拿 ?
+09:36:49 <favonia> data-dir: xxx
+09:37:01 <favonia> 是說我覺得 ++ 好醜
+09:37:19 <favonia> (</> "resource" </> "db") 感覺比較文青
+09:37:55 <mno2> favonia: 事必工青
+09:38:13 <favonia> getDataDir <&> (</> "resource" </> "db") 工青到爆表
+09:42:09 <favonia> mno2: 總之 snaplet 架構真的什麼都想到了...
+09:42:29 <favonia> 除了幾個我覺得有點爛的地方 xD
+09:42:45 <mno2> 說說看？
+09:44:11 <favonia> 那個 variable capture...
+09:44:19 <favonia> 他直接加到 Param
+09:44:35 <favonia> 好像不能200%確定不是從 query或是POST來的
+10:19:07 <favonia> mno2: 出現麻煩的問題了，如果我用 Paths_xxx 那麼自動編譯好像就失效了...
+10:19:47 <mno2> 你說 sqlite_simple ?
+10:29:29 <favonia> mno2: 是說如果我們用了 Path_xxxxx
+10:29:46 <favonia> mno2: 然後 snap 自己重新編譯時不會去找 cabal 自動生成的目錄的樣子
+10:36:17 <favonia> mno2: 我去 #snapframework 問了
+10:50:11 <favonia> mno2: 那個編碼表格的程式基本上完成一半，另外一半就是怎樣把檔案自動複製進去...
+10:52:49 <mno2> 我這邊 sqlite query_ 回來的型別有點搞不定, 如果搞定後面就都一樣了
+10:59:45 <mno2> 搞定了， lens 用法不熟
+13:09:52 <favonia> 結果 travis-ci 一次就要 10 分鐘真不習慣
+13:14:18 <miaout17> 我做一下前端好了，現在有資料可以測嗎？
+13:14:43 <miaout17> favonia: 前端直接用snap static來服務嗎？
+13:15:34 <favonia> miaout17: 沒有耶... 主要是還沒有（很漂亮的）餵法（哭）
+13:15:56 <favonia> miaout17: 如果你可以忍受每次都還要重新打一次 cabal install 之類的是很簡單啦 xD
+13:16:25 <favonia> getChars 現在理論上可以動了
+13:16:36 <favonia> 只要把 sqlite 填進去
+13:16:56 <favonia> sqlite 的位置在不知道多少層目錄裡面的 devel.cfg
+13:17:25 <favonia> 有 getChars 應該可以開始畫圖了 www
+13:18:19 <favonia> miaout17: 你按照表格，自己準備好 database 擺進去應該就可以動了
+13:18:28 <favonia> 我是說 chars/all 之類的
+13:18:52 <favonia> miaout17: 前端我還在看 snap 的 heist 有什麼好玩的
+13:19:01 <favonia> 我剛才講的是後端的部份
+13:23:21 <favonia> miaout17: 嗯....
+13:23:32 <favonia> miaout17: 我先把 static 裝上去好了 @@
+13:27:09 <miaout17> favonia: 有測試的sqlite可以直接伸嗎？
+13:27:22 <favonia> miaout17: 你要問 mno2 lol
+13:27:35 <mno2> 沒有耶 xD
+13:28:26 <mno2> 就用 mashup-server.sql 倒一下
+13:28:58 <miaout17> 我在想要寫個script把google doc上的東西倒進來嗎？
+13:29:10 <favonia> miaout17: xD go!
+13:29:33 <mno2> google docs 應該可以 export ?
+13:31:23 <miaout17> favonia: 我打get chars API會segmentation fault :S
+13:32:23 <favonia> 我好像好好的耶 就只有錯誤訊息說 char_info 沒有這個表格
+13:32:49 <favonia> 我是說 http://0.0.0.0:8000/api/chars/all
+13:33:07 <miaout17> 是的，而且我有create table了
+13:33:48 <favonia> miaout17: 奇怪為什麼我好好的
+13:33:54 <favonia> 他傳回 {}
+13:33:59 <favonia> 空物件
+13:34:01 <favonia> 是正確的
+13:35:18 <miaout17> favonia: 我現在連 GET / 也會掛，我看看....
+13:35:32 <favonia> 全部重編吧 orz
+13:35:45 <favonia> 表格 sql 也有換過喔
+13:37:14 <miaout17> 幾個版本前是好的，我git bisect一下
+13:39:01 <miaout17> 阿咧，真的最新版重編就好了，神秘
+13:39:45 <miaout17> favonia: False alarm. Recompiled ane works
+13:44:05 <favonia> miaout17: 好了現在擺在 static/ 下面的都可以直接存取
+13:44:34 <favonia> 現在好猶豫喔，我覺得我愈來愈想把很多東西搬到 server 上
+13:44:45 <favonia> 包括用 server 產生詭異的 JavaScript www
+13:46:30 <miaout17> 先簡單實作吧？
+13:46:35 <mno2> favonia, miaout17: 要不要現在討論一下前端大致的樣子啊？ 包括
+13:47:01 <mno2> 1. 除了更正框以外的 mockup
+13:47:04 <favonia> miaout17: 對了 cabal configure -f development 可以有動態載入 就是你存一下 hs 檔網站會更新
+13:47:26 <mno2> 2. 有需要多少 server-side generated javascript ?
+13:47:37 <mno2> 3. 美化用 bootstrap ?
+13:48:03 <favonia> 我的想法是我上面用的格子
+13:48:12 <favonia> 然後右邊擺註解和多餘的資訊
+13:48:23 <favonia> 詳細的我還沒有仔細想過
+13:48:27 <mno2> 原本 survey 的時候有想過 angularjs, 但不確定跟其他東西有沒有衝突
+13:48:35 <miaout17> 1. 整個網站好像就只有很多更正框？ XD 3.我已經打算用bootstrap了 2.個人不想用server-side generate JS
+13:49:36 <favonia> miaout17: 可以 server-site optimize xD
+13:50:30 <miaout17> Rails從2.x的一大堆server-side generated JS走到3.x幾乎不用server-side generated JS，一開始看起來很好用，但越用越混亂。
+13:51:31 <mno2> 我覺得 favonia 只是私心想惡搞 xD
+13:52:21 <favonia> 好啦，比較認真的是我希望 server-side 跑 jsmin~
+13:52:59 <miaout17> Oh, 只是要minified的話OK
+13:53:56 <favonia> 比較不認真的是直接把 Json 介面放在旁邊，然後用 fayax 傳
+13:54:08 <miaout17> 可是原本想用coffeescript或livescript，這個好像haskell沒有好用的完整toolchain，所以後來想說乾脆不optimize好了 XD
+13:54:33 <favonia> 喔有啊
+13:54:36 <favonia> 就是 fay 啊
+13:54:51 <favonia> 包括暴力 Json 介面
+13:55:20 <favonia> 有點像 GWT 這樣中間惡搞，不過我想應該還沒到這麼成熟
+13:56:06 <mno2> fay 的缺點就是還沒有足夠的 lib
+13:57:41 <favonia> mno2: 反正不認真的版本寫滿 foreignFay 就好了（逃）
+13:59:08 <favonia> miaout17: 等一下我搞不好有誤解你的意思 xD
+13:59:14 <miaout17> 覺得…先能動再來optimize吧？
+13:59:18 <miaout17> 嗯嗯？
+13:59:36 <favonia> 你講的 toolchain 是？
+14:00:25 <mno2> 是 coffeescript 的 toolchain ?
+14:00:39 <miaout17> 我用詞可能不精確。把coffeescript compile成javascript，然後minify，最後可以再把所有JS打成一包
+14:00:51 <favonia> 喔喔
+14:01:01 <miaout17> 像Asset Pipeline這種東西 http://guides.rubyonrails.org/asset_pipeline.html
+14:01:13 <favonia> 嗯嗯
+14:01:17 <miaout17> 同理SCSS(LESS) -> CSS -> Minifed CSS 也可以
+14:01:28 <favonia> 我相信這個還沒有很成熟...
+14:01:32 <favonia> CSS 好像有人做了
+14:01:45 <mno2> css 我上次有貼過的樣子
+14:02:39 <miaout17> 我覺得沒差，就先讓他可以動就好，要optimize最後再來…
+14:03:34 <favonia> mno2: clay 嗎？我忘了
+14:03:36 <favonia> miaout17: 嗯嗯
+14:04:31 <mno2> favonia: 對, http://hackage.haskell.org/package/clay-0.1
+14:05:38 <favonia> miaout17: 我想到的介面就是
+14:05:55 <favonia> [ 字 字 字 ]  框框框框框框框框       註解註解註解註解註解註解註解註解註解註解註解註解註解註解
+14:06:02 <favonia> 然後這樣無限多行
+14:06:17 <favonia> 框框框是有必要才顯示
+14:06:44 <favonia> 中間還有很多細節啦但我想得先把這個大表格做出來再看
+14:07:00 <favonia> 我設計的 API 都是為了這個介面而設計的
+14:07:13 <favonia> 一定時間內畫面上只會看到幾個框框而已
+14:07:34 <favonia> 所以 updatedChars 可以只問幾個框框
+14:07:53 <favonia> 只要管畫面上可見的就好
+14:08:35 <favonia> miaout17: mno2: 這樣大概ok嗎 @@?
+14:10:10 <mno2> 其實我看不太懂 xD
+14:13:24 <mno2> http://vimeo.com/59215336
+14:13:38 <mno2> NYC 社群真活躍
+14:19:20 <hychen> 作業3第三題的意思是什麼?
+14:19:48 <miaout17> hychen: 好奇哪裡的作業？
+14:20:00 <hychen> https://class.coursera.org/proglang-2012-001/class/index
+14:20:33 <miaout17> favonia: mno2: Google doc export csv太妙了…公式算不完的就匯出一堆thinking
+14:20:37 <miaout17> hychen: Thanks
+14:20:48 <favonia> miaout17: 囧
+14:20:59 <favonia> miaout17: 我以為那是穩的 orz orz orz
+14:21:27 <hychen> "in the case of ties it returns the string closest to the end of the list" 這句話是什麼意思?
+14:22:28 <miaout17> 不過還好，工式算出來的我們都不需要。不過kIRG_TSource是不是也不要了？
+14:25:02 <favonia> miaout17: 可以不要沒關係。想辦法弄出一個好的表格就好... 有問題再說 lol
+14:25:36 <favonia> mno2: 我講的是類似底下這樣 https://hackpad.com/3du.tw-Encoding-Mashup-Design-ozYEnChzp5w
+14:26:19 <favonia> 單欄或雙欄，總共 1XXX 字 xD
+14:27:46 <mno2> 1XXX 字是說註解嗎？
+14:28:17 <favonia> 不是，我是說現在有 1000~2000 字
+14:29:13 <mno2> 喔喔，了解
+14:31:13 <mno2> 我覺得 sqlite-simple 沒有 variadic type 還蠻傷的，這樣做 binding 都一定要知道 ? 的個數
+14:33:05 <favonia> mno2: 需要 Template (逃)
+14:36:47 <mno2> 現在 snap 好像也沒有現成過慮還有產生 crumb 的 snaplet
+14:39:40 <miaout17> 我把一些前端基本的東西push上去喔，jquery, bootstrap (這兩個應該沒有問題) 我打算用coffeescript, 如果要template我想用handlebars，MVC就再看看，目前沒有導入
+14:39:59 <miaout17> 基本上現在什麼都不能做，只是空殼而已，我先在轉 csv -> sqlite
+14:41:00 <miaout17> favonia: mno2: FYI
+14:41:43 <mno2> roger that
+14:41:47 <miaout17> 你們說沒問題我就推
+14:42:37 <favonia> 我無所謂 xD
+14:42:46 <favonia> jQuery 用 google 的吧
+14:42:59 <favonia> 還是你還想擺什麼
+14:44:10 <CindyLinz> jquery 用 google 的會偶爾害網站壞掉.. QQ
+14:44:21 <CindyLinz> 自用隨便用的就沒差 :p
+14:44:40 <miaout17> 我都先放自己家一份
+14:45:01 <CindyLinz> 嗯嗯嗯
+14:45:05 <miaout17> 先push了，BTW, 我想可以直接把網站/導到static
+14:45:13 <favonia> CindyLinz: 是喔（筆記）
+14:46:23 <CindyLinz> favonia: 原理很單純, 就是有時候自己網站沒掛, 但是 google cdn 掛掉拿不到了 XD
+14:46:47 <favonia> CindyLinz: 我一直以為反過來狀況比較多，但，好吧 xDDDDD
+14:46:48 <CindyLinz> 放自己家的話, 掛掉的時間會跟自己家的網站同步.. (Y)
+14:46:49 <miaout17> 不然就是離線開發很痛苦，3G lag時自己的開發就lag了
+14:46:57 <miaout17> 沒錯 XD
+14:47:07 <hychen> 我搞懂了題目 orz.
+14:47:18 <mno2> CindyLinz:  讓我想到前幾天的新聞，FB login 掛掉結果讓 FB login 的網站都掛掉了 xD
+14:47:33 <CindyLinz> favonia: 反過來的狀況可能也真的是比較多.. 但是用 google 的話, 就是 google 掛 or 自己掛 都會掛.. 這個時候當然會比 自己掛 only 多 XDD
+14:47:38 <miaout17> mno2: 是的，我們也是受害者 XD
+14:48:00 <CindyLinz> mno2: FB login 的情況有很大機會更慘...
+14:48:14 <CindyLinz> mno2: jquery @ google 掛掉的時候, 只是有用到 jquery @ google 的頁面掛掉
+14:48:30 <CindyLinz> mno2: FB login 掛掉的時候, 如果假設網站是用 FB 的 php api 去 access FB token
+14:48:59 <CindyLinz> mno2: 那麼, FB 卡在那邊不回應的時候, 會全程佔用我們自己家的 php worker
+14:49:31 <CindyLinz> mno2: 一般不是非常大的站, 不會有限定哪些機器只處理哪幾個 url 的設計, 所以就會漸漸把整個站所有的 php work 吃光
+14:49:46 <CindyLinz> 然後全站都掛掉了.. 包含不用登入的頁面....
+14:49:51 <mno2> 那邊出 bug 真的是大規模毀滅性武器 xD
+14:50:29 <CindyLinz> 所以我們 hack 了 asynchronous 的方式來 access remote 網站.... ._.
+14:51:03 <favonia> CindyLinz: 我正要問... 你這句話讓我想起來 PHP 有多難用。
+14:51:17 <CindyLinz> favonia: XD
+14:51:31 <CindyLinz> favonia: 這種掛法呢... 我猜大部分的非 perl 實作都會掛呢
+14:51:38 <CindyLinz> 不對, node.js 不會掛
+14:51:42 <favonia> CindyLinz: 我剛才一直在想說為什麼不回應就會卡住...
+14:52:18 <CindyLinz> 反正就是習慣 event base 的方式作 concurrent 的 language 沒事, 其他習慣用 pro-fork process 或 multi-thread 的都會死
+14:52:38 <CindyLinz> pre fork
+14:53:03 <favonia> 傳說中的 "green thread" 也不會怎樣吧
+14:53:16 <favonia> （我覺得這些名詞很無聊不過... xD）
+14:53:19 <CindyLinz> 從機器管理的角度, 限制 FB connect 只能用某幾台機器上面的 php 的也可以, 是從災難控管的角度來解決
+14:53:26 <CindyLinz> favonia: green thread 不算 XD
+14:54:02 <CindyLinz> favonia: 不過這是個連續光譜上的分界, 要看一個 thread 吃的資源多不多.. 越多越慘, 越少能撐越久
+14:54:36 <favonia> CindyLinz: 我只是想說不能用爛實作說 multi-thread 不好 xD
+14:55:00 <CindyLinz> event base 吃的資源通常非常小.. 然後, remote cgi 的 library 常常也會預先限制對同一個 domain 能同時發多少個 request, 所以天生也就做了災難管制
+14:55:12 <favonia> 嗯嗯
+14:57:50 <favonia> mno2: 看來我們要準備 sqlite 掛掉的狀況 xD
+14:58:04 <favonia> mno2: GHC 應該會把 IO 都集中到一個 thread 吧 xD
+14:58:44 <mno2> 目前實作的確是這樣
+14:58:52 <favonia> 嗯好那就不管他了
+15:01:29 <CindyLinz> sqlite 掛掉嗎? local sqlite 掛掉的話, 就自盡了事吧... XD
+15:11:01 <miaout17> favonia: "Unicode 認同字 unified" 是對應到google doc 的"Uni(自動)"嗎？
+15:11:12 <favonia> miaout17: no
+15:11:43 <favonia> 這應該是 CharDisplay 顯示用的字吧？
+15:12:01 <favonia> 這算不精確的字。我無聊亂設計的第三欄
+15:12:17 <miaout17> 對應到「通」？
+15:12:30 <favonia> 是
+15:12:43 <favonia> 「通」的 Unicode 碼
+15:12:55 <favonia> 你就直接把那個欄位
+15:13:04 <favonia> 抓下來就是正確的了
+15:13:09 <favonia> 空白變成 null
+15:13:20 <favonia> 你等一下讓我講一下對應
+15:13:59 <favonia> 造字碼 XXXX => CharName "moe:revised/XXXX"
+15:14:10 <favonia> 疑 => tabled
+15:14:35 <favonia> 通 => display->uni
+15:14:44 <favonia> 組字 display->ids
+15:15:05 <favonia> CNS(請輸入) => exact->cns
+15:15:23 <favonia> Unicode手動 => exact->manualuni
+15:15:35 <favonia> 註解=>comment
+15:15:42 <favonia> 其他都是預設值
+15:15:57 <favonia> 上面講的東西如果沒有就是null
+15:17:18 <favonia> 話說我一直想把註解的 { } 去掉
+15:17:23 <favonia> 不過算了先這樣
+15:23:48 <favonia> miaout17: 有什麼忙要幫的嗎？
+16:10:12 <miaout17> favonia: mno2: 寫了一個python script轉csv->sqlite，我直接commit進encoding-mashup-server專案喔？
+16:10:51 <miaout17> 另外，我現在打API有exception: ConversionFailed {errSQLType = "INTEGER", errHaskellType = "Text", errMessage = "need a text"}
+16:11:02 <miaout17> 不知道snap有沒有比較好的方法看call stack
+16:12:06 <mno2> 請隨意 commit, 不要爛掉不能 compile 就好~
+16:17:47 <miaout17> http://m17pub.s3.amazonaws.com/encoding-mashup-server/converted-130210.db
+16:18:14 <miaout17> 擺上去之後/api/chars/all會噴exception
+16:19:31 <mno2> 我檢查一下
+16:44:44 <mno2> miaout17: favonia 有把 schema 改過，他把 serial 拿掉，換 charname 當 primary key 了
+17:25:12 <miaout17> 疑，現在sql看看哪裡？
+17:26:11 <miaout17> 喔，在git repository的resource裡找到了
+17:29:07 <miaout17> favonia: mno2: 我用新的schema依然有問題
+17:29:50 <miaout17> ConversionFailed {errSQLType = "TEXT", errHaskellType = "Int64", errMessage = "need an int"}
+17:30:08 <miaout17> 這錯誤訊息好難追...Orz
+17:43:42 <mno2> 就是在欄位沒對上， SQL某個欄位存的是 TEXT,  但轉到 Haskell 裏面他期待會是 Int64
+17:43:59 <mno2> 所以看看Type.hs裏面哪個是 Int64
+17:45:41 <mno2> hmm... 我猜是 timestamp 造成的
+17:46:05 <mno2> sqlite 的 timestamp 預設會塞 TEXT
+18:03:16 <miaout17> 還發現sql裡是timestammp，code裡是timestamp 有個typo
+18:05:36 <miaout17> well, timestamp先亂塞int default 10000可以過了
+20:22:27 <mno2> 我先把 timestammp 這個 typo 修掉，看看還有沒有什麼需要幫忙的
+21:16:13 <miaout17> 我推了一些前端code，現在可以把所有字render到HTML上，但不能編輯。 BTW, 其實我不知道UI的細節是什麼，再跟favonia討論。
+21:16:39 <miaout17> P.S. Template是用handlebars，目前沒有用JavaScript MVC(覺得殺雞用牛刀了)
+21:16:49 <miaout17> P.P.S. 我覺得我CSS好弱
+21:20:11 <mno2> cool~
+21:20:16 <mno2> 我也不太會
+21:20:18 <mno2> css
+21:49:28 <favonia> miaout17: 我的想法是 JavaScript 是 VC
+22:05:51 <mno2> hackage 上看起來沒有一個 stable 的 OAuth 2 實作
+22:07:08 <mno2> http://hackage.haskell.org/packages/archive/snap/0.11.0/doc/html/Snap-Snaplet-Test.html
+22:07:27 <mno2> Snaplet.Test 看起來可以拿來寫 Test 但是沒有範例
+22:08:20 <mno2> Snap 主體還算完整，不過 snaplet 有很大發展空間
+22:10:23 <favonia> 我對他前景滿期待的。我唯一不爽的是 variable capturing
+22:10:32 <favonia> 到目前為止
+22:10:51 <favonia> 其他都是 Haskell 自己 cabal 系統的 bug 或是因為人力不足所以還沒寫出來
+22:12:12 <favonia> miaout17: mno2: snap 可以先準備好一些檔案，然後第一次啟動時複製到想要的地方去
+22:12:16 <favonia> 例如那個對照表
+22:55:18 <hychen> letoh, 我作業終於寫完了, 包過peer assignment review
+22:55:41 <hychen> letoh, peer review 很花時間 orz
+22:56:46 <letoh> hw3 的?
+22:57:00 <letoh> 我在寫 challenge
+22:57:38 <hychen> challenge 我都不寫
+22:57:38 <hychen> 人生苦短啊
+22:58:18 <letoh> 題目蠻有趣的啊  但我還沒看懂題目要什麼XD
+22:58:19 <hychen> 打電動比較實在
+22:58:35 <hychen> 我覺得看懂它題目要什麼很浪費時間
+22:58:48 <letoh> 那你考完試了嗎?
+22:58:57 <hychen> 還沒ㄟ
+22:59:03 <hychen>  不是還早?
+22:59:11 <hychen> 我section 4還沒看
+22:59:14 <letoh> 是還有一週啦
+22:59:26 <letoh> 我 sec 1 都還沒看完耶XD
+22:59:34 <letoh> 你都花多少時間看完一週啊?
+22:59:46 <letoh> 怎麼覺得影片好多看不完orz
+23:00:16 <hychen> 3horus
+23:00:29 <letoh> 真快...
+23:01:00 <letoh> 我覺得很多影片好像都沒講清楚  每一段都重複看幾次怕有漏掉的
+23:01:16 <hychen> 很多已經會的就跳過了
+23:01:29 <hychen> sml 有分curry 跟uncurry
+23:01:35 <hychen> 我覺得這超煩的
+23:01:39 <letoh> 看完才知道是不是有已經會的XD
+23:01:50 <letoh> 什麼叫 curry 跟 uncurry ?
+23:02:27 <letoh> http://hackage.haskell.org/packages/archive/base/latest/doc/html/Prelude.html#v:uncurry
+23:02:27 <hychen> 就是參數沒給完，會傳一個functino
+23:02:31 <letoh> haskell 也有
+23:02:43 <hychen> haskell 的 function 就是 curry
+23:03:34 <hychen> 我覺得optinal video裡面說的東西比較有意思
+23:03:50 <letoh> 唔，之前有踩到，不過主要是我沒看懂 sml 出錯時的 type 表示法
+23:04:30 <hychen> 第一課有跟你說sml debug methods
+23:04:32 <letoh> 看來要先看 optional video...
+23:04:38 <hychen> 因為sml repl出錯很難debug XD
+23:04:39 <hychen> 很難看懂他在說三小
+23:04:44 <letoh> 有嗎? 好像被我跳過了XD
+23:05:11 <hychen> 我覺得你可以先讀reading notes
+23:05:11 <hychen> 比較快get idea
+23:05:32 <letoh> 我也先掃一次 note 啊  怕作業又限制語法XD
+23:06:28 <letoh> 怪了... peer assessment 不是要 2/14 以後才能做?
+23:07:54 <hychen> 我是說hw1 and hw2 peer assignment
+23:08:28 <letoh> 喔喔.. hw1 的不給我做XD  hw2 的前幾天做完了
+23:09:17 <mno2> http://d.hatena.ne.jp/itchyny/20130209/1360417348
+23:09:25 <mno2> 用 Javascript 寫 Thunk
+23:13:02 <hychen> letoh, 我記得它一週的video都概都是3小時左右的內容
+23:13:18 <hychen> letoh, 認真看一個晚上就ko了
+23:13:35 <hychen> letoh, 我都邊看邊玩clan of clash....
+23:13:46 <letoh> 我都斷斷續續看啦  我很難一直盯著螢幕看影片
+23:13:51 <hychen> 我也是啊
+23:15:51 <letoh> 我看了一下  sec1 看了大概 1/3
+23:18:45 <miaout17> favonia: 大概理解你的意思。但我是指backbone.js, ember,js等JavaScript MVC Library。他們自己有一層model，但persistance當然還是做在後端。 reply> 我的想法是 JavaScript 是 VC
+23:19:25 <miaout17> BTW, timestamp的問題還沒根除喔
+23:19:34 <favonia> miaout17: 唉我 CSS 排不出我想要的
+23:20:53 <favonia> 喔天啊原來是 p {margin...}
+23:21:18 <favonia> miaout17: timestamp sqlite  mz4
+23:21:25 <favonia> miaout17: timestamp sqlite 用 text 存無所謂
+23:21:51 <mno2> favonia: 但 fromField 會轉 Int64
+23:21:54 <favonia> field 改成 (myconv <$> field) 就好了
+23:22:16 <favonia> myconv :: Text -> Int64
+23:22:38 <favonia> 至於轉回去我再想一下 xDDD
+23:22:47 <favonia> 到底 sqlite 是怎樣存的啊
+23:22:50 <mno2> 要類似 strftime 之類的東西吧
+23:22:58 <favonia> ...
+23:23:04 <favonia> 我們可以完全忽略這件事情
+23:23:12 <favonia> 自己存 INTEGER 嗎
+23:23:20 <mno2> 就說他存 Text 了 xD
+23:23:24 <favonia> 就不要管 sqlite 裡面怎麼搞的
+23:23:35 <mno2> 存進去是 Text 版的 Integer
+23:23:51 <favonia> 我的意思是說 scheme 改掉
+23:23:55 <favonia> 變成 INTEGER
+23:24:34 <mno2> 應該可以吧
+23:25:10 <mno2> 就是管理上會失去內建 function
+23:25:47 <favonia> JavaScript 也有自己的時間格式
+23:25:54 <favonia> 但每個瀏覽器每個實作都不一樣
+23:25:59 <favonia> 最後根本亂七八糟
+23:26:15 <favonia> 轉成人類讀得懂的時間以後根本轉不回來
+23:26:35 <favonia> 既然 sqlite 也這樣就放棄吧
+23:26:36 <favonia> xD
+23:26:53 <favonia> 預設值 0 無所謂
+23:26:55 <mno2> 放棄的意思就是改 Integer 嗎
+23:26:58 <mno2> OK
+23:26:58 <favonia> 代表久遠以前更新的
+23:27:00 <favonia> 對
+23:28:06 <favonia> miaout17: UI 的細節你想問的是？
+23:33:02 <favonia> miaout17: 我現在在惡搞這個 http://dl.dropbox.com/u/27228930/encoding-mashup-design/row.html
+23:35:20 <mno2> favonia, miaout17: timestamp 改好了
+23:36:33 <favonia> miaout17: 還有我最近會爆忙。如果你覺得我畫的那些 svg 圖很酷想要用，我可以告訴你我大概的 UI 想法是什麼
+23:37:05 <favonia> 但我應該沒空 hack CSS 了 orz 平常沒用，現在要一直查文件
+23:37:56 <favonia> 我去 g0v.tw 丟一下 xD
+23:37:56 <mno2> favonia: 所以 pulse 有空撿起來嗎？ wwwww
+23:38:13 <favonia> mno2: er 我還沒看 inspect.hs 那邊
+23:38:28 <favonia> 我想先把 inspect.hs 弄完，如果可以的話
+23:39:22 <favonia> mno2: miaout17: 我先把專案搬到 g0v 喔？
+23:39:46 <favonia> 這樣子想改的可以改，如果我們需要 css/html hacker
+23:40:56 <mno2> 的確
+23:41:14 <favonia> 另外我要整理一下檔案
+23:41:27 <favonia> miaout17: 所有額外的東西都送去 resources
+23:41:41 <favonia> 其實我想要擺 data 之類的不過我不在乎名字 xD
+23:42:06 <favonia> miaout17: mno2: ok 嗎？我個人很不想根目錄塞一堆東西
+23:43:15 <mno2> 我OK, 不過現在要移的只有 csv2sqlite.py ?
+23:43:23 <favonia> 嗯
+23:43:32 <favonia> 等一下你是說 resources 改名也無所謂？
+23:44:10 <mno2> 改名唷，我是希望跟官方一樣啦。這樣後人比較不會搞混
+23:44:21 <favonia> 我看一下
+23:45:19 <favonia> ok
+23:46:14 <favonia> miaout17: 我把東西丟到 resources 了

@@ -1,0 +1,85 @@
+09:00:48 <MnO2> http://www.yinwang.org/blog-cn/2013/06/21/move-on/
+09:01:00 <MnO2> 照慣例，手腳要快 xD
+09:16:18 <UncleHandsome> 王垠真的好威
+09:16:25 <UncleHandsome> 剛剛追悼這篇文章XD
+09:16:27 <UncleHandsome> http://www.yinwang.org/blog-cn/2012/07/04/dan-friedman/
+12:13:34 <banacorn> http://www.haskell.org/haskellwiki/Functor-Applicative-Monad_Proposal
+13:06:57 <b4284> 剛剛發現 hashcat 是一個 password cracker
+13:08:58 <hashcat> 應該不是說我是cracker吧
+13:09:31 <b4284> hehe
+13:09:32 <hashcat> 這名稱我隨便取的
+13:09:52 <b4284> 剛在裝 gnu-netcat 時看到的
+13:10:43 <MnO2> 意思是常跟 gnu-netcat 搭配使用嗎？ xD
+13:20:05 <hashcat> 應該只是名字相似剛好被找到
+13:36:18 <favonia> hashcat: 我以為是 #cat 之類的～
+13:47:28 <hashcat> 三個只是名字相似的東西
+15:13:00 <MnO2> http://www.yinwang.org/blog-cn/2013/06/21/pysonar-slides/
+17:13:25 <hychen> 請問我要怎麼讓quick check.Gen 裡面的 arbitrary function 使用檔案讀出來的資料?
+17:38:40 <MnO2> hychen: 不太確定你檔案中讀出來的資料是什麼，不過從 Gen 的型別跟程式碼來看，他應該沒有要讓你使用你自己資料的意思。 arbitrary 只是負責描述 Gen 是如何 compose 出來的，但最基本的 Generator 他是用 StdGen，所以資料看起來應該是系統自己幫你去一直丟骰子
+17:39:21 <hychen> 我是指elements 要讀的 list
+17:39:22 <MnO2> 如果是自己的測試資料，也許考慮用 HUnit ？
+17:43:22 <hychen> Hunit 能產生亂數資料嗎?
+17:43:34 <hychen> 我現在是想用quickcheck產生亂數資料
+17:45:13 <hychen> 手上幾份csv, 我現在想用這些csv的資料組出一些測試用資料
+17:49:39 <MnO2> HUnit 應該就是普通 unit test
+17:50:09 <MnO2> Gen 的 Monad 看起來有點麻煩，作弊就用 unsafePerformIO
+21:15:38 <hashcat> 問個問題
+21:15:54 <hashcat> 有沒學校教Haskell的
+21:23:14 <UncleHandsome> nctu小黃老師有些一些些
+21:24:29 <UncleHandsome> 不過他教scheme教了半學期就是XD...
+21:28:13 <hashcat> 額
+21:45:31 <favonia> hashcat: 國外應該滿多的吧（？）不過我沒查 xD
+22:06:14 <hashcat> 罷了就這樣吧
+22:18:13 <banacorn> 小黃 A_A
+22:48:21 <UncleHandsome> 就我所知nctu應該沒有做語言的教授了....
+23:11:47 <favonia> 台大資管聽說曾經有教 Haskell 的課，但我自己沒上過所以不知道 xD
+23:19:32 <hashcat> 那可能也是很快就掛點了
+23:20:00 <hashcat> 感覺教這語言最能持續的是數學系
+23:25:20 <suhorng> 台大資管程式語言曾經是必修~ 現況不清楚
+23:25:41 <suhorng> 所以教Haskell應該是老師的喜愛所以在程式語言課中用
+23:28:28 <monochrom> 然而, 數學佬對程式跟本沒興趣
+23:29:00 <monochrom> (我係香港人, 所以講「數學佬」 XD )
+23:30:40 <monochrom> 得要找電算佬而又有數學傾向的, 這等人就會喜愛 haskell
+23:30:51 <CindyLinz> 台大資訊程式語言也曾經是必修 QQ
+23:31:02 <hychen> haskell IO好複雜...
+23:31:35 <monochrom> 不複雜, 就只是多了個 >>=
+23:31:36 <suhorng> 現在有人連得上yinwang的blog (裡面的文章)嗎..? 我突然無法載入 blog-cn 裡面的文章@@
+23:32:11 <hychen> 任何function只要用了random value, 就會變成IO function嗎?
+23:32:36 <monochrom> 我入不到
+23:33:03 <suhorng> monochrom: +1
+23:33:19 <suhorng> hychen: 因為不太可能自己寫一個 pseudo-random number generator..?
+23:34:38 <hychen> https://github.com/hychen/mockdata_generator/blob/master/kuansim_mockgen.hs
+23:34:58 <hychen> 我現在卡在random choice element
+23:35:27 <hychen> random choice element in a file.
+23:35:37 <monochrom> 這樣說罷, f::Int->Int, 那麼 f 5 :: Int, f 5 次次都是同一數字. 如果你想次次不同, 不論是因為隨機或者讀取外面資料, 都不能維持 f 5 :: Int, 唯有 f 5 :: IO Int 或 f 5 :: Blahblah IO
+23:36:14 <hychen> 所以只要我一個function 裡面是要產生亂數data, 就一定是IO function
+23:37:50 <suhorng> 除非自己額外把 random number generator 傳進去
+23:38:03 <suhorng> 而那個 random number generator 也大概會是個 monad
+23:38:26 <hashcat> Haskell明明就跟數學聯繫很強
+23:38:39 <monochrom> 好處是 (\x -> x*x) (f 5) = f 5 * f 5. 因為 f 5 不變, 我用一次跟用十次都無分別
+23:38:54 <suhorng> hashcat: 那是 formal 聯繫比較強
+23:39:07 <hashcat> haskell的語境下一切都是不變的
+23:39:17 <hashcat> 宣告後就不變了
+23:39:25 <suhorng> hashcat: Haskell跟數學系學的數學差非常多
+23:39:47 <hashcat> monad那些乍看能變得其實也是不變
+23:39:50 <suhorng> 而且數學系聽到大部分都是古典邏輯@@
+23:40:31 <hashcat> monad其實是把程序當組件, 程序不變化
+23:40:38 <monochrom> 別的語言, 容許 f 5 次次隨機不同. 對你來說可能方便了, 但我來說 (\x -> x*x) (f 5) != f 5 * f 5 是極大不便, 甚至是陷阱
+23:40:59 <monochrom> 對了
+23:42:20 <hashcat> suhorng: 至少設計的人得是數學背景
+23:43:40 <hashcat> suhorng: 不是範疇論就是型別論
+23:44:06 <hychen> i am reading  this notes http://www.vex.net/~trebla/haskell/random.xhtml
+23:44:12 <suhorng> hychen: 似乎只剩下 unsafe IO...XD?
+23:44:24 <hashcat> 總覺得是台灣的數學系跟世界脫軌 = =
+23:44:35 <suhorng> 除非乖乖寫清楚
+23:44:49 <suhorng> hychen: 把有state的東西都分該來這樣XD
+23:45:01 <UncleHandsome> hashcat: 台灣哪個系跟世界接軌了XDD?
+23:45:18 <hashcat> 用什麼unSafe的請回去用C語言
+23:45:24 <suhorng> hashcat: 數學這麼大...
+23:46:23 <hashcat> monads的實例補全了隨機和輸出入
+23:47:35 <hashcat> 您要的話也可以整個很命令式
+23:48:06 <hashcat> 只要包裝在monad 什麼 if, for, while都有人實作
+23:48:06 <monochrom> http://www.vex.net/~trebla/ 就是我 :)
+23:48:53 <hychen> monochrom, 超實用的筆記!
+23:50:31 <hashcat> suhorng: 老有些新東西明明對數學各領域的共同基礎有影響
+23:51:06 <hashcat> suhorng: 在台灣就好像從沒發生過一樣

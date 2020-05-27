@@ -1,0 +1,18 @@
+13:18:54 <caasih> 有人知道 cabal build 與 cabal build -j4 的差別嗎？不知道怎樣看 ghc 到底用到幾個 CPU 0rz
+15:37:21 <mno2> 一個有解釋，一個不解釋 (大誤)
+15:37:32 <mno2> cabal b(uild) -j4
+15:37:34 <caasih> XDDDD
+15:38:26 <mno2> 好像自從某一版之後預設就會有 -j 開啟 (很不確定）
+15:40:08 <caasih> * 沒認真找 changelog 之類的 0rz
+15:42:00 <caasih> 找到一點線索... https://github.com/haskell/cabal/blob/master/cabal-install/changelog#L70
+15:57:23 <caasih> mno2: 不確定是不是這個 commit ，不知道是不是設成 default @@
+15:57:24 <caasih> https://github.com/haskell/cabal/commit/99264248db78835b308232943038e6cbce4e72a4
+15:57:35 <caasih> * 累了
+20:31:39 <suhorng-_> 記得現在是預設就平行了. (平行的編譯不相干的 package)
+20:37:17 <petercommand> cabal 現在是預設平行
+21:52:02 <CindyLinz> 我的沒有 o.o
+21:52:09 <CindyLinz> 也許 cabal 嫌我電腦弱 :Q
+21:52:16 <CindyLinz> 手動下 -j 就有了
+21:53:01 <CindyLinz> 可是 CPU 會衝到超過 90℃  風扇轉速會多一級, 以後大概還是用 single thread 跑就好 XD
+23:02:05 <suhorng--> CindyLinz: 好像可以調 default 設定?
+23:04:21 <CindyLinz> single thread 的設定很好 :D

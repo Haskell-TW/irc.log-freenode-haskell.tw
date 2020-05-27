@@ -1,0 +1,308 @@
+10:02:09 <petercommand> 問一下，打 :t * 會有錯誤的原因是甚麼呢?
+10:02:22 <petercommand> 要打:t (*)才行
+10:05:06 <petercommand> >:t *
+10:05:24 <petercommand> > :t *
+10:05:25 <lambdabot>  <hint>:1:1: parse error on input ‘:’
+10:05:31 <petercommand> > :t (*)
+10:05:32 <lambdabot>  <hint>:1:1: parse error on input ‘:’
+10:05:40 <petercommand> >:t (*)
+10:06:28 <petercommand> > :type (*)
+10:06:29 <lambdabot>  <hint>:1:1: parse error on input ‘:’
+10:06:54 <petercommand> @src (*)
+10:06:54 <lambdabot> Source not found. :(
+10:06:58 <petercommand> @src *
+10:06:58 <lambdabot> Source not found. Take a stress pill and think things over.
+10:07:04 <petercommand> @src (.)
+10:07:04 <lambdabot> (f . g) x = f (g x)
+10:07:04 <lambdabot> NB: In lambdabot,  (.) = fmap
+10:57:12 <mno2> @type (*)
+10:57:13 <lambdabot> Num a => a -> a -> a
+10:58:38 <petercommand> XD
+10:58:50 <mno2> petercommand: ghc 定義 operator 都要包起來 (*)，其實我不確定是只有 ghc 或是是標準。但總要有語法來跟函數區別
+10:59:05 <petercommand> 喔喔
+10:59:06 <mno2> petercommand: 然後 :t 是 ghci 的用法。lambdabot 的指令就是如上
+10:59:35 <mno2> 至於設計成不一致，我也不知道 xD
+10:59:41 <petercommand> 恩XD
+10:59:56 <petercommand> @t (*)
+10:59:56 <lambdabot> Maybe you meant: tell thank you thanks thesaurus thx tic-tac-toe ticker time todo todo-add todo-delete type v @ ? .
+11:00:04 <mno2> @ty (*)
+11:00:04 <petercommand> @type (*)
+11:00:05 <lambdabot> Num a => a -> a -> a
+11:00:06 <lambdabot> Num a => a -> a -> a
+11:00:22 <mno2> 縮寫是 ty 不是 t。這是他更討厭的地方 xD
+11:00:26 <mno2> 真是沒道理
+11:00:28 <petercommand> XDDD
+11:00:37 <petercommand> @thx
+11:00:37 <lambdabot> you are welcome
+11:00:49 <petercommand> @tic-tac-toe
+11:00:49 <lambdabot> how about a nice game of chess?
+11:00:57 <petercommand> @tic-tac-toe a
+11:00:58 <lambdabot> how about a nice game of chess?
+11:01:01 <petercommand> XD
+11:01:52 <b4283> @thank you
+11:01:53 <lambdabot> Maybe you meant: thank you thanks
+11:01:59 <b4283> @thanks
+11:01:59 <lambdabot> you are welcome
+11:02:08 <b4283> @thank\ you
+11:02:09 <lambdabot> you are welcome
+11:02:18 <b4283> @"thank you"
+11:02:18 <lambdabot> you are welcome
+11:02:27 <b4283> @tic-tac-toe
+11:02:27 <mno2> @quote OlegFacts
+11:02:27 <lambdabot> OlegFacts says: When Oleg writes code, the typechecker asks *him* if it's correct.
+11:02:27 <lambdabot> how about a nice game of chess?
+11:02:42 <b4283> hehe
+11:02:56 <b4283> @thesaurus conspicuous
+11:02:58 <lambdabot> Error: 550 invalid database, use SHOW DB for list
+11:03:07 <b4283> @tell
+11:03:07 <lambdabot> Who should I tell?
+11:03:23 <b4283> @tell mno2 hello my friend, stay awhile and listen
+11:03:23 <lambdabot> Consider it noted.
+11:03:48 <b4283> @tell b4283 oh oh you made it. this is grand, grand indeed.
+11:03:49 <lambdabot> You can tell yourself!
+11:03:53 <b4283> huh
+11:04:10 <b4283> @tell b4284 oh oh you made it. this is grand, grand indeed.
+11:04:10 <lambdabot> Consider it noted.
+11:05:09 <petercommand> @thesaurus show db
+11:05:11 <lambdabot> Error: 550 invalid database, use SHOW DB for list
+11:05:11 <lambdabot> Error: 550 invalid database, use SHOW DB for list
+11:05:18 <petercommand> @thesaurus SHOW DB
+11:05:20 <lambdabot> Error: 550 invalid database, use SHOW DB for list
+11:05:20 <lambdabot> Error: 550 invalid database, use SHOW DB for list
+11:05:26 <petercommand> @SHOW DB
+11:05:26 <lambdabot> Unknown command, try @list
+11:05:34 <petercommand> @thesaurus lambda
+11:05:35 <lambdabot> Error: 550 invalid database, use SHOW DB for list
+11:05:46 <b4284> lambdabot: do you have something for me?
+11:05:55 <b4284> hmm
+11:06:08 <b4284> @messages
+11:06:24 <b4283> 原來是私訊
+11:06:47 <b4283> 的確有將訊息送到
+11:06:59 <petercommand> thesaurus怎麼玩呀XD
+11:09:00 <petercommand> @thesaurus velociraptor
+11:09:01 <lambdabot> Error: 550 invalid database, use SHOW DB for list
+11:09:36 <b4283> petercommand: 看起來字庫沒裝
+14:06:23 <petercommand> 問一下像這個haskell程式http://pastebin.com/Tp7srQ62
+14:06:35 <petercommand> weight / height ^ 2 會eval 3 次嗎?還是只eval 1次呢?
+14:08:17 <CindyLinz> petercommand: 不一定欸.. ^^|
+14:08:38 <petercommand> 怎麼說?
+14:09:03 <petercommand> eval 3次就很慘阿XD
+14:09:19 <CindyLinz> petercommand: 就.. 沒有規定啊 ^^|
+14:09:30 <petercommand> @@
+14:09:43 <CindyLinz> petercommand: 如果你是先 let 或 where 一個名字的話, 那就只會 eval 1 次
+14:10:00 <CindyLinz> petercommand: 拆開來貼 3 遍的話, 就不知道 optimizer 有沒有那麼深入做
+14:10:10 <petercommand> 所以意思就是不樣這樣寫比較好的意思吧?
+14:10:15 <petercommand> 所以意思就是不要這樣寫比較好的意思吧?
+14:10:20 <CindyLinz> petercommand: 對, 在意效率的話
+14:10:49 <petercommand> 發覺learn you a haskell for great good有錯誤XD
+14:11:08 <CindyLinz> 他說會只算一次喔?
+14:11:18 <CindyLinz> 我在 begining haskell 也有看到類似的 @@"
+14:11:25 <petercommand> 不是，是其他的XD
+14:11:43 <CindyLinz> 心下覺得懷疑就去拿 ghci 嘗試.. 然後, begining haskell 錯了 XD
+14:12:22 <petercommand> CindyLinz: 他說triangle可以用let triangles = [ (a,b,c) | c <- [1..10], b <- [1..10], a <- [1..10] ]
+14:12:45 <petercommand> CindyLinz: 問題是有的根本不是三角形阿XD
+14:12:50 <petercommand> http://learnyouahaskell.com/starting-out
+14:12:56 <CindyLinz> 好像不符合兩邊合大於第三邊 XD
+14:13:15 <petercommand> 對，我寫信給作者了XD
+14:13:20 <CindyLinz> XDDD
+21:51:44 <petercommand> 問一下，haskell是backward compatible 的嗎?
+21:53:35 <au> 是的
+21:53:49 <CindyLinz> petercommand: 我自己的感覺.. 我覺得 ghc 是, 他們在新增 feature 的時候很小心, 都會用 pragma 的方式由我們使用的人來開關
+21:53:57 <au> 編譯器可以選擇要 compatible 的模式，如 haskell98、haskell2010 等
+21:54:34 <petercommand> 恩
+21:55:14 <petercommand> 花了整天在看learn you a haskell for great good呢XD
+21:55:32 <CindyLinz> 然後 hackage 的 package 通常可以同時裝 N 個不同的版本, 然後再在自己的每一個 project 裡面各自決定要用哪一版的 package
+21:56:18 <CindyLinz> 不過如果它們有些要用到外部的 library 例如說 zlib 之類的, 那就不是 haskell / ghc 能管的了
+21:57:06 <petercommand> CindyLinz: 所以是像rvm這種嗎?XD
+21:57:42 <petercommand> 好像不能這樣講...有點不同
+21:59:56 <petercommand> CindyLinz: 所以用外部lib還是要檢查版本號對吧？
+22:03:02 <mno2> 一定的吧，至少 header interface 不能變啊。不過那就是交給 pkgconfig 去處理
+22:05:32 <petercommand> 恩
+22:07:58 <CindyLinz> petercommand: 我不知道 rvm.. ._.
+22:08:16 <mno2> 題外話，聽說每一家用 haskell 的公司都一定有自己的一套 time / time-zone 的 library，不知道 hackage 上的 time / time-zone 的 library 到底是怎麼了。是效能問題還是實做不正確
+22:11:40 <petercommand> CindyLinz: 那是ruby的
+22:18:35 <au> rvm 比較像 cabal sandbox
+22:44:55 <petercommand> >  [(a,b) | a <- [1,2,3,4,5], b <- [1,2,3,4,5]]
+22:44:57 <lambdabot>  [(1,1),(1,2),(1,3),(1,4),(1,5),(2,1),(2,2),(2,3),(2,4),(2,5),(3,1),(3,2),(3,...
+22:45:46 <petercommand> > take 10 [(a,b) | a <- [1..], let j = a*a, j <- [1..k]]
+22:45:48 <lambdabot>  *Exception: not an integer: k
+22:46:02 <petercommand> > take 10 [(a,b) | a <- [1..], let k = a*a, j <- [1..k]]
+22:46:04 <lambdabot>  [(1,b),(2,b),(2,b),(2,b),(2,b),(3,b),(3,b),(3,b),(3,b),(3,b)]
+22:46:13 <petercommand> > take 10 [(a,b) | a <- [1..], let k = a*a, b <- [1..k]]
+22:46:14 <lambdabot>  [(1,1),(2,1),(2,2),(2,3),(2,4),(3,1),(3,2),(3,3),(3,4),(3,5)]
+22:47:42 <au> > let fibs=1:1:[x+y|x<-fibs|y<-tail fibs] in take 10 fibs
+22:47:44 <lambdabot>  [1,1,2,3,5,8,13,21,34,55]
+22:59:13 <CindyLinz> > let pas = [1] : map (\ls -> zipWith (+) ([0] ++ ls) (ls ++ [0])) pas in take 10 pas
+22:59:15 <lambdabot>  [[1],[1,1],[1,2,1],[1,3,3,1],[1,4,6,4,1],[1,5,10,10,5,1],[1,6,15,20,15,6,1],...
+23:00:59 <CindyLinz> > let pas = [1] : [zipWith (+) ([0] ++ ls) (ls ++ [0]) | ls <- pas] in take 10 pas
+23:01:01 <lambdabot>  [[1],[1,1],[1,2,1],[1,3,3,1],[1,4,6,4,1],[1,5,10,10,5,1],[1,6,15,20,15,6,1],...
+23:01:10 <CindyLinz> 有變短一點點 XD
+23:02:24 <CindyLinz> 如果可以開 extension -XParallelListComp 的話, 可以寫:
+23:02:30 <CindyLinz> > let pas = [1] : [[a + b | a <- [0] ++ ls | b <- ls ++ [0]] | ls <- pas] in take 10 pas
+23:02:32 <lambdabot>  [[1],[1,1],[1,2,1],[1,3,3,1],[1,4,6,4,1],[1,5,10,10,5,1],[1,6,15,20,15,6,1],...
+23:02:39 <CindyLinz> 咦 lambdabot 有開耶 :p
+23:02:58 <CindyLinz> 可是變長了.... //
+23:05:50 <petercommand> CindyLinz: 像這種-Xblah這種的怎麼開呀?
+23:06:13 <au> > let pas=[1]:[[a+b|a<-0:ls|b<-ls++[0]]|ls<-pas]in pas
+23:06:14 <lambdabot>  [[1],[1,1],[1,2,1],[1,3,3,1],[1,4,6,4,1],[1,5,10,10,5,1],[1,6,15,20,15,6,1],...
+23:07:55 <petercommand> let pas=[1]:[[a+b|a<-0:ls|b<-ls:[0]]|ls<-pas]in pas
+23:08:00 <petercommand> > let pas=[1]:[[a+b|a<-0:ls|b<-ls:[0]]|ls<-pas]in pas
+23:08:02 <lambdabot>  Occurs check: cannot construct the infinite type: t1 ~ [t1]
+23:08:02 <lambdabot>  Relevant bindings include
+23:08:02 <lambdabot>    b :: [t1] (bound at <interactive>:1:27)
+23:08:02 <lambdabot>    a :: t1 (bound at <interactive>:1:19)
+23:08:02 <lambdabot>    ls :: [t1] (bound at <interactive>:1:38)
+23:09:11 <CindyLinz> petercommand: ghci 的話打 :set -XParallelListComp 這樣
+23:09:41 <CindyLinz> petercommand: .hs 檔案裡面的話, 我習慣在第一行寫 {-# LANGUAGE ParallelListComp #-}
+23:10:05 <CindyLinz> petercommand: 然後, 也可以在 ghc compile 的時候加參數, 但我幾乎沒這樣用過, 所以一時說不上來 XD
+23:10:30 <petercommand> 喔喔
+23:11:40 <CindyLinz> petercommand: ++ 和 : 的意思和 type 不一樣喔~
+23:11:46 <CindyLinz> @type (++)
+23:11:47 <lambdabot> [a] -> [a] -> [a]
+23:11:49 <CindyLinz> @type (:)
+23:11:50 <lambdabot> a -> [a] -> [a]
+23:12:19 <CindyLinz> [0] ++ 某[Int] 和 0 : 某[Int] 等價就是
+23:12:41 <petercommand> 恩恩
+23:13:39 <petercommand> 有 [a] -> a -> [a]這種的嗎?
+23:14:14 <CindyLinz> @type flip (:)
+23:14:16 <lambdabot> [a] -> a -> [a]
+23:14:17 <CindyLinz> XD
+23:14:34 <petercommand> > flip [1,2,3] 4
+23:14:35 <lambdabot>  Couldn't match expected type ‘a -> b0 -> c’ with actual type ‘[t0]’
+23:14:44 <CindyLinz> 不過這個意思只是參數順序換一下, 出來的結構還是前面一項, 後面 N-1 項這種的
+23:15:04 <CindyLinz> > [1,2,3] `flip (:)` 4
+23:15:07 <lambdabot>  <hint>:1:15: parse error on input ‘(’
+23:15:10 <CindyLinz> QQ
+23:15:20 <CindyLinz> > flip (:) [1,2,3] 4
+23:15:22 <lambdabot>  [4,1,2,3]
+23:15:47 <petercommand> 恩
+23:16:30 <petercommand> > let pas=[1]:[[a+b|a<-0:ls|b<-flip (:) ls 0]|ls<-pas]in pas
+23:16:32 <lambdabot>  [[1],[0,2],[0,0,4],[0,0,0,8],[0,0,0,0,16],[0,0,0,0,0,32],[0,0,0,0,0,0,64],[0...
+23:16:37 <CindyLinz> petercommand: 反過來放的, 好像只有在理論上看到, 實際上在 Haskell 好像沒看到人用..  畢竟功能一樣, 大家都用同一種比較方便?
+23:17:20 <petercommand> @@
+23:17:36 <CindyLinz> petercommand: 不過有一種是方便東西從後面放, 但方便從前面讀的, 這種功能就不太一樣的, 就有了
+23:18:24 <CindyLinz> petercommand: flip (:) ls 0 和 0 : ls 是完全一樣的啊
+23:18:49 <petercommand> 恩
+23:19:38 <CindyLinz> 然後用在這邊.. 因為這 [0] ++ ls 和 ls ++ [0] 是要一個配一個加在一起, 應該也是兩條都要選一樣的結構才方便啦 ^^|
+23:22:13 <petercommand> @type (++)
+23:22:14 <lambdabot> [a] -> [a] -> [a]
+23:22:32 <petercommand> ++就是list concatenation對吧?
+23:22:35 <CindyLinz> 對
+23:22:51 <CindyLinz> 應該也可以用 (<>)
+23:23:03 <CindyLinz> > [1,2] <> [3.4]
+23:23:05 <lambdabot>  Ambiguous occurrence ‘<>’
+23:23:05 <lambdabot>  It could refer to either ‘Data.Monoid.<>’,
+23:23:05 <lambdabot>                           imported from ‘Data.Monoid’ at L.hs:91:1-18
+23:23:05 <lambdabot>                        or ‘Data.Semigroup.<>’,
+23:23:05 <lambdabot>                           imported from ‘Data.Semigroup’ at L.hs:101:1-21
+23:23:07 <CindyLinz> > [1,2] <> [3,4]
+23:23:09 <lambdabot>  Ambiguous occurrence ‘<>’
+23:23:09 <lambdabot>  It could refer to either ‘Data.Monoid.<>’,
+23:23:11 <lambdabot>                           imported from ‘Data.Monoid’ at L.hs:91:1-18
+23:23:13 <lambdabot>                        or ‘Data.Semigroup.<>’,
+23:23:14 <CindyLinz> 嗚 有兩個 orz
+23:23:15 <lambdabot>                           imported from ‘Data.Semigroup’ at L.hs:101:1-21
+23:23:22 <CindyLinz> > [1,2] Data.Monoid.<> [3,4]
+23:23:24 <lambdabot>  [1,2,3,4]
+23:23:40 <CindyLinz> 沒用過 Semigroup
+23:24:00 <petercommand> <>是?
+23:24:06 <CindyLinz> > [1,2] Data.Semigroup.<> [3,4]
+23:24:08 <lambdabot>  [1,2,3,4]
+23:24:18 <monochrom> <> 是 mappend
+23:25:18 <monochrom> 都是 Monoid 的運算子. 兩名同義. 對 [a] 來說, <> 是 ++
+23:25:33 <CindyLinz> petercommand: monoid 是一種.... 可以把兩個元素合成一個元素的數學結構, 而 (Data.Monoid.<>) 是這個「合成」的 operator
+23:25:47 <CindyLinz> list 是 monoid 的一種, 所以可以用 <>
+23:26:12 <petercommand> 恩
+23:26:33 <petercommand> monoid是typeclass嗎?
+23:26:50 <CindyLinz> 是
+23:30:24 <petercommand> 如果說一個operation必須要該operator在typeclass有定義才能進行  這樣講對嗎?
+23:30:55 <CindyLinz> 對
+23:31:45 <au> > let (+)=(,) in 1+1
+23:31:47 <lambdabot>  (1,1)
+23:32:33 <CindyLinz> typeclass 指定的每一個 operator 都作了對應的定義, 才能定義一個該 typeclass 的 instance type.. 不過通通都可以塞 undefined 去唬爛 ghc (或是沒寫出來也會被當 undefined), 然後一用就 crash.. ._.
+23:32:41 <petercommand> au: 可以直接這樣定義呀...
+23:32:50 <CindyLinz> au: 你為什麼要這樣 QAQ
+23:32:55 <au> petercommand: 對啊，這樣就和 typeclass 無關了 A_A
+23:34:27 <petercommand> > let (+)= [,] in 1+1
+23:34:28 <lambdabot>  <hint>:1:11: parse error on input ‘,’
+23:34:49 <petercommand> > let (+)= ([],[]) in 1+1
+23:34:51 <lambdabot>  Couldn't match expected type ‘a0 -> a1 -> t’
+23:34:51 <lambdabot>              with actual type ‘([t0], [t1])’
+23:34:52 <CindyLinz> petercommand: 沒有 [,] 啦 ^^|
+23:35:03 <petercommand> 試試看XD
+23:35:20 <CindyLinz> petercommand: [ , , , , ] 的寫法是 syntax sugar, 寫死對應為 a : b : c : ... : [] 這樣
+23:35:23 <petercommand> > let (+)= (-) in 1+1
+23:35:24 <lambdabot>  0
+23:35:47 <petercommand> > let (+)= (:) in 1+1
+23:35:48 <lambdabot>  No instance for (GHC.Show.Show a0)
+23:35:49 <lambdabot>    arising from a use of ‘M53623717147670913326406.show_M53623717147670913326...
+23:35:49 <lambdabot>  The type variable ‘a0’ is ambiguous
+23:35:49 <lambdabot>  Note: there are several potential instances:
+23:35:49 <lambdabot>    instance [safe] GHC.Show.Show
+23:36:10 <CindyLinz> petercommand: (:) 的左右兩邊 type 不能一樣欸
+23:36:29 <CindyLinz> 一定是 某a 和 [某a]
+23:36:39 <petercommand> 喔喔
+23:36:44 <petercommand> > let (+)= (:):[] in 1+1
+23:36:45 <lambdabot>  Couldn't match expected type ‘a1 -> a2 -> t’
+23:36:46 <lambdabot>              with actual type ‘[a0 -> [a0] -> [a0]]’
+23:37:09 <CindyLinz> > let a + b = a : b : [] in 1 + 1
+23:37:11 <lambdabot>  [1,1]
+23:37:35 <CindyLinz> @pl \a b -> a : b : []
+23:37:35 <lambdabot> (. return) . (:)
+23:37:47 <CindyLinz> let (+) = (. return) . (:) in 1 + 1
+23:37:57 <CindyLinz> > let (+) = (. return) . (:) in 1 + 1
+23:37:59 <lambdabot>  [1,1]
+23:38:01 <CindyLinz> (Y)
+23:38:15 <petercommand> 來看看:p
+23:38:25 <au> > let (+)=(.(:[])).(:) in 1+1
+23:38:26 <lambdabot>  [1,1]
+23:39:03 <CindyLinz> 我再次覺得 perl 的符號沒有用很兇啊 ww
+23:39:09 <petercommand> 這好像是叫point free notation嗎?
+23:39:31 <CindyLinz> style?
+23:39:31 <petercommand> 一堆點的XD
+23:39:45 <CindyLinz> 免費的點
+23:40:09 <petercommand> 那個點是甚麼呀?
+23:40:15 <CindyLinz> petercommand: function composition
+23:40:34 <CindyLinz> petercommand: point free 的 point 是有取名字的參數
+23:40:45 <petercommand> 喔喔
+23:40:48 <au> CindyLinz: 結果我請 FLOLAC 的工作人員印「Haskell 脳の恐怖」出來當演講的 handout 了，希望可以增加無點流的信徒
+23:40:56 <CindyLinz> 所以是真原本是說「無點流」.. (ref: au)
+23:41:06 <CindyLinz> 嚇跑人吧.... ._.
+23:41:16 <CindyLinz> 你看這標題 XD
+23:41:34 <petercommand> XDDDD
+23:41:38 <au> 到底是那篇嚇人還是 Haxl 的 ICFP'14 paper 比較嚇人呢，下星期就知道了 (兩篇都有印)
+23:44:18 <CindyLinz> au 好嚇人.. (筆記)
+23:46:53 <petercommand> au: 上次你說要趁年輕多學一些語言，很好奇你都學了哪些語言呀?
+23:50:42 <petercommand> > + 1 1
+23:50:43 <lambdabot>  <hint>:1:1: parse error on input ‘+’
+23:51:20 <CindyLinz> petercommand: operator 用在 prefix 寫法的時候要寫成 (+)
+23:51:21 <letoh> > (+ 1 1)
+23:51:22 <lambdabot>  Could not deduce (GHC.Num.Num (a0 -> a))
+23:51:22 <lambdabot>    arising from the ambiguity check for ‘e_111’
+23:51:22 <lambdabot>  from the context (GHC.Num.Num (a1 -> a),
+23:51:22 <lambdabot>                    GHC.Num.Num a1,
+23:51:22 <lambdabot>                    GHC.Num.Num a)
+23:51:28 <letoh> 果然不行XD
+23:51:35 <CindyLinz> > ((+) 1 1)
+23:51:37 <lambdabot>  2
+23:51:38 <petercommand> (+) 1 1
+23:51:43 <petercommand> > (+) 1 1
+23:51:44 <lambdabot>  2
+23:51:54 <petercommand> 他不是lisp XD
+23:52:11 <letoh> 我知道啦  只是想看一下 lambdabot 的反應XD
+23:52:29 <au> petercommand: http://images.plurk.com/7fT70LOS3ETH35dh6SPuUy.jpg #多半看得懂，寫得熟練的沒那麼多
+23:52:42 <au> (afk)
+23:52:51 <CindyLinz> 看不懂 XD
+23:53:10 <CindyLinz> 而且我還說不出來我哪一個看不懂.....ww
+23:53:17 <petercommand> XDDD
+23:53:20 <letoh> R 左邊那個海星是什麼?
+23:53:25 <au> Mathematica
+23:53:51 <letoh> 原來如此  有聽過是個蠻強大的工具
+23:54:07 <petercommand> R 右邊的黑白線條動物是甚麼呀?
+23:54:20 <au> smalltalk squeak (後來簡報換成汽球了)
+23:55:07 <petercommand> 上面是java + lambda...
+23:55:26 <caasihuang> 11 好可愛 XD
+23:55:31 <letoh> 看起來像 lambda 被綁起來燒....XD
+23:56:06 <letoh> (聖女嵐達
+23:58:04 <petercommand> mathematica的左邊是甚麼呀?
+23:59:44 <caasihuang> petercommand: ls? http://livescript.net/

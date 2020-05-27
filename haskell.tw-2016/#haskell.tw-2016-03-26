@@ -1,0 +1,5 @@
+00:07:41 <petercommand> monochrom: 喔喔!
+00:09:53 <monochrom> in fact 太 safe 了, 我最後決定 import qualified Data.Vector as V;  (!) = V.unsafeIndex
+00:12:05 <petercommand> XD..
+00:40:01 <pkmx> 最後決定直接 import Control.Lens 反正寫一寫遲早會用到 (?)
+00:52:31 <monochrom> 這就是 一不做二不休 XD

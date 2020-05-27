@@ -1,0 +1,299 @@
+00:00:11 <letoh> vmInit code ib = Bfvm code 0 ['\0', '\0'..] 0 [] "" ib   這算是有用到嗎?
+00:00:22 <CindyLinz> 算
+00:00:31 <letoh> 我原本是用 replicate 啦，不然 debug 不方便
+00:00:37 <letoh> 那個 list 會一直跑XD
+00:00:45 <letoh> print 那個 list 會一直跑XD
+00:01:20 <CindyLinz> 對.. XD
+00:01:38 <CindyLinz> 那印的時候就要 print $ take n 這樣
+00:01:47 <CindyLinz> 可是 replicate 出來的東西也會一直跑啊?
+00:01:51 <letoh> 但這個 lazy 好像沒有什麼關鍵地位，改用 replicate 產生固定長度也可以
+00:01:54 <letoh> 不會
+00:02:01 <letoh> (replicate 20 '\0')
+00:02:07 <CindyLinz> 喔不是 repeat :p
+00:02:48 <letoh> 我不曉得有 repeat 可以用，所以不會搞錯XD
+00:03:27 <CindyLinz> replicate n a = take n ( repeat a )
+00:03:50 <CindyLinz> 可以這樣寫式子.. 感覺好舒服啊... (思)
+00:04:29 <letoh> 其實昨天寫了半天，本來以為不會動的  沒想到 hello world 就出現了
+00:04:38 <letoh> 害我不曉得該作何反應...
+00:05:52 <letoh> 寫一些等式就可以變成程式... 雖然不是第一次寫了，但這是第一個非數學題的程式，感覺蠻有趣的XD
+00:07:31 <CindyLinz> 是個不適合用 haskell 寫的題目 XD
+00:08:26 <letoh> 咦  所以拿 state machine 當作練習題算越級挑戰嗎? XD
+00:08:49 <letoh> 昨天還在猶豫要不要先搞懂 state monad
+00:08:53 <CindyLinz> 難度不知道.. 我說不適合指的是如果用 imperative language 寫的話應該會簡化很多的意思 XD
+00:09:02 <letoh> 嗯嗯
+00:16:32 <letoh> google 又在首頁放遊戲了
+00:21:32 <letoh> https://gist.github.com/152896  看了一下這個版本，用了好多可怕的東西XD
+00:21:33 <CindyLinz> 不好玩 >_<
+00:21:53 <letoh> 玩了幾關手很痠就關掉了XD
+00:25:57 <CindyLinz> 邪惡指數++ (指)
+00:28:02 <letoh> 看不懂的語法就先跳過XD
+00:33:05 <favonia> letoh: 你是要寫什麼？
+00:33:44 <letoh> 喔，只是想體驗一下 dark side 長什麼樣子 (誤
+00:34:29 <favonia> 你要 slice 操作用 Data.Sequence 會不會比較好啊
+00:35:17 <favonia> letoh: d {curr = curr d + n} 就好啦 xD
+00:35:18 <letoh> 唔，看起來又是個 monad ?
+00:35:43 <CindyLinz> 這個沒有 monad :p
+00:35:55 <favonia> letoh: move 直接傳回 BFData 可以嗎？
+00:36:05 <letoh> 猜錯了XD  (看不懂的先歸到 monad XD)
+00:36:11 <letoh> favonia: 那個不是我寫的
+00:36:16 <CindyLinz> monad 很無辜啊 XD
+00:36:24 <favonia> letoh: 喔喔 xD
+00:36:45 <letoh> favonia: 我的在這邊 http://tinyurl.com/b4wq3cr
+00:37:07 <favonia> 可是這到底是在寫什麼
+00:37:25 <CindyLinz> 看起來是 brainf**k 的 interpreter
+00:37:30 <letoh> 就是丟一串 brainfuck 程式進去跑一跑
+00:39:54 <CindyLinz> letoh: 那個 d !! j 是 O(j) 喔
+00:40:07 <letoh> 對呀... 想改掉
+00:40:10 <letoh> 用太多了
+00:40:26 <letoh> 所以我剛剛才說想改成放在 head 可以拿得到的地方
+00:41:00 <CindyLinz> 喔是在說這呀 :p
+00:41:15 <letoh> 對呀.. 而且我不喜歡 !!
+00:41:31 <CindyLinz> 這個問題好解
+00:41:33 <letoh> 看起來就像是嚇人的感覺  提醒我這個寫法不行XD
+00:41:39 <favonia> letoh: 你應該用 zipper 之類的呀～
+00:41:45 <CindyLinz> 你可以寫一個 (!) = (!!) 然後就可以用 ! 了 :D
+00:41:52 <letoh> XD
+00:41:53 <favonia> letoh: 喔喔你是說應該變成 !!!!!!!! 嗎
+00:42:04 <letoh> favonia: 這樣會先被嚇死吧XD
+00:42:08 <CindyLinz> XDDD
+00:42:29 <letoh> 看到這種程式感覺就很緊張啊  好像隨時有 bug 會跳出來的感覺XD
+00:42:35 <CindyLinz> 用 (^_^) = (!) 呢?
+00:42:47 <CindyLinz> d ^_^ j
+00:42:51 <letoh> 打 rpg 裡看到 ! 都是有事件的意思啊
+00:43:06 <letoh> ^_^ 還不錯XD
+00:45:38 <favonia> d >_< j
+00:46:03 <letoh> 這是在欺負誰嗎XD
+00:46:19 <letoh> 應該是我的表情吧  看到這程式都快哭了XD
+00:46:20 <favonia> > let (>_<) = (!!) in        [] >_< 0
+00:46:22 <lambdabot>   <hint>:1:9: parse error on input `)'
+00:48:04 <CindyLinz> > let a >_< b = a !! b in [3] >_< 0
+00:48:05 <lambdabot>   <hint>:1:5: Parse error in pattern: a > _
+00:48:47 <favonia> _ 不能用
+00:48:49 <favonia> > let (>@<) = (!!) in        [] >@< 0
+00:48:51 <lambdabot>   *Exception: Prelude.(!!): index too large
+00:48:57 <favonia> 耶
+00:48:58 <CindyLinz> 哎呀.. QQ
+00:49:03 <letoh> (fT_T) 也不行囉
+00:49:15 <CindyLinz> 可以改用減號
+00:49:25 <CindyLinz> 欸你那個全都是字欸
+00:51:48 <letoh> let (fT_T) = (!!) in [1..] `fT_T` 0    好像要這樣?
+00:51:51 <favonia> letoh: bf 裡面 []]]]]]]] 後面的 ] 要跳到哪？
+00:52:17 <letoh> 好像數量要配對吧  不然就爛掉了
+00:52:32 <letoh> 跟括號一樣要成對出現
+00:52:33 <favonia> 是喔
+00:53:27 <favonia> 我來寫寫看 總覺得可以稍微更簡單一點
+00:54:15 <letoh> 應該可以吧  這是偽 scheme 版改寫的啊  感覺不像在寫 haskell
+00:55:28 <favonia> letoh: 輸出是數字還是 char?
+00:55:33 <letoh> char
+00:55:53 <letoh> 所以要輸出 '0' 要加到 48
+00:57:54 <letoh> 不曉得有沒有人整理測試程式  可以用來驗證實作的...我自己弄了幾個簡單的程式跑起來好像沒問題
+00:58:25 <letoh> helloworld 程式沒什麼用，寫錯的 interpreter 都可以跑出正確結果XD
+00:58:28 <CindyLinz> letoh: 你可以放一層 monad 向 interpreter 吃 Int, run monad 的時候再轉成 Char 輸出
+00:59:06 <letoh> 可是改成吃 Int 好像沒什麼好處耶
+00:59:49 <letoh> 我直接用 ['\0','\0'..] 處理好像蠻簡單的  不曉得有沒有缺點就是
+00:59:58 <CindyLinz> 對耶 你資料根本也都是 Char 進出
+01:00:05 <CindyLinz> 那真的沒好處了 XD
+01:00:21 <letoh> 可以練習 monad XD
+01:00:43 <CindyLinz> 這樣太矯情了....
+01:01:22 <letoh> 沒問題的，design pattern 的教學範例都是這樣，monad 也可以來一下 (誤
+01:02:28 <CindyLinz> letoh: 考慮包一層把 IO 隔掉好了?
+01:02:50 <CindyLinz> 這樣如果想把這程式用在不是直接輸出, 而是收集成別的東西也行
+01:02:54 <letoh> IO 應該是必要的吧，下一版加上
+01:03:15 <letoh> 我現在就不是直接輸出啦，都是先丟到 output buffer
+01:03:25 <CindyLinz> 啊, 我記成你剛剛貼的別人的程式了... zz
+01:04:02 <letoh> 喔喔喔... yzugsr 寫了三個版本，但是我剛剛看了一下都看不懂XD
+01:04:14 <letoh> http://blog.miaout17.net/2009/07/23/haskell-monad-brainfuck-interpreter-1/  他的文章在這邊
+01:04:27 <letoh> 難得有中文的文章XD
+01:04:34 <CindyLinz> :D
+01:10:59 <favonia> letoh: 怎麼想都不對啊
+01:11:03 <favonia> 頂多只能 Num CChar
+01:11:33 <letoh> 嗯?
+01:14:01 <favonia> letoh: 0 - 1 output 應該是什麼？
+01:14:19 <letoh> 就是奇怪的東西
+01:14:26 <favonia> bf output 到底是什麼...
+01:14:54 <letoh> 唔... 0 的話就 chr(0) 這樣
+01:15:22 <favonia> 那 -1 呢
+01:15:37 <letoh> 好像變 ff
+01:15:47 <letoh> 然後就會爛掉XD
+01:16:48 <letoh> http://www.muppetlabs.com/~breadbox/bf/  好像沒有提到 -1 會輸出什麼
+01:16:59 <favonia> letoh: 那這樣是要怎麼寫 Q_Q
+01:17:19 <letoh> 我也是憑感覺寫的XD
+01:19:07 <letoh> http://en.wikipedia.org/wiki/Brainfuck  wikipedia 好像也沒寫，應該是本來就沒定義吧@_@
+01:19:29 <CindyLinz> 那就給 _|_ 好了 :D
+01:19:43 <letoh> favonia: implementation-defined behavior XD
+02:21:41 <c9s> MnO2: PHP 的標準是從 Zend 的實作來的... XD
+02:21:53 <c9s> the implementation is based on reference, not spec
+02:48:05 <favonia> letoh: https://gist.github.com/4540948
+02:48:22 <letoh> 哇
+02:48:29 <letoh> 有笑臉的感覺
+02:49:12 <favonia> letoh: 什麼有笑臉的感覺？？？
+02:49:25 <letoh> 就程式碼的 layout XD
+02:50:24 <favonia> letoh: 不太懂... 不過總之這樣就可以了
+02:50:48 <letoh> 感謝  我研究一下 zipper
+02:51:27 <favonia> 你原本丟給我的程式碼也有用
+02:51:35 <favonia> 但我覺得那還是太麻煩 xD
+02:55:54 <favonia> letoh: 我是直接用 pcs 把所有 while(...) 都存起來
+02:55:58 <favonia> 可以直接跳回去
+02:56:15 <favonia> 再移來移去實在太麻煩了
+02:56:37 <favonia> 只有向前找才會一個一個找
+02:57:20 <letoh> 意思是把 [] 內的 code 存起來變成一個類似 block 的東西?
+02:58:56 <favonia> 應該說類似 label
+02:59:13 <favonia> a:while(..)...  b:while(...)    jump a 這樣不是比較快 xD
+02:59:25 <letoh> 喔  我也是這樣跳的
+02:59:28 <favonia> 把看得到的 label 都存起來
+03:00:07 <favonia> letoh: 喔
+03:00:13 <letoh> 掃到 [ 就先把位置記起來
+03:00:20 <letoh> 遇到 ] 再跳回去
+03:00:23 <favonia> letoh: 啊所以你是 data (array) 沒有用 zipper
+03:00:31 <favonia> letoh: 等一下
+03:00:36 <letoh> 我根本不會用 zipper XD
+03:00:40 <favonia> 這重點就是不要直接用位置
+03:00:49 <favonia> 直接把整個 list 存起來就好啦
+03:00:59 <favonia> 反正也是 pointer 嘛又沒有關係
+03:01:31 <letoh> 嗯  我還不太確定是不是 pointer，所以直覺先記位置比較不會有問題XD
+03:01:36 <favonia> zipper 簡單來講究是拉開一半的拉鍊
+03:01:41 <letoh> 知道是 pointer 就簡單了
+03:01:56 <favonia> 你是直接跳進去 我是邊拉開邊記住要怎麼回復
+03:02:13 <favonia> 這樣子要存取的資料不需要 !!
+03:02:20 <favonia> 然後又可以回復
+03:02:45 <favonia> 我這是變形，只能拉回到 while 的地方
+03:03:03 <favonia> data 則是一格一格往回拉
+03:03:59 <letoh> 看了一下介紹，感覺是好用的工具
+03:04:02 <favonia> letoh: 同樣技巧 scheme 也可以用
+03:04:13 <favonia> letoh: er 這算是 design pattern 吧
+03:04:20 <letoh> 嗯嗯
+03:05:25 <favonia> 先假設沒有 laziness. list of A = mu X. A + A*X
+03:05:37 <letoh> 看起來就是想在某種資料結構裡跑來跑去的時候就能用 zipper 處理
+03:06:41 <favonia> "微分"變成 X + A 這就是拆法 xD
+03:09:16 <favonia> 唔打錯 是 A 而已 orz sorry
+03:10:05 <favonia> letoh: http://en.wikibooks.org/wiki/Haskell/Zippers#Differentiation_of_data_types 精美圖解說
+03:10:39 <letoh> 沒想到會看到微分XD
+03:12:51 <letoh> 我覺得... 做的事好像差不多，但是包裝精美多了@_@
+03:13:59 <favonia> letoh: 你說 zipper 還是什麼跟什麼差不多？
+03:15:19 <letoh> zipper 跟我原本處理 branch 的想法
+09:42:15 <favonia> letoh: 我想要重寫一下 xD
+12:56:47 <MnO2> favonia 的版本改一下就可以用 Free Monad 了
+12:57:24 <MnO2> 然後就可以 do L; L; R; R
+12:58:53 <favonia> xDDDDD
+12:59:41 <favonia> MnO2: 那乾脆重寫 然後把他變成 runXXX
+12:59:48 <favonia> 我的意思是說
+13:00:11 <favonia> run = foldr (>>) 之類的
+13:00:18 <favonia> 打錯
+13:00:29 <favonia> foldl (>>)
+13:01:31 <favonia> 其實大概沒差... 不過算了不理他 xD
+13:01:41 <MnO2> 沒差吧。
+13:02:05 <MnO2> 只是在 haskell 內寫 brainfuck 還是蠻爽的 xDD
+13:02:36 <favonia> MnO2: 可以有無限長（？？？？）的程式
+13:03:11 <favonia> MnO2: 不過... 唉算了懶得管 xD
+13:04:15 <favonia> MnO2: 等一下我覺得這很不 monad 耶 因為根本沒辦法傳回資料啊
+13:04:34 <favonia> 這是 monoid + loop construct 而已吧
+13:07:52 <MnO2> 要多傳 state 吧？
+13:07:53 <favonia> 就好像你只有 IO () 一樣
+13:08:11 <favonia> 對 但是 brainfuck 不能傳其他東西了
+13:09:35 <MnO2> brainfuck 不能傳其他東西的意思是？
+13:10:04 <favonia> 例如你想說 Monad BrainFuck 好了
+13:10:19 <favonia> return 10 應該是 BrainFuck Int
+13:10:22 <favonia> 之類的
+13:11:40 <favonia> 我只是覺得這會變成「有個額外 brainfuck VM」而不是本身是 brainfuck
+13:13:02 <MnO2> 對啊，我覺得是有個額外的 brainfuck VM， 可能我之前的語句有語病吧
+13:13:33 <favonia> 喔好吧 我是說 brainfuck 本身是某個奇怪 monoid 而已
+13:13:46 <MnO2> 了解
+13:14:04 <favonia> （假設 [ ] 的問題已經解決）
+13:25:03 <_13h> 第一版還沒完全看懂XD
+13:26:33 <favonia> _13h: 我已經改到（可能更難懂的）第2版 lol
+13:26:59 <favonia> _13h: 每個步驟（不考慮 gc）（假設用一般的指標實作）（不考慮奇怪的各種因素）都是 constant time
+13:28:34 <_13h> 其實第一版大部份都很直覺啦  只有 [ ] 那邊還沒仔細看...第二版還沒開始研究XD
+13:29:23 <_13h> 像 list 的 slice 或 pattern matching 都是指標操作嗎？還是會產生新的 sublist ?
+13:31:32 <favonia> _13h: slice 很貴啊 所以就慢慢展開
+13:31:46 <_13h> 嗯..
+13:32:20 <favonia> _13h: 基本上就是 linked list 嘛
+13:34:27 <_13h> 唔  我可以理解裡面的東西應該都是用 linked list 之類的方式串起來的
+13:34:49 <_13h> 所以 sublist 應該只是弄個新的 header node ？
+13:35:56 <_13h> 但其實資料都是相同的?
+13:37:33 <_13h> 我好像猜到第二版想幹什麼... 是先變成類似 bytecode 的東西再執行嗎？
+13:37:47 <favonia> _13h: 你說 sublist 是什麼意思？
+13:38:18 <favonia> _13h: 我只有說 tail 喔。中間取一段的話基本上每個 node (在目前實作) 大概都要是新的
+13:38:24 <_13h> 嗯，不曉得有沒有用錯字，就是 foo (x:xs) = ...    裡面的 xs
+13:40:03 <favonia> _13h: 基本上（在目前實作）沒有新的 node
+13:40:30 <favonia> （在目前實作）比較像是指標指到不同地方
+13:40:43 <favonia> （在目前實作+沒有經過奇怪的最佳化）
+13:41:11 <_13h> 可以理解成 x:xs 的操作不需要額外的記憶體嗎？
+13:42:14 <favonia> _13h: （目前實作） runtime system 總是需要一堆記憶體... 但就是除了那耶本來就要的，應該不用（太多）了...
+13:43:46 <_13h> 嗯，我是突然想到 golang 的 slice 好像不會產生新 node.. 就同一條 list 但可以有很多 slice object 指向不同範圍
+13:45:35 <b4283> (defadvice irc-speak before (concat "(目前實作)" str))
+13:45:42 <_13h> 剛剛試了一下 python 好像也是這樣，隨便 slice 出來的片斷，內容跟原始 list 是同一個 object (用 id 來判斷)
+13:51:47 <favonia> _13h: 你是說元素還是 list 本身？
+13:51:56 <_13h> 元素
+13:52:41 <favonia> _13h: 你要知道就算元素一樣也不代表他沒有創新 list xD 尤其 python 這種語言並不會區分 variable 和 reference 指到的東西
+13:53:30 <favonia> _13h: 不過我相信（or希望）他應該有某種加速
+13:53:51 <_13h> 產生出來的 slice 應該是新的，原始的 list 有沒有被複製就不知道了@_@  內容(元素)應該是沒變
+13:54:13 <favonia> _13h: 這個在每個（正常）的語言都是這樣啦... xDDDD
+13:55:08 <_13h> 喔喔喔，不過不曉得為什麼.. python 的 slice 好慢，很容易拖到速度，所以我對 slice 操作有心理障礙XD
+13:55:49 <favonia> _13h: 我是認真的... 有可能（按照目前實作）他其實複製那段 list
+13:56:10 <favonia> 元素沒有動 但類似指標的東西複製過去
+13:56:49 <_13h> 嗯嗯，這樣的做法可以理解
+13:58:00 <hychen> slice 會產生新的list
+13:58:09 <hychen> 所以才會有numpy
+13:58:19 <favonia> _13h: brainfuck 第2版就事先用很醜的方法 parse...
+13:58:29 <favonia> _13h: brainfuck 第2版就是先用很醜的方法 parse...
+13:59:17 <_13h> 我可能比較喜歡第二版  但還沒看懂為什麼一個 W 就可以處理 []
+14:02:37 <favonia> _13h: 他類似這樣啊：
+14:02:56 <favonia> [L,R,R,R,L,W[L,R,W[]]]
+14:03:06 <favonia> W 就是 while loop
+14:14:35 <favonia> _13h: 簡單來說 W 可以標一個 block
+14:21:11 <_13h> ",[.[-],]"  會變成  GW[PW[D]G] ?
+14:24:48 <favonia> [G,W[P,W[D],G]]
+14:26:22 <favonia> _13h: 你可以玩玩看啊 lol
+14:26:34 <favonia> ghci xxx.hs
+14:26:49 <favonia> 然後 parse ",[.[-],]" 看看
+14:46:30 <CindyLinz> _13h: sublist 在 haskell 會跑過整個 sublist 含括的所有元素 (因為 lazy 而不一定馬上跑, 但反正就是製造了這麼多的潛在工作量)
+14:47:25 <CindyLinz> _13h: 原因是這個 sublist 的屁股和原本的 list 不一樣; sublist 的最後一個元素的屁股會接到 [], 而原有 list 的對應的同一個元素的屁股是接到再下一個元素
+14:47:49 <CindyLinz> _13h: 這樣就使得倒數第二個也不一樣了, 倒數第三也不一樣了... etc
+14:48:14 <CindyLinz> _13h: 如果是 tail 或 drop n 這種的, 屁股一定會一樣, 就不用跑過整個 sublist
+15:48:22 <_13h> 我在 arm 上面還沒有 ghci 可以用XD
+15:53:05 <CindyLinz> 唉, 好多想做的東西都要會用 ghc api (compiler) 才行 @@"
+16:04:00 <MnO2> CindyLinz 想做什麼？
+16:05:26 <CindyLinz> MnO2: 看到這句.. 就想寫一個 browser 內跑的 ghci 啊  XD # 15:48 < _13h> 我在 arm 上面還沒有 ghci 可以用XD
+16:06:04 <MnO2> CindyLinz: 這東西好像已經有了
+16:06:09 <CindyLinz> !
+16:06:21 <CindyLinz> MnO2: 能不過 server 的?
+16:06:44 <CindyLinz> 不對啊.. 如果有的話.... 那那些 ghcjs / Fay 就不用做了啊
+16:06:59 <MnO2> 對啊
+16:07:07 <CindyLinz> 啊? 你對哪句 ^^|
+16:07:47 <MnO2> http://tryhaskell.org/
+16:08:23 <MnO2> 就是說不過 server 的話就可以直接跑 javascript 版的 ghc 啦
+16:09:00 <CindyLinz> 這個應該有過 server :/
+16:09:03 <CindyLinz> 我打了 3+3
+16:09:18 <CindyLinz> 看到它出現了一個 http request, response 是 handleJSON({"result":"6","type":"Num a => a","expr":"3+3"})
+16:12:15 <MnO2> 好吧，那就靠你了
+16:13:11 <CindyLinz> 啊就挑戰 ghc api 失敗嘛.. ~_~
+16:13:30 <CindyLinz> 也許去翻看 Fay 的 src 可以找到出路.. :p
+16:13:35 <CindyLinz> 然後就開始忙了... orz
+16:15:34 <MnO2> 然後就全職做 ghc 了
+16:16:05 <CindyLinz> 聽起來真是好夢幻的工作... (遠目)
+16:48:05 <_13h> 我可以先用 hugs 頂著XD
+16:57:09 <MnO2> CindyLinz: 全職寫compiler好像不錯，最近Facebook也在找compiler的人做Hiphop
+16:59:28 <CindyLinz> MnO2: 在 Facebook 做 Hiphop 的話, 對我來說, 並不是一個美麗得令人感動的東西 (php), 它令人開心的點是比較工業比較應用性的 (效能不錯, 或是用的人很多). 這方面的點來看, 目前的工作也就是這一面向了呀
+17:00:18 <CindyLinz> 用(玩)的人很多, 工作氣氛工作型態很適合我這樣..
+17:00:48 <MnO2> 那就去 Mozilla 做 rust 好了 xDD
+17:00:55 <CindyLinz> 所以還是玩 haskell 或 agda 好, 雖然想玩的東西比較玩不動.... (嘆)
+17:01:23 <CindyLinz> 也許就是玩不動才覺得它美妙..... zz  等我玩的動的時候就開始嫌了 XD
+17:01:48 <MnO2> CindyLinz: 那時候就要開發更深奧的東西
+17:02:01 <CindyLinz> 嗯嗯..
+17:03:08 <CindyLinz> 我前幾天在 jaiyalas 的 FB 上看到 josh ko 的留言, 覺得很有道理
+17:04:25 <CindyLinz> 是他的老闆跟他說的, 他老闆跟 josh 說不要討厭那些首起來醜陃, 很工程導向的東西; 現在我們覺得漂亮的東西, 它們在被整理整齊以前, 也都是很噁心很醜的東西, 只是現在被整理漂亮了. 所以我們要去碰那些現在看起來很醜的東西, 將來它們才會變漂亮
+17:04:45 <CindyLinz> (用字是我自己寫的, 反正意思大約是這樣)
+17:05:19 <CindyLinz> ...不要討厭那些看起來醜陃...
+17:13:38 <MnO2> 好想知道講這些話的時候心中想的是哪個project
+17:16:14 <CindyLinz> 找到出處了 :p http://www.facebook.com/yunyan.chi/posts/4448014952408
+17:43:49 <cataska`> 所以要學習整理術嗎 (思)
+22:47:36 <favonia> CindyLinz: 為什麼公開的訊息（應該吧）也要登入才看得到...
+22:50:28 <CindyLinz> favonia: 這... 因為馬克希望你登入 XD
+22:50:48 <CindyLinz> 馬克祖克柏格 表示... XD
+22:50:58 <CindyLinz> 那我直接轉貼原文好了
+22:51:42 <CindyLinz> 反正不是壞話, 是好話.. 轉錄 safe :p
+22:51:44 <CindyLinz> 但另一名證人表示，是女方讓他「窒息致死」。
+22:51:44 <CindyLinz> 原文網址: 咪咪太沈重　女子被控以大胸部悶死男友！ | ETtoday國際新聞 | ETtoday 新聞雲 http://www.ettoday.net/news/20130116/153435.htm#ixzz2I9MKGhxt 
+22:51:51 <CindyLinz> 哎呀 貼到了 XD
+22:51:57 <CindyLinz> Josh Ko 要聽指導老師的話呦：「我們所受的訓練，有時會太沉迷於前人的成就，而覺得一些新的、太『工程』的領域不夠美，沒有深度。但我們所知的『美』的領域，也都是前人將一團亂的東西理出頭緒的結果。我們應做的是投入不美的領域，將其中的美感發掘出來。我認為 Dijkstra 所謂的『美是我們的責任』指的應該就是這個意思。」
+22:52:30 <CindyLinz> 剛剛誤貼的那個是在覺得奇怪「窒息」為什麼是證人作證, 不是驗屍決定 ^^|

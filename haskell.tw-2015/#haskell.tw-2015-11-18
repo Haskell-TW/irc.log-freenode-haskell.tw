@@ -1,0 +1,17 @@
+20:21:15 <acgtyrant_> True && True = True
+20:21:15 <acgtyrant_> _    && _    = False
+20:21:16 <acgtyrant_> True  && b    = b
+20:21:16 <acgtyrant_> False && _    = False
+20:21:27 <acgtyrant_> 这两个分别是 && 的定义
+20:21:43 <acgtyrant_> 后者为何比前者高效？
+21:25:27 <CindyLinz> 當輸入的兩個參數為 True 的時候.. True && True = True 用到兩個比較; True && b = b 只有用到一個比較
+21:29:46 <CindyLinz> False && _ = False 我會寫 _ && _ = False.. 但有可能沒差.. 也許 GHC 會看出 Bool 除了 True 以外, 已經只剩下 False 一種可能了
+21:35:59 <petercommand> 這一定看的出來呀
+21:36:19 <petercommand> 只是不曉得有沒有這樣看
+21:47:49 <petercommand> 這 ghc 是在 desugar 階段做嗎?
+21:48:41 <petercommand> https://github.com/ghc/ghc/blob/master/compiler/deSugar/Match.hs
+21:53:20 <petercommand> https://github.com/ghc/ghc/blob/c2fab84239299176a8e72aa26ae894019d677bd9/compiler/simplCore/Simplify.hs#L1641
+21:53:45 <petercommand> case elimination
+21:55:59 <petercommand> 看起來是在 simplify..
+22:08:19 <CindyLinz> GHC 不是看得出來的都會做啊.... /_\
+22:08:47 <CindyLinz> 我的 data A = A {-# UNPACK #-} !Bool {-# UNPACK #-} !Bool.... Q_Q

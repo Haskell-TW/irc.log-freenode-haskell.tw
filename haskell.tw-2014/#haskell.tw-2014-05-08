@@ -1,0 +1,330 @@
+00:00:17 <monochrom> 不過我還是認為不鼓勵大部份用家自己 build. 死硬派要自己 build 就必須付出代價.
+00:01:02 <whitglint> 丟 linux executable 給 bsd...
+00:01:38 <monochrom> 只接受 32-bit 嗎? 那麼, 你還是要開 virtualbox, 在裏面裝 32-bit linux... :)
+00:04:11 <CindyLinz> monochrom: 不能啊. 要用 cabal 把 dependency 都抓進來 @@"
+00:04:19 <CindyLinz> 又不是在寫 Agda.. XD
+00:05:22 <monochrom> 用家要自己 build 就要付出代價.
+00:06:11 <monochrom> 當然我樂意提供收費的代客裝 ghc+cabal 服務.
+00:06:39 <CindyLinz> 所以想說如果可以丟一份 ghc 生出來的 c/c++ source 放在 github 上
+00:06:45 <CindyLinz> 用的人可以直接 make 就好了
+00:07:49 <whitglint> 但是它生出來的 c/c++ source 有哪些 dependency？
+00:09:06 <monochrom> 是時候打破 "人人都有 C compiler 但偏沒有別的 compiler" 的謎思. 想自己 build 就要自己裝 compiler.
+00:10:09 <monochrom> "C 有特別優待" 不合我的原則
+00:11:24 <godfat> make 之後去裝 ghcccc
+00:11:59 <monochrom> 嘻嘻
+00:13:05 <CindyLinz> ww
+00:13:41 <CindyLinz> 你們這些壞人 =口=
+00:14:01 <godfat> XDD 很多套件管理不是都這樣嗎？
+00:14:26 <CindyLinz> 這跟 in2 遇到的那個 lib 一樣.......
+00:14:43 <CindyLinz> 有提供 .dll 版, .jar 版, php zend 版, 還有 perl 版..
+00:14:59 <monochrom> 我只是較理想化而已 :)
+00:15:09 <CindyLinz> 兔子好高興有 perl 耶~ 來看看怎麼寫的, 可以怎樣整合到我們原有的程式裡面
+00:15:20 <CindyLinz> 打開來一看 system("java -jar oo.jar")
+00:15:29 <poga> XDDD
+00:15:31 <godfat> 讓我回想起以前玩 dmd 的事，他裡面也是包一堆東西
+00:15:32 <godfat> 然後我怎麼執行都會掛掉，最後才發現我在 windows 上執行 linux 上的 binary
+00:15:32 <monochrom> \∩/
+00:16:21 <CindyLinz> 不過題外話是.. 這樣還是阻止不了兔子...
+00:16:23 <godfat> dmd 的 bin 裡面放 dmd.bat 跟 dmd
+00:16:24 <godfat> 我直接執行 dmd 是 linux 版的，會 crash
+00:16:27 <godfat> ?XDD
+00:16:27 <lambdabot> Unknown command, try @list
+00:16:28 <CindyLinz> 她就開始 decompile .jar......
+00:16:42 <monochrom> 我想起了某電影裏 "用明朝的尚方寶劍, 斬清朝的官?" XD
+00:19:22 <godfat> 然後發現 .jar 裡面是 .dll XDD
+00:19:31 <CindyLinz> 沒那麼慘啦 XD
+00:19:44 <CindyLinz> .dll 裡面跑 .jar 的機會比較大 XD
+00:19:57 <godfat> 我記得 swt 是呀 XD
+00:20:05 <monochrom> 最好的大結局是 dll 裏面有個 perl interpreter XD
+00:20:10 <darkx>  XDDDD
+00:20:23 <CindyLinz> 這樣在非 windows 系統怎麼跑啊?
+00:20:41 <godfat> 結果那個 perl interpreter 去執行最外面那個 perl wwwwwww
+00:20:56 <CindyLinz> 妙的是兔子看一看還找到人家的 bug....ww
+00:21:05 <godfat> swt 是 win32 裝 win32 的版本，要分開裝的
+00:21:17 <monochrom> 明年四月一日宜乎開這個玩笑
+00:21:51 <godfat> termination checker: are you gonna terminate?
+00:22:46 <godfat> 是說也還沒機會見識 in2 的功力 XD
+00:23:35 <CindyLinz> godfat: 去 ptt 狂發擬張爸文就會見識到了...
+00:23:40 <monochrom> 我也想結識這樣的異能奇人哩!
+00:24:42 <godfat> 一直問聽首歌好嗎？然後全站文章會被刪除嗎？
+00:24:59 <CindyLinz> 唔... 台灣的, console 版的 BBS 幾乎只剩 ptt 獨大, 應該算就是被 in2 搞的...
+00:25:14 <godfat> 我大概也只知道這點 XDDD
+00:25:38 <godfat> 不過我的理解只是因為 ptt 程式太強，所以其他的用不上了
+00:25:56 <CindyLinz> godfat: 也不是這樣解釋... XD 畢竟程式強跟使用者沒直接關係
+00:26:18 <godfat> 所以我想應該有我不知道的事情發生 XD 我跟 bbs 不大熟
+00:26:23 <CindyLinz> godfat: 只是當年大家都受限於機器能力, 站上同時在線人數不能太多, 會連不上去...
+00:26:42 <godfat> 那又回到我的理解了 XD
+00:26:57 <CindyLinz> 然後 ptt 的程式被 in2 tune 得很極端, 只有 ptt 能撐得上去...
+00:27:12 <monochrom> 誰知呢? 或者其實是 ptt 硬件太強
+00:27:15 <godfat> 裡面的程式還好讀嗎？ XD
+00:27:26 <CindyLinz> monochrom: 你可以去拿 ptt 的原始碼來看..
+00:27:45 <CindyLinz> http://www.ptt.cc/index.source.html
+00:39:35 <monochrom> http://opensvn.csie.org/pttbbs/trunk/pttbbs/mbbsd/read.c 裏好像有部份自己做 memory management, 這是其中一個例子嗎?
+00:41:31 <godfat> 我一直很好奇，allocator 很多，不知道是不是不同情況用不同的比較好，所以真的需要高效的 allocator 其實都是自己做的？
+00:49:28 <monochrom> 是有幾個不同情況, 但為數不多, 大概有幾大類就夠了
+00:50:20 <godfat> 了解..
+00:50:44 <monochrom> 自己做是因為通常 standard library 只提供一個選擇
+00:51:06 <godfat> 記得之前我有問過關於記憶體不足的問題，對方推薦這套 http://goog-perftools.sourceforge.net/doc/tcmalloc.html
+01:46:42 <CindyLinz> 我記得有縮小每一個 process 用的記憶體..
+01:47:07 <CindyLinz> 然後用一個獨立 process 等 user 登入.. 登入後再交給真正的 bbs process
+01:47:24 <CindyLinz> 好像還有 tune IO buffer 的大小之類的
+01:47:43 <CindyLinz> 可是我沒有參與, 只有偶爾聽到而已
+01:49:14 <monochrom> 啊, 我記起了, 當年沒有 thread, 只有 process, 超貴的, 所以幾時開 process 幾時用 select 非常講究
+01:49:49 <darkx> CindyLinz: 有點像是 inetd?
+01:50:46 <monochrom> 給 ghc 寵壞了 :)
+01:56:25 <CindyLinz> darkx: 那什麼東西我不會 :|
+01:57:15 <CindyLinz> monochrom: 不只.. ptt 的程式是從更早期的 bbs 程式繼承來的, 原本就是用 fork process 的寫法弄的..
+01:57:34 <CindyLinz> 應該也是 maple 的吧
+01:57:47 <darkx> www
+01:59:22 <darkx> WD?
+02:00:03 <darkx> 早期 bbs 不是 M3 就是 WD 吧
+02:01:22 <whitglint> 現在都 multithreaded + async i/o 了
+02:01:41 <CindyLinz> 現在大的 console bbs 還是 multi-process 喔..
+02:01:56 <darkx> whitglint: BBS 還是沒有用 multithread 阿
+02:01:58 <CindyLinz> 其實也就剩 ptt 了, 沒人有興趣做了.....ww
+02:01:59 <darkx> 除非大幅改寫
+02:02:18 <CindyLinz> 而且只用一台機器....
+02:02:27 <darkx> CindyLinz: 其實一些小站還是有慢慢改啦，maple 的改進還是有人在弄
+02:02:41 <darkx> 只是有無回饋到 itoc 那邊就不一定了www
+02:03:07 <CindyLinz> darkx: 可是哄... 換用 multi-thread 目的是讓它可以省資源撐更多人, 如果人數沒比 ptt 這種 multi-process 的多, 就.... 會很心酸吧 ww
+02:03:23 <darkx> XDDDDDD
+02:03:46 <darkx> 我認識的還有在改的大多都是修 bug 和加入自己的 feature 吧
+02:04:00 <darkx> 現在 cpu.twbbs.org 也很少人了(默
+02:04:00 <CindyLinz> 溫馨私站 :D
+02:04:38 <darkx> 你也有私站? XD
+02:10:01 <whitglint> linux 不是號稱 lightweight process?
+02:10:38 <CindyLinz> 我沒有私站 XD
+02:11:09 <CindyLinz> whitglint: PTT 是從他們實際使用的 pattern 去 tune 的, 一般 general purpose 的設計很難拼的啊 @@"
+02:11:10 <darkx> in2 表是：我的私站就是 ptt (誤
+02:11:30 <whitglint> single node failure...
+02:11:33 <CindyLinz> 其實 ptt 是私站沒錯, 只是這房子有點大, 人有點多.... XD
+02:11:51 <darkx> 整個 ptt 都是我的私人站台(O)
+02:12:21 <whitglint> 如果人數沒持續成長，應該也不用改寫了？XD
+02:12:32 <whitglint> 台灣玩 BBS 的就這麼多人
+02:13:56 <CindyLinz> 應該也很難改了啊.. 改這種的就是要找瓶頸突破, 然後就會進展一段, 再看下次卡在哪個新瓶頸
+02:14:01 <whitglint> ptt db 好像是用 file？
+02:14:02 <CindyLinz> ptt 應該是全身都是瓶頸了吧 XD
+02:14:10 <CindyLinz> whitglint: 對啊 file, 沒有用 DB
+02:14:30 <whitglint> 剛看了篇文章說 posix async file i/o api 廢廢的
+02:14:31 <darkx> .DIR 無敵啦！
+02:14:34 <CindyLinz> whitglint: 你看 user data 是直接把 C struct mmap 到檔案... XD
+02:15:00 <darkx> CindyLinz: 好懷念小時候還在改 bbs code 的時候 XD
+02:15:41 <CindyLinz> 欸, 我覺得 ptt 在 user 登入後把 socket 交給別的 process 那一段很噁欸, 你們都不覺得嗎? @@"
+02:15:56 <darkx> CindyLinz: ptt/maple 有乾淨的地方嗎(?
+02:16:10 <CindyLinz> darkx: 不不 我不是說 code 噁.. 是覺得這種動作就很噁.....
+02:16:29 <monochrom> 小時候上 assembly 課, 跟同學鬥快鬥短哩! 不過都只是交功課的 toy programs
+02:16:29 <CindyLinz> 把 socket 從一個 process 拿給另一個 process 用, 而且沒有斷線...
+02:16:44 <whitglint> http://blog.libtorrent.org/2012/10/asynchronous-disk-io/ 文長注意
+02:16:47 <darkx> 印象中是直接當成一般 FD 拿過去吧?
+02:16:57 <darkx> 忘了 m3 那邊怎麼寫
+02:17:02 <CindyLinz> 是 OS 的怪招啊~~
+02:17:04 <darkx> 小時候是改 m3-itoc 的
+02:17:20 <CindyLinz> darkx: 沒有, ptt 以前的 bbs 應該都是一個 server process listen socket, accept 以後就 fork 自己
+02:17:45 <CindyLinz> darkx: 只是因為發現有非常大量的人會掛在登入畫面沒登入, 所以他們用這個作法省下一堆 process 資源
+02:17:57 <monochrom> 咦? 是啊, 怎樣把 socket 瞬間轉移? 未學過
+02:18:07 <CindyLinz> 延到登入成功後才 fork 真正的 bbs
+02:18:41 <CindyLinz> 記得 OS 做了個很髒的東西, 要 read/write 特殊的資料 :Q
+02:19:23 <whitglint> fd 可以跨 process 喔？
+02:19:36 <CindyLinz> 很噁對吧!
+02:19:40 <letoh> fork
+02:19:43 <CindyLinz> (正在找... 忘記關鍵字了)
+02:19:48 <CindyLinz> letoh: 不是 fork 那種 @@"
+02:19:58 <CindyLinz> fork 那種可接受 :Q
+02:20:14 <darkx> https://github.com/gaod/MapleBBS-itoc/blob/master/trunk/src/maple/bbsd.c
+02:20:22 <darkx> 對阿，印象中 maple 作法是直接 fork
+02:21:26 <whitglint> 一個 user 開一個 process 嗎？
+02:21:30 <darkx> y
+02:21:46 <whitglint> 哇，那不就開了幾萬個
+02:21:54 <letoh> 開頭的部份好像都差不多... 以前改 feeling 跟 firebird 好像也是類似的
+02:24:41 <letoh> 還有個奇耙 cola 是用 java 寫的
+02:24:51 <CindyLinz> 應該叫作 FD passing
+02:25:02 <monochrom> 我乾脆向 google 問 "how does inetd transfer socket to another process" :)
+02:25:06 <letoh> 喔喔  好像有這招沒錯
+02:25:14 <whitglint> 一個連線開一個 thread/process 的寫法很古老啊
+02:25:37 <monochrom> 於是得到 http://stackoverflow.com/questions/12425067/socket-handle-transfer-between-independent-processes
+02:25:37 <whitglint> 但是寫起來簡單
+02:27:28 <monochrom> 其實 inetd 倒不用做特別的事, 反正它的對手也是它自己 fork 出來的, 只要 inherit 就行.
+02:28:05 <darkx> FD passing 是很古老的作法惹 :~
+02:30:39 <darkx> http://opensvn.csie.org/pttbbs/trunk/pttbbs/mbbsd/mbbsd.c
+02:30:49 <darkx> in2 也改太多惹，快看不懂惹 XDD
+02:32:25 <whitglint> 用 domain socket 只是為了傳 fd 這個 int 過去給 worker process dup2() 嗎？好長懶得看
+02:34:30 <monochrom> 是一整個 ancillary data message, 裏面有 fd
+02:35:18 <whitglint> 現在 ptt source code 有固定人維護嗎？
+02:35:36 <monochrom> 不過, 任何方法傳送 binary data 也行, 不一定用 unix domain socket
+02:35:51 <darkx> 苦主左轉找 wens (?
+02:37:27 <whitglint> 現在有 websocket 了，ptt 要不要支援一下 XD
+02:41:29 <whitglint> 我以為是學生負責維護 XD
+02:43:54 <whitglint> http://www.ptt.cc/man/SYSOP/D2FD/D555/M.1178682714.A.2CA.html  4.程式 active committers  kcwu
+02:44:04 <whitglint> kcwu 有點眼熟
+02:56:19 <monochrom> 看來我錯了, 必須經 unix domain socket 傳送, 因為 kernel 對它特別處理.
+02:57:03 <whitglint> 聽起來像是黑魔術
+02:57:38 <letoh> 黑箱!
+03:05:11 <whitglint> 登入佔領 ptt！
+03:06:10 <monochrom> 參看 man cmsg(3). 這是一種 control message, 要用 sendmsg 傳, 因為你傳的不是任意數字, 而是特定的 header 及 body.
+03:09:59 <monochrom> 還有 man unix(7)
+03:10:31 <monochrom> (這個 "unix" 指 unix domain socket, 不是整個 unix XD)
+03:11:36 <monochrom> man unix(7) 就正式講到 SCM_RIGHTS 用來傳 fd. man cmsg(3) 有例子.
+03:12:12 <whitglint> man 的編號記不起來啊 XD
+03:13:01 <monochrom> 真不知算是黑魔法還是絕密秘技了
+03:13:40 <whitglint> 至少是有文件記載的絕技...
+03:14:56 <CindyLinz> 我不知道為什麼他們不設計成直接多一個 system function 來做這件事 @@"
+03:15:22 <monochrom> 辟邪劍法, 葵花寶典 XD
+03:15:39 <CindyLinz> 就 hand-shake 一下, 一邊先說要接哪個 pid 的 fd, 一邊說要丟 fd 給哪個 pid
+03:15:45 <godfat> 覺得少用加上反正設計的人都記得怎麼用吧？我覺得這種情況還滿常見的.. :/
+03:16:33 <CindyLinz> 一邊讀這個會一邊想皺眉... 只是怕老所以忍住了 ww
+03:16:34 <godfat> 話說我總算做到一段落了，剛剛數數公司的東西被我用上九個自己的 lib XDD
+03:16:42 <monochrom> 你知道嗎? 結果有人寫了個 libancillary 替你分憂. http://www.normalesup.org/~george/comp/libancillary/
+03:16:43 <godfat> XDDDDD
+03:17:19 <CindyLinz> libancillary 文件裡面也說 black magic.. XD
+03:18:00 <whitglint> 九個自己的 lib，是不是叫作九頭龍閃什麼的
+03:18:36 <monochrom> 我好一點, 眉總是皺不起來 :)
+03:19:11 <CindyLinz> monochrom: 你打肉毒喔!
+03:19:26 <monochrom> 我沒有...
+03:20:23 <CindyLinz> 唔?
+03:20:32 <godfat> whitglint, XDDDD 看來不適合再多加一個
+03:20:59 <CindyLinz> godfat: 你牢牢地鎖了個鐵飯碗 XD
+03:21:11 <godfat> XDDD 科科
+03:21:17 <whitglint> 公司不能沒有你惹
+03:21:21 <godfat> 洗澡洗澡...
+03:21:47 <monochrom> 9個lib, 可以叫九子連環. 10個lib也沒問題, 叫十兄弟好了.
+03:22:10 <monochrom> 我也要洗澡了. 一齊去... XD
+03:22:34 <whitglint> 一起去了～～～
+03:23:08 <godfat> 遠端共浴 XDD
+03:23:16 <CindyLinz> 那9個lib還可能不是獨立的, 而是互有親子關係的?
+03:24:08 <CindyLinz> 哇 GHC 是把 getopt 直接內建在 standard library 裡面.. System.Console.GetOpt
+03:24:25 <whitglint> 每個 lib 都緊密相依其它 8 個 lib，這樣才牢不可改
+03:25:04 <CindyLinz> whitglint: 全都圈在一起的話, 承認它是 9 個 lib 的可能不多? ^^|
+03:25:49 <whitglint> 這倒是 XD
+03:26:15 <CindyLinz> 說到洗澡....
+03:26:34 <CindyLinz> godfat: 洗澡是 in2 的大絕招....... 不要見識比較好...ww
+03:27:21 <whitglint> ???
+03:27:58 <CindyLinz> 程式會出錯, 機器會壞掉....ww
+03:29:59 <CindyLinz> 唔.. SCM_RIGHTS XD
+03:30:08 <CindyLinz> 有關鍵字 XD
+03:42:03 <godfat> CindyLinz, 大部分是無關獨立的，然後我剛剛想到多數一個，應該是八個才對
+03:42:03 <godfat> 我只知道 ptt2 當掉常常說是因為 in2 洗澡，不知道緣由 XD
+03:43:57 <CindyLinz> 嗯, 外人對 ptt2 比較熟.... 在我們公司就會知道她的威力包括但不限於 ptt2.... ww
+03:44:27 <godfat> ||||||b 是不是澡洗太多，所以就一直洗一直洗一直洗洗到當？ XDDD
+03:45:28 <CindyLinz> 是洗蠻多的 XD
+03:45:58 <godfat> 難道一天好幾次？ @@
+03:46:47 <CindyLinz> 不是, 是時間比較長 :p
+03:47:03 <godfat> 我對比較長的定義大約是超過半小時
+03:47:04 <monochrom> 20分鐘算不算長?
+03:48:08 <monochrom> 不過, 我要強調, 我不是20分鐘全程開水喉的, 用水的時間其實很短
+03:48:36 <CindyLinz> 就我所知會泡..只是結束時間不一定, 可能是結束於 PM 焦急的電話 XDXD
+03:49:05 <godfat> |||||
+03:49:09 <monochrom> 啊, 泡, 那就天長地久了!
+03:49:38 <godfat> 好啦，晚安 XDD 這頻道的時區真的怪怪的...
+03:49:58 <CindyLinz> XD
+03:50:03 <CindyLinz> 掰掰~~
+03:50:14 <monochrom> 哈哈
+03:52:38 <monochrom> 媲美當年不日落的大英帝國
+04:05:12 <monochrom> 立此為誌: https://plus.google.com/102208456519922110915/posts/CkEdzoTEvau
+10:14:00 <c9sloud> http://dev.stephendiehl.com/hask/
+12:37:23 <CindyLinz> ghc 這個 getopt 覺得用起來還蠻精美的, 不知道是原版 libgetopt 就是這樣還是 ghc 弄得比較好用
+14:20:46 <monochrom> 我更愛用optparse-applicative
+14:21:00 <CindyLinz> 沒有要用那麼複雜啦 XD
+16:29:15 <CindyLinz> 「Haskell 腦」的中譯出現了.. XD https://www.facebook.com/yoan.lin/posts/10152179689671715?comment_id=10152181926451715&offset=0&total_comments=11
+16:34:05 <CindyLinz> 可是文中描述的「Haskell 腦」的境界是「無點流 (point free style)」
+16:34:19 <CindyLinz> 在本 channel 最符合的人是 letoh... (逃)
+16:50:28 <darkx> XDDDD
+21:27:33 <letoh> 竟然有中譯了，而且譯成 南無參照透明性 實在太神!!
+21:28:21 <CindyLinz> 唐鳳 audreyt 譯的 XD
+21:31:26 <letoh> CindyLinz: 感謝幫 forth 搏到小小版面XD
+21:32:05 <CindyLinz> letoh: XD
+21:32:45 <letoh> 話說這種「XXX 腦」的說法，是日文專有的嗎? 英文圈有人這樣說嗎?
+21:33:15 <CindyLinz> 不會日文．不熟英文 QQ
+21:33:53 <letoh> XDXD  我以前有嘗試找過 lisp brain 之類的組合，好像沒看到這種用法
+21:36:25 <letoh> 其實翻譯好像有小地方錯了
+21:36:39 <letoh> Microsoft 那一段，原文並不是講 Microsoft
+21:37:14 <letoh> 而是 MicroShaft
+21:38:19 <letoh> 不過譯成 MicroSoft 大家好像比較開心XD
+21:39:56 <CindyLinz> XD
+21:40:03 <CindyLinz> 反正 GHC 的確是 MicroSoft 的?
+21:40:51 <letoh> 通常惡搞文在提到公司名字時都會馬賽克處理，反正大家看了也知道是誰
+22:45:19 <monochrom> 英文圈裏沒見過"XXX腦"成語
+22:46:30 <letoh> monochrom: thanks! 看起來是日本人才會這麼說
+22:49:04 <godfat> like, i have a unix head?
+22:58:48 <monochrom> 呀, 除了 bird brain. 但 bird brain 並非指像 Richard Bird 那麼聰明, 而是像鳥類那樣腦部細小, 引伸為愚笨. (儘管鳥類並不笨.)
+22:59:09 <godfat> Richard Bird XDDDDDDDDDD
+22:59:44 <godfat> 我只好自稱自己是鳥腦了 lol
+23:00:47 <whitglint> 第一次看到 xx 腦是這個 https://www.youtube.com/watch?v=QWcZ-3NE8NU
+23:03:01 <whitglint> CindyLinz: ghc 是 m$ 的？
+23:04:18 <monochrom> 由丌此還出了另一個成語 bird course, 指在大學有些太容易拿高分的課, 這些課非常受歡迎, 因為大學生急需把總平均分拉高 XD
+23:10:38 <monochrom> 舉例! 電算系的同學在本門的成績只比"合格"好一點. 正在苦惱之際, 忽聞隔壁哲學系有個"基本邏輯入門", 如同荒漠中一股清泉, 總於有一課用少少時間就拿到 A+. 久違了的 A+ 啊!
+23:13:29 <godfat> 所以平均成績這件事問題真是不少
+23:15:33 <CindyLinz> whitglint: 現在看這邊只看到兩個來自微軟研究院... # https://ghc.haskell.org/trac/ghc/wiki/TeamGHC
+23:15:57 <CindyLinz> 嗯! 有一個 Facebook 的 Simon Marlow 其實是從微軟被挖走的吧!
+23:16:31 <godfat> 之前就有人說，看起來好像 google 做了很多語言，但其實他們不做程式語言研究的，都是別的公司在做
+23:17:23 <CindyLinz> whitglint: 應該說, M$ 出力不少, 但沒有去擁有 GHC
+23:18:19 <CindyLinz> godfat: 我只有聽說 Go 和 Dart 兩個 ^^|
+23:19:29 <CindyLinz> GHC team 有一個: Ian Lynagh
+23:19:32 <godfat> 好問題，我想想還有啥，沒啥印象但總覺得還有 XD
+23:19:38 <CindyLinz> Main areas of interest: ...
+23:19:40 <CindyLinz> XDD
+23:19:51 <CindyLinz> godfat: v8 不算是設計語言 :p
+23:20:46 <whitglint> https://twitter.com/simonmar/status/463758378385170433
+23:20:50 <godfat> wikipedia 好朋友 http://en.wikipedia.org/wiki/Category:Google_software
+23:20:51 <godfat> http://en.wikipedia.org/wiki/Sawzall_%28programming_language%29
+23:20:51 <godfat> 可是其實我沒聽過這個 XDD
+23:21:07 <CindyLinz> 覺得微軟好多啊... C#, F#, Basic(這算嗎?), Visual Basic(好像語法不太一樣?), J#..  還有! IE 的 Html, IE 的 CSS, IE 的 Javascript !!!
+23:21:31 <CindyLinz> 唔, 還有 Linq
+23:21:39 <petercommand> ie lol
+23:21:58 <godfat> 結果果然是 google 保守，ms 勇於嘗試呀 (?)
+23:22:16 <petercommand> XD
+23:22:21 <CindyLinz> 而且還勇於和 standard 對衝... XD
+23:22:33 <godfat> 這我好像只能不予置評... XD
+23:22:40 <CindyLinz> XD
+23:22:41 <petercommand> 真是勇敢的公司XD
+23:23:37 <CindyLinz> MS: 我就是標準、真理、道路。
+23:25:20 <whitglint> google 早就 evil 化了
+23:25:21 <b4283> 我以為 livescript 是 ms 的
+23:25:31 <whitglint> ms 是 jscript
+23:25:36 <CindyLinz> 唔.. 微軟的 app 設計有自訂一套 XAML.. 是 XML 的一種, 可是自己訂了一堆 element 的規格, 不知道算不算是自訂語言?
+23:25:46 <b4283> 我記得他們最近有出個 xxscript
+23:26:56 <godfat> ms 的是 typescript
+23:27:08 <CindyLinz> 啊 漏了!
+23:28:41 <petercommand> CindyLinz: ooxml
+23:30:03 <b4283> markup language 不算程式語言
+23:32:00 <CindyLinz> QQ
+23:32:13 <CindyLinz> 可是它可以內嵌 C# script 欸?
+23:32:45 <b4283> 真假 XD
+23:32:59 <godfat> svg 也可以內嵌很多東西？
+23:33:25 <b4283> 不過那算是 c# 呀
+23:33:53 <CindyLinz> 喔..
+23:33:53 <b4283> "In 1964, John G. Kemeny and Thomas E. Kurtz designed the original BASIC language at Dartmouth College in New Hampshire."
+23:34:20 <b4283> 1964 超早的
+23:35:27 <b4283> Coco 原來是從 coffeescript 改出來的
+23:35:37 <whitglint> forther!
+23:36:08 <letoh> b4283: 好像反了?
+23:36:46 <letoh> 嗯  是我記反了XD
+23:36:50 <b4283> letoh: 源流似乎是 coffee -> coco -> livescript
+23:37:02 <letoh> 嗯  是 livescript 才對
+23:37:48 <letoh> vb 其實基本語法沒什麼變啊.. 好像多了物件跟模組語法?
+23:38:51 <CindyLinz> 啊~~ 忘了重要的微軟發明的語言... MASM... XDDD
+23:38:57 <godfat> livescript -> javascript -> coffeescript -> coco -> livescript
+23:39:09 <letoh> wwww
+23:39:22 <letoh> 可以連成圓
+23:40:01 <godfat> 然後讓 livescript 跟 livescript 發明人都大喊「這不是 livescript」(?)
+23:40:09 <CindyLinz> ......
+23:41:32 <CindyLinz> 微軟做的 Visual Programming Language.. Kodu http://research.microsoft.com/en-us/projects/kodu/
+23:41:57 <CindyLinz> 不是 layout-based, 是 icon-based....ww
+23:42:36 <godfat> 好可愛。我開始對 ms 有敬意了 (咦
+23:43:27 <whitglint> 原來 livescript 是一種稱號，跟可汗一樣意思
+23:43:52 <letoh> 感覺像 blockly 的變型
+23:44:30 <CindyLinz> godfat: 微軟很大... 不同部分的微軟應該要看成完全不一樣的人格.... (思)
+23:45:39 <letoh> "High-level language incorporates real-world primitives: collision, color, vision"   好像很有趣
+23:54:08 <godfat> CindyLinz, google 也很大... XD 不過確實 google 不同產品也差很多就是了
+23:56:28 <CindyLinz> godfat: 可是 google 好像沒有看到什麼好的部分? @@"
+23:57:20 <godfat> 我記得之前有看到他們想把各種經典文書掃描數位化，做線上圖書館，這還滿不錯的
+23:57:44 <CindyLinz> godfat: 可是看起來非常業務相關啊
+23:57:59 <godfat> 這是指？
+23:58:28 <CindyLinz> godfat: 像這個 Kodu... 就看起來跟微軟很遙遠的感覺 XD
+23:58:44 <letoh> F# 算遙遠嗎?
+23:58:56 <godfat> 喔喔，大概懂你的意思.. 那倒是真的
+23:58:56 <CindyLinz> godfat: 那個掃描書, 感覺跟 google index 網頁差不多
+23:59:01 <letoh> 最後竟然成功商品化真是嚇到我
+23:59:13 <letoh> 最早還以為只是玩玩而已
+23:59:18 <CindyLinz> letoh: F# 應該算近的 :p
+23:59:48 <godfat> 不過 kodu 可能跟 xbox 有關？
+23:59:54 <letoh> 連 msdn 都整理一堆 F# 資源，範例程式也都有 F# 版

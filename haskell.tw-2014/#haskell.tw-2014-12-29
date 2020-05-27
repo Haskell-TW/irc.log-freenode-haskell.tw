@@ -1,0 +1,55 @@
+13:58:11 <CindyLinz> "對於一般的開發者來說，做為一種「函數式程式設計語言」（functional programming language）的Ur/Web將會有很高的學習門檻，Chlipala教授也同意這樣的看法，並拿Ur/Web與受到特定族群喜愛的Haskell做比較，而Haskell就是以晦澀難懂而知名。" # http://www.ithome.com.tw/news/93236
+13:58:14 <CindyLinz> ...........................||
+13:58:44 <godfat> 我看到這篇也是想說反對晦澀難懂
+14:00:18 <CindyLinz> wwwwwwww
+14:01:16 <godfat> 不過話說回來是還滿好奇怎麼突然會有中文媒體在講 Ur/Web @@
+14:01:46 <CindyLinz> 我沒辦法預測媒體什麼會講什麼不會講 ^^|
+14:01:57 <godfat> XDDDD
+14:03:46 <poga> 我猜是來自於這篇吧... http://www.pcworld.com/article/2863672/mit-unifies-web-development-in-a-single-speedy-new-language.html
+14:04:57 <CindyLinz> 原文是這樣 "Chlipala compared Ur/Web to Haskell, a functional programming language considered esoteric by many programmers yet loved by a dedicated community that praises its computational functionality."
+14:06:56 <CindyLinz> 我覺得中文版是情緒性翻譯..... OAO
+14:14:27 <CindyLinz> 找時間讀讀看, 看要不要列入 Funth 主題 :p
+14:26:02 <godfat> 原來是翻譯的，那確實無法預測 XD
+14:26:03 <godfat> 所以他是把 esoteric 翻譯成晦澀難懂了...
+14:26:03 <godfat> 這樣說來語意差異大概是在，
+14:26:03 <godfat> 原文 haskell 說被很多人認為晦澀難懂，
+14:26:03 <godfat> 而中文卻直接寫成是晦澀難懂，還外加因此知名變得更強烈了 =_=
+14:27:22 <CindyLinz> 譯成晦澀難懂是一回事, 譯成因此而知名就真的是情續性發言了...
+14:27:55 <CindyLinz> 不過我看字典對這個字的意思是深奧.. 沒有晦澀難懂這麼負面的意味
+14:31:34 <godfat> 同意 XD 因此而知名不知道從哪裡冒出來的
+14:31:34 <godfat> mac 字典（應該是牛津）是寫
+14:31:34 <godfat> > intended for or likely to be understood by only a small number of people with a specialized knowledge or interest.
+14:31:35 <lambdabot>  <hint>:1:64: parse error on input ‘of’
+14:33:07 <CindyLinz> 是說中文的中性辭不多.. QQ
+14:34:18 <godfat> 我不知道耶，我覺得或許中性詞不多是因為我們看多了，
+14:34:18 <godfat> 看到各種詞本身就會浮現很多情境；反之英文我是沒啥感覺，
+14:34:19 <godfat> 就相對中性了 XD
+14:34:52 <CindyLinz> 是....
+14:35:02 <CindyLinz> 不過這解釋看起來應該是真的中性吧 o.o
+14:36:04 <godfat> 中文晦澀難懂你會怎麼解釋？ XD
+14:36:05 <godfat> 我用中文解釋起來可能也會很中性 @@
+14:37:47 <godfat> 其實我也不知道要怎麼解釋，可能只想說反正就是「不容易懂」的意思 XD
+14:38:47 <godfat> 反而英文解釋就指出原本就是只打算讓少數人理解，
+14:38:48 <godfat> 我是覺得也沒有那麼中性 @@"
+14:38:59 <CindyLinz> 「存心不想讓你懂」的意思 XD
+14:39:09 <godfat> XDDDD 這樣就很負面了 XDD
+14:43:08 <CindyLinz> 英文字典這個有只想讓少數人懂的意思喔? 我以為它只是描述最後的現狀, 懂的人不多 @@"
+14:44:33 <godfat> 喔，因為我是看到 intended for, 描述最後的現狀大概是 likely to be
+14:44:33 <godfat> 大概是都可以吧 XD 就這點而言就比較中性？ XD
+14:45:14 <CindyLinz> 我的英文啊.. QAQ
+14:47:33 <godfat> @_@b 你英文應該不差吧？ XD
+14:47:33 <lambdabot>  你英文應該不差吧？ XD
+14:48:40 <CindyLinz> darkx: 你說說.....
+15:21:23 <miaoski> 看 godfat 貼的字典，中文大概只能說「非常小眾」
+15:21:37 <godfat> 非常小眾++
+15:22:26 <CindyLinz> 「存心不想讓你懂」改成「意圖使人不會懂」.. 嗯, 這句型最近比較流行 XD
+15:50:18 <godfat> XDDDD
+15:57:24 <CindyLinz> 我聞到 dependent type 的味道..... # Then there's parametric polymorphism. Unlike in ML and Haskell, polymorphic functions in Ur/Web often require full type annotations. That is because more advanced features (which we'll get to in the next chapter) make Ur type inference undecidable.
+16:00:11 <CindyLinz> 是不是只要有「大 lambda」就 undecidable 了, 不需要 dependent type?
+16:15:38 <petercommand> 大 lambda 是指?
+16:17:39 <CindyLinz> petercommand: System F 的 # http://en.wikipedia.org/wiki/System_F
+16:55:16 <CindyLinz> 覺得 Ur/Web 不是很有吸引力.. @_@"
+16:55:23 <CindyLinz> (回頭看看 Yesod...)
+17:44:56 <darkx> CindyLinz: wwwwwww
+17:45:14 <darkx> 姊姊的英文大概跟我的數學差不多(躺
+20:53:46 <cibs> CindyLinz: Adam Chlipala 看起來就是教 dependent types 的

@@ -1,0 +1,45 @@
+00:00:41 <b4283> 也對XD
+10:38:12 <MnO2> 經歷九個月的掙扎，我終於翻完了!!!!!!
+10:38:29 <letoh> 賀!!
+10:38:58 <CindyLinz> ! :D
+10:41:19 <MnO2> 我想我以後再也不會做類似的事情了 wwwww
+10:41:57 <MnO2> yinwang的口試投影片：http://www.slideshare.net/yinwang0/phd-oral-exam?ref=http://yinwang0.wordpress.com/2012/10/09/oral-exam
+10:42:18 <MnO2> 話說不是dropout嗎？怎麼會有口試
+14:58:09 <MnO2> https://plus.google.com/103925382602424793947/posts/he3Aktc9Dp9
+14:58:34 <MnO2> 感謝大家不吝給予意見
+15:00:15 <letoh> List Comprehension 一般好像沒有中文說法?
+15:00:35 <MnO2> 對啊
+15:00:40 <letoh> Comprehension 可以翻成具現化嗎? XD
+15:02:00 <MnO2> http://www.merriam-webster.com/dictionary/comprehension
+15:02:16 <MnO2> 具現化可能比較會聯想到其他東西
+15:02:52 <letoh> instantiation ?
+15:03:45 <MnO2> 之類的吧
+15:03:55 <letoh> 嗯
+15:04:31 <MnO2> 2.a. the act or process of comprising
+15:09:12 <CindyLinz> 康普立恆昇 (誤)
+15:09:35 <MnO2> 聽起來好像成藥的名字
+15:14:07 <letoh> 哈哈  真的很像
+15:33:13 <CindyLinz> :p
+15:33:32 <CindyLinz> 把 xmonad 加上 fullscreenEventHook 和 noBorders/smartBorders   感覺更好了 :p
+15:34:05 <CindyLinz> 前面那個是讓 chromium 的 full screen (F11) 會正常運作
+15:35:10 <CindyLinz> 後面那個是只有一個窗的時候把邊去掉, 總共可以多 4996 個 pixel 可以用 (1600x900的螢幕) :p
+15:36:17 <CindyLinz> 這樣寫看起來好像多很多 XD
+15:45:39 <CindyLinz> 嗯, 不過少一個紅框的確有舒服不少...
+15:47:51 <CindyLinz> 最邊邊的 border 拿掉了, 在用滑鼠的時候有個很大的好處, 就是可以直接把滑鼠推到最邊邊去拉東西... 有框的時候就必須自己再拉回來一點點, 不然會點不到東西
+15:51:07 <letoh> 我的 border 被我設成可以移動視窗
+15:51:28 <letoh> 這樣視窗拉很大  超出螢幕範圍時還是可以移動
+15:52:42 <CindyLinz> 這是什麼意思啊?
+15:53:23 <CindyLinz> 不是壓著 modMask 就可以移動了嗎?
+15:53:43 <letoh> 喔喔  我不是用 xmonad
+15:53:50 <CindyLinz> 噢
+15:53:55 <letoh> 我覺得加個 modkey 的設定不太好
+15:54:02 <letoh> 很容易跟程式本來的設定打架
+15:54:21 <CindyLinz> 不會, 我把它 map 到標準鍵盤沒有的鍵 XD
+15:54:37 <CindyLinz> 大部分的人是把它 map 到 Win 鍵
+15:55:09 <CindyLinz> 不過反正日文鍵盤的無用鍵好多 ^^|
+15:55:16 <letoh> 嗯嗯  你的鍵盤是作弊用的XD
+15:55:40 <letoh> 這次去還是沒買到滿意的日文鍵盤XD
+15:55:49 <CindyLinz> T_T
+15:56:29 <letoh> 秋葉原很多廉價鍵盤  但按起來軟軟的就買不下去XD
+15:57:12 <CindyLinz> 廉價鍵盤還挑 XD
+15:57:33 <letoh> 是這樣講沒錯啦XD

@@ -1,0 +1,8 @@
+22:47:08 <CindyLinz> web 版的 @pl (含過程)....ww # https://blunt.herokuapp.com/
+22:47:56 <CindyLinz> 欸不是含過程, 是一次給好幾組解
+22:49:00 <pkmx> 其實我一直好奇@pl的演算法是什麼w
+22:49:25 <CindyLinz> pkmx: 有 source 可以看.. XD # http://hackage.haskell.org/package/blunt
+22:49:35 <CindyLinz> or https://github.com/tfausak/blunt
+22:50:44 <pkmx> 這個應該只是frontend而已@@
+22:50:53 <pkmx> 看了一下應該是要看這個 # https://github.com/bmillwood/pointfree
+22:51:16 <CindyLinz> 它有塞在這邊.. https://github.com/tfausak/blunt/tree/master/library/Plugin/Pl

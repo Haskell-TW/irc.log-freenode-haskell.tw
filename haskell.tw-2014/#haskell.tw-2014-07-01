@@ -1,0 +1,459 @@
+00:00:31 <letoh> 為什麼 g+ 看單篇 post 時還要分兩欄  好浪費空間XD
+00:00:39 <hashcat> 怕包的話都是用formal verification吧
+00:01:18 <hashcat> haskell把一部分verification做在一起
+00:01:44 <hashcat> 其他語言就是google拉
+00:01:53 <letoh> monochrom: un*x 的 64bit 好像都是用 LP64
+00:03:01 <whitglint> http://en.wikipedia.org/wiki/64-bit_computing#64-bit_data_models
+00:06:38 <CindyLinz> letoh: llvm 有 1MB 大的 integer!
+00:07:48 <letoh> 上次好像有說過XD  說到這個.. ocaml 的 int 好像只有 31bit
+00:10:52 <letoh> 那個 c 程式... 如果把 x 或 i 宣告成 volatile 結果就會不同XD
+00:12:19 <yllan> windows 在 x64 下連 long 都是 32bit
+00:18:12 <CindyLinz> haskell standard 的 Int 好像也只有保證一定要有效到 28bits?
+00:18:30 <CindyLinz> > maxBound :: Int
+00:18:32 <lambdabot>  9223372036854775807
+00:18:40 <CindyLinz> lambdabot 的有 64bits XD
+00:19:42 <yhsiang> letoh: 可以設定單欄
+00:19:48 <hashcat> >maxBound::Double
+00:19:53 <hashcat> > maxBound::Double
+00:19:54 <lambdabot>  No instance for (GHC.Enum.Bounded GHC.Types.Double)
+00:19:54 <lambdabot>    arising from a use of ‘GHC.Enum.maxBound’
+00:19:59 <letoh> yhsiang: thanks~ 我研究一下XD
+00:20:12 <hashcat> > maxBound::Long
+00:20:13 <lambdabot>  Not in scope: type constructor or class ‘Long’
+00:21:12 <hashcat> Haskell沒有Longㄟ
+00:21:26 <CindyLinz> 有 Data.Int64
+00:21:36 <CindyLinz> @info Int64
+00:21:37 <lambdabot> Int64
+00:21:39 <CindyLinz> .....||
+00:21:46 <hashcat> > maxBound::Int64
+00:21:47 <CindyLinz> Data.Int.Int64
+00:21:47 <lambdabot>  9223372036854775807
+00:21:52 <hashcat> > maxBound::Int32
+00:21:53 <lambdabot>  2147483647
+00:22:01 <CindyLinz> Data.Int 裡面有定一些... 如果 care bits 數可以用的東西
+00:22:22 <CindyLinz> unsigned 的話用 Data.Word 裡面的.. Word32 之類的
+00:22:41 <hashcat> 很久沒看haskell了
+00:22:57 <hashcat> 都是以前看過現在沒想起來 @@
+00:23:01 <CindyLinz> XD
+00:23:33 <yhsiang> 腦袋一直響著 Cindy 不算 :p
+00:23:34 <hashcat> 還記成有Long
+00:23:35 <CindyLinz> yllan: C 裡面常見的 64bits 的應該是 long long?
+00:23:48 <CindyLinz> yhsiang: ............||
+00:23:56 <hashcat> 128吧
+00:24:08 <CindyLinz> 我來試一下 gcc
+00:24:12 <yllan> CindyLinz: 在 mac 上 long 就是 64bit 嘍
+00:24:13 <yhsiang> int 32 long不就是64?
+00:24:26 <yllan> yhsiang: depends on platform
+00:24:27 <CindyLinz> yllan: clang 喔?
+00:24:33 <yhsiang> yllan: yes
+00:24:47 <hashcat> 所以long long比long長
+00:24:59 <CindyLinz> gcc 說 sizeof(long long) = 8
+00:25:21 <CindyLinz> gcc version 4.8.2 x86_64-linux-gnu
+00:25:30 <yllan> CindyLinz: gcc 和 clang 應該都一樣吧 :P
+00:25:30 <letoh> long long 應該都是 64bit 吧?
+00:25:36 <yllan> yup
+00:25:54 <CindyLinz> 喔 對耶我幹嘛試 long long....
+00:26:12 <CindyLinz> sizeof(long) 也是 8
+00:26:26 <yllan> gcc 自己搞了一個 __uint128_t 這種東西 :P
+00:26:35 <whitglint> 快試 long long long, 記得會出現 long long long is too long
+00:27:12 <hashcat> byte, short, int, long, long long感覺是會逐步增長的東西
+00:27:57 <hashcat> http://stackoverflow.com/questions/6155784/range-of-values-in-c-int-and-long-32-64-bits
+00:27:58 <yhsiang> long long long
+00:28:12 <hashcat> 結果short跟int一樣
+00:28:18 <letoh> yllan: 用 sse intrinsics 就有啦XD  不過這跟硬體比較有關了
+00:29:32 <whitglint> 我都改用 stdint.h 那些了
+00:33:05 <CindyLinz> too long... XD
+00:33:33 <CindyLinz> c.c:2:37: error: ‘long long long’ is too long for GCC
+00:33:44 <letoh> 這錯誤還蠻有名的XD
+02:21:52 <caasih_> 終於寫完了
+02:51:54 <poga> 寫作業!?
+03:04:41 <caasih_> poga: 嗯嗯
+03:05:15 <caasih_> 大象書沒先看完有點虧，花了好久
+03:08:39 <monochrom> 大象書教的是甚麼?
+03:12:52 <caasih_> 趣學指南（大象書）這邊只看了前面一點點，但光是知道有 type class ，就覺得比較看得懂 code
+03:13:14 <monochrom> 啊, Haskell 的大象書
+03:13:38 <caasih_> poga: 剛剛才知道投影片有上線 http://flolac.iis.sinica.edu.tw/flolac14/doku.php?id=zh-tw:fp
+03:14:08 <caasih_> 但作業那兩張沒有的樣子
+03:14:08 <poga> caasih_: 喔喔太好了 感謝  :D
+03:14:22 <caasih_> :D
+07:48:02 <yllan> caasih_: 第四部分要怎麼做啊？是要自己定一個 data N = Zero | Succ N 嗎？還是用 Int 當作 N 就好了？
+07:49:01 <CindyLinz> 要自己定, 不然 induction 不了 ^^|
+07:58:06 <yllan> 那要怎麼印出來啊？好像是要實作 Show? 有點忘記 typeclass 的用法了……
+07:59:07 <CindyLinz> 噢.. 寫成 data N = Zero | Succ N deriving Show 可以有一個 default 的 Show
+07:59:32 <CindyLinz> 印出來就是 Succ (Succ (Succ Zero)) 這種長相
+07:59:44 <yllan> 喔喔！真方便
+09:32:53 <mno2_> 剛剛查了一下有  -XNegativeLiterals 耶
+09:33:01 <mno2_> http://www.haskell.org/ghc/docs/7.8.1/html/users_guide/syntax-extns.html
+09:33:28 <mno2_> The literal -123 is, according to Haskell98 and Haskell 2010, desugared as negate (fromInteger 123). The language extension -XNegativeLiterals means that it is instead desugared as fromInteger (-123).
+09:37:09 <mno2_> http://engineering.silk.co/post/90354057868/announcing-rest-a-haskell-rest-framework   [Announcing rest - A Haskell REST framework]
+09:45:36 <CindyLinz> 柯向上: 如果你開始覺得有點恐怖的話, 那是對的; 如果你不這麼覺得的話, 那也沒有關係....
+09:46:47 <mno2_> CindyLinz: 主題是什麼？
+09:48:14 <CindyLinz> Type Theory and Logic
+09:49:05 <CindyLinz> 講到這句的時候是在講 set of sets.. XD
+09:50:11 <CindyLinz> 真沒白來啊~ 內容跟前年的 Logic 不一樣 ._.
+09:50:26 <CindyLinz> 多了 Type Theory and 三個字果然有差 XD
+09:50:29 <mno2_> 有投影片嗎?
+09:50:50 <CindyLinz> mno2_: http://flolac.iis.sinica.edu.tw/flolac14/doku.php?id=zh-tw:logictype
+09:52:06 <CindyLinz> 他迴避了身為老師, 要一直講重覆的東西的問題 XD
+09:53:52 <au> 今天就會講 Dependent type theory，還是先只講 Simple type theory ?
+09:54:07 <au> oh, 明天才講 dependent type
+09:54:11 <CindyLinz> 進度我不知道欸 @@"
+09:54:31 <au> nvm 簡報上有寫 XD
+09:55:55 <CindyLinz> 也對, 雖然安排的進度可能不準, 但一向是往後延, 沒有提早的 XD
+09:58:26 <CindyLinz> 不要 TDD 只要 DTT (誤)
+10:03:48 <lcamel_> 問題: 這不能直接套 Formation rule 嗎... ?
+10:06:26 <mno2_> 咦咦，lcamel_ 也請假跑去上課了嗎 ?
+10:07:28 <CindyLinz> 想得到的都可以套呀~ 最後上下相鄰的 reduction rule 是正確的就可以
+10:07:35 <lcamel_> mno2_: 也請假上課了 XD
+10:07:42 <CindyLinz> 還有最上面都要是空的, 最下面要跟題目一樣 XD
+10:08:00 <lcamel_> 剛問到的說法是: formation rule 等於只能說寫下 BxA 是合法的而已
+10:08:03 <mno2_> lcamel_: 熱血！
+10:12:18 <CindyLinz> 嗯嗯嗯
+10:13:44 <lcamel__> Formation rule 基本上不會寫在 derivation 過程中
+10:16:08 <CindyLinz> 嗯, 不過每一個 row 裡面寫的都是 formation rule
+10:16:41 <CindyLinz> 但不是上下相鄰 row 之間的關聯
+10:22:28 <cibs> CindyLinz: 打聽一下~ 今天下午的教室會有電源插座和 Wi-Fi 嗎
+10:23:36 <CindyLinz> wifi 只有台大的, 在校生/校友帳號/校際漫遊.. 課程申請的 wifi 帳號總共只有15個, 昨天不知道被用掉幾個
+10:23:42 <CindyLinz> 電源我要問一下
+10:25:34 <CindyLinz> cibs: 有電源, 應該每個坐位都有
+10:25:40 <CindyLinz> 3G 訊號非常爛
+10:25:42 <cibs> CindyLinz: 感謝w
+10:25:54 <cibs> 有沒有校際校友漫遊啊? XD
+10:26:07 <cibs> 我去 AA 看有沒有校友帳號可以用好了 ><
+10:26:23 <CindyLinz> 如果你有原學校的校內上網帳號, 那可以試試看
+10:26:59 <CindyLinz> 昨天我試 3G, 鎖死 GSM... CDMA 根本出不去.. 然後有通的時候 ping time 一秒以上 XD
+10:27:12 <cibs> 好慘
+10:27:16 <cibs> LTE (思)
+10:27:37 <CindyLinz> cibs: 這種範圍更短的就別肖想能通了吧 XD
+10:28:57 <cibs> 號稱大安區很通啊 XD
+10:29:17 <cibs> 敝社離台大不遠據說訊號很好 (←還沒升級
+10:29:38 <CindyLinz> 喔, 離開教室走到大樓外訊號就好嘍~ CDMA 也很通喔~~
+10:29:40 <caasih_> 睡過頭了！
+10:30:13 <cibs> CindyLinz: I got your point..><
+10:30:41 <CindyLinz> 可以在教室外放 3G-Wifi AP.. (咦)
+10:32:51 <CindyLinz> caasih_: XD
+10:33:54 <cibs> g0v 網路組 (誤
+10:44:54 <CindyLinz> 柯向上: 於是我就使用 functional programming 的直覺!
+10:48:53 <mno2_> 特殊技能： functional programming 的直覺 xD
+10:49:26 <lcamel__> 剛剛直覺一用出來 旁邊的學生都笑了
+10:49:59 <lcamel__> "怎麼可以這樣幹啦!!" 的那種笑
+10:50:36 <b4283> New ability unlocked: Functional Instinct
+10:53:42 <mno2_> 這其實跟寫數學證明的特殊技能："Obviously, blah blah blah" 是一樣的 lol
+10:53:56 <CindyLinz> 覺得今天上課人數也蠻多的, 應該減少不到10個
+10:54:49 <CindyLinz> 助教多一個 XD
+10:56:28 <CindyLinz> 覺得 q:A+B f:A->C g:B->C 推得 case q f g:C 的這個 case q f g 有種 C-macro 的 fu.. XD
+10:56:56 <CindyLinz> 不過語法結構好像也就是長這樣 :Q
+11:01:48 <c9sloud> 今天下午在哪邊呢?
+11:10:53 <CindyLinz> 新生102(應該)
+11:14:29 <CindyLinz> 確認是102
+11:47:25 <_13h> fp 的作業是那一份 practical.pdf  嗎?
+11:50:02 <CindyLinz> 要交的只有裡面一部分
+11:51:02 <CindyLinz> 柯向上: 這個叫作 simple type theory, 為什麼叫作 simple 呢? 因為明天要教的東西很複雜..
+11:52:00 <jaiyalas> 他一直不停地暗示明天會變成地獄日 XD
+11:55:17 <CindyLinz> 排中律出現了!
+12:03:15 <_13h> 那 pratical.pdf 的程式碼部份有好多 .   例如 twice f x = f (f x) .
+12:03:19 <CindyLinz> 不知道 type   A -> (A -> _|_) -> _|_ 的 element 要怎麼造.. o.o
+12:03:30 <_13h> 最後那個 . 應該沒意義吧? XD
+12:03:39 <CindyLinz> 句點吧
+12:03:53 <_13h> 嗯嗯
+12:04:08 <CindyLinz> 亂推看看 XD
+12:04:50 <_13h> 唔  原來 composition 是垂直置中的 .
+12:05:26 <CindyLinz> 喔 會了 XD
+12:07:37 <jaiyalas> 爆炸盒！！！
+12:07:44 <CindyLinz> 佈道中..
+12:09:43 <cibs> CindyLinz: 這裡也要佈一下道啊
+12:11:15 <jaiyalas> 傳教是必要的(握拳)
+12:12:06 <CindyLinz> cibs: 只有一種 programming language: Haskell, 其他的不是 (?
+12:12:57 <jaiyalas> 傳教
+12:13:27 <CindyLinz> 突然覺得聽道好輕鬆 XD
+12:13:30 <jaiyalas> 好直接的傳教, 我還以為一開始會比較客氣 :p
+12:13:43 <cibs> 一神論 XD
+12:13:55 <jaiyalas> 麵神? XD
+12:13:58 <CindyLinz> 前面要思辨的比較累 XD
+12:14:06 <au> \ramen/
+12:14:37 <jaiyalas> 竟然連 computing science VS computer science 都拿出來講了 XDDDDD
+12:14:45 <cibs> au 的拉麵好像高舉雙手在歡呼一樣
+12:15:08 <au> (這是麵神教的口號)
+12:15:21 <CindyLinz> 無限期交作業.. 這樣是沒打算收到作業吧 XD
+12:40:45 <_13h> 可以問作業嗎? XD
+12:41:08 <_13h> 可能不是直接跟作業相關的問題
+13:06:53 <c9sloud> CindyLinz: 102 在 202 附近嗎
+13:08:40 <CindyLinz> c9sloud: 在 202 下面
+13:10:44 <au> 到 102 了~
+13:11:22 <CindyLinz> 看到 au 在 102 了~
+13:11:30 <au> XDD
+13:11:35 <mno2_>  computing science VS computer science 的梗是什麼？
+13:11:48 <CindyLinz> 噗噗 102 的插座是假的!
+13:13:22 <CindyLinz> mno2_: Dijkstra 的話
+13:17:28 <au> http://tinyurl.com/flolac
+13:17:30 <au> #haskell.tw 來不及貼到 wiki 上了
+13:17:40 <au> 有編輯權限的朋友歡迎補充
+13:19:18 <au> 中間如果有什麼想問的或想補充的都歡迎留言
+13:19:29 <CindyLinz> jaiyalas: 補充完了~
+13:19:51 <au> CindyLinz++ # 好快
+13:19:54 <CindyLinz> 而且是盜用 evast 的帳號補充的....ww
+13:20:00 <jaiyalas> 嘿嘿, 其實不是我唷:「上一次變更: 2014/07/01 13:19 由 evast」
+13:20:02 <au> evast++
+13:20:14 <au> jaiyalas++ # 一次要加三個人
+13:20:48 <CindyLinz> XD
+13:21:14 <c9sloud> 阿...
+13:21:26 <c9sloud> 我快到了
+13:21:53 <CindyLinz> 有很多位子
+13:23:25 <yen3> 這邊的插頭有電嗎 XD
+13:23:33 <CindyLinz> 有的有.. :|
+13:23:39 <superbil> 我的有  :)
+13:23:42 <CindyLinz> 你的應該沒有.. XD
+13:23:49 <yen3> 沒有
+13:25:10 <CindyLinz> 這實驗好棒.. 重在過程不在結果.. (誤)
+13:25:20 <yen3> XD
+13:25:23 <wowwwww> XD
+13:25:31 <jaiyalas> 重點不是在工時很短嗎? XD
+13:29:21 <CindyLinz> 好像剛好都有上到 :p
+13:30:27 <CindyLinz> 不不 後面的不是 XD
+13:30:35 <yen3> 後面指的是 XD?
+13:30:39 <CindyLinz> closure
+13:31:29 <CindyLinz> Functional programming 的直覺又出現了 XD
+13:32:46 <CindyLinz> 無上....
+13:35:20 <superbil> 原來那是 java 燒 lamda
+13:36:02 <CindyLinz> 技術輸出 XD
+13:36:10 <CindyLinz> fibs XD
+13:36:28 <demipenguin> 無限多的記憶體 XD
+13:37:09 <yen3> 第一天有教 map 嗎 XD?
+13:37:17 <chchen> 講義裡面有
+13:37:22 <CindyLinz> 課堂好像沒有
+13:37:47 <superbil> 記得是說 這個 map 很重要，但是我們先不提
+13:39:56 <CindyLinz> au 剛剛在測試講 talk 的速度沒有人能夠及時理解嗎 XD
+13:40:40 <CindyLinz> 殘留的語言越來越少了 XD
+13:40:51 <c9sloud> 耶到了
+13:41:25 <c9sloud> 奇怪笑話大家都不笑 是我笑點太低嗎 XDDDDD
+13:44:06 <c9sloud> 這邊 3G 整個悲劇阿
+13:44:23 <caasih> 太慘了，幾乎上不來
+13:44:29 <CindyLinz> 沒錯.. ^^|
+13:45:11 <wing_> 十年前的印表機也太扯..
+13:45:23 <CindyLinz> 這價錢有值.....
+13:46:33 <c9sloud> wifi 也悲劇
+13:46:33 <c9sloud> 沒帳號 wwww
+13:46:41 <cibs> 呼
+13:46:41 <c9sloud> 這邊 3G 整個悲劇阿
+13:46:50 <cibs> 用了 20 分鐘總算想起密碼了 XD
+13:46:53 <wowwwww> 好熱wwwwww
+13:47:14 <cibs> 3G 悲劇我連要傳訊息問帳密都傳不出去 XD
+13:47:15 <wing_> 我wifi頗順耶~~
+13:47:38 <cibs> WiFi 超順沒錯但是有些人沒有帳號有些人忘記帳號啊...
+13:49:35 <CindyLinz> 目前都是 perl.. XD
+13:50:26 <cibs> Perl 好啊 (誤
+13:50:32 <cibs> 今天主題不是 HasPerl 嗎
+13:50:52 <CindyLinz> 沒有吧!
+13:51:06 <CindyLinz> (崩潰)
+13:51:23 <cibs> au 講話速度比 IRC 快...
+13:51:24 <wing_> 好多語言~~(崩潰)
+13:51:34 <cibs> 我看到 au 講沒有吧之後才看到 Cindy 打的字跳出來..
+13:51:53 <CindyLinz> cibs: 你網路太慢.. (逃)
+13:52:02 <cibs> CindyLinz: 我們不是同一個網路嗎嗎嗎
+13:52:22 <CindyLinz> 學生版 XD
+13:52:38 <cibs> CindyLinz: 地下教授 (指
+13:53:09 <CindyLinz> 我也有這種被 FPer 欺負的經驗!
+13:53:09 <wowwwww> @@?
+13:53:22 <wing_> 講好快一大串聽不懂啦XDD
+13:53:36 <CindyLinz> 聽不懂才是正常人 (Y)
+13:53:37 <cibs> wing_: 就是投影片上的字啊
+13:53:48 <cibs> 真的，au 唸起來像在聽法文一樣
+13:53:56 <CindyLinz> unsafe! 沒錯, 初學者的救星!
+13:54:58 <CindyLinz> 只是.. 第一次聽說把 unsafeInterleaveIO 這樣用.. XD
+13:55:09 <wing_> 好酷喔@@
+13:55:19 <cibs> 所有 au 的做法我都是第一次聽說那樣用的...
+13:55:53 <cibs> 崩╰(〒皿〒)╯潰
+13:56:06 <CindyLinz> PhD generator... XD
+13:56:24 <caasih> CindyLinz: 難怪你說過會變成讀論文地獄...
+13:56:43 <wing_> 死線前完美解決!
+13:56:49 <CindyLinz> 這效率也太快....
+13:57:00 <CindyLinz> caasih: 我忘了 XD
+13:57:12 <CindyLinz> caasih: 喔 第三個災難 XD
+13:58:15 <cibs> > 3000 * 3 * 24 * 30
+13:58:17 <lambdabot>  6480000
+13:58:30 <DL_> 3000/hr...
+13:58:32 <cibs> 半年的花費...
+13:58:38 <CindyLinz> cibs: 這樣會死吧.... 24*30
+13:58:43 <wing_> 6480000!
+13:58:45 <banacorn> 吧拉八八吧
+13:58:48 <cibs> CindyLinz: au 說不眠不休嘛 XD
+13:59:05 <CindyLinz> 「很簡單的入門書」
+13:59:11 <DL_> 三個月賺的可以活超過三年了
+13:59:43 <cibs> CindyLinz: 應該是跟"說明書"比的關係
+14:00:03 <CindyLinz> 我都不太相信陌生 FPer 說的「很簡單」.. XD
+14:00:08 <petercommand> CindyLinz: 這頻道愈來愈多人了XDDD
+14:00:32 <petercommand> 超強力宣傳XD
+14:00:33 <CindyLinz> 熟的 FPer 的話, 看人品 XD
+14:00:36 <cibs> CindyLinz: 認識的 FPer 說的就比較有參考價值嗎? XD au 說很簡單之類...
+14:00:43 <cibs> 可惡我打字慢
+14:00:48 <CindyLinz> cibs: 認識的, 就知道那個人能不能信 XD
+14:00:59 <cibs> XD
+14:01:14 <wing_> 馬克杯不錯耶~~
+14:02:38 <cibs> "太好了我來擴充 spec"...
+14:02:44 <CindyLinz> wwww
+14:03:08 <wing_> 各種邀請函XDDD
+14:03:15 <CindyLinz> 好可怕.....XD
+14:03:44 <cibs> CindyLinz: HasPerl 也可以這樣w
+14:03:49 <caasih> w
+14:03:59 <CindyLinz> cibs: 可是沒有人催啊 XD
+14:04:27 <cibs> Hasperl 怎麼還沒出來w
+14:04:33 <CindyLinz> cibs: 你 email 來一下..
+14:04:34 <cibs> 咦不對這樣就跳了..
+14:04:41 <cibs> 囧我中計了
+14:04:45 <CindyLinz> XD
+14:05:22 <wing_> 全球跑太厲害了..
+14:05:49 <caasih> 所以我們會有 au 數嗎？ XD
+14:05:52 <cibs> BTW, HasPerl 要 support perl6 嗎? XD
+14:07:15 <CindyLinz> cibs: 底層完全不一樣啊~
+14:09:04 <cibs> CindyLinz: 也是w
+14:09:16 <CindyLinz> 「再這樣下去, 我打高爾夫球的時間都比打程式多了」
+14:09:19 <cibs> 「打高球的時間要比打程式多囉」
+14:09:25 <cibs> 打字又慢..-_-
+14:13:19 <cibs> 等下我怎麼覺得後面那半比較難懂 (相對)
+14:13:44 <CindyLinz> cibs: 你不是另一半的人
+14:14:10 <jaiyalas> 我自己承認我是那另一半(掩面)
+14:15:35 <wing_> 唯一解看起來好噁心= =
+14:15:54 <CindyLinz> 40 行!
+14:16:17 <b4283> 王垠的 40 行代碼
+14:16:39 <DL_> 王垠的 40 行代碼不是CPS嗎
+14:21:54 <c9sloud> 誰有 wifi 能借一下收信 QQ
+14:22:18 <CindyLinz> 我有 wifi.. 不過, 要怎麼借啊? @@"
+14:22:46 <CindyLinz> 嗯, 我手機可以用 usb 線分享
+14:23:12 <CindyLinz> 不過其實休息時間去教室外面應該就通了?
+14:23:33 <cibs> CindyLinz: 妳的位置如果去借也太顯眼w
+14:23:47 <CindyLinz> 我想的是講完休息的時候啊
+14:25:32 <CindyLinz> 「那個 C++ 編譯器比較慢.. 所以我就用了 GHC」...ww
+14:27:34 <cibs> 以後只好用 GHC 寫 C++ 的 compiler 了 (誤
+14:27:54 <CindyLinz> 人家是說 C++ 寫的 compiler VS GHC 寫的 compiler ...ww
+14:27:55 <cibs> 於是乎所有的語言都是 Haskell gen 出來的
+14:28:08 <cibs> CindyLinz: www
+14:28:09 <c9sloud> 每次只有一秒上來就斷線了 orz
+14:28:41 <c9sloud> CindyLinz: 開個小 ap?
+14:28:48 <CindyLinz> c9sloud: 不會 @@"
+14:29:13 <CindyLinz> c9sloud: 手機不行, 因為不能同時連 wifi 又當 ap..
+14:29:49 <wing_> 平行處理好方便
+14:30:12 <superbil> 自動平行好棒
+14:31:56 <wing_> 強大的動力努力學functional language~
+14:33:01 <cibs> 「真實世界也只不過是函數裡的一個參數」
+14:33:46 <au> when printing reports for banks, all languages you chose ar high level.. is C an option?
+14:34:02 <au> 2. autodidact -- how to resolve obstructions?
+14:34:31 <cibs> 本來想幫 au note, 結果 au 自己 note 了 XD
+14:34:40 <demipenguin> 打字真快 XD
+14:36:10 <wing_> \是無上的指令集 WW
+14:38:11 <au> ncurrency -- implicit ones -- is turned into compiler features. how does this compare with the calculus as implemented in research?
+14:39:56 <cibs> CindyLinz: 看到 Cindy 跑過來才注意到 c9s 在附近w
+14:42:45 <caasih> c9sloud: 終於見到本人了w
+15:19:01 <whitglint> 嗚嗚好想參加喔
+15:24:41 <c9sloud> CindyLinz: 感謝 WIFI  (感動
+15:25:06 <CindyLinz> :D
+15:25:07 <cibs> 雨好大走不了只好繼續在這上 IRC>..
+15:25:16 <CindyLinz> cibs: 上課!
+15:25:36 <cibs> CindyLinz: 有啊我很認真上IRC^H^H^H課
+15:26:12 <c9sloud> au: 剛剛提到的 haskell + cuda 是 Data Parallel Haskell 嗎?
+15:28:39 <evast> 就是 DPH （我也在看 XD）
+15:36:52 <Nick__> As a new PhD student on a different research area, I wonder how I can use Haskell as my PhD generator.
+15:52:40 <au> c9sloud++ # thanks for the mineral water :D
+15:53:17 <c9sloud> au: you're welcome :)
+15:59:05 <au> c9sloud evast : also see http://hackage.haskell.org/package/accelerate-cuda
+15:59:36 <evast> au: Got it :)
+16:12:25 <sy> Hey, 請問有人用過 hoopl 嗎？ 一直希望能拿它來作DSL的optimizer，無奈它的範例太少，paper 也讀不大懂XD
+16:16:32 <au> seems #agda is also pretty active (mailing lists, too) http://wiki.portal.chalmers.se/agda/pmwiki.php?n=Main.Community
+16:29:15 <CindyLinz> monochrom: http://www.vex.net/ 連不到了
+16:57:44 <cibs> 雨好像小了一點可以閃人了 XD
+17:26:18 <petercommand> 來/join #agda XD
+18:50:45 <cibs> > let fib :: Int -> Int -> Int; fib x = if x < 2 then 1 else fib (x - 1) + fib (x - 2) in fib 50
+18:50:46 <lambdabot>  No instance for (GHC.Num.Num (GHC.Types.Int -> GHC.Types.Int))
+18:50:46 <lambdabot>    arising from the literal ‘1’
+18:52:12 <cibs> > let fib :: Int -> Int; fib x = if x < 2 then 1 else fib (x - 1) + fib (x - 2) in fib 50
+18:52:16 <lambdabot>  mueval-core: Time limit exceeded
+18:59:36 <petercommand> > let fib :: Int -> Int; fib x = if x =< 2 then 1 else fib (x - 1) + fib (x - 2) in fib 10
+18:59:37 <lambdabot>  Not in scope: ‘=<’
+18:59:38 <lambdabot>  Perhaps you meant one of these:
+18:59:38 <lambdabot>    ‘=<<’ (imported from Control.Monad.Writer),
+18:59:38 <lambdabot>    ‘<’ (imported from Data.Ord), ‘<=’ (imported from Data.Ord)
+18:59:43 <petercommand> > let fib :: Int -> Int; fib x = if x <= 2 then 1 else fib (x - 1) + fib (x - 2) in fib 10
+18:59:45 <lambdabot>  55
+19:00:03 <petercommand> > let fib :: Int -> Int; fib x = if x <= 2 then 1 else fib (x - 1) + fib (x - 2) in fib 50
+19:00:07 <lambdabot>  mueval-core: Time limit exceeded
+19:04:04 <au> > let memo = (map fib [0 ..] !!); fib x = if x <= 2 then 1 else memo (x - 1) + memo (x - 2) in memo 1000
+19:04:06 <lambdabot>  4346655768693745643568852767504062580256466051737178040248172908953655541794...
+19:06:52 <petercommand> :t map
+19:06:53 <lambdabot> (a -> b) -> [a] -> [b]
+19:08:20 <caasih_> > :i map
+19:08:21 <lambdabot>  <hint>:1:1: parse error on input ‘:’
+19:08:32 <petercommand> :i map
+19:08:52 <caasih_> >:i map
+19:10:12 <caasih_> > @src map
+19:10:14 <lambdabot>  <hint>:1:1: parse error on input ‘@’
+19:10:22 <caasih_> @src map
+19:10:23 <lambdabot> map _ []     = []
+19:10:23 <lambdabot> map f (x:xs) = f x : map f xs
+19:12:56 <caasih_> @src (!!)
+19:12:56 <lambdabot> xs     !! n | n < 0 = undefined
+19:12:56 <lambdabot> []     !! _         = undefined
+19:12:56 <lambdabot> (x:_)  !! 0         = x
+19:12:58 <lambdabot> (_:xs) !! n         = xs !! (n-1)
+19:16:26 <petercommand> :t (!!)
+19:16:26 <lambdabot> [a] -> Int -> a
+19:16:58 <petercommand> (x:_)和(_:xs)的pattern matchine差別在哪裡呀
+19:17:11 <petercommand> (x:_)和(_:xs)的pattern matching差別在哪裡呀
+19:18:10 <letoh> 一個是 list  一個不是  不過重點應該是在那個 !! 0
+19:18:26 <letoh> 遇到 !! 0 就不用管後面的 list 了
+19:19:35 <petercommand> 喔喔..沒看到後面@@
+19:20:04 <petercommand> 總覺得haskell的表達能力有點強大...
+19:20:33 <letoh> 這邊其實還好  但有些地方的確蠻過份的XD
+19:21:45 <hashcat> 那個代數type系統強大
+19:22:02 <hashcat> 語法樹同夠
+19:22:12 <au> Haxl 的自動並行處理核心引擎只有三行，是我看過最過份的表達式之一
+19:22:24 <letoh> 三行XD
+19:22:24 <au> scheduleFetches :: [PerformFetch] -> IO ()
+19:22:25 <au> scheduleFetches fetches = asyncs syncs
+19:22:28 <au>   where asyncs = foldr (.) id [f | AsyncFetch f <- fetches]
+19:22:30 <hashcat> 鍵盤兩個鍵掛了
+19:22:31 <au>         syncs  = sequence_   [io | SyncFetch io <- fetches]
+19:22:33 <au> 以上 :p
+19:23:08 <hashcat> facebook用haskell拉
+20:24:52 <CindyLinz> petercommand: (x:_) 和 (_:xs) match 的 pattern 是一樣的
+20:25:15 <CindyLinz> petercommand: 只是被放 _ 的地方沒有取名字, 不能拿出來利用而已
+20:28:43 <CindyLinz> caasih_: 那個.. lambdabot 的 :i 是 @info
+20:28:48 <CindyLinz> @info map
+20:28:53 <lambdabot> map
+20:29:02 <CindyLinz> caasih_: 通常我覺得很沒用就是........||
+20:29:23 <caasih_> XDDD
+20:29:30 <caasih_> @info id
+20:29:30 <lambdabot> id
+20:29:48 <CindyLinz> 我覺得用 @@ 就可以了.....||
+20:29:55 <CindyLinz> @@ 我覺得 @info 很沒用捏~
+20:29:56 <lambdabot> Plugin `compose' failed with: Unknown command: "info"
+20:30:00 <CindyLinz> @@ 我覺得很沒用捏~
+20:30:02 <lambdabot>  我覺得很沒用捏~
+20:30:04 <CindyLinz> .........
+20:38:18 <petercommand> CindyLinz: 恩恩
+22:34:03 <c9sloud> 請問一下... 這邊有人懂 zsh completion system 嗎?
+23:19:55 <yllan> ﹁A 是 A → ⊥ 的 syntactic sugar 嘛，那我是不是能理解為一個 function, take type A 然後沒有 return?
+23:24:33 <DreamLinuxer> void funcion吧?
+23:30:24 <yllan> 講義上寫，Note that ﹁A has a proof iff A has no proof. 翻譯成程式的說法，是「如果你能寫出一個 type 為 take A return nothing 的程式 iff 不存在任何程式是 type A」？好像怪怪的 Orz
+23:31:14 <DreamLinuxer> 我一直想不出來A → ﹁A怎麼証
+23:31:32 <DreamLinuxer> A → ﹁﹁A
+23:32:51 <DreamLinuxer> 最後會有一個 x : A -> ⊥ 會化簡出 t : ⊥
+23:34:46 <yllan> DreamLinuxer: 那個東西証出來是 λxy.yx
+23:35:12 <DreamLinuxer> why?
+23:35:17 <DreamLinuxer> 最後一步怎麼做的
+23:35:46 <yllan> 用 →E
+23:36:54 <yllan> 我發現和證明 A → (A → B) → B 的證明完全一樣，只是把所有 B 的地方都寫成 ⊥
+23:38:41 <DreamLinuxer> oh, thx
+23:42:04 <DreamLinuxer> 可是這樣不就會變成有變數的type是A -> ⊥
+23:43:55 <yllan> 有啊，把 (A→⊥) → ⊥ 用 (→I) 拆開的時候就會多一個 A→⊥ 的變數跑到 context 了
+23:44:45 <DreamLinuxer> 能允許這種function存在嗎
+23:46:02 <yllan> 我這只是按照 deduction rule 來做的，但 bottom 和程式的連結我也還不太明白
+23:47:15 <DreamLinuxer> 跟程式的聯結應該就是那種只有side effect的function
+23:49:55 <monochrom> (\a g -> g a) :: A → (A→⊥) → ⊥
+23:51:17 <monochrom> ﹁A has a proof iff A has no proof = some term has type ﹁A iff no term has type A
+23:52:55 <yllan> ah, 好像有點懂了，所以雖然我們可以寫出 A → (A→⊥) → ⊥
+23:54:31 <yllan> 但是我們沒辦法真的寫出一個 (A→⊥) 的 function (如果可以寫出 expression 的 type 為 A 的話……）
+23:55:23 <yllan> 是這樣嗎？
+23:55:34 <monochrom> A → (A→⊥) → ⊥ 翻成人話: 如果同時有 A 及 ﹁A, 就得出矛盾
+23:56:52 <monochrom> 是. 如果同時寫得出 A 的 term 及 A→⊥ 的 term, 就得出矛盾.
+23:57:21 <DreamLinuxer> 從集合的角度來看A->⊥除了A=⊥以外應該是個空集合
+23:58:44 <lcamel> 請問 ⊥ -> ⊥ 為什麼不是空的 ... ?
+23:59:36 <lcamel> empty set  x  empty set  不是 empty set ... ?

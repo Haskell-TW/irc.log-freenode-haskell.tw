@@ -1,0 +1,37 @@
+11:58:59 <cibs> 所以應該要寫一個 Moe IRC Client 來把表情符號都轉成各種萌圖嗎 # 15:36 < kyun> 那是你的客戶端不夠萌
+12:01:00 <kyun> cibs: 正是正是XD
+12:01:03 <kyun> Xd
+12:01:05 <kyun> XD
+13:36:41 <kyun> 話說現在的ghc還是先轉譯到C再由gcc生成機器碼嗎
+14:00:45 <mno2> 預設是 C-- 的樣子，但可以選成 llvm bytecode
+14:04:34 <kyun> 原來是這樣啊
+14:05:13 <kyun> 貎似OCaml直接機器碼？
+14:09:44 <jyyou> https://ghc.haskell.org/trac/ghc/attachment/wiki/Commentary/Compiler/HscPipe/HscPipe2.png
+14:11:37 <kyun> 喲，明白啦，多謝
+15:30:14 <hychen> darcs 在 mac 上裝不起來
+16:07:37 <hychen> 看起來是clang的問題.. let me seesee.
+21:13:46 <CindyLinz> 想到.. 應該在這邊也貼一下 :p
+21:13:49 <CindyLinz> http://www.reddit.com/r/haskell/comments/2hpzpu/announcing_needle_asciified_arrow_notation/
+21:50:54 <hychen> lambdabot 搞得我好苦 =.=
+21:51:23 <CindyLinz> XD
+21:51:26 <hychen> CindyLinz: haskell 如果要debug, 都怎麼debug?
+21:51:44 <hychen> 沒辦法像以前那樣用print看output是不是我要的
+21:51:48 <CindyLinz> 可以..
+21:52:00 <CindyLinz> 看一個叫作 Debug.Trace 的 standard lib.. :p
+21:52:30 <hychen> CindyLinz: ok...
+21:52:48 <au> Debug.Trace, 參照透明甘泉當中保留的一寸荒漠
+21:52:54 <hychen> CindyLinz: 那像hs的文件通常都沒寫用法，要怎麼看懂 =.=
+21:53:49 <CindyLinz> hychen: 看 source.. 在 type 加持下, 有比別的語言好讀些.. ^^|
+21:54:13 <au> 要看 tests / examples / source / paper (依這個順序)，然後都沒有 synopsis 的話寫信問作者可不可以加上去...
+21:54:45 <hychen> 另一個問題是, 改好hs的code以後, 能夠做部分編譯嗎?
+21:55:18 <hychen> 比如說lambdabot有很多個package, 我只改到一個pkg, 只想重編他
+21:56:17 <au> module interface 沒變的話照理說是可以的，實務上有時候用到它的下游 package 還是要重編
+22:02:13 <CindyLinz> hychen: 你要編的是 lambdabot 喔?
+22:02:26 <hychen> CindyLinz: 編好了
+22:02:31 <CindyLinz> 直覺覺得這種比較邪門的東西.. 會比正常的 hs 還難搞 @@"
+22:02:44 <hychen> CindyLinz: 但是fetchTitle return 的string 是亂碼
+22:03:03 <hychen> CindyLinz: 可是這種才是實用的東西....
+22:03:13 <hychen> 看到一堆enabled extension...
+22:05:04 <CindyLinz> hychen: 但是它比正常的實用的東西像 xmonad 還邪門啊 XD
+22:05:32 <hychen> CindyLinz: 面對它，接受他，學習他，戰勝它
+22:07:23 <CindyLinz> 戰勝.....ww

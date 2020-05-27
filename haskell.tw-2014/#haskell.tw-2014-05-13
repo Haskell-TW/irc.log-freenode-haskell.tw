@@ -1,0 +1,628 @@
+00:09:40 <CindyLinz> godfat: 從此瘋狂地愛上 scala? # def map[U](f: T => U): F[U]
+00:09:56 <CindyLinz> 不過他這張投影片想講什麼啊 @@"
+00:09:57 <godfat> 是放棄... XD
+00:10:03 <godfat> scala > haskell XD
+00:10:31 <CindyLinz> 用 scala 的語法來寫 haskell?
+00:11:04 <godfat> 應該不是，我覺得他的角度是實用和彈性比較重要
+00:11:29 <godfat> https://twitter.com/odersky/status/465865366501994496
+00:12:30 <CindyLinz> 哎唷~ 為什麼沒有人純粹做一個語法省略版的 java 就好咧... @@"
+00:12:41 <CindyLinz> 應該也很有價值吧 @@"
+00:12:59 <letoh> 例如省掉 class 之類的?
+00:13:14 <CindyLinz> 嗯, 反正就是純粹 syntax sugar 等級的
+00:13:23 <CindyLinz> 像 coffeescript <-> javascript 那樣就好
+00:13:43 <letoh> scala 不算嗎?
+00:13:53 <godfat> 於是他就讓我想起 Michael Snoyman 之前那個奇怪的 prelude...
+00:14:38 <CindyLinz> 我沒學過 scala, 但是它還額外扯進來什麼 functional 的話, 我猜他應該不純只是弄點 sugar 保護手指健康 @@"
+00:14:45 <godfat> scala 我覺得實在搞到有點走火入魔了... 不愧也是弄在 java 上的？
+00:15:15 <godfat> 他後來那一堆 trait 搞到我好混亂呀，type 超複雜的，一堆東西串在一起...
+00:15:28 <letoh> 只看某些語法的話，寫起來還蠻方便的啦，大概就跟 c++ 那種感覺有點像XD
+00:15:47 <CindyLinz> 那為什麼他常常強調它是 functional 的 orz
+00:15:52 <godfat> 對，其實我覺得他精神很像 c++... 是說也可以忽視那塊，單純就當 better java 用這樣
+00:16:29 <godfat> 欸，反正 js 或 py 也在自稱 functional... XD
+00:16:34 <letoh> 基礎應該是還是 OOP，只是模擬了很多 FP 的風格
+00:17:09 <CindyLinz> (揮開) (揮開)
+00:17:12 <letoh> coursera 不是有門課就用 scala 教 FP 嗎XD
+00:17:36 <petercommand> letoh: 還是作者開的XDD
+00:18:09 <letoh> 沒留意誰開的，只記得有這樣一門課
+00:18:29 <petercommand> scala的作者開教scala的課
+00:18:53 <CindyLinz> http://1.bp.blogspot.com/-G8JmyDo4KeM/ULizRtrHDaI/AAAAAAAABNY/vOOPNX_vZEc/s1600/no.gif # (揮開)
+00:19:16 <godfat> 斷開魂結，斷開鎖鏈
+00:20:37 <mno2> Java 跟 XP 一樣再戰十年 xD
+00:21:40 <godfat> 然後推出 Java XP 再戰十年
+00:59:32 <b4283> CindyLinz: When Somebody Propose to Use Untested New Programming Languages And Technologies
+01:00:47 <letoh> XDXD
+01:01:05 <c9sloud> 咦 Simon Marlow 在 facebook inc 耶
+01:01:09 <c9sloud> https://plus.google.com/107890464054636586545/posts
+01:02:22 <c9sloud> https://ghc.haskell.org/trac/ghc/wiki/Commentary/Compiler/CmmType  # C-- implementation in Haskell XD
+01:11:45 <c9sloud> godfat: 我覺得自稱可以 functional programming 跟自己是 functional language 還是有差 :-p
+01:12:18 <c9sloud> 就目前 haskell 的理解.... 這樣看起來 live script 好像會比 haskell practical ? (逃)
+01:29:04 <c9sloud> CindyLinz: 剛剛查了一下發現 trie 跟 tree 的差異是在 sequence /  individual single values ?
+01:29:08 <c9sloud> http://stackoverflow.com/questions/4737904/difference-between-tries-and-trees
+01:29:48 <c9sloud> 所以像 prefix, suffix tree 等等的由於儲存資料不僅是 individual single values 還包含了順序所以叫 trie..
+01:30:03 <c9sloud> 據說為了和 tree 區分，所以念 "try" XD
+01:31:44 <CindyLinz> 嗯嗯
+01:33:06 <CindyLinz> 目前還是看壞 livescript...ww
+01:33:24 <letoh> 看壞XD
+01:35:18 <CindyLinz> 就是.. 覺得它就算紅也不會太久 @@"
+01:37:23 <CindyLinz> 不過好像是因為我們跟 clkao, au 熟, 才會覺得用 livescript 的人很多的感覺 @@"
+01:38:02 <letoh> 所以現實是小圈圈在用的東西嗎?
+01:38:32 <CindyLinz> 在 github 上比 typed script 還小眾 @@"
+01:38:42 <letoh> 我記得你還是誰之前好像有在玩 fay，這個會比較好嗎?
+01:38:45 <CindyLinz> 不過 typed script 有 MS 推比較不公平?
+01:39:03 <letoh> MS 推的東西也不是每個都成功啊
+01:39:14 <CindyLinz> 我有試玩過, 那算是 Haskell 啦, 沒有新的語法... 可是它沒支援 class... 這我無法接受 orz
+01:39:33 <CindyLinz> 沒有 class 的 Haskell... 怎麼用嘛 ><
+01:40:34 <CindyLinz> letoh: 喔只是有 MS 的話一開始在宣傳和知名度方面會佔很多便宜呀~ 當然要流行而且長久還是沒那麼容易
+01:41:08 <CindyLinz> 可是對於都不算是流行的語言之間互比的時候, 就影響很大了
+01:42:17 <letoh> 這種比法怎麼感覺有點可憐XD
+01:44:06 <CindyLinz> 可是 Haskell 還能排到前20欸?
+01:44:25 <letoh> Haskell 不在「不算是流行的語言」之內吧XD
+01:44:35 <letoh> 至少在研究這一塊還蠻多人用的
+01:45:05 <CindyLinz> 原本我是想拿 haskell 跟 livescript 比較嘛.. 只是不小心看到中間還卡了一個我以為沒什麼人用的 typed script...||
+01:45:22 <CindyLinz> 不過咧... 第一名是 javascript..............||
+01:45:56 <CindyLinz> 我覺得 gh-pages 會引誘人增加 js project
+01:46:09 <CindyLinz> 我那些 talk 的投影片應該都被算成 js project 了吧?
+01:47:01 <letoh> gh-pages 不是在 branch 上嗎，這統計是所有 branch 都算?
+01:52:28 <CindyLinz> 不知道欸.. XD # http://adambard.com/blog/top-github-languages-for-2013-so-far/
+01:52:36 <CindyLinz> 只是算 master 也很怪啊?
+01:53:18 <CindyLinz> 啊不過.. 如果研究用 hasell 用很多的話, 用 popularity 來看 haskell 的實用性就不行了.. 可能灌水很兇 @@"
+01:53:58 <letoh> XDXD
+01:54:09 <CindyLinz> 那我也不知道該怎麼看了...
+01:54:15 <b4283> ruby 好誇張
+01:54:33 <CindyLinz> 看..... 這個語言的產品產生了多少美金的效益? 可是這東西怎麼可能查得到 XD
+01:54:47 <b4283> clojure 是唯一一個 lisp
+01:55:31 <CindyLinz> 你是說 前20名?
+01:55:56 <CindyLinz> 下面有前100名的列表
+01:57:00 <CindyLinz> 24 是 emacs lisp, 33 是 common lisp 加起來有 4072, 可以把 20 名的 lua 4048 擠下去 XD
+01:57:37 <c9sloud> CindyLinz: 後來會說 live script 好像比 haskell practical 的原因
+01:57:45 <c9sloud> 其實不是因為認識的人有在用 XD
+01:58:04 <c9sloud> 老實說 coffee-script 沒有 functional feature
+01:58:21 <c9sloud> composite, currying ... 之類的
+01:58:41 <b4283> F# 意外的很少
+01:58:42 <c9sloud> 所以如果 live-script 可以用 javascript native hash table, array, classes
+01:59:02 <CindyLinz> b4283: 可能都不想 open source.. XD
+01:59:03 <c9sloud> 感覺會比 haskell practical XDDD 雖然沒這麼 pure
+01:59:08 <c9sloud> XDD
+01:59:16 <c9sloud> F# 感覺很 experimental
+01:59:23 <CindyLinz> c9sloud: 為什麼 haskell 不能用 haskell 自己的 hash table, array 呢?
+01:59:31 <CindyLinz> C native XD
+01:59:38 <letoh> F# 從 Ocaml 抄那麼多東西，完成度應該不低?
+01:59:57 <CindyLinz> 聽起來比 js native 厲害.. (重點誤)
+01:59:59 <c9sloud> CindyLinz: 不是 language built-in 呀
+02:00:24 <CindyLinz> c9sloud: 實際考量的話, 我們應該是講 ghc 有的就算 build-in 吧? @@"
+02:00:38 <c9sloud> 也算啦 XD
+02:00:44 <CindyLinz> 就... 如果我們用 gcc, 應該會把 glibc 算進來才對 @@"
+02:00:49 <c9sloud> 但 haskell 沒有 class
+02:00:50 <letoh> 還是你想說的是 primitives ?
+02:01:05 <letoh> built-in 只要整包有包進去應該就算了?
+02:01:34 <CindyLinz> 其實我覺得 haskell-platform 有包的都可以算.. 因為至少 linux / mac / windows 都通了 ^^
+02:02:05 <CindyLinz> haskell 的 class 有包含 OO 的 class 啊?
+02:02:15 <c9sloud> 還是你覺得一般 imperative programming 的 class 可以用什麼角色轉換到 haskell ?
+02:02:40 <letoh> 「imperative programming 的 class」?
+02:03:21 <c9sloud> data ShuttleInterface =
+02:03:21 <c9sloud>   SI { launch    :: Delay -> IO Handle
+02:03:21 <c9sloud>      , deploy    :: Payload -> IO ()
+02:03:21 <c9sloud>      , getStatus :: IO Status
+02:03:21 <c9sloud>      } ?
+02:03:25 <c9sloud> 像這樣寫?
+02:03:36 <c9sloud> 我剛剛查到有 OOHaskell 這玩意
+02:04:23 <c9sloud> "Remember that objects are a poor man's closure, and closures are a poor man's object." XDDD
+02:04:51 <letoh> 只聽過前一句
+02:05:58 <c9sloud> http://arxiv.org/abs/cs/0509027
+02:06:19 <CindyLinz> 啊對, 如果是 browser script 應用的話... 嗯 我覺得 haskell 應該還不行
+02:06:47 <c9sloud> 得睡了 XD 明天繼續努力 K  real world haskell... 可能還是要讀完比較有全面的概觀 XD
+02:07:39 <c9sloud> CindyLinz: 我現在有點好奇的是, 一般像 MVC framework 有很多繼承關係，這在 snappy 之類的 framework 不知道怎麼處理?
+02:07:41 <CindyLinz> c9sloud: 如果需要的是 java 那種 dynamic subclass 的效果, 可以參考 std lib 裡面 Exception 系的實作, 在 Control.Exception module
+02:08:08 <c9sloud> ohoh
+02:08:13 <CindyLinz> xmonad 好像也是用同一個方式, 用來作 Window 階層架構
+02:09:15 <CindyLinz> 但是其實在寫 OO 程式的時候, 他們也是鼓勵用 compose 的, 而不是 inheritance 的.. 這時候其本質是 static 的 polymorphism, 而不是 dynamic 的
+02:09:35 <CindyLinz> 如果硬是要用 Control.Exception 這樣去模擬 OO 作法當然是可行... 但是就可惜了.. QQ
+02:10:41 <CindyLinz> 因為靈活度小很多, 然後也阻止 compiler 早起發現早期治療寫錯的程式
+02:12:48 <letoh> 現在很多 OO 也是都鼓勵 compose 啊
+02:13:11 <CindyLinz> letoh: 喂喂我剛也是這樣說啊 XD # 02:09 < CindyLinz> 但是其實在寫 OO 程式的時候, 他們也是鼓勵用 compose 的, 而不是 inheritance 的..
+02:14:08 <CindyLinz> 我指的是, OO 語言在處理 compose 的手法, 也是用繼承的, 只是自我約束說不要繼太多層
+02:14:35 <c9sloud> 雖然 compose 的解法很聰明，但聽起來要 dry 會很麻煩 |||
+02:14:38 <godfat> 不然要收很重的遺產稅
+02:14:56 <CindyLinz> 只是這樣的手法, 有些資訊是不見了的.. 使得 compiler 比較難 trace
+02:15:14 <CindyLinz> 遺產稅 XD
+02:15:54 <CindyLinz> java 是到執行的時候才知道那個 reference 實際上是屬於哪一個 class 的 instance, 才知道要執行哪一份 method
+02:16:00 <CindyLinz> compile 的時候不知道..
+02:16:23 <c9sloud> C++ 知道
+02:16:27 <CindyLinz> XD
+02:16:41 <CindyLinz> 可是繼承的玩法一定會用 virtual function 吧... ^^|
+02:16:57 <c9sloud> Java 是 dynamic calls 的時候不知道
+02:17:06 <letoh> c++ 可以 static
+02:17:21 <letoh> 不過還是 virtual 方便
+02:17:21 <c9sloud> 但如果 type 清楚的話是可以的
+02:17:23 <CindyLinz> C++ 的 virtual function 也是執行的時候看 vtable 呀
+02:17:59 <letoh> 我是指 static polymorphism，這種也會看 vtable 嗎?
+02:17:59 <CindyLinz> 不過... 靈活度會變小這件事.. 對於天天吃 OO 的人來說是比較難理解的 @@"
+02:18:08 <CindyLinz> letoh: 不會.. 
+02:18:32 <CindyLinz> letoh: 我記得是有 virtual function 的 class 的 object 才會有 vtable, 也才能寫 instance of 這種去測
+02:18:48 <CindyLinz> (還是 type of?)
+02:18:59 <letoh> static_cast 就可以了
+02:19:27 <CindyLinz> 嗯, 因為天天吃 OO 的人會用 OO 來描述他的問題, 用 OO 來描述他的解法.. 所以不會覺得有什麼 OO 做不到的事, OO 做不到的事就是不存在的事...
+02:19:39 <godfat> CindyLinz, dynamic_cast
+02:19:39 <letoh> CindyLinz: 沒錯!!
+02:20:23 <CindyLinz> godfat: 是不是對沒有 virtual function 的 obj 下 dynamic_test, compile 就不會過了?
+02:20:25 <letoh> 用 dynamic_cast 的好處是可以知道轉不過去  如果確定一定能轉其實不用靠它
+02:20:29 <godfat> 所以其實後來我覺得把 monad 拿到其他語言，跟把 oo 拿到 haskell 一樣其實都是在製造問題..
+02:20:57 <godfat> 我記得至少會有 warning, 會不會直接錯我不確定
+02:21:06 <CindyLinz> godfat: builder pattern 表示... XD
+02:21:22 <letoh> dynamic_cast 轉不過去好像是傳回 NULL... (要確認一下XD
+02:21:32 <godfat> 這個我確定是
+02:21:37 <CindyLinz> 好啦我覺得不要拿 monad 去別的地方解 side-effect, 但是 builder pattern 這種的應該還可以 XD
+02:22:12 <godfat> builder pattern 是這個？ http://en.wikipedia.org/wiki/Builder_pattern
+02:22:26 <CindyLinz> letoh: 我記得是 pointer 的話會給 NULL, reference 的話會 exception
+02:22:43 <godfat> 我都忘記還可以轉 reference... @@
+02:25:25 <monochrom> 下課了!
+02:25:26 <CindyLinz> godfat: 對啊~ 是這個 builder pattern, 在 haskell 裡常見到的模樣就是像 User <$> getUserName <*> getUserAge
+02:26:01 <CindyLinz> 或是在類似 StateT 的東西裡面 write 它
+02:26:22 <CindyLinz> monochrom: 晚安~~ ^^
+02:27:12 <letoh> 一個語言只要在 github 建超過 5 個 repo 就可以擠進百大...
+02:27:20 <CindyLinz> StateT 提供的是 get, put, modify.. 那對於我們特別想 build 的東西, 就提供我們特別想設的東西
+02:28:04 <godfat> CindyLinz, 這是什麼意思呀？ User <$> getUserName <*> getUserAge -- 是 applicative?
+02:28:38 <CindyLinz> 對是 applicative.. XD
+02:28:58 <CindyLinz> 可是它是 generic for 所有的 data type 都能用, 所以抓來充數 XD
+02:29:26 <monochrom> 因為法定假期關係, 下星期不用上課 \∩/
+02:29:28 <CindyLinz> monochrom: ....||
+02:29:40 <godfat> 有具體的例子嗎？不太懂 getUserName <*> getUserAge 為什麼會串在一起 @@
+02:29:53 <godfat> 加拿大的假期嗎？
+02:30:01 <monochrom> 是
+02:30:20 <CindyLinz> godfat: 那個可以看成這樣 do { name <- getUserName ; age <- getUserAge ; return $ User name age }
+02:30:31 <monochrom> (User <$> getUserName) <*> getUserAge
+02:30:46 <CindyLinz> (正在想怎麼跟 builder 扯上邊....ww)
+02:31:32 <godfat> (有時候真的覺得 monad 比較好懂|||)
+02:31:44 <CindyLinz> 我只是覺得 <$> 和 <*> 配合 data constructor 的時候, 很像一組免費的, 所有簡單 data type 都可以用的 builder... ._.
+02:32:15 <godfat> XD
+02:32:25 <monochrom> applicative 比 monad 更抽象, 一時不明也難怪
+02:32:56 <CindyLinz> 我們實用系的可以把它背起來當 pattern 用就好 XDXD
+02:32:57 <godfat> 那就好|||||b
+02:33:10 <letoh> 我以為是用在 container 上的?
+02:33:28 <monochrom> 不過還是 User <$> getUserName 串起, 然後整個串 getUserAge. 而不是把 getUserName <*> getUserAge 串起
+02:33:43 <CindyLinz> 到處都可以看到這長相的東東啊... 像是 Data.Aeson (JSON) http://hackage.haskell.org/package/aeson-0.6.1.0/docs/Data-Aeson.html
+02:33:54 <CindyLinz> 上面有個 parseJSON 的例子
+02:34:42 <CindyLinz> letoh: 我剛那邊用 <$> 和 <*> 是為了墊在底下能執行 getUserAge 它們所在的 monad 上面
+02:34:51 <monochrom> 這是一個啟示! 原來抽象和實用可以並全
+02:35:16 <godfat> 那我倒是確實一直是這樣想的 XD
+02:35:30 <CindyLinz> 哎你們的感想都好玄啦 XD
+02:35:37 <godfat> XDDDDD
+02:36:10 <monochrom> 我學 applicative 最主要是為 optparser-applicative, 結果玩得很高興
+02:37:13 <CindyLinz> (我先來補睡個覺.. QQ)
+02:37:25 <godfat> 晚安 XD
+02:37:35 <letoh> 晚安
+02:37:47 <godfat> > (,) <$> return 0 <*> return 1
+02:37:48 <lambdabot>  No instance for (GHC.Show.Show (f0 (a1, a0)))
+02:37:49 <lambdabot>    arising from a use of ‘M68584449660869933879780.show_M68584449660869933879...
+02:37:49 <lambdabot>  The type variables ‘f0’, ‘a0’, ‘a1’ are ambiguous
+02:37:49 <lambdabot>  Note: there are several potential instances:
+02:37:49 <lambdabot>    instance [safe] GHC.Show.Show a =>
+02:38:34 <godfat> > (,) <$> return 0 <*> return 1 :: (Int, Int)
+02:38:37 <lambdabot>  Couldn't match type ‘(a1, a0)’ with ‘GHC.Types.Int’
+02:38:37 <lambdabot>  Expected type: a1 -> a0 -> GHC.Types.Int
+02:38:37 <lambdabot>    Actual type: a1 -> a0 -> (a1, a0)
+02:38:42 <monochrom> 抽象是: 我只給你一堆 axioms, 沒給你一個比喻或模型. 但是, 我把那堆 axioms 設計得好記易用的話, 結果還是實用的.
+02:39:44 <godfat> > ((,) <$> return 0 <*> return 1) :: (Int, Int)
+02:39:45 <lambdabot>  Couldn't match type ‘(a1, a0)’ with ‘GHC.Types.Int’
+02:39:45 <lambdabot>  Expected type: a1 -> a0 -> GHC.Types.Int
+02:39:45 <lambdabot>    Actual type: a1 -> a0 -> (a1, a0)
+02:39:45 <monochrom> 反過來說, 比喻或模型也不見得實用, 只能說讓人自我感覺良好而已
+02:40:20 <godfat> 不過可以拿來做一些自動化程式的話，效能夠好也是很實用
+02:40:37 <godfat> 所以抽象可以走到實用，但實用很難走回抽象，出發點不對
+02:40:39 <monochrom> 說起來也是啊, 連續幾日見 CindyLinz 在加拿大的日間出活 XD
+02:44:00 <godfat> > ((,) <$> return 0 <*> return 1) :: Maybe (Int, Int)
+02:44:01 <lambdabot>  Just (0,1)
+02:45:32 <CindyLinz> 突然發現頭髮還沒吹....||
+02:46:41 <monochrom> 看看型別或者有幫助. (,) :: Int -> (Int -> (Int,Int)).  <$> 是 fmap.  (,) <$> return 0 :: Maybe Int -> Maybe (Int,Int)
+02:46:44 <CindyLinz> 這... 聽起來好像 rails 的 default 文化... # 02:38 < monochrom> 抽象是: 我只給你一堆 axioms, 沒給你一個比喻或模型. 但是, 我把那堆 axioms 設計得好記易用的話, 結果還是實用的.
+02:48:10 <godfat> CindyLinz, 我是連不太起來|||b rails 不一致性很高..
+02:48:32 <monochrom> (<*>) :: Maybe (a -> b) -> Maybe a -> Maybe b. 所以, ((,) <$> return 0) <*> (return 1) 就正合朕意
+02:48:37 <CindyLinz> godfat: 你知道得太多了......
+02:48:41 <CindyLinz> (無誤)
+02:48:51 <godfat> (噗) 還真的笑出來了 XD
+02:48:56 <godfat> 正合朕意 XDDD
+02:49:21 <CindyLinz> 哎唷.. 今天 (其實是昨天) 在公司開會的時候被歸類為夜班工程師........ orz
+02:49:37 <CindyLinz> 因為就算四點寄信給我我也會馬上回.... ww
+02:50:06 <letoh> 四點寄信那位也很神...在不同時區?
+02:50:26 <CindyLinz> 他被歸類夜班主管 XD
+02:50:40 <CindyLinz> 他是沒預期我會馬上回...... XD
+02:50:51 <letoh> 貴公司白天應該有人上班吧? XD
+02:51:02 <monochrom> XD
+02:51:07 <CindyLinz> 幾乎都白天正常上班啦... XD
+02:51:33 <godfat> |||b 不然歸類為加拿大工程部好了
+02:51:42 <monochrom> 那就要問貴公司有人睡覺嗎? XD
+02:52:12 <CindyLinz> 啊我說的幾乎不是說我幾乎都白天正常上班... 是說幾乎所有人都白天正常上班 XD
+02:52:36 <monochrom> 咦, 好像弄錯型別
+02:52:40 <godfat> monochrom, 覺得改寫成 fmap (,) (return 0) <*> return 1 好像就比較好懂 ~.~ 怎麼說呢，我覺得很多東西一步步看都不難懂，但如果想用比較高階直觀的方式去看，就不容易捉摸...
+02:53:07 <CindyLinz> godfat: <$> 是 fmap 的中置寫法啊
+02:53:21 <CindyLinz> 不然你寫 (,) `fmap` (return 0) .... ?
+02:53:22 <godfat> 對，我知道，但是看不習慣就不覺得直觀... XD
+02:53:34 <monochrom> (,) <$> return 0 是 Maybe (Int -> (Int,Int)) 才對
+02:53:43 <CindyLinz> 撿到 lisp 前置粉一枚.. (誤)
+02:54:06 <godfat> XDDDD
+02:55:09 <godfat> 不過大概真的要多寫多看才能增加直觀 orz
+02:55:39 <monochrom> 直觀是練出來的
+02:56:18 <CindyLinz> 從大腦思考層級練到脊椎反射層級 XD
+02:56:40 <monochrom> 正所謂, 南無參照透明觀自在...
+02:56:54 <letoh> 誰用脊椎寫程式? XD
+02:56:56 <godfat> 大概有種 foreign language 和 native language 的感覺吧... XD
+02:57:17 <CindyLinz> XDDD
+02:57:31 <godfat> 用脊椎寫程式聽起來扭扭扭
+02:57:37 <CindyLinz> 哼哼還有人用膝蓋想的 XD
+02:58:21 <CindyLinz> 好我真的要去睡了 orz
+02:58:24 <CindyLinz> 掰掰~~~~
+02:58:34 <godfat> XD 掰掰演劇社
+10:35:47 <c9sloud> 所以就是要練到脊椎層級就是了 XD
+10:41:55 <c9sloud> CindyLinz: 所以像 snappy 也是 MVC 嗎? 昨天想請教的是一般 MVC pattern 到 Haskell 這類的 functional language 是用什麼 pattern 來解決
+10:42:10 <c9sloud> 不是說要用 OO 搬到 Haskell 裡面寫啦 ||||b
+10:42:13 <c9sloud> XD
+12:57:42 <CindyLinz> c9sloud: 欸.. 我沒辦法確定地跟你說.. 因為我好久沒看 snap 了 @@"
+12:59:05 <c9sloud> 哦哦 QQ
+12:59:14 <c9sloud> 實在是太喜歡 "case expression of pattern -> result"
+12:59:27 <c9sloud> 想把這個搬來 gutscript 用 XD
+12:59:37 <CindyLinz> c9sloud: 但我猜它不會整個作 MVC
+13:01:24 <CindyLinz> c9sloud: 之前 yhsiang 有丟給我一個用 haskell 寫 MVC 的例子, 不過那個不是做網站
+13:01:41 <CindyLinz> 他是做一個航太系統的測試系統
+13:03:00 <CindyLinz> 流水帳, 不是很好讀.. 略略翻過就好  http://www.onikudaki.net/blog/archives/6
+13:03:59 <mno2> 我不確定 MVC 該如何清楚地被定義。不過 snap 的架構比較鬆散一點，不過我的看法是他目標就是寫出一個大的 a -> m b ，其中 m 是 snap 的 application monad
+13:04:41 <mno2> 他是從小的開始 a -> m b 開始組出來
+13:04:48 <mno2> 小的可能就只有 web server
+13:05:04 <mno2> 但它也有開發一套自己的 template language，但可用可不用
+13:05:21 <mno2> 天哪，我綴字好多
+13:05:28 <CindyLinz> 而且也可以偷用 yesod 的 template.. XD
+13:06:09 <CindyLinz> mno2: 聽說這叫作軟軟的台灣腔 XD # 13:05 < mno2> 天哪，我綴字好多
+13:07:09 <mno2> 微軟的台灣腔
+13:07:19 <CindyLinz> ww
+14:44:23 <CindyLinz> c9sloud: 我後來為了想要比較了解 haskell, 所以就先不碰 snap 或 yesod
+14:44:43 <CindyLinz> c9sloud: 而是找比較低階的網路 lib 和 db lib 來接接看
+14:45:08 <CindyLinz> c9sloud: 嗯, 雖然我現在在玩的網路 lib 其實是 yesod 體系做的 XD
+14:45:17 <CindyLinz> warp / wai 系的
+15:17:25 <c9sloud> warp ?
+15:17:48 <c9sloud> CindyLinz: 我猜 Haskell 應該也有一些現成的 SQL Generator ?
+15:33:43 <CindyLinz> c9sloud: warp # http://hackage.haskell.org/package/warp
+15:33:58 <CindyLinz> c9sloud: wai # http://hackage.haskell.org/package/wai
+15:34:31 <CindyLinz> c9sloud: 因為我一直都是手寫 SQL 派, 所以 SQL Generator 就沒有用力找了 @@"
+15:34:50 <CindyLinz> yesod 的 Persistent 是一個 SQL generator 就是了
+15:35:16 <CindyLinz> 但我還是自己用 template haskell 寫了一個 SQL generator... XD
+15:35:27 <CindyLinz> 但我的方向跟他們是反的... 他們是寫 haskell 生 sql
+15:35:35 <CindyLinz> 我是去讀取 DB, 生 haskell... XD
+15:35:47 <c9sloud> 哦哦 好奇怪的需求 (?)
+15:35:51 <CindyLinz> 反著嗎?
+15:36:03 <c9sloud> 對呀
+15:36:04 <c9sloud> XD
+15:36:06 <CindyLinz> 因為我習慣直接在 DB console 裡面改來改去, 直接寫 schema file 之類的
+15:36:20 <c9sloud> 喔喔 所以用 db query 的 info 產生 SQL ?
+15:36:26 <c9sloud> 直接把 db 當 schema
+15:36:33 <CindyLinz> 算是
+15:36:46 <c9sloud> 我記得 Perl 的 DBIx::Class 也有這樣的功能 XD
+15:37:06 <c9sloud> 那時候是 2006 年
+15:37:21 <c9sloud> 後來覺得 DBIx::Class 很難用後來就沒用了 XD
+15:38:10 <CindyLinz> generator http://lpaste.net/5491458387671515136
+15:38:40 <CindyLinz> 用法是在想要定義的 Model module 裡面寫 $(gen dbConnection)
+15:39:15 <CindyLinz> 用的是一個叫 postgresql-simple 的 package 來連 DB
+15:39:35 <CindyLinz> 不過有個天生差異...
+15:39:36 <c9sloud> 題外話 那天聊 router 我後來覺得好像應該用 radix tree 來實作
+15:39:45 <CindyLinz> 就是只有 compile 的時候才會去讀取生 code
+15:39:51 <CindyLinz> 執行的時候不會重讀..
+15:40:03 <c9sloud> 有趣
+15:40:11 <c9sloud> Model.Generator 是你寫的 ?
+15:40:15 <CindyLinz> 對
+15:40:29 <c9sloud> 這就是你跟 in2 說要用 haskell 寫的東西嗎 :-p
+15:40:59 <CindyLinz> 嗯.. 我有看到 GHC 的 milestone, 如果到 GHC 7.10 的話, 這玩意兒應該會更好寫...
+15:41:06 <CindyLinz> 不是, 我們家沒有 postgres
+15:41:10 <CindyLinz> 這是自己玩的 XD
+15:41:39 <CindyLinz> 我現在正在用 haskell 寫一個 proxy
+15:41:43 <CindyLinz> 目前是用 perl 版的
+15:42:12 <c9sloud> 你的那個 toCamalCase
+15:42:22 <c9sloud> 好像可以用 inflector https://github.com/stackbuilders/inflections-hs
+15:42:36 <c9sloud> Inflector  之前搞 ORM 有 survey 過
+15:42:46 <CindyLinz> 喔 因為我 db 裡面用 a_b_c 這樣的格式
+15:42:46 <c9sloud> singular => plural
+15:42:55 <c9sloud> 或是 underscore => calmal
+15:42:59 <CindyLinz> 然後, 在 Haskell 裡面習慣用 aBC
+15:43:00 <c9sloud> camal
+15:43:19 <c9sloud> 我想說來寫個 SQLGenerator 練習看看
+15:43:20 <c9sloud> XD
+15:43:25 <c9sloud> 甚至是 SQL parser
+15:43:56 <CindyLinz> 如果要生成 haskell code 的話, 多一個麻煩是要去看 template 怎麼用 @@"
+15:44:51 <c9sloud> 哦哦
+15:45:07 <CindyLinz> 而且如果生出來的 code 有錯
+15:45:15 <c9sloud> 話說為了生 PHP code 我也寫了這個 https://github.com/c9s/php-ClassTemplate
+15:45:15 <c9sloud> XD
+15:45:29 <CindyLinz> compile 的時候 error message 都會跟你說錯在 $(gen dbConn) 那一行的行號
+15:47:46 <CindyLinz> 喔喔..
+15:48:18 <CindyLinz> 用 template 寫 haskell, 感覺有點像在寫前置式的語言.. XD
+15:48:33 <CindyLinz> 例如說要寫個 type signature a -> b -> c
+15:48:40 <c9sloud> 前置式語言? 英文是什麼?
+15:50:26 <CindyLinz> 要寫成 ((->) a) (((->) b) c)
+15:51:23 <CindyLinz> c9sloud: 不知道欸, 反正就 lisp scheme 那種感覺
+15:52:18 <c9sloud> 還是你是說 operator precedence ?
+15:52:51 <CindyLinz> 都前置了, 不會有 ambiguity, 就不需要 precedence 了
+15:53:20 <c9sloud> 就像 lisp, scheme, 會這樣寫 (+ 1 2)
+15:53:27 <CindyLinz> 對對
+15:53:33 <CindyLinz> 只是這邊的 + 是 -> 這樣
+15:53:37 <c9sloud> 我記得那是 operator precedence
+15:54:04 <c9sloud> ohoh
+15:54:06 <CindyLinz> operator precedence 不是 3 + 4 * 5 的時候 * 要比 + 優先的意思嗎?
+15:54:23 <b4283> + + 1 2 3
+15:54:29 <c9sloud> 好像是 compiler contenxt 的確是這樣 XD
+15:54:56 <c9sloud> ah, prefix notation
+15:54:59 <c9sloud> for operator
+15:55:21 <b4283> 還是會有 ambiguity，因為 + 可以收 2+ 個數字
+15:55:26 <b4283> > 2 個
+15:55:27 <lambdabot>  Not in scope: ‘個’
+15:55:46 <b4283> @@ 我是豬頭三
+15:55:47 <lambdabot>  我是豬頭三
+15:55:49 <CindyLinz> 嗯, 一定要加括號的版本 XD
+15:56:22 <b4283> @@ 海珊總統最不愛打仗
+15:56:23 <lambdabot>  海珊總統最不愛打仗
+15:56:29 <CindyLinz> Haskell 的函數 apply 都一律會吃到尾巴, 不管 arity 的 @@"
+15:56:33 <c9sloud> 是我豬頭三
+15:56:46 <c9sloud> 吃我飯
+15:56:47 <b4283>  @@ 原本是作什麼用的
+15:57:09 <CindyLinz> @@ b4283: 不知道耶
+15:57:10 <lambdabot>  b4283: 不知道耶
+15:57:20 <c9sloud> 講話用 prefix operator 好像還蠻妙的
+15:57:58 <CindyLinz> template 裡面的 apply 一定都是只能吃一個參數
+15:58:02 <CindyLinz> 所以像 -> 要吃兩個
+15:58:06 <CindyLinz> 就要 apply 兩次
+16:21:28 <c9sloud> 問一下.. 有人有用過 Judy array 嗎?
+16:22:01 <c9sloud> 雖然 HP 有 patents ... 不知道合法的使用範圍是到怎麼樣
+16:22:04 <c9sloud> http://hackage.haskell.org/package/judy-0.2.2/docs/Data-Judy.html
+16:22:19 <CindyLinz> 第一次聽說 :p
+16:22:24 <c9sloud> 如果是用 PHP internal 的 zend_hash_ 肯定是比較慢
+16:22:38 <c9sloud> 因為 Judy array 實作 key 是用 Trie
+16:22:51 <c9sloud> 所以比傳統 hash 節省更多記憶體速度也比較快
+16:23:01 <c9sloud> 考慮把它用在 r2 裡面 當 cache
+16:23:39 <CindyLinz> 付錢, 就一切合法? (逃)
+16:23:56 <c9sloud> 幾年前有看過 Judy array 不過是讀 Prefix tree 才發現原來 Judy array 是 Trie 的一種
+16:24:07 <c9sloud> XDD
+16:24:21 <c9sloud> 咦 那 Haskell 的 Data.Judy 好像沒有使用上的問題?
+16:25:57 <CindyLinz> 因為是自己重新實作嗎?
+16:28:42 <c9sloud> judy array 的 patent 好像主要是在 algorithm
+16:30:09 <c9sloud> 咦 LGPL 耶
+16:30:15 <c9sloud> 而且有 C library 可以用
+16:30:17 <c9sloud> 那就決定了
+16:33:14 <CindyLinz> 來看有沒有 cpan 版本..
+16:33:30 <CindyLinz> 我們常常為了 large range 的數字 index 而使用 hash
+16:35:03 <CindyLinz> 有耶 http://search.cpan.org/~jjore/Judy-0.41/lib/Judy.pod
+16:43:24 <CindyLinz> 咦 奇怪, 它是 string -> int ??
+16:43:39 <CindyLinz> string -> int / int -> int  @@"  我以為是 int -> string
+16:47:45 <CindyLinz> 不過.. value 可以是一個 word, 那應該就可以拿來存 pointer 了
+17:11:42 <c9sloud> 恩恩恩
+17:11:51 <c9sloud> 有一個 map 可以用
+17:11:56 <c9sloud> HS HashSet 的樣子
+18:13:48 <c9sloud> 咦 話說這邊 irc log 會被 google search 嗎 XDD
+18:14:17 <CindyLinz> 我有放 robot.txt 關掉
+18:15:13 <CindyLinz> 但我想應該還是會被 index, 只是沒有公開給一般人查而已
+18:15:32 <c9sloud> ohoh ok
+18:15:47 <c9sloud> 是說 I** 社怎麼這麼愛用 SOAP
+18:16:33 <CindyLinz> 不知道你在說誰 XD
+18:33:12 <c9sloud> 好吧 I*M 社
+18:33:15 <c9sloud> XDD
+18:33:32 <c9sloud> 只好說服他們用 JSON
+18:34:53 <godfat1> 前幾天看 paypal 也看到肥皂，吃驚（雖然也還好...
+21:10:02 <whitglint> 有人用 haskell 寫 gui 嗎？
+21:10:22 <whitglint> qt binding 不知成熟度如何
+21:12:18 <whitglint> topic 那個[中2]似乎連不上了
+21:13:20 <whitglint> 中二病也想學 haskell # 逃
+21:15:34 <CindyLinz> 你是問這 channel 的人嗎? 我猜不太有.. ^^|
+21:15:43 <CindyLinz> 改 xmonad 的設定檔 (haskell) 應該不算? XD
+21:16:48 <CindyLinz> 啊不過這 channel 好多人都不太講話, 那可能有... :p
+21:17:41 <godfat> |||b 我是有試過啦，然後發現沒啥好用的，那時候 wx 好像弄不起來
+21:18:11 <CindyLinz> 竟然常講話的人有用過... 嗚嗚猜錯 ><
+21:18:34 <godfat> 試跑個 example 也算嗎？ = =...
+21:18:59 <whitglint> CindyLinz: 不然在這 channel 還能問什麼人？XD
+21:19:02 <CindyLinz> 我這幾年寫的 GUI 都是 html 環境.. @@"
+21:19:14 <CindyLinz> whitglint: 喔我以為你是說這世界上有沒有人用 haskell 寫 GUI...
+21:19:30 <CindyLinz> 那我就可以去翻一些 haskell 寫的 GUI project 出來啊 :p
+21:19:31 <godfat> 我對 GUI 還是有一份情的 XD 雖然確實沒在寫...
+21:19:50 <whitglint> 那麼大大們用哪套 web framework？yesod?
+21:19:57 <CindyLinz> 這兩年連寫 Win8 的 application 都用 html 呢....ww
+21:20:28 <godfat> 我不算有在寫 haskell... 嗚嗚
+21:20:29 <godfat> win8 那個.... orz 唉，世風日下，人心不古 (?)
+21:20:35 <yllan__> 不是聽說 haskell 可以寫 iOS app
+21:20:54 <godfat> 我知道有人有做過，他應該也算滿意
+21:22:07 <whitglint> yllan__: http://www.haskell.org/haskellwiki/IPhone 剛剛路過
+21:22:25 <whitglint> 但是這樣有 debugger 嗎...
+21:32:35 <CindyLinz> whitglint: 要不要去國際版的 #haskell channel 問看看? ^^|
+21:35:57 <whitglint> CindyLinz: 反正我也還沒開始學啦... 問問而已
+21:35:58 <CindyLinz> 看到 yesod 作者 MichaelSnoyman 正在以 commit yesod 各 package 進 hackage 的方式對 #haskell 洗版... XD
+21:36:36 <whitglint> 想要先評估看看 haskell package
+21:37:00 <CindyLinz> 唔.. 所以你是要 web framework, 還是 GUI, 還是 mobile app 呀?
+21:37:31 <whitglint> 哇 #haskell 一千多人
+21:37:44 <whitglint> 應該是只要 web framework
+21:38:27 <CindyLinz> 如果想要「一整套」的話, 我想 yesod 不錯..
+21:39:01 <CindyLinz> 然後, 你可以加入 #yesod channel
+21:40:02 <whitglint> 社群不小呢
+21:40:04 <CindyLinz> channel 上的 snoyberg 就是 yesod 的那個作者
+21:40:19 <CindyLinz> 而且人很好~~
+21:40:31 <whitglint> hackage 是？
+21:42:12 <CindyLinz> whitglint: haskell 的 third party library / tool 的集合
+21:42:37 <CindyLinz> http://hackage.haskell.org/packages/
+21:43:03 <CindyLinz> 通常用 cabal 來裝
+21:47:23 <whitglint> 哇多到滿出來了
+21:50:08 <CindyLinz> whitglint: 你的瀏覽器 scrollbar 壞掉了嗎? XD
+21:51:08 <whitglint> CindyLinz: 本來沒有壞，捲到底就壞了 XD
+21:51:20 <CindyLinz> @___@
+21:51:20 <lambdabot> Unknown command, try @list
+21:51:29 <whitglint> @list
+21:51:30 <lambdabot> What module?  Try @listmodules for some ideas.
+21:51:40 <whitglint> @listmodules
+21:51:41 <lambdabot> activity base bf check compose dice dict djinn dummy elite eval filter free fresh haddock help hoogle instances irc karma localtime more oeis offlineRC pl pointful poll pretty quote search slap source spell system tell ticker todo topic type undo unlambda unmtl version where
+22:31:35 <CindyLinz> 以前覺得 Haskell 的 list comprehensive 真是個大雞肋.. 只是那些不要臉的髒東西喜歡抄過去, 而且列為重要 feature.. XD
+22:31:58 <CindyLinz> 看了推廣型的 Monad comprehensive 以後.. 嗯, 有點意思.. :Q
+22:32:19 <petercommand> @list activity
+22:32:20 <lambdabot> activity provides: activity
+22:32:27 <CindyLinz> 不過這部分就沒被抄走了, 畢竟他們沒什麼在用 monad..
+22:32:45 <godfat> 我剛學 haskell 時還滿著迷 list comprehension 的，結果後來發現那沒啥意義，而且我也沒在用...
+22:32:51 <godfat> monad comprehension 是？
+22:33:07 <CindyLinz> list 是一種 monad 嘛?
+22:33:11 <godfat> 是
+22:33:26 <CindyLinz> monad comprehensive 就是讓 list comprehensive 套用在任意的 monad 上
+22:33:28 <godfat> 你是說就是用 list monad 嗎？
+22:33:35 <CindyLinz> 對..
+22:34:01 <CindyLinz> 所以如果可能可以作一個... DB monad, 用來存取 SQL DB
+22:34:15 <CindyLinz> 然後在這 monad 裡面就可以用這個寫 SQL.. XD
+22:34:55 <CindyLinz> [(id, name) | (id, name) <- user, name == "cindy"]
+22:35:13 <CindyLinz> user 就假設是一個會 fetch user table 的東西
+22:35:29 <CindyLinz> 不過這 monad 的實作不一定是看到 user 就要真的去 fetch
+22:35:59 <CindyLinz> 唔.. 那個 guard 好像還是要取出來以才能比對
+22:36:21 <godfat> 說到這個，我想 scala 就是用 list comprehension 的語法去玩 monad, 一整個就是詭異
+22:36:21 <godfat> 不過總覺得用 do notation 就好了，需要 monad comprehension 嗎？
+22:36:44 <CindyLinz> 可能有時候比較清楚..
+22:37:01 <godfat> 喔那個 name == "cindy" 倒是
+22:38:42 <CindyLinz> 啊對今天在 begining haskell 看到...的東西.. XD
+22:38:47 <CindyLinz> @type filterM
+22:38:48 <lambdabot> Monad m => (a -> m Bool) -> [a] -> m [a]
+22:39:23 <CindyLinz> > let powerset = filterM (const [True, False]) in powerset [1,2,3]
+22:39:25 <lambdabot>  [[1,2,3],[1,2],[1,3],[1],[2,3],[2],[3],[]]
+22:39:30 <godfat> 每次看到這個就想到 powerset XD 喔出來了...
+22:39:41 <CindyLinz> > let powerset = filterM (const [False, True]) in powerset [1,2,3]
+22:39:42 <CindyLinz> XD
+22:39:43 <lambdabot>  [[],[3],[2],[2,3],[1],[1,3],[1,2],[1,2,3]]
+22:40:11 <CindyLinz> 太過份了這個... XD
+22:40:57 <godfat> 第一次看到這個時說真的好傻眼，跟 infinity fib 一樣傻眼
+22:41:01 <godfat> 可能更傻眼才對
+22:41:39 <CindyLinz> 哪有人灌 list monad 給 filterM 的啦.. XD
+22:42:20 <godfat> 想我以前可是用很笨的方法算 powerset, 然後搞不太懂遞迴要怎麼寫
+22:42:21 <godfat> 不過仔細想想這個，發現這個其實是很直觀的 XD 用這想法可以很容易寫出遞迴...
+22:42:52 <caasih> powerset QQ
+22:43:38 <CindyLinz> caasih: 這個..
+22:43:43 <CindyLinz> > let powerset = filterM (const [True, False]) in powerset [1,2,3]
+22:43:44 <lambdabot>  [[1,2,3],[1,2],[1,3],[1],[2,3],[2],[3],[]]
+22:44:36 <caasih> CindyLinz: 來研究一下，想起過去因為關鍵時刻不會寫 powerset ，受到的打擊
+22:45:13 <CindyLinz> caasih: 可是這一種用了怪 monad, 寫法很邪惡欸~ XD
+22:45:40 <godfat> CindyLinz, 明明就很天才 XDDD
+22:45:44 <caasih> CindyLinz: 咦咦，所以是進階版... XD
+22:46:13 <godfat> caasih, 要滿了解 monad 的運作，這一行真的要知道很多東西 XD
+22:47:27 <godfat> http://blogger.godfat.org/2011/04/powerset-4.html
+22:47:35 <CindyLinz> > let powerset [] = [[]] ; powerset (a:as) = let aa = powerset as in aa ++ map (a:) aa in powerset [1,2,3]
+22:47:38 <lambdabot>  [[],[3],[2],[2,3],[1],[1,3],[1,2],[1,2,3]]
+22:47:48 <CindyLinz> 這個才是正常版.... ._.
+22:48:06 <caasih> 平時不爬神胖格，碼到用時方恨少...
+22:48:41 <godfat> 上面其實也沒多少碼.. XD 也好久沒寫了 orz
+22:53:49 <CindyLinz> godfat: 唔, 你說的最直覺的 recursion 跑最慢, 應該是 powerset'' xs 跑了兩次吧?
+22:54:06 <godfat> 喔喔，所以也許 let 起來就快了？
+22:54:49 <CindyLinz> ghc 這地方記得沒那麼聰明 ._.
+22:55:22 <godfat> 下次再測 XD
+22:55:38 <monochrom> [ expr1 | x <- m0; y <- m1 ] 就是 do { x <- m0; y <- m1; return expr }
+22:56:40 <CindyLinz> 拿來寫一整排但每一項都短短的 Maybe a 不錯
+22:56:56 <CindyLinz> 雖然我好像最近都寫成 >>= >>= >>=
+22:56:59 <monochrom> 再進一步, [ expr1 | x <- m0, cond, y <- m1 ] 就是 do { x <- m0; guard cond; y <- m1; return expr }
+22:58:51 <CindyLinz> @type maybe mzero return
+22:58:53 <lambdabot> MonadPlus m => Maybe a -> m a
+22:59:07 <CindyLinz> @hoogle MonadPlus m => Maybe a -> m a
+22:59:10 <lambdabot> Control.Monad mfilter :: MonadPlus m => (a -> Bool) -> m a -> m a
+22:59:10 <lambdabot> Control.Monad mplus :: MonadPlus m => m a -> m a -> m a
+22:59:10 <lambdabot> Control.Monad msum :: MonadPlus m => [m a] -> m a
+22:59:40 <CindyLinz> 沒有.. QQ
+23:00:11 <CindyLinz> 嗯, 在猶豫, 寫一個結果會是 Maybe a 的東西, 應該就直接用 Maybe a 呢, 還是用 m a
+23:00:33 <CindyLinz> 如果有這個 (maybe mzero return) 可以用的話, 那就可以放心丟 Maybe a
+23:00:52 <CindyLinz> 反正如果使用的時候想套在別的 monad 裡面, 就用這個 maybe mzero return 轉一下就好
+23:12:48 <CindyLinz> 突然覺得 maybe mzero return 這樣排在一起, 好有 forth 的感覺.. :p
+23:14:59 <CindyLinz> godfat: 你寫好多篇 powerset 喔!
+23:15:22 <godfat> 那時感觸太多 XD(?)
+23:16:18 <caasih> 看文中提到大數的作法，想起十一年前在某校系館聽強者同學報告 UVa 心得
+23:17:15 <godfat> UVa 是？
+23:17:24 <CindyLinz> 那位同學現在是該校該系的教授了嗎?
+23:17:43 <caasih> 平常大家叫那個 ACM 題庫？
+23:17:58 <godfat> 喔喔
+23:17:58 <caasih> CindyLinz: 不知道耶，我被踢出那個學校了 XDD
+23:19:11 <caasih> 卡 powerset 那天，也是用 powerset'' 的作法，可是不知道為啥一直爛掉。
+23:19:13 <CindyLinz> 聽起來是一種成就...
+23:20:22 <CindyLinz> godfat 有一個寫了四個 '''' 的 powerset.... OAO
+23:20:51 <caasih> 那是無法單獨存在的成就 QQ
+23:21:13 <caasih> 等等在 LiveScript 再挑戰看看
+23:21:13 <CindyLinz> 咦, 你那時就寫 haskell 喔?
+23:21:32 <CindyLinz> 或說... 有 map 能用的語言? @@"
+23:21:44 <petercommand> python XD
+23:22:02 <caasih> 沒有，卡 powerset 是去年的事， ACM UVa 那時，用大數的強者用 C
+23:22:26 <letoh> petercommand: 你在這應該要說 perl 才對XD
+23:22:27 <godfat> 人家有 cancancan, 我有 primeprimeprimeprime XD
+23:22:48 <CindyLinz> cancancan 是什麼東西 XD
+23:22:57 <godfat> https://github.com/CanCanCommunity/cancancan
+23:23:35 <godfat> 用 c 就要處理一堆邊界問題，超煩
+23:23:49 <CindyLinz> 好激動的名字...ww
+23:23:50 <caasih> 要是 cancancan 再斷頭，就會有 cancancancan ? XD
+23:23:51 <petercommand> letoh: 咦?是甚麼梗嗎?XD
+23:24:01 <monochrom> godfat: 當你把 "map (x:) (powerset xs) ++ (powerset xs)" 化成 "(\r -> map (x:) r ++ r) (powerset xs)" 時, 這不止是 CPS 化, 這其實是先 re-factor 為 "let r = powerset xs in map (x:) r ++ r" 然後才 CPS 化. 然而那個 re-factor 就完全改變了電腦工作量.
+23:24:10 <letoh> perl 不是也有 map ?
+23:24:17 <petercommand> 對阿
+23:24:24 <godfat> 中文翻譯不知道要用 可可可可 還是 罐頭罐頭罐頭罐頭
+23:24:34 <CindyLinz> letoh: 幹嘛這樣~ 我沒有 anti-python 啊~~ XD
+23:24:57 <letoh> 一方面 perl 的 map 比 python 的好用太多，另一方面這裡的 perl 人口應該比較多XD
+23:25:07 <petercommand> 不過我對perl不熟啦XD
+23:25:18 <monochrom> 想 CPS 化而又不改變工作量, 應該是 (\r s -> map (x:) r ++ s) (powerset xs) (powerset xs)
+23:25:19 <CindyLinz> letoh: 這裡大部分人都沒有講話~~ >o<
+23:25:24 <godfat> monochrom, 唔唔，所以 CPS 這裡其實沒什麼差？我猜可能要看超大量才有差？
+23:26:13 <letoh> CindyLinz: 我拿發言量來評估的XD
+23:26:34 <petercommand> weighted
+23:26:39 <CindyLinz> letoh: 這樣我一個人好像就已經佔很多便宜 XD
+23:26:51 <CindyLinz> 啊~ 不要 weight... 囧
+23:27:23 <letoh> 讓大家多認識 perl 也不錯啊  一般的誤解蠻多的
+23:27:44 <CindyLinz> letoh: 我不知道 python 的 map 有什麼問題就是 ^^|
+23:28:34 <letoh> 其實也還好，就單純沒有 block 寫起來很不方便XD
+23:29:01 <monochrom> 需要 reverse 這點倒有趣
+23:30:31 <whitglint> 可以哦可以哦可以哦
+23:31:16 <godfat> whitglint, 聽起來有點糟糕 (?)
+23:31:59 <whitglint> 𠹳𠹳
+23:32:17 <whitglint> perl6 用 haskell 寫的？
+23:32:29 <letoh> perl6 在哪裡? XD
+23:33:15 <whitglint> 應該說 pugs
+23:33:32 <CindyLinz> 可是 pugs 和 perl6 的 spec 好像已經有點距離了 @@"
+23:33:32 <petercommand> #perl6
+23:33:36 <letoh> pugs 還有繼續發展嗎? 我以為現在比較有希望的是 rakudo ?
+23:34:32 <CindyLinz> 我看 pugs 已經從 implementation 的評比中拿掉了 @@"
+23:35:21 <whitglint> 不是唐鳳在寫的嗎？
+23:36:12 <CindyLinz> 可是我以為已經沒再繼續寫了?
+23:36:20 <whitglint> 怎 perl6 聽起來像都市傳說 XD
+23:37:05 <letoh> whitglint: http://rakudo.org/   有興趣的話先看一下這邊?
+23:37:08 <godfat> 就我所知是成功 bootstrap 起來就功成身退了
+23:37:37 <CindyLinz> 好像有印象 perl6 的 FAQ 還是什麼的說它沒打算完成? XD
+23:38:49 <mno2> 可以期待 perl 6.999999 版 ? xD
+23:39:00 <CindyLinz> mno2: 不行...
+23:39:14 <CindyLinz> mno2: perl6 的版號規則是 π 的兩倍.. XD
+23:39:26 <CindyLinz> perl6, perl6.2, perl6.28, ....
+23:39:47 <petercommand> 根本就是學tex嘛
+23:39:49 <petercommand> XD
+23:39:52 <CindyLinz> tex?
+23:40:01 <petercommand> 版號
+23:40:10 <CindyLinz> tex 是 3.14 嗎?
+23:41:13 <mno2> 這樣會不會列 package 的時候版號長度就好幾頁，根本看不到套件名 xD
+23:41:45 <CindyLinz> XD
+23:42:13 <petercommand> CindyLinz: http://www.tex.ac.uk/cgi-bin/texfaq2html?label=TeXfuture
+23:42:15 <monochrom> 是不是 perl 6 處於下述尷尬情況? 對多數 perl 用者來說太先進或沒必要, 而能明白及充份使用 perl 6 的人早已有其他選擇?
+23:44:24 <letoh> 抱歉離題問一下 g+ 上面 haskell.tw 出現的問題，狀態圖可以用來為非同步行為建模嗎?
+23:45:16 <letoh> https://plus.google.com/117594021220065986125/posts/fpZYCtk32JY  問題寫在這邊，沒印象看過這樣用法的狀態圖
+23:45:17 <monochrom> 可以
+23:46:20 <letoh> 對於建模的目標，狀態的變化應該還是同步的? 只是事件的發生是非同步的?
+23:47:11 <letoh> 感覺原發問者提到的例子比較像發生中斷 (interrupt) 的情況
+23:47:21 <CindyLinz> monochrom: perl6 有點怪.. 它沒打算要取代 perl5, 然後 perl5 team 的人也大都沒參與 perl6... 好像它們只有名字很像似的 @@"
+23:47:41 <mno2> 狀態圖只是一個狀態接到什麼 input 會變成什麼狀態吧
+23:47:58 <letoh> 不過 perl6 不是 larry wall 開始的嗎?
+23:48:13 <CindyLinz> 那 + larry wall XD
+23:48:29 <mno2> 對於畫成時間軸來看，事件還是按照順序發生啊
+23:48:58 <letoh> mno2: 是啊，但是我還沒搞懂他所謂的「非同步狀態移轉」想說的是什麼
+23:49:40 <monochrom> 我試著用個例子吧. 先畫兩個分開的機, 一個是 0->1, 1->0. 另一個是 A->B, B->A.
+23:49:43 <letoh> 我原本想的是類似離散事件那樣的系統，想用狀態機來建模...XD
+23:50:06 <whitglint> 聽起來只是加個 processing_state
+23:50:38 <whitglint> 有所謂的「非同步狀態」嗎？
+23:51:04 <monochrom> 現在畫一個機是它們"一起"運行. 你有兩個選擇.
+23:51:15 <whitglint> 或是加入「子狀態」
+23:51:31 <letoh> whitglint: 我就是卡在這個描述  但後面的例子我可以理解，所以在想是不是我有哪裡想錯了
+23:52:32 <mno2> monochrom 想表達的是說，應該是把互動的原件全部拉進來，然後根據順序發生先後來分不同宇宙？
+23:52:38 <monochrom> 第一個是 (0,A) -> (1,B), (1,B) -> (0,A). 這是假設兩個機平行運行而速度匹配. 這多數不是你要的. 但有人要.
+23:52:53 <whitglint> 我覺得他把非同步事件誤認為非同步狀態？
+23:55:07 <letoh> 如果是非同步事件就比較沒問題了，一般遇到的事件也很少是同步的
+23:55:26 <b4283> ( 0, A) -> (1, A) -> (0, A) -> (0, B) -> (0, A)
+23:55:39 <monochrom> 第二個畫出來大得個. (0,A) -> (1,A), (0,A) -> (0,B), (1,A) -> (0,A), (1,A) -> (1,B). (0,B) -> (1,B), (0,B) -> (0,A). 可能還漏了一些. 總之就是: 有 (s,t) -> (s' , t) 及 (s,t) -> (s, t'). 這是假設 interleaving.
+23:56:31 <letoh> 如果兩個子機都在非同步運行，那各種狀態轉移的組合都會出現
+23:56:52 <yllan__> 問一下，有沒有 function 可以算大整數的 \floor{\sqrt{n}} ?
+23:57:31 <monochrom> interleaving 就是說, 每次只讓一個子機行一步, 其他子機不行. 試想像在一個 core 行兩條 thread, 也只能這樣了.
+23:57:54 <letoh> monochrom: 你的意思是所有可能的轉移狀況都列出來，當作整體系統的一個狀態，依此來建模嗎?
+23:58:15 <b4283> 一步只能給一個子機動一格
+23:59:11 <letoh> 可以先這樣假設  不過我覺得對真實系統來說不一定可以抓到那麼準  有時看起來會是同時動作
+23:59:34 <monochrom> interleaving 還有一項附加, 我騙著你沒說: 還需要加一項限制, "公平"的 scheduler, 總不能讓一個子機獨霸, 要時不時讓所有子機都有機會行一下
+23:59:49 <b4283> 完全聽不懂在聊什麼，我還是旁邊涼快去
+23:59:52 <monochrom> 是的, letoh

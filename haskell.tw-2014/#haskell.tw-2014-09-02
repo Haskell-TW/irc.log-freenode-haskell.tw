@@ -1,0 +1,80 @@
+18:42:31 <suhorng> Standard ML 的 record 是不是有做 subtyping？
+18:44:04 <suhorng> 唔，不對，那不是問題點XD
+18:45:41 <suhorng> 還是想不到做 closure conversion 後 type 要怎麼辦XD
+21:11:12 <CindyLinz> 先來補課.. 不然 suhorng 在講什麼我都聽不懂.. (艸) # http://matt.might.net/articles/closure-conversion/
+21:13:00 <CindyLinz> 趕快來補課, 免得 suhorng 知道我真的都沒聽懂..
+21:17:03 <suhorng> CindyLinz: 要聽聽兩句話的版本嗎(?)
+21:17:38 <CindyLinz> 來看看?
+21:20:20 <suhorng> 就是函數有 free var 的時候在執行時我們會把它的 free variables 都包成一個 struct
+21:20:35 <CindyLinz> 竟然用不加標點符號的方法縮句數....ww
+21:21:06 <CindyLinz> 跟「一行 C 語言」如出一轍 QQ
+21:21:23 <suhorng> 這個步驟就是把原本的 first-class function 轉成這個東西, 於是原本 a -> b 的函數就變成了 data Closure a b = forall t. MkClosure t (t -> a -> b)
+21:21:46 <CindyLinz> 是為了用低階語言實作 lambda 要使用的技巧?
+21:22:00 <suhorng> 函數呼叫 f x 就成了 let MkClosure fv f = old_f in f fv x
+21:22:02 <suhorng> 三句話QQ
+21:22:07 <suhorng> 恩, 算是
+21:23:11 <CindyLinz> 那個 t 可以 forall 喔? @@"
+21:23:33 <suhorng> 那個是 Haskell 的 existential type
+21:23:47 <suhorng> 因為即使都是 a -> b 的函數, 不同函數的 t 會不同
+21:23:57 <CindyLinz> 這樣不就那個塞在 MkClosure 裡面的 (t -> a -> b) 可以適用在任何環境了? @@"
+21:24:19 <CindyLinz> 喔 只是 拿 Closure 的人不知情而已
+21:24:24 <suhorng> 或者..GADT 的話, data Closure a b where MkClosure :: t-> (t -> a -> b) -> Closure a b
+21:24:29 <CindyLinz> 拿 Closure a b 的人不知情而已
+21:24:42 <suhorng> 是呀, 對單獨的 MkClosure 他是固定的, 而且要一樣
+21:24:50 <CindyLinz> 嗯嗯
+21:25:09 <CindyLinz> t 是那個來應徵的函數帶的小抄, 格式不拘 :D
+21:25:38 <CindyLinz> 也可寫在只有一面的莫比烏斯帶上 :D
+21:25:46 <suhorng> 只有一面 XD
+21:26:15 <suhorng> 但是我現在的核心語言只有 monomorphic type, 沒有 existential type...不知道該怎麼做了
+21:26:40 <CindyLinz> 噢..
+21:26:47 <CindyLinz> 核心語言是誰啊?
+21:26:53 <CindyLinz> 自己設計的?
+21:27:18 <suhorng> 嗯嗯對
+21:27:34 <CindyLinz> 那就來一下 exist type.. XD
+21:27:38 <suhorng> simply typed lambda calculus + ADT + pattern matching 這樣而已
+21:28:00 <suhorng> 也是可.... :P
+21:28:04 <CindyLinz> 你有 dynamic 的 Any 嗎?
+21:28:11 <CindyLinz> 大絕 XD
+21:28:15 <suhorng> 沒有w
+21:28:29 <CindyLinz> 老字號的 C 都用 void* 惹
+21:28:31 <suhorng> 暫時還不清楚加了的話會有什麼反應
+21:28:40 <suhorng> void* 很恐怖耶XD
+21:28:49 <CindyLinz> 不是就把 t 的位置放 Any 嗎?
+21:29:11 <suhorng> 這樣不會變我可以放不同的 t 嗎?
+21:29:30 <suhorng> 話說還有另一個作法
+21:29:45 <suhorng> 我可以定一個 datatype, 像這樣:
+21:30:06 <CindyLinz> 你不是就是要能放不同的 t 嗎? @@"  只是就少掉放的 t 和函數的 t 一定會 match 的限制
+21:30:28 <suhorng> 唔 對 就是少掉那個 match 的限制
+21:32:16 <suhorng> http://ideone.com/q3UStS 像這樣...因為整個程式的函數是有限多個, 我可以先把資料結構定好 @_@|||
+21:32:19 <CindyLinz> http://www.quickmeme.com/img/0e/0e23e9fc704b8d4edfe58ef550aa53e84cd3d208cba5f3aa96f06befcf4d5dcd.jpg
+21:32:33 <suhorng> 可是就變之後我還要再做 inline XD
+21:32:50 <suhorng> XDDDD
+21:33:01 <CindyLinz> ideone.com 開好久 怪怪..
+21:33:59 <CindyLinz> hmmm
+21:34:09 <CindyLinz> 好像也沒什麼不好
+21:34:15 <suhorng> 是沒錯
+21:38:23 <CindyLinz> 欸.. 如果這邊放 t 的地方想放 closure 怎麼辦? @@"
+21:38:37 <CindyLinz> t ~ AllClosure someA someB 的形式
+21:38:58 <suhorng> 好問題
+21:39:38 <CindyLinz> 那就固定做七層好了? ^^|
+21:39:51 <suhorng> 實際實作的話大概只是某個 AllClosure someA someB 的指標, 不過我想想要怎麼從這裡轉過去....
+21:40:30 <CindyLinz> 這樣 data AllClosure a b = ... 應該就窮舉不完了? @@"
+21:40:49 <suhorng> 遞迴?
+21:41:24 <suhorng> 噢, 實際的話我不會用 polymorphic type a, b 而會直接放 concrete type
+21:41:42 <suhorng> 反正我這邊都是 monomorphic 的
+21:42:10 <CindyLinz> ... = ... | MkClosure999 (AllClosure Int Char) (AllClosure Int Char -> a -> b) | ... ?
+21:42:27 <suhorng> 嗯嗯嗯嗯
+21:42:31 <CindyLinz> 喔喔 所以先收集好所有會建 closure 的地方
+21:42:45 <CindyLinz> 一定都是已經填好 concrete type 的?
+21:43:05 <suhorng> 因為是 simply typed lambda calculus 所以都會知道XD
+21:43:22 <CindyLinz> 嗯
+21:43:28 <suhorng> 現在我是打算前面就先把 polymorphic function 的部份全都複製好填好 type
+21:43:59 <CindyLinz> 嗯嗯嗯
+22:38:27 <suhorng> http://www.quora.com/What-do-C-C++-programmers-know-that-Haskell-programmers-dont/answer/Costya-Perepelitsa 這篇實在是XDD
+22:43:51 <suhorng> https://medium.com/@Appletone/functional-programming-c7a65927806e
+22:44:45 <petercommand> suhorng: 問一下...鱷魚蛋遊戲是甚麼XD
+22:45:25 <suhorng> http://worrydream.com/AlligatorEggs/ 這個唷
+22:46:32 <suhorng> 每個直的都是一族; 鱷魚吃掉右邊的一族時會死掉, 然後 bounded-eggs (?) 會生出一樣的東西XD
+22:49:41 <petercommand> 喔喔XDXD
+23:02:21 <CindyLinz> 寫 C++ 的朋友平均會比寫 Haskell 的人細心嗎?
+23:20:54 <suhorng> 哇, Idris 竟然有 Java backend

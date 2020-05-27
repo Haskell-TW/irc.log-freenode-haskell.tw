@@ -1,0 +1,45 @@
+00:04:48 <petercommand> https://mail.haskell.org/pipermail/ghc-devs/2014-April/004826.html 找到這個..
+00:06:25 <petercommand> "I have repeatedly sought someone to support and maintain External Core, but no one has stepped forward." XD
+00:07:05 <petercommand> 是這個原因移除的改覺有點悲傷..
+00:07:12 <petercommand> *感覺
+01:30:37 <CindyLinz> BYOHC 用的 basic haskell -- untyped (去冰) desugar (無糖) Haskell
+01:31:06 <CindyLinz> 至於為什麼 type 是冰... 我也說不上來 (逃
+01:32:00 <caasih> XDDD
+17:12:55 <CindyLinz> 有了 multi-way-if 以後, 讓我的 coding style 有一點猶豫...
+17:13:43 <CindyLinz> 我寫 Haskell 習慣 indent 兩格, 遇到 do,of,where,let 的時候如果超過一行, 都會寫完這關鍵字就先換行縮排
+17:14:50 <CindyLinz> 而 multi-way-if 的寫法.. 如果第一行寫 if, 第二行寫 空空| 感覺不太舒服? 就快要對齊了, 然後又剛好歪掉的感覺 XD
+17:17:16 <CindyLinz> 如果用 if | 條件 -> 的話  那個 | 不是在奇數 column 上有點討厭, 而 if| 條件 -> 的話, 黏在一起也不太舒服 ^^|
+17:26:59 <cibs> if| cond ->
+17:27:02 <cibs>   | cond ->
+17:27:03 <cibs> 呢
+17:32:09 <CindyLinz> 就是黏到的那種 ^^|
+17:32:15 <CindyLinz> 猶豫 ._.
+17:32:45 <CindyLinz> 不過有人附議了, 以後就寫這種吧!
+17:38:47 <petercommand> if | cond ->
+17:38:54 <petercommand>    | cond ->
+17:38:56 <petercommand> 呢?
+17:39:02 <petercommand> XD
+17:39:05 <CindyLinz> 這是 | 不在奇數 column 啊
+17:39:55 <CindyLinz> 如果每一行的 prefix space 都是偶數個比較開心
+17:40:50 <petercommand> XD
+17:45:10 <cibs> 喔對耶那行沒看完 XDDD 不過我覺得這個看起來比較舒服
+17:48:18 <CindyLinz> 看起來舒服, 可是打起來不舒服... QQ
+17:48:36 <CindyLinz> 還要考慮一下 -> 後面的程式碼, 有時候會是一個 do 然後換行
+17:51:05 <caasih> 打個岔，在看 CindyLinz 和 alex_lu 的 repo 時，我下 cabal install --only-dependencies ，都會遇到沒裝 happy 的錯誤。
+17:51:33 <caasih> 試過把 happy 加到 .cabal 裡但是失敗，變成每次都要另外 cabal install happy
+17:51:52 <caasih> * 不知道自己哪邊作錯了
+17:59:01 <CindyLinz> 因為是要使用 happy 這個執行檔, 而不是 package 要 depend 它的 code
+17:59:21 <CindyLinz> 如果在 sandbox 裡安裝的話, 我想你預設的執行路徑找不到它的
+18:20:24 <caasih> CindyLinz: 謝，晚點看看我的 PATH 有什麼問題
+18:21:21 <alex_lu> caasih: 把 happy 裝在 sandbox 外面應該就一勞永逸了
+18:26:48 <caasih> alex_lu: 那樣要 sandbox 何用 XDD
+18:29:39 <CindyLinz> 只有 happy 在外啊
+18:29:56 <CindyLinz> 畢竟你應該也接受 ghc 和 gcc 是裝在 sandbox 外吧? XD
+18:32:16 <alex_lu> 看起來這是個歷史悠久的 issue ( https://github.com/haskell/cabal/issues/220 )
+18:35:40 <alex_lu> 然後因為我用 stack ，會自動裝好這些 build-tools ，所以都剛好沒遇到
+18:46:38 <caasih> 瞭解。被 JS 寵壞了
+18:48:09 <caasih> alex_lu: 昨天看到篇文介紹 stack 和 Nix 的關係，看不太懂，是指 stack 用 Nix 管理 dependencies 嗎？
+18:49:27 <caasih> http://www.tweag.io/blog/stack-nix-portable-reproducible-builds
+19:27:07 <alex_lu> 看起來是耶
+19:27:38 <alex_lu> 不知道 "No-resinstall Cabal" 出來之後用 stack 是不是也會自動有這樣的效果
+23:47:11 <CindyLinz> resinstall @@"

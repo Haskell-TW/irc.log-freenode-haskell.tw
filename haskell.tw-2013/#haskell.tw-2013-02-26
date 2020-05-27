@@ -1,0 +1,194 @@
+00:03:58 <letoh> 我 google 一下 attoparsec 後...
+00:04:13 <letoh> 傳回  1 attoParsec = 3.08567758 centimeters  XD
+00:04:23 <letoh> 原來是個單位
+00:04:24 <CindyLinz> google... 好奢侈的工具.. T_T
+00:04:45 <letoh> XD
+00:06:03 <letoh> 這邊有人去上那個 c++ 大師認證班嗎?
+00:06:26 <letoh> http://www.cppgm.org/pa1.html  原來有第一次作業了
+00:09:15 <letoh> 不管是 parsec 或 attoparsec 好像都是 LL(k) parser
+00:09:28 <letoh> 這樣遇到 left-recursion grammar 不就掛了?
+00:09:42 <letoh> 要自己手動改 grammar 嗎?
+00:10:33 <CindyLinz> 我因此掛掉過 XD
+00:10:42 <CindyLinz> parsec
+00:10:47 <letoh> 原來如此  會跑不完吧
+00:11:13 <CindyLinz> Y
+00:11:39 <letoh> 不曉得在哪看到的介紹  說 parsec 可以支援 LL(n)... 很多類似的 clone 都只有 LL(1)
+00:12:32 <letoh> 不過這樣寫還是方便很多...
+00:13:20 <letoh> 找找有沒有 combinator + packrat 的實作...
+00:14:02 <letoh> scala 有
+00:21:39 <letoh> 「過去幾年來，台灣對外的海纜，幾乎每兩年都會斷線超過一天。」
+00:23:21 <CindyLinz> "是方將於15分鐘後測試對網路設備恢復供電，再一小時後如沒問題將逐一全部恢復供電。猜想真的是拉市電硬上了"
+00:46:33 <b4283> ruby 2.0
+01:01:41 <favonia> letoh: atto = 10^-18
+01:01:56 <favonia> letoh: 我希望指的是執行時間... xD
+01:23:55 <suhorng> 好崩潰喔, hw4 不知道為什麼錯一堆
+01:24:26 <suhorng> 我懷疑因為我在 vector-assoc 裡面用內建的 assoc 讓他誤判以為我 cache-assoc 直接用 assoc...
+01:28:56 <letoh> 唔  需要討論嗎? 我一發就結束了  不過 challenge 還沒寫
+01:30:30 <letoh> 不過剛剛又改寫了一下最後一題  自以為有比較好一點  結果沒有XD
+01:31:02 <letoh> suhorng: assoc 的型別不同
+01:31:20 <suhorng> 咦？
+01:31:24 <letoh> vector-assoc 應該沒辦法用 assoc 吧...
+01:31:26 <suhorng> 型別怎磨了嗎
+01:31:28 <suhorng> 對呀
+01:31:43 <letoh> assoc 吃的是 list，所以你用偷吃步喔...
+01:31:44 <suhorng> 我…我是把他的vector轉成一個都是 pair 的 list
+01:31:53 <suhorng> 應該不算偷吃步吧…？
+01:32:04 <letoh> 不用轉 list 就可以啦
+01:32:10 <suhorng> 麻煩呀...
+01:32:12 <letoh> pair vector 會有問題嗎?
+01:32:17 <suhorng> 不會
+01:32:49 <letoh> 用內建的所以我說是偷吃步啊XD
+01:33:01 <suhorng> 不算吧Q___Q
+01:33:17 <suhorng> 不然東西都混在一起很醜...
+01:33:38 <letoh> 不曉得耶  因為 hint 說有用到一個 local helper，所以我猜是要我們自己 lookup
+01:34:12 <suhorng> 嗯...
+01:34:18 <suhorng> 我也有local helper呀QQ
+01:34:38 <letoh> 好吧XDXD
+01:34:40 <suhorng> 算了
+01:35:02 <suhorng> 新的section 6聽我同學說滿有趣的
+01:35:11 <letoh> 不過他們的自動檢查好像都是檢查有沒有用某些函式
+01:35:15 <letoh> 喔喔  來看一下
+01:35:33 <letoh> 我 section 5 看了一半覺得很無聊XD
+01:35:35 <suhorng> 嗯
+01:35:38 <suhorng> 我只挑著看
+01:35:49 <suhorng> section 5 也只是介紹基本語法...
+01:35:57 <suhorng> 不過要模擬 Lazy 還真麻煩
+01:36:07 <letoh> 對啊... sec 6 好像真的比較有趣
+01:36:19 <letoh> 不會啊  我在 python 裡常常做XD
+01:36:43 <suhorng> 不是還得用個變數紀錄算過了沒？不然會重複算orz
+01:36:51 <letoh> 對呀
+01:36:57 <suhorng> >""<...
+01:37:00 <letoh> 不過我通常沒那麼複雜
+01:37:13 <letoh> 算完那一次就丟出去了
+01:37:41 <suhorng> 嗯
+01:37:43 <letoh> 寫 project euler 常常用到
+01:37:55 <suhorng> wwww
+01:38:02 <letoh> lazy stream 和 cache 也都用得到
+01:38:05 <suhorng> 話說 python 的 generator 也滿酷的XD
+01:38:07 <suhorng> 嗯哼
+01:38:24 <letoh> python 的 generator 就 lazy stream 的語法糖啊XD
+01:38:30 <suhorng> 超棒!
+01:38:58 <letoh> 的確是很棒  讓我想用 python 的原因之一
+01:40:07 <suhorng> XD
+01:40:55 <letoh> 我很多迴圈都變成 generator 了
+01:42:04 <suhorng> 有點神秘...
+01:42:10 <suhorng> 真的有多到那麼多？
+01:42:26 <letoh> ?? 你是指 generator 的使用?
+01:42:27 <lambdabot> Plugin `compose' failed with: Unknown command: ""
+01:42:35 <letoh> ...
+01:42:38 <suhorng>  嗯
+01:42:39 <suhorng> XDDDDD
+01:42:51 <letoh> 出來亂的XD
+01:43:30 <letoh> 一時要舉例有點難，但很多迴圈的東西都可以變成 generator 呀，分開寫比較乾淨
+01:43:37 <suhorng> 嗯哼
+01:43:43 <suhorng> 之前有用過一些..不過還是不多
+01:43:48 <letoh> 可以寫成 for v in gen(args): proc(v)
+01:43:52 <suhorng> 可能我用到的跟串劉比較不相關XD
+01:43:55 <suhorng> 神秘@@
+01:44:12 <letoh> 其實跟 stream 沒什麼關係啦
+01:44:50 <letoh> 那個 stream 的名字應該是從 sicp 來的吧，忘了為什麼叫 stream 了
+01:45:08 <suhorng> 其實我也不熟...
+01:45:36 <suhorng> 我要先離線了@_@"
+01:45:42 <letoh> ok
+01:45:44 <letoh> 晚安
+01:46:11 <suhorng> 晚安~
+02:33:18 <letoh> 原來 challenge 做完會加分
+12:27:46 <_13h> http://stackoverflow.com/users/120163/ira-baxter  這人 60 歲耶...
+12:34:52 <favonia> 原來 xmonad 在 G+ 上有 community xD
+17:57:26 <_13h> https://www.coursera.org/course/prob  台大開的機率
+18:01:12 <mno2> xD
+22:53:41 <letoh> 沒想到 ptt 的 oo 討論串還可以戰下去
+22:53:47 <letoh> suhorng: hi
+22:55:36 <suhorng> hello XD
+22:56:00 <suhorng> 哪個板呀？
+22:56:04 <letoh> suhorng: 我丟了一隻 generator 的示範小程式  但好像會把 ideone 搞爛
+22:56:26 <letoh> 喔看了一下應該是不會爆啦  會跑到 runtime error XD
+22:56:34 <letoh> suhorng: http://ideone.com/EVf3Ym
+22:56:39 <letoh> suhorng: soft_job
+22:56:53 <suhorng> 神奇@_@"
+22:57:22 <letoh> 怪了  這 indent 有點不太對... 不過還是可以跑
+22:57:40 <letoh> result: runtime error     time: 0.01s    memory: 7728 kB     signal: 25 (SIGXFSZ)
+22:57:41 <suhorng> 喔喔 感謝
+22:57:47 <suhorng> 我之前也有寫過一些用 generator 的東西XD
+22:58:15 <letoh> 我很多這種東西  畫圖阿  寫 parser 啊  分析資料啊  超好用的
+22:58:36 <suhorng> 後來runtime error大概是MLE之類？
+22:58:56 <suhorng> 喔　是檔案大小超過限制
+22:59:09 <letoh> quota 吧?
+22:59:19 <suhorng> 對
+22:59:27 <suhorng> 輸出太多XD
+22:59:36 <letoh> 對啊  因為跑不完XD
+23:00:50 <letoh> http://www.ptt.cc/bbs/Soft_Job/M.1361863634.A.EC6.html
+23:01:19 <letoh> Joe Armstrong 不懂物件導向嗎? @_@
+23:02:58 <suhorng> 不會吧!?
+23:03:33 <letoh> 那篇文章內說的XD
+23:04:26 <favonia> letoh: 當一個人只知道蘋果和橘子時，所有不是蘋果的都是橘子。
+23:04:57 <letoh> 原本的比喻不是鐵釘嗎? 還是我記錯了XD
+23:05:19 <CindyLinz> letoh: 不太一樣
+23:05:26 <CindyLinz> letoh: 鐵釘的世界只有鐵釘.. XD
+23:05:44 <CindyLinz> letoh: 當世界上出現了銅釘, 那比喻就不太一樣了 XD
+23:10:05 <letoh> 「資料和函數是有關聯的」不見得要用『綁在一起』來解決吧，型別不好嗎? XD
+23:11:35 <favonia> letoh: 你學過 SML module 就應該知道 OOP 宣稱的優點在 module 眼中都不值一提 xDDDD
+23:11:56 <letoh> sig 超厲害的XD
+23:12:26 <favonia> letoh: 在 sig 眼中，大部份 OOPL 的封裝根本就沒封好
+23:13:14 <letoh> 我覺得對很多人來說根本不重要，只要用的技術夠潮就好XD
+23:14:08 <CindyLinz> sig?
+23:15:06 <CindyLinz> 很多人只要活在微軟蓋的溫室裡假裝天不會塌下來就好了..
+23:16:23 <letoh> sig 是指 sml 的 signature / structure
+23:16:29 <CindyLinz> 雖然 ghc 也是微軟蓋的.... QQ
+23:16:44 <CindyLinz> letoh: 喔, 原來不是人名啊 XD
+23:16:54 <CindyLinz> letoh: 想說又是哪位大大, 來搜一下文章或著作 XD
+23:16:59 <letoh> 不是XDXD
+23:17:35 <letoh> 看了一下前兩句還真的很像在說某位大大XD
+23:18:08 <favonia> letoh: 快申請 facebook
+23:18:23 <letoh> 為什麼要申請 facebook ?
+23:18:39 <favonia> 幫大大申請
+23:18:45 <letoh> XDXD
+23:21:53 <letoh> 我一直覺得  按鈕.按下()  這種寫法很難理解，為什麼不是  使用者.按下(按鈕)  XD
+23:22:15 <CindyLinz> 這只是語系問題....
+23:22:23 <CindyLinz> 以前我在用 C 的時候..
+23:22:38 <CindyLinz> 照 Introduction to Algorithms 的虛擬碼
+23:23:16 <CindyLinz> 會寫出 weight[neighbor[neighbor[n]]] 這樣的 code
+23:23:29 <CindyLinz> 如果包成物件或結構的話, 會寫成
+23:23:47 <CindyLinz> node[n]->neighbor->neighbor->weight
+23:24:04 <CindyLinz> 我覺得前者像是 weight of neighbor of neighbor of node n
+23:24:15 <CindyLinz> 後者是 node n 的 neighbor 的 neighbor 的 weight
+23:24:36 <CindyLinz> 所以就覺得... 嗯嗯, 大概就像中文 vs 英文的感覺吧 ^^|
+23:24:42 <letoh> 語系++  這說法好像不錯XD
+23:26:05 <suhorng> XDDD
+23:27:54 <CindyLinz> 但是 OO 裡面的函數不能屬於兩個或以上個 class 讓我不太舒服...
+23:28:49 <letoh> prototype-based 好像可以? 不過這種模型通常沒有 class
+23:30:55 <CindyLinz> 是常見語言嗎? o.o
+23:31:05 <CindyLinz> javascript 沒有呀 :|
+23:31:34 <CindyLinz> 啊~ 我說的屬於, 是說.. 可能這函數執行的時候會用到兩個不同的 this
+23:31:38 <letoh> 現在的 js 我不太熟，我只會 Io 跟 Python XD
+23:32:00 <CindyLinz> 所以要同時有兩種物件都存在的時候, 這個 method 才能用
+23:32:15 <letoh> 喔喔  原來是這樣  multimethod 嗎?
+23:32:36 <CindyLinz> 不知道那個叫什麼 XD
+23:32:54 <letoh> 唔  我學過的語言有這語法糖的只有 factor
+23:33:04 <letoh> 或叫 multiple dispatch
+23:33:23 <letoh> 不確定是不是你說的那種特性
+23:33:33 <CindyLinz> Haskell class 可以不只牽涉一個 type, 感覺就很棒 :D
+23:34:17 <letoh> http://factor-language.blogspot.tw/2008/01/multi-methods-in-factor.html   類似這樣
+23:34:42 <letoh> : play ( obj1 obj2 -- ? ) beats? 2nip ;   要有 obj1 obj2 一起才能執行 play 這個函式
+23:35:23 <letoh> 語法有點怪先不要管它XD
+23:36:13 <CindyLinz> 沒關係 XD
+23:37:30 <letoh> 唔  原來 wikipedia 上有不少範例，可以參考一下
+23:38:19 <letoh> 上面說 haskell 世界叫做 multi-parameter type class
+23:38:43 <letoh> 而且 hugs 就有支援XD
+23:39:46 <CindyLinz> 先別說 hugs 了, 你聽過 ghci 嗎? XD
+23:40:04 <letoh> 不能跑XD
+23:40:18 <favonia> letoh: 難怪我剛才一直搞不清楚到底有什麼好玩的 \o/
+23:40:28 <letoh> favonia: 什麼東西?
+23:40:36 <favonia> multi-methods
+23:40:41 <letoh> 喔喔喔
+23:41:32 <letoh> 這東西不好玩啊  不過記得有個語言還分成對稱式跟非對稱式的
+23:41:44 <favonia> ?
+23:41:59 <letoh> 好像叫 symmetric multiple dispatch 之類的
+23:42:19 <letoh> 不過我沒研究那是什麼東西XD
+23:42:55 <letoh> 剛剛要找那一套語言一直找不到  印象中是 jvm language
+23:43:42 <favonia> /ignore xD
+23:43:51 <letoh> 不重要XD
+23:44:42 <CindyLinz> scala?
+23:45:08 <letoh> 不是耶  好久以前看到的  當時 scala 可能還沒出生或沒那麼有名XD
+23:46:07 <letoh> 剛剛以為 goo，但看了一下又不太像@_@
+23:47:53 <letoh> http://lambda-the-ultimate.org/node/2571#comment-38802  怎麼搞了半天是 multijava 嗎? 對這名字沒印象

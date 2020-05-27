@@ -1,0 +1,251 @@
+00:00:09 <letoh> C++ 還可以啦  雖然能不碰也是...(ry
+00:01:43 <suhorng> 那不是一開始沒有 lambda 才做出來的模仿品嗎XD
+00:17:40 <CindyLinz> C++ 的 functor... 就只是有 overloading () operator 的物件?
+00:19:03 <monochrom> 是
+00:19:48 <CindyLinz> 不有趣!
+00:20:37 <hashcat> 偽functor
+00:20:46 <CindyLinz> YuLin: 欸欸, C++ 的 functor 講完了, 你可以不用花時間再細看了 XD
+00:21:44 <hashcat> 可以多關注idris
+00:21:59 <hashcat> 對偏門的新語言來說活動率不算太低
+00:22:12 <suhorng> 他年代好像滿近的?
+00:22:30 <suhorng> 而且程式可以實際跑@@!!
+00:24:35 <CindyLinz> 我晚一點.. 最近想專心看 lazy 的東西...
+00:32:32 <letoh> 我貼的那一篇對 c++ 來說才是偽 functor XD
+00:32:52 <letoh> 那篇是用 c++ 實作 fmap 這些東西
+00:33:16 <letoh> 看到那個 domain 至少捧個場嘛XD
+00:34:46 <CindyLinz> letoh: 網址那麼長, 沒注意 domain 啊.. XD
+00:34:48 <letoh> suhorng: 就算有 lambda 好了，我實在懷疑十年內能不能在業界普及使用...
+00:34:51 <letoh> XDXD
+00:35:28 <CindyLinz> C++11 的 lambda.... 普及它真的是好事嗎? orz
+00:36:06 <CindyLinz> 我覺得很局部很局部地用就好了..
+00:36:10 <CindyLinz> 那就還不錯
+00:37:04 <letoh> 唔  其實我想講的是說熟悉用這些新工具來設計程式  不過表達的不太好XD
+00:37:20 <letoh> 不過就算現在，也還是很多把 c++ 當成 c 來寫的XD
+00:37:21 <suhorng> letoh: 可是 lambda 也是假的....XD
+00:37:47 <suhorng> 雖然真要說的話是一連串東西的結果, 可是 C++ 的 lambda 就完全不是我們平常用的 lambda
+00:38:12 <letoh> 我是覺得以 c++ 這樣的限制能提供一點新工具已經是突破了  你要它突然變成 haskell 是不太可能的啦
+00:38:16 <CindyLinz> letoh: 這連結.... 是 Haskell 長得像 C++ 的 syntax sugar 啦 XD
+00:38:27 <letoh> 哈XDXD
+00:38:47 <suhorng> 不全然啦, 應該說 C++ 的 lambda　＝＝＝　建立function object的syntactic sugar
+00:39:01 <suhorng> 跟常見 functional language 的 lambda 意思完全不一樣
+00:39:29 <suhorng> 而 C++ 的 std::function 是用 template 把 callable object 外面再包一層東西...
+00:39:40 <letoh> 大部份的 lambda 就是 ananymous function 而已，不是要變成 functional language 講的 lambda 啦
+00:40:32 <letoh> 我覺得業界不太在意追求理論方面的滿足，主要還是實用方面，然後不要改變太大
+00:41:54 <CindyLinz> 等等.. 還有差喔? XD # lambda vs anonymous function
+00:42:05 <CindyLinz> 我是說.. 再加上 closure 的部分 :p
+00:42:25 <CindyLinz> C++ lambda 在 by value 的部分, 還蠻像 closure 的呀
+00:42:58 <letoh> 就限定使用範圍來看吧，應該還算是可以用
+00:43:23 <letoh> 不過要我把程式改寫成 c++1x 還是有點懶... 原本的能跑就好XD
+00:43:38 <suhorng> 例如
+00:43:39 <suhorng> let counter = ref 0 in fn () => counter := !counter + 1; counter end
+00:43:40 <CindyLinz> 已經能用的幹嘛改啊 @@"
+00:44:04 <suhorng> C++裡面要改成 shared_ptr<int> 然後closure抓進來也是可以啦.....
+00:44:10 <letoh> 還是常常會修修改改啊  其實是可以趁機一點一點換掉XD
+00:44:17 <suhorng> 不過就是東西都要手動轉
+00:44:23 <letoh> 卡在公司還有人用 vc6...
+00:44:34 <suhorng> vc6!!!!!!!!!!!!!!
+00:44:41 <suhorng> 我以為買不到了?
+00:45:07 <letoh> 有買 msdn subscription 的話，也許還弄得到?
+00:45:16 <letoh> 都能弄個 win3.1 來玩了XD
+00:45:36 <suhorng> www
+00:45:42 <CindyLinz> suhorng: 嗯, 要改值的, by ref 的就不行了....
+00:46:01 <CindyLinz> 外層函數 return 以前可以 XD
+00:46:37 <suhorng> CindyLinz: 有個不健康的作法是, 如果確定每個 closure 的 instance 都獨立, 那加上 "mutable" ... XD
+00:47:13 <suhorng> 我覺得精確來說要一樣的話就是要用指標. 如果不想要 memory leak 就配合 shared_ptr 自動做 reference count...
+00:48:06 <CindyLinz> 那就不是 C++11 lambda 的功能了, 你是自己實作的 XD
+00:49:03 <suhorng> 好吧, 畢竟 C++ 裡面的變數都是 reference XD
+00:49:39 <suhorng> functional language 有一種 closure 的時作方式就是把外面的變數都拷貝一份近來
+00:50:01 <CindyLinz> 變數都 imutable 真開心.. XD
+00:50:06 <suhorng> 然後 'a ref 拷貝進來的是 'a ref 所以不會出事 XD
+00:50:41 <suhorng> 但是對於 Scheme 這種沒有 type 的, 要這樣實作 closure 編譯器實作就要先把會改到的變數都變指標
+00:50:55 <suhorng> (其中一種實作方式)
+00:54:20 <CindyLinz> 能改的東西不是原本就是指標喔? @@"
+00:55:28 <suhorng> 需要辨認出哪些被改, 因為沒有 type Orz
+00:56:35 <suhorng> Scheme 裡面 variable reference 沒有像 ML 那樣 "!" 明確寫
+00:56:46 <CindyLinz> 喔喔...
+00:57:08 <CindyLinz> 我目前讀的部分蠻前面的, 以為都是不能改的 :p
+00:59:41 <suhorng> 大家的作法都差好多XD
+00:59:47 <suhorng> *語言的作法
+01:00:33 <CindyLinz> 這樣很好 :p
+01:00:38 <suhorng> XDD
+01:01:00 <CindyLinz> 有了什麼新平台想 porting 的話也比較有路
+01:01:15 <CindyLinz> 既然它已經用這麼多種不同的方式實作, 再多一種可能也不太難
+01:01:23 <CindyLinz> 像 perl 就... QQ
+17:05:27 <CindyLinz> 寫一寫 chrome extension 就好想自己寫個 browser....||
+17:06:06 <CindyLinz> chrome extension 的 api 真是好亂, 東漏西漏的... 感覺像他們工程師或 PM, 想到一個功能就做一個功能, 互相不整合的 :|
+17:14:54 <MnO2_> 最後就變 NaCL 了 (誤)
+20:25:38 <hashcat> https://github.com/overtone/emacs-live
+20:25:49 <hashcat> 用這個寫clojure中
+20:45:21 <suhorng> hashcat: 好奇一下XD　你用 ParEdit (minor) mode 嗎?
+20:46:38 <hashcat> 他預設開的就用了
+20:48:10 <hashcat> 下括號拔不掉, 要移動一段只能整塊括號成對剪下
+20:48:31 <hashcat> 培養了個好習慣
+20:51:41 <suhorng> 真的
+20:51:51 <suhorng> 而且我覺得一些直接操作一整個node超級好用
+20:52:37 <suhorng> 像是把這個節點最前/後的子節點吐出去, 或把外面的吞進來, 還可以兩層換位置之類
+20:52:43 <suhorng> 直接編輯AST的感覺XD
+20:53:50 <hashcat> 有時後會出鎚
+20:54:04 <suhorng> bug？
+20:54:08 <hashcat> 不知道按到啥括號不成對了
+20:54:32 <hashcat> 他貌似不是每種刪除下括號都擋得了
+20:54:35 <suhorng> 嗯..我是有不小心按過大括號, 然後就再也動不了了
+20:54:55 <suhorng> 有的刪除可能是 emacs 內建的刪除功能, 造成不成對 (像 C-Del)
+20:56:11 <hashcat> C-w
+20:56:29 <suhorng> 嗯 應該也會
+20:56:57 <hashcat> 忘記怎用出來了
+20:57:14 <hashcat> 有次跑出一個下括號刪不掉
+20:58:38 <suhorng> 那樣真的很麻煩= =|||
+20:58:39 <hashcat> 貌似不是啥重要的事情
+20:59:47 <hashcat> 換成vim補起來
+21:01:37 <suhorng> 十分難過XD 內建的還原不太好用...
+21:02:29 <CindyLinz> 想到王垠的 editor... ^^
+21:02:33 <hashcat> emacs-live的還原很好用
+21:02:40 <hashcat> 又是王垠
+21:03:23 <CindyLinz> hashcat: 中文的文章不好找啊.... (攤)
+21:03:39 <suhorng> hmm.. lisp.tw XD?
+21:04:01 <Yu_lin> 中文文章難找，看起來只好自己寫了？XD
+21:04:20 <hashcat> 他寫中文繁體字我也看不懂
+21:04:20 <CindyLinz> 先拜.... m(_._)m
+21:06:47 <CindyLinz> 我直接看簡體字沒什麼障礙, 只是看到用繁體字寫的, 有台灣用語的大陸用語會很不慣 ^^|
+21:07:51 <CindyLinz> 像什麼... 「內存緊張」「魯棒的冗餘迴路設計」.. XD
+21:07:57 <hashcat> 我是不知道他到底要講啥
+21:08:03 <hashcat> 看簡體字是沒差
+21:08:16 <godfat> 內存緊張.... 是缺少記憶體？
+21:08:24 <CindyLinz> yes...||
+21:08:57 <godfat> 說真的我好討厭那些奇怪的翻譯呀...
+21:09:07 <hashcat> robust應該翻譯成強健或耐受之類的吧
+21:09:11 <CindyLinz> 但如果純簡體字寫就沒有違和感 ^^
+21:09:14 <hashcat> 魯棒很難聽
+21:09:48 <CindyLinz> 魯棒真是罕見的大陸譯法 XD  我覺得他們通常是用意譯的
+21:09:58 <hashcat> 說是音譯唸起來也沒像到哪去
+21:10:11 <CindyLinz> 而且常常譯得不錯, 音譯不常見
+21:10:25 <CindyLinz> hashcat: 可能大陸人的英文發音跟這個字會比較像? @@"
+21:10:39 <godfat> 我記得數量級有一個翻譯跟台灣不一樣，好像是 mega?
+21:10:43 <CindyLinz> 兆
+21:10:58 <godfat> 那真正的兆怎麼說？
+21:11:15 <CindyLinz> 應該還是兆吧.. @_@"  反正中文本來就吃 context 吃很重 ._.
+21:11:21 <godfat> ........orz
+21:12:54 <CindyLinz> 想到今天看 free monad 介紹文裡面的 sample code.. instance 定義裡面用到的 type variable 和它的函數字義的 variable 喜歡用重複的名字... 不小心就會很困惑 @@"
+21:12:54 <MnO2_> 音譯應該香港一堆吧 xD   屈臣氏
+21:13:46 <hashcat> 他們根本是想直接講英文吧
+21:14:01 <CindyLinz> 我超愛前一陣子在一個大陸寫的 php library 裡面看到的註解..
+21:14:27 <CindyLinz> (找一下)
+21:17:26 <CindyLinz> token
+21:17:30 <CindyLinz> 叫作 令牌
+21:18:03 <godfat> 查了一下，他們叫「太」 @_@
+21:18:03 <godfat> http://zh.wikipedia.org/zh-tw/太拉
+21:18:21 <godfat> 令牌 XDDDDDD
+21:18:22 <CindyLinz> tera?
+21:18:27 <godfat> 嗯
+21:18:54 <CindyLinz> 咦, 他們高位數直接改成千進位喔 @@"
+21:21:03 <Yu_lin> 把資料寫進 ax 的千進位......？
+21:21:16 <CindyLinz> 這個表... 怎麼中華民國的部分我都覺得陌生 orz
+21:21:31 <godfat> 說來萬好像是個有點微妙的存在倒是... ~.~
+21:22:29 <godfat> 對照這個
+21:22:29 <godfat> http://zh.wikipedia.org/zh-tw/中文数字
+21:22:29 <godfat> 三個零和四個零的麻煩 -_-
+21:22:55 <CindyLinz> godfat: 欸, 這個表是「國際單位制詞頭」.. 不能拿來代表他們平常沒有用 萬億兆京 啊 @"
+21:22:56 <CindyLinz> @@"
+21:23:53 <godfat> XD 真麻煩 orz
+21:24:25 <godfat> 不可說不可說不可說 XDDDD
+21:24:28 <CindyLinz> 還是靠 context 對吧 XD
+21:24:37 <godfat> 看來是 orz....
+21:30:44 <CindyLinz> 我們現在用的是中數系統, 是萬進位的... 上數系統的「數窮則變」看起來真不錯, 這才是好好利用每一個 symbol 呀 :p
+21:31:10 <CindyLinz> 就是.. 億兆京垓.. 這些, 每一個都是前一個的平方倍
+21:33:16 <godfat> 意思就是用萬億之類的方式，而不是換字嗎？
+21:36:07 <CindyLinz> godfat: 對, 用一樣的十個字
+21:36:24 <CindyLinz> 欸.. 喔, 嗯嗯 中間是繼續組合小字
+21:36:41 <godfat> 不過這樣數字很大很亂時，比較難一眼看出數量級
+21:36:45 <suhorng> 慘了orz Haskell寫多了寫 OCaml 就寫錯了...
+21:38:02 <suhorng> let itoa4 n output =
+21:38:02 <suhorng>   let rec aux m t =
+21:38:02 <suhorng>     if t == 0
+21:38:02 <suhorng>     then ()
+21:38:02 <suhorng>     else output.(t-1) <- Char.chr ((m mod 10) + 48);
+21:38:02 <suhorng>          aux (m / 10) (t - 1)
+21:38:02 <suhorng>   in aux n 4;;
+21:38:03 <suhorng> 這個的 type 是.... int → char array → 'a （？？？？）
+21:38:23 <suhorng> 因為 if-then-else 只到 ...+ 48); 那裡為止, 遞迴的部份變成不在 if 裡面..
+21:43:01 <mno2> https://docs.google.com/presentation/d/1ZODuGNVnddLy2DG_IiPnBb5LBl0r1Rwhm_5LGGDQECY/edit#slide=id.p  下禮拜的投影片初稿
+21:43:19 <mno2> 不過做了半天發覺好像跟 FP 關係不是很大 xD
+21:43:25 <mno2> 幾乎都是系統
+21:43:29 <Yu_lin> 我寫 sml 也是快掛掉了
+21:44:15 <CindyLinz> 啊.. 投影片 orz
+21:44:44 <mno2> 已經 4x 頁了 xD
+21:45:00 <mno2> 但其實還有東西沒有講
+21:46:51 <CindyLinz> 要不要分成兩次講啊 orz
+21:47:49 <CindyLinz> mno2: 用的符號很 Haskell 啊 XD # 21:43 < mno2> 不過做了半天發覺好像跟 FP 關係不是很大 xD
+21:48:17 <CindyLinz> 你下面那三顆水桶的位置是不是斜的啊 @@"
+21:48:35 <mno2> 哪三顆？
+21:48:56 <mno2> 喔喔
+21:48:58 <mno2> 好像有點斜
+21:49:06 <CindyLinz> Gateway server, Middleware server, Web server
+21:49:10 <mno2> 隨便啦，用 touchpad 畫的 xD
+21:52:38 <CindyLinz> 結束時間訂成九點半好了... ^^|
+22:48:29 <mno2> CindyLinz 有在寫 blog 喔？
+23:30:52 <CindyLinz> mno2: 有「想要寫」很久了.. orz
+23:31:05 <CindyLinz> 所以一直很敬佩那些一直寫一直寫的人 @@"
+23:31:22 <mno2> 喔喔。只是看到你說要註冊 logdown 想說沒搜到啊 xD
+23:33:07 <CindyLinz> 註冊了..
+23:33:17 <CindyLinz> http://cindylinz.logdown.com/
+23:33:24 <CindyLinz> 空的... ._.
+23:33:51 <letoh> markdown syntax...
+23:34:00 <petercommand> logdown的創始人的fb天天都在宅配零食阿，洋芋片，礦泉水之類的XD
+23:34:19 <CindyLinz> 此風不可長....
+23:34:45 <mno2> 不太健康 xD
+23:34:56 <letoh> 這 table 語法是外掛的吧? markdown 應該不支援 table ?
+23:35:07 <CindyLinz> 前幾天他去他的對手 (宅配對手XD) 的公司, 哭說他覺得被霸凌了
+23:35:18 <petercommand> XD
+23:35:22 <CindyLinz> 因為他寄了一大堆食物, 隔天已經被吃掉 90%
+23:35:30 <Yu-Lin> XD
+23:35:52 <CindyLinz> 對方說: 公司大就沒在怕啊! 你那十個人的小公司怎麼跟我們玩!?
+23:36:08 <petercommand> XDDD
+23:36:08 <mno2> markdown 好像很多方言的樣子 xD
+23:36:08 <CindyLinz> KKBox 200人..
+23:36:44 <CindyLinz> letoh: ```語言   ``` 也是方言才有呀.. 純 markdown 我覺得蠻漂亮的, 可是真的是太少了 ^^|
+23:36:58 <CindyLinz> markdown 還有放 latex 外掛 XD
+23:37:00 <letoh> 唔  所以找 markdown renderer 還得看相容哪個方言? XD
+23:37:05 <mno2> 最近還有 MultiMarkdown
+23:37:08 <CindyLinz> letoh: 用眼睛看吧 XD
+23:37:09 <mno2> 對啊
+23:38:23 <CindyLinz> 想到以前學校有個學長, 習慣看 latex over 建出來的 pdf/ps....
+23:38:38 <CindyLinz> 他很適合直接看有 latex 外掛的 markdown..... wwww
+23:39:01 <letoh> 我的公司報告和簡報也是用 latex
+23:39:17 <letoh> 不過必要時還是得改成 word XD
+23:39:38 <CindyLinz> 我每一次做簡報都用一套不同的東西.... orz   還沒找到用起來開心可以用第二次的 orz
+23:40:01 <CindyLinz> 這次想用 suhorng 上次用的那個, 希望就一直用下去了 :D
+23:40:08 <CindyLinz> 也是 markdown 血統的東西 :p
+23:40:15 <letoh> powerpoint 實在不好用啊  打開後不曉得該做什麼XD
+23:40:24 <petercommand> CindyLinz: 太強了XD
+23:40:28 <letoh> suhorng 上次用哪一套?
+23:40:51 <CindyLinz> letoh: 先用一次 libreoffice 的 presentation, 然後就會覺得 MS powerpoint 真是好用到令人痛哭流涕 ._.
+23:41:27 <CindyLinz> letoh: 這個 https://github.com/gnab/remark
+23:41:29 <letoh> 我用過 openoffice 的... 這樣一比的確會覺得 powerpoint 很不錯
+23:41:42 <letoh> 其實我根本覺得 openoffice 沒資格出來比XD
+23:41:46 <CindyLinz> petercommand: 我作簡報的間隔很長啦... ^^|
+23:41:53 <letoh> CindyLinz: thanks, 研究看看
+23:42:47 <petercommand> CindyLinz: 天天用不同套超強大阿^^
+23:42:54 <letoh> 嗯  不過限定 in browser 對我來說就比較不適合
+23:43:10 <CindyLinz> petercommand: 如果是「天天」才有超強大啊... ^^|
+23:43:32 <CindyLinz> 我每次相隔幾個月吧 XD
+23:43:56 <petercommand> XD
+23:44:01 <CindyLinz> letoh: 你會在沒 browser 的環境用啊? @@"
+23:44:14 <CindyLinz> 它不用連網路啊
+23:44:20 <letoh> 應該是說 除了簡報外  還得把資料交出去
+23:44:28 <CindyLinz> 就交一個 html?
+23:44:38 <letoh> 圖片之類的怎麼辦? XD
+23:45:01 <letoh> 不過可以研究看看  當成 org-mode 的某個 backend 來用XD
+23:45:12 <CindyLinz> <img src="data:image/png;base64,......./>
+23:45:14 <letoh> 要交出去再重新轉成 pdf 就好
+23:45:22 <letoh> 還有這招XD
+23:45:37 <CindyLinz> 圖片 < 2MB 的時候可以安全用 ._.
+23:45:51 <letoh> 剛剛就在想說只能把資料塞進 html 裡了
+23:45:52 <CindyLinz> >= 2MB 以後.... IE or Firefox 可以用, chrome 就出局了
+23:45:59 <petercommand> CindyLinz: XDD
+23:49:32 <CindyLinz> 啊.. 如果圖檔 >= 2MB 還想給 chrome 用的話, 有個古老的方法!
+23:49:39 <CindyLinz> 把圖片分塊......
+23:49:49 <petercommand> ...
+23:49:58 <CindyLinz> 老祖先(?)的智慧
+23:53:10 <petercommand> 恐怖的html XD
+23:53:24 <CindyLinz> 在 RoR 陣營的 XDite 的 FB 上看到 Haskell 的東西耶~ # https://www.facebook.com/xdite/posts/10151943935503552
+23:57:15 <mno2> QuickCheck 還蠻多移植的 xD

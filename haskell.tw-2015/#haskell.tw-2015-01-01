@@ -1,0 +1,160 @@
+01:06:29 <CindyLinz> petercommand: 練習了一下 haskell 寫 determinent # http://ideone.com/KrQ7r6
+01:06:55 <CindyLinz> 一個是 O(N^N) 的降階法, 一個是 O(N^3) 的高斯消去法
+01:08:19 <suhorng> (Y)
+01:08:20 <CindyLinz> 原本只是想先練一種.. 可是找來找去沒有方便地找到 4x4 的練習題 + 答案... 所以只好寫兩種自己對答案 XD
+01:08:33 <monochrom> :)
+01:09:55 <CindyLinz> 話說.. 我從來沒有寫過浮點數可用的, 而且時間複雜度可接受的, det 演算法... 任何語言都沒寫過 @@"
+01:10:20 <petercommand> 我也沒有寫過XD
+01:10:37 <petercommand> CindyLinz: :p
+01:10:38 <monochrom> 想起來, 讀也沒讀過
+01:10:50 <CindyLinz> 只記得以前在學校被老師強調, 高斯消去法實務上不能用...
+01:11:00 <CindyLinz> 不過他當然是指浮點數...
+01:12:11 <petercommand> 恩，要完全精確才能用
+01:12:18 <suhorng> 好像有個數值較穩定的方法 :P
+01:12:42 <suhorng> 不確定是不是高斯消去法的某種變形 能保證運算過程中出現數字的大小不會太大
+01:12:46 <CindyLinz> 那時老師有介紹兩種... 然後有一種適用範圍最廣, 只記得名字叫 house holder..
+01:13:05 <CindyLinz> 「顧家的人」演算法?
+01:13:46 <monochrom> Householder 是人名. http://en.wikipedia.org/wiki/Householder_transformation
+01:14:02 <CindyLinz> 咦!?
+01:14:05 <CindyLinz> 原來不是拆開的 XD
+01:14:16 <monochrom> 又或者 http://en.wikipedia.org/wiki/Householder_%28Buddhism%29 居士
+01:14:29 <suhorng> http://cs.nyu.edu/exact/core/download/core_v1.4/core_v1.4/progs/bareiss/bareiss.cpp
+01:14:39 <suhorng> Bareiss algorithm, 好像是 fraction-free
+01:16:28 <CindyLinz> 其實我上那門課常常打瞌睡 orz
+01:17:35 <CindyLinz> 覺得內容很瑣碎很枯燥.. 完全沒有會感動的地方 @@"  高微複變或代數才比較有趣 QQ
+01:17:49 <CindyLinz> 記得課名是 計算線代
+01:18:54 <suhorng> 神秘XD
+01:18:57 <suhorng> 數學系的~?
+01:19:12 <CindyLinz> 對呀
+01:20:30 <monochrom> "高微複變" 應該是縮寫 高等微積分, 複數變數 (complex variables)
+01:21:07 <monochrom> 其中, 變數其實指函數.
+01:21:28 <CindyLinz> 嗯 一階展開(?)叫「複變函數論」
+01:22:46 <suhorng> 應該是誤會吧(?) 那是兩門課
+01:22:56 <monochrom> n-階展開, 是不是 複變變變...函數? :)
+01:23:51 <CindyLinz> XDDD
+01:24:03 <monochrom> "高微複變或代數才比較有趣" 應該理解為: "高微, 複變, 或代數才比較有趣"
+01:24:25 <CindyLinz> 結果入了 Flolac 教以後, 說反證法不能用..... 以前學的高微跟複變整個崩壞, 感到非常崩潰 orz
+01:25:31 <monochrom> 啊, analysis 通常都用 classical logic, 從不擔心 "甚麼是存在"
+01:25:45 <suhorng> 在 HoTT 那本書裡面的話...好像連排中律都有分很多不同的排中律XDD 第 0 階的, -1 階的, ∞ 的
+01:27:51 <CindyLinz> O_______O
+01:28:00 <CindyLinz> -1 階是怎樣.............
+01:28:11 <CindyLinz> 先用排中律證明 -1 階存在... = =
+01:28:16 <suhorng> XDDDD
+01:29:03 <suhorng> 他對 type 上面的 identity type 的分類(這樣講不太對不過管他的)從 0 往上 1, 2, ... 然後往下到 -2
+01:29:07 <suhorng> -2, -1, 0, 1, 2, ...
+01:29:08 <CindyLinz> monochrom: 對啊對啊, 多麼和諧美好的世界.... Q_Q
+01:30:52 <petercommand> http://pastebin.com/zk9JyVxr
+01:31:11 <petercommand> 剛剛遇到了這個問題，兩個都是 Num a 呀...
+01:31:22 <monochrom> 總於找到同路人了. 在 haskell 界信奉 intuitionism 是多麼的多啊!
+01:32:14 <CindyLinz> petercommand: 要怎麼看 source 啊?
+01:32:30 <monochrom> @type \x -> (zipWith ($) $ cycle [id, negate]) x
+01:32:30 <CindyLinz> 不過.. 都是 Num a 不代表是同一種 Num a 嘛?
+01:32:31 <lambdabot> Num c => [c] -> [c]
+01:32:42 <CindyLinz> 喔喔 下面 XD
+01:33:25 <petercommand> 恩，最下面那一行XD
+01:33:50 <CindyLinz> 有 monomorphism 的氣味..
+01:35:36 <CindyLinz> petercommand: 可以看完整一點的 source 嗎?     這個 x 來路不明啊 XDXD
+01:35:42 <monochrom> 需要語境
+01:35:55 <petercommand> http://ideone.com/RnhRk3
+01:36:13 <petercommand> 應該剛開始就貼的XD
+01:36:39 <CindyLinz> petercommand: 你那個.. 下面的 list1 不要標 type
+01:36:49 <CindyLinz> (應該就會過....)
+01:37:01 <CindyLinz> 不過 list2 的 type 也要拿掉 XD
+01:37:07 <petercommand> @@
+01:37:20 <CindyLinz> 是這樣... 沒有開「ScopedTypeVariables」的話
+01:37:29 <petercommand> 恩，變其他錯誤了XD
+01:37:41 <CindyLinz> type 裡面寫到的 type variable 都會被當成 fresh 的...
+01:37:46 <CindyLinz> orz
+01:37:57 <monochrom> 把 "list1 :: Num a => [a]" 和 "list2 :: Num a => [a]" 消除. 否則, 電腦把它看成 "list1 :: forall b. Num b => [b]", "list2 :: forall c. Num c => [c]"
+01:38:19 <petercommand> hmm..
+01:38:26 <petercommand> 原來如此..
+01:38:40 <CindyLinz> petercommand: 嗯, 我會開那個 extension, 然後把 determinant 的 a 加上 forall a.
+01:39:13 <petercommand> XDXD
+01:40:54 <monochrom> 啊, a ~ [a] 易得多, 某處把數字和 list 混淆了
+01:41:09 <CindyLinz> petercommand: 你那個 list2, 是用 determinant 算出來的, 結果會是 a 不是 [a] 呀 OAO
+01:41:51 <CindyLinz> petercommand: 我把 ScopedTypeVariables 列入必帶 extension....
+01:42:06 <CindyLinz> 是一種.. 超越 Z>B 的存在... (Y)
+01:42:27 <petercommand> CindyLinz: 恩恩，只是先編譯看看XD
+01:42:34 <petercommand> Z>B XDD
+01:42:47 <monochrom> 甚麼是 Z>B ?
+01:43:05 <petercommand> 利(Z)大於弊(B)
+01:43:05 <CindyLinz> 利大於弊... 台灣 318 學運期間的梗...
+01:43:30 <CindyLinz> 總統說服貿一定要簽, (唯一)理由是... 利大於弊
+01:44:36 <monochrom> 那真是說了等如沒說
+01:45:15 <CindyLinz> 嗯, 是個諷刺梗...
+01:45:50 <monochrom> 人家問理由, 當然就是問有甚麼利, 有甚麼弊, 為甚麼利大些
+01:45:51 <CindyLinz> 平常就... 懶得解釋理由的時候用 XDXD
+01:46:27 <monochrom> 不過, "利"怎樣變成"Z"呢?
+01:46:28 <petercommand> 懶人專用 (蓋章
+01:46:45 <CindyLinz> 發音像
+01:47:41 <monochrom> "利" 應該像 li 吧? 怎樣變成 zed 或 zi?
+01:47:58 <CindyLinz> 找個字母湊啊.. 用 li 就不是一個字了 XD
+01:48:21 <CindyLinz> 這個 Z 是取 zi 的發音
+01:50:03 <CindyLinz> intuition 世界的實數定義真是醜爆了 :(
+01:50:10 <pkmx> ScopedTypeVariables 必開++
+01:50:31 <pkmx> 幾乎沒有寫過裡面的type variable是想要shadow外面的情況= =
+01:51:06 <CindyLinz> 對啊 ^^|
+02:24:53 <petercommand> http://ideone.com/hWPiSW 寫了一個降階的XD
+02:26:45 <CindyLinz> 賀..
+02:27:07 <CindyLinz> 喔喔 看到 index 了.. XD
+02:27:21 <petercommand> XD
+02:27:26 <CindyLinz> 你真是超愛 inf list.. XD
+02:27:48 <petercommand> XDD
+03:10:22 <miaoski> monochrom: 什麼是 intuitionism ?
+05:39:08 <monochrom> 是認為數學和邏輯裏要成立 "P或Q" 必須說得出 "是P, 因為..." 或 "是Q, 因為...". 同理, 要成立 "∃x. P x" 必須說得出一個 x 的例子.
+05:40:47 <monochrom> 因此不接受 "因為 ¬(∀x. ¬ P x), 所以 ∃x. P x"
+05:44:01 <monochrom> 近年因為這種要求與計算甚為匹配 (寫得出證明, 就有算法), 大受 haskell 程式員歡迎.
+08:58:25 <monochrom> 忘了說: 新年快樂!
+08:59:04 <monochrom> 啊, 大家不會這麼早啊! :)
+09:59:47 <petercom1and> 新年快樂!
+14:48:16 <petercommand> data Nat = Zero | Succ Nat
+14:50:43 <petercommand> 貼錯了 @@
+14:51:36 <petercommand> http://ideone.com/kt0vEV
+14:52:28 <petercommand> 這裡的 Vector (Vector a n) n 我希望兩個 n 都是在 Nat 中的同一個數字
+14:53:54 <petercommand> 不曉得怎麼做比較好..
+14:57:32 <petercommand> 還是說他直接就會做 type equality了?
+15:00:58 <petercommand> 好像不能這樣寫..
+15:01:13 <petercommand> kind mismatch
+15:02:26 <CindyLinz> 這問題太難 XD
+15:02:36 <CindyLinz> (對我來說)
+15:06:33 <petercommand> XD
+15:08:21 <petercommand> 我沒甚麼寫過 dependent type 的東西，實在不熟..
+15:09:09 <CindyLinz> 這邊有個額外問題是 GHC 的 type 系統不是完整的 dependent type
+15:09:19 <CindyLinz> 我不清楚哪些允許哪些不允許 @@"
+15:09:37 <pkmx> http://ideone.com/feFwMA 這樣可以嗎:p
+15:10:07 <pkmx> @@ ideone還沒更新到GHC 7.8喔
+15:10:07 <lambdabot>  ideone還沒更新到GHC 7.8喔
+15:10:08 <CindyLinz> 而且 feature 太新, 差 0.2 版 GHC 就不一樣....
+15:11:10 <petercommand> 用到了哪一個新 feature 呀?
+15:11:29 <CindyLinz> DataKind 之類的
+15:12:48 <petercommand> pkmx: 讚! 來試試看..
+15:17:27 <petercommand> 我的ghc 也是舊的...
+15:17:37 <petercommand> XD
+15:17:47 <petercommand> 7.6.3
+15:18:42 <pkmx> 那就自己把他改成open type familiy吧xd
+15:20:05 <petercommand> 恩恩
+15:27:02 <petercommand> Couldn't match type `n' with 'Succ n
+15:27:11 <petercommand> 這個`n' 是啥XD
+15:27:28 <petercommand> 前後不一樣..
+15:28:02 <petercommand> 神奇的符號:p
+15:28:08 <pkmx> 那個不是就是fancy的quote嗎@@
+15:28:48 <petercommand> fancy quote?
+15:30:39 <pkmx> 就是因為ascii不包含‘…’ 所以用`...'代替這樣
+15:31:31 <petercommand> 為甚麼不是'...' 或是 `...` 呢?
+15:35:31 <pkmx> 我記得好像是因為 很久以前系統都會把'顯示成右引號 所以和` match在一起就剛好
+15:35:50 <pkmx> 但是後來'就變成現在垂直的' 只是習慣上繼續沿用了
+15:36:03 <pkmx> Unicode表示：
+15:38:00 <pkmx> https://ghc.haskell.org/trac/ghc/ticket/2507
+15:38:24 <pkmx> 7.8 修掉了XD
+15:38:29 <petercommand> 喔喔，了解XD
+15:39:07 <pkmx> 快升級吧 別用古董compiler了
+15:39:11 <pkmx> 科科
+15:40:06 <petercommand> XDXD
+15:40:08 <CindyLinz> GHC 7.6 已經被說是古董惹....
+15:40:16 <CindyLinz> pkmx: 拍賣你要出多少收.. (誤
+15:44:25 <pkmx> 被arch慣壞了
+23:06:12 <suhorng> monochrom: 新年快樂~
+23:06:15 <suhorng> 應該還不算太晚XD?
+23:14:10 <pkmx> 這是UTC-15:00 XD?
+23:15:56 <suhorng> lol
+23:18:48 <petercommand> 新年快樂 :p

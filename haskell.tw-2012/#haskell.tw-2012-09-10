@@ -1,0 +1,27 @@
+05:41:49 <favonia> CindyLinz: 建議去學一下 SML 體驗 modules...
+09:43:59 <kanru> wow
+09:44:23 <favonia> kanru: ?
+09:44:49 <kanru> favonia: 人變多了 :P
+09:45:24 <favonia> kanru: 最近幾天常常再更多 :P
+10:02:10 <MnO2> favonia: 通常是什麼情況下實作會做CPS transformation?
+10:02:18 <MnO2> favonia: ghc 好像沒有做
+10:02:34 <MnO2> favonia: 是說lazy比較不好做嗎？
+10:48:43 <MnO2> http://blog.sigfpe.com/2008/12/mother-of-all-monads.html
+13:12:44 <CindyLinz> favonia: 可不可以簡短 hint 一下 ^^  我是在讀 Functional Programming with Overloading and Higher-Order Polymorphism 裡面的例子的時候突然想到
+13:22:11 <MnO2> CindyLinz: hint什麼?
+13:34:31 <a2n> c9s: no :)
+13:43:28 <CindyLinz> MnO2: 你看昨天晚上的 log, 最後面三行
+18:09:56 <favonia> MnO2: CPS transformation 可以讓計算順序很清楚... 沒有仔細想過 lazy 版本要怎樣做
+18:10:55 <favonia> MnO2: lazy 跟計算順序有關啊
+18:11:35 <favonia> CindyLinz: Haskell 說一個型態只能實作一個介面一次... 這是 Haskell 加的限制
+18:12:39 <jaiyalas> 介面?
+18:13:02 <favonia> jaiyalas: type classssss
+18:14:03 <jaiyalas> 喔喔喔喔喔
+18:19:07 <CindyLinz> favonia: 嗯嗯嗯
+18:20:49 <CindyLinz> 如果介面的實作 (instance) 可以帶有 value 的話, 就可以在這一限制底下仍然分別出不同的介面了
+18:21:13 <CindyLinz> 因為 Monoid Int (+) 0 和 Monoid Int (*) 1 會被視為不同的 instance
+18:22:25 <favonia> CindyLinz: 你可以自己定義一些無用的 type 來達成同樣的效果
+18:23:59 <CindyLinz> favonia: 像是 newtype MyInt = MyInt Int  然後 instance Monoid MyInt 和 instance Monoid Int ?
+18:24:36 <favonia> CindyLinz: 喔或是你可以定一個型態叫 Z 和 S 然後表示自然數之類的
+18:24:40 <favonia> CindyLinz: 都可以～
+18:26:07 <CindyLinz> favonia: 那太衝了 XD

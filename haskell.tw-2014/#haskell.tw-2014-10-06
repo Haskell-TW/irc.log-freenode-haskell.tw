@@ -1,0 +1,205 @@
+12:34:43 <mno2> 最近的熱門話題應該是改寫 prelude 了吧
+13:28:35 <CindyLinz> !
+13:28:41 <CindyLinz> 7.10?
+14:24:53 <mno2> http://www.reddit.com/r/haskell/comments/2icjmf/how_to_rewrite_the_prelude/
+14:24:59 <mno2> http://pchiusano.github.io/2014-10-05/refactoring.html
+14:25:48 <mno2> http://www.yesodweb.com/blog/2014/10/classy-base-prelude
+14:50:31 <CindyLinz> 是教大家自己動手改喔 XD
+18:37:21 <kuanyui> 請問為什麼這一條執行到一半會卡在81那個項目就停住 [ x^2 | x <- [1,3..] , x<10 ]
+18:41:27 <YuLin> x < 10
+18:43:28 <kuanyui> 我是指REPL沒有執行完就卡在81那裡....預期應該是[1,9,25,49,81]但他吐給我的是[1,9,25,49,81（沒有右括號）
+18:49:10 <CindyLinz> 因為... 它不夠聰明到一眼看出以後再也沒有可能解了...
+18:49:39 <CindyLinz> 所以它就乖乖地(笨笨地)繼續試下去, 試 10<10, 11<10, 12<10, ...
+18:50:07 <CindyLinz> 如果這邊的數字是 Int type 的話, 最後是會停下來的, 到 maxBound 的時候就會停
+18:50:36 <kuanyui> 喔喔@A@
+18:50:43 <CindyLinz> > [1..] :: [Integer]
+18:50:44 <lambdabot>  [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,...
+18:50:53 <CindyLinz> 這個應該是不會停的版本..
+18:51:47 <CindyLinz> > maxBound :: Int
+18:51:48 <lambdabot>  9223372036854775807
+18:51:50 <CindyLinz> > maxBound :: Integer
+18:51:52 <lambdabot>  No instance for (GHC.Enum.Bounded GHC.Integer.Type.Integer)
+18:51:52 <lambdabot>    arising from a use of ‘GHC.Enum.maxBound’
+18:52:29 <kuanyui>  [1..] :: [Integer]加上這個好像還是停不下來
+18:53:44 <CindyLinz> Integer 沒有上限應該是不會停沒錯啦 ^^|
+18:54:02 <CindyLinz> 然後.. Int 雖然有上限... 可是你看那個上限好像有點太大 ._.
+18:54:14 <kuanyui> @@
+18:54:31 <CindyLinz> 所以你用 x <- [...] 這邊給範圍不要太大
+18:55:08 <CindyLinz> 嗯, 我有一點點記不清楚... 因為我印象中 [...] 要用在 Enum 的 type, 在沒有給尾巴的時候是跑到 Enum 的 maxBound..
+18:55:16 <CindyLinz> 可是它可以用 Integer.. :Q
+20:36:09 <CindyLinz> kuanyui: 嗯 我這邊衍生的問題應該不會影響到你遇到的問題哄?
+20:36:27 <kuanyui> CindyLinz: 什麼意思？
+20:41:48 <kuanyui> 嗯...現在也還在初學階段，這問題只是不懂為何會如此，想先搞清楚這個語言的各種概念和特性，不是因為正在寫什麼東西而遇到問題上來問。=w="
+20:58:59 <CindyLinz> kuanyui: 不然你呆滯什麼 ^^|
+21:00:18 <kuanyui> 搞不太懂到底他是怎麼判斷惰性求值該求到哪裡停住
+21:01:02 <CindyLinz> 嗯嗯嗯...
+21:01:25 <kuanyui> 換句話說，我不懂為何他無法判斷這個到x>=10就該停住...[ x^2 | x <- [1,3..]::[Int] , x<10 ]
+21:01:33 <CindyLinz> 印完 81 之後, 「系統」想再印下一個, 所以就去跟這一坨 list 要下一個數字
+21:01:41 <CindyLinz> 然後這個 list 就開始去找下一個...
+21:01:46 <CindyLinz> 一直找一直找一直找...
+21:02:01 <kuanyui> 好詭異啊囧
+21:02:06 <CindyLinz> 也許某一天會突然出現一個 <10 的啊
+21:02:26 <CindyLinz> 你有寫 C 語言嗎?
+21:02:30 <kuanyui> 溢位嗎
+21:02:32 <kuanyui> 不會
+21:02:49 <CindyLinz> 或是你有寫過哪個別的程式語言?
+21:02:57 <kuanyui> Lisp和Python
+21:04:06 <CindyLinz> 那用 python 的 coroutine 來「想像」這個 [ x^2 | x <- [1,3..]::[Int], x<10 ] 好了
+21:05:48 <CindyLinz> python 不換行要怎麼寫啊? XD
+21:06:11 <CindyLinz> 像是個 def list: { x = 1; while True: { if x < 10: yield (x*x); x = x + 1 } }
+21:06:17 <CindyLinz> 用大括號亂包一下.. XD
+21:06:34 <CindyLinz> 就類似這樣的東西吧, 跟他要下一個的時候它才去努力生下一個出來
+21:06:56 <CindyLinz> 可是 x 到了 10 了, 再跟他要, 他就會一直跑一直跑一直跑下去不出來...
+21:07:13 <CindyLinz> x = x + 2 才對 :p
+21:21:18 <letoh> python 是這樣 (x**2 for x in xrange(1, 10, 2)) XD
+21:21:54 <CindyLinz> letoh: 不一樣啊, 你不可以把 10 放在 range 那邊
+21:22:13 <letoh> 好像沒有現成的無限 list 可以用.. 卻有 takewhile
+21:22:15 <CindyLinz> 不然對應的 haskell 寫法是 [ x^2 | x <- [1,3..10] ]
+21:22:30 <CindyLinz> 確認一下有沒有寫錯 ._.
+21:22:34 <CindyLinz> > [ x^2 | x <- [1,3..10] ]
+21:22:35 <letoh> XD
+21:22:36 <lambdabot>  [1,9,25,49,81]
+21:23:02 <CindyLinz> letoh: 也不用無限啦, 放 2^63-1 在結尾也可以
+21:23:15 <CindyLinz> Haskell 的 Int 版是到 maxBound 就結束了
+21:23:15 <letoh> 嗯
+21:23:21 <letoh> 瞭解
+21:23:39 <CindyLinz> 應該實體感受也是跑不完吧? @@"
+21:24:00 <letoh> CindyLinz: (x**2 for x in xrange(1, sys.maxint, 2) if x < 10)  這樣呢?
+21:24:03 <CindyLinz> 只有 C++ UB 滿天飛的 optimizer 可以把尾巴直接去掉.. (逃)
+21:25:02 <letoh> 會卡住XD
+21:25:05 <CindyLinz> 可能可以? 看起來有點像
+21:25:20 <CindyLinz> 我看 python 說這是一個 generator?
+21:25:27 <CindyLinz> 所以可以去 for 它?
+21:25:27 <letoh> 用 kill 砍掉了XD
+21:25:30 <letoh> 可以
+21:25:41 <letoh> for n in (...): print(n)
+21:25:49 <kuanyui> 去看了一下coroutine 是什麼玩意，終於懂了
+21:26:04 <CindyLinz> letoh: 咦 竟然一個都沒出 @@"
+21:26:22 <CindyLinz> kuanyui: 等等... 我是故意要拿一個你熟悉的東西啊 囧
+21:26:39 <CindyLinz> 喔它是 generator, 不是 coroutine?
+21:26:43 <kuanyui> 我寫Python還沒用過generator啊
+21:27:06 <YuLin> 我自己也沒寫過 generator
+21:27:19 <letoh> CindyLinz: 會輸出啊  但輸出到 81 就停了
+21:27:26 <kuanyui> Lisp也可以寫個一兩年都沒寫過macro之類的
+21:27:33 <letoh> 按 c-c 也停不下來XD
+21:27:36 <CindyLinz> letoh: 我在 python>>> 裡面打, 只有看到 ... @@"
+21:27:44 <letoh> CindyLinz: 再按一次 enter
+21:27:45 <kuanyui> letoh: 就是要解釋為什麼到81就掛在那裡
+21:27:50 <CindyLinz> letoh: 噢
+21:27:50 <kuanyui> letoh: 按C-g
+21:28:18 <letoh> 空行告訴 python 輸入完畢可以開始跑XD
+21:28:34 <CindyLinz> 原來是這樣... 根本還沒開始 orz
+21:28:37 <kuanyui> XD
+21:29:31 <letoh> 用 python2 的話記得要 import sys 和 print_function... py3 要把 xrange 換掉XD
+21:29:36 <CindyLinz> python coredump
+21:29:50 <CindyLinz> 因為 ctrl-c 停不下來, 我下了 ctrl-\.....
+21:30:01 <kuanyui> 那啥啊
+21:30:17 <letoh> XD
+21:30:20 <CindyLinz> 比較兇的 ctrl-c.. XD
+21:30:34 <kuanyui> 真的嗎？按了怎麼沒反應
+21:31:03 <letoh> sigquit 吧
+21:31:06 <kuanyui> 你們是在REPL裡面測試嗎
+21:31:12 <letoh> 對
+21:31:15 <CindyLinz> 我是用 python>>>
+21:31:15 <kuanyui> 喔喔
+21:31:46 <kuanyui> 還想說怎麼我這裡沒這種問題
+21:31:52 <letoh> sys.maxint 跑太久了... 可以把 upperbound 改小一點XD
+21:32:10 <letoh> 想到了.. 這種東西最適合拿去戳 ideone...
+21:32:15 <CindyLinz> 就是要完美重現卡住的現象啊, 怎麼可以改小 XD
+21:32:20 <kuanyui> XD
+21:33:23 <letoh> 為什麼要它卡住啊?
+21:33:33 <letoh> ideone 表示: 超過時間限制
+21:33:51 <letoh> 免費帳號只能跑 5 秒的樣子
+21:33:57 <CindyLinz> 他就在問為什麼 haskell 印到 81 就卡住了啊..
+21:34:09 <CindyLinz> 那就用他熟悉的語言重製一個類似的模型呀~
+21:34:17 <letoh> 原來如此.. 前面沒跟到XD
+21:35:09 <CindyLinz> 花多少錢可以把 sys.maxint 跑完? @@"
+21:35:18 <letoh> 不曉得XD
+21:35:46 <letoh> maxint 是 9223372036854775807
+21:36:12 <CindyLinz> 跟 lambdabot 的 Int 一樣
+21:36:24 <letoh> CindyLinz: 換台機器跑 8-bit python XD
+21:36:30 <CindyLinz> > maxBound :: Int128
+21:36:33 <lambdabot>  Not in scope: type constructor or class ‘Int128’
+21:36:33 <lambdabot>  Perhaps you meant one of these:
+21:36:33 <lambdabot>    ‘Int8’ (imported from Data.Int), ‘Int16’ (imported from Data.Int),
+21:36:33 <lambdabot>    ‘Int32’ (imported from Data.Int)
+21:36:36 <CindyLinz> > maxBound :: Int64
+21:36:39 <lambdabot>  9223372036854775807
+21:36:40 <CindyLinz> > maxBound :: Int
+21:36:42 <lambdabot>  9223372036854775807
+21:36:47 <CindyLinz> 為什麼沒有 Int128... QQ
+21:37:07 <CindyLinz> gcc 都有了說 QQ
+21:37:57 <CindyLinz> wwww
+21:39:18 <kuanyui> > [1..5]
+21:39:20 <lambdabot>  [1,2,3,4,5]
+21:39:40 <kuanyui> 欸欸欸真的會動耶耶耶@A@
+21:40:04 <CindyLinz> @pl [1..5]
+21:40:05 <lambdabot> [1..5]
+22:24:50 <suhorng> > [2147483640..]
+22:24:51 <lambdabot>  [2147483640,2147483641,2147483642,2147483643,2147483644,2147483645,214748364...
+22:25:04 <suhorng> > [2147483640..] :: [Int]
+22:25:06 <lambdabot>  [2147483640,2147483641,2147483642,2147483643,2147483644,2147483645,214748364...
+22:25:16 <suhorng> > [2147483646..]
+22:25:17 <lambdabot>  [2147483646,2147483647,2147483648,2147483649,2147483650,2147483651,214748365...
+22:25:26 <suhorng> > [2147483646..] :: [Int]
+22:25:27 <lambdabot>  [2147483646,2147483647,2147483648,2147483649,2147483650,2147483651,214748365...
+22:25:56 <suhorng> 唔@_@"
+22:26:50 <suhorng> 阿阿..原來他的 int 是 8 bytes
+22:26:52 <suhorng> > [False..\
+22:26:53 <lambdabot>  <hint>:1:10:
+22:26:54 <lambdabot>      parse error (possibly incorrect indentation or mismatched brackets)
+22:26:56 <suhorng> > [False..]
+22:26:58 <lambdabot>  <hint>:1:9: parse error on input ‘]’
+22:27:02 <suhorng> Orz
+22:27:28 <suhorng> [False ..]
+22:27:32 <suhorng> > [False ..]
+22:27:34 <lambdabot>  [False,True]
+22:27:36 <suhorng> magic!!!!
+22:42:27 <CindyLinz> False.. 被當成 module name 了...
+22:43:49 <petercommand> False也可以被enumerate 呀XD
+22:44:32 <kuanyui> 這點真的蠻詭異的
+22:51:37 <CindyLinz> 可以寫一個 module 叫作 False, 然後裡面有個 infix operator 叫作 (.) 那麼 (False..) 就是它的全稱了 XD
+22:53:30 <suhorng> > [()..]
+22:53:31 <lambdabot>  [()]
+22:53:44 <suhorng> > ['a'..]
+22:53:45 <lambdabot>  "abcdefghijklmnopqrstuvwxyz{|}~\DEL\128\129\130\131\132\133\134\135\136\137\...
+22:53:56 <suhorng> 飆上去了wwwww
+22:55:12 <CindyLinz> > [...]
+22:55:13 <lambdabot>  <hint>:1:5: parse error on input ‘]’
+22:55:15 <CindyLinz> > [..]
+22:55:17 <lambdabot>  <hint>:1:2: parse error on input ‘..’
+22:55:21 <CindyLinz> > [..] :: [Int]
+22:55:22 <lambdabot>  <hint>:1:2: parse error on input ‘..’
+22:55:25 <kuanyui> 飄上去了wwwwww
+22:55:29 <CindyLinz> 沒頭沒尾不行嗎 = =
+22:56:34 <CindyLinz> 這樣就不能寫 filterM (const [..]) [1,2,3] 了.. QQ
+22:56:49 <CindyLinz> au: 以後可以加 [..] 嗎? :D
+22:57:36 <kuanyui> CindyLinz: 這什麼東西？
+22:57:44 <kuanyui> filterM
+22:57:50 <CindyLinz> > filterM (const [False, True]) [1,2,3]
+22:57:52 <lambdabot>  [[],[3],[2],[2,3],[1],[1,3],[1,2],[1,2,3]]
+22:58:11 <CindyLinz> kuanyui: 是一個驚悚的 powerset 實作 XD
+22:58:20 <suhorng> > sortByM (\_ _ -> [False, True]) [1,2,3]
+22:58:21 <lambdabot>  Not in scope: ‘sortByM’
+22:58:21 <lambdabot>  Perhaps you meant one of these:
+22:58:21 <lambdabot>    ‘sortBy’ (imported from Data.List),
+22:58:21 <lambdabot>    ‘Seq.sortBy’ (imported from Data.Sequence)
+22:58:28 <suhorng> sad XD
+22:58:42 <suhorng> > takeWhileM (const [False, True]) [1,2,3,4,5]
+22:58:43 <lambdabot>  Not in scope: ‘takeWhileM’
+22:58:43 <lambdabot>  Perhaps you meant one of these:
+22:58:43 <lambdabot>    ‘takeWhile’ (imported from Data.List),
+22:58:43 <lambdabot>    ‘BS.takeWhile’ (imported from Data.ByteString),
+22:58:43 <lambdabot>    ‘BSL.takeWhile’ (imported from Data.ByteString.Lazy)
+22:59:16 <CindyLinz> > Data.List.takeWhileM (const [False, True]) [1,2,3,4,5]
+22:59:17 <lambdabot>  Not in scope: ‘Data.List.takeWhileM’
+22:59:18 <lambdabot>  Perhaps you meant one of these:
+22:59:18 <lambdabot>    ‘Data.List.takeWhile’ (imported from Data.List),
+22:59:18 <lambdabot>    ‘Data.List.dropWhile’ (imported from Data.List)
+22:59:28 <CindyLinz> 沒有 M..
+23:00:01 <suhorng> CindyLinz: 在某個微妙的 package 中 http://hackage.haskell.org/package/monadlist-0.0.1/docs/Control-Monad-ListM.html
+23:00:18 <CindyLinz> 0.0.1 版.. XD
+23:00:45 <suhorng> 阿, 原來他還有出 0.0.2
+23:01:43 <CindyLinz> 咦..
+23:02:05 <CindyLinz> release 差一天
+23:02:17 <suhorng> XD

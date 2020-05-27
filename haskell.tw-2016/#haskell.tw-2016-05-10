@@ -1,0 +1,19 @@
+09:59:58 <cibs> 不是導到 learn you a haskell 比較好嗎 (誤
+16:40:16 <CindyLinz> 啊~ 真厲害 XD
+16:40:31 <CindyLinz> 我不知道怎樣用比較好 @@"
+17:52:43 <caasih> kuanyui: 你是用 haskell-stack 在 Windows 上裝 GHC 嗎？
+20:36:57 <kuanyui> kuanyui: 為什麼是Windows?!
+20:38:50 <caasih> kuanyui: 你說把 Win7 砍了 50 G ？
+22:59:51 <CindyLinz> Haskell 有 Vulkan binding 欸~
+22:59:56 <kuanyui> caasih: 不是，是想說現在根本沒在用Windows了，乾脆整個Windows磁區的120GB全部砍掉拿去給Linux用了
+23:00:03 <CindyLinz> 這 hackage 要 GHC 8.0 以上才能用..
+23:17:37 <caasih> 竟然有 Vulkan binding... ，剛剛只查到 https://hackage.haskell.org/package/accelerate
+23:18:07 <caasih> kuanyui_hp: \賀/
+23:21:04 <CindyLinz> caasih: https://hackage.haskell.org/package/vulkan
+23:21:23 <caasih> CindyLinz: https://github.com/svenpanne/Vulkan/blob/master/Vulkan.cabal#L19 看來 7.10 可以用？
+23:21:42 <caasih> 啊，原來是不同家...
+23:24:43 <darkx> caasih: 你後來偷偷跑走 QQ
+23:25:33 <caasih> darkx: 捷運不太順路 0rz
+23:32:44 <darkx> caasih: 可是走捷運可以跟 Cindy 玩耍w
+23:33:14 <caasih> * 摸摸 darkx 的下巴
+23:54:33 <darkx> (晃動

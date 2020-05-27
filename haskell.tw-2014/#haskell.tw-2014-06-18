@@ -1,0 +1,170 @@
+10:59:37 <mno2> http://www.haskellcast.com/episode/007-chris-done-on-compiling-to-javascript-and-sql/
+13:05:54 <c9sloud> au: 簡報加油
+13:09:12 <au> 感謝 XD 希望周末可以先有 beta 版做 preview
+13:23:37 <c9sloud> 話說聽到 Applicative .. 我只知道 Apocalypto 之類的東西 (逃
+18:10:33 <twprogrammer> hi
+18:10:48 <twprogrammer> 小弟初學haskell想請問一個小問題
+18:12:47 <CindyLinz> ??
+18:12:58 <CindyLinz> Hi :p
+18:13:02 <twprogrammer> 想問 [2*x | x<-[1..10], 14<=2*x]  List, 為什麼無法透過將 ,  轉成 && run呢
+18:13:38 <CindyLinz> twprogrammer: 你想放兩個以上的條件?
+18:13:39 <twprogrammer> 我的意思是, 裡面 x<-[1..10] &&  14<=2*x 這樣寫算有錯誤
+18:13:43 <twprogrammer> 是低
+18:14:13 <twprogrammer> 我在想說它應該是要收集能使predicate為True的那些東西
+18:14:26 <twprogrammer> 是故寫  x<-[1..10] &&  14<=2*x 不也可以嗎
+18:14:30 <CindyLinz> 這個是 list comprehensive, 規定死了的寫法. | 後面的每一項之間用 , 隔開
+18:14:50 <twprogrammer> 那如果想要用 or 呢
+18:14:50 <CindyLinz> 然後.. x <- [1..10] 不是 predicate
+18:15:19 <CindyLinz> 所以如果假設是想要 x < 3 或 x > 7 的話, 可以這樣寫
+18:15:20 <twprogrammer> 是喔
+18:15:33 <CindyLinz> > [2*x | x <- [1..10], x < 3 || x > 7]
+18:15:36 <lambdabot>  [2,4,16,18,20]
+18:16:06 <CindyLinz> 這邊 x < 3 || x > 7 這一團整個看是 list comprehensive 的一個 term
+18:16:16 <CindyLinz> 所以也是可以寫
+18:16:29 <CindyLinz> > [2*x | x <- [1..10], 3 < x && x < 7]
+18:16:37 <lambdabot>  [8,10,12]
+18:16:41 <CindyLinz> lambdabot 怎麼變這麼慢 :|
+18:17:02 <CindyLinz> 那麼這邊 3 < x && x < 7 合起來是一個 term..
+18:17:06 <CindyLinz> 也可以寫
+18:17:17 <CindyLinz> > [2*x | x <- [1..10], 3 < x, x < 7]
+18:17:19 <lambdabot>  [8,10,12]
+18:17:28 <twprogrammer> ok 有看懂
+18:17:47 <twprogrammer> 啊不過 x <- [1..10] 不是predicate嗎?
+18:17:59 <CindyLinz> 但 x <- [1..10] 不是一個過濾條件.. 過濾條件都是 evaluate to Bool 的 expr
+18:18:16 <twprogrammer> 我才看到 Learning you a haskell chap.  2
+18:18:18 <twprogrammer> 嗯嗯
+18:18:19 <CindyLinz> 它是... 產生器
+18:18:49 <CindyLinz> 如果要用濾的, 你想的可能是.... 必須落在 [1..10] 裡面的元素
+18:18:52 <twprogrammer> > [ 2*x | x `elem [1..10]]
+18:18:53 <lambdabot>  <hint>:1:17: parse error on input ‘[’
+18:18:57 <CindyLinz> 對 用 elem
+18:19:02 <twprogrammer> > [ 2*x | x `elem` [1..10]]
+18:19:04 <lambdabot>  []
+18:19:11 <twprogrammer> =_=
+18:19:22 <CindyLinz> 因為你沒有產生東西來濾
+18:19:55 <CindyLinz> 不過.. 這邊怪了一點........
+18:20:19 <CindyLinz> 一般來說你這一個式子會 error 的, 因為 x 沒有被定義
+18:20:26 <CindyLinz> 用 ghci 試的話會 error
+18:20:38 <CindyLinz> 只是 lambdabot 有把所有單個字的字母都定義過了...
+18:20:43 <CindyLinz> > x
+18:20:45 <lambdabot>  x
+18:20:48 <CindyLinz> > xx
+18:20:50 <lambdabot>  Not in scope: ‘xx’
+18:20:51 <lambdabot>  Perhaps you meant one of these:
+18:20:51 <lambdabot>    ‘x’ (imported from Debug.SimpleReflect),
+18:20:51 <lambdabot>    ‘ix’ (imported from Control.Lens)
+18:21:23 <CindyLinz> 還是得先產生一下... 這樣寫吧
+18:21:44 <CindyLinz> > [2*x | x <- [-10..100], x `elem` [1..10]]
+18:21:46 <lambdabot>  [2,4,6,8,10,12,14,16,18,20]
+18:21:57 <twprogrammer> > [x | x<-[1..100], x`elem` [3..7] || x`elem`[9]]
+18:21:59 <lambdabot>  [3,4,5,6,7,9]
+18:22:24 <twprogrammer> 所以是一定要 <- 一下 ?
+18:22:37 <twprogrammer> 而這 <- 不是屬於 是某個奇怪的東西
+18:23:06 <CindyLinz> 算是 monad 的 do-notation 裡面的 <-
+18:23:35 <twprogrammer> 嗯嗯 我可能要再多念幾天 Learning you a Haskell才會讀到了~
+18:23:46 <CindyLinz> 像是你如果有作輸入輸出可能會用到 x <- getLine
+18:24:30 <twprogrammer> hmm
+18:25:07 <twprogrammer> 啊另外想請問,  a = 6     b=17 這些在haskell都算是0 引數的函數嗎
+18:25:31 <CindyLinz> twprogrammer: 把 list comprehensive 視為一個不關鍵的東西看待吧, 這種語法寫的東西會機械性地轉換為更基本的函數呼叫的寫法, 只是看起來華麗一點
+18:25:45 <CindyLinz> twprogrammer: 分不太出來 ^^|
+18:25:59 <CindyLinz> twprogrammer: 可以這樣看待沒問題
+18:26:18 <twprogrammer> ok
+18:26:31 <CindyLinz> sin 5 在 haskell 也可以視為 0 引數的函數, 也是常數 ^^|
+18:27:37 <twprogrammer> 照這邏輯, 那 6 也是了
+18:29:49 <CindyLinz> 嗯, 等以後你想看 ghc 怎麼作最佳化的時候, 就會有一點差異了.. ghc 的設計會根據寫法來判斷可能怎樣的呼叫情境比較常發生, 而生出不一樣的執行流程. 但是在考慮值的正確性的部分, 就是沒有差的
+18:33:42 <twprogrammer> :)
+18:36:31 <CindyLinz> @pl [x | x<-[1..100], x`elem` [3..7] || x`elem`[9]]
+18:36:32 <lambdabot> [x | x <- [1..100], x `elem` [3..7] || x `elem` [9]]
+18:36:36 <CindyLinz> QQ
+18:37:09 <CindyLinz> @unpl [x | x<-[1..100], x`elem` [3..7] || x`elem`[9]]
+18:37:10 <lambdabot> [x | x <- [1 .. 100], ((elem x ([3 .. 7])) || (elem x ([9])))]
+18:37:16 <CindyLinz> OAO
+18:37:21 <CindyLinz> 算了 ><
+18:45:47 <CindyLinz> twprogrammer: 那個.. list comprehensive 應該是沒有規定一定要 <- 一下, 而且可以有好幾個 <-... 只是如果完全沒有 <-, 或是第一個 term 不是 <- 的話, 好像寫不出空 list 以外的東西.... (思)
+18:46:13 <CindyLinz> 啊我錯了.. 可以寫出來 XD
+18:46:18 <CindyLinz> > [3 | True]
+18:46:33 <lambdabot>  [3]
+18:46:51 <CindyLinz> > [3 | False]
+18:46:53 <lambdabot>  []
+18:47:33 <CindyLinz> > [x * y | x <- [2..9], y <- [2..9]]
+18:47:35 <lambdabot>  [4,6,8,10,12,14,16,18,6,9,12,15,18,21,24,27,8,12,16,20,24,28,32,36,10,15,20,...
+18:48:09 <CindyLinz> > [x | True, x <- [1,2,3]]
+18:48:11 <lambdabot>  [1,2,3]
+18:48:46 <CindyLinz> 只是看起來都很故意, 很無聊才這樣寫的感覺 ^^|
+18:49:05 <CindyLinz> (如果第一個 term 不是 <- 的話)
+19:16:48 <twprogrammer> 好像右側一定要出現<-就是了
+19:19:37 <twprogrammer> 感覺好像是把 x <- [1..10] 的 1~10當論域, 一個一個跑過一遍看看符不符合predicate
+19:20:21 <twprogrammer> > [x+1 | x<-[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]]
+19:20:23 <lambdabot>  [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]
+19:20:39 <twprogrammer> 因為我發現他好像會重複算 ~_~
+20:10:58 <CindyLinz> twprogrammer: 是低~~ ^^
+20:12:46 <CindyLinz> @info group
+20:12:46 <lambdabot> group
+20:12:51 <CindyLinz> @type group
+20:12:53 <lambdabot> Eq a => [a] -> [[a]]
+20:13:14 <CindyLinz> > [x <- [1,1,1], group by x]
+20:13:16 <lambdabot>  <hint>:1:4: parse error on input ‘<-’
+20:13:21 <CindyLinz> > [x | x <- [1,1,1], group by x]
+20:13:23 <lambdabot>  Not in scope: ‘by’
+20:13:23 <lambdabot>  Perhaps you meant one of these:
+20:13:23 <lambdabot>    ‘b’ (imported from Debug.SimpleReflect),
+20:13:23 <lambdabot>    ‘y’ (imported from Debug.SimpleReflect)
+20:14:09 <CindyLinz> orz
+20:14:19 <CindyLinz> twprogrammer: 這裡有些額外的變化可以玩~ # http://www.haskell.org/ghc/docs/7.2.1/html/users_guide/syntax-extns.html#generalised-list-comprehensions
+20:14:47 <CindyLinz> 有興趣再看, 沒興趣就跳過吧.. 個人覺得是一些花而不實的東西 XD
+20:30:48 <c9sloud> CindyLinz: 問一下..
+20:31:00 <c9sloud> 那個之前妳加的 strndup
+20:31:06 <c9sloud> 是 check _GNU_SOURCE 嗎?
+20:31:15 <c9sloud> 有點忘記妳提的 feature tests
+20:31:55 <letoh> man strndup 就有測試方法
+20:32:33 <letoh> 好像蠻麻煩的  還跟 libc 版本有關
+20:32:41 <c9sloud> 對阿
+20:32:45 <c9sloud> 我有看 man
+20:32:52 <c9sloud> 所以才想問一下
+20:32:53 <c9sloud> XD
+20:33:26 <letoh> bsd 會單純一點嗎?
+20:34:39 <c9sloud> #if 可以跟 #ifndef 混用嗎?
+20:34:49 <letoh> 怎麼個混用法?
+20:34:59 <letoh> 你有很多條件要組合嗎?
+20:35:04 <c9sloud> 嗯對
+20:35:08 <letoh> 用 defined
+20:35:16 <c9sloud> 我現在有 #ifndef HAVE_STRNDUP XD
+20:35:18 <letoh> #if defined(XXXXX) && YYY
+20:35:23 <c9sloud> 阿我想到了
+20:35:25 <c9sloud> okok
+20:35:27 <c9sloud> thanks!
+20:36:03 <letoh> http://gcc.gnu.org/onlinedocs/cpp/Defined.html  這裡有其他例子可以參考
+20:36:45 <CindyLinz> c9sloud: 我... 直接用自己提供的, 不管系統的啊
+20:36:59 <letoh> not 就用 !  跟一般邏輯運算用法一樣
+20:37:02 <CindyLinz> c9sloud: 因為我 man 了一下發現在不同版本的 glibc, 還要用不同的 macro 測試 orz
+20:37:22 <CindyLinz> c9sloud: 然後我又還不知道怎麼 detect glibc 的版本.. 生氣就不用了 XD
+20:37:46 <c9sloud> 喔對了原來是我後來改掉了
+20:37:49 <c9sloud> 因為用 autotools
+20:37:54 <letoh> glibc 有給判斷版本用的 macro
+20:38:03 <c9sloud> 所以會自動 gen 一個 HAVE_STRNDUP
+20:38:11 <letoh> gcc 裡面用超多的XD
+20:39:00 <CindyLinz> 超煩的啊啊啊
+20:40:00 <c9sloud> 不過..
+20:40:07 <c9sloud> Mac 上面沒有 feature test macro 可以用
+20:40:08 <c9sloud> QQ
+20:40:10 <c9sloud> Darwin
+20:40:41 <letoh> libc 是用哪一套?
+20:41:12 <c9sloud> 阿有了 #if __DARWIN_C_LEVEL >= 200809L
+20:41:33 <letoh> 那個應該是用來判斷實作的 api 版本?
+20:42:05 <letoh> 不過一般 c runtime 實在太複雜  因為都會提供超出標準規範的函式@_@
+20:42:38 <c9sloud> https://gist.github.com/c9s/772af3186bf8929e6ffd 寫起來像這樣 XD
+20:43:07 <letoh> 像 gcc 為了可以搭配各種 libc   弄了一堆超複雜的判斷  而且是到處都塞一份
+20:43:36 <letoh> 最慘的是還不是用 copy paste 的，所以好像每個地方判斷的條件不一定一樣XD
+20:45:41 <letoh> 不過這應該比 gtk 的版本判斷簡單多了
+20:51:16 <c9sloud> XD
+20:51:18 <c9sloud> yeah
+20:51:38 <c9sloud> 來研究一下 gumbo-parser 的 cmake 怎麼寫
+20:52:54 <c9sloud> 咦不對
+20:53:06 <c9sloud> 他好像沒有用 cmake .. 只有 gtest 才有用 cmake
+20:53:06 <c9sloud> orz
+20:53:16 <c9sloud> 所以連 Google 還是用 autotools XD
+22:55:42 <monochrom> > [x | let x=2]
+22:55:43 <lambdabot>  [2]
+22:55:59 <CindyLinz> 喔喔 XD
+22:56:49 <monochrom> 看作 do { let {x=2}; return x } 可能好點.
+23:00:27 <CindyLinz> 我寧願寫 do... XD

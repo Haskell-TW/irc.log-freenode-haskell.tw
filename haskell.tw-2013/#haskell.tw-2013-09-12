@@ -1,0 +1,78 @@
+14:36:22 <CindyLinz> mno2: jaiyalas 向你徵稿.. XD
+14:36:29 <CindyLinz> mno2: 10.1 喔~
+14:37:19 <mno2> 喔喔，好 xD
+14:37:56 <mno2> 有 deadline 好像比較願意動工，要不然為了找工作都停擺了 wwww
+14:39:03 <mno2> 有人有認識在 wikimedia 當過 engineer 的嗎？
+14:39:12 <CindyLinz> mno2: 沒錯.... :D
+14:39:26 <CindyLinz> 像我給的題目... 我根本還沒做出來.... XD
+14:40:12 <mno2> 哈哈，自己的 project 真的很容易停擺
+14:45:59 <CindyLinz> 嗯嗯, 覺得這樣有一點半自願半強迫好像也不錯.... 現在的自己把未來的自己賣掉, 到時候再來怨恨過去的自己這樣.... XD
+15:10:55 <CindyLinz> 好像也不錯的觀點 # http://www.yinwang.org/blog-cn/2013/03/08/on-syntax/ (談語法)
+15:11:14 <CindyLinz> # Haskell，ML，Coq，Agda，这些“超高级”的语言设计，其实都中了这个圈套。在 Coq 和 Agda 里面，你不但可以使用中缀表达式，还可以定义所谓的 "mixfix" 表达式。这样其实是把简单的问题复杂化。想让自己看起来像“数学”，很神秘的样子，其实是学会了数学的糟粕，自讨苦吃。
+15:11:45 <CindyLinz> 我只有想過 Agda 那樣 if_then_else_ 的設計很不錯
+15:12:04 <CindyLinz> 沒有想過從另一個角度來看, 它反而是非常醜 :p
+16:17:21 <godfat1> mno2 在找工作喔？在 wikimedia 會碰到 wikipedia 嗎？
+16:17:24 <godfat1> 我也有一堆想做的東西後來沒做完，沒有直接需求的話動力不是很夠..
+16:17:24 <godfat1> 不過值得慶幸的是其實也有不少是已經做完的了，沒做的部分大概是
+16:17:24 <godfat1> 宣傳美化之類的... XD
+16:18:24 <mno2> godfat1: 對啊
+16:19:08 <mno2> wikimedia 的話，底下全部的 project 都會碰到吧。看他系統架構是蠻有趣的，全部都公開在網路上
+16:19:22 <godfat> 是喔，晚點找來看看
+16:19:38 <godfat> 希望你能找到一個有趣的地方 XD
+16:19:51 <mno2> 我希望找到寫 Haskell 的工作 xD
+16:19:59 <godfat> 語法方面... 我覺得我還是有 lisp 閱讀障礙 :/
+16:20:09 <godfat> galois! XD
+16:20:49 <mno2> 那太困難了，大概要學術血統純正才比較有機會
+16:38:31 <godfat> 是喔 XD...
+18:09:01 <godfat> 好棒啊 http://www.jsfuck.com/
+18:43:20 <Yu-Lin> 其實我蠻喜歡 scheme
+18:43:54 <Yu-Lin> 只是實作品之間的差異，讓我有點哭哭
+18:44:30 <godfat> 有推薦哪一個版本嗎？
+18:48:35 <Yu-Lin> 之前我只用過 chicken scheme 跟另外一個忘記名子的實作
+18:48:43 <godfat> XD
+18:48:45 <Yu-Lin> 兩邊都宣稱符合 R5RS
+18:49:46 <Yu-Lin> 不過用的 keyword 不太一樣，所以相同的程式碼，要丟給另一個實作品跑，還是要改一些東西
+21:44:11 <mno2> matz ruby 真的太肥了… logbot 一天到晚掛..
+21:44:33 <godfat> 換 jruby 或 rubinius?
+21:45:12 <mno2> 不知道耶，可以這樣直接搬嗎?
+21:45:28 <godfat> 要瞧瞧 logbot 怎麼寫的 XD
+21:45:59 <godfat> 是哪一個啊？查 logbot 東西一堆 @@
+21:46:26 <mno2> https://github.com/g0v/Logbot
+21:47:10 <mno2> 其實架構蠻簡單的，只是太多 process 了
+21:48:17 <mno2> 隨便 top 看一下就八隻 ruby，每隻將近 40 M
+21:50:25 <mno2> god, sinatra, logbot, foreman，這樣應該就四隻了吧，不知道剩下是 sinatra 多 fork 的還是怎樣
+21:51:35 <mno2> 看起來都透過 shotgun 出來的
+21:55:31 <b4283> god, sinatra, logbot 和 foreman 四個人在一起打牌... (誤)
+22:57:39 <godfat> 用到 eventmachine 呀.. 這個 java 支援好像有點問題
+22:57:40 <godfat> 不過如果問題是八隻 process 太多的話，也許換別的幫助不大..
+23:00:50 <godfat> 好好瘦身一下應該是沒問題...
+23:01:40 <godfat> shotgun 和 foreman 應該都能拿掉，server 換個比較有效率的
+23:01:40 <godfat> god 不確定有沒有需要
+23:07:47 <CindyLinz> godfat: god 是你寫的嗎? o.o
+23:08:52 <godfat> XDDD 不是...
+23:09:11 <godfat> 聽說 god memory leak 嚴重，所以需要 god 監視 god (?)
+23:11:55 <CindyLinz> 聽起來很奇怪... (蓋章)
+23:12:12 <CindyLinz> god 是 resource monitor?
+23:12:21 <godfat> process monitor
+23:12:31 <CindyLinz> 嗯嗯嗯
+23:26:32 <mno2> godfat: server 有哪隻比較好？
+23:27:29 <godfat> 如果前面可以掛 nginx 的話，大概用 unicorn 吧
+23:28:54 <mno2> 我前面已經掛了 nginx 了
+23:29:05 <mno2> 所以e93
+23:29:24 <mno2> 所以改 include unicorn 就可以了？
+23:29:47 <mno2> 中間接口有一樣嗎？
+23:29:56 <godfat> Gemfile 裡面要加 unicorn, 然後啟動 script 要改成 unicorn -p PORT ...
+23:30:18 <godfat> 其他應該是都一樣了
+23:30:19 <godfat> 不過不知道他 eventmachine 用在哪裡.....
+23:31:46 <godfat> 你現在是怎麼跑的？要我完整改一份嗎？
+23:32:11 <mno2> 就照他說明寫的: screen -> forman start
+23:33:20 <godfat> forman start 基本上就是跑 Procfile 裡 web: 那一行，所以是
+23:33:21 <godfat> shotgun -o 0.0.0.0 -p 15000 config.ru
+23:33:48 <godfat> shotgun 我看不出來有什麼意義，除非 server 重開很慢又一邊在編輯修改...
+23:34:04 <godfat> 所以直接改成 unicorn -p 15000 應該就行了
+23:34:15 <mno2> shotgun 主要的作用是？
+23:34:58 <godfat> 根據我剛剛瞥過去的理解，就是我改 code 不用重開 server 也能看到更新後的樣子
+23:35:08 <godfat> 所以應該只有在開發時才用吧..
+23:36:13 <godfat> 啊啊，forman start 應該還會跑 ruby logbot.rb
+23:36:13 <godfat> 所以這個也要一起跑
+23:37:49 <mno2> 恩

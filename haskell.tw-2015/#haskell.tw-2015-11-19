@@ -1,0 +1,52 @@
+00:37:35 <pm5> mno2: nice to meet you today
+09:41:57 <mno2> pm5: are you pomin?
+09:42:13 <mno2> 最近來新加坡的人真多
+09:42:23 <mno2> 先是 CindyLinz
+09:42:34 <mno2> 然後這禮拜 JSConf 也來不少人
+14:43:52 <CindyLinz> :D
+14:57:31 <cibs> 真好
+18:12:18 <suhorngT> mno2: gansteed: 我還是覺得這個問題好微妙....
+18:13:05 <CindyLinz> 不是就是 base 的實作方式造成的嗎?
+18:13:44 <CindyLinz> 如果把 cons 改成 snoc 就會反過來這樣? XD
+18:14:41 <suhorngT> 每次都把左邊的遍歷沒錯, 所以 a ++ (b ++ c) 的成本是 |a| + |b|, 而 (a ++ b) ++ c 的成本是 |a| + (|a| + |b|)
+18:15:21 <suhorngT> 所以計算起來成本確實不同. 一個是線性增長, 一個是平方增長
+20:43:29 <mno2> CindyLinz: 就 DList ?
+20:43:33 <mno2> difference list
+20:44:30 <mno2> CindyLinz: 最近 Haskell.SG 開始缺講者，開始考慮把 meetup 轉型變成 study group，我可以抄你的 BYOHC roadmap 嗎？ lol
+20:44:42 <mno2> 這樣兩邊有機會還可以牽線交流一下 xD
+21:12:28 <mno2> 或是說你覺得其實就可以直接交流也可以 xD 像是合併一個 channel 或是 video hackathon xD
+21:34:15 <CindyLinz> mno2: 可以啊可以啊~~ (抄 roadmap
+21:34:35 <CindyLinz> 直接交流... 想起來好困難 <囧>
+21:35:16 <CindyLinz> DList 的確效能就是左右反過來了..
+21:44:46 <mno2> CindyLinz: 可以漸進吧 xD   Greg 的英文蠻好的 xD
+21:45:05 <mno2> 而且打字應該比較容易，或是 code review 也行
+21:45:09 <mno2> 可以從容易的開始
+21:49:12 <CindyLinz> code review 倒是可以的, 大家的 code 都有丟 github.. 不過, 實驗性質塗塗改改的 code 的寫作風格... 嗯..... ^^|
+21:54:44 <mno2> 我找 Greg 聊聊看看他有什麼想法
+21:54:51 <mno2> 不過我沒有他的 email xD
+21:54:55 <mno2> 他好像也沒有 FB
+21:55:06 <mno2> （雖說他現在在新加坡啦..）
+21:59:47 <CindyLinz> 我我我真的覺得很困難 OAO
+22:20:02 <mno2> 如果偶爾在 gitter 上有人用英文問問題會覺得很困擾嗎？ xD
+22:20:24 <CindyLinz> 那完全不困擾 XD
+22:20:34 <CindyLinz> (應該會有人英文好的吧 :p)
+22:20:45 <CindyLinz> 嗯, 有在寫論文的吃董應該沒問題 :D
+22:23:10 <mno2> 原來他叫吃董嗎
+22:24:33 <CindyLinz> 我不會打那個字 orz
+22:25:24 <mno2> 有打不出來的字嗎？ xD
+22:25:41 <CindyLinz> 不知道是什麼字, 就打不出來那個字啊
+22:25:52 <mno2> 真好奇
+22:25:53 <caasih> 郗？
+22:26:28 <CindyLinz> 好像是?
+22:26:56 <mno2> 怎麼念啊
+22:27:12 <mno2> gitter 有 notification 嗎？
+22:27:13 <mno2> 不太會用
+22:27:15 <CindyLinz> 念「吃」
+22:27:40 <CindyLinz> 有, 不過瀏覽器要開著那個窗才會有通知..
+22:27:53 <CindyLinz> 嗯, 我也有用 irc 介面連它
+22:28:01 <mno2> 可以用 irc 連喔？
+22:28:03 <mno2> 好像不錯
+22:28:05 <CindyLinz> 也有裝手機 app... 但是習慣用 poll 的 orz
+22:28:10 <mno2> 恩
+22:28:21 <caasih> BYOHC 第二次問到的
+22:28:43 <mno2> 吃董聽起來有種吃貨的味道

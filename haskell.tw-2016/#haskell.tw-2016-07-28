@@ -1,0 +1,10 @@
+06:11:22 <pkmx> @hoogle Applicative f => f (a -> b) -> a -> f b
+06:11:24 <lambdabot> Control.Applicative (<*>) :: Applicative f => f (a -> b) -> f a -> f b
+06:11:25 <lambdabot> Control.Applicative (<**>) :: Applicative f => f a -> f (a -> b) -> f b
+06:11:25 <lambdabot> Control.Applicative liftA :: Applicative f => (a -> b) -> f a -> f b
+06:12:35 <pkmx> :t \f a -> ($ a) <$> f
+06:12:36 <lambdabot> Functor f => f (a -> b) -> a -> f b
+06:12:51 <pkmx> @hoogle Functor f => f (a -> b) -> a -> f b
+06:12:53 <lambdabot> Prelude fmap :: Functor f => (a -> b) -> f a -> f b
+06:12:53 <lambdabot> Data.Functor fmap :: Functor f => (a -> b) -> f a -> f b
+06:12:53 <lambdabot> Control.Monad fmap :: Functor f => (a -> b) -> f a -> f b

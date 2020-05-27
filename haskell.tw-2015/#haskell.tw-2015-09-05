@@ -1,0 +1,6 @@
+23:51:33 <petercommand> :t compileExpr
+23:51:34 <lambdabot> Not in scope: ‘compileExpr’
+23:52:41 <petercommand> :t InteractiveEval.compileExpr
+23:52:43 <lambdabot> Not in scope: ‘InteractiveEval.compileExpr’
+23:54:08 <petercommand> https://downloads.haskell.org/~ghc/latest/docs/html/libraries/ghc/GHC.html 404..
+23:56:50 <petercommand> https://downloads.haskell.org/~ghc/latest/docs/html/libraries/ghc-7.10.2/index.html 這頁就可以了..XD

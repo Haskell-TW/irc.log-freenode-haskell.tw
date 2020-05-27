@@ -1,0 +1,49 @@
+02:39:58 <hashcat> http://srfi.schemers.org/srfi-49/srfi-49.html
+02:40:12 <hashcat> http://readable.sourceforge.net/
+02:40:30 <hashcat> 還真不少
+20:47:56 <hashcat> 我被噓爆啦
+20:48:16 <hashcat> 為啥lisp的括號這麼重要
+21:07:47 <Yu_lin> 被噓爆？什麼 lisp 括號
+21:08:10 <Yu_lin> 什麼 lisp 括號被噓爆？
+21:11:14 <letoh> hashcat: 有沒有人叫你去看王垠的文章? (誤
+21:12:05 <hashcat> 額有前集, 我說想用排縮來表達 s-expr
+21:12:09 <hashcat> 又是王某
+21:12:24 <letoh> 他專門寫過一篇文章在講這個問題啊
+21:13:15 <hashcat> 被噓爆的回文中有些收穫
+21:13:30 <hashcat> http://readable.sourceforge.net/
+21:16:20 <hashcat> 反正不是要跟人合作啥的, 自己看得順眼就好
+21:16:51 <hashcat> 這麼弄下去比haskell還耐看
+21:17:19 <hashcat> letoh: 我要看那篇文 XD
+21:18:30 <letoh> 講 s-exp 的那篇嗎?
+21:18:52 <letoh> hashcat: http://www.yinwang.org/blog-cn/2013/03/08/on-syntax/   這篇吧
+21:20:36 <hashcat> 看看
+21:21:42 <Yu_lin> 居然有放圖片XD
+21:27:23 <hashcat> 還是不能理解, 改個語法少點括號會被噓一票
+21:28:09 <Yu_lin> 跟用 lisp 語法的 haskell 差不多感覺吧？
+21:28:26 <Yu_lin> 還是會有人比較喜歡或習慣原本的語法
+21:29:19 <hashcat> 罷了, 我喜歡就好
+21:31:46 <Yu_lin> 如果括號不要寫太多，我是偏向 lisp 語法，但如果括號太多，就覺得很煩
+21:35:47 <petercommand> 數括號XD
+21:39:17 <CindyLinz> 噓爆? @@"
+21:39:34 <CindyLinz> 是一個人非常嗆的爆, 還是被一堆人圍攻啊? @@"
+21:40:26 <letoh> 如果只有一個人的話，那應該就是 Li○us 了吧 (誤
+21:43:28 <CindyLinz> 只是個建議, 即使優點少於缺點.. 卻會被一堆人嗆爆的話, 這個社群.......
+21:43:53 <Yu_lin> XDDDD
+21:44:04 <Yu_lin> 只有一個人這個實在XD
+22:33:43 <hashcat> Lin(_)us 那個是?
+22:34:01 <hashcat> 應該是u噗噗, 來查一下是啥回事
+22:54:59 <petercommand> 我好像從來沒看過Linus戰語言XD
+22:55:45 <letoh> petercommand: 誰說的 c++/c 之戰不是名戰役嗎? XD
+22:56:00 <letoh> 不過只有一方壓著打算是戰嗎? XD
+22:56:29 <hashcat> 我還以為是兩個u
+22:58:43 <petercommand> letoh: XDDD
+22:59:00 <petercommand> letoh: 想起來了
+22:59:55 <b4283> 他還有戰過 java 的樣子
+23:00:22 <b4283> https://www.youtube.com/watch?v=Aa55RKWZxxI
+23:00:51 <letoh> git/cvs 算嗎? 雖然這戰力很懸殊XD
+23:01:12 <petercommand> 原來是大戰神XD
+23:04:55 <CindyLinz> 無雙等級的....
+23:05:17 <CindyLinz> 如果多戰一的話, 要叫作霸凌?
+23:06:46 <godfat> 一對多 => 無雙
+23:06:47 <godfat> 多對一 => 罷凌
+23:23:17 <hashcat> 打殭屍或被殭屍啃

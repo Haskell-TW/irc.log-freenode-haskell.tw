@@ -1,0 +1,158 @@
+00:09:45 <mno2> 發信給 Yamamoto 詢問了 :p
+00:26:15 <CindyLinz> 今天講的投影片和素材~ https://github.com/CindyLinz/Talk-HappyMonadFix-Easy-NPassCompiler/
+01:27:42 <mno2> http://www.quora.com/What-are-some-great-stories-about-Bill-Gates
+01:27:57 <mno2> 原來 Logicomix 的那位數學家教過 Bill Gates!
+01:56:02 <CindyLinz> 討厭 quora.. QQ
+01:57:01 <letoh> quora 的內容根本看不到  所以無視XD
+01:57:21 <CindyLinz> 不是這部分.. 是我以前點過一次授權 quora 的 FB app
+01:57:34 <CindyLinz> 然後他就一天到晚寄信給我的朋友說我在 quora 上面 follow 他們
+01:57:55 <CindyLinz> 但其實我那時點完就後悔, 把 quora app 刪了, 也再也沒上去過
+01:58:25 <CindyLinz> 我會知道是因為有朋友好奇問我說為什麼跑去 follow 他, 他在 quora 上面根本就沒有什麼動態, 不值得 follow 啊
+01:58:58 <letoh> sns 不都是這樣嗎? XD
+01:59:01 <CindyLinz> 然後我也有陸續收一大堆朋友 follow 我的通知信.. 我相信相當多都不是他們真的有 follow 我...
+01:59:29 <CindyLinz> letoh: 不一樣, 他在通知信裡面說了我沒有做的事情
+01:59:54 <letoh> 該不會有什麼自動 follow 的功能?
+02:00:11 <letoh> 像 linkedin 那樣一直想從 email 裡挖名單出來之類的?
+02:00:11 <CindyLinz> 這跟詐騙電話裡面冒充某某人的小孩哭說他被綁了希望爸爸救他, 是 isomorphic 的!
+02:00:22 <letoh> isomorphic XD
+02:00:32 <CindyLinz> 他可以信上說某某人有註冊 quora 的帳號就好
+02:01:27 <letoh> 我是收過很多有人在某某服務上找我的信 (不是 facebook)  都直接砍掉了
+02:02:07 <CindyLinz> 如果那是那個朋友真的有點個什麼這樣描述的按鈕, 我感覺就不會這麼差了...
+02:02:24 <CindyLinz> 像 FB 小遊戲會引誘玩家去發邀請
+02:02:41 <CindyLinz> 畢竟還是玩家決定要發的..
+02:02:47 <CindyLinz> 雖然是被利誘的 XD
+02:03:11 <CindyLinz> 但是冒用我的名義去亂講話不一樣 orz
+02:03:42 <letoh> 就這點來說  quora 的做法的確不好
+02:04:17 <CindyLinz> 所以別的廣告信我常常只是就丟 trash, 或是就設 filter 自動 trash.. quora 就給他丟 spam 了...
+02:05:19 <letoh> 我以為 sns 就是想辦法弄到使用者的人際關係資料，然後就可以隨便用了 (所以我一直不喜歡用這類服務...)
+02:05:42 <CindyLinz> letoh: 那樣可以告的...
+02:05:58 <CindyLinz> 而且可以「團告」.. XD
+02:06:13 <CindyLinz> 所以玩太大, 會出現蟑螂律師開團來告
+02:06:37 <letoh> 我覺得比較可怕的是  我身邊的人其實都對這樣的情況無感
+02:06:48 <CindyLinz> 反正舉證都一樣, 把名單收集一下, 賠的錢可以分成, 越大團律師就越賺... XD
+02:07:11 <letoh> XDXD  聽起來像是好生意XD
+02:07:39 <CindyLinz> http://www.ithome.com.tw/itadm/article.php?c=61306&s=12
+02:07:49 <CindyLinz> 每人每件可求償500～20,000元，相同原因造成的事件總求償金額最高2億元
+02:08:04 <CindyLinz> 可是外國網站就.... wwww
+02:08:56 <letoh> 只要 server 放國外就算外國網站吧? 還是說有 .tw 就不能算?
+02:09:45 <CindyLinz> 這邊講的對象是公司
+02:09:55 <CindyLinz> 跟 server 在哪倒沒關係
+02:10:24 <CindyLinz> 因為也不一定專指網站上的問題
+02:10:38 <CindyLinz> 像保險業亂用個資也在範圍內
+02:11:05 <letoh> 嗯嗯  也是  電信方面應該也很喜歡賣個資XD
+02:11:15 <CindyLinz> (瞪)
+02:11:48 <letoh> 我一直懷疑 line 也有XD
+02:12:04 <letoh> 自從建完帳號  每天都在收一堆簡訊XD
+02:16:16 <CindyLinz> orz
+02:27:56 <CindyLinz> 額外發現 github page 裡面不能用 symlink XD
+02:28:06 <CindyLinz> 我原本用 ln -s slide.html index.html
+02:28:11 <CindyLinz> 放上去都 404.. XD
+02:28:20 <CindyLinz> 必須直接放有內容的 index.html
+02:29:09 <letoh> symlink 是 link 到哪裡? symlink 有不能跨 fs 的限制
+02:29:28 <letoh> 講錯了XD
+02:29:57 <letoh> 剛想的是跨 repo 可能會有問題.. 講成跨 fs
+02:31:02 <CindyLinz> 我原本是放一個真實有內容的 slide.html 和 index.html->slide.html
+02:31:28 <CindyLinz> 然後 404.. 而且 404 頁面還提醒說可能要等十分鐘, 因為是新建的 github page...
+02:31:47 <CindyLinz> 只是我手癢開了一下 /slide.html 發現是有東西的
+02:31:56 <letoh> 原來如此  這倒是沒試過  那用 redirect 呢?
+02:32:09 <letoh> 就一個真實的 index.html，裡面 redirect 到 slide
+02:32:20 <CindyLinz> 那就不是 symlink 了啊 XD
+02:32:24 <CindyLinz> 我想 redir 應該是可以吧
+02:32:40 <CindyLinz> <meta http-equiv=refresh content=0;url=slide.html>
+02:32:55 <CindyLinz> 不知道有沒有記錯, 好久沒寫了 XD
+02:33:00 <letoh> 嗯.. html 版的 symlink (這是啥XD
+02:36:18 <CindyLinz> 我在我們公司自家的網站, symlink 來來去去都很順的嘛 XDDD
+02:39:23 <letoh> 這樣應該比較正常  想不到不能用 symlink 的原因
+02:40:21 <CindyLinz> 可能他背後是 NTFS..... (逃)
+02:40:54 <letoh> ntfs 應該也有 symlink，只是需要工具XD
+02:41:19 <CindyLinz> 也許他怕我們亂 link 到不可以被 link 的地方? @@"
+02:41:47 <letoh> ln -s /etc/xxxx 之類的? XD
+02:57:43 <CindyLinz> 對...
+02:58:48 <CindyLinz> 或是不小心猜到什麼 db account password config 檔的路徑...
+03:45:37 <CindyLinz> 現在最多人用的 Lens 是哪一套呀?
+03:45:39 <CindyLinz> (haskell)
+05:34:13 <monochrom> hackage.haskell.org/package/lens
+10:24:44 <Yu_lin> 昨天 Cindy 這個範例 " fix f = let x = f x in x " 中， f x  的 x 是從哪邊來的？
+12:15:07 <monochrom> 請看我的 http://www.vex.net/~trebla/haskell/fix.xhtml
+12:49:46 <CindyLinz> Yu_lin: let x = ... 來的呀
+13:01:15 <CindyLinz> monochrom: 謝謝~~ ^^
+13:01:47 <CindyLinz> 這 hackage lens 的說明頁也太有誠意了吧...... 這一定不是 hackage 啊.... wwww
+13:02:07 <monochrom> 哈哈
+13:04:19 <CindyLinz> Yu_lin: 這個 fix f 下去能不能用, 這個 f 的內容是什麼是很關鍵的.. 不是所有的 f 都能用. 有些 f 會直接 halt, 有些 f 可以用. 也許在你心裡是卡在這邊?
+13:04:56 <CindyLinz> 不對, 不只是 f... 還要看最後 fix f 的 in x 出去以後, 這個 x 被怎麼利用的
+13:07:47 <CindyLinz> 如果我們寫 let fix f = let x = f x in x in fix id 然後想把這整個 expr 的結果印出來, 這會卡住的
+13:09:10 <CindyLinz> 如果寫 let fix f = let x = f x in x in fix (\as -> 0 : as) 那麼就會出一個全部都是 0 的無窮 list
+13:09:30 <CindyLinz> 如果再對它取 take, 就可以印出其中有限項
+13:09:58 <CindyLinz> let fix f = let x = f x in x in take 3 $ fix (\as -> 0 : as)
+13:10:37 <CindyLinz> 如果想把來籠去脈都讀一讀的話, 還是移駕 monochrom 的文章 :p
+13:32:37 <CindyLinz> 嗯, 當然這個 f 也可以完全不看自己的參數
+13:32:40 <CindyLinz> let fix f = let x = f x in x in fix (\_ -> 3)
+13:32:56 <CindyLinz> 這樣結果是 3, 不過這樣就失去用 fix 的意義了
+20:03:13 <mno2> http://skillsmatter.com/podcast/scala/lenses-compositional-data-access-and-manipulation/te-8510
+22:29:27 <b4283> godfat: http://nodeos.github.io/
+22:31:06 <letoh> 可怕...
+22:32:13 <b4283> nodejs 要出來跟 guile 搶生意啦
+22:32:31 <petercommand> b4283: omg
+22:32:46 <petercommand> b4283: 做網頁的都變os了...
+22:33:43 <CindyLinz> 這樣是有什麼好處啊 @_@"
+22:34:10 <CindyLinz> 叫用系統服務之類的比較低階的事情, javascript 沒有比 C 好寫啊 @@"
+22:37:21 <petercommand> 有趣呀XDD
+22:39:00 <CindyLinz> 好吧, 這理由太有說服力了 XD
+22:39:24 <godfat> 我不知道 guile 是啥 @@
+22:39:24 <godfat> 我實在不能理解為什麼要擁抱 javascript,
+22:39:24 <godfat> 不過看到 no bash here 倒是有點爽 orz
+22:39:24 <godfat> bash 我覺得也是超難用的
+22:40:08 <letoh> godfat: guile 是快打旋風裡的平頭美軍 (誤
+22:40:15 <godfat> XDDDD
+22:40:41 <godfat> 阿雷估
+22:40:49 <letoh> 原來你知道XD
+22:41:05 <godfat> 我知道那個人，不記得他的名字 XD
+22:41:19 <letoh> 喔喔  就凱爾啊
+22:41:36 <CindyLinz> godfat: 打 tcsh 就做到 no bash 了啊 (歪頭)
+22:41:45 <letoh> 其實每次有人問 guile 時  我都先給這個答案XD
+22:41:51 <CindyLinz> 不過好像更難用.. (謎)
+22:42:20 <godfat> ok XD 我記得之前有聽過別人說為什麼 sonic boom 會聽起來像是阿雷估
+22:42:28 <godfat> 我自己是用 fish
+22:42:44 <CindyLinz> 我同事用 tcsh.. 聽說 tcsh 寫迴圈一定要換行, 不像 bash 是用分號分隔的, 所以在 command line 就打不出來... 目前他們常用解法是用 echo, 然後再 pipe 給 tcsh..... *_*
+22:43:18 <godfat> ....
+22:43:19 <godfat> fish 是本來就能在 terminal 上換行
+22:44:07 <CindyLinz> 我那時是建議他直接 perl -e '寫perl程式' 算了
+22:44:28 <godfat> 話說回來，我不太能想像 NodeJS based operating system 是什麼意思...
+22:44:28 <godfat> 是說上面所有 application 都用 nodejs 來跑？
+22:45:07 <godfat> 喔喔，那我想起來另一件事。上次也有人跟我抱怨 sh 超難用
+22:45:07 <godfat> 我跟他說那你乾脆寫 perl 好了，反正大部分的 linux 也都有 perl,
+22:45:07 <godfat> 不太有跨平台的考量... XD
+22:48:55 <godfat> 看來他 readme 寫得比較清楚...
+22:48:56 <godfat> https://github.com/NodeOS/NodeOS
+22:49:24 <godfat> 等等，為啥就只有 README 沒別的了......
+22:49:43 <godfat> 這是詐騙吧 XD 還兩百多人 star...
+22:49:46 <letoh> 因為放 github 比較好曝光 (誤
+22:49:57 <godfat> ~.~ 莫名....
+22:50:17 <CindyLinz> ...........||
+22:50:22 <CindyLinz> 我剛也在想這件事
+22:50:47 <godfat> (關電視)
+22:54:44 <b4283> XD
+22:54:57 <b4283> 原來是詐騙集團XD
+22:56:06 <godfat> 另外一個可能是開發沒 open source 或是還沒真的開始做啦 ~.~
+22:57:02 <CindyLinz> b4283: 你是幫兇 XD # 22:54 < b4283> 原來是詐騙集團XD
+23:03:43 <b4284> GNU make 4.0 要用 guile 當 extended language
+23:03:55 <b4284> 真不錯呵
+23:04:15 <letoh> sonic boom~
+23:05:03 <b4284> spinning bird kick!
+23:06:56 <letoh> 用 guile 會不會搞死其他人啊  我覺得 guile 並不是很流行的東西@_@
+23:10:28 <b4284> 是新功能嘛，需要的人就會去學了 XD
+23:12:43 <petercommand> 原來guile是scheme interpreter@@
+23:13:24 <petercommand> 從上面看下來以為guile是一種語言XD
+23:13:49 <letoh> 就某個實作的名字吧
+23:14:28 <b4284> 各家的小地方都不太一樣 @@
+23:16:43 <petercommand> 只要standard的地方一樣應該還好
+23:18:19 <petercommand> dialect之類的就....
+23:18:39 <petercommand> 需要在看一下
+23:19:46 <letoh> guile 的用法可能跟 racket 有點像
+23:21:54 <petercommand> scheme不同實作會差很多嗎?
+23:23:22 <mno2> http://stackoverflow.com/questions/19210935/why-does-the-c-preprocessor-interpret-the-word-linux-as-the-constant-1
+23:23:33 <letoh> 語法的部份一般會參考 rnrs 吧
+23:24:41 <b4284> r6rs 的 standard library 不是很完整，例如 posix networking 的部份是 guile 自己做的
+23:24:57 <b4284> 不足的地方都是自己腦補
+23:25:40 <b4284> r7rs 應該可以解決這個問題，不過他們還在寫
+23:43:40 <letoh> 玩了一下 remark.. 覺得這種設計的指令好亂...

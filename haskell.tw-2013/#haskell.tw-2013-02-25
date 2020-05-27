@@ -1,0 +1,177 @@
+12:19:57 <favonia> letoh: 我想問一下，那堂程式語言課是結束了嗎？
+12:20:22 <_13h> 還沒
+12:20:39 <_13h> 目前進行到第六週，總共好像 12 週?
+12:21:27 <_13h> 這兩週在教 racket(scheme)... 但講的很淺所以很無聊XD
+12:23:19 <favonia> _13h: xD
+12:23:32 <favonia> Standard ML 有講到 module 嗎
+12:23:58 <_13h> structure / signature 這個嗎?
+12:24:23 <_13h> 好像有耶，我不是很專心在看影片，寫作業沒問題的話就跳過影片了XD
+12:24:25 <favonia> sig type t; lala : t * t -> t end 之類的
+12:24:36 <favonia> 嗯
+12:24:58 <_13h> 好像有，因為考試有考XD
+13:39:33 <hychen> 有signature
+13:39:52 <hychen> _13h, 那是因為你會lisp吧
+13:40:04 <hychen> 我還有3題沒寫 orz
+13:40:22 <hychen> 六日電動打太多了....
+13:40:25 <hychen> 作業太晚寫
+13:40:25 <_13h> hychen: 你是說 hw4 還是 hw5 ?
+13:40:28 <hychen> hw4
+13:41:56 <_13h> 喔喔.. 我週末都不在家.. hw4 只剩 challenge，好像只要寫個 macro 而已吧，晚上再來寫@_@
+13:41:57 <CindyLinz> 問問..
+13:42:05 <CindyLinz> cabal-dev ghci 丟給我
+13:42:22 <CindyLinz> Failed to extract GHC build arguments
+13:42:32 <CindyLinz> 可是有的目錄不會 :|
+13:43:20 <CindyLinz> 想想差別是什麼.. :Q
+13:43:22 <_13h> hychen: 作業最後一題跟我上次寫給你看的 python code 有點像:p
+13:43:50 <CindyLinz> 可以成功 run 的目錄裡面 xxx.cabal 是我直接手打的, 內容很貧乏.. 失敗的目錄的 xxx.cabal 是用 cabal-dev init 生出來的 :Q
+13:44:14 <_13h> hychen: 但要在 python 裡做到同樣的事就有不少東西要注意
+13:46:27 <favonia> _13h: python 是無辜的，他都表明自己不要 functional 了...
+13:47:30 <_13h> 那是 python 3 吧，不過好像只是把一些不想再看到的東西藏起來而已，沒有完全拿掉
+13:49:01 <_13h> favonia: http://docs.python.org/3.4/howto/functional.html  剛剛發現有這個
+13:50:55 <favonia> _13h: 這個都是騙人的啦 xD
+13:51:09 <_13h> XDXD
+13:52:12 <favonia> _13h: 現在模組化這個字已經被濫用，不代表任何意義了 lol
+13:54:21 <favonia> _13h: 大多數好像只有講「可以分開寫再組合」沒有講「組合以後把某塊換掉」
+13:54:26 <favonia> 這兩個是不一樣的...
+13:54:56 <_13h> 分開再組合感覺有點像以前講的結構化程式?
+13:55:22 <_13h> 你說的要可替換應該要定義好界面之類的？
+13:55:53 <favonia> _13h: 對啊
+13:55:55 <CindyLinz> 發現, 在 xxx.cabal 裡面.. library 加上 exposed-modules: 就可以了
+13:57:11 <favonia> _13h: 然後要規定大家遵守介面
+13:58:10 <_13h> 要設計出好的界面不容易啊，一般只能先做成自欺欺人式的模組化，把髒東西丟到看不到的地方XD
+13:58:15 <favonia> _13h: 這樣才能真的替換掉
+13:58:36 <favonia> 而且保證等價的模組替換掉不會出事情
+13:59:45 <_13h> 遵守界面不就代表換了不會出事嗎？還是需要其他保證?
+14:00:19 <favonia> 只有換了等價的模組才能保證結果一樣啊。一般語言的介面都講不清楚啊
+14:00:33 <favonia> 例如 stack 和 queue 的「介面」可能完全一樣
+14:00:46 <favonia> 但功能完全不一樣...
+14:00:52 <hychen> _13h, 上課不認真, 有一章投影片就在說什麼叫做相等
+14:01:00 <favonia> 因為介面都只能隨便講講
+14:01:13 <favonia> hychen: 不會吧竟然有講這個 lol
+14:01:33 <hychen> _13h, section 3 有一篇在講什麼叫做stucture EQ
+14:01:38 <hychen> favonia, 很粗淺的啦
+14:01:42 <_13h> 不過我覺得比較麻煩的大概是傳回值，常常看到類似 \x -> foo x 的寫法, 那個 foo 傳回什麼鬼東西也不曉得，就這樣直接傳出去
+14:02:17 <favonia> _13h: 比較誇張的語言中，介面已經把所有你關心的數學性質講完了，所以實作什麼完全不重要
+14:02:18 <hychen> favonia, 在說sml module 時的signature 順便提到structure EQ
+14:02:49 <favonia> _13h: 比較不誇張（如 SML）的語言中，介面還是交代不清，所以只能說等價的實作可以互換
+14:02:56 <_13h> hychen: 好像有看到標題? XD 我忘了內容在講什麼... 沒有看到新東西我就快轉或直接跳過了...
+14:03:24 <hychen> _13h, 我覺得上一週的重點就是這個ㄟ XD
+14:03:44 <_13h> hychen: section 5 ?
+14:03:52 <hychen> section 4
+14:04:11 <favonia> _13h: python 沒有給你任何講介面/定義介面的工具... 你無法藏起來（抽象化）任何東西 lol
+14:04:23 <_13h> section 4 忘了是什麼，考試考完就不太想回頭看影片了XD
+14:05:36 <favonia> 或是你也可以說大家都同一個介面 xDDD 什麼都沒講的介面
+14:06:16 <hychen> _13h, https://d19vezwu8eufl6.cloudfront.net/proglang/lecture_slides%2Fsection4%2F82_equivalence_performance.pdf
+14:06:22 <hychen> _13h, 在這張提到
+14:06:49 <hychen> 有 PL Equivalence:, Asymptotic equivalence, Systems equivalence
+14:06:49 <_13h> python 的界面合不合都要用猜的吧，我不曉得有什麼好方法可以檢查，跑跑看會不會收到 exception XD
+14:07:46 <_13h> hychen: thanks! 果然被我跳過了XD
+14:10:06 <_13h> 我覺得要做到 PL Equivalence 都不太容易了 (要求相同輸入輸出)
+14:10:21 <favonia> _13h: 這是基本啊（哭）
+14:11:33 <favonia> SML 搞那麼多詭異的東西，一大目標就是要幫你達成這個 xD
+14:12:07 <favonia> 啊講錯了
+14:12:09 <favonia> 應該說
+14:12:26 <favonia> 讓你在達成這件事情以後可以享受到其他好錯
+14:12:29 <favonia> 好處
+17:54:53 <_13h> 我想問一下，目前在 haskell 中最常見的 parser framework 都是選 parsec 嗎？
+22:12:41 <favonia> letoh: 可能吧，雖然用 attoparsec 有機會比較快...
+22:17:14 <letoh> 唔  斷線了XD
+23:01:48 <mno2> CindyLinz: 今天有被燒到嗎？
+23:02:26 <CindyLinz> 事情是不是大約發生在中午的時候?
+23:02:41 <CindyLinz> 吃飯吃到一半, 發現收到一整排 error mail
+23:02:52 <mno2> 接近中午吧
+23:02:57 <CindyLinz> 香港 server 因為連線太慢出現問題..
+23:03:27 <mno2> 香港剛剛看 gslin 不是說現在要環繞世界一周才能到香港?
+23:03:28 <CindyLinz> 不過那時還不知道原因, 從我們這邊只是發現台港之間的連線有狀況....
+23:04:09 <CindyLinz> 不過我們在香港的機器還是通著, 只是連線很慢.. 所以知道是網路的事情
+23:05:18 <CindyLinz> 現在在家裡 gmail / facebook / msn 都爛掉.. 好煩啊
+23:05:23 <mno2> 你們台灣機房擺在哪啊？
+23:05:45 <favonia> CindyLinz: 趁機看看書～
+23:05:53 <CindyLinz> 中華/台固/遊戲橘子 都有放
+23:06:26 <CindyLinz> favonia: 我書都是習慣在車上看的 XD
+23:06:37 <mno2> CindyLinz: 所以上 irc 聊天 wwww
+23:07:02 <CindyLinz> 剛在看 #haskell... wwww
+23:08:14 <CindyLinz> 有時候這種感覺也很奇妙...
+23:08:38 <CindyLinz> 上次日本 311 地震.. 我們也是第一時間就知道日本出大事了...
+23:08:52 <CindyLinz> 雖然還不知道是什麼事, 只是知道是嚴重的事
+23:09:04 <CindyLinz> 因為日本玩家突然都不見了...
+23:11:30 <mno2> 剛剛聽到 schee  介紹衛星電話，在想要不要買一支 ...
+23:13:56 <CindyLinz> 作什麼用啊?
+23:15:37 <mno2> 網路斷的時候可以用衛星上網...
+23:16:45 <CindyLinz> 貴不貴啊?
+23:17:41 <mno2> 空機大概4萬左右
+23:17:50 <mno2> 費用可以用預付的方式
+23:18:02 <letoh> google 現在不能用嗎?
+23:18:13 <CindyLinz> 還.蠻.貴.的...
+23:18:30 <CindyLinz> 那可能不用問費率了 XD
+23:18:37 <letoh> 還是已經修好了? 我一直在用沒啥問題啊  速度也沒感覺變慢
+23:19:06 <mno2> letoh: 我無法連上 google
+23:19:12 <CindyLinz> 不同網段的人會不一樣
+23:19:17 <CindyLinz> letoh: 你從哪邊上網?
+23:19:24 <letoh> 剛剛還在用 gmail 收發信，蠻正常的
+23:19:43 <letoh> 唔  我該回答什麼? 新竹?
+23:19:48 <CindyLinz> 我家是台固的光纖
+23:19:56 <letoh> 喔 seednet
+23:20:00 <letoh> adsl
+23:20:15 <letoh> 光纖那種高級貨我家沒有XD
+23:20:36 <CindyLinz> 一個月八九百塊 :Q
+23:21:17 <CindyLinz> gmail 好像突然有了動靜..
+23:21:29 <letoh> adsl 好像便宜一點點? 其實沒啥需求就沒換了
+23:22:18 <CindyLinz> 又不動了 QQ
+23:23:01 <letoh> 唔，有差那麼多啊@_@ 看了一下 gmail/g+/drive 都很順@_@
+23:24:37 <CindyLinz> 可能跟 adsl or 光纖比較沒關, 跟 seed or 台固 比較有關係 ^^|
+23:25:13 <letoh> http://pastebin.com/sSw2S8Vk  g+ 上看到的
+23:25:36 <CindyLinz> 晚上好像有覺得修好了, 就再把電開起來.. 然後又爆一次
+23:25:54 <CindyLinz> 開不起來 XD
+23:26:07 <letoh> pastebin 也不行? XD
+23:26:10 <CindyLinz> 乾脆, 你把內容 uuencode 以後貼上來好了.. (誤)
+23:27:24 <letoh> 『我們公司位於其他地區的機房大火 (好像是變電器爆炸)\n 所以公司對外的網站全部都打不開 (我們是靠網路吃飯的)\n 各主管緊急處理這件事 然後我們的大老闆很著急的問了一句: 「不是有防火牆?」\n「不是有防火牆?」\n 「不是有防火牆?」』
+23:27:30 <CindyLinz> 剛剛有朋友繞過去那邊看, 回來說爆第三次了..
+23:27:32 <letoh> 請自己換行XD
+23:28:45 <mno2> CindyLinz: 原來第三次囉，我以為是第二次
+23:31:44 <CindyLinz> :|
+23:31:54 <CindyLinz> 覺得寫 Haskell 程式的時候, 常常在寫 undefined
+23:32:03 <CindyLinz> 覺得 undefined 實在是太長了 XD
+23:32:46 <letoh> 改成 qq 或 wtf 之類的?
+23:33:12 <letoh> 這幾天有個問題
+23:33:59 <letoh> 像 c++ 那種語言  一堆技巧都在 type 上耍花招，跟 haskell 的 type system 是類似的東西嗎?
+23:35:57 <CindyLinz> 能不能舉些例子? 因為我以為比較多是在 syntax 上耍花招, 不是 type..?
+23:36:06 <letoh> 隔壁有人在貼八卦... seednet 的確是悻存者之一
+23:36:44 <letoh> 嗯... 例如 typelist
+23:37:14 <letoh> 把一堆 type 串在一起這件事實在是有點怪...
+23:37:50 <CindyLinz> typelist?
+23:38:28 <letoh> 我想貼連結，可是應該看不到? XD
+23:38:49 <CindyLinz> 反正應該都是純文字, 可以直接打出來吧? XD
+23:38:49 <letoh> http://stackoverflow.com/questions/901907/how-to-use-typelists
+23:39:02 <letoh> 會洗板XD
+23:39:12 <CindyLinz> 一行打不完喔? ^^|
+23:39:29 <letoh> 其實就是弄一個類似 cons cell 的東西，只是裡面都裝 type
+23:39:54 <CindyLinz> 出來了
+23:40:01 <letoh> 哇
+23:40:23 <letoh> http://www.drdobbs.com/generic-programmingtypelists-and-applica/184403813  這邊還有一個XD
+23:40:43 <letoh> 有一些單純一點的程式碼可以看
+23:41:05 <CindyLinz> 看起來是依序 try 一排 runtime casting?
+23:41:17 <letoh> 我想單純寫 c++ 的人應該是想不到這種東西
+23:41:30 <letoh> 應該都是 compile time...
+23:41:53 <letoh> 不過我不是很熟，不太確定有沒有 runtime @_@
+23:42:09 <CindyLinz> 喔 要看 answer 的, 不是 question 的..
+23:42:38 <letoh> 嗯，主要實作是 loki
+23:43:06 <letoh> 我的感覺是有點像加強版的 type trait ?
+23:43:53 <CindyLinz> 唔, 我看以為是 haskell 裡面的 tuple?
+23:44:07 <letoh> 對呀  類似的東西
+23:44:17 <letoh> 但是用來裝 type，不裝 data
+23:46:06 <CindyLinz> haskell 裡我看過有人弄個叫作 type proxy 的東西
+23:46:30 <letoh> 唔，看看
+23:46:38 <CindyLinz> 用在沒有它的話, 常常需要手動標示 type 的函數
+23:47:02 <CindyLinz> 就放一個沒有人會去讀值的東西當參數, 目的只是要讓這個參數的 type 被 haskell 的 type system 拿去當 hint
+23:47:10 <CindyLinz> 所以值通常也都是放 undefined
+23:47:13 <letoh> 有點像
+23:47:46 <letoh> http://hackage.haskell.org/packages/archive/tagged/0.2.3.1/doc/html/Data-Proxy.html  是這個嗎?
+23:48:48 <CindyLinz> 要等一陣子.. XD
+23:48:57 <letoh> XD
+23:51:22 <CindyLinz> 應該就是它
+23:51:35 <CindyLinz> 它幫 Proxy 定那一堆 instance 幹嘛....
+23:56:47 <CindyLinz> 現在開起來的網頁 tab 看完了也捨不得關掉... 囧
+23:57:10 <letoh> 只好開電視了
+23:57:39 <letoh> 因為連 youtube 都沒辦法看
+23:58:43 <CindyLinz> 繼續寫 memcached server protocol.. ._.

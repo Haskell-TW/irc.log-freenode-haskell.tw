@@ -1,0 +1,6 @@
+21:29:30 <pkmx> @hoogle runConst
+21:29:31 <lambdabot> No results found
+21:30:54 <pkmx> @hoogle getConst
+21:30:55 <lambdabot> Control.Applicative getConst :: Const a b -> a
+21:30:58 <pkmx> oh
+23:53:40 <monochrom> runCont?

@@ -1,0 +1,106 @@
+00:22:39 <monochrom> * 1.5 是現時流行的
+00:23:21 <CindyLinz> 我最後用了 +4096
+00:23:42 <CindyLinz> 想想其實一次衝大一點比較有機會用比較少 XD
+00:23:52 <CindyLinz> 就是運氣好的時候, 最後一次剛好用到快滿的時候.....
+00:24:14 <CindyLinz> 欸不對我是用 +1048576
+00:24:28 <CindyLinz> 啊難怪測 1m 整數的時候那麼小, 因為根本不用 grow...
+00:28:43 <pkmx> Maximum resident set size (kbytes): 1051180
+00:29:01 <pkmx> 用 C++ std::vector<int64_t>
+00:30:09 <CindyLinz> GHC 的 mark&copy GC 會額外用掉不少空間
+00:31:43 <CindyLinz> 如果完全不分代的話會多用一倍.. 分 N 代的話這個部分可以變成只多浪費 1/N, 不過分代產生的 cost 不知道有多少...
+00:43:12 <CindyLinz> @pl \a b -> return a
+00:43:12 <lambdabot> const . return
+01:01:26 <CindyLinz> 喔喔! stack lts 出 7.0, 配 ghc 8.0.1
+01:03:00 <pkmx> https://gist.github.com/PkmX/c82eab1bf7fcd9f9910767ba5ed2c628
+01:03:18 <pkmx> 終於不用 nightly 了 (灑花~~~~
+01:12:44 <pkmx> @hoogle Monad m => (a -> b -> m c) -> m a -> m b -> m c
+01:12:45 <lambdabot> Control.Monad (>=>) :: Monad m => (a -> m b) -> (b -> m c) -> (a -> m c)
+01:12:45 <lambdabot> Text.XML.Cursor (>=>) :: Monad m => (a -> m b) -> (b -> m c) -> a -> m c
+01:12:45 <lambdabot> Text.XML.Cursor.Generic (>=>) :: Monad m => (a -> m b) -> (b -> m c) -> a -> m c
+01:13:24 <pkmx> @pl \f ma mb -> do { a <- ma ; b <- mb ; f a b }
+01:13:24 <lambdabot> (line 1, column 16):
+01:13:24 <lambdabot> unexpected '{'
+01:13:24 <lambdabot> expecting variable, "(", operator or end of input
+01:13:43 <pkmx> pl 居然不支援 do XD
+01:14:00 <pkmx> @pl \f ma mb -> ma >>= \a -> mb >>= \b -> f a b
+01:14:00 <lambdabot> flip ((.) . (>>=)) . flip ((.) . (>>=))
+01:14:29 <pkmx> :t \f ma mb -> join (f <$> ma <*> mb)
+01:14:31 <lambdabot> Monad m => (a2 -> a1 -> m a) -> m a2 -> m a1 -> m a
+01:23:11 <CindyLinz> @hoogle Int# -> Int
+01:23:12 <lambdabot> GHC.Exts I# :: Int# -> Int
+01:23:12 <lambdabot> GHC.Types I# :: Int# -> Int
+01:23:12 <lambdabot> GHC.Prim notI# :: Int# -> Int#
+01:43:11 <CindyLinz> @type sum
+01:43:13 <lambdabot> (Foldable t, Num a) => t a -> a
+01:43:41 <CindyLinz> @type (**)
+01:43:46 <lambdabot> Floating a => a -> a -> a
+01:46:49 <CindyLinz> @pl map (\s -> s*s)
+01:46:49 <lambdabot> map (join (*))
+02:14:01 <CindyLinz> @type round
+02:14:03 <lambdabot> (RealFrac a, Integral b) => a -> b
+02:35:31 <pkmx> > round 0.5 :: Int
+02:35:34 <lambdabot>  0
+03:52:36 <monochrom> 請記著 "round to even"
+03:52:54 <monochrom> > (round 0.5, round 1.5) :: Int
+03:52:57 <lambdabot>  error:
+03:52:58 <lambdabot>      • Couldn't match expected type ‘Int’
+03:52:58 <lambdabot>                    with actual type ‘(Integer, Integer)’
+03:53:04 <monochrom> > (round 0.5, round 1.5) :: (Int, Int)
+03:53:07 <lambdabot>  (0,2)
+04:28:40 <petercommand> > round 1 :: Int
+04:28:43 <lambdabot>  1
+04:28:47 <petercommand> > round 1.` :: Int
+04:28:50 <lambdabot>  <hint>:1:9: error: parse error on input ‘`’
+04:28:50 <petercommand> > round 1.1 :: Int
+04:28:53 <lambdabot>  1
+06:51:11 <caasih> round "half" to even
+06:51:30 <caasih> cc petercommand
+10:06:38 <whitglint> 四捨六入五成雙
+15:26:54 <CindyLinz> @type curry
+15:26:56 <lambdabot> ((a, b) -> c) -> a -> b -> c
+15:33:21 <b4283> @type stephen
+15:33:23 <lambdabot> error: Variable not in scope: stephen
+16:23:52 <pkmx> @type Control.Category.Schoenfinkel.schön
+16:23:55 <lambdabot> error:
+16:23:55 <lambdabot>     Not in scope: ‘Control.Category.Schoenfinkel.schön’
+16:23:55 <lambdabot>     No module named ‘Control.Category.Schoenfinkel’ is imported.
+18:21:23 <CindyLinz> 這題我用 instance Read 實作 XDD # https://www.hackerrank.com/challenges/while-language-fp
+18:22:13 <CindyLinz> newtype Stmt = Stmt (Map String Int -> Map String Int)
+18:24:54 <b4283> Schoenfinkel?
+18:25:17 <b4283> oh, nice person
+21:27:18 <caasih> 像這樣的 function ，有沒有省掉 a0~an 的寫法？ `f a0 a1 ... an = g a0 a1 ... an b c d`
+21:27:23 <caasih> n 的數量不一定
+21:37:41 <pkmx> 用 type class 應該有辦法 ...
+21:48:02 <pkmx> ㄜ 應該不用吧...
+21:49:09 <pkmx> :t \m b c d -> m >>= pure (f b c d)
+21:49:11 <lambdabot> (FromExpr (m b), Show t2, Show t1, Show t, Monad m) => m a -> t -> t1 -> t2 -> m b
+21:49:53 <pkmx> :t \mf b c d -> mf >>= \f -> pure (f b c d)
+21:49:56 <lambdabot> Monad m => m (t -> t1 -> t2 -> b) -> t -> t1 -> t2 -> m b
+21:50:14 <pkmx> 然後 m 挑 (->) e 就好了 XD
+21:52:17 <pkmx> @pl \mf b c d -> mf >>= \f -> pure (f b c d)
+21:52:17 <lambdabot> (. (((((pure .) .) . flip) .) . flip . flip id)) . (.) . (.) . (>>=)
+21:52:23 <pkmx> Eww...
+21:58:25 <caasih> 好難懂，想不通我再上來問 @@
+22:00:06 <pkmx> @let com mf b c d = mf >>= \f -> pure (f b c d)
+22:00:14 <lambdabot>  Defined.
+22:00:28 <pkmx> @let g1 a0 b c d = a0 + b + c + d
+22:00:36 <lambdabot>  Defined.
+22:00:41 <pkmx> @let g2 a0 a1 b c d = a0 + a1 + b + c + d
+22:00:46 <lambdabot>  Defined.
+22:01:36 <pkmx> :t let f1 = com g1 0 0 0 in f1
+22:01:39 <lambdabot> Num t => t -> t
+22:01:49 <pkmx> :t let f2 = com g2 0 0 0 in f2
+22:01:51 <lambdabot> Num t => t -> t -> t
+22:10:42 <pkmx> :t \mf b c d -> mf <$> pure b <*> pure c <*> pure d
+22:10:44 <lambdabot> Applicative f => (a2 -> a1 -> a -> b) -> a2 -> a1 -> a -> f b
+22:10:57 <pkmx> :t \mf b c d -> mf <*> pure b <*> pure c <*> pure d
+22:10:59 <lambdabot> Applicative f => f (a2 -> a1 -> a -> b) -> a2 -> a1 -> a -> f b
+22:11:10 <pkmx> 恩...應該只需要 Applicative
+22:17:50 <CindyLinz> 比較想用 do-notation..
+22:18:16 <CindyLinz> pure 連發實在是.... XD
+22:18:39 <pkmx> 可是一個要 Monad XD
+22:24:33 <CindyLinz> 值得.....
+22:46:37 <CindyLinz> @type sum
+22:46:39 <lambdabot> (Foldable t, Num a) => t a -> a
+22:46:46 <CindyLinz> > sum []
+22:46:50 <lambdabot>  0

@@ -1,0 +1,173 @@
+00:12:11 <MnO2> touch
+00:13:36 <CindyLinz> 囧
+08:45:29 <yen3> http://community.haskell.org/~simonmar/slides/cadarache2012/ 丟東西上來，雖然我看不懂，不過這是 Simon Marlow 在 summer school 的投影片，主題是 Parallel and Concurrent Haskell。
+08:47:55 <yen3> http://community.haskell.org/~simonmar/papers/par-tutorial-cefp-2012.pdf 這篇的也是 Simon Marlow 寫的一篇文章，主題是 Parallel and Concurrent Programming in Haskell。
+11:46:19 <CindyLinz> :D
+11:46:43 <CindyLinz> 想到 FLOLAC 12 剛開學的時候討論到的一個問題...
+11:46:52 <CindyLinz> Haskell 裡面的 seq 能怎麼寫呢?
+11:47:49 <MnO2> CindyLinz: 你是說怎麼實作?
+11:48:07 <CindyLinz> 如果是確定型態的, 例如說知道是 Maybe a 的話, 可以用 seq (Just a) b = b     seq Nothing b = b
+11:48:26 <CindyLinz> 可是如果像 Haskell 裡面 seq 是可以 for 所有 type 的
+11:48:31 <CindyLinz> 不知道能怎麼寫 o.o
+12:18:54 <MnO2> CindyLinz: http://stackoverflow.com/questions/6442019/how-does-seq-force-functions
+12:20:48 <MnO2> http://xiki.org/
+12:21:08 <MnO2> 大家覺得xiki的功能怎樣？ 會特別喜歡那項功能嗎？
+12:25:43 <MnO2> https://tech.dropbox.com/?p=361
+12:26:22 <MnO2> dropbox 把 js 的 code 都改寫成 coffeescript 了
+12:57:57 <MnO2> yinwang 變成不推薦 Haskell 當作入門語言了 xDD
+12:59:25 <CindyLinz> 他是推 scheme?
+12:59:55 <MnO2> CindyLinz: 應該吧，他原本清單列了兩個，拿掉一個就剩下Scheme
+13:00:55 <CindyLinz> MnO2: 所以答案是: All these are implementation details and are hidden inside compiler (GHC). Haskell's case expression doesn't force it's scrutineer, only pattern-matching and seq do.
+13:01:03 <CindyLinz> MnO2: 就是... 寫不出來的意思 ^^|
+13:01:05 <MnO2> 他提的大多數我都同意，我自己也傾向不推薦Haskell作第一個接觸FP的語言
+13:01:21 <MnO2> CindyLinz: Don Stewart都那麼說了，應該就是寫不出來吧
+13:01:38 <CindyLinz> 呃... 入門語言和 FP入門語言 不太一樣欸
+13:01:46 <CindyLinz> MnO2: 連入 FP門, 也不推荐嗎?
+13:02:08 <CindyLinz> MnO2: 我就是為了學 FP, 所以拿 Haskell 當成(第一個)學習對象
+13:03:16 <CindyLinz> 我那時候聽過的 FP 有 Haskell, Lisp, OCaml, Erlang
+13:03:29 <MnO2> CindyLinz: 他應該就是說FP入門語言，不過他也推薦從FP接觸程式語言，所以好像等價?
+13:04:14 <CindyLinz> 覺得 OCaml 和 Erlang 不夠「純」, 然後 Haskell 和 Lisp 的話.. 我不記得是怎麼二選一的了
+13:04:29 <CindyLinz> 可能學長有推荐過 Haskell, 但沒有人跟我推荐過 Lisp
+13:04:38 <MnO2> 看你愛不愛括號吧xDD
+13:04:48 <CindyLinz> 想說要學 FP, 就學一個非常 FP 的 FP 比較好啊 ^^|
+13:05:51 <CindyLinz> MnO2: 你每次把 王垠 的名字用英文寫, 都會讓我驚一下...  不過現在有習慣一點了 XD
+13:06:22 <MnO2> 你們還欠兩個兄弟xDD
+13:06:41 <CindyLinz> 什麼意思?
+13:06:52 <MnO2> 王因跟王印
+13:07:03 <CindyLinz> ||o
+13:08:08 <MnO2> 那就要看你FP的定義中有哪些語言特色了
+13:08:22 <CindyLinz> 我把 Haskell 當第一個學的 functional language, 所以我很長一段時間, 以為 lazy evaluation 是 function language 的特性... XD
+13:08:42 <MnO2> 如果他提到的這些特色都不是教學上你想要強調的，其實沒有必要強求 Haskell
+13:10:04 <CindyLinz> 嗯我想要體會一下, 只剩下函數概念建構的
+13:10:08 <MnO2> 就看想要給學生什麼？如果預設學習者什麼概念都沒有，我覺得lispy會撞到的牆是相對少
+13:10:17 <CindyLinz> 世界, 程式會寫程什麼樣子
+13:10:51 <CindyLinz> 原來 xiki 不是一種 wiki 啊
+13:11:06 <MnO2> 那這樣其實不需要教到HM的型態系統啊~
+13:12:05 <CindyLinz> 接觸以前的確沒有想到 type 這個坑這麼大 XD
+13:12:47 <MnO2> 對啊，不能就挖坑給初學者啊，要引誘他們進來，然後慢慢把坑加大
+13:13:43 <CindyLinz> 欸可是我接觸 Haskell 這麼久了, 是到 Flolac 裡面才知道有 Hindley-Milner
+13:14:20 <CindyLinz> 才知道原來 Haskell 用的就是這個系統, 而且比 polymorphic type 要小
+13:14:46 <CindyLinz> 因為它已經比我以往接觸的 C / Java 裡面的 type 靈活太多了...
+13:16:56 <CindyLinz> 結果因為我心中已經把 Hindley-Milner type system 當成宇集, 所以在看 Polymorphic type 的時候出現障礙 @@"
+13:17:50 <MnO2> 很正常啊，看到不同世界的時候會一時轉換不過來。
+13:19:17 <CindyLinz> MnO2: 而且是縮小簡單, 放大很困難.... 因為原本所會的語言會描述我心中想得出來說得出來的所有想法, 原本的語言說不出來的句子, 很難具體想像...
+13:21:03 <MnO2> 這讓我想到據說愛斯基摩語描述冰塊就要好多種。我們去學會想，Fsck，我哪分得出來
+13:21:30 <CindyLinz> Fsck XD
+13:21:43 <CindyLinz> MnO2: 好像有點像...
+13:22:27 <CindyLinz> 剛剛一直在找不到 xiki 的介紹... 所以只好看影片了 orz
+13:22:34 <MnO2> 看影片比較快
+13:25:11 <CindyLinz> 看起來毛毛的 orz
+13:25:24 <CindyLinz> 直接去改 df 出來的 usage % 數是怎樣....||
+13:47:27 <MnO2> 我忘記之前有沒有貼過了
+13:47:29 <MnO2> http://www.cs.uoregon.edu/Research/summerschool/summer12/curriculum.html
+13:51:27 <yen3> 至少我沒有看到過，謝謝哩。
+13:52:01 <yen3> 對喔，我這邊還有FLOLAC 12 - Logic 的錄音 ... Orz
+13:52:34 <yen3> 我再轉檔一下後放在網路上好了 XD。
+13:53:00 <CindyLinz> :D
+15:19:06 <MnO2> yen3: 錄音要放網路上最好知會一下講者？還是一開始就橋好了？
+15:19:50 <MnO2> yen3: 有些人可能會在意。
+15:20:42 <MnO2> 啊，突然發現yen3斷線了
+15:36:12 <CindyLinz> XD
+15:36:31 <CindyLinz> 召喚成功!
+15:38:56 <MnO2> xDE
+15:38:58 <MnO2> xD
+15:39:35 <MnO2> 重貼一次:    "yen3: 錄音要放網路上最好知會一下講者？還是一開始就橋好了？"
+15:41:10 <CindyLinz> 所以.. xiki 是把所有他用到(想到)的 shell 指令都重新(實作)包一次嗎 @@"
+15:41:42 <CindyLinz> 結果看起來好像很神奇, 可是有一種很髒的感覺? o.o
+15:45:00 <yen3> MnO2: 我剛剛不在電腦前，講者知道我有錄啊 ... 我就在他的旁邊剪輯錄音檔 XD。
+15:45:51 <yen3> MnO2: 不過我還是問完他再確定，應該不會想要公開釋出，有想要聽的再私底下給好了。
+15:47:02 <MnO2> 嗯，要放網路上理論上也要想一下錄音的版權是誰的
+15:47:43 <MnO2> CindyLinz: 可是我們的hash可能也會做類似的事
+15:47:56 <yen3> 對不起，這點我沒想到，是我疏忽
+15:48:56 <MnO2> 不用道歉啦@@ 我只是提醒一下而已，因為我以前有碰過類似的事
+15:50:41 <yen3> 我很謝謝你的提醒，我自己都忘了有這些事 ...
+15:52:00 <yen3> 那麼我問一下再說結果是什麼。
+15:53:23 <MnO2> :)
+16:06:04 <CindyLinz> MnO2: hash 是...?  haskell 實作的 xiki?
+16:46:27 <CindyLinz> MnO2: 那也噁心啊... haskell 只保證 type 沒錯, 沒有保證不會噁心 XD
+17:01:55 <MnO2> CindyLinz: hash 是favonia, 我還有godfat 預計要作的 strongly typed shell, 會設計成可以綁外部程式的接口，像現在我們就在先寫libpulse的plugin
+17:25:28 <suhorng> 是說 想請問大家一下 大家學 Haskell / Functional Programming 都是只看網路資源嗎? (官網有很多資源連結, 不過找了一些書 e.g. Introduction to Functional Programming Using Haskell, The Algebra of Programming 台灣沒進貨, 滿貴的...)
+17:35:20 <MnO2> suhorng: 如果你把 Real World Haskell, Learn you a haskell, Yesod book 也定義成網路資源的話，then yes
+17:35:58 <MnO2> suhorng: 如果把暗黑版的書也當作網路資源， then a big yes.
+17:36:20 <suhorng> 嗯!! 我現在是在看第二本的翻譯 (謝謝樓上 m(_ _)m )
+17:36:34 <suhorng> 喔lol 我指 Learn you a haskell
+17:41:20 <suhorng> 另外我現在在找 Currying 的資料, Currying 是不是單純指把擁有多個參數的函數變成只拿一個參數的技巧? (把 f : XxY→Z 變成 f' : X→Y→Z)
+17:47:30 <MnO2> suhorng: 應該說不是只拿一個，而是可以經由一連串的partial application來帶入參數
+17:47:51 <MnO2> suhorng: 每次partial application不一定只帶一個
+17:48:26 <MnO2> 還有Curry的全名是Haskell Curry  :p
+17:48:54 <suhorng> 喔喔 好
+17:52:05 <suhorng> 當時想跟同學講 Curry 不過描述不太好
+17:52:15 <suhorng> 結果他以為是 Closure Orz...
+17:55:05 <b4283> 之前思考過 Currying 的實作法，不過數學太差，除了用 macro 想不出什麼比較好的作法 ... :/
+17:56:26 <b4283> 或是用 lazy 累積起來，到最後要 evaluate 時再取 argument
+17:56:28 <MnO2> suhorng: 在 javascript 實現的確跟 closure 有點關係啦 xD
+17:57:39 <b4283> 比如說有一個 (define f (lambda (a b c) ...)
+17:58:12 <suhorng> 嗯哼
+17:58:34 <b4283> 當給呼叫者給值不夠的時候就會傳回一個 medium lambda, ex: (f 5)  =>  (lambda (b c) ...)
+17:59:49 <b4283> 然後 abc 都滿足時，傳回一個 no-argument lambda，執行了就會是原本 eager 版本 (f 1 2 3) 應該要有的值
+18:00:21 <suhorng> 嗯@@...
+18:01:54 <MnO2> b4283: 聽起來沒什麼問題吧，雖然我不熟lispy
+18:02:04 <b4283> 不曉得利用現有的 scheme 是否有可能作到我想的那樣
+18:02:12 <b4283> hmmm
+18:04:14 <b4283> r6rs 的 future 是放在 library 裡面，type 是 syntax(macro) @@
+18:04:31 <kanru> 你要的是 (defmacro defun-curry (...
+18:05:02 <b4283> kanru: 那是啥，clisp 我不熟 XD
+18:05:36 <kanru> (define-syntax define-curry :P
+18:06:57 <CindyLinz> MnO2: 如果外部程式接口切得乾淨而且靈活的話, 就可以算為不噁心了 ^^
+18:08:57 <MnO2> CindyLinz: 這就要靠寫plugin的人的努力了xD
+18:13:28 <CindyLinz> MnO2: 那很好呀, 就像點自助餐.. 想吃什麼自己拿 :p
+18:14:26 <CindyLinz> MnO2: 但如果是你們 kernel 就包了一大堆, 然後別人要 extend 的唯一方法就是 fork 你們的 code 去 hack 的話.... 就不太舒服了...
+18:14:57 <MnO2> CindyLinz: 所以xiki現在是這樣？
+18:14:57 <b4283> ;Q
+18:16:34 <CindyLinz> MnO2: 你看這邊... 看起來是啊 :Q https://github.com/trogdoro/xiki/tree/master/lib/xiki
+18:17:09 <CindyLinz> 這是 man # https://github.com/trogdoro/xiki/blob/master/lib/xiki/man.rb
+18:17:49 <CindyLinz> 這是 php # https://github.com/trogdoro/xiki/blob/master/lib/xiki/php.rb
+18:19:14 <CindyLinz> 看這邊, 更多在這邊才對 :p  # https://github.com/trogdoro/xiki/tree/master/menu
+18:19:29 <CindyLinz> mysql.rb postgres.rb ls.rb ps.rb ...
+18:21:06 <MnO2> hmm...
+18:21:23 <CindyLinz> 藉鏡.. XD
+18:21:37 <CindyLinz> 你們真的要用掉 hash 這個名字喔?  很過份捏 XD
+18:23:39 <b4283> 好可怕，rb 要統治世界了
+18:24:02 <MnO2> CindyLinz: 其實還不確定，因為覺得有點弱
+18:24:23 <CindyLinz> MnO2: 你是指哪個點呀?
+18:24:43 <MnO2> CindyLinz: 聽起來有點弱
+18:24:59 <CindyLinz> MnO2: 你是說 hash 這個名字弱, 還是這個 project 的功能弱?
+18:25:01 <MnO2> CindyLinz: 而且太不特別了，不好SEO
+18:25:22 <MnO2> CindyLinz: 名字
+18:25:43 <CindyLinz> 打 hash 查不到.. 到時候要打 hash haskell 才行 ^^|
+18:27:17 <CindyLinz> b4283: 去把 rb 趕回 web 世界.. (誤)
+18:32:48 <b4283> 看 video cast 主要都是 rails 展示，沒想到有這麼多介面
+18:33:03 <b4283> 好像 zsh 似的
+18:38:18 <MnO2> log 經過一個多禮拜重新站上 1 萬 bytes
+18:39:40 <CindyLinz> XD
+18:43:12 <yen3> 賀~
+20:36:56 <favonia> CindyLinz: （除了惡搞以外的正規途徑）不行
+20:45:07 <CindyLinz> favonia: 你是回答哪一句啊? ^^|
+20:45:34 <CindyLinz> favonia: 喔你是回答手寫 seq?
+20:57:38 <favonia> CindyLinz: y
+20:57:46 <favonia> CindyLinz: MnO2 到哪去了 lol
+20:58:08 <CindyLinz> favonia: 我怎麼知道 XD
+21:20:52 <MnO2> 找我?
+21:26:02 <favonia> MnO2: 我聽別人說因紐特人有很多詞其實就像德文一樣把很多字黏在一起而已
+21:27:56 <favonia> MnO2: 我自己不會講，所以我不確定 xD
+21:29:03 <favonia> MnO2: http://en.wikipedia.org/wiki/Eskimo_words_for_snow
+21:51:56 <CindyLinz> 我想問個問題 :p
+21:52:01 <CindyLinz> 有個叫 StateMonad 的東西, 它的 data 定義類似是這樣:
+21:52:04 <CindyLinz> data State s a = State { runState :: s -> (a, s) }
+21:52:07 <CindyLinz> 然後 instance Monad 的定義是這樣寫:
+21:52:10 <CindyLinz> instance Monad m => Monad (State s)
+21:52:11 <CindyLinz>  
+21:52:14 <CindyLinz> 那如果我 State 的定義順序是反的, 也就是如果我寫成
+21:52:16 <CindyLinz> data State a s = ....
+21:52:19 <CindyLinz> 那我 instance Monad 應該怎麼寫呢?
+21:52:40 <CindyLinz> 我在試是不是用 forall 把這個 a 「槓掉」
+21:52:48 <CindyLinz> 不過試不出來應該塞在什麼位置 orz
+22:11:29 <MnO2> CindyLinz: http://stackoverflow.com/questions/8005372/is-it-possible-to-make-a-type-an-instance-of-a-class-if-its-type-parameters-are
+22:13:27 <CindyLinz> MnO2: 謝謝~ 我看看 ^^
+22:26:20 <CindyLinz> 嗚嗚, 我需要 hackage 的 mirror 了 ^^|
+22:29:16 <CindyLinz> 隔壁 #haskell 有人發出一樣的嘆息了 XD # 22:28 < t7> i need hackage :'(
+22:30:17 <CindyLinz> 看起來真是有一點工.. 而且後續拿它套用這個 class 的時候都要額外 wrap 一下, 不能直接用了...
+22:32:03 <CindyLinz> 隔壁也出現了解法.. :p # http://hdiff.luite.com/packages/archive/
+22:34:14 <MnO2> hackage不知道為什麼那麼容易掛
+22:34:49 <MnO2> 找時間研究解決一下搞不好你就紅了
+22:36:57 <CindyLinz> 來期待 ghc 的新 extension XD

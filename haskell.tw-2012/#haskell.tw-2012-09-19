@@ -1,0 +1,275 @@
+00:00:59 <MnO2> toucher
+00:01:19 <letoh> 賀  這次是英文
+00:01:58 <MnO2> er 這是法文
+00:02:22 <letoh> XD
+00:02:29 <letoh> touch ?
+00:03:30 <MnO2> 英文粗略上來講是德文跟法文的混合啊~
+00:03:56 <MnO2> 比較淺顯的單字多半是從德文來的
+00:04:06 <letoh> 跟德文好像差不少  法文我就不知道了@_@
+00:04:14 <MnO2> 比較難的像是GRE那種多半是從法文來的
+00:04:18 <MnO2> 跟歷史有關
+00:04:51 <letoh> 征服者威廉嗎
+00:04:59 <MnO2> 對對
+00:05:05 <letoh> 嗯
+00:05:47 <MnO2> 他那時候就是統治階級講法語
+00:05:58 <MnO2> 但一般老百姓還是日耳曼語
+00:06:19 <MnO2> 所以法文字源來的就會感覺比較高級
+00:06:29 <MnO2> 但其實去法文看其實都是一般用字
+00:06:37 <letoh> 貴族語XD
+00:06:47 <MnO2> 所以理論上學了法文，英文用字會變好
+00:06:49 <MnO2> 天龍語
+00:06:56 <letoh> XDXD
+00:10:02 <letoh> 我不清楚現代法文是不是那麼好用  經過那麼多年發展  就算有相通，會不會有些字的意思在英文中已經有些變化了
+00:11:09 <letoh> 不過瞭解字源的話應該會有些幫助就是
+00:11:13 <MnO2> 我碰到的基礎用字還是差不多耶，不會變太多
+00:11:44 <MnO2> 而且有些長得像的字其實也不一定是從法語來的
+00:12:06 <MnO2> 有時候反而可能是從其他地方來的只是剛好很像
+00:12:18 <MnO2> 如果要好用應該要學西班牙文吧
+00:12:44 <MnO2> 只是多半都不是主導勢力的國家xD
+00:13:11 <letoh> 直接學好英語會不會比較快XD
+00:13:15 <MnO2> 西班牙文也相對簡單很多
+00:13:45 <MnO2> 英文可能有大半地方能用吧，不過還是有走不通的地方
+00:14:10 <letoh> 日本XD
+00:14:20 <MnO2> 日本還好吧
+00:14:40 <letoh> 可以講  但聽不懂對方回答的XD
+00:14:54 <letoh> 結果來說還是不通XD
+00:15:51 <MnO2> Singlish才難聽懂吧xD
+00:16:15 <letoh> 都很難懂XD
+00:22:47 <b4283> singlish 真的很詭異 XD
+00:23:24 <b4283> 我是覺得不好聽啦，不過他們好像很自豪
+00:23:34 <letoh> 現在電影台常播的那些電影  聽起來超怪的
+00:24:37 <MnO2> 可能跟重音擺的位子有關，不習慣的話很難解析
+00:25:17 <MnO2> 在學校的training data都太純正了，生活實用上實在太難用。
+00:36:10 <CindyLinz> 太 pure 就會難用.. (筆記)
+00:36:56 <godfat> XDDDDD
+06:37:58 <yen3> > let f = f * f
+06:37:59 <lambdabot>   not an expression: `let f = f * f'
+07:43:16 <favonia> > let f = f * f in f
+07:43:20 <lambdabot>   mueval-core: Time limit exceeded
+09:35:44 <MnO2> http://stackoverflow.com/questions/1976247/efficiency-of-equality-in-haskell
+09:36:33 <MnO2> 觀摩人家的構造方法~
+09:45:16 <favonia> MnO2: xD
+12:54:12 <MnO2> > let fix f = (let x = f x in x) in fix error
+12:54:13 <lambdabot>   "*Exception: *Exception: *Exception: *Exception: *Exception: *Exception: *E...
+12:54:38 <MnO2> xD
+14:29:05 <CindyLinz> > error
+14:29:06 <lambdabot>   Overlapping instances for GHC.Show.Show ([GHC.Types.Char] -> a)
+14:29:06 <lambdabot>    arising ...
+14:29:19 <CindyLinz> @t error
+14:29:20 <lambdabot> Maybe you meant: tell thank you thanks thx ticker time todo todo-add todo-delete topic-cons topic-init topic-null topic-snoc topic-tail topic-tell type . ? @ ft v
+14:29:29 <CindyLinz> @type error
+14:29:30 <lambdabot> forall a. [Char] -> a
+14:29:36 <CindyLinz> @info error
+14:29:37 <lambdabot> error
+14:35:17 <MnO2> CindyLinz: 你要Haskell "fix error"的話他會給你很多Exception喔xD
+14:54:40 <CindyLinz> orz
+14:55:05 <CindyLinz> > error "MnO2"
+14:55:06 <lambdabot>   *Exception: MnO2
+20:00:50 <MnO2> 話說我覺得應該要弄個wiki，把不同情境常用的library，還有簡單範例更新上去
+20:01:15 <godfat> 官方的是有些，感覺有點破碎就是了
+20:01:23 <MnO2> 雖然hackage已經有type info，但簡單範例對於上手時間還是很有幫助
+20:01:47 <MnO2> pydoc, perldoc範例很多就不錯
+20:01:52 <CindyLinz> 而且而且.. 根據 #haskell.tw 之於 #haskell 的經驗
+20:02:01 <CindyLinz> 有中文版就差很多 XDD
+20:02:05 <godfat> 我覺得單只有 type 還是滿難懂的，例如我之前想找 ghci 到底要怎麼用，就一直弄不出來
+20:02:06 <godfat> 我是想弄個比 ghci 更好的介面
+20:02:27 <MnO2> 這都是人力問題啊xDD
+20:02:43 <godfat> 是啊..
+20:02:55 <MnO2> CindyLinz: 你是說理解速度嗎？
+20:03:23 <CindyLinz> 理解速度我覺得影響是一點點... 精神力的消耗比較重要
+20:03:35 <CindyLinz> 有點想睡覺的時候還是可以看一看中文討論串
+20:03:45 <CindyLinz> 但是英文討論串就算了... ^^|
+20:03:59 <CindyLinz> 在 #haskell 光要找到一個討論串的頭就很困難
+20:04:36 <MnO2> 我覺得有一個問題是，想 patch document都有點麻煩
+20:05:10 <MnO2> 譬如說作者沒寫什麼範例，好不容易試出來想幫他補上，也要submit回上游
+20:07:51 <MnO2> 不知道perldoc, pydoc這種在人力配置上都是怎麼做的
+20:07:59 <MnO2> 特別是stdlib的部份
+20:08:26 <godfat> ruby 的話，stdlib 還是要給上游
+20:08:46 <CindyLinz> perldoc 的說明超完整, 一大堆 sample.. 不過我不知道怎麼配置的
+20:09:49 <MnO2> 還有compiler/interperter改版的時候的doc版本控制也不知道怎麼比較好
+20:10:00 <MnO2> ghc變動超快的
+20:10:33 <MnO2> 核心開發群根本就鬼神
+20:11:12 <godfat> XDDDDD 一般都要一起動吧？有時候會有專門寫 doc 的，ruby 是還有 release 前會呼朋引伴來補 doc
+20:11:57 <godfat> 對了，我可以問 CindyLinz 關於 perl server 的事嗎？ XD 我想知道一般用什麼 server?
+20:13:13 <MnO2> 看Plack能吃什麼server?
+20:14:42 <godfat> 原來都換 plack 了喔
+20:14:43 <godfat> http://search.cpan.org/dist/Plack/
+20:14:44 <godfat> 看起來這邊有些清單
+20:16:18 <MnO2> http://plackperl.org/
+20:16:45 <CindyLinz> Plack 2009年開始, 呼聲蠻高的..  不過我們家還在用最古老的 CGI 配 Apache 的 mod_perl ^^|
+20:17:02 <godfat> XD 了解...
+20:17:06 <CindyLinz> 因為我們公司 2005 就成立了....
+20:17:36 <CindyLinz> nginx + fcgi 也可以... 不過家裡老大懶得試了 ^^|
+20:18:00 <godfat> 我之前想這樣跑 php, 後來覺得好痛苦就算了
+20:18:19 <CindyLinz> php 用 nginx 蠻多的啊?
+20:18:28 <godfat> 另外是我知道 python 有這個 https://github.com/benoitc/gunicorn
+20:18:29 <godfat> 不知道使用率如何就是了
+20:18:50 <b4283> hmm
+20:18:55 <godfat> 我是之前弄 php+fcgi 覺得很難弄，那時只是小東西，一會弄不出來就算了
+20:19:06 <b4283> 現在有蠻多 *GI 接法
+20:19:08 <CindyLinz> 那現在很容易弄了 XD
+20:19:20 <godfat> 是喔 XDD 確實那好多年前就是了
+20:19:22 <b4283> wsgi uwsgi sgi fcgi
+20:19:41 <CindyLinz> 只要小心 nginx 要設一個檢查 php 檔是否存在
+20:20:01 <CindyLinz> 不然如果你是架一個可以讓 user 上傳圖檔的網站
+20:20:48 <b4283> *scgi*
+20:20:49 <godfat> 我以為 nginx 只要管接 fcgi 就好了？ @@
+20:20:49 <godfat> 所以 python 一般會用 wsgi 嗎？搭配啥 server?
+20:21:00 <CindyLinz> 他可以上傳一個內容是 php 的圖檔. 然後在網址列打 ......圖檔.jpg/xxx.php
+20:21:25 <CindyLinz> 然後, nginx 就會把這個圖檔丟給 php-fcgi 去執行...
+20:21:45 <MnO2> 這哪招...
+20:21:55 <CindyLinz> 安全性漏洞....
+20:22:08 <godfat> 這是不是 rewrite rule 寫錯了啊？ = =
+20:22:34 <CindyLinz> 是沒寫的 default.. 因為 nginx 是 reverse proxy 不是 web server
+20:22:44 <CindyLinz> 所以它原則上是不去檢查檔案存在不存在的
+20:23:06 <CindyLinz> 他只負責把符合規則的網址 assign 到指定的 backend 執行... o.o
+20:23:15 <godfat> 可是這樣不會變成 php-fcgi 找不到那個 php 檔嗎？
+20:23:24 <CindyLinz> php-fcgi 會找到那個圖檔....
+20:23:43 <godfat> 為啥..? 路徑不是 圖檔.jpg/xxx.php 嗎？
+20:23:45 <CindyLinz> php.ini 裡面可以設定拒絕這種情況
+20:23:51 <godfat> .............
+20:24:24 <godfat> 聽起來問題出在 php =_=b...
+20:24:27 <CindyLinz> 在 php.ini 裡面要設 cgi.fix_pathinfo = 0;
+20:24:38 <godfat> ...............
+20:24:46 <CindyLinz> 或是在 nginx 裡面加一條檢查, 看檔案是不是存在
+20:25:00 <CindyLinz> 只是 fcgi 理論上是可以不在同一台機器上的, 那就不能在 nginx 檢查
+20:25:14 <godfat> 我想不管 nginx 有沒有設，php 那奇怪的功能都應該關掉？
+20:26:07 <CindyLinz> php 的 policy 應該是以最容易推廣, 最容易「會動」為目標吧.. 安全性是不應該重視的啊 XD
+20:26:49 <CindyLinz> 不過如果是上傳圖檔的話, 你如果會用 convert 之類的轉過應該就沒問題
+20:27:01 <CindyLinz> 但如果是上傳附件那種要給別人下載的就... zz
+20:27:13 <CindyLinz> 因為你不能去動內容
+20:27:27 <godfat> .....=_= 可是我不懂讓「圖檔.jpg/xxx.php」變成「圖檔.jpg」的理由是啥...
+20:28:34 <CindyLinz> 讓 php 可以吃 /.... 的方式給的參數吧
+20:28:46 <CindyLinz> 很多 RESTful 的很喜歡這樣搞啊
+20:28:53 <godfat> 原來是這樣..........
+20:29:24 <godfat> 可是我覺得這好 ambiguous... 感覺應該是在 rewrite routing 那邊做的 orz
+20:29:42 <CindyLinz> 規定一種作法, 就不「方便」, 也比較不容易推廣了呀
+20:29:56 <CindyLinz> 要讓使用者亂設, 然後通通都可以動得起來最好 :p
+20:30:34 <godfat> 有誰真的在這樣用嗎？ @_@
+20:30:34 <godfat> 是說 apache 的 .htaccess 或許也是異曲同工吧
+20:33:14 <CindyLinz> 你看喔, php default 這樣放, 完全不用設任何設定, 就可以這樣用了
+20:35:18 <godfat> 假設 php-fcgi 吃到 index/users
+20:35:19 <godfat> 所以他會先找 index/users 是否存在，
+20:35:20 <godfat> 假設不存在，則找 index 是否存在，
+20:35:20 <godfat> 是這樣嗎？
+20:36:14 <CindyLinz> 順序我不知道 ^^|  不過在 unix 的 file system 裡面, 不會有一個檔案的 path 剛好是另一個檔案 path 的 prefix 呀
+20:36:25 <CindyLinz> 目錄和一般檔案的名字不能一樣
+20:36:41 <CindyLinz> 應該不會有 ambigu...
+20:38:03 <godfat> 我想如果有順序的話就不會 ambiguous?
+20:38:04 <godfat> 不然就不知道 index/users 是指把 users 傳給 index, 還是真的在找 index/users?
+20:38:46 <CindyLinz> godfat: index 和 index/users 不會同時存在啊
+20:39:36 <godfat> 噢，我懂你的意思了，所以其實順序不重要... O_o
+20:40:15 <CindyLinz> XD
+20:41:00 <godfat> 可能因為我沒有考慮檔案系統吧 orz...
+20:41:37 <CindyLinz> php 的設計很實務的(?)
+20:41:44 <CindyLinz> XD
+20:41:57 <CindyLinz> php 以前還有什麼 magic quote....||o
+20:42:11 <godfat> 這個我知道.... XDD
+20:42:23 <godfat> 這再加上 big5 真是太歡樂了
+20:42:33 <CindyLinz> 用這方法來避免 SQL injection 真是很妙的想法... @@"
+20:42:58 <godfat> 不知道該說啥..... XD
+20:43:03 <b4283> magic quote ? 看下
+20:43:30 <godfat> 就是會自動在可能危險的 char 前面前贅 \
+20:43:30 <CindyLinz> b4283: 看了有害身心健康....
+20:43:49 <godfat> 前綴才對
+20:44:14 <godfat> 然後這如果不是 encoding aware, 就爆炸了
+20:44:50 <b4283> 啊，deprecated
+20:45:11 <CindyLinz> b4283: 如果 magic quote 不 deprecate.. 那 php 就要 deprecate 了 XD
+20:46:05 <b4283> 我一直很好奇 php 到底為啥還可以擠身 popular language 之列  XD
+20:46:19 <CindyLinz> b4283: 上手超快啊
+20:46:39 <CindyLinz> 而且是很積極以推廣為目標啊
+20:46:46 <MnO2> 還有歷史因素吧~
+20:46:53 <godfat> 都是 P 開頭嘛 (?)
+20:47:17 <CindyLinz> 那改名 paskell 會比較多人用嗎? XD
+20:47:23 <b4283> 不過我沒用過 php 的 web framework，可能它們寫得不錯
+20:47:29 <CindyLinz> 要想辦法跟 pascal 分隔一下 XD
+20:47:36 <MnO2> Haskell 歷史還比 PHP 久的說
+20:47:39 <b4283> 好多 P
+20:48:12 <MnO2> pascal 很夯啊，大陸超愛用pascal
+20:48:37 <CindyLinz> 以前.. 覺得 pascal 的 nested function 超棒
+20:48:44 <CindyLinz> 因為 C 沒有...
+20:49:00 <CindyLinz> 有一次我還在 C 裡面自製 nested function
+20:49:04 <CindyLinz> 用了一堆 goto.. orz
+20:49:15 <CindyLinz> 自備 stack 儲存 return point...
+20:49:40 <godfat> XDDDD 好歡樂
+20:50:46 <godfat> 我 ruby 踩到不知道該怎麼解決的 error 了 orz...
+20:50:46 <godfat> FiberError: fiber called across stack rewinding barrier
+20:50:47 <godfat> 不太懂...
+20:51:22 <b4283> 超過介限.. 好像 guile 的 prompt
+20:51:44 <b4283> 是不是中間有奇怪的 scope 構造擋住了
+20:52:35 <godfat> 不確定 guile 的 prompt 是啥 XD
+20:52:36 <godfat> 我感覺跟平常沒什麼不一樣呀.. 要說的話是這邊是測試，所以 event loop 很快就關掉了
+20:52:36 <godfat> 但剛剛延長好像也是一樣
+20:53:38 <godfat> http://www.gnu.org/software/guile/manual/html_node/Prompt-Primitives.html
+20:54:08 <b4283> with-continuation-barrier
+20:56:21 <b4283> 我和 ruby 不熟 (逃走)
+20:56:28 <godfat> 不過我剛剛發現好像是因為我用 debugger 去看才會有那錯誤 orz
+20:56:29 <godfat> 大概是 debugger 把 stack 弄壞了... 那好像也不意外 O_o
+20:56:48 <godfat> 還是很感謝感覺確實有點關係 XDDD
+20:57:42 <CindyLinz> 測不準原理.. zz
+20:58:04 <MnO2> heisenbug
+20:58:23 <godfat> 測不準真是萬用解釋 XDDD
+20:58:52 <b4283> http://www.sciencedaily.com/releases/2012/09/120907125154.htm
+20:59:27 <b4283> 剛好有一篇看不懂的文章 XD
+20:59:46 <godfat> 真是我問個 ruby 問題，換來一堆待讀.... XD...
+21:00:17 <godfat> schrödinbug XDD
+21:01:12 <CindyLinz> godfat: 啊不就測量的動作會影響結果嗎? XD
+21:01:52 <godfat> 剛剛沒認出來 Heisenbug 是海森堡... XD 這些我只看過中文的東西 @_@
+21:02:28 <godfat> 主要是想知道 Continuation Barriers 是啥
+21:02:29 <godfat> http://www.gnu.org/software/guile/docs/docs-1.8/guile-ref/Continuation-Barriers.html
+21:03:02 <MnO2> schrödinbug 這樣代表是他同時是feature也是bug嗎？ xD
+21:03:08 <b4283> 就是 at 力場 (誤)
+21:03:30 <godfat> with-continuation-barrier 看起來是不允許裡面的人跳出來？
+21:04:15 <MnO2> 在程式release之前，你無法知道他究竟是feature還是bug
+21:04:33 <godfat> 在問老闆之前，你不知道那是 feature 還是 bug XDD
+21:05:09 <CindyLinz> godfat: 問的時候要加一點話術進去...
+21:05:31 <CindyLinz> 這樣就可以編造測量結果了.. (誤)
+21:05:49 <godfat> 你掉進去的是這隻金蟲，還是這隻銀蟲？ XD
+21:06:03 <CindyLinz> ^^|
+21:06:22 <b4283> godfat: 沒有見過真實效果，只知道有這個東西
+21:06:38 <godfat> b4283, 了解，感謝 XD
+21:17:48 <godfat> 找到問題果然是 event loop 太早關掉... 做成這樣我好難測試 :s
+21:17:49 <godfat> 去吃晚餐回去了 XD
+21:21:16 <favonia> MnO2: xDDDDDD
+21:22:58 <MnO2> favonia: 最近都只回我 "xDDDD"
+21:25:05 <CindyLinz> MnO2: 不過.. 假設你現在把 wiki 架起來...  我猜大家都不太敢寫?
+21:26:06 <MnO2> CindyLinz: 八成吧
+21:29:44 <favonia> MnO2: Schrödinger's response
+21:30:10 <CindyLinz> :|
+21:30:26 <CindyLinz> ghc 的主要開發者都在微軟唷?
+21:31:44 <MnO2> MS跟Standard Charter
+21:33:15 <CindyLinz> hmm..
+21:33:31 <MnO2> hmm = hiddern markov model
+21:33:33 <CindyLinz> 渣打國際?
+21:34:08 <CindyLinz> 想到微軟在 web 標準方便做的事, 就會有一點擔心 @@"
+21:34:09 <MnO2> 渣打銀行？
+21:34:12 <CindyLinz> 想到微軟在 web 標準方面做的事, 就會有一點擔心 @@"
+21:34:20 <CindyLinz> MnO2: Standard Charter = 渣打?
+21:34:30 <MnO2> 對啊
+21:34:47 <CindyLinz> 真難想像..
+21:35:02 <MnO2> 微軟做了什麼？ video tag?
+21:36:55 <CindyLinz> 跟標準很像, 但是又故意不一樣的 spec
+21:37:33 <CindyLinz> 別的瀏覽器都還在用 mozXXX webkitXXX oXXXX 當作自訂 feature name 的時候
+21:37:43 <CindyLinz> 微軟率先使用標準規定的 XXXX name
+21:37:56 <CindyLinz> 但是微軟的行為是一種, 別的所有瀏覽器的行為是一種... (攤)
+21:38:30 <CindyLinz> 別的瀏覽器先用自訂 prefix 的目的是等到標準 stable 的時候, 再實作標準用的名字
+21:38:57 <CindyLinz> 這樣如果萬一目前的行為跟將來的標準行為不一樣的話, developer 可以利用 prefix 來選擇用哪一種, 可以繼續相容
+21:40:17 <MnO2> 那跟ghc的關係是？
+21:40:46 <CindyLinz> MnO2: 現在可能還沒有吧
+21:41:07 <MnO2> 喔喔
+21:41:43 <CindyLinz> 只是微軟是會製造不相容來保護地位的...
+21:41:59 <CindyLinz> 現在 GHC 獨大的話, 倒還看不出問題
+21:42:43 <CindyLinz> 但如果有個誰做了另一個相容 GHC 的 runtime, 而且賺錢(重點!)的時候就不一樣了
+21:44:11 <MnO2> 我們可能距離那天有點遠xD
+21:44:22 <MnO2> http://stackoverflow.com/questions/8443035/multi-line-commands-in-ghci
+21:44:24 <CindyLinz> 這樣好像也不是好事? XD
+21:44:34 <MnO2> 如果要在ghci打多行指令
+21:44:44 <CindyLinz> 不過 .Net 裡面有個 F#, 感覺有點神祕
+21:44:59 <MnO2> F#據說是ocaml
+21:45:53 <CindyLinz> 噢
+21:54:24 <MnO2> http://stackoverflow.com/questions/870919/why-are-haskell-algebraic-data-types-closed/
+21:54:31 <MnO2> Why are Haskell algebraic data types �closed�?
+22:10:13 <CindyLinz> 我沒想過拿 GADT 跟 oop 作類比
+22:10:22 <CindyLinz> 我只有想過用 class
+22:27:27 <MnO2> http://stackoverflow.com/questions/6724434/how-to-debug-haskell-code
+22:27:32 <MnO2> debug 技巧

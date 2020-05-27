@@ -1,0 +1,485 @@
+01:02:11 <au> John Carmack 婉拒 ICFP keynote 邀請，目前正在和 ekmett 聯手推坑他改到 CUFP 給 keynote...
+01:02:15 <au> https://twitter.com/audreyt/status/471223206435504128
+01:03:21 <au> 想問大家除了 Carmack 之外，commercial use of functional programming 會想聽誰講呢
+01:05:55 <godfat1> Jane Street 的人？雖然我不知道有誰 XD
+01:06:32 <godfat> 還有 Galois XD
+01:08:55 <godfat> Simon Marlow?
+01:10:28 <au> 對耶，Marlow 非常適合，簡直就是代言人 XD
+01:10:34 <au> 感謝提議
+01:11:05 <CindyLinz> 或是.. Oleg?
+01:11:18 <CindyLinz> 可以看他表演打撞球.. (誤)
+01:11:22 <godfat> XDDD Oleg++
+01:11:36 <au> XDD
+01:15:03 <CindyLinz> 變成球台上的球了, 好像有點恐怖 ww
+01:15:07 <au> 最後聽到 "ok this is basically sound but just a minimally useful syntax sugar" 之後上 #haskell 說 "whew I just survived the assault of one oleg"
+01:15:14 <au> 真的
+01:15:36 <CindyLinz> XD
+01:16:24 <godfat> @_@ 記得 joshko 曾經說過 oleg 會輕描淡寫地講出異常困難的東西 XD
+01:16:25 <lambdabot>  記得 joshko 曾經說過 oleg 會輕描淡寫地講出異常困難的東西 XD
+01:17:41 <au> "On this infinite grid of ideal one-ohm resistors..." #設計對白
+01:18:59 <godfat> one oleg 是什麼意思呀？ XD 某種單位？ XD
+01:34:13 <au> godfat: 是，這個梗超老的 http://ircbrowse.net/browse/haskell?id=1169660&timestamp=1114626551#t1114626551
+01:36:11 <monochrom> oleg 單位是量度一個人玩弄型別於股掌中的能力. 1 oleg 就是 Oleg Kiselyov 的能力. 而常人的能力大概在 1 millioleg 左右 :)
+01:37:52 <godfat> XDDDD 讓我想起之前讀到的，好像是王垠說的？說有個東西靠 oleg 和另外一個人研究半天才把 type 弄對，因此他認為這條路太艱深不是正確的路，連 oleg 都要花這麼多心力... XD
+01:38:39 <godfat> wow, 2005, 真的有段時間了，這樣也找到好厲害 XD
+01:39:26 <au> 到 2007 還有人在用 http://ircbrowse.net/day/haskell/2007/01/01?id=3047187&timestamp=1167659997#t1167659997
+01:39:32 <au> monochrom: you got it
+01:43:15 <godfat> lol... 好像很歡樂: "simonpj says: Maybe if I had an Oleg implant I could express all this in the type system"
+01:55:04 <monochrom> "歡樂" XD
+01:56:42 <monochrom> mno2: 看來, eager evaluation 容易看穿運算代價, 但好些 abstractions 就很難寫. lazy evaluation 則相反. 眾生皆苦啊!
+02:01:24 <monochrom> 生有時, 死有時, 栽種有時, 收割有時, allocate 有時, deallocate 有時, bug 有時, bugfix 有時, 返工嘔心瀝血有時, 退休撒手不顧有時...
+02:03:08 <monochrom> P.S. 這邊烏雲蓋頂, 遠方雷隆隆, 快要暴風雨了
+08:49:40 <mno2_> monochrom: 我還是覺得 lazy evaluation 對我而言太難駕馭了。而且 debug 就算印出來 runtime stack 也不知道怎麼對回原本的 source code。
+08:52:17 <mno2_> 把 oleg 當單位這樣所有人都是小數點啦。取個 log 加負號好看一些。-log oleg
+08:52:54 <monochrom> 畢竟我駕馭了它就得到PhD XD
+08:54:18 <mno2_> Simon Marlow ++   (附上最近的演講：https://www.youtube.com/watch?v=lqG3mURwUxo )
+08:55:09 <monochrom> async 好好用 :)
+08:56:55 <mno2_> ?quote RSA.on.type.level
+08:56:56 <lambdabot> oleg says: The implementation of RSA on type level is left for future work.
+08:57:05 <monochrom> hehe
+08:57:16 <mno2_> 原來 lambdabot 有這種隱藏功能
+08:58:08 <mno2_> 也許可以把 yinwang 加進去 (誤)
+08:58:28 <mno2_> ?quote OlegFacts
+08:58:28 <lambdabot> OlegFacts says: Oleg wrote a function with type (a -> b) -> [a] -> [b] ...and it wasn't map
+10:30:42 <monochrom> java 的 interface 內不准 static method 嗎?
+10:30:42 <monochrom> 太可惜了
+10:34:08 <monochrom> 唉, 回到 OO 世界真覺得第三世界
+11:30:02 <mno2_> monochrom: 你在 java shop 工作？
+11:38:34 <monochrom> 我在為學生寫 java test cases
+11:39:49 <monochrom> 如果是 haskell, suite :: [IO ()]; suite = [test0, test1, test2]; main = sequence_ suite 就成了
+11:41:37 <monochrom> 在 java, 就變成 public interface Test { public void test(); }; Test[] suite = { new Test0(), new Test1(), new Test2() };
+11:42:18 <monochrom> 然後 test0 = do {...} 要變成 public class Test0 implements Test { public void test() { ... } }
+11:42:51 <monochrom> 令人非常嚮往先進國家的 first-class functions
+11:43:21 <monochrom> 打倒萬惡的唯物世襲主義!
+11:44:31 <monochrom> 可惜又不忍心迫學生額外花時間學 haskell XD
+11:45:44 <monochrom> 我出的邪惡功課很好玩哩! http://www.cs.utoronto.ca/~trebla/CSCB63-2014-Summer/assignment-2.pdf
+11:46:43 <monochrom> 打倒蠱惑人心的唯物世襲主義!
+11:46:47 <mno2_> 資料結構 xD  為什麼不是教 PL
+11:47:15 <monochrom> 輪不到我教
+11:49:29 <mno2_> soga
+11:50:23 <monochrom> 不過, 能用 java generics 已經謝天謝地了! 我一出 public class AVLTree<K extends Comparable<K>>, 學生們就不能玩 downcast, upcast 了!
+11:51:33 <monochrom> 古時的 MyClass x = (MyClass)(iterator.next()); 實在慘不忍睹
+11:54:43 <mno2_> 那應該是 j2se 1.4 的時代了吧 xD
+11:55:35 <monochrom> 是啊. 我也是古生物, 我看著 java 由小長到大...
+11:56:39 <monochrom> 我用的第一個瀏覧器是 Mosaic, 第二個是 lynx...
+11:57:43 <monochrom> 我寫 java applet 時, javascript 還未出世. (所以唯有用 java applet)
+11:58:22 <monochrom> 剛昨天我又老一歲了!
+11:58:49 <mno2_> 生日快樂 :p
+12:00:12 <monochrom> 對了, 每年生日我都要播放布拉姆斯的德文安魂曲慶祝, 今次因為這幾天教書忙, 現在才有時間播...
+12:03:16 <monochrom> 其實用 java 時, 我最 miss 的是 algebraic data type, 例如 Maybe
+12:04:19 <mno2_> monochrom: 我前幾天才在其他 channel 說 haskell 的主題曲是 Call me Maybe, lol
+12:04:43 <monochrom> 嘻嘻
+12:06:47 <monochrom> 明天的慶祝節目還有去看電影哥斯拉, 及吃一餐貴的...
+12:08:21 <mno2_> Kobe steak :p
+12:09:51 <monochrom> 古時的哥斯拉只不過一座樓高, 今年這個竟是一座山高, 加上塵煙減低能見度, 我就說, 終於領會到甚麼叫 神龍見尾不見首
+15:19:39 <CindyLinz> monochrom: 明明這裡才是第三世界.... XD
+15:20:08 <CindyLinz> lambda 就是我們的石油.. (咦)
+15:21:06 <CindyLinz> mno2_: 我覺得.. (而且希望 XD) lazy eval 不會難駕御, 只是我們與它相處的時間還太短...
+15:21:39 <CindyLinz> 我們熟習 eager eval 的時間已經非常長了....
+15:21:59 <CindyLinz> 如果給 lazy eval 也有一樣的時間, 就不會這樣了...
+15:23:23 <mno2_> CindyLinz: 我持不同看法。我寫越久越討厭預設 lazy eval。
+15:23:59 <c9sloud> XDDDD
+15:24:18 <mno2_> lazy eval 本身有很多好處。但我不喜歡他當作語言的預設
+15:26:39 <mno2_> 所謂難駕馭的完整句子是，我覺得預設為 lazy eval 的語言在時不時需要注重效率，或是 production env debug 的情況下，對我來說很難駕馭。
+15:40:44 <whitglint> monochrom: 大大 5/27 生日？
+16:27:13 <mno2> 該怎麼說勒。
+16:27:46 <mno2> 1. 我要一台鋼彈
+16:27:56 <mno2> 2. 我明天要展示
+16:28:07 <mno2> 我還是希望他預設爆在 1
+16:28:28 <mno2> 我不想要寫
+16:28:38 <mno2> 1. 我要一台  ! 鋼彈
+16:28:46 <mno2> 2. 我明天要展示
+16:32:34 <UCG_Jhe> 有大大能提共 haskell 實作的 小專案嗎@@?
+16:36:20 <mno2> UCG_Jhe:  http://en.wikibooks.org/wiki/Write_Yourself_a_Scheme_in_48_Hours
+16:42:38 <CindyLinz> 我持比較樂觀的態度, 不是抱持著要去注意效能的問題會不見, 而是平常用別的 eager eval 的語言也是要一直注意這種問題, 但日子還是過得不錯
+16:43:06 <CindyLinz> 像我這樣從硬硬的語言起家, 後來轉戰軟軟的語言的人, 應該都會有這樣的感覺吧?
+16:43:59 <CindyLinz> 看我們家的工程師, 隨便在 perl 裡面寫 regex, 偶爾就會埋地雷, 而且他們自己看不出來 ^^|
+16:45:26 <UCG_Jhe> mno2, thanks
+16:45:45 <UCG_Jhe> 台灣有 公司專門用 FP 開發嗎 應該沒有吧@@?
+16:46:20 <CindyLinz> 經典長相是這種.. 拿 /a*b/ 去 match 一整條長長的 a, 只是可惜從來沒遇過這麼經典的 case... ^^|
+16:49:43 <whitglint> 覺得 CindyLinz 比我還愛講硬硬軟軟語言 XD
+16:49:45 <mno2> CindyLinz: 問題不會不見，而是要讓他爆在哪裡的偏好。我不喜歡讓他爆在「明天 demo」，但我喜歡爆在「我要鋼彈」。我不喜歡還要寫明，「我要鋼彈，馬上做鋼彈給我看」
+16:50:06 <mno2> 就是預設的偏好
+16:50:21 <mno2> UCG_Jhe: 看你對 FP 的定義
+16:50:22 <CindyLinz> mno2: 你說的這個問題應該只有爭議性的 lazy IO 會發生?
+16:50:40 <CindyLinz> mno2: 如果避用 lazy IO, 只用 lazy eval 的話應該不會遇到 @@"
+16:50:57 <mno2> CindyLinz: 但 IO 就是經常碰到的問題啊
+16:51:13 <CindyLinz> mno2: IO 跟 lazy IO 不一樣啊 @_@"
+16:51:24 <UCG_Jhe> mno2, 只用 functional programming 當主要開發語言 開發產品
+16:51:44 <CindyLinz> mno2: 如果還是很想用 lazy IO 的話, 可以把它們「關在外面」
+16:52:39 <CindyLinz> 就像 Haskell 要跟沒有 typed 的外界溝通時, 也是會把它們關在外面, 讓它們要進到 Haskell 邏輯核心時都已經穿上 Typed 無菌衣這樣
+16:53:08 <CindyLinz> 覺得這樣的 pattern 再玩久一點, 應該可以慢慢演化出來..
+16:53:15 <CindyLinz> (design pattern)
+16:55:49 <CindyLinz> UCG_Jhe: 我的確沒有聽說過 :p
+16:56:21 <au> UCG_Jhe: 我之前有和一家台灣的銀行資訊系統顧問合作用 haskell on aix 開發 IBM AFP 相關程式
+16:56:32 <CindyLinz> 喔, 不過如果可以當一下不要臉的髒東西把 perl / python 算 FP 的話, 那就有了.. (咦)
+16:56:36 <mno2> CindyLinz: 順序性的 IO 跟 lazy IO 我認為都有觸發點的問題啊。
+16:57:10 <UCG_Jhe> python 不太算吧@@ 沒有很 FP
+16:57:11 <mno2> 分別是觸發創造或是觸發 GC 的時間點無法預測
+16:58:26 <mno2> UCG_Jhe: 那 scala 算在你的定義裡面嗎？我印象中有用 scala 的
+16:58:26 <CindyLinz> mno2: 觸發 GC 的時間點無法預測應該一般可以不用管它?
+16:58:33 <au> UCG_Jhe: 成果都放在 http://hackage.haskell.org/package/OpenAFP-Utils 以及 line2pdf pdf2line afp2line2pdf 等小專案裡，也許可以參考。
+16:58:44 <CindyLinz> mno2: 幾乎 真．GC 語言的 GC 都無法預測啊
+16:58:50 <mno2> CindyLinz: File / Socket 都算要 GC 的東西啊
+16:58:52 <UCG_Jhe> au, thanks
+16:59:30 <CindyLinz> mno2: 嗯, 好先把創造點放一邊.. 先講 GC 的部分...
+16:59:48 <CindyLinz> mno2: 我覺得 File / Socket 的 Handler (應該是說這個吧) 算在 GC 是我們的責任 @@"
+17:00:15 <CindyLinz> mno2: 寫 Java 的人一般也不會把 handle.close() 由 GC 來做吧
+17:00:16 <UCG_Jhe> mno2, 我沒用過 scala 不太清楚他到底比較偏哪邊
+17:00:48 <mno2> 但 lazy IO 就是把他歸類在交給 GC 的啊？所以才會有 conduit, pipes, iteratee
+17:00:59 <mno2> 但這些又都有不小心就 memory leak 的東西
+17:01:12 <mno2> 而且 iteratee 是 continuation passing style，超複雜的
+17:01:14 <CindyLinz> mno2: 嗯, 我的確是說爭議性的 lazy IO 會是問題點呀~
+17:01:39 <CindyLinz> mno2: 所以使用 lazy IO 的話, 應該會需要發明一點 design pattern
+17:02:12 <CindyLinz> mno2: 但是一般 IO 就沒有這個問題了~ 而 lazy eval 不是 lazy IO, 如果只牽涉 lazy eval 的話, 應該不會有你講的問題 @@"
+17:02:14 <mno2> 而 conduit, pipes 的 memory leak ，我認為就是創造性的觸發點問題
+17:03:12 <CindyLinz> mno2: lazy IO 很詭異, 詭異到它根本只有黑魔法才做得到.. 所以我覺得由它引起什麼副作用也不太意外 XDXD
+17:03:53 <CindyLinz> 一個叫作 unsafeInterleaveIO 的黑東西 @@"
+17:04:10 <CindyLinz> 如果純用 lazy eval 的方式根本做不出來
+17:05:16 <mno2> CindyLinz: 應該說 lazy eval 最終勢必要在 IO 裡面
+17:05:43 <mno2> 但在那之前，因為 lazy 的關係，彼此結構交纏，很容易在你要的時候爆掉
+17:07:27 <CindyLinz> 我覺得從 lazy IO 取出來的東西要關好, 讓它一定爆在你預期的地方
+17:07:56 <CindyLinz> 然後 iteratee 算是 design pattern 的一個例子吧, 只是寫得很難懂 XD
+17:08:08 <CindyLinz> (無視 Oleg 的理解力)
+17:08:45 <CindyLinz> Begining Haskell 這書也是這樣描述 iteratee, 所以他說, 我們來看 Conduit.. XD
+17:09:18 <CindyLinz> 記得 MichaelSnoyman 在 Conduit 的說明裡面有寫說, 他做這東西目的就是為了讓它好懂, 容易上手
+17:09:38 <CindyLinz> 不過我覺得這邊的「懂」只要會用, 知道特性, 就算是夠了...
+17:09:59 <CindyLinz> 因為類比於 perl regex, 其實會寫 regex engine 的人遠比會使用 regex 的人少吧..
+17:10:25 <CindyLinz> 只是學 haskell 的人可能對自己的要求比較高一點 :p
+17:11:27 <mno2> CindyLinz: 我就是對於「讓他一定爆在你預期的地方」這件事情很悲觀
+17:11:58 <CindyLinz> mno2: 這種主觀的感受, 就跟價值觀取捨一樣, 我沒辦法說服你 XD
+17:12:50 <CindyLinz> 畢竟我們是在看未來的事, 一個還沒被證明做不到, 然後也還沒做到 (別人有沒有做到不知道, 只是自己還沒做到) 的 open problem.. ^^|
+17:15:02 <mno2> 對。所以我沒有用 lazy 有致命性缺陷這種描述，我只是說對我而言無法駕馭
+17:15:50 <CindyLinz> 不過應該可以把這個抱怨的對象限縮在 lazy IO 的部分就好?
+17:16:00 <CindyLinz> 而不是 default lazy eval 的部分?
+17:16:08 <CindyLinz> 畢竟還是可以完全不用 lazy IO 的寫法呀
+17:16:20 <mno2> CindyLinz: 不，我還是認為都有參與。
+17:16:37 <mno2> 只是 lazy IO 特別嚴重
+17:16:49 <CindyLinz> 就算是寫 server, 可以用那種 libev 的作法.. 完全不用 lazy IO, 你這一串所舉的問題例子就不會發生了
+17:17:55 <CindyLinz> 如果你是拿來跟 python 比較的話, 還需要把 multi-thread 這個因素拿來考慮一下... multi-thread 增加不少麻煩, 可能印象上不小心都一起植在 haskell 頭上了?
+17:33:28 <mno2> 我沒有要跟其他比較實作比較耶。我針對的就是我無法駕馭爆的點跟所需資源消耗
+17:34:10 <CindyLinz> 可是你覺得的是就算你再花個幾年跟他磨, 也還是會無法駕馭喔? @@"
+17:34:17 <mno2> 其他實作也有其他問題，甚至更爛。但要說 ghc semantic 是要賣給我的理想，我不太能接受。
+17:34:47 <mno2> 我的理想的語言還是 defaul by strict
+17:35:56 <CindyLinz> mno2: 欸, 你第一次接觸 function 或函數這個字的時候, 是在數學上學到的, 還是在程式語言上學到的?
+17:36:29 <mno2> CindyLinz: 也許我可以訓練出容易找出問題，也有可能他是目前現實考量中比較好的選擇。但我至少目前為止的想法是，我無法認同是理想。
+17:36:57 <CindyLinz> 我是在程式語言上學到的, 我覺得這件事對我影響很深, 也成為我學 Haskell lazy eval 的障礙 @@"
+17:36:58 <mno2> CindyLinz: 我不記得了，這種東西應該不太可能記得吧.
+17:38:12 <CindyLinz> 我記得.. 因為數學上的函數是我在國中的時候才學到的..  但因為我一開始是在程式語言學的, 所以我就算後來看到數學的函數, 第一個想到的也是先把參數通通算完, 然後才進函數裡面算.. 我的思想裡面完全是由計算所構成
+17:38:32 <CindyLinz> 就算在學不能計算的函數, 我的心中還是會先把它們類比成一個假想的可計算的模型來理解
+17:39:11 <CindyLinz> 一直以來我心中一想到函數都是 strict 的.. 輸入 -> 輸出
+17:39:16 <whitglint> 國中數學 f(g(x)) 不也是先計算 g(x)？
+17:39:56 <CindyLinz> whitglint: 沒有欸, 我有問過別人, 比較晚學程式的人, 他說明明就是把 g(x) 拿到 f 裡面有出現參數的地方代換
+17:40:32 <whitglint> 那就... 把 function 當作 macro 好了 # 咦
+17:40:39 <mno2> 就算有雛鳥印象的問題。但我認為在我無法輕易改變我心智的假設下，我認為語言還是應該要配合身為人的我
+17:41:07 <CindyLinz> 因為我有問過一些這種背景不一樣的別人, 聽了他們的反應以後.. 我開始反省我 haskell 學得跌跌撞撞可能是我自己的背景問題...
+17:41:16 <mno2> 也許社會認同會改變，但我對於自身沒有那麼大的能力。
+17:41:27 <mno2> 所以我才會從頭到尾都強調「我」
+17:41:42 <CindyLinz> 像是我對 C 的 x = x + 1 一直都覺得很自然, 不懂為什麼會有人會卡住... ^^|
+17:42:11 <CindyLinz> mno2: 我把它當第二外語在學啊 XD
+17:42:33 <CindyLinz> 想要練到能用 Haskell 思考, 而不是先用 C 思考, 再翻譯成 Haskell 這樣 ^^|
+17:43:29 <mno2> 但一般性來講，第二外語還是沒辦法像母語嵌得那麼深入啊，就還是會有不自在的地方。
+17:44:04 <CindyLinz> 不要排斥 CCR 嘛~~ (誤)
+17:45:03 <whitglint> CindyLinz: 我之前在 #cschat.tw 就說，有些人學不會程式設計，會不會就是因為沒有變數的概念
+17:45:14 <mno2> 排斥就不會學 haskell 啦，應該說是了解而理解這不是我的理想吧
+17:45:52 <whitglint> 我也是先學程式才學數學函數
+17:46:05 <CindyLinz> 嗚嗚, 可是我第一個學好的是 MASM.. 所以連 C 我都沒辦法自然看.. orz
+17:46:48 <CindyLinz> (看看 letoh)
+17:48:00 <whitglint> x := x + 1 就不會卡住了 XD
+17:48:10 <CindyLinz> whitglint: 去幫我買一盒雞蛋, 如果有看到鹽的話, 買兩盒~
+17:48:18 <whitglint> 不該拿 = 當作 assignment operator
+17:48:39 <CindyLinz> whitglint: 會卡啊~ 兩邊 x 消掉得到 0 := 1... XD
+17:49:01 <whitglint> CindyLinz: 幾何證明才奇怪，什麼都沒執行，答案就出來了
+17:49:37 <whitglint> 都只有宣告、定義
+17:49:37 <CindyLinz> whitglint: 可以用解析解何 XD
+17:49:50 <CindyLinz> 解析幾何
+17:50:49 <petercommand> 分析幾何
+17:52:47 <whitglint> 我不會鼓勵別人早點學寫程式
+17:53:19 <CindyLinz> John Milnor 證明: 7維球上恰有28種可微分結構   <- 每一個字都看得懂, 不過.....ww
+17:53:59 <whitglint> 事實證明有些人大學才開始接觸電腦，都比我強 N 倍
+17:56:38 <darkx> CindyLinz: why C 會沒辦法自然看?
+18:00:41 <CindyLinz> darkx: 封裝過度, 看了很不踏實啊~
+18:01:06 <petercommand> c就叫封裝過度.......
+18:01:10 <CindyLinz> darkx: 拿一個 ptr 起來, 看不出它是 long ptr 還是 short ptr..... OAO
+18:02:13 <CindyLinz> 就.. 踩不到地板的感覺...  嗯, 現在是有去刻意把這種感覺壓下來啦 :p
+18:02:15 <darkx> CindyLinz: 不知道的話會有影響嗎?
+18:02:35 <CindyLinz> darkx: 心理不舒服 XD
+18:02:49 <darkx> 現在都 64 bit 了，long pointer 也不夠長(?)
+18:03:13 <CindyLinz> darkx: 不是那個 long 啦 ^^|
+18:03:30 <petercommand> 是jump那個吧?
+18:04:01 <darkx> CindyLinz: 喔喔
+18:04:05 <CindyLinz> 8086 MASM 裡面有 short jump 和 long jump.. 然後還有更短的 relative addr 的 conditional jump 
+18:04:11 <darkx> 不過在 C level 就沒差阿 XDDDD
+18:04:22 <darkx> CindyLinz: 我知道，你講了我就知道我想成另一個惹 XD
+18:05:06 <petercommand> darkx: 想成甚麼呀?
+18:05:12 <darkx> long XD
+18:05:14 <CindyLinz> 嗯, 如果哪個人是從半導體開始學的話, 可能也會覺得 MASM 封裝過度吧 XDXD
+18:05:50 <darkx> 不過其實我這樣想也沒錯，relative jump 是拿 16 bit 的
+18:06:04 <darkx> 古早 C 的 long 會是當成 32bit
+18:06:12 <CindyLinz> 有那麼大嗎? 記得範圍是 +127 ~ -128 欸 @@"
+18:06:21 <CindyLinz> jz jnz 這種的
+18:06:38 <petercommand> 8bit
+18:06:53 <darkx> 對耶，好像是 1 byte
+18:07:03 <darkx> 那哪個才是 16 bits ，我記得有印象阿www
+18:07:11 <CindyLinz> short jump, 只有 offset
+18:07:14 <darkx> http://en.wikipedia.org/wiki/JMP_(x86_instruction) 喔，是 jmp
+18:07:47 <whitglint> von neumann 說直接寫 machine code 就好啦
+18:08:00 <whitglint> 寫什麼組語！
+18:08:12 <darkx> whitglint: 這裡當然是用 lambda calculus 阿 (?)
+18:08:20 <CindyLinz> 現在一提 von neumann 就想提 yinwang.....ww
+18:08:41 <whitglint> 那... functional assembly
+18:11:32 <darkx> CindyLinz: 不對啦，這些 jump 明明都可以 real8/real16/real32 通吃www
+18:12:41 <darkx> 還翻了一下 www   # http://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-instruction-set-reference-manual-325383.pdf
+18:12:51 <petercommand> darkx: 在32bit有16bit的jump嗎?
+18:13:01 <darkx> Vol 2A 3-431
+18:13:19 <darkx> petercommand: 其實不要問我，我組語只有隨便學學 XD
+18:13:30 <CindyLinz> darkx: 你這都不在 8086 MASM 裡面啊 XD
+18:13:38 <b4283> 檔案超大 1479 頁
+18:13:50 <darkx> CindyLinz: 那就是 M$ 的問題惹 (捏鼻
+18:14:01 <CindyLinz> darkx: 8086 是要什麼 32bits 啊 XD
+18:14:08 <darkx> XDDDD
+18:14:23 <darkx> jump far/near (?)
+18:14:38 <CindyLinz> 對耶 記錯字了
+18:15:03 <CindyLinz> 姊姊出國留學久了... (被拖走..)
+18:15:12 <darkx> 出國留學?
+18:15:30 <CindyLinz> darkx: C 國, Haskell 國 XD
+18:15:36 <darkx> XDDDDDDDD
+18:15:46 <darkx> 我想說姊姊不是 112 csie 的 XD
+18:16:31 <CindyLinz> 只是看那些低階的東西會突然覺得很親切這樣 :D
+18:17:08 <darkx> CindyLinz: XDDDDD
+18:17:37 <darkx> 再下面頂多看看 x86_64 asm/LLVM IR 而已 QQ
+18:18:03 <CindyLinz> LLVM 的整數 type 啊, 可以用到 i8388607 耶
+18:18:12 <CindyLinz> 整整 1MB 大的整數!
+18:18:21 <CindyLinz> 這樣寫 LLVM 是不是就不用實作大數了 XD
+18:18:23 <darkx> LLVM IR 超歡樂 der
+18:18:32 <petercommand> 開頭的i是?
+18:18:41 <CindyLinz> petercommand: 常見的是 i8, i32, i64
+18:18:57 <petercommand> 是甚麼意思呀?
+18:19:05 <CindyLinz> petercommand: 我想是 integer 的意思吧
+18:19:22 <CindyLinz> 後面的數字代表 bit 數
+18:19:31 <petercommand> 喔喔
+18:19:51 <darkx> petercommand: http://llvm.org/docs/LangRef.html (給
+18:19:52 <CindyLinz> 內建大數運算的組語太 OP 了吧... XD
+18:20:12 <petercommand> 所以上面就是8388607 bit?
+18:20:21 <CindyLinz> 看起來是啊 XD
+18:20:22 <darkx> integer type iN  => The number of bits the integer will occupy is specified by the N value
+18:20:54 <petercommand> 真是歡樂XD
+18:21:30 <petercommand> Any bit width from 1 bit to 223-1 (about 8 million) can be specified.
+18:21:37 <CindyLinz> 2^23-1
+18:22:45 <b4283> 2↑23
+18:23:10 <CindyLinz> > 2^23-1
+18:23:13 <lambdabot>  8388607
+18:23:51 <CindyLinz> > 2↑23
+18:23:53 <lambdabot>  Not in scope: ‘↑’
+18:24:12 <CindyLinz> > let (↑) = (^) in 2↑23-1
+18:24:14 <lambdabot>  8388607
+18:24:33 <darkx> wwwwwww
+18:24:50 <b4283> 好大，bc 算不出來，等一下可能會當機
+18:25:05 <darkx> > 2^23^23
+18:25:10 <lambdabot>  mueval: ExitFailure 1
+18:25:11 <darkx> (?)
+18:25:12 <CindyLinz> b4283: 2^(2^23-1)-1 嗎? @@"
+18:25:26 <CindyLinz> > 2^3^3
+18:25:28 <lambdabot>  134217728
+18:25:37 <CindyLinz> > 2^27
+18:25:39 <lambdabot>  134217728
+18:25:53 <petercommand> > 2^^2
+18:25:54 <darkx> 268435456
+18:25:55 <lambdabot>  4.0
+18:26:08 <CindyLinz> @type (^^)
+18:26:10 <lambdabot> (Integral b, Fractional a) => a -> b -> a
+18:26:17 <CindyLinz> @type (**)
+18:26:18 <lambdabot> Floating a => a -> a -> a
+18:26:25 <darkx> @type(^q^)
+18:26:25 <lambdabot> Unknown command, try @list
+18:26:29 <darkx> 咦 XDD
+18:26:39 <petercommand> @type(^_^)
+18:26:39 <lambdabot> Unknown command, try @list
+18:26:46 <darkx> @type (^q^)
+18:26:47 <lambdabot> parse error on input ‘)’
+18:26:48 <CindyLinz> 喔 ** 應該是用 lm 的 pow 做的
+18:26:50 <petercommand> @type (^_^)
+18:26:51 <lambdabot> parse error on input ‘)’
+18:27:07 <CindyLinz> 然後 ^^ 是整數指數用遞迴做的
+18:27:36 <darkx> CindyLinz: 有做切兩邊的作法嗎?
+18:27:44 <darkx> 還是線性(ry
+18:29:20 <CindyLinz> 來拷問 lambdabot 
+18:29:21 <b4283> guile 瞬間就算出來了
+18:29:25 <CindyLinz> @src (^^)
+18:29:26 <lambdabot> x ^^ n      =  if n >= 0 then x^n else recip (x^(negate n))
+18:29:40 <CindyLinz> @src (^)
+18:29:41 <lambdabot> x ^ 0            =  1
+18:29:41 <lambdabot> x ^ n | n > 0    =  f x (n-1) x
+18:29:41 <lambdabot>   where f _ 0 y = y
+18:29:41 <lambdabot>         f x n y = g x n
+18:29:41 <lambdabot>           where g x n | even n  = g (x*x) (n `quot` 2)
+18:29:43 <lambdabot>                       | otherwise = f x (n-1) (x*y)
+18:29:45 <lambdabot> _ ^ _            = error "Prelude.^: negative exponent"
+18:29:54 <CindyLinz> @src recip
+18:29:55 <lambdabot> Source not found. Sorry about this, I know it's a bit silly.
+18:30:17 <CindyLinz> 原來 ^^ 只是比 ^ 增加負正數指數的部分
+18:30:21 <CindyLinz> 原來 ^^ 只是比 ^ 增加負整數指數的部分
+18:30:44 <CindyLinz> 可是用了祖傳不公開祕方 recip...
+18:31:08 <darkx> 用 recip 不好嗎?
+18:31:16 <CindyLinz> 我不知道 recip 是什麼 XD
+18:31:26 <b4283> (log10 (expt 2 (expt 2 23))) => 2525222.629866838
+18:31:47 <CindyLinz> b4283: 這種估計值不算是「算出來」吧 XD
+18:31:52 <darkx> > recip 0.2
+18:31:53 <lambdabot>  5.0
+18:32:03 <darkx> > recip 4
+18:32:05 <lambdabot>  0.25
+18:32:07 <darkx> > recip 0.25
+18:32:08 <lambdabot>  4.0
+18:32:10 <darkx> > recip 1
+18:32:11 <lambdabot>  1.0
+18:32:18 <darkx> 阿不就 n -> 1/n wwwwww
+18:32:26 <b4283> 可是 guile 是 strict…… (回到主題!)
+18:32:27 <CindyLinz> > recip 0
+18:32:29 <lambdabot>  Infinity
+18:32:31 <darkx> XD
+18:32:39 <CindyLinz> @type recip
+18:32:41 <lambdabot> Fractional a => a -> a
+18:32:42 <darkx> CindyLinz: 泥壞壞
+18:33:02 <darkx> > recip []
+18:33:04 <lambdabot>  No instance for (GHC.Show.Show t0)
+18:33:04 <lambdabot>    arising from a use of ‘M99047662323699521110242.show_M99047662323699521110...
+18:33:04 <lambdabot>  The type variable ‘t0’ is ambiguous
+18:33:04 <lambdabot>  Note: there are several potential instances:
+18:33:04 <lambdabot>    instance [safe] GHC.Show.Show
+18:33:12 <darkx> wwwwwwwwww
+18:33:29 <b4283> M99 星團
+18:33:53 <b4283> ...還真的有 M99
+18:34:52 <darkx> > recip [0]
+18:34:54 <lambdabot>  No instance for (GHC.Show.Show t0)
+18:34:54 <lambdabot>    arising from a use of ‘M648075411391160671510273.show_M6480754113911606715...
+18:34:54 <lambdabot>  The type variable ‘t0’ is ambiguous
+18:34:54 <lambdabot>  Note: there are several potential instances:
+18:34:54 <lambdabot>    instance [safe] GHC.Show.Show
+18:35:02 <darkx> 真神奇
+18:35:22 <CindyLinz> > 999 ^^ (-5)
+18:35:24 <lambdabot>  1.0050150350701262e-15
+18:35:37 <CindyLinz> > 0 ^^ 0
+18:35:39 <lambdabot>  1.0
+18:35:44 <CindyLinz> > 0^^0
+18:35:46 <lambdabot>  1.0
+18:36:55 <darkx> CindyLinz: 這是表情符號嘛www
+18:38:53 <b4283> 轉成 char 的資訊密度是 i8388607 的 0.41 倍
+18:41:55 <b4283> 一個 byte 可表示 255 一個 char 表示 [0-9]  比率為 255/10 => 25.5
+18:42:22 <b4283> 兩個 byte 可表示 65535 一個 char 表示 [0-9][0-9]  比率為 65535/100 => 655.35
+18:42:32 <b4283> *兩個char*
+18:50:31 <b4283> guile 表示位數超過 219 時資訊密度的比率是 +inf.0
+18:51:05 <b4283> 218 是 9.915450207666239e306
+18:52:19 <b4283> 這比宇宙中所有的原子數目還要大上 9.91545020766624e226 倍
+18:55:57 <b4283> 轉成 char 的資訊密度是 i8388607 的 0.41 倍 => 錯誤，應該說轉成 char 之後使用的 2525223 bytes 只表示了 i8838607 中所有組合的其中一個數字
+18:56:47 <CindyLinz> 宇宙所有原子數目.....
+18:56:53 <CindyLinz> 怎麼會有這種數目啦 XD
+18:59:30 <b4283> 使用 char 表示 i8838607 的所有數目需要 +inf.0 MB 的硬碟空間
+19:00:40 <CindyLinz> +inf.0 又是什麼鬼東東 XD
+19:02:55 <b4283> XD
+19:03:41 <b4283> (其實用 i8838607 表示 i8838607 的所有數目也需要 +inf.0 的硬碟空間)
+19:15:27 <whitglint> 我到底看了什麼... XD
+19:33:59 <c9sloud> @@
+19:34:28 <c9sloud> Please create another channel #integer XDD
+19:36:55 <c9sloud> @type ww
+19:36:56 <lambdabot>     Not in scope: ‘ww’
+19:36:56 <lambdabot>     Perhaps you meant ‘w’ (imported from Debug.SimpleReflect)
+21:43:38 <godfat> 我國中學數學，不過 f(g(x)) 我也是想說先算 g(x), 也是計算思維.. ~.~ 難怪數學學不好 XD
+22:08:05 <c9sloud> 我都請同學幫我算 -> 代工思維
+22:11:05 <godfat> 大老闆思維~ XD
+22:28:57 <monochrom> 為提高密度, 我認為應該使用像素, 一個像素有 24 bit, 足夠一個 unicode code point 之用!
+22:29:45 <godfat> XDD binary source
+22:35:17 <monochrom> 0*(390283943+23908429), 你真的聽老師的話, 先算 390283943+23908429 嗎?
+22:35:48 <godfat> 那倒是不會
+22:36:00 <letoh> 會先展開 (?
+22:36:15 <godfat> 也不會.. XD 看到零就整行劃掉了
+22:36:40 <monochrom> 這證明了, 其實"先處理括號"只是 parsing, 不是evaluation. parsing 之後, 才看情況決定 evaluation.
+22:36:45 <CindyLinz> godfat: 也許括號裡面是個 ∞  怎麼辦? XD
+22:36:54 <godfat> 不過倒是確實有時候會覺得先展開比較好算。對，所以說來確實是「看情況」
+22:37:08 <godfat> 我不知道 0 * ∞ 是多少... XD
+22:37:18 <CindyLinz> 是 _|_  (win)
+22:38:00 <godfat> ⊥ (unicode)
+22:38:08 <CindyLinz> ← (lose)
+22:38:25 <godfat> XD (笑)
+22:38:27 <monochrom> 學校稱之為"evaluation 次序"只是因為不想節外生枝, 多教一樣叫 parsing 的東西, 學生們也不想多學一樣東西吧
+22:39:25 <godfat> 也是，（非計算？）數學上沒差？
+22:39:27 <monochrom> 可惜, 到了 haskell, 這個分野不能再迴避了
+22:39:46 <godfat> 我曾因此對於 foldr 感到很困惑 XD
+22:40:03 <CindyLinz> 這個叫... 實質正義而非程序正義... (思)
+22:40:18 <CindyLinz> 最近這種東西讀比較多..ww
+22:40:22 <monochrom> 學校教的 operator 反正都是 strict 的, 把 parsing 和 evaluation 合一沒損失
+22:41:37 <CindyLinz> 還有教.... 99999995 * 100000002 要先自己拆成 (100000000-5) * (100000000+2) 再算, 這個就不知道要叫作什麼 evaluation order 了..
+22:41:40 <monochrom> 但即使是 C 的 (3*5) ? (6+2) : (4/0) 也已經開始見到不能永遠扮無知了
+22:41:50 <c9sloud> > (!!3)<$>transpose[show$foldr(\k a->2*10^2^n+a*k`div`(2*k+1))0[1..2^n]|n<-[0..]]
+22:41:53 <lambdabot>  "314159265358979323846264338327950288419716939937510582097494459230781640628...
+22:42:03 <CindyLinz> monochrom: 這個就要 raise (舉手) exception 跟老師說, 題目出錯了 XD
+22:42:35 <monochrom> 哈哈, 實質正義 vs 程序正義
+22:42:46 <CindyLinz> c9sloud: 太噁了..
+22:42:57 <CindyLinz> 至少前50位都是對的 @@"
+22:43:54 <c9sloud> CindyLinz: 妳背到五十位比較恐怖 XDD
+22:45:07 <CindyLinz> c9sloud: 我們那個年代, 日子無趣... (不對)
+22:47:17 <monochrom> 日子無趣, 我那時背的是諸葛亮的第一次出師表, 背到無涕可揮, 不知所謂 XD
+22:47:21 <CindyLinz> XDXD
+22:47:34 <godfat> XDDDDD 無涕可揮, 不知所謂!
+22:49:42 <monochrom> "將軍向寵... 昔日試用之, 先帝稱之曰能" 被我們改成 "先帝稱之弱能"
+22:49:58 <CindyLinz> > 4 * atan 1
+22:50:01 <lambdabot>  3.141592653589793
+22:50:03 <c9sloud> CindyLinz: 那你 power of 2 可以算到多少 n? XDDDDD
+22:50:12 <CindyLinz> c9sloud: 從來不用算的歐 XD
+22:50:25 <CindyLinz> c9sloud: 順的只有到 2^32
+22:50:50 <CindyLinz> 以前以為 2^32 就一定夠用了!
+22:51:18 <c9sloud> XDDD 簡直是 32bit CPU xDDDDDDDD
+22:53:59 <CindyLinz> 不對 發現中間有漏 噗噗
+22:54:09 <monochrom> 我的 power of 2 只背到 65536. (我是古生物啊! 我玩 Apple IIe 時, 16 bit 不夠也沒辦法了)
+22:54:36 <CindyLinz> 我只有 N=0~24,31,32
+22:55:18 <monochrom> 今日的年青人可以背到 2^32, 已經青出於藍了!
+23:00:14 <c9sloud> 65536+1 XD
+23:01:05 <c9sloud> CindyLinz 應該不只是青吧 XDDD
+23:06:41 <CindyLinz> c9sloud: ...........
+23:06:53 <CindyLinz> 可以不用繼續說了ww
+23:07:09 <c9sloud> XDDD
+23:07:20 <c9sloud> CindyLinz: 讓我拜一下 XD
+23:07:26 <CindyLinz> 走開 XD
+23:08:45 <c9sloud> XDDD
+23:16:19 <c9sloud> CindyLinz: 2^0~32 你是讀大學的時候背的嗎 XD
+23:18:25 <CindyLinz> c9sloud: 沒有啦, 到現在都沒背完 ^^|
+23:18:36 <CindyLinz> 31 32 是直接跳上來的
+23:18:54 <CindyLinz> c9sloud: 以前寫組語的時候就會一直看到這些啊~
+23:19:13 <CindyLinz> c9sloud: 然後要修改遊戲進度檔的時候也會 XD
+23:19:25 <c9sloud> 哦哦哦哦!! 對喔
+23:19:28 <c9sloud> 好懷念 XD
+23:19:35 <CindyLinz> FF FF FF 開下去就出來了
+23:19:36 <CindyLinz> XD
+23:19:40 <c9sloud> 你以前怎麼會去寫組語阿
+23:19:58 <c9sloud> 話說 jserv 好像也是先學組語 @@
+23:20:12 <c9sloud> 我第一個學的是 C
+23:20:15 <CindyLinz> 因為 C lib 都不會裝, 一直 compile error 很挫折就放棄了 @@"
+23:20:49 <CindyLinz> 書上跟你說先這樣這樣再那樣那樣就會看到什麼什麼就好了
+23:21:00 <CindyLinz> 啊就看不到啊........ww
+23:21:09 <c9sloud> 我以前玩 trouble C 倒是玩得很愉快 XDD
+23:21:15 <CindyLinz> trouble C....ww
+23:21:24 <monochrom> 太可惡了, 銀行為我賀生日的方式是給我信用卡賬單
+23:21:53 <CindyLinz> 現在回想.. 那本讓我好挫折的 C 好像書名有個四位數單晶片的編號, 可能我真是拿錯書了 orz
+23:22:35 <CindyLinz> monochrom: 吃生日餐 :D
+23:22:35 <c9sloud> CindyLinz: 也是為了改遊戲才學 ASM 嗎 XD
+23:22:48 <CindyLinz> c9sloud: 是要寫遊戲, 什麼改遊戲 XD
+23:22:58 <c9sloud> @@!
+23:23:23 <CindyLinz> 能畫圖, PC-speaker 會叫就行啦 XD
+23:23:31 <c9sloud> 我小時候只會玩 DUNE II XDD
+23:24:56 <monochrom> 所以我以前學 BASIC 多快樂 XD
+23:25:18 <c9sloud> CindyLinz: 你該不會拿到什麼 8051 之類的書吧
+23:25:36 <c9sloud> monochrom: 賀生日快樂
+23:25:37 <monochrom> 不過不久後 Turbo Pascal 及 Turbo C 也不麻煩
+23:26:23 <CindyLinz> c9sloud: 不記得了 @@"
+23:26:53 <monochrom> 我是直接由 K&R 2ed 學 C
+23:27:17 <CindyLinz> 沒有什麼 linker, 或 header path 的概念.. 就直接用 turbo C 照書玩, 完全不能動 :|
+23:27:31 <b4283> CindyLinz: 你該不會在讀正義論吧
+23:28:01 <CindyLinz> b4283: 沒有, 之前太陽花期間有很多文章冒出來可以讀 @@"
+23:29:42 <b4283> CindyLinz: 還真是 learn c the hardest way
+23:30:03 <monochrom> Turbo C 那本書, 倒沒讀過. 這只是因為: 軟件是盜版的, 所以沒有書. 當然, 可以加錢買盜版書, 但到這地步, 乾脆選 K&R
+23:31:02 <CindyLinz> b4283: 被擊敗了 XD
+23:32:23 <monochrom> 不如我又寫本 "快快樂樂由 8051 學 haskell" 看看害死多少有為少年 XD
+23:33:51 <b4283> 支持 XD
+23:38:36 <CindyLinz> 支持 XD
+23:38:53 <CindyLinz> monochrom: 環境設定要很簡單喔~ 不然是死另一種方向.... QQ
+23:52:14 <petercommand> > 2^32
+23:52:16 <lambdabot>  4294967296

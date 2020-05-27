@@ -1,0 +1,2 @@
+18:55:12 <abel-abel> 能夠在stack init的時候用代理嗎，我這裏總是連不上
+21:56:55 <pkmx> 應該是吃http_proxy環境變數吧

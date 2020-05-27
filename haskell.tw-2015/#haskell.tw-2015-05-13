@@ -1,0 +1,28 @@
+17:34:31 <suhorngM_> > runST (return ())
+17:34:32 <lambdabot>  ()
+17:34:37 <suhorngM_> :t runST
+17:34:38 <lambdabot> (forall s. ST s a) -> a
+17:34:45 <suhorngM_> > runST $ return ()
+17:34:47 <lambdabot>  ()
+17:41:01 <suhorngM_> :t runST $ return ()
+17:41:02 <lambdabot> ()
+17:41:15 <suhorngM_> :t return () :: forall s . ST s ()
+17:41:16 <lambdabot> ST s ()
+17:42:45 <suhorngM_> > runST . return $ ()
+17:42:47 <lambdabot>      Couldn't match type ‘m0 ()’ with ‘forall s. ST s c’
+17:42:47 <lambdabot>      Expected type: m0 () -> c
+17:42:47 <lambdabot>        Actual type: (forall s. ST s c) -> c
+17:43:05 <suhorngM_> Hmm, ($) 真的是 special case 處理的... https://ghc.haskell.org/trac/ghc/ticket/5596
+18:33:28 <CindyLinz> :t 3#
+18:33:30 <lambdabot> GHC.Prim.Int#
+18:33:39 <CindyLinz> :t I# 3#
+18:33:41 <lambdabot>     Not in scope: data constructor ‘I#’
+18:33:41 <lambdabot>     Perhaps you meant ‘In’ (imported from Lambdabot.Plugin.Haskell.Eval.Trusted)
+18:33:46 <CindyLinz> :t Int# 3#
+18:33:47 <lambdabot> Not in scope: data constructor ‘Int#’
+18:33:52 <CindyLinz> 好吧 算了 XD
+18:34:32 <CindyLinz> 那個.. I# $ 3# 會失敗.. 沒有也加上 special case QQ
+19:46:27 <suhorngM_> CindyLinz: 好像不一樣欸XD @Cindy 這個是 special case 是 Kind, 17:43 那個 special case 是 polymorphic
+22:17:53 <mno2> http://plato.stanford.edu/entries/type-theory/  原來 Frege 其實就已經有描述出原形了
+22:54:34 <suhorngM_> 原來是邏輯學家 Frege. 我一開始以為是 https://github.com/Frege/frege
+22:55:09 <suhorngM_> 唔...不過原來我心裡想的是 https://hackage.haskell.org/package/Frank XDDDD

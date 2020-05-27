@@ -1,0 +1,20 @@
+04:56:21 <vivian> hi i'm new to this
+04:56:32 <vivian> anyone here?
+07:22:44 <vivian_> Eq a 點解
+07:33:28 <favonia_> vivian_: hi
+07:33:39 <favonia_> vivian_: 你來的時間剛好大家都在睡覺
+14:05:44 <CindyLinz> XD
+16:33:13 <vivian> class 在HASKELL 有什麼用？
+16:38:45 <CindyLinz> vivian: 有不同角度的理解法.. 從比較實作的角度看, 是讓不同的 type 可以對應「同樣」的功能
+16:39:15 <CindyLinz> 例如說你的 Eq a, 能被放在 a 這位置的 type, 都可以作 (==) 或 (/=) 的比較
+16:40:14 <CindyLinz> 所以想被放在 a 這位置的 type, 都要準備好它的 (==) 或 (/=) 怎麼作
+17:30:05 <vivian> 有沒有例子
+17:40:28 <CindyLinz> Eq Int ?
+17:40:36 <CindyLinz> Eq Char, Eq [Int]
+17:40:58 <CindyLinz> 你問得好簡短, 猜不太出你想得到怎樣方向的答案 ^^|
+17:41:43 <CindyLinz> > 'a' == 'a'
+17:41:44 <lambdabot>  True
+17:41:57 <CindyLinz> > [3,4,5] == [3,4,5]
+17:41:58 <lambdabot>  True
+17:42:07 <CindyLinz> > [3,4,5] == [3,4,5,6]
+17:42:08 <lambdabot>  False

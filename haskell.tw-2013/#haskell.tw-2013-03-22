@@ -1,0 +1,118 @@
+01:28:41 <MnO2_> https://twitter.com/donsbot/status/314520680622350336
+01:28:55 <MnO2_> CindyLinz: 有飯吃了 xD
+01:29:52 <MnO2_> https://twitter.com/donsbot/status/314634198168268800
+01:30:49 <letoh> solid 是精實的意思嗎? XD
+01:32:55 <MnO2_> 就非理論派但練得一身好功夫的意思吧
+01:34:02 <MnO2_> 雖說 Haskell 寫好一陣子了，還是無法體會 Solid
+12:04:11 <CindyLinz> 要去天津啊... ^^|
+22:46:41 <suhorng> 真會在意想不到的地方看到 Haskell XD http://en.wikipedia.org/wiki/L4_microkernel_family#Current_research_and_development
+22:46:57 <suhorng> "At the core of this approach is a new L4 kernel, calledseL4, aimed at satisfying security requirements such as those of Common Criteria. The seL4 API is represented by an executable specification[9] written in Haskell."
+22:47:05 <letoh> L4!!
+22:47:29 <letoh> seL4
+22:48:25 <suhorng> " It has been formally verified,[11] which means that there is a (machine-checked) mathematical proof that the implementation is consistent with the specification. This provides a guarantee that the kernel is free of implementation bugs such as deadlocks, livelocks, buffer overflows, arithmetic exceptions or use of uninitialised variables." 好猛阿...
+22:49:00 <letoh> 酷!!
+22:53:00 <letoh> linux 也要來一下嗎? XD
+22:59:25 <suhorng> 那就太強了XD 這兩個大小應該差很多!
+23:09:29 <suhorng> 嗯.. 如果我定義一個語言： v ::= c | x | λx. e 及 e ::= v | e_1 e_2 (其中 c是某些內建常數..例如, 可能是整數)
+23:10:09 <suhorng> 然後接著用 evaluation 來定義計算順序 E ::= [] | vE | Ee
+23:10:42 <suhorng> (上式中 v 拿來定義 "value", e 拿來定義 "expression")
+23:13:37 <suhorng> 然後計算是 E[(λx. e) v] ~~> E[ e[v/x] ] （ E[ e ] 表示把 E 當中 [] 的位置填入 e）
+23:14:22 <suhorng> 那.. 到底什麼狀況可能出現 vvvv[(λx. e) v]eeee 呀 ... @@ 這樣而且不希望他卡住的話, 左邊的 v 都只可能是 λx. e 的型式嗎？
+23:15:05 <letoh> 你在定義文法嗎?
+23:18:52 <suhorng> 嗯嗯對, v ::= ... e ::= ... E ::= 那個都是文法的定義
+23:20:00 <suhorng> v 跟 e 兩個合起來跟 λ-calculus  差不多, E 則是用來定義怎麼化簡
+23:23:25 <letoh> x 是什麼? 變數?
+23:23:52 <letoh> v := c | x | \x.e 中間那個 x
+23:25:36 <suhorng> x 是變數
+23:25:54 <suhorng> 不一定是 x, 可能是 x, y, z, ... 之類
+23:27:36 <letoh> 嗯... 你沒定義 e_1 和 e_2
+23:27:45 <letoh> 我要怎麼展開?
+23:28:57 <suhorng> 喔喔
+23:29:08 <suhorng> 應該說, e_1 跟 e_2 就都是 e
+23:29:14 <suhorng> 符號不清楚XP
+23:29:29 <suhorng> 所以就只是遞迴的展開
+23:29:33 <letoh> 你是想定義 e := v | e* 還是 e:= v | e+ 之類的 ?
+23:30:02 <letoh> 但這實在有點怪就是了
+23:30:34 <suhorng> 所以說這裡定義的 e 展開一個的例子是 λf. f ((λx. x) (λx. x))
+23:30:38 <letoh> 我猜大概是 e* 比較對?  這樣才能結束
+23:30:45 <suhorng> 不是 e*
+23:30:52 <suhorng> 就是兩項, e_1 e_2
+23:31:04 <suhorng> 然後 e_1, e_2 就是 e, 遞迴展開下去
+23:31:20 <letoh> 那就 e := v | e e
+23:31:40 <suhorng> 到最後結尾一定是結尾在某些 v, v 可能是 constant、variable 或 lambda abstraction
+23:32:16 <letoh> 我好像講錯了
+23:32:29 <suhorng> 沒錯呀?
+23:32:32 <letoh> lambda 裡可以兩個 e ?
+23:32:47 <letoh> (\x.v v)   這樣可以嗎?
+23:33:08 <suhorng> 可以，但是這樣只有一個 e：\x. (v v)
+23:33:14 <suhorng> 不會有兩個 e 的
+23:33:55 <suhorng> λx. e ~~> λx. (e e) ~~> λx. (v v) 這樣
+23:34:23 <letoh> 喔  你給的例子是 \f.f ((\x.x) (\x.x))   剛剛漏看了
+23:35:49 <letoh> 其實我不太確定這個式子要怎麼計算XD
+23:36:10 <suhorng> 嗯嗯!!
+23:36:17 <suhorng> 計算的部份是用 E 來算
+23:36:40 <suhorng> E 展開來是 vvvv[ ]eeee 的形式
+23:36:57 <letoh> \x.x 會傳回 x 對吧?
+23:37:04 <suhorng> E[u] 代表把 [] 換成 u ：vvueeeeee
+23:37:22 <suhorng> 如果只有 \x. x 的話那 \x. x就是結果了
+23:37:32 <letoh> 喔  就是 v
+23:37:42 <suhorng> 如果發現 E[(\x. e) v] 的形式就把他換成 E[ e[v/x] ]
+23:38:08 <letoh> 那 E[(\x.x) (\x.x)] 呢? 會變成 E[ e[(\x.x)/(\x.x)] ] 嗎?
+23:38:42 <letoh> 錯了
+23:38:57 <suhorng> 會變成 E[ \x. x ]
+23:39:35 <letoh> 嗯..
+23:39:50 <suhorng> E[ x[(\x.x)/x] ] 這樣
+23:39:55 <letoh> 嗯嗯
+23:40:01 <letoh> 是這樣沒錯
+23:41:20 <letoh> 只寫 e := v 不行嗎?
+23:42:15 <suhorng> 不太懂？
+23:42:51 <suhorng> 那這樣 (\x. \y. x) (\x. x) 不是就沒辦法納入了嗎？
+23:43:35 <letoh> 本來以為這樣 v := c | x | \x.v  也許就夠了?
+23:44:14 <suhorng> 那一樣 \x. x x 這個就表達不出來吧?
+23:45:51 <suhorng> 就是 v 定義了什麼是 value: 常數 或變數 或函數
+23:46:01 <letoh> v := c | x | \x.v v'    v' = v |ε    類似這樣?
+23:46:06 <suhorng> e 則定義了 term 可以是一個值 或 function application
+23:46:21 <letoh> 就是要允許 \x.v 和 \x.v v ?
+23:46:30 <letoh> 嗯
+23:46:32 <suhorng> 阿..也是可以啦XDrz 意義上就不太明確
+23:48:05 <suhorng> 那樣的話 v 就不代表 "值" 了
+23:48:11 <letoh> 嗯嗯
+23:48:20 <letoh> 變成只是去湊個文法XD
+23:49:07 <letoh> 但是你用 e e 好像會變無窮迴圈?
+23:49:33 <suhorng> 不會呀 QQ
+23:49:41 <suhorng> 喔..也是XDrz
+23:50:09 <suhorng> 可是照這樣講 v := c | x | \x.v v'    v' = v |ε 也是無窮迴圈..
+23:50:29 <suhorng> 變成多數 CFG 都是無窮迴圈了不是嗎...
+23:50:37 <letoh> 也是@_@
+23:51:21 <letoh> e e 可以 reduce 成 e 好像行得通XD  但是...
+23:51:34 <letoh> 變成 \x.e e e 也可以了...
+23:52:00 <suhorng> 不想要模糊的話要加括弧
+23:52:04 <letoh> \x.e e e => \x.e e => \x.e => v   是這樣嗎?
+23:52:06 <suhorng> \x. (e e) e 或是 \x. e (e e)
+23:52:23 <suhorng> 就是這裡這樣定義把他當成樹狀結構 而不是平面的
+23:52:41 <letoh> 我是想成樹狀的沒錯啊
+23:52:51 <suhorng> 那是這樣沒錯..
+23:53:03 <suhorng> \x. e 只是 lambda abstraction 裡面要放什麼都沒差
+23:53:19 <letoh> 所以 \x.e e e e e e e e e  也是可以的
+23:53:43 <suhorng> 就只是這個函數裡面很多東西
+23:54:09 <letoh> 只是 tree 會歪一邊 (或 ambiguous?)
+23:54:15 <suhorng> 例如 \f. (\x. f (x x)) (\x. f (x x)) 裡面就很多東西
+23:54:17 <letoh> 嗯嗯
+23:54:25 <suhorng> 要加括弧就不會ambiguous了呀
+23:54:29 <suhorng> 既然是樹狀的
+23:54:35 <letoh> 嗯嗯
+23:54:55 <suhorng> ambiguous就是因為把他當成平的的關係吧...
+23:55:23 <letoh> e e e e e  那合法嗎?
+23:55:41 <letoh> 例如說  1 2 3 4 5
+23:55:51 <suhorng> 加括弧確定的話就合法
+23:56:09 <letoh> 這樣最後會變成什麼? 好像沒辦法變成一個 v
+23:56:25 <suhorng> 對 算不下去 會卡祝
+23:56:31 <letoh> E 的規則沒辦法套到一堆 constant ?
+23:56:41 <letoh> 但還是符合文法?
+23:56:46 <suhorng> 嘛 其實論文裡面也沒仔細講 E = [] | vE | Ee 的分解是怎樣...
+23:57:44 <suhorng> e 只定義怎樣是 lambda term, E 是怎麼計算, 有可能會 get stuck
+23:58:27 <letoh> 嗯嗯
+23:58:49 <letoh> 那這個語言可以玩什麼?
+23:59:02 <suhorng> 不能玩什麼阿XDDD
+23:59:16 <suhorng> 這只是個 call-by-value 的 λ-calculus
+23:59:58 <suhorng> 我想用 Haskell 寫個 interpreter 可是發現好像只能算一項 沒辦法跟 REPL 那樣.. 所以上來問XD

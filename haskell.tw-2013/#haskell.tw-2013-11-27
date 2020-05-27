@@ -1,0 +1,85 @@
+20:46:54 <suhorng> CindyLinz: http://stackoverflow.com/questions/7768536/space-leaks-in-haskell 跟你遇到一樣的問題耶
+20:47:37 <suhorng> 用 IO 也要隨時注意 lazy/strict 也是滿費神的 ~"~
+21:11:45 <CindyLinz> 改名叫 Simon Marlow 比較快... QQ
+21:25:22 <CindyLinz> suhorng: 不過也不用為此而對 Haskell 感到絕望..
+21:25:50 <CindyLinz> 平常常在寫應用程式的話, 其實每個語言都有外人看的致命傷
+21:26:08 <CindyLinz> 但是在其中用多了習慣了, 其實感覺還好...
+21:26:38 <CindyLinz> 例如說.. 在 perl 就是 circular reference 不會自動被解開來 GC, 所以我們寫程式的人就要一直去小心處理環狀連結
+21:26:57 <CindyLinz> (其實有時候甚至是正面利用環狀連結來達到效果 :p)
+21:27:14 <CindyLinz> 而在 java.. 至少有一個是要時時小心 null ref
+21:27:31 <CindyLinz> C 最恐怖的應該是把記憶體寫穿...
+21:28:00 <CindyLinz> 嗯, 我最近玩裝了很多 mod 的 minecraft, server 偶爾就會丟 exception 而 crash
+21:28:12 <CindyLinz> 最常遇到的就是 null exception... 各 mod 都會出.. XD
+21:28:55 <CindyLinz> C++ 我猜 constructor / destructor 再配上 implicit convertion 所出的故事也是非常精彩
+21:29:25 <CindyLinz> Haskell 應該就是 lazy eval 帶來的特性吧 :p
+21:32:12 <suhorng> null ref xDD
+21:32:26 <suhorng> 記憶體寫穿是write through吧 (誤)
+21:32:35 <CindyLinz> 寫穿我指的是 array 出界之類的
+21:32:38 <suhorng> XD
+21:32:55 <CindyLinz> 寫到不知道是哪裡.. 到時候出的 core dump 裡面的 stack trace 都不會指出出錯的位置
+21:33:09 <CindyLinz> 有特性可以看出來是記憶體寫穿....
+21:33:20 <CindyLinz> 就是每次都 core dump 在不同地方, 非常分散
+21:33:39 <CindyLinz> 但還是不知道在哪 XD
+21:33:47 <suhorng> XDD
+21:34:05 <mno2> 我覺得 lazy 是其中一項，對於只要寫一次的程式，Haskell 就很煩。常常要為 type 轉來轉去煩惱
+21:34:13 <CindyLinz> Java 的 null ref 和 Haskell 的 bottom 相比.. Haskell 的好處是不會有正常的程式利用 bottom 來 carry 資訊
+21:34:32 <suhorng> 假如用monad transformer的話有時候type不標出來還不給你過 XD
+21:34:33 <CindyLinz> Java 的話就很有可能會拿 var==null 來代表某種事情
+21:34:58 <suhorng> bottom無法辨認吧...
+21:35:12 <mno2> 但對於要看別人的程式的話，Haskell 的優勢就出來了。改別人的程式（前提不是 Edward Kmett 寫的）很容易
+21:35:14 <CindyLinz> 正常來說就是因為這樣所以比較沒這種問題
+21:35:23 <CindyLinz> 但其實 GHC 現在的實作還是可以辨認吧? XD
+21:35:34 <CindyLinz> 如果是 undefined 那種.. 可以用 catch XD
+21:35:43 <suhorng> 像是 catch exception?
+21:35:44 <suhorng> 嗯嗯
+21:36:12 <CindyLinz> 但我想會這樣子來利用的程式不多... 會少用這樣就很夠了.
+21:36:51 <suhorng> 然後感覺 java throw 要寫出來跟 monad 要寫出會有什麼 exception 超像的
+21:37:00 <suhorng> 或說有哪些副作用 (IO除外)
+21:37:21 <suhorng> mno2: XDD
+21:37:25 <CindyLinz> mno2: compile error 真的是很煩. XD 不過覺得跟那種執行下去會死得不明不白的感覺不太一樣...
+21:37:43 <CindyLinz> compile 的時候就死得不明不白了.... (默)
+21:37:56 <CindyLinz> 因為看不懂 error message XD
+21:38:52 <mno2> 重點是不要上線之後死得不明不白啊 xD
+21:39:20 <suhorng> 靠 type system 的 team 呢www
+21:39:31 <CindyLinz> 可以這樣宣稱: 我們的產品是有機的, 所以有蟲是正常的...
+21:39:38 <CindyLinz> (前幾天看來的 XD)
+21:39:40 <petercommand> link的時候掛
+21:40:05 <CindyLinz> suhorng: Simon Marlow 的 team 的程式活得不明不白的.. XD
+21:42:52 <CindyLinz> 其實我原本有聽說 null ref 是會製造問題的設計, 也聽說 null ref 的發明人 Tony Hoare (also qsort 的發明人) 說這是 one billion dollar mistake
+21:43:12 <CindyLinz> 但是是玩了 minecraft, 而且有稍微幫忙管了一下在玩的 server, 會去看 crash report
+21:43:35 <CindyLinz> 才切實覺得它真的是很有效率的問題製造點... @@"
+21:43:38 <mno2> 有啊，yinwang 還特別寫了一篇反對，說這標題殺人
+21:44:19 <CindyLinz> 只是我們還偶爾就會遇到 jvm 層級 crash 就覺得難以理解了 orz
+21:44:43 <CindyLinz> report 裡面就會噴一堆 jvm 裡面的暫存器之類的東西, 完全不知道能怎麼辦 zz
+21:45:22 <mno2> 不是上次 jvm 爆安全問題就一大堆人說沒救了
+21:45:42 <CindyLinz> 我們應該不是被惡意攻擊啊 XD
+21:46:22 <mno2> 啊，我的意思是，jvm crash 或出問題好像我們也不能怎樣 :p
+21:46:30 <CindyLinz> 喔 XD
+21:46:55 <mno2> 但 hotspot 好像也換不掉
+21:46:59 <CindyLinz> 我之前以為 jvm 應該超穩的, 出問題都是 app 寫爛... 但是... ww
+21:48:00 <CindyLinz> 我們那 server 的玩家真是超誇張的.. 遇到 server crash 了以後, 還會去有系統地找出來能怎麼 reproduce
+21:48:02 <mno2> 不是這幾天好像有再吵 nginx 怎樣怎樣
+21:48:13 <CindyLinz> 作出結論, 然後以後避免這樣的操作....
+21:48:19 <CindyLinz> 這... 這不是在玩遊戲啊啊
+21:48:23 <mno2> 太專業了吧
+21:48:41 <mno2> 他是遊戲測試從業人員吧 xDD
+21:49:00 <CindyLinz> 我們都互相沒問大家底細就是 XD
+21:50:25 <CindyLinz> mno2: 欸欸.. nginx 怎樣啦 XD
+21:50:32 <CindyLinz> 用很兇, 很在意... ._.
+21:53:00 <mno2> https://news.ycombinator.com/item?id=6799029
+21:53:14 <CindyLinz> 謝謝 :D
+21:53:19 <mno2> 我沒看內文，只是 zite 快速瞄到標題而已
+21:53:30 <mno2> 搞不好只是有人純靠盃
+21:56:17 <CindyLinz> 好 XD
+21:57:18 <CindyLinz> 他講的是 nginx 在試圖轉成收費模式的樣子
+21:57:26 <CindyLinz> 不是在講它有什麼漏洞之類的
+21:59:33 <mno2> 嗯嗯
+22:28:21 <petercommand> dereference null pointer出來的就是null reference這樣講對嗎?
+22:28:59 <CindyLinz> dereference null pointer 出來的是.... 不會出來吧 ^^|
+22:29:18 <CindyLinz> 會 raise null exception 啊
+22:29:28 <petercommand> 那甚麼是null reference呀
+22:29:45 <CindyLinz> 指向虛無的意思呀..
+22:30:00 <CindyLinz> Java 裡面可以 Object a = null;
+22:30:11 <CindyLinz> 但是 a.print() 之類的都會死
+22:30:36 <petercommand> 喔喔
+22:30:40 <CindyLinz> 它不算是一個 type, 而是 Java 裡所有的 reference type 都可以有的值

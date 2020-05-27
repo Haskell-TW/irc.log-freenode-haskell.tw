@@ -1,0 +1,230 @@
+00:02:57 <letoh> 我以前比較會留意實用導向的啊  好玩歸好玩  平常用不到的話很快就會忘掉XD
+00:05:00 <favonia> suhorng: showHex 有很沒效率嗎 @@
+00:07:58 <suhorng> 我在想用 String 來處理會不會比較慢？（相對於用 ByteString 做 I/O，然後也許有什麼方法轉成 Integer 之類...）
+00:08:33 <suhorng> 資料大小大概 300MB~500MB
+00:09:02 <favonia> suhorng: lol 拜託不要用 String
+00:09:11 <favonia> Text 或 ByteString 都好
+00:09:20 <favonia> 內建 parser 就算了
+00:09:24 <suhorng> 因為 showHex 的型態是 String
+00:09:29 <favonia> 請用 Parsec 之類的東西
+00:09:32 <suhorng> 噢...
+00:15:02 <favonia> String 超沒效率...
+00:15:53 <suhorng> 嗯，直接是 [Char] 看起來很慢...
+00:16:54 <favonia> suhorng: 也可以看 attoparsec
+00:17:14 <suhorng> 好！
+00:19:10 <suhorng> http://stackoverflow.com/questions/10099921/efficiently-turn-a-bytestring-into-a-hex-representation 有人問過把 ByteString 轉成 hex 表達XDD
+00:21:07 <suhorng> http://hackage.haskell.org/packages/archive/bytestring-lexing/0.4.0/doc/html/Data-ByteString-Lex-Integral.html
+01:04:52 <letoh> 奇怪  為什麼我的 filter 函式一直沒辦法用XD
+01:09:30 <suhorng> filter怎麼了？
+01:09:45 <suhorng> List.filter~
+01:12:03 <letoh> 對啊  但是連丟範例進去都不會動@_@
+01:12:33 <letoh> List.filter ((fn x => x>0), [~1,0,1])  像這樣寫有什麼問題嗎?
+01:13:39 <suhorng> List.filter是curry的版本
+01:13:50 <suhorng> List.filter (fn x => x > 0) [~1,0,1]
+01:14:33 <letoh> 原來是這樣  感謝!! 不然連第一題都要卡關了XD
+01:15:57 <suhorng> 直接打 List.filter; 可以看型態
+01:17:40 <letoh> 這我倒是有試過，但怎麼看得出是 curry ? 因為前兩個型別之間是 ->  不是 * 嗎 ?
+01:17:58 <letoh> haskell 好像都會顯示成 ->
+01:18:30 <suhorng> 因為 Haskell 的都是 curry 的版本
+01:18:44 <suhorng> a * b 代表型態是個 pair (a,b)
+01:18:49 <suhorng> -> 是function
+01:19:17 <letoh> 也就是說，sml 在多參數的情況下都是接受 pair/tuple 囉?
+01:19:29 <suhorng> 一般 a -> b -> c -> d 把該加的括號都加上去後是 a -> (b -> (c -> d))
+01:19:35 <suhorng> 有的函數是接受pair/tuple
+01:19:38 <suhorng> 有的是curry過得～
+01:19:55 <suhorng> 所以實際上函數都只有一個參數
+01:20:05 <letoh> 嗯嗯  還真是要注意  因為錯誤訊息實在有看沒有懂XD
+01:20:08 <suhorng> 只是有時你丟一個 pair/tuple 之類進去
+01:20:21 <letoh> 原來是這樣
+01:20:23 <suhorng> 錯誤訊息大概是 type 不符合..
+01:20:45 <letoh> 對呀  但不曉得是什麼原因不合  拿掉 , 就可以了XD
+01:21:02 <suhorng> 像 ('a -> bool) -> 'a list -> 'a list 代表你給他一個 'a -> bool 型態的 function 後
+01:21:12 <suhorng> 得到的是一個 'a list -> 'a list 型態的 function
+01:21:44 <letoh> 嗯嗯  這部份跟 haskell 一樣，倒是看得懂  只是沒想到得區分是不是該傳 tuple
+03:31:10 <letoh> http://www.mpi-sws.org/~rossberg/hamlet/  名字好有趣
+21:58:02 <favonia> 我認真覺得 snap tutorial 要整個重寫
+21:59:04 <favonia> （乾脆出一本書順便讓 O'Reilly 決定動物好了...）
+21:59:23 <letoh> snap 是什麼?
+21:59:38 <letoh> 喔喔 web framework
+22:00:17 <favonia> letoh: 嗯我決定放棄 yesod 用 snap xDDD
+22:01:41 <favonia> yesod & haskell 好像是蝴蝶跟獨角仙...
+22:09:10 <miaout17> 好奇能談談為何放棄yesod嗎？
+22:14:01 <favonia> miaout17: 我個人覺得 snap 核心的 API 稍微乾淨一點點點
+22:30:45 <mno2> favonia, miaout17:  我更新了一下 README，描述開發環境建制的簡單步驟
+22:31:00 <favonia> 有沒有人裝 Haskell platform 啊
+22:31:21 <favonia> 為什麼會有奇妙的 haskell-platform package
+22:31:28 <favonia> (我自己沒裝不知道xD)
+22:31:33 <mno2> 我有裝啊
+22:31:54 <favonia> 那個 package 是幹嘛的
+22:32:09 <hychen> 就裝一些基本的haskell lib
+22:32:12 <hychen> 跟ghc
+22:32:19 <favonia> 可以移除掉嗎
+22:32:27 <favonia> 我好奇的是他自己可以幹嘛
+22:32:54 <hychen> 它是meta package
+22:33:05 <mno2> 他是 meta-package 吧
+22:33:12 <hychen> 移除,會有一堆東西被幹掉
+22:34:03 <favonia> hychen: 喔喔 cabal 預設不會移除不需要用到的東西...
+22:34:19 <hychen> ???
+22:34:19 <favonia> 所以如果沒有人依賴他的話去掉無所謂
+22:34:46 <favonia> 我只是好奇 cab remove haskell-platform 會怎樣
+22:35:03 <hychen> you can try
+22:35:38 <favonia> 我沒裝 xD hackage 上面也沒有這個 package
+22:35:47 <favonia> haskell platform 硬塞的吧我想
+22:39:20 <favonia> mno2: 我還滿擔心/困惑的 現在檢字系統 https://github.com/favonia/encoding-mashup-server 好像有依賴什麼跟 haskell-platform 不合的套件...
+22:42:11 <mno2> favonia: 是會提示，不過硬裝還是可以動 xD
+22:43:21 <favonia> 可是我不覺得這樣好像沒有解決問題 lol 有兩個炸掉。一個是 container
+22:43:26 <favonia> 一個是 template-haskell
+22:43:38 <favonia> 我不懂到底哪個條件讓他非要 2.8 不可
+22:45:46 <mno2> favonia: 你的 ghc 版本是 ?
+22:45:52 <favonia> 7.6
+22:46:23 <mno2> favonia: 我猜是 lens ?
+22:48:12 <favonia> mno2: lens 本身沒事
+23:03:47 <favonia> [snap] 應該要在 .gitignore 加上 snaplets 嗎?
+23:11:32 <mno2> favonia: 什麼情況下會產生 snaplets ?
+23:11:54 <favonia> 不知道耶，我有看到 sqlite 自己產生一個設定檔
+23:11:56 <mno2> favonia: 另外， comments 為什麼是 Text 而不是 [Text]
+23:13:14 <mno2> 我正在想 sqlite schema ， 在想要有哪些 table
+23:13:30 <favonia> 我想了一陣子覺得允許多個 comments 然後允許刪掉好像有點麻煩
+23:13:41 <favonia> 既然沒有要 merge
+23:13:53 <favonia> 那就全部當一大格
+23:14:17 <mno2> favonia: 那應該是 cabal install 觸發的
+23:14:51 <mno2> 喔喔，好吧。那我 sqlite 也就塞一大格 /
+23:15:10 <CindyLinz> 我覺得 haskell-platform 還蠻不錯的...
+23:15:29 <CindyLinz> 它提供了一個 consistent 的 snapshot.... 這是 haskell 社群很需要的.... wwww
+23:16:20 <favonia> 嗯嗯（雖然我就是因為不要這個 snapshot 才從 Ubuntu 轉到其他地方去 xD）
+23:16:30 <CindyLinz> 我之前想試 yesod 的時候, 直接裝 yesod 總是失敗, dep 問題解很久解不完
+23:16:53 <CindyLinz> 後來嘗試先裝 haskell-platform 之後再裝 yesod, 就一路順暢了.. @@"
+23:17:10 <miaout17> XD
+23:17:30 <favonia> CindyLinz: 暴力惡搞才是王道（逃）
+23:17:31 <CindyLinz> 我也是覺得不應該這樣.. 可是現狀就是要這樣日子才過得下去 orz
+23:17:52 <CindyLinz> 所有的輪子都自己再發明一遍吧.. (灰心)
+23:18:15 <favonia> 不用啊，就把壞掉的輪子硬裝上去就好
+23:18:23 <CindyLinz> 一直解別人的的問題實在很膩...
+23:18:23 <mno2> CindyLinz: Stackage 大概要等好一陣子
+23:18:42 <CindyLinz> 時間花一堆, 可是一點成就感都沒有啊 @@"
+23:19:09 <favonia> mno2: 現在至少 haskell-platform compatible 了 xD
+23:19:43 <mno2> good
+23:19:51 <favonia> mno2: 原來是新版 container 經過許多複雜邏輯後導致 template-haskell 要更新
+23:19:57 <CindyLinz> mno2: 還需要開發者多一點.. 才能聚出足夠多相容性穩定的開發者 ^^|
+23:20:43 <CindyLinz> 遇到 dep 版號上限寫太高或沒寫上限的已經很累了.. 還一直遇到下限寫太低的....
+23:21:15 <favonia> mno2: 有圖有證據 https://travis-ci.org/
+23:21:19 <favonia> 打錯
+23:21:32 <favonia> https://travis-ci.org/favonia/encoding-mashup-server
+23:21:38 <CindyLinz> 讀了兩邊(上游+下游)的 code 才知道它根本不能適用這麼舊的 dep...
+23:22:03 <favonia> CindyLinz: xD
+23:22:23 <favonia> 是說我現在的預設邏輯都是 現在版本+跳兩個
+23:22:28 <favonia> 這樣好像更相容
+23:22:41 <favonia> 之前只允許一個，雖然很嚴謹，天天都在衝
+23:23:06 <favonia> 希望跳兩個有幫助 xD
+23:23:40 <CindyLinz> cabal 找不到可行解是一種情況.. 不過我遇到的是 cabal 根據各 package 的 dep 限制, 有找到可行版本.. 但其實 compile 不可能過的版本.. @@"
+23:23:52 <hychen> 我把之前binding跟assigment 的討論記成筆記, 各位大大請幫忙糾正我吧? 看我是不是理解錯誤? http://hychen.wuweig.org/blog/2013/02/09/binding-and-assignment/
+23:24:33 <hychen> CindyLinz, 如果haskell一天到晚要處理dep問題, 這樣不是很適合用在產品開發耶
+23:24:55 <letoh> hychen: 你說有解釋的影片是哪一段啊?
+23:25:10 <letoh> 有解釋 binding/assignment 的影片
+23:25:26 <CindyLinz> hychen: 快, 加入 hackage 開發的行列!
+23:25:46 <CindyLinz> hychen: 一天到晚要處理 dep 問題, 是 hackage 開發者不重視相容性...
+23:25:57 <CindyLinz> hychen: 需要重視相容性的開發者加入!
+23:26:20 <favonia> hychen: val result + PI 應該編譯不會過吧
+23:26:20 <letoh> 像有些語言有 constant 的設計，算是有把變數分成可修改跟不可修改嗎?
+23:27:15 <hychen> favonia, bingoo
+23:27:19 <favonia> letoh: 可以取指標之類的就還是不一樣
+23:27:21 <hychen> favonia, 忘了type ... orz
+23:27:41 <favonia> hychen: 我們現在在玩的東西已經用 travis 把關了
+23:27:46 <favonia> 應該沒事了 orz
+23:28:41 <favonia> mno2: scheme 要不要寫在 https://hackpad.com/3du.tw-Encoding-Mashup-Design-ozYEnChzp5w
+23:29:02 <letoh> hychen: 最後一段不太懂
+23:29:10 <hychen> CindyLinz, 寫haskell 沒飯吃啊...
+23:29:21 <CindyLinz> hychen: 不用是職業的啊~
+23:29:28 <CindyLinz> 我是說.. 全職..
+23:29:48 <CindyLinz> 不過, 其實寫了自用也是一種吃飯方式啊?
+23:29:59 <favonia> hychen: Haskell 現在像瑜珈，是拿來練身體的（逃
+23:30:12 <hychen> CindyLinz, 但我都把python ... haskell 化.... 夠用了
+23:30:27 <hychen> letoh, 哪裡不懂?
+23:31:10 <CindyLinz> hychen: 像我偶爾就會在 shell 打 for i in a b c... 之類的做事情.. 複雜一點的話因為 bash 不夠熟, 就會改用 perl.. 像你應該就 python. 那麼這個部分也許可以改用 haskell
+23:31:12 <letoh> val PI = ref 3.64 以後  我要怎麼修改?
+23:31:43 <hychen> CindyLinz, https://github.com/hychen/boliau
+23:31:55 <CindyLinz> hychen: 好消極的 project name XD
+23:31:59 <hychen> CindyLinz, 所以我把haskell 的一些概念轉成python code....
+23:32:16 <hychen> PI := 4
+23:32:36 <favonia> hychen: 以後我要寫個 dahuen xD
+23:32:37 <letoh> 這樣就不會產生新的 binding 了?
+23:32:56 <CindyLinz> dahuen 聽起來積極多了 XD
+23:32:57 <hychen> dahuen???
+23:33:01 <hychen> letoh, yes
+23:33:09 <hychen> 什麼中文字?
+23:33:18 <CindyLinz> 打混 吧
+23:33:35 <letoh> hychen: 那 python 要怎麼做到這件事? PI = 4 的話會產生新的 binding
+23:33:53 <hychen> python 不能做吧
+23:34:04 <letoh> 你最後一段說 Python 可以做到呀
+23:34:25 <hychen> PI=4沒有新binding啊
+23:34:34 <hychen> PI的值是一個ref
+23:35:05 <hychen> 然後ref指到4
+23:35:12 <CindyLinz> hychen: 現在啊.. 會一點 bash, 會一點 make (噢, 還分 gmake 和 pmake.. QQ), 會一些 awk, 會一些 sed, 辛苦地組在一起用.. 由於是透過 shell pipe 之類的組在一起, 常常很多動作都是下下去就回不來了..
+23:35:20 <CindyLinz> 有一次為了小心起見
+23:35:32 <CindyLinz> 我做事情以前先 cp 一次
+23:35:41 <letoh> 重來一下  假如我 PI = ref 3.14...(為啥會變 3.64? XD)  然後我再寫 PI := 4  這樣改到的是原本放 3.14 的空間?
+23:35:49 <hychen> 打錯了 orz
+23:35:51 <CindyLinz> 結果好像檔名寫反, 所以 cp 瞬間就灰飛煙滅了
+23:35:58 <hychen> no
+23:36:15 <letoh> ok, 所以我一開始就搞錯了XD
+23:36:23 <hychen> 只是PI的指標從指到3.14改成指到4
+23:36:32 <CindyLinz> 如果是用 haskell 寫, 也許.. 也許在下執行下去的時候, ghci 就告訴你你的 type 有問題, 不能證明你要的效果會達到
+23:36:36 <letoh> 原來是這個意思
+23:36:47 <CindyLinz> 只要學一套 haskell, 又快又安全呢! (幻想)
+23:37:05 <hychen> 作個雜事還要管type, 好累啊...
+23:37:24 <CindyLinz> hychen: 我們做雜事的時候其實還是有管 type 啊
+23:37:32 <hychen> 是啊
+23:37:44 <CindyLinz> hychen: 累不累是看需不需要 explicit 把 type 寫出來啊
+23:37:48 <CindyLinz> haskell 不用寫呀
+23:38:14 <letoh> hychen: 所以改指標這種做法就不算是 binding 嗎? 要不能改的才叫 binding ?
+23:38:14 <hychen> 其實我也覺得要有type比較安全
+23:38:36 <miaout17> 好奇大家有在工作偷用haskell嗎
+23:38:51 <hychen> letoh, 改指標就叫assigment
+23:39:13 <hychen> 因為你assign 一個值到一個容器(大略來說)
+23:39:32 <CindyLinz> miaout17: 正要偷用..
+23:39:45 <hychen> 但實際上你也就是把一個指標從一個地方指到另一個地方
+23:39:54 <CindyLinz> miaout17: 然後被 cabal 勸退了.. 所以現在正在找別的偷用法 QQ
+23:40:14 <miaout17> 我之前有用haskell寫過處理svn日常作業的程式，事後還是覺得拿來練身體（？）可以，真的要快速開發對我來說還是Ruby或Python比較快，可能我還不夠骨骼精奇。
+23:40:48 <favonia> mno2: miaout17: interface change proposal: Map => HashMap ?
+23:41:14 <CindyLinz> 嗯, 對我來說是個還不願意放棄的目標.. (握拳)
+23:41:30 <mno2> agree
+23:41:46 <hychen> 我是覺得不怎麼實際
+23:41:59 <miaout17> favonia: OK
+23:42:06 <hychen> 打雜這種事，根本就是比誰lib binding多誰贏
+23:42:24 <CindyLinz> hychen: 可以建啊~ ^^
+23:42:33 <hychen> 人生苦短啊...
+23:42:35 <letoh> 建完都下班了XD
+23:43:16 <letoh> 長遠規劃是可以啦  但臨時要打個雜還要從地基開始就有點...
+23:43:20 <CindyLinz> 我覺得我們公司竟然能拿 perl 這麼慢的語言寫即時連線對戰遊戲的 server... haskell 要變成日用品也不是沒可能呀
+23:43:39 <letoh> perl 大概只有文字處理特別快?
+23:43:59 <CindyLinz> letoh: 是寫起來快.. 不是跑起來快 XD
+23:44:16 <letoh> 那大概是拿來跟 perl 比的都太慢了XD
+23:44:24 <CindyLinz> letoh: 連續記憶體的資料處理, 我實測大約是 340倍 C++
+23:44:58 <hychen> 打雜的好處就是不用管效率...
+23:45:05 <CindyLinz> XD
+23:45:16 <letoh> 之前看到有人分析用幾種語言實作 template engine，ruby/python/perl 之類的，perl 的速度遠遠超快其他實作
+23:45:18 <CindyLinz> 打雜的效率應該要工具天生就給了, 不要打雜的人傷腦筋 :p
+23:45:34 <hychen> 所以我這種非CS背景的勉強還有口飯吃...
+23:47:12 <hychen> 我覺得我的boliau專案已經夠了...
+23:47:26 <hychen> 只差沒時間去實作arrow跟type-check
+23:48:08 <CindyLinz> python 還 type check.. XD
+23:48:17 <hychen> 我爽 A_A
+23:48:19 <CindyLinz> 都脫了褲子, 就不要只放屁啊.. (逃)
+23:48:30 <hychen> pipeline 建立要有type check啊
+23:48:56 <hychen> 這樣才能確定運算組合正確
+23:50:27 <hychen> 基本上我覺得lazyness 比較麻煩...
+23:50:53 <hychen> imported 的 module太多 context很難帶到下一個command.
+23:51:04 <CindyLinz> 不行啦, 你這樣下去會阻礙 haskell 發展..
+23:51:16 <hychen> 也許把他轉成 client-server 的方式比較好
+23:51:29 <favonia> miaout17: mno2: Type.hs 已經更新了
+23:51:30 <hychen> 這樣還可以平行處理
+23:51:41 <favonia> 我竟然發現 GHC 7.6 的 bug
+23:52:13 <miaout17> 啥bug
+23:52:32 <favonia> 在 Maybe 那邊加很多 ! ! ! 以後他就炸掉了
+23:52:42 <favonia> ghc: panic! (the 'impossible' happened)
+23:52:42 <favonia>   (GHC version 7.6.1 for x86_64-unknown-linux):
+23:52:42 <favonia> 	tc_hs_type: bang
+23:52:58 <favonia> 應該是配合 template haskell 然後還有一堆東西就炸掉了
+23:53:16 <hychen> CindyLinz, 怎麼會, 我寫這個只是小玩具而已, 只有我在用....
+23:55:13 <hychen> CindyLinz, 而且python binding超多的
+23:58:48 <mno2> favonia, miaout17: https://gist.github.com/MnO2/4745813#file-mashup-server-sql  請 review  (我對 sqlite 不是很熟)

@@ -1,0 +1,598 @@
+00:36:53 <CindyLinz> 我說動咱們家技術長在一台 FreeBSD 上面裝好 ghc 7.4.2 了
+00:37:04 <CindyLinz> 同時發現一個拿 ghc 開發的嚴重問題...
+00:37:23 <CindyLinz> 他是特別找了一台機器裝 ghc, 而不是我平常用的開發機..
+00:37:33 <CindyLinz> 因為我用的開發機記憶體不夠用...... wwwwww
+00:37:41 <CindyLinz> 他找的那台機器代號叫作 bm
+00:37:52 <CindyLinz> 意思是 Big Memory...... lol
+00:55:01 <MnO2> 原來 CindyLinz 不是技術長 (畫錯重點）
+00:55:41 <favonia> lol
+00:55:56 <favonia> 是編譯時記憶體不夠吧
+00:56:00 <favonia> 跑的時候應該還好
+00:56:26 <CindyLinz> 對 編譯的時候...
+00:56:33 <CindyLinz> 可是開發的時候就會一直編譯
+00:56:43 <CindyLinz> 另外.. deploy 的部分沒有想過該怎麼做
+00:57:13 <CindyLinz> 我們現在用 perl 或 php 都是把 source 放到 production environment 去執行就好
+00:57:25 <CindyLinz> haskell 這種要先 compile 的沒有用過
+00:57:44 <CindyLinz> perl 裡面有用過 Inline C, 它是執行的時候去檢查 C source 有沒有更動過
+00:57:56 <CindyLinz> 有更動過的話當場重新 compile, 不然就用舊的 binary
+00:58:42 <CindyLinz> 只是如果在 deploy 的時候在 production environment compile 會吃掉巨量記憶體, 我們就要額外小心這件事了..
+00:59:15 <CindyLinz> 因為 deploy 的時候, 同一台機器上面會有 online service 正在跑, 記憶體壓爆就糟糕了
+00:59:20 <letoh> 好像沒有人寫 the little haskeller ? @_@
+01:00:06 <CindyLinz> 以前我自己在編 haskell 的東西的時候, 記得是 ld 的時候吃的記憶體最兇 @_@"
+01:00:21 <CindyLinz> compile 的時候其實還好..
+01:02:28 <MnO2> deploy 直接編成 static 執行？
+01:03:21 <MnO2> http://hackage.haskell.org/package/keter-0.3.5
+01:03:29 <MnO2> 這是 yesod 的 deploy system
+01:05:20 <favonia> CindyLinz: 我的意思是說編譯 GHC
+01:05:29 <favonia> 沒理由 GHC 編譯別人時還會佔那麼多記憶體
+01:05:39 <favonia> 你的程式又沒有這麼大
+01:05:53 <CindyLinz> MnO2: 那樣要兩邊的環境都完全一樣.. 雖然理論上開發和營運的環境要一樣
+01:06:10 <CindyLinz> 但實際上我們營運的機器環境不一樣, 而開發環境每個人只有一個...
+01:06:37 <CindyLinz> 因為比較新的環境, 只敢在爆掉的時候影響比較小的地方用
+01:06:45 <CindyLinz> 等於是實驗性...
+01:07:43 <CindyLinz> favonia: 我不知道我們的程式會多大, 不過之前我 cabal 安裝 yesod 的時候, 記得記憶體要 1.5G 才安全
+01:09:04 <CindyLinz> 不過我們遊戲 server 的複雜性, 也不一定會比較小呀 :Q
+01:11:09 <CindyLinz> letoh: the little haskeller 是什麼樣的東西呀?
+01:12:35 <CindyLinz> 不過至少是往前推進一步了 :p
+01:13:52 <favonia> CindyLinz: 好吧（默）
+01:15:34 <CindyLinz> 我們公司的機器還有一個比較不循常的特性, 就是沒有 swap... ^^|
+01:16:55 <MnO2> 為什麼啊？
+01:17:09 <CindyLinz> 因為 service 的時間都卡很緊, 如果動作太慢等於 fail.. 所以進 swap 就等於死掉了... 如果沒有 swap, 那麼就一兩個 service 被 kill, 有了 swap 就是同一台機器上面的 service 全滅
+01:17:42 <CindyLinz> 然後要去人工連進去救火也會變得很遲緩, 災情擴大...
+01:17:52 <MnO2> I see
+01:18:24 <CindyLinz> 沒關係, 我一定會想出怎麼讓 ghc 在這種環境存活的方法的.. (握拳)
+01:19:13 <MnO2> 開發環境跟營運環境不一樣比較討厭 xD
+01:19:31 <favonia> virtual machine(逃)
+01:20:07 <CindyLinz> 時間緊的機器不能用 virtual machine (嘆)
+01:20:23 <CindyLinz> virtual machine 上面的時間速度很怪..
+01:21:02 <letoh> 不曉得  類似 the little schemer 或 the little mler 之類的?
+01:21:39 <CindyLinz> MnO2: 真的蠻討厭的... 遇到那種開發機會成功, 正式機會爆炸的情況.. 就要 deploy 一些很微妙的 code.. 在正式機上面實驗, 又要讓外人感覺不出來....
+01:22:07 <CindyLinz> letoh: 我那兩個也沒聽過 ^^|
+01:22:21 <MnO2> 對啊，這樣不是上線都會很緊張..
+01:22:32 <CindyLinz> letoh: 是 compile 很快, 但 optimize 程度比較小的嗎?
+01:22:45 <MnO2> 這樣你們有 CI 嗎？
+01:22:48 <CindyLinz> MnO2: 發生率通常不高...
+01:22:56 <CindyLinz> MnO2: 沒有
+01:24:13 <MnO2> 是喔 @@   這樣上線我會更睡不安穩
+01:25:03 <CindyLinz> 我們有還算完善的 monitor 機制啦 XD
+01:26:51 <MnO2> 可是這樣都是上線後的事情啦，而且遊戲都是晚上尖峰時刻最高，這樣下班不是很不安心 xD
+01:29:11 <CindyLinz> MnO2: 我們是遊戲公司, 可是 deploy 跟網站比較像, 都是不停機更新.. 所以大家都習慣白天就隨時改版上線, 執行好幾個小時沒出問題的東西就可以提升信心指數 ^^|
+01:30:00 <CindyLinz> 不過遊戲這種的不知道 test case 該怎麼寫呢 @@"
+01:30:22 <CindyLinz> 只有小元件知道要怎麼單獨測...
+01:30:26 <MnO2> 問得好，我也不知道
+01:31:25 <MnO2> 真不知道寫飛機控制系統的怎麼做 integration test
+01:31:27 <CindyLinz> 可能可以拿線上跑過的 log 來作成劇本跑...
+01:32:06 <CindyLinz> MnO2: 順便就把起飛到降落的自動駕駛都作好了? XD
+01:32:23 <favonia> MnO2: 只能用數學證明了
+01:32:26 <CindyLinz> 測試!? 就叫 bot 去飛20趟回來回報!
+01:32:42 <favonia> CindyLinz: 不不，飛機這種當然是需要數學證明所有可能的狀況軟體的反應都是對的
+01:32:46 <favonia> 反正時間多
+01:32:58 <favonia> 而且驗證速度也在改進的樣子（？？？？）
+01:34:06 <MnO2> 現在也許是有漸漸導入，不過很好奇十年前是什麼樣子
+01:34:18 <CindyLinz> favonia: 用數學證明的這種方式, 是不是就不會有那種「保守寫法」的開發方式了?
+01:34:38 <favonia> 什麼保守寫法？？
+01:35:14 <favonia> 保守都是騙人的，多少人類覺得保守的寫法，再某些奇怪狀況下就會爆炸
+01:35:26 <CindyLinz> 就是 if( x!=0 ){ ...做一些事...  if( x!=0 ){ ... 做另一些事 ... }}
+01:36:04 <CindyLinz> 名古屋那次是程式跑到一個不會執行到的 branch... 而且還有註解說這邊不會發生
+01:36:05 <favonia> 例如兩架飛機交會的安全錯機方法一點都不 trivial
+01:36:21 <favonia> 簡單的寫法在某個特別角度會撞
+01:36:36 <CindyLinz> 感覺像是 compiler 有問題造成的..
+01:36:36 <favonia> 我的「簡單」是說某個繞圈圈的聰明方法
+01:39:23 <CindyLinz> favonia: 現在飛機會自動錯機喔?
+01:39:35 <MnO2> 講到這個我就想到之前看 Berkeley open course 提到的一個 bug
+01:39:38 <favonia> 這當然是可以寫出來的
+01:41:14 <CindyLinz> hmm
+01:41:15 <MnO2> 就是魚雷的控制程式在前進方向跟發射方向一百八十度相反的時候會自動爆炸，避免攻擊自己
+01:41:39 <MnO2> 但如果卡彈，然後軍艦掉頭...
+01:41:46 <CindyLinz> 啊, 不一定要 compiler 有 bug.. 就某次運算, 應該為 1 的電壓不太足被判定為 0 就可以爆了.... @@"
+01:41:53 <favonia> CindyLinz: 我會知道是因為上次聽蔽校某教授演講 http://symbolaris.com/info/RCAS.html
+01:42:26 <favonia> CindyLinz: 這種硬體/sensor可能發生而數學沒有model的錯誤本來就沒救
+01:42:33 <CindyLinz> MnO2: 啊啊啊啊!
+01:42:44 <favonia> 你乾脆說引擎突然停下來怎麼辦 lol
+01:43:19 <CindyLinz> favonia: 但是工程師而非理論學者, 就要在即使如此的情況下盡可能救啊 @@"
+01:43:34 <letoh> 我剛剛講的那些其實都是書名XD
+01:43:49 <favonia> CindyLinz: er 理論的方法就是把這種誤差之類的全部考量進去啊 @@
+01:43:58 <favonia> sensor 可以不準
+01:44:02 <favonia> 不要到整個壞掉就好
+01:45:02 <favonia> 電腦裡的電壓也都是一直超不準... 所以其實有一堆錯誤更正，電路也都採取保守路線 xDDD
+01:45:17 <CindyLinz> favonia: 那個要證明的話就要去假設每一個組件的錯誤率....
+01:45:39 <CindyLinz> 不過.. 搞那麼細的時候, 程式真的還寫得下去嗎? ^^|
+01:45:53 <CindyLinz> MnO2: 你說的這個有沒有真實發生過啊?
+01:46:04 <favonia> CindyLinz: 通常只會講誤差吧。極端來講，如果所有 sensor 都給你已經降落的幻覺的話怎麼有救 xD
+01:46:33 <favonia> 我覺得這樣驗證子根本不是在驗證軟體了....
+01:46:34 <MnO2> CindyLinz: 我不知道耶，但那堂課說得好像有真的發生過
+01:47:07 <CindyLinz> favonia: 欸, 所以我是說 錯誤率啊 :p  要證明所有 sensor 合作編織一個天衣無縫的謊言的機率很低啊 XD
+01:47:20 <favonia> CindyLinz: 那是硬體的問題吧 lol
+01:47:39 <CindyLinz> MnO2: 聽起來就很合理的情形.. 我們公司就偶爾發生... wwww
+01:48:13 <favonia> CindyLinz: 你看到剛才的錯機網頁了嗎 lol
+01:49:33 <favonia> 像他就說飛機周圍一大區域都不能有第二個分機
+01:49:36 <favonia> 飛機
+01:49:49 <favonia> sensor 只要不要不準到很離譜就都還是安全的
+01:50:14 <favonia> 如果你去看飛機上重要 sensor 的設計
+01:50:20 <favonia> 不會只有一個....
+01:50:30 <CindyLinz> 嗯嗯
+01:51:20 <CindyLinz> 總共只能有兩架飛機..... XD
+01:52:32 <CindyLinz> 想起前一陣子看到英國和阿根廷打福克蘭群島戰爭的時候, 英國當時最先進的軍艦被阿根廷的 20/30 年老飛機擊沈
+01:53:05 <CindyLinz> 其中有一個回合.. 是一開始兩架飛機飛太近, 所以防空系統把它看成一架大飛機
+01:53:52 <CindyLinz> 在飛近船的時候兩架飛機飛開了, 所以系統發現突然多了兩架小飛機, 消失了一架大飛機, 然後一直在尋找已鎖定的消失的大飛機
+01:53:55 <CindyLinz> 然後就當掉了
+01:54:17 <CindyLinz> 重開機20秒.. 可是飛機飛過它上空只經過8秒....
+01:54:41 <CindyLinz> 還好那一次飛機丟的炸彈是未爆彈, 只有壓垮一架船上的直昇機...
+02:01:21 <CindyLinz> .. 所以以後有機會選擇的話, 要選擇寫軍用程式而不是飛安程式.. 你看, 軍用程式出了問題還可以救人, 飛安程式出了問題會殺一堆人.... (誤)
+09:56:11 <b4283> 在捷運上想不太通為什麼 fmap (f . g) = fmap f (fmap g)
+09:56:37 <b4283> 後來發現是我型態搞錯了
+09:58:57 <_13h> 唔... Functor
+09:59:14 <b4283> yes sir
+09:59:46 <b4283> 還不確定該怎麼想這玩意 XD
+10:01:52 <_13h> 對了，昨天給你的那篇文章看了嗎？
+10:10:11 <b4283> scheme vs python? 看啦
+10:15:25 <_13h> 裡面有提到研究用語言跟真實世界用的語言
+10:16:27 <b4283> 對，可是我不覺得 guile 很慢啦 XD
+10:17:06 <b4283> 他說 java 可能要再 10 年才會發現有 first-class continuation
+10:18:01 <b4283> 記得 benchmark game 裡面 racket 和 haskell 是同一級的速度咧
+10:19:26 <b4283> http://benchmarksgame.alioth.debian.org/u64q/which-programs-are-fastest.php 嗯... median 比 haskell 慢三倍 XD
+10:19:49 <_13h> 那句超好笑，一開始說大家終於有 lambda 可以用了，但還要再花個十年發展出 first class continuation
+10:20:45 <_13h> guile 我也覺得不慢，拿來寫 project euler 都還是 python 的好幾倍快XD
+10:21:07 <b4283> von Rossum "hates" lisp ? 難怪之前聽說 map 都要拿掉咧
+10:21:38 <_13h> 我很好奇這說法的來源，昨天問了一下沒人理我XD
+10:21:48 <_13h> reduce 要拿掉吧.. map 我忘了
+10:22:20 <b4283> http://www.artima.com/weblogs/viewpost.jsp?thread=98196
+10:22:38 <b4283> 是本人的文章 ... 我想應該不會錯 XD~
+10:25:19 <b4283> 嗯... 我想到了
+10:25:50 <b4283> Laplace transform 應該算是 functor 吧
+10:26:49 <b4283> 把積場變成方程式場 (誤)
+10:42:18 <favonia> b4283: 我後來覺得那個 benchmark game 實在很沒意義
+10:42:30 <favonia> 你看那個程式碼... 平常誰會這樣寫 orz
+10:49:12 <b4283> http://benchmarksgame.alioth.debian.org/u64q/program.php?test=pidigits&lang=ghc&id=4
+10:52:48 <b4283> 看起來不像是我所認識的 haskell XD
+11:29:31 <cataska> _13h: 你裝哪一個 distro ?
+11:31:40 <b4283> slackware
+11:34:51 <cataska> thx
+11:36:44 <cataska> 牌子老，信用好 (?)
+11:38:51 <_13h> 我現在有 slack/debian/arch
+11:39:56 <favonia> b4283: pidigits 這還好，但你看 Python 在搞什麼
+11:40:19 <favonia> b4283: 第1行就是 from gmpy import mpz
+11:40:24 <favonia> 這樣還有比較的意義嗎？
+11:45:27 <b4283> @@
+11:46:34 <favonia> b4283: 跟 Haskell 版本動不動就用各種詭異陣列/unbox技巧一樣 lol
+11:46:37 <favonia> 全都走火入魔了 lol
+11:47:15 <favonia> b4283: Python 如果沒有用 gmp 一定慢死 xD
+11:53:06 <favonia> b4283: 應該這樣說，我覺得好多都是 extension/library 大決戰 xD
+11:53:49 <favonia> b4283: 我想贏得 pidigits 的方法就是... 語言加一個 Math.pidigits(1000) 可以印出前 1000 位
+11:53:54 <favonia> 之類的
+11:54:23 <favonia> 然後盡其所能最佳化這個函式 xD
+12:03:55 <b4283> pidigits  c++ 缺席耶
+12:04:27 <_13h> favonia: 比 ffi 效率XD
+12:14:35 <favonia> _13h: 作弊版本沒有 ffi. 基本上 compiler 直接把機器碼貼上 xD
+12:18:20 <_13h> python 最有趣是很多大量計算跟加速的調校方法都是不要寫 python XD 例如改用 c++ 再用 boost.python 串起來之類的...
+12:18:43 <_13h> 不然就是改用 cython 之類的鬼東西
+12:37:41 <favonia> _13h: 請支持 Python 內加入 asm { }
+12:37:49 <favonia> _13h: 這樣就不用改用 C++ 了
+12:45:50 <cataska> XD
+12:50:06 <cataska> new PEP
+12:50:55 <YuLin> XD
+12:57:08 <favonia> _13h: 你剛才的例子我其實不太懂
+12:57:17 <favonia> _13h: 我覺得應該全部用 C++ 寫
+12:57:27 <favonia> 加上 system("...") 一行就好啦
+12:57:33 <favonia> 串來串去想要幹嘛 lol
+12:58:06 <favonia> 這樣子還是 Python 吧
+13:01:23 <MnO2> http://techblog.netflix.com/2013/02/rxjava-netflix-api.html
+13:01:24 <MnO2> Functional Reactive in the Netflix API with RxJava
+13:01:42 <MnO2> 未看先貼（不知道是不是真的FRP)
+13:04:53 <favonia> CindyLinz: 我覺得 g0v LogBot 好漂亮... 要不要偷過來用 xDDDD
+13:09:41 <favonia> hychen: 你提醒我我還沒有玩 Actions.Search xD
+13:10:27 <MnO2> 偷過來用 ++
+13:12:49 <CindyLinz> favonia: 對不起來個 link ^^|
+13:13:15 <favonia> https://github.com/dannvix/Logbot
+13:15:24 <CindyLinz> ruby.. QQ
+13:15:28 <_13h> favonia: 我是說對 python user 來說，想讓程式變快的方法，所以最後還是得留一條路跟 python，好處大概就是可以串到 python 的其他 library 吧?
+13:15:35 <CindyLinz> 那台沒有 ruby 環境..
+13:16:05 <favonia> _13h: 有啊有啊，我有用 Python 的 os.system
+13:16:33 <favonia> CindyLinz: 所以要寫 Hogbot (誤)
+13:16:39 <_13h> favonia: XD
+13:16:56 <_13h> favonia: 好啦  算你過關XD
+13:17:01 <CindyLinz> Hogbot XD
+13:17:03 <favonia> _13h: 謝謝
+13:17:41 <favonia> _13h: 可能用 popen 比較好（搞錯重點）
+13:20:08 <MnO2> 要先確定那一台有 ghc 啊~
+13:20:30 <CindyLinz> 果然沒有.. XD
+13:21:22 <favonia> MnO2: 先編譯再送上去～
+13:21:51 <CindyLinz> 發現那台 bm 上面還沒裝 cabal.. orz
+13:23:40 <favonia> CindyLinz: bm = ?
+13:24:02 <MnO2> big memory
+13:24:29 <CindyLinz> 就我凹來裝 ghc 的機器 XD
+13:24:35 <CindyLinz> 再去凹 cabal XD
+13:26:32 <favonia> 喔 lol
+13:45:14 <_13h> hychen: 中午寫到 same color 那一題了，寫一寫覺得還蠻有趣的
+13:49:10 <favonia> _13h: 哪堂課～遲交還是有自動驗證嗎？
+13:49:30 <favonia> _13h: 應該說我知道哪堂課
+13:49:45 <favonia> 我在想怎樣可以儘量不修課用最多功能
+13:51:07 <_13h> 遲交可以自動驗證，但驗證完只能看 raw score，網頁顯示出來的會是 0/100 XD
+13:51:38 <hychen> 所以他為什麼是真?
+13:51:52 <b4283> so why is it True?
+13:51:52 <hychen> favonia, 你現在是半夜了吧? XD
+13:51:57 <_13h> 我現在也還沒開始看教學影片啊，所以寫作業寫得有點辛苦，要想一下哪些語法不能用XD
+13:52:45 <_13h> 其實我沒仔細想耶，只是寫出來的結果碰巧就是 true XD
+13:53:01 <hychen> that since the list is empty the mismatch is impossible and since we have only two choices (true or false) it must be true.
+13:53:09 <hychen> 有人的回答是這樣
+13:53:13 <hychen> https://www.facebook.com/groups/languageprogramming/
+13:53:22 <hychen> the study group in facebook.
+13:54:31 <b4283> Either Bool
+13:54:33 <favonia> _13h: 可惡不能用啊
+13:54:34 <_13h> hychen: peer assessment 會看到答案，所以我現在只好在寫完之前先不去做 peer assessment... 但忘了做又會被扣分 20%... 分數都已經夠低了XD
+13:54:42 <favonia> 氣死人了...
+13:54:48 <favonia> 沒辦法上傳
+13:55:23 <hychen> 我覺得這回答很奇怪, 為什麼可以說是true..
+13:55:59 <_13h> favonia: 可以上傳吧？
+13:56:05 <_13h> 我連第一週的都傳上去了
+13:56:14 <favonia> _13h: 看來他討厭我
+13:56:29 <_13h> 也有分數，只是不給傳 peer assessment 而已
+13:56:57 <_13h> 你是傳 programming assignment 那邊嗎？
+13:57:11 <favonia> 喔喔
+13:57:17 <hychen> favonia, 你的xmonad有什麼特異功能嗎?
+13:57:32 <favonia> 可以瞬間 suspend
+13:57:40 <favonia> 多加一個 layout
+13:57:45 <favonia> 可以靜音
+13:57:48 <favonia> 還有啥我忘了
+13:57:57 <hychen> 我有用gnome config
+13:58:23 <hychen> https://github.com/hychen/.xmonad/blob/master/xmonad.hs
+13:58:26 <hychen> 我目前的config
+13:58:45 <favonia> hychen: 我把 gnome 的東西能拔就拔
+13:58:59 <hychen> 我不行... 工作上會用到....
+13:59:26 <favonia> hychen: 工作上會用到什麼？！？！
+13:59:42 <hychen> 要debug時比較方便
+14:00:08 <favonia> 好吧
+14:00:15 <hychen> 我在canonical工作, 常常要修bug
+14:00:22 <favonia> 喔喔喔喔
+14:00:27 <favonia> 這樣很合理
+14:00:29 <favonia> 啊不對
+14:00:30 <hychen> 要不然我是很嫌棄 gnome 的東西啟動很慢...
+14:00:32 <favonia> 不合理啊
+14:00:38 <favonia> compiz 壞掉怎麼辦
+14:00:44 <_13h> hychen: 你有用過 awesome 嗎? 想瞭解一下兩個相比有什麼不同?
+14:00:57 <hychen> favonia, 這...就別提了 (遮臉)
+14:01:19 <_13h> awesome 處理 workspace 也蠻方便的
+14:01:25 <favonia> _13h: 一個用 Haskell 寫的比較酷，一個不是所以比較不酷，大概就這樣（END）
+14:01:27 <hychen> _13h, 我討厭LUA
+14:01:31 <hychen> _13h, END.
+14:01:38 <_13h> XDXD
+14:01:41 <favonia> hychen: 你比我更誇張 xDDD
+14:01:48 <hychen> _13h, haskell 的gnome support 比 awesome 好
+14:01:53 <hychen> _13h,  at least in Ubuntu.
+14:02:25 <_13h> 喔  可是我不喜歡 gnome XD  這樣對我來說沒什麼吸引力XD
+14:02:40 <hychen> _13h, session manage 還是滿重要的
+14:03:01 <favonia> gnome 不存在！！！！！
+14:03:06 <_13h> 我這麼多年都沒用到，對我來說應該不太重要XD
+14:03:07 <hychen> _13h, GTK based的整合度比較高
+14:03:19 <_13h> 對啊.. gnome 早就死了XD
+14:03:19 <hychen> _13h, 應該這樣說比較準
+14:03:22 <favonia> 我用 xfce 的東西就好
+14:03:45 <favonia> xfce 是 gtk 少數可以信賴的清流～
+14:03:55 <hychen> _13h, 我覺得awesome 3 走火入魔了
+14:04:07 <hychen> _13h, config 檔太複雜
+14:04:11 <favonia> （相對於 gnome 本身）
+14:04:15 <_13h> xfce 不錯，但我覺得有點笨重，好像快步上 gnome 後塵了
+14:04:39 <favonia> _13h: 如果真的發生這種糟糕的事情，只好再另起爐灶了
+14:04:42 <hychen> 其實我只有用xmonad + gnome2-bar 而已
+14:04:57 <hychen> launcher 是用gnome-do
+14:05:06 <_13h> 我覺得 awesome3 不是複雜，而是本身太有彈性了吧? 全部都靠 lua 建構出來，爛掉很難處理
+14:05:55 <_13h> 我的系統還有留一個 xfce 備用，但 fvwm 一直不爛掉，所以 xfce 裝好後只啟動過幾次吧XD
+14:05:56 <hychen> config 檔裡面看到 for... 我就不是很舒服啊
+14:06:28 <favonia> _13h: 我問一下... 到底是有彈性到什麼地步？
+14:06:51 <_13h> 不想看到 for 應該可以封裝到其他地方XD 不過我很久沒用 awesome 3，不確定現在長什麼樣子
+14:08:21 <_13h> 印象中就像 emacs 那樣可以亂搞，給你一堆 wm 的基礎函式，靠設定檔組裝出完整的 wm
+14:08:39 <_13h> 沒有好的設定檔會很難用
+14:09:11 <favonia> _13h: 喔看來還是 xmonad 勝（就算扣掉 Haskell 很外星人這點）
+14:09:48 <favonia> 其實我沒用過 awesome 剛才的比較都是亂打的 xD
+14:10:00 <_13h> 我最後沒用 awesome 的原因是我的鍵盤沒有 mod4 很麻煩，已經找不到能用的空鍵可以分給 mod4 了
+14:11:37 <hychen> https://github.com/romockee/powerarrow/blob/master/rc.lua
+14:11:45 <hychen> 這才是外星人... XD
+14:12:21 <favonia> 天啊
+14:12:39 <favonia> hychen: 我想我暫時不會想用 awesome
+14:12:39 <_13h> rc.lua 要當作整個 wm 程式的 main module
+14:13:18 <_13h> 也可以全部封裝起來，丟到其他檔案再 require 吧，不用全部塞到同一個檔案裡
+14:13:28 <hychen> 都一樣啦
+14:13:36 <favonia> _13h: 我覺得有根本上的問題
+14:13:45 <favonia> 不是切開組合可以解決的
+14:13:54 <_13h> 嗯，怎麼說？
+14:14:35 <favonia> _13h: 我的美感告訴我這很醜，讓我想一下比較理性的理由...。
+14:14:42 <hychen> end太多..
+14:14:47 <hychen> 這是非常理性的理由
+14:15:16 <_13h> hychen: 那只是為你討厭 lua 吧XD
+14:15:38 <hychen> 我討厭的其實是在config檔裡面implement 太多logic
+14:15:39 <favonia> _13h: "if awesome.startup_errors then" 這實在太醜了...
+14:15:43 <_13h> 不過我不討厭 end 就是，我覺得有始有終很不錯XD
+14:16:01 <hychen> favonia, 還有宣告local variable...
+14:17:05 <favonia> _13h: 我想 "mytasklist.buttons =" 那邊比較醜
+14:17:38 <favonia> 啊我反悔了
+14:17:46 <favonia> 後面好像比較醜
+14:18:10 <_13h> 怎麼感覺都是對語法設計很不滿意XD 我對 lua 是沒什麼愛，但對於這種設計覺得還不錯，設定檔就是 main module
+14:19:24 <favonia> _13h: 可是這個特性沒有意義啊
+14:19:28 <favonia> 因為大家都一樣
+14:20:07 <_13h> 你是說 rc.lua 的內容都一樣嗎？還是指這個設計？
+14:21:11 <_13h> 我記得剛裝起來的時候，連執行都失敗，後來才知道要有 rc.lua，然後從最基本的功能開始慢慢加上去
+14:24:23 <_13h> 我看了一下 xmonad.hs，作法跟 awesome 相比，除了語法變成 haskell 之外好像差不多?
+14:26:39 <favonia> _13h: 所以只能比較程式語言啦
+14:28:50 <_13h> 喔  如果只是語法部份，我也覺得 haskell 是比較好一點啦
+14:29:31 <b4283> 用個 wm 還要寫一堆太累了吧
+14:29:57 <b4283> 我最多是把所有視窗相關 hotkeys bind 到 mod4 而已...
+14:29:59 <_13h> b4283: 只是看要不要有預設的而已
+14:30:40 <_13h> b4283: 反正你也在用 emacs 不是嗎，過個幾年你的 .emacs.d 也會變成幾十 MB 的怪物
+14:31:09 <_13h> 其他人看到就會說，我只是要打個字幹嘛得先寫一堆程式XD
+14:31:35 <favonia> b4283: xmonad 只要三行就可以做完你講的事情 xDDD
+14:31:39 <favonia> 來用吧來用吧
+14:34:37 <favonia> xD
+14:44:51 <b4283> XD
+14:45:05 <b4283> 我的 .emacs.d 目前 2.0M
+14:48:25 <_13h> b4283: 我的 51..不過可能要扣掉幾個 tarball，先算一半吧
+14:49:13 <favonia> _13h: 看來我的 xmonad.hs 太小了
+14:49:49 <favonia> hychen: 剛看到這個： [ ((mod4Mask, xK_p), spawn "$HOME/scripts/yeganesh_run")
+14:50:02 <favonia> hychen: 我換成 yeganesh
+14:50:26 <favonia> 原本預設是其他程式的樣子
+15:01:04 <favonia> _13h: 我會努力寫出 51MB 的 Haskell 程式（搞錯重點）
+15:03:20 <hychen> super+p 我的沒作用
+15:03:37 <favonia> 因為你沒有裝吧（？）
+15:03:37 <hychen> 因為 it is a video out event
+15:03:49 <hychen> already handled by gnome-settings-daemon
+15:04:12 <favonia> lol
+15:04:19 <favonia> pkill gnome
+15:04:20 <hychen> 因為微軟叫bios送super+p的key event作為videout
+15:04:27 <hychen> it is not gnome's fault
+15:04:34 <favonia> 喔
+15:04:34 <hychen> it is MS's fault
+15:04:47 <favonia> pkill microsoft -9
+15:05:02 <hychen> 從windows7之後的電腦都這樣
+15:09:16 <favonia> rm windows7 -rf
+15:17:29 <favonia> hychen: 那就換別的吧，反正重點是 peganesh
+15:17:33 <favonia> yeganesh
+15:17:50 <_13h> favonia: 你把剛剛那個 rc.lua 塞進去應該就有了?
+15:18:15 <favonia> _13h: system("lua rc.lua") 這樣嗎
+15:24:01 <favonia> hychen: 我還有用 fullscreenEventHook
+15:32:30 <hychen> 拿來作什麼?
+15:35:04 <favonia> hychen: 因為我有擺 xmobar
+15:35:10 <favonia> 這個會真的全螢幕
+16:07:10 <CindyLinz> favonia: 是 source 就 51MB 嗎.. (驚)
+17:42:07 <_13h> hychen: 寫完了，但還是只有 18 分XD
+17:42:34 <_13h> 前兩次那麼簡單竟然沒拿到分數XD
+21:39:20 <b4283> functor 這章我看到迷路了，跟本不知道他在講啥 @@
+21:40:12 <b4283> 把 (++) 1 2 變成 (++) <*> Just 1 <*> Just 2 有啥好處呢？
+21:40:38 <b4283> (++) 應該是 (+) XD
+21:42:35 <b4283> 我還沒注意看呢
+21:42:51 <b4283> > (+) <$> Just 1 <*> Just 2
+21:42:53 <lambdabot>   Just 3
+21:43:33 <letoh> 包裹版的 + ?
+21:43:54 <b4283> 我想到的用處是把部分的程式邏輯寫在 type declaration 裡面 ...
+21:44:07 <b4283> instance declaration
+21:46:59 <b4283> 文字上一個比較微微有點不順的地方是常常會看到「一個 functors」這種句子
+21:48:29 <letoh> 很多地方都想改...
+21:48:46 <letoh> 但現在有繁簡版，改了以後簡中版應該會變很怪
+21:59:21 <favonia> 學維基百科xD
+22:05:41 <CindyLinz> b4283: 它舉比較簡單的例子, 簡單到沒意義了 ^^|
+22:06:19 <letoh> 這時候就要改看 real world - ?
+22:13:24 <letoh> nested pattern matching 是比較好的寫法嗎  完全搞不懂這標準在哪XD
+22:14:36 <favonia> letoh: 寫程式是創作，好看是藝術，這是需要品味的 xD
+22:15:11 <letoh> 對不起XD
+22:15:50 <letoh> 那個評分準則說 auto-grade 可以抓到語法限制，說不要重複扣分
+22:16:31 <letoh> 但抓不出沒用 nested patten matching，所以看到沒用的話可以扣分
+22:16:43 <CindyLinz> b4283: 我今天在看 HaskellDB, 裡面拼出 Query 的方式算是一個還不錯的例子
+22:17:25 <letoh> favonia: 我覺得 nested 越多層  要一直縮排耶  很煩
+22:18:05 <letoh> 程式很容易就超出 80 columns
+22:20:10 <favonia> letoh: 感覺好無聊的限制 \o/ 是作業規定要寫嗎
+22:20:58 <letoh> 就好像是第二週只教了這個，所以強迫練習，不能用 hd tl null isSome 這些東西
+22:21:57 <favonia> 喔
+22:23:13 <CindyLinz> b4283: 在 Query 裡面寫的運算式, 都不是要當場直接算出來的, 是要生成 SQL 送到 DB 裡面跑的
+22:24:03 <CindyLinz> b4283: 它是個 Functor, 所以可以 fmap 我們平日常見的函數進去
+22:24:35 <CindyLinz> 像是... fmap not (某 Query Bool)
+22:26:35 <favonia> b4283: 是例子太無聊吧
+22:26:54 <favonia> > (+) <$> [1,2,3] <*> [10,20]
+22:26:55 <lambdabot>   [11,21,12,22,13,23]
+22:28:23 <favonia> 原本 (+) 只能弄一項，現在可以 "lift" 到更複雜的東西上去
+22:28:43 <favonia> 也不一定更"複雜"
+22:28:55 <favonia> 希望你了解我的意思 lol
+22:29:29 <favonia> 你可以試試看 lines <$> readFile "xxx"
+22:30:17 <letoh> <$> 好像有個人兩手插腰
+22:31:49 <favonia> <*> 是托球
+22:32:17 <favonia> or... 抱頭崩潰樣 xD
+22:32:29 <letoh> 都冒星了啦
+22:34:10 <CindyLinz> b4283: 嗯, 所以它定義 Query 的時候, 就只要定義它裡面最基本的 Entity (像是 DB 的欄位, DB 用的 constant), 然後它們之間要怎麼組合運算, 就不用定義了, 原本可以 apply 在 Int / String /Bool 的函數通通都可以用
+22:36:42 <favonia> > take n $ (/)(cycle[1,-1])[1,3,..]
+22:36:43 <lambdabot>   <hint>:1:31: parse error on input `..'
+22:36:49 <favonia> > take n $ (/)(cycle[1,-1])[1,3..]
+22:36:51 <lambdabot>   Couldn't match expected type `GHC.Types.Int'
+22:36:52 <lambdabot>              with actual type ...
+22:38:31 <favonia> 嗯讓我想一下...
+22:39:11 <letoh> 為什麼有人可以寫出跟標準答案幾乎一樣的東西...<*>
+22:40:39 <favonia> 算了... lol
+22:40:44 <favonia> letoh: <*>
+22:43:00 <letoh> "Remember that you are grading them on general style, not how close to the sample solution their solution is."
+22:44:51 <b4283> CindyLinz: favonia: 謝謝兩位指點
+22:45:10 <b4283> CindyLinz: 看了你說的我明白書裡面一直強調 context 是什麼意思了
+22:46:14 <b4283> favonia: 會變成 IO ("xxx\nxxx ...") 嗎？
+22:46:35 <CindyLinz> sorry 同時在跟人家講公事, 留言留得支離破碎的 ^^|
+22:46:58 <b4283> 喔，變成 list 了
+22:48:18 <b4283> IO [String]
+22:49:01 <b4283> CindyLinz: 不要緊啦 client 有變粗體 :D
+22:50:18 <b4283> cycle 這玩意好像可以拿來做 Ring
+23:06:07 <letoh> 唔  問一下 sml 語法，想在 list 最後塞東西有什麼好的寫法嗎? 我現在寫成 xs @ a :: []   感覺有點蠢
+23:08:24 <favonia> letoh: [a]
+23:08:55 <letoh> 我之前也試過  結果好像會有錯誤... 我再試試好了@_@
+23:09:09 <b4283> letoh: 你用哪款 sml ?
+23:09:16 <letoh> nj
+23:09:29 <b4283> 喔~
+23:09:41 <letoh> 有推薦的嗎?
+23:09:47 <letoh> 我不要 guile 喔
+23:10:15 <b4283> orz  問一下而已囉
+23:10:38 <letoh> 好像有看過 guile 的 sml languge module
+23:10:43 <favonia> mlton~
+23:10:51 <favonia> (亂推)
+23:11:02 <letoh> guile 跟 racket 都可以變身成其他語言
+23:11:16 <letoh> 喔喔... mlton 有看到
+23:11:22 <b4283> 好像 2.0 以後才有的
+23:11:33 <letoh> 對.. 1.8 還不行
+23:11:52 <favonia> letoh: 我不太相信耶... 一定沒有做完 typechecking
+23:12:09 <letoh> 應該吧  看到的都是 demo
+23:12:48 <favonia> 這樣沒啥意義啊（攤手）...
+23:13:58 <letoh> 但是有機會做完整啊
+23:15:54 <favonia> letoh: 網站在哪裡啊？我快速掃一下
+23:16:24 <letoh> sml 的嗎? 要找一下@_@ 以前沒特別留意 sml 的資訊，沒記下來
+23:17:10 <letoh> 是說 sml 有比 haskell 好學嗎? 還是因為我被荼毒過了才覺得 sml 好學? XD
+23:17:19 <favonia> 就像有數不清的「我也可以寫 Haskell」只是把 list comprehension 弄出來而已 \o/
+23:17:28 <letoh> 哈哈
+23:17:58 <favonia> 根本不是重點 orz Haskell 可以不要 list comprehension 還是有根本上的不一樣
+23:18:18 <favonia> 我不知道耶，懂了就懂了吧
+23:18:22 <b4283> 好久沒看到 list comprehension 了...
+23:18:27 <letoh> 是沒錯啦  只是一般都先強調某些特色啊
+23:18:35 <CindyLinz> 例如說.. library 的名字 H 字帶頭的特別多....
+23:18:57 <b4283> Hentai
+23:19:01 <letoh> ...
+23:19:13 <letoh> b4283: 你的大作嗎? (誤
+23:19:39 <b4283> 哈哈 *躲*
+23:20:07 <suhorng> HW2 的 peer review 嗎 XD
+23:20:19 <letoh> 嗯
+23:20:32 <letoh> 看到想哭... 為啥我會寫出那麼奇怪的答案XD
+23:21:53 <letoh> 那種 recursive call 前面還有傳回值的運算就不叫 tail call 了吧
+23:22:01 <letoh> 答案幾乎都這種寫法...
+23:22:02 <suhorng> 應該吧
+23:22:19 <suhorng> 沒有要求 tail recursion 的話應該不太需要?
+23:22:29 <favonia> letoh: 初學嘛... 就...
+23:22:30 <suhorng> 除非很要求空間或效率
+23:22:35 <letoh> 寫 tail recursion 比較自然吧?
+23:22:58 <suhorng> tail 有的要多加參數呀
+23:23:18 <suhorng> 如果說直接從 loop 去想的話應該是很容易 tail code XD
+23:23:19 <suhorng> *call
+23:23:32 <letoh> 是啊，所以說比較好寫XD
+23:24:04 <suhorng> 不過不這樣想的話 很容易想說非 tail recursion 的寫法
+23:24:20 <suhorng> 比如說 list 的話 就只考慮兩種情況
+23:24:38 <suhorng> [] 跟 _ :: _, i.e. constructors
+23:25:20 <suhorng> 然後考慮遇到 [] 要做什麼, 然後遇到 _ :: _ 要怎麼遞迴呼叫(像是歸納法)處理掉剩下來的答案, 再跟前面的合併
+23:25:22 <letoh> 我的寫法大概都是先寫個 helper function 用 tail call 做完所有的事再丟出答案
+23:25:33 <suhorng> 就很少是 tail recursion 了?
+23:25:59 <letoh> 嗯  我還在想說為什麼都沒人遇到在 list 後面塞資料的問題@_@
+23:26:25 <suhorng> 我剛剛評到一份 code 就是在後面塞東西 XD
+23:26:37 <letoh> 該不會是我的吧XD
+23:26:40 <suhorng> 大概因為順著 list 的形狀下去寫比較容易吧?
+23:26:50 <suhorng> 應該不是 因為他寫 acc @ [h]
+23:27:15 <letoh> 話說回來  有規定檔案內不能留名字嗎? 我好像有留我的名字XD
+23:27:30 <letoh> 不是我的... 我沒用到 acc 這個名字
+23:27:42 <letoh> 可是我有 h (遮臉
+23:28:06 <favonia> letoh: 你可以用 _123h 這樣別人就看不出來是 _13h 了
+23:28:10 <suhorng> XDDD
+23:28:16 <letoh> XDXD
+23:28:31 <letoh> 突然想到金田一二三XD
+23:28:45 <suhorng> 話說 officiate 整個就超迴圈的...
+23:28:53 <suhorng> 解答自己也一堆 fun loop ... 呀 XDD
+23:29:06 <letoh> 我用兩個 case
+23:30:31 <letoh> 咦  我又多一題跟答案一樣了XD officiate 的答案也是兩個 case
+23:30:50 <suhorng> 哈哈
+23:31:26 <letoh> 可是答案沒有保證順序耶  好怪...
+23:32:09 <letoh> 只用 :: 串起來  這樣會對嗎? 我以為要保證順序只好都照著原順序接
+23:32:55 <suhorng> 哪一題的答案?
+23:33:08 <suhorng> 我猜題目沒特別指定(順序)的話, autograder 應該會特別檢查
+23:33:09 <letoh> officiate
+23:33:29 <letoh> 我丟 autograde 是拿到 100/100
+23:33:45 <letoh> (但因為遲交所以實際只有 18/100 XD)
+23:33:51 <suhorng> 哪個部份有參數問題呀?
+23:34:01 <suhorng> 扣滿重>< 我也是遲交
+23:34:12 <suhorng> * 順序問題
+23:35:26 <letoh> 重看了一次題目，有特別說 list order does not matter unless specifically stated XD
+23:35:35 <suhorng> 恩
+23:36:15 <suhorng> 雖然還是不太懂 _::_ 哪裡有順序問題@@
+23:36:30 <letoh> 抽牌的時候
+23:36:30 <suhorng> hw3 的 challenging problem 我看不太懂orz
+23:36:40 <suhorng> 抽排不是就固定抽最前面的嗎?
+23:36:50 <letoh> 牌要放到手上的第一張還是最後一張
+23:36:59 <letoh> 不過想了一下好像根本沒差XD
+23:37:14 <suhorng> 對呀 XDDD 抽到後牌放哪沒差
+23:37:17 <letoh> 唔  不一定  要看 move
+23:37:22 <suhorng> 喔~
+23:37:26 <suhorng> Discard 原來如此
+23:37:26 <letoh> 萬一 move 很少呢?
+23:37:41 <letoh> Discard 的結果就會受影響了
+23:37:53 <suhorng> 除非說他能保證沒有重複才行
+23:37:54 <letoh> move 用完也算 end 不是嗎?
+23:37:57 <suhorng> 對呀
+23:38:07 <letoh> 但 remove_card 允許重複啊
+23:38:14 <letoh> 只抽第一張
+23:38:28 <letoh> 這樣會影響 score 結果吧@_@
+23:38:33 <suhorng> 嗯 重複會有問題
+23:38:48 <letoh> 好吧.. test case 沒那麼嚴謹XD
+23:39:08 <suhorng> 說到他的 test case
+23:39:36 <suhorng> HW1 我寫 (#1 date1 < #1 date2) orelse (#2 date1 < #2 date2) orelse (#3 date1 < #3 date2)
+23:39:40 <suhorng> 結果竟然 100/100
+23:39:54 <letoh> hw1 有什麼限制嗎?
+23:40:08 <letoh> is_older 那一題?
+23:40:12 <suhorng> 那邊在比年份, 照理說應該
+23:40:28 <suhorng> 對對 照理說後面應該 (#1 date1 = #2 date2 andalso #2 date2 < #2 date2) orelse ...
+23:40:33 <letoh> 對啊
+23:40:41 <letoh> 剛剛才想說漏掉一堆條件
+23:40:44 <suhorng> 錯得很離譜不過還是過了..
+23:40:52 <letoh> 我自己的測試有測到這種情況
+23:42:28 <letoh> suhorng: 我覺得寫 test code 花的時間還比較多XD
+23:42:35 <suhorng> 真的 XDD
+23:42:45 <suhorng> 後來就懶了(抹臉)
+23:42:51 <letoh> 我也是XD
+23:44:03 <favonia> letoh: 你們沒有教 record 嗎
+23:44:11 <favonia> 不是應該要寫 #year 之類的
+23:44:15 <letoh> 我根本沒上課  不要問我XD
+23:44:19 <favonia> #1 誰知道是什麼
+23:44:19 <letoh> 喔  這個禁用
+23:44:26 <letoh> #foo 不能用
+23:44:51 <suhorng> #1, #2, #3 那題是因為題目給的 type 限定是 typle
+23:44:53 <suhorng> *tuple
+23:45:01 <suhorng> 又不能用 pattern matching (in week 1)
+23:45:12 <favonia> o_O
+23:45:14 <favonia> 好吧
+23:45:20 <letoh> 我只是先找了個語法的 cheatsheet 就開始寫作業了XD
+23:45:24 <suhorng> 後來都 record & pattern matching
+23:45:34 <favonia> > let o_O = undefined in o_O
+23:45:36 <lambdabot>   *Exception: Prelude.undefined
+23:46:24 <letoh> record type 搞了我好久才成功踹出 pattern matching 語法...
+23:46:52 <suhorng> 每週的 reading notes 可以快速查
+23:46:52 <letoh> 還有產生資料的語法  原本以為 {a,b,c} 就好了  搞半天一直有錯誤
+23:46:56 <suhorng> XDD
+23:47:08 <letoh> 我剛剛才知道有那種東西XD
+23:47:46 <letoh> (所以說上課還是要認真一點XD)
+23:48:43 <suhorng> 後面可能會比較複雜？（我不會 Ruby ... )
+23:48:58 <letoh> 我也不會  但是可以亂改XD
+23:50:07 <suhorng> favonia: 偷偷問, Agda 一定是跟 Emacs 的嗎？
+23:50:54 <favonia> suhorng: 是也不是。你堅持的話用記事本也可以。
+23:52:09 <CindyLinz> suhorng: 只是不用 Emacs 會痛不欲生
+23:52:45 <letoh> 其他 editor 為什麼不行?
+23:53:08 <suhorng> 因為互動的關係嗎？
+23:53:09 <favonia> letoh: 我用 vim xD
+23:53:18 <letoh> vim++
+23:53:35 <favonia> letoh: 但他有為 emacs 做很多事情
+23:54:14 <letoh> 嗯  但應該會有人幫 vim 寫一套 addon 吧?
+23:54:21 <favonia> 很難～
+23:54:37 <favonia> 大概要有人寫 OpenAgda 才比較容易
+23:54:46 <favonia> 沒有定好用的 API 根本很難寫
+23:55:08 <letoh> 所以是特製的接口?
+23:55:10 <CindyLinz> suhorng: 因為寫證明很難, 需要 Emacs 幫你寫 XD
+23:55:25 <favonia> letoh: 半特製
+23:55:29 <letoh> 嗯嗯
+23:55:39 <favonia> letoh: 在惡搞面前，沒有不可能，只有沒時間 xD
+23:55:40 <suhorng> 認真學基礎的 emacs 好了..
+23:55:45 <letoh> ... 我剛剛看到全小寫的 nick 就認不出來了...
+23:56:00 <CindyLinz> XD
+23:56:11 <letoh> 我是認形狀的...
+23:56:32 <letoh> 一堆英文字擠在一起哪看得清楚寫啥啊XD
+23:56:38 <favonia> letoh: Favonia FaVoNiA FAVONIA fAVONIA
+23:56:41 <favonia> letoh: Favonia FaVoNiA FAVONIA fAVONIA
+23:56:43 <suhorng> 這也算 pattern matching 嗎 /o/
+23:56:45 <CindyLinz> letoh: 那你千萬不要寫 Agda.. XD
+23:56:46 <favonia> letoh: Favonia FaVoNiA FAVONIA fAVONIA
+23:56:47 <letoh> suhorng: 那你作業也都用 vim ?
+23:57:06 <letoh> favonia: 不要干擾我啦  眼睛都花了XD
+23:57:15 <suhorng> 我作業用 Notepad++, Windows 上沒有調習慣的 vim 環境
+23:57:16 <CindyLinz> letoh: 我看寫 Agda code 除了英文大小寫以外, 還喜歡用一堆全型字花體字什麼的.. XD
+23:57:37 <letoh> CindyLinz: 不要大小寫變來變去就沒問題
+23:57:38 <suhorng> CindyLinz: 我覺得 Agda 的函式名字那麼自由好酷
+23:58:03 <suhorng> 這理由好像滿爛的 XDD
+23:58:04 <CindyLinz> suhorng: Windows 上面用 Virtual Box 裡面裝 debian / ubuntu 裡面的 vim... :D
+23:58:16 <letoh> suhorng: 不會啊  我就是因為這樣才喜歡 forth XD
+23:58:50 <suhorng> 我有在 VM 裡裝 debian 呀 XDDD
+23:58:54 <letoh> 除了空白以外都可以當名字很棒
+23:58:59 <favonia> CindyLinz: rm windows -rf; cp linux .
+23:59:07 <CindyLinz> suhorng: 我很喜歡 Agda 的 _or_ 的這種函數定義方式
+23:59:20 <CindyLinz> favonia: 你不可以否定前提啊 XDD
+23:59:30 <suhorng> 可以由一堆奇怪符號 下標之類很神奇 o_O

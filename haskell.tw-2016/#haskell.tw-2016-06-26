@@ -1,0 +1,43 @@
+18:12:53 <CindyLinz> 正在練習 pattern synonym 實用起來的感覺..
+18:13:09 <CindyLinz> 正在培養自己使用 pattern synonym 的 pattern.. XD
+18:20:23 <CindyLinz> 可以消除 newtype 以後每次都要多打一層 data constructor 的不方便
+18:20:32 <CindyLinz> 會更 encourage 使用 newtype ^^
+20:00:54 <pkmx> 我都直接用 bidir pattern synonym 取代 newtype ctor 了 XD
+20:32:35 <CindyLinz> 那樣會沒有 type check 的效果啊
+20:58:42 <pkmx> 應該不應該說取代 就是和你講的一樣可以少打一層 ctor
+20:59:13 <pkmx> 原本 newtype A = A B 變成 newtype A = A' B ; pattern A x0 x1 ... = A' (B x0 x1 ...)
+21:03:35 <CindyLinz> 嗯嗯嗯..
+21:03:55 <CindyLinz> 我就是這樣弄 ^^
+21:04:16 <CindyLinz> 不過剛剛遇到一個沒辦法 pattern match 的.. 只好退回去用 smart constructor... @@"
+21:04:47 <CindyLinz> monochrom: 剛剛改用 ghc 8.0 以後, 我的 instance Monoid (IO ()) 出 error 了
+21:05:03 <CindyLinz> 因為 ghc 8.0 有 instance Monoid a => Monoid (IO a) -- Defined in ‘GHC.Base’, 已經定好了 XD
+21:19:42 <pkmx> 之前有遇到一個超級適合使用 pattern synonym 的 case ...
+21:20:13 <pkmx> 就是 hexgrid 的 cube coord: (x, y, z), x + y + z = 0
+21:20:32 <pkmx> 可是我只想存兩個數字 因為 z 可以算 z = -(x + y)
+21:21:39 <pkmx> 所以就寫成 newtype HexCoord = HexCoord' (V2 Int)
+21:21:53 <pkmx> pattern HexCoord x y = HexCoord' (V2 x y)
+21:22:56 <pkmx> pattern HexCoord x y z <- ((\(HexCoord x y) -> (x, y, -(x + y))) -> (x, y, z))
+21:23:22 <pkmx> pattern HexCoordZ x y z <- ((\(HexCoord x y) -> (x, y, -(x + y))) -> (x, y, z)) -- 這樣才對...
+21:23:45 <pkmx> 這樣如果需要 z 的話 pattern 的地方就寫 HexCoordZ 拿到的 z 就會是正確的 XD
+21:55:54 <CindyLinz> z 欄位是一種... cache 意味的存在?
+21:56:20 <CindyLinz> 欸不對, 沒有 z 欄位 XD
+21:58:40 <CindyLinz> 我昨天在弄圓椎曲線.. 想放兩組欄位, 各是一種表示法: 其中一組是 Axx + Bxy + Cyy + Dx + Ey + F = 0 的係數; 另一組是根據它的分類 (楕圓或雙曲或拋物) 的 Sum type, 裡面放對稱中心軸長與斜放角度等等
+21:59:35 <CindyLinz> 存入的時候可以指定其中一組, 取出的時候也可以取其中一組.. 如果剛好存入與取出用的是同一組, 就不用計算另一組
+22:00:12 <CindyLinz> 但是圓椎曲線轉軸移轉式子好複雜.. 目前狀態為放棄w
+22:00:18 <CindyLinz> 轉軸移軸
+22:02:19 <pkmx> 這個問題 haskell 幫不了你 XD"
+22:10:29 <CindyLinz> 改使用近似版的貝茲曲線 :Q
+22:14:49 <CindyLinz> 分享屍塊www # https://github.com/CindyLinz/Haskell-HVG/blob/conic_sections/src/HVG/Geometry.hs
+23:32:26 <monochrom> CindyLinz: GHC 8 定的, 是否做到你想的?
+23:40:08 <CindyLinz> monochrom: 剛好包含了啊 XD
+23:40:27 <monochrom> 咁就好了!
+23:45:03 <petercommand> 我猜應該只可能是 ioAct1 <> ioAct2 = ioAct1 >> ioAct2 ?
+23:45:59 <CindyLinz> GHC8 的是 monoid.. 所以我覺得應該會把結果 mappend 起來
+23:46:10 <CindyLinz> 只是我用的是 () 所以有沒有 mappend 沒差
+23:46:38 <petercommand> 喔喔..對，所以應該是類似 sequence 的效果
+23:46:41 <petercommand> :t sequence
+23:46:42 <lambdabot> (Monad m, Traversable t) => t (m a) -> m (t a)
+23:49:03 <petercommand> 阿，不會，這個結果不會合在一起
+23:49:13 <petercommand> *不對
+23:51:57 <CindyLinz> 一定要有個有 Monoid 的東西才行 XD
+23:52:56 <CindyLinz> 可是 GHC8 怎麼就任意幫人家選擇要左結合還是右結合了呢... ._.

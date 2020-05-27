@@ -1,0 +1,24 @@
+18:50:28 <CindyLinz> 原來 a $ b 也可以寫成 a `id` b
+18:50:49 <CindyLinz> 剛看著 EdwardK 的 code 裡面用到 flip id 覺得疑惑
+18:51:07 <CindyLinz> type 一下發現跟 (&) = flip ($) 長得一樣...
+18:51:32 <CindyLinz> 發現 id 的 type 根本是 ($) 的 generalize
+18:58:40 <CindyLinz> > 2.0 `id` sqrt 
+18:58:42 <lambdabot>      Could not deduce (Floating a0)
+18:58:43 <lambdabot>      from the context (Floating a, Fractional ((a -> a) -> t))
+18:58:43 <lambdabot>        bound by the inferred type for ‘e_120’:
+18:58:52 <CindyLinz> > (2.0 :: Float) `id` sqrt 
+18:58:55 <lambdabot>      Couldn't match expected type ‘(Double -> Double) -> t’
+18:58:55 <lambdabot>                  with actual type ‘Float’
+18:58:55 <lambdabot>      In the first argument of ‘id’, namely ‘(2.0 :: Float)’
+18:59:10 <CindyLinz> > sqrt `id` 2.0
+18:59:12 <lambdabot>  1.4142135623730951
+18:59:18 <CindyLinz> (寫反惹 XD)
+19:24:58 <b4283> 1.414 意思意思
+19:25:18 <b4283> 1.732 一妻三兒
+19:25:45 <b4283> > sqrt 3
+19:25:47 <lambdabot>  1.7320508075688772
+19:30:04 <suhorng> XDDD 我以前也寫過 flip id, 後來覺得太隱晦....
+19:32:53 <suhorng> 說來這應該算 η-expansion? λf. f 變 λf. λx. f x
+20:26:28 <CindyLinz> EdwardK 是用在 flip id <$> a <*> f
+20:26:53 <CindyLinz> 也許他覺得 flip ($) <$> a <*> f 要多打一個字 (?
+20:27:42 <CindyLinz> 不過... 別處的跡象顯示他是一個喜歡拿 pure 代替 ([]) 的人, 所以拿 id 代替 ($) 可能也只是剛好.... /_\

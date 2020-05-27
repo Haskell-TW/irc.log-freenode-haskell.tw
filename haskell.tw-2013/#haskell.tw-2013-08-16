@@ -1,0 +1,293 @@
+00:24:46 <monochrom> 我認為: 做學生時, 或滿足好奇心時, 應該追問符號規則有甚麼意義, 為甚麼要接受這些規則. 但應用時, 應該用符號規則, 別想太多. 你可以在應用時仍想太多, 仍追問意義, 但效率太低, 自己疲勞轟炸自己.
+00:41:26 <hashcat> 無義之義乃大義
+00:42:36 <hashcat> 有物混成, 先天地生, 寂兮寥兮
+00:43:03 <hashcat> 現在看來貌似是符號先天地生 -v-
+06:05:23 <favonia> monochrom: hmm... 以符號為基礎的研究方法不一定比較簡單，也不代表不去思考為什麼要接受吧。我覺得這比較像是研究方法不同。
+06:07:49 <favonia> monochrom: 像 Homotopy Type Theory 一大 open problem 就是符號取向的 consistency 證明
+09:49:56 <Yu-Lin> 打太順手，把 python dict 的 : 打成 ::
+10:01:36 <favonia> Yu-Lin: SML 和 Haskell 的 :: 和 : 相反才是最讓人崩潰的... xDDD
+10:03:11 <Yu-Lin> SML 沒碰過XD
+10:04:55 <favonia> Yu-Lin: 就不要搞混來說... 也許只學一個最好（誤）
+10:05:49 <Yu-Lin> 幸好不是說不要學程式比較好XD
+10:06:48 <Yu-Lin> 話說 haskell 的 house 停了，沒有其他 haskell os 專案了？
+10:07:52 <monochrom> haskell "f [] = 0; f (x:xs) = 1" => SML "fun f [] = 0 | f (x::xs) = 1"
+10:08:30 <monochrom> haskell "f :: [a] -> Int" => SML "val f : 'a list -> int"
+10:10:56 <monochrom> 第二句只是大約. 因為 SML 的 "val f : 'a list -> int" 不會與 f 的定義寫在一起. 是另覓地方寫的 (寫在 module signature 那裏)
+10:53:44 <favonia> monochrom: 我還以為你要說 call-by-name/need xDDDDD
+10:54:13 <monochrom> haha
+11:10:49 <favonia> monochrom: 分開寫根本沒差吧。反正 SML 可以寫 fun f (x : 'a list) : int = ...
+11:11:58 <monochrom> 也對
+11:25:29 <CindyLinz> 覺得 Haskell 的語法比 SML 要來得乾淨簡潔些? 還是我 Haskell 看得比較習慣比較順眼...
+11:27:08 <godfat1> 訂了《確定性的失落》，看了 mno2 這篇 http://pastebin.com/TK7nuXjw
+11:27:08 <godfat1> 覺得自己錯過很多有趣的數學呀
+11:27:38 <godfat1> 我比較喜歡 SML 用 : 而非 ::
+11:27:38 <godfat1> 其他方面的語法是比較喜歡 haskell
+11:28:43 <mno2> godfat1: 數學是填不完的坑 xD
+11:28:44 <CindyLinz> : :: 想想我應該也比較喜歡 SML 的.. 因為用在 type 的機會比較多, 用在 list 的時候常常會用 [ , , , ] 的方式來寫
+11:29:18 <CindyLinz> mno2: 原來這就是「不完備定理」講白了的解釋啊... XD # 11:28 < mno2> godfat1: 數學是填不完的坑 xD
+11:29:49 <godfat> mno2, 只好當作興趣消遣隨便看看了 ~.~
+11:29:49 <godfat> CindyLinz, 而且滿多語言都是用 : 表示 type
+11:29:49 <godfat> haskell 這邊反而跟別人都不一樣
+11:30:41 <CindyLinz> 為什麼要這樣呢.. 會不會 Haskell 最初發想的時候沒打算給人寫 Type? 等到決定要放 Type 進去的時候已經來不及了.. XDDD
+11:34:06 <godfat> 我聽說是原本認為 type inference 的關係 type 不需要常常寫，
+11:34:06 <godfat> 但我們會常常用 list, 所以就反過來了。結果最終事實還是原本那樣對 XDD
+11:34:45 <CindyLinz> 欸.. 你最後一句是不是寫反了? @@"
+11:35:10 <godfat> 我的意思是我們還是比較常寫 type 而非 list
+11:35:22 <CindyLinz> 嗯嗯嗯
+11:35:48 <godfat> 只是制定時以為應該是比較常寫 list 而非 type (聽說)
+11:36:09 <godfat> 話說回來啊，有時候真覺得我不該念數學，反正我念不動，但數學史好好玩 XDDD
+11:36:15 <CindyLinz> list 可能也是蠻常寫的啊.. 只是那時沒有 [ , , , ] 的寫法嗎? XD
+11:36:23 <godfat> 不清楚哩
+11:40:06 <suhorng> 很久很久以前IRC上有一篇 "python lambda is broken"
+11:40:20 <suhorng> 而C# http://blogs.msdn.com/b/ericlippert/archive/2009/11/12/closing-over-the-loop-variable-considered-harmful.aspx
+11:40:38 <suhorng> 重點: In C# 5, the loop variable of a foreach will be logically inside the loop, and therefore closures will close over a fresh copy of the variable each time.
+11:40:58 <suhorng> 不過 Python 大概還是無法改XD
+11:41:59 <CindyLinz> considered harmful 又出現了 XD
+11:42:11 <suhorng> lol
+11:44:05 <CindyLinz> 我用 javascript 也常在處理這個問題 @@"
+11:44:44 <CindyLinz> 有時候在既有的, 連續的, non-blocking 的程式中間安插一個 blocking call 的時候就會不小心冒出來鬧事....
+11:45:04 <suhorng> 大概是兩派的習慣不一樣....
+11:49:39 <CindyLinz> 我覺得這一派是錯的啊啊.. XD
+11:50:32 <CindyLinz> 覺得這等級就跟... 第一版 lisp 的 lambda 用 dynamic bind variable 是一樣的 XD
+11:51:00 <Yu-Lin> 好嚴重XD
+11:51:21 <suhorng> 用 dynamic scoping...XD
+11:51:26 <CindyLinz> perl 這部分倒是好的.. :p
+11:51:47 <CindyLinz> 欸, 我那樣說是因為這唯一理由是 favor 語言實作容易 :p
+11:52:22 <CindyLinz> 語言使用上, 應該沒有人有在怎樣利用這個特性吧 :Q
+11:53:38 <suhorng> 應該比較多是不經意踩到...
+11:54:04 <Yu-Lin> http://math.andrej.com/2009/04/09/pythons-lambda-is-broken/
+11:54:10 <Yu-Lin> 是說這篇嗎？
+11:54:16 <suhorng> https://news.ycombinator.com/item?id=554669 原來 Common Lisp 的 loop 也是用mutation嗎@@
+11:54:20 <suhorng> Yu-Lin: 對
+11:55:15 <godfat> 好多語言都是做成這樣，我也覺得這是錯的。不過我覺得這不是 lambda 的問題，而是 for loop 的問題。看起來那個 loop 裡的 var 不是 local 的...
+11:55:57 <CindyLinz> 應該算是 forloop..
+11:56:20 <godfat> ruby 用 for loop 的話也有這個問題，不過我完全沒在用 for loop, 剛剛為了測試還要查一下語法... 一般而言用 each method 則沒有問題，closure (取代 loop body) 本身的 var 都是 local 的
+11:56:25 <CindyLinz> local to the for loop, not the body of the for loop..
+11:56:53 <godfat> 對啊...
+11:56:59 <Yu-Lin> 先吃飯
+11:57:11 <godfat> C# 那篇說用 copy 感覺也怪怪的...
+11:57:35 <CindyLinz> 欸.. 你說的 for loop 是 for( ; ; ) 這種的, 由使用者自己控制 iterator 的才是.. 可是這邊 C# 看到的雖然是 for 這個字, 但其本質是 each 呀
+11:58:15 <godfat> ruby 的 each 是 method call, 這邊的 foreach 看起來不是？
+11:58:21 <godfat> 這邊是指 C#
+11:58:45 <godfat> each:
+11:58:45 <godfat> a = []
+11:58:45 <godfat> [0,1,2].each{ |i| a << lambda{ i } }
+11:58:45 <godfat> p a.map(&:call)
+11:58:47 <CindyLinz> 這邊的不是 method call.
+11:58:57 <godfat> for each:
+11:58:57 <godfat> a = []
+11:58:57 <godfat> for i in [0,1,2] do
+11:58:57 <godfat>   a << lambda{ i }
+11:58:57 <godfat> end
+11:58:58 <godfat> p a.map(&:call)
+11:59:06 <suhorng1> 真的
+11:59:21 <godfat> 所以我覺得是他 loop 展開的問題，不是 lambda/closure
+11:59:46 <suhorng1> C#把他當成syntactic sugar, 然後就展開的錯了吧?
+11:59:52 <CindyLinz> perl 的 for my $elem (@list) { ... } 也不是 method, 不過 $elem 可以視為每一個都是新的
+12:00:15 <godfat> 嗯嗯，總之應該是 loop 的實作問題
+12:00:15 <suhorng1> C++意外的沒這個問題因為他的lambda..(消音)
+12:00:32 <godfat> c++ 的 lambda 複雜到我不想看...
+12:01:11 <godfat> 不過老實講我滿意外很多語言的 loop 都有這個問題...
+12:01:11 <godfat> 看來 perl 比較厲害 XD
+12:02:53 <darkx> Perl++
+12:04:57 <monochrom> 總之 mutable variable 就是麻煩, 造閉包時包括它又死, 不包括它又死.
+12:05:32 <godfat> 我之前也有一個結論是這樣...
+12:05:54 <godfat> 變成一種有點弔詭的狀況
+12:09:22 <suhorng1> 我還是喜歡包含的XD 例如這種用法
+12:09:22 <suhorng1> (define make-counter
+12:09:22 <suhorng1>    (lambda ()
+12:09:22 <suhorng1>       (let [(val 0)]
+12:09:22 <suhorng1>          (lambda ()
+12:09:23 <suhorng1>             (set! val (+ val 1))
+12:09:23 <suhorng1>             val))))
+12:10:15 <suhorng1> 主要是什麼 syntactic sugar 展開時用不用 mutation...
+12:11:46 <monochrom> 而在 Haskell 及 SML 不覺兩難, 因為 (例如 Haskell) 你做完 "x <- readIORef v" 後, 你獲得兩個名, x 是不會變的那個, v 是會變的那個, 你想包哪個就只要選對名就行, 不會誤會
+12:12:28 <monochrom> 在 SML 就是 "val x = !v"
+12:12:30 <suhorng1> 該有 ref 的有 ref XD
+12:16:12 <suhorng1> 但是 Haskell 裡面把副作用結合起來好困難呀, 好想全部丟在 IO 下面...
+12:18:14 <monochrom> 我不介意 IO. 不過, 你若介意, 各款 ML 都不錯.
+12:19:15 <godfat> SML 是 pure 的嗎？既然有區分 IORef, 還是就只區分這個，還是可以隨意 print?
+12:19:35 <monochrom> SML 不 pure
+12:19:56 <godfat> 嗯..
+12:19:57 <suhorng1> SML區分的是 reference
+12:20:15 <suhorng1> http://www.ptt.cc/bbs/PLT/M.1325722303.A.2A4.html
+12:20:51 <monochrom> f () = !v.  f () 的值可以次次不同
+12:21:28 <suhorng1> 純粹是..丟在 IO 下面的話以後所有用到的程式碼都要丟到 IO 下面了, 不一定只是某個有功能的 monad
+12:24:23 <godfat> 嗯，debug 時比較方便 XD
+12:24:23 <godfat> 用 random 時也方便多了..
+12:26:03 <suhorng1> 其實 Haskell debug 有個後門 Debug.Trace 的說w
+12:26:13 <suhorng1> :t trace
+12:26:14 <lambdabot> Not in scope: `trace'
+12:27:09 <godfat> 前一陣子有在這個 irc 上見到 ~.~ 還沒用過就是了
+12:27:15 <suhorng1> 阿XD 總之 trace :: String -> a -> a, 例如 trace "Evaluating this thunk!" $ [1..]
+12:27:45 <godfat> 不過由於執行上的狀態，我懷疑那是否能看到我想看的 orz
+12:27:52 <suhorng1> XDD
+12:30:52 <monochrom> 你會看到 lazy evaluation 造成的有趣次序
+12:38:28 <godfat> 我之前是在 STM 裡面做 log, 另外用了一個 list, 再跑另一個 thread 讀出來印...
+12:53:23 <favonia> CindyLinz: Perl 的 scope 真的沒問題嗎？！ http://www.plover.com/FAQs/Namespaces.html
+12:58:52 <Yu-Lin> 以前用 Perl5 老是被 sub 搞死XD
+12:59:17 <monochrom> sub is subtle  XD
+13:00:27 <favonia> my creates a local variable. local doesn't.  xD
+13:03:16 <suhorng1> XDD
+13:07:43 <favonia> godfat: 你有空快去學 ML 啦。想要有乾淨理論就學 Standard ML. 想要有很多現成函式庫的就學 OCaml
+13:08:27 <favonia> godfat: 這樣就不用靠什麼詭異的 Debug...
+13:10:19 <godfat> favonia, XDDD 我電腦有灌 smlnj, 之前試的感覺是還不錯
+13:10:20 <godfat> 有機會再多試試 >_< 可能把一些 haskell 程式翻譯過去看看
+13:10:20 <godfat> ocaml 之前看都感覺怪怪的.... :/
+13:10:21 <Yu-Lin> 乾淨理論？
+13:10:59 <favonia> godfat: 我現在覺得 mlton 的實作比 smlnj 穩多了（都是 SML 的編譯器）
+13:11:31 <godfat> :D
+13:11:31 <godfat> 🍺  /usr/local/Cellar/mlton/20100608-1: 2818 files, 69M, built in 8 seconds
+13:12:03 <favonia> godfat: 上次遇到 smlnj 的 Word64 某部份竟然沒有實作 orz orz
+13:12:29 <favonia> 不過那個是不是語言本身我沒有查 xDD
+13:13:09 <favonia> Yu-Lin: SML 最酷的地方就是，目前在各種「實用」「流行」的語言中他幾乎是唯一有嚴謹定義的...
+13:13:41 <godfat> 也許 SML 本身沒定義這些「實用」的 type?
+13:13:48 <favonia> Yu-Lin: 其他頂多像 Haskell 這樣"小心"的寫下來，跟 Standard ML 那種還是有一大段差距
+13:13:54 <favonia> godfat: 我沒有查...
+13:14:54 <Yu-Lin> 我研究看看
+13:15:01 <godfat> 也許把 haskell monad 做出來可以算一種入門練習 XDD
+13:15:35 <monochrom> SML 係有嚴謹定義, 但定義很長... XD
+13:16:40 <Yu-Lin> XDDDD
+13:16:54 <suhorng1> Scheme也有給定義w
+13:18:38 <Yu-Lin> suhorng 你升級變成 suhorng1 了，我是不是也該來升級一下呢？
+13:19:29 <suhorng1> Yu-Lin: 一段時間後會降級回來
+13:20:08 <Yu-Lin> Scheme 為什麼要刻意把 port 分成 in port 跟 out port？我曾經試著用 chinken 寫一個 server，可是一直卡在這邊XD
+13:20:30 <Yu-Lin> 我重組一下我的話好了
+13:21:19 <suhorng1> http://www.reddit.com/r/haskell/comments/y8kca/generalizednewtypederiving_is_very_very_unsafe/ 下面jnowak一整串在討論為什麼他用 OCaml (in practice) 而不是 Haskell
+13:23:37 <Yu-Lin> 雖然腿了，但我還是覺得 python lambda broken 那篇，問題不是出在 lambda，而是 python 本身
+13:24:19 <Yu-Lin> 單就 python 3.3 就有很多神奇的 side effect XD
+13:25:18 <suhorng1> Yu-Lin: 有些例子嗎? 對 python 3 不熟
+13:25:56 <Yu-Lin> 我目前遇到的一個是 list()
+13:27:04 <Yu-Lin> 如果寫 my_list = map( lambda x: x + 3, [1,2,3] )
+13:27:30 <Yu-Lin> 如果想要取 my_list 的值，但不想用 for 的話，就要另外宣告一個變數
+13:27:47 <Yu-Lin> my_new_list = list( my_list ) 這樣
+13:27:51 <suhorng1> 因為噴出來的是 generator?
+13:28:24 <Yu-Lin> 如果直接寫 my_list = list( my_list )， my_list 會變成 [None]
+13:28:34 <suhorng1> 咦
+13:28:52 <suhorng1> 好可怕
+13:29:50 <Yu-Lin> 不過我剛剛又試了一下，他好像又好了，這到底....XD
+13:30:09 <Yu-Lin> 阿，我剛剛說錯了XD
+13:30:45 <favonia> suhorng1: 我沒有仔細看過 Scheme 的標準。可是你知道那個標準沒有講 (eqv? "" "") 會發生什麼事情嗎？
+13:32:05 <Yu-Lin> 之前有遇過那樣的問題，不知道為什麼剛剛試就沒問題了XD
+13:33:31 <suhorng1> unspecified....
+13:34:01 <favonia> suhorng1: 啊也不能說他沒講。他好像有說不能有 exception 之類的
+13:34:55 <favonia> suhorng1: 大概就是這些例子，讓我覺得離嚴謹之路還有一段距離吧 orz
+13:35:15 <suhorng1> 瞭解
+13:38:40 <CindyLinz> favonia: perl 用的關鍵字的選字的確不是很好, 但是它定義還蠻明確的呀
+13:47:16 <CindyLinz> 問問, 你們用 GHC 的時候, 哪些 extension 是常常用, 幾乎必開的?
+13:49:11 <suhorng1> FlexibleInstances & FlexibleContexts, for mtl
+13:50:29 <CindyLinz> 我有用到: OverloadedStrings, BangPatterns, ScopedTypeVariables
+13:50:35 <CindyLinz> mtl?
+13:51:08 <suhorng1> monad tranformer library
+13:51:13 <CindyLinz> mmm
+13:51:21 <suhorng1> 用 MonadState XXX => 那類的時候得開
+13:51:58 <monochrom> 我很少用任何 extension
+13:52:27 <CindyLinz> 啊那個我好像有用過..
+13:52:43 <CindyLinz> ScopedTypeVariables 沒開的話, 有些情況會沒辦法寫 type
+13:52:58 <CindyLinz> 但是如果不寫 type, 讓 GHC 自己 inference 還是可以用
+13:53:22 <CindyLinz> 但是就想寫出 type 嘛... XD
+13:53:26 <monochrom> 我有個程式, 用 ScopedTypeVariables 就只為了 \(_ :: SomeException) -> xxx
+13:54:28 <suhorng1> 真的 特別是有時候資訊不夠推出來時..
+13:55:44 <CindyLinz> overloadedstrings 是為了用 "啦啦啦" 來寫出 ByteString (lazy or strict) 的 constant
+13:56:51 <suhorng1> 原來有這個extension
+13:57:52 <monochrom> 就快連 OverloadedLists 都有!
+13:58:21 <CindyLinz> overloadedlists 要怎麼用啊? XD
+13:59:36 <suhorng1> http://ghc.haskell.org/trac/ghc/wiki/OverloadedLists my god www
+14:00:57 <CindyLinz> 好像還不錯... 更像 perl 了 (誤)
+14:02:09 <CindyLinz> 不對我又誤會了... XD
+14:03:07 <CindyLinz> 這些東西開下去, 應該 type 就要寫得更勤了.. 不然同一句會有多種解釋
+14:03:39 <CindyLinz> GHC 的 extension 好像都是以 module 為單位, 不能局部開對不對?
+14:04:06 <monochrom> 對
+14:04:13 <CindyLinz> mm
+14:05:26 <CindyLinz> 要局部開的話.. 比較漂亮點的作法是在函數裡面開, 然後就影響這一個函數; 醜一點的就是自己在程式碼檔案裡面開開關關.. XD
+14:06:23 <CindyLinz> 前面這種作法要看運氣, 如果 extension 會動語法的話, 可能函數的邊界會很難找...
+14:30:28 <Yu-Lin> 嗚阿阿阿，reduce 真的很好用，為什麼不能用阿阿阿阿
+20:27:50 <mno2> CindyLinz: http://tmonad.org/
+20:59:22 <favonia> CindyLinz: 好吧。不過別的語言也不算不明確吧，只是我(們)不喜歡而已 xD
+22:08:54 <mno2> github 又掛了
+22:09:56 <godfat> orz 我正好在看..
+22:11:27 <letoh> 改在 bb 弄個 mirror ?
+22:11:40 <letoh> 有人用 gitcafe 嗎?
+22:11:44 <mno2> 我覺得 github 還蠻常掛的
+22:11:59 <letoh> 現在可以連上去啊...
+22:12:03 <mno2> 有申請帳號但沒有用
+22:12:26 <mno2> 好了，一分鐘前還不行 xD
+22:12:26 <favonia> mno2: 這時 git 的好處就出來啦 xD
+22:12:34 <godfat> 最近一直被 DDoS
+22:12:35 <godfat> https://status.github.com/messages
+22:12:37 <mno2> 現在是上班時間有人監控 xD
+22:12:44 <letoh> 我都 remote 加兩邊
+22:13:22 <godfat> 我想要綁在 git 上的 issue tracker.. 之前的好像都無疾而終，真可惜
+22:13:37 <mno2> 該不會誰又寫了個訂票程式了吧 xD
+22:13:42 <godfat> XDDDDDDDD
+22:13:48 <letoh> XD
+22:19:01 <favonia> distributed 訂票程式？感覺好高級
+22:20:45 <godfat> favonia, 之前是中國春運，有人做了訂票網站，結果直接連 github 出圖，github 就被打趴了
+22:20:46 <godfat> （正好 issue tracker 也有訂票的味道，不知道有沒有誤會 XD）
+22:21:53 <favonia> godfat: 沒有誤會。不過 pull request 才是上卡車的意思，其他都是客服問答
+22:25:49 <favonia> godfat: 唔等一下廂型車的 trunk 可能比較大（？）... 還是說其實不同 branch/tag 就是不同鐵路 xDDDD
+22:28:13 <godfat> XDDDD branch 大概是不同路段吧，tag 也許是車站
+22:30:02 <favonia> trunk 也可以當主線
+22:33:43 <mno2> godfat 最近有空嗎？有興趣寫 tmonad 嗎？ xD
+22:34:00 <mno2> 看你好像工作疲憊的樣子
+22:34:39 <godfat> 是啊... XD 不過可沒自信能真的寫現實的 haskell orz...
+22:35:07 <godfat> 我瞧瞧 tmonad... XD (github 回來了嗎？ XD）
+22:35:57 <mno2> 有時間的話我可以教你
+22:36:11 <mno2> 不過要你有空啦
+22:36:58 <mno2> 現在狀態只有勉強能動而已 xD
+22:37:32 <godfat> 嗯嗯，感謝，目前可能我用問的比較簡單 XD
+22:38:47 <godfat> tmonad 現在有什麼明顯需要補的嗎？
+22:39:07 <mno2> 很多東西耶
+22:39:17 <mno2> 我有列一些 milestone
+22:39:34 <mno2> 不過現在這個狀態比較簡單的就是 parse config 吧
+22:39:40 <mno2> 需要設計 config
+22:40:23 <godfat> 目前我最愛 yaml XD
+22:40:23 <godfat> 話說我滿好奇為啥大家不用 iteratee 或 enumerator?
+22:40:52 <godfat> 簡化的 yaml 可能就單純
+22:40:52 <godfat> key: value
+22:40:52 <godfat> 即可
+22:41:56 <mno2> yaml 的話有現成 lib，不過主要是 config 有地方不太好用 yaml 表達
+22:42:05 <godfat> 比方說？
+22:43:05 <mno2> 需要作 routing
+22:43:16 <mno2> 參考對象像這樣：http://trafficserver.apache.org/docs/trunk/admin/configuration-files/remap.config.en.html
+22:44:07 <mno2> 很多 hostname 可能是同一個 ip, 需要根據 hostname 做 rewrite & route
+22:45:05 <godfat> 好像滿複雜的，這種時候就會想說如果就像 xmonad 如何？ XD
+22:47:28 <mno2> 其實還好
+22:48:15 <mno2> 就是 parse config 然後做成一個 ruleMap，中間找 Host:  跟 path 作改寫，用一個 middleware 解掉（只是要盡量優化）
+22:49:10 <mno2> 其實說穿了, monad 就是目標成 middleware 的 tookit 就是了
+22:49:14 <mno2> tmonad
+22:49:32 <mno2> 只有商業邏輯前面的東西都可以往這裡搬
+22:49:48 <mno2> 然後放不同台 server
+22:52:46 <godfat> 嗯嗯，反正 parsec 很好用 XD
+22:52:47 <godfat> 不過現在是都用 WAI 了嗎？
+22:55:42 <mno2> WAI 有他的好處跟壞處
+22:56:03 <mno2> 他的 type 不是那麼直覺
+22:56:19 <mno2> 不過下面的 warp 已經很多前人作過苦工了
+22:56:35 <mno2> 而且也有實戰的考驗
+22:56:48 <mno2> http://www.quora.com/Tips-and-Hacks-for-Everyday-Life/What-is-the-safest-way-to-send-someone-1-000-cash-physical-bills  第一個答案 xDD
+22:59:31 <godfat> ..........100 分
+23:00:24 <godfat> 我之前看 reactive-banana, 他的 type 都參雜一個 t,
+23:00:24 <godfat> 文件上說那是一些實作限制，使用上忽略掉即可
+23:00:24 <godfat> WAI 有類似的東西嗎..?
+23:01:03 <mno2> 我沒看過 reactive-banana，從你的描述聽起來像 Phantom type
+23:01:09 <mno2> Wai 沒有
+23:03:42 <CindyLinz> 唔, 所以 cache 的部分已經做完了喔?
+23:05:48 <mno2> CindyLinz: 還沒，不過 memcache 有個玩具能動的版本
+23:07:40 <godfat> 不確定是不是
+23:07:40 <godfat> http://hackage.haskell.org/packages/archive/reactive-banana/0.7.1.3/doc/html/Reactive-Banana-Combinators.html
+23:07:40 <godfat> > As you can see, both types seem to have a superfluous parameter t. The library uses it to rule out certain gross inefficiencies, in particular in connection with dynamic event switching. For basic stuff, you can completely ignore it, except of course for the fact that it will annoy you in your type signatures.
+23:07:41 <lambdabot>   <hint>:1:15: parse error on input `,'
+23:07:55 <suhorng> mno2: 第一個答案 XDDDD
+23:08:09 <godfat> phantom type 看起來也滿有趣的，可以拿來做某種 validation XD
+23:14:25 <mno2> 對 FRP 各種實作不是很熟 xD   不過那個 t 就如他所說的要表達時間流用的
+23:15:26 <godfat> 嗯嗯。我只是覺得反正最後都是接到 IO 嘛... XD
+23:16:14 <godfat> 也許寫一點 config parser 的 failing tests, 我來補補看 @_@
+23:16:30 <godfat> (補實作)
+23:18:36 <CindyLinz> mno2: 嗯嗯 所以現在是先用純 memory 的版本?
+23:20:12 <mno2> CindyLinz: 因為 disk 版本我還沒想完整… 我在想要不要用 linux aio ，如果要，跟 ghc runtime 實作的 epoll/kqueue 有明顯速度上的改進嗎？
+23:38:03 <CindyLinz> 不熟 AIO @@"
+23:40:01 <mno2> CindyLinz: 我也不熟
+23:51:58 <CindyLinz> 不過.. 之前跟 libev 的 author 討論.. 他說這種東西不太好選, 跟實際遇到的 pattern 關係很大
+23:52:11 <CindyLinz> 有些情況傳統的 select 甚至比 epoll/kqueue 快
+23:52:25 <godfat> 我記得聽說量少時 select 比較快
+23:53:14 <CindyLinz> 有點.. select : kqueue/epoll = insertion sort : quick sort 的感覺

@@ -1,0 +1,9 @@
+08:19:14 <abel-abel> fromChunks的作用是接收一個bytestring的列表然後返回一個lazy bytestring。這和直覺相反啊，lazy bytestring不是一個一個chunk的嗎。
+08:19:39 <abel-abel> 返回一個lazy bytestring的話，函數名應該是toChunks啊。
+08:39:52 <monochrom> 如果叫 fromChunkList_to_Bytestring 又怎樣?
+08:50:08 <abel-abel> monochrom, 对，这样就对了。
+08:51:54 <monochrom> 然後把 ChunkList 縮成 Chunks. 然後略去 _to_Bytestring 因為你已在 Data.Bytestring.Lazy 內. 如此 slippery slope 就得出 fromChunks.
+08:54:51 <monochrom> 所以說 The road to Hell is paved with well intentions.
+08:54:52 <abel-abel> 原來如此，謝謝！
+08:56:10 <abel-abel> 哈哈
+15:42:29 <petercommand> 為什麼是 The road to Hell 啊XD

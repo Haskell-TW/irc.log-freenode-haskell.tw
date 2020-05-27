@@ -1,0 +1,35 @@
+10:58:58 <MnO2> netsplit
+11:00:14 <_13h> 嗯嗯  好像都回來了
+11:08:01 <_13h> 來問一下 haskell 的問題好了，前陣子看 haskell wiki 上那篇 typeclassopedia ，functor 那邊有一段看不太懂
+11:09:28 <_13h> fmap 是 Functor a => (b->c)->a b->a c
+11:10:10 <_13h> 那篇文章說可以變成 (b->c)->(a b -> a c)，這樣叫做 lifting
+11:13:19 <_13h> 嗯 記錯了，叫 lift，從 normal world 到 functor world
+11:15:08 <_13h> 不太懂怎麼用這個觀點來看 fmap... 以 list map 來說，map 是 (a->b)->[a]->[b]，依文章說的轉換方式可以變成 (a->b)->([a]->[b])
+11:16:00 <_13h> 如果只是玩文字遊戲去推導這些型別是沒問題，但實際使用時，什麼情況需要用這的方式去思考？
+11:17:02 <_13h> 像使用 map 時，期待的結果會是一個轉換過的 list，而不是一個吃掉一個 (a->b) 後，得到 (a b -> a c) 的東西
+11:34:29 <MnO2> _13h: 最常見就是在 monad stack 裡面，但你又需要用到 IO
+11:34:51 <MnO2> _13h: 也就是 IO Monad 相關的 function
+11:35:20 <MnO2> _13h: 這時候就常用 liftIO，直接把 IO Monad 相關的 function 把他搬進 monad stack 的世界
+11:35:38 <MnO2> 因為 IO Monad 應該都會在 monad stack 的最底層
+11:36:33 <_13h> 在最底層是指跑完所有計算，最後輸出的動作嗎？
+11:37:53 <MnO2> 不一定最後，如果用一條線來比喻把所有 monad action 串在一起的話。就是瞇起眼睛來看，最外層的 monad action
+11:38:08 <MnO2> 把每個 monad action 放大來看，裡面又有小的線串來串去
+11:38:35 <MnO2> 那就是 monad stack 中比較「上層」的
+11:40:18 <_13h> 感謝，我先參考 liftIO 的例子感受一下
+12:17:20 <monochrom> foldr (+) 0 . map f
+12:18:31 <monochrom> map f 就是 map 吃了 f::b->c 得到 [b]->[c]
+12:19:36 <monochrom> foldr (+) 0 就是 foldr 吃了 (+) 和 0 得到 [c]->d
+12:20:40 <monochrom> 而整個  foldr (+) 0 . map f 就是 [b]->d
+12:21:37 <monochrom> 此外還有 map (map f) [[1,2,3], [4,5], [6,7,8,9]]
+12:28:44 <_13h> 我看了一下 liftIO，似乎是把 IO 裡的資料拆出來裝進另一個 monad ？
+12:39:06 <MnO2> 啊，我想錯了。你是針對 fmap ，我那是直接想說解釋一般 lift 的意思。那也許用 liftA 或 liftM 會比較好
+12:42:40 <MnO2> 不過想不到直覺的例子。通常就是在使用函數的時候要在不同世界切換。
+12:46:53 <_13h> 剛剛看到一個例子是在串 monad 時，中間要輸出時會用到  x <- foo; liftIO $ print x; ...
+12:47:37 <_13h> 這樣就是中間那個式子有沾到 IO a，其他的都不曉得有 IO 介入
+12:49:46 <MnO2> yes
+12:54:49 <_13h> 唔... liftIO 算是 monad transformer 的一種嗎？
+12:58:28 <_13h> 看了一下 ReaderT 的例子，好像更複雜了XD
+13:00:32 <_13h> transformer 應該是用來包裝 liftIO 這類轉換動作用的?
+13:01:39 <MnO2> transformer 是 type level 用來定義新的 type ，type class 會要求 lift
+18:55:17 <suhorng> 那個倒過來的arrow -< 叫什麼阿？
+18:56:57 <suhorng> 用fmap好像在parsec很好用 (配合applicative functor: 有 <*>運算子的)

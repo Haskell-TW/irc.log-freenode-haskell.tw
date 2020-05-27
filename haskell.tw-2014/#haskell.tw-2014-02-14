@@ -1,0 +1,13 @@
+16:04:34 <CindyLinz> 發現一個比 GHC compile error message 還難讀的東西...
+16:04:59 <CindyLinz> 用 GHC 寫 Haskell template, 生出來的 code 有 compile error 的時候..... *_*
+16:05:19 <CindyLinz> 不管錯在哪裡, 行號都一樣...... *___*
+23:43:10 <monochrom> (廢話) 改錯不如少錯, 少錯不如無錯 XD
+23:52:45 <CindyLinz> 用 Language.Haskell.TH 裡面的東西來「寫 Haskell」, 感覺有一點像 scheme
+23:52:54 <CindyLinz> S-exp 的感覺
+23:53:37 <monochrom> 天下語法樹一樣黑 :)
+23:54:42 <monochrom> 唔, 更加 tautological 的版本: 天下語法樹一樣樹 :)
+23:54:51 <CindyLinz> = =..
+23:55:40 <CindyLinz> 我先在註解裡寫好成品打算長什麼樣, 然後再用這種 S-exp 去寫產生器 @@"
+23:58:01 <monochrom> 其實, 但凡設計出來(而非盲目演化出來))的程式, 本應如此. 先有目標, 才有碼.
+23:59:10 <CindyLinz> 嗯嗯嗯...
+23:59:36 <CindyLinz> 喜歡直接看 S-exp 的人真奇怪... (苦惱)

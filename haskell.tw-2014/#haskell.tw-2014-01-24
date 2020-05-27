@@ -1,0 +1,132 @@
+03:11:27 <CindyLinz> no @@"
+10:21:53 <CindyLinz> suhorng: 覺得 effects 那個 Proxy 的想法很棒欸
+10:22:25 <CindyLinz> 但它的 type 一定要那麼複雜嗎 @@" 三個 type, 分別有 2, 3, 4 個 type variable... orz
+12:49:48 <suhorng> 實在有點複雜XD||| 沒有懂
+12:50:22 <suhorng> 我也對 AutoLift 那個 typeclass 很好奇...
+12:50:33 <suhorng> 一般就是麻煩在 lift 吧?
+12:51:03 <suhorng> 補一個, 很久以前提到的 extensible effect 默默出library了 http://hackage.haskell.org/package/extensible-effects
+12:51:12 <suhorng> http://ocharles.org.uk/blog/posts/2013-12-04-24-days-of-hackage-extensible-effects.html
+12:57:57 <suhorng> http://www.reddit.com/r/programming/comments/15itwl/do_equivalents_of_the_zen_of_python_exist_for/c7mureg XDDD
+13:26:20 <CindyLinz> suhorng: 我是看這邊的 example.hs ^^ https://github.com/sjoerdvisscher/effects/blob/master/examples.hs
+16:29:19 <hashcat_> idris又變短了
+17:02:10 <hashcat> 順便講一下Prolog語法也是各種自由的, 有DCG跟operator可以做出各種語法 =P
+17:03:51 <hashcat> dependent type可以翻譯成數值相依型別
+17:05:02 <hashcat> 值相依型別, 元素相依型別
+17:18:52 <hashcat> 單純翻譯成相依型別沒表達出他跟啥相依, 匪夷所思
+17:37:12 <cataska> Idris 有甚麼優點呢
+17:38:01 <hashcat> 他們的paper都講完了
+17:38:31 <hashcat> 簡單的說haskell好的他都有, 不好的都被拔掉了
+17:38:40 <hashcat> full dependent type
+17:39:29 <hashcat> haskell自身不太可能會有這種轉變, 因為讓一堆包變成不能用或要改一大堆會被砸雞蛋
+17:40:10 <hashcat> 還加了一票特性, 又沒犧牲到haskell好的部分
+17:40:25 <hashcat> http://www.idris-lang.org/
+17:40:35 <hashcat> overview就有寫
+17:40:38 <CindyLinz> haskell 要轉還行啦.. 反正 ghc 都用 extension 的方式翆.. XD
+17:40:40 <CindyLinz> 方式開
+17:40:52 <hashcat> 另外最需要提的, 是這個不像是會死掉的專案
+17:41:16 <CindyLinz> 現有的 extension 開了, 有些也是會破壞到原有的語意...
+17:41:28 <hashcat> 更新快速, 教學愈寫愈短, 工具也一個一個跑出來
+17:41:32 <CindyLinz> 像是 ScopedTypeVariables
+17:41:48 <hashcat> 看起來就算一直冷門也不會死掉
+17:42:05 <hashcat> Haskell外掛愈開愈多
+17:42:19 <CindyLinz> 我想要以 function 為單位的開關法.. QQ
+17:42:51 <CindyLinz> 或是像 C preprocessor 那樣 #define DEBUG .... #undefine DEBUG 也行...
+17:42:58 <hashcat> 怎沒說prolog有什麼優點
+17:43:03 <cataska> 像是 js 跟 coffeescript 的關係 (錯誤類比)
+17:43:37 <hashcat> 怎都拉不到人玩prolog
+17:43:45 <cataska> Prolog 有甚麼優點 (應主持人要求)
+17:43:51 <CindyLinz> ......ww
+17:44:04 <hashcat> 算了 ==
+17:44:29 <hashcat> idris是證明即程序, prolog是知識即程序
+17:44:35 <CindyLinz> hashcat: 你以後多講講你用 prolog 做了什麼什麼, 這樣會讓人比較有興趣吧~
+17:44:50 <cataska> 講一下啦 m(_ _)m
+17:45:19 <hashcat> 講個最值得一提的好了
+17:45:25 <hashcat> prolog的語法不是只有謂詞邏輯那種樣子, 是可以擴展的
+17:46:04 <hashcat> haskell只有前綴跟中綴運算符號, prolog還有後綴
+17:47:17 <hashcat> 語法擴展強到有人直接在prolog嵌進函數式編程和smalltalk那種物件導向, 貝葉斯機率推論也被嵌進去
+17:47:32 <cataska> 哪一套 Prolog 實作比較推薦？gprolog ?
+17:47:59 <hashcat> gprolog是產生獨立執行檔好用些
+17:48:32 <hashcat> 但要各種實驗特性的話, yap特性多到不行
+17:49:15 <hashcat> 嵌進型別推論也很一絕, 有一種也太容易的感覺, 因為他是自動推論
+17:50:17 <cataska> 有 Real World Prolog 嗎
+17:50:49 <hashcat> http://www.amzi.com/AdventureInProlog/
+17:52:36 <hashcat> 還有smalltalk for prolog
+17:52:42 <hashcat> http://logtalk.org/documentation.html
+17:53:10 <hashcat> 卷下去有個From Plain Prolog to Logtalk Objects: Effective Code Encapsulation and Reuse
+17:54:14 <hashcat> 最後是這個
+17:54:15 <hashcat> http://www.dcc.fc.up.pt/~vsc/Yap/documentation.html
+17:54:27 <hashcat> 看下目錄有很多神奇的東西
+17:58:21 <hashcat> 像是Constraint Logic Programming over Reals
+17:58:52 <hashcat> 順便說下logtalk是也是很神奇的東西, 他跟一堆prolog編譯器相容
+17:59:14 <hashcat> 而且logtalk的特性可以跟他後端的prolog混用
+17:59:47 <hashcat> 像是yap的機率推論擴展可以跟problog跟logtalk混用
+18:00:42 <hashcat> 不會像電波蓋台一樣用了logtalk就不能用特定的後端prolog擴展
+18:04:17 <hashcat> 要遷移到什麼奇怪的平台 yap 依賴會比較多比較難敲
+18:04:20 <hashcat> gnu prolog
+18:04:28 <hashcat> 就很容易遷移
+18:06:00 <hashcat> 他會產生mini asm, 再由那個mini asm轉換成不同機器平台的組合語言
+18:15:10 <hashcat> 大的用yap, 小的用gprolog
+18:15:34 <hashcat> yap還可以用mpi做分佈式編程, 不過有點難看就是
+18:16:44 <hashcat> 再講個缺點好了, 不管是多簡單的程序, prolog都是用自動推論繞遠路
+18:17:27 <hashcat> 需要處理巨大流量的程序, 就不太可能用啥prolog
+18:19:41 <hashcat> 但基於知識的系統就滿行的
+22:06:12 <suhorng> idris是能跑的Agda (?
+22:06:57 <suhorng> Agda要寫能跑的程式好像不太方便
+22:10:42 <suhorng> 然後 idris 在證明的方面除了 Agda 那一派也提供用 tactics (像 Coq)
+22:13:31 <hashcat> Agda是個雛型吧
+22:13:54 <hashcat> 看著貌似Idris才是真的想推成實用的
+22:15:48 <hashcat> Idris跑出了一票就是加強開發效率的特性
+22:16:07 <hashcat> Agda貌似除了偏重搞證明沒其他想法
+22:16:26 <suhorng> 咦，我以為兩邊是不同人在開發的
+22:16:54 <hashcat> 我貌似沒隱含同樣人在開發的意思
+22:17:01 <suhorng> 一個是 theorem prover，一個是 general purpose programming language @@
+22:57:55 <hashcat> 貌似就這意思
+22:58:35 <hashcat> 像啥namespace,光是定理證明用途貌似無此必要
+22:59:06 <hashcat> 也沒必要把haskell的那套typeclass跟型別宣告學進去
+22:59:23 <CindyLinz> 也可能只是貪心.. ww
+23:29:16 <hashcat> 以後您用idris就只用GADTs
+23:31:43 <hashcat> 偷用haskell那種就是你很貪心了
+23:34:06 <suhorng> 突然想到，typeclass 是不是有可能是靜態決定也有可能是動態才知道的？
+23:34:43 <hashcat> 不是吧
+23:35:12 <hashcat> typeclass感覺就是函數名稱前面加個型別識別就可以知道的
+23:35:28 <hashcat> 不知道為啥要留到執行時期做這個
+23:35:53 <suhorng> 因為我想到這個例子： data Test where Constructor :: Class a => a -> Test
+23:35:57 <suhorng> 這種就要動態才能知道
+23:36:15 <suhorng> 不過平常用的話應該靜態就知道了才對 @_@"
+23:36:50 <hashcat> 為啥這會動態才知道
+23:37:26 <suhorng> 假如有個函數 test :: Test -> IO ()，那他不可能知道進來的是哪個 a 不是嗎？
+23:37:45 <hashcat> 就算無法斷定是啥型別, 他也不會默默地產生執行檔
+23:37:58 <suhorng> 什麼意思@@
+23:38:11 <hashcat> 編譯器開始抱怨無法判定是啥型別
+23:38:24 <hashcat> 要你補東西上去
+23:40:13 <hashcat> 退件
+23:41:08 <suhorng> 編譯會過啦 XD http://ideone.com/9kgrGB
+23:45:42 <hashcat_> 斷線一下
+23:45:57 <hashcat_> 你在應用那函數的瞬間他就確定啦
+23:46:22 <suhorng> how?!
+23:47:29 <hashcat_> (Test 5)的時候 Test :: Show a => a -> Test 就縮成 Test :: Int -> Test 了
+23:47:49 <hashcat_> (Test True)同理
+23:48:11 <suhorng> 但是 test 不知道呀 @@
+23:48:19 <hashcat_> @@
+23:48:32 <hashcat_> 他幹嘛知道
+23:48:56 <hashcat_> test知道型別是Test就夠了
+23:49:12 <hashcat_> 知道他吃進的型別不是不確定的東西
+23:49:15 <suhorng> 所以這就是動態才能解決的例子不是嗎?
+23:49:25 <hashcat_> 才不是
+23:49:25 <suhorng> 有個知道怎麼調用 print 的方法
+23:50:24 <hashcat_> 額
+23:50:45 <hashcat_> 他也怎會不知道唉
+23:50:47 <suhorng> 就那個派送不一定是靜態就知道的
+23:50:57 <hashcat_> (Test 5)的時候就解決啦
+23:51:39 <hashcat_> 你看下 test (Test a) = print a
+23:52:17 <hashcat_> 當他帶入的時候 test (Test 5) = print 5
+23:52:46 <suhorng> 嗯
+23:52:54 <hashcat_> print不就知道了
+23:53:41 <suhorng> 沒有這種extension的時候，動態可以不需要保留型別資訊的說XD
+23:54:01 <hashcat_> 不知道你在說啥
+23:55:03 <hashcat_> 要是可以動態知道的話, 我在寫haskell加了堆型別是加辛酸的
+23:59:00 <suhorng> 就是說 我在想說
+23:59:36 <suhorng> 像這種case他需要帶一個類似 virtual table 那類的東西
+23:59:48 <hashcat_>  if ch == '5' then test (Test 5) else test (Test True) 展開  if ch == '5' then print 5 else print True
+23:59:51 <suhorng> 這樣才知道動態時到底會調用什麼東西
+23:59:59 <suhorng> 畢竟有些東西可能靜態分析不出來的

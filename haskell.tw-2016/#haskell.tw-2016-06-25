@@ -1,0 +1,40 @@
+00:07:28 <CindyLinz> 為什麼沒有 instance Applicative m => Monoid (m ()) ?
+00:08:18 <monochrom> 同理沒有 instance Applicative m => Monad m
+00:13:50 <CindyLinz> 可是有 class Applicative m => Monad m
+00:14:02 <CindyLinz> 有 class Applicative m => Monoid (m ()) 嗎?
+00:14:36 <monochrom> class 不是 instance 噃
+00:15:30 <pkmx> mempty = pure (); mappend = ?
+00:16:23 <pkmx> x `mappend` y = x *> y ?
+00:17:32 <pkmx> 這樣是可以 type check 沒錯 但不知道能拿來幹麻XD
+00:27:48 <CindyLinz> 就是 side-effect 連擊啊
+00:29:24 <pkmx> 原來如此xd
+00:29:27 <CindyLinz> 這個 Monoid 就是一種... side-effect 的 builder
+00:30:33 <pkmx> https://ideone.com/GieYe6
+00:31:46 <CindyLinz> (Y)
+00:32:15 <CindyLinz> mappend 用 (*>) 或 (<*) 都可以.. 反正結果都是 ().. XD
+00:32:43 <monochrom> 為甚麼不乾脆寫 x *> y 呢? 何須 Monoid (m ()) 呢?
+00:33:55 <pkmx> *> 可以忽略左邊包在裡面的東西XD
+00:34:19 <CindyLinz> 因為我在弄的是 container, 用 Monoid 可以吃比較多種可能
+00:34:24 <CindyLinz> 而我的第一個應用是 IO ()
+00:35:50 <CindyLinz> 第二個應用還沒有想好要用 IO () 還是一些可以接起來的指令
+00:37:28 <monochrom> 你有沒有一個應用是 Monoid 但不是 Applicative?
+00:42:46 <CindyLinz> 就是指令呀
+00:42:54 <CindyLinz> 一個個字串, 然後接起來
+00:43:15 <CindyLinz> 或是, 先作成 ADT 的東西, 最後一刻再轉為字串
+00:43:24 <monochrom> 指令是任意字串嗎?
+00:44:24 <monochrom> 真指今似 Applicative 多些
+00:45:51 <CindyLinz> SVG 的 path 裡的參數片段
+00:45:53 <monochrom> 造個 newtype HiHo = HiHo (IO ()) 為 Monoid 吧
+00:46:58 <CindyLinz> 取名字有夠痛苦的 XD
+00:47:14 <CindyLinz> 就叫 newtype Draw = Draw (IO ()) 好了
+00:47:29 <monochrom> newtype RealWorld = RealWorld (IO ())
+00:48:08 <CindyLinz> 不過 IO () 作成 Monoid 的時候, 有什麼別的自然的定義法嗎?
+00:48:21 <CindyLinz> 不然我把 Applicative m 改成 IO 好了, 縮小一點 XD
+00:48:24 <monochrom> instance Applicative m => Monoid (m ()) 係合法, 但沒人做, 因為對其他型別有負面影響
+00:48:51 <CindyLinz> 把 Applicative m => m 改成 IO 這樣
+00:49:17 <CindyLinz> Monoid (m ()) 的確包得有點廣 :Q
+00:49:20 <monochrom> 啊, instance Monoid (IO ()) 是沒爭議的
+00:50:19 <monochrom> 出 FlexibleInstances 牌
+00:50:34 <CindyLinz> 那個已經在心中視為 default 開啟了 XD
+00:50:43 <CindyLinz> 只是常常會被 ghc 提醒 XD
+01:02:52 <pkmx> +1 (坐等Haskell 2020

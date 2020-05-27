@@ -1,0 +1,292 @@
+00:02:11 <hashcat> 這也能說成莫名其妙的故事
+00:02:40 <hashcat> 最近才發現gcc可以產生跨語言的物件導向界面
+00:03:37 <hashcat> ada,fortran,c++之間跨語言的界面產生器
+00:03:38 <CindyLinz> 他撰文的方式常常是很嗆的, 不過我們作為讀者, 就繞過讓自己不太愉快的發表方式, 把有意義的內容聽走就可以啦 ^^
+00:04:01 <hashcat> 問題是我根本沒辦法看懂
+00:05:09 <CindyLinz> 那.... ^^|
+00:05:22 <CindyLinz> 你跳過這些 link 吧...
+00:07:21 <hashcat> 如果需要各種保證的話Ada不錯用
+00:07:48 <hashcat> 搭配gcc的界面產生器可以沿用各種函式庫
+00:08:28 <hashcat> python其實比較像蚯蚓
+00:09:22 <hashcat> 斷頭斷尾還是能動
+00:09:30 <CindyLinz> Ada 提供怎樣的保證?
+00:09:36 <CindyLinz> 沒碰過 ^^|
+00:11:00 <suhorng> 蚯蚓 XDDDDD
+00:11:16 <hashcat> 波音777不會因為編程錯誤掉下來的保證
+00:12:44 <hashcat> 你要問的應該不是指這個
+00:12:53 <CindyLinz> hmm... 它怎麼保證波音777不會掉下來? @@"
+00:12:59 <CindyLinz> 不會因為程式錯誤而掉下來?
+00:13:47 <hashcat> 他的不同很難用C++, python去類比
+00:14:12 <hashcat> 不知從何說起
+00:14:14 <CindyLinz> 可以用 Agda 來類比?
+00:15:04 <CindyLinz> 語法上看起來有點像 Pascal
+00:15:05 <hashcat> 嗯差一個字母
+00:15:28 <hashcat> C++跟Ada的差距可能Haskell跟C++的差距一樣大吧
+00:15:55 <hashcat> 而且特性比C++還多
+00:16:15 <CindyLinz> 你得正面表列一些東西出來啦 ^^|
+00:18:50 <hashcat> 跟其他語言比拼下就是, 比特性完勝C++, 比型別安全勝Haskell, Agda, 比面向嵌入式開發堪比C
+00:19:35 <hashcat> C++有的特性都可以直接挪過來了, 但又已經拔掉C++各種陷阱
+00:19:54 <CindyLinz> 我想知道他是用什麼樣的方式來作保證呀
+00:21:22 <CindyLinz> 因為我所知道的方法, 一種是窮舉所有狀態, 一種是正面推論.. 都會有無法確保我們去描述出我們要保證的事情, 和實際上我們真的想保證的事情一致
+00:21:25 <CindyLinz> 的問題
+00:21:50 <CindyLinz> 而作個過份的假設, 假設沒有這一層問題的話...
+00:22:10 <hashcat> 應該說型別很嚴格, 語法很囉唆吧
+00:22:23 <CindyLinz> Agda Coq 或自動機派的, 應該都有做到他們所要的保證
+00:23:52 <CindyLinz> 只有嚴格也不夠, 還需要描述性夠強.. untyped 組語也很嚴格, 因為無論你怎麼寫都是那一堆 bytes, 它有保證你不會寫出 bytes 以外的東西...
+00:24:09 <hashcat> 那種學術語言都會留後門, 未經大量測試
+00:24:11 <CindyLinz> 所以沒什麼用, 因為它的 type 幾乎什麼都說不出來
+00:24:22 <hashcat> 最重要一點是速度太慢
+00:24:47 <hashcat> Ada跟C差不多快的
+00:25:15 <hashcat> 飛機慢一秒就撞山
+00:25:36 <CindyLinz> 我想問你 Ada 是用怎樣的方式作保證啊 @@"
+00:25:37 <yulin> 有聽說 Ada 實作難
+00:25:57 <hashcat> 一大堆特性做保證, 還是自己看吧
+00:26:25 <hashcat> 不然洗版了
+00:26:51 <CindyLinz> 特性多... 聽起來方向是反的呀 :Q
+00:27:23 <CindyLinz> Coq 就是依靠它的核心非常小, 可以明顯看出它是正確的, 所以才能作為證明的工具
+00:27:31 <hashcat> 特性多跟安全性相反, 是C++的刻板印象吧
+00:27:35 <hashcat> 對拉有個點值得講一下
+00:29:09 <hashcat> Ada寫出來的程序可讀性很高, 都是正經的英文, 沒啥奇怪的符號
+00:29:25 <hashcat> 給複審的人很大方便
+00:29:35 <hashcat> 但對寫得人來說就比較痛苦
+00:29:50 <hashcat> 不只是得多打些單字而已
+00:30:30 <hashcat> 其他程序語言的老手, 不見得能很順手寫出Ada能通過編譯的程序
+00:30:53 <hashcat> 會遭遇各種阻攔
+00:31:33 <CindyLinz> 所以 Ada 程式的正確性主要依靠複審, 只是由 Ada 產生的限制, 使得複審的時候很省心力?
+00:31:47 <hashcat> 促使實踐邏輯的人得深思熟慮, 複審卻各種方便
+00:32:11 <hashcat> 已說明這是其中一點
+00:33:53 <hashcat> 其他像是他怎保證物件導向時, 使用指標時, 使用多執行緒時, 又是各種囉唆
+00:34:13 <CindyLinz> 的確也是種折衷的辦法. 不過你可以說它比 Coq 實用, 倒不能說它比 Coq 安全.. :Q
+00:35:13 <hashcat> 能等到Coq有反應早就撞山了
+00:35:55 <CindyLinz> 那是你用錯了 XD
+00:36:10 <CindyLinz> Coq 用來證明你的程式是正確的, 倒不是在執行時期拿去跑
+00:36:43 <hashcat> 一來他們說得安全不是你那種
+00:36:58 <hashcat> 二來你說的那種安全也是有保證的
+00:37:24 <hashcat> Ada有個工具叫Spark
+00:38:06 <hashcat> 各種型別和數值間應有的關係都可以嵌在Ada的註釋裡面
+00:38:31 <hashcat> 對Ada來說那只是註釋, 不過對Spark來說就是各種命題
+00:39:46 <hashcat> 有些地方可以看出Ada注重的點
+00:40:19 <CindyLinz> 你有建議的書嗎?
+00:40:23 <hashcat> 比起啥嚜傳值傳參考參考, Ada用得是in out來決定要不改值
+00:40:36 <hashcat> adaic.org
+00:41:20 <CindyLinz> 你覺得從哪一本開始比較好?
+00:41:22 <hashcat> 比起用啥尖括號, 他用的是begin end之類的
+00:41:38 <CindyLinz> 我看這邊有一大堆 http://www.adaic.org/learn/materials/
+00:41:43 <hashcat> 不知道欸
+00:41:50 <hashcat> 我也忘記是從何看起的
+00:42:06 <CindyLinz> ._.
+00:42:17 <hashcat> 感覺就是很保護眼睛又迴避各種人腦盲點
+00:43:15 <hashcat> 杜絕眼殘腦袋昏睡等各種情形
+00:44:14 <hashcat> http://www.adaic.org/learn/materials/intro/
+00:44:17 <hashcat> 這個好了
+00:44:32 <CindyLinz> mmm
+00:44:42 <hashcat> 頁面中最上面的連接一直點就是這個
+00:47:47 <CindyLinz> mm 好 ^^
+00:48:44 <hashcat> 我在猜沒變成主流的原因
+00:49:26 <hashcat> 是因為正經八百, 沒有任何把戲
+00:50:00 <hashcat> 不知道能不說是硬派
+00:50:24 <CindyLinz> 不用找沒有變成主流的原因啦, 不需要有原因, 也幾乎都不會是主流的
+00:52:25 <hashcat> 劃分領域的話倒是能說是主流
+00:52:32 <hashcat> 在高規格的系統工程領域是不折不扣的主流
+00:53:18 <hashcat> IT就沒影了
+00:56:58 <CindyLinz> 用 begin..end 來取代 {..} 是為了怕看不清楚?
+00:57:54 <hashcat> 可能考慮主管會有老花眼吧~
+00:58:53 <hashcat> 讓讀得人不用太多訓練也能看得懂
+00:59:07 <hashcat> 不只是要給懂編程的人看的
+00:59:25 <hashcat> 同時防呆
+01:01:39 <hashcat> 比起一堆這種東西})]||)}}])]{({][}))(, begin begin end begin end看來也不太容易讓腦袋亂掉
+01:02:24 <miaout17__> http://goto.ucsd.edu/quark/
+01:02:30 <hashcat> 數一下有幾個下尖括號, 和數一下有幾個end的差別
+01:02:31 <CindyLinz> 為什麼要給不懂編程的人看懂呢?
+01:02:34 <miaout17__> a browser whose kernel has been implemented and verified in the Coq proof assistant.
+01:03:30 <hashcat> 因為各部門的人不一定都是做這個的
+01:03:48 <hashcat> 卻都要大概知道這東西是在做啥
+01:04:17 <CindyLinz> 這方面對正確性應該就沒什麼幫助了?
+01:04:42 <CindyLinz> 因為別領域的人都會注意到主線流程, 看不到支線的例外流程
+01:04:44 <hashcat> 當然也不至於完全不懂那種
+01:04:52 <CindyLinz> 而錯都是錯在支線
+01:05:00 <hashcat> 是說不用專門計算機的人
+01:05:10 <hashcat> 假設機械部門預期這程序在某狀況, 應該是那輸出來設計機械
+01:05:30 <hashcat> 要是完全沒看懂的機會, 編程出錯也沒辦法抓出來
+01:07:26 <hashcat> 主管也得同時兼顧好幾個部門, 要是不容易看懂, 當然就比較不傾向去複查吧
+01:08:03 <CindyLinz> 嗯
+01:08:21 <hashcat> 包了火箭原本要到火星就射到別人家去, 十億美金消失
+01:11:52 <hashcat> 貌似很多管理科學的概念
+01:34:06 <hashcat> 函式庫也滿多的噗噗
+01:35:28 <hashcat> 順便說下說飛機的程序反應太慢會撞山那個是實時性要求
+01:36:02 <hashcat> 不只要快, 還要保證一定週期可以執行完成
+01:36:16 <CindyLinz> 這我同意 :p
+01:37:28 <hashcat> 那種學術的語言通常最多就只做到效率能接受這樣
+01:38:12 <monochrom> 照我知少少加推想, "飛機不會因程式問題失事" 只指: 程式不會終止運行. 而程式不會終止運行, 只需要沒有 type error, null pointer error, unhandled exception.
+01:38:17 <hashcat> 有限資源下限定幾個時脈保證完成
+01:41:02 <hashcat> Ada是另一個世界
+01:41:21 <monochrom> 所以, 只要程式語言用精細的 static typing, 以及這 typing 把 unhandled exception 暴露出來, 還有限制 null pointer 便成
+01:41:39 <hashcat> 而且跑太快也不行
+01:42:24 <hashcat> 某些極端物理環境, 電子元件會不堪負荷
+01:42:47 <CindyLinz> monochrom: 直接用 first order logic 來描述時間相關的東西, 會非常累 :(
+01:43:01 <CindyLinz> 老師是這樣說的 XD
+01:43:30 <hashcat> 跟Haskell說的那種安全不一樣, 此安全非彼安全
+01:43:44 <CindyLinz> 不過.. 應該包成 lib (tactic) 以後應該也不會那麼累才對...
+01:48:13 <hashcat> 其實對通常編程來說不太需要學習Ada吧
+01:48:54 <hashcat> 只是對各種語言的抱怨Ada通常都已經有解了
+01:52:41 <hashcat> 要不在說一個
+01:53:09 <hashcat> Ada的數值型別系統至少我沒在別處看過類似
+01:54:31 <hashcat> 可以適應各種有限位數, 也足夠靈活能表達類似同餘數之類的型別
+01:55:00 <hashcat> 同時兼顧小不拉機的計算資源
+01:55:15 <hashcat> 其他自己看吧
+01:55:18 <hashcat> 快洗版了
+01:58:24 <CindyLinz> 本來就是在聊天, 這種洗法沒問題的~ XD
+02:05:08 <hashcat> 能不妄想ada.tw
+02:05:31 <hashcat> 貌似我只要看到語言就會想要加.tw
+02:09:43 <CindyLinz> XD
+02:09:50 <monochrom> php.tw \∩/
+02:10:08 <CindyLinz> Ada 這種東西, 應該算是「幹壞事是進步的原動力」的具體例證了..... www
+02:16:40 <hashcat> 為啥是壞事阿
+02:17:27 <hashcat> 看來你家被戰斧飛彈打中過
+02:17:31 <CindyLinz> 為了殺人啊.. 美軍耶, 當代做最多壞事的組織了吧 XD
+02:18:44 <monochrom> 啊, 那種壞事
+02:19:03 <hashcat> scala.tw
+02:19:14 <monochrom> 我還以為"壞事"指賺大錢哩!
+02:19:32 <hashcat> 那scala才是
+02:19:39 <CindyLinz> hmm... 用錢算的話, 應該也是賺不少吧... (思)
+02:20:14 <hashcat> 瑞銀集團用得噗噗
+02:20:27 <hashcat> 應該髒錢是洗過不少
+02:20:48 <monochrom> 恐怕因為"殺人放火金腰帶", 兩者毋須分開吧... XD
+02:21:00 <hashcat> Ada貌似都是燒錢用專案
+02:21:29 <hashcat> 我說十億美金這數字是其來有自
+02:21:40 <CindyLinz> 做專案說要用 Ada 就可以要比較多預算這樣? XD
+02:22:06 <hashcat> 據傳某顆衛星掉下來調查報告指就是Ada的缺陷
+02:22:13 <hashcat> 損失十億美金
+02:23:19 <hashcat> 我還沒認識賠得起的人
+02:24:30 <monochrom> 缺陷好啊! 電影 一代宗師 主角話: 大成若缺 XD
+02:28:22 <hashcat> 讓他來賠好了
+02:28:29 <monochrom> 哈哈
+02:29:05 <monochrom> 王家衞再拍多幾部電影, 或許就真的夠錢賠
+02:29:12 <hashcat> 沒錢關塔那摩伺候
+02:30:07 <hashcat> 額搞錯了
+02:30:20 <hashcat> 那是歐洲的火箭跟美國無關
+02:30:34 <monochrom> 明天問題: 關塔那摩 能關得住葉問嗎?
+02:32:05 <hashcat> 外面太無聊躲起來渡假這樣
+10:02:42 <mno2> http://www.reddit.com/r/haskell/comments/1lymxc/ann_threepennygui03_gui_framework_that_uses_the/
+10:02:56 <mno2> 第一個 comment: Time flies like a monad .   wwwww
+10:50:23 <CindyLinz> 這什麼比喻啦 XDDD
+11:10:17 <monochrom> time flies like an arrow. s/arrow/monad/
+12:23:10 <favonia> instance Monad Time where
+13:33:23 <CindyLinz> 好想要 MonadPlus 的 Time... (泣)
+14:12:14 <CindyLinz> 我朋友(在台灣)在徵 lisp 工程師... http://blog.storysensecomputing.com/recruit-lisp-algorithm-developer
+14:12:39 <CindyLinz> 應該是跟機器學習或什麼 AI 相關的..
+14:13:17 <CindyLinz> 覺得他們公司蠻歡樂的, 常常看他們出去玩的照片, 老闆帶頭玩 XD
+14:49:41 <mno2> http://www.zhihu.com/question/19643954  第一個回答，這就是霸氣 xD
+15:12:12 <mno2> http://www.zhihu.com/question/21486706  最後一句有提到 suhorng 那天提到的 partial evaluation
+16:32:16 <cataska_> 好酷喔臺灣竟然有 lisp 職缺
+16:33:11 <CindyLinz> 嗯, 雖然是商業廣告(?).. 不過我覺得在這麼小眾的社群裡貼應該還是好事 ^^|
+17:08:05 <mno2> 真有趣，真想寄信去聊聊天 xD
+17:09:08 <CindyLinz> go~~ ^^
+17:11:13 <mno2> 其實我有跟老闆講過話，不過他大概不記得了
+17:11:56 <CindyLinz> hmm.. 我不知道他記人的能力好不好 ^^|
+17:35:30 <godfat> 幾年前他問我一個問題，說他只知道用 lisp 可以用 macro 寫
+17:35:30 <godfat> 後來我用 haskell 寫給他，他沒回應，不知道有沒有看到 XD
+17:37:16 <mno2> 他原本不是也在 Pic Collage ?
+17:37:37 <godfat> 曾經在我們公司待過，不過那時沒有 pic-collage
+17:38:36 <mno2> 喔喔
+17:40:04 <godfat> 我找到當時的程式了 XD
+17:40:05 <godfat> https://gist.github.com/godfat/481148
+17:42:04 <b4283> 好像 zip
+17:48:01 <mno2> 這 applicative 一行就搞定了
+17:48:14 <mno2> > (,,) <$> [0..2] <*> [3..4] <*> [5..7]
+17:48:15 <lambdabot>   [(0,3,5),(0,3,6),(0,3,7),(0,4,5),(0,4,6),(0,4,7),(1,3,5),(1,3,6),(1,3,7),(1...
+17:48:19 <CindyLinz> 改人家環境應該很痛吧... XD
+17:49:02 <godfat> tuple 長度不定，所以要用 list
+17:49:30 <godfat> > foldr (liftM2 (:)) [[]] [[0..2], [3..4], [5..7]]
+17:49:31 <lambdabot>   [[0,3,5],[0,3,6],[0,3,7],[0,4,5],[0,4,6],[0,4,7],[1,3,5],[1,3,6],[1,3,7],[1...
+17:50:05 <mno2> OK, 長度不定就比較討厭
+17:55:33 <godfat> 不過我以為他們後來都換成 python 了，他說 lisp 的人太難找
+17:57:04 <CindyLinz> 這是小說情節吧...... wwwww # 14:49 < mno2> http://www.zhihu.com/question/19643954  第一個回答，這就是霸氣 xD
+17:57:13 <mno2> 如果只在台灣找應該真的就超難找吧
+17:57:31 <mno2> 不過歐美的人也請不起就是
+17:58:02 <godfat> 可能用創業來誘惑 XD
+17:59:30 <mno2> CindyLinz: 在 John 老大面前，Peter 也只能是小弟
+18:00:23 <mno2> 上古神授
+18:03:39 <godfat> 不過我現在愈來愈不喜歡把程式當資料了..
+18:06:03 <CindyLinz> godfat: storysense 我猜是留下核心一些些 lisp 吧?
+18:06:17 <CindyLinz> 不是說 lisp 很適合作 AI 的東西?
+18:06:41 <godfat> 可能吧，核心演算法之類的
+18:08:37 <CindyLinz> mno2: 我有想到王垠介紹 Dan Friedman 老師的時候, 說那個老師最愛問, 讓人哭笑不得的問題: Does it run backwards?
+18:09:22 <CindyLinz> 不過「lisp 之父」這頭銜的霸氣應該更強大.... www
+18:09:40 <mno2> 白鬍子
+18:10:53 <CindyLinz> XDDD # CoffeeScript (不要写下面这种令数学家欣喜若狂，但即使加100行注释都解释不了的代码)
+18:11:21 <CindyLinz> (例子裡是用 coffeescript 寫了個 Y combinator)
+18:11:48 <CindyLinz> mno2: 哇 這一串裡面王垠也有回應耶
+18:12:41 <CindyLinz> godfat: 你曾經把程式當資料, 而且發生悲劇了??
+18:13:15 <CindyLinz> godfat: 嗯, 我不太懂他說 ruby 的把程式當資料是什麼意思.. 我想像得到的是說, 程式執行過去, class 就定義出來了這樣?
+18:13:52 <CindyLinz> 然後在 class 裡面內嵌別的檔案進來.. 忘記是 import 還是 require 還是 include 了
+18:26:13 <godfat> CindyLinz, 誰有說 ruby 把程式當資料嗎？
+18:26:13 <godfat> 我自己的狀況是這樣
+18:26:13 <godfat> 一開始我滿喜歡玩 metaprogramming 的，是 c++ template 的後遺症
+18:26:13 <godfat> 後來我注意到一件事，同樣的事情，用一般的方式去完成，
+18:26:13 <godfat> 通常比較容易擴充，比較直接，其實也比較容易理解...
+18:26:13 <godfat> metaprogramming 可能寫起來很直接，但我現在覺得那是在迴避
+18:26:14 <godfat> 使用原本語言裡的方式去描述
+18:26:50 <godfat> ruby 的 require 就想成 eval File.read 就好了 XD
+18:26:50 <godfat> 只是加上路徑檢查，一樣的路徑不會重複 eval
+20:14:03 <CindyLinz> godfat: 就那個「很霸氣」的回覆裡面: 代码可以生成代码，编译时和运行时并没有绝对的区分，这才是Lisp的杀手锏。......Ruby甚好，所说也是基于C系的语法，但是已经深得Lisp要领了。
+20:14:04 <CindyLinz> Ruby的metaprogramming能力之强大，直接催生了RoR的诞生，风靡全球。
+20:14:52 <CindyLinz> godfat: 因為我以前接觸的時候沒有什麼這樣的印象, 可是他這樣講了... 所以我就在想這個 module 的擴充的是不是被他算作為把資料當程式 @@"
+20:21:30 <godfat> orz 我看半天，居然沒看到霸氣那篇前面有那一段，只想說這故事我看過，一直在看下面的回覆 囧>
+20:21:40 <CindyLinz> XDD
+20:22:27 <CindyLinz> 等我學過什麼 lisp 或 S-expression 再回頭來看這個話題好了 @@"
+20:22:50 <CindyLinz> 我現在對程式碼當資料, 或資料當程式碼.. 連理解有沒有正確都不知道 ^^|
+20:24:32 <godfat> 可能就想像可以透過 reflection 來改寫程式吧？
+20:24:32 <godfat> 不過 lisp 我也是沒用過 macro
+20:27:15 <godfat> 也許一個極端的例子... 這在 ruby 裡要靠 extension 才做得到
+20:27:16 <godfat> 就是抓出一個 function, 然後調整這個 function 裡面的東西，
+20:27:16 <godfat> 做成另外一個 function
+20:28:31 <CindyLinz> 關鍵字是「裡面」嗎? @@"
+20:29:08 <CindyLinz> 如果沒有「裡面」的話, 叫那個函數自己吐出一部分出來, 那其實就是 closure?
+20:29:20 <CindyLinz> 不對 關鍵字抓錯了 XD
+20:29:54 <CindyLinz> 應該說.... 不用經過那個函數允許, 可以擅自把手伸到他的體內掏來掏去, 作任意的解剖採樣?
+20:31:05 <godfat> 這是我能想像到最把程式當資料的狀況了 XD
+20:31:05 <godfat> 比方說我可以取得 function 的 AST 等等，
+20:31:05 <godfat> 按照我的意思改寫程式，像是在自己語言裡做最佳化...
+20:31:35 <CindyLinz> 還在用 dos 真實模式的時候寫組語, 可以在執行階段跑去把某個函數裡面的某個 jmp address 改來改去, 使得這個函數的行為改變.. 這樣應該也算是一種用法?
+20:31:54 <godfat> 可能是類似這樣的感覺，我想
+20:32:26 <godfat> ruby 有個 ruby2ruby 的 library, 讓每個東西都可以 to_ruby 轉回 source
+20:33:21 <CindyLinz> 是用每個 object 自己的 inspect()?
+20:34:20 <CindyLinz> AST 都出來了.. 像是 reflection 做到徹底的狀態 @@"
+20:35:00 <godfat> 我記得他的作法是從 ruby interpreter 裡面抓出 AST,
+20:35:01 <godfat> 然後用 AST 重建 source... 所以有一些資訊會丟失，
+20:35:01 <godfat> 不是全部都抓得到
+20:35:01 <godfat> 後來 ruby VM 好像沒保留那麼多資訊，這個就更不完整了
+20:36:04 <CindyLinz> mmm
+20:36:06 <godfat> 不過 a == eval a.to_ruby 是還滿帥的 XD
+20:36:07 <godfat> 當然實際上 function 不能這樣比較就是了
+20:36:48 <CindyLinz> AST 可以比, 「函數」沒法比 ^^|
+20:37:42 <godfat> 不知道有沒有可能做成，我知道這個函數是從同樣的 AST 建來的，因此他們應該是一樣的
+20:37:43 <godfat> 等於是編譯過程要留下原始資料之類的我猜
+20:38:15 <CindyLinz> 實務上... AST 一樣的話為什麼不直接用同一個函數, 然後大家去 call 就好呢? @@"
+20:40:21 <godfat> 我也是這樣想 XD 所以只是舉例而已，或是說實際上其實不真的是這樣做
+20:40:22 <godfat> 我知道有一個作法是，去看 function 的 parameter 是什麼，
+20:40:22 <godfat> 依此做不同的事情
+20:40:22 <godfat> 例如把 http routes 定義成 function
+20:40:22 <godfat> def users(name)
+20:40:23 <godfat>     ...
+20:40:23 <godfat> end
+20:40:23 <godfat> 就是在說有一個 /users 的 route, 如果 /users/name=abc 時，則 name 會吃到 abc,
+20:40:24 <godfat> 反之吃不到東西
+20:40:48 <godfat> 打錯，應是： /users?name=abc
+20:41:02 <CindyLinz> godfat: 我想說, 如果通常是程式寫爆了才需要的功能, 還那麼大 overhead, 我看就算了吧 XDDD
+20:41:24 <godfat> 我現在也是不太喜歡這些做法
+20:42:16 <CindyLinz> 你舉這例子有 AST 的確方便惡搞.. 不過沒看到函數相等的比較 ^^|
+20:42:41 <godfat> 函數相等只是我亂說的，實際上沒聽過有在做這種事的 XD
+20:43:08 <suhorng> AST一樣怎麼感覺怪怪的? 不是應該要有環境嗎@@
+20:43:08 <CindyLinz> 喔 XD
+20:43:30 <CindyLinz> 我剛心中想的都是 context 在 global 的情況 XD
+20:43:45 <suhorng> 我只記得之前看同學寫過一個lisp code, 給他一個函數 f, 他會噴回來那個函數 memoize 的版本...
+20:43:48 <suhorng> 嗯
+20:44:16 <godfat> 我一個可能的想像是，有一個東西，要擴充他的話，
+20:44:16 <godfat> 插入的程式必須堅守某個規範，例如不能用標準方式定義變數
+20:44:16 <godfat> a = 123
+20:44:16 <godfat> 這樣不行，應該寫 a = TMVar.new(123) 之類的
+20:44:16 <godfat> 不過這樣要求使用者，又會顯得囉唆，於是就可以用這種方式，
+20:44:16 <godfat> 將使用者的 function 轉成內部需要的方式
+20:45:33 <godfat> suhorng, 嗯嗯，可能類似那樣沒錯，雖然 memoize 應該靠外部的方式就能做了

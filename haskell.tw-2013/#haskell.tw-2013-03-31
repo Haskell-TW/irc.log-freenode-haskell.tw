@@ -1,0 +1,67 @@
+00:04:10 <monochrom> 還可以用denotational semantics觀點, 得出同一結論. haskell或SML的denotational semantics, 不同的type可以賦與不同的, 分別的domain. 而scheme, 就只能賦與一個統一的domain.
+00:05:50 <b4283> ohoh, 好像懂了！
+00:06:56 <b4283> 就是 suhorng 說的意思 data = TypeA | Type B | ...
+00:07:09 <monochrom> 是呀
+00:10:05 <letoh> 我突然有個想法  像這種 data = TypeA | TypeB | .. 可以想成 OO 的 TypeA, TypeB 都是 data 這個 class 的 subclass 嗎? 我在想要怎麼向只會 OO 的人解釋類似的想法
+00:10:52 <letoh> 可能有點類似想用 OO 來模擬 sum type ?  雖然我覺得用 OO 真的很麻煩XD
+00:12:29 <monochrom> 可以這像看, 但不完全準確. 有兩點要注意:
+00:12:50 <b4283> 我想是不是 java 的 Object 再派生出來那樣？XD
+00:13:26 <b4283> java: 你要什麼自己去店裡找！
+00:13:45 <b4283> jvm: 記得到我這邊結帳！
+00:13:58 <monochrom> 1. 在多數情況, 可以statically知道是哪個subclass, 但不知道是sum type哪個分支
+00:15:08 <monochrom> 2. 可以外加subclass, 但不可以外加sum type分支
+00:15:57 <CindyLinz> letoh: sum type 裡面的各 type 之間沒有(或說沒規定要有)共同性質啊
+00:16:05 <letoh> 嗯，如果只是想解釋 sum type，只能多加一些限制，強調 subclass 就是只限某個集合
+00:16:24 <letoh> CindyLinz: 我知道... 刻意用 OO 去說明其實很牽強也很怪XD
+00:16:33 <monochrom> 有時這兩點不太重要, 所以我也會把sum type當subclass用, 或把subclass當sum type用.
+00:17:10 <CindyLinz> Haskell standard lib 裡面的 Exception 設計方式蠻像 OO 的 polymorphism
+00:17:19 <monochrom> http://www.vex.net/~trebla/humour/Nightmare.java 嘻嘻!
+00:17:21 <CindyLinz> 因為要 catch
+00:17:52 <letoh> 至於第一點  其實我曾經嘗試要在 python 模擬 (或 ruby 也可以)   在 python 沒辦法 statically 知道是哪個 subclass，但可以 runtime 測試
+00:18:35 <letoh> 或者用其他方法... 雖然很麻煩但還是可以學個樣子XD
+00:18:40 <b4283> what's that, looks like lisp
+00:18:51 <CindyLinz> 我記得 ruby 可以這樣寫:    class T < ( rand() < 0.2 ? A : B )
+00:19:06 <CindyLinz> 就.. 有 20% 的機率 T 繼承 A, 80
+00:19:12 <CindyLinz> 80% 繼承 B.... ||
+00:19:25 <letoh> 這是什麼生命模擬系統嗎? XD
+00:19:38 <monochrom> 哈哈
+00:19:48 <CindyLinz> 生命模擬 XD
+00:19:56 <b4283> 可能是魔王發射的子彈的機率
+00:20:17 <b4283> 要用不同的 lib 算軌跡 (誤)
+00:21:34 <letoh> 如果 ruby 可以寫成這樣  那還可以做 static analysis 嗎? XD
+00:21:58 <letoh> 看起來得跑了才知道結果  而且還可能得到不同的結果....
+00:22:45 <CindyLinz> 那個 class T < expr
+00:22:48 <CindyLinz> 的 expr
+00:22:59 <CindyLinz> 會不會停都不知道咧...
+00:23:36 <CindyLinz> undecidable XD
+00:23:45 <letoh> 一方面覺得能得到這種自由真是爽，但另一方面也覺得能寫出這種怪物真可怕XD
+00:58:14 <b4283> adhoc class 還蠻酷的...
+01:05:24 <b4283> Nightmare.java 真是詭異的迴圈
+07:44:05 <darkx> CindyLinz: Perl 也可以做到一樣的事情XD   http://ideone.com/9k3Aho
+09:44:10 <MnO2> http://blog.sina.com.cn/s/blog_5d90e82f0101jx3l.html
+09:44:25 <MnO2> 出現 bob harper 的名字了 xD
+11:24:09 <CindyLinz> darkx: 在 perl 裡你是在操作一個變數, 不是在一個長得 static 的語法上面做呀~ perl 對 oo 的定義是說, 沿著 @ISA 找 method, 而不是 sub-class 為 base-class 的延伸/特例
+12:32:34 <darkx> CindyLinz: 其實 Perl 的 OO 也是 There's more than one way to do it, 就我所知也沒有特別的定義
+12:33:41 <CindyLinz> darkx: 所以我指的是它最低階的定義呀, 往上是由 programmer 自己詮釋
+12:35:56 <darkx> 喔喔，我懂你的意思
+12:37:45 <CindyLinz> 我覺得.. 危險的東西表面上看起來很危險的話, 就不危險; 但如果表面上很優雅很安全, 是不道德的! (痛)
+12:38:10 <darkx> CindyLinz: 要拖出語言設計者拿出來鞭了嗎(誤
+12:39:21 <CindyLinz> darkx: 你知道... 痛過很難理性的.... QQ
+12:39:37 <CindyLinz> 不過我不是踩到這個 class T < ( rand .... )
+12:40:04 <darkx> 我懂...
+13:08:15 <darkx> foobar = type('', (random.choice( [foo, bar] ), ), {})
+13:08:25 <darkx> 我朋友寫了這個 (in Python)
+13:39:34 <letoh> 唔  連你都來了
+13:43:14 <darkx> letoh: 我被 suhorng 拉進來的XD
+13:43:34 <darkx> 其實我不會寫 haskell 啊  *笑*
+13:43:44 <letoh> 喔喔  因為 ptt 的廣告?
+13:43:56 <darkx> letoh: ptt 廣告 ？
+13:44:09 <letoh> 他不是跑到 python 板打廣告嗎? XD
+13:44:31 <darkx> <del>其實我沒有在看  Python 板 </del>
+13:44:57 <darkx> 他到我  bs2 個版打廣告
+13:45:06 <letoh> 喔喔喔
+13:46:00 <letoh> 原來那個站還在XD
+13:50:14 <darkx> suhorng: 一召喚就出來了 w
+13:52:23 <suhorng> 咦 哈囉？
+13:52:37 <darkx> suhorng: 喔，darkx 是我 irc 慣用 id 這樣XD
+13:53:02 <suhorng> 原來是這樣w

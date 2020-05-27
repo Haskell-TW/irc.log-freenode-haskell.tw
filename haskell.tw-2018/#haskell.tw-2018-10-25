@@ -1,0 +1,18 @@
+10:20:13 <jokester> 我最近在学scala -_- 在读一本叫functional programming in scala的书
+10:20:38 <jokester> 好难啊.. /o\
+10:33:56 <monochrom> functional programming 應該是正式的 functional languages 如 Scheme, Haskell 等容易.
+10:35:37 <monochrom> 正如 data structures 不會由 tcl 或 perl 學起.
+13:18:54 <jokester> 那scala可以算吗 lol
+13:28:52 <caasih> 猜 jokester 應該不是把 scala 當第一個 functional language 吧
+13:29:53 <caasih> 印象中以前就在 PTT PLT 版看過這個 id
+13:32:13 <jokester> 不是 看过一点hs
+13:32:43 <jokester> 有些难&目前公司没在用 （公司有一点scala)
+13:32:48 <jokester> 所以在看scala
+13:35:11 <caasih> * 只看過一點 Scala for the Impatient XD
+13:41:22 <jokester> 那本也看了，作者很热心提示各种陷阱
+13:53:49 <caasih> 看了一下好奇那邊難學？是強迫要做 pure 的 random number generator ？
+13:54:27 <caasih> 還是後面那些 functional programming 的資料結構？
+13:56:02 <caasih> for comprehension 看起來很有意思
+14:26:13 <jokester> 可能难在没有合适的玩具可做，我比较习惯做中学
+15:30:49 <cibs> 用 haskell 寫個 perl interpreter 如何, cindy 之前用 perl 寫了 haskel 的 compiler
+16:07:24 <jokester> 可能我需要更简单的！比如brainfuck interpreter

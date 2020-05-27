@@ -1,0 +1,73 @@
+09:30:10 <mno2> https://plus.google.com/117380487359344039293/posts/T4BEJd5gobW 話說得好重啊 xD
+11:13:21 <monochrom> 我還想說, 「不重就不叫王垠」呢! 讀完後才感到, 好像他平時的尺度又沒這麼重 :)
+11:15:35 <monochrom> 慢著! 之所以平時沒這麼重, 是因為平時寫完不久就刪, 所以見不著! XD
+11:16:34 <monochrom> 結論: 不重就不叫王垠, 不刪就不算金句
+11:21:08 <monochrom> 至於這次為甚麼還未刪, 我倒有個想法: 他不知道可以刪. 正所謂: GUI design is in a very large degree programming language design. if Yin Wang can't figure out how to delete a post, then it's a SCAM XD
+11:27:37 <monochrom> 我在想, 王垠是不是想回復古時的 network database. 這裏 network 不是通訊網, 是指一個 record 有 pointer 指向相關的 records, 總體看就是用 pointer 組成的網絡. 換言之, data structure
+14:03:55 <CindyLinz> 他走到哪就鞭到哪嗎? :p
+15:01:33 <CindyLinz> 哇~ 他把 RDBMS 和 NoSQL 兩邊都罵光了 XD
+15:04:17 <CindyLinz> 我覺得可以理解他的感覺.. 不過他這篇真的沒什麼內容 XD   只是剛好也有過類似的想法
+15:17:01 <MnO2__> https://twitter.com/meteokol/status/393312952024961024
+15:17:08 <MnO2__> In C++14 you just write "auto auto(auto auto) { auto; }". The compiler infers the rest from context.
+15:21:46 <CindyLinz> .................||
+15:24:56 <b4283> 呵
+15:25:21 <hashcat> 又是王垠
+15:27:39 <CindyLinz> 看哪天會發展成每次寫程式就只要寫 auto; 就結束了, 隨情境會生成不一樣的正確程式 (Y)
+15:39:09 <MnO2__> CindyLinz: 解決那個問題就可以解掉的問題的 Set，我們就叫做 auto-complete
+15:39:59 <CindyLinz> auto complete :D
+15:41:39 <hashcat> 不就是prolog
+15:42:04 <CindyLinz> MnO2__: 問你, 新的 GHC 用的 mio, 是一個獨立的 event dispatch system 嗎? 還是是 GHC 自己實作的特殊的東西?
+15:42:28 <CindyLinz> 我好難想像他要用怎樣特定的手法來處理連 OS 都不知道的資訊  @@"
+15:42:57 <MnO2__> 不太懂你的問題
+15:45:05 <CindyLinz> MnO2__: 因為無論用 kqueue 或 epoll, 都無法得知 disk 是不是正在忙碌, OS 總是跟我們說現在可以寫入
+15:45:18 <CindyLinz> 所以好奇 mio 是不是一個更低階的 library
+15:46:13 <CindyLinz> 然後, 也好奇能不能把這個更低階的 library 拿去別的地方用 :p
+15:46:42 <CindyLinz> 我們家的程式... 寫 log 的部分常常沒處理好就搞死 server process...
+15:46:58 <MnO2__> 沒有耶，他還是要靠 kqueue, epoll 啊
+15:47:30 <CindyLinz> 所以是他利用它們的方式很特殊嘍... 嗚嗚這表示只能乖乖讀 paper 了 orz
+15:47:44 <MnO2__> 只是在上面疊了一層，當量大的時候可以用多個 thread 去分散 IO 的工
+15:47:53 <MnO2__> paper 蠻容易懂的
+15:47:58 <MnO2__> 不用什麼基礎
+15:48:17 <CindyLinz> 12頁耶!
+15:48:37 <CindyLinz> 唔, 有圖表充版面 :p
+15:50:06 <CindyLinz> 我在看的是 Mio: A High-Performance Multicore IO Manager for GHC [pdf] : haskell
+15:50:23 <MnO2__> 對
+15:50:26 <MnO2__> 是這篇
+17:12:24 <CindyLinz> 好像沒有對 Disk 有作處理.. QQ
+17:12:34 <CindyLinz> 全部都是 network 的部分
+17:13:29 <CindyLinz> 只有對 multiple native thread 的程式有影響, 對 single thread 沒差
+17:15:18 <CindyLinz> 嘖嘖.. "While implementing Mio, we encountered hardware performance
+17:15:20 <CindyLinz> problems and a Linux kernel bug."
+17:16:02 <CindyLinz> 不知道第一次 functional thursday 的時候講的 memcached server 遇到的是不是 linux kernel bug.. :p
+17:39:24 <MnO2__> CindyLinz: Disk 就要自己想辦法了。也許我們可以來寫 Linux AIO handle
+17:50:51 <CindyLinz> MnO2__: 欸.. 你想的是墊在 epoll 上面的, 還是取代 epoll 的 approach?
+17:51:09 <MnO2__> Linux AIO 跟 epoll 沒關係啊
+17:51:27 <CindyLinz> 那就算是取代 epoll 的哄?
+17:51:33 <MnO2__> 對啊
+17:51:52 <MnO2__> 只是可能不好封裝 xD
+17:52:00 <CindyLinz> 我之前所知道的情況是蠻悲觀的, 說是 OS 根本就直接認為 disk 永遠都是 available.. 所以完全沒路 @@"
+17:52:23 <CindyLinz> 然後上次誤會以為 mio 有處理這個.. 所以覺得好神祕, 想來看一看他怎麼做的 XD
+17:52:48 <CindyLinz> 嗯, 所以 NFS 後面卡住的時候, 整個就會完全死掉...
+17:53:02 <MnO2__> 可能你聽反了 xD
+17:53:07 <CindyLinz> kill -9 都沒辦法終止正在等 NFS 的程式, 例如說在 NFS 的目錄上面 ls...
+17:53:11 <MnO2__> 我上次是說不能
+17:53:32 <CindyLinz> 我聽成你說現有的舊的不能, 看來意指新的可以啊 XDD
+17:54:36 <MnO2__> 應該是還沒有人撞過真的大的 disk IO 的 app 吧，而且這東西也不跨平台，所以實做價值就低
+17:56:43 <CindyLinz> NFS 就.... wwww
+17:57:03 <CindyLinz> 它在即使不大的時候, 也破壞了 disk 馬上會回來的假設 XD
+17:57:48 <MnO2__> 恩，那根本就是根本上的缺陷了吧 xD
+17:58:17 <CindyLinz> 覺得 NFS 是個 hack 啊... 它介面上符合 POSIX 規定, 但是行為不符合...
+17:58:29 <CindyLinz> 像是 flock...
+17:58:48 <CindyLinz> 可是使用廣泛............||
+17:58:56 <MnO2__> 我也覺得是個 hack  xD
+17:59:08 <CindyLinz> 可是常常看到 orz
+18:11:21 <b4283> nfs 有 soft-mount 的選項就不會卡死了吧？
+19:47:22 <godfat> 我不熟 database, 王垠這樣大罵是覺得有什麼更好的作法嗎？ XD
+19:47:23 <godfat> libev 作者有 libeio, 我看看作法大概就是用 thread pool 去讀 disk...
+20:17:49 <CindyLinz> godfat: 他是沒說 XD
+20:18:40 <godfat> ...XD 此風不可長...
+20:19:18 <CindyLinz> 反正就 RDBMS -- SQL 的描述力很弱啊...
+20:19:40 <godfat> 看解決什麼問題吧？ @_@
+20:21:28 <CindyLinz> 像是... N+1 pattern..
+20:21:42 <CindyLinz> 或.. GADT.. (Y)
+22:34:06 <suhorng> https://plus.google.com/101555949501667191720/posts/MN9ykUMte1Z 哪來這麼多圖 XDD

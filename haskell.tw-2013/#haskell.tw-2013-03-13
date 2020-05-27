@@ -1,0 +1,151 @@
+00:00:19 <CindyLinz> 不過.. ghc 的 profiling 感覺還不錯... (如果有開得起來的話..... www)
+00:00:38 <CindyLinz> 它可以畫出你的程式在每一個時間點的記憶體用量
+00:00:58 <suhorng> 找到了, Introduction to Functional Programming Using Haskell 第九章的例子
+00:01:12 <CindyLinz> 可以分析出是哪些 data type 在佔記憶體.. 或是從函數呼叫的角度去分類是在哪個函數的時候開出來的
+00:01:40 <CindyLinz> 所以雖然空間不好掌握.. 可以從這邊去補一些回來 ^^|
+00:01:56 <MnO2> http://blog-mno2.csie.org/blog/2013/03/12/snap-framework-tutorial-part-1-the-design-of-snap-framework/
+00:02:08 <MnO2> 拙作，寫一下 snap framework
+00:04:17 <suhorng> iter f x = xs where xs = x : map f xs
+00:04:51 <suhorng> 跟 iter f x = x : map f (iter f x) 的差別(阿..不過這個例子是時間上的差別)
+00:05:13 <CindyLinz> 嗯 page 303
+00:05:39 <CindyLinz> MnO2: 哇~ 你直接用英文寫呀
+00:05:52 <MnO2> CindyLinz: 中文沒人看啊...
+00:05:59 <CindyLinz> orz
+00:06:30 <suhorng> 還有一個是空間上有差的例子(不過一時找不到..)
+00:08:05 <hychen> hw6 只有三個enhancement嗎?
+00:08:47 <hychen> 如果是, 這週也太簡單了?
+00:10:03 <letoh> MnO2: 整理完發現你可能會不太好 merge XD
+00:10:15 <letoh> 你要先 merge ebook 的部份嗎?
+00:10:17 <MnO2> letoh: 怎說？
+00:10:46 <MnO2> letoh: 都可，只要能從 commit 部分看出來就好
+00:10:48 <letoh> 會有 conflict... 因為我從中間把修 typo 的部份拆出來了@_@
+00:12:30 <CindyLinz> suhorng: 想想, 這個應該是有否 cache 住運算結果的差異..
+00:13:34 <MnO2> letoh: 所以 conflict 是指那些修 typo 的部分？
+00:14:23 <suhorng> CindyLinz: 空間的例子好像不是那樣的差異, 而是產生出來的 thunk 的量就差一個量級..
+00:14:45 <letoh> 我現在拆成兩個 branch，不管先 merge 哪一個，另一個都會有不少 conflict @_@  想說是不是一起 merge 好了... 其實有很多內容的修改是為了排版而修的
+00:18:47 <MnO2> letoh: 只要最後網頁版看起來不會爛掉我就沒差，切 branch 只是想說有東西爛掉的時候比較知道哪個是哪個
+00:21:45 <hychen> letoh, 這週題目真的很簡單...
+00:21:55 <hychen> letoh, hw5 review比較麻煩...
+00:22:07 <letoh> 我說啦  那 review 是惡夢XD
+00:26:19 <hychen> 我實在是很討厭加end
+00:26:30 <hychen> 然後if..else一直不小心加:
+00:30:46 <letoh> 先研究一下網頁有沒有爛掉
+00:30:53 <letoh> hychen: 你是說 ruby 的 end 嗎?
+00:30:59 <hychen> y
+00:31:09 <hychen> 明天再來做peer review
+00:31:12 <hychen> 我要回家了
+00:31:24 <hychen> 明天中午要release , 不能太晚到公司
+00:31:27 <letoh> 嗯嗯
+09:21:06 <letoh> http://pksunkara.github.com/semicolon/  .... 那個反向的符號怎麼來的? XD
+09:47:20 <kanru> U+204F REVERSED SEMICOLON
+09:58:15 <_13h> 輸入有點麻煩@_@
+10:01:41 <kanru> bind 到 shift-; XD
+10:03:27 <_13h> 這樣 : 就不見了XD
+10:05:55 <_13h> 突然想到如果以 expression 為主的設計來看，if 的後面應該跟 bash 一樣用 ; 而不是像 python 那樣用 :
+10:16:46 <MnO2> http://wadler.blogspot.ro/2013/03/informatics-1-functional-programming.html
+10:17:15 <MnO2> Philip Wadler 教課的影片
+14:11:04 <MnO2> 有人有碰過套件系統的套件名可以是 Unicode 的嗎？
+14:37:14 <_13h> slackware ? 沒試過
+14:37:46 <_13h> OS 和檔案系統可以支援的編碼和字元集應該都可以處理吧XD
+14:46:52 <MnO2> 只是看到某討論串中出現 cabal install (╯°□°）╯︵┻━┻-0.2.1﻿ 有感問問看 xD
+14:47:23 <_13h> 弄成那樣有什麼意義嗎? XD
+14:48:20 <MnO2> 不知道，因為就算可以支持大家好像還是包 ascii ，所以好奇有沒有人真的包奇怪的東西
+14:49:19 <hychen> ascii比較方便輸入
+14:49:57 <_13h> 就算是早期惡搞出來的中文 Linux 系統好像也都用英文，因為套件根本都是外國人包的... 華人開發的專案也都取英文名字@_@
+14:51:28 <_13h> 例如 hime 包成 姫-dev-i686-1.deb    但是要安裝時因為還沒有輸入法，所以連 apt-get install 姫  都沒辦法下指令XD
+14:52:09 <_13h> 就算有輸入法，也因為沒有日文輸入引擎所以只能輸入中文的「姬」XD
+14:53:22 <_13h> 大概只能靠 gui-based frontend 想辦法選到要裝的套件XD
+14:54:24 <hychen> http://i.imgur.com/jZpEdz5.png
+14:54:33 <hychen> 在上面問問題，還有人幫你改文法
+14:55:25 <_13h> 這是哪裡?
+14:56:40 <MnO2> stackoverflow 或 stackexchange 某個頻道吧
+14:56:43 <_13h> 以前有個站叫做 lang8 之類的名字，可以在上面寫文章或日記，然後有人會幫你改文法，你也可以改別人的
+14:58:08 <_13h> 嗯... 那個評分區塊的風格不太像 stackoverflow/stackexchange @_@
+19:59:34 <letoh> MnO2: http://shokos.hatenablog.com/  人妻 programmer 的 haskell blog
+20:24:33 <MnO2> 人妻這麼厲害
+20:25:00 <letoh> twitter 上的自稱啦
+20:27:35 <CindyLinz> 人妻不能厲害嗎, 啊不就登記結婚以後就變人妻了嗎? ^^|
+20:31:07 <letoh> 她工作的地方有 haskell 讀書會耶
+20:32:11 <letoh> 我在公司找到一本舊的 dragon book 中譯版
+20:32:38 <letoh> 裡面把 functional language 翻成「功能語言」  那一段我看好幾次才看懂XD
+20:33:48 <letoh> 我記得大學時看的版本是冼大師翻譯的啊  怎麼這次找到的版本連譯者的名字都沒有...
+20:36:41 <suhorng> 有 Haskell 讀書會!!! (rock)
+20:37:35 <letoh> 公司有讀書會真是棒... 我今天還在想要不要來弄個 python 入門給同事
+20:39:01 <letoh> 對於一群平常根本不會多念書的人  應該要換個角度介紹比較容易推得動@_@
+22:23:39 <suhorng> hw6t Peer review完了!
+22:23:43 <suhorng> *hw5 打錯
+22:24:02 <letoh> 賀  今天最後一天?
+22:29:09 <suhorng> 對 剩九個小時
+22:29:46 <suhorng> 來看一下最後一週的東西XD 我很好奇 functional programming 要怎麼跟 OOP 結合
+22:31:02 <CindyLinz> Haskell 用類似這樣的東西 data List = forall a. List [a] 感覺就有 OOP 的 polymorphism 的感覺
+22:31:44 <CindyLinz> 比較正常的用法, 在 forall a. 那邊會加 class 限制.. 例如說 Num a 或 Eq a 之類的
+22:31:51 <suhorng> OOP的 polymorphism 通常都是指 subclass polynorphism 不是嗎？
+22:32:01 <suhorng> *打錯, subclass (X), subtyping (O)
+22:32:34 <suhorng> OOP東西都要放在物件後面, 讓我覺得跟 FP 有點衝突的說
+22:34:16 <letoh> 那用 record type 就不會嗎?
+22:34:27 <letoh> 裡面不是也可以塞一堆東西嗎?
+22:35:18 <suhorng> CindyLinz: 加 Num a & Eq a 是把 typecalss 類比成 OO 的 class 嗎 @_@"" 感覺對不太起來 (例如繼承、override那邊)
+22:36:15 <suhorng> letoh: 如果說我要表達 length . filter (== 0) . map fst 這種東西, OOP 有什麼好的組合法嗎？ 好像得寫成新的 method？
+22:36:44 <suhorng> (好吧, Ruby既然可以動態改 class, 讓所有 instant 都變成有這個method也是可以啦..可是感覺怪怪的)
+22:37:48 <letoh> fluent api 那種方式?
+22:38:28 <letoh> 如果只是要建構這樣的東西，oop 的方式也是有辦法組合出來啦
+22:38:39 <suhorng> 那是什麼 (woot)？
+22:39:17 <letoh> 唔，就一堆 method 串在一起的型式.. 大概吧? XD
+22:41:54 <letoh> 來玩玩看@_@
+22:42:11 <suhorng> 像這篇嗎 XDD #1EMPX7ZA (PLT) [ptt.cc]
+22:42:36 <letoh> 類似XD
+22:43:51 <CindyLinz> suhorng: 把 Num a 想成 base class
+22:44:06 <CindyLinz> suhorng: 所有 Num a 的 instance 就是它的 sub class 們
+22:44:18 <suhorng> 嗯 也是可以
+22:44:37 <CindyLinz> forall a. Num a 就是所有 Num a 的 subclass 都適用呀
+22:44:50 <CindyLinz> 你就可以弄出一個 list, 裡面可以裝所有有實作 Num a 的 instance
+22:45:13 <CindyLinz> 當然, 你在使用這個 list, 從這 list 拿東西出來用的時候, 也就只允許使用 Num a 有的 method
+22:45:38 <suhorng> 嗯嗯!!
+22:45:45 <CindyLinz> 不過我猜現在主流不太寫 data List = forall a. ...
+22:46:05 <CindyLinz> 而是寫成 data List where List :: Num a => a -> List
+22:46:12 <CindyLinz> GADT 的形式這樣
+22:47:27 <suhorng> !!
+22:48:19 <CindyLinz> ghc extension 的 guide 這邊有個我覺得很 OO 的例子, 甚至用 self 來當 type variable
+22:48:24 <CindyLinz> http://www.haskell.org/ghc/docs/7.4.2/html/users_guide/data-type-extensions.html#gadt-style
+22:48:28 <suhorng> http://en.wikibooks.org/wiki/Haskell/GADT
+22:48:30 <CindyLinz> 這段最下面
+22:48:33 <suhorng> 好神秘耶~!
+22:48:41 <CindyLinz> data Counter a where 那裡
+22:50:18 <suhorng> 之前看到一篇 you could have invented comonad, 他把 comonad 當 OOP 的 class (不過還沒細讀)
+22:51:43 <CindyLinz> google "you could have invented comonad" 找不到東西 QQ
+22:58:30 <suhorng> 是這篇沒錯http://www.haskellforall.com/2013/02/you-could-have-invented-comonads.html Orz
+22:58:49 <suhorng> You could have invented comonads 只出現在網址XDrz
+22:59:43 <CindyLinz> 喔.. 重點可能是中間有 dash XD
+23:00:14 <CindyLinz> 之前在好奇 comonad 有沒有提供數學上一個對稱概念美感以外的用處 XD
+23:00:48 <CindyLinz> suhorng: 如果你在意的是 OOP 語法的 obj.method 的話, 我猜你可能會失望啦 ^^|
+23:01:37 <CindyLinz> 說 Functional Language 做到 OOP, 指的應該不是語法看起來像, 而是資料結構上做到一樣的功能吧
+23:02:37 <suhorng> CindyLinz: 其實也不一定是語法 但是什麼東西都要藏在物件後面感覺有點麻煩
+23:03:32 <suhorng> 比起用functional做到OOP, 我很好奇這兩種有點衝突(?)的概念同時出現在一種語言中會怎樣
+23:04:00 <CindyLinz> 咦, 你講的是 functional language 和 OOP 結合.. 所以指的可能不是用 functional language 來作到 OOP 的效果
+23:04:04 <suhorng> 兩者在設計時感覺主角不一樣呀
+23:04:08 <suhorng> 嗯嗯!
+23:04:12 <CindyLinz> 而是像 oCaml 那樣, 兩種語法同時存在?
+23:04:33 <suhorng> 對呀 還有拿來寫程式時會怎樣寫XD
+23:04:40 <CindyLinz> 大不了就像 C++ 一樣的存在... orz
+23:05:06 <suhorng> 那樣就太悲劇了XDDD
+23:07:54 <letoh> 還好啦  反正大部的人還是只知道 oo 的那部份啊
+23:09:14 <letoh> 講錯  是只知道跟 c 很像的那部份XD
+23:09:22 <suhorng> XDD
+23:31:00 <suhorng> http://existentialtype.wordpress.com/2012/08/14/haskell-is-exceptionally-unsafe/ 先丟著(?) 有點長
+23:53:16 <letoh> . 連 lambda 都可以接耶...
+23:54:18 <suhorng> letoh: f1 . (\x -> e) . f2 ?
+23:54:25 <letoh> 嗯
+23:54:46 <suhorng> functions are values 的優勢(?)
+23:55:54 <letoh> 沒有名字的不行
+23:56:13 <suhorng> 不太懂@_@"
+23:56:25 <letoh> 沒定義過的名字
+23:56:54 <suhorng> 只是看你有沒有把那個 function bind到某個variable而已吧?
+23:57:14 <letoh> > let foo = lenght . brainfuck
+23:57:16 <lambdabot>   not an expression: `let foo = lenght . brainfuck'
+23:57:43 <letoh> > let foo = length . brainfuck
+23:57:45 <lambdabot>   not an expression: `let foo = length . brainfuck'
+23:58:08 <suhorng> letoh: let .. in..., lambdabot中要有in的樣子
+23:58:24 <letoh> 唔  好像是  剛剛在 hugs 裡玩了一下
+23:59:11 <letoh> 唔.. 在 python 裡做了一半  但沒辦法把 lambda 一起串進來@_@
+23:59:49 <suhorng> 大概是python的lambda比較奇怪的關係吧XDD 不是真的匿名"函式"
+23:59:59 <letoh> 唔  是個怪東西

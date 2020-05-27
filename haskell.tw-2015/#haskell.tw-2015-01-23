@@ -1,0 +1,36 @@
+00:06:23 <CindyLinz> 我都用 Data.Text.pack . show   :p
+00:06:35 <CindyLinz> @type Data.Text.pack . show
+00:06:36 <lambdabot> Show a => a -> Data.Text.Internal.Text
+00:08:30 <pkmx> 沒有已經寫好的 :<
+00:09:29 <pkmx> @hoogle (Show a, IsString s) => a -> s
+00:09:29 <lambdabot> Debug.Trace traceShow :: Show a => a -> b -> b
+00:09:30 <lambdabot> Unsafe.Coerce unsafeCoerce :: a -> b
+00:09:30 <lambdabot> Prelude ($) :: (a -> b) -> a -> b
+00:09:52 <pkmx> :t fromString . show
+00:09:53 <lambdabot>     Not in scope: ‘fromString’
+00:09:53 <lambdabot>     Perhaps you meant one of these:
+00:09:53 <lambdabot>       ‘BSLC.fromStrict’ (imported from Data.ByteString.Lazy.Char8),
+02:13:54 <CindyLinz> miaoski, cibs: 幽靈棋程式放 github 了.. 還沒開 host server  # https://github.com/CindyLinz/Game-GhostChess
+02:14:34 <CindyLinz> 有加上開新房間 & 選房間 & 太久沒人的房間自動關閉的功能..
+02:17:04 <letoh> 太久沒人不是派幾個 AI 幽靈補滿?
+02:26:27 <CindyLinz> letoh: patch welcome~~~
+02:27:55 <CindyLinz> XD
+02:30:33 <letoh> 哇.. 全 .hs (我以為開起來會看到一堆 perl
+02:39:42 <CindyLinz> 對呀~ 就 study group 用的範例
+09:34:29 <mno2> http://www.reddit.com/r/haskell/comments/2tbbxh/io_monad_considered_harmful/
+09:34:37 <mno2> 命名真難
+10:33:37 <miaoski> CindyLinz: 賀.
+11:28:11 <cibs> CindyLinz++
+13:41:02 <CindyLinz> host 了 server, 現在有 demo page 了 :p
+13:41:05 <CindyLinz> http://cindylinz.github.io/Game-GhostChess/
+13:41:29 <CindyLinz> 但是如果沒有跟想對局的人約好, 點進去只能無聊 ^^|
+14:49:15 <petercommand> CindyLinz: build-depends 指定像 text == 1.2.* 而不是直接指定自己所用的版本號有甚麼原因嗎?
+14:59:11 <petercommand> 之前我都直接指定自己用的版本XD
+16:02:32 <CindyLinz> petercommand: 喔, 前兩位數一樣會相容呀.. (舊功能都能用, 但可能會加新函數造成 name conflict)
+16:03:07 <CindyLinz> 如果都用 import qualified .. as 或是有 explicit 列出要 import 哪幾個函數的話, 那就會相容
+16:08:01 <CindyLinz> 保留一點彈性.. 因為也許它們會去修 bug, 就不用重新 bump 版號了 :p
+16:20:09 <petercommand> 原來有前兩位數一樣就相容的規則..
+16:21:01 <CindyLinz> 良心規則 XD
+16:21:30 <CindyLinz> 三位都一樣的話, 就是也不會額外 export 新的函數
+16:21:52 <CindyLinz> 所以直接全部 import 進來不加 alias 的用法也應該是安全的
+16:32:48 <petercommand> :p

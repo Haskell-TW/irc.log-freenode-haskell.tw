@@ -1,0 +1,20 @@
+02:04:28 <CindyLinz> 很久以前玩過的自動機小遊戲 # http://pleasingfungus.com/Manufactoria/
+02:04:52 <CindyLinz> Lambda Calculus 的小遊戲不知道可以怎樣設計 :|
+02:24:27 <CindyLinz> 唔.. 不過關卡跟以前玩的時候不一樣了
+02:24:37 <CindyLinz> 有更多東西了..
+14:44:20 <MnO2> favonia: 我大致上對 bi-directional typechecking 有點概念了，有沒有參考的語言實作啊？
+14:44:47 <MnO2> favonia: 全部從頭自己想有點累..
+17:07:49 <MnO2> cyt93cs_: hi
+17:12:19 <cyt93cs_> MnO2: hi
+17:14:24 <MnO2> cyt93cs_: 有上過 FLOLAC ?
+17:15:15 <cyt93cs_> MnO2: 沒耶
+17:15:41 <cyt93cs_> MnO2: 怎麼會這麼問？
+17:16:45 <MnO2> cyt93cs_: 看來源 + ID 猜測是學生，那是學生又會想學 Haskell 的話，有可能有上過 FLOLAC
+17:17:23 <cyt93cs_> MnO2: 哈, 原來如此 :P
+17:18:22 <MnO2> cyt93cs_: 那怎麼會想了解 Haskell ? （純好奇）
+17:19:25 <cyt93cs_> MnO2: 不過其實我已經畢業很久了 XD
+17:19:56 <cyt93cs_> cyt93cs_: 應該是說好奇 Functional programming
+17:20:20 <cyt93cs_> 然後發現原來有這個 channel, 所以就來參觀一下
+17:22:32 <MnO2> cyt93cs_: 哈，歡迎多上來聊聊，聊天主題不拘泥於 Haskell，PL 相關都可以聊聊。
+17:23:46 <cyt93cs_> MnO2: :)
+17:24:54 <MnO2> cyt93cs_: 聊天有 log 可以先隨便看看。然後 G+ 有一個 community

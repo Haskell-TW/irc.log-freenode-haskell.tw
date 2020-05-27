@@ -1,0 +1,19 @@
+17:16:44 <puerdon> 嗨大家好
+17:17:23 <puerdon> 我是用Haskell學functional programming的新手，有個問題想請問
+17:19:48 <puerdon> 我讀到pure function其中之一的定義是，給一樣的輸入就一定會有一樣的輸出。這個概念我可以理解。
+17:20:46 <puerdon> 但反而讓我好奇了（平常我是寫python和JS的），在python或JS中，一個function不也是有相同的input就會產生相同的output嗎？
+17:22:10 <puerdon> 想請問在非functional programming language中，有什麼function是會給相同input會得到不同output的？
+17:25:37 <cibs> puerdon: Math.random()
+17:28:08 <puerdon> 謝謝，可以再多舉幾個例嗎？
+17:28:34 <cibs> in Python
+17:28:40 <cibs> foo = 1
+17:28:43 <cibs> def bar(x):
+17:28:49 <cibs>     global foo
+17:28:59 <cibs>     foo = foo + x
+17:29:06 <cibs>     return foo
+17:29:10 <cibs> bar(1)
+17:29:11 <cibs> bar(1)
+17:29:13 <cibs> bar(1)
+17:29:30 <cibs> 輸入一樣是 1 但輸出就不一樣了
+17:31:16 <puerdon> 了解了! 因為這個function依賴著一個值會改變的變數foo，這樣的副作用造成函數針對相同input可能會有不同output。
+17:31:28 <puerdon> Thanks!

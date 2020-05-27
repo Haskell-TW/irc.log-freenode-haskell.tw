@@ -1,0 +1,36 @@
+11:07:22 <cibs> CindyLinz: good
+13:29:22 <mno2_> 大家取名都是要這麼有梗嗎？ lol   https://github.com/penberg/taylor
+13:36:06 <petercommand> taylor swift XD
+14:30:29 <CindyLinz> XDXD
+17:03:24 <CindyLinz> fenced code block 裡面要怎麼寫出 ` 呢? orz
+17:03:58 <CindyLinz> 直接用 ` 變成加底色的功能, 用 `` 會出現 ``, \` 會出現 \`.. 不知道要怎麼剛好出現一個 `
+17:29:11 <petercommand> CindyLinz: 在remark.js?
+17:31:20 <CindyLinz> 對
+17:35:01 <CindyLinz> 使用 囧冏 兩個字元作二進位編碼, 用 javascript 在完成 render 以後再去把它們翻出來換成想要的字碼.. (誤
+17:38:46 <petercommand> 我可以直接打`耶....
+17:39:08 <petercommand> 在``` ```裏面
+17:44:54 <CindyLinz> 我會變這樣 @@" http://cindylinz.github.io/PublicShare/remark_with_backquote_in_fencedcodeblock.png
+17:47:12 <CindyLinz> 這個是特別把 ```haskell  ``` 換成 ```  ``` 的結果, 想說去掉 haskell syntax hilight 這個變因 @@"
+17:47:19 <CindyLinz> 然後我用的是 remark.js 7.0
+17:47:21 <au> 只好用  ̀div ̀ 了
+17:47:27 <CindyLinz> 也許我該試試 8.0?
+17:47:31 <CindyLinz> au: 全型? o.o
+17:47:36 <au> U+300
+17:47:48 <au> 全型是 ｀div｀ U+FF40
+17:47:52 <CindyLinz> 咦..
+17:48:05 <CindyLinz> 來試試 @@"
+17:49:32 <petercommand> CindyLinz: 我的不會highlight耶...
+17:49:37 <CindyLinz> au: U+300 好像很厲害.. 這是什麼字啊 XD
+17:49:50 <petercommand> 可以正常的打`div`
+17:50:38 <au> CindyLinz: combining grave accent
+17:50:57 <CindyLinz> petercommand: 你的 remark 是壞掉der......!
+17:51:48 <CindyLinz> au: m(_._)m
+17:54:13 <CindyLinz> 分不出 U+300 和 U+340 的差異.. 繼續用 U+300... XD
+17:57:25 <CindyLinz> 好像 U+300 會往前一個字跑..  其實是幫前一個字的頭上加裝飾?
+18:06:43 <au> 是的
+18:06:51 <CindyLinz> mmm
+18:07:16 <au> 所以可以前一個字放空白，或 U+2009 之類
+18:07:46 <petercommand> au 都會打出神奇的字元XD
+18:08:02 <CindyLinz> au: 你到底是怎麼找的 XD
+18:08:19 <au> 請愛用 http://search.cpan.org/dist/App-Uni/bin/uni
+18:09:12 <CindyLinz> 哇 XD

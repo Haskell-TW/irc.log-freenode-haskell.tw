@@ -1,0 +1,146 @@
+00:06:05 <hashcat_> 這邊也宣傳下ada
+00:06:21 <hashcat_> www.adaic.org/learn/
+00:06:36 <letoh> 突然被 ada 電波打到?
+00:07:04 <hashcat_> www.adaic.org/ada-resources/tools-libraries/
+00:07:15 <hashcat_> 打到很久拉
+00:08:31 <hashcat_> 想混合ada跟prolog
+00:09:10 <hashcat_> prolog語法夠簡單可以在ada中query
+00:16:55 <monochrom> 覺得你鍾情古老又多英文字的語言
+00:18:18 <hashcat_> 能讀的語言
+00:19:31 <monochrom> 你怎樣界定能讀不能讀?
+00:19:43 <hashcat_> ada跟flora-2混合
+00:19:56 <CindyLinz> 白名單法: ada, prolog, flora 為能讀語言.. (誤)
+00:20:03 <hashcat_> 拿掉眼鏡看
+00:20:36 <hashcat_> 我分不清尖括號跟圓括號
+00:22:11 <monochrom> 拿掉眼鏡, 英文字都會分不清
+00:22:14 <suhorng> Scheme只有圓括弧（咦）
+00:22:15 <hashcat_> 能寫成像是某種文章但又有一定規則吧
+00:22:57 <CindyLinz> perl 是用來寫詩的... 這樣算嗎?
+00:22:59 <monochrom> 我最反對像文章
+00:23:11 <suhorng> literal programming!
+00:23:27 <hashcat_> perl規則亂的
+00:23:51 <letoh> literal programming 到底有什麼好處呢? 能不能從實際面說明一下
+00:23:52 <monochrom> 其實連"能不能讀"我都認為是空廢命題
+00:24:22 <CindyLinz> 呃... 這是 SM 詩嗎......||
+00:24:33 <CindyLinz> 	       1, 2 or more('to'),
+00:24:33 <CindyLinz> 	tie $her, $up and bind $her, $up;
+00:24:34 <CindyLinz> 	 sub for ({ each  %2; do {} };)
+00:24:59 <hashcat_> lisp更亂拉
+00:25:49 <hashcat_> literal不是語言本身可讀
+00:26:41 <CindyLinz> literal programming 寫書寫 blog 很方便啊
+00:26:55 <hashcat_> 而且有點各說各話
+00:27:34 <letoh> 唔  不過一般寫程式的目的並不會是寫書或寫 blog... 這會是推不起來的原因之一嗎?
+00:27:59 <hashcat_> 有欠規整
+00:28:17 <monochrom> 不. 一般程式員不想重上作文課, 這是原因
+00:28:54 <monochrom> 喜歡作文的, 早成了記者, 作家, 律師, ...
+00:29:49 <hashcat_> 我對程序寫的像是工程師寫的文章,或羅輯推論那樣
+00:30:14 <hashcat_> 不知為啥特有興趣
+00:31:55 <letoh> CindyLinz: 那黑名單有啥?
+00:32:54 <letoh> bcpl 就不知道怎麼念?
+00:33:23 <CindyLinz> letoh: 我又沒在分這個.. XD
+00:33:36 <letoh> 我以為你也有名單XD
+00:33:55 <CindyLinz> 我自己的想法是... 熟了就能讀了, 沒有靜態列表 @@"
+00:34:23 <CindyLinz> 熟了, 就會很快認出 pattern
+00:34:53 <CindyLinz> 而在團隊合作中, 需要考慮夥伴的程度, 不過那是另一回事...
+00:35:26 <monochrom> 大家都主張"能讀", 而條件是"似自然語言". 而我認為"能讀"空廢, 及應遠離自然語言.
+00:36:10 <CindyLinz> monochrom: 看到你最近用「空廢」這個辭來形容事物.. 害我一直想到「老廢角質」..... XD
+00:36:11 <monochrom> 我主張的是"能預測". 這是科學思想所說的那種"可預測"
+00:36:28 <letoh> 跟不懂自然語言的對象交談，為什麼要用自然語言@_@
+00:36:37 <hashcat_> 自然語言也不規整阿
+00:37:30 <monochrom> "可預測"有很多條件. 與"能讀"最有關的一個條件就是"無岐義"
+00:37:57 <CindyLinz> letoh: 對象懂不懂自然語言, 倒是看我們有沒有要努力讓它懂嘍..
+00:38:12 <monochrom> "無岐義"本質上就跟"自然語言"對立. 誓不兩立.
+00:38:15 <hashcat_> 20世紀初的人工語言跟工程標準文件 =P
+00:40:19 <monochrom> 好了, 跟著你們會說, "不如兩全其美, 用英文字, 但規限語法及語義". 但這不是兩全其美, 這是兩害並取.
+00:40:24 <CindyLinz> letoh: 現在放棄的話, 它就永遠不會嘍.. (咦)
+00:40:51 <letoh> 剛剛想用現實的例子來回應  但好像怪怪的
+00:41:23 <monochrom> 雖然規限了語法語義, 但正因似英文, 人類還是當真英文讀, 讀出錯誤語義.
+00:41:53 <monochrom> 但其實又不是英文. 這是四不像
+00:42:21 <CindyLinz> 好像有個叫作「世界語」的東西...
+00:43:33 <CindyLinz> https://zh.wikipedia.org/wiki/%E4%B8%96%E7%95%8C%E8%AF%AD
+00:46:01 <monochrom> 借用英文, 只會誤導. 你無論如何都要設計一個形式語言 formal language 了, 不如丢棄袱, 推倒重來
+00:47:22 <hashcat_> prolog就沒一定要英文
+00:47:46 <hashcat_> 只是不用英文也不知道怎用
+01:07:32 <monochrom> 是日 xkcd 很實用啊! http://xkcd.com/now/
+13:26:48 <mno2> 感覺 Wolframe language 的 runtime 好厲害
+15:04:04 <godfat> 所以有時候我覺得用外來語來寫程式是有優勢的
+15:04:04 <godfat> 這是跟幾個跟英文比較熟的人工作後的結論
+15:04:05 <godfat> 程式裡的用字對我來說比較近似符號，但他們會受文字本身影響
+15:06:25 <kanru> 用 APL! xD
+15:06:48 <kanru> 天書
+15:32:40 <CindyLinz> godfat: 你是說, 故意寫得讓他們看不懂? @@"
+15:32:54 <CindyLinz> 用中文, 然後他們可能甚至沒字型可以顯示? XD
+15:36:51 <godfat> 當然不是故意的呀... XD 只是命名沒有完全照英文的原意而已
+15:37:06 <godfat> 比方說單複數或是時態都是一個例子
+15:48:39 <CindyLinz> 那優勢是什麼啊? ^^|
+15:48:48 <CindyLinz> 單複數和時態真的好難... orz
+15:49:00 <godfat> 不會被英文字搞混 XD
+15:49:07 <godfat> 因為比較不會假設那個字有什麼意思
+15:49:18 <CindyLinz> 喔喔.. 因為對我們來說它不是字, 只是圖象? X
+15:49:19 <CindyLinz> XD
+15:49:39 <CindyLinz> 明明就是看更慢..... orz
+15:50:11 <godfat> 我實在非常反對命名有單複數或時態變化，應該只當符號使用，因為這些變化都是 context dependant 的，而我們不可能根據 context 改名字卻指向同一個東西。名字就是名字...
+15:50:28 <godfat> 比較不會誤解呀 XD
+15:50:35 <CindyLinz> (看看 RoR 的 ActiveRecord..)
+15:50:46 <godfat> 就是 rails 這大便啦... ~.~
+15:50:53 <CindyLinz> LoL
+15:51:07 <godfat> UsersController
+15:51:07 <godfat> 我要改 UserController 的話麻煩一堆
+15:51:11 <CindyLinz> 請問今天您7是左派還是右派.. (誤)
+15:51:20 <godfat> 不覺得每個都是 /...s 很煩嗎...
+15:51:41 <CindyLinz> 我記得它遇到 y 結尾的還會自動生成 ies....
+15:52:22 <CindyLinz> datum/data, fungus/fungi 有沒有那麼聰明就不知道了 :Q
+15:53:40 <godfat> 今天您7是啥呀？ XD
+15:53:41 <godfat> 對啊。他有寫死的變化清單，像是 datum 和 data 就有包含
+15:55:27 <godfat> 像是 table name 跟 model name 分開這也就算了，他們不太會交互用
+15:55:27 <godfat> 時態最麻煩了啦
+15:55:28 <godfat> exist?
+15:55:28 <godfat> exists?
+15:55:28 <godfat> existed?
+15:55:28 <godfat> 這根本就會不斷交互用... 然後 alias 三份有意義嗎？
+15:55:42 <CindyLinz> 7 是壓到 XD
+15:55:51 <godfat> XD
+15:56:14 <CindyLinz> 這部分還是中文好... XD
+15:56:26 <CindyLinz> 動辭可以當名辭用, 名辭也能當動辭用 (Y)
+15:56:41 <CindyLinz> 「你今天王垠了嗎？」
+15:56:43 <godfat> 我也曾經很喜歡這樣
+15:56:44 <godfat> users.each{ |user| user.... }
+15:56:44 <godfat> 後來發現一瞥過去時，users 跟 user 不太好分辨...
+15:56:44 <godfat> 後來我就一律
+15:56:44 <godfat> users.each{ |u| u.... }
+15:56:47 <godfat> XDDDDDDDDDDD
+15:56:50 <b4283> 人腦 compile
+15:56:56 <godfat> 轉品才是王道啦~~
+15:57:21 <CindyLinz> 雖然這時候 point-less 可能更好.. (逃)
+15:58:09 <CindyLinz> 「你這說話太度真是太王垠了..」 (Y)
+15:58:14 <CindyLinz> 態度.. :p
+15:58:20 <godfat> 其實是可以... users.each(&:save) 等同於
+15:58:20 <godfat> users.each{ |u| u.save }
+15:58:20 <godfat> 但是當然複雜起來就沒辦法這樣寫了
+15:58:20 <godfat> point-free 也會很複雜就是了
+15:58:28 <CindyLinz> 對.. XD
+15:59:36 <CindyLinz> 然後, 如果世界真的這麼美好都能分單數複數就算了
+15:59:50 <CindyLinz> 像那種 array of array 的就不知道怎麼辦了... ss 嗎.. 囧
+16:00:51 <godfat> 是啊.... 所以真的簡單的東西引入自然語言就算了，複雜的話還是省省吧 :o
+16:01:44 <godfat> 辦公司網路太慢了，不知道要怎麼工作了...
+16:01:58 <godfat> 好像 irc 聊天還可以，我 linux 動不了了
+16:02:26 <CindyLinz> 戳MIS.. XD
+16:02:43 <CindyLinz> 真是友善的環境....ww # 16:01 < godfat> 好像 irc 聊天還可以，我 linux 動不了了
+16:02:54 <godfat> 現在跟別人共享辦公室，不知道戳誰 ~.~
+16:03:00 <godfat> XDDDD
+16:03:01 <CindyLinz> ._.
+16:03:18 <CindyLinz> 在辦公室裡裝開發用主機
+16:03:23 <CindyLinz> 平常連它就好了?
+16:04:08 <godfat> 我可能要自己準備電腦... XD 嘛，不如待在家裡環境好多了 XD
+16:04:21 <CindyLinz> 不用跟同事討論喔?
+16:04:31 <godfat> 有時候要，真可惜
+16:05:01 <CindyLinz> XD
+16:14:43 <b4283> 大部分時間都是同事干擾我
+16:15:26 <godfat> 讓我們推廣遠端非同步協作
+16:22:29 <CindyLinz> 這要怎麼推廣啦 XD
+16:23:09 <godfat> 進行並公開一個遠端非同步的協作，咦 g0v 是不是這樣？
+16:23:46 <godfat> 就差沒有 profit 比較難說服公司
+16:23:48 <CindyLinz> 是..
+21:04:30 <suhorng> Liskell xDDDD http://clemens.endorphin.org/ILC07-Liskell-draft.pdf
+21:05:06 <suhorng> 我的天，還是原本的syntax好，雖然我Haskell裡常用的運算子實在多到有點討厭XD
+21:21:34 <CindyLinz> XD

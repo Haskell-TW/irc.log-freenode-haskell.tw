@@ -1,0 +1,44 @@
+00:27:51 <miaout17> 拉回pure的話題，這部份我有點讚同王垠耶…或者說我不覺得mostly functional真的很糟，前題是使用的人要認清語言到底保證了什麼
+00:29:20 <miaout17> (在這個channel這樣說會不會被拖出去)
+00:29:59 <godfat> 我是覺得這個還是要看個案就是了，沒辦法一言以蔽之 XD
+00:30:18 <monochrom> 每一天都錯過 gansteed
+00:30:33 <godfat> XDDDDDD
+00:35:48 <miaout17> godfat: acm queue那篇文章好長，我不確定他想鞭什麼…我是覺得Haskell有Haskell的好，Scheme有Scheme的好…
+00:36:21 <miaout17> 題外話一下好了
+00:36:24 <godfat> 我.. 還沒看那篇 XD
+00:36:53 <miaout17> 我以為你讚同了…可能是我搞錯上面接話的語意 @@
+00:37:45 <miaout17> 題外話一下好了…一直覺得Haskell debug有點麻煩…可是IO Monad又切的很乾淨
+00:38:18 <CindyLinz> miaout17: 用 Debug.Trace 裡面的函數壓~~
+00:38:22 <godfat> XD 我內心想的是一些 functional ooo 的 talk/post
+00:38:52 <monochrom> 我認為他在懺悔, 鞕自己. 他為 C#, F# 服務多年, 終看清是為虎作倀 :)
+00:39:28 <CindyLinz> 我不知道 acm queue 那篇的作者的底細 ^^|
+00:39:56 <miaout17> CindyLinz++ 我不知道有 Debug.Trace 這個module...這已經把我原本想講的東西差不多講完了
+00:41:02 <CindyLinz> miaout17: 開外掛作弊超實用啊.. XD 所以有一次 functional thursday 就跑去分享這個了 XD
+00:41:25 <monochrom> 我又有個陰謀論: 他其實想寫個 monad tutorial, 但又想隠藏用意, 所以用另一個議題包裝 XD
+00:48:10 <yllan_> Erik Meijer 口音滿可愛的，之前有上過他在 coursera 的課
+00:49:11 <yllan_> 最近在覺 haskell 有點疑惑，如果我要在很深的 function 裡用 random，是不是要一路把 IO 從最外層傳進去？
+00:49:26 <yllan_> s/覺/學/
+00:50:00 <monochrom> 不是. 應該把一個 random infinite list 傳進去.
+00:51:43 <monochrom> 再講一個少人認同的意見: 那個在深處用 random 的東西, 早已不算 function 了
+00:52:30 <CindyLinz> 對歐, 會有隨機行為的東西, 不能叫作函數了.. 但如果隨機只是過程, 最後產出是決定性的, 那麼可以叫函數嗎?
+00:52:34 <yllan_> 的確 XD 那不然該怎麼說？
+00:52:58 <CindyLinz> yllan_: 把依賴的隨機數當成參數, 就仍然可以叫作函數了
+00:53:04 <CindyLinz> yllan_: 想成一個隨機種子吧 :p
+00:53:53 <monochrom> 我想, 我的 http://www.vex.net/~trebla/haskell/random.xhtml 或者有合用的例子
+00:55:14 <yllan_> monochrom: Cool, thanks!
+00:55:54 <monochrom> 有一次, 量度出使用 newStdGen, randoms 快過 randomIO
+00:56:33 <monochrom> 原因: randomIO 使用 readIORef, writeIORef, 超慢
+17:09:02 <hashcat_> http://www.expdev.net/urtutorial/
+17:09:34 <hashcat_> urweb做blog
+17:11:18 <hashcat_> server client database都是第一類物件
+18:55:05 <snowmantw> 有任何方式聯絡得到 FP Thu 主辦人嗎？緊急...
+18:55:16 <snowmantw> 剛丟 Google Hangout 沒人回
+18:55:44 <godfat> 現在主辦人是誰？
+18:58:26 <snowmantw> Stefani
+18:58:37 <snowmantw> Yun-Yan 理論上也是
+18:58:58 <godfat> 我有 Yun-Yan 的電話，你要嗎？
+18:59:12 <snowmantw> 感謝...看你要寄給我嗎
+18:59:18 <snowmantw> snowmantw@gmail.com
+18:59:32 <godfat> yes, gmail (i think i sent you something before :P)
+19:00:31 <godfat> sent
+19:00:54 <snowmantw> thanks!

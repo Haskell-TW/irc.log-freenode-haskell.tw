@@ -1,0 +1,48 @@
+02:32:50 <suhorngM_> > let fun = ((flip bool (-1) <*>) . (==)) . maximum >>= map         in fun [1,3,5,2,4,5,5]
+02:32:52 <lambdabot>  [1,3,-1,2,4,-1,-1]
+03:05:02 <CindyLinz> :i bool
+03:05:08 <CindyLinz> @type bool
+03:05:09 <lambdabot> a -> a -> Bool -> a
+03:05:23 <CindyLinz> > bool 1 2 True
+03:05:25 <lambdabot>  2
+03:05:29 <CindyLinz> > bool 1 2 False
+03:05:31 <lambdabot>  1
+03:05:36 <CindyLinz> bool selector?
+03:05:53 <CindyLinz> 好像 if'
+07:54:02 <petercommand> @src bool
+07:54:02 <lambdabot> Source not found.
+13:58:55 <darkx> @type []
+13:58:55 <lambdabot> [t]
+13:59:03 <darkx> @type [1..]
+13:59:04 <lambdabot> (Num t, Enum t) => [t]
+14:19:39 <petercommand> :k []
+14:19:40 <lambdabot> * -> *
+14:19:50 <petercommand> :k [1..]
+14:19:50 <lambdabot> parse error on input ‘..’
+14:20:00 <petercommand> :k [1]
+14:20:01 <lambdabot>     Expected kind ‘*’, but ‘1’ has kind ‘GHC.TypeLits.Nat’
+14:20:02 <lambdabot>     In a type in a GHCi command: [1]
+14:20:23 <petercommand> :k [t]
+14:20:24 <lambdabot> Not in scope: type variable ‘t’
+14:20:32 <petercommand> :k [Int]
+14:20:33 <lambdabot> *
+14:20:59 <petercommand> :k forall t. [t]
+14:21:00 <lambdabot> *
+14:30:56 <CindyLinz> :k petercommand 
+14:30:57 <lambdabot> Not in scope: type variable ‘petercommand’
+14:34:55 <petercommand> www
+23:22:08 <suhorngM_> :k 5#
+23:22:09 <lambdabot> parse error on input ‘5#’
+23:22:17 <suhorngM_> :k Int#
+23:22:18 <lambdabot>     Not in scope: type constructor or class ‘Int#’
+23:22:19 <lambdabot>     Perhaps you meant one of these:
+23:22:19 <lambdabot>       ‘Int’ (imported from Data.Int), ‘Int8’ (imported from Data.Int)
+23:22:28 <suhorngM_> :k GHC.Types.Int#
+23:22:29 <lambdabot>     Not in scope: type constructor or class ‘GHC.Types.Int#’
+23:31:51 <suhorngM_> :t I#
+23:31:52 <lambdabot>     Not in scope: data constructor ‘I#’
+23:31:53 <lambdabot>     Perhaps you meant ‘In’ (imported from Lambdabot.Plugin.Haskell.Eval.Trusted)
+23:31:57 <suhorngM_> :t GHC.Types.I#
+23:31:58 <lambdabot> GHC.Prim.Int# -> Int
+23:32:03 <suhorngM_> :k GHC.Prim.Int#
+23:32:04 <lambdabot> #

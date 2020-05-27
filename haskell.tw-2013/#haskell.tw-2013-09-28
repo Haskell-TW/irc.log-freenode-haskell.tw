@@ -1,0 +1,260 @@
+00:28:34 <monochrom> 我喜歡 type Bool = T_T | ^_^
+03:11:07 <favonia> O_o | o_o
+03:11:41 <letoh> fO_o | o_o?
+10:58:12 <MnO2> http://registrano.com/events/5e35ff  用這背景是有人要結婚了嗎? wwwww
+11:02:25 <monochrom> 甚麼是 "滾來滾去"?
+11:02:54 <Yu_Lin> 這背景......XDDD
+11:03:49 <monochrom> 無用的tautology: 每日都有人結婚 XD
+11:06:18 <Yu_Lin> 這次的簡報會釋出嗎？
+11:08:18 <monochrom> 我最想在完了後看Cindy的slide或程式, 因為我太菜鳥, 不會專誠由多倫多飛來台北看 XD
+11:11:37 <Yu_Lin> 其實我也是想看 Cindy 的 compiler 怎麼做......
+11:45:22 <CindyLinz> 唔.. 可是簡報上面是打算寫結語, 主要是對著程式碼講欸 @@"
+11:46:53 <CindyLinz> 目前準備了 12 個 .y 檔.. 大部分是標序號, 像是 h1, h2, h3, h3-1, h3-2
+11:47:05 <CindyLinz> 可以相臨編號的作 diff 來看
+11:47:48 <monochrom> 其實程式碼加些提示, 可能就夠了. 真的看不明再算.
+11:48:07 <CindyLinz> 不然我來把各檔要講的點加到註解好了
+11:48:38 <CindyLinz> 然後.. 在裡面寫「下一個檔請看 oooo.y 檔」XD
+12:01:27 <CindyLinz> MnO2: jaiyalas 說只是新學期新氣象.....  wwww
+12:11:14 <MnO2> https://twitter.com/ccshan/status/383625029017432064   回應讓我大笑 xD
+12:12:58 <MnO2> https://twitter.com/ezyang/status/382939785750650880  這個也蠻好笑的
+12:15:26 <MnO2> http://xkcd.com/1270/
+12:18:45 <MnO2> https://twitter.com/runarorama/status/383680373571342336/photo/1  這太靠杯了
+12:20:45 <CindyLinz> XDDD
+12:21:44 <MnO2> https://twitter.com/plragde/status/383657145499021313  Oleg 狂中槍 xD
+12:22:01 <CindyLinz> 那如果這投影片要譯成台灣版的話, 把 Oleg 換成柯向上好了.. 認識的人比較多 (逃)
+12:23:47 <CindyLinz> 看了這個.. # 09:06 < MnO2> https://plus.google.com/115504368969270249241/posts/EpQodRSVQ3r   要開 strict 的 pragma 了 xD
+12:24:22 <MnO2> 恩?
+12:24:27 <CindyLinz> 在想, 好像 GHC 的這種 pragma 常是以 module 為單位.. 但其實以 function 為單位好像也很好, 可能更好啊? @@"
+12:25:01 <CindyLinz> 啊, 大概是 Haskell 的 layout format 的問題, 不方便確定這個 pragma 屬於哪一個函數 orz
+12:25:30 <CindyLinz> 如果要求 {-# .... -} 也要縮到對應位置行不行? (思)
+12:26:16 <CindyLinz> 因為我從 perl 來的經驗.. perl 的這種 pragma 的東西, 都是在 package 為單位, 或是任何一個 block 為單位
+12:26:45 <CindyLinz> 想來 Haskell 以 layout format 的時候, block 的界限比較不明顯
+12:28:05 <MnO2> 不知道耶，可能要看 compiler 設計怎樣比較好改吧 xD
+12:28:05 <CindyLinz> perl 的 pragma 包含: source 是不是 utf8 格式 (一串 utf8 bytes 要視為一個字元, 還是n個字元), warning 的項目開關, 甚至是不同 perl 版本..
+12:28:13 <MnO2> https://twitter.com/runarorama/status/383648832174583808/photo/1/large   終於看到長甚麼樣子
+12:29:23 <MnO2> https://vimeo.com/75490786  BPFG 看起來有不少 video 可以看
+12:48:47 <monochrom> 我在 Wii 上玩過 Mario 賽車, 所以同意 "the bullet is enormous there is no escaping" XD
+12:58:30 <monochrom> monad/comonad annihilation 實在太強了! XD
+13:46:07 <MnO2> https://gist.github.com/leroux/6395804
+17:19:32 <Yu_lin> Orz|||
+17:20:20 <Yu_lin> 為了上 Courses 的 PL 課，我必須安裝 sml/nj，然後這東西搞掉我兩天的時間Orz|||
+17:20:57 <CindyLinz> 免錢的最貴.. (誤)
+17:22:48 <Yu_lin> 同樣是 sml 的實作品，mlton 可以讓我很無腦的用 src2pkg 一個指令搞定，sml/nj 則讓我花了很多時間在嘗試奇怪的事情上Orz|||
+17:24:32 <CindyLinz> 我也討厭這種事 @@"
+17:26:03 <Yu_lin> 其實我覺得最可怕的是 sml/nj 的實作是用 sml 寫的，所以需要有一個 sml 實作品才能編譯
+17:28:16 <CindyLinz> 它自己沒有內附標準的 bootstrap 流程喔? @@"
+17:28:56 <Yu_lin> 有，不過 sml/nj 沒有提供 64 bit 的版本
+17:29:45 <CindyLinz> hmm.... 不過你都做完了 XD
+17:29:56 <CindyLinz> 想說你當初沒有考慮開一個 32bit 的 vm?
+17:30:11 <Yu_lin> 如果是其他發行版，把 glibc-devel 之類的裝一裝，問題就解決了，但我用的是 slackware，所以要自己看 mutillib 怎麼弄
+17:30:18 <CindyLinz> 反正是學習, 應該能用就好
+17:31:22 <Yu_lin> 對阿，學了很多，我本來還想用 mlton 去編 sml/nj.....Orz|||
+17:31:33 <CindyLinz> 「學了很多」.... XDDDD
+18:09:05 <hychen> sml/nj 有ppa
+18:09:16 <hychen> in Ubuntu
+18:57:24 <letoh> sml/nj 不是很好裝嗎?
+18:57:44 <letoh> 除非有特殊需求  不然照預設 config 編譯就好了
+18:58:12 <letoh> Yu_lin: 我也是 slackware  不過你應該是因為 64bit 比較麻煩
+19:01:01 <Yu_lin> 對阿，問題就出在 64bit
+19:20:21 <letoh> 我的 64bit 是跑在 vm 裡  平常其實也用不太到
+19:20:53 <letoh> 32bit 環境已經用很多年沒重裝過了  都是一路一直升級上來的
+20:08:12 <godfat> 問個 vim 的問題？ orz
+20:08:12 <godfat> 我想編輯一個 zip 檔，但不想把檔名改成 .zip
+20:08:12 <godfat> 有啥方法嗎？ set filetype=zip 看來沒有用..
+20:10:04 <b4283> symlink ? XD
+20:10:31 <godfat> ~.~ 試試... 不過沒有指令可以切換模式嗎？ 囧
+20:11:05 <petercommand> godfat: hard link...
+20:12:06 <godfat> = =... symlink 看來是可以，我想 hard link 應該也行
+20:12:06 <godfat> 但還是得建額外檔案 = =
+20:14:44 <godfat> 現在在做的是修改 sublime text 的 package
+20:14:45 <godfat> sublime text 3 的 package 是 zip 檔，雖然檔名不是
+20:14:45 <godfat> 裡面的 ruby syntax highlighting 是爛的，想修好
+20:18:49 <godfat> 修好了，vim 開 zip 這件事先放著好了 orz
+20:19:08 <Yu_lin> :!mv % 想要的檔名
+20:19:11 <Yu_lin> :q!
+20:19:22 <godfat> mv.... = =
+20:19:53 <godfat> 我以為可以有 :bufmode zip 這樣就行了
+20:21:03 <CindyLinz> 那你附檔名是什麼?
+20:21:13 <CindyLinz> 幫這個附檔名設 au.. XD
+20:22:12 <godfat> sublime-package...
+20:22:13 <godfat> 剛剛查到的都是這個方式，可是我不想污染我的設定 XD
+20:22:13 <godfat> 只改這一次而已 @_@
+20:22:13 <godfat> 而且我可以想像會有很多東西是 zip 包起來的，也沒副檔名
+20:30:04 <petercommand> au?
+20:31:49 <godfat> au 可以不設副檔名嗎？
+20:32:43 <petercommand> 甚麼是au阿
+20:33:10 <godfat> vim 裡面設檔案關聯的指令（的樣子，我不熟）
+20:34:44 <petercommand> 我對vim不熟= =
+20:37:12 <Yu_lin> autocmd?
+20:39:38 <godfat> 原來 au 就是 autocmd
+20:39:39 <godfat> 我一直想試 BufRead zip 之類的但都失敗
+20:40:10 <Yu_lin> *zip 或 .*zip 的樣子？
+20:40:35 <godfat> 我要編輯的檔案裡沒有 zip 字樣，所以我猜不行？
+20:43:48 <Yu_lin> BufRead 是根據檔名來判斷，如果檔名沒有 zip，就沒辦法用 BufRead 了
+20:44:08 <godfat> 果然，好吧 :(
+20:46:32 <CindyLinz> 有可以看檔案內容的 rule 的樣子... 可是我不會 (小聲)
+20:47:18 <CindyLinz> zip 檔案開頭應該是 PK
+20:47:42 <petercommand> 像file那樣嗎?
+20:47:57 <godfat> 所以要弄自動判斷嗎？ @_@
+20:47:57 <godfat> 那也許已經有人做了，用 file 判斷之類的
+20:48:09 <godfat> 不過我以為手動切換比較簡單 -_-
+20:48:26 <CindyLinz> 手動切換你幹嘛還抗拒手動改一下附檔名 XD
+20:48:49 <godfat> 那要 mv 兩次 = =... ln 一下確實還比較快 XD
+20:51:29 <godfat> 說到這個，我想在自己的 automation task 中，不給任何選項時列出所有指令
+20:51:29 <godfat> 像是 make 時列出 make install, make all, 等等
+20:51:29 <godfat> 實際上是 rake, 我希望在打 rake 不給選項時，等同於 rake --tasks 列出所有指令
+20:51:29 <godfat> 不過發現最穩的方法是重跑一次 process... 不知道有沒有更好的作法 :(
+20:51:29 <godfat> 重跑一次 process 有點慢...
+21:03:50 <suhorng> mno2: Standard ML 那一條是什麼意思阿?
+21:13:43 <Yu-Lin> 哪一條？
+21:19:30 <suhorng> > 12:11:14 <MnO2> https://twitter.com/ccshan/status/383625029017432064   回應讓我大笑 xD
+21:19:31 <lambdabot>   Not in scope: data constructor `MnO2'Not in scope: `https'Precedence parsin...
+22:02:09 <Yu-Lin> 不過如果想自動切換 vim 的檔名，還是可以用 au 搭配 vimscript 去做XD（剛剛試了一下
+22:02:42 <Yu-Lin> 除了 BufRead 還有其他的，例如 VimLeave 之類的
+22:05:37 <godfat> 教一下？ XD 感謝 @_@
+22:12:17 <mno2_> suhorng: 我不確定耶，應該是在調侃 standard ML 某些 strict 的性質吧。但其實我不會 SML
+22:12:48 <godfat> 我以為是在調侃美國人？ XD
+22:13:48 <suhorng> 那回應是為什麼@_@
+22:14:22 <godfat> Bob Harper 很愛 SML XD
+22:14:48 <godfat> @_@
+22:14:48 <godfat> Robert Harper... 看來不是 Bob XD
+22:14:59 <godfat> 看來我搞錯人了 orz
+22:15:59 <b4284> bob 好像就是 robert
+22:16:25 <suhorng> (!) make sense!
+22:16:29 <suhorng> http://en.wikipedia.org/wiki/Robert_Harper_(computer_scientist)
+22:17:00 <suhorng> 他是 Standard ML 定義的作者之一?
+22:17:00 <godfat> ...=_= 難怪我有這樣的連結...
+22:17:06 <godfat> 我記得是
+22:17:12 <b4284> 應該說 bob 是 robert 常用的匿稱
+22:18:18 <b4284> 就好像常叫的 bill gates 其實名字是 william
+22:18:48 <godfat> 是喔 @@ Bill 是假名？
+22:19:01 <suhorng> 原來不是名字 @_@
+22:19:06 <b4284> William Henry "Bill" Gates
+22:19:41 <b4284> 三代 (誤)
+22:26:50 <Yu-Lin> 我剛剛翻文件，vim 就算不給副檔名，它也會自動根據檔案內容判斷格式，我猜應該有個可以用來顯示格式的指令才對，但還沒找到
+22:28:03 <Yu-Lin> 然後你可以設定一個 function 用來 rename 或是用 file 來給檔案一個新的名稱，再寫另一個用來復原檔案名稱
+22:29:06 <Yu-Lin> 前面那個 function 用在 autocmd BufRead 或其他可以用來判斷檔案格式的地方，後面那個用在 autocmd BufWrite 或 VimLeave 之類的
+22:30:26 <Yu-Lin> 你可以參考這篇
+22:30:27 <godfat> 了解... 看來不是很好弄 @_@
+22:30:28 <godfat> 感謝 orz..
+22:30:28 <Yu-Lin> http://vim.wikia.com/wiki/Write_your_own_Vim_function
+22:30:46 <Yu-Lin> 或是 :help function 來翻文件
+22:31:14 <godfat> 決定還是先用 ln -s... XD
+22:31:28 <Yu-Lin> XD
+22:32:47 <Yu-Lin> 我之前好像有把 F5 設成 autocmd BufRead *html :map <F5> :!chrome %<CR> 這樣過
+22:36:20 <Yu-Lin> http://www.cs.nyu.edu/leunga/MLRISC/Doc/html/ 有人玩過 MLRISC 這個東西嗎？
+22:36:29 <Yu-Lin> 剛剛看 sml/nj 看到的
+22:47:17 <godfat> 那是按 f5 時會重新讀取檔案的意思嗎？
+22:49:45 <Yu-Lin> 我那是用在 html 上的，如果副檔名是 html，按 F5 就會調用外部的 chrome 去跑這整份程式碼
+22:51:06 <godfat> 喔喔。我晚點研究看看，謝啦
+22:51:39 <letoh> godfat: 你都用什麼 editor 呢? 平常不是用 vim ?
+22:52:39 <godfat> 目前平常是用 sublime text XD vim 是懶得離開 terminal 時用的 @@
+22:53:00 <letoh> 原來如此
+22:53:15 <godfat> 是有想轉移到 vim 上，不過試了很多次都有點失敗 orz
+22:53:16 <godfat> 不少我需要的功能，在 vim 上很難做或是做不到之類的
+22:54:55 <letoh> 那是什麼神奇的功能啊?
+22:55:23 <hashcat> 用emacs好了
+22:56:08 <hashcat> 雖說會lag, 快速鍵還會重疊到
+22:57:26 <godfat> 我有點忘記了，好像跟 ctrlp 和 nerdtree 有點關係
+22:57:27 <godfat> 例如我希望 nerdtree 能把任意檔案當成 project 內容，
+22:57:27 <godfat> 而不是真的根據硬碟目錄
+22:57:27 <godfat> 諸如此類的
+22:57:27 <godfat> 後來想說乾脆自己改，但發現 vim script 用起來太痛苦了，
+22:57:27 <godfat> 就算了....
+22:57:46 <godfat> emacs 看看吧 ~.~ 暫時還沒空重摸工作工具 orz...
+22:58:22 <hashcat> emacs有兩種, 一種是xwindows的, 一種terminal
+22:58:29 <letoh> vim 不一定要用 vim script，可以吃 python..
+22:58:46 <letoh> emacs 有很多種XD  但本家只有一種
+22:58:51 <hashcat> xwindows不太需要記憶東西
+22:59:13 <CindyLinz> 想寫 script 的話應該 emacs 比 vim 適合?
+22:59:19 <letoh> 如果你說的是 xemacs，那的確是不是本家的東西
+22:59:23 <hashcat> terminals那種也就 alt + `
+22:59:39 <CindyLinz> 不過換一種不同的檔案類型, 就像換了整套環境的樣子
+22:59:42 <b4284> 該是 gtk 版
+22:59:54 <CindyLinz> vim 會比較相似
+23:00:01 <hashcat> 我說得就是emacs
+23:00:02 <letoh> 其實 vim 也可以  只是比較弱一點  可能得用 ft 來切換
+23:00:05 <hashcat> 前面沒x
+23:00:33 <letoh> 嗯  emacs-x11 跟 emacs-no-x11 都算本家的
+23:01:29 <hashcat> 單手沒辦法用可能是缺點
+23:01:47 <godfat> 我之前用 aquaemacs 的印象是都不太好... XD
+23:02:01 <CindyLinz> 單手... 可以練單手 dvorak layout 作補嘗.. (誤)
+23:02:03 <hashcat> 也不是完全沒辦法, 就是要繞比較大圈
+23:02:30 <letoh> 我還在用 vim 時其實也會寫一些 script，其實 vim 提供的 api 還不少，能做的事也很多... 問題就是跟 terminal 的整合太弱
+23:02:57 <letoh> 不過就算現在有改善，也回不去了XD
+23:06:34 <letoh> aquaemacs 好像是 mac 上的首選，但從來沒用過，不曉得有什麼不同@_@
+23:08:49 <godfat> 我覺得應該是我不太適應 emacs orz...
+23:09:01 <godfat> 之前想改個字型也讓我覺得好麻煩 @@
+23:09:42 <letoh> 只是改字型的話好像跟 vim 差不多
+23:10:24 <godfat> 我可能需要從 console 介面開始
+23:10:27 <letoh> 不過我其實都在 terminal，所以很少遇到字型設定問題XD
+23:11:10 <letoh> 不管是 console 或 gui 界面的使用都一樣啊  但我個人建議剛開始先從 gui 開始
+23:11:39 <petercommand> letoh: gui有menu可以按呀
+23:11:44 <letoh> emacs 有些函式設計不良，強迫要傳入 mouse event，在 console 會沒辦法呼叫
+23:12:26 <godfat> gui 我是按 menu 按到不能接受 XD
+23:12:34 <petercommand> XD
+23:12:40 <letoh> 按 menu ?
+23:12:53 <godfat> 就是覺得那 menu 設計實在太恐怖了
+23:13:03 <letoh> 唔  沒有 menu 也能用，我基本上都是拿掉 menubar 的
+23:13:12 <petercommand> XD
+23:13:15 <godfat> 所以想說從 console 著手應該比較適合我
+23:14:13 <letoh> 其實都一樣啦  但 gui 能用的功能比較完整  例如 speedbar，還不習慣 emacs 的人用 console 版的 speedbar 會瘋掉...
+23:14:33 <hashcat> 我玩eclipse玩到被eclipse玩
+23:14:42 <letoh> 練到可以在心中切換 frame 後就沒問題了XD
+23:15:04 <hashcat> 裝了那個clojure plugin後, 補全def只會出現defn
+23:15:09 <letoh> eclipse 沒辦法在 terminal 用，這對我來說是沒辦法用的XD
+23:15:10 <hashcat> 求救
+23:15:35 <letoh> 我應該有 90% 的環境需求都是需要 terminal
+23:15:36 <hashcat> 明明就有defprotocol之類的
+23:16:08 <hashcat> 那除了emacs別無選擇
+23:16:55 <godfat> 暫離..
+23:16:57 <letoh> 剩下的大概就是在 x11 畫圖或在 windows 寫 mfc 程式XD
+23:17:11 <hashcat> eclipse裝消維
+23:19:00 <hashcat> 光x11也能畫圖
+23:19:30 <hashcat> 裝個kde不是很好嘛
+23:20:00 <hashcat> 無聊還可以把桌面轉來轉去
+23:20:23 <letoh> 我只要能跑 gimp 的環境就可以
+23:20:45 <hashcat> xmonad跟mate混合不錯
+23:20:48 <letoh> 其他多餘的東西不太喜歡裝XD
+23:20:50 <CindyLinz> mate?
+23:21:20 <hashcat> 有人不喜歡gnome 3就把2分離出來
+23:21:25 <hashcat> 叫mate
+23:21:31 <CindyLinz> 喔喔
+23:21:48 <hashcat> xmonad能讓工作列整個消失不見
+23:21:52 <CindyLinz> 那 letoh 現在是用純的 xmonad?
+23:22:21 <hashcat> 也可以變回有mate工作列
+23:22:43 <hashcat> 變不見的狀況跟只開x11樣子很像
+23:24:03 <b4284> mate 很好用
+23:24:56 <letoh> 我沒有 ghc 呀，應該沒辦法跑 xmonad XD
+23:25:18 <letoh> 還是只有 hugs 也能跑?
+23:25:24 <CindyLinz> 對哄!
+23:26:49 <letoh> 可能哪天受不了就會把 ghc 裝起來了XD  到時候再試試 xmonad
+23:27:19 <hashcat> 發行版都有提供binary版吧
+23:28:12 <letoh> 不過我真的不需要特殊的 wm... 以前用一陣子 twm 和 evilwm，提供的功能已經多到用不完
+23:29:49 <CindyLinz> hashcat: xmonad 如果沒有配合 ghc 的話, config 不能改欸 ^^|
+23:30:53 <hashcat> 沒注意過
+23:32:49 <letoh> 我比較需要一個很穩定的 terminal 和一個很好改的 text editor XD
+23:34:18 <hashcat> 怎麼聽都是emacs
+23:34:46 <hashcat> 順便講eclipse上面一票plugin都不錯用
+23:35:21 <letoh> 我知道啊  因為弄 android 時只能先配合用 eclipse XD
+23:35:56 <hashcat> XL跟unified parallel C都有plugin
+23:37:59 <hashcat> http://upc.lbl.gov/
+23:38:26 <letoh> xl 是指 ibm 那個?
+23:38:30 <hashcat> 看起來就很好玩, 雖說用不上
+23:38:32 <hashcat> 嗯嗯
+23:38:51 <letoh> 唔  你在哪個環境用 xl 呢?
+23:39:04 <hashcat> 沒用過
+23:39:13 <letoh> 喔喔喔
+23:39:31 <hashcat> 只是eclipse看到有全套parallel套裝就順便裝了
+23:39:59 <letoh> 我以為你在 aix 之類的環境上工作
+23:40:01 <hashcat> 想存錢作集群
+23:40:38 <hashcat> 只是妄想集群所以先學一下
+23:41:53 <mno2_> suhorng, godfat: Bob 的確是 Robert Harper 啊。
+23:41:59 <mno2_> Bob = Robert
+23:42:18 <mno2_> Bill = William
+23:44:42 <petercommand> 群集和集群是一樣的吧?
+23:45:10 <hashcat> 熊貓跟貓熊應該也是一樣
+23:45:22 <suhorng> mno2: 喔喔從名字來的!!
+23:46:27 <b4284> 叢集表示：
+23:46:37 <petercommand> XD
+23:52:44 <CindyLinz> cons 跟 snoc 也一樣喔~ (誤)

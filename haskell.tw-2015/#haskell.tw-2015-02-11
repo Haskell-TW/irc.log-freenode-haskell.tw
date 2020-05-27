@@ -1,0 +1,129 @@
+06:12:51 <pkmx> 這不知道有沒有比較好看的寫法... # https://ideone.com/IP3JYc
+06:13:32 <pkmx> 主要是希望有一個buffer可以hold住最近進來的n個element 超過的話就把最老的踢掉
+06:28:31 <pkmx> 沒有Data.Tagged的版本 # https://www.fpcomplete.com/project/94879/5DR0YidzdR
+06:28:54 <pkmx> 這個比ideone強多了 還內建一堆library + ghc 7.8
+09:44:55 <mno2> https://github.com/http2/http2-spec/wiki/Implementations  沒有 haskell 實作，該來寫一個？
+10:11:33 <mno2> https://docs.google.com/forms/d/1Rffj60hZXcg6zfu1dSGttHLTTsEcqXj8D66qIn9Grno/viewform?c=0&w=1
+10:11:35 <mno2> [GHC 7.10 Foldable/Traversable Survey]
+12:57:48 <CindyLinz> pkmx: 這個 buffer 需要有 random access 的功能嗎?
+13:03:50 <CindyLinz> mno2: 來開 issue 結案... (逃 # https://github.com/yesodweb/wai/issues
+13:04:56 <CindyLinz> 哦~ 所以 Foldable Traversable 是一定會進 Prelude.. 只是看 7.10 還是 7.12 而已?
+13:05:49 <CindyLinz> 進了 Prelude.. 以後就不會再分開用 [] 的 map / fold* 了 ^^
+13:14:05 <pkmx> 不需要=p
+13:15:26 <petercommand> 這樣會有甚麼問題嗎?
+13:15:40 <petercommand> 看起來蠻不錯的
+13:18:56 <CindyLinz> pkmx: 那可以用兩個 [a] 當 queue 加一個長度. 一直把新 elem push 到其中一個 [a], 太滿的時候從另一個 [a] 把東西 tail 掉. 然後當要 pop 的 [a] 空掉的時候, 把 input [a] 的內容一次 reverse 到 output [a] 裡面
+13:19:23 <CindyLinz> amortized O(1)
+13:21:05 <CindyLinz> 想偷看整個 queue 內容的時候就是先看 output [a], 然後再看 reverse (input [a])
+13:21:34 <pkmx> 這不就是用兩個stack做queue嗎?
+13:21:57 <CindyLinz> pkmx: 我沒有想過名字嘛 ^^|
+13:24:12 <pkmx> 這樣做跟用Data.Sequence不知道實際上效能差多少
+13:24:49 <CindyLinz> Data.Sequence 是 finger tree... 聽名字就覺得 overhead 超大 XD
+13:25:54 <pkmx> 而且其實我後來發現 我只需要存兩個就好
+13:26:24 <CindyLinz> wwww XD
+13:26:26 <pkmx> 乾脆用 (Maybe a, Maybe a) 硬幹吧 (誤
+13:32:28 <pkmx> 主要是要存最近收到的兩個值做外插 然後想說能不能寫general一點 如果之後想用最近的3個就把type的2改成3就好了=p
+13:33:10 <CindyLinz> tuple XD
+13:34:57 <pkmx> 然後想到這種會對端點做動作的container最適合的就是Seq了 然後用個phantom type去紀錄這個Seq最大的size可以是多少
+13:40:06 <petercommand> (Maybe a, Maybe a) 不錯XD
+13:40:19 <petercommand> 反正只有兩個嘛:p
+13:42:25 <pkmx> 效能可能還比較高=p
+13:42:58 <pkmx> 看來只好...搬data family出來用了...
+14:58:23 <petercommand> > "1"
+14:58:24 <lambdabot>  "1"
+14:58:28 <petercommand> > "1\n"
+14:58:29 <lambdabot>  "1\n"
+15:11:12 <petercommand> > data A = A
+15:11:14 <lambdabot>  <hint>:1:1: parse error on input ‘data’
+15:26:49 <CindyLinz> 我不知道怎麼在 ghci 環境裡面 define data @@"
+15:37:12 <aksatac> 問個問題：在 Mac 上哪一個 Haskell 環境推薦安裝？
+15:53:56 <au> aksatac: Haskell Platform
+15:55:25 <aksatac> au: thanks
+16:02:35 <CindyLinz> Michael Snoyman (Yesod 的爸爸) 推荐的 Haskell libraries.. # https://www.fpcomplete.com/school/using-fphc/recommended-libraries
+16:49:53 <suhorng> CindyLinz: 賀!
+16:50:04 <suhorng> 天阿都忘了這題還有這種陰險的地方
+16:53:36 <CindyLinz> suhorng: ?_?
+16:53:44 <CindyLinz> suhorng: 喔喔 Word32.. XD
+16:54:46 <CindyLinz> suhorng: 目前 input 1MB 個整數, 2秒內要跑完的題目還沒辦法處理.. 接下來想試試 ByteString + Parsec/Attoparsec 行不行
+16:55:23 <CindyLinz> 現在是懶懶的 inputs <- fmap (map read . words) Prelude.getContents  .. XD
+16:55:36 <CindyLinz> 啊不是 1MB 個整數.. 是 1M 個整數 :p
+17:01:39 <suhorng> 感覺...還是很痛苦.....XD
+17:02:03 <suhorng> 咦?　我所以目前不是直接用 ByteString 的 getContents 跟 words 跟 read?
+17:04:16 <CindyLinz> 還沒試
+17:07:03 <suhorng> 嗯嗯
+18:25:33 <suhorng> 是說 data 在 ghci 裡面可以, 不過在 do 裡面大概不行...?
+18:26:40 <CindyLinz> data 不能在 func 裡面..
+18:26:46 <CindyLinz> 只能 top level.. @@'
+18:26:54 <CindyLinz> 討厭的限制.... QQ
+18:33:20 <suhorng> 所以 lambdabot 可能也不行...
+18:35:22 <CindyLinz> 再抱怨一次.... 討厭的限制.............. OAO
+18:54:42 <pkmx> 不知道有沒有人整理到底哪些extension是安全可以開的XDrz
+18:56:00 <pkmx> 他 stream processing 故意忽略pipes :PPPP
+18:58:18 <CindyLinz> Conduit only 唷!! (逃
+18:58:49 <pkmx> 一定是之前pipes的作者每次發文都要先把conduit抓出來婊 惹人討厭了
+18:59:35 <suhorng> pkmx: 哪裡的 stream processing 阿XD
+19:00:05 <pkmx> CindyLinz 上面貼的 # https://www.fpcomplete.com/school/using-fphc/recommended-libraries
+19:01:05 <suhorng> 喔! thx
+19:07:49 <pkmx> @@ 我的crond突然segfault然後Xorg就自殺了...
+19:07:49 <lambdabot>  我的crond突然segfault然後Xorg就自殺了...
+19:07:57 <pkmx> 是被xray打到嗎...
+19:11:31 <suhorng> 跟 pi 2 一樣?（誤）
+19:12:25 <pkmx> 人家筆電是有殼的w
+20:17:03 <CindyLinz> @pl \acc p -> acc + detect p
+20:17:05 <lambdabot> (. detect) . (+)
+20:17:37 <suhorng> @unpl \f g -> (. (. g)) . f
+20:17:37 <lambdabot> \ f g e j -> f e (\ m -> j (g m))
+22:04:31 <CindyLinz> @pl \r k -> min r (res ! (k,k))
+22:04:32 <lambdabot> (. ((res !) . join (,))) . min
+22:04:37 <CindyLinz> 算了.. = =
+22:51:06 <suhorng> 好像還滿可以拆解的阿 lol
+22:52:08 <suhorng> @pl @pl \(r,k) -> min (r, (res ! (k,k)))
+22:52:08 <lambdabot> (line 1, column 1):
+22:52:08 <lambdabot> unexpected "@"
+22:52:08 <lambdabot> expecting white space, "()", natural, identifier, lambda abstraction or expression
+22:52:20 <suhorng> @pl \(r,k) -> min (r, (res ! (k,k)))
+22:52:21 <lambdabot> uncurry ((min .) . (. ((res !) . join (,))) . (,))
+22:52:25 <suhorng> woot
+22:58:38 <CindyLinz> 拆成這樣不會比較好讀啊
+23:02:39 <suhorng> 是要好讀嗎? 我以為只是想惡搞(呃)
+23:04:06 <CindyLinz> 丟丟看有沒有變好讀啊.. 有變好讀就用了, 變爛就丟了 XD
+23:06:47 <suhorng> lol
+23:07:28 <CindyLinz> 我覺得 Haskell 用的 IDE 需要內建一個隨手用的 @pl 工具...
+23:34:17 <suhorng> 不過話說回來 如果一個 @pl 需要思考才能寫出來 那樣還值得嗎?
+23:34:28 <suhorng> 目的不是要變好讀嗎XD
+23:35:22 <petercommand> 我覺得常常 @pl 都變很難讀XD
+23:35:47 <petercommand> @pl \a b c d -> a + b - c + d
+23:35:47 <lambdabot> ((((+) .) . (-)) .) . (+)
+23:36:20 <petercommand> 感覺當 . 用 section 的時候，可讀性會大幅降低
+23:36:28 <petercommand> 用 section 語法
+23:44:17 <CindyLinz> suhorng: 我比較笨不行嗎 
+23:44:27 <CindyLinz> suhorng: 我比較笨不行嗎 >o<.. 比較笨就不可以寫 Haskell 嗎 >w<
+23:49:09 <suhorng> CindyLinz: 阿嗚 我不是那個意思阿!!
+23:49:42 <suhorng> 不是要好讀嗎?
+23:49:53 <CindyLinz> suhorng: 好讀好寫不一樣啊~~
+23:50:05 <CindyLinz> 你看語言測驗讀和寫都是分開考的 XD
+23:50:55 <CindyLinz> 就... 我一下子想不出來怎麼寫, 可是如果有人寫出來給我看, 可能覺得很好讀 XD
+23:51:31 <CindyLinz> @pl \a -> (-a, a)
+23:51:32 <lambdabot> (line 1, column 9):
+23:51:33 <lambdabot> unexpected '-'
+23:51:33 <lambdabot> expecting expression
+23:51:33 <petercommand> 像 lens 嗎XD
+23:51:40 <CindyLinz> @pl \a -> (- a, a)
+23:51:41 <lambdabot> (line 1, column 9):
+23:51:41 <lambdabot> unexpected '-'
+23:51:41 <lambdabot> expecting expression
+23:51:50 <CindyLinz> @pl \a -> (0 - a, a)
+23:51:51 <lambdabot> (,) =<< (-) 0
+23:52:06 <CindyLinz> 其實我想叫 @pl 生一點 arrow 的東西出來看 XD
+23:52:14 <CindyLinz> @pl (a, b) -> (a*2, b+3)
+23:52:15 <lambdabot> (line 1, column 10):
+23:52:16 <lambdabot> unexpected '>'
+23:52:16 <lambdabot> expecting operator
+23:52:20 <CindyLinz> @pl \(a, b) -> (a*2, b+3)
+23:52:21 <lambdabot> (2 *) *** (3 +)
+23:52:34 <CindyLinz> 對對對... 像這個, 因為符號不夠熟, 一時不好想 XD
+23:52:49 <CindyLinz> @pl \a -> (a*2, a+3)
+23:52:51 <lambdabot> liftM2 (,) (2 *) (3 +)
+23:52:59 <CindyLinz> 說好的 &&& 呢.... /_\
+23:53:03 <petercommand> @unpl (1 -) *** (1 *)
+23:53:04 <lambdabot> ((\ a -> 1 - a) *** \ b -> 1 * b)

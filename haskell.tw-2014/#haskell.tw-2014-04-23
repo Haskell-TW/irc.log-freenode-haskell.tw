@@ -1,0 +1,148 @@
+00:43:38 <haroldwu> 唷！歡迎大家來 #yinwang.talk 掛著
+00:44:08 <haroldwu> 雖然王垠似乎對 monad 有點意見 ...
+00:45:11 <b4283> 王垠表示：http://this-plt-life.tumblr.com/post/44462204757/simon-peyton-jones-adding-the-io-monad-to-haskell
+09:26:23 <motephyr> 也沒有一定要拿haskell來做什麼 就反正花點時間碰一下Haskell覺得是好的 看看寫其他程式的時候思路是不是比較好整理
+19:32:38 <CindyLinz> 嗯, 這邊會語言的人多, 在這裡問好了... :p
+19:33:07 <CindyLinz> 想請問有沒有一個, 比 Java 還要更冗更囉嗉的語言?
+19:33:29 <CindyLinz> 前幾天, 一個天天寫 Java 的人在抱怨說, 他好討厭 Java...
+19:33:52 <godfat> cobol?
+19:33:53 <CindyLinz> 然後我就跟他說, 那我幫他找一個更討厭的語言給他看看, 也許他再到工作看 Java 的時候心情會好一點...
+19:34:20 <CindyLinz> 結果過了好一陣子... 我說:
+19:34:41 <CindyLinz> 「欸, 要找到像 java 這麼累贅的語言... 說真的, 還真找不到........ sorry
+19:34:42 <godfat> objective-c? 不過那好像是 cocoa framework 的關係
+19:34:50 <godfat> XDDD
+19:34:55 <CindyLinz> cobol 我看不出來冗不冗.. @_@"
+19:35:11 <godfat> 我只記得笑話說 Compile Only Because Of Luck
+19:35:22 <CindyLinz> 像 Java 要打一堆重複的 public.. 之類的
+19:35:46 <CindyLinz> 嗯, 因為我想他討厭 Java 應該是冗的部分.. 所以像 brainf**k 雖然也是不堪使用, 但是方向不一樣 ^^|
+19:36:01 <CindyLinz> 好像不能用「也是」... 其實 Java 是相當堪用的 XDDD
+19:36:10 <CindyLinz> 我看一下 obj-c
+19:37:05 <CindyLinz> cobol 看起來只是很多 symbol 用文字表示? 是會比較長沒錯, 但是這不會冗, 因為在心中還是一個東西.... 嗯, 可能冗的判斷比較像是沒必要的 token 太多?
+19:37:47 <godfat> 老實講我之前寫 scala 也是寫到好煩，不過要說還是比 java 乾淨多了，而且我在做的事 java 做不到...
+19:38:04 <godfat> c++ template 也滿冗的
+19:38:09 <CindyLinz> template!
+19:38:28 <godfat> template <typename T, template <typename U> >::iterator_type ...
+19:39:02 <godfat> 不過總地來說感覺還是 java 略冗，因為是整個冗，其他語言只是部分...
+19:39:28 <godfat> 跟他說王垠也愛 java 好了
+19:39:28 <CindyLinz> 是不是拿 SGI STL 的 code 出來讀就很威了.. (思)
+19:39:45 <CindyLinz> 這真的算是鼓勵嗎... ww # 19:39 < godfat> 跟他說王垠也愛 java 好了
+19:40:05 <CindyLinz> 王垠覺得 S-exp 是最好讀的 code 欸.. 那不是一般人啊啊
+19:40:11 <godfat> 要 template 魔術可以看 boost, 應該也都很冗很煩。是說 haskell 要玩 type 魔術感覺也很冗..
+19:40:36 <CindyLinz> godfat: 太故意造出來的 code 不算, 有在實用的比較好 XDD
+19:40:45 <CindyLinz> boost 可以, 但 haskell type 魔術不算 :p
+19:40:52 <godfat> XDDD 好吧，那 java 還是贏了.. XD
+19:43:21 <godfat> 順便抱怨一下好了，我要回去和吃飯了，不想再搞下去
+19:43:22 <godfat> 我現在在做一件事，希望在 transaction 失敗後標一個 flag
+19:43:22 <godfat> 如果說直接改 record flag 再 save, 問題是會把失敗的值一起存進去
+19:43:22 <godfat> 所以我想用 update_column 直接去改那個 column 而非走一般的 save
+19:43:22 <godfat> 結果 rails 很神奇，save 可以動但 update_column 會說 transaction aborted 然後就直接忽略 update_column...
+19:44:10 <godfat> 無腦解決法就是 save 前先 reload 回原本 db 狀態
+19:44:11 <godfat> 可是幹嘛呀 orz...
+19:47:34 <CindyLinz> 我還跟不上你說的情境 ._.
+19:47:42 <CindyLinz> 你先回家好了 ^^|
+19:47:49 <godfat> XDD 好
+19:54:50 <letoh> s-exp 不好讀嗎?
+19:55:41 <letoh> 我這個小魯也覺得很好讀啊  只是討厭輸入而已
+19:58:14 <letoh> 我想到有兩種「冗」  一種是一句話沒辦法簡單講，一種是缺乏封裝或自動產生代碼的能力
+20:05:05 <CindyLinz> letoh: 我看中置式 operator 很習慣了改不了 XD
+20:05:44 <letoh> 我放頭放尾放中間都用過XD
+20:06:04 <CindyLinz> letoh: 當然我也沒辦法說一切都用中置式解決啦.. 只是只剩前置式會很難過啊 ._.
+20:06:40 <letoh> 光看 s-exp 的話大概沒什麼好說的，但 lisp 的話很多人做 infix macro
+20:06:55 <CindyLinz> 這就表示很多人受不了嘛 XDDD
+20:07:12 <letoh> 那只是為了讓習慣 infix syntax 的人入門方便而已
+20:07:36 <letoh> 寫 lisp 的人本身其實不太用
+20:08:04 <letoh> 而且多半是為了炫技... 為了展示 lisp 什麼都辦得到XD
+20:08:09 <CindyLinz> wwww
+20:08:31 <CindyLinz> 想到我寫 Haskell 好像幾乎沒在用 list comprehension
+20:08:54 <letoh> forth 也是  infix module 大家看看會笑一下，但通常不會真的用... 因為 infix 太麻煩了
+20:09:23 <CindyLinz> 最近看 Begining Haskell 才知道現在 Haskell 的 list comprehension 有這麼多東西, 用起來像 SQL 一樣 ^^|
+20:09:47 <CindyLinz> 有類似 group by, order by 的東西
+20:09:51 <letoh> 是說有什麼 where condition 之類的語法?
+20:09:53 <letoh> 喔喔喔
+20:10:06 <CindyLinz> where 原本就有了.. 像是..
+20:10:12 <letoh> 嗯嗯
+20:10:22 <CindyLinz> > take 3 [x | x <- [1..], odd x]
+20:10:23 <lambdabot>  [1,3,5]
+20:10:29 <CindyLinz> 不加的就是 where XD
+20:10:50 <CindyLinz> 只是 group by / order by 有點過份啊 XD
+20:10:54 <letoh> 嗯嗯  我以為是講這個.. groupby orderby 我也沒用過XD
+20:11:21 <CindyLinz> 更過份的它不是直接丟一個關鍵字那樣做, 所以這些 group by 什麼的都可以是自己實作的函數, 符合某種形狀就好....
+20:11:32 <CindyLinz> 但我還是不知道我會不會去用 @@"
+20:11:47 <CindyLinz> 在構思程式怎麼寫的時候, 好像不小心就沒把它放進來考慮 @@"
+20:11:49 <letoh> 聽起來像 LINQ
+20:19:01 <CindyLinz> > let fib = 1 : 1 : [a + b | (a, b) <- zip fib (tail fib)] in take 10 fib
+20:19:03 <lambdabot>  [1,1,2,3,5,8,13,21,34,55]
+20:19:18 <CindyLinz> hmm... 這樣寫有比較好看嗎? @_@"
+20:19:34 <CindyLinz> > let fib = 1 : 1 : zipWith (+) fib (tail fib)
+20:19:35 <lambdabot>  not an expression: ‘let fib = 1 : 1 : zipWith (+) fib (tail fib)’
+20:19:39 <CindyLinz> > let fib = 1 : 1 : zipWith (+) fib (tail fib) in take 10 fib
+20:19:41 <lambdabot>  [1,1,2,3,5,8,13,21,34,55]
+20:19:46 <letoh> 不太習慣
+20:19:59 <CindyLinz> 你說, [....] 那種比較不習慣?
+20:20:52 <letoh> 對啊  不過 python 也是這種寫法
+20:20:56 <CindyLinz> 不對, 你比我還更偏愛前置式的話, 會更看不慣這個好像很正常 ^^|
+20:21:33 <CindyLinz> 對啊... 好像新興語言很多很喜歡 Haskell 的 list comprehension, 抄去當火力展示的 feature @@"
+20:21:53 <letoh> 這全部都不是前置啊... 不過 s-exp 主要不在於前置...
+20:22:21 <CindyLinz> 前置風:
+20:22:53 <CindyLinz> > let fib = (:) 1 ((:) 1 (zipWith (+) fib (tail fib))) in take 10 fib
+20:22:54 <lambdabot>  [1,1,2,3,5,8,13,21,34,55]
+20:25:15 <letoh> XDXD
+20:25:41 <letoh> 這很接近前置沒錯XD
+20:26:16 <CindyLinz> 只是 list comprehension 是 list monad 的一種變形, 能用 do-notation 來寫, 好像就更肌肋了?
+20:26:23 <CindyLinz> 雞肋 XD
+20:26:29 <CindyLinz> 我來試看看.. :Q
+20:27:24 <CindyLinz> > let fib = 1 : 1 : (do { (a, b) <- zip fib (tail fib) ; return (a + b) }) in take 10 fib
+20:27:26 <lambdabot>  [1,1,2,3,5,8,13,21,34,55]
+20:28:07 <CindyLinz> 好吧, 符號運用上還是冗了一點 ^^|
+20:29:37 <letoh> 這樣就可以向你朋友推薦 haskell 了 (誤
+20:31:24 <CindyLinz> 沒有人想把 list comprehension 變成所有的 monad 都可以用嗎? XD
+20:34:06 <letoh> 可以串起來應該蠻方便的  不過我還是想不到什麼時候會用到@_@
+20:34:42 <letoh> 好像一般的例子都是跟數學有關?
+20:36:17 <CindyLinz> 覺得複雜到寫成 SQL 樣就不數學了啊 ^^|
+21:37:26 <CindyLinz> 真好! cabal repl 可以拿 .cabal 檔去開一個 ghci!
+22:51:11 <CindyLinz> 以前在學校學過用 Turing machine 的模型證明 halting problem 是 uncomputable
+22:51:29 <CindyLinz> 不知道 lambda calculus 直接證這問題會長什麼樣...
+22:51:52 <CindyLinz> 應該不是先甫明 lambda calculus 和 Turing machine 的 power 一樣, 然後用 Turing machine 來證吧 XDD
+22:52:18 <godfat> XDDDDD 永遠的證明法
+22:52:29 <CindyLinz> 這樣就輸了啊啊 XD
+22:52:57 <godfat> 讓我想到那個笑話：
+22:52:57 <godfat> A: Do you speak Chinese?
+22:52:58 <godfat> B: Yes
+22:52:58 <godfat> A: ...
+22:53:30 <CindyLinz> 欸?
+22:53:43 <godfat> 英文作文之類的
+22:53:54 <CindyLinz> 哈哈.. 我是國中的時候同學想這樣搞 XD
+22:54:11 <godfat> 我不記得我有沒有想過這樣了... XD
+22:54:23 <CindyLinz> 上台演短劇.. A: Can you speak Chinese? B: Why not? A: ...(開始說中文)...
+23:02:20 <petercommand> CindyLinz: yinwang的文章說lambda calculus來證明halting problem很簡單.....
+23:04:54 <petercommand> http://yinwang0.lofter.com/post/183ec2_790286
+23:08:24 <CindyLinz> 怎麼又是他啦 XDXD
+23:11:26 <CindyLinz> 在這 http://yinwang0.wordpress.com/2012/10/25/halting/
+23:14:04 <whitglint> 以後什麼關鍵字都可以問王垠了，王垠，關於這件事你怎麼看？
+23:14:37 <godfat> 王垠，關於寶傑你怎麼看？
+23:15:25 <CindyLinz> godfat: type error! 寶傑只能當主辭
+23:15:47 <CindyLinz> 嗯, 而且只有西屏可以用 XD
+23:15:59 <whitglint> 不是王垠的頻道在討論王珢，王垠的頻道不討論王垠
+23:16:16 <petercommand> lolol
+23:16:43 <whitglint> 我到底在看哪個頻道 XD
+23:17:19 <CindyLinz> XDXD
+23:18:28 <letoh> 我現在才發現XD
+23:18:48 <godfat> inception...
+23:23:08 <CindyLinz> 好像真的很好證....
+23:23:57 <petercommand> 對阿
+23:24:51 <petercommand> 代入argument->就contradiction了XD
+23:25:54 <CindyLinz> 為什麼要學 Turing machine 來證明 halting problem 呢... (恨)
+23:26:35 <petercommand> 他說他在implicitly using diagonalization是甚麼意思呀?
+23:26:51 <CindyLinz> 這我不知道
+23:27:02 <godfat> 因為熱愛 brainfuck?
+23:27:13 <CindyLinz> 不愛啊 = =
+23:27:29 <godfat> 那只好說無知了... XD
+23:27:39 <petercommand> diagonalization不是matrix的東西嗎XD
+23:28:15 <petercommand> 印象中
+23:31:44 <mno2> 它是指 Cantor’s diagonal argument
+23:31:54 <mno2> 我有點忘記證明了
+23:32:15 <mno2> 不過基本上跟 Cantor 證明實數是 uncountable 的證明類似
+23:33:12 <mno2> 就是擺在二維方格上然後從左下到右上開始劃
+23:34:24 <mno2> 啊，好像說錯了
+23:34:30 <mno2> http://en.wikipedia.org/wiki/Cantor's_diagonal_argument
+23:36:59 <mno2> http://en.wikipedia.org/wiki/Halting_problem  Sketch the proof 那一段，也是取對角上的 bit 來組出新的 program ，造成矛盾

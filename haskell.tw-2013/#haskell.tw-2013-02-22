@@ -1,0 +1,56 @@
+21:30:08 <favonia> miaout17: 後來你有把 server 跑起來了嗎
+21:34:19 <favonia> 為什麼有個套件叫 system-filepath...
+21:39:01 <CindyLinz> dependent 它的 package 好多個 :p
+21:39:20 <CindyLinz> 用 bytestring 以及處理 / \ 的選擇吧
+21:41:15 <favonia> 喔喔
+21:41:37 <favonia> 那我覺得這名字滿爛的，誰知道 filepath 和 system-filepath 有什麼差別啊...
+21:42:37 <CindyLinz> filepath 已經被用走了...
+21:42:57 <CindyLinz> Prelude type FilePath = String
+21:43:26 <favonia> 我的意思是說可以用 bytestring-filepath 之類的
+21:43:34 <CindyLinz> 另外, 有個 package 叫 filepath http://hackage.haskell.org/package/filepath
+21:43:59 <favonia> CindyLinz: 我剛才講的就是這個...
+21:45:33 <CindyLinz> favonia: bytestring-filepath 的話.. 在 System.Posix.ByteString.FilePath 裡面有 type RawFilePath = ByteString  :p
+21:46:53 <CindyLinz> 感覺只剩 / \ 有差了 :Q
+21:46:59 <favonia> 啊好煩喔 /___\ 真亂
+21:47:54 <favonia> system-filepath 不讓別人知道底下是不是 bytestring
+21:49:23 <favonia> CindyLinz: 喔天啊 system-filepath 用的資料結構好肥
+21:49:44 <favonia> 而且裡面都用 String
+21:49:54 <favonia> 大概是世界級慢的套件 xD
+21:51:20 <CindyLinz> 還好 path 通常不長 @@"
+21:52:02 <favonia> CindyLinz: 能省則省...
+21:52:13 <favonia> CindyLinz: 主要是我不知道這樣有什麼好處
+21:52:21 <favonia> 需要好多 utf8 編碼轉來轉去
+21:52:32 <CindyLinz> 嗯
+21:52:53 <CindyLinz> filepath 的確不一定是 UTF8 @@"
+21:53:08 <favonia> 你看他的介面
+21:53:13 <favonia> 滿滿 utf8
+21:53:18 <CindyLinz> 記得之前用 Windows 的時候, default 是 cp950
+21:53:53 <favonia> CindyLinz: ...This function ignores the user’s locale, and assumes all file paths are encoded in UTF8. If you need to display file paths with an unusual or obscure encoding, use encode and then decode them manually.
+21:54:33 <CindyLinz> ....
+21:54:51 <favonia> CindyLinz: 我個人建議是
+21:54:59 <CindyLinz> 看到 for windows 的 code, 想起來 windows 的 path 沒有分大小寫.. (Y)
+21:55:00 <favonia> CindyLinz: 把這套件丟了 xDDDDDDDDDDDDD
+21:55:09 <favonia> 唉唉對啊
+21:55:45 <CindyLinz> winValid 函數裡面有神祕的東西..
+21:55:48 <favonia> CindyLinz: 不過這問題已經被解決了
+21:56:02 <favonia> @google case-insensitive haskell
+21:56:04 <lambdabot> http://hackage.haskell.org/package/case-insensitive
+21:56:05 <lambdabot> Title: HackageDB: case-insensitive-1.0
+21:57:30 <favonia> CindyLinz: 這個可以應付大部分的狀況
+21:57:44 <favonia> 然後不用動用到 Unicode 最終大決
+21:58:10 <CindyLinz> 嗯
+21:58:12 <favonia> 最近在應付 HTTP parser, 前面的 header 就可以這樣用 xDDD
+21:59:31 <favonia> 這樣就可以保有原有字串的同時又不分大小寫的比對
+22:01:08 <CindyLinz> 疊一層怪怪的 compare
+22:01:21 <favonia> 對
+22:01:49 <favonia> 我個人覺得這已經是 Haskell 世界算漂亮的答案了啦 xDD
+22:03:05 <CindyLinz> 嗯嗯
+22:13:20 <favonia> UncleHandsome: 我好奇問一下，你用 xmonad 有遇到什麼怪問題嗎
+22:24:28 <mno2> miaout17:  雖然我任性想玩， 不過其實我並沒有一定要怎樣，如果你覺得怎樣對你比較順利就直接改掉 （或是你想寫後端？）
+22:25:22 <favonia> mno2: 打岔一下， travis 到底在不爽 test-framework 什麼啊？
+22:28:37 <mno2> favonia: 不懂，不是 build success ?
+22:28:48 <favonia> mno2: 喔我說 pulse 的
+22:30:19 <mno2> favonia: 應該說不知道為什麼寫在 cabal test-suite 裏面的 dependency 好像不會被算進去
+22:30:26 <mno2> 我 local 也是這樣
+22:31:17 <mno2> 所以我 encoding-server 的 .travis.yml 就硬是多加上 cabal install test-framework
+22:32:28 <favonia> mno2: 好暴力 ._.

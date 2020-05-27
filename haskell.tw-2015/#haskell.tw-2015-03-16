@@ -1,0 +1,38 @@
+00:01:47 <monochrom> 我是數學家. 我最反對比喻. 及空泛詞句.
+00:02:34 <monochrom> 至於 least fixed point, 並非比喻或空泛. 是說得出怎樣 least 法的.
+00:05:22 <monochrom> 比喻是不懂寫正解才寫的
+02:18:30 <xcycl> 程式設計教育滿奇怪的，其他工程類別的常態是先學習微積分，普通物理等基礎科目再學習工程相關知識
+02:19:40 <xcycl> 但是談到程式設計，似乎變成不需要背景，把需要一些理論背景的語言當作難以駕馭的怪獸 ...
+02:24:26 <xcycl> 要認真學好 FP 還是建議看 Richard Bird 的書 http://www.cambridge.org/gb/academic/subjects/computer-science/programming-languages-and-applied-logic/thinking-functionally-haskell
+02:34:44 <monochrom> 很大程度, 程式員之所以選擇做程式員, 即不入傳統工程行業以至科學, 正是因為厭倦數學理科.
+02:36:02 <monochrom> 所以是死症. 程式員不會喜歡用數學角度, 甚至單單是邏輯角度, 去看待程式.
+02:36:27 <xcycl> 但是程式設計教育應該維持自身的倫理啊 xD
+02:37:41 <xcycl> 更正，我心中批判的目標是學校的程式設計教育
+02:39:37 <monochrom> (同樣, 不入寫作行業及法律行業, 正是因為不懂寫作. 所以也是死症, 想程式員寫好 doc, 這是矛盾)
+02:41:20 <monochrom> 教別人寫程式的人, 自身不也是選擇了程式, 即厭倦了數學理科嗎?
+02:41:48 <monochrom> 舉例: 試想像 Guido von Rossum 教人寫程式...
+02:42:12 <monochrom> 又或者 Larry Wall
+02:42:26 <xcycl> 我覺得這點不大對，只是理論派的為主的教學還沒成熟而已
+02:43:23 <monochrom> 我們有這樣的偉大領袖供學生景仰, 還可能會有愛邏輯的人嗎? XD
+02:43:34 <xcycl> <--- 我啊
+02:43:57 <monochrom> 當然了, 還有我. 有人景仰我的 :)
+02:45:55 <monochrom> 我確是認為程式教育的頭一課, 應該是邏輯. 我們容或不必知 differential, integral calculus, 但一定要熟 predicate calculus.
+02:46:56 <xcycl> 至少我愛好邏輯，跟以範疇論為生存工具>但我可以說程式設計需要的數學背景，跟主流數學差異頗大
+02:47:10 <xcycl> 至少我愛好邏輯，跟以範疇論為生存工具。但程式設計需要的數學背景，跟主流數學差異頗大
+02:47:37 <monochrom> 是
+02:48:55 <xcycl> 世界上還是有以 FP 為主的教學，以及完整理論課程，像是 Chalmers
+02:51:48 <monochrom> 我還是未買 thinking functionally 來讀. (主要因為還有其他書買了未讀, 還有我其實已經懂了)
+02:53:53 <xcycl> thinking functionally 只是一般程度的入門書，只是相較於一般的入門書來說，描述精確不容易誤解
+02:55:29 <monochrom> 其實不一定要 FP, 即使用 Pascal 也可以有非常嚴謹的邏輯算計, 例如我師父的 http://www.cs.toronto.edu/~hehner/aPToP/ . 甚或用舊式的 Hoare triples
+02:56:36 <xcycl> 嗯，是不用執著在特定的語言上
+02:57:16 <xcycl> 但學生學習 imperative language 的過程可能對詞彙感到困惑，跟傳統數學的意義互有衝突
+02:59:24 <xcycl> 直到自修學了程式語意才有豁然開朗的感覺, 但 functional programming 的問題比較小
+02:59:30 <monochrom> 我頗鄙視有些程式員想被稱為工程師, 但沒有工程師的付出, 例如花時間心血學懂相關的數學理論, 工作也有理論基礎
+03:01:14 <xcycl> 這點反而覺得 imperative language 在理解程式的抽象語意上，比 FP 還要困難一些。
+03:01:54 <xcycl> 同意。
+03:02:20 <monochrom> 我最尊敬的是像 David Parnas 那樣, 為"軟件工程"提出及推廣認真嚴謹的數理基礎, 使之配得"工程"二字
+03:05:10 <monochrom> 其次尊敬的是, 像 Greg Wilson 那樣, 不喜數學基礎, 於是不稱工程, 改稱 craft. 他們至少是言行一致, 尊重"工程"及"craft"二詞的真義.
+03:06:45 <xcycl> 話雖如此，資訊工程或電腦科學這兩字也常被許多大學系所濫用 ...
+03:07:23 <xcycl> 甚至一開始命名「電腦科學」就有誤導的嫌疑
+03:11:39 <xcycl> computer 本身即是工程產物，並不是自然存在的現象，稱之為 computing science 強調關於計算的部分會更恰當
+03:13:06 <xcycl> 許多學校的課程也跟「工程」關係不大，也就不能怪程式員自認為是工程師 ..

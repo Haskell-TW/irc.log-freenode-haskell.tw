@@ -1,0 +1,41 @@
+00:04:49 <godfat> 好白癡 XDDDDD https://www.youtube.com/watch?v=u7Noxp6apN8
+00:06:17 <CindyLinz> :p
+00:06:33 <letoh> 這東西好久了 為啥一轉過來就看到這個XD
+00:07:03 <godfat> 因為我沒聽過，有點好奇就查了一下 XD
+00:11:41 <suhorng> let { 紙=S; 包=K; 雞=I }
+00:12:07 <letoh> SKI XD
+00:13:40 <godfat> 然後 I 其實可以不用，所以程式就可以轉成紙包紙包紙紙包紙包包包紙
+00:14:35 <letoh> I 是自己吃掉了嗎? XD
+00:14:56 <godfat> 雞在最裡面，要全部打開來才吃得到喔~
+00:16:46 <CindyLinz> 不一定有雞啊
+00:16:52 <CindyLinz> 第一段就沒雞 XD
+00:17:07 <CindyLinz> 他是「紙包雞」, 但是是翻面的「雞包紙」.......
+14:14:19 <suhorng> 原來 ReaderT 可以拿來用全域變數 XDD
+14:15:45 <suhorng> 大概是像, 假如用 IORef 開全域(而不用 StateT), 若想讓每個函式都看到就用 ReaderT 把 ref 塞進去
+14:15:56 <suhorng> 雖然開全域變數應該不是好作法 XD
+14:16:13 <suhorng> 類似的可能還有像讀 command line 參數後存設定？
+15:05:13 <CindyLinz> 這用法的確就是全域變數啊 :p
+15:09:14 <suhorng> 原本一直想不到 ReaderT 到底拿來做什麼w
+15:13:33 <CindyLinz> 你一定是拿來跟 StateT 比了.. XD
+15:13:51 <CindyLinz> 覺得 ReaderT 還有一個 local 的功能, 感覺還不錯
+15:13:55 <CindyLinz> 用下去就像開了一個副本
+15:14:46 <CindyLinz> ReaderT 搭配濫用的 local 的話, 就變成 StateT 了... 不過可能會激怒讀你程式的人... ww
+15:15:06 <CindyLinz> 欸.. power 比 StateT 還大點 XD
+15:15:42 <suhorng> 比較強XD 有scope
+15:15:47 <suhorng> local好用!
+15:16:09 <CindyLinz> 糟糕我幫你掀開潘朵拉的盒子了..... ww
+15:16:18 <suhorng> XDDDDDDDD
+15:16:44 <suhorng> 可是ReaderT加上IORef就變IO裡面的StateT了! (完全無意義)
+15:18:41 <suhorng> 老實說, 我就真的不知道 IORef 能做什麼了XD 效能考量..?
+15:19:06 <CindyLinz> 如果要實作 Hash.. 你這資料結構會想怎麼維護啊?
+15:19:29 <CindyLinz> 喔你是說用 StateT 這種用法就好了?
+15:19:45 <suhorng> 嗯 用StateT外表也看不出來
+15:20:25 <CindyLinz> 假設用一個 immutable 的大陣列, 用一個 StateT 抓住它
+15:20:37 <CindyLinz> 每次修改一個 element 的時候都要複製整個陣列欸
+15:21:37 <suhorng> 那換成 mutable array 感覺也不錯阿XDDD
+15:21:59 <CindyLinz> 實作 mutable array 就要用 FFI 或 IORef 了吧?
+15:22:17 <suhorng> 嗯,也是
+15:23:04 <suhorng> 想想假如StateT裡面放mutable array終究是得在 IO 裡面...除非放棄 O(1) 存取用平衡樹...
+15:23:31 <CindyLinz> 嗯嗯
+15:24:05 <suhorng> 嗯..mutable array的instance有 IO[U]Array 跟 ST[U]Array 兩種 XDD
+17:43:32 <CindyLinz> 考慮.. 也許我先把 Agda 擺一邊, 先學 Coq 好了.. @@"

@@ -1,0 +1,13 @@
+19:31:26 <caasih> 想起上次 petercommand 撞到沒有 systray 的是 Vidyo https://bugzilla.mozilla.org/show_bug.cgi?id=989811
+21:58:06 <CindyLinz> 那那個 issue 有解了嗎?
+22:41:35 <caasih> > Status: NEW → RESOLVED
+22:41:37 <lambdabot>  <hint>:1:13: error: parse error on input ‘→’
+22:41:53 <caasih> > Resolution: -> WORKSFORME
+22:41:55 <lambdabot>  <hint>:1:13: error: parse error on input ‘->’
+22:42:50 <caasih> 看來回報的人升級 openSUSE 就好了 XD
+22:46:41 <CindyLinz> ...
+22:46:53 <CindyLinz> 意思是沒有 systray 還是會掛嘛w
+22:54:40 <caasih> 反正 Rust 讀書會看來擱置中， petercommand 再開 Vidyo 的機會不大(逃
+23:02:17 <CindyLinz> 問題使用者被解決了w
+23:38:37 <monochrom> All human problems are caused by humans. :)
+23:47:44 <petercommand> XDXD

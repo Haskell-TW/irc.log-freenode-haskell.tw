@@ -1,0 +1,158 @@
+00:00:30 <CindyLinz> book 裡面有用到一個叫 mkYesod 的東西.. 它會生 Yesod dispatch 的 data 和 instance 的部分..
+00:01:08 <godfat> code generator 嗎？
+00:01:29 <CindyLinz> instance 的部分需要用到各 path 的 handler 函數; 而各 handler 函數需要 dispatch 的 data.. 這會使得所有的 handler 函數都要跟 mkYesod 寫在同一個檔案裡面 orz
+00:01:50 <CindyLinz> 我研究對照 scaffold 生出來的程式... 發現如果想把 handler 拆開的話
+00:02:12 <CindyLinz> 不要直接用 book 裡的 mkYesod 而是用 mkYesodData 和 mkYesodDispatch 兩個
+00:02:41 <CindyLinz> mkYesodData 不需要 depend 別人; 然後各 handler 可以 import 有 mkYesodData 的檔案; 然後 mkYesodDispatch 的檔案再去 import 各 handler
+00:03:04 <CindyLinz> godfat: 嗯, 它會吃 routes 檔 (或 QuasiQuote) 來生東西
+00:03:15 <godfat> 感覺好複雜.. XD
+00:03:48 <CindyLinz> 如果是要試試一檔網站的話, 用 mkYesod 就沒有問題 ^^|
+00:06:51 <godfat> 嗯.. 雖然感覺理想上不應該有檔案上的限制的
+00:06:51 <godfat> 其實我不是很懂為什麼一定要同一個檔案？同一個 module 不行嗎？
+00:07:27 <godfat> 是說同 module 可以不同檔嗎？|||b
+00:08:13 <CindyLinz> godfat: 同一個 module 不能不同檔
+00:08:32 <godfat> orz...
+00:08:36 <CindyLinz> 我用抽象點的描述好了.. 會比較精簡有重點 ^^|
+00:08:52 <CindyLinz> mkYesod 會生出兩塊東西 data 和 instance
+00:09:21 <CindyLinz> 然後.. handler 就是... 像是 getHomeR, postHomeR, getAuthR.. 之類的函數, 就是使用者點到網址要去跑的 CGI
+00:09:41 <CindyLinz> handler 要 import data 才能 compile; 然後 instance 要 import 所有的 handler 才能 compile
+00:10:06 <CindyLinz> mkYesod 一次生出了 data 和 instance (所以這兩個在同一檔內), 這樣就使得所有的 handler 都要一起在同一個檔案裡
+00:10:31 <CindyLinz> 用 mkYesodData 和 mkYesodDispatch 的話.. data 和 instance 就可以放在不同檔案了, 那麼, handler 也就可以放在不同檔案了
+00:10:53 <CindyLinz> 只是個 yesod 實作生 code 的技術問題 ^^|
+00:16:54 <CindyLinz> 不是為了要擠在同一個 module 的限制, 沒有這個限制.. 是生 code 的順序產生問題 ^^|
+00:17:29 <godfat> 我猜這跟 template haskell 有點關？我沒實際用過有一點不太明白
+00:18:12 <godfat> mkYesod "HelloWorld" [parseRoutes|
+00:18:12 <godfat> / HomeR GET
+00:18:12 <godfat> |]
+00:18:12 <godfat> 這樣就假設一定要有 getHomeR 嗎？
+00:18:24 <CindyLinz> 用一個函數生出來的 code 都會塞在同一個檔案裡.. (其實就是生在呼叫的那一行啦 ^^|)
+00:18:46 <miaoski> 看到今天這串，我覺得牙痛都好了... (誤)
+00:19:04 <CindyLinz> 不會.. Haskell 不認得 quote 裡面寫的東西.. 是 mkYesod 生出來的程式碼, 其中 instance 那一塊的程式碼會用到 getHomeR
+00:19:09 <CindyLinz> data 那一塊沒有用到
+00:19:49 <CindyLinz> 它會生一塊 instance YesodDispatch HelloWorld where ... (然後裡面的函數會用到 getHomeR)
+00:19:52 <godfat> 那如果我把 getHomeR 寫在另一個 module, 然後 import 進來呢？
+00:20:11 <CindyLinz> getHomeR 的 type 裡面會用到 data 那一塊
+00:20:58 <CindyLinz> 所以你放 getHomeR 的 module 會想 import 回來... 可是 GHC 還不能處理這種等級的 mutual recursive import
+00:21:48 <CindyLinz> miaoski: 那星期三你牙痛就會痊癒了....ww
+00:23:08 <godfat> 噢... 原來是不能亂 import XD
+00:23:08 <godfat> 好吧，然後我得趕投影片，不能再想這些了 XD
+00:23:08 <godfat> 謝啦
+00:23:17 <CindyLinz> 等卡住了再來聊 XD
+00:23:41 <CindyLinz> 現在我累積了不少關關難過關關過的經驗, 可以分享 XDXD
+00:23:54 <godfat> XDDDD 能試這麼多真好~~
+00:24:04 <CindyLinz> :p
+03:13:33 <CindyLinz> 喔喔喔! yesod persistent 會自動生好 lens.. 不過 lens 要好用嘛... 就要裝 edwardk 寫的 lens package...
+03:13:38 <CindyLinz> 更大了 XD
+03:16:29 <favonia> edwards 的 lens 不是內建嗎（誤
+03:17:22 <favonia> 我剛才把中選會產生器改成 foldr 了。一般打字習慣還是對括號 foldr 比較對？
+03:20:54 <CindyLinz> 內建 XD
+03:21:16 <CindyLinz> favonia: 反正都是 finite 的..? XD
+03:21:38 <favonia> 重點是最外面的括號是不是一定是單引號。
+03:22:46 <CindyLinz> 喔喔 要從最裡面開始數?
+03:34:06 <favonia> 從外面吧
+03:34:11 <favonia> 對
+03:34:14 <favonia> 是從裡面
+03:34:17 <CindyLinz> 嗯嗯嗯
+03:34:27 <CindyLinz> 如果要算奇偶就醜了 XD
+03:42:38 <monochrom> 你們在數算甚麼?
+03:45:29 <favonia> monochrom: 一個遞迴的文字產生器
+03:45:56 <favonia> 類似「類似「啦啦啦」這樣說的東西」這樣說的東西
+09:45:04 <miaoski> CindyLinz: 感覺星期三很恐怖  ==
+09:48:44 <petercommand> 黑色星期三 (誤
+11:25:19 <suhorng> favonia: XDDD
+11:26:20 <suhorng> https://gist.github.com/suhorng/2aab7d38905196442aa1 改成取 least fixed point 版本, 體會它的真義 (誤)
+11:31:16 <favonia> suhorng: q 是 quotation function 啦……
+11:31:53 <favonia> suhorng: 你要的應該是 foldr warn seed quotes
+11:32:04 <suhorng> 阿阿
+12:03:07 <cibs> CindyLinz: 用 Haskell 來做 dfs 吧 XD
+12:34:37 <monochrom> Haskell 做 DFS 超容易
+12:34:56 <petercommand> tree search 很容易做++
+12:43:47 <suhorng> bfs 的話..
+12:44:07 <suhorng> 阿 不過假如是在圖上 DFS, 我不是要避開做過的點嗎@_@"
+12:46:25 <monochrom> 是
+12:47:44 <petercommand> 一般是寫個 kd tree 把這些點放進去嗎?
+13:15:24 <petercommand> bfs 好像比較麻煩一些，tree dfs 寫起來比較簡單的樣子
+13:15:43 <mno2> 此圖是座標圖還是 graph 啊？
+13:16:55 <mno2> kd tree 不是是找座標像是 bump detection 的？
+13:19:46 <petercommand> mno2: < mno2> kd tree 不是是找座標像是 bump detection 的？ #看不懂QQ
+13:20:37 <petercommand> 看不懂要表達的意思@@
+13:21:14 <mno2> 我以為上面講的圖的點是 graph theory 中的 node ，不是 geometry 的 point ?
+13:36:08 <suhorng> 不過要避開圖中走過的點, 不就只好用狀態了QQ
+14:13:15 <CindyLinz> 可以先作一組 DFS 或 BFS 用的 monad.. 然後應用端只寫從一個點到 children 該做的動作
+14:21:56 <cibs> 啊糟了分散了..XD 我講的是 distributed FS XD
+14:23:15 <CindyLinz> cibs: distributed FS 才分散呢~~ DepthFirstSearch 比較集中.. :D
+14:23:32 <cibs> 這是角度的問題 XD
+14:23:41 <CindyLinz> XD
+14:23:45 <cibs> 因為妳本來不是說沒有寫過 FS 所以才接這個啊 XD
+14:25:48 <CindyLinz> cibs: 可是你講話之前的最新話題是中選會的遞迴警告 XD
+14:26:10 <CindyLinz> 對.. 之前就翻了 fuse 來讀...
+14:27:07 <CindyLinz> 就發現 Haskell 的 fuse binding 比較好讀.. ^^| # https://hackage.haskell.org/package/HFuse-0.2.4.4/docs/System-Fuse.html
+15:03:07 <CindyLinz> 驚! Yesod 的 Shakespeare template 裡面有 coffeescript.. XD
+15:03:17 <CindyLinz> http://hackage.haskell.org/package/shakespeare-2.0.2.2/docs/Text-Coffee.html
+15:04:10 <CindyLinz> compile 的時候靠外部安裝的 coffee 來把 script 轉成 javascript
+15:04:49 <CindyLinz> 特別處理的地方是... 原本 Shakespeare 的習慣是用 #{  } 來 embed haskell expression, 這和 coffeescript 的字串 interpolate 打架, 所以改成 %{   }
+15:06:27 <CindyLinz> #{ } 和 %{ } 皆可.. shakespeare 好像會判斷是不是在字串裡面..
+15:07:51 <CindyLinz> 也有 Roy..
+15:07:58 <CindyLinz> TypeScript
+15:39:28 <cibs> LiveScript 呢? XD
+15:40:02 <CindyLinz> 作者表示太髒.. (誤
+15:41:16 <CindyLinz> cibs: 去把 Text-Coffee 的 code 抓下來, 把執行外部程式 coffee 的地方改成 livescript, 就可以 publish package 了? XD
+15:44:04 <cibs> CindyLinz: 賺 commit 數 (誤
+15:46:37 <CindyLinz> XDD
+15:46:48 <CindyLinz> 可是我對 livescript 沒有愛... ._.
+17:21:13 <cibs> XDD 妳討厭的部分 au 不是說要拿掉了嗎
+17:22:40 <CindyLinz> cibs: 拿掉以後的是 livescript2, 不是 livescript..
+17:22:50 <CindyLinz> 是個 immutable 的概念... XD
+17:25:45 <cibs> immutable 的話也只是 livescript 改指到拿掉之後的實體而已啊 XD 幹麻改名字
+17:30:18 <petercommand> immutable reference XD
+17:32:41 <CindyLinz> cibs: 可是真的是 livescript2 啊
+17:34:37 <cibs> 原來ww
+17:37:26 <CindyLinz> 改在 livescript, 舊程式就爆啦~  而且又不像 Haskell 依賴 type 的指引, 可以讓 compiler 自動找出哪些地方要改和怎麼改 ^^|
+17:41:12 <miaoski> CindyLinz: 是 LiveScript'
+17:47:11 <CindyLinz> miaoski: 就說是 LiveScript 2 了嘛~ XD https://github.com/gkz/LiveScript/tree/ls2
+17:48:45 <petercommand> CindyLinz: 你覺得看 livescript 前要看 javascript 嗎?XD
+17:49:02 <CindyLinz> petercommand: 要
+17:49:39 <CindyLinz> petercommand: javascript 會爆炸的地方 livescript 也會同步爆炸; 但是在 livescript 的文件裡不會提
+17:49:46 <petercommand> XDD
+17:50:44 <petercommand> 了解
+18:09:41 <cibs> 需要的是一個好的 debugger
+18:09:59 <petercommand> haskell 有甚麼好用的 debugger 嗎?
+18:10:44 <CindyLinz> 你要 define 一下好的 debugger....
+18:11:05 <CindyLinz> 我寫 server 程式, 好的 debugger 就是可以噴 log 就可以了..
+18:12:15 <cibs> CindyLinz: 妳是問誰? XD 我的「好」指的是可以 work 的 LS debugger XD 不是好用的意思
+18:12:31 <CindyLinz> cibs: petercommand 啊..
+18:12:32 <petercommand> hmm....可以追 IO code 實際執行的順序和 context..
+18:12:59 <CindyLinz> cibs: 反正我不熟 livescript, 一定是答不上來的 XD
+18:13:09 <CindyLinz> petercommand: 用 Debug.Trace
+18:13:41 <cibs> CindyLinz: ww 但我覺得寫 ls 比寫 js 好寫
+18:14:10 <CindyLinz> cibs: 比寫 js 好寫.. 不是什麼值得拿出來講的事啦 (逃..
+18:14:35 <petercommand> CindyLinz: 恩...我知道有 Debug.Trace 呀...只是還要修改 code 加上去XD
+18:14:58 <cibs> 所以當妳必須產出 js 的時候，總要選一個寫啊
+18:15:23 <CindyLinz> petercommand: 寫 server 程式, 都是會這樣加的.. 而且不是暫時加, 是要放在 production 跑的....
+18:15:48 <CindyLinz> cibs: 只是.. 比 js 好寫的東西有點多啊 ^^|
+18:15:51 <cibs> petercommand: 有什麼 compiled language 是不用改 code 可以加有用的 debugger 的嗎 @@
+18:16:14 <petercommand> CindyLinz: hmm..
+18:16:38 <cibs> CindyLinz: 要再交集可以轉出 js 的東西就沒有那麼多了 XD 當然還是有幾個就是
+18:16:44 <petercommand> cibs: 像 C 就可以 compile 的時候自動加 debug info 呀...
+18:16:49 <CindyLinz> 一開始寫的時候就把 assert 寫好.. 然後心裡說這東東不會執行到.   這樣就可以 compile 的時候 -DDEBUG 讓它可以 debug.. XD
+18:17:24 <CindyLinz> petercommand: 那個給單步執行用的不是 server 程式能用的方法 ^^|
+18:17:34 <CindyLinz> petercommand: 單步執行用 ghci 嘍
+18:17:40 <cibs> 啊我剛剛要表達的其實是不用 re-compile
+18:17:52 <CindyLinz> petercommand: 如果是用 cabal 開的 project, 那用 cabal repl 來開 ghci
+18:18:32 <petercommand> CindyLinz: 原來如此...馬上來試試..
+18:19:18 <CindyLinz> 用 cabal repl 開 project 以後... 有小修改想 compile 一下可以用 :r   速度很快
+18:19:25 <CindyLinz> 很多東西不用重跑
+18:19:54 <petercommand> 恩，很方便
+18:20:33 <petercommand> 只是:r 似乎 -fdefer-type-errors 原本有錯的話好像不會再顯示一次XD
+18:20:54 <petercommand> 在有加 -fdefer-type-errors 的時候
+18:22:20 <CindyLinz> 我還沒用過這個
+18:24:59 <petercommand> cabal repl 有辦法 feed command line argument 嗎?
+18:26:10 <petercommand> 不過沒差就是了 ，反正直接呼叫要執行的函數就好XD
+18:26:24 <CindyLinz> 可以.. main
+18:26:36 <CindyLinz> 欸.. 等等 參數喔?
+18:26:53 <CindyLinz> :run
+18:26:53 <petercommand> argv 那個
+18:27:22 <CindyLinz> 好像搞錯 ^^|
+18:27:32 <petercommand> XD
+18:29:03 <CindyLinz> :main 參數 參數 參數 ...
+18:30:57 <petercommand> thx :)

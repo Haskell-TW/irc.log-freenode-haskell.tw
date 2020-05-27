@@ -1,0 +1,46 @@
+01:12:56 <monochrom> 我也很覺奇怪他不用中文. 不過 https://github.com/bitemyapp/learnhaskell 有詳列材料以至次序
+01:13:42 <monochrom> 當然, 我是番書仔, 打英文快過打中文 :)
+01:17:37 <petercommand> 番書仔是甚麼意思呀?
+01:18:05 <monochrom> 放洋留學
+01:18:46 <petercommand> 喔喔
+01:19:26 <petercommand> 就是外國留學生的意思對嗎?
+01:19:31 <monochrom> 是
+01:20:41 <monochrom> 國語說"洋"的, 廣府話說"番", 例如洋鬼子 -> 番鬼佬
+01:21:16 <monochrom> <- 香港長大, 後來移居加拿大, 讀大學
+01:21:35 <petercommand> 廣府是廣東的意思嗎?
+01:21:39 <monochrom> 是
+01:21:51 <petercommand> :)
+01:23:03 <petercommand> 用詞和台灣的有些不同，問一下比較清楚 :)
+01:23:05 <monochrom> 我在香港時, 已在政府的英文名校讀中學, 並且很用心接受英式教育, 所以在香港時已半個番書仔
+01:24:15 <monochrom> 我是那種為了預備英文口試, 公然在巴士上跟同學用英語聊天 XD
+01:25:00 <petercommand> XD
+01:26:17 <monochrom> 不過來到加拿大, 又會去閱讀中文書, 可能比在香港時讀得多
+01:27:07 <petercommand> 都看哪些書呀?
+01:28:00 <petercommand> 蠻好奇都看哪類的書XD
+01:28:48 <monochrom> 若干金庸小說. 畢華流. 有一本李天命的書. 還有張五常的"經濟解釋"
+01:30:06 <petercommand> 哈，沒有一本是我有看過的
+01:30:35 <monochrom> 我還是對香港作家留意多些
+01:31:37 <petercommand> :p
+01:35:51 <monochrom> 啊, 其實有讀過台灣的書, 但都是在香港時, 用 Turbo Pascal 等等所以有參考過台灣來的 Turbo Pascal 書等等
+05:17:07 <monochrom> 終於看了你們提過的 Michael Church 講義.
+05:17:35 <monochrom> 咦? 他也姓 Church 嗎? (開始遐想)
+05:18:04 <monochrom> 想問他 "Alonzo 是不是你祖上"
+09:36:42 <mno2> https://superginbaby.wordpress.com/2015/04/08/teaching-haskell-to-a-10-year-old-day-1/  幼苗從小帶他上 Church (pun intended)
+23:30:49 <petercommand> ghc 編譯的檔案出現 heap exhaustion 可以印一些相關的資訊出來嗎?
+23:31:16 <petercommand> catch exception 好像沒用
+23:33:57 <pkmx> +RTS -xc ?
+23:35:13 <pkmx> 記得編譯時要開profiling
+23:35:46 <pkmx> 然後等著看 cabal 炸裂 (誤
+23:38:01 <monochrom> 理想的話, 重新編譯但開 profiling (參閱 GHC 用家指南), 再測試, 以求找出誰用這麼多記憶
+23:39:13 <monochrom> 實際上, profiling 本身亦會干預記憶使用, 可信性存疑
+23:41:02 <petercommand> 好，來試試看
+23:43:28 <petercommand> 要安裝 profiling library 耶
+23:44:54 <monochrom> 恭喜你, http://www.vex.net/~trebla/haskell/cabal-cabal.xhtml#config
+23:45:13 <monochrom> 這就是禍不單行了!
+23:46:40 <petercommand> 開 cabal sandbox 解決了XD
+23:48:47 <petercommand> -xc 會有甚麼效果呀?
+23:50:05 <petercommand> 改開 -p 就有了
+23:50:20 <petercommand> 產生了空檔案..
+23:51:11 <petercommand> 編譯是加 -rtsops -prof -fprof-auto
+23:51:49 <petercommand> 執行加了 +RTS -M100m -xc -p
+23:54:28 <petercommand> .prof 出來是空的

@@ -1,0 +1,143 @@
+00:00:04 <CindyLinz> 記住?
+00:00:23 <MnO2> 應該說會表示在最終的型別中
+00:00:28 <CindyLinz> 可以想成 data 實體會帶著 constructor 走?
+00:00:28 <letoh> 嗯嗯
+00:00:56 <letoh> 嗯嗯  大概是這種感覺
+00:03:24 <letoh> http://pastebin.com/0ZyzbzVz  感覺像這樣，但還是覺得很神奇
+00:03:49 <letoh> foo / bar 產生出來的資料可能完全不同，卻都屬於 xxx 型
+00:04:32 <CindyLinz> 這好像叫 sum type
+00:04:55 <letoh> 而且 pattern matching 也可以處理，真厲害
+00:05:06 <CindyLinz> 就... foo 帶頭的資料們和 bar 帶頭的資料們, 聯集在一起變成一種 type
+00:05:32 <letoh> 感覺 sdl 用這個方式來寫會簡單一點XD
+00:05:35 <letoh> 一堆 union
+00:07:04 <CindyLinz> 感覺這根本就是 union + 一個辨認用的 header 啊 :p
+00:08:36 <MnO2> http://pcwalton.github.com/blog/2012/12/26/typestate-is-dead/
+00:08:48 <letoh> http://en.wikipedia.org/wiki/Tagged_union
+00:09:10 <letoh> "In type theory, a tagged union is called a sum type."
+00:09:22 <letoh> MnO2: 對了  你有看到我丟給你的連結嗎?
+00:09:40 <MnO2> letoh: 沒看到，我漏掉了吧
+00:11:24 <letoh> 唔，你的 client 不收 privmsg 跟 notice 呀?
+00:12:02 <favonia> letoh: Foo 和 Bar (Haskell 要求要大寫）是 name/symbol
+00:12:18 <letoh> 喔對.. 這個我知道
+00:13:15 <MnO2> letoh: 喔喔，有，只是他沒跳藍色我就沒注意到
+00:28:24 <favonia> letoh: 他是一個名字，就像 "letoh"
+00:30:24 <letoh> 嗯嗯  看了一下 tagged union，大概有一點概念了
+00:30:47 <favonia> letoh: 就像「太陽」是個名字
+00:35:58 <letoh> favonia: 突然想到  之前台灣好像有人搞了 fp user group
+00:36:41 <letoh> 看了一下他們的活動，還是不太懂 fp 是啥XD
+00:37:58 <favonia> letoh: 在臉書上嗎
+00:38:25 <letoh> 好像有辦聚會什麼的
+00:38:30 <MnO2> 是指 ihower 辦的那個嗎？
+00:38:37 <letoh> 好像是吧
+00:39:57 <MnO2> 那個後續好像就沒了？ 應該只有那兩場聚會？
+00:40:31 <letoh> 對呀  沒聽說有新活動
+00:42:36 <MnO2> 畢竟真的有認真在寫的人應該極少吧
+00:44:06 <letoh> 嗯...還不夠熟  最近工作上寫一些新工具都先用 python 跟 c++ 搞定了
+00:44:35 <CindyLinz> letoh: 想熟嗎? :D
+00:44:44 <letoh> 後來找到路以後覺得沒那麼難，但真的動手一寫又很容易卡住XD
+00:46:24 <letoh> 我是很好奇這種東西要怎麼應用或推廣出去，像我有幾位同事看到我在用 python 也跟著用，對工作幫助不少 (因為現成的工具太多了)
+00:47:01 <CindyLinz> letoh: 下定決心, 從現在開始再也不准用 python 跟 c++!
+00:47:03 <letoh> haskell 相關工具應該也不少，但要找資料或範例又不是那麼好找@_@
+00:47:18 <CindyLinz> letoh: 我覺得相關工具應該很少.... :|
+00:47:59 <MnO2> 我最近觀察 recent upload rss 有在快速增加中，只是都是 under document, 或是仍在 unstable
+00:48:04 <letoh> CindyLinz: 還是學生的時候我也這樣做過啊，但工作上也這樣玩就太刺激了XD
+00:48:32 <MnO2> CindyLinz: 像 selenium 之類的 binding 都有了
+00:50:13 <CindyLinz> hackage 的 list 還能設計成一頁噴完啊... :p
+00:50:45 <CindyLinz> perl 的 cpan 上面 module 現在有 116,844 個
+00:51:02 <CindyLinz> # http://www.cpan.org/
+00:51:37 <MnO2> 當然不能跟 CPAN 比啊，ruby gem 應該也沒有超過 CPAN 吧
+00:51:41 <CindyLinz> 而且 hackage list 因為分類的關係, 那一頁裡面有很多重複... 不過, 都還裝得下 :/
+00:52:10 <CindyLinz> MnO2: 哎唷~ 我當然是貪方便, 順手揀身邊最熟的嘛 :p
+00:52:42 <MnO2> 這就是舊語言不會死的原因 xDD
+00:52:55 <CindyLinz> 趕快來加速生產 Acme 分類的 package... (逃)
+00:53:46 <MnO2> CindyLinz: 你有在用 Acme 喔？
+00:53:55 <CindyLinz> MnO2: 怎麼可能...
+00:54:30 <CindyLinz> 欸.. 你說的 Acme 可能跟我想的不一樣....
+00:54:47 <CindyLinz> Acme 分類是用來放無用 package 的 XD
+00:54:54 <MnO2> 喔喔
+00:55:00 <CindyLinz> cpan 也有一堆 XD
+00:55:01 <MnO2> 我想成 Acme Editor
+00:55:12 <CindyLinz> perl 裡面有個指令叫 goto.
+00:55:17 <favonia> letoh: 這個頻道不就是來問的嗎 Haskell 問題的嗎 xD
+00:55:22 <MnO2> 想說你這麼硬派
+00:55:33 <CindyLinz> 唐鳳寫了一個 Acme 的 module 叫 comeback
+00:55:48 <letoh> favonia: 是啊  所以想到會來問一下
+00:56:23 <letoh> 不過我只要玩具一多就很容易分心啦... 看了那麼多年都還沒認真看完過任何一份教學XD
+00:56:26 <CindyLinz> 奇怪找不到了 orz
+00:56:53 <CindyLinz> 原來名字記錯.. 叫 comefrom XD # http://search.cpan.org/~audreyt/Acme-ComeFrom-0.11/lib/Acme/ComeFrom.pm
+00:58:50 <CindyLinz> The Acme:: hierarchy is reserved for joke modules; for instance, Acme::Don't adds a don't function that doesn't run the code given to it # http://en.wikipedia.org/wiki/CPAN
+01:01:45 <MnO2> http://tex.stackexchange.com/questions/94889/how-can-i-explain-the-meaning-of-latex-to-my-grandma
+01:01:50 <MnO2> 這討論串好好笑
+01:02:30 <CindyLinz> 噗噗 XD
+16:14:20 <MnO2> http://unix.stackexchange.com/a/40787
+16:14:30 <MnO2> 這人也太執著收集答案了吧  xD
+16:17:07 <b4283> 怎沒有 awk
+16:20:07 <MnO2> 漏掉了吧
+20:46:01 <suhorng> > 1 + 2
+20:46:03 <lambdabot>   3
+20:46:06 <suhorng> > @pl
+20:46:08 <lambdabot>   <hint>:1:1: parse error on input `@'
+20:46:10 <suhorng> @pl
+20:46:10 <lambdabot> (line 1, column 1):
+20:46:10 <lambdabot> unexpected end of input
+20:46:10 <lambdabot> expecting white space, "()", natural, identifier, lambda abstraction or expression
+20:46:18 <suhorng> @p1
+20:46:18 <lambdabot> (line 1, column 1):
+20:46:18 <lambdabot> unexpected end of input
+20:46:18 <lambdabot> expecting white space, "()", natural, identifier, lambda abstraction or expression
+20:46:29 <suhorng> 2 + 3
+20:46:32 <suhorng> > 2 + 3
+20:46:34 <lambdabot>   5
+20:46:40 <suhorng> @pl
+20:46:40 <lambdabot> (line 1, column 1):
+20:46:40 <lambdabot> unexpected end of input
+20:46:40 <lambdabot> expecting white space, "()", natural, identifier, lambda abstraction or expression
+20:46:44 <suhorng> @p1
+20:46:44 <lambdabot> (line 1, column 1):
+20:46:44 <lambdabot> unexpected end of input
+20:46:44 <lambdabot> expecting white space, "()", natural, identifier, lambda abstraction or expression
+20:47:11 <suhorng> @pl
+20:47:11 <lambdabot> (line 1, column 1):
+20:47:11 <lambdabot> unexpected end of input
+20:47:11 <lambdabot> expecting white space, "()", natural, identifier, lambda abstraction or expression
+20:47:14 <suhorng> @mtl
+20:47:14 <lambdabot> Maybe you meant: ft map msg pl unmtl url
+20:47:22 <suhorng> @unmtl
+20:47:22 <lambdabot> Plugin `unmtl' failed with: Parse error
+20:48:06 <suhorng> @unmtl ContT Int Maybe String
+20:48:06 <lambdabot> (String -> Maybe Int) -> Maybe Int
+20:48:24 <suhorng> @unmtl MaybeT IO Int
+20:48:24 <lambdabot> IO (Maybe Int)
+20:48:34 <suhorng> > :t lift
+20:48:36 <lambdabot>   <hint>:1:1: parse error on input `:'
+20:48:40 <suhorng> > lift
+20:48:42 <lambdabot>   No instance for (GHC.Show.Show (m0 a0 -> t0 m0 a0))
+20:48:42 <lambdabot>    arising from a use o...
+20:49:54 <suhorng> @pl (.)
+20:49:54 <lambdabot> (.)
+20:50:11 <suhorng> @pl (++)
+20:50:11 <lambdabot> (++)
+20:50:14 <suhorng> @pl curry
+20:50:15 <lambdabot> curry
+20:50:30 <suhorng> @pl func f x = f x
+20:50:30 <lambdabot> func = id
+20:51:15 <suhorng> ':t' lift
+20:51:22 <suhorng> :t lift
+20:51:23 <lambdabot> (Monad m, MonadTrans t) => m a -> t m a
+20:51:38 <suhorng> @pl reset e = Cont (\k -> k $ runCont e id)
+20:51:39 <lambdabot> reset = Cont . flip id . flip runCont id
+20:51:52 <suhorng> 天阿 lambdabot 到底怎麼做的=口=
+20:56:00 <suhorng> > putStrLn "Hello World!\n"
+20:56:01 <lambdabot>   No instance for (GHC.Show.Show (GHC.Types.IO ()))
+20:56:01 <lambdabot>    arising from a use of ...
+20:57:33 <suhorng> @unmtl ContT Int IO ()
+20:57:33 <lambdabot> (() -> IO Int) -> IO Int
+20:58:51 <suhorng> @unmtl Cont (IO Int) ()
+20:58:52 <lambdabot> (() -> IO Int) -> IO Int
+21:06:29 <suhorng> @help
+21:06:29 <lambdabot> help <command>. Ask for help for <command>. Try 'list' for all commands
+21:06:38 <suhorng> @help list
+21:06:39 <lambdabot> list [module|command]
+21:06:39 <lambdabot> show all commands or command for [module]. http://code.haskell.org/lambdabot/COMMANDS
+21:38:52 <suhorng> @help pl
+21:38:52 <lambdabot> pointless <expr>. Play with pointfree code.

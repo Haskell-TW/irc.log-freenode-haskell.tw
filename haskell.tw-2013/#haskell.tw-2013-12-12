@@ -1,0 +1,59 @@
+16:53:12 <hashcat> http://shuklan.com/haskell/
+17:00:09 <hashcat> bundle is an atom, not variable
+17:00:49 <hashcat> bundle - Ruby Dependency Management
+17:02:54 <hashcat> 額是昨天的
+21:18:38 <suhorng> clang還滿厲害的, 我丟這個東西給他 [](auto x) { return x(x); }
+21:18:52 <suhorng> 他遞迴一定深度後就報錯了 XDD
+21:30:52 <CindyLinz> ...
+21:31:50 <suhorng> 回顧一下GHC：cannot construct the infinite type: t1 = t1 -> t0
+21:32:23 <CindyLinz> suhorng: 你就這樣去教小朋友啊! # [](auto x) { return x(x); }
+21:34:38 <hashcat> 我記得以前有個人沒事嘗試寫命令把磁碟機頭移到一個奇怪的位置
+21:35:10 <hashcat> 那磁碟機就損毀了
+21:35:15 <CindyLinz> ..........................
+21:35:36 <CindyLinz> 這樣可以用保固換新嗎?
+21:35:42 <letoh> 練習 bios call ? XD
+21:36:01 <hashcat> 是unix剛出來的時候
+21:36:10 <CindyLinz> 好久遠 @@"
+21:36:16 <hashcat> 磁碟機比房子貴
+21:36:22 <letoh> 喔喔喔... unix 剛出來的時候!
+21:36:28 <CindyLinz> 對啊想起來就好貴 orz
+21:37:42 <hashcat> 那人還在書中很得意的說自己沒賠半毛錢
+21:37:48 <suhorng> 不能這樣教啦XDD
+21:40:46 <hashcat> 現在計算機便宜又安全, 大都可以亂試, 但有時還是會燒掉cpu
+21:45:40 <CindyLinz> 燒掉 CPU 應該有保固 :p
+21:46:11 <CindyLinz> 安全機制竟然沒有發生作用斷電, 廠商要負責 :D
+21:50:11 <hashcat> 有人就偏好沒有安全機制的 =P
+22:04:16 <petercommand> hashcat: 哪本書寫的呀XD
+22:04:30 <CindyLinz> 好孩子不該看的書? XD
+22:06:03 <petercommand> 聽起來很有趣呀
+22:14:18 <petercommand> 會是叫甚麼"電腦破壞大全"之類的嗎?
+22:14:43 <petercommand> XD
+22:18:20 <CindyLinz> petercommand: ok, 你可以看.. 你已經明確表達你是壞小孩了 = 3=
+22:20:28 <petercommand> = =
+22:28:28 <CindyLinz> mno2: zepto 的 selector 遇到特殊字元是用 \ escape 嗎? @@"
+22:29:49 <CindyLinz> #lazy-doc-\(\<\<\\) 被 zepto 抗議了
+22:30:19 <CindyLinz> 原始函數名是 (<<\)
+22:31:36 <CindyLinz> 好像是 \ 沒被 escape 到
+22:33:05 <mno2> CindyLinz: 我是參考 jQuery 的 xD，jQuery 是用 \ 沒錯。
+22:34:38 <hashcat> petercommand: 想不太起來, 印象中有看過而已
+22:35:09 <CindyLinz> 是 \ 沒錯.. 發現問題是這個 text.replace(/[!"#$%&'()*+,./:;<=>?@[\]^`{|}~]/g, "\\$&")
+22:35:10 <hashcat> 是不是想遙控燒掉某人手機
+22:35:15 <CindyLinz> [ ] 中間的 \ 被當成 \]
+22:35:22 <CindyLinz> 要改成三條
+22:35:39 <CindyLinz> js 的 regex 的 [...] 的用法
+22:35:47 <CindyLinz> 好像不能直接把 ] 放到最前面就好 @@"
+22:40:18 <mno2> hmm..
+23:11:32 <suhorng> http://stackoverflow.com/questions/14047241/simple-example-for-impredicativetypes GHC的impredicativity有點癥結
+23:12:03 <suhorng> 說是 document page 裡面給了一個 example
+23:12:04 <suhorng> f :: Maybe (forall a. [a] -> [a]) -> Maybe ([Int], [Char])
+23:12:04 <suhorng> f (Just g) = Just (g [3], g "hello")
+23:12:04 <suhorng> f Nothing  = Nothing
+23:12:46 <suhorng> 但是 > f (Just reverse) 會爆炸，必須要 f ((Just :: (forall a. [a] -> [a]) -> Maybe (forall a. [a] -> [a])) reverse) 才會成功 (我去 annotate reverse 還沒有用...)
+23:22:35 <suhorng> 還有不知道為什麼如果我開ghci不是用 ghci -XRankNTypes 而是在裡面 :set -XRankNTypes 的話就不能用 forall...
+23:27:57 <CindyLinz> 實作問題好難啊 orz
+23:40:31 <mno2> 原來 pgrest 一定要有 id 欄位
+23:54:57 <CindyLinz> 好像 post lpaste 有被擋掉.. 大概是 refer.. ww
+23:58:11 <mno2> CindyLinz: 壞事大概已經有前人做過了
+23:58:45 <mno2> 我覺得 pgrest 還不錯用，只是有些 under document
+23:59:26 <CindyLinz> mno2: 嘿嘿我寫過改 referer 的 chrome extension.. :p
+23:59:52 <CindyLinz> 不過今天有點累了 orz

@@ -1,0 +1,63 @@
+00:14:59 <petercommand> @help
+00:14:59 <lambdabot> help <command>. Ask for help for <command>. Try 'list' for all commands
+00:15:03 <petercommand> @list
+00:15:03 <lambdabot> What module?  Try @listmodules for some ideas.
+00:15:07 <petercommand> @listmodules
+00:15:07 <lambdabot> activity base bf check compose dice dict djinn dummy elite eval filter free fresh haddock help hoogle instances irc karma localtime metar more oeis offlineRC pl pointful poll pretty quote search slap source spell system tell ticker todo topic type undo unlambda unmtl version where
+00:56:04 <petercommand> @djinn a -> a
+00:56:04 <lambdabot> f a = a
+00:56:59 <petercommand> @djinn (a -> c (d -> r) -> r) -> (a -> (c -> r) -> r) -> a -> (d -> r) -> r
+00:56:59 <lambdabot> Error: kind error: (KVar 1,KStar)
+00:57:12 <petercommand> @djinn (a -> c -> (d -> r) -> r) -> (a -> (c -> r) -> r) -> a -> (d -> r) -> r
+00:57:12 <lambdabot> f a b c d = b c (\ e -> a c e d)
+09:31:15 <mno2> http://www.zhihu.com/question/30817802/answer/61517089
+09:31:20 <mno2> [学了Haskell以后，还有必要学OCaml吗]
+09:31:45 <mno2> * Strict language extension <-  好像蠻有趣的
+09:32:43 <mno2> https://ghc.haskell.org/trac/ghc/wiki/StrictPragma
+09:32:49 <mno2> https://www.reddit.com/r/haskell/comments/2bi69g/strict_language_pragma_proposal/
+09:32:53 <mno2> https://ghc.haskell.org/trac/ghc/wiki/Records/OverloadedRecordFields/Design
+10:38:33 <kanru> 也想知道.. Haskell vs OCaml
+11:39:38 <cataska> 前陣子 reddit 很流行 What are ooo critiques of xxx? 的標題
+11:41:50 <petercommand> What is the pure critiques of reason (X
+12:47:01 <CindyLinz> SML 有 lazy extension, Haskell 有 strict extension 這樣... (思 XD
+12:48:39 <monochrom> 學 OCaml 可以看出 OOP 其實很難及很多問題
+12:49:59 <CindyLinz> 覺得 Haskell 的 logo 太硬梆梆了...
+12:50:20 <monochrom> 因為 OCaml 誠實及想清楚
+12:50:32 <CindyLinz> 這麼稀有的 lazy 特色語言, 應該用像是蛋黃哥這種類型的吉祥物 XD
+12:51:38 <CindyLinz> monochrom: o.o?
+12:53:41 <monochrom> 先前有提: 學了 Haskell 後, 還有必要學 OCaml 嗎?
+12:56:24 <cataska> 蛋黃哥 XDD
+12:56:29 <CindyLinz> monochrom: 好奇你說的.. OCaml 為了誠實搞清楚 OOP 在其中的角色, 所以搞出的很難的...語法(?)
+12:57:24 <CindyLinz> monochrom: (因為我不會 OCaml 啦.. ^^|)
+12:57:34 <monochrom> 語法不難. 型別難. 或至少, 你想不到要這樣做
+13:00:38 <CindyLinz> 會想不到... 囧
+14:41:45 <mno2> CindyLinz 自己畫？沒有說不能有 logo No.2
+15:08:53 <CindyLinz> mno2: 叫我畫!? 比寫 dependent type 程式還超現實 XD
+15:09:37 <CindyLinz> 可以出錢請三麗鷗公司設計嗎, 會不會太貴 QQ
+21:35:32 <CindyLinz> 啊.. 就設計一隻「暖毛毛」吧 XD
+21:44:10 <mno2> DeriveAnyClass 可以 derive NFData 耶
+21:44:13 <mno2> 好好用
+21:45:54 <CindyLinz> +1
+22:11:50 <mno2> mysql-simple 不是 thread safe.. 用 forkIO 會爆..
+22:15:16 <mno2> However, forkOS creates a bound thread, which is necessary if you need to call foreign (non-Haskell) libraries that make use of thread-local stat
+22:17:27 <mno2> 用 forkOS 還是會爆..
+22:19:47 <CindyLinz> forkOS 才是保證爆呀
+22:20:00 <CindyLinz> 如果沒有 -threaded 然後只用 forkIO 還有機會平安 ^^|
+22:20:17 <CindyLinz> 那如果一個 thread 用一個 mysql connection 呢?
+22:24:29 <mno2> 我是把 connect 包在 forkIO 裡面沒錯
+22:25:03 <mno2> 但好像不是多個 connection
+22:40:52 <CindyLinz> (或是就別用 mysql-simple 了 ^^|)
+22:45:13 <suhorngM_> Haskell 的 strict extension 印象中好像滿不夠 strict 的..?
+22:45:20 <suhorngM_> 不是加一堆 ! 而已?
+22:49:20 <CindyLinz> 那不是 BangPattern 嗎?
+22:49:38 <CindyLinz> 還可以加 {-# UNPACK #-}
+22:50:00 <CindyLinz> 我以為是更大面積的 hint 設定 @@"
+22:51:17 <suhorngM_> CindyLinz: 就是上面 mno2 貼的 StrictPragma, 我記得只是缺省加上一堆 ! 而已吧
+22:51:36 <suhorngM_> let binding, data declaration, function parameter
+22:52:14 <CindyLinz> 喔 QQ
+22:55:17 <mno2> CindyLinz: 可是沒有其他 lib 了
+22:59:30 <CindyLinz> mno2: 我記得有 hdbc 的 mysql 和 haskelldb 的 mysql 或是 persist 的 mysql 呀?
+22:59:46 <mno2> 背後應該都是同一個
+22:59:53 <CindyLinz> 噢... orz
+23:13:35 <caasihuang> http://www.wired.com/2015/09/facebooks-new-anti-spam-system-hints-future-coding/
+23:24:53 <mno2> 最後用 mapConcurrently 解決..

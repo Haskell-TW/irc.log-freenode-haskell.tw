@@ -1,0 +1,77 @@
+11:31:28 <suhorng> @pl (\a b -> f a (g b))
+11:31:28 <lambdabot> (. g) . f
+11:31:56 <suhorng> @unpl (. (. (. g))) . f
+11:31:56 <lambdabot> (\ h k -> f h (\ n -> k (\ q -> n (g q))))
+11:46:51 <hychen> 這隻lambdabot 是誰架的?
+12:26:39 <monochrom> int-e
+18:15:09 <kuanyui> haskell 要怎麼顯示中文字串？輸入中文都會變成 \20013\25991之類的東西orz
+18:22:08 <mno2> 要看你是哪一版 ghc,  新的記得是偵測一般 locale 的 env variable 會自動調整輸出成 UTF8
+18:22:19 <mno2> 不然也可以用 hSetEncoding
+18:54:25 <kuanyui> 7.6.3
+20:30:41 <kuanyui> https://github.com/chrisdone/structured-haskell-mode/blob/master/README.md 請問這個cabal install到底應該用什麼權限執行@A@
+20:30:50 <kuanyui> 需要root媽
+20:30:54 <kuanyui> 嗎
+20:35:59 <kuanyui> 實在搞不太懂...orz cabal是每個使用者安裝的package都是特別分開的?(包括root)
+20:36:04 <kuanyui> 個別
+21:41:23 <CindyLinz> kuanyui: default 是 per user, 不然要加上 --global
+21:41:40 <kuanyui> 喔喔@A@
+21:41:56 <CindyLinz> 但如果曾經... 你裝的時候是用 sudo 的, 有可能你的 user cabal 目錄的 owner 是 root... ^^|
+21:42:48 <CindyLinz> 如果有開 cabal sandbox 的話, 在 sandbox 裡面安裝會裝在 sandbox 那個目錄裡面
+21:43:53 <kuanyui> 我第一次用cabal =w="
+21:44:01 <CindyLinz> 第一次就用 sudo? XD
+21:44:14 <kuanyui> 我下了兩次，一次有用一次沒用
+21:44:18 <CindyLinz> 哎呀 XD
+21:44:26 <CindyLinz> cabal 的目錄... 通常是在 $HOME/.cabal
+21:44:41 <kuanyui> 去/root把~/.cabal幹掉就可以了吧？
+21:44:51 <CindyLinz> 還有 $HOME/.ghc
+21:45:00 <CindyLinz> 這兩個都砍掉.. 就可以重練了
+21:45:04 <kuanyui> wwww
+21:45:41 <CindyLinz> cabal 是輔助裝 package 的工具, 但是是 ghc 自己在管理它會去引用哪些 package db
+21:46:13 <kuanyui> 喔喔
+21:46:20 <CindyLinz> 我 sudo 以後的 $HOME 不會變成 /root 就是 @@"
+21:46:36 <CindyLinz> 所以會用 owner root 直接壓在原本 user 的目錄上 @@"
+21:46:36 <kuanyui> 不過中文字串到底該怎麼顯示？GHC版本7.6.3
+21:46:43 <CindyLinz> ghci?
+21:47:04 <kuanyui> 也是7.6.3
+21:47:14 <CindyLinz> ghci 的環境我不知道要怎麼強迫它 XD  但是用 putStrLn 直接印到 console 是沒問題的呀
+21:47:17 <kuanyui> 還是說ghci裡面沒辦法顯示？
+21:47:19 <kuanyui> 喔喔orz
+21:47:35 <CindyLinz> 你倒是也可以在 ghci 裡面 putStrLn 啦.. ^^|
+21:47:41 <kuanyui> 因為目前都還在GHCi裡面測試...
+21:48:19 <CindyLinz> 反正到時候要寫正經的程式時, 也是會把 ghci 丟開的? :p
+21:48:56 <kuanyui> 囧
+21:49:30 <CindyLinz> 怎麼了? 你難道是希望使用者必須用 ghci 來使用你寫的程式喔? ^^|
+21:51:02 <kuanyui> 不是啦XD
+21:52:29 <kuanyui> 只是除了Python2以外，目前沒用過哪個語言的repl不支援unicode的感覺有點囧（<=中二）
+21:54:15 <CindyLinz> ghci 的情況你遇到的應該不是 repl 支援與否....
+21:54:42 <CindyLinz> 是 show 的實作決定要變成 \數字\數字 的
+21:55:20 <CindyLinz> 你在 ghci 裡面輸入的文字其實直接打中文它是會接受的對吧 ^^|
+21:55:26 <kuanyui> 喔喔
+21:55:37 <CindyLinz> 可是 show "這樣" 會出現的字串就是 \數字 這樣的長相
+21:56:04 <kuanyui> 大致了解了
+21:56:16 <CindyLinz> 如果你另外定一個字串型態, 把 Show 的實作換掉就可以不是這種長相了..
+21:56:27 <CindyLinz> 可是別的 library 都不會去用你的實作, 還是白搭...ww
+21:58:55 <kuanyui> https://github.com/chrisdone/structured-haskell-mode/blob/master/README.md#how-to-enable 這個裡面的cabal install我下了都一直爆炸（沒加--global）： http://paste.ubuntu.com/8492954/
+21:59:57 <kuanyui> 不確定該到emacs版還是haskell問，不過既然是在haskell就爆掉了那應該是這裡吧=w="
+22:01:08 <CindyLinz> 算是個常見錯誤.... orz
+22:01:16 <CindyLinz> 他想用一個叫作 happy 的工具
+22:01:27 <CindyLinz> 然後, 我猜你應該已經在 dependency 裡面安裝了
+22:01:41 <CindyLinz> 可是! 它把執行檔裝在 $HOME/.cabal/bin/ 裡面
+22:01:57 <CindyLinz> 通常, 我們的 $PATH 都沒有加上這一條, 所以它還是找不到, 不能用.....ww
+22:02:06 <CindyLinz> 把這條加進 $PATH 就可以了
+22:05:05 <kuanyui> 什麼意思?!
+22:05:09 <kuanyui> 喔喔
+22:05:57 <kuanyui> 所以我手動全域裝happy也可以解決？
+22:06:57 <CindyLinz> 把 $HOME/.cabal/bin 加到 $PATH 裡面就好啊
+22:08:43 <CindyLinz> 全域裝 happy 應該也可以.. 但我沒這樣作過..
+22:08:49 <CindyLinz> 我全域的沒有直接用 cabal 裝過..
+22:08:55 <CindyLinz> 全域的都是用 apt-get 裝... XD
+22:09:04 <CindyLinz> 缺點就是會比 cabal 上面的舊 XD
+22:09:47 <kuanyui> 還是爆掉耶@@
+22:13:41 <CindyLinz> 你裝 global 喔?
+22:13:49 <kuanyui> 不是
+22:13:58 <CindyLinz> 你打 happy 出現什麼?
+22:14:16 <kuanyui> 不過剛剛手滑不小心用zypper裝了happy就好了XD
+22:14:26 <CindyLinz> zypper 是什麼啊?
+22:14:43 <kuanyui> 啊，openSUSE上等同於apt-get的套件管理員
+22:17:19 <CindyLinz> 喔喔

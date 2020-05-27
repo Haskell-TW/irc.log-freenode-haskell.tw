@@ -1,0 +1,119 @@
+00:09:49 <suhorng> 五倍 XD  --這應該要叫倍受寵愛的感覺--
+00:17:41 <CindyLinz> 保護和歧視是共生的啊 OAO
+00:18:58 <suhorng> 引導多元、適性發展
+00:20:49 <CindyLinz> 不過重點是 rejudge 以後還是爆了... orz
+00:20:58 <CindyLinz> 還是爆記憶體.. 300MB 還不夠 OAO
+00:21:07 <CindyLinz> pass 的 case 有變多, 只剩2個了 XD
+00:21:13 <suhorng> WWWW
+00:22:15 <CindyLinz> 該檢討自己惹 ._.
+11:26:38 <cibs> 哪個網站啊?? # 00:21 < CindyLinz> pass 的 case 有變多, 只剩2個了 XD
+11:39:20 <CindyLinz> cibs: http://tioj.ck.tp.edu.tw/problems/1566
+11:42:59 <CindyLinz> 我找到記憶體寫法的問題.. 現在可以壓在 61MB 了.. (嗯, 比理論值還低... 我是搞不太懂 ww)
+11:43:02 <cibs> CindyLinz: 居然支援 Haskell XD
+11:43:15 <CindyLinz> 但是有兩個小測資變成 Wrong Answer.........||
+11:43:33 <CindyLinz> cibs: 有 Haskell 就是重點啊 XD
+11:45:03 <CindyLinz> Haskell 7.8.3 的 haskell platform
+11:45:44 <cibs> cool
+11:45:53 <cibs> 等忙完我也要去玩
+11:48:32 <CindyLinz> 玩這個會傾向寫 unsafeHaskell 就是了...... :Q
+11:48:59 <CindyLinz> 例如說... access array 的時候, 會去用沒有 range check 的 unsafeRead 之類的...
+11:51:08 <CindyLinz> 不過這個 unsafe 跟型別爆炸的 unsafe 不一樣 XD
+12:59:53 <petercommand> 為甚麼 google attoparsec ，google 會出現 1 attoParsec =3.08567758 centimeters
+12:59:58 <petercommand> XD
+13:04:20 <monochrom> :)
+13:07:55 <petercommand> 原來 atto 是 10^(-18)， parsec 是 3.26 lightyear XD
+13:11:30 <petercommand> > Data.Attoparsec.Text.parse (string "hello") "b"
+13:11:32 <lambdabot>  Not in scope: ‘Data.Attoparsec.Text.parse’Not in scope: ‘string’
+13:11:32 <lambdabot>  Perhaps you meant one of these:
+13:11:32 <lambdabot>    ‘storing’ (imported from Control.Lens),
+13:11:53 <petercommand> 好吧 @@
+13:14:38 <petercommand> 結果出現 Partial _
+13:14:58 <petercommand> 為甚麼不是 Fail 呢?
+15:33:07 <CindyLinz> @src foldr1
+15:33:08 <lambdabot> foldr1 _ [x]    = x
+15:33:08 <lambdabot> foldr1 f (x:xs) = f x (foldr1 f xs)
+15:33:08 <lambdabot> foldr1 _ []     = undefined
+15:36:41 <petercommand> > parse
+15:36:43 <lambdabot>  Not in scope: ‘parse’
+15:38:02 <petercommand> Prelude Data.Attoparsec.Text> parse (string "hello") "cc c"
+15:38:03 <petercommand> Partial _
+15:38:03 <petercommand> Prelude Data.Attoparsec.Text> parse (string "hello") "cc cc"
+15:38:03 <petercommand> Fail "cc cc" [] "Failed reading: takeWith"
+15:38:24 <petercommand> 不太了解為甚麼會這樣...
+15:39:08 <petercommand> 喔，原來是長度的關係..
+15:39:25 <petercommand> 怎麼剛剛都沒看出來XD
+15:39:59 <CindyLinz> petercommand: 沒辦法回應 Attoparsec 相關的 ^^|
+15:41:08 <petercommand> 恩恩，我剛剛才開始看 Attoparsec 的 ^^
+15:41:11 <CindyLinz> Data.Foldable 裡面有 foldr, foldr', foldl, foldl', foldr1, foldl1. 為什麼沒有 foldr1', foldl1' ?
+15:41:51 <CindyLinz> 不過... foldr1 foldl1 真的實作起來比較沒效率... 可能重視效率的人也不會想用 foldl1' 吧 XD
+15:42:31 <CindyLinz> 欸不對啊 foldl1 還好呀 ^^|
+15:43:23 <petercommand> @src foldl'
+15:43:24 <lambdabot> foldl' f a []     = a
+15:43:24 <lambdabot> foldl' f a (x:xs) = let a' = f a x in a' `seq` foldl' f a' xs
+15:43:27 <petercommand> @src foldl
+15:43:27 <lambdabot> foldl f z []     = z
+15:43:27 <lambdabot> foldl f z (x:xs) = foldl f (f z x) xs
+15:43:41 <petercommand> @src foldl1
+15:43:41 <lambdabot> foldl1 f (x:xs) = foldl f x xs
+15:43:41 <lambdabot> foldl1 _ []     = undefined
+15:45:01 <CindyLinz> 對.. fold1 和 foldl 其實差異不大, 不會慢 @@"
+15:45:07 <CindyLinz> foldl1
+15:45:40 <CindyLinz> 比較麻煩的是 foldr1, 因為要等到最後一項..的前面才拿到 init 值
+15:45:54 <CindyLinz> 我 foldr1 這樣寫...
+15:46:45 <CindyLinz> foldr1 f (a:as) = go a as where go a as = case as of { b:bs -> f a $ go b bs ; _ -> a }
+15:46:59 <CindyLinz> 然後 {-# INLINE foldr1 #-}.. 不知道能不能快一點點
+15:48:05 <CindyLinz> 應該一定會比這邊 @src 到的版本快.. 但是不知道讓這個 go 傳兩個參數好, 還是只傳尾巴, 然後裡面再自己把 head 和 tail 拆出來好
+15:53:42 <petercommand> @src foldr1
+15:53:43 <lambdabot> foldr1 _ [x]    = x
+15:53:43 <lambdabot> foldr1 f (x:xs) = f x (foldr1 f xs)
+15:53:43 <lambdabot> foldr1 _ []     = undefined
+15:54:38 <petercommand> 要怎麼看出來會比較快呢?
+15:57:37 <petercommand> 是因為可以 inline 的關係嗎?
+15:58:30 <petercommand> 不對...感覺應該不是這樣XD
+16:06:23 <CindyLinz> inline 是一個啊
+16:06:43 <CindyLinz> inline 省掉的是 f 的傳遞
+16:06:56 <CindyLinz> 原本的 foldr1 每一步都要重傳 f
+16:07:46 <CindyLinz> 然後原本的 foldr1 (每一步)進去的時候都要先看讓後面這個 list 和 (:) x [] 作比較, 比 (:) 和 []
+16:08:04 <CindyLinz> 如果不合再看第二個 branch
+16:10:02 <petercommand> 後面的呼叫也是都要傳 environment 下去呀?
+16:10:25 <petercommand> 只是 f 變成在 env ，而不是參數了?
+16:12:54 <CindyLinz> 對 在 env 裡面.. 應該是整個 env 會一起走, 而且一定有 env, 所以能把東西藏在 env 裡面搭便車就會省到吧?
+16:12:59 <CindyLinz> 啊剛話講一半 XD
+16:13:19 <CindyLinz> 我不確定的是第一個 branch 已經看過知道有沒有 (:) 的情況下到第二個 branch 的時候 (:) 需不需要重新比較...
+16:14:46 <CindyLinz> 我的寫法裡面, 會去把 xs (我那邊是 as 展開看有沒有 (:) b bs, 另一個是擺在 _, 這樣應該會省掉 [] 的檢查... 尤其每個 list 預期應該都是一堆 (:) 但只有一個 []
+16:14:56 <petercommand> 恩恩
+16:15:05 <CindyLinz> 如果要先確認不是 [] 再重新確認有 (:) 有點浪費
+16:15:20 <CindyLinz> 如果先確認 (:), 然後把剩下的直接當成同一類應該會省一點
+16:17:12 <petercommand> 不曉得這部份有沒有優化
+16:20:05 <CindyLinz> 我聯想了一下 8bytes 寬的 data constructor..... (嘆
+16:22:21 <CindyLinz> generic 來說要作這個有點麻煩 @@"
+16:23:23 <CindyLinz> 給我兩條 potentially 很長的 pattern, 然後找出相通的部分, 有些是一樣所以相通, 有些是非a即b所以相通..
+16:24:12 <CindyLinz> ViewPatterns 可能就不理它了... 比較兩個 expression 是否一樣太誇張了 :/
+16:24:46 <CindyLinz> PatternGuards 也不理它了.. 也是 expr..
+16:25:18 <petercommand> CindyLinz: 會不會像 list 這樣的東西當特例去處理之類的?
+16:25:58 <petercommand> 要判斷非 a 即 b 好像也不容易耶...
+16:26:51 <CindyLinz> 非a即b.. 或說... 非(n-1)就剩最後一個1 (因為已知非 bottom)
+16:27:16 <CindyLinz> 特例是有可能... 只是那實作的時候就會覺得投報率好低好辛酸 XD
+17:51:28 <petercommand> @hoogle <*>
+17:51:29 <lambdabot> Control.Applicative (<*>) :: Applicative f => f (a -> b) -> f a -> f b
+17:51:31 <petercommand> @hoogle *>
+17:51:31 <lambdabot> Parse error:
+17:51:31 <lambdabot>   *>
+17:51:31 <lambdabot>    ^
+17:51:47 <petercommand> parse error XD
+17:51:55 <petercommand> @hoogle <*
+17:51:55 <lambdabot> Control.Applicative (<*) :: Applicative f => f a -> f b -> f a
+17:51:55 <lambdabot> Control.Applicative (<**>) :: Applicative f => f a -> f (a -> b) -> f b
+17:51:55 <lambdabot> Control.Applicative (<*>) :: Applicative f => f (a -> b) -> f a -> f b
+18:00:27 <petercommand> @djinn Applicative f => f a -> f b -> f a
+18:00:28 <lambdabot> Error: Class not found: Applicative
+22:37:34 <suhorng> 沒想到 GHC 在討論這樣大的變動 https://www.haskell.org/pipermail/libraries/2015-January/024777.html 要不要把 Foldable, Traversable 搬到 Prelude 中
+22:54:11 <pkmx> 這應該是我目前看過最適合使用.io的domain了... # http://unsafeperform.io
+22:54:29 <pkmx> http://unsafeinterleave.io ?
+22:54:29 <petercommand> lol
+22:54:45 <pkmx> 誰可以來註冊一下這個 =p
+22:58:59 <suhorng> wwww
+22:59:17 <suhorng> 之前學弟才剛發現 mon.ad 已經被註冊掉了
+22:59:39 <petercommand> monad.io XD
+23:06:49 <letoh> std.io
+23:07:39 <letoh> .io 好像突然變多@_@

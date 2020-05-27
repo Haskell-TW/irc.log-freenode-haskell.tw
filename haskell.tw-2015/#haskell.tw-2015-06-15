@@ -1,0 +1,12 @@
+12:31:52 <caasihuang> 意外發現這篇：https://news.ycombinator.com/item?id=8822705
+12:31:57 <caasihuang> 圖解 GHC
+13:46:24 <CindyLinz> caasihuang++
+14:37:38 <cibs> caasihuang++
+14:37:44 <cibs> 印出來慢慢看
+14:39:27 <mno2> caasihuang#
+14:40:01 <CindyLinz> @type succ
+14:40:03 <lambdabot> Enum a => a -> a
+14:40:26 <CindyLinz> caasihuang: 想到這裡是 haskell.tw, 應該改口對你用 succ caasihuang
+14:41:02 <caasihuang> XD ，不知道 :t caasihuang 會得到什麼
+15:26:12 <mno2> http://goto.ucsd.edu/~vrobert/coq-en-stock/blog/2015/06/03/introducing-peacoq/
+18:22:47 <b4283> peacock XD

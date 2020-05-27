@@ -1,0 +1,14 @@
+12:36:44 <mno2> https://www.gnu.org/software/guix/
+12:37:13 <mno2> 這在 NixOS 上又疊了 Guile，蠻有趣的
+14:04:29 <monochrom> 怎麼 GNU 好像到處留情的. 程式界楚留香...
+14:25:51 <kanru> XD
+14:26:37 <kanru> 我一直以為 guix 是 pure guile @@
+14:58:13 <b4283> 不是嗎？ http://git.savannah.gnu.org/cgit/guix.git/tree/guix
+14:59:06 <mno2> 他首頁寫了 "Guix is based on the Nix package manager."
+14:59:25 <mno2> 應該是把 Nix Expression 換成了 Guile
+15:03:38 <b4283> 猜測就是 atomic action, rollback 那一套想法而已
+15:04:12 <b4283> 查了一下 nix 是 c++ 寫的
+15:12:35 <mno2> 對，不過設計蠻有趣的~
+15:13:20 <mno2> nix 對 hackage 上面的 package 支援還不錯
+15:13:27 <mno2> 還有 cabal2nix 的工具可以轉
+15:14:22 <mno2> coreOS 感覺也很有趣，目前感覺是 coreOS 聲勢比較強。

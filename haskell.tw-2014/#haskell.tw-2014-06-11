@@ -1,0 +1,101 @@
+00:06:40 <CindyLinz> c9sloud: 用 mutex 鎖成實質 single thread 啊 :p
+00:07:37 <c9sloud> 這樣好像有點累.. 如果我希望能夠同時作兩件事情，然後去聽一個 channel.. 先回傳過來的，我就先用，然後把兩個 worker 關掉?
+00:07:54 <c9sloud> 看起來要先做一個 queue 來模擬 channel
+00:08:51 <c9sloud> 不過這樣每次作都要去 create threads ?
+00:12:37 <CindyLinz> 做一個 queue 然後用一個 mutex 來控制 queue 的操作
+00:14:01 <c9sloud> Go 裡面的 thread worker 是本來就 prepare 好了
+00:14:16 <c9sloud> 所以當我建立一個新的 goroutine 的時候不會損耗太多資源..
+00:14:25 <CindyLinz> 你也可以建 thread pool 呀
+00:14:26 <c9sloud> 但 pthread 好像沒辦法先 prepare
+00:14:39 <CindyLinz> 喔 suspend 沒辦法叫它 swap out
+00:14:54 <CindyLinz> 只好實作 pthread 了? ^^|
+00:15:24 <CindyLinz> 在 c9s 身上體會到什麼叫作一不作二不休........
+00:28:32 <letoh> goroutine 應該只是幫你封裝好吧? 是每次都建一個 thread 來處理嗎?
+00:45:19 <CindyLinz> 可是 pthread 不是只是一個介面的定義嗎?
+01:35:58 <c9sloud> letoh: no, goroutine != pthreads
+01:36:11 <c9sloud> its N x M model
+01:36:54 <c9sloud> 有人測過 goroutine construction time vs pthread construction time
+01:37:12 <c9sloud> 結果 pthread 大輸
+01:38:18 <letoh> 我知道兩個不一樣  所以 goroutine 底層不是 thread model 囉?
+01:38:57 <c9sloud> thread workers
+01:40:10 <c9sloud> 有點像有一個 vm 每個 thread worker 還有自己的 pc
+01:40:48 <c9sloud> 同個 goroutine 會被不同的 thread worker 交互處理
+01:41:14 <letoh> 聽起來還是 thread 啊  只是自己實作特別的排程而已
+01:41:40 <c9sloud> go vm 的 scheduler 會去切 tasks 給 thread worker 做
+01:41:55 <c9sloud> 所以是 NxM 呀
+01:42:27 <c9sloud> goroutine create 的時候不大有 overhead
+01:42:38 <c9sloud> 因為沒有 system call
+01:42:47 <c9sloud> 但 pthread 有
+01:42:54 <letoh> 感覺只是先弄個 thread pool
+01:43:04 <c9sloud> 恩恩
+01:43:09 <godfat> 上次在 rust mailing list 上看到不少討論，最後的結論似乎是，如果可以我們每種 model 都可以做，弄成可切換的
+01:44:24 <c9sloud> 所以只好自己做 thread worker in C?
+01:44:32 <letoh> 以現在的系統來說  感覺各種神奇的實作最後還是回歸到 thread model 和 coroutine   只差在外面的包裝而已... 不曉得還有沒有什麼神奇的 model ?
+01:44:35 <c9sloud> (跪
+01:44:49 <letoh> thread pool 在 embedded system 還蠻常見的
+01:45:19 <c9sloud> 呃我沒有要表示 goroutine 特別神奇的意思
+01:45:36 <letoh> 放著 runtime 配置很容易亂搞記憶體  容易有 fragmentation
+01:45:48 <c9sloud> 但是我用 pthread pool
+01:46:20 <letoh> 喔  神奇是我自己的想法  當初玩一下 goroutine 是覺得蠻不錯的
+01:46:33 <c9sloud> 根本沒辦法先 allocation 一些不知自己要幹嘛的 thread
+01:46:52 <letoh> 不做事的就休息啊
+01:46:56 <c9sloud> 然後在動態指派出去
+01:47:42 <letoh> 不過應該是說  pool allocator 本來就是很常用的策略  不光是用在 thread 上
+01:47:57 <c9sloud> 譬如說你有不同
+01:53:18 <c9sloud> pthread create 的時候就一定要給 function pointer 了
+01:53:38 <c9sloud> runtime 沒辦法改
+01:54:22 <letoh> 改什麼?
+01:54:38 <letoh> 要改執行的內容嗎?
+01:54:40 <c9sloud> 如果每個 tasks 都 create 一堆 pool
+01:55:03 <c9sloud> 不能動態做 balance
+01:55:24 <c9sloud> 還蠻浪費資源的
+01:55:26 <letoh> 要不要一堆 pool 應該是系統決定的?
+01:55:51 <c9sloud> hmmm 明天再說好了
+01:56:03 <c9sloud> 先睡
+01:56:04 <letoh> 看系統需要預先準備多大的 pool  這通常不是一開始就能決定的呀
+01:56:14 <letoh> 嗯嗯  繼續裝系統XD
+02:12:56 <letoh> 搞一整晚總算可以上網了...接下來要搞定中文XD
+09:15:12 <mno2> http://www.matrix67.com/blog/archives/5981
+09:20:22 <mno2> http://www.infoq.com/articles/configuration-management-with-nix
+09:20:32 <mno2> [Purely Functional Configuration Management with Nix and NixOS]
+10:39:40 <monochrom> game 到玩時方恨少 :)
+10:41:16 <b4283> monochrom: Civilization 5 正在特價呢
+10:47:35 <monochrom> 我剛好在買 Brave New World, Scrambled Continents Map, 及 Scrambled Nations Map. (其餘的, 上次特價時買了)
+10:49:16 <b4283> nice :P
+10:49:34 <b4283> 我也想買 Complete Bundle ...
+10:50:18 <monochrom> 說 "game 到玩時方恨少", 是因為幾分鐘前考慮買不買那兩個 scrambled map. 最後以 "game 到玩時方恨少" 為由, 通過了!
+10:52:05 <b4283> 原來如此，是在給自己開脫呀 XD
+10:52:58 <monochrom> 跟著就引伸出一個作弄人的問題. 原價 $4.99, 二五折後, 究竟是 $1.25 還是 $1.24 呢?
+10:54:09 <monochrom> Steam 的作弄人答案: Continents $1.25, Nations $1.24 :)
+10:54:44 <b4283> 真怪啊，怎麼不是一致的
+10:55:12 <b4283> 想必是手動設定的價格
+10:58:14 <b4283> 如果是便利商店的話是無限捨去 :P
+14:14:25 <c9sloud> CindyLinz: 忙裡偷閒大概看了一下 feersum 的 http handler
+14:14:38 <c9sloud> picohttpheader parser 也大概看了一下
+14:14:47 <c9sloud> 還是有 optimize 的空間 :-p
+14:14:56 <c9sloud> CindyLinz: 有興趣支援嗎 XD
+14:15:25 <c9sloud> Feersum.xs L1258 是用 iterating 的方式去找 header
+14:19:39 <CindyLinz> 等要用到的時候再傷腦筋好了 XD
+14:25:32 <c9sloud> 把 picohttpparser 換成 h3 應該會蠻快的
+14:25:42 <c9sloud> 嗯嗯 先把 h3 寫完再說好了 XD
+21:23:27 <caasihuang> c9sloud: 打擾一下， r3_tree_insert_pathl_ex 吃的 data 的作用是？
+21:32:25 <whitglint> caasihuang: 我的理解是「可以讓你把 insert 進去的 node 和某個 data 做關聯」，match 時回傳的 node 的 data 會跟你 insert 時丟進去的 data 一樣
+21:33:44 <c9sloud> caasihuang: 可以是任何東西
+21:33:45 <caasihuang> whitglint: 感謝，我再讀讀...。
+21:33:58 <whitglint> 隨便你要怎麼利用它，例如我想在 match 到不同的路徑時 call 不同的 function，那 data 就可以丟 function pointer 進去
+21:33:59 <c9sloud> caasihuang: 可以是 callback, 可以是 array, 可以是 integer 也可以是 string
+21:34:02 <caasihuang> c9sloud: 喔喔喔，因為是 void * ？
+21:34:05 <c9sloud> 端看你 match 完之後要怎麼用
+21:34:07 <c9sloud> yeah
+21:34:23 <godfat> 有點 payload, metadata 的味道吧？
+21:34:25 <c9sloud> it's a pointer address
+21:34:34 <c9sloud> 對~~ yo got it
+21:38:25 <whitglint> r3 開始發酵了耶
+22:05:42 <CindyLinz> 唔?
+22:10:56 <c9sloud> 咦對耶 還有人開始寫 vala binding
+22:10:57 <c9sloud> XD
+22:11:10 <c9sloud> https://github.com/c9s/h3/issues/6 這好熱心阿，可是我實在沒時間看 QQ
+22:11:35 <c9sloud> 都還沒寫完就 17 個 stars 了... 壓力好大 XDDDDD
+22:11:44 <c9sloud> 下次還是寫完再 push 上去
+23:10:13 <c9sloud> https://twitter.com/tokuhirom/status/476532152104792064 這.....好像很激動
+23:11:24 <godfat> 喜歡純 perl 吧

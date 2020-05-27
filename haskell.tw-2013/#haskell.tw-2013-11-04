@@ -1,0 +1,18 @@
+11:55:13 <CindyLinz> 用 \begin{code} ... \end{code} 方式寫的 agda, 副檔名是 lagda
+11:55:19 <CindyLinz> 聽起就超慢的 XDD
+12:14:21 <CindyLinz> agda 只能用前面定義過的 type 耶, 不能用後面定義的 type.. QQ
+12:16:19 <CindyLinz> petercommand: 我想這就是 Mutually Recursive Sets 的語法有必要的地方了 :Q
+13:19:08 <junx1989> 在讲什么问题呢？
+13:21:01 <CindyLinz> 22:45 < petercommand> http://people.inf.elte.hu/divip/AgdaTutorial/Sets.Mutual.html#1
+13:21:01 <CindyLinz> 22:45 < petercommand> mutual definition有甚作用呀
+13:21:01 <CindyLinz> 22:46 < petercommand> s/甚/甚麼
+13:21:01 <CindyLinz> 22:49 < petercommand> 看不懂他在做啥
+13:21:19 <CindyLinz> junx1989: 啊, 以後你也可以用對話記錄看 ^^ http://goo.gl/oFPLX
+14:07:24 <junx1989> 好的
+18:21:33 <petercommand> CindyLinz: 甚麼是mutually recursive sets呀?
+18:49:23 <CindyLinz> petercommand: 啊不就你貼的 link ^^|
+18:49:43 <CindyLinz> 就 A 定義用到 B 的定義, 而 B 的定義又用到 A 的定義呀
+19:25:42 <petercommand> 像昨天那個example, "_::_"是怎麼被套用的阿
+19:32:38 <petercommand> 像如果輸入blah :: blah , N -> M -> L 和 Bool -> L -> M 這兩個會做甚麼
+19:39:06 <petercommand> CindyLinz: mutualy recursive sets應該知道意思了，不過那個example我還是不了解@@
+19:50:21 <petercommand> 我在看一下好了@@

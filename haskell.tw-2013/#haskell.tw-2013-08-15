@@ -1,0 +1,161 @@
+00:42:30 <monochrom> 常以寫直譯器來教, 的確不很健康. 不過也許, 想教 algebraic data type, 玩厭序列和樹後, 大抵就只剩直譯器可玩
+10:02:44 <Yu-Lin> abstract data type 與 algebraic data type 最根本性的差別是什麼？
+10:04:52 <monochrom> abstract: 不告訴你怎樣實作. algebraic: 講明怎樣實作: 加及乘
+10:06:01 <monochrom> data S = C1 Bool | C2 Int -- 加, sum
+10:06:37 <monochrom> data P = C3 Bool Int -- 乘, product
+10:09:56 <monochrom> 最好不視為"差別"而視為兩回事
+10:11:22 <Yu-Lin> 那我改一下問題好了
+10:12:12 <Yu-Lin> 我想想.....
+10:13:00 <Yu-Lin> 當有人問這兩者是什麼，該怎麼解釋？
+10:13:34 <Yu-Lin> 有沒有哪本書或資料可以給我參考的？
+10:14:14 <monochrom> abstract data type: 給你一個 API, 不讓你碰內部數據
+10:15:00 <monochrom> algebraic data type: 用加及乘造 type
+10:38:57 <_13h> 我覺得 abstract data type 跟給不給碰內部數據無關耶
+10:39:32 <_13h> 給一個 api，不給碰內部數據  聽起來比較像在講資訊封裝
+10:50:50 <favonia> monochrom: 我沒有想得很清楚。那個 algebraic 是不是像在解 type equations
+10:51:37 <monochrom> abstract 抽象就是資料封裝
+10:52:02 <favonia> monochrom: 基本上就是在解 X = F(X) 之類的
+10:52:45 <Yu-Lin> X = F(X) => F = id?
+10:54:14 <favonia> Yu-Lin: er 像是 data List = Nil | Elem :: List
+10:54:36 <favonia> Yu-Lin: 有點像是在解 L = 1 + (E * L)
+10:54:40 <Yu-Lin> 喔喔喔
+10:55:17 <favonia> 如果 F(X) = 1 + E * X... 那麼 L 某種意義上來說就是 F(X) = X 的不動點
+10:55:37 <favonia> er 如果要嚴謹的話還要多講一點東西 不過大概是這樣
+10:55:57 <favonia> 打錯，「L 某種意義上來說就是 F 的不動點」
+10:57:41 <favonia> 我只是在猜稱作「algebraic」是不是代表，就連最複雜的狀況，也是在解 F(X) = X 這個等式
+10:57:48 <favonia> 不過我是亂猜的就是了～
+11:01:54 <monochrom> 查書發現原來 algebraic data type 有兩個不同意思. 我先講 haskell 那個. 但, 另一個跟 abstract data type 有關, 所以這個來說, "差別"問題有意義
+11:03:52 <monochrom> haskell 的 algebraic data type: 用加及乘造 type. 叫 algebraic 只因為加和乘, 即多項式 polynomial.
+11:06:22 <monochrom> 並不關等式求解. 事實上, 雖然 algebraic data type 容許 L = 1 + E*L, 但要解這等式要用 limit, 這是通常視為分析而非代數.
+11:07:22 <favonia> monochrom: 如果你沒有要管什麼 CPO 還是語意，你可以說符號本身就是語意，這樣就不用管什麼 limit 了
+11:07:45 <monochrom> 另一種 algebraic data type: 給你一個 API, 但 API 內沒有 higher-order function. 所以是 abstract data type 特例
+11:08:01 <favonia> （感覺我好像踏入邏輯學中長久不休的戰場 xDDD）
+11:08:14 <Yu-Lin> 所以 haskell 的 algebraic 是指透過計算求出 type？
+11:08:21 <Yu-Lin> XD
+11:10:50 <favonia> monochrom: 唔第2種的說法好像滿有趣的（抄筆記）可以指一下資料來源嗎
+11:10:52 <monochrom> 不, haskell 的 algebraic 只指 sum type 及 product type. sum type: data S = C1 Bool | C2 Int. 這是 disjoint union, 被視為像加數. product type: data P = C3 Bool Int. 這是 cartesian product, 被視為像乘數. 只此而已.
+11:11:26 <monochrom> 巨書 Foundations for Programming Languages. John Mitchell
+11:12:04 <favonia> monochrom: 我了解你指 polynormial, 然後數學上有個傳統把跟多項式有關的都稱作 algebraic
+11:12:34 <monochrom> 對, 就只是這樣
+11:12:40 <favonia> 但所謂解等式需要用到 limit, 是因為有先建立某個 model, 在那個 model 下用 limit 算出來
+11:13:10 <favonia> 我只是想說那種 model 不是唯一 model... 甚至可以用 syntax 本身當 model 就好
+11:13:19 <favonia> 如果你覺得可以接受的話
+11:14:06 <favonia> PS: 我個人目前研究都走 syntax 路線 xD 搞不好哪天跳槽也說不定
+11:16:22 <monochrom> 第二種稱為 algebraic 是因為抽像代數及 universal algebra
+11:17:05 <monochrom> 所以, 一個是中學代數, 一個是研究院代數 XD
+11:17:15 <favonia> 你的意思是說
+11:17:24 <favonia> API 每個東西就是 operator 這樣嗎
+11:17:32 <monochrom> 正是
+11:17:33 <favonia> operator 之間的互動就是 equation 這樣嗎
+11:17:48 <monochrom> 是
+11:18:14 <favonia> 嗯
+11:19:29 <monochrom> "代數" 太闊了
+11:20:10 <favonia> 好吧... 不過有些小問題。 haskell 的 algebraic data type 不是只有 + 和 *.
+11:20:14 <favonia> 還有 ->
+11:20:17 <favonia> 還是說這不算？
+11:21:01 <monochrom> 嚴格來說不算, 但實際上沒人介意了
+11:21:04 <favonia> （我得先承認我從來沒在管這個術語到底怎麼來的）
+11:21:42 <favonia> er
+11:21:48 <favonia> 好吧...
+11:21:53 <monochrom> 正如 regular expression 沒人深究准不准 back reference
+11:22:29 <favonia> 有吧。學術版的 regular expression 還是要求可以用 DFA 做出來啊
+11:23:50 <favonia> 至於 ADT... 就如同程式語言理論中的各種術語一樣... 大家都有自己的定義
+11:23:52 <monochrom> 學校裏的 regular expression 不准 back reference, 所以得出結論如 "regular expression 不可能給出純粹所有質數". 但日用的 regular expression 可以.
+11:24:13 <favonia> monochrom: 但我相信程式語言理論中的混亂，是連學術中也如此
+11:24:39 <favonia> 跟那種好歹大家覺得 reg expression "應該" 要怎樣有個共識差很多...
+11:25:53 <favonia> monochrom: 常常覺得如果 type/module/variable 這三個詞可以先定死的話，不知道可以少吵多少莫名其妙的架 xDDD
+11:26:34 <monochrom> 下回題目: 甚麼叫 calculus, 為甚麼叫 lambda calculus XD
+11:27:50 <Yu-Lin> XD
+11:27:53 <favonia> monochrom: 可以忽略微積分那邊的發展的話，這題很好回答吧
+11:28:39 <monochrom> 不, 反而包括微積分才好答. (至少, 我的答案如是)
+11:29:49 <hashcat> 因為都用代換和縮約吧
+11:30:21 <favonia> monochrom: 只專心討論程式語言的話，你甚至可以堅持 calculus = syntactical manipulation = PL xDDDD
+11:30:52 <hashcat> 而且都有綁定變數
+11:31:12 <monochrom> syntactical manipulation 也是我的答案. 而這答案也附合微積分
+11:32:12 <monochrom> s/附/符/
+11:32:21 <favonia> monochrom: 我個人覺得微積分扯太多實數以後就很不 syntactical 了...
+11:33:20 <favonia> hashcat: 縮約是指 reduce 嗎？
+11:33:43 <hashcat> 是
+11:34:33 <hashcat> 還可以alpha縮約, beta縮約
+11:34:38 <monochrom> "d(x^2)/dx = 2x" 之類是很 syntactical 的. 牛頓就是說, 應用的時候, 玩這些符號遊戲就夠
+11:35:19 <favonia> 喔如果說簡單的應用我沒意見...。但理論基礎完全不「符號」吧... 這就是我要抗議的地方
+11:36:30 <hashcat> 可以看non-standard版
+11:37:57 <monochrom> 基礎當然不符號. 這很自然. lambda calculus 的眾多基礎, 又有幾多個是符號呢?
+11:39:31 <favonia> monochrom: PL 有趣的點就是... 很多東西停留在符號階段就可以弄完啦
+11:39:39 <favonia> monochrom: 你不需要另外建 domain
+11:40:55 <favonia> monochrom: 唉完蛋了我開啟了永無止境的哲學問題了 lol lol
+11:43:17 <hashcat> http://en.wikipedia.org/wiki/Non-standard_analysis
+11:43:59 <hashcat> 說明不夠符號通常是因為公設有少東西
+11:47:35 <favonia> hashcat: 嗯...
+11:49:42 <monochrom> 永無止境的哲學問題, 永無止境的語法語義. 你為某L語法設計語義, 但這語義本身是另一個語文的語法而已. 往下去全是一層層的語法. XD
+11:50:45 <favonia> monochrom: 這是一種 fu 啦... xDDD
+11:50:55 <favonia> anyway, 我的論點是，因為 PL 通常是要可以算的，而計算通常是立基於程式（符號）本身，所以通常也都會有個（幾乎）只以符號為基礎的計算規則。
+11:51:25 <favonia> 然後就把那個計算規則當語意就好了。
+11:52:33 <favonia> （通常）不需要仰賴其他複雜理論，本身就有意義這樣。
+11:53:24 <monochrom> 我的師尊也說, 你寫程式, 遲早都要符號, 要 formal, 早好過遲. 早即是規格階段已符號
+11:55:11 <favonia> monochrom: PL 也有很多人研究的起手式就是，把程式語言每個程式，先解釋成某個奇妙 domain 的某個元素再說。我只能說我目前還沒這樣搞 xD
+12:00:15 <favonia> monochrom: 在我還沒跳槽前似乎該去做一個「syntax is semantics」的 T-shirt xDDD
+12:00:27 <monochrom> 哈哈
+18:39:09 <suhorng> (早上的討論) 微積分有很 syntactical 的部份也有超級不 syntactical 的部份...雖然前者是我比較喜歡的部份 XDD
+18:40:20 <suhorng> 對數學系來說後者也佔很大部份
+18:40:50 <mno2> 18 世紀的數學家應該是偏愛前者吧，後者直接丟掉 xD
+18:41:24 <suhorng> 符號超好玩
+18:41:54 <mno2> 是很好玩啊 xD
+18:42:18 <mno2> 某段時期數學界陷入瘋狂符號 style   xD
+18:42:43 <suhorng> 想到維基有個 symbolic integration tutorial, 在講現在的電腦系統怎樣求符號積分...
+18:43:06 <suhorng> mno2: 是瘋狂公設化的那段嗎?
+18:43:27 <hashcat> suhorng: 在哪裡
+18:44:53 <mno2> 有兩個時期吧，18 世紀是代數符號亂操作，只要結果跑出來是對的就好，反正有物理經驗支持，意義不管他。 20 世紀是 Hilbert Style 囉
+18:45:56 <mno2> 代數曾經是亂搞亂寫的時代啊 xD
+18:46:41 <suhorng> hashcat: 我找下
+18:46:50 <suhorng> 17 世紀也是 XD
+18:48:16 <suhorng> hashcat: http://en.wikipedia.org/wiki/Risch_algorithm#References Manuel Bronstein (1998). Symbolic Integration Tutorial.
+18:49:26 <mno2> 其實我以前都覺得我代數都看不懂，心理 OS 都覺得這是胡亂拼出來的吧。 讀了數學史才發覺還真的是亂搞出來的。先拼出來然後再找解釋
+18:49:51 <suhorng> 好像有人說過數學教科書的內容與歷史發展順序相反
+18:50:17 <mno2> 是啊，完完全全相反。
+18:50:45 <mno2> http://www.amazon.com/Mathematics-Loss-Certainty-Galaxy-Books/dp/0195030850
+18:50:50 <mno2> 有興趣可以看這本
+18:50:53 <mno2> 很推薦
+18:51:02 <mno2> 有中文版
+18:51:20 <mno2> 而且翻得不錯
+18:51:29 <suhorng> 圖書館有耶XD
+18:51:47 <suhorng> 數學 : 確定性的失落 / 数学 : 确定性的丧失
+18:52:33 <mno2> 他後期也有講到 20 世紀初學派大戰，所以對了解 PL 理論的根源也是有點幫助的 xD
+18:59:29 <hashcat> suhorng: 改天用haskell寫一個
+19:01:00 <suhorng> hashcat: 我看不太懂那篇的說 XDD 數學學太少
+19:01:27 <suhorng> 維基上的資料也是說需要 heuristic
+19:02:05 <hashcat> suhorng: 我寫一個XD
+19:03:05 <hashcat> suhorng: 感覺積分問題跟一般符號計算沒兩樣, 這算法不知道有啥特出之處
+19:08:04 <suhorng> 不知道耶 要用常見函數表達出來? (多項式, .....)
+19:08:55 <hashcat> suhorng: 我不瞎猜了, 先擱置有時間看看
+19:13:27 <favonia> mno2: 之前哲學討論讀書會好像有遇到一些例子 lol 不只代數吧... 像是幾何學中根本不存在的點之類的...
+19:14:19 <mno2> 不只啊，但代數特別嚴重吧
+19:14:39 <mno2> github.io 又掛了
+19:14:40 <suhorng> mno2: 驚 我還以為代數是比較安全的地方orz 比起分析跟幾何
+19:16:54 <favonia> suhorng: 虛數 i 顯然是亂湊的吧...
+19:17:05 <mno2> suhorng: 複數跟負數有很長一段時間數學家都不知道該怎麼去解釋，只是好像有用就用下去
+19:17:19 <mno2> 很長一段時間可能有 200 年吧 xD
+19:17:29 <hashcat> 最後發現一切都只是有沒有矛盾的問題
+19:18:19 <mno2> 然後出現不完備定理，Hilbert 哭哭
+19:18:39 <suhorng> favonia: mno2: 對喔, i..
+19:18:43 <suhorng> 想成抽象代數了
+19:19:30 <favonia> suhorng: 抽象代數... 你能設計多少 PL 就至少有那麼多種代數 xD
+19:20:30 <suhorng> 所以就...改名不再叫做亂湊 而是"我就這樣定" (誤)
+19:21:11 <mno2> 所以才會出現純數啊 xD
+19:21:56 <mno2> 其實機率也是 xD
+19:22:28 <mno2> 到了 Bayesian school 的時候，其實機率值背後的詮釋就叫：你爽就好
+19:23:36 <suhorng> lol
+20:00:44 <hashcat> 起於經驗, 終於符號
+20:04:27 <favonia> 我花了很多時間想到底自己是哪一派
+20:04:40 <petercommand> 數學符號很多就是自己定出來的呀
+20:05:20 <favonia> 我想應該還是偏直覺主義一點... 但用的都是從別人家偷來的技術www
+20:31:01 <petercommand> mno2: 位什麼呀@@
+20:31:08 <petercommand> mno2: 為什麼呀@@
+20:31:26 <mno2> petercommand: 你是指機率值？
+20:31:33 <petercommand> 恩
+20:31:49 <mno2> 我找一下以前寫的文章
+20:34:41 <mno2> petercommand: http://pastebin.com/TK7nuXjw
+20:35:00 <petercommand> mno2: 來看看
+20:35:05 <mno2> 這是以前跟人家解釋 ML 之中 bayesian school 跟 frequentist school 的差別的文章
+20:35:10 <mno2> 所以會有講到其他的東西
+20:37:10 <mno2> 先閃，晚點再回來

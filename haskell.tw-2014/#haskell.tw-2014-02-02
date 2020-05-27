@@ -1,0 +1,245 @@
+00:20:49 <monochrom> 各位早已超越 level 1, 所以反而不明白 level 1 的人在想甚麼 :)
+00:22:09 <hashcat_> 有沒 level inf
+00:22:42 <hashcat_> 朝level inf 前進
+13:18:48 <godfat> hashcat, 是啊，所以說我很難想像要怎麼當 oo 的 class, 雖然聽 CindyLinz 這樣說勉勉強強吧... XD
+16:26:26 <hashcat_> interface也滿像class的
+16:27:06 <godfat> 以 java 為例的話，因為 java 不能多重繼承，導致 interface 跟 class 差比較多
+16:31:41 <hashcat_> 這樣haskell可以多重繼承
+16:32:43 <hashcat_> www.cs.indiana.edu/~eholk/papers/hips2013.pdf
+16:33:08 <hashcat_> rust編譯成gpu ptx
+16:33:46 <godfat> PTX 跟 cuda 有什麼關係嗎？ cuda 編成 ptx?
+16:34:44 <godfat> ok, abstract 解釋了
+17:45:39 <CindyLinz> 我第一次接觸 OO 用的是 C++
+17:45:54 <CindyLinz> 所以學 Java 的時候覺得不能多重繼承真是限制好大 ^^|
+17:46:59 <CindyLinz> 我也是覺得 Haskell type class 比較像 interface... 但是如果完全不動用 type class 又模擬不出 Java 單線繼承的效果....
+17:47:40 <CindyLinz> 欸.. 其實是主角是 type class, 不然用 Typeable 一層一層套又是另一種模擬法....
+17:48:43 <godfat> 我後來覺得多重繼承其實也不是不對，而是 c++ 的作法怪怪的
+17:48:44 <godfat> 後來很多語言宣稱要解決多重繼承的問題，感覺只是換個名字而已
+17:49:46 <CindyLinz> 我現在還是覺得堅持單線繼承只是為了比較好實作.. 雖然 Java 派書都會一直洗腦說單線繼承才是對的.... = =
+17:50:20 <godfat> 忽然讓我想到王垠的權威文 XDDD
+17:50:27 <CindyLinz> C++ 怎樣怪? 你是說 virtual 繼承嗎?
+17:50:34 <CindyLinz> C++ 不是兩種都有嗎? XD
+17:50:44 <godfat> 是啊，還有各種 ambiguos 的狀況
+18:18:54 <CindyLinz> Haskell 的 tuple 只有定到 7 個 (印象中), 所以如果想要用很長很長很長的 tuple..
+18:19:28 <godfat> 就不如自己定個 record
+18:19:34 <CindyLinz> 不用 template haskell 的話, 應該就是 (1, (2, (3, (4, (5, (6, (7, (8, 9))))))))
+18:19:46 <CindyLinz> 不行, 長度不固定 XD
+18:20:01 <godfat> tuple 長度不是固定的？
+18:20:10 <CindyLinz> 但這種寫法後面會有一堆 ))))) (想到 ruby ennnnnnnnnnnnd 的故事 :p)
+18:20:50 <CindyLinz> 我想的是像 printf 這種應用, compile 完是固定的長度, 但在設計 printf 的時候其實是不固定的
+18:21:19 <CindyLinz> 所以想, 可能用 operator 的 data constructor, 就可以接出很長很長的 tuple, 而又不用前後的括號了 :p
+18:21:36 <CindyLinz> 1 ::: 2 ::: 3 ::: 4 ::: 5 ::: 6 ::: 7 ::: 8 ::: 9
+18:21:43 <godfat> (憶起大玩 c++ template 的過去...)
+18:22:28 <CindyLinz> >>>>>>> 嗎? @@"
+18:22:39 <godfat> c++ 的 _1 與 _2 等等是真的滿好用的...
+18:23:09 <godfat> XD 不只是那個，像是自己串 tuple, 另外用 function 包裝，一層包一層只為了 type safe 又用起來方便
+18:23:15 <CindyLinz> 沒有用過 _1 和 _2 @@"
+18:23:46 <godfat> 例如 (_1 + 1)(2) 就是 3
+18:23:47 <godfat> 自動產生 anonymous function
+18:23:55 <godfat> (_1 + _2) 就是 (+)
+18:24:19 <CindyLinz> 有這種東西 @@"
+18:25:00 <CindyLinz> _1, _2 這些就像是 shell script 裡面的 %1 %2 %3?
+18:38:12 <godfat> 我不太熟 shell, 不過重點是自動產生 function
+18:38:13 <godfat> 比方說 map(list.begin(), list.end(), _1 + 1) 寫起來就很快
+18:38:13 <godfat> 這當然也跟缺少 anonymous function 有關，
+18:38:13 <godfat> 但是另一個重點就是有 _2, _3 可以用 (不確定有沒有到 _4)
+18:39:03 <godfat> 在 haskell 裡要做類似的事，可能要 flip 來 flip 去
+18:39:03 <godfat> 比方說 _3 + _1 + _2 之類的
+18:40:38 <CindyLinz> 正常人會寫 \_1 _2 _3 -> _3 + _1 + _2 吧? 誰跟你 pointless... XD
+18:41:00 <godfat> XD 也是長一倍就是了
+18:41:17 <CindyLinz> (看看 suhorng..)
+18:41:53 <CindyLinz> @pl \_1 _2 _3 -> _3 + _1 + _2
+18:41:53 <lambdabot> (line 1, column 14):
+18:41:53 <lambdabot> unexpected "_"
+18:41:53 <lambdabot> expecting lambda abstraction or expression
+18:42:03 <CindyLinz> orz
+18:42:14 <godfat> 咦？名稱不合法嗎？
+18:42:16 <CindyLinz> @pl \a1 a2 a3 -> a3 + a1 + a2
+18:42:16 <lambdabot> flip . ((+) .) . (+)
+18:42:28 <CindyLinz> 可能不能底線開頭.. XD
+18:43:14 <CindyLinz> 誰說 perl 比較 unreadable 了... # flip . ((+) .) . (+)
+18:43:20 <godfat> 那個 _1, _2 可以參考這個
+18:43:21 <godfat> http://www.boost.org/doc/libs/1_55_0/libs/bind/bind.html#Purpose
+18:43:21 <godfat> 不過我記得其他地方也有實作 _1, _2
+18:43:21 <godfat> 然後這有加入 TR1, 所以應該是 c++11 標準（如果這幾年沒有變化的話）
+18:43:40 <CindyLinz> 咦 原來是加入標準的東西歐..
+18:44:04 <CindyLinz> @unpl flip . ((+) .) . (+)
+18:44:05 <lambdabot> (\ g b c -> (g + c) + b)
+18:44:14 <CindyLinz> 這次復原得很好 XD
+18:44:44 <letoh> _1 _2 有進 c++11
+18:46:07 <letoh> 目前 boost 好像還沒用到 c++11 的語法來實作
+18:46:52 <godfat> 說真的這些真的做到很方便，type safe 也有
+18:46:52 <godfat> 不過底下需要花的力氣真的很大，稍微想想要怎麼做都覺得有一堆細節
+18:47:08 <letoh> 你是說自己實作嗎/
+18:47:11 <letoh> 你是說自己實作嗎?
+18:47:21 <godfat> 是啊，總要有人做？ XD
+18:47:31 <godfat> compile error 也會噴到那幾行去
+18:47:51 <letoh> 進標準的話就是都準備好了  不過有錯的確是不太好除錯
+18:48:19 <letoh> 現在 g++ 噴出來的錯誤都好幾頁  每次都要把訊息存下來慢慢研究XD
+18:48:55 <godfat> 我以前還在玩時，常常要交叉閱讀
+18:48:55 <godfat> 就是每個 compiler 換一輪，所有錯誤訊息都看過，比較容易釐清問題
+18:49:04 <CindyLinz> 想到一個叫作 jeh.cpp 的檔案.....ww
+18:49:32 <CindyLinz> 檔案內容兩行..  line 1: #include ".//.//.//.//jeh.cpp"   line 2: #include "jeh.cpp"
+18:49:50 <CindyLinz> 用 g++ compile 看看, 很有趣 :p
+18:50:45 <godfat> clang: error: unable to execute command: Segmentation fault: 11
+18:50:57 <CindyLinz> 怎麼變成 clang 了 XD
+18:50:59 <godfat> 我用 g++ 結果居然來 clang = =
+18:51:52 <CindyLinz> godfat: 那你換一個 compiler, 釐清一下問題好了.. (誤)
+18:52:02 <godfat> 去 linux 上跑 g++, 被洗板
+18:52:14 <godfat> 好像不會停？
+18:52:22 <godfat> 那 clang 至少會 crash... XD
+18:52:23 <CindyLinz> 會停, 可是超長......
+18:52:48 <CindyLinz> 可能只是 clang 的某個 buffer 太小? XD
+18:52:55 <godfat> 說不定可以 dos judge? XD
+18:53:04 <CindyLinz> ...........
+18:53:46 <CindyLinz> 因為看到 letoh 說 現在 g++ 噴出來的錯誤都好幾頁 XD
+18:54:00 <godfat> 話說我有時候會把 ls 打成「峱」
+18:54:00 <godfat> 說不定可以仿 sl 做個公車頭或啥的... XD
+18:54:11 <CindyLinz> XDD
+18:54:18 <CindyLinz> 我是有時候 XD 會打成 BH..
+18:54:39 <godfat> 有點距離耶... 我是會打成 CD
+18:54:58 <CindyLinz> dvorak 的 XD 二鍵是 qwerty 的 BH 二鍵 @@"
+18:55:20 <godfat> 是喔 @@" 我上次看到有人說練 dvorak 只要一個月，值得嗎？
+18:55:34 <CindyLinz> 是不是只要一個月我不知道, 但我覺得值得 :p
+18:56:16 <godfat> 除了快很多有其他好處嗎？
+18:56:26 <CindyLinz> 手比較不累
+18:56:57 <CindyLinz> 然後打密碼萬一被看到了, 人家要真的照著打出來要過比較久
+18:57:07 <CindyLinz> 因為不知道是 dvorak
+18:57:27 <godfat> XDDDDDDDD
+18:57:55 <CindyLinz> 電腦忘記鎖的時候別人要偷用你電腦的機會也比較小
+18:57:58 <godfat> 剛剛看了一下，mac 好像不能直接改 dvorak
+18:57:59 <godfat> 剛開始好像也應該用個有刻鍵盤練？
+18:58:42 <CindyLinz> Ubuntu / Debian 是安裝的時候可以選.. 然後有 X 的話還可以用 xkbmap 來設
+18:58:44 <b4284> dvorak 我也練過，一個月差不多
+18:59:05 <CindyLinz> 我還沒有用過印 dvorak 的鍵盤 @@"
+18:59:11 <godfat> 喔有了有了，在輸入法那邊可以改...
+18:59:21 <b4284> 練一個禮拜還不算太熟時就直接在上班時用 (偷練習)
+18:59:25 <godfat> 所以不用看喔？
+18:59:35 <b4284> 要看
+18:59:37 <CindyLinz> 然後有看過有人拿 qwerty 的桌機鍵盤硬拆改成 dvorak 的長相
+18:59:49 <CindyLinz> 整支鍵盤凹凸不平的... orz
+18:59:58 <godfat> 唔唔，我用無刻這樣改也沒啥意義
+19:00:24 <b4284> keyboard 不用換，建議找一張可印的 A4 cheetsheet 印出來放在鍵盤下
+19:01:19 <godfat> ok, 來玩玩看好了
+19:01:34 <CindyLinz> (推)
+19:01:41 <b4284> 我會比較推薦 colemak
+19:01:52 <CindyLinz> (鎖門)
+19:02:38 <godfat> colemak? 沒聽過 @@
+19:02:57 <b4284> dvorak 後來打順了還是很不習慣，後來就跳 colemak 了
+19:03:40 <CindyLinz> 它和 dvorak 相比, 特性是什麼啊?
+19:04:01 <b4284> 有一些鍵和 qwerty 相同
+19:04:09 <b4284> zxcv 是一樣的
+19:05:12 <b4284> 有用到 Ctrl-C Ctrl-V 的應用程式比較順手
+19:05:56 <CindyLinz> 嗯嗯
+19:06:23 <b4284> CUA binding
+19:07:25 <b4284> 有聽過 dvorak 打字是常會有兩手間交互的跳舞般的節奏，個人認為的確是這樣
+19:07:28 <godfat> 啊啊，我覺得我可能要放棄 dvorak, 確實碰上 ctrl+c 會有點痛苦
+19:07:38 <b4284> 因為母音都在左手
+19:07:49 <CindyLinz> godfat: 其實只是改用右手按而已 ^^|
+19:08:01 <CindyLinz> c 和 v 都在右邊
+19:08:15 <b4284> 而且 dvorak 打 "ls" 實在是不給力
+19:08:40 <b4284> 因為是小指，真的沒力氣 XD
+19:08:56 <CindyLinz> 嗯, 有人會用無名指來按 l
+19:09:10 <CindyLinz> 我自己是都還用小指...
+19:09:24 <godfat> 唔唔，可是如果我要搭配滑鼠的話，還是不方便 @@"
+19:09:25 <CindyLinz> 我有同事... 雖然不是用 dvorak, 但之前就設定 cd 後自動 ls.. XD
+19:09:35 <b4284> XD
+19:10:00 <CindyLinz> godfat: 下個決心一次練齊全吧, 我也改用左手用滑鼠了~~ :D
+19:10:39 <b4284> godfat: 要改的話是很快，下定決心就可以了
+19:10:56 <godfat> 噗，左手滑鼠，果然是一路練到底... XD
+19:11:01 <CindyLinz> 來用左右相反的螢幕吧?
+19:11:15 <b4284> 當初我用 terminal 下 setxkbmap 改成 dvorak 差點改不回去
+19:11:22 <godfat> 正好我滑鼠都買左右對稱的，真要練搞不好真的可以
+19:11:27 <CindyLinz> 我有用了大約兩三個小時... 然後暫時放棄.. XD
+19:11:44 <CindyLinz> 會覺得中文字都是歪斜的... XD
+19:11:44 <b4284> 後來只好用另一台電腦印出 layout 再改回 qwerty
+19:12:15 <CindyLinz> godfat 用 mac 是設定輸入法, 可能比較好?
+19:12:22 <CindyLinz> 應該是可以用滑鼠切換吧
+19:13:17 <b4284> 剛開始練，一分鐘只有 6 word，很有趣
+19:14:30 <CindyLinz> 嗯, 而且因為原本打字速度還算快, 所以看到或想到要打的字時, 很自然會預期自己打得那麼快
+19:14:35 <CindyLinz> 一整個力不從心....
+19:17:20 <b4284> godfat: http://play.typeracer.com/ ;; XD
+19:18:09 <godfat> 倒是 mac 有個困擾，cmd +
+19:18:09 <godfat> 可惡啦，現在輸入法怪怪的，我調整一下... 一直不太讓我取消某些輸入法
+19:19:13 <CindyLinz> 很有 Win8 的 fu..... ww
+19:19:18 <CindyLinz> 被 guest 打敗了.. XD
+19:19:28 <CindyLinz> 不對 我也是 guest..
+19:20:19 <b4284> 剛剛那個 jeh.cpp 那個好可怕
+19:20:50 <b4284> redirect 到硬碟上瞬間少了 2.6G
+19:22:15 <godfat> 我懷疑要重開機才有解... 他不讓我取消 dvorak 或 colemak, 一定要選一個，或是用另一個某些國家的語言的輸入法
+19:22:16 <godfat> 還好我沒 redirect...
+19:23:10 <CindyLinz> orz
+19:23:26 <b4284> 現在用 pbzip2 -9c ... cpu 飆到 70 度了
+19:23:40 <CindyLinz> 沒必要吧... 沒什麼有價值的資訊啊.... 囧
+19:23:44 <godfat> mac 上按 cmd+q 是關閉程式，cmd+w 是關閉視窗，很容易誤按又沒有任何提示
+19:23:45 <godfat> 看來 dvorak 是可以解決這個問題
+19:23:49 <CindyLinz> 螢幕上看一看笑一笑就可以了 XD
+19:23:54 <CindyLinz> XDDD
+19:24:25 <godfat> 可以用滑鼠換，做成輸入法是不錯，隨時可以切換，只是我現在居然被他 bug 搞鬼 orz
+19:24:31 <CindyLinz> 想知道多長的話.. pipe 給 wc 好了?
+19:26:50 <b4285> 當機了，哈哈
+19:26:54 <CindyLinz> ..........||
+19:27:34 <CindyLinz> 恭喜暱稱++
+19:29:25 <godfat> 我打這麼慢錯誤這麼多居然還拿第一...
+19:31:24 <godfat> 果然這次最後一名... XD
+19:33:09 <godfat> 我發現我不太會拼的字都比較慢... 三次大約都是 56 wpm
+19:33:39 <CindyLinz> 我們需要比 programmer 常用字的比賽?
+19:33:55 <CindyLinz> 像是 while, for, struct, printf 都會比較快 XD
+19:34:28 <godfat> XDDDD 那保證快很多....
+19:35:00 <godfat> 我不知道能不能號稱 60 wpm... orz
+19:35:51 <b4285> AbstractConnectionFactoryBuilderFacet
+19:36:43 <CindyLinz> 嗚嗚我不寫 Java...
+19:37:06 <CindyLinz> 而且這種長度.... 應該會用自動補齊, 或是複製貼上.....ww
+19:40:28 <godfat> 放棄，在 55~57 wpm 間... 至少很穩定吧 orz
+19:40:51 <CindyLinz> godfat: 用 dvorak / colemak 打一次試試?
+19:41:04 <godfat> XDDDD 一定會打到無地自容
+19:41:52 <godfat> 先把 layout 放在 tab 上，哪天再來練練看 @@
+19:42:39 <CindyLinz> 適合舒壓
+19:42:54 <CindyLinz> 練成後就沒這用途了...
+19:43:11 <godfat> XDDDDDDDDDDD
+19:43:11 <godfat> ++
+19:43:13 <CindyLinz> 等壓力大點的時候再用
+19:43:22 <godfat> 不過時程壓力大時無效 = =...
+19:43:26 <CindyLinz> 像是 deadline 前一天突然改用 dvorak 寫程式.....
+19:43:33 <godfat> ...
+19:43:57 <godfat> 話說其實我也算放棄 hhkb pro 和 vim...
+19:44:40 <CindyLinz> hhkb pro.. 很好的鍵盤?
+19:46:14 <godfat> 沒有方向鍵打起來有點痛苦，我覺得手感其實也沒機械鍵盤好
+19:46:22 <CindyLinz> @__@"
+19:46:23 <lambdabot> Unknown command, try @list
+19:46:47 <godfat> 最大的特色就是超小一隻吧，少別人一排
+19:47:29 <CindyLinz> 噢
+19:48:07 <godfat> 跟我賣掉的那把一樣
+19:48:08 <godfat> http://en.wikipedia.org/wiki/File:Happy_Hacking_Keyboard_Professional_2.jpg
+19:49:10 <CindyLinz> 我也蠻想要白鍵盤的..
+19:49:17 <CindyLinz> 反正鍵帽上印的字都是錯的....
+19:49:32 <CindyLinz> 可是用筆電, 而且沒外接 orz
+19:50:20 <godfat> 發揮機械魂，拆開來自己組上去？ XD
+19:50:33 <CindyLinz> 我沒有機械魂... XD
+19:50:48 <godfat> 噢... XD 那只好交個有機械魂的朋友了 (?)
+19:51:23 <letoh> 換鍵帽的話應該還好?
+19:51:43 <CindyLinz> 筆電欸 @@" 沒出就沒有啊
+19:52:18 <b4285> godfat: 我對電容式還蠻有興趣，聽說是很安靜
+19:52:58 <letoh> 我以為那種剪刀腳鍵盤的鍵帽有通用規格
+19:53:02 <b4285> 如果要很小的話也有很多種替代品
+19:53:13 <godfat> 我覺得也還好，是比機械鍵盤安靜，但剪刀腳或薄膜還是比較安靜（印象
+20:09:59 <hashcat> 高雄都不知道上哪買
+20:15:57 <CindyLinz> 可以找一天上台北到店裡去試一下各種鍵盤類型的手感 (記下來), 然後回去再用網路訂吧
+20:16:37 <hashcat> 這樣要加高鐵錢
+20:17:34 <b4285> hashcat: 建國路上有一家 PC Party
+20:17:37 <hashcat> 不如直接一次買十個
+20:17:45 <hashcat> ??
+20:17:55 <hashcat> 後天來去看看
+20:17:56 <b4285> 不是說高雄嘛
+20:19:06 <hashcat> 離建國路有點遠
+20:19:36 <b4285> hashcat: http://goo.gl/maps/ZmSkw
+20:21:21 <b4285> 對面有一家情趣用品店，呵呵
+20:21:31 <b4285> 沒印象
+20:21:39 <hashcat> 招牌像是家紋
+20:21:41 <petercom1and> 變4285了XD
+20:21:47 <hashcat> 難怪我沒印象
+20:22:17 <b4285> 4285 是啥
+20:22:24 <hashcat> 那招牌我會直接掠過
+20:22:38 <b4285> ASUS 的股票號碼嗎
+20:22:42 <petercom1and> b4285: 你的nick呀XD
+20:23:05 <b4285> :P

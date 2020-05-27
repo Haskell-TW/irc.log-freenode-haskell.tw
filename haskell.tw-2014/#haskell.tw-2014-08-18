@@ -1,0 +1,83 @@
+00:00:08 <monochrom> 香港諺語: 一次生, 兩次熟!
+01:12:08 <au> http://codeworld.info/ # 良好的 GHCJS 示範
+09:27:45 <mno2> ghcjs 跟 elm 是解決相同問題嗎？自帶 runtime 會不會造成 bug 難找？
+09:40:17 <miaoski> CindyLinz: ping
+11:28:57 <CindyLinz> miaoski: ??
+13:31:04 <suhorng> XD 實在不會資安
+13:31:21 <suhorng> FT 17 誠徵講者 >_____<""
+13:32:16 <suhorng> 任何有跟函數式/程式語言沾上邊的主題都可以唷 即使是 node / promise / ES6 的主題也可以 (咦)
+13:33:00 <CindyLinz> js 相關! 來找找 whitglint.. (誤)
+13:34:38 <CindyLinz> 啊 爆地點 QQ
+13:34:46 <suhorng> qq
+13:51:29 <miaoski> suhorng: 有一題是  Haskell 的 polyglot 啊啊啊啊啊 XD
+13:52:46 <suhorng> 完全沒聽過 (掩面)
+13:53:15 <suhorng> 不過 CTF  剛剛結束了 XD?
+13:54:01 <CindyLinz> 程式語言相關也包含語法層面哄..
+13:54:22 <CindyLinz> miaoski: 不用 {} () [] ; 的 C 語言技巧大全? :D
+13:54:40 <miaoski> CindyLinz: 饒了我 (doh) ...
+13:54:50 <suhorng> !? 那要怎麼寫...
+13:54:54 <miaoski> CindyLinz: 殺去 217 找出題的人叫他 present 比較快
+13:55:42 <CindyLinz> miaoski: 請他在 217 等著, FT-17 辦在 217.. (大誤)
+13:56:09 <CindyLinz> suhorng: CTF 的題目
+13:56:27 <CindyLinz> suhorng: 超級髒髒der XD
+13:57:13 <suhorng> 噗
+13:57:16 <whitglint> 什麼是 FT 17?
+13:57:23 <CindyLinz> FunctionalThursday 17
+13:57:34 <CindyLinz> 發現 topic 一直沒拿掉....
+13:57:40 <suhorng> 不會改 topic..Orz
+14:14:52 <dryman> CindyLinz: 想敲碗神奇的C語言技巧大全...XD
+14:16:37 <CindyLinz> dryman: 你找錯人啦~ XD
+14:57:39 <mno2> FT 17 聽起來好像是什麼戰鬥機的名字..
+14:57:56 <mno2> dryman: Hacker's Delight?
+15:00:01 <CindyLinz> 越來越懶了... XD
+15:00:26 <CindyLinz> Functional Thursday -> FunThursday -> FunTh -> FT
+15:00:48 <petercommand> lazy!
+15:50:42 <petercommand> CindyLinz: https://gist.github.com/Inndy/63a4db7514a0bedc1bd4
+15:51:49 <CindyLinz> petercommand: 我少列了 <> 不行.. XD
+15:52:13 <petercommand> CindyLinz: 你有參加?
+15:52:45 <CindyLinz> petercommand: 沒有.. 是 miaoski (指指)
+15:52:54 <petercommand> XDXD
+15:53:24 <petercommand> 原來gcc可以直接寫int main = 0x90x90;....
+15:55:24 <petercommand> 原來gcc可以直接寫int main = 0x9090;....
+15:55:30 <petercommand> 多打了一個x
+15:57:29 <suhorng> <: :> <% %> 其實是 [] {} 吧...?
+15:58:02 <CindyLinz> digraph trigraph
+15:58:25 <suhorng> ~"~...
+15:59:32 <CindyLinz> CTF 比這還髒ra.......
+16:31:33 <miaoski> dryman: 你沒找錯人... CindyLinz 是暗黑界 C 設程的第一把交椅
+16:32:26 <CindyLinz> miaoski: 最好是...... XD
+16:33:13 <CindyLinz> 人家是光明乾淨 FP 界的人 QQ
+16:37:26 <miaoski> CindyLinz: 人都有過去 *拍肩* (咦)
+16:37:59 <CindyLinz> 拍肩!!
+18:45:46 <suhorng> 天阿, 突然發現 Applicative 沒有規定求值順序@@?   mf <*> mx <*> my 沒有說在底下的 monad 中 f, x, y 的副作用(之類)誰先發生
+20:01:51 <CindyLinz> 就連 monad 也沒有規定呀.. 是實作的 monad 決定的..
+21:52:15 <favonia> monad 不算完全沒有規定吧……
+21:54:14 <suhorng> favonia: 恩..這樣說的話, Applicative 跟 Monad 之間的關聯(等式)有規定嗎...? 例如需要 (<*>) = ap?
+21:54:45 <suhorng> favonia: Oops, 看了一下對話紀錄, 我接錯話了 XD
+21:55:55 <suhorng> CindyLinz: 我的意思是說, 例如 mf <*> mx 好像沒有說要是 do { f <- mf; x <- mx; return (f x) } 這種順序
+21:56:42 <mno2> 所以 Haxl 才能那樣寫吧？
+21:57:02 <suhorng> mno2: 沒錯!! 剛剛就是在實作 generator 的 Applicative 時發現的XD
+21:57:03 <mno2> 就是直接假設 Applicative 是可以 concurrent 發生
+21:58:09 <suhorng> 所以假如我實作一個 generator, 那 (do { yield 1; return (+1) }) <*>  (do { yield 2; return 3}) 好像也沒說一定要噴出 1 然後再噴出 3 XD
+22:04:54 <CindyLinz> monad 只有規定 binding 的順序啊, 執行順序沒有規定
+22:22:08 <monochrom> 我的 http://lpaste.net/41790/ 示範倒敍法
+22:23:04 <monochrom> 而 http://lpaste.net/63925 已是不知何序了!
+22:23:34 <CindyLinz> source 裡面的 :) 是故意湊的嗎 XD
+22:23:57 <monochrom> 不是
+22:25:17 <suhorng> gen = gen >> modify (() : ) -- 哇...
+22:25:46 <suhorng> 沒想到 lazy state 完全可以這樣玩
+22:25:59 <monochrom> 是不是很一針見血, 一鳴驚人呢? :)
+22:26:25 <suhorng> 比 fix 驚人太多了
+22:26:54 <monochrom> 別忘記當你 import Control.Monad.State 時, 你得到的是 Control.Monad.State.Lazy
+22:27:06 <suhorng> 只好躲到乾淨的 IO 裡面..不對
+22:27:16 <monochrom> 哈哈
+22:28:16 <CindyLinz> suhorng: 把實作讀一讀就好啦~ 又不像 IO 不知道要上哪去讀實作.. XD
+22:29:00 <suhorng> CindyLinz: 恩...我有翻到 IO 的實作過....... :D
+22:29:05 <CindyLinz> 除非寫 action 的時候 type 是宣告成非常 general 的 Monad m =>
+22:29:22 <CindyLinz> suhorng: 可是有很多 FFI, 招牌也是掛 IO 欸 OAO
+22:29:27 <suhorng> xDDD
+22:29:43 <CindyLinz> 如果宣告成 Monad m, 就不能假設太多了 @@"
+22:30:06 <CindyLinz> 不過那應該幾乎都是在做 Maybe a 的事吧? :p
+22:31:11 <CindyLinz> 唔, 覺得 monochrom 給的例子好像是 action 在玩 monad; 不是 action 被 monad 玩?
+22:31:36 <suhorng> 我開始聽不懂了...XD
+22:32:10 <CindyLinz> 我要先 pass 了, 被進度追殺中.... QQ

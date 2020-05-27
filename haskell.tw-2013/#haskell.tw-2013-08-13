@@ -1,0 +1,91 @@
+12:04:55 <suhorng> 關於跑 λ-calculus 的機器: http://gallium.inria.fr/~xleroy/mpri/progfunc/ 的 Part II: abstract machines and compilation
+12:06:44 <suhorng> 這是 ZAM machine http://gallium.inria.fr/~xleroy/talks/zam-kazam05.pdf OCaml在用的
+12:07:27 <suhorng> 不過Haskell要lazy的話好像比較接近Krivine's machine
+12:18:12 <Yu-Lin> (worship)
+12:59:32 <Yu-Lin> 還蠻有趣的，先偷偷筆記下來
+13:09:24 <CindyLinz> 筆記+1
+13:14:10 <suhorng> ST Monad到底是什麼魔術...
+13:16:16 <CindyLinz> 我把它理解為底層偷偷開了 FFI, 然後表面再假裝成 pure 的東西...
+13:17:45 <suhorng> 查到說pure跟他的 type 裡面那個 s 是 forall 的有關? 不懂..
+13:18:03 <suhorng> 可以把裡面的東西拉出來變成pure的 :-o
+13:18:56 <suhorng> Haskellwiki有看沒有懂|||
+13:21:33 <miaout17> 關注pl課，但周期跟 cryptography 2重疊，應該會選一個上
+13:22:06 <CindyLinz> suhorng: 那個 forall 讓它可以胡亂實作, 外面管不著
+13:22:24 <CindyLinz> suhorng: 我說的外面是... 塞給它的那一串 do-notation 的程式碼
+13:22:46 <CindyLinz> 所以它實作想偷偷用 FFI 也可以.. 想乖乖純 haskell 實作也行
+13:24:45 <Yu-Lin> forall 胃口真大
+13:25:07 <suhorng> CindyLinz: 意思是 do 那一大串, 必須允許底下隨便怎麼實作都可以?
+13:25:37 <suhorng> 所以 runST 選純的實作也可以, 但是亂用 IO 的東西也管不著...?
+13:27:18 <CindyLinz> 對, 你得允許底下的 ST 擁有一個沒有畫面的 s 狀態
+13:27:38 <suhorng> 總覺得這樣 runST 有種 unsafePerformIO 的感覺..
+13:28:02 <CindyLinz> 看實作者的良心... 像 GHC 應該是蠻沒良心的 XDD
+13:29:12 <suhorng> XDDD
+13:29:20 <CindyLinz> 我自己在用的感覺, 覺得用到 ST 的部分就不會太「漂亮」... 有點像是在 Haskell 裡面塞一段 inline C 的感覺
+13:30:00 <Yu-Lin> XD
+13:30:24 <suhorng> 上面舉的例子也是 inline (真正的XD?) quicksort..
+13:30:29 <suhorng> *inplace
+13:31:30 <CindyLinz> 嗯嗯..
+13:33:13 <CindyLinz> 不過... unsofePerformIO 是看使用者(我們)良心, runST 是看 lib 提供者的良心, 不用看我們的良心
+13:33:54 <suhorng> 恩 比較不會犯錯 :-&
+13:35:59 <CindyLinz> 被找出 unsafe 等級 bug 的時候, 可以說: 都是 lib 的錯.. XD
+13:40:57 <suhorng> 奇怪的例子..http://www.vidarholen.net/contents/junk/catbag.html 用 Rank 2 types 把一些東西關在 do 裡面
+13:51:56 <CindyLinz> 哦~~ STMonad 實作教學 :D
+13:55:51 <CindyLinz> 實作 eDSL 的時候, 應該是個不錯用的手法
+13:56:14 <CindyLinz> embedded Domain Specific Language
+14:23:04 <Yu-Lin> 看到 DSL 就想到 ADSL.......XD
+14:23:49 <_13h> Abstract DSL  (誤
+14:28:26 <mno2> http://typeof.net/m/dont-invent-a-language-when-idle.html
+14:28:47 <mno2> 「無法面對各種奇葩右值的侵襲」這句好好笑
+14:31:14 <_13h> 這個站很有趣  但記得站長自己也搞了一個語言啊
+14:33:41 <mno2> moescript 應該也是 compile to javascript 的東西，記得 c9s 有看過
+14:34:12 <mno2> 不過好像又弄了什麼 asoi ，跟 moescript 又不太一樣
+14:38:30 <mno2> CindyLinz 認識小緲嗎？
+14:39:13 <_13h> 我不太懂那篇文章最後講的反直覺是怎麼回事，我覺得蠻直覺的啊XD
+14:39:36 <CindyLinz> mno2: 是不是又叫大緲?
+14:40:08 <mno2> _13h: 沒看標準無法 comment  xD
+14:40:17 <_13h> 反直覺的點在於會多產生一個臨時物件嗎？
+14:40:22 <mno2> CindyLinz: 對啊（這年頭一定要流行大小互換嗎？）
+14:40:35 <_13h> 我是單純看他上下例子來比較
+14:41:30 <mno2> 喔喔，如果看他的例子我也覺得蠻直覺的
+14:41:55 <_13h> 其實我覺得他那兩個展開式好像差不多，不過我想到  萬一有 lazy 的話，展開結果就更複雜了
+14:42:30 <_13h> "a.y = (a = {})"  這樣執行完會是什麼結果?
+14:43:24 <_13h> 得先看 assignment 會傳回什麼? 大概是個 a，那就相當於 a.y = a  但 a 又先被初始化成 {} ?
+14:44:02 <_13h> 結果就是 a 這個物件只有 y 這個 member，且指向自己 ? (單看這一行
+14:44:59 <CindyLinz> mno2: 那, 我認得他.. 不知道這樣算不算認識 XD
+14:48:12 <mno2> _13h: lazy + impure 應該本身就超怪吧 xD
+14:48:46 <_13h> 不太懂為什麼怪? impure 不能 lazy 嗎？
+14:48:47 <mno2> CindyLinz: 那你知道他好像弄了一家 YC-backed 的 start-up: http://techcrunch.com/2013/08/12/hackermeter-wants-to-kill-your-resume-and-replace-it-with-a-high-score/
+14:50:09 <mno2> _13h: 可以啊，只是 side-effect 順序可能不照字面上發生，多少違反第一印象？
+14:50:34 <_13h> 嗯嗯  這是沒錯
+14:51:15 <mno2> 買飲料去~
+15:45:47 <Yu-Lin> 看起來沒有違反直覺的地方啊
+15:46:11 <Yu-Lin> 還是我太習慣某種東西，導致我的直覺跟作者的直覺不同了？
+15:47:05 <_13h> 我比較一下覺得應該是在講多出來的物件和參考方式
+16:00:18 <Yu-Lin> 珍惜生命、遠離程式
+16:02:42 <CindyLinz> 不同的人的背景會生出不一樣的直覺結果, 好的語言要盡量避開這種窘境呀..
+17:56:49 <Yu-Lin> ........
+17:57:09 <Yu-Lin> 我發現自己不能用 fold，程式寫起來是黑白的
+18:15:33 <Yu-Lin> 不能用 FP 來寫程式.....腦袋打結了Orz|||
+18:21:55 <mno2> 在 terminal 裡面寫，程式就是黑白的 (誤)
+18:25:45 <b4283> mno2 觸發我的笑點
+18:31:36 <Yu-Lin> XD
+18:52:13 <_13h> mno2: 在 vt100 寫應該還有 16 色XD
+18:53:19 <miaout17> True color vim XD https://blog.othree.net/log/2013/07/27/true-color-terminal-vim-osx/
+18:55:36 <mno2> 系統預設是黑白的 xD
+18:56:30 <_13h> 連 ansi sequence 都沒辦法顯示啊?
+18:56:42 <_13h> 感覺好像在用以前 windows 的 telnet ?
+18:57:32 <mno2> 不用太執著，打嘴砲而已 xD
+18:57:35 <Yu-Lin> XD
+18:57:43 <_13h> www
+18:57:46 <miaout17> 所以用 Windows人生是黑白的
+19:01:40 <mno2> unix 是哪一套？
+19:17:35 <Yu-Lin> 下班回家去
+19:17:37 <Yu-Lin> 餓了
+19:33:53 <letoh> 那時是 aix.. 也有 irix
+19:34:15 <letoh> 然後系館是 hpux
+19:39:16 <miaout17> 這些都沒用過 @@
+19:44:46 <letoh> 其實除了上課外也沒特別登入啦  那時連 windows 都沒怎麼用過，更別說 unix XD
+21:53:59 <suhorng> >>違反直覺 我也覺得沒違反直覺耶XDDD 算出值然後做binding (雖然這是assignment...)
+21:54:27 <suhorng> "各種奇葩右值" 太好笑了
+22:42:05 <suhorng> > newtype F (+) = F (Int + Int); :t F (Left 3)
+22:42:06 <lambdabot>   <hint>:1:1: parse error on input `newtype'

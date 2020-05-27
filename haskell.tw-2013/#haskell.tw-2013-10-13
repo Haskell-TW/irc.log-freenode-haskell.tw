@@ -1,0 +1,38 @@
+13:01:57 <CindyLinz> suhorng 上任 ptt #PLT 板主了 :D
+13:25:49 <letoh> 賀!!
+15:19:50 <CindyLinz> 問問.....
+15:20:02 <CindyLinz> GADT 可以用 syntax sugar 作到嗎?
+15:20:32 <CindyLinz> 用 class / instance 和 existential type 去作出跟 GADT 一樣的效果?
+15:22:32 <CindyLinz> 我也有一點在懷疑 GHC 7.6(?) 的某個 extension, 可以讓 type level 的計算不再只有 * 的(像是 * -> *), 而是可以加上限制為某些特定 type 的
+15:22:39 <CindyLinz> 是不是也可以用 class / instance 作出來
+15:23:31 <CindyLinz> 只是看起來會是: 如果滿足某 class 的話, 就會符合要求的效果, 而不符合要求的 data 雖然造得出來, 但是就不會符合該 class 的 instance
+15:24:22 <CindyLinz> 而由 GADT 和這個 extension 作出來的會像是連造都造不出來.
+15:24:58 <CindyLinz> 另外一點差異是, class 的 instance 可以隨別人亂加, 一旦被亂加了, 就會破壞(放寬)原始的限制
+15:25:24 <CindyLinz> 所以由 class / instance 的實作作出來的保證, 有個前提是使用的人沒有去亂加
+15:25:36 <CindyLinz> (是這樣嗎? @@)
+20:10:27 <favonia> 執行 .ghci 下的檔案的安全性問題 xD # http://ghc.haskell.org/trac/ghc/ticket/6017
+22:25:07 <suhorng> ghci...
+22:26:15 <petercommand> rvm也會，不過他會先警告
+23:03:42 <hashcat> rvm是啥
+23:11:56 <petercommand> 管理ruby版本的工具
+23:14:40 <hashcat> 看上去像是r語言虛擬機
+23:14:48 <petercommand> XD
+23:30:37 <letoh> 這樣看好像不太準，就像 prolog 的 vm 也沒叫 pvm 或 provm 啊XD
+23:35:53 <petercommand> 除了java外，有其他是這樣叫的嘛?
+23:36:10 <letoh> llvm (誤
+23:36:15 <CindyLinz> nvm (誤
+23:36:16 <petercommand> ...
+23:36:20 <petercommand> XDD
+23:36:32 <godfat> nvm XD
+23:36:39 <petercommand> 連nvm都出現了XD
+23:38:47 <CindyLinz> GHC 的叫 RTS
+23:39:18 <petercommand> real time strategy (誤
+23:53:19 <hashcat> pvm 是 parallel virtual machine
+23:53:47 <hashcat> 已經被佔用了
+23:54:03 <suhorng> 只好叫 lvm, logical virtual machine 了?
+23:55:15 <hashcat> lvm好像是磁碟管理的東西
+23:55:43 <suhorng> 糟了w
+23:56:31 <hashcat> prolog虛擬機有兩種叫法
+23:57:02 <hashcat> 上面都沒p字母
+23:58:07 <hashcat> wam跟vam, 連全稱也都沒半個p
+23:59:17 <suhorng> 那是人名吧...XD

@@ -1,0 +1,103 @@
+00:01:57 <monochrom> 其實我解 IO 時也是這樣說哩! 不過我用詞小心, 你要已經知道底蘊才看出我的用意.
+00:03:01 <suhorng> xDD
+00:03:09 <monochrom> "getLine >>= xxx", 試想像 "getLine >>=" 其實是單一體, xxx 是callback. 這不就是 CPS 嗎?
+00:03:20 <suhorng> 真
+00:03:42 <suhorng> 倒是以前 monad 還沒變成做 I/O 的標準時(比 Haskell 1998 更老),
+00:04:11 <suhorng> 曾經有一派的 I/O 就是用 CPS 來做的. 他們的 getLine 是 (String -> a) -> a
+00:05:11 <monochrom> 是呀! 古代多好...
+00:05:30 <CindyLinz> 我用 perl 作多人 server 的時候, IO 也是用 CPS 做.. 然後就是縮排地獄了 :Q
+00:06:12 <suhorng> 好像還有更崩潰的過去www 就是曾經 main 的 type 是 [Request] -> [Response] 之類的.. 然後 Request 跟 Response 都是 lazy list
+00:06:39 <suhorng> 喔喔, javascript 的 call-back Hxll! （然後 promise 就要出來了嗎）
+00:06:57 <CindyLinz> 好像 interactive
+00:07:05 <CindyLinz> @type interactive
+00:07:07 <lambdabot>     Not in scope: ‘interactive’
+00:07:07 <lambdabot>     Perhaps you meant one of these:
+00:07:07 <lambdabot>       ‘interact’ (imported from Prelude),
+00:07:11 <CindyLinz> @type interact
+00:07:12 <lambdabot> (String -> String) -> IO ()
+00:08:04 <CindyLinz> suhorng: 有 condition var, 還有後來我就寫了一個改 perl syntax 的 library.. ^^|
+00:08:34 <suhorng> 就是 COSCUP 上講的那個嗎..?
+00:08:48 <CindyLinz> 嗯
+00:09:32 <CindyLinz> http://search.cpan.org/~cindy/Combinator-0.04.01/lib/Combinator.pm
+00:10:51 <monochrom> [Request] -> [Response] 要對 lazy 非常熟悉才可駕駑, 否則很容易 deadlock 而不知為甚麼.
+00:11:51 <CindyLinz> 嗯嗯...
+00:12:09 <monochrom> CPS 就只難在抽象, 至於事件發生次序則一目了然
+00:13:27 <monochrom> CPS 另一難是語法, 就是你遇過的縮排地獄 :)
+00:14:50 <CindyLinz> haskell 用 hanging lambda 沒這問題啊? :p
+00:15:25 <suhorng> hanging lambda是指什麼..?
+00:15:49 <CindyLinz> ...... $ \x ->
+00:15:54 <CindyLinz> ......... $ \y ->
+00:15:55 <CindyLinz> .....
+00:16:20 <monochrom> http://www.vex.net/~trebla/haskell/IO.xhtml#do 由 hanging lambda 例子開始
+00:16:30 <suhorng> 喔喔喔
+00:16:54 <suhorng> 函數本體延伸到無限遠這樣
+14:01:02 <mno2> http://www.yinwang.org/blog-cn/2014/04/18/golang/
+14:01:59 <mno2> 真的是洋洋灑灑一大篇 lol
+14:02:31 <mno2> 我好喜歡「大并发」這個用語喔，聽起來好有喜感>
+14:03:15 <mno2> 啊，現在才看到 cschat.tw 已經貼過了
+14:08:10 <CindyLinz> XDXD
+14:10:56 <CindyLinz> 我覺得他用大陸語寫: 「用戶級的 continuation」「系統級的 continuation」有不一樣的風味..
+14:12:37 <CindyLinz> 以前好像 hychen? 要做 haskell shell 的樣子, 我最近在想, 好像也可以直接用 ghci
+14:12:54 <CindyLinz> 然後把 shell 比較常用的功能寫在一個, 或一些 module 裡面
+14:13:03 <hychen> 不太像
+14:13:11 <hychen> 主要是做比較fp的shell
+14:13:12 <CindyLinz> 在 ghci 裡面用 :m +Shell.Util 之類的方式
+14:13:25 <CindyLinz> hychen: 你竟然醒著!
+14:13:26 <hychen> haskell太複雜了
+14:13:47 <CindyLinz> hmm.. 我想說 :m + 進來以後, 就可以用了 XD
+14:14:20 <CindyLinz> 也是一樣可以 cd "路徑"; cat "檔名" 之類的... 噢可是都要加雙引號 XD
+14:15:31 <CindyLinz> (cat "檔案1" ; cat "檔案2") >>= w "輸出檔"
+14:15:58 <CindyLinz> 不對 這種寫法的話 內容會只剩 檔案2 XD
+14:18:46 <CindyLinz> cat "檔案1" >> cat "檔案2" >> cp "/stdio" "輸出檔"
+16:01:49 <cibs> 如果 Haskell 和 Perl 一樣有 bareword 就不用寫雙引號了~
+16:03:42 <CindyLinz> Haskell 如果也加了 bareword, 覺得不太舒服... XD
+16:04:44 <cibs> 也是~
+16:04:58 <cibs> 還是說可以讓某些 function 吃 bareword 就好
+16:05:26 <cibs> like, cd, cat.. or system cmd 之後的 arguments 之類的
+16:09:11 <CindyLinz> 想想 GHC 的流程, 應該是加在 syntax check 和 type check 之間
+16:09:49 <CindyLinz> 可是這個「某些」function 是要知道 value 才行... 或至少要先知道 type..
+16:10:15 <CindyLinz> 例如說.... 如果有一行寫 cd2 = cd, 那麼 cd2 就也有這個特性了
+16:12:32 <CindyLinz> 也許有一天, 會出現 lazy 實作的 GHC, 就可以不同的階段扭來扭去扭成一團來用了 XD
+16:56:28 <mno2> CindyLinz: https://github.com/chrisdone/hell
+16:59:07 <CindyLinz> hell......ww
+17:00:07 <CindyLinz> 獨立程式
+17:37:01 <miaout17_____> Welcome to Hell....XDDDDD
+17:40:49 <cibs> hell XD
+17:43:35 <b4283> "You should add loads of custom syntax!"
+17:47:50 <CindyLinz> loads of?
+17:52:59 <b4283> 很多
+18:02:09 <CindyLinz> 喔..
+20:29:12 <CindyLinz> 覺得要寫 Zipper 都要無腦地打一大堆東西, 有沒有 lib 可以自動生成呀? :p
+20:39:43 <CindyLinz> 這一個有點像.. 它只要求目標 type 有 Typeable # http://hackage.haskell.org/package/pez-0.1.0/docs/Data-Label-Zipper.html
+21:40:06 <CindyLinz> 討厭, 如果要用這個幫不是我自己寫的 data type 加 zipper, 那我要先幫這 data type 加上 label.. 那就還是要打一堆無腦程式碼.. QQ
+21:41:53 <CindyLinz> 我想幫這個東東加 zipper.... OAO # http://hackage.haskell.org/package/haskell-src-exts-1.15.0/docs/Language-Haskell-Exts-Syntax.html#t:Exp
+21:46:35 <gansteed> 请问为什么自己编写的模块，就在模块所在目录在ghci用import会发生错误呢？
+21:47:22 <CindyLinz> gansteed: error message 來一下?
+21:47:38 <CindyLinz> 欸.. 應該要用 :l 檔名 吧?
+21:48:51 <gansteed> 啊？import是只能在.hs文件中使用吗？
+21:49:24 <CindyLinz> 嗯
+21:49:53 <CindyLinz> 然後 ghci 裡面可以用 :m +XXXX 來 import cabal db 裡面的 module
+21:50:27 <gansteed> soga~
+21:50:28 <CindyLinz> 來試一下這個, 這個可能是我要的.. http://hackage.haskell.org/package/syz-0.2.0.0/docs/Data-Generics-Zipper.html
+21:51:09 <gansteed> 啊？
+21:51:47 <CindyLinz> 我在找 zipper generator :p
+21:52:39 <gansteed> 这样子啊，，那你有没有试一试hoogle呢？
+21:53:06 <CindyLinz> 我從 hackage 找啊, 這個用 hoogle 要怎麼下條件啊? ^^|
+21:55:02 <gansteed> :( 我也不太清楚。。我试了一下只有搜索zippper才能得出结果 XD
+21:57:29 <CindyLinz> zipper 是一個概念, 沒有一定的 type 形狀啊 ^^|
+22:07:00 <gansteed> -。- 好吧。。
+22:18:05 <gansteed> <CindyLinz> 对了，能不能问一下你，一般你都用haskell做什么呢？
+22:19:13 <CindyLinz> gansteed: 不知道耶~ 拿來增加深度? ^^|
+22:20:06 <CindyLinz> 從 Haskell 領悟的事情, 對我在別的語言寫程式的幫助也很大
+22:21:01 <gansteed> 貌似很少直接使用Haskell开发程式呢，，对其他语言的帮助，可能是刚学体会不大 :q
+22:21:48 <CindyLinz> 不夠熟就不敢拿來當吃飯的工具啊
+22:23:03 <gansteed> 嗯，确实是这样
+22:23:16 <CindyLinz> gansteed: 嗯, 如果是現在常見的動態語言, 其高階函數或 closure 之類的應該都有~ 不過在 Haskell 裡面打滾, 會體會到能滾得這麼深...
+22:23:39 <CindyLinz> 因為 Haskell 少了很多別的語言能用的手法, 所以就把遞迴什麼的玩得很深入..
+22:24:24 <CindyLinz> 但是滾過以後再回頭去用別的語言, 有些玩法精神也是用得上的, 雖然沒辦法像 Haskell 那麼自然, 但對整理想法還是有點用處 ^^
+22:25:27 <gansteed> 嗯～
+22:36:34 <gansteed> join jxufe
+22:36:59 <gansteed> 发错
+22:40:34 <monochrom> 又賣多次廣告: 我的 Haskell I/O tutorial http://www.vex.net/~trebla/haskell/IO.xhtml
+22:42:41 <CindyLinz> (Y)
+22:45:25 <CindyLinz> 試起來覺得 syz 適合 ^^

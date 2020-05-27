@@ -1,0 +1,16 @@
+13:17:18 <mno2> http://www.haskell.org/ghc/docs/latest/html/libraries/base-4.7.0.1/GHC-Stack.html
+13:17:32 <mno2> 像這個可以拿到好的 stack trace 嗎？
+13:19:03 <mno2> http://stackoverflow.com/questions/25359461/finding-where-loop-happened/25359633#25359633   原來有 +RTS -xc
+13:20:05 <CindyLinz> 我有用過這個.. 只不過因為 lazy eval 的順序, 再加上有時候會 cache, 所以有時候對不起來看不太懂 orz
+16:55:42 <petercommand> nrr
+16:56:25 <petercommand> 按到= =
+18:57:23 <Yulin> 雖然我們公司主力語言用的是 python，但我偶爾也會寫寫 Perl 替我的 python 加一些小功能
+19:01:14 <Yulin> 這幾天看了一些 haskell 寫的程式，突然覺得自己離 haskell 好遠
+19:04:17 <CindyLinz> 用 Perl 替 python 加小功能?? 這是怎麼做啊? 為什麼不是用 FFI 寫 C 啊? ^^|
+19:15:10 <Yulin> 就很簡單的用 Perl 去掃 Python code 而已阿，我目前還沒看到 python 的 $.
+19:17:15 <CindyLinz> 喔喔 用 Perl 來作 python 的 preprocessor
+19:19:43 <Yulin> 恩恩，對XD
+20:08:45 <Yulin> http://library.elm-lang.org/
+20:28:41 <letoh> Yulin: 為什麼要用 Perl 擴充 Python 啊?
+20:48:16 <Yulin> 寫 django 經驗不足，希望能明確知道那一份檔案的那一行開始出錯，網路上提供的 inspect 法，顯示出來的不是我要的
+20:49:59 <letoh> 從 call stack 追回去應該是不太會錯

@@ -1,0 +1,201 @@
+00:00:34 <CindyLinz> monochrom: 那這樣說呢?  乙語言的 "a+b" 語義: 把它們相加
+00:00:43 <hashcat> 我一直想問出優點在哪
+00:00:55 <godfat> 如果描述成，無論他們是什麼，都先轉成數字，然後相加。這樣呢？
+00:00:57 <CindyLinz> monochrom: perl 的設計就是要你別再想 a 是數字還是文字了
+00:01:16 <CindyLinz> 我是說, 這個「轉」是我們從實作角度去想的, 但不是 user view
+00:01:45 <CindyLinz> a < b 是看 a 比 b 小... a lt b 是看 a 與 b 排在字典裡面時, a 在 b 前面
+00:02:02 <CindyLinz> 這個序述裡面都是沒有提到 a b 的 type 的
+00:02:11 <CindyLinz> 敘述.. (咦)
+00:02:43 <godfat> 所以 "Z" gt "B" XD
+00:02:57 <CindyLinz> 這樣你這個甲語言是說 "a+b" 的語義: 如果 a 和 b 都是數字, 把它們相加; 如果 a 或 b 是文字, 把它們相接 (而且把還不是文字的轉成文字)
+00:03:18 <CindyLinz> godfat: 這個有, 反正也不紅.. XD
+00:04:26 <CindyLinz> 3 就是 3, 從 user view 沒必要去強調它是文字還是數字, 3 就是 3
+00:07:13 <godfat> 這樣我是理解成沒有 type 了，因為做什麼事是由操作來決定
+00:08:15 <CindyLinz> 是..
+00:08:59 <monochrom> 不不, 甲語言不准 a, b 是文字
+00:10:16 <monochrom> 不可能不想 a 是數字還是文字. 一定要想. 一定要知.
+00:10:25 <CindyLinz> monochrom: ok, 那去掉我補的那個描述
+00:10:37 <CindyLinz> 畢竟 甲語言的描述, 應該由甲語言的角度來講
+00:10:53 <CindyLinz> 乙語言的描述呢, 依乙語言的角度來講, 就是 a 和 b 加起來
+00:11:50 <monochrom> 我沒有甲角度或乙角度. 我只有 first-order logic 角度.
+00:12:02 <CindyLinz> monochrom: 不行..
+00:12:21 <CindyLinz> monochrom: 你看哪個語言, 因為你要由學習並使用該語言的人的角度來看
+00:12:42 <CindyLinz> monochrom: 例如說我們學 Haskell, 就不應該用 Dynamic type 的角度來看
+00:13:11 <CindyLinz> monochrom: 因為我們要考慮的是學習使用該語言的長期負擔, 每一個語言有它自己的一套 context
+00:14:29 <monochrom> 好吧, "不問a,b是甚麼, 總之相加" 是甚麼意思? 如果不知a,b是甚麼, 何為相加? "x"+"y" 的結果是甚麼? 為何是該結果?
+00:16:58 <CindyLinz> "x" 的值就是抽出它裡面的數字啊, 有多少就是多少, 沒東西就是 0 啊
+00:17:31 <CindyLinz> 不過這也是實作細節, 不是 user view
+00:17:58 <monochrom> 那麼, 你先要寫下 "抽出" 的 algorithm. 你的完整語義還是長了.
+00:18:04 <CindyLinz> 正常的 programmer 不會去把 "x" 和 "y" 拿去加的
+00:18:12 <CindyLinz> monochrom: 這是實作細節, 不是 user view
+00:19:13 <monochrom> 是不是所有 "細節" 都自動是 "實作細節" 呢?
+00:19:20 <CindyLinz> monochrom: 我們使用 perl 寫程式的時候, 不會把這些末節放在心裡的..
+00:20:10 <CindyLinz> monochrom: 你要真的來寫, 才能夠體會到細節和不是細節的分界.. @@" 你寫的時候心中要一直惦記著才不會出錯的東西, 就不是要在意的細節, 但有些是不用記著的, 那就不用理它
+00:20:21 <monochrom> 我被召喚了, 不能詳細反駁了.
+00:20:49 <CindyLinz> monochrom: 但是這個分界我講不出明確的定義, 畢竟那是心理上的東西我不熟... 我只能以我自己實際的感受分享與你.
+00:20:57 <monochrom> 不過我得說, 我寫了三年 Perl.
+00:21:22 <CindyLinz> 你真的寫 perl 的時候整天在想怎麼去抽出數字之類的嗎? @@"
+00:23:20 <godfat> 其實這讓我想到另一個人在跟我說 javascript 時的事
+00:23:20 <godfat> 他的說法是，對，有這些問題，但平常在寫的時候不會碰到，也不會故意去弄出那種情境
+00:23:41 <CindyLinz> 可是我要數字加, 卻搞成字串接的情況我遇到好多次啊 orz
+00:23:55 <CindyLinz> 後來我只好到處寫 (x-0) + (y-0) 之類的東西 orz
+00:24:05 <godfat> XDDD js 絕對比 perl 慘這我趕保證..
+00:24:10 <godfat> 敢
+00:27:24 <petercommand11> CindyLinz: 感覺type casting比這樣好XD
+00:28:10 <CindyLinz> petercommand11: 你說 parseFloat() ?
+00:28:31 <petercommand11> 對阿
+00:29:06 <CindyLinz> 我是要看心情, 心情好就乖乖寫函數, 心情差的時候就亂揮 XD
+00:29:51 <petercommand11> XD
+00:30:33 <CindyLinz> 沒有寫 x*1 已經很客氣了!
+00:30:38 <CindyLinz> 還可以省括號!
+00:37:06 <monochrom> 我當然也不認同 javascript 的做法.
+00:38:47 <CindyLinz> monochrom: 在想, 你指的是不是 static type 對 dynamic type 的比較?
+00:39:07 <CindyLinz> static type 才能夠「甲語言裡面 a b 一定是數字」這樣
+00:39:49 <monochrom> 整體來說, 我要為 "雜亂" 定一個客觀的定義. 為了客觀, 就必須拒絶"用甲角度審視甲語言". 必須定一個中立, 獨立角度, 劃一審視各語言. 我選的各角度是 formal logic, formal methods.
+00:40:06 <monochrom> s/我選的各角度/我選的角度/
+00:40:28 <hashcat> 駱駝商旅
+00:40:33 <CindyLinz> 我選的角度是, 用起來心理負擔低
+00:40:50 <hashcat> 賽駱駝
+00:40:59 <hashcat> 我睡覺好了
+00:41:04 <hashcat> 開始胡言亂語唉
+00:41:27 <godfat> ruby 也進來大混戰好了。ruby 裡要解 a + b, 要看 a 的 type 為何，因為 + 的定義在 a 之上
+00:41:32 <CindyLinz> 最好是睡眠不足喝醉酒的時候也不會寫錯..
+00:41:39 <CindyLinz> 不過這 dynamic type 就還是算了 XD
+00:41:49 <CindyLinz> godfat: 只看 a 不看 b? @@"
+00:42:13 <godfat> 對，只看 a, 因為 a + b 等同於 a.send(:+, b)
+00:42:14 <godfat> + 是 a 的 method
+00:42:52 <CindyLinz> 物件.... QQ
+00:43:14 <b4283> ruby 的 class hierarchy 啊
+00:43:24 <monochrom> 當你說 "總之抽取, 別問何謂抽出", 或者你在說, 高階一點, 抽象一點. 好吧, 那麼我就不應要求一個 algorithm. 但我就真的可以一無所知嗎? 而你也真的一無所知嗎?
+00:43:25 <godfat> 對。以內建型別而言的話，a 與 b 通常必須是同樣的 type, 否則一定會有錯
+00:43:56 <CindyLinz> monochrom: 其方法你會知道的, 但是 daily life 裡面不會放在心上
+00:44:18 <monochrom> 就算不知道 algorithm, 至少也知道幾條 axioms 或 laws.
+00:44:23 <b4283> scheme 的 + 只能用在數字相加上
+00:44:40 <CindyLinz> b4283: 那就要加一條, 如果不是數字, 會丟 exception 啊 XD
+00:44:49 <b4283> 字串 string-append
+00:46:33 <monochrom> daily life 裏面一定至少把幾條重要 laws 放在心上. 否則, 當我讀你寫的程式時, 如何預測你的程式輸出甚麼?
+00:47:41 <CindyLinz> monochrom: 這樣說是沒錯呀~ 但是不包含這個怎麼抽出數字這一條 ^^|
+00:48:08 <monochrom> 正常的程式不會直寫 "x" + "y", 但正常的程式一定接受任意外來文字, 然後加以處理. 問題沒有消失.
+00:48:28 <CindyLinz> monochrom: 正常程式接收任意外來文字以後, 第一件事就是把它們 normalize 啊
+00:51:57 <monochrom> 好. 那麼我讀你的程式時, 首先就要審視你做的 normalize 完備不完備. 這就給我, 讀者, 更重的負擔.
+00:52:20 <CindyLinz> monochrom: normalize 完備不完備我承認這是需要確認的..
+00:52:38 <CindyLinz> monochrom: 我覺得這是應該的啊?
+00:52:38 <whitglint> 看了各位大大的討論，在下決定這輩子不再使用動態型別語言  # 誤
+00:52:51 <CindyLinz> whitglint: 沒, 你就算用 Haskell 也跑不掉這個問題 @@"
+00:52:57 <monochrom> 照說, 同理, 也給你, 作者, 一樣更重的負擔, 因為你應該整天都擔心還有沒還錯漏.
+00:53:20 <CindyLinz> whitglint: yesod tutorial 裡面一開始就跟你說, 雖然 Haskell 有 strong type, 可是外面的世界不是, 所以你得在邊界的地方好好整理....
+00:54:05 <CindyLinz> monochrom: 等等, 你真的覺得可以允許程式的 normalize 這一步是壞的嗎? @_@"
+00:54:23 <monochrom> 不明
+00:54:40 <CindyLinz> monochrom: 不然你是怎麼省掉這個負擔? @@"
+00:55:06 <CindyLinz> monochrom: 省略這一步, 等著你的是 SQL injection 或是 buffer overflow 的安全漏洞欸 @@"
+00:55:31 <monochrom> 我列出3個情況.
+00:55:37 <CindyLinz> 嗯 buffer overflow 可能只剩 C 還會有啦 :p
+00:56:32 <whitglint> 根據 monochrom 對「雜亂無章」的定義，C++ 應該是「不可教育」的程式語言了，光是要寫出完整的語法就吐血了吧
+00:57:40 <godfat> 說到 buffer overflow, 真的應該禁止 c 寫 crypto 的東西
+00:57:51 <CindyLinz> godfat: 太遲了.....
+00:58:23 <CindyLinz> godfat: 是說.. crypto 都超花計算資源的, 這情境, C 的誘惑力好大 XD
+00:58:32 <whitglint> 那麼 goto fail; goto fail; 又如何？
+00:58:47 <CindyLinz> whitglint: 這啥? ^^|
+00:58:53 <godfat> 硬體解好了....
+00:58:58 <CindyLinz> wwww
+00:59:18 <godfat> 那是 apple 捅出的樓子，也是 openssl
+00:59:21 <monochrom> 1. static typing. 電腦已審視了一部份. 當然我還要自行審視剩下的, 但已經少了. 至少, 已知沒有漏網之魚.
+00:59:22 <whitglint> 硬解是 NSA 的好朋友？
+01:00:17 <godfat> 簍子...
+01:00:17 <CindyLinz> whitglint: 他是說「硬體」解, 不是「硬解」啦 XD
+01:00:45 <onemouth> 硬解可能晶片有後門XD
+01:00:56 <whitglint> CindyLinz: 對啊，硬體會不會更難檢查有沒後門？
+01:01:05 <CindyLinz> whitglint: 我覺得會.. orz
+01:01:05 <monochrom> 2. dynamic typing, 但仍在 run time 限制 a 必須是數字. 電腦在 run time 才審視, 遲到好過無到, 至少還是沒有漏網之魚.
+01:01:49 <monochrom> 3. Perl 的做法. 那麼電腦完全沒有幫我. 我要作更多的審視.
+01:02:39 <CindyLinz> monochrom: 1. static type 和 dynamic type 的取捨, 嗯, 先跳過吧... 那個有好多 orz
+01:02:53 <CindyLinz> monochrom: 而你這個 2. 的作法, 我理解是這樣:
+01:03:00 <whitglint> Python 也只能 2,
+01:03:04 <CindyLinz> 我還是會對變數指定 type
+01:03:06 <whitglint> Perl 不可以 2 嗎？
+01:03:23 <CindyLinz> 只是在 bind 的那一刻會 check 它是不是合用的, 不合就 exception
+01:03:48 <CindyLinz> 覺得像是寫一個 static type 的 function
+01:04:05 <CindyLinz> 只是可以隨意 eval 的時候說要呼叫它, 呼叫的那一刻才檢查 type
+01:04:39 <CindyLinz> whitglint: Perl 可以, 不過不太主流, 平常我是當作沒這回事...
+01:05:12 <CindyLinz> whitglint: Perl 有那種例如說給一個變數設定一個 regex, 限制它存的內容一定要符合這個 regex 之類的..
+01:05:19 <CindyLinz> whitglint: 有一套叫作 Moose 的東西..
+01:05:41 <CindyLinz> 嗯, 有一陣子很紅啦..
+01:05:49 <godfat> ........那會不會太扯 orz, 難怪有人稱 perl 傾向一切用 regex 解
+01:05:53 <monochrom> predicate subtype, 不錯吖!
+01:06:20 <CindyLinz> godfat: 它是 apply 一個 verify 的函數啦, 只是既然是函數了, 所以也可以放一個 regex 來 check 啊 :p
+01:06:45 <CindyLinz> godfat: 也可以放像是 2 <= $_ && $_ < 5 之類的..
+01:07:24 <whitglint> 很棒啊，算是 precondition？postcondition？invariant？
+01:07:26 <godfat> 可是那等於是強迫任何 data type 都要能有意義地轉成 string
+01:08:11 <b4283> 把它想像成 XString extends String (java) 應該行得通？
+01:08:32 <CindyLinz> godfat: 就我這陣子深入 perl 底層..... perl 的 scalar type 除了 reference 以外, 只有 整數 浮點數 文字 空 這四個 ^^|
+01:08:33 <b4283> 在 constructor 裡寫 predicate 就好了
+01:08:46 <CindyLinz> godfat: 所以都是可以轉的 XD
+01:08:50 <monochrom> 上列3個情況, 1 最少擔負, 3 最多, 2 在中間.
+01:09:48 <godfat> CindyLinz, @@ 那 reference 也是指到另一個 scalar type? 沒有 struct 之類的嗎？
+01:10:45 <CindyLinz> godfat: scalar 之外, 有 array 和 hash. array 當 scalar 時是長度, hash 當 scalar 時是 已使用的bucket/所有的bucket 很罕用
+01:10:53 <CindyLinz> godfat: 沒有 struct
+01:11:16 <CindyLinz> godfat: 如果心中有 struct, 那是拿 hash 當 struct 用
+01:12:33 <godfat> CindyLinz, 那 Moose 檢查 array/hash 也是先轉成 string 嗎？不過如果真沒其他 data type 了，那好像是沒啥問題...
+01:12:34 <CindyLinz> 可以鎖一個 hash 可以有哪些 key.. 不過, 實際上我都偷懶沒用...
+01:13:09 <CindyLinz> godfat: 欸, 是把那個 member 整個變數丟給檢查函數檢查, 所以該函數想怎麼用, 或是想 dereference 都是可以的呀
+01:13:34 <whitglint> CindyLinz: 一定要 regex 嗎？如果我要限定 0 <= x <= 100 之類的？
+01:13:41 <CindyLinz> godfat: 要偷改應該也行.. 反正就是被 code review 罵一罵 (思)
+01:13:50 <godfat> XDDDD
+01:14:02 <CindyLinz> whitglint: 當然不用啊, 我是說可以用, 包括但不限於 XD
+01:15:38 <whitglint> 這樣超棒的，我以前寫 C++ 還故意寫個 CheckedInteger class 跟 int 用法一樣，但是 assign 超出範圍的值就例外
+01:15:50 <CindyLinz> whitglint: 其實我覺得用起來會很累 orz.... http://search.cpan.org/~ether/Moose-2.1204/lib/Moose/Manual/Attributes.pod
+01:16:03 <CindyLinz> 我一點都不想用... @@"
+01:16:20 <monochrom> agda 有沒有 predicate subtype 呢?
+01:16:20 <CindyLinz> 要這樣用, 我就寫 Haskell 就好了啊 OAO
+01:17:06 <monochrom> PVS 有, 但 PVS 不是程式語言, 是 theorem prover 語言.
+01:17:09 <CindyLinz> monochrom: Haskell 可以用 smart constructor 的方式作, 我想 Agda 至不繼, 至少這樣也行吧?
+01:17:28 <CindyLinz> 咦 好像是 不濟?
+01:17:55 <CindyLinz> 用 smart constructor 作 check, 然後 Pattern matching 的部分另外再弄一組 shadow data type 來作
+01:18:18 <CindyLinz> 因為如果強制用 smart constructor 的話, 會把原始的正牌 consturctor 藏起來, 就不能 match 了
+01:18:32 <CindyLinz> 咦, 不知不覺話題回到 channel name 了 :D
+01:20:15 <monochrom> smart constructor 太容易了. 我是說在寫型別是已寫明 f :: {x | x::Integer and x>=100} -> Bool, g :: {s | s::String and s matches (0|a)*} -> Char 之類
+01:20:38 <godfat> 讓我想到 ada... 上次看他程式，滿滿這種
+01:21:41 <CindyLinz> 嗯嗯嗯
+01:21:56 <CindyLinz> monochrom: 如果用 template haskell 生成可以嗎? ^^
+01:22:11 <monochrom> 不會是同一回事
+01:22:28 <CindyLinz> hmm
+01:23:32 <monochrom> Haskell 無論如何也只能做 runtime check, 或因為 smart constructor 所以不用 check. 但 static type checking 時段絶不可能.
+01:23:41 <CindyLinz> monochrom: 你講的 PVS 下的條件, 應該是可以完全事前預防意外發生, 所以是不會產生 exception 的?
+01:24:14 <monochrom> 是. PVS 在 static type checking 時段已截住你
+01:25:08 <CindyLinz> monochrom: 那 whitglint 講的 C++ 的 check 應該和 smart construct 這種比較像... ._.
+01:25:21 <CindyLinz> 不過, 事前避免這種的, 有時候很難寫欸.....
+01:25:26 <monochrom> 當然, 也因此, PVS 在 static type checking 時段已要求你寫一些證明, 不過反正 PVS 是 theorem prover, 無所謂.
+01:25:37 <CindyLinz> XD
+01:26:06 <monochrom> 正所謂, 一不做, 二不休.
+01:27:20 <monochrom> agda 也有條件這樣做, 就只不記得有沒有真的這樣做.
+01:27:59 <CindyLinz> monochrom: 我看 Agda 有另外的痛苦之處 orz
+01:28:16 <CindyLinz> 例如說在 Agda 裡面寫一個 x < y (是個 type)
+01:28:30 <CindyLinz> 可是這邊的 < 是 user 自己定義的
+01:28:45 <monochrom> 講開又講, 非 static typing 的 theorem prover 也存在哩, 就是 ACL2, 非常 lisp 感覺的.
+01:28:47 <CindyLinz> 為它自己的 Nat 定義的
+01:29:36 <CindyLinz> 定義還不只有一種, 互相 equivalent.. 所以我要先去看懂他的 < 和我心裡的 < 是不是一樣的 orz
+01:31:45 <CindyLinz> 在某 channel 看到 ingy 即將完成一個叫作 CafeScript 的東西, 不知道是什麼.... (好奇)
+01:31:50 <monochrom> 在 ACL2, 你會寫這種句子: 試證明 (implies (and (is-integer x) (> x 100)) (> x 1)). 沒有型別, 但把平常看成是型別的, 當作一般 predicate 處理.
+01:33:43 <monochrom> 我在寫 Haskell I/O tutorial 哩! 不日就完成了.
+01:35:03 <CindyLinz> 喔, 那個句子就是說, 如果 is-integer 的時候才考慮後面的條件對不對, 如果不是 is-integer, 就放過它?
+01:36:19 <monochrom> 可以那樣看. 也可以不. 這是邏輯語言, (and p q) 及 (and q p) 完全同義.
+01:36:54 <CindyLinz> monochrom: 也是...
+01:37:17 <monochrom> 讓 (is-integer x) 行先是方便讀者, 當然是可取的
+01:37:28 <CindyLinz> monochrom: 嗯, 所以, 如果寫 (> x 100) 的時候同時一定要某個地方配一下 is-integer x 嗎?
+01:37:59 <monochrom> 對. 又或者 (is-real x), 如果你想要 real 的話.
+01:38:02 <CindyLinz> 才讓 ACL2 可以 type inference 出 x 是整數?
+01:38:06 <CindyLinz> 嗯嗯
+01:38:28 <monochrom> 沒有 type inference 了.
+01:39:10 <CindyLinz> 那如果只寫 (> x 100) 它用什麼理由拒絕我這樣寫咧?
+01:39:52 <CindyLinz> 咦 好像跟 type inference 不太一樣, 不過.... 嗯, 總是有個類似的東西在??
+01:40:22 <monochrom> 它不會拒絶你寫那句. 但到你想為那句找證明, 你就卡住了, 因為找不到適用的已知定理.
+01:40:41 <CindyLinz> 噢 :D
+01:42:44 <monochrom> 這樣說吧. 內建的的定理有這幾項: is-integer x ⇒ is-real x; is-real x && x>100 ⇒ x>1.
+01:43:06 <CindyLinz> 嗯嗯嗯, 這樣懂 ^^
+01:43:36 <monochrom> 那麼. 你想證明 x>100 ⇒ x>1, 就發覺三缺一了!
+01:44:13 <CindyLinz> 嗯嗯嗯
+10:57:07 <monochrom> 最新傑作: http://www.vex.net/~trebla/haskell/IO.xhtml
+13:17:50 <letoh> 我個人是比較支持 perl 對數字和字串的運算包含了 implicit conversion
+13:20:48 <letoh> 不過對於 implicit/explicit 的討論，我總覺得大家對這兩個字的解釋都不太一樣
+13:21:14 <letoh> 連甲語言跟乙語言的觀點都跑出來了...
+13:22:14 <letoh> 如果選擇要用某一種語言的觀點來解釋，我覺得那已經是受過訓練的觀點了，這樣是否真的 implicit?

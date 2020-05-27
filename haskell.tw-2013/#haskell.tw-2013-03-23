@@ -1,0 +1,78 @@
+00:00:45 <letoh> 如果只是要最後算出一個 v，也不行嗎?
+00:01:07 <suhorng> 算出最後一個 v？
+00:01:21 <letoh> 最後不是只會剩下一個 value 嗎?
+00:01:26 <suhorng> 嗯@@
+00:01:34 <suhorng> 可是好像就沒辦法剩下很多 value？
+00:02:13 <letoh> 剩下很多的情況就是我剛剛說的 1 2 3 4 5 啦... 但沒辦法繼續算下去
+00:02:40 <suhorng> 嗯...
+00:02:55 <letoh> 感覺是可以畫出 ast，但沒辦法算?
+00:03:03 <letoh> 應該說不見得算得完
+00:03:13 <suhorng> 所以說這樣最後一定就是卡住囉……
+00:03:29 <suhorng> 感覺被 evaluation context 可以長成 vvvv[]eeeeee 給騙了 =_=|||
+00:03:32 <letoh> 不曉得耶  我還是對那個 e := e e 不太滿意XD
+00:04:42 <suhorng> 原來左邊那一堆 vvvv 根本不是代表很多獨立的 term Q_Q
+00:04:52 <suhorng> e ::= e_1 e_2 這個應該也還滿常見的 @@
+00:05:06 <letoh> 代表不同的 e 嗎?
+00:05:11 <suhorng> 嗯
+00:05:38 <letoh> 不曉得耶  我總覺得看到 e_1 應該要有一條對應的文法可以描述 e_1
+00:07:30 <suhorng> 嘛XD 開心就好
+00:08:53 <letoh> E ::= [] | vE | Ee
+00:10:06 <suhorng> 嗯？
+00:10:23 <letoh> 1 2 3 4 5 => (1 (2 (3 (4 (5)))))   會變這樣嗎?
+00:10:35 <letoh> [] 是表示 empty ?
+00:10:53 <suhorng> [] 其實是表示一個 "洞" XD
+00:11:01 <suhorng> 所以展開來是 vv[]eeeee
+00:11:23 <suhorng> 然後剛才規定 E[u] 代表把 E 中的 "洞" 替換成 u： vvueeeee
+00:11:32 <letoh> 嗯嗯
+00:11:47 <suhorng> 所以例如 E = 1 (2 (3 (4 []))) 那 E[5] 就是你那個
+00:14:11 <letoh> 好奇怪的東西XD
+00:14:16 <letoh> 那個洞怎麼出現的XD
+00:14:31 <suhorng> 拿來接計算的結果@_@"
+00:14:53 <letoh> E = 1 2 3 4 5   這樣還能算嗎? 沒有洞
+00:14:58 <suhorng> 這個把計算規則中 "找尋待計算的部份" 跟 "化簡" 兩種規則分開
+00:15:07 <suhorng> 那個東西不在 E 語法定義的範圍內
+00:15:12 <letoh> 嗯  不行  因為 E 不等於 v
+00:15:13 <letoh> 嗯
+00:15:30 <letoh> 最後一定會跑出一個洞
+13:46:29 <suhorng> 突然發現 (++) 是 infixr 耶, 好聰明 (其實是我太笨QAQQ)
+13:46:34 <suhorng> :i (++)
+13:46:51 <suhorng> lambdabot 沒有 :i 喔 OQ
+13:47:45 <letoh> :i 是 info 嗎?
+13:48:32 <suhorng> 嗯對
+13:48:42 <suhorng> @help
+13:48:42 <lambdabot> help <command>. Ask for help for <command>. Try 'list' for all commands
+13:48:46 <suhorng> @list
+13:48:47 <lambdabot> http://code.haskell.org/lambdabot/COMMANDS
+13:49:01 <letoh> 我在 hugs 輸入 :i (++) 沒東西XD
+13:49:09 <letoh> Unknown reference `(++)'
+13:50:02 <suhorng> 嗯@@ 神秘
+15:47:57 <CindyLinz> suhorng: 因為 ++ 是符號呀~
+15:51:12 <suhorng> 意思是說?
+15:55:21 <CindyLinz> 啊.. 發現你重點是 r 不是 infix XD
+16:01:58 <suhorng> XDD
+21:09:28 <suhorng> CindyLinz: 是說 你有可能來之前提到的 Functional Tuesday 來給個 talk 嗎？
+21:09:51 <suhorng> 現在兩個時段都還是TBA, 不知道 jaiyalas 跟 scm 找到人了沒@_@"
+22:15:24 <MnO2> suhorng: 是哪個禮拜二啊？
+22:17:14 <suhorng> http://ft.jaiyalas.org/ 04/02打算舉辦第一次
+22:17:45 <suhorng> MhO2: 或你願意來分享XD? scm老師希望是實際應用方面的內容
+22:18:02 <suhorng> 不限定Haskell
+22:18:31 <suhorng> jaiyalas說他們設定的聽眾希望以業界的人為主XD
+22:19:29 <letoh> functional 在業界的使用情況?
+22:20:15 <MnO2> suhorng: 我 4/2 人在緬甸 xD
+22:20:29 <suhorng> 難過QQ
+22:20:37 <suhorng> letoh: 不知道耶@@ 也許這算推廣XD?
+22:21:12 <letoh> 如果還需要推廣  那應該代表使用情況還不多吧XD
+22:21:30 <MnO2> 理論上是可以講一下用 snap framework 寫 encoding-mashup 的東西，不過最近真的有點忙
+22:23:03 <MnO2> 也許可以找 Walter Chang 講 Scala ?
+22:23:38 <suhorng> 不太認識QQ
+22:24:23 <MnO2> 我也不太認識 xD https://plus.google.com/103943309878727777440/posts
+22:24:34 <suhorng> 我沒接觸實際工作的經驗..真的不知道在業界情形怎模樣
+22:24:41 <MnO2> 不過 Scala 在台灣據說是真的有在用
+22:26:34 <MnO2> 如果扣掉 Scala 的話應該就少得可憐吧
+22:27:15 <suhorng1> 我研究一下XD
+22:27:33 <MnO2> CUFP 最近才招開過啊
+22:27:44 <MnO2> 可見 Conrad Parker 的 comment
+22:31:53 <suhorng1> 在講這個嗎XD https://plus.google.com/101555949501667191720/posts/1oos87xXXBc
+22:35:48 <MnO2> 對啊
+22:36:19 <MnO2> 可以推測至少大公司內應用是有點慘
+22:38:21 <suhorng1> 嗯...

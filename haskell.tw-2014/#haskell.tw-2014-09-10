@@ -1,0 +1,80 @@
+00:05:47 <caasih> 一直很羨慕 Haskell 有 $ XD
+00:09:23 <caasih> 的確 livescript 少打很多字， coffee 都還要多一些
+00:10:29 <CindyLinz> perl 和 php 也有很多 $  (意味不明..)
+00:11:00 <caasih> ls 這樣寫不給過：
+00:11:04 <caasih> state name: \foo <| STR: 8 <| DEX: 9 <| CON: 8
+00:12:19 <caasih> 想做這樣的事情： ((((state name: \foo) STR: 8) DEX: 9) CON: 8)
+00:13:57 <caasih> CindyLinz: 前者還期待哪天可以回頭學好，後者的 $ 可是不想再看見了 XD
+00:15:06 <CindyLinz> 雖然後者的 $ 才是最多的.... ._.
+00:15:17 <CindyLinz> array 也是 $ XD
+00:16:01 <monochrom> BASIC 都有 $
+00:19:01 <au> caasih: 可以寫前 =>..
+00:19:28 <au> state name: \foo =>.. STR: 8 =>.. DEX: 9 =>.. CON: 8
+00:19:36 <au> #livescript無奇不有
+00:19:50 <caasih> au: 馬上來試試 XDD #無奇不有
+00:34:30 <caasih> au++ 原來是 "a\n  .. b" 配上 block 箭頭 XDD
+00:35:36 <au> #自反而縮排
+00:40:47 <CindyLinz> caasih: 如果三個月後出現了 livescript2, 而且紅了......
+00:41:34 <au> ... 就是寫 ls2ls2 的時候了 (冷)
+00:41:51 <suhorng> 自反而縮排...吾往矣XD?
+00:41:55 <CindyLinz> au: 悲慘的是他還要回去照顧舊版程式 XD
+00:42:34 <CindyLinz> au: 等等... ls2 與 ls2ls2 會同步推出嗎!?
+00:42:51 <au> ls 跟 coffeeredux 跟 coffee2ls 是同步推出的
+00:42:53 <CindyLinz> compile 成 js, 然後包在 ```...``` 裡面.. (X
+00:43:43 <au> (應該說，ls 自從應某人要求加了 ``...`` 之後的 coffee 向後相容版本是跟 coffeeredux 跟 coffee2ls 同步推出的)
+00:44:11 <au> 所以 ls2 會附 ls2ls2 也是很合理的預期
+00:44:35 <CindyLinz> XD
+11:21:08 <southp0105> 各位好～小弟最近在看http://www.seas.upenn.edu/~cis194/spring13/lectures.html學haskell，目前做到作業3(http://www.seas.upenn.edu/~cis194/spring13/hw/03-rec-poly.pdf)，雖然題目要求儘量用library中提供的recursion pattern function來盡可能精簡，不過我不太知道該怎麼簡化了...請問大家可以幫我看看嗎？http://lpaste.net/110819
+11:23:18 <CindyLinz> 才43行耶, 還不滿意嗎? :p
+11:23:32 <CindyLinz> module 竟然叫作 Golf....ww
+11:25:08 <CindyLinz> do_pick 看起來跟 pickN 完全一樣啊
+11:25:13 <southp0105> CindyLinz: 才剛po完limechat就當了XD
+11:25:20 <CindyLinz> 11:23 < CindyLinz> 才43行耶, 還不滿意嗎? :p
+11:25:20 <CindyLinz> 11:23 < CindyLinz> module 竟然叫作 Golf....ww
+11:25:39 <CindyLinz> pickN 裡面應該就不用再 where do_pick 了
+11:25:59 <southp0105> 誒XD
+11:26:10 <southp0105> 真的耶，搞笑了 XDD
+11:27:37 <CindyLinz> 規定不可以用一些內建的 list 函數嗎?
+11:28:30 <southp0105> 題目上是說『建議要用』，只是我還不太熟，不知道可以用哪些
+11:28:41 <CindyLinz> 喔喔
+11:29:09 <southp0105> 這也是想來請益的地方 :P
+11:29:29 <CindyLinz> southp0105: 這邊.. http://www.haskell.org/ghc/docs/latest/html/libraries/base-4.7.0.1/Data-List.html
+11:32:00 <southp0105> CindyLinz: 哦哦，我看一下
+11:42:16 <southp0105> 唔...histogram那邊好像可以用map和fold來簡化，都是對一個list的每個element做些轉換
+11:44:35 <CindyLinz> 不過.. 程式碼可能不一定會變短... (剛剛有想一下下 @@)
+11:45:00 <CindyLinz> 也不一定會變好讀 XD
+11:45:09 <southp0105> XD
+11:45:37 <CindyLinz> map 可能還好.. 通常能用 map 都是有想到很直覺的對應
+11:45:58 <southp0105> CindyLinz: 說起來，像localMaxima其實也是類似，只是他是每個element要跟前後的element比而已，有辦法在filter的predicate function一次帶入三個相鄰的element嗎？
+11:45:59 <CindyLinz> foldl foldr 就不一定了, 因為功能有點太強, 能做的事太多.. XD
+11:46:27 <CindyLinz> 不行喔~ 但你可以先用 inits, 然後再一一 take 前 3 項來用 :p
+11:46:43 <southp0105> 我覺得我每次在stackoverflow上都常看到看不懂的fold T_____T
+11:47:10 <CindyLinz> fold 功能太強.. 理論上所有這些函數都能用 fold 來做吧 (?
+11:47:16 <southp0105> 哦哦，了解
+11:47:42 <CindyLinz> 然後, 你也可以把原本的 list 變成三個 list: a, drop 1 a, drop 2 a
+11:48:23 <CindyLinz> 然後再把它們 zip3 起來, 變成 [(a, b, c)] 這樣的 list, 再灌給 filter
+11:50:41 <southp0105> 哦哦！好像不錯～立刻來試試看
+11:55:17 <southp0105> 糟糕，要被抓去開會了...上班偷寫Haskell的娛樂要被中斷了T___T
+11:55:40 <southp0105> 之後再來請益，先謝謝了 m(__ __)m
+12:04:54 <CindyLinz> XD
+12:23:59 <suhorng> 這個作業有限定複雜度嗎XD 不然覺得像 localMaxima 好像很難寫得更漂亮了
+12:25:44 <suhorng> 不限的話例如說 localMaxima xs = map (xs !!) . filter (\i -> xs!!i > xs!!(i-1) && xs!!i > xs!!(i+1)) $ [1..length xs-1]  ?
+13:08:36 <suhorng> https://github.com/idris-hackers/iQuery iQuery! jQuery 表示:
+13:13:49 <CindyLinz> dear idris users, welcome to 2006 (?
+13:16:46 <suhorng> xDDDD
+13:41:44 <CindyLinz> 是 壹追絲, 還是 哎追絲 ?
+21:57:15 <suhorng> 原來有 http://hackage.haskell.org/package/containers-0.2.0.1/docs/Data-Sequence.html 這種神奇的東西!
+21:57:43 <suhorng> CindyLinz: 不知道欸, 我唸伊dris
+21:57:49 <CindyLinz> Data::Sequence 表示: (><)
+21:57:55 <CindyLinz> Data.Sequence 表示: (><)
+21:58:00 <CindyLinz> 用錯符號 XD
+21:58:58 <suhorng> (:>) (:<)
+21:59:14 <suhorng> 不過這樣 |> 就跟 F# 產生歧義了 哈哈
+22:00:58 <CindyLinz> 為什麼要考慮別的語言啊 OAO
+22:01:26 <CindyLinz> 那 livescript 和 F# 已經在 |> 熱戰了 :p
+22:01:37 <suhorng> !! livescript 戰了什麼XD
+22:01:41 <CindyLinz> 不是啦
+22:01:46 <CindyLinz> 就符號打架了啊
+22:01:49 <suhorng> 不過既然 javascript 這麼火紅, 感覺 livescript 會戰上風
+22:01:51 <suhorng> 喔....
+22:01:59 <suhorng> 是呢

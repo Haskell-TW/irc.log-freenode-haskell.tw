@@ -1,0 +1,16 @@
+11:01:38 <c9s> 哦哦 我現在好像比較看得懂了 XDDDD
+11:02:05 <c9s> (最近通勤的時候有空就翻一下 haskell XD)
+11:02:27 <c9s> 不過 strict IO 是指 non lazy IO ?
+11:24:16 <c9s> 另外再請教一下 newtype 的使用時機是?
+11:24:33 <c9s> 雖然讀過了但還是有點難想像使用情境 XD
+13:19:35 <monochrom> newtype 可讓你重頭寫 instance
+13:20:42 <monochrom> 亦可用作 abstract type (如果不 export 內容)
+14:39:18 <mno2> strict 就是要化約到完，不過不 lazy 只是說不是什麼都不做，但也不等於完全化約到沒辦法化約
+14:55:29 <letoh> 我也不太會用 newtype  剛剛查了一下在 stackoverflow 看到一篇比較 data/newtype 差異的回應 http://stackoverflow.com/a/2650051
+15:01:52 <c9s> 咦 重新開機 lost connection XD
+15:21:28 <CindyLinz> c9s: strict IO 只是指某幾個函數而已
+15:21:54 <CindyLinz> 某幾個原本亂做的函數.. std lib 改提供正常實作的版本 XD
+18:27:00 <suhorngM_> IO 的實作對於那個 state paremeter 是 strict
+18:27:17 <suhorngM_> c9s: Control.Monad.State 下面有 .Strict 跟 .Lazy 兩個版本, 用起來笑裹布一樣
+18:28:19 <suhorngM_> CindyLinz: job steal 是什麼? 確實 seq 不代表順序, 所以後來他們的解法是提供一個新的 primitive (in IO)
+19:44:31 <CindyLinz> 就是偷算 thunk 啊

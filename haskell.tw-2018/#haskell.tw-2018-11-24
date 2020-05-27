@@ -1,0 +1,2 @@
+22:50:02 <lmy9900> mkParser d@(DefaultProp def _) g rdr = liftOpt opt <|> maybe empty pure def
+22:50:31 <lmy9900> 小写的maybe是什么。。。

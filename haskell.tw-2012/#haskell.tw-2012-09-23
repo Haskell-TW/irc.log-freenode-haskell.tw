@@ -1,0 +1,51 @@
+00:00:14 <favonia> jediac: @run 後面接的是 Haskell 程式碼
+00:00:33 <jediac> 嗯嗯
+00:01:38 <jediac> @pretty jediac
+00:01:38 <lambdabot>  jediac
+00:02:27 <jediac> @quote
+00:02:28 <lambdabot> Plugin `quote' failed with: getRandItem: empty list
+00:03:14 <jediac> 大致就這樣... 玩bot過時間
+00:04:16 <jediac> @dict taiwan
+00:04:16 <lambdabot> Supported dictionary-lookup commands:
+00:04:16 <lambdabot>   all-dicts devils easton elements foldoc gazetteer hitchcock jargon lojban vera web1913 wn world02
+00:04:16 <lambdabot> Use "dict-help [cmd...]" for more.
+00:07:00 <favonia> @all-dicts taiwan
+00:07:01 <lambdabot> *** "Taiwan" gcide "The Collaborative International Dictionary of English v.0.48"
+00:07:01 <lambdabot> Formosa \Formosa\ prop. n.
+00:07:01 <lambdabot>    An island off the coast of China, also called {Taiwan}. It
+00:07:01 <lambdabot>    was occupied by Japan from 1895 to 1945, when it was returned
+00:07:01 <lambdabot>    to Chinese sovereignty. After the Communist revolution which
+00:07:03 <lambdabot> [552 @more lines]
+00:07:45 <jediac> 好笑的是, 我剛才 google 出 haskell 是什麼... 我真的是亂闖進來 :P
+00:09:13 <CindyLinz> ^^|
+00:09:15 <CindyLinz> 欸...
+00:09:46 <CindyLinz> 所以如果我實作 instance 的時候如果要寫一個共用的函數給各實作函數應用的話
+00:09:52 <CindyLinz> 也只能寫在 top-level 嘍?
+00:10:11 <jediac> 我也發現... 全部 .tw 的 channel 都跟寫程式有關... (驚)
+00:10:26 <letoh> 有個 -tw 比較無關
+00:10:43 <letoh> 不一定都是 .tw 結尾，也有 -tw 的
+00:11:00 <jediac> 喔? 去瞧瞧
+00:11:23 <letoh> 不過 freenode 幾乎都是軟體專案或相關技術的頻道阿
+00:11:44 <letoh> 要找一般類的可能少一點，或者要找其他 net ?
+00:12:40 <jediac> 其他的 net 大多數都把 .tw 給 banned
+00:13:17 <letoh> 這我就不太清楚了  我只去過 freenode 和 2ch @_@
+00:13:20 <MnO2> CindyLinz: 對啊
+00:13:29 <jediac> 嗯嗯
+00:19:21 <CindyLinz> MnO2: 嗯嗯嗯
+00:34:37 <favonia> Haskell 的 module 實在不怎麼樣～
+00:35:08 <favonia> 就將就一下吧
+00:35:18 <CindyLinz> 多拆開寫幾個 module?
+10:04:03 <jediac> @slap lambdabot
+10:04:03 <lambdabot> I'd rather not; lambdabot looks rather dangerous.
+16:08:30 <CindyLinz> 我現在就每一塊「功能」就開一個檔來寫, 如果有用到彼此, 就互相 import... 然後最後再開一個檔來放要 export 的 public interface
+16:09:10 <CindyLinz> Expr.hs 是 public interface; 然後 Expr/Data.hs 是 data Expr 的定義; Expr/Read.hs 是 instance Read Expr 的實作; Expr/Show.hs 是 instance Show Expr 的實作
+16:09:42 <CindyLinz> Expr/Read.hs 和 Expr/Show.hs 會 import Expr/Data.hs; Expr.hs 會 import 另外三個
+16:10:30 <CindyLinz> 還沒遇到 mutually recursive import, 遇到了再來傷腦筋...
+20:06:50 <CindyLinz> 嘖嘖... GHC 7.6: Deferred type errors. Etienne Laurin suggested [16] that GHC could compile and run a program even though it contains type errors. 
+20:07:18 <CindyLinz> 要跑的部分沒有 type error 就好了....
+20:08:42 <jediac> GHC could compile and run even though it contains errors 所以還是可以跑啊
+20:18:10 <CindyLinz> 對啊, 這是 7.6 的新功能
+20:18:36 <CindyLinz> jediac: 感覺不是循常的 static compiler 會有的功能 XD
+20:19:56 <jediac> 嗯, 方便多了. 不然若 code 很多就要 debug 很久
+20:45:53 <CindyLinz> GHC 7.4 的 DataKinds.. 有 Agda dependent type 的 fu.. # http://www.haskell.org/ghc/docs/7.4.2/html/users_guide/kind-polymorphism-and-promotion.html
+21:03:42 <CindyLinz> http://hackage.haskell.org/trac/ghc/wiki/TypeNats/Basics

@@ -1,0 +1,23 @@
+10:05:14 <mno2> ∃x.P(x) ~ ∀r.(∀x.P(x) → r) → r)    把 existential type encode 成 higher rank polymorphism 要怎麼理解啊？ （顯示為基礎學不好）
+10:32:09 <mno2> https://hackage.haskell.org/package/contravariant  contravariant 這個 package 的主要應用是什麼啊？ download 數還蠻高的
+12:01:56 <CindyLinz> mno2: 我對它的具體想像是 Contravariant f => f a 是一個可以吃 a 的東西
+12:02:07 <CindyLinz> Functor f => f a 是一個可以吐 a 的東西
+12:02:59 <CindyLinz> 下載數嘛... 既然 lens depends contravariant, 我就不知道要怎麼看它的獨立下載數惹 XD
+13:19:32 <mno2> 不太能理解 xD   有具體應用嗎？
+13:19:49 <mno2> http://www.quora.com/What-is-the-Intuition-behind-skolemization-to-remove-existential-quantifier
+13:26:24 <CindyLinz> mno2: 就.. newtype Rev b a = a -> b    (改一下 a -> b 的 type variable 的順序 ^^|)  然後 instance Contravariant (Rev b) 這樣 @@"
+13:30:01 <CindyLinz> 不過為什麼 lens depend contravariant, 但是 30 天內下載數 lens 比 contravariant 還高?
+13:30:12 <CindyLinz> 是因為 lens 有更新, 但 contravariant 沒更新的關係嗎
+13:38:46 <petercommand> 可能先安裝了 contravariant 才裝 lens XD
+13:42:50 <CindyLinz> 是啊.. 可是 lens 的下載數比 contravariant 還多耶 ^^|
+15:45:30 <mno2> 所以他是 cofunctor 嗎？
+15:58:54 <CindyLinz> 不知道 cofunctor 的定義 ^^|
+16:03:15 <petercommand> 我記得 cofunctor 的頁面指向 contravariant
+16:03:40 <petercommand> 兩個應該是一樣的東西
+16:08:36 <mno2> 因為聽起來只是箭頭反過來，不就是 co- 的定義？
+16:08:49 <petercommand> 對阿
+16:09:18 <mno2> http://stackoverflow.com/questions/13653532/how-to-express-existential-types-using-higher-rank-rank-n-type-polymorphism  existential encoding 自問自答
+16:26:06 <CindyLinz> 那 ntravariant 就是 functor 了!
+17:06:02 <mno2> The open brackets used are known as banana brackets, http://en.wikipedia.org/wiki/Catamorphism
+17:06:20 <mno2> Eric Meijer 真是幽默
+17:06:59 <mno2> ( ￣□￣)/ 喔~~喔喔~~喔喔~~喔喔~爪爪

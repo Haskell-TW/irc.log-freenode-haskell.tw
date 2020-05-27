@@ -1,0 +1,123 @@
+09:51:53 <YuLin> http://this-plt-life.tumblr.com/post/55546134150/when-somebody-says-a-pl-must-have-functional-aspects
+09:52:01 <YuLin> 這張圖想表達的是？
+10:02:38 <MnO2> 其實我也看不太懂
+10:14:53 <YuLin> http://this-plt-life.tumblr.com/post/44462204757/simon-peyton-jones-adding-the-io-monad-to-haskell
+10:14:56 <YuLin> 這張XDD
+10:18:16 <favonia> YuLin: 這張超搞笑 xD
+10:28:17 <YuLin> http://this-plt-life.tumblr.com/post/43655942984/when-im-working-on-a-macro-system-with-phase
+10:28:28 <YuLin> 這張是？XD
+10:41:27 <YuLin> http://this-plt-life.tumblr.com/post/40176146981/when-im-preparing-to-use-somebody-elses-code
+10:41:34 <YuLin> 這張倒是蠻經典的XD
+10:45:24 <suhorng> @unmtl ErrorT
+10:45:25 <lambdabot> Plugin `unmtl' failed with: `ErrorT' is not applied to enough arguments, giving `/\A B C. B (Either A C)'
+10:45:54 <suhorng> @unmtl ErrorT e Identity a
+10:45:54 <lambdabot> Either e a
+10:53:14 <suhorng> @unmtl ErrorT e (StateT s Identity) a
+10:53:14 <lambdabot> (StateT s Identity) (Either e a)
+10:53:14 <suhorng> @unmtl StateT s (ErrorT e Identity) a
+10:53:14 <lambdabot> s -> (ErrorT e Identity) (a, s)
+10:53:40 <suhorng> :t ErrorT
+10:53:41 <suhorng> :t StateT
+10:53:41 <lambdabot> m (Either e a) -> ErrorT e m a
+10:53:41 <lambdabot> (s -> m (a, s)) -> StateT s m a
+10:54:13 <suhorng> 奇怪, 為什麼ErrorT e (StateT s Identity) a沒有展開到底 @@
+10:54:36 <suhorng> 阿 都沒有展開到底...
+10:56:29 <suhorng> @unmtl ErrorT e (StateT s IO) a
+10:56:29 <lambdabot> (StateT s IO) (Either e a)
+10:56:46 <suhorng> @unmtl ErrorT ByteString (WriterT String (State s)) a
+10:56:46 <lambdabot> (WriterT String (State s)) (Either ByteString a)
+10:56:53 <suhorng> @help
+10:56:53 <lambdabot> help <command>. Ask for help for <command>. Try 'list' for all commands
+10:56:59 <suhorng> @help unmtl
+10:57:00 <lambdabot> unroll mtl monads
+10:57:06 <suhorng> @help list
+10:57:06 <lambdabot> list [module|command]. Show commands for [module] or the module providing [command].
+10:57:34 <suhorng> @unmtl @unmtl ErrorT ByteString (WriterT String (State s)) a
+10:57:34 <lambdabot> Plugin `unmtl' failed with: Parse error: @
+11:25:06 <CindyLinz> YuLin: 一定要 mark 一下這一張 :p http://this-plt-life.tumblr.com/post/41439555366/when-oleg-shows-a-newbie-how-to-solve-a-problem
+11:28:48 <YuLin> wwwww
+12:48:59 <YuLin> http://this-plt-life.tumblr.com/post/36425228283/when-somebody-asks-me-how-i-added-a-dsl-to-my-lisp
+12:49:15 <YuLin> 這張說的 magic 到底是什麼耿XD
+13:27:17 <CindyLinz> 「不告訴你」的意思?
+13:48:52 <MnO2> CindyLinz: 這張超好笑
+13:53:04 <YuLin> magic？
+13:59:57 <suhorng> 就是字面上的意思吧XD
+14:01:00 <suhorng> "How did you do that!?" "Magic!"
+16:24:30 <MnO2> http://adit.io/posts/2013-07-22-lenses-in-pictures.html
+16:24:38 <MnO2> http://adit.io/imgs/lenses/inception.jpg
+16:24:42 <MnO2> 這張圖好好笑
+16:31:29 <YuLin> XD
+16:37:56 <b4283> ...
+16:38:43 <_13h> 請問一下，haskell 有內建 |> 的定義嗎？
+16:48:21 <CindyLinz> |> 是什麼?
+16:51:04 <_13h> 只是好奇問一下，剛剛發現 livescript 有這東西... 以前只在 ocaml 看過
+16:51:33 <_13h> 類似 pipe 吧，不過在 haskell 好像可以改用 arrow 處理掉
+16:53:22 <_13h> 唔，livescript 應該是搭配 prelude.js 才能用 |>... 例子是 [1 2 3] |> map (* 2) |> filter (> 3) |> fold1 (+)
+16:54:34 <CindyLinz> 不就 (>>=) 嗎? XD
+16:55:45 <_13h> 我以為 >>= 只能用在 monad @_@
+16:56:00 <_13h> 昨天在 haskell wiki 看到這個  http://www.haskell.org/haskellwiki/The_JavaScript_Problem
+16:57:36 <CindyLinz> 不過所有的 pure 函數, 套 lift 以後都可以在 monad 裡面用呀.  真的不需要 side effect 什麼的話, 可以用 identity monad ^^
+16:58:45 <_13h> 這樣聽起來還是得要求 monad，不是的話就得用各種手段想辦法弄出來XD
+17:05:59 <CindyLinz> 你用了各種手段以後, 會不會結果弄出一個 monad isomorphism 的東西啊? @@"
+17:06:21 <CindyLinz> pipe 這樣的東西很像 continuation passing 啊
+17:12:03 <_13h> 我剛剛說的手段是指 lift 這些東西，好像是用來包裝成 monad 界面?
+17:12:46 <_13h> livescript 的 |> 看起來好像沒特別要求 (可能本來就沒有設計什麼 monad 界面吧?)
+17:26:12 <CindyLinz> 接觸了 haskell 以後, 我是把別的 imperative language 視為, IO monad by default 欸 ^^|
+17:26:32 <CindyLinz> 以.. livescript 整個都在 monad 裡來理解
+17:34:09 <_13h> 嗯嗯  這樣好像也可以，簡單多了
+17:34:43 <_13h> 不過其實還有另外的 monad library XD
+17:42:18 <_13h> 之前講說 whitespace sensitive 的語言是 livescript？是因為它的 identifier 支援使用 - 嗎？
+17:43:42 <_13h> 分不清楚 a-b 到底是一個 identifier 還是一個 expression
+17:46:18 <cataska> a-b => aB
+17:47:42 <cataska> foo-baz-bar => fooBazBar
+17:49:45 <_13h> 我個人支持可以用 a-b，不行才用 camel case XD
+17:50:17 <CindyLinz> a-b => aB... 當 javascript 遇到 css 的感覺 XD
+17:53:05 <cataska> 寫 livescript 會一直想找有沒有更簡潔的寫法，是不是走火入魔了
+17:53:40 <_13h> 不管寫什麼語言都會吧?
+17:54:37 <cataska> 總覺得跟其他語言不一樣 XD
+17:55:38 <cataska> 感覺 livescript 在哪裡一定有我不知道的神秘寫法
+17:55:46 <_13h> 也許是語法上的彈性夠大，才有機會讓你找其他的寫法？perl 應該也算?
+17:59:25 <_13h> 話說  這幾天開始用 npm 覺得真是方便，主要是可以裝 module 時預設裝到 project root，而不是裝到系統
+18:00:09 <_13h> cabal 如果可以的話，考慮裝起來用了XD
+18:04:20 <CindyLinz> cataska: 是簡, 但... 不一定潔吧.. (逃)
+18:05:30 <cataska> CindyLinz: 同意 XD
+18:10:38 <_13h> 這幾天看了這些語言，感覺像在看某括號家族...明明長得很像，但又很多地方不太一樣XD
+18:12:24 <CindyLinz> _13h: livescript 裡面.. f! [1,2] 和 f ![1,2] 不一樣
+18:12:36 <CindyLinz> 我以為是因為這樣所以叫作 white space sensitive
+18:13:41 <_13h> 原來如此，我只是大概掃一下語法跟幾個範例而已，那它到底會怎麼處理 a-b 呢？
+18:14:06 <CindyLinz> 譯作 javascript 的話 f! [1,2] 是 f()([1,2]) 而 f ![1,2] 是 f([!1,!2])
+18:14:49 <CindyLinz> 那你猜 f![1,2] 是什麼?
+18:15:23 <_13h> 應該會跟 f! [1,2] 一樣吧？
+18:15:32 <_13h> [f 1, f 2] ?
+18:15:46 <_13h> 不曉得  感覺這語言很怪XD
+18:19:31 <_13h> [(ref$ = f())[1], ref$[2]]  這是什麼怪東西XD
+18:21:03 <CindyLinz> 就.. 先執行 f()
+18:21:07 <_13h> 應該是傳回一個 array，然後取出 [1] [2] 再重新組成新的 array ?
+18:21:12 <CindyLinz> 對對
+18:21:20 <CindyLinz> 很 sensitive 吧 XD
+18:21:25 <_13h> 噁心XD
+18:22:42 <CindyLinz> 把 ! 換成 ?    f?[1,2]   f? [1,2]   f ?[1,2]  三個也都不一樣
+18:23:13 <CindyLinz> 想像以 livescript 為主的公司的工程師的考試題目 (誤)
+18:25:08 <_13h> 看了一下... 已暈XD  為啥需要設計成這樣，有什麼優點嗎？
+18:38:48 <CindyLinz> 別問我 XD
+18:39:38 <_13h> 還有一個問題... 為什麼這些語言的工具都用食物命名...coffee, cake, coco, coke 越看越餓XD
+18:39:59 <_13h> 看到 coffke + cake 就覺得下午茶時間到了XD
+18:40:26 <CindyLinz> java 就是咖啡啊
+18:40:34 <CindyLinz> 爪哇咖啡
+18:40:50 <favonia> _13h: 我的經驗是在某些情況下這些小差別會讓程式變得很短，看起來很酷，但整體而言整個語言變得很難掌握
+18:40:53 <CindyLinz> 還有 iced coffee script
+18:40:56 <_13h> 我知道啊，但也有像 livescript 或 typescript 這種清流(?)
+18:41:04 <_13h> 有  剛剛有找到
+18:41:06 <CindyLinz> 只有名字清而已... = 3=
+18:41:24 <_13h> 是沒錯啦XD
+18:42:07 <favonia> _13h: 例如某個狀況可以用某個特殊符號完成兩件事情啦之類的
+18:42:07 <CindyLinz> coscup 的 talk 時間好短, 25 分鐘含自我介紹和 Q&A
+18:42:17 <CindyLinz> 這樣就不能分一半的時間罵 livescript 了.. XD
+18:43:15 <CindyLinz> favonia: 使得 "Do one thing" is impossible
+18:43:18 <_13h> favonia: 這需求感覺比較適合用 macro 之類的東西處理掉?
+18:43:28 <CindyLinz> 至於這個 "Do it well".. 反正前提已經不成立了 XD
+18:44:47 <favonia> _13h: 某種程度上 js compiler 就是把 macro 全部展開啊...
+18:45:38 <_13h> 嗯，其實我只是想說，這種東西弄個什麼機制讓使用者自己封裝就好了，弄進語言本身會變得超複雜XD
+18:46:06 <_13h> 例如常常需要檢查 f 是不是函式  自己去封裝 f? 之類的來用
+19:26:56 <cataska> 在 livescript 看到 []= 到底是什麼東？
+20:25:54 <hashcat> http://libcello.org/documentation

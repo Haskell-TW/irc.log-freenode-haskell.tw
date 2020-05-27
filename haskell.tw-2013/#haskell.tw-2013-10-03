@@ -1,0 +1,86 @@
+00:02:03 <Yu_lin> 通常我是寫給以後的自己看的（被打
+00:02:46 <Yu_lin> 以前寫 perl 有遇過一年前寫的程式已經看不懂的情況....所以就....
+00:02:59 <CindyLinz> 噢..
+00:03:20 <CindyLinz> 我目前對 monad 的體會是....
+00:03:45 <CindyLinz> 不要去想 monad 是什麼, 而是去想 monad 的性質在這裡是不是剛好可以用
+00:04:20 <CindyLinz> 它沒有什麼理由, 可能就只是剛好符合, 可以用, 而用起來好像又蠻方便的, 所以就用了....
+00:07:38 <CindyLinz> 我們去理解一個事物的時候, 常常用隱喻, 用類比.. 類比一個我們比較熟悉的東西, 最好是具體的東西..
+00:08:19 <CindyLinz> 但是這每一個能夠類比的東西, 總是會有個無法類比下去的 axiom, 也就是這個具體想像的開頭
+00:08:53 <CindyLinz> 我是絕望地覺得 monad 自己就是這一個開頭, 它自己就是我們經驗中最具體最熟悉的存在了... XD
+00:09:36 <Yu_lin> XD
+00:09:49 <CindyLinz> 所以解釋 monad 的理由就變成是: 因為它是 monad 所以怎樣怎樣...
+00:10:02 <CindyLinz> 它就像 monad 一樣如何如何...
+01:02:23 <hashcat> 無他, 唯手熟爾
+01:02:39 <hashcat> 這是範疇論的哲學點
+01:03:16 <hashcat> 一個東西是啥不在於他本身, 在於他跟其他東西的關聯是什麼
+01:05:45 <monochrom> 明天問題: 我是誰? XD
+01:08:40 <hashcat> 以後說不定人腦可以用奈米機械或電子元件替代
+01:09:18 <hashcat> 腦殘失智或失語裝了那玩意, 還算不算自己
+09:48:51 <MnO2_> 關於 blog 看到 zonble 在用這套 http://postach.io/  ，第一次看到 backend 用 evernote 的
+09:59:31 <MnO2_> https://twitter.com/jgoldberg_/status/385487897207398401
+09:59:33 <MnO2_> http://arstechnica.com/security/2013/10/silk-road-mastermind-unmasked-by-rookie-goofs-complaint-alleges/
+10:00:38 <MnO2_> PHP 中槍
+10:02:17 <MnO2_> cchan 居然還在用 svk ? https://twitter.com/ccshan/status/385475795965050880
+11:14:27 <_13h> svk 不是停止開發了嗎?
+11:16:03 <MnO2_> 應該吧，所以才覺得奇特
+15:42:25 <godfat1> 投影片我上次是用 https://github.com/shower/shower
+15:42:26 <godfat1> 據說用 chrome 輸出不錯，
+15:42:26 <godfat1> 不過裡面所有 html 轉 pdf 的工具，
+15:42:26 <godfat1> 轉我的只有 princexml 轉出來比較正常，
+15:42:26 <godfat1> 其他版面是完全爛的
+15:49:38 <_13h> 現在的開發都以 browser 為平台了XD
+16:03:22 <MnO2_> 我覺得用 browser 版的 slide 就是畫圖比較討厭。
+16:21:35 <_13h> 你是說要畫箭頭之類的嗎？也許要靠 canvas 解決?
+16:21:44 <CindyLinz> SVG 啊~~ ^^
+16:22:36 <mno2> favonia 流 (SVG)
+16:22:45 <_13h> 嗯  svg 應該也不錯
+16:23:21 <_13h> 像昨天講的那一套只是靠 css 排版而已吧
+16:24:59 <CindyLinz> 文件不大的時候可以用 SVG.. (遠目)
+16:25:15 <CindyLinz> SVG 蠻慢的... ._.
+18:17:35 <godfat> favonia 那個看起來很棒，不過我 firefox 跑不動... ~.~
+20:56:27 <Yu_lin> 問一個私人一點的問題....有人有用噗浪然後被下面這個帳號加粉絲的嗎？
+20:56:28 <Yu_lin> http://www.plurk.com/carrolltrust
+22:55:48 <suhorng> 8122   110/03 carelai      □ [問題] 大家覺得函數式語言有前途嗎？ http://www.ptt.cc/bbs/Programming/M.1380810707.A.861.html
+22:55:52 <suhorng> <戰> (誤)
+22:59:40 <suhorng> http://haskellnews.org/grouped 原來有這種整合介面XD
+23:01:03 <suhorng> my god, http://alpmestan.com/2013/06/27/ghc-core-by-example-episode-1/ http://alpmestan.com/2013/10/01/ghc-core-by-example-episode-2-evaluation/
+23:04:08 <hashcat> 額這很難回答
+23:04:49 <hashcat> 要正確分析這種問題要同時對經濟跟語言有一定認識
+23:05:32 <suhorng> 然後不知道他是不是要問關於工作之類的
+23:05:37 <hashcat> 人的慣性不遜於質點的慣性
+23:05:40 <b4283> 上次不是分析過了，haskell 最沒錢途啊 XD
+23:05:45 <hashcat> 哦那沒有
+23:06:11 <hashcat> 就慣性來說scala最有機會
+23:07:08 <hashcat> 轉移成本比另外三個都低
+23:08:04 <CindyLinz> suhorng: 看起來不錯耶 :D # ghc-core-by-example-episode
+23:08:21 <hashcat> 有史為證
+23:08:35 <suhorng> hashcat: 真的很多都是這樣耶
+23:08:51 <suhorng> CindyLinz: 就是剛剛 haskellnews.org 首頁看到的XD
+23:09:39 <Yu_lin> ghc bootstrappppppp
+23:09:43 <hashcat> suhorng: 這是技術狂考量不到的事情
+23:11:05 <hashcat> 沒有什麼危及存亡之秋的理由, 不用期待大小企業會突然想到
+23:11:23 <hashcat> 沒ppt帳號
+23:11:44 <suhorng> 嗯, 要有帳號才能推文回文
+23:11:49 <hashcat> 有沒人有心轉答
+23:12:21 <CindyLinz> 那既然他問題問得這麼簡略.. 是不是只要存在至少一種 evaluation 方式, 使得存在至少一種函數式語言, 在某個特定的情況下有前途, 就可以回答他一個字: 有 了
+23:13:11 <suhorng> 假設不存在然後推矛盾 (X
+23:13:27 <Yu_lin> 不考慮用 agda 或 coq 嗎？XD
+23:13:31 <letoh> 自從 ptt 一堆連線板不禁推文的問題越來越嚴重後，我就不在 ptt 看連線板了XD
+23:13:32 <hashcat> prolog可以取代你們了
+23:14:03 <Yu_lin> It can run backward!
+23:15:33 <suhorng> letoh: 現在已經不是連線板啦~ Group.NCTU (~ 2013)
+23:18:04 <letoh> 現在不是接到 tw.bbs.comp.language 啦?
+23:23:13 <suhorng> 大驚, 原來有接新的
+23:25:45 <Yu_lin> hashcat 我幫你轉達好了，不過可能要請你再整理一下，哪些是要轉達的部份
+23:25:56 <Yu_lin> 全部？
+23:26:17 <hashcat> 意思到就好拉
+23:28:22 <hashcat> 反正我不負責嘿嘿
+23:28:56 <Yu_lin> XDDDD
+23:42:52 <hashcat> 頭一次只開emacs-live沒開任何檔案
+23:43:25 <hashcat> 有噁心到
+23:46:01 <hashcat> 突然被文字編輯器表白
+23:46:33 <Yu_lin> 不愧是 emacs，連表白都學會了
+23:48:00 <b4283> emacs-live 是什麼模式？
+23:49:10 <hashcat> 一時衝動把emacs做掉了
+23:49:51 <hashcat> http://overtone.github.io/emacs-live/
+23:56:36 <hashcat> 貌似幾乎只支持clojure

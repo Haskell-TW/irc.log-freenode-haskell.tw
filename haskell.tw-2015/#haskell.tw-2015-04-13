@@ -1,0 +1,37 @@
+11:07:57 <mno2> http://www.go-hero.net/jam/15/languages  Code Jam 居然用 haskell 的還不少，而且生存率還蠻高的 xD
+11:08:41 <mno2> 但重點是有人用 brainfuck, lol 而且都生存了
+11:17:22 <mno2> 沒有人用 hodor: http://www.hodor-lang.org/ , lol
+11:35:00 <kcwu> brainfuck ... 那是 compile 過去的吧 @@
+11:38:22 <mno2> 我也覺得應該是 compiler 過去的
+11:38:33 <mno2> s/compiler/compile/
+12:04:12 <CindyLinz> @type <*>
+12:04:14 <lambdabot> Applicative f => f (a -> b) -> f a -> f b
+14:20:40 <petercommand> :i <*>
+14:20:57 <petercommand> @info <*>
+14:20:58 <lambdabot> <unknown>.hs: 1: 1:Parse error: <*>
+14:21:36 <petercommand> @info (<*>)
+14:21:36 <lambdabot> (<*>)
+14:22:32 <petercommand> ww
+14:22:37 <CindyLinz> lambdabot 的 @info 一直很廢.. XD
+14:22:49 <petercommand> XD
+14:23:23 <petercommand> 看 infixl infixr 是用哪個 command 呀?
+14:23:51 <petercommand> :i (<*>)
+14:24:19 <petercommand> ghci 是用 :i
+14:24:29 <petercommand> lmabdabot 不曉得要用哪一個
+14:24:39 <CindyLinz> 就是 @info 吧.. 不過.....ww
+15:25:36 <CindyLinz> 拿來這邊記錄一下.. petercommand 作的, Applicative 裡面用的 infix operator... # https://ideone.com/f7NaJx
+15:25:55 <CindyLinz> Just "abc" <*< (++) >*> Just "def" <*< (++) >*> Just "ghi" 獲得 Just "abcdefghi"
+15:32:58 <petercommand> 感覺 infix 看起來很讚 :p
+15:34:18 <CindyLinz> 為什麼不用寫 infixity?
+15:34:40 <CindyLinz> default 是 infixl 0 嗎?
+15:38:46 <petercommand> https://www.haskell.org/onlinereport/decls.html#fixity #Any operator lacking a fixity declaration is assumed to be infixl 9 ...
+15:39:46 <CindyLinz> 喔喔 ^^
+15:41:07 <CindyLinz> petercommand: 大大我想用 Just 'a' <*< (:) >*> Just 'b' <*< (:) >*> Just ""
+15:41:27 <CindyLinz> 要獲得 Just "ab"
+15:43:06 <CindyLinz> 如果不考慮 priority 的話, 可以用另一種.. 例如 <&< 和 >&> 當 infixr..?
+15:43:23 <CindyLinz> 然後不准不同的 priority 混用
+15:47:22 <petercommand> 感覺應該行得通 ^^
+15:49:28 <CindyLinz> petercommand: 下一個是.... Just 3 <*< (:) >*> Just 4 <*< (*) >*> Just 5 <*< (+) >*> Just 6
+15:49:39 <CindyLinz> 不對 是, Just 3 <*< (+) >*> Just 4 <*< (*) >*> Just 5 <*< (+) >*> Just 6
+15:49:53 <CindyLinz> 要 Just 29
+16:00:09 <petercommand> 這感覺困難一些XD

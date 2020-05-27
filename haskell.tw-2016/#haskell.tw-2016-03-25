@@ -1,0 +1,17 @@
+14:30:49 <pkmx> @hoogle [a] -> Int -> Maybe a
+14:30:52 <lambdabot> Prelude (!!) :: [a] -> Int -> a
+14:30:52 <lambdabot> Data.List (!!) :: [a] -> Int -> a
+14:30:52 <lambdabot> Data.List genericIndex :: Integral a => [b] -> a -> b
+14:31:16 <pkmx> 是我的錯覺還是... Data.List 居然沒有 safe 的 index function
+14:32:35 <CindyLinz> 原本的 head 就已經..... XD
+14:33:11 <CindyLinz> head 可能是大部分 Haskeller 第一個學到的 partial function...
+14:34:53 <pkmx> 感覺應該要加進去啊@@ 總不能每次都要自己寫一個或是 depend safe/lens
+15:26:12 <CindyLinz> hackage 上有 ^^|
+15:26:48 <CindyLinz> https://hackage.haskell.org/package/listsafe-0.1.0.1/candidate/docs/Data-List-Safe.html
+15:26:58 <CindyLinz> depend safe.. XD
+15:27:22 <CindyLinz> 這個沒有 depend safe.. XD
+16:05:14 <petercommand> safe array 呢?
+16:09:54 <petercommand> haskell 預設 library 就給了一堆 partial function XD
+16:13:03 <petercommand> s/預設/常用 XD
+18:52:19 <CindyLinz> 教學用函數
+23:59:21 <monochrom> vector library 有 safe 的 index function

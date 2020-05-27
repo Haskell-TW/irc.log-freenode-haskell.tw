@@ -1,0 +1,148 @@
+01:25:08 <favonia> letoh: 就只是覺得好像應該要做什麼
+01:25:50 <letoh> 機器人不是有一隻嗎?
+01:26:00 <letoh> 不見了XD
+01:26:26 <favonia> 機器人有兩隻啊～ 不過會講話的不見了...
+01:26:41 <letoh> 對喔  忘了有一隻新來的
+01:26:58 <favonia> letoh: 這樣他會哭喔
+01:27:14 <letoh> 新來的不會講話  卻會哭? XD
+01:27:21 <hychen> 我錯過了什麼?
+01:27:31 <letoh> 機器人
+01:27:34 <hychen> 喔
+01:28:08 <favonia> logbot__: 你會哭嗎
+01:28:18 <favonia> letoh: 他好像不理我
+01:28:21 <letoh> XDXD
+01:28:24 <favonia> 喔我忘了他不會講話
+01:29:17 <letoh> functional thursday 之後  這裡的人好像沒有增加啊XD
+01:29:28 <hychen> 因為沒有太宣傳?
+01:29:35 <letoh> 有其他集散地嗎?
+01:29:41 <hychen>  應該是沒有
+01:29:48 <hychen> FP我看人也沒太多
+01:29:55 <hychen> 20幾個
+01:30:00 <letoh> 嗯.. g+ 上面也沒什麼討論
+01:30:28 <hychen> letoh, 你去COSCUP講一場OOP有多糟就可以吸引很多人來這裡了吧
+01:30:41 <hychen> letoh, 今天cindy也有來
+01:30:47 <favonia> 慢慢來吧，這邊人還是有慢慢變多啊～
+01:31:03 <hychen> CindyLinz, pppp
+01:31:19 <letoh> XDXD  我覺得 oop 還是可以用啦  只是好像慢慢想不起來什麼時候該用它XD
+01:31:21 <hychen> 今天場地是godfat他們公司提供的
+01:31:32 <hychen> letoh, 你這句話好酸
+01:32:17 <letoh> 我現在每天還是得改一點 MFC (?)，可以回味一下XD
+01:32:26 <favonia> letoh: \o/
+01:33:26 <letoh> 最近同事在學 python，每次跑來問我 class 和 object 的問題都會卡住XD
+01:33:45 <favonia> letoh: 該不會你用 OO 結果骨子裡都是 Lisp/Haskell 吧
+01:34:24 <letoh> 其實也沒那麼誇張啦XD  工作上還是得迎合一下其他人的口味
+01:35:37 <favonia> letoh: 這不是等於說「其實我想這樣做只是稍微妥協一下」嗎
+01:36:35 <letoh> 好像差不多是這樣XD  不過我覺得向別人解釋 gui 程式，用 oo 還是挺方便的... 可能我還不清楚怎麼用其他方法解釋
+01:37:09 <favonia> frp (逃)
+01:38:11 <letoh> 正在研究中  等學通了再慢慢滲透到公司內部XD
+01:38:36 <letoh> 上禮拜跟同事提了一點 cons cell 跟 pure function，他們好像覺得蠻新鮮的XD
+01:38:41 <hychen> letoh, 就一個ArrowLoop
+01:38:54 <hychen> letoh, 解釋完畢
+01:39:15 <letoh> 其實我之前在看 arrowloop 時只有一個感覺... 好像在寫我以前的控制學作業XD
+01:39:19 <hychen> 不過這是Yamp的model
+01:39:47 <hychen> letoh, 我都把mutiplex做進來了
+01:39:57 <favonia> yampa?
+01:40:13 <hychen> favonia, http://www.haskell.org/haskellwiki/Yampa
+01:40:26 <favonia> hychen: 我是說你剛才是不是想打 yampa
+01:40:36 <hychen> favonia, oops , 我打錯了
+01:40:45 <favonia> hychen: 喔你用 oop 了
+01:40:54 <letoh> 不考慮 lazy 這些機制的話，arrowloop 感覺很像在定義 closed-loop transfer function 的 operator
+01:40:55 <hychen> XD
+01:41:11 <letoh> XDXD
+01:41:16 <hychen> favonia, 我用python實作arrow還是用了oop
+01:41:24 <hychen> favonia, 因為沒有lazy evaluation
+01:41:34 <hychen> 所以用object來做
+01:42:04 <favonia> 嗯嗯
+01:42:05 <hychen> https://github.com/hychen/harrow
+01:42:25 <hychen> 沒有跟haskell的一模一樣, 因為這是我在學arrow的side project
+01:42:37 <hychen> 像fanin就寫錯了 XD
+01:43:14 <letoh> http://en.wikipedia.org/wiki/File:Feedback_loop_with_descriptions.svg  像這個  我應該回母系去推廣一下 arrowXD
+01:44:21 <hychen> letoh, 你要看一下snowman提到的swicher
+01:44:35 <hychen> letoh, 電路還可以動態切換
+01:44:40 <letoh> 我看到一半而已  還沒看完
+01:46:37 <hychen> letoh, 弄一個繼電器出來 XD
+01:47:05 <letoh> hychen: 對了  你上次說你的實作沒有 copy 的話會有問題  是什麼問題啊? 有什麼 test case 可以玩嗎?
+01:47:22 <hychen> letoh, 會無窮迴圈
+01:47:32 <letoh> 其實我覺得那張電路圖有點超過了XD 雖然概念蠻有趣的
+01:48:03 <hychen> letoh, 沒有copy的話就會self reference
+01:48:31 <letoh> 唔... 原來是這個問題
+01:48:48 <hychen> 這樣你的arrow不能夠reuse
+01:48:53 <letoh> 我以為是怕 scope 污染
+01:48:59 <hychen> 不是
+01:49:09 <hychen> 因為這個arrow是stateful ....
+01:49:49 <hychen> 我想我改一下就可以處理掉這個問題
+01:49:53 <letoh> 我讓 arrow 是 stateless.. 但看了你的覺得有點怪，為什麼會需要 stateful ?
+01:50:01 <hychen> 這樣就不用copy
+01:50:13 <letoh> 不曉得有漏掉啥東西  因為我也沒用到 copy
+01:50:57 <letoh> 不確定遇到什麼例子會爆炸XD
+01:51:04 <hychen> Arrow本身沒有state
+01:51:13 <hychen> 但是composition是有state
+01:51:40 <hychen> 這樣說不是很精確
+01:51:52 <letoh> 我看你的例子如果不用 feed 應該可以省掉 state 吧?
+01:52:01 <hychen> letoh, yap
+01:52:06 <hychen> letoh, 但我想要有feed
+01:52:35 <letoh> 唔  我覺得 feed 好像有點多此一舉  你只是想模擬 -< ?
+01:52:37 <hychen> letoh, 因為我想作到多個acc input
+01:52:39 <hychen> letoh, no
+01:52:48 <letoh> 多個?
+01:52:52 <hychen> letoh, 我想做的事比haskell arrow做的好要再多些
+01:52:59 <letoh> 餵到同一個 arrow ?
+01:53:02 <hychen> yes
+01:53:34 <hychen> haskell的Arrow是單個入口的水管
+01:53:37 <letoh> 我不太確定  不過我目前對 arrow 的理解應該是做最少的事  然後透過組裝來完成大一點的工作
+01:53:46 <hychen> 我想做多個入口的水管
+01:54:00 <letoh> 多個入口不是應該透過組裝產生嗎?
+01:54:24 <hychen> 沒耶, 再怎麼組裝它都只有一個入口
+01:54:31 <letoh> 不過不曉得會不會變很醜就是XD
+01:54:59 <letoh> 應該可以  我的想法是 (a, (b, (c, ...))) 類似這樣的 input
+01:55:11 <hychen> 那還是一個入口
+01:55:32 <letoh> 有什麼多個入口的例子嗎?
+01:55:47 <hychen> 用unix pipeline來說，你還是從STDIN進來
+01:56:03 <letoh> 嗯
+01:56:29 <hychen> 簡單來說, 一個command除了STDIN可以讀data, arguments 跟 options 也是它讀data的管道
+01:56:57 <letoh> 是沒錯  那你的界面會長什麼樣子呢?
+01:57:15 <hychen> 我還沒unify好
+01:57:42 <letoh> 有 test sample 可以參考嗎? 還不能運作也沒關係
+01:57:47 <hychen> 等我把boliau的底層用harrow寫過就差不多了
+01:58:01 <letoh> 只是想看看樣子感受一下XD
+01:58:41 <letoh> 你說的多個 input 是指呼叫很多次 feed 嗎?
+01:58:46 <hychen> no
+01:58:52 <letoh> 猜錯XD
+01:59:04 <hychen> feed 只是預先給值而已
+01:59:09 <letoh> 是啊
+02:00:02 <hychen> output_acc > a_command | a_command Arrow Arrow2 | a_command
+02:00:25 <hychen> 這樣就是三個input的組合
+02:00:36 <letoh> a_command 要維護同一組 context.. 然後收集一堆資料完再執行?
+02:00:58 <hychen> a_command 不一定視同一個command
+02:01:15 <hychen> output_acc > a_cmd | b_cmd Arrow1 Arrow2 | c_cmd
+02:01:19 <hychen> 這樣也可以
+02:01:47 <letoh> 我以為是同時給一堆資料  但你的例子看起來比較像是提供多種不同的輸入界面
+02:01:54 <hychen> yes
+02:02:07 <hychen> 這樣我寫一個ArrowTee的界面就好了
+02:02:29 <letoh> 這件事在 haskell arrow 做不到嗎?
+02:02:43 <hychen> 要做當然是做得到啊
+02:02:50 <hychen> 幫Arrow再寫一個function
+02:02:58 <letoh> 嗯
+02:03:12 <hychen> 目前沒看到它內建的lib有類似的interface
+02:04:27 <letoh> 嗯  想了一下有點像是某種 input spec，每個 command 應該還是要自己實作實際的動作吧?
+02:04:39 <hychen> 是的
+02:05:02 <hychen> 只是決定function的arg, kwargs要對接到哪裡
+02:05:28 <letoh> 嗯  大概知道是什麼東西啦  不過我覺得你的例子感覺只是用 shell 語法當作語法糖而已
+02:06:09 <hychen> 喔, 我不是要在haskell裡面加這個語法
+02:06:18 <hychen> 我只是要用這東西表達概念
+02:06:22 <letoh> 我知道啦
+02:06:46 <letoh> 你不是要做在 boliau?
+02:06:48 <hychen> haskell的arrow compostion沒有讓你可以選擇做partial mapping
+02:06:57 <letoh> partial mapping?
+02:07:05 <hychen> 對啊, 那個本來就是語法糖
+02:08:09 <letoh> 我不太確定 partial mapping 指的是什麼@_@
+02:08:16 <letoh> 數學上的?
+02:08:19 <hychen> 不是
+02:10:07 <hychen> 我得睡了
+02:10:16 <letoh> 我大概知道你在說什麼了
+02:10:28 <letoh> 嗯  晚安
+11:04:18 <cataska> 昨天 Meetup 有沒有錄影？
+15:58:11 <godfat> 抱歉，沒有
+16:13:00 <MnO2> godfat!
+16:13:27 <godfat> 昨天想說趁機把 adium 灌起來 XD 這台新電腦之前一直沒灌...
+16:14:59 <MnO2> godfat: GJ

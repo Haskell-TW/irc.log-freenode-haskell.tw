@@ -1,0 +1,16 @@
+10:53:20 <suhorng> JuanitoFatas: 原來如此
+10:53:28 <suhorng> http://blog.sina.com.cn/s/blog_5d90e82f0101kfnd.html
+10:54:25 <suhorng> 「测试的条件往往是“组合爆炸”的数量级，所以你不可能测试所有的情况。唯一能可靠的方法是使用严密的“逻辑推理”，证明它的正确。」
+10:54:26 <suhorng> 「当然我并不是让你用 ACL2 或者 Coq 这样的定理证明软件。虽然它们的逻辑非常严密，但是用它们来证明复杂的软件系统，需要顶尖的程序员和大量的时间。即使如此，由于理论的限制，程序的正确性有可能根本无法证明。所以我这里说的“逻辑推理”，只是局部的，人力的，基本的逻辑推理。」
+10:54:45 <suhorng> 證明呀..
+11:23:28 <_13h> decrete event system 也可以用邏輯描述嗎？
+12:18:28 <MnO2> http://lethalman.blogspot.com/2013/04/build-vala-applications-with-shake.html
+12:18:35 <MnO2> 有人在用 shake 了
+12:25:19 <b4283> Vala/Shake 這個組合好冷門XD
+12:46:20 <monochrom> 人寫得出的程式都可以用邏輯描述
+12:49:28 <_13h> 嗯，沒有反對這句話的意思，但我不懂的其實是這件事實際上是怎麼執行的？
+12:49:46 <_13h> 寫成某種邏輯語言這樣嗎？
+12:52:29 <monochrom> 我以前寫下, 即時可提供的小小例子, 請參看 http://www.vex.net/~trebla/haskell/scanl.xhtml
+13:19:36 <monochrom> 還有這個, 看似長, 但只是因為我慢慢細說, 循循善誘(誤). 邏輯內容不算長, 或者說, 合理長度. http://www.vex.net/~trebla/compsci/imperative-functional.html
+13:22:24 <_13h> thanks, 我剛剛看了第一個連結，有點像是某種證明過程
+19:44:36 <suhorng> http://www.haskell.org/pipermail/haskell-cafe/2013-April/107506.html

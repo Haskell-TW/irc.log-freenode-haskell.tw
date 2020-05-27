@@ -1,0 +1,72 @@
+00:05:43 <CindyLinz> 哼哼, 神來也有少數用 Haskell 開發的 project!
+00:05:52 <CindyLinz> 少個也.. XD
+00:17:10 <MnO2> CindyLinz: 上線了嗎? xD
+00:20:04 <CindyLinz> delay 中.. orz
+10:00:52 <MnO2> http://blog.johantibell.com/2013/04/haskellorg-gsoc-ideas.html
+10:01:03 <MnO2> 有人想用 haskell 做 project 的話可以參考看看
+13:23:04 <MnO2> 突然發現多了超多篇文章 http://www.yinwang.org/
+13:23:13 <MnO2> 以後要改訂這邊
+13:28:23 <MnO2> http://www.yinwang.org/blog-cn/2013/04/13/generality/
+13:29:37 <_13h> 剛看完這篇
+13:33:15 <_13h> "在 Java 世界里的很多 design pattern，就是这些一知半解的人设计出来的。"  XD
+13:35:17 <MnO2> http://www.yinwang.org/blog-cn/2013/04/14/terminology/   這一個應該是從 stackoverflow 上某一篇慢慢傳出來的
+13:35:53 <_13h> yoda XD
+13:38:49 <MnO2> 提到 star war 就想到今天看到一個蠻搞笑的東西 http://starlogs.net/
+13:49:07 <_13h> 這站好慢...
+13:50:43 <_13h> 突然變快了，蠻有趣的:p
+13:54:55 <_13h> "使用 = 来表示赋值其实并不是真正的错误所在。真正的错误在于 C/C++ 的赋值语句不应该返回一个值。"
+13:55:37 <_13h> 不過 c 裡面很常看到 if(!(fp = fopen(...))) { ... }
+15:00:58 <CindyLinz> 如果 C/C++ 的 assign 完全沒有 return, 用起來有一點太不方便
+15:01:12 <CindyLinz> 可能要補一個可以一次 assign N 個變數為同一個值的寫法
+15:01:24 <CindyLinz> x = y = z = 0 這種的應該算是還不錯的用法
+15:01:51 <CindyLinz> x = (y = 1) + (z = 2) 就不要鼓勵了 :p
+15:02:49 <_13h> 最後這寫法好可怕...
+15:03:22 <CindyLinz> 我想這個應該是該句作者主要想避免的東西吧 o.o
+15:04:05 <b4283>  while 語句會變得比較沒那麼好看
+15:07:27 <b4283> _13h: 那個網站怎麼沒寫 "A long ago in a galaxy far, far away..." XDD
+15:07:43 <_13h> 對啊  不專業XD
+19:40:23 <suhorng> 是說jaiyalas表示functional Tuesday變成functional Thusday了
+19:40:36 <suhorng> 在五月二號(週四)晚上七點到九點舉辦。
+19:41:03 <suhorng> 活動網頁最近會宣佈的樣子
+19:41:45 <letoh> 要參加得先解碼嗎? XD
+19:42:42 <suhorng> 糟糕, 剛剛發生了什麼事orz
+19:43:11 <suhorng> 是我的編碼錯了嗎? (是亂碼?)
+19:58:07 <favonia> suhorng: 請用 utf8... lol
+20:46:33 <suhorng> sorry..有需要的話我重貼剛剛的訊息orz
+20:48:12 <letoh> 回到地球了
+20:48:33 <ws23> 好奇剛剛的訊息是什麼xD
+20:49:06 <letoh> 可能要先用 haskell 寫個解碼程式(誤
+20:50:14 <ws23> ＝口＝....
+20:50:51 <MnO2> http://scarcecapital.com/hft/
+20:51:13 <MnO2> 想做的 project 先被做了 xD
+20:51:28 <MnO2> https://news.ycombinator.com/item?id=5550930
+20:51:35 <MnO2> hacker news 的討論
+20:52:11 <letoh> graphviz 在 node 多的時候很難控制XD
+20:53:51 <MnO2> 喔對啊
+20:54:58 <suhorng> >>ws23: 是說jaiyalas表示functional Tuesday變成functional Thusday了, 在五月二號(週四)晚上七點到九點舉辦. 活動網頁最近會宣佈的樣子
+20:57:55 <MnO2> 提到 functional thursday，不知道 coscup 有沒有人報 functional 的主題
+20:57:58 <letoh> 以前拿來畫系統的 pkg dependency 和分析專案的 function/module dependency  一開始看起來還可以，後來就越來越看不懂了XD
+20:58:51 <MnO2> OSDC 已經有強者 miaout17 延續議題的熱度
+20:59:09 <suhorng> 喔喔喔喔!!
+20:59:47 <letoh> 今年的 osdc.tw 好像很有趣啊
+21:03:56 <MnO2> 嗯，看起來不錯
+21:07:03 <MnO2> https://github.com/hackfoldr/hackfoldr   我相信這邊的人斷句都會變成 hack + foldr  ，然後想這跟 foldr 有什麼關係，最後才想到是 folder
+21:08:03 <letoh> 不是 foldr 嗎? XD
+21:08:17 <CindyLinz> foldr :D
+21:08:44 <CindyLinz> 今年的 osdc 為什麼是辦星期五啊 :|
+21:09:28 <MnO2> CindyLinz 不說還沒注意
+21:09:40 <ws23> 超多人報名之後表示崩潰.....
+21:09:50 <letoh> 我記得去年也是某一場活動辦在禮拜五
+21:10:25 <letoh> 那天的租金比較便宜嗎? XD
+21:11:30 <letoh> MnO2: 剛剛那個專案，沒看 readme 根本聯想不到 folder 吧
+21:11:50 <MnO2> letoh: 恭喜你成功被洗腦了 wwww
+21:12:17 <letoh> XD
+21:12:49 <CindyLinz> 所以我就賺了一天公假.. (逃)
+21:13:12 <letoh> 竟然還有公假
+21:13:38 <CindyLinz> 這是員工工作相關的進修活動.. (Y)
+21:13:44 <MnO2> 神來也有贊助啊
+21:13:50 <CindyLinz> 去年參加 Flolac 也是同樣理由 :D
+21:15:47 <MnO2> CindyLinz 趕快報名 COSCUP ，講題是「我如何讓 Haskell 從進修學習變成公司 Project 」
+21:16:02 <CindyLinz> XD
+21:16:21 <CindyLinz> 算了, 這沒什麼內容啊 XD
+21:17:54 <MnO2> 這種講題就是要火力展示，就像前陣子 Iron.io 發表文章說，自從用了 Go 之後， Server 每天都頭好狀壯

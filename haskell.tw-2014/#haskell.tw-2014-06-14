@@ -1,0 +1,50 @@
+00:32:11 <caasihuang> godfat: 靠 raw ptr 配上 patch 過 tree_create 的 r3 是會動的。
+00:32:40 <caasihuang> 不擾頻了，下次我到 github 上問。
+00:47:10 <c9sloud> caasihuang: patch?
+00:48:08 <caasihuang> c9sloud: node_create 和 tree_create 沒有把 data 初始化，但只有 tree_create 那邊真的對我造成影響。
+00:48:15 <caasihuang> 我可以送 PR 嗎？
+00:48:18 <c9sloud> 可以阿
+00:48:21 <c9sloud> welcome
+00:48:32 <c9sloud> 所以是哪邊影響到?
+00:50:01 <caasihuang> node->data 裡面我放的是 V8 的 Value* ，在 tree_free 前我會把整個樹走過一遍，把它們取出來丟掉。
+00:50:16 <caasihuang> 要是分不出是不是 NULL ，就 gg 了
+01:05:59 <whitglint> 初始化 data？不是 insert path 就會填進去？
+01:10:20 <c9sloud> 咦對呀
+01:10:50 <c9sloud> oh
+01:11:00 <c9sloud> non endpoint nodes
+01:11:10 <caasihuang> y
+01:14:12 <c9sloud> 咦那你可以檢查 endpoint?
+01:15:20 <caasihuang> 咦，可以這樣作？ XD
+01:17:57 <caasihuang> c9sloud: 完成了，這樣就不用改到 r3 了 XD
+01:23:57 <c9sloud> 不過 set data to NULL 的確比較 safe
+01:36:37 <whitglint> insert path 時 data 傳 NULL 進去會有問題嗎？
+01:40:49 <caasihuang> insert path 老是有值，沒遇到問題，到是 tree_create 那邊才有問題。
+06:05:27 <c9sloud> caasihuang: merged!
+06:22:32 <c9sloud> 日本電報電話公司（NTT）2003年就宣布已經開發出一種工作頻率為81GHz執行速度高於先前元件速度兩倍的鑽石半導體（diamond semiconductor）元件。NTT稱這項進展顯示著首次能夠放大30GHz~300GHz頻段的mm波，強化數位電視廣播的能力。
+06:22:38 <c9sloud> 難怪日本數位電視這麼強
+06:23:36 <c9sloud> 毛河光，台灣人。合成鑽石界的翹楚。2005年發表《快速生產超大鑽石》論文，獲得Balzan Prize獎。此後銷聲匿跡，迄今再無有關他合成鑽石的報導。
+06:23:41 <c9sloud> 原來還有這傳奇人物
+06:24:27 <c9sloud> 中央研究院院士。
+06:25:03 <c9sloud> 2005年發表發現了人工鑽石迅速長大的秘方，生產出10克拉純潔鑽石一舉轟動鑽石業界，從此毛河光只表示與多家珠寶廠商洽談量產應用中，從此深居簡出也沒有再發表過鑽石相關論文、也沒有後續生產應用的公開消息，成為學術界一大謎團。
+09:55:21 <c9sloud> whitglint: 咦 你沒有用 irccloud 呀?
+09:56:09 <whitglint> c9sloud: 有啊
+09:56:31 <c9sloud> 咦 那你怎麼有 quit 的 action
+09:56:44 <c9sloud> 一直很好奇
+09:56:56 <c9sloud> 還是說閒置的時候 irccloud 會自動幫使用者 quit ?
+09:57:52 <whitglint> 沒付費不是關掉兩小時就會 quit？
+10:23:28 <c9sloud> 喔喔喔原來是這樣
+10:23:33 <c9sloud> 因為我有付費 :-p
+10:23:34 <c9sloud> XD
+10:45:45 <monochrom> 難道被鑽石黨暗殺? :)
+10:50:17 <monochrom> 如果 AMD 忽然掌握快速生產 81GHz 鑽石半導體的技術, 你說多好, 一夜之間比 Intel 及 NVidia 快 20 倍, 完全無仇報. :)
+12:20:42 <b4283> 唔...
+15:06:21 <caasihuang> c9sloud: 謝謝！
+15:07:00 <caasihuang> 今天重新試了存 Persistent<T>* 和 raw ptr ，兩種都是好的，看來出問題的是我的腦袋不是 V8
+15:07:08 <caasihuang> 好想找地洞鑽進去
+16:26:57 <c9sloud> https://twitter.com/clattner_llvm # 好 LLVM hacker 不 follow 嗎 ? :p
+16:27:11 <c9sloud> monochrom: 也不知道，還蠻神奇的
+16:27:35 <c9sloud> 說不定威脅到既得利益的鑽石採礦商
+16:27:56 <c9sloud> 所以用黑道跟他警告之類的
+16:28:21 <c9sloud> 鑽石產業應該是有牽涉到很多人的利益
+16:38:14 <hashcat> 可能有人已經能製造鑽石了
+16:38:58 <hashcat> 結果送掉小命

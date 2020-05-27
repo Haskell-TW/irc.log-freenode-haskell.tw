@@ -1,0 +1,13 @@
+00:41:36 <CindyLinz> 蠻喜歡 Agda 那種 a_b_c 的方式定義函數名稱的 :p
+00:41:42 <CindyLinz> if_then_else_
+11:26:21 <_13h> 請問一下，有沒有類似名人錄之類的整理資料？每次看到不熟的名字都要研究半天XD
+11:43:39 <MnO2> _13h: 沒有吧，覺得不熟就貼上來問?
+11:49:26 <_13h> 嗯 好
+11:57:54 <MnO2> _13h: 總之叫Edward都很強就是
+11:58:47 <_13h> XDXD 這名字真厲害
+12:10:40 <MnO2> _13h: Edward Z. Yang, Edward Kmett 這兩個是要認識的
+12:14:41 <MnO2> http://ureddit.com/class/69577
+12:14:57 <MnO2> 有人要在ureddit上開課教Haskell
+12:15:03 <_13h> 後面那位是最近你介紹的 lens 作者?
+12:16:20 <MnO2> _13h: 對啊，他超強的。
+14:32:37 <drbean> MnO2: 我閱讀Computational Semantics with Functional Programming http://www.computational-semantics.eu/, 實施question answering app.

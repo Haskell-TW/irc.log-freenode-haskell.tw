@@ -1,0 +1,41 @@
+14:47:50 <YuLin> 好久沒上來這邊了
+14:51:40 <YuLin> 想問問目前 haskell 在 web 這塊的發展現況如何？
+14:54:50 <letoh> haskell 在學術以外的應用好像還不是很明顯
+14:55:10 <letoh> 可能都還在摸索吧@_@
+15:25:58 <CindyLinz> Yesod 還在動.. XD # http://www.yesodweb.com/blog/2014/12/yesods-new-scaffolding
+16:29:02 <YuLin> haskell 好像蠻多 web 相關的東西都停掉了
+16:48:01 <kuanyui> flip :: (a -> b -> c) -> (b -> a -> c)
+16:48:02 <kuanyui> flip f x y = f y x
+16:48:02 <kuanyui> 這個我一直看不懂那個型別的順序怎麼會變成b在前面...有人可以說明一下嗎 http://learnyouahaskell-zh-tw.csie.org/zh-tw/high-order-function.html
+16:48:32 <kuanyui> 為什麼不是a->c->b
+16:49:04 <kuanyui> 這篇最前面的max :: (Ord a) => a -> (a -> a)的說明我也是看不太懂...
+16:51:38 <YuLin> flip 接受一個 (a -> b -> c) 的函數
+16:51:52 <kuanyui> 對
+16:51:59 <YuLin> 改變這個函數接受參數的順序
+16:52:03 <kuanyui> 嗯
+16:52:04 <YuLin> 然後把這個函數回傳
+16:52:28 <kuanyui> 這裡也懂
+16:53:56 <YuLin> 喔，我以為是講 flip' 那段，原來是講 curry 那段
+16:55:09 <kuanyui> 我不懂為何要寫成(b -> a -> c)而不是(a -> c -> b)
+16:55:33 <kuanyui> 看得超頭大
+16:57:10 <YuLin> c 是最後結果的 type，所以不會在中間
+16:58:15 <YuLin> 我還是等高手出來解釋好了XD
+16:58:56 <petercommand> a b是兩個參數的type
+16:59:21 <petercommand> 所以參數互換 a -> b 就變 b -> a 了
+17:01:06 <petercommand> 如果是接收tuple的函數type是 (a, b) -> c  那參數互換就只有跟那個tuple有關，和c無關
+17:03:03 <petercommand> (a, b) -> c 就變 (b, a) -> c這樣
+17:13:13 <kuanyui> 阿阿阿阿懂了QQ
+17:13:27 <kuanyui> 感謝各位大神worship
+17:33:00 <petercommand> 問一下，
+17:33:00 <petercommand> mapAsFold2 f = foldr2 (\case Nothing -> [] Just (x,xs) -> f x : xs)
+17:33:21 <petercommand> Just前有換行
+17:33:39 <petercommand> 這個是合法的haskell syntax嗎?
+17:34:00 <petercommand> mapAsFold2 f = foldr2 (\case Nothing -> []
+17:34:08 <petercommand>                              Just (x,xs) -> f x : xs)
+17:34:51 <petercommand> 他竟然不是寫case blah of
+17:35:47 <petercommand> 看起來很像某種extension的樣子...
+17:41:01 <petercommand> 果然是extension XD
+17:41:06 <petercommand> -XLambdaCase
+21:32:36 <suhorng> 我也世新手 /lag
+21:47:30 <CindyLinz> petercommand: LambdaCase 是必要的 extension :D
+22:44:52 <petercommand> XD

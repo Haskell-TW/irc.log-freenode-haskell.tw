@@ -1,0 +1,78 @@
+00:29:50 <CindyLinz> 唔, 真好奇之前 Funth 去的奇群科技本業是什麼..
+00:30:25 <CindyLinz> 以前以為是做超級運算中心的東西, 不過最近出了貓臉辨識餵食機產品
+00:30:47 <mno2_> Funth = 小迪克？
+00:30:58 <CindyLinz> Funth 是 Functional Thursday
+00:31:10 <CindyLinz> 奇群是小迪克 :p
+00:31:10 <mno2_> 喔喔
+00:31:41 <mno2_> 已經縮寫成 Funth 了，跟 forth edit dist distance 2
+00:31:52 <CindyLinz> 網址用 funth 嘛 XD
+00:32:12 <CindyLinz> kktix 和 hackpad 都用 funth
+00:32:32 <mno2_> domain hack?  fun.th ?
+00:32:48 <CindyLinz> 啊?
+00:33:07 <CindyLinz> https://funth.hackpad.com/
+00:34:26 <mno2_> 我的意思是這個網址還沒被註冊 xD
+00:34:53 <CindyLinz> 喔喔 XD
+10:11:49 <miaoski> mno2_: 這個人好牛啊!
+10:55:46 <petercommand> 有人看過real world haskell嗎?
+10:55:52 <petercommand> 這本怎麼樣呢?
+11:30:37 <CindyLinz> 看過.. 可是印象模糊了.. orz
+11:31:58 <CindyLinz> 印象是, 比 Yet another haskell tutorial 厚很多, 讀起來也比較輕鬆. 但是和 begining haskell 比的話, 實作感比較低, 可能對工程背景的人讀完了會有一點虛虛的感覺
+11:32:29 <petercommand> 那沒背景的呢?XD
+11:32:42 <CindyLinz> petercommand: 請問沒背景的人 XD
+11:32:51 <petercommand> 就是我阿
+11:32:54 <petercommand> XD
+11:33:00 <CindyLinz> petercommand: 那你評論一下? XD
+11:33:24 <petercommand> 就是還沒看來問問呀XDXD
+11:34:40 <petercommand> 看完再來評論XD
+11:35:07 <CindyLinz> 我覺得我就是要有讀過以後有一種彷彿就能夠實作出 compiler 或 interpreter (只是可能需要很多時間實際上做不到) 的感覺, 才會有實在感 @@"
+11:37:43 <petercommand> CindyLinz: 就是write yourself a scheme in 48 hours這種嗎XDXD
+11:49:16 <CindyLinz> petercommand: 可惜沒看過 ^^|
+11:49:23 <CindyLinz> 名字有像啦 :p
+11:49:39 <CindyLinz> 不過, begining haskell 沒有走那麼極端, 其應用的成份比較高
+11:49:47 <CindyLinz> 只是讀著讀著會有感覺就是了
+11:49:56 <petercommand> 恩
+11:50:13 <CindyLinz> 就是, 它其實沒有直接教怎麼做, 只是隱約會學到 Haskell 的運作機制
+12:20:53 <suhorng> http://www.haskellforall.com/2014/03/introductions-to-advanced-haskell-topics.html 到一堆 tutorial 的傳送門XD
+13:38:00 <mno2_> 我覺得 Real World Haskell 比較難一點。特別是碰到 Monad Transfomers 那邊  (可惜沒有 Optimus Prime）
+13:39:03 <CindyLinz> mno2_: 是跟哪一本比咧?
+13:39:30 <mno2_> 把 Real World Haskell 看完我覺得大概才比較能看懂 hackage 中的某些 package 的 source
+13:39:42 <mno2_> 跟 LYAH for GG 比啊
+13:39:49 <mno2_> 其他沒看過不知道
+13:40:27 <mno2_> 我其實 Haskell 的書看得不多。
+13:40:47 <CindyLinz> LYAH 沒看過, 跟你互補一下 XD
+13:43:34 <mno2_> miaoski: 從 ByVoid 社交圈爬出去大概會發現一批大牛 :p
+15:32:15 <cibs> CindyLinz: 我以為是做 GPU 相關 # 00:30 < CindyLinz> 以前以為是做超級運算中心的東西, 不過最近出了貓臉辨識餵食機產品
+15:33:48 <CindyLinz> 噢, 所以那台機器裡面放一顆 GPU 作運算這樣?
+15:33:49 <mno2_> 好像跨得有點大 xD
+15:36:19 <cibs> 不知w 也許
+15:37:26 <cibs> Funth 如果之前都沒去過的話要註冊什麼嗎?
+15:56:49 <CindyLinz> meetup 帳號?
+15:56:55 <CindyLinz> 應該就這個
+16:01:23 <cibs> m(_ _)m thx
+16:58:16 <caasih_> whitglint CindyLinz: 記得兩位之前在試讓 ghc 吐 C 出來
+16:58:32 <caasih_> 有看到過這篇嗎 http://stackoverflow.com/questions/18207338/cant-output-from-hs-to-hc-with-ghc-in-haskell
+16:59:01 <caasih_> 好像可以吐 C-- 出來？
+17:07:46 <CindyLinz> 我自己玩只有試過讀生出來的 simpl haskell
+17:08:05 <CindyLinz> 沒有想要去讀 C--... ._.
+17:09:01 <CindyLinz> 咦? 我應該沒有想要讓 ghc 吐 C 出來過呀
+17:09:21 <petercommand> 用jhc就好啦= =
+17:11:25 <CindyLinz> 嗯, 除非想要玩 ghc 一些神祕的 extension.. XD
+17:22:28 <caasih_> petercommand: jhc ？感謝。
+17:23:01 <caasih_> CindyLinz: 喔喔，那我記錯人了
+17:23:03 <au> 或是現代的 fork ( ajhc )
+17:23:40 <caasih_> au++ 來查看看 ajhc...
+17:47:18 <whitglint> caasih_: 我沒有試過 ghc 呀? 記錯人囉~
+17:47:42 <CindyLinz> caasih_: 糟糕了... XD
+17:48:51 <whitglint> 吐氣... C氣... 吐氣... C氣...
+17:48:56 <whitglint> 吐C
+17:49:14 <CindyLinz> @@"
+17:50:16 <whitglint> ._.|||
+18:08:06 <caasih_> XD 看來是場夢
+18:11:36 <b4283> Where have you gone to, dreamer? Whose dreams are you dreaming now?
+18:19:27 <caasih_> 久仰 Dreamfall 的大名但沒玩過 0rz
+18:28:59 <b4283> 我也沒玩過 OTL
+18:29:27 <b4283> (深深被他的 trailer 吸引)
+18:32:42 <petercommand> OTL是?
+18:34:23 <b4283> petercommand: orz 大寫版
+18:34:46 <b4283> OT乙
+21:09:09 <petercommand> http://wall.org/~lewis/2013/10/15/asm-monad.html #asm monad

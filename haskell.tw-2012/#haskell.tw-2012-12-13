@@ -1,0 +1,70 @@
+07:22:05 <mgccl> 用Haskell写个DP程序好不容易... 速度跟不上啊... 10000*10000的matrix...
+07:22:44 <mgccl> 没法用unboxed array, 因为要用到array前面的结果...
+10:13:37 <MnO2> mgccl: try memoization? http://www.haskell.org/haskellwiki/Memoization
+10:13:43 <MnO2> http://hackage.haskell.org/package/memoize-0.3
+10:14:43 <mgccl> 不知道晚点试试. 我感觉最终的结果会是要用mutable array. 那写Haskell和写C感觉差不多了- -
+10:14:52 <mgccl> thx for the suggestion
+10:23:36 <MnO2> http://www.academicearth.org/lectures/introduction-to-haskell
+10:24:01 <MnO2> or http://freevideolectures.com/Course/2260/Computer-Science-III-Programming-Paradigms/27#
+10:32:07 <mgccl> 这种基础的DP的确没有难度啊... 主要是速度很慢...
+10:33:43 <mgccl> 我需要写出高效的longest common subsequence的算法. 网上流传的那些完全无法做长度10000的string...
+10:39:19 <MnO2> mgccl: http://www.haskell.org/haskellwiki/Numeric_Haskell:_A_Repa_Tutorial, repa也可以試試看。
+14:27:52 <MnO2> mgccl: http://stackoverflow.com/questions/13848032/is-it-possible-to-use-haskell-to-reasonably-solve-large-dp-problems/13848363#13848363
+14:27:59 <MnO2> mgccl: is that you?
+14:40:19 <MnO2> https://twitter.com/ccshan/statuses/278969626090696704
+14:40:46 <MnO2> ccshan 還會參加 nips @@
+22:24:26 <MnO2> 咦，有人把community連結放到title了
+22:59:00 <CindyLinz> (舉手)
+23:03:40 <MnO2> 咦，CindyLinz不是在北海道
+23:05:16 <CindyLinz> 在啊
+23:05:26 <CindyLinz> 所以晚上在房間才會出聲 XD
+23:05:30 <CindyLinz> 現在這邊十二點多
+23:11:11 <letoh> 北海道好玩嗎  聽說是鄉下
+23:11:33 <letoh> 看旅遊節目  好像公車也很難等
+23:15:07 <CindyLinz> 我都在渡假村裡面玩, 感受不到那部分 ^^|
+23:15:32 <CindyLinz> 不過, 晚上可以看到很多星星(如果沒有正在飄雪的話), 這應該是鄉下特色沒錯
+23:16:06 <CindyLinz> 在 Tomamu.. 第一次滑雪 :Q
+23:16:30 <letoh> 那還不錯，那你應該出去看一下雙子座流星雨  也許看得到
+23:17:27 <CindyLinz> 我從來沒有看過流星雨.. 要等很久嗎? 還有.. 眼力要好嗎?
+23:17:55 <MnO2> 就是流星比較密集而已
+23:17:56 <letoh> 天氣好的話，大概跟下雨一樣吧  看久眼睛會很累
+23:18:11 <letoh> 因為一直盯著亮的東西看XD
+23:18:12 <MnO2> 應該沒有到下雨那樣吧@@
+23:18:16 <letoh> 有
+23:18:27 <letoh> 阿  平地應該是看不太到
+23:18:32 <letoh> 我以前都在山上看的
+23:19:41 <CindyLinz> 就是往... 雙子座看嗎?
+23:20:02 <letoh> 不過雙子座是不少，但要真的像下雨那樣的，我只看過獅子座  回歸那幾年真是超誇張
+23:20:02 <MnO2> 好吧，我以前碰到人家說是流星雨的時候。我自己感覺就是每幾秒一顆
+23:20:44 <letoh> 還出現好幾次火流星  有聲音的那種
+23:20:47 <letoh> 嗯嗯
+23:21:27 <letoh> 我覺得不用特別往那個方向看  不過至少要看得到雙子座的時間比較容易看到
+23:22:53 <CindyLinz> 來裝星座 app...  不然第一件事就是星際(?)迷航 XD
+23:24:13 <letoh> 雙子座看起來像是「北」字  應該不難找
+23:24:33 <letoh> 不過我不確定這時間在日本能不能看到... 我只能認台灣的角度XD
+23:26:27 <letoh> 不過冬天很亮，所以可能要先找幾顆特殊的先定位  像紅色的畢宿五
+23:27:46 <letoh> 找到以後雙子(的腳)就在附近
+23:29:13 <CindyLinz> google sky map 怪怪的, 我往某個方向看, 他說我可以看到南極, 船底座之類的... 感覺不大對啊 囧
+23:29:23 <letoh> 超強!!!
+23:29:38 <letoh> 比 ios 的地圖還強XD
+23:30:34 <letoh> sky map 太花了...
+23:30:37 <MnO2> http://www.youtube.com/playlist?list=PLey3KIETJDP-6dIBWfFWjKkz4AC88qN7t
+23:30:45 <letoh> 人眼是看不到那種星雲的XD
+23:31:47 <letoh> 哇  影片，才想說這幾天還是從 type class 繼續看下去好了XD  不然停好久了
+23:32:07 <CindyLinz> 崩潰, 我查雙子座, 它一直叫我往俯角的角度找 orz
+23:33:11 <letoh> 也許還沒升起? 我沒記時間，看不到天空就很難預測XD 一般我們是隨便找一顆認識的，然後就可以估一下其他星出現的時間
+23:37:07 <letoh> http://tinyurl.com/2uocjx  sky map 的使用難度太高了...
+23:37:18 <letoh> 雙子座在正中間XD
+23:38:26 <letoh> 這 m42 跟天狼星... 鬼才認得出來XD
+23:38:54 <b4283> try stellarium  ?
+23:39:15 <letoh> 研究看看  其實我有地圖啦
+23:39:26 <letoh> 不過是紙本的
+23:40:52 <CindyLinz> 手動設定現在位置經緯度以後.. 找到雙子座現在在我頭頂上 :D
+23:43:49 <letoh> 賀!! 可以看到天狗星嗎?
+23:44:24 <letoh> 在天頂的話... 找到雙子座後往南邊看應該看得到
+23:45:01 <letoh> stellarium 編譯不起來 看來又得找一下 qt 的問題了XD
+23:50:19 <CindyLinz> 打算明天晚上再看
+23:50:46 <CindyLinz> 因為明天早上六點半 (台北時間五點半) 要起床 ^^|
+23:51:44 <letoh> 喔喔  聽說明天是極大
+23:52:06 <letoh> 但通常極大看不見得看得到XD
+23:56:06 <CindyLinz> 嗯嗯 天氣哄?

@@ -1,0 +1,51 @@
+00:07:25 <monochrom> CindyLinz: 關於 "不公平, 不對稱", 我認為 例外=醜陋.
+00:08:08 <monochrom> 例外是萬惡之源
+00:09:20 <monochrom> @type ap
+00:09:21 <lambdabot> Monad m => m (a -> b) -> m a -> m b
+00:11:25 <monochrom> 呀! Reader 的 ap 跟 >>= 型態一樣, 意義不同呀!
+00:12:24 <monochrom> 呀... 我錯了, 意義都一樣.
+00:41:15 <CindyLinz> monochrom: agree.. QQ # 00:07 < monochrom> CindyLinz: 關於 "不公平, 不對稱", 我認為 例外=醜陋.
+00:41:19 <CindyLinz> # 00:08 < monochrom> 例外是萬惡之源
+00:47:30 <hashcat> 沒有例外的話有點麻煩
+00:48:24 <hashcat> 代表當下一定要處理掉, 不能讓父程序處理
+00:50:09 <hashcat> 職員喬得來的事情, 當然是自己喬掉, 喬不掉就只好問經理, 比自己亂搞好
+00:50:54 <CindyLinz> 這叫缺陷美啊 XD # 有例外
+00:51:06 <hashcat> 擴展別人已經寫好的物件導向程序, 要是沒這種機制的話
+00:51:44 <CindyLinz> 但平常的心態是例外能少則少呀~ 如果把例外當常態... (默)
+00:51:46 <hashcat> 別人寫得父層的程序就沒辦法幫你搞定了
+00:52:08 <CindyLinz> estimate cost 調高一點而已.
+00:52:13 <hashcat> 又想到當兵時候
+00:53:02 <hashcat> 什麼事都問長官確認會被電死, 不懂的事自己亂處理也會被電死
+00:53:38 <monochrom> hashcat: 我是指程式語言給你的規則裏的例外條文, 例如 "所有 operator 都不能 overload, 唯獨 ==, != 可以 overload"
+00:53:39 <hashcat> 規模大的協作, 沒例外貌似不方便
+00:54:18 <hashcat> 哦搞錯了
+00:54:41 <monochrom> 至於 throw 和 catch, 我是舉腳贊成, 堅決擁護的
+00:55:00 <monochrom> http://www.vex.net/~trebla/haskell/exception.xhtml
+00:55:09 <hashcat> 我被長官電之前也覺得例外不重要 (?
+00:56:06 <hashcat> 例外丟多了也被電, 退伍後還是沒搞懂標準在哪
+01:20:41 <CindyLinz> 看 Haskell 的 exception 和 dynamic type, 心中發出一種「哼哼哼」的感覺.. XD
+19:32:04 <hashcat_> 有個 ocaml 寫的prolog變種 abella
+19:32:35 <hashcat_> 用途是定理證明
+19:32:53 <hashcat_> abella-prover.org
+20:44:46 <cibs> 可以問一下 foldl 和 foldr 嗎~
+20:45:30 <cibs> 一般好像是講 foldr 從右開始摺，foldl 從左開始摺?
+20:46:19 <cibs> 可是用 fold 來做 map 的話，這樣做 mapr = foldr (\x acc -> f x : acc ) [] 和 mapl = f = foldl (\acc x -> acc ++ [f x]) []
+20:47:46 <cibs> 面對 mapl odd [1..] 和 mapr odd [1..]，mapl 會卡住，mapr 才是一個一個數字產生 ( 在 ghci ), 如果用 take 10 也是只有 mapr 才可以拿完
+20:48:17 <cibs> 可是 [1..] 不是沒有右端？怎麼想都覺得應該是 mapr 才會卡住才對啊 *bang*
+21:13:51 <hashcat_> fold怎能做map
+21:14:44 <hashcat_> fold會銷毀列表, map保持列表
+21:16:56 <hashcat_> 哦我看到可以,用列表的列表
+21:25:30 <hashcat_> 你把表達式的樹狀圖由上而下展開就有解答了
+21:26:04 <hashcat_> 最上面最先算
+21:27:45 <hashcat_> 惰性計算使得右邊可以被截掉
+21:28:01 <hashcat_> 右子樹
+21:40:12 <hashcat_> cibs 有人在嘛
+21:41:41 <hashcat_> 你的誤解應該是把算術的優先順序,當成惰性計算的順序
+21:42:56 <hashcat_> 我的誤解是忘記列表不是原子型別,可以被建構
+22:47:46 <hashcat> 我打出來好了
+22:48:09 <hashcat> mapr的示意表達式 a:(b:(c:(d: (THUNK)))) 其中a是head最先被計算, 再來b, 依序下去. THUNK的部分是還沒被計算, 可以被惰性計算跺掉的部分
+22:56:46 <hashcat> mapl 的話 ( ... ((([] ++ [f a]) ++ [f b]) ++ [f c]) ++ ... ) 反而變成有打出來的部分 ((([] ++ [f a]) ++ [f b]) ++ [f c]) 才是包含在THUNK的部分, 最開始應該要被計算的地方反而變成...打不完
+23:00:33 <CindyLinz> 嗯嗯, 這邊的「開始」「先後」之類的, 都是打括號的順序
+23:01:42 <CindyLinz> 而計算的順序是, 需要用到哪, 才算到哪... 所以可以從屁股往回看, 從被取走的資料要真的用到的時候才開始一點一點把結果擠出去
+23:03:58 <hashcat> 討論這個意外地咬文嚼字
+23:05:36 <CindyLinz> XD

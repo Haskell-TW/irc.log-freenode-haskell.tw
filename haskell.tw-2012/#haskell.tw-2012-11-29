@@ -1,0 +1,32 @@
+00:54:22 <MnO2> favonia: compiler 的 frontend 啊， 這 library 沒有 codegen 吧
+12:05:58 <MnO2> https://twitter.com/bos31337/status/273942292052733952
+12:06:06 <MnO2> bos 好酸 xD
+12:07:54 <MnO2> 我猜他是指 hadoop，facebook現在應該內部是用修改過的hadoop
+12:17:12 <MnO2> cchan 新文章
+12:17:13 <MnO2> http://conway.rutgers.edu/~ccshan/wiki/blog/posts/Borderline/
+12:22:33 <MnO2> c9s 連寫了好幾篇 go,   xD
+12:23:45 <c9s> XDDDD 被發現了...
+12:24:06 <c9s> MnO2: 你有追蹤喔? 我還以為沒什麼人在追蹤 XDDD
+12:24:34 <MnO2> c9s: 我有訂閱啊 :p
+14:48:31 <favonia> c9s: 跟 node.js 比不公平吧
+15:24:16 <feiyin> hello
+15:34:24 <favonia> feiyin: hello
+15:34:57 <feiyin> 都干嘛呢
+15:35:37 <favonia> feiyin: 改作業ing xD
+15:36:28 <feiyin> 改作业？
+15:36:33 <feiyin> 你是老师 ?
+15:37:54 <favonia> 現在當助教～
+15:38:10 <feiyin> 大学老师吧
+15:38:26 <favonia> 我只是助教而已啊
+15:38:52 <feiyin> 教什么？
+15:39:09 <favonia> type systems & programming languages
+15:39:25 <feiyin> 哦  挺好的
+15:39:47 <b4283> 助理教授
+15:40:34 <favonia> b4283: TA 啦
+15:40:51 <b4283> 喔喔 XD
+15:42:47 <MnO2> favonia: 也太操了，改作業改到凌晨xD
+15:43:36 <feiyin> 作业都是学生的程序么 ？
+17:37:27 <c9s> favonia: 哪裡不公平?
+21:36:22 <favonia> c9s: 沒啦，開玩笑的。因為我覺得 Node.js 本來就很慢。
+22:44:54 <favonia> MnO2: lambdabot 竟然離線了
+22:51:28 <MnO2> 其他頻道好像也離線了

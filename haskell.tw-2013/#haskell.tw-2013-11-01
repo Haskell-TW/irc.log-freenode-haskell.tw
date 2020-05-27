@@ -1,0 +1,83 @@
+10:18:31 <MnO2> https://twitter.com/existentialtype/status/395951944227115008  戰神開砲了 xDD
+12:03:01 <cataska> 原來 Odersky 提到 SML 是講給 existentialtype 聽的
+12:26:03 <favonia> cataska: xDDDD
+12:37:12 <cataska> 我也很好奇為甚麼 SML 沒有成功
+17:40:00 <hashcat> cataska:那要看你對成功的定義
+21:18:37 <CindyLinz> Agda 有 literal mode 嗎? 類似...  > 開頭的行才是 code, 沒有 > 開頭的是註解
+22:29:22 <hashcat> http://wiki.portal.chalmers.se/agda/pmwiki.php?n=Main.LiterateAgda
+22:33:44 <hashcat> 長得跟literate haskell不一樣
+22:47:13 <CindyLinz> hmm.. 好, 謝謝~
+22:59:44 <hashcat> 用Agda做啥嚜?
+23:00:53 <CindyLinz> 在練習
+23:01:36 <CindyLinz> 目標是寫一個 Haskell 式的偽 Q-sort, 然後證明它排序完的元素就是原有的元素, 並且相鄰項有 <= 的關係
+23:02:04 <CindyLinz> List 裡面都只用 Z+ 的 Nat 就好了
+23:03:06 <hashcat> Z+是什麼
+23:03:13 <CindyLinz> 0,1,2,3,... XD
+23:03:24 <hashcat> 喔~
+23:03:30 <CindyLinz> 我還是沒習慣這些邏輯學家的正整數有包含0 XD
+23:03:40 <CindyLinz> 所以喜歡講 Z+ XD
+23:03:44 <CindyLinz> 或是 N0
+23:05:31 <hashcat> 正整數有0有個很好的理由
+23:06:16 <CindyLinz> 我不否認.. XD
+23:06:32 <CindyLinz> 只是我習慣稱它「非負整數」 XD
+23:07:05 <hashcat> 看模算術(Modular Arithmetic)就知道是啥回事了
+23:08:14 <hashcat> 不管模幾都有0, 推廣到模無限就是正整數
+23:08:27 <hashcat> 0亦正亦負
+23:08:51 <CindyLinz> 可是它叫非負整數集嘛 (扭)
+23:10:21 <hashcat> 計算機領域模算術用到不少, 從陣列就開始了
+23:11:46 <hashcat> 非負即正
+23:13:46 <hashcat> 貌似對計算機來說把零排除在外才是各種不方便
+23:15:56 <petercommand> CindyLinz: Z+不就是正整數嗎?
+23:16:27 <hashcat> 正整數的說法是指啥要看上下文
+23:16:56 <hashcat> 數論通常就不會把0包含進去
+23:17:09 <hashcat> 因為0不會是因數的
+23:17:33 <hashcat> 幼稚園也是從1數起
+23:22:33 <hychen> 那天去mopcon的場地, 它的電梯從0開始算 XD
+23:23:54 <hashcat> 聽起來像是整棟樓都他們的
+23:24:26 <hychen> 沒, 它們只包一層
+23:24:30 <hychen> 但還滿大的
+23:25:51 <hashcat> 那是建商想到要從0開始
+23:26:11 <hychen> 其實只是電梯的code出包了...
+23:26:19 <hychen> 最上層是R
+23:26:22 <hychen> 0-R
+23:27:07 <hashcat> ???
+23:27:37 <hychen> 第一層0, 第二層1, 第三層R
+23:28:04 <hashcat> 哽在哪
+23:28:43 <hychen> 沒啥梗啊, 就電梯的樓層從0開始計算, 剛好那時在辦技術研討會. 軟體人的自然數都從0開始....
+23:29:42 <hashcat> 只是程序寫錯而已
+23:29:47 <hashcat> 這電梯還有人敢搭
+23:30:37 <hashcat> 會不突然上升
+23:32:36 <hashcat> 說是特別設計就算了
+23:33:28 <hashcat> 有bug的電梯前陣子才一個
+23:40:43 <CindyLinz> 我有問題 QQ
+23:41:14 <CindyLinz> 我有一個函數, 其中一個參數的 type 是 is-true (某個 return Bool 的 expression)
+23:41:54 <CindyLinz> is-true 是 Bool -> Set, 吃 true 的時候會 return Top type (就是恰有一個 tt instance 的 type), 吃 false 的時候會 return Bot type (沒有 instance 的 type)
+23:42:15 <CindyLinz> 所以目的就是這個函數只有在這一個參數的 type 為 Top 的時候才需要考慮
+23:42:57 <CindyLinz> 我的問題是, 傳進來的這個參數當然一定會是 tt, 而我在寫這函數內容的時候, 能不能取出這個算出它是 Top type 的那個 Bool expression 的計算過程?
+23:44:56 <hashcat> 你打出每個函數的宣告再說要做啥可能會比較好懂
+23:45:36 <CindyLinz> exclude : (n : Nat) -> (ms : List) -> is-true (in-set n ms) -> List
+23:45:59 <CindyLinz> 這是我講的正要寫的函數
+23:46:03 <CindyLinz> in-set : Nat -> List -> Bool
+23:46:15 <CindyLinz> 這個是 test 第一個參數有沒有在第二個參數裡面
+23:46:29 <CindyLinz> is-true : Bool -> Set
+23:46:37 <CindyLinz> is-true true = Top
+23:46:41 <CindyLinz> is-true false = Bot
+23:47:15 <CindyLinz> 我寫 exclude 內容的時候, 能不能 pattern matching in-set 走的 branch?
+23:48:55 <suhorng> 我想不行
+23:49:09 <suhorng> 所以一般才會用 data type 當證明吧?
+23:50:00 <CindyLinz> 嗯嗯
+23:51:25 <CindyLinz> 所以如果這樣寫, 如果運氣好, 直接在那邊打個 tt, 看 Agda 能不能很聰明地自動 unify 成功
+23:51:33 <CindyLinz> 如果不行的話, 這個方法就 GG 了?
+23:52:10 <CindyLinz> 也就是.. 對於別項參數的組合... 覺得合理該定義的就在這邊打 tt
+23:52:25 <CindyLinz> 覺得不合理應該跳過的就打 (), 剩下就是 Agda 的事這樣? XDD
+23:53:01 <suhorng> 應該吧XD
+23:53:23 <CindyLinz> 缺乏參與感... :|
+23:53:38 <suhorng> 不行的話搞不好對 ms 分case討論可以弄出來/o/
+23:54:25 <suhorng> 因為那個該 () 的時候, 通常就是 is-true (in-set n ms) 已經確定算出 bot 了 @@
+23:54:45 <suhorng> s/確定算出/真的算出/g
+23:55:02 <CindyLinz> 把 ms 拆一拆, Agda 就有更高的機會直接判斷它是 tt or () 的意思?
+23:57:42 <hashcat> 唉我沒看懂
+23:57:47 <hashcat> 啥嚜是branch
+23:58:05 <CindyLinz> hashcat: 像 is-true true 和 is-true false 這樣是 branch 
+23:58:08 <CindyLinz> 我指的是這個
+23:58:18 <CindyLinz> 就是分成不同 case 的意思

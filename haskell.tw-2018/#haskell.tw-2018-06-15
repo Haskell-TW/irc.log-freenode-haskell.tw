@@ -1,0 +1,10 @@
+00:28:20 <jokester> hi
+15:06:25 <BalterNotz> 哈喽，
+15:06:33 <BalterNotz> 新来一个 cybai
+15:06:47 <BalterNotz> 这个里面，能聊天？？
+15:06:53 <BalterNotz> 怎么没有人说话？？
+15:25:00 <caa51h> 有人問 Haskell 問題時，就會有人說話了 :p
+15:53:10 <BalterNotz> 问一个问题，我在用 stack build 时，有的时候，不能将编译出来的 exe 文件安装到项目录下面的 bin ，打印出来的日志是：C:\Users\v-zhangsw05\AppData\Local\Programs\stack\x86_64-windows\ghc-8.2.2\mingw\bin\strip.exe: unable to rename 'C:\Users\v-zhangsw05\work\temp\haskell\haskelltest\.stack-work\install\e6d3037a\bin\catfile.exe'; reason: File exists
+15:55:15 <BalterNotz> 我的解决办法是，改动一下 package.yaml 文件，让 stack 重新 build 项目，就可以了。
+15:57:33 <BalterNotz> 告诉大家一个QQ群号： 72874436  这个是 Haskell函数式编程 群，比较大的。
+19:59:52 <cybai> BalterNotz: Hi :P 我大多都掛著而已 XD

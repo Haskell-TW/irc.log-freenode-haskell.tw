@@ -1,0 +1,78 @@
+00:00:52 <monochrom> 不, 不符合 Gray code, 由 [1,2] 到 [1,3] 一下子轉兩個 bits.
+00:01:02 <letoh> 嗯嗯
+03:04:13 <hychen> CindyLinz: 這幾天在看learnyouahaskell, 才發現原來這飯粒有在這裡面
+03:06:03 <hychen> s/飯粒/範例/
+03:06:16 <CindyLinz> hychen: 正要接「粒粒皆辛苦」的.. XD
+03:06:34 <CindyLinz> 讀起來「例例皆辛苦」
+03:07:06 <hychen> CindyLinz: 的確很辛苦 =.=
+03:07:57 <monochrom> 我做教書, 所以經歷到例例皆辛苦
+03:08:49 <monochrom> 你們不用睡嗎? XD
+03:09:11 <hychen> monochrom: 求知若渴，難以入睡(誤)
+03:09:23 <CindyLinz> 我正在讀 graphviz.. ._.
+03:09:32 <CindyLinz> hychen: 緣木求魚..  (Y)
+03:10:56 <hychen> functor -> applicative -> monoid -> monad #終於搞懂了...
+03:11:19 <hychen> 之前直接看monad, 一直搞不懂這啥玩意
+03:11:57 <CindyLinz> monoid 和 applicative 之間的箭頭..
+03:12:11 <hychen> CindyLinz: 顛倒了 XD
+03:12:35 <CindyLinz> 唔 我覺得好像是在不同 branch 上
+03:12:49 <CindyLinz> 不過這好像不是很重要 XD
+03:12:54 <CindyLinz> hychen: 先說恭喜 :D
+03:13:28 <hychen> CindyLinz: 咦, 順序沒錯啊 =.=
+03:14:51 <hychen> CindyLinz: learnyouhaskell 看完，下本看哪本比較好?
+03:14:54 <CindyLinz> 我覺得 functor -> applicative -> monad 是一條, 然後 monoid -> monad 是另一條 XD
+03:15:03 <CindyLinz> hychen: 我沒看過 learnyouahaskell... orz
+03:16:25 <CindyLinz> 你喜歡理論一點的, 還是應用一點的, 還是資料結構?
+03:17:13 <hychen> CindyLinz: 理論點的
+03:17:52 <hychen> CindyLinz: 應用類得不太合用啊, 很多lib都要再自己寫
+03:20:58 <CindyLinz> 那我想應該是 type 理論方面的東西.. 有 type inference, 然後有一些人拿 type 去表達描述特定的事物, 像是利用 Rank2Type 來讓資源不會「外流」
+03:21:23 <CindyLinz> 然後 Agda 那種拿來證明東西的應該也有趣
+03:22:08 <CindyLinz> 我推荐不出書 orz
+03:22:34 <CindyLinz> 我後面講的這個是這篇.. http://okmij.org/ftp/Computation/resource-aware-prog/region-io.pdf
+03:23:30 <CindyLinz> 嗯, 我覺得 GHC extension 是個不錯的索引列表, 從 GHC extension 的說明頁可以找到 paper 連結 :p
+03:25:06 <CindyLinz> (找到一堆 paper 連結..ww)
+03:25:31 <CindyLinz> 而且都是被證明可實現的 paper.. ^^
+03:31:11 <CindyLinz> 應用方面也不一定那麼苦啦~ 像是寫網站的話應該算是資源豐富的.. 不過身邊熟的人不多, 要花比較多時間找是真的 @@"
+03:32:46 <hychen> CindyLinz: 真要寫web，應該還是會用livescript or python...
+03:33:52 <CindyLinz> hychen: 你看那個 yesod 呀, 應該比較完整 (?
+03:34:19 <CindyLinz> 從 html, css, js, model, controller 全部都是 haskell 一體完成
+03:34:40 <hychen> CindyLinz: 問題在於找人co-working 很難
+03:35:04 <CindyLinz> 自己成為 master 以後就不難了
+03:35:36 <CindyLinz> 因為用它開發東西不需要會寫 filterM (const [True, False]) XD
+03:35:50 <CindyLinz> 只是至少要有一個人(自己)會用..
+03:37:10 <CindyLinz> livescript 好找人還不是 clkao 和 au 推出來的.. 也只有 g0v 這邊才有出現一群敢說自己會 livescript 的人吧 ^^|
+03:44:04 <hychen> CindyLinz: 幹嘛這樣.. XD
+03:44:34 <CindyLinz> 呃你是回哪句 ^^|  人家上面這幾句都是真心話啊 ._.
+07:46:56 <miaoski> hychen: 去看 FLOLAC 的錄影
+09:36:17 <mno2_> CindyLinz: 「也只有 g0v 這邊才有出現一群敢說自己會 livescript 的人吧」<--  CindyLinz 的 linkedin 跳出框框，請問 au 會 livescript 嗎？
+14:25:02 <CindyLinz> mno2_: 對了, 這是什麼意思 ^^| # linkedin 跳出框框, 請問 ooooo
+14:30:28 <miaoski> caasih_: 享受鄙視的眼神 +1 (那不是 PHP 嗎? *逃* *引戰*)
+14:53:05 <mno2_> CindyLinz: https://lh4.googleusercontent.com/-wV7EGh2Ki_o/U454YuINwSI/AAAAAAAAAtE/k3mmokvmKMA/w346-h192/linus-git.png
+14:55:27 <CindyLinz> 我知道這張圖
+14:55:45 <CindyLinz> 我也知道 Linus 是 git 發起人..
+14:55:56 <CindyLinz> 但我還是不知道這是什麼意思 @@"
+15:00:33 <b4283> CindyLinz: 可以用來當哏
+15:01:11 <b4283> CindyLinz: Do you love him ?
+15:01:24 <b4283> 然後你就可以答這句
+15:02:14 <CindyLinz> 為什麼啊?
+15:02:19 <CindyLinz> 為什麼 linkedin 要問問題?
+15:02:22 <CindyLinz> captcha 嗎?
+15:03:16 <b4283> 因為答案是 yes
+15:03:27 <b4283> Do you love him?  --- yes
+15:05:02 <CindyLinz> 那這笑點在哪? @@"
+15:06:43 <CindyLinz> 這跟「Haskell is a functional language」一樣不好笑啊? @@'
+15:10:03 <b4283> 應該要用問句
+15:10:27 <b4283> A: Do you love me?     B: Is Haskell a functional language ?
+15:11:04 <b4283> A: (blushes)
+15:11:26 <CindyLinz> 然後就笑惹? @_@"
+15:12:06 <b4283> 不是笑話 @@
+15:48:33 <caasih_> 這個事件的笑點就好像獵人頭公司機器人發信問 python 作者說：「聽說你很會 python ，有興趣做 python 工作嗎？」一樣 XD
+15:49:42 <caasih_> 來源： https://plus.google.com/115212051037621986145/posts/R8jEVrobbRj
+15:50:48 <CindyLinz> 開始有點懂了w
+15:54:34 <CindyLinz> linkedin 那個是他們在自動建立會員專長的機制嗎?
+15:54:46 <CindyLinz> 跑去到處問某人的好友這個人會不會A, 會不會B?
+15:55:09 <CindyLinz> 只是這個 A, B 是 linkedin 經過某種 machine learning 機制, 已經有個七八成把握這樣?
+16:03:24 <caasih_> 不知道後面的機制，但一開始 linked 只是讓你可以去 endores 朋友自己填的技能，
+16:03:43 <caasih_> 後來變成會問你朋友是不是也會 XXX
+16:05:16 <CindyLinz> 嗯嗯
+16:06:55 <caasih> s/linked/linkedin/ #0rz
+23:54:12 <suhorng> (\\) 只會刪除第一個 occurence, 居然中這招 orz

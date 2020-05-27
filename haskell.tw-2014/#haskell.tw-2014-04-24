@@ -1,0 +1,75 @@
+01:52:15 <monochrom> 用 lambda calculus 處理 halting problem 是很容易的. 用 turing machine 處理 halting problem, 則通常是先介紹 Church's thesis, 跟著只寫 pesudo code 處理 halting problem, 並聲稱 "因為 Church's thesis 關係, 等如用 Turing machine".
+04:09:06 <cebrusfs> @src scanl1
+04:09:06 <lambdabot> scanl1 f (x:xs) =  scanl f x xs
+04:09:06 <lambdabot> scanl1 _ []     =  []
+04:09:13 <cebrusfs> @src scanl
+04:09:13 <lambdabot> scanl f q ls = q : case ls of
+04:09:13 <lambdabot>     []   -> []
+04:09:13 <lambdabot>     x:xs -> scanl f (f q x) xs
+04:35:43 <cebrusfs> @src zipWith
+04:35:43 <lambdabot> zipWith f (a:as) (b:bs) = f a b : zipWith f as bs
+04:35:43 <lambdabot> zipWith _ _      _      = []
+04:43:08 <cebrusfs> @src seq
+04:43:08 <lambdabot> Source not found.
+12:27:14 <cibs> 是不是每個人問 seq 都是想讓 lambdabot 罵一下..XD
+14:29:25 <miaout17_> @src id
+14:29:25 <lambdabot> id x = x
+14:29:28 <miaout17_> @src seq
+14:29:29 <lambdabot> Source not found. It can only be attributed to human error.
+14:29:38 <miaout17_> @src seq
+14:29:39 <lambdabot> Source not found. There are some things that I just don't know.
+14:29:44 <miaout17_> @src seq
+14:29:45 <lambdabot> Source not found. That's something I cannot allow to happen.
+14:30:39 <CindyLinz> miaout17_: 這就是所謂的討罵嗎? wwww
+14:30:42 <miaout17_> 原來有那麼多種 http://goo.gl/h6lil6
+14:30:43 <miaout17_> XD
+14:35:21 <miaout17_> @src foldM
+14:35:21 <lambdabot> foldM _ a []     = return a
+14:35:21 <lambdabot> foldM f a (x:xs) = f a x >>= \fax -> foldM f fax xs
+14:42:59 <darkx> @src []
+14:43:00 <lambdabot> data [] a = [] | a : [a]
+14:43:04 <darkx> lol
+14:46:55 <miaout17_> src :
+14:46:58 <miaout17_> @src :
+14:46:59 <lambdabot> Source not found. That's something I cannot allow to happen.
+14:47:05 <miaout17_> @src (:)
+14:47:06 <lambdabot> Source not found.
+14:47:41 <miaout17_> @src ++
+14:47:42 <lambdabot> []     ++ ys = ys
+14:47:42 <lambdabot> (x:xs) ++ ys = x : (xs ++ ys)
+14:47:42 <lambdabot> -- OR
+14:47:42 <lambdabot> xs ++ ys = foldr (:) ys xs
+16:35:43 <cibs> @src CindyLinz
+16:35:44 <lambdabot> Source not found. Whoa.
+17:58:43 <godfat> Whoa, cannot find the source of CindyLinz
+18:00:31 <mno2> 難怪每次 CindyLinz++ 我都覺得是種新語言
+18:00:40 <mno2> C++, CindyLinz++
+18:05:49 <miaout17> @src lambdabot
+18:05:50 <lambdabot> Source not found. The more you drive -- the dumber you get.
+18:06:12 <miaout17> lambdabot: Why don't you have the source code of lambdabot?
+18:06:45 <godfat> XDDDD 訊息好好笑
+18:07:01 <godfat> @src whatelse
+18:07:01 <lambdabot> Source not found. You speak an infinite deal of nothing.
+18:07:11 <godfat> @src givememore
+18:07:12 <lambdabot> Source not found. Whoa.
+18:07:23 <godfat> 看來是隨機的
+18:08:44 <CindyLinz> mno2: ?_L
+18:08:46 <CindyLinz> mno2: ?_?
+18:10:14 <mno2> CindyLinz: 我在胡言亂語。 CindyLinz++ 取開頭就變 C++ 了
+18:10:24 <CindyLinz> @________@
+18:10:24 <lambdabot> Unknown command, try @list
+18:10:37 <miaout17> @_@ /__/
+18:10:37 <lambdabot>  /__/
+18:10:42 <miaout17> 啊咧
+18:10:58 <miaout17> 只是無法預期lambdabot會做什麼
+18:11:20 <miaout17> @_@╯︵ ┻━┻
+18:11:21 <lambdabot> Unknown command, try @list
+18:12:06 <CindyLinz> mno2 被嚇跑了 XD
+18:13:11 <godfat> @_@ @_@╯︵ ┻━┻
+18:13:12 <lambdabot> Plugin `compose' failed with: Unknown command: "_@\226\149\175\239\184\181"
+18:15:58 <CindyLinz> 覺得要拿來 irc 上面玩, 要好玩的話... forth 比較適合 (思)
+18:16:44 <CindyLinz> lambdabot 只能拿來學 haskell ^^|
+18:18:26 <godfat> 在 irc 上面用 bot 上 irc 上用 bot 上 irc 上...
+19:19:51 <kanru> @_@
+19:20:02 <kanru> @_@ @_@
+19:20:02 <lambdabot> Plugin `compose' failed with: Unknown command: "_@"

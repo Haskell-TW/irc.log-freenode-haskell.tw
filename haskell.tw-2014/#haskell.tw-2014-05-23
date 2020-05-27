@@ -1,0 +1,604 @@
+00:06:03 <c9sloud> CindyLinz: 那個~~ Perl-Router-R3 repo 你方便另外建一個然後用 submodule 接 r3 嗎？因為我沒辦法 fork 你的 repo XD
+00:06:19 <c9sloud> 不過不急就是了 XD
+00:09:54 <CindyLinz> 不會用 sub module... orz
+00:20:42 <c9sloud> 就~~ git clone ...; cd .... ;  git submodule init ; git submodule add [repo uri] libr3 類似這樣
+00:22:03 <c9sloud> CindyLinz: https://gist.github.com/c9s/e296c0edf3a8665e9db2
+00:22:26 <c9sloud> 然後如果要 lock 在 1.0.0 的 tag 的話
+00:22:49 <c9sloud> 就只要 cd libr3 進去 git checkout -b 1.0.0 origin/1.0.0
+00:23:10 <c9sloud> cd .. 出來之後 commit 他，這樣就會自動 lock 住版本
+00:23:37 <CindyLinz> 或是我用同一個 repository, 只是內外換一下?
+00:23:52 <CindyLinz> 就像 run monad transformer 那樣!?
+00:23:58 <c9sloud> 對
+00:24:45 <c9sloud> 我幫你弄一下 script 好了
+00:24:46 <c9sloud> 等我一下
+00:25:03 <CindyLinz> 不用啦 我可以試試 XD
+00:25:14 <c9sloud> 就順便做 filter branch
+00:25:20 <CindyLinz> filter branch?
+00:25:32 <c9sloud> 對呀，讓你原本的 history 留下來
+00:25:34 <c9sloud> 燒等喔
+00:26:56 <CindyLinz> c9sloud: 你這個 gist 是要 show 你那個灰階漸層的 shell prompt 對吧... = =
+00:26:56 <c9sloud> 節省你的時間
+00:27:09 <c9sloud> XDDXDDDDD
+00:27:15 <c9sloud> 不是啦 XDD
+00:27:38 <c9sloud> CindyLinz: 好了~~
+00:27:39 <c9sloud> https://github.com/c9s/Router-R3
+00:27:46 <c9sloud> 完美過濾完 commit
+00:27:56 <c9sloud> 你只要 push 到你的 git repo 就可以了
+00:29:07 <c9sloud> lock 到 1.0.0
+00:29:37 <CindyLinz> 那我把這個.. fetch 到我原本那個 repository, 然後把 master 跳過去?
+00:29:49 <CindyLinz> 反正我想應該還沒有人 fork 我的去用 :p
+00:30:17 <c9sloud> 對
+00:30:25 <c9sloud> 喔不是
+00:30:44 <c9sloud> 你 github 另外建一個新的 repo 叫 Router-R3 之類的
+00:30:59 <c9sloud> 然後你先 fetch 我剛剛那個，再 push 到你的新 repo
+00:31:07 <c9sloud> 這樣就可以完美保留 history 了
+00:31:37 <CindyLinz> 那這樣舊的這個留著幹嘛? ^^|
+00:31:54 <c9sloud> 舊的 repo 舊可以砍了
+00:32:00 <c9sloud> 就 XD
+00:32:26 <c9sloud> 不過因為是 filter 過了，所以你原本舊的 repo 沒辦法直接 fetch 新的 repo
+00:32:34 <c9sloud> 要重建一個 empty bare repo
+00:33:05 <CindyLinz> 喔可以直接從 init commit 開一條新的線, 然後把 master 直接 reset --hard 過去啊? :p
+00:33:37 <c9sloud> 喔也是可以 XD
+00:33:48 <c9sloud> 那就要 git push -f ?
+00:36:33 <c9sloud> 阿 不過這樣 github 不會重新設定 parent repo
+00:36:39 <c9sloud> 這樣我還是沒辦法 fork 你的 XD
+00:41:36 <CindyLinz> 你不能 git clone 再 push 進一個新的 rep 嗎?
+00:41:48 <CindyLinz> 原來 github 禁止亂倫.. (誤)
+00:42:41 <petercommand> 重新設定 parent repo好像要contact github support
+00:42:42 <CindyLinz> 唔.. 那這樣我還要翻轉目錄嗎? ._.
+00:44:15 <CindyLinz> 我先翻好了.. contact github support 的事晚點再說 :p
+00:44:31 <c9sloud> CindyLinz: 你可以把原本的砍掉，然後新建，這樣就不用 reset parent link 了
+00:45:02 <CindyLinz> 嗯嗯
+00:45:10 <c9sloud> 然後 git pull https://github.com/c9s/Router-R3 master  # merge 到 root commit
+00:45:21 <c9sloud> git push origin master
+00:53:28 <CindyLinz> c9sloud: 好嘍
+00:58:46 <c9sloud> CindyLinz: thanks~~~~~ :D
+01:05:14 <c9sloud> CindyLinz: 喔對了 你 pull 回來之後可以跑 git submodule update  # 這樣會 checkout r3 => 1.0.0
+01:07:43 <CindyLinz> 有看到
+01:07:58 <CindyLinz> 等下次我要再改東西的時候, 就要來改 fill_source.pl 了, 因為 path 反了 XD
+01:12:51 <c9sloud> 我改了
+01:12:56 <c9sloud> PR sent~
+01:13:58 <CindyLinz> ww 有必要這麼急嘛 XDXD
+01:15:15 <CindyLinz> 唔 這個我要不要送 cpan 啊? 你改了 Makefile.PL
+01:20:22 <c9sloud> 應該還不用
+01:20:32 <c9sloud> 不過也許看你 XD
+01:20:55 <c9sloud> 這樣可以 mac friendly
+01:21:03 <CindyLinz> 好 XD
+01:23:35 <CindyLinz> 來增加 backpan 的 loading.. (咦)
+01:29:57 <c9sloud> XD
+01:30:22 <c9sloud> CindyLinz: 原來 au 寫的 inc::Module::Install 可以搭配 XS 這樣寫: https://github.com/cnangel/Conf-Libconfig/blob/master/Makefile.PL
+01:33:07 <c9sloud> 原來光 submodule update 沒辦法，要 git submodule update --init
+01:33:34 <CindyLinz> 我有先 git submodule init; 然後才 git submodule update
+01:34:05 <CindyLinz> 不是很想搞懂 Makefile.PL... orz
+01:36:08 <c9sloud> 兩個 PR :p
+01:38:24 <CindyLinz> 那個 travis 的 perl 要那麼高版號喔?
+01:38:32 <CindyLinz> 想說 5.006 就可以了? XD
+01:41:12 <c9sloud> 哦哦 那個都可以
+01:41:23 <c9sloud> travis ci 可以用很多種版本幫你測
+01:41:28 <c9sloud> 可以自己加上去
+01:41:58 <c9sloud> inc::Module::Install DSL++ :p
+01:44:49 <c9sloud> looks great ~~
+01:44:53 <c9sloud> 來去睡~~ XD
+01:45:25 <c9sloud> 晚安
+01:49:27 <CindyLinz> 晚安 ^^
+01:50:41 <monochrom> 剛收到 http://philipyip.files.wordpress.com/2013/01/microsoft.jpg XD
+01:51:41 <monochrom> 視窗 8.1 軟碟限量版, 3711 隻碟 XD
+01:52:25 <CindyLinz> 清庫存嗎.................||
+01:52:42 <CindyLinz> 唔你用日文版喔?
+01:52:53 <CindyLinz> 不對 這沒打算用的吧....ww
+01:53:16 <CindyLinz> 3711片.. 先弄一台自動換磁碟的機器手臂才能用吧....ww
+01:53:25 <monochrom> 不, 我只是轉載圖片 :)
+01:53:40 <CindyLinz> 喔喔.. XD
+02:02:18 <caasihuang> 現在還有哪個 linux distribution 提供安裝軟碟映像的嗎？
+02:02:30 <caasihuang> 查了一下， debian 現在也沒有了。
+02:16:37 <caasihuang> 自問自答，查到 WakePup 這個工具： http://puppylinux.org/wikka/WakePup2
+02:20:10 <au> caasihuang: http://www.zelow.no/floppyfw/
+02:20:38 <au> WakePup2 似乎比較正確 XD
+02:20:57 <caasihuang> au: cool XD
+02:21:59 <caasihuang> 不限 Linux 的話，對這個 OS 的存在印象深刻： http://www.menuetos.net/
+02:25:14 <au> 看來不錯。這年頭也有 jvm 專用 OS: http://osv.io/
+02:26:23 <au> (精確來說是 xen/kvm/vmware 專用 OS)
+02:28:57 <letoh> 印象中那個磁片版應該是之前有個日本人訂的，最後也真的拿到了
+02:29:42 <caasihuang> letoh: 查到 reddit 但沒找出明顯的留言終結資料 #不懂日文
+02:29:58 <monochrom> 真的有嗎? 很嚇人...
+02:30:32 <letoh> 這報導出來好一陣子了，原始出處要找一下
+02:31:37 <monochrom> 一分鐘讀入一隻碟, 3711隻碟就要62小時
+02:34:17 <monochrom> "日本有位宅男因為連續62小時不吃不喝安裝視窗, 因而暴斃"
+02:35:23 <letoh> 剛剛找到一些報導的後續，似乎最早的報導是假的
+02:35:42 <letoh> https://twitter.com/Ishibasystems/statuses/390829729852313600  最早應該是這篇
+02:36:58 <caasihuang> au++ #TIL #OSv
+02:38:11 <caasihuang> letoh: 查到這個： http://wp-mag.com/fanatic/1713-floppy-disks-needed-windows-8-installer/ 搞不好有關？
+02:38:13 <letoh> https://twitter.com/Ishibasystems/statuses/390849282502189056  澄清
+02:38:39 <letoh> 說標籤是自己用印表機印的XD
+02:39:56 <letoh> caasihuang: 感覺只是像台灣的記者在換算幾個便當之類的報導?
+02:41:29 <caasihuang> letoh: 原來如此，被精美的圖騙了 XD
+02:41:43 <caasihuang> letoh++ #TIL #留言終結
+02:42:00 <caasihuang> 厄，流 0rz
+02:42:19 <letoh> 那張圖真的很驚人啊
+02:43:54 <letoh> 然後你剛剛貼的 windows 8 磁片版應該也算元兇之一，因為這日本人用的貼紙多半是參考那張圖做出來的 (twitter 有寫，但沒寫明是哪一張圖)
+02:44:50 <caasihuang> XDDD
+02:45:56 <letoh> 不過，日本人的確像是真的會幹出這種事的民族XD
+03:10:33 <whitglint> 以磁片的可靠度... 安裝得完才怪～XD
+03:23:55 <monochrom> 磁片很可靠呀! 我沒遇過讀不到.
+03:24:19 <godfat> 我失落的封印磁片壞了（哭哭
+03:24:20 <godfat> 雖然沒壞大概也不知道跑哪了...
+03:24:47 <monochrom> 反而人的體力才不可靠 XD
+03:25:06 <godfat> 我覺得耐心會先用完 XD
+03:27:38 <letoh> 拿出練出十里坡劍神的毅力...
+03:28:02 <godfat> 這不是人人可以辦到的 XD 是說十里坡劍神應該更厲害...
+03:28:19 <monochrom> 我則沒有遺失磁片, 反而失落了一些光碟, The 7th Guest 及 OS/2 Warp 4. 但我仍有 OS/2 Warp 3 磁片(十多隻)
+03:28:32 <letoh> the 7th guest !!
+03:29:00 <godfat> 聽說那個遊戲裡面的其中一個棋盤遊戲，現在的電腦太快，導致 AI 太強
+03:29:11 <letoh> 還有個續作叫 the 11th hour
+03:29:17 <monochrom> 幸而數年前 The 7th Guest 有得在 iOS 玩, 在 Steam 上又有再出
+03:29:39 <monochrom> 我還未玩完 The 11th Hour
+03:30:43 <godfat> 原來這也有復刻...
+03:30:49 <monochrom> 那局棋嗎, 卒之我以夷制夷, 我自己寫個 alpha-beta pruning 做我的軍師 XD
+03:30:50 <letoh> 這兩款是小時候看雜誌介紹才知道的，一直很想玩，但家裡根本沒電腦XD
+03:31:28 <godfat> 我小時候不太敢玩，所以只打了一點... XD 那時候也不會寫程式 XD
+03:31:47 <letoh> 查了一下 the 7th guest 去年出了 linux 版
+03:32:00 <monochrom> http://store.steampowered.com/sub/32847/ 快快買來玩吧!
+03:32:35 <monochrom> 咦, 沒留意有得 linux, 不錯啊
+03:32:54 <godfat> 好像不錯... 考慮考慮
+03:33:01 <letoh> "The 7th Guest for PC, Mac & Linux is available on Steam!"
+03:33:10 <letoh> the 11th hour 還沒
+03:33:20 <godfat> 我 mac 跑不了 steam 就是了，太麻煩
+03:33:48 <monochrom> 我有以前 DOS 版的 The 11th Hour, 卒之在 linux 裏用 DOSEmu 玩
+03:34:12 <monochrom> dual boot windows 吧 XD
+03:34:41 <godfat> Windows 98 模擬器希望
+03:34:42 <godfat> 我另外有 windows 桌機專門打遊戲 ~.~
+03:34:42 <monochrom> 又或者, 愛用 virtualbox 或 vmware 之類
+03:34:54 <monochrom> 我也是!
+03:35:05 <letoh> 我玩過幾款 pc game 都是用 wine
+03:35:49 <letoh> 不過 dos 時代的遊戲 wine 大概不支援XD
+03:36:07 <godfat> 我之前用 crossover games (wine wrapper) 的效果不錯，不過也不是所有遊戲都能跑
+03:36:08 <godfat> 記得之前想打 sacrifice 的 skirmish mode 卻卡在 IPX 無法運作，一進去就當掉 O_o
+03:36:15 <monochrom> 說起來, 雖然以夷制夷, 結果還只是險勝, 只比它多幾霸粒棋
+03:36:23 <godfat> DOSBox 不錯，能跑好多
+03:36:26 <letoh> 以夷制夷XD
+03:36:39 <godfat> 只好換更快的電腦？ XD
+03:38:08 <caasihuang> 失落的封印！！
+03:39:28 <godfat> 是說前一陣子我又溫習了一下說，這次邊打邊寫筆記（物品名稱），不過後來忘記什麼事，又半途而廢了 orz
+03:39:47 <letoh> 後來還是一直沒電腦可以玩這兩款遊戲，倒是玩了另一款台灣公司開發的解謎遊戲  叫「敦煌」
+03:40:32 <letoh> 當初一些廣告都是拿這款跟 the 7th guest 相比
+03:41:13 <caasihuang> 記得看表哥玩，目睹女主角在其他兩人倒了的情況下，剩只能承受一擊的血量打到某個魔王 XD
+03:42:14 <monochrom> 你有 iOS 的話, 亦可以考慮: 那個棋盤在 iOS 上有單獨成 app
+03:42:41 <monochrom> (找尋 The 7th Guest: Infection)
+03:44:02 <godfat> letoh, 沒查到敦煌 @@
+03:44:02 <godfat> caasihuang, 讓我想到鬼馬小英雄，好想回味 XD
+03:44:15 <letoh> godfat: 昱泉開發的遊戲
+03:44:27 <letoh> godfat: 全名：塔克拉馬干 敦煌
+03:44:36 <godfat> 感覺對這名字有點印象
+03:44:52 <letoh> 好像是昱泉的出道作，拿了不少獎
+03:46:12 <letoh> godfat: http://change.e1515.com.tw/Detail.php?ProductID=1807837  遊戲盒封面... 原來是 486DX33 時代的遊戲XD
+03:47:05 <godfat> 說到這個，國外的老遊戲可能有不少人都有保存，台灣的遊戲不知道以後會不會完全滅亡...
+03:47:05 <godfat> 大宇 XD 建議售價 1080 耶，不低
+03:47:39 <monochrom> "觀音井" 只令我想到 鐵觀音 和 龍井
+03:48:06 <letoh> 我是玩後來移植到 sega saturn 的版本，因為當時還是沒有電腦可以玩，但 console 比較容易弄到
+03:48:20 <godfat> 加拿大容易弄到茶嗎？
+03:48:33 <caasihuang> godfat: 台灣之前不是有個橫向射擊遊戲被老外挖出來，還有 FPS 被挖出來？
+03:48:34 <monochrom> 容易
+03:48:40 <godfat> 是喔，saturn 上好像有不少移植過去的電腦遊戲
+03:48:40 <letoh> 應該都有茶商，但價格跟品質不曉得怎樣
+03:48:53 <letoh> godfat: 有仙劍 :p
+03:49:10 <godfat> caasihuang, 沒有印象 XD
+03:49:10 <godfat> letoh, 我就是想到那個 XDD
+03:49:31 <letoh> caasihuang: 有  但我忘了名字XD
+03:49:57 <letoh> 好像是國外有人追查半天，最後追到是台灣的團隊開發的
+03:50:22 <monochrom> 我去這間買大吉嶺茶的: http://houseoftea.ca/main/
+03:53:44 <monochrom> 不過, 網頁還不能反映親臨店址的百分一. 有很多印度茶及中國茶的選擇.
+03:54:12 <monochrom> (是啊, 普洱以至祁門都有)
+03:54:24 <godfat> 真有趣，有茶包嗎？（我太懶了 orz
+03:54:34 <caasihuang> FPS 的話是 MARS 3D ： http://www.doomworld.com/vb/everything-else/65586-anyone-have-experience-with-this-obscure-fps-mars-3d/
+03:55:28 <caasihuang> 有趣的是那引擎有 Doom 跟 Build engine 的特徵，詳見討論。
+03:56:28 <monochrom> 它沒有茶包. 但你可以買完茶葉, 再買日本人出的絲網袋, 合起來就是茶包了!
+03:57:13 <godfat> UserJoy 記得是宇峻？
+03:57:38 <caasihuang> letoh: 查到了，叫 SideLine http://sideline.ghegs.com/
+03:58:00 <letoh> caasihuang: 厲害!! 就是這一款沒錯
+03:59:50 <godfat> 等等，該不會是邊緣戰區吧？好像有點眼熟...
+03:59:59 <letoh> 對
+04:00:08 <letoh> godfat: http://sideline.ghegs.com/index_chinese.html
+04:00:09 <caasihuang> NovaRain++ 這多半是他跟我說的 >///<
+04:00:15 <godfat> 哇，我有買耶，雖然不知道跑哪去了......
+04:00:47 <godfat> 這名字我應該有超過十年沒想到過了 XD
+04:02:01 <caasihuang> 看他們的 fb 才知道，我買過同一家出的 A.D. cop （遮臉）
+04:02:21 <godfat> 看 screenshot 居然能回想起這個名字（感動）
+04:02:22 <godfat> 不過老實講，那時候我對這遊戲有點失望 XD
+04:02:22 <godfat> 也不是不好玩，只是也沒什麼好玩的...
+04:03:24 <letoh> 這類遊戲玩起來都差不多，後來大概都玩 r-type 比較多
+04:03:53 <godfat> 哇超懷念 https://www.facebook.com/photo.php?fbid=669652653045530
+04:03:54 <letoh> 彈幕系的我玩不起來，太吃穩定度了XD
+04:04:31 <godfat> caasihuang, A.D. cop 怎麼了嗎？ XD
+04:05:04 <caasihuang> 就覺得是劣化版的 VR 戰警 XD
+04:05:19 <godfat> 想想小時候我還滿愛玩這類的，好像玩過不少（現在想到極上瘋狂大射擊
+04:05:24 <godfat> XDD
+04:05:27 <letoh> 極上瘋狂大射擊++
+04:05:43 <letoh> godfat: 超兄貴之類的? XD
+04:05:59 <godfat> 亂七八糟什麼都有 XDD
+04:07:37 <godfat> mega drive 上有一款我還滿喜歡的，不過想不起名字。那真的很彈幕，只能看子彈，不能看現在發生什麼事 XD
+04:08:15 <letoh> thunder force 之類的?
+04:09:04 <godfat> 查了一下圖，應該不是。畫面風格是有一點像是各種微生物
+04:09:19 <godfat> 空牙我也滿喜歡的
+04:09:58 <letoh> 還有世界末日
+04:10:45 <godfat> 找到了... 關鍵字 mega drive shooting, 真厲害
+04:10:45 <godfat> http://en.wikipedia.org/wiki/Bio-Hazard_Battle
+04:10:52 <godfat> 世界末日沒印象是什麼
+04:11:44 <letoh> 這款沒玩過.. 世界末日是從 arcade 來的，也是一款很經典的作品
+04:11:57 <godfat> 這款算是武器比較特殊的，跟一般的子機和彈幕系統不太一樣
+04:13:07 <letoh> biohazard battle 連 steam 都有
+04:14:04 <godfat> 囧> 只好開來回味了 XD
+04:14:20 <letoh> $2.99
+04:15:06 <godfat> 希望台灣的遊戲也可以像這樣慢慢救回來
+04:15:59 <letoh> 前幾天好像又有一款經典遊戲的續作公布要開發了
+04:17:32 <letoh> 現在的台灣廠商還會回頭開發單機遊戲真是不簡單
+04:17:53 <godfat> 大概都是做興趣吧 orz...
+04:18:54 <caasihuang> 現在 2D 開發環境友善，如果這些老前輩願意跳出來做，不求是 AAA 大作我也會支持
+04:20:31 <godfat> 我也不想支持 AAA 大作（咦
+04:22:45 <letoh> 還有謠言說天使帝國可能也有新作XD
+04:23:46 <godfat> 哇 XD
+04:23:55 <letoh> 不過不太期待就是XD
+04:24:14 <godfat> XDDD 我有買三代，不過沒什麼感覺
+09:57:16 <b4283> 失落的封印 XD
+10:05:18 <b4283> monochrom: 真好，加拿大也有好茶喝，有台灣茶嗎？
+10:06:05 <b4283> 橫向捲軸我只想到「爆笑出擊」
+10:06:35 <monochrom> 台灣茶, 有專門的 天仁茗茶 各分店!
+10:07:21 <b4283> 看到 SideLine 我驚了！居然有這麼精美的遊戲
+10:07:48 <b4283> 天仁好像只賣自己的茶
+10:08:59 <b4283> godfat: 說到各種微生物，馬上想到 R-Type，結果居然不是 :D
+10:09:17 <b4283> 另外一個是 G-DARIUS (PS)
+10:09:48 <b4283> 不過這兩款都是巨生物 XD
+10:35:48 <mno2_> CindyLinz: https://github.com/MnO2/r3/blob/master/src/Text/R3/Router.hs   你覺得高階界面設計成 pure 適合嗎？
+10:38:23 <CindyLinz> 適合歐~~
+10:38:30 <CindyLinz> 不過這邊看起來缺了 capture?
+10:39:48 <mno2_> 只是先弄個 buildable 的版本。ghc 跟 gcc 依賴太深<
+10:40:13 <mno2_> mavericks 上換成 clang 解一些 issue 搞了好久
+10:40:20 <CindyLinz> 咦為什麼 lookup 出來是 Maybe a 啊?
+10:40:33 <CindyLinz> 要用 Dynamic 喔?
+10:42:42 <mno2_> 沒有。不要太認真啊，只是先一個 buildable 的版本而已
+10:43:04 <mno2_> 只是想缺定高階界面的走向而已
+10:46:35 <CindyLinz> 喔 XD
+10:55:25 <c9sloud> 好像可以把一些簡單的 re 換成 op code
+10:55:32 <c9sloud> 然後在 r3 裡面做掉
+10:55:47 <c9sloud> 像是 \d+ , \w+ 或 [^/]+ 之類的
+11:41:55 <CindyLinz> 我還不會 perl 的 op code programming... ._.
+11:42:05 <CindyLinz> 我覺得那是玩 perl XS 的第三階段 XD
+12:07:57 <c9sloud> 我也不會 perl op code XD
+12:08:03 <c9sloud> 這可能要問 au XD
+13:23:01 <CindyLinz> 覺得第一個階段是用 XS 自動生成的功能把一些 perl 的資料轉換成 C 方便的 type; 第二個階段是直接去亂摸亂搞 perl 的資料的結構; 第三階段是亂摸亂搞 perl 的 code 的結構.. A_A
+13:34:20 <CaesarChi> hello world
+14:17:50 <c9sloud> CaesarChi: hi
+14:22:59 <CaesarChi> 問一下要怎麼把 r3 的方式直接做到
+14:23:06 <CaesarChi> node client 呢？
+14:23:18 <CaesarChi> 因為小弟看不太懂 c
+14:23:20 <CaesarChi> XDDD
+14:23:37 <CaesarChi> 然後看過 perl 的版本，也不知道要從哪裡下手
+14:26:15 <CindyLinz> c9sloud: 是不是有個 perl POD 和 github README.md 互轉的工具啊?
+14:27:52 <CindyLinz> CaesarChi: Perl 版本完全都在寫 C 啊.. 只有 Makefile.PL 這種打包工具是用 Perl 寫.. github 說 C 佔 95.9%....||
+14:28:21 <CindyLinz> 不對 這應該是我抓了整個 R3 的 source 進來貼, 充很多版本.. XD
+14:28:24 <CindyLinz> 版面
+14:30:27 <mno2_> 慣 C
+14:42:32 <CaesarChi> XDDDDDDDD
+14:42:45 <CaesarChi> 所以都是要使用 c 來寫囉！？
+14:44:40 <CindyLinz> 然後寫這種東西就是, 我們自己要考慮多少用 C 寫, 多少用目標語言寫這樣~ 只是因為 perl 底層就是 C, 我覺得用 C 一路寫完也還算方便就是
+14:59:26 <CaesarChi> 可以另外問一下，原理是什麼嗎？
+14:59:42 <CaesarChi> 因為不是太懂 @@ 有沒有推薦文章可以讓小弟了解
+15:01:58 <CindyLinz> CaesarChi: a都.. 這邊好像沒有在寫 node 底層的人啊.. 我們只能跟你很形而上的建議 orz
+15:02:43 <CindyLinz> CaesarChi: 我用 FFI 當關鍵字, 找到這個 npm 的 lib.. # https://github.com/rbranson/node-ffi
+15:02:48 <CaesarChi> 那有什麼形而上的建議嗎？？？
+15:03:28 <CindyLinz> CaesarChi: 你現在的問題是.. call 去 C 生出了那個 tree 以後存不下來?
+15:03:38 <b4283> 要看哪一段原理你不懂
+15:03:52 <CindyLinz> CaesarChi: 或是說那個 tree 拿不回 js?
+15:04:30 <b4283> 是不懂 R3 為什麼這樣設計，還是不懂 libr3 和 perl 是怎麼接起來的
+15:05:00 <CindyLinz> 還是不懂 C++ 為什麼還沒退流行? (被拖走..)
+15:05:53 <b4283> 本席傳喚 hashcat (誤)
+15:05:56 <cataska> 還是不懂 c9s 為甚麼寫了 r3 來折騰大家 ? (逃
+15:06:26 <b4283> cataska: starting forth 看到哪了
+15:06:47 <CindyLinz> b4283: 太兇惹..ww
+15:07:02 <cataska> b4283: 我可以先借你
+15:07:40 <cataska> b4283: 這樣就換我問你：「Starting Forth」看到哪了
+15:07:48 <b4283> cataska: XD 沒有要趕你啦
+15:07:49 <cataska> XDD
+15:08:00 <b4283> 先我待看完 SCHEMER 系列...
+15:08:33 <cataska> b4283: 最近沒空看，蒐藏的價值多，要看網路上也有
+15:08:50 <cataska> b4283: 所以可以先借你
+15:09:42 <CindyLinz> CaesarChi: 雖然我不熟 node.. 但我想, 如果是直接從 C 自己 malloc 取得的記憶體, 應該不會被 node 的 runtime 管到, 除非你自己手動 free 掉, 不然不會被 node runtime 丟掉..
+15:09:54 <cataska> Starting Forth 還有簡中版
+15:09:58 <b4283> 對啊，網路上有嘛，我只是 touch 一下你的進度
+15:10:07 <CindyLinz> CaesarChi: 所以你只要能把那個 tree 在記憶體裡的位置 (pointer) 丟回給 js 找地方存著就好
+15:10:22 <b4283> (顧左右言他)
+15:10:23 <cataska> b4283: 你準備好要看可以告訴我
+15:10:38 <b4283> cataska: 高雄．準備好了
+15:10:43 <cataska> touch cataska ?
+15:11:03 <b4283> 還是你都在看 Factor ?
+15:11:07 <CaesarChi>  CindyLinz 應該說，我不知道要怎麼寫 R3 node cilent
+15:11:23 <CindyLinz> CaesarChi: 我不知道 node-ffi 有沒有為 C pointer 作對應的 type.. 如果沒有的話, 你可以在 C 用 sizeof(node*) 取得 pointer 的長度, 然後硬把它裝在一個 string 裡面丟給 js
+15:11:28 <CaesarChi> 在 fb 上直接問 c9s, 他就叫我倒這邊來了
+15:11:36 <b4283> cataska: 感謝你
+15:11:52 <cataska> b4283: 所以已經準備好了？
+15:11:55 <CindyLinz> CaesarChi: 不知道怎麼寫 client 指的是不知道使用介面設計怎樣會比較好用嗎?
+15:12:05 <b4283> cataska: 沒有
+15:12:15 <CaesarChi> 不知道要怎麼跟 c  連接
+15:12:17 <CaesarChi> XDDDDD
+15:12:28 <cataska> b4283: 準備好告訴我吧
+15:13:12 <CaesarChi> 不懂 libr3 和 perl 是怎麼接起來的
+15:13:19 <CaesarChi> 其實我比較不懂這段
+15:14:18 <b4283> 不懂 nodejs，不過你應該可用這個 https://www.npmjs.org/package/ffi
+15:14:19 <CindyLinz> CaesarChi: 我覺得知道 libr3 和 perl 怎麼接起來的, 對 libr3 和 node 要怎麼接起來的幫助可能不太大? @@"
+15:14:42 <cataska> perl 版的 r3 在哪裡啊 ? (毆
+15:15:08 <CindyLinz> CaesarChi: 然後, 我沒有用到 libr3, 而是把 R3 的 c source 全部抓進來, 塞在 R3.XS 這個檔案裡面
+15:15:42 <CindyLinz> cataska: https://metacpan.org/pod/Router::R3
+15:15:53 <cataska> CindyLinz++
+15:16:10 <CaesarChi> @b4283 感謝
+15:16:11 <lambdabot> Unknown command, try @list
+15:17:42 <b4283> @list
+15:17:42 <lambdabot> What module?  Try @listmodules for some ideas.
+15:22:17 <cataska> CindyLinz: 在 R3.xs 裡 match function 是自己寫的嗎
+15:23:41 <CaesarChi> 糟糕
+15:24:00 <CindyLinz> cataska: /* __R3_SOURCE_SLOT_END__ */ 這一行以下是我寫的
+15:24:24 <CindyLinz> cataska: 該行以上, 到 /* __R3_SOURCE_SLOT_BEGIN__ */ 之間是 R3 的 c source
+15:24:52 <cataska> ok
+15:25:23 <cataska> c9s 好厲害，看了 CindyLinz 給的 ppt 就寫了 r3
+15:25:51 <CindyLinz> 我沒印象給了什麼 ppt 啊.. XD
+15:26:44 <cataska> trie tree 阿
+15:26:46 <CindyLinz> 我只有在這 channel 上跟他說, 前面好像直接用 prefix 字串比對, 那用 suffix tree 就好了?.. 接下來實際要採用什麼資料結構都他自己找的 XD
+15:27:41 <CindyLinz> 所以是更厲害 XD
+15:34:17 <cataska> 不過我遺失了 ppt 的連結...
+15:34:41 <CindyLinz> cataska: 啊我想起來了.. 是 hil 的上課投影片, 教 suffix tree
+15:35:15 <CindyLinz> http://www.csie.ntu.edu.tw/~hil/algo2006fall/2007spring-algo08.ppt
+15:35:16 <cataska> CindyLinz: 就是這個！
+15:35:41 <CindyLinz> 不過 c9s 最後應該不是用這個做的?
+15:36:30 <c9sloud> CindyLinz: http://search.cpan.org/~marcel/Module-Install-ReadmeMarkdownFromPod-0.03/lib/Module/Install/ReadmeMarkdownFromPod.pm 有哇這個
+15:36:43 <CindyLinz> c9sloud: 謝謝 ^^
+15:37:34 <CindyLinz> 把它用 eval 裝起來, 沒裝這 mod 的 user 就 by pass 就好了 XD
+15:39:56 <c9sloud> CindyLinz: 對 後來還是用 prefix tree
+15:39:58 <c9sloud> trie
+15:40:18 <c9sloud> cataska: 我覺得你應該先找個簡單的 node extension 來改
+15:40:21 <c9sloud> 這樣最快
+15:40:40 <cataska> c9sloud: 不是我要改，是 CaesarChi XDD
+15:41:02 <c9sloud> 哦哦 我丟錯人了 XD
+15:41:07 <cataska> XDD
+15:41:15 <c9sloud> CaesarChi:  http://syskall.com/how-to-write-your-own-native-nodejs-extension/index.html/
+15:41:18 <c9sloud> 這篇還蠻詳細的
+15:41:37 <c9sloud> 或者看這個 http://nodejs.org/api/addons.html#addons_hello_world
+15:42:18 <c9sloud> CindyLinz: opcode 加上去之後簡單的 re pattern 換成 opcode 速度翻一倍
+15:42:42 <CindyLinz> 發現大家都是 C 開頭的耶... XDXD
+15:43:12 <CindyLinz> c9sloud: 我知道直接摸 op code 很威啊... 不過.. (默)
+15:43:32 <CindyLinz> 還沒弄到那一塊 XD
+15:43:42 <c9sloud> 哦哦 我是自己弄自己的 opcode
+15:43:45 <c9sloud> :p
+15:44:19 <CindyLinz> 你是說新增一個 opcode 喔?
+15:44:56 <c9sloud> 對 就是把 \d 換成一個 op
+15:45:03 <c9sloud> 或是 [^/]+ 換成一個 op
+15:45:25 <c9sloud> 類似一個小的 re scanner
+15:45:36 <CindyLinz> 欸, 你不是說 perl internal 的, 而是 perl-compatible-regular-expression 喔?
+15:46:03 <c9sloud> 對
+15:46:05 <c9sloud> XD
+15:47:02 <c9sloud> CindyLinz: http://c9s.github.io/r3/bench.html
+15:47:19 <c9sloud> 黑色的部份是 pcre pattern
+15:47:49 <CindyLinz> 這個要怎麼看啊 囧
+15:48:16 <CindyLinz> 看不出來哪邊是之前的哪邊是之後的 @@"
+15:49:40 <CaesarChi> c9sloud node extension for c ???
+15:49:56 <CaesarChi> GREATE 好喔！
+15:50:33 <CaesarChi> 另外問個蠢問題， r3 的程式碼，主要架構都是在這個資料夾底下嗎
+15:50:34 <CaesarChi> https://github.com/c9s/r3/tree/master/src
+15:50:51 <CindyLinz> 還有 include/
+15:55:04 <CindyLinz> c9sloud: 那個 POD -> README.md 的好像要整個用 Module::Install 來做... orz
+16:04:41 <c9sloud> CindyLinz: 右邊是新的
+16:04:54 <c9sloud> Yeahh module::install
+16:10:58 <c9sloud> CaesarChi: 你可以看是用 dynamic linking 或是像 cindy 的那個一樣搬 source code 進來一起 compile XD
+16:11:32 <CaesarChi> 糟糕又多一個新名詞
+16:11:33 <CaesarChi>  dynamic linking
+16:17:06 <c9sloud> CaesarChi: 那你就用把 source code 抓進來 compile 好了 XD
+16:17:44 <c9sloud> CindyLinz: 那用這個 ? http://search.cpan.org/~rwstauner/Pod-Markdown-2.001/lib/Pod/Markdown.pm
+16:18:01 <CindyLinz> CaesarChi: 覺得你可能要先玩一陣子 C/C++ 會比較好?
+16:18:18 <CaesarChi> 嗯
+16:18:22 <CaesarChi> 我也這樣覺得
+16:18:25 <CaesarChi> XDDDDD
+16:19:19 <CindyLinz> c9sloud: 看起來可能比較不用考慮相容性的問題 ^^
+16:19:47 <CindyLinz> 為什麼它沒有提供 command-line 的 synopsis 給抄呢.. 那才是最常見的用法吧吧.. XD
+16:26:19 <CindyLinz> perl -MPod::Markdown -e 'Pod::Markdown->new->filter(@ARGV)' POD檔檔名
+17:22:21 <c9sloud> CaesarChi: 嗯可能你還是要先玩一下 C++
+17:45:29 <caasihuang> CaesarChi: 我講一下昨天嘗試遇到的問題
+17:47:43 <CindyLinz> 咦 caasihuang 和 CaesarChi 是不同人!
+17:48:11 <caasihuang> 咦咦？
+17:48:22 <CindyLinz> 難怪我猜 CaesarChi 的問題會猜錯.....||
+17:48:53 <caasihuang> CaesarChi: 是這樣的，多數 node extension 靠 node-gyp 處理編譯前的準備跟編譯
+17:49:50 <caasihuang> 它是用 C++ 做的，為了把 C++ 跟 node 連起來，得靠 v8.h 提供的許多 Class
+17:50:25 <caasihuang> 如果不想打很多重複的內容，可以靠 nan 這個工具，它提供許多 helper
+17:50:58 <mno2_> gyp 聽起來在罵人的感覺 lol    gy 的 program
+17:51:13 <caasihuang> 之前跟 CindyLinz 的討論中讓我發現 v8 有個 Eternal:Warp/Unwarp 可以讓我把 pointer 丟回去給 node
+17:51:18 <caasihuang> mno2_: XDDDD
+17:52:11 <b4283> egyptian
+17:52:24 <caasihuang> 但是這個 pointer 在 node 中 log 出來就是個數字，
+17:52:38 <mno2_> 因為 github page 上面沒寫到 gyp 代表什麼意思啊 xD  只好自己亂猜
+17:53:00 <caasihuang> 而且不知啥時會 gc ， JS Object 又沒有 destructor...
+17:53:30 <b4283> Eternal Saga
+17:53:31 <caasihuang> CindyLinz 說 Perl 和 Haskell 的 FFI 有準備處理這樣的問題，
+17:54:03 <caasihuang> mno2_: https://code.google.com/p/gyp/ /(_A_)\
+17:54:42 <godfat> 是說雖然我不覺得有需要做 r3 ruby binding, 但看大家這樣討論熱烈，當一個練習或許也不錯... XD
+17:55:17 <caasihuang> 但查了半天現在我只查到這個： http://stackoverflow.com/questions/4573446/in-v8-how-would-i-remove-wrapped-c-objects-after-their-javascript-counterpart
+17:55:20 <godfat> gyp 有好長一段時間我都沒辦法用，因為沒裝 xcode IDE, 最近終於修好了
+17:56:01 <caasihuang> 也許 node-gyp extension 還是得生一個 C++ class 在裡面， nan 的範例也是如此。
+17:56:05 <caasihuang> godfat: XD
+17:56:41 <godfat> homebrew 裝 node 會自己 patch gyp, 這件事行之多年..
+17:57:26 <caasihuang> 或者還有個辦法是跳槽用 v8plus 寫純 C extension ，這個就沒試過了
+17:57:52 <caasihuang> godfat: 一直都有裝 Xcode ，沒注意到這個問題 0rz
+17:58:38 <godfat> 我覺得超崩潰的... ~.~ 到底依賴 xcode IDE 的理由是啥...
+17:58:50 <caasihuang> 另外 JS 的 lib binding extension 通常不用自己編該 lib ，只用 pkg-config 找到該有的 ld 參數
+17:59:10 <caasihuang> godfat: 還以為依賴 console tools 就好了（死
+18:00:01 <caasihuang> 最後如果要寫 r3 node binding 的話還可能遇到 name conflict 跟 rpath 找不到...
+18:00:13 <godfat> 終於改好啦~~ (灑花)
+18:00:40 <godfat> node 要做 extension 這麼多問題喔 = =... rpath 都來了...
+18:01:15 <CindyLinz> caasihuang: 沒有沒有 perl 的是不處理, 是 haskell 的才有 ^^|
+18:01:33 <caasihuang> CaesarChi: 以下是昨天弄到一半的玩具，歡迎抄 building.gyp ，其他沒啥可看的...
+18:01:34 <caasihuang> https://github.com/caasi/node-r3
+18:01:54 <caasihuang> CindyLinz: 啊啊，抱歉，是我記錯了，感謝指正
+18:02:33 <caasihuang> godfat: rpath 似乎只有我遇到，也許哪邊做錯了
+18:02:48 <caasihuang> 以上 XD
+18:02:56 <CindyLinz> c9sloud: 嘖嘖.. 在 POD 裡面習慣用 =head2 來描述函數 signature, 然後下面寫它的說明.. 這直接轉成 markdown 實在是太大了 XDXD
+18:03:01 <CindyLinz> c9sloud: https://github.com/CindyLinz/Perl-JSON-XS-ByteString
+18:04:20 <godfat> 咆哮語
+18:05:10 <CindyLinz> 看起來 godfat 處於狂暴模式..
+18:05:54 <godfat> 我是說你的字太大耶 XD
+18:06:51 <CindyLinz> 喔.. XD
+18:07:14 <CindyLinz> 把 ## 改成 ### 小一級好多了....ww
+18:10:11 <godfat> r3 dependency 真多 @@
+18:11:08 <CindyLinz> perl 版只有 depend pcre 歐~ (心)
+18:11:46 <godfat> 我正在弄 homebrew 安裝 r3, 成功了，要好多：
+18:11:47 <godfat>   depends_on "automake"
+18:11:47 <godfat>   depends_on "libtool"
+18:11:47 <godfat>   depends_on "pkg-config"
+18:11:47 <godfat>   depends_on "check"
+18:11:47 <godfat>   depends_on "pcre"
+18:11:48 <CindyLinz> 雖然說都已經在 perl 裡面了還要額外 link 一個 perl-compatible-regular-expression 感覺不是很好..ww
+18:12:07 <godfat> XD 寫成也可以 link perl? XD
+18:12:33 <CindyLinz> 我不知道要怎麼這樣 link..  我只知道可以直接呼叫 perl 的函數.. ^^|
+18:12:49 <CindyLinz> 應該說 一定是已經有 link 了, 可是要去用啊 ._.
+18:13:04 <godfat> compile r3 時多加幾個 macro? XD
+18:13:28 <CindyLinz> 是可以改在 fill_source.pl 裡面加料...
+18:15:36 <CindyLinz> 不過.. 它們是 perl 的 public but undocumented api... document 裡面只有把它們的名字列上去, 沒有說明ww # pregcomp pregexec pregfree pregfree2
+18:16:27 <godfat> perl 可以直接改用 pcre 嗎？
+18:19:36 <CindyLinz> godfat: (指指 public but undocumented api)
+18:20:20 <godfat> 原來那些就是 pcre 的 api 了..
+18:20:57 <godfat> 那最終都是 link 到同一份 pcre 吧？
+18:22:13 <CindyLinz> 沒有.. 我翻了一下 source.. perl 提供的那些是給 perl 介面的.. 所以如果要把 C 的資料塞進去的話, 要先偽裝成 perl 的變數 XD
+18:23:25 <godfat> 那 perl 那些底層如果也是呼叫 pcre, 那有差嗎？
+18:24:28 <CindyLinz> 應該不是...
+18:24:41 <CindyLinz> pcre 的 man page 說 The current implementation of PCRE corresponds approximately with Perl 5.12
+18:24:51 <CindyLinz> 看起來是仿作, 不是一樣的東西 @@"
+18:25:12 <godfat> 那就沒辦法啦 XD
+18:25:25 <godfat> check 是 runtime 需要的，還是 build 而已？
+18:25:32 <CindyLinz> build only
+18:25:37 <godfat> ok
+18:26:17 <godfat> make check 就是跑測試嘛？
+18:27:05 <CaesarChi> caasihuang 所以已經寫完了 lol ???
+18:27:31 <godfat> 猛一看以為 3.0 了 libr3.0.dylib
+18:27:39 <mno2_> godfat: 是開一張支票給 c9sloud
+18:27:50 <godfat> XDDD
+18:28:04 <godfat> 那 c9sloud 應該很快就發了
+18:29:09 <caasihuang> CaesarChi: 沒寫完，跟你卡不同的地方
+18:29:43 <CaesarChi> XDDDD     我是卡在完全不會寫 C
+18:33:07 <godfat> done: https://github.com/Homebrew/homebrew/pull/29517
+18:34:55 <letoh> 寫 r3 binding 變成最近的全民運動?
+18:35:03 <godfat> ruby binding 晚點再說好了，該辦正事了..
+18:35:03 <godfat> XD
+18:35:41 <letoh> 上完課也來玩玩看好了XD
+18:36:17 <godfat> XDD forth binding? 話說如果做成的話，我也想照著演算法弄弄看純 ruby 會慢多少
+18:37:05 <letoh> 大概會弄一下 io / factor / forth 的吧  先從比較熟的開始弄起
+18:37:09 <letoh> python 的有人寫了嗎?
+18:38:07 <godfat> io!
+18:39:36 <letoh> 我知道你好像也有玩過:p
+18:40:12 <godfat> 稍微試了一下而已 XD 不過感覺還不錯~
+20:30:21 <aksatac_> 全民運動！
+20:43:39 <CindyLinz> 欸! 結果這兩天我寫了兩個 perl mod 丟 github
+20:43:44 <CindyLinz> 都被標為 C 啦.......||
+20:43:55 <CindyLinz> 明明就是 Perl+2 的說... OAO
+21:22:48 <CindyLinz> ghc generic 看起來真是有點複雜啊... OAO
+21:22:59 <CindyLinz> template haskell 簡單多了的感覺 orz
+23:17:19 <caasihuang> CindyLinz: 前天聽你提到 Haskell 的 Ptr 和 ForeignPtr ，今天跟 Johnson Lin 討論時，他問道：
+23:17:34 <caasihuang> > 蠻有趣的是什麼情況下需要去讓 ownership 改變 (Ptr -> ForeignPtr)？想不到什麼 use case ..﻿
+23:17:36 <lambdabot>  <hint>:1:59: parse error on input ‘case’
+23:18:09 <caasihuang> 背景脈絡大概是，他是寫 C++ 和 Lua 為主，分享了他的經驗。
+23:18:31 <caasihuang> 可愛的 lambdabot 抱歉啦 XD
+23:19:02 <caasihuang> 這邊是公開的討論內容： https://plus.google.com/u/0/+caasiHuang/posts/CsypJa4sa5g
+23:19:07 <c9sloud> CindyLinz: 稍微敘述了一下 optimized patterns https://github.com/c9s/r3#optimization
+23:21:02 <CindyLinz> caasihuang: 我回應了!
+23:21:23 <caasihuang> CindyLinz: 感謝！
+23:21:49 <CindyLinz> caasihuang: 你感謝得太早了..ww
+23:22:09 <caasihuang> XDD
+23:22:56 <poga> 先探頭！XDD
+23:23:15 <CindyLinz> 啊又還沒看完前文.... XD
+23:23:16 <c9sloud> 咦!
+23:23:52 <c9sloud> 還有 25 分鐘
+23:24:06 <c9sloud> 不知道有沒有可能寫完一個 pthread route feedback worker
+23:24:07 <c9sloud> XD
+23:28:06 <caasihuang> CindyLinz: 你願意回應，不管在這邊還是在那串，就非常感謝啦 XD
+23:29:26 <CindyLinz> c9sloud: 為什麼要動用 multithread 啊? 會有賺頭嗎? @@"
+23:29:34 <c9sloud> 1.2.0 released
+23:29:48 <c9sloud> CindyLinz: for dynamic feedback statistics & adjustment
+23:29:51 <c9sloud> XD
+23:30:08 <c9sloud> 順便練習一下 pthread programming
+23:30:53 <c9sloud> CindyLinz: 因為每個 edge 都是 stored by sequence, 如果可以依照權重 sort 一下的話...
+23:31:04 <c9sloud> 但我又希望 sorting 不要 blocking
+23:31:11 <CindyLinz> caasihuang: 有內容的回了 XD
+23:31:44 <c9sloud> 所以我想設計一個 optimizer 可以大概 10-20 seconds 依照每個 edge 的 score optmized 一下 ... for fun :p
+23:32:25 <CindyLinz> c9sloud: fork thread, join thread, waiting thread, 使用 mutex 的時候都會 blocking 啊 OAO
+23:32:48 <letoh> thread 才喜歡 blocking XD
+23:32:51 <c9sloud> 嗯嗯對 看是如果 idle 沒 matching 的話 要走訪就沒差
+23:33:03 <CindyLinz> 不過體驗體驗也是好的?
+23:33:18 <caasihuang> CindyLinz: 收到，再一次感謝 XDD
+23:33:22 <c9sloud> letoh: 呃, 但如果每次 match 到之後就去做調整，這樣就 blocking 了
+23:33:32 <CindyLinz> multithread 需要極端測試來檢驗正確性... o.o
+23:33:38 <c9sloud> 嗯嗯嗯 yeahhh
+23:33:59 <CindyLinz> 只是那種 1/2000 的錯誤率要測得出來就看運氣了 orz
+23:34:36 <c9sloud> 通常錯誤應該是因為 data race 吧
+23:34:53 <CindyLinz> 對啊, 可是 race 發生率很低的...
+23:34:56 <c9sloud> 話說以前在 perl 裡面要用 pthread
+23:35:15 <c9sloud> 發現只能 share scalar ... 不能 share object, hash or array XD
+23:35:26 <CindyLinz> 對.. XD
+23:35:28 <c9sloud> 而且好像還是 copy-on-write ??
+23:35:36 <CindyLinz> 而且沒有宣告的所有變數都會 fork 一份..
+23:35:40 <c9sloud> 所以你真的 modify 了，他會變成另外一個 variable XD
+23:35:44 <CindyLinz> 沒有宣告要 share 的變數..
+23:36:00 <c9sloud> 用過好幾套 thread module... 沒好用的 orz
+23:36:00 <CindyLinz> 沒有 copy on write 啦.. 應該是沒 share 的才會那樣 ^^|
+23:36:18 <c9sloud> 大概快速看過了一次 pthread c programming 我覺得簡單多了
+23:36:24 <c9sloud> 比 perl 好控制 XD
+23:36:42 <CindyLinz> c9sloud: 用 Haskell 的 Perl package, 裡面可以自己開 N 隻 runPerlT
+23:38:02 <CindyLinz> 喔不過我好像忘記把它們丟到 forkOS 裡面... XD
+23:38:27 <c9sloud> 講到這邊..
+23:38:31 <c9sloud> 想請問一下
+23:38:51 <CindyLinz> OSDC 前, 還沒有弄出 HasPerl 的時候, 原本想只有 demo Perl.. 就在想有什麼梗可以玩... 其中一個就是來 真．multithread.. XD
+23:38:54 <c9sloud> linux 上的 pthread mutex 實作是會呼叫 linux kernel 底層的 futex 嗎?
+23:39:17 <CindyLinz> c9sloud: 原型都是沒有的.. 原型是純 user mode 實作, kernel 完全不知道...
+23:39:26 <c9sloud> CindyLinz: 你有自己寫一個 pthread extension 喔?
+23:39:28 <CindyLinz> c9sloud: 後來就不知道了 orz
+23:39:29 <c9sloud> 喔喔 XDDD
+23:39:53 <CindyLinz> c9sloud: 不用啊, 想利用 GHC runtime 的 multithread 支援而已 XD
+23:39:54 <c9sloud> 我記得 futex 是為了減少 system calls
+23:40:12 <c9sloud> 因為 pthread mutex 會比 spin lock 花更多的 system calls
+23:40:25 <c9sloud> 要去 thread sleep & wake up 之類的
+23:40:59 <c9sloud> 所以才想問說是不是 pthread mutex 本身底層就是 futex
+23:41:19 <CindyLinz> 嗯 沒有讀過 @@"
+23:41:57 <c9sloud> 可能要請教 letoh 或 au XD
+23:43:43 <letoh> 我幾乎都在寫別套 RTOS 的 thread，很少碰 pthread 耶
+23:44:58 <letoh> 不過單純看 api 的話，用起來其實差不多
+23:45:28 <CindyLinz> c9s 在偷翻人家底下的實作!
+23:45:35 <letoh> 要討論實作的話就得去挖 code 了
+23:45:49 <c9sloud> 所以應該是不同的東西? 嗯嗯看來應該去看 code
+23:46:24 <letoh> 我只聽說以前是在 user space 模擬的
+23:46:51 <CindyLinz> linux 應該好一點, 會有很多好心人寫教學 blog, 不用翻 code 吧 :p
+23:47:07 <letoh> 不過為什麼需要那麼在意 latency? 有要求到 ms 甚至是 ns 嗎? XD
+23:47:39 <CindyLinz> letoh: 有喔~ 如果是看單一個 request 的話....ww
+23:48:00 <c9sloud> 有耶
+23:48:02 <c9sloud> https://sourceware.org/git/?p=glibc.git;a=blob;f=nptl/pthread_mutex_init.c;h=d9b1ef0b98d129ded2ebf256ea5d243406f3fdbc;hb=HEAD
+23:48:04 <CindyLinz> 現在平均有 1M request/s 吧ww
+23:48:08 <c9sloud> 他有 feature test
+23:48:16 <letoh> !!!
+23:48:37 <c9sloud> 所以 mutex 底層是會看 kernel feature 有沒有 futex
+23:48:55 <c9sloud> 這是 glibc 的實作
+23:49:01 <c9sloud> 其他的可能就不確定了
+23:49:17 <CindyLinz> linux 哪有在用其他的.. (逃)
+23:49:29 <c9sloud> 因為好像也有分 intel linux 的 posix 實作喔
+23:49:40 <letoh> 有 musl linux XD
+23:50:39 <CindyLinz> 印象中 icc 貴鬆鬆, 看到 intel 就想跳過了..ww
+23:51:07 <c9sloud> 最近在讀這篇 https://computing.llnl.gov/tutorials/pthreads/
+23:51:10 <c9sloud> 請多指教 ^^
+23:51:32 <CindyLinz> 等等, 我以為這是「最近在寫這篇」才「請多指教」啊 XD
+23:52:52 <letoh> 如果要快的話，用 openmp 應該會好一點?  資料可以同時處理嗎?
+23:55:17 <c9sloud> letoh: openmp XDDDD
+23:55:38 <c9sloud> 我只是要 async 做這件事情而已 XD
+23:55:38 <CindyLinz> 應該只想多一個影分身在背景偷做事而已?
+23:55:44 <letoh> 喔喔喔
+23:55:58 <CindyLinz> 主線應該是要依序做, 不能分割的
+23:56:08 <c9sloud> CindyLinz: yeah
+23:56:21 <CindyLinz> 欸! 我倒是沒有想過考慮平行處理的 DFA 有沒有什麼好玩的作法耶~
+23:56:32 <CindyLinz> 有了!
+23:56:38 <CindyLinz> 直接拿 NFA 去處理.. XDXD
+23:57:12 <CindyLinz> state 個數可能比轉成 DFA 的 state 個數少, 所以有機會賺到
+23:57:21 <letoh> (好像不小心打開什麼開關了 (誤
+23:57:26 <CindyLinz> wwww
+23:57:47 <c9sloud> 對..
+23:57:54 <c9sloud> XDD
+23:58:08 <c9sloud> 不過 DFA 麻煩的地方就是要 reduce state
+23:58:14 <c9sloud> 不然 state 一堆

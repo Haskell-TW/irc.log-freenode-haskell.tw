@@ -1,0 +1,5 @@
+22:19:20 <suhorng> 平常說 non-strict 有什麼比較清楚的解釋嗎? (e.g. 對Haskell的non-strict的解釋)
+22:20:09 <suhorng> 像是說 strict 可以簡單的定義什麼是value, 然後主要規定 function application 都要先把參數算到 value 為止
+22:33:28 <suhorng> 嗯..好像也還是只能用用到什麼值再去算這樣解釋...?
+23:20:10 <Yu_lin> 我現在才知道 sdl 2.0 release 了
+23:28:09 <letoh> 好像有一陣子了

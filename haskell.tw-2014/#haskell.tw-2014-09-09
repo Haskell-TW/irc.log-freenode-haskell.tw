@@ -1,0 +1,34 @@
+13:42:35 <suhorng> 引入 import Control.Monad.Error 時出現了警告訊息@@ 說要改用 import Control.Monad.Except...
+13:43:53 <suhorng> 突然發現 mtl 也變成 ekmett 在維護了....
+13:44:10 <CindyLinz> :D
+20:59:12 <suhorng> http://www.haskell.org/ghc/docs/latest/html/libraries/ghc-prim-0.3.1.0/src/GHC-Prim.html     newMutVar#, readMutVar#, writeMutVar# ... 我到底看了什麼XD
+20:59:56 <suhorng> 連追個 STRef 的實作也追不到...XD
+21:00:08 <CindyLinz> REAL WORLD haskell? XD
+21:00:19 <suhorng> www
+21:00:44 <suhorng> 原來 readl world haskell 全都一句 let x = x in x 就搞定
+21:01:11 <CindyLinz> 這 any world 哪裡 real 了 XD
+21:02:10 <suhorng> 那是個含時間參數的 real world (?) 還是說一旦他被我們這個世界具體化就變 real 了呢
+21:02:36 <CindyLinz> 覺得這 source 只是擺個 placeholder 叫 syntax checker 不要吵而已 XD
+21:07:47 <suhorng> CindyLinz: 阿, 真正的實作應該是直接在 compiler 內部....
+21:08:20 <CindyLinz> 嗯, 等 code gen 的時候偷偷把程式換掉
+21:08:51 <CindyLinz> 不知道 GHC 會不會把「可以一眼看出 un-halting」的程式作怎樣的 optimize
+21:08:59 <suhorng> 然後 IO 的實作變成某個特化的 ST monad 0..0
+21:09:03 <suhorng> 唔
+21:09:31 <suhorng> 應該也可以做一些 dead code elimination, 只是不知道有什麼用XD
+21:11:19 <CindyLinz> 啊不對, let x = x in x 應該要真的 halt 不是 UB 哄..
+21:11:28 <suhorng> 是XD
+21:11:47 <suhorng> !? 突然發現 un-halting 看不懂是什麼意思
+21:11:55 <CindyLinz> 那就不能拿掉, 然後, 髒西西的 GHC native 就不會找不到地方 landing 了 :p
+21:12:01 <CindyLinz> unterminate? :p
+21:12:29 <suhorng> XDD
+21:13:59 <suhorng> https://github.com/ghc/ghc/blob/master/compiler/prelude/primops.txt.pp 喔喔! 搜尋 newMutVar#
+21:14:12 <suhorng> 這是不是跟 GHC 以前的實作方式不同...@_@"
+21:14:46 <suhorng> 不對 別理我 =A="
+21:15:50 <CindyLinz> github syntax 壞掉惹 :p
+23:43:43 <caasih> 這裡也貼一下 找到 brew 移掉 haskell-platform 的原因了 https://github.com/Homebrew/homebrew/commit/1e9fb520b17fffe1d6559b054a05f1a3abaae079
+23:45:44 <suhorng> 阿, 這麼說好像有大改
+23:45:57 <suhorng> 安裝出來的東西也變了之類
+23:48:27 <caasih> 前面幾個 commits 看來是更新到 7.8.3
+23:54:16 <caasih> XDDDD
+23:55:48 <au> caasih: https://github.com/meiersi/blaze-react/blob/master/src/Blaze/React/Examples/Todo.hs#L159 #FRP
+23:56:20 <au> 和 jsx 的 overhead 相近，比較來 livescript syntax 好像少打很多字 XD

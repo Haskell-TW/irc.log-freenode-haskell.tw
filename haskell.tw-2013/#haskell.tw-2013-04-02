@@ -1,0 +1,10 @@
+20:59:32 <MnO2> oh yeah, 緬甸可以上 IRC, 留個紀錄
+21:01:14 <letoh> 哇
+21:02:23 <MnO2> 但網速非常悲慘 xD
+21:12:57 <b4283> Burma
+22:03:14 <suhorng> pandoc好像是Haskell寫的耶www
+22:27:46 <MnO2> suhorng: 對
+22:28:50 <suhorng> 不過不知道為什麼中文弄出來的 pdf (用 xelatex)編出來很悲劇- -||
+22:28:53 <suhorng> 排版亂掉
+23:03:50 <petercommand> suhorng: font的問題?
+23:06:54 <suhorng> 不知道, 換了好幾種font仍然會亂掉 (後來讓他產生 tex 自己編)

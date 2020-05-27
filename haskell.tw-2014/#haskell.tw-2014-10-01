@@ -1,0 +1,48 @@
+13:44:13 <miaoski> 在敝社開了 Scala 的 study group
+13:44:18 <miaoski> 大家看到都快吐了....
+13:44:28 <miaoski> 一點都不 coherent, 語言設計有夠糟 XD ...
+13:44:35 <cibs> 只好馬上轉成 Haskell 的 study group
+13:46:18 <miaoski> cibs: 大大好威~~ 大大幫忙開課 ^^
+13:48:42 <miaoski> 10/15 是 cibs 大大的課喲! 歡迎大家旁聽~ 在 A905 教室
+13:49:18 <petercommand> 是哪個學校呀?XD
+13:49:22 <hychen> 趨勢大學
+13:49:39 <hychen> miaoski: 語法超醜
+13:49:47 <hychen> 比go還醜
+13:50:05 <petercommand> 趨勢大學是啥XD
+13:50:12 <petercommand> google找不到
+13:50:34 <miaoski> petercommand: 地址是敦化南路二段198號，請在樓下換證 :)
+13:51:25 <cibs> miaoski: 這樣互賣不行啊
+13:51:35 <petercommand> 喔喔，是趨勢防毒公司XD
+13:57:57 <miaoski> hychen: 沒辦法，不想寫 Java, 大家又很怕 Clojure ..
+14:04:14 <cataska> 課程主講人吐嘈 Scala 是甚麼概念 www
+14:24:31 <miaoski> cataska: 我不是主講人啦。這是 study group 大家輪流講... XD 我是 LISP 派的，當然要吐糟 XD
+14:28:08 <cataska> miaoski++
+14:28:46 <cataska> 現在 JVM 上最火紅的就是 Scala & Clojure
+14:29:02 <cataska> 如果害怕 Clojure 只好...
+14:29:38 <cataska> 有 IDE 幫忙應該好一點吧
+14:56:19 <kanru> miaoski++
+15:28:20 <cibs> miaoski: 明明 Scala 的人數也只比上次沒開成的 Clojure 多幾個有差嗎...XD
+15:29:06 <miaoski> cibs: 5 個 vs. 8 個 好啦上次是因為我已經加了 3 個 study group 了，所以就不想勉強
+15:29:13 <miaoski> 這次我只有這一個 XD
+15:33:22 <hashcat> 個位數..
+16:14:25 <au> JVM 上最尖端的聽說是 Node.js XD
+16:14:30 <au> aka Truffle/JS
+16:29:17 <mno2> 不是前幾天 Oracle 才放出來？
+16:33:36 <hychen> miaoski: 趨勢study group是上班時間開嗎?
+16:43:14 <miaoski> hychen: 不一定，但 scala 的是喲。在 12:00-14:00
+16:43:26 <miaoski> au: 我不要 node.js ~~~ XD
+16:43:37 <miaoski> 不過可以 LiveScript -> node.js / JVM 這樣也不錯
+16:43:53 <au> yeah
+16:44:02 <CindyLinz> miaoski: 好 ghcjs, 不用嗎? XD
+16:44:20 <au> ghcjs -> Truffle/JS -> JVM?
+16:44:25 <au> 玩很大
+16:44:27 <CindyLinz> 嗯 XD
+16:44:45 <CindyLinz> 連 au 都說玩很大....orz
+16:45:02 <CindyLinz> 我覺得我聽懂惹.... (逃走)
+16:48:04 <miaoski> CindyLinz: 不要!
+16:53:14 <cataska> miaoski: 可以開放旁聽麼？
+16:53:31 <miaoski> cataska: 至少 scala 可以
+16:53:44 <miaoski> 其它的請問主辦人囉... (預設都是很歡迎啦，應該沒人會拒絕)
+16:54:06 <cataska> miaoski: Scala 是禮拜三？
+16:55:59 <miaoski> cataska: 是。每星期三中午 12:00-14:00 建議買個東西來吃，因為公司有供應便當... 你會很餓 XD
+16:56:42 <cataska> miaoski: OK

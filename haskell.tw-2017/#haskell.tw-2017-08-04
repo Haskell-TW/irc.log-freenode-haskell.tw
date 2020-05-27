@@ -1,0 +1,7 @@
+17:58:15 <CindyLinz> > let gcd a b = if a == 0 then b else gcd (b `mod` a) a in gcd 15 20
+17:58:17 <lambdabot>  5
+17:58:30 <CindyLinz> @pl let gcd a b = if a == 0 then b else gcd (b `mod` a) a in gcd
+17:58:30 <lambdabot> fix (ap (ap . if' . (0 ==)) . join . (flip .) . (. flip mod) . (.))
+18:07:13 <caasih> 其實你可以 /msg lambdabot （逃
+18:07:25 <CindyLinz> 不要!
+18:07:50 <caasih> XD 好吧，君子坦蕩蕩

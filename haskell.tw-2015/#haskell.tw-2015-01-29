@@ -1,0 +1,37 @@
+00:43:52 <mno2> 今天 meetup 聽到有人說有人在把 liquid democracy 的 project 的一小部分改用 haskell 寫
+00:44:39 <mno2> 然後有一個法國人好像也是在弄另外一套 public participation 的東西，也是用 haskell 寫
+00:52:43 <mno2> 話說參加 haskell meetup 真的是很打擊自信的事 xDD  覺得身邊每一個人都比你聰明
+01:14:04 <CindyLinz> 沒關係.. 不覺得這是種會打擊信心的事件類型 XD
+01:22:02 <CindyLinz> mno2: 有沒有理由啊?
+01:28:05 <mno2> CindyLinz: 你說 liquid democracy 改寫？
+01:28:27 <CindyLinz> 欸對呀~ 這個「改」應該是個動機比較強烈點的動作嘛? ^^
+01:28:44 <CindyLinz> 甚至要把原本做好的東西丟掉耶
+01:29:41 <mno2> 我不確定有沒有「改」，應該是「寫」啦。應該就只是很想用 Haskell ，然後成功推動小小一塊空間被其他人同意可以用 Haskell 寫的樣子
+01:30:40 <mno2> 就像微軟那個 protocol 的東西一小塊用 Haskell 寫也是可以拿來小小說嘴
+01:31:27 <CindyLinz> 好吧 ^^|  沒有撈到一個某某 Haskell 特性大勝的說辭
+09:54:49 <mno2> http://code.haskell.org/~dons/talks/dons-google-2015-01-27.pdf
+09:54:59 <mno2> [Haskell in the Large]
+18:40:51 <CindyLinz> miaoski, cibs: 昨天投影片放上線~~
+18:41:03 <miaoski> CindyLinz: ++
+18:41:37 <CindyLinz> allenlai: 昨天投影片上線~~ https://github.com/CindyLinz/Tutor-Haskell
+19:08:41 <petercommand> 為甚麼 haskell 不要設計成當 data 符合 newtype 的定義的時候，直接用 newtype 的方法做操作呢? 把他當成 optimization 這樣
+19:09:05 <petercommand> 這樣就不用寫 newtype 了
+19:49:52 <pkmx> newtype的ctor是strict
+19:54:28 <pkmx> > (\(Const _) -> ()) undefined
+19:54:30 <lambdabot>  ()
+19:54:34 <pkmx> > (\(Just _) -> ()) undefined
+19:54:36 <lambdabot>  *Exception: Prelude.undefined
+19:55:47 <pkmx> > (\_ -> ()) undefined
+19:55:49 <lambdabot>  ()
+19:59:16 <petercommand> 喔喔，原來如此..
+20:04:42 <pkmx> 這個樣子看起來比較wtf一點XD
+20:05:08 <pkmx> > (\(_ :: Sum a) -> ()) undefined
+20:05:09 <lambdabot>  ()
+20:05:13 <pkmx> > (\(_ :: Maybe a) -> ()) undefined
+20:05:15 <lambdabot>  ()
+20:05:24 <pkmx> :<
+20:05:29 <pkmx> GG
+20:05:41 <pkmx> 忘了這樣他就不會去看ctor了=.=
+20:06:00 <petercommand> XD
+20:08:50 <pkmx> 突然想到
+20:09:18 <pkmx> 常見的library裡面有可以是newtype但是故意定義成data的型態嗎=p

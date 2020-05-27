@@ -1,0 +1,70 @@
+03:05:04 <CindyLinz> "OH: GHC is a much friendlier program than it used to be. Many more kind errors." # https://www.facebook.com/ekmett/posts/10153529315945339
+07:42:11 <suhorngT_> mno2: XD
+07:42:46 <suhorngT_> letoh: GCC gen thumb code, LLVM gen non-thumb code. 然後 GHCi runtime linker 沒有好好的把兩邊接起來, 所以 jmp 過去就滅了
+23:00:59 <suhorngT_> 突然想到原本 typeclass 可以 inline, 不過 Oleg 上次的 talk 那樣就真的不能 inline 了哪....
+23:02:28 <suhorngT_> (forall repr. Semantics repr => repr XXX) 之類
+23:04:37 <CindyLinz> 有 forall 的話, inline 希望渺茫沒錯
+23:05:05 <CindyLinz> forall 可以作 object 程式的 dynamic dispatch, 所以很可能需要把 vtable 存在 runtime
+23:07:48 <suhorngT_> 對
+23:08:02 <suhorngT_> 我是說只得 runtime 傳個 Dict Q_Q
+23:09:07 <CindyLinz> 功能一樣的東西, 最後實作的結構也不會不一樣到哪去嘛 ^^|
+23:19:16 <suhorngT_> CindyLinz: 抗議一下, vtable 應該遠比 typeclass 需要的複雜太多了....typeclass 沒有繼承阿
+23:19:38 <CindyLinz> suhorngT_: 喔, 我只是沒有 vtable 以外的名詞可以用 @@"
+23:19:47 <suhorngT_> XDD
+23:19:48 <CindyLinz> 有標準名字嗎? @@"
+23:20:01 <CindyLinz> 如果都叫 the-table 不是更難達意 XD
+23:20:35 <CindyLinz> suhorngT_: 然後... type class 的 constraint 可以視為繼承 ._.
+23:20:39 <suhorngT_> 我記得 typeclass-guy 叫它 dictionary?
+23:21:00 <CindyLinz> dictionary 聽起來跟 table 一樣有意義... (?
+23:21:08 <suhorngT_> CindyLinz: 繼承會把父類別實作繼承下來, 還可以複寫, typeclass 完全不是這種東西呀?
+23:21:30 <suhorngT_> typeclass 沒有繼承實作這種東西  沒有複寫  也不可能有菱形
+23:22:42 <CindyLinz> 不是保證複寫嗎? 因為只是個 interface XD
+23:23:01 <CindyLinz> 有菱形啊
+23:24:30 <suhorngT_> CindyLinz: 恩...怎麼弄阿
+23:25:30 <suhorngT_> CindyLinz: 保證複寫?
+23:26:03 <CindyLinz> instance Eq Int where (==) = .... 這樣就複寫了啊
+23:26:31 <CindyLinz> 不複寫的話就是 a == b = not (a /= b)
+23:27:44 <suhorngT_> 我在想的複寫是 instance A a => B a where 然後 B a 裡面去複寫 A a (但是沒這種東西)
+23:28:47 <suhorngT_> 不然只是蓋掉 default impl 跟一般 OO 的 overriding 有段差距, 從任意多層變僅限一層XD
+23:28:50 <CindyLinz> Haskell 與 Java 的形狀不完全一樣, 我們只是在 encode/embed 概念而已, 所以各有想像 XD
+23:29:59 <suhorngT_> 那這樣子的 encode 跟 OO 的繼承/overriding 的差距很大....
+23:30:14 <suhorngT_> 比用 function object encode lambda 還大(X
+23:32:41 <CindyLinz> 我理解的 encode OO 是這種 http://cindylinz.github.io/Tutor-Haskell/?volume=syntax2#25
+23:32:44 <CindyLinz> 或這種 http://cindylinz.github.io/Tutor-Haskell/?volume=syntax2#29
+23:33:36 <CindyLinz> #29 比較像
+23:36:20 <suhorngT_> 後面會提到 A -繼承-> B -繼承-> C 這類東西嗎?
+23:36:41 <suhorngT_> 還是說僅限封裝, 把資料跟函式綁在一起的部份
+23:37:10 <CindyLinz> 後面? 沒有, 我這只是要介紹 existential type ^^|
+23:38:06 <suhorngT_> QQ
+23:38:22 <CindyLinz> instance A a => B a 的 dictionary 要怎麼實作呢 @@"
+23:39:24 <CindyLinz> 嗯.. 它本身是一個 B 的 dictionary, 然後再自帶一個指向 A 的 dictionary
+23:39:42 <CindyLinz> 然後 B 部分的函數會使用那個 A dictionary 裡的函數
+23:39:56 <CindyLinz> 這樣不是就有繼承感了嗎? XD
+23:40:07 <suhorngT_> 我覺得是有關聯 (A a, B a, C a) => f a 這種東西要怎麼實作
+23:40:13 <suhorngT_> 是會自帶很多個 dictionary 還是怎樣
+23:40:28 <CindyLinz> 自帶很多個沒錯 XD
+23:40:34 <CindyLinz> 你說的是 instance 不是 class 吧?
+23:40:37 <suhorngT_> instance A a => B a 比較像這種. dictinoary 之間總覺得是都可以獨立不用連來連去
+23:40:43 <suhorngT_> 是
+23:41:03 <suhorngT_> 因為 typeclass compile-time 就可以知道到底誰要哪些了
+23:41:05 <CindyLinz> class 應該是展開把 A 的 method slot import 到 B 裡面
+23:41:40 <CindyLinz> 嗯 instance A a => B a 的 dictionary 外表看起來是 B, 不會有 A 的成份在
+23:41:45 <CindyLinz> 只是裡面會偷用 A
+23:41:57 <suhorngT_> 沒仔細研究實作...但是我會想要作成 dictionary 都是獨立的, 不管 instance => 還是 class => 都是
+23:42:10 <suhorngT_> 這些 dependencies 僅限於 compile time 去解 relation
+23:42:11 <CindyLinz> instance 紅 a => 藍 a -- 藍皮紅骨 (X
+23:42:16 <suhorngT_> runtime 都丟掉
+23:42:40 <CindyLinz> runtime 能丟掉的東西 <=> inline 之後可以消掉的東西?
+23:42:58 <CindyLinz> 應該不用額外的引理吧? @@"
+23:42:59 <suhorngT_> inline phase 應該跟丟不丟掉這邊是獨立的 pass @@
+23:43:13 <suhorngT_> 我說 runtime 丟掉是丟掉 dependencies
+23:43:58 <CindyLinz> 喔喔, class 的那個?
+23:44:38 <suhorngT_> class 跟 instance 都是
+23:45:11 <CindyLinz> 咦?
+23:45:23 <CindyLinz> instance 裡面的 => 行嗎? @@"
+23:46:07 <CindyLinz> 我覺得 instance 的 => 可以 propagate 到各 method 來加 =>
+23:46:29 <CindyLinz> 變今各 method 的 context, 變成 curry 的第一項參數這樣
+23:46:37 <CindyLinz> 你是想這樣作?
+23:46:47 <suhorngT_> 恩對
+23:47:09 <CindyLinz> 嗯嗯嗯..
+23:47:46 <CindyLinz> 也是... 如果存在 instance.. 其實就是再 indirect 一層, 從 method 指向自己 instance 的 container (如果有的話), 再使用 container 裡面的 instance context.. XD

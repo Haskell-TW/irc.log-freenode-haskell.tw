@@ -1,0 +1,60 @@
+12:59:57 <_13h> http://research.microsoft.com/en-us/projects/koka/   這算是 strict 版的 haskell 嗎?
+13:13:38 <_13h> http://www.cs.brown.edu/courses/cs173/2012/OnLine/  # 也是一個免費的線上課程
+13:16:49 <MnO2> 沒聽過koka
+13:17:21 <_13h> 剛剛在清理 ltu 的 feed，太久沒看了XD
+17:21:15 <CindyLinz> 口卡獸 XD
+17:32:20 <MnO2> ?
+17:33:50 <CindyLinz> koka
+17:36:22 <_13h> 那是什麼獸？
+17:39:43 <CindyLinz> 鄉民的正義 的名詞解釋裡有說明 :p  http://home.gamer.com.tw/creationDetail.php?sn=601773
+17:40:17 <CindyLinz> 跟 PTT 有關, 這電影是拿它去延伸創作 :p
+17:43:13 <_13h> 原來是 ptt
+18:01:18 <MnO2> https://github.com/audreyt/js2ls/tree/master
+18:01:44 <MnO2> 做這個是拉攏的有力武器嗎? xD
+18:03:09 <MnO2> CindyLinz 趕快寫個 js2fay
+18:03:22 <CindyLinz> MnO2: Fay is fail 啊 @_@"
+18:03:25 <CindyLinz> 不是啦
+18:03:42 <CindyLinz> 只是 GHC 上面 standard lib 的 import 不能用啊 orz
+18:04:12 <MnO2> 很正常吧
+18:04:16 <CindyLinz> MnO2: 你貼的這個不知道是在做什麼.. 到底是要轉成 coffeescript 還是 livescript 搞不清楚 orz
+18:04:28 <MnO2> livescript吧
+18:04:29 <CindyLinz> 大標題是 livescript.. 可是說明全部都是 coffeescript
+18:04:39 <MnO2> 只是從coffeescript的版本開始改
+18:04:50 <CindyLinz> hmm
+18:05:04 <CindyLinz> 還有, 這一個方向我不知道用處是什麼耶 @@"
+18:05:33 <CindyLinz> 如果像 Fay, 想成 fay2js 的話, 那就是說: 你不用學 js 了, 學 fay (haskell) 就好了
+18:05:47 <CindyLinz> js2fay 的話是說: 你不用學 haskell 了, 學 js 就好了
+18:05:50 <CindyLinz> 這樣嗎? ^^+|
+18:05:56 <MnO2> 要把現有的project轉換吧
+18:06:21 <MnO2> 這樣就不用考慮compile之後相容問題？
+18:06:35 <CindyLinz> 我想一下....
+18:07:03 <CindyLinz> 有一個用途, 應該是想用 coffee / live 去改寫很局部的現有的 javascript 程式
+18:07:25 <CindyLinz> 不然, 如果是從檔案層級切開, 它們根本就是互融的 ^^|
+18:08:04 <CindyLinz> 因為... js2ls 或 js2coffee 根本是 asm2c 的方向啊 ^^|
+18:08:45 <MnO2> 但應該不會想要project裡面一大堆asm吧
+18:09:07 <MnO2> 全部轉成C來維護
+18:09:37 <CindyLinz> 其實是 C-- 這樣 ^^|
+18:10:19 <CindyLinz> 是個 regular language :p
+18:10:39 <CindyLinz> 不過 js 比較複雜, 還不到組語的程度..
+18:11:28 <MnO2> 就是某中爽度的問題吧
+18:11:32 <MnO2> 某種
+18:14:27 <CindyLinz> MnO2: 哎不過.. Fay 現階段沒有 standard lib 可以用的情況下, 很難用啊 @_@"
+18:15:02 <CindyLinz> 理論上可以把它們用 pure haskell 放一份.. 想起來就好多啊 orz
+18:15:55 <MnO2> 這個還需要時間吧，畢竟這都還是實驗性的東西啊
+18:16:09 <MnO2> 也才出來四個月xD
+18:16:28 <MnO2> 當然如果後繼無力就沒轍了
+18:16:58 <CindyLinz> 那那.. 這個 project 呢? ^^ # https://github.com/ghcjs/ghcjs
+18:19:25 <CindyLinz> 發現 ghcjs 又有變化了!
+18:19:29 <CindyLinz> 說明變多了 XD
+18:20:36 <MnO2> 不知道耶，沒研究
+22:23:42 <MnO2> 「第一次學Haskell就GG」我覺得這名字還不錯 xDD
+22:24:03 <CindyLinz> .......||
+22:24:24 <MnO2> 當作暗黑版書名好了 xDD
+22:27:20 <suhorng> XDDDDDDD
+22:40:04 <b4283> MnO2: 你知道有個樂團也叫 Rage Against The Machine 嗎
+22:40:50 <MnO2> 之前google的時候有看到
+22:41:35 <b4283> The Matrix 1 的結尾曲是他們的，叫 Wake Up
+22:43:51 <MnO2> 從google看到蠻多都是他們的結果就想說應該是蠻有名氣的樂團吧
+22:45:00 <b4283> 是金屬rap，癖性蠻高的，不喜歡的人一聽就會關了
+22:48:30 <MnO2> 剛剛打開Wake up，旁邊推薦瑪莉連曼森，就想說，啊，大概是那一類的xD
+22:48:48 <b4283> XD

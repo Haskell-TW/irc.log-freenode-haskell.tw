@@ -1,0 +1,106 @@
+23:00:13 <CindyLinz> 晚安 :p
+23:01:30 <CindyLinz> 這篇在講 Y combinator 和 type 的一些些關係.. http://blog.ezyang.com/2012/09/y-combinator-and-strict-positivity/?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+ezyang+%28Inside+245s%29
+23:06:37 <MnO2> 這篇我還沒看（汗）
+23:08:25 <MnO2> CindyLinz: 你現在寫perl都會用Moose嗎？
+23:28:55 <CindyLinz> MnO2: 從來沒用.. XD
+23:29:12 <CindyLinz> MnO2: 我都是在用老派 perloo 呀
+23:29:42 <CindyLinz> MnO2: 可是 haskell 接觸得多了, 就連 oo 也用得少了 orz
+23:29:48 <MnO2> 硬派的perl programmer xD
+23:30:03 <letoh> 老派是什麼? package / bless 那個嗎?
+23:30:10 <CindyLinz> letoh: 對呀
+23:30:21 <letoh> 喔喔喔
+23:30:31 <CindyLinz> letoh: man perlboot perltoot perltooc perlbot 的那些
+23:30:36 <letoh> 原來這東西變老派了XD
+23:30:45 <letoh> 嗯嗯
+23:30:48 <CindyLinz> letoh: 沒啦 我第一次這樣說它 XD
+23:31:07 <CindyLinz> 也沒聽過別人這樣說它
+23:31:18 <CindyLinz> MnO2: 聽說 Moose 很慢啊 :Q
+23:31:36 <letoh> 原來如此XD  Moose 以前有聽說，但不曉得真的有人在用XD
+23:31:41 <MnO2> 我初步測試一下還蠻慢的
+23:31:59 <MnO2> 可是我看clkao都在用xD
+23:32:15 <CindyLinz> 不需要效能的地方比較多嘛 ^^
+23:32:23 <letoh> 意思是說高手都以草木為劍這樣? XD
+23:32:41 <CindyLinz> 可是 clkao 就是高手高手高高手啊 :|
+23:32:52 <CindyLinz> letoh: 還姓高呢.. 
+23:32:54 <MnO2> 我最近因為工作上的需要又開始寫perl，所以就在把這些東西檢回來，我已經不知道有幾年沒寫perl了
+23:32:58 <letoh> 哈
+23:33:31 <MnO2> 而且Moose的資料不如想像中多
+23:33:39 <letoh> 我也有舊的 perl script，但因為不去亂動也能跑，所以就放生了XD
+23:33:45 <CindyLinz> perl 的 OO 和 Java 很不一樣... Java 的 OO 是用隱喻去學的.. perl 的 OO 是用行為去學的..
+23:34:05 <MnO2> 什麽叫隱喻
+23:34:18 <CindyLinz> 所以 perl OO 感覺像在亂湊.. 不過它好處就是, 不像 Java 隱喻出現失當或誤解的時候...
+23:35:07 <CindyLinz> MnO2: 就是要想像什麼是繼承啊, 杯子 可以喝水; 馬克杯 和 玻璃杯 都是 杯子, 所以都可以喝水
+23:35:13 <letoh> 所以隱喻指的是「對真實世界的建模」之類的?
+23:36:03 <MnO2> 看起來是這樣
+23:36:05 <CindyLinz> letoh: 對呀.. 就是, 它實作根本也不是這麼回事, 不過有很努力要去符合這個隱喻就是
+23:36:47 <CindyLinz> perl 就是: 反正呢, 你要呼叫 member method 的時候, 我就會依哪個變數的資料決定去哪裡找函數, 如果沒找到, 我就會再看個什麼東西決定再往哪邊找.. blah blah
+23:37:08 <MnO2> 我實在不太習慣名詞的世界
+23:37:27 <CindyLinz> MnO2: 你是說.. Data centered 的 OO 世界?
+23:38:10 <MnO2> OO世界有這種分法喔？還有哪種centered?
+23:38:15 <letoh> CindyLinz: 意思是 perl oo 是有點像 duck typing 的東西嗎? 以前雖然看過一點，但幾乎沒寫過XD
+23:38:40 <CindyLinz> MnO2: 欸.. 我不是說要怎麼分類啦, 是說, 我聽過 OO 就是以資料為中心的構造方式
+23:38:50 <letoh> OO 我只會分 class-based/prototype-based XD
+23:38:50 <CindyLinz> MnO2: 然後聽你講說「名詞的世界」, 以為你指的就是這個
+23:38:56 <MnO2> steve yegge以前po過一篇嗆文，就是名詞王國啊
+23:39:12 <MnO2> 他第一個舉的例子就是倒垃圾
+23:39:14 <letoh> 可是我得單純以「資料為中心」的說法好像怪怪的
+23:39:45 <MnO2> http://steve-yegge.blogspot.tw/2006/03/execution-in-kingdom-of-nouns.html
+23:39:46 <letoh> 印象中以前學 oo 都說要把資料(屬性)跟操作(行為)封裝在一起
+23:40:46 <CindyLinz> letoh: perl oo 的定義是用它的行為定義的, 所以是看你怎麼運用它, 你應該可以運用成 doctyping 的作法, 但是也可以用成不像.
+23:40:54 <letoh> 然後 c++ primer 第三版(?)還特別區分 object-based 跟 object-oriented 是不一樣的
+23:40:58 <letoh> 嗯嗯
+23:41:20 <CindyLinz> letoh: 應該, 根本也沒有真的 typing 什麼, 或說, 它是可以 runtime 改變的, 但依需要, 你可以會規定自己不要改變它
+23:41:28 <letoh> 可以想成定義 prototype ?
+23:41:56 <CindyLinz> letoh: 然後因為我們知道它搜尋 method 的途徑, 所以也可以適當把 method 放在它會找到的地方
+23:43:05 <letoh> 嗯嗯  好像蠻自由的XD
+23:44:00 <CindyLinz> perl 的 obj 是一個 reference 上面「黏」一個字串
+23:44:13 <CindyLinz> 這個字串理論上應該要剛好是一個 package name
+23:44:33 <CindyLinz> $obj->act() 的時候, 就會去這個 package 找 sub act 來用
+23:45:08 <CindyLinz> 若沒找到 act, 會去看這個 package 的 @ISA 陣列, 它的元素應該也都是 package name
+23:45:15 <CindyLinz> 用 DFS 的順序找 act
+23:45:20 <CindyLinz> 萬一都沒找到 act
+23:45:33 <CindyLinz> 那就改找 sub AUTOLOAD
+23:45:48 <CindyLinz> 萬一也沒有 AUTOLOAD, 那就會 die 一個 exception
+23:46:21 <CindyLinz> 所以什麼繼承啊多型啊 typing 啊, 就都是 programmer 的腦內小劇場了 XD
+23:46:28 <letoh> 感謝解說，前面的還記得，但找的細節就不太清楚了XD
+23:46:43 <CindyLinz> 這個「黏」的字串可以改掉, 也可以查詢目前「黏」的字串是什麼
+23:47:29 <CindyLinz> 如果字串不是 package name 也沒關係, 不過真的呼叫 method 的時候就會找不到而 die exception
+23:48:47 <letoh> 聽起來就像 prototype @_@
+23:48:58 <MnO2> 聽起來是蠻像的
+23:49:20 <CindyLinz> letoh: prototype 不是拿物件當 class 的那種?
+23:49:37 <letoh> 不是耶
+23:49:45 <letoh> 你是說 prototype pattern 那種東西嗎?
+23:49:54 <letoh> 我是指 prototype-based oo
+23:49:55 <CindyLinz> letoh: 我是說 javascript ^^|
+23:50:06 <CindyLinz> letoh: javascript 是拿物件當 class 呀
+23:50:11 <letoh> 喔喔，我跟那種怪東西不太熟XD
+23:50:44 <letoh> 不過 js 好像也有 prototype
+23:51:00 <CindyLinz> letoh: 那, prototype based oo 是指這個搜尋 method 的方式嗎?
+23:51:12 <CindyLinz> letoh: js 會沿著 __proto__ 去找.
+23:51:15 <MnO2> 他只有單一chain耶
+23:51:27 <CindyLinz> perl 是多重的
+23:51:29 <CindyLinz> js 是單線
+23:51:44 <letoh> Io 好像也是多重的(?) 我沒這麼用過就是了
+23:52:14 <MnO2> 對啊，所以我第一次看到的時候就想，哇DFS耶，還真酷
+23:52:20 <CindyLinz> perl oo 的 member variable 就... 直接看 reference 自己了, 算是完全沒有語法上的支援
+23:52:30 <letoh> Self 還沒寫到那麼複雜的XD
+23:52:44 <CindyLinz> 通常我們會用 hash reference, 直接把心中想的 member variable name 當 hash key
+23:52:52 <CindyLinz> 不過要用 array 也行
+23:53:35 <CindyLinz> MnO2: DFS or 單線跟 prototype 與否無關?
+23:54:07 <letoh> 名詞王國好像是 java? 我記得以前有一張圖是把 java 世界的書都疊起來XD
+23:54:36 <letoh> 應該無關  只是定義一套找 method 的方法而已?
+23:54:39 <CindyLinz> 不過 perl 有別的 util 例如說可以鎖定一個 hash 只能有哪幾個 key, 把這個 util 用在被當作 constructor 的函數裡面, 就可以做到限定 member var 了
+23:54:44 <CindyLinz> 不過我一直懶得用這個 ^^|
+23:55:06 <CindyLinz> letoh: 所以就是一層又一層來搜尋 method 的方式嘍?
+23:55:43 <letoh> prototype 嗎? 就我的理解是這樣  找不到就一直往 prototype 找
+23:56:31 <CindyLinz> 嗯嗯嗯
+23:56:41 <letoh> 我一直在想，最早聽到 oo 好像都在強調什麼軟體 ic，程式碼重用之類的好處
+23:56:48 <letoh> 現在好像很少聽到了
+23:56:49 <CindyLinz> 啊不過.. 這個 @ISA 是變數... 所以也就.. 嘿嘿 ^^|
+23:57:22 <MnO2> CindyLinz: 我不知道耶，是說我也沒看過學術上的定義就是了，這種名詞就是大家隨便自己定義。
+23:57:24 <letoh> 我對 perl 的印象就是有很多這類犯規的東西XD
+23:57:28 <CindyLinz> MnO2: 嗯嗯
+23:58:03 <CindyLinz> letoh: perl 很忠實地把所有行為都 doc 下來了, 所以.. 不是 hack, 不算犯規 (Y)
+23:58:56 <letoh> 好吧，有文件就可以原諒XD
+23:59:39 <CindyLinz> letoh: perl 的 man page 裡面就有一堆 sample.. 而且寫得很人性喔
+23:59:55 <CindyLinz> letoh: 有時候就會用全大寫提醒你: 千萬不要這麼做, 除非你知道你在做什麼

@@ -1,0 +1,48 @@
+00:01:39 <petercommand> suhorng: 那個可怕的 loeb 和 moeb XD
+00:01:59 <petercommand> suhorng: CindyLinz  竟然說 fix 比那個東西難懂XD
+00:03:21 <petercommand> fix data type
+00:03:29 <suhorng> !!!
+00:03:50 <suhorng> 突然覺得該認真去展開 loeb moeb 算一下了XD
+00:22:35 <CindyLinz> moeb 和 MonadPeel 都很應用啊.. 遇到問題才回頭來看覺得很自然啊.. (只是不一定有那個創造力能自己想到)
+00:22:56 <CindyLinz> fix data type.... 這不具實用性的東西 XD
+00:24:43 <suhorng> 寫成 fold f  .  in   =  f  .  fmap (fold f) 感覺就很簡潔呀w
+00:25:25 <suhorng> CindyLinz: 對了, 有沒有可能全部用 try, 不用 MonadPeel?
+00:26:21 <CindyLinz> suhorng: 你寫應用可以, 因為你知道你的應用裡, 所有疊起來的 MonadTrans 們是誰
+00:26:42 <CindyLinz> 寫 library 不行, 因為你想假設你的 MonadTrans 可以疊在任意的 MonadTrans 上面
+00:27:41 <suhorng> 我是想說, 像 liftIO (try IO_OPERATIONS) :: MonadIO m => m (Either e a) 這樣不行嗎?
+00:27:50 <suhorng> 還是因為要用 bracket 保證資源不會洩漏的關係
+00:29:29 <CindyLinz> 我記得就算不寫 bracket... try 和 catch 會有一個寫不出來
+00:32:11 <CindyLinz> 寫錯.. throw 和 catch.. XD
+00:32:17 <CindyLinz> try 跟 catch 是一樣的 ^^|
+00:33:28 <suhorng> 對, 不過用 try 的話就不需要 catch 了
+00:33:42 <suhorng> 如果是寫 lib 要寫 catch 另當別論...
+01:56:46 <monochrom> abstraction 到用時方恨少
+02:02:39 <CindyLinz> monochrom: ??
+21:01:34 <petercommand> http://ideone.com/g87pbp #這個 rollDice 函數不是 lazy 的，原因是甚麼呢?
+21:02:03 <petercommand> 沒有結果出來XD
+21:02:59 <CindyLinz> 你在問什麼啦 ^^|
+21:03:29 <petercommand> 問這個程式為甚麼不會停
+21:03:46 <CindyLinz> 原來你拋了一個 halting problem... (思
+21:03:54 <petercommand> @@
+21:06:33 <suhorng> genState 是產生一個 random number (改變 seed), 然後把那個 random number 丟棄掉吧
+21:06:56 <suhorng> 它整個應該是變成 while (1) rand(); ?
+21:07:41 <petercommand> 對耶...XD
+21:07:41 <CindyLinz> 丟掉嗎? 不就是最後那個 Int 嗎?
+21:07:53 <CindyLinz> 喔 下面沒接 :p
+21:08:18 <suhorng> loop = do { genState; loop }
+21:08:28 <petercommand> 恩，所以就啥都沒有了XD
+21:09:57 <suhorng> ideone 竟然沒有 System.Random = ="""
+21:12:51 <petercommand> 在這樣的loop，怎麼把東西存起來比較好呢?
+21:13:31 <petercommand> fix 所產生的 loop
+21:14:36 <suhorng> 利用 laziness.. http://ideone.com/NAhyTa
+21:14:46 <suhorng> 這個 fix 其實跟直接寫遞迴意思差不多?
+21:15:09 <petercommand> 對阿
+21:16:22 <petercommand> suhorng: 感謝 :p
+21:17:56 <CindyLinz> suhorng: 欸.. 好奇你 try 是怎麼寫的
+21:18:22 <CindyLinz> 假設你要在你的 MonadTrans 上實作一個..... 如果底下有 IO 就可以用的 try
+21:28:05 <suhorng> 喔!!好像無法?
+21:28:18 <suhorng> 原來是因為我只考慮 IO a 的 type 的緣故
+21:30:28 <CindyLinz> 我想了一會子發懶了, 想說直接請你 share 一下作法, 那就可以看一下關鍵的差異在哪 XD
+21:31:47 <suhorng> 因為我當時在想的只有說：我有一個 act :: IO a, 怎麼 lift 到現在的 monad 變 m a 還可以抓到 act 的 exception
+21:32:07 <suhorng> 所以才只需要用 liftIO (try act) ...
+21:32:59 <CindyLinz> 嗯嗯...

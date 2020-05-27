@@ -1,0 +1,54 @@
+15:57:51 <CindyLinz> parsec 裡面 ParsecT s u m a 的這個 u 是給 user 隨意放的 state
+15:58:41 <CindyLinz> 可以用 getState :: Monad m => ParsecT s u m u 和 putState :: Monad m => u -> ParsecT s u m () 來讀取和寫入
+15:58:59 <CindyLinz> 然後, parsec 本身完全不會去摸這個 u...
+15:59:09 <CindyLinz> 我覺得這個 u 的設計, 好多餘啊? @@"
+15:59:35 <CindyLinz> 已經有 user 可以隨意放的 Monad m 在那邊了啊?
+16:00:06 <CindyLinz> 唔.. 還是說 try 裡面走回頭路的時候也會順便把這個 u rollback?
+16:00:13 <au> backtracking state
+16:00:14 <au> 是的
+16:00:28 <au> ParsecT State 不保證回捲 (iirc)
+16:00:32 <CindyLinz> 嗯嗯
+16:04:25 <au> (主要是想找人來幫寫 ApplicativeDo (https://ghc.haskell.org/trac/ghc/wiki/ApplicativeDo : 讓 Haxl 比較能夠日常使用，不需要用到 RebindableSyntax 或 TemplateHaskell))
+16:06:52 <au> 不過有 Control.Applicative.QQ.ADo, 先用這個好了 #繼續趕簡報
+16:08:09 <CindyLinz> 覺得那一堂應該不用聽懂細節, 覺得很有 fu 很威就可以了?
+16:08:18 <CindyLinz> 加油 ^^
+16:32:51 <au> CindyLinz: yeah, 以火力展示為主，因為好像還會有旁聽人士? XD
+16:42:39 <CindyLinz> au: 有.. 我 :D
+16:43:50 <CindyLinz> au: 欸, 覺得就算是為修課學生著想, 要逼著已經七葷八素的學生聽很硬的東西, 會休克吧 ._.
+17:16:11 <au> 真的，那還是說故事就好了
+17:43:21 <CindyLinz> ParsecT 的這個 u 好像不能局部換一個 type?
+17:45:11 <au> 不行，但是可以自己包一層 Either u1 u2
+17:45:28 <au> 或是 (u1, Maybe u2)
+17:45:38 <CindyLinz> 嗯, 要把可能用到的變化都裝在一個 sum type 裡面? @@"
+17:46:26 <au> 不然也可以用 Data.Dynamic 喔 XD
+17:46:56 <CindyLinz> 像是我現在要 parse html, 然後進到一個 tag 裡面的時候, 要從這個 tag 取出資訊, 等一個 tag 完整處理完之後, 會生出一個... 完成的 tag 的成果, 但是 tag 處理到一半的時候會有一堆零散的東西, 其實不太需要往上 expose @@"
+17:47:18 <au> 不然也可以 reparse
+17:48:01 <CindyLinz> 用 runParsecT :: Monad m => ParsecT s u m a -> State s u -> m (Consumed (m (Reply s u a))) ?
+17:48:13 <CindyLinz> 這 type 看起來好不舒服啊 :|
+17:48:38 <au> 好奇問一下，你的 underlying monad 是?
+17:48:52 <CindyLinz> 現在寫的樣子是 Identity.. XD
+17:48:59 <au> 那為什麼不用 attoparsec
+17:49:07 <CindyLinz> 有差喔? XD
+17:49:08 <au> 可以省好多事，又快。
+17:49:26 <CindyLinz> 因為聽大家都說 parsec parsec, 不知道還有個不一樣的 attoparsec.. :p
+17:49:35 <au> attoparsec = strict bytestrings only
+17:49:41 <CindyLinz> 那我來翻一翻 :p
+17:49:51 <CindyLinz> au: 謝謝 :p
+17:51:19 <CindyLinz> 這這... 為什麼 document 第一頁標紅字說是 deprecated 啊... OAO # https://hackage.haskell.org/package/attoparsec-0.12.1.0/docs/Data-Attoparsec.html
+17:51:42 <CindyLinz> 喔喔 要換一個 module 讀 :p
+17:51:49 <au> 對， https://hackage.haskell.org/package/attoparsec-0.12.1.0/docs/Data-Attoparsec-Text.html
+17:51:57 <au> 或是 https://hackage.haskell.org/package/attoparsec-0.12.1.0/docs/Data-Attoparsec-ByteString.html
+17:52:05 <CindyLinz> 嗯嗯 XD
+17:52:06 <au> 看你需不需要 unicode support
+17:52:12 <CindyLinz> 不需要 :D
+17:54:30 <CindyLinz> 欸.. 用 attoparsec 的話, 就是原本想塞 u 裡面的東西要自己放在 m 裡面, 並且自己處理 retry rollback 的問題哄?
+17:56:10 <au> CindyLinz: yeah, or see trifecta
+17:56:11 <au> https://stackoverflow.com/questions/18806586/custom-state-in-trifecta
+17:56:45 <CindyLinz> 嗯嗯嗯
+17:57:05 <au> trifecta 主要好處是有漂亮的 trace
+17:57:39 <CindyLinz> 不太想遇到需要 trace 的時候.... QQ
+19:43:36 <c9sloud> 有人用 node 做了這個耶 https://www.npmjs.org/package/pathing XD
+19:44:50 <c9sloud> 好像很威耶
+19:44:53 <c9sloud> au: 火力展示+1
+19:45:02 <c9sloud> 想看 (純觀賞 XDD
+23:47:05 <hychen> 想看+1

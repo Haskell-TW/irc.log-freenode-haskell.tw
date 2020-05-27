@@ -1,0 +1,9 @@
+00:41:48 <petercommand> :t takeWhile
+00:41:49 <lambdabot> (a -> Bool) -> [a] -> [a]
+00:42:01 <petercommand> > takeWhile (< 5) [1..]
+00:42:04 <lambdabot>  [1,2,3,4]
+00:42:11 <petercommand> 這樣呢
+00:42:32 <petercommand> 遇到不滿足的就停
+01:13:52 <Galaxian> 我記得前幾天看 learn you a haskell for great good 有看到作者提這件事情
+01:14:06 <Galaxian> 剛剛回去翻 他的解決方法也是 takeWhile XD
+01:14:17 <Galaxian> 謝謝大家

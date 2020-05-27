@@ -1,0 +1,13 @@
+10:06:31 <_13h> touch ./-i  這做法實在很妙
+10:08:28 <MnO2> 利用shell script的缺陷xD
+10:16:17 <_13h> 但是 working dir 換地方就麻煩了XD
+10:16:27 <_13h> 有趣是有趣，但好像不太實用
+10:16:36 <_13h> 通常都是 rm -rf xxx/
+10:17:57 <_13h> 如果 journaling fs 搞成跟 vcs 那樣，每個操作都可以還原，那誤刪檔案好像就沒那麼可怕
+10:18:51 <_13h> 發現刪錯就下 ext4fs revert 之類的
+10:23:36 <kanru`> btrfs
+10:24:02 <kanru`> 都是 COW
+10:24:29 <_13h> 喔喔喔!!
+10:25:54 <kanru`> touch ./'-rf /'
+23:58:09 <MnO2> http://lucumr.pocoo.org/2012/10/18/such-a-little-thing/
+23:58:17 <MnO2> Such a Little Thing: The Semicolon in Rust

@@ -1,0 +1,12 @@
+12:57:53 <mno2> https://ghc.haskell.org/trac/ghc/wiki/Records/OverloadedRecordFields/DuplicateRecordFields  這個 extension 感覺很實用
+15:19:49 <CindyLinz> 實用了一點 QQ
+15:20:58 <CindyLinz> data constructor 和 data field 名字打架的問題, 對習慣 C struct 或是物件方式寫法的人來說有點困擾 o.o
+15:25:18 <CindyLinz> 我想要 subtype.. XD
+15:25:50 <CindyLinz> 就是... 可能某 A type 有 9 個 data constructor, 然後某 B 有 4 個, 而且這 4 個是 A 的那 9 個的其中 4 個..
+15:26:18 <CindyLinz> 可以接受 A 當參數的函數可以吃 B
+15:26:43 <CindyLinz> 或是可以套一個內建的 coerce dummy 函數
+19:25:53 <pkmx> 我比較想知道 nikita-volkov 的 record library 到底怎麼了 @@
+20:10:48 <CindyLinz> latest commit 3 days ago
+20:12:20 <CindyLinz> 真是 modern... XD  # instance Field "1" (Identity v1) (Identity v1') v1 v1' where
+23:33:09 <pkmx> 看起來只是修bug @@
+23:34:04 <pkmx> 他之前有一個 ghc plugin (preprocessor) 但是不太能用... 他說會有 major update 然後就沒下文了 XD

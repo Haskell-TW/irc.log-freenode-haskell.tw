@@ -1,0 +1,161 @@
+00:01:06 <kanru`> 目前用最多的大概是 http://github.com/mozilla/servo ?
+00:03:20 <godfat> 忽然有種網頁還有希望的感覺 (?)
+00:04:13 <MnO2> kanru`: 希望他能好好發展，好讓rust能持續有動能 :p
+00:05:25 <MnO2> godfat: 你是指Mark Zuckerberg的 comment?
+00:05:52 <godfat> 喔沒有，我只是好想把 javascript 丟掉 XD
+00:06:10 <b4283> http://www.jwz.org/blog/2010/10/every-day-i-learn-something-new-and-stupid/#comment-1048
+00:06:15 <b4283> ten days
+00:06:17 <godfat> 或是說，期望大家不要再拿一堆東西拼湊了...
+00:08:17 <godfat> 10 天能做完真厲害呀。不過為何會這樣一直錯下去？很難理解...
+00:08:42 <MnO2> 相容性吧
+00:09:02 <godfat> 網頁爆炸性成長快到無法修正這些？
+00:09:12 <MnO2> maybe
+00:09:41 <MnO2> 所以我一直很愛比喻javascript是人家的期末project啊 xDD
+00:10:21 <godfat> 我期末 project 搞不好做得都比他還久... 難度也沒那麼高 XD
+00:11:00 <godfat> html/css 可以進化，js 不行？但可以加 api?
+00:11:01 <godfat> 我還是不能理解...
+00:12:01 <CindyLinz> 和 javascript 並行的.. 是不是有一種叫作 vbscript 的東西? :p
+00:12:06 <CindyLinz> godfat: 衝! # VBScript
+00:12:15 <godfat> ....orz
+00:13:27 <MnO2> CindyLinz: 好像有這段歷史耶，差點忘了
+00:13:47 <MnO2> CindyLinz: 當年微軟真的很愛basic
+00:13:49 <CindyLinz> 不知道現在還能不能用, 支援度如何 ^^|
+00:14:17 <MnO2> 搞不好IE有某種mode還支援xD
+00:15:33 <CindyLinz> http://en.wikipedia.org/wiki/VBScript#Environments
+00:15:44 <CindyLinz> 嘖嘖... VBScript 真是走在 Node.js 前面啊!
+00:16:06 <CindyLinz> VBScript is also used for server-side processing of web pages, most notably with Microsoft Active Server Pages (ASP).
+00:16:59 <godfat> 其實我覺得微軟是做過不少有趣的事，只是... 可能有政治因素吧... XD
+00:17:01 <MnO2> 一統江湖是大家的夢想
+00:18:50 <MnO2> CindyLinz: 所以你有看懂那兩篇嗎？
+00:21:19 <CindyLinz> MnO2: 第二篇還沒看, 第一篇看到他正要開始詳述兩種模型的地方.. 我在想是不是應該先看一下 exception control 的概念
+00:24:00 <MnO2> 嗯，不過Exception control可能不完全是重點就是
+00:24:31 <MnO2> CindyLinz: 主要是我們雖然可以 lift    a -> b -> c -> IO d 之類的東西
+00:25:08 <MnO2> CindyLinz: 但 (a -> IO b) -> IO c 的東西沒辦法用一般化的方式 lift
+00:25:27 <MnO2> CindyLinz: 這就包含了像是 mask 之類的東西
+00:25:41 <CindyLinz> mask... 真的要看 exception 啊 XD
+00:26:16 <MnO2> 那 ezyang 那篇提到，是某些先做了一些特例，先頂著用
+00:26:38 <MnO2> 但社群對於許多點還沒有共識
+00:27:14 <CindyLinz> 嗯嗯
+00:28:52 <MnO2> 所以 monad 疊疊樂不是什麼東西都可以舉上去的 xD
+00:30:52 <CindyLinz> 還有點遠
+00:32:35 <letoh> office 應該還可以跑 vbscript 呀
+00:32:50 <letoh> 那個時代還有一個 jscript
+00:33:14 <letoh> 偽 javascript 但只有 win/ie 可以支援
+00:36:03 <CindyLinz> MnO2: 你覺得正常使用下, 會疊很多很多層 monad 嗎?
+00:36:34 <CindyLinz> MnO2: 如果 monad 疊很多很多層, 是不是很可能是需要檢討的設計..
+00:37:40 <MnO2> 很多很多是多少@@?
+00:38:01 <MnO2> 你把library中的monad都用完應該也頂十幾個吧@@?
+00:38:09 <MnO2> 頂多
+00:38:23 <godfat> 十幾個還在可接受範圍內（筆記）
+00:39:30 <MnO2> 一般都疊個3,4個吧
+00:39:36 <CindyLinz> MnO2: 我覺得超過五個就有點恐怖了?
+00:40:09 <MnO2> 把常用的列出來也不過就那幾個吧，而且mtl裡面也沒那麼多可以用？
+00:40:29 <CindyLinz> MnO2: 寫正經程式的話, 我猜應該不要直接用 Writer / Reader / State... 用它們就好像直接用 (,) (,,) (,,,) 滿天飛一樣.. :|
+00:41:05 <CindyLinz> 用這幾個的話, 應該很容易會寫成疊好幾層同一種吧
+00:41:16 <godfat> 所以這樣還好嗎？
+00:41:16 <godfat> https://github.com/godfat/sandbox/blob/master/haskell/trans/trans5.hs#L22
+00:41:16 <godfat> eval :: Expr -> ReaderT Env (StateT Integer (ErrorT String IO)) Val
+00:41:18 <CindyLinz> 可能要把它們包一包, 取個名字之類的
+00:41:20 <MnO2> 不會啊， xmonad 有用 ReaderT
+00:41:32 <MnO2> 通常都是疊起來，然後 newtype
+00:41:45 <MnO2> 所以才會叫做 application monad
+00:41:48 <CindyLinz> MnO2: 把疊起來, 取個 newtype 的看成一層好了?
+00:42:07 <CindyLinz> 畢竟那個比較像是「理解」上的單位
+00:42:12 <MnO2> 可以這麼說吧，都混成一個context了
+00:42:17 <CindyLinz> 嗯嗯
+00:43:21 <MnO2> godfat: 還好吧
+00:44:26 <godfat> ok XD 我記得之前看 agda 的程式是覺得更恐怖倒是沒錯... 有時候也分不出來是怎麼疊了，因為也是變成 application monad 了，我想
+00:46:24 <CindyLinz> MnO2: 你可以接受 ReaderT Int (ReaderT Int (ReaderT [Char] (ReaderT Int IO))) 嗎? XD
+00:46:35 <MnO2> 如果要觀摩的話，其實xmonad的source是還蠻推薦的
+00:46:56 <MnO2> CindyLinz: 這啥，為什麼不用一個就好了
+00:47:39 <MnO2>  xmonad 的程式很少，沒有太複雜的東西，也可以學到基本的手法
+00:47:58 <CindyLinz> XD
+00:48:09 <godfat> 好，下次優先挑 xmonad, 如果我要看的話 XD
+00:48:22 <MnO2> 學完還可以順便學會改裝 xmonad
+01:11:46 <b4283> crockford 還蠻可愛的
+10:27:03 <CindyLinz> PLT 板的 noctem 是誰呀? 好像是個教授?
+10:29:04 <MnO2> scm?
+10:30:07 <CindyLinz> 看起來好像是耶
+10:31:28 <CindyLinz> 剛好看到一篇他 post 的徵人文 ^^|
+10:39:03 <MnO2> 對啊
+10:39:12 <MnO2> 這樣就洩漏了他的ID了xD
+10:53:35 <CindyLinz> 他不想被知道嗎? o.o
+10:58:13 <CindyLinz> 哇 godfat 被 scm 嗆了 XD # →  noctem:呴呴.. 如果你看得比我寫得還慢你就遜到了呀.. XD           12/08 21:35
+12:54:52 <MnO2> yinwang 推薦 TeXmacs  http://blog.sina.com.cn/s/blog_5d90e82f0101bek1.html
+15:21:11 <yen3> 剛在 Mac OSX 10.7 上用了，中文支援度沒想像中的好 XD。
+15:21:25 <yen3> 不過也沒啥時間可以細用了 XD
+15:49:48 <CindyLinz> yen3: 錄音~ (伸)
+15:51:43 <yen3> CindyLinz: 上傳中 XD
+15:52:00 <yen3> CindyLinz: 而且我還沒壓縮到 128 Kbps ... Orz
+15:55:03 <CindyLinz> yen3: 壓縮後不是比較好上傳嗎 XD
+15:56:56 <yen3> CindyLinz: 因為壓縮一個檔案要二十分鐘 XD。
+15:57:16 <CindyLinz> yen3: 好吧, 你真的是在倒數了 ^^|
+15:57:47 <yen3> CindyLinz: 謝謝你 XD。
+15:58:56 <b4283> 用最新的 opus codec  :Q
+16:04:35 <yen3> 鑑於我明天之後就會消失一陣子了 XD
+16:04:47 <yen3> b4283: 你可以幫忙嗎 XD?
+16:05:07 <godfat> yen3 我會想念你的 O_Q
+16:06:01 <yen3> godfat: 我也會的 T^T~
+16:06:15 <yen3> (謎之音: 不是很快就出來了嗎 XD)
+16:06:19 <godfat> 你也會想念 yen3 的 XD
+16:06:53 <CindyLinz> 要去多久啊
+16:07:09 <b4283> sure
+16:07:13 <yen3> CindyLinz: 聽說是十一個月
+16:07:37 <b4283> 是語音檔？但原始檔怎麼玩 XD
+16:09:55 <CindyLinz> 8xxMB
+16:10:52 <yen3> 對不起，搞太大了 XD
+16:57:51 <b4283> 壓完 139 MiB
+16:59:54 <yen3> 好小~!
+17:00:14 <yen3> 正在壓 128 Kbps 的 mp3 版本 XD
+17:00:31 <b4283> 02 一開始的聲音和 4:00 以後的差好多
+17:00:50 <yen3> 對
+17:01:03 <yen3> 因為是兩個錄音檔合起來
+17:01:11 <yen3> 前面是 CindyLinz 的，後面是我的 XD
+17:01:35 <yen3> 除了第一個和最後二個，其他都會有這樣子的情形
+17:02:05 <b4283> CindyLinz: 該換設備囉
+17:02:29 <b4283> XD
+19:44:58 <MnO2> http://blog.ezyang.com/2012/09/common-misconceptions-about-safe-haskell/
+19:45:08 <MnO2> ezyang 講safe haskell
+22:04:44 <CindyLinz> 有個叫作 Concurrent Haskell 的東西..  GHC 算是對不對?
+22:05:24 <godfat> 我以為只要用上裡面的東西就算了？像是 forkIO, STM 之類的
+22:07:21 <CindyLinz> 嗯 我看到裡面寫到的 forkIO  MVar 之類的, GHC 都有
+22:07:38 <MnO2> http://www.haskell.org/ghc/docs/7.4.2/html/users_guide/using-concurrent.html
+22:08:48 <CindyLinz> "GHC supports Concurrent Haskell by default"
+22:08:59 <CindyLinz> 開宗明義第一句 (Y)
+22:24:22 <MnO2> 我蠻喜歡 scm 這篇的 http://www.iis.sinica.edu.tw/~scm/ncs/2009/07/go-to-considered-harmful/
+22:24:42 <MnO2> 主要是我喜歡看這種歷史八卦
+22:25:01 <godfat> +1 尤其文獻很少？ XD
+22:25:03 <MnO2> 我總覺得中文資料中太少關注資訊發展歷史的文章了
+22:25:20 <godfat> 是啊.......
+22:25:37 <godfat> 想到 reader XD
+22:25:46 <MnO2> 像是數學的話還有數學傳播之類的
+22:25:56 <MnO2> 會講一些數學家的生評
+22:25:59 <MnO2> 生平
+22:26:05 <MnO2> 這些都蠻有趣的
+22:26:23 <godfat> 是喔
+22:26:46 <letoh> reader 是指 id 嗎?
+22:26:47 <MnO2> 記得高中有看過一本數理化通俗演義
+22:26:52 <MnO2> 九章出的樣子
+22:27:04 <godfat> 嗯，在 ptt 上是叫 reader
+22:27:24 <letoh> 他以前是用另一個 id... 突然改 reader 好久才認出來
+22:27:29 <MnO2> 其實這樣的書對入門者應該都是蠻好的書籍
+22:27:36 <MnO2> 看不懂技術看八卦總行xD
+22:27:43 <godfat> 好像是 captia 之類的？我記得曾經看過他說帳號要不回來
+22:28:13 <godfat> 可能吧，不過對於有興趣的人來說我覺得真的滿重要的
+22:28:26 <letoh> 喔喔喔對
+22:28:37 <MnO2> 像浪潮之巔那樣子就寫得蠻生動的啊
+22:28:47 <MnO2> 雖然是講矽谷發展史
+22:28:53 <godfat> 我手上有一本啥 borland 傳奇之類的書名，我偶然看到的。很精彩呀，不知道為啥好像很難見到
+22:28:54 <letoh> capita
+22:29:12 <letoh> borland 那本不錯
+22:29:20 <letoh> 李維寫的
+22:29:41 <letoh> 他以前在 blog 上連載(?)  後來才出書
+22:30:53 <godfat> 前一陣子我在看 DNA 三部曲，雖然看起來很累，感覺像在看文獻
+22:30:54 <godfat> 可是能整理成這樣真的很不錯，難度也滿高的
+22:30:54 <godfat> 這些東西日後不整理，會愈來愈難弄..
+22:31:04 <MnO2> 有機會可以來寫 程式語言通俗演義 xD
+22:31:06 <godfat> borland 傳奇我記得錯字不少
+22:31:26 <letoh> 因為編輯也看不懂? 直接跳過? XD
+22:31:48 <godfat> 可能吧 @@"
+22:31:48 <godfat> 我覺得也許可以用 wiki 的形式？
+22:32:21 <godfat> 我要閃回去啦 XD

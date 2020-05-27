@@ -1,0 +1,17 @@
+00:14:08 <suhorng> http://serras-haskell-gsoc.blogspot.jp/2014/08/summer-of-code-on-emacs.html Haskell 也有 Agda 的 C-c C-c 了 @@
+00:14:17 <suhorng> 不過叫做 M-t
+00:14:44 <suhorng> 而且 djinn 還被拿來做 C-c C-a XD
+00:14:55 <suhorng> @djinn Maybe a
+00:14:56 <lambdabot> f = Nothing
+00:49:10 <petercommand> @djinn Maybe a -> a
+00:49:11 <lambdabot> -- f cannot be realized.
+00:49:20 <petercommand> @djinn a -> Maybe a
+00:49:21 <lambdabot> f = Just
+14:38:20 <drbean> @^@. 我再一次要用 ghc-mod.
+14:38:20 <lambdabot> Maybe you meant: @ .
+15:44:11 <CindyLinz> 最近在趕工作, 沒有空玩 haskell.. QQ
+16:32:02 <suhorng> monochrom: 今天跟別人討論時才瞭解到...之前貼的那個 OCaml 的例子其實在 Standard ML 是不會 type check 的!! 所以 Standard ML 沒有這個問題 @"@
+16:32:33 <suhorng> 因為他有 value restriction, if .... then ys else id::ys 這個不會被 generalize!! 0.0
+16:46:37 <suhorng> 然後 Haskell 感覺是很莫名其妙的避開這類問題 XDD 因為 bind 後面是丟給他一個函數, 所以一定是 monomorphic
+23:52:46 <suhorng> Functional Thursday #17 http://www.meetup.com/Functional-Thursday/events/201479932/
+23:59:43 <CindyLinz> 感謝 ^_^

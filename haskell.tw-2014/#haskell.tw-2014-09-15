@@ -1,0 +1,44 @@
+01:18:05 <hychen> orz, 看不懂
+01:21:58 <monochrom> @src filterM
+01:21:58 <lambdabot> Source not found. My mind is going. I can feel it.
+01:24:18 <monochrom> 如果把 filterM 寫出來, 可能會好些
+01:25:46 <monochrom> filterM (const [False,True]) (x:xs) = do { flg <- [False,True]; ys <- filterM (const [False,True]) xs; return (if flg then x:ys else ys) }
+01:27:27 <monochrom> 然後用歸納法: 假設  filterM (const [False,True]) xs 已經給你 xs 的所用子集.
+01:30:07 <monochrom> 現在從 [False,True] 中選一個作為 flg, 並選一個 xs 的子集作為 ys, 那麼 if flg then x:ys else ys 就是 x:xs 的其中一個子集. 並且所有的選擇會涵蓋所有 x:xs 的子集.
+01:31:20 <monochrom> s/所用/所有/
+01:34:46 <CindyLinz> 還真不好解釋 ~_~
+01:47:14 <hychen> monochrom: 懂了, thx
+02:07:32 <CindyLinz> letoh: 我找到那部電影了耶.. 是普遍級的... @@"
+02:08:01 <CindyLinz> http://www.ivideo.com.tw/rent_video/video_detail.asp?film_id=2893
+02:08:30 <CindyLinz> 算了 換 channel 講好惹 XD
+02:11:10 <monochrom> 啊, 我有它的 Blu-ray. 我有 Indiana Jones 全集四部電影的 Blu-ray, amazon 減價時買的 :)
+02:11:54 <monochrom> 只要用平常心看, 就不太驚了 XD
+02:12:19 <monochrom> (說就容易 XD )
+02:13:17 <monochrom> 我看的時候, 不覺得驚, 不過覺得壞人太可惡了.
+02:13:29 <CindyLinz> 剛剛從 youtube 看了那一段, 發現現在比較會怕 orz  只好把眼睛瞇起來 XD
+02:13:48 <CindyLinz> 小時候看的電影都不記得劇情...
+02:14:13 <CindyLinz> 欸, 也許是小時候根本就沒看懂劇情, 沒辦法記劇情, 只會記得畫面 ^^|
+04:16:35 <miaoski> CindyLinz: 現在 judy 沒有專利問題了嗎？
+11:08:03 <CindyLinz> miaoski: 應該有吧.. 至少 wiki 仍把它列為 drawback.. XD
+11:09:45 <CindyLinz> 但是只有那一份實作有專利, 重新實作就沒有呀~ 然後... 要拿來給 Haskell pure 用的話, 我覺得應該也是要照它的精神重寫, 它的實作甚至還自己管理了一組 memory pool.. ^^|
+14:04:20 <miaoski> CindyLinz: 重新實作確定沒有嗎? :P 敝公司好像有花錢買使用者...
+14:04:35 <miaoski> 使用權// 因為就算自己寫，可能還是會踩到什麼專利的鬼東西
+14:20:43 <CindyLinz> miaoski: 專利不保護想法啊
+14:22:11 <CindyLinz> miaoski: 它眉角蠻多的, 程式碼超複雜, 有無窮的 debug 時間, 應該是為了這個自己寫的 cost, 而不是專利問題
+23:37:29 <suhorng> > filterM (const [True, False]) [1,2,3]
+23:37:31 <lambdabot>  [[1,2,3],[1,2],[1,3],[1],[2,3],[2],[3],[]]
+23:37:48 <suhorng> > filterM (const (pure True `mplus` pure False)) [1,2,3]
+23:37:50 <lambdabot>  No instance for (GHC.Show.Show (m0 [a0]))
+23:37:50 <lambdabot>    arising from a use of ‘M47088805650993943896968.show_M47088805650993943896...
+23:37:50 <lambdabot>  The type variables ‘a0’, ‘m0’ are ambiguous
+23:37:50 <lambdabot>  Note: there are several potential instances:
+23:37:50 <lambdabot>    instance [safe] GHC.Show.Show a =>
+23:38:04 <suhorng> > filterM (const (pure True `mplus` pure False)) [1,2,3] :: [[Integer]]
+23:38:05 <lambdabot>  [[1,2,3],[1,2],[1,3],[1],[2,3],[2],[3],[]]
+23:44:10 <letoh> 一看到你在玩怪東西就知道要開一下 plurk XD
+23:46:50 <suhorng> letoh: 毫無吧XD 我只不過是改寫成讓人毫無驚喜的版本而已
+23:47:48 <letoh> 那個 true false 讓我想到 gray code
+23:48:44 <suhorng> 喔喔?
+23:49:11 <letoh> 其實我還沒看懂 filterM  只是有這種感覺而已  有空再仔細研究一下XD
+23:51:04 <suhorng> 似乎不太需要看懂(?)
+23:51:39 <suhorng> 他跟 mapM, replicateM 那些一樣, 是原本函數的 monadic 版本, 就只是把所有函數變成 monadic 的串起來

@@ -1,0 +1,39 @@
+00:01:38 <suhorng> Haskell 課 http://www.scs.stanford.edu/14sp-cs240h/slides/
+00:02:44 <suhorng> 的內容真有趣, Pipes, Lenses, Web, Haskell Compiler (compiler), Haskell Compiler (rts)
+00:03:02 <suhorng> 竟然有 CS 課教這些東西XD
+00:03:16 <CindyLinz> rts :D
+00:04:02 <suhorng> 好像花很大篇幅在講 GHCGC 的樣子
+00:04:10 <suhorng> GHC rts 的 GC
+00:06:46 <CindyLinz> 聽起來很讚 :p
+00:07:24 <CindyLinz> 原來是 Edward Z. Yang 講的課 XD
+00:07:54 <suhorng> 就 rts 那個 lecture 而已XD
+00:12:39 <CindyLinz> 嗯 XD
+00:29:14 <CindyLinz> 我還是沒很理解「垃圾越多跑越快」的道理..
+00:29:28 <CindyLinz> 還是他說的「快」是指「時間/垃報」很低
+00:29:34 <CindyLinz> 還是他說的「快」是指「時間/垃圾」很低
+00:29:52 <CindyLinz> 分母大了, 每一塊垃圾平均佔用的時間就短了?
+00:32:18 <suhorng> 會不會是垃圾多了, 要 forward 的東西就少了
+00:32:39 <suhorng> 所以單次做 garbage collection 的時間就少了?
+09:55:42 <monochrom> 這是針對 generational GC 說的, 所以不妨從別的地方細讀 generational GC 來理解
+18:03:41 <CindyLinz> 程式證明~ # http://technews.tw/2014/08/14/%E5%9B%9B%E7%99%BE%E5%B9%B4%E5%89%8D%E5%85%8B%E5%8D%9C%E5%8B%92%E7%84%A1%E6%B3%95%E8%AD%89%E6%98%8E%E7%9A%84%E7%8C%9C%E6%83%B3%EF%BC%8C%E5%A6%82%E4%BB%8A%E9%9B%BB%E8%85%A6%E9%A9%97%E8%AD%89%E7%82%BA/
+18:03:56 <CindyLinz> Kepler conjecture
+18:09:24 <suhorng> "點計畫的小組宣布那份長達三百頁的論文已成功通過兩個軟體的審查"
+18:09:34 <suhorng> 通過兩個軟體的審查 ......
+18:10:38 <cataska> OCaml !!
+18:11:37 <CindyLinz> 文章寫是 Isabelle 和 HOL Light 欸
+18:15:16 <cataska> https://code.google.com/p/flyspeck/wiki/FlyspeckFactSheet
+18:37:44 <CindyLinz> 唔, 用 lens 來 access 的欄位配合 ViewPatterns 應該就可以用在 pattern matching :p
+18:40:10 <suhorng> 然後還有  pattern synonym...
+18:40:28 <suhorng> 雖然暫時還不知道 pattern synonym 到底多有用@@
+18:43:09 <CindyLinz> 感覺很棒.. :p
+18:43:20 <CindyLinz> 可以用來提昇 readability
+18:43:57 <suhorng> 是沒錯XD
+18:44:21 <suhorng> https://ghc.haskell.org/trac/ghc/wiki/PatternSynonyms 就這個
+18:44:34 <suhorng> 唔, ghc docs 的話 http://www.haskell.org/ghc/docs/latest/html/users_guide/syntax-extns.html
+18:45:37 <CindyLinz> 其實.. 還蠻需要的 XD  一直重複寫 ViewPatterns 雖然能用, 但用得很痛苦啊 XD
+18:45:57 <suhorng> xDD
+21:37:36 <suhorng> 恩...不知道把 (a -> IO b) -> IO b 這種 with... 用 ContT monad 包起來有什麼好處@@  # http://www.haskellforall.com/2014/08/managed-100-monad-for-managed-resources.html
+21:46:21 <CindyLinz> 原來網址裡面的 managed-100-monad 不是 100 種 monad, 而是 managed 1.0.0.......
+21:46:48 <suhorng> XDDDD
+22:24:11 <mno2> http://www.haskellforall.com/2012/12/the-continuation-monad.html
+22:24:30 <mno2> 前情提要？算是共用抽象結構吧。

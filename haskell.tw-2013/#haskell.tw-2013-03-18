@@ -1,0 +1,58 @@
+12:44:50 <MnO2> http://haskellnews.org/grouped
+13:44:55 <letoh> 底下的 Github 那邊看到一個 HManga....
+13:45:34 <letoh> 有人看過 the fun of programming 這本書嗎?
+13:47:46 <hychen> no
+13:47:51 <hychen> ISBN?
+13:48:07 <letoh> http://www.amazon.com/The-Fun-Programming-Cornerstones-Computing/dp/0333992857
+13:48:18 <letoh> ISBN-10: 0333992857
+13:56:03 <letoh> http://www.cs.um.edu.mt/gordon.pace/Research/Papers/csaw2007-03.pdf  # 用 haskell 研究摺紙
+13:57:07 <b4283> kamigari
+13:57:50 <b4283> origami 才對
+13:58:19 <letoh> kamigari 是什麼?
+13:59:48 <letoh> http://link.springer.com/chapter/10.1007%2F978-3-540-40018-9_6  隨便找一下，這方面的東西還不少
+14:02:05 <hychen> 有沒有用haskell研究股票的...
+14:07:19 <letoh> stock dsl ?
+14:22:00 <letoh> http://www.haskell.org/haskellwiki/Haskore  # music dsl
+15:28:19 <CindyLinz> 好想有個 pure 的 Hash 用啊 :p
+15:31:02 <hychen> 等我修業有成就開始寫
+15:31:33 <hychen> letoh, 第8週的課很有趣，講了funtion decompose 跟 OO decompose的差異
+15:51:11 <CindyLinz> hmm
+15:51:30 <b4283> what's that
+15:51:54 <CindyLinz> ghc standard lib 只有 IO Hash, 沒有 pure Hash, 不知道是不是實作會遇到嚴重困難... :|
+15:52:28 <CindyLinz> 做出來了發現時間複雜度是 O(lg N) 這樣..? XD
+16:04:45 <b4283> #cschat.tw anyone  ?
+16:06:40 <kanru> what's that?
+16:07:44 <b4283> 之前想讓大家可以不同技術大亂鬥的地方
+16:08:05 <b4283> 想說這樣 #lisp.tw 也可以移過去 :D
+16:08:38 <kanru> 好啊
+16:09:13 <b4283> 呵呵
+16:09:25 <b4283> 咦 letoh 今天沒上來
+16:09:28 <kanru> 搬家好難的 :P
+16:09:34 <b4283> 是呀
+16:20:54 <CindyLinz> 我遇到一個問題..
+16:21:14 <CindyLinz> 我在自己的資料結構裡面想用到 Data.Map.Map key value
+16:21:26 <CindyLinz> 它要求這個 key 有 Ord key
+16:21:54 <CindyLinz> 而我想要自己的這個大資料結構不用要求這個 key 有 Ord key
+16:22:09 <CindyLinz> 而是要求使用者多傳給我一個 (key -> key -> Ordering) 函數
+16:23:52 <CindyLinz> 我有什麼方法可以在我寫的函數, 或資料結構裡面自己塞一個 newtype
+16:24:23 <CindyLinz> 我看 TypeFamily 的確有這樣的東西
+16:24:51 <CindyLinz> 不過它似乎得用在 class, 然後在 instance 的時候指定這個 newtype 要長什麼樣
+16:25:58 <CindyLinz> 不過我這只是個純資料結構, 不是用 class 來定義的話, 可以怎麼做呢
+16:42:39 <hychen> CindyLinz, 我剛以為你說的Hash是Haskell Shell.... orz
+16:48:46 <CindyLinz> 是資料結構 雜湊表, 又稱 哈希表.. XDDD
+17:20:45 <letoh> b4283: ??
+17:21:23 <letoh> lisp.tw 根本沒聲音啊
+17:25:38 <b4283> orz
+20:33:12 <suhorng> 有人知道這篇的原文在哪嗎？ http://lisp.tw/2013/02/17/god-wrote-in-lisp-code/
+20:33:38 <suhorng> 如果是原文是英文, 就不太想看譯文QQ
+20:47:02 <letoh> https://news.ycombinator.com/item?id=2965  只找到這個
+20:51:00 <letoh> http://www.youtube.com/watch?v=5-OjTPj7K54  這邊有人唱
+20:51:02 <suhorng> 我也只找到音樂跟歌詞QQ
+20:51:29 <letoh> 還蠻電波的  聽完腦中一直都是這首旋律XD
+20:52:39 <suhorng> XD
+21:11:43 <letoh> 這篇原文是英文嗎?
+21:12:29 <letoh> 是說，我不太喜歡那個發爐的λ
+21:14:54 <suhorng> 我也不知道原文是哪個 或作者是誰
+21:15:10 <suhorng> 純粹看到下面tag是譯文
+21:15:28 <letoh> 唔  可能去 lisp.tw 問一下? XD
+21:16:38 <suhorng> google是有找到這個啦XD http://garfieldandlittlepig.wordpress.com/2008/02/07/god-wrote-in-lisp-code/

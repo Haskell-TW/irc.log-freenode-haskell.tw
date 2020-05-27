@@ -1,0 +1,63 @@
+02:46:34 <CindyLinz> xmonad-contrib 的 CopyWindow 真好用.. 可以開一個 youtube 在每個 workspace 播影片, 然後其他的窗切來切去換做不同的事
+02:47:01 <CindyLinz> petercommand: 要不要來 Funth 介紹一次 xmonad 呀? ^^
+03:27:07 <letoh> 聽起來像是設成 sticky window
+03:28:06 <CindyLinz> 可以拿來當 sticky window
+03:28:33 <CindyLinz> 可以只 copy 到一個指定的 workspace
+03:31:58 <CindyLinz> 反正 xmonad 的 config 就是程式嘛, 看怎麼呼叫就會怎麼跑 ^^|
+03:47:24 <letoh> 印象中 sticky hint 好像會影響所有 viewport... 可以控制顯示 workspace 不曉得怎麼做的
+10:39:06 <caasih> 聽起來像不同的 view 對應到同一個 browser （沒看源碼
+11:59:18 <CindyLinz> browser?
+12:08:37 <caasih> 你不是用 browser 放 youtube 的嗎？我想講 window 但是我也不清楚 xmonad 是怎麼和 X 互動的 0rz
+12:10:40 <CindyLinz> 喔我是呀.. 那個 copy window 不只有管 browser 嘛, 什麼窗都可以 dup.. XD
+12:14:38 <caasih> 在不同的 workspace ，那個 window 可以放在不同的位置嗎？
+12:14:51 <caasih> 如果可以，就跟 sticky 不太一樣了
+13:10:14 <petercommand> CindyLinz: 可以呀
+13:31:52 <CindyLinz> caasih: 可以放在不同位置... 但可以自己拉到一樣的位置 XD
+13:32:29 <CindyLinz> 然後, 我試用起來的感覺... 它好像複製過去的時候第一次也會複製為一樣的大小位置
+13:33:03 <CindyLinz> 但那是剛好我兩個 workspace 的排列類型選的是一樣的.... 如果不一樣的話可能不存在一樣大小位置的 slot
+13:33:12 <CindyLinz> petercommand: :D
+13:34:39 <caasih> CindyLinz: 聽來真棒 :D 喜歡一樣的東西有不同的 view 這件事
+20:39:29 <pkmx> xmonad++
+20:48:07 <CindyLinz> 這邊有一堆寫 xmonad config 可以動用的東西.. https://hackage.haskell.org/package/xmonad-contrib
+20:48:17 <CindyLinz> 有夠多, 不知道該從何讀起... QQ
+20:48:29 <CindyLinz> petercommand: 可以導讀嗎? ^^|
+20:49:00 <CindyLinz> 其中那個 XMonad.Actions.CopyWindow 就是可以拿來作這個像 sticky window 的東西
+20:49:08 <pkmx> 我都是想到需要什麼功能才去找
+20:52:09 <pkmx> 話說新版的xmonad好像可以用stack build 還沒時間去研究
+20:54:36 <CindyLinz> 我從 stack 3.x 就開始用 stack 裝 xmonad 了
+20:54:51 <CindyLinz> xmonad --recompile 要改成 stack exec xmonad -- --recompile
+20:55:05 <CindyLinz> 不然 xmonad 會找不到 stack 管理的 library
+20:55:14 <pkmx> 對啊 我目前是這樣
+20:55:30 <CindyLinz> 呃那你不就已經用了? ^^|
+20:55:47 <pkmx> 記得看到是新版 xmonad --recompile 會去找 ~/.xmonad/build 之類的script
+20:56:25 <pkmx> 然後你可以在裡面改成用stack去build 這樣就不用每次前面都要stack exec
+20:56:41 <CindyLinz> 噢噢... 原來還有這招啊
+21:03:41 <petercommand> CindyLinz: xmonad-contrib 大部份我都沒看過XD
+21:05:27 <petercommand> CindyLinz: 導讀這個嘛..看起來好雜XD
+21:05:53 <pkmx> 叫 *-contrib 感覺就是大雜燴嘛
+21:06:28 <pkmx> 不知道何時才有人用 haskell 寫 wayland compositor 出來
+21:06:37 <petercommand> 為甚麼叫 contrib 呀? contribution?
+21:06:53 <pkmx> 恩
+21:07:40 <CindyLinz> 如果是 contributor 的話可以增加一點獵奇感.. (X
+21:08:12 <petercommand> XD
+21:08:58 <pkmx> import EdwardKmett (X
+21:12:12 <petercommand> 黑幕的 cookie 嘛XDD
+21:15:40 <petercommand> https://en.wikipedia.org/wiki/White_Christmas_(Black_Mirror)#Part_II #cookie
+21:19:27 <CindyLinz> 我 xmonad 最新版 (0.13) 在筆電上遇到問題 @@" # https://github.com/xmonad/xmonad/issues/92
+21:19:44 <CindyLinz> 作者建議的最後一則我還沒時間試
+21:19:55 <CindyLinz> 桌機沒問題
+21:22:31 <CindyLinz> 筆電現在用 lts-7.20 裝 xmonad-0.12 xmonad-contrib-0.12 ok
+21:31:49 <petercommand> 沒遇過@@"
+21:33:45 <pkmx> arch上的ghc不知道為啥卡在8.0.1超久了
+21:33:53 <pkmx> 害我只好繼續用lts-7.x (掩面
+21:35:04 <petercommand> 咦，stack 不是可以自動找對應的 ghc 版本嘛
+21:35:46 <pkmx> stack可以幫你裝吧@@
+21:35:54 <petercommand> 恩
+21:36:25 <pkmx> 我記得stack裝的在arch上面常常有問題 library版本不對什麼的
+21:36:34 <pkmx> 所以我都只跟系統ghc的版本
+21:36:37 <petercommand> @@"
+21:38:23 <pkmx> 記得arch上面ncurses和libtinfo都比debian新 所以用ghc的bindist都會有問題...
+21:38:25 <CindyLinz> 欸我都是用 stack 裡面的
+21:38:28 <CindyLinz> 系統自己沒有裝 ghc
+21:38:52 <pkmx> 所以現在其實可以了嗎XD
+21:39:06 <CindyLinz> 我不確定有沒有用到你想用的東西 ^^|

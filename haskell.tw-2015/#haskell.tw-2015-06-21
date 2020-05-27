@@ -1,0 +1,57 @@
+00:10:26 <__Z2suI3horI2ngE> CindyLinz: 有點久了 不過我猜你的問題可能會在 GHC 的 STG langauge design choice 裡面有提到
+00:13:03 <__Z2suI3horI2ngE> thunk 也好 value 也好基本全都是用 closure 代表, 總之遇到 closure 就是 enter, 假如已經算完了就 return, 他們不打算測試一個東西是否算完再 branching (另外 "enter" 的部份也跟 VM for lazy evaluation 的設計有關, push-enter 比 eval-apply 更高效率的樣子)
+00:14:03 <__Z2suI3horI2ngE> 當然假如是 data-type, 那 enter closure 再 return 還有可能多做一些事, 例如把 branching result load 到register 當中, return 後就直接 jump (而不是測回傳的是哪個 constructor)
+00:15:15 <__Z2suI3horI2ngE> 他是 "spineless tagless" G-machine XD    這個 tagless 就是統一用 closure 表達的結果
+00:15:48 <__Z2suI3horI2ngE> 是說剛剛找到這個XD 想來看看 http://www.andres-loeh.de/LambdaPi/
+00:21:26 <CindyLinz> push-enter, eval-apply 是什麼? ^^|
+00:23:48 <__Z2suI3horI2ngE> 看 (λx. λy. z) M N N 是被編譯成 eval (λx. λy. z); eval M; apply; eval N; apply 還是 push M; push N; push (λx. λy. z) ; apply
+00:24:03 <__Z2suI3horI2ngE> 阿打錯, 最後不是 apply, 是 enter
+00:27:42 <CindyLinz> 這是假設已知 eval z 需要先 eval 參數 x 和 y?
+00:27:49 <CindyLinz> enter 是一個怎樣的組語嗎?
+00:28:00 <CindyLinz> apply 我就當成 x86 的 call 來理解了? ^^|
+00:28:31 <CindyLinz> 就是呼叫那個 lambda 的 funptr?
+00:28:39 <CindyLinz> enter 是 jmp 嗎?
+00:28:51 <__Z2suI3horI2ngE> 對
+00:29:05 <CindyLinz> 我這麼多個問號, 你是回哪個 OAO
+00:29:13 <__Z2suI3horI2ngE> 呃 這好像有點區分, 假如是 call-by-name, enter 就是 jmp, 不過 call-by-need 可能跟 apply 叫接近(我猜)
+00:29:38 <__Z2suI3horI2ngE> eval-apply 一般都是講 strict evaluation 的呀
+00:29:56 <__Z2suI3horI2ngE> 而 call-by-name (not lazy) 做出來就差不多是 push-enter
+00:30:35 <__Z2suI3horI2ngE> 在 eval-apply 中, \x.\y.P 會編譯成類似 closure (closure P; return); return
+00:30:52 <CindyLinz> 為什麼你用的指令都不太像組語 QQ
+00:31:07 <__Z2suI3horI2ngE> 而 push-enter 中會變成像 grab; grab; P    // grab 是從 stack 中抓一個東西 extend 到 environment 裡
+00:31:14 <__Z2suI3horI2ngE> 這都是 abstract machine 的指令 X
+00:31:16 <__Z2suI3horI2ngE> XD
+00:31:59 <__Z2suI3horI2ngE> 欸抖...這應該不是重點 主要大概是保持個 closure 每次都進去, 而不是設 flag 用 testing 的方式 codegen 出來比較簡單
+00:32:35 <__Z2suI3horI2ngE> 尤其 lazy evaluation 的控制流程可能滿複雜的....
+00:38:08 <CindyLinz> 單字的意義看不懂的話, 你講的句子也都會理解困難啊 orz
+00:40:06 <CindyLinz> enter 是檢查一下有沒有需要計算(或是之前已經計算過了)再決定要不要 jmp? # 00:29 < __Z2suI3horI2ngE> 呃 這好像有點區分, 假如是 call-by-name, enter 就是 jmp, 不過 call-by-need 可能跟 apply 叫接近(我猜)
+00:40:28 <CindyLinz> 噢不是 enter 是 jmp, 會檢查的是 apply?
+00:41:05 <CindyLinz> 你的 abstract machine 該不會叫作 GHC RTS? (X
+00:41:11 <__Z2suI3horI2ngE> 我上面講的不太精確. call-by-name 裡面 enter = jmp (simply enters (go to) the thunk)
+00:41:30 <__Z2suI3horI2ngE> call-by-need, 反過來說, 就需要 return, 所以才比較複雜...
+00:41:43 <__Z2suI3horI2ngE> 阿這樣講也不全然對啦XDDD
+00:42:41 <__Z2suI3horI2ngE> call-by-value 裡面 apply 就只是普通的 call 了 (除了會從 stack 上 pop parameter 然後 extend environment)
+00:44:19 <CindyLinz> __Z2suI3horI2ngE: 欸, 找到這個... http://hackage.haskell.org/package/ministg
+00:44:46 <CindyLinz> 說是可以在 html 裡面 demo 步驟.. 不知道好不好用 ^^
+00:45:34 <__Z2suI3horI2ngE> CindyLinz: http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.53.3729 Section 3.1 就是在講你問的東西~
+00:46:49 <CindyLinz> 喔喔!
+00:46:51 <CindyLinz> 謝謝
+00:46:55 <CindyLinz> 怎麼這麼長........... /_\
+00:47:22 <__Z2suI3horI2ngE> 它裡面還有提到另外一點, 假如用存值然後測試判斷是否有算過的話, 遇到太大的值還是得存 pointer, 這樣至少有三個 case, 很不方便
+00:48:21 <CindyLinz> 才3個.... XD
+00:49:03 <__Z2suI3horI2ngE> Haskell 每個東西都是 thunk, 每個地方都要產生 3-way branching code 很麻煩捏....
+00:49:05 <CindyLinz> 想到某年 IPSC 的題目, 我想出來的解法遞迴 11 種 case.. XD
+00:49:13 <__Z2suI3horI2ngE> LOL
+00:49:46 <__Z2suI3horI2ngE> 當然我覺得這篇 paper 裡面講的東西也沒有附統計資料這些或實地驗證, 可能還是某種經驗或信念(?)吧XD
+00:50:38 <__Z2suI3horI2ngE> huh.. Data types 在 3.3
+00:51:43 <CindyLinz> __Z2suI3horI2ngE: 1992 年, 好早....
+00:52:01 <CindyLinz> Haskell 98 都還不存在!
+00:52:12 <CindyLinz> Haskell98 -6 歲了!
+00:53:18 <__Z2suI3horI2ngE> wwww
+00:55:08 <CindyLinz> __Z2suI3horI2ngE: 這麼大一篇.. 我應該會 silent 好一陣子惹 ._.
+00:55:21 <__Z2suI3horI2ngE> Haskell 在 Haskell 98 前就已經存在了的說....
+00:55:35 <__Z2suI3horI2ngE> CindyLinz: 跳著看>____< 有些段落不太重要
+00:56:22 <CindyLinz> __Z2suI3horI2ngE: 看過去就知道哪些是不重要的了.. (?
+00:57:05 <__Z2suI3horI2ngE> wwww
+22:25:12 <__Z2suI31orI2ngE> 想問一下... Haskell 裡面可以訂 type-level 的 fixed point,  data Mu f = In (f (Mu f))
+22:25:25 <__Z2suI31orI2ngE> 可是這個是不是沒辦法在 System f ω 裡面寫出來?

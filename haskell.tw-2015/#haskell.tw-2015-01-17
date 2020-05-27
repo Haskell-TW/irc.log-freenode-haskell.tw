@@ -1,0 +1,21 @@
+11:02:22 <drbean> > let in in = "out" in (in $) in
+14:58:02 <CindyLinz> 哦~ Data.Either 裡面有 isRight, isLeft 可以用 :p
+14:58:09 <CindyLinz> @type isRight
+14:58:21 <CindyLinz> lambdabot 不在 QQ
+14:58:46 <CindyLinz> isRight, isLeft :: Either a b -> Bool
+19:56:42 <CindyLinz> lambdabot: Hi~ 你回來啦~~~
+19:56:52 <CindyLinz> @type isRight
+19:56:53 <lambdabot> Either a b -> Bool
+19:56:57 <CindyLinz> :D
+21:27:42 <CindyLinz> 把前幾天說的, 自動 import 目錄的程式整理到 hackage 上 :p # http://hackage.haskell.org/package/imports
+21:28:36 <au> CindyLinz++
+22:29:42 <caasihuang> CindyLinz: 人蠢沒藥醫，剛發現 then 就是 >>=
+22:35:12 <CindyLinz> caasihuang: 糟糕我只聽得懂 >>= 聽不懂 then.. XD
+22:36:19 <caasihuang> 就用 Promise 時會寫 p.then(do-something), 發現看成 then p do-something 的話就是 >>= XDD
+22:38:52 <caasihuang> （除非這是什麼高深的反諷...）
+22:39:43 <CindyLinz> 不是.. 真的不知道 XD
+22:40:07 <CindyLinz> 這個 do-something (應該是個函數) 的參數是 p 的先前運算的結果?
+22:44:50 <caasihuang> do-something 我以為是 m a -> (a -> m b) -> mb 中的  (a -> m b)
+22:45:33 <caasihuang> 只是他也可以是 (a -> b) ， then 裡面會自己做 (b -> m b)
+22:52:21 <CindyLinz> 就當作都是 a -> m b 吧~  Haskell 裡面 \a -> return (a+a) 也是 a -> m a 而不是 a -> a... ^^|
+22:54:00 <caasihuang> 嗯嗯，有注意到那個 return 不是 keyword 是 function XD

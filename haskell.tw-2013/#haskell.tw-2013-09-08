@@ -1,0 +1,25 @@
+22:08:32 <suhorng> https://plus.google.com/117380487359344039293/posts/PR96UYs4hMy S-expression...
+22:12:58 <miaout17__> 上週四接到電話臨時有急事離開了，很遺憾沒有聽完穆老師和 suhorng 的演說 QQ
+23:20:19 <hashcat> 為啥每隔一陣就會跑出王垠的東西
+23:20:36 <hashcat> 他寫啥我從沒看懂過
+23:35:24 <favonia> hashcat: 你是訂閱哪裡？
+23:35:48 <hashcat> 訂閱?
+23:36:16 <hashcat> 是說這頻道
+23:40:10 <monochrom> 王垠的東西好啊 :)
+23:41:59 <CindyLinz> 王垠的東西好啊 :D
+23:42:36 <CindyLinz> 人又帥.. (搞錯重點)
+23:43:27 <hashcat> 貌似只能怪在下境界沒到那裡
+23:44:42 <CindyLinz> hashcat: 覺得能像他這樣常常分享東西出來的人很難得啊~ 雖然不是所有的論點都完全認同, 但的確是挺有內容的...
+23:44:56 <hashcat> 我再仔細看下是好在哪裡
+23:45:33 <hashcat> 連哪裡有論點都沒看出來過
+23:47:36 <CindyLinz> hashcat: 看一些長一點的文章好了? http://www.yinwang.org/blog-cn/2013/04/18/language-design-mistake2/
+23:48:40 <CindyLinz> 是說我看他的 google+, 因為是全英文的... 個人感覺很奇怪 XD
+23:49:21 <suhorng> 我貼這段只是覺得 json 那邊很像 S-expression很好笑XD
+23:50:18 <hashcat> 還是完全沒方向感
+23:53:39 <hashcat> 還是直接寫個程序說明問題好懂
+23:55:03 <hashcat> python可以寫出無頭人戴帽子是啥問題唉
+23:56:54 <CindyLinz> hashcat: 因為你寫了一個函數, 給所有的「人」戴帽子
+23:57:07 <CindyLinz> 你心中以為所有的「人」都會有「頭」
+23:57:28 <CindyLinz> 但是在 python 的環境裡面從來就無法給你這樣的保證
+23:57:47 <CindyLinz> 意外就會發生....
+23:58:46 <hashcat> 用Ada好了

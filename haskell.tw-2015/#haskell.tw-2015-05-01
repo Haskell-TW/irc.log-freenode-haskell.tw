@@ -1,0 +1,7 @@
+13:38:07 <mno2> https://github.com/imeckler/mote  好像不錯用
+18:28:36 <mno2> https://www.fpcomplete.com/user/edwardk/fibonacci/search  系列第二篇,  CindyLinz 寫 fib search 好像比 binary search 要潮。
+18:51:49 <CindyLinz> 應用上有好處嗎? @@"
+18:52:03 <CindyLinz> 我 binary search 的 /2 都是用 shift 作欸..
+20:44:51 <mno2> CindyLinz: 看起來就是 cache 有好處？如果是要等資料的 case 的話， shift 好像不是 bottleneck
+21:40:07 <CindyLinz> fib search 為什麼會額外有 cache 的好處啊? 我只想到說因為它切割不均勻, 所以平均比較次數會比較高而已 @@
+21:56:01 <CindyLinz> 以前想到這切割方式只有想說可以拿加減法取代除法的優點, 不過 shift 代替除二的話, 這優點就沒有了..

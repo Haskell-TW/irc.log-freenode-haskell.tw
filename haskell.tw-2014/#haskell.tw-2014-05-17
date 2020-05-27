@@ -1,0 +1,138 @@
+00:16:36 <c9sloud> hychen: 是包 deb ～
+00:17:19 <c9sloud> hychen: 19:24 <c9sloud> http://github.com/c9s/r3
+00:28:41 <c9sloud> CindyLinz: 你應該可以先用 cmake && make 出來的 .a 檔著用?
+00:28:55 <c9sloud> 其實 make install 就會把 lib 裝進去 system 了
+00:33:37 <c9sloud> hychen: 需要麻煩你幫忙包 deb XDDD
+00:33:40 <CindyLinz> c9sloud: 我正在拿你的 .c 和 .h 塞 cpan... XD
+00:33:59 <c9sloud> CindyLinz: 那如果 dir, file 改了怎麼辦 @@
+00:34:09 <CindyLinz> c9sloud: 一起改嘍 XD
+00:34:13 <c9sloud> XD
+00:34:26 <CindyLinz> 先來放個 patch...
+00:34:37 <CindyLinz> 雖然在我的機器還 build 不起來...ww
+00:34:49 <CindyLinz> 目前是死在 check 的部分
+00:34:57 <c9sloud> 你 cmake 現在有辦法過嗎?
+00:35:35 <c9sloud> CindyLinz: apt-get install check ?
+00:35:56 <CindyLinz> 有裝, cmake 有過, 是 make 才壞
+00:37:42 <CindyLinz> c9sloud: 推你一個拉請求.. XD
+00:37:51 <c9sloud> ohoh ok!
+00:37:53 <c9sloud> CindyLinz: 3Q!
+00:39:21 <CindyLinz> 有這個我才能突破很多關 compile error... XD
+00:41:51 <c9sloud> XDD
+00:41:58 <c9sloud> 我改天來上 linux 編譯看看
+00:43:36 <c9sloud> 換我有 error 了 XD
+00:43:53 <c9sloud> src/str.c:184:7: error: conflicting types for 'my_strdup'
+00:44:39 <CindyLinz> 是因為 size_t 嗎?
+00:44:46 <c9sloud> maybe XD
+00:44:54 <c9sloud> 我先去睡 明天再戰 XD
+00:45:01 <CindyLinz> mmm
+03:57:39 <caasi_> au: 有關 TimePiece ，找到這個 log ，遇到一樣的問題，正在找方法解決： http://ircbrowse.net/browse/haskell?id=15950345&timestamp=1372153026#t1372153026
+04:00:54 <au> cabal --extra-include-dirs=/usr/include/SDL
+04:01:06 <au> (or something like that)
+04:05:48 <caasi_> au: 開始編了，感謝！
+04:54:05 <au> caasi_: 換成自由字型了，extra include dir 也加上了，released as TimePiece 0.0.4, thx much
+04:57:16 <caasi_> au++ 我該 apt-get libsdl-image-dev 之類的嗎？還是讓 cabal 處理就好？
+04:57:52 <au> probably needs all of sdl_image sdl_gfx sdl_ttf packages/headers
+04:58:54 <caasi_> 現在卡這樣，上述的已裝： https://gist.githubusercontent.com/caasi/f578ca041fc9e1d4eec4/raw/c114a37a278a08cdaa438d5b78696e47f61b6712/cabal.log
+05:00:20 <caasi_> 正在問 google...
+05:02:33 <au> 這表示 libSDL 的 main 沒有 link 到
+05:03:10 <au> cabal install --extra-lib-dirs=/usr/lib/SDL
+05:03:24 <au> 看 libSDL.* 在哪裡就指向哪裡
+05:06:10 <au> cabal install --extra-lib-dirs=/usr/lib/x86_64-linux-gnu # if 64bit
+05:13:25 <caasi_> 還是遇到 crt1.o(.debug_info): relocation 0 has invalid symbol index 11 ，
+05:13:48 <caasi_> 會跟這個有關嗎？ http://stackoverflow.com/questions/5528958/make-file-problem
+05:14:04 <au> caasi_: try edit c_main.c line 16
+05:14:06 <au> 改成 int main
+05:14:24 <au> 再 cabal install 一次
+05:15:28 <caasi_> 大成功！
+05:15:57 <au> ok cool, 直接跑 TimePiece 看看
+05:16:02 <au> 如果會動我就再 release 一次
+05:22:34 <caasi_> au: 會動！但還沒找到 printScreen 的方法 XDDD
+05:23:30 <au> 是說會有數字跳動但是不能存檔這樣嗎 XD
+05:25:11 <caasi_> 是說按了 printScreen 後，在拍到前程式就關掉啦 XD
+05:26:34 <caasi_> 抓到了，來貼一下 XD
+05:26:41 <au> Main.hs line 111 刪掉即可
+05:26:51 <au> 或是改成 Esc only
+05:27:38 <caasi_> XD 叫 Screenshot delay 5 秒抓到了
+05:27:45 <au> 刪掉就變成用滑鼠按鍵退出
+05:27:55 <au> 按空白可以亂 zoom
+05:27:56 <au> ok cool
+05:28:03 <au> enjoy :) 先去睡了, ttyt
+05:29:10 <caasi_> https://twitter.com/caasih/status/467416809927233536
+05:29:16 <caasi_> au: 晚安！
+05:37:53 <c9sloud> 咳得太嚴重結果起來看手機就看到 cindy 的 PR.   XD
+06:58:03 <c9sloud> CindyLinz:  autotool 好了 XD
+07:18:30 <c9sloud> CindyLinz:
+07:18:34 <c9sloud> ./autogen.sh
+07:18:48 <c9sloud> ./configure && make && make check   (if you've installed check)
+07:19:04 <c9sloud> include config.h 就可以檢查 functions
+07:19:20 <c9sloud> #ifdef HAVE_STRDUP 之類的
+07:30:43 <c9sloud> CindyLinz:  http://c9s.github.io/r3/bench.html  # 要不是有寫 Check 我還以為出錯了 XD
+07:31:00 <c9sloud> 上面是換上 autotool 後沒有 -g 加上 -O2
+07:32:43 <c9sloud> http://www.ekd123.org/blog/autotools-as-easy-as-abc/ 這篇太好用了
+07:33:05 <c9sloud> + google 一小時內搞定 cmake => autotools
+07:39:17 <monochrom> autotools 真的容易嗎?
+07:41:16 <monochrom> 啊, 原本不易, 讀了那文就容易了
+07:48:13 <c9sloud> monochrom: yeahhh
+07:48:20 <c9sloud> 但目前用起來好處比 cmake 多
+08:10:16 <c9sloud> CindyLinz: strndup 好像有 bug 我在 linux 上面 dup 出來的 string 是空的 e->pattern (空的)
+08:23:12 <c9sloud> CindyLinz: https://github.com/moriyoshi/mod_himote/blob/master/Zend/zend_alloc.c#L2499 拿這個來改 (??)
+12:58:15 <CindyLinz> c9sloud: 這是我測試 README 的結果 @@ http://lpaste.net/899585603136389120
+12:58:36 <CindyLinz> match 沒有找到.. 不過我也有把 my_strndup 被呼叫的時候 input 和 output 印出來
+12:58:45 <CindyLinz> 我看不出哪邊不對 orz
+13:00:24 <CindyLinz> 有找到一個浪費記憶體的地方, 因為我抄隔壁函數的 sizeof(char*) * count XD
+13:54:34 <CindyLinz> scm 說:「Haskell 是 simple, 不是 easy」
+13:57:20 <darkx> http://gibiansky.github.io/IHaskell/
+13:57:28 <darkx> 竟然有人把這個弄到 ipython 理 XD
+14:02:02 <CindyLinz> 應該是那個 Carl Su 弄的~ 有來過 Functional Thursday 歐~
+14:02:56 <darkx> 酷！
+14:03:37 <darkx> CindyLinz: 不過看 github 上面作者好像是其他人?
+14:07:31 <CindyLinz> 咦 還是 Carl Su 是包 docker 呢
+14:08:42 <CindyLinz> 嗯 是包 docker 沒錯 https://github.com/bcbcarl/docker-ihaskell
+14:39:40 <c9sloud> CindyLinz: 好像是跟 edge branch 有關
+14:40:16 <c9sloud> '/' 被吃掉了
+14:40:45 <c9sloud> 試試 insert /foo /bar 然後 dump ?
+14:53:16 <CindyLinz> c9sloud: 額外加放 /foo ?  我看已經有 /bar 在裡面了
+14:54:00 <c9sloud> No~ just 2 routes
+14:54:09 <CindyLinz> 喔喔 好
+14:54:33 <c9sloud> See if the root slash is still there XD
+14:55:38 <CindyLinz> c9sloud: http://lpaste.net/4682744353964163072
+14:58:20 <c9sloud> 果然是 edge branch 的 flow
+14:59:44 <c9sloud> 從 dl > 0 的 condition 追追看？
+14:59:53 <CindyLinz> 啊我先把 malloc(sizeof(char*) * count) 改成 malloc(sizeof(char) * count) 的 push 給你
+15:00:26 <CindyLinz> dl?
+15:01:19 <CindyLinz> common prefix 長一點嗎?
+15:02:25 <CindyLinz> 好像 common prefix 會被吃掉的樣子? # http://lpaste.net/413016725336883200
+15:02:51 <c9sloud> Yeahh
+15:03:04 <c9sloud> Dl = offset
+15:03:51 <c9sloud> There is a line: e->pattern_len = dl or something
+15:04:25 <CindyLinz> http://lpaste.net/8023645696643039232
+15:04:28 <CindyLinz> 嗯我來找一下
+15:05:53 <CindyLinz> 不對我要先出去一下....ww
+15:08:44 <c9sloud> Okok (wave)
+15:12:34 <c9sloud> Oh shit, we freed the pattern before strndup XDDDD
+15:16:13 <c9sloud> https://github.com/c9s/r3/blob/master/src/node.c#L425
+16:01:02 <CindyLinz> 來更新 :p
+16:08:49 <c9sloud> CindyLinz: 你那邊 autotool 有 work 嗎?
+16:09:16 <CindyLinz> 有了 match 會出來了
+16:09:24 <CindyLinz> 我沒有試那個欸
+16:09:50 <CindyLinz> 我用一個 perl script 把所有的 .h 和 .c 全部抓進來, 作些適度修改以後塞到 .xs 檔裡面 XD
+16:10:58 <CindyLinz> 我還找不到要怎麼讓 xs 可以吃額外的 .c 檔.. 然後想說去 cpan 亂翻看看例子好了
+16:11:06 <CindyLinz> 只有找到過超巨大的 .xs 檔....ww
+16:12:38 <c9sloud> 我猜應該是你 make install 之後
+16:12:47 <c9sloud> 用 Makefile.PL 有一些 ExtUtils 之類的
+16:13:02 <c9sloud> 可以指定 CFLAGS, LDFLAGS=-lr3 之類的
+16:13:15 <CindyLinz> CCFLAGS 是好的, 然後 C 也可以指定檔案列表
+16:13:53 <CindyLinz> 但是指定完以後生出來的 .o 檔會出現在 project 根目錄, 而它自己的 O_FILES 還是會去 src/ 目錄找 .o 檔, 然後就找不到
+16:14:23 <CindyLinz> 然後, 因為都找不到有人用, 懷疑它是壞掉很多年的功能?
+16:15:10 <c9sloud> http://search.cpan.org/~mschwern/ExtUtils-MakeMaker-6.57_09/lib/ExtUtils/MakeMaker/FAQ.pod 你是用這個嗎
+16:16:38 <CindyLinz> 對呀~ h2xs 生出來的裡面就是這個的
+17:30:59 <CindyLinz> @_@"
+18:56:26 <c9sloud> CindyLinz: 剛剛忘了要講什麼.. 阿 今天早上有人送 PR，是 pkg-config 的支持
+18:57:05 <c9sloud> 如果 ExtUtils:: 可以用 pkg-config 的話，應該可以 pkg-config --libs r3  或 pkg-config --cflags r3
+19:01:29 <CindyLinz> c9sloud: 安心睡啦... ._.
+22:08:54 <CindyLinz> 唔.. 如果我寫 concurrent 程式的情境是, 要去 wait 兩個 MVar, 而且是只要任何一個等到了, 我的程式就可以繼續跑
+22:09:18 <CindyLinz> 比較簡單的寫法是不是要用 stm 的兩個 TMVar 和 retry?
+23:50:23 <monochrom> 寫程式寫到腦部過熱? XD
+23:52:13 <monochrom> 最簡單是兩個 tmvar. 或者 async 裏也有"等到一個就夠"的東西
+23:54:54 <CindyLinz> 還沒看過這個「等到一個就夠」的東西..
+23:55:07 <CindyLinz> 如果不用 stm 的話.. 就要搞好幾個 MVar 來做這種事了 @@"

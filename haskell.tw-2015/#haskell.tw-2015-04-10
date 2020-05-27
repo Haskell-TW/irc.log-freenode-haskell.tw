@@ -1,0 +1,32 @@
+07:46:20 <mno2> https://blog.pusher.com/porting-the-pusher-integration-tests-to-haskell/
+07:46:34 <mno2> pusher 用 haskell 的經驗分享
+07:47:45 <mno2> http://conal.net/talks/haskell-to-hardware.pdf  Conal 投影片的圖看到就覺得要畫好久..
+08:22:14 <letoh> 那種圖不是用 dot 或 tikz 跑一下描述檔就會自動畫的嗎?
+08:24:42 <letoh> 後面的圖好複雜  應該用程式跑出來的?
+09:07:43 <mno2> 說得也是
+15:38:49 <JohnLIANG> hello
+15:40:11 <JohnLIANG> anyone online?
+15:40:24 <JohnLIANG> come on, answer me
+15:41:06 <CindyLinz> ??
+15:42:25 <JohnLIANG> sorry
+15:42:38 <JohnLIANG> you have learn haskell?
+15:43:31 <CindyLinz> some.. ^^|
+15:43:48 <JohnLIANG> ..ok
+15:44:47 <JohnLIANG> I find there are so few resourses about haskell on intenet
+15:45:58 <JohnLIANG> It's really hard to self-study off class
+15:50:59 <JohnLIANG> readProp :: String -> Prop
+15:50:59 <JohnLIANG> -- Example:
+15:50:59 <JohnLIANG> --      readProp "~(q && ~q)" = NOT (AND (VAR "q") (NOT (VAR "q")))
+15:50:59 <JohnLIANG> readProp = undefined
+15:52:08 <JohnLIANG> ~(q && ~q) this is  proof language
+15:52:27 <JohnLIANG> can you define readProp
+15:59:44 <CindyLinz> 欸 跑掉了?
+16:00:00 <CindyLinz> 想先問他會不會講中文的說 ._.   姓看起來很像 :p
+16:51:45 <petercommand> 很像梁XD
+17:06:46 <JohnLIANG> @CindyLinz
+17:06:47 <lambdabot> Unknown command, try @list
+17:07:01 <JohnLIANG> @ CindyLinz
+17:07:56 <JohnLIANG> sorry, I had a class just now
+17:08:13 <au> JohnLIANG: try https://hackage.haskell.org/package/parsec or https://hackage.haskell.org/package/attoparsec for writing parsers
+17:08:53 <JohnLIANG> @ au Thx! I will do now
+17:09:36 <au> see http://book.realworldhaskell.org/read/using-parsec.html for parsing prefix, infix and parens

@@ -1,0 +1,130 @@
+19:43:41 <caasih> petercommand: 好像要開始了
+19:43:57 <caasih> xmonad 是你起的頭，結果今天你竟然沒到...
+19:44:47 <caasih> 投影片看來講者還沒有 push
+19:45:02 <caasih> 等等看有沒有辦法文字轉播 XDDD
+20:05:45 <caasih> Cindy 表示最近 fb 不知道發生什麼事，之前貼文有800個人看到，這次只有70人
+20:06:21 <caasih> 接著 Cindy 開始 demo xmonad 用起來是怎樣，並介紹有紅框的是現在 focus 所在
+20:07:09 <caasih> focus 可以任意移動，也可以搬動。要播影片也可以開不是 tiling 的，獨立的窗
+20:07:36 <caasih> 這樣的窗也能丟回去跟其他窗排在一起
+20:08:29 <caasih> talk 前半會講 xmonad 架構，後半講 code 中，講者自己寫 Haskell 也會用到的技巧
+20:09:00 <caasih> 現在在介紹 X Window
+20:09:24 <caasih> 提到有螢幕的才是 X server ，跑程式的是 X client
+20:11:05 <caasih> window manager 管理 X server 的窗怎麼畫， X server 跟 window manager 用訊息溝通
+20:12:01 <caasih> XMonad 的進入點在 https://github.com/xmonad/xmonad/blob/master/src/XMonad/Main.hs#L163
+20:13:39 <caasih> launch 先設定環境變數，然後試著拿到 root window 的 handler ，並設定去聽所有事件
+20:14:18 <caasih> 再設定好自己的狀態，才進到一個叫 X 的 monad 裡面（226行的樣子）
+20:15:02 <caasih> 講者表示這個 X monad 有趣的地方是，再重啟時會把狀態先存下來，所以一開始要先把這些狀態讀回來
+20:15:34 <caasih> 最後會停在...
+20:16:07 <caasih> forever $ prehandler =<< io (nextEvent dpy e >> getEvent e)
+20:16:24 <caasih> 這邊一直聽事件
+20:16:57 <caasih> nextEvent 讀下一個事件，打包成 Haskell 方便處理的結構，再餵給 getEvent e
+20:17:14 <caasih> # io 那邊講到開洞，我聽不太懂...
+20:17:52 <caasih> 講者提到 petercommand 說 code 只有 1200 行，但是講者自己看過後表示，那應該是不包含註解...
+20:18:15 <caasih> 接著提到 Main.hs 中值得看的有...
+20:19:50 <caasih> 291行的 handle :: Event -> X () 是要看怎麼樣處理事件的好地方
+20:20:07 <caasih> 另外一個講者覺得重要的檔案是 StackSet.hs
+20:20:43 <caasih> 如果需要寫 extension 的話，可以看 https://github.com/xmonad/xmonad/blob/master/src/XMonad/StackSet.hs#L125 怎麼操作 stack
+20:22:50 <caasih> 接著介紹 StackSet, Screen, Workspace, RationalRect, Stack 這幾個 data
+20:23:32 <caasih> 其中 data Stack a = Stack { focus :: !a, up :: [a], down :: [a] } 很有趣，後面還會介紹
+20:23:59 <caasih> # 其中 focus 是現在 focus 的窗， up 是他之前的， down 是他之後的
+20:24:50 <caasih> 現在講者介紹 Core.hs ，提到 X 這個 monad 的結構，其實是 reader monad 疊在 state monad 上，再裝到 IO monad 裡
+20:25:25 <caasih> reader monad 用來放執行時不會變動的資料， state monad 放會的
+20:25:50 <caasih> Operations.hs 則把 XMonad 的動作變成 X 的動作，主要看 windows 這個函數
+20:26:13 <caasih> windows :: (WindowSet -> WindowSet) -> X ()
+20:26:31 <caasih> https://github.com/xmonad/xmonad/blob/master/src/XMonad/Operations.hs#L106
+20:26:50 <caasih> 看這邊的程式碼可以知道他是怎麼跟 X 溝通的
+20:27:11 <caasih> Layout.hs 則含有 XMonad 預設的三種排版模式
+20:27:34 <caasih> 講者表示想實作自己的 layout 時可以看
+20:27:54 <caasih> Config.hs 則是預設的 config ，忘記怎麼用可以去看它
+20:28:12 <caasih> ManageHook.hs 則是寫 hook 方便的函數
+20:28:29 <caasih> 講者表示 XMonad 的程式介紹大概到這邊
+20:28:40 <caasih> 接下來是不連續的一個個 topics
+20:29:27 <caasih> 1. Reader monad
+20:30:15 <caasih> 適用在想讀 config ，但是不想每個函數都手動傳 config 的時候
+20:30:30 <caasih> 有三個函數， ask, local, reader
+20:31:23 <caasih> ask 是要 config ， local 可以暫時改掉 config
+20:31:35 <caasih> 2. State monad
+20:32:13 <caasih> 適用在程式執行中要改的狀態
+20:32:30 <caasih> 講者以 Main.hs 中的 drag 為例
+20:32:49 <caasih> 看到 modify 就知道要改 state ，看到 ask 就知道要讀 config
+20:33:12 <caasih> 接著講者提到她曾問過 Oleg 的問題：
+20:33:37 <caasih> 如果一個 type 中有一堆 type variable ，但是只改到其中一個，這樣有什麼好處？
+20:34:23 <caasih> Oleg 表示這樣的好處是，函數裡面不用知道它的實體是什麼，且打錯的時候， compiler 會幫你抓錯
+20:35:16 <caasih> 講者舉了小時候做物理題目時，用抽象的未知數取代數字，有時會讓問題變簡單
+20:35:36 <caasih> 並提到這樣做 compiler 無法幫你 inline ，會有一點效率損失
+20:36:11 <caasih> 3. dynamic polymorphism
+20:37:06 <caasih> 講者以 Layout 為例..
+20:37:41 <caasih> WorkSpace 中有個欄位會紀錄怎麼排版，但那個 Layout 要到 runtime 才知道
+20:39:41 <caasih> runLayout 這函數就是整個功能了，
+20:40:04 <caasih> 但為了方便修改，拆成很多小函數，功能不複雜的話改那些小函數就好
+20:40:36 <caasih> 4. extensible message & dynamic casting
+20:41:03 <caasih> 講者表示有時你不只需要知道 function ，還需要知道是什麼 type
+20:42:23 <caasih> 講者說詳細的做法可以看 Simon Marlow 的 http://simonmar.github.io/bib/papers/ext-exceptions.pdf
+20:43:08 <caasih> 接著開始介紹 Typeable 這個 type class
+20:44:04 <caasih> * 聽不懂了 XD
+20:45:02 <caasih> 講者表示 TypeRep 可以比較，然後有個叫 cast 的函數，可以轉 type ，但是這樣還差一步
+20:45:38 <caasih> 可以轉成某個 type ，但不是轉成某一類 type
+20:46:32 <caasih> 接著在 Exception 中，要實作 toException 和 fromException 來轉換 type
+20:47:49 <caasih> * 這部分我放棄
+20:53:17 <caasih> 5. monadic data or pure data 的選擇
+20:53:57 <caasih> 講者覺得享用 do-notation ，用順序來隱含想要表達的事情時，會選用 monadic data
+20:55:01 <caasih> 6. zipper pattern
+20:55:42 <caasih> 適用在要改遞迴 pure data 資料中一部分的時候用
+20:56:06 <caasih> * 想起這個在 LYaH 後面有提到
+20:58:37 <caasih> 講者以 binary tree 為例，會準備一個資料結構，存放走過的路
+20:59:04 <caasih> 而 XMonad 中用到 zipper 的就是前面提過的 Stack
+20:59:34 <caasih> focus 是現在的窗， up 是前面的窗， down 是後面的
+21:00:04 <caasih> 另外一個有趣的點是，這個 zipper 沒有完整的狀態，總是 focus 還有它的前面和後面
+21:02:29 <caasih> 講者提到 Hackage 上有 lib 可以幫你生 zipper
+21:02:48 <caasih> 也有可以讓你亂逛資料結構的 lib ，但 type 對了才能改
+21:03:05 <caasih> 7. 與 C library 介接時常見的記憶體管理方式
+21:03:35 <caasih> a. 資料內容是否要重複 copy
+21:03:53 <caasih> b. 不 copy 的話，誰負責配置跟回收？
+21:05:35 <caasih> * 這邊也聽不懂 XD 請等錄影 0rz
+21:08:34 <caasih> banacorn 表示 zipper 是資料結構的微分， Cindy 說是偏微分..
+21:09:24 <caasih> 現在講者介紹 Haskell 中有哪些 data type 和幾種 C 管理記憶體的方式對應
+21:11:03 <caasih> 8. alloca 的運用
+21:14:52 <caasih> alloca 是在 stack 中要一塊記憶體來用，存活到 function 結束，
+21:15:14 <caasih> Haskell 中有對應的 allocaXEvent 可以用
+21:17:12 <caasih> 講者提到為了避免用到不可以用的記憶體而爆炸，
+21:17:52 <caasih> Oleg 跟善中杰寫過一篇論文 Lightweight monadic regions 來處理這件事
+21:18:00 <caasih> http://homes.soic.indiana.edu/ccshan/capability/region-io.pdf
+21:19:57 <caasih> 擅自文字轉播就到這裡，先這樣
+21:21:41 <caasih> 講者提到剛剛那個 zipper ，在 https://github.com/xmonad/xmonad/blob/master/src/XMonad/StackSet.hs#L60 中有詳細說明
+21:22:14 <caasih> 還列了完整的參考資料出處
+21:32:19 <caasih> CindyLinz: 你提到那個把全螢幕 focus 時的紅框去掉，算是這個的應用嗎？ http://blog.vgod.tw/2009/10/02/fitts-law/
+22:17:38 <CindyLinz> 哇咧你是記在這啊... OAO
+22:18:02 <CindyLinz> 我還以為你會先記在什麼地方再整理 XD
+22:19:03 <caasihuang> 本以為 petercommand 在線等啊
+22:19:15 <caasihuang> 下次不敢了 XD
+22:19:31 <CindyLinz> 我不知道你要文字轉播, 回來以後才看到對話記錄 XD
+22:20:12 <caasihuang> 最近還看到一個你講過的結構，應該是 Cont 的應用， Iterator 。
+22:20:29 <caasihuang> 今天忘了問，下次再問 XD
+22:20:40 <CindyLinz> exception?
+22:20:52 <CindyLinz> 喔不是 XMonad 裡的東西
+22:21:01 <CindyLinz> Iterator 還是 Iteratee? XD
+22:21:12 <caasihuang> 嗯嗯不是，所以那時問都可吧
+22:21:31 <CindyLinz> 什麼時間?
+22:21:36 <caasihuang> Iterator ，從 monochrom 上次貼的文章看來的
+22:21:42 <CindyLinz> 喔是「問」不是「間」...w
+22:21:56 <CindyLinz> 我應該不知道那是什麼 @@"
+22:22:22 <caasihuang> Iterator 內外溝通讓我想起 HVG ？
+22:22:33 <caasihuang> 想起來再問你 0rz
+22:22:45 <CindyLinz> 附一下 Iterator 的 link? ^^|
+22:23:10 <caasihuang> searching
+22:23:22 <caasihuang> i'm searching
+22:30:04 <caasih> CindyLinz: http://www.vex.net/~trebla/haskell/cont.xhtml
+22:30:26 <caasih> 大概在三分之二
+22:50:41 <petercommand> caasih: 有在看，可是不曉得要說啥..XD
+22:51:11 <CindyLinz> caasih: 結構長得跟 iteratee 裡面的東東很像 ^^
+22:51:49 <caasih> CindyLinz: 好我查一下 Iteratee
+22:52:09 <CindyLinz> caasih: 不過... 重點應該是聽你講一遍, 聽聽看你心中是怎麼解讀的 ^^
+22:54:17 <petercommand> caasih: 就一直看你筆記XD
+22:56:18 <CindyLinz> caasih: 看了看我現在覺得很不像了w # https://hackage.haskell.org/package/iteratee
+22:57:45 <CindyLinz> 像 enumerator 這個 package 裡面的 Iteratee # https://hackage.haskell.org/package/enumerator-0.4.20/docs/Data-Enumerator.html#g:1
+22:57:59 <caasih> CindyLinz: 我先重讀 monochrom 那篇，看能不能回想起當時的心得
+23:23:39 <petercommand> * 也來看看 Iteratee XD
+23:25:31 <petercommand> 你們是看這篇嗎? http://okmij.org/ftp/Haskell/Iteratee/describe.pdf
+23:35:49 <CindyLinz> 要實用的話看 Conduit.. XD
+23:36:04 <CindyLinz> 要看比較理論的東西才看 Iteratee
+23:51:26 <petercommand> XD

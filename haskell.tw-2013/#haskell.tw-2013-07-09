@@ -1,0 +1,126 @@
+00:14:14 <monochrom> hashcat: 如果我講的是實數(real number), 因而不存在遞歸呢? 漸近值: forall e>0, exists d>0, forall x, 0<|x-42|<d implies |f(x)-6|<e
+00:17:55 <monochrom> 那些 e>0, 0<|x-42|<d, implies 等等都不難, 所以我把它們都收在所謂 q(e, d, x) 裏, 只把關鍵的 forall-exists-forall 擺出來.
+00:50:58 <hashcat> 若是沒法遞歸的話 Q(E,D,X) 也不會有結果吧
+01:02:45 <monochrom> 昨天的題目是: 為甚麼不用 prolog 寫數學. 我的答案是: 不夠寫, 例子是漸近值的定義. 我先不當是程式語言(我不問程式怎樣執行), 寫不寫得出一些句子已成問題.
+01:19:11 <hashcat> 所以跟 forall there exist貌似沒關係
+01:23:03 <hashcat> prolog不是基於一階邏輯的?
+01:23:59 <hashcat> 是的話應該會有某種方式表示量詞
+01:24:43 <hashcat> Q(e,d,x)本身就沒法有結果的話, 表示是謂詞的問題
+01:25:00 <hashcat> 不是能不寫出量詞的問題
+01:28:59 <hashcat> 貌似就算能寫出來也很麻煩
+14:32:47 <Yu-Lin> =w= 看到 FB 的嘴砲小屁孩，一直抓著奇怪的點在戳 closure
+14:33:16 <_13h> 戳 closure?
+14:37:16 <cataska> 詳細希望
+14:57:12 <CindyLinz> 對啊.. 發言不附連結, 此風不可長.. (誤)
+15:22:35 <Yu-Lin> 因為發文的人只是抓著 closure 在人身攻擊，所以我說是抓奇怪的點在戳XD
+15:23:58 <Yu-Lin> 嗯？FB 不能跟 plurk 一樣直接抓討論的網址阿
+15:24:20 <_13h> 「抓著 closure 在人身攻擊」  我比較好奇這可以攻擊什麼？
+15:25:35 <CindyLinz> 也許是我們平常沒想到的點?
+15:26:17 <CindyLinz> 嗯, 我有覺得用 closure, 內層函數可以 implicit 引用外部變數, 其實用太兇是會出事的....
+15:26:31 <_13h> (阻礙資訊流通的服務都該消失XD)
+15:26:43 <CindyLinz> 這太兇指的是時間太長, 層數探入太深等等
+15:27:02 <CindyLinz> 它本質上就是邪惡的 global var :p
+15:27:11 <CindyLinz> 不過, 還是好奇他提出的點是什麼 :p
+15:28:33 <Yu-Lin> 他什麼點都沒提出來
+15:29:06 <Yu-Lin> 只是一直批評另一個寫 closure 介紹文的人有多爛多爛這樣
+15:29:09 <_13h> 其實我剛剛想到的是奇怪的東西... 我以為是「你這人很 closure 耶」這種攻擊，但想了半天覺得這種攻擊一點力道也沒有... 如果是用 lazy 還比較有意義XD
+15:29:25 <CindyLinz> 原來是批評寫介紹文的人.........||
+15:30:14 <Yu-Lin> 阿，弄到了網址
+15:30:15 <Yu-Lin> https://www.facebook.com/groups/programmerMagazine/permalink/669846103032109/
+15:30:58 <CindyLinz> refine 一下 :p https://www.facebook.com/groups/programmerMagazine/permalink/669846103032109/?comment_id=670806676269385&offset=0&total_comments=26
+15:31:30 <CindyLinz> hmm 那邊是公開社群, 直接轉貼那邊的留言過來應該沒問題 :p
+15:31:39 <CindyLinz> Pica Mio 不一定喔...厲害的名嘴就是可以說要說closure，寫了兩三年，十幾篇文章，什麼是closure沒解釋出來，倒是扯到λ演算，扯到Haskell語言，人家可一點也不心虛喔，倒是讓你很心虛！你還不懂他說的closure是嗎？那是因為你不懂λ演算、不懂Haskell語言！這就是人家名嘴厲害之處啊！！
+15:32:01 <_13h> Thanks!
+15:35:09 <Yu-Lin> 補充一點比較有用的新聞好了
+15:35:10 <Yu-Lin> http://wired.tw/2013/07/08/writing_on_github/index.html
+15:35:37 <Yu-Lin> https://github.com/HoTT/book 這本是他們合著，放在 github 上的書
+15:35:41 <Yu-Lin> 裡面用了 coq
+15:35:42 <b4283> 必須先登入才能看...
+15:35:50 <Yu-Lin> 诶诶XD
+15:36:52 <Yu-Lin> 一群普林斯頓數學家，用geek最愛的開源碼託管平台GitHub寫成600頁專書！ -> 標題
+15:37:10 <Yu-Lin> 「同倫型理論：數學的單價基礎」（Homotopy Type Theory: Univalent Foundations of Mathematics） -> 書名
+15:37:28 <Yu-Lin> 文章其他的部分都直接 lazu 就可以了
+15:37:32 <Yu-Lin> lazy
+15:45:08 <cataska> 以後批評阻礙資訊流通的服務，就說某服務很 closure 好了
+15:45:14 <CindyLinz> ._.
+15:49:25 <_13h> 每次看到一些要求登入和積分才能看到內文的論壇都直接放棄XD (運氣好可以在 google cache 撈到一部份XD)
+15:49:50 <Yu-Lin> 這個服務充滿了 side-effect
+15:58:26 <CindyLinz> 弄個服務, 作為這些網站的公用 guest?
+15:58:40 <CindyLinz> 但只要一被發現, 就會被那些網站 ban 掉 ^^|
+16:03:42 <petercommand> _13h: 可以在google cache看到的都可以用change user agent的方式看到XD
+16:04:18 <CindyLinz> 好方法... ._.
+16:09:21 <_13h> 可是 cache 這招對同一個論壇也不是每一篇文章都有效耶
+16:09:33 <_13h> 這樣換 user agent 還有效嗎?
+16:10:58 <petercommand> 試試看，沒效就算了XD
+16:11:52 <_13h> 嗯  晚上有空再實驗一下
+16:12:26 <CindyLinz> google cache 有些文章沒出現, 會是剛好 google 爬過的時候那些文章還不存在呀?
+16:15:34 <_13h> 我遇到的狀況是 cache 到登入畫面XD 但內容應該是對的 (從標題和文章日期作者判斷)，只是被登入界面取代
+16:21:08 <CindyLinz> 很像是你進去看的時候, cache 住的那頁裡面有 javascript 會檢查你的 UA 和登入狀態
+17:20:07 <hashcat> 關於prolog我想了下我應該是比較想聽到是不少了什麼公設或推論規則
+20:10:35 <favonia> hashcat: monochrom 的分析是一個方法。數學上有用 forall exists forall exists... 的層數來分類一個邏輯句子有多難搞
+20:11:31 <favonia> hashcat: http://en.wikipedia.org/wiki/Arithmetical_hierarchy
+20:12:16 <favonia> hashcat: 但我對 Prolog 很不熟所以不知道如果這樣分析，Prolog 會不會卡在哪一層之類的。
+20:21:31 <hashcat> Coq那種證明等同於用有限步驟取得符合命題條件的結果
+20:22:08 <favonia> hashcat: 我修正一下，是分析一個概念有多難定義
+20:22:52 <hashcat> 就這點來說有沒 forall 跟 exists 因為搜尋結果有限所以並非必要
+20:23:37 <hashcat> 若是沒有量詞就沒辦法表達量詞才能敘述的命題, 那他還自稱基於一階邏輯也滿奇怪的
+20:23:38 <favonia> hashcat: 不太懂你的意思。計算時間有限不代表 domain 有限。
+20:24:43 <hashcat> 我的意思是若是 Q(e,d,x) 沒法得出結果, 有沒有量詞都一樣的
+20:25:08 <favonia> hashcat: 但得出結果 != e,d,x 的搜尋範圍是有限的
+20:25:14 <hashcat> 應該定義命題的方向錯誤跟有沒量詞無關
+20:25:24 <hashcat> 不見得喔
+20:26:03 <hashcat> 有時只要是可數可遍歷就好
+20:26:42 <favonia> 在 Coq 「內部」你應該無法證明什麼都是可數的
+20:27:01 <hashcat> 所以說prolog辦不到的命題, Coq也沒法辦倒
+20:28:14 <hashcat> 我有去#prolog
+20:28:41 <favonia> 我不太懂你的分析方法。首先你拆解量詞的方法是假設 domain 可數或有限之類的，這個假設應該是（內部）無法證明的。
+20:29:35 <hashcat> 他們是說深度優先算法跟否定即失敗這兩個特性不適合當定理證明器
+20:29:51 <hashcat> 不過還是有人把他拿來做證明器就是
+20:31:39 <hashcat> 要是搜尋範圍不可數的話根本不是計算機來解決的問題
+20:31:59 <hashcat> 其實人也沒辦法解決
+20:32:36 <hashcat> 數學分析有部分證明是拿自然數來當作標記
+20:32:53 <favonia> hashcat: 不是。這就是很容易讓人混淆的地方
+20:33:11 <favonia> hashcat: 集合論如果用一階邏輯表示
+20:33:11 <hashcat> 藉由自然數或有理樹的某區間鎖定有某種特性的實數
+20:33:26 <favonia> hashcat: 是有一個可數的 model 的
+20:33:41 <favonia> hashcat: 但在內部還是可以表達「實數」這個概念
+20:34:28 <favonia> 你可以在「外部」說 Coq 什麼東西背後都有個「程式碼」，我們按照那程式碼編上一個自然數就好啦
+20:34:50 <hashcat> 我看不懂了
+20:35:07 <favonia> 但內部不行。這也不是壞事，就跟集合論一樣，你可以處理不一定可數的東西
+20:35:19 <favonia> 你剛才講的事情並不是邏輯內部可以證明
+20:36:00 <hashcat> 先重整一下
+20:36:10 <favonia> 一階邏輯集合論，從外部看，是有一個可數的 model. 用這 model 來看，裡面定義出來的實數還是可數的。
+20:36:32 <favonia> 但是集合論裡面沒辦法定義出這可數集合跟 N 之間的對應。
+20:36:53 <favonia> 所以內部就可以把他視為不可數
+20:36:59 <hashcat> 我說的也不是對應
+20:37:30 <favonia> 我只是想講說你說不可數就不能處理是錯的。很多東西不可數還是可以處理。
+20:37:39 <hashcat> 我說的是有些分析裡的證明方法, 通常都會用自然數或有理數, 一連串的變化去構成證明
+20:38:10 <hashcat> 所以數學證明上根本沒人直接搜尋不可數的領域
+20:38:34 <favonia> hashcat: 不需要搜尋啊。Coq 就不是用搜尋的。
+20:38:45 <hashcat> 所以我想Q(e,d,x)沒結果是命題不對
+20:39:43 <hashcat> 命題設計不對
+20:39:44 <favonia> hashcat: Prolog 是用搜尋的，Coq 並不是。
+20:39:54 <hashcat> 就算狀態空間沒有返回, 也可以是搜尋的一種
+20:40:05 <favonia> 搜尋範圍甚至不可數也無所謂
+20:40:11 <hashcat> 就是一直線也算樹狀圖
+20:41:06 <hashcat> 所以我才說Q(e,d,x)設計的不對
+20:42:01 <hashcat> 就算E,D,X都不可數也是可以用可數的方式鎖定
+20:42:06 <hashcat> 不過當初的問題算是解決了
+20:44:01 <hashcat> 沒有直接的量詞, 深度優先, 把反命題當作失敗, non-Horn推論規則沒有良好定義
+20:44:18 <hashcat> prolog就是寫程式用的東西
+20:45:29 <favonia> hashcat: 嗯嗯（對 Prolog 很不熟 QQ）
+20:49:52 <hashcat> 不過某些簡單的狀況還是有人用他來當證明器
+20:50:29 <hashcat> 跟我當初想像的完全沒有還是有點差距
+23:30:25 <monochrom> Q(e,d,x) 怎會沒結果呢? 它只是一些數值比較, 一些 and or implies 罷.
+23:32:25 <monochrom> 啊, 你是說例如 "Q(0.01, d, 3), 求d" 求不得, 或需要無限時間. 對.
+23:33:55 <monochrom> 那麼數學上大把命題對 prolog 來說都是沒結果.
+23:46:22 <hashcat> 我不是說沒結果, 是說若某命題是有限時間不能解決是謂詞設計不當
+23:48:48 <hashcat> 數學證明也沒嘗試在不可數的領域搜尋, 數學分析的證明多半是以有理數和自然數做標記的區間, 來找到符合描述的實數
+23:49:36 <hashcat> 所以說搜尋範圍限定在有理數下搜尋是可遞歸的
+23:49:41 <hashcat> 遞歸展開
+23:50:34 <hashcat> 所以用prolog書寫證明是可行的
+23:51:15 <hashcat> 但因為prolog推論規則有缺陷, 所以比較少人用來寫證明
+23:53:17 <hashcat> 如此要是Q命題本身能在有限時間解決, 那有沒明示量詞都是無所謂的, 頂多會多花時間在多餘的領域去搜索
+23:54:17 <hashcat> 基於一階邏輯卻沒有量詞的原因, 我猜測是因為展開就可以代表量詞
+23:54:58 <hashcat> 不然根本沒有那種無法表示量詞的卻能稱為一階邏輯的東西
+23:58:51 <favonia> hashcat: 除了展開以外，有一些詭異的技巧如「選一個新變數」也可以達成一定效果。

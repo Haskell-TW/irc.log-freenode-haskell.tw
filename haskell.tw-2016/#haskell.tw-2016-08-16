@@ -1,0 +1,46 @@
+06:13:23 <pkmx> @hoogle Monad m => m (Maybe a) -> m [a]
+06:13:25 <lambdabot> Prelude sequence :: Monad m => [m a] -> m [a]
+06:13:25 <lambdabot> Control.Monad sequence :: Monad m => [m a] -> m [a]
+06:13:25 <lambdabot> Control.Monad replicateM :: Monad m => Int -> m a -> m [a]
+14:19:53 <CindyLinz> @hoogle Maybe a -> [a]
+14:19:55 <lambdabot> Data.Maybe maybeToList :: Maybe a -> [a]
+14:19:56 <lambdabot> Data.Foldable toList :: Foldable t => t a -> [a]
+14:19:56 <lambdabot> Data.Maybe catMaybes :: [Maybe a] -> [a]
+14:20:36 <CindyLinz> 用 fmap maybeToList 或 fmap toList 好了?
+21:34:04 <pkmx> 其實我是需要 f m = unfoldrM (\() -> (,()) <$> m) ()
+21:34:10 <pkmx> :t unfoldrM
+21:34:12 <lambdabot>     Not in scope: ‘unfoldrM’
+21:34:12 <lambdabot>     Perhaps you meant one of these:
+21:34:12 <lambdabot>       ‘Data.ByteString.unfoldr’ (imported from Data.ByteString),
+21:34:35 <pkmx> :t Control.Monad.Loops.unfoldrM
+21:34:36 <lambdabot> Monad m => (a -> m (Maybe (b, a))) -> a -> m [b]
+21:34:59 <pkmx> :t \m -> Control.Monad.Loops.unfoldrM (\() -> (,()) <$> m) ()
+21:35:00 <lambdabot>     Couldn't match type ‘(a, ())’ with ‘Maybe (b, ())’
+21:35:00 <lambdabot>     Expected type: a -> Maybe (b, ())
+21:35:00 <lambdabot>       Actual type: a -> (a, ())
+21:36:36 <pkmx> :t \m -> Control.Monad.Loops.unfoldrM (\() -> fmap (,()) <$> m) ()
+21:36:37 <lambdabot> Monad m => m (Maybe b) -> m [b]
+21:45:16 <CindyLinz> f m = unfoldrM (\() -> (,()) <$> m) () 的 alphabet : symbol 比是 11 : 18
+21:45:38 <CindyLinz> 覺得 alphabet : symbol 比可以作為某種可讀性的評估值 XDDD
+22:04:31 <pkmx> 發現其實 monad-loops 裡面就有我要的 unfoldM' ...
+22:04:41 <pkmx> :t Control.Monad.Loops.unfoldM'
+22:04:42 <lambdabot> (Monad m, MonadPlus f) => m (Maybe a) -> m (f a)
+22:05:19 <pkmx> evalState ?? [Just 1, Just 2] $ Control.Monad.Loops.unfoldM' (state $
+22:05:30 <pkmx> oops
+22:06:00 <pkmx> > evalState ?? [Just 1, Just 2] $ Control.Monad.Loops.unfoldM' (state $ list (Nothing, []) (\x xs -> (x, xs)))
+22:06:02 <lambdabot>      Not in scope: ‘Control.Monad.Loops.unfoldM'’
+22:06:02 <lambdabot>      Perhaps you meant one of these:
+22:06:02 <lambdabot>        ‘Control.Monad.Cont.foldM’ (imported from Control.Monad.Cont),
+22:19:30 <CindyLinz> :i (??)
+22:19:39 <CindyLinz> @info (??)
+22:19:39 <lambdabot> (??)
+22:19:45 <CindyLinz> @type (??)
+22:19:46 <lambdabot> Functor f => f (a -> b) -> a -> f b
+22:20:02 <pkmx> :t Control.Lens.(??)
+22:20:04 <lambdabot>     Not in scope: data constructor ‘Control.Lens’
+22:20:04 <lambdabot>     Perhaps you meant one of these:
+22:20:04 <lambdabot>       variable ‘Control.Lens.op’ (imported from Control.Lens),
+22:20:12 <CindyLinz> 沒有看過 ??
+22:20:22 <CindyLinz> 看你寫出來還以為是有字不顯示 XD
+22:20:46 <CindyLinz> @src Control.Monad.Loops.unfoldM'
+22:20:46 <lambdabot> Source not found. Take a stress pill and think things over.

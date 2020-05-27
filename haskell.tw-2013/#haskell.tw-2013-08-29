@@ -1,0 +1,79 @@
+00:04:15 <suhorng> >> Scala 最近看到這個 https://plus.google.com/117380487359344039293/posts/LSEvXRcg51B
+00:06:19 <monochrom> 可不可以說, method 不算 function 呢?
+00:07:04 <suhorng> 我是在想 Scala 那段話會不會是在說他最後在 JVM 中的情形
+00:07:10 <suhorng> 不過不熟Scala
+00:08:41 <monochrom> 其實這只是另一個羅素吊詭而已, 我們早已知道十幾個解決或逃出方法
+00:09:03 <suhorng> XD
+00:12:26 <mno2> CindyLinz: 下次是什麼時候啊？
+00:18:52 <CindyLinz> mno2: 下週四...
+00:19:07 <CindyLinz> mno2: 原來你不是落慌而逃啊.. XD
+00:22:15 <mno2> 有點趕 xD 不過應該沒問題
+00:22:28 <mno2> 題目要先給嗎？
+00:22:40 <mno2> 我要想一下...
+00:24:28 <CindyLinz> 我想題目已經不需要先給了....
+00:24:56 <mno2> xD
+00:25:11 <CindyLinz> 嗯, 如果來不及.. jaiyalas 有可能會去介紹一個「鱷魚蛋」的小遊戲頂一下 ^^|
+00:25:41 <CindyLinz> 如果你有八成把握會講的話, 早一點讓他放輕鬆一下也是好的..
+00:25:51 <CindyLinz> ...就是, 告訴他一下 ^^|
+00:26:21 <mno2> 要寄信給他？
+00:27:09 <CindyLinz> 寄信或 FB 留言都行呀, 他看得到就好 XD
+00:27:49 <mno2> 喔喔，好
+00:27:55 <CindyLinz> 星期一遇到他, 他抱怨我好久都沒去 Functional Thursday 了...
+00:28:08 <CindyLinz> 我說我就只有這最後一次沒去啊... XD
+00:28:19 <CindyLinz> 少去一次, 就是兩個月不見了 XD
+00:28:45 <mno2> 我上次也沒去，因為我忘了...
+00:28:51 <CindyLinz> 啊.. XD
+00:29:18 <CindyLinz> 我那時準備 coscup 很緊張, 準備要講的東西沒法去...
+00:34:46 <CindyLinz> jaiyalas 的留言.. XD # https://www.facebook.com/suhorng/posts/689458101082765
+00:35:05 <CindyLinz> 欸等等
+00:35:19 <CindyLinz> 我點進去發現 suhorng 已經報題目上去了....
+00:35:23 <CindyLinz> mno2: sorry sorry...
+00:37:01 <mno2> 為什麼我看不到內容 xD
+00:37:27 <mno2> 看起來還是有活水的 xD
+00:37:27 <CindyLinz> mno2: 可能沒加 FB 好友.. 那直接看這好了 ^^| http://registrano.com/events/634b93
+00:37:49 <CindyLinz> jaiyalas 的留言是: 題目 (伸)
+02:52:43 <letoh> 那篇真妙
+03:09:35 <monochrom> 咦? dependent type 給譯成 相依型別? 好纏綿相依啊...
+11:04:30 <Yu-Lin> 喔波
+11:16:16 <Yu-Lin> suhorng 這主題我有興趣啊！
+12:11:39 <mno2> http://www.reddit.com/r/PHP/comments/1l7baq/creating_a_user_from_the_web_problem/  這真是太經典了
+12:13:57 <petercommand> mno2: 看起來好恐怖= =
+12:15:05 <mno2> 天才沒有極限！
+12:15:14 <petercommand> XD
+12:15:36 <monochrom> hahaha
+12:17:01 <Yu-Lin> 又學到一招如何讓 Linux 安全性降低的做法了XD
+12:19:06 <mno2> 這直接降到 0 了吧 xDDD
+12:22:40 <mno2> http://skillsmatter.com/podcast/home/simon-marlow
+12:22:55 <mno2> 這邊有提到 simon marlow 去 FB 之後的 project
+12:23:09 <mno2> Haxl <--- 這個
+12:28:24 <CindyLinz> sudo nopassword.. GJ
+12:29:01 <petercommand> web的只能no password呀XDDD
+12:30:16 <b4284> you will need --no-preserve-root for rm -rf /
+12:30:38 <petercommand> comment真是精彩
+13:38:13 <hychen> comment太好笑了
+14:59:46 <CindyLinz> 覺得今年 Flolac 的東西好像比較髒... :Q
+15:00:06 <CindyLinz> 很多方法是靠經驗法則, 而且存在解不出來的反例...
+15:00:32 <CindyLinz> 然後解同一個問題有很多方法, 每個方法各有不同的勝場和弱點...
+15:01:08 <CindyLinz> 比較髒的領域比較容易找到還沒被做掉的題目來做? XD
+15:01:40 <_13h> 或許這個世界本來就不乾淨？
+15:20:10 <CindyLinz> 去年的就很乾淨啊 ^^
+15:21:47 <CindyLinz> 嗯, 所以(?)今年的領域賺比較多錢.. XD
+15:55:11 <godfat> XDDDDDDDD
+15:56:12 <Yu-Lin> 居然是這樣嘛！？XD
+17:42:46 <Yu-Lin> https://github.com/GaloisInc/HaLVM
+17:46:09 <hashcat> 看到看到ciao最近對haskell興趣大失
+17:52:07 <Yu-Lin> 潮
+17:53:53 <hashcat> 深入prolog中
+17:56:14 <Yu-Lin> 我現在比較想衝 sml
+17:56:15 <Yu-Lin> XD
+17:57:41 <Yu-Lin> 如果只看 screenshot，ciao 會讓我想到 erlang
+17:59:14 <hashcat> 為啥
+17:59:29 <hashcat> ml語法也有一個集大成者
+17:59:50 <hashcat> https://www.ps.uni-saarland.de/alice/
+18:00:04 <hashcat> 2007年停擺
+18:01:40 <hashcat> 沒看過erlang
+18:02:40 <Yu-Lin> 同樣都受到 prolog 影響，所以單看教學，會覺得兩者很像
+18:02:50 <Yu-Lin> 阿，我指語法部分
+18:04:15 <hashcat> ciao應該說本來就是prolog
+18:05:46 <hashcat> 還有iso prolog相容選項
+21:16:49 <a2n> k/wg 24

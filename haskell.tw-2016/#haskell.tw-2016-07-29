@@ -1,0 +1,16 @@
+22:50:18 <in_AL_60h> :t \ff a -> ff <*> pure a
+22:50:20 <lambdabot> Applicative f => f (a -> b) -> a -> f b
+22:50:59 <in_AL_60h> :t (. pure) . (<*>)
+22:51:00 <lambdabot> Applicative f => f (a -> b) -> a -> f b
+22:51:38 <CindyLinz> @pl \ff a -> ff <*> pure a
+22:51:38 <lambdabot> (. pure) . (<*>)
+22:51:52 <in_AL_60h> :t flip ((<*>) . pure)
+22:51:53 <lambdabot> Applicative f => f a -> (a -> b) -> f b
+22:51:59 <in_AL_60h> oops
+22:52:15 <in_AL_60h> @pl \f a -> ($ a) <$> f
+22:52:15 <lambdabot> flip ((<$>) . flip id)
+22:52:26 <in_AL_60h> incomprehensible XD
+23:01:11 <pkmx> 不意外XD
+23:01:47 <pkmx> 這裡最近真安靜 快兩個星期沒有人說話
+23:03:26 <in_AL_60h> 阿阿我來是要轉錄這篇 https://www.facebook.com/ekmett/posts/10154169719195339 : http://baatz.io/posts/haskell-in-a-startup/
+23:03:49 <in_AL_60h> 配合上次 funth XD     下週是講 jit 耶, 有心動

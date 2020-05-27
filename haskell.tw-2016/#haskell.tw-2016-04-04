@@ -1,0 +1,11 @@
+22:11:05 <caasih> CindyLinz: 看不懂 Haskell-HVG 中的 `setTransform` ，試了一下得到 ghc 說他預期的是 `Context ()` ，但寫的是 `Context (ContextState, ())`
+22:11:53 <caasih> 還是說，我想讀的話，得從已經有 Builder 的 commit 開始往下看才對？
+22:13:55 <CindyLinz> 我後來有改版喔~ Builder 那些的 kind 有變
+22:14:41 <CindyLinz> 你要確認一下你對的會不會是不同版本的片段
+22:15:50 <caasih> CindyLinz: 不太可能是不同版本的片段...。不過快看到 Builder 出現了，到時還是不會動的話再來問...
+22:23:52 <CindyLinz> caasih: ghc 預期的跟我寫的不一樣, 這聽起來 compile 不會過啊?
+22:24:56 <caasih> CindyLinz: 一個一個 commit 試，發現 Builder 出現前一個不會過，才問的啊
+22:25:13 <CindyLinz> 不一定每個 commit 都是可以 compile 的
+22:25:33 <caasih> ok, 我想知道的就是這句 :D
+22:25:43 <CindyLinz> 有的 commit 甚至叫作 draft
+22:29:23 <caasih> 我知道了。原來如此。

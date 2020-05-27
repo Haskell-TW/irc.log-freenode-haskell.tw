@@ -1,0 +1,11 @@
+00:49:47 <monochrom> source tree 如菩提樹, software 如明鏡台, 日日常測試, 莫使殘留 bug? XD
+14:27:14 <CindyLinz> ghci 不知道要加什麼參數才能載入有用到 FFI 的 .hs 檔
+14:27:31 <CindyLinz> 所以就先用 ghc 幫有用到 FFI 的檔案生出 .o 檔
+14:27:59 <CindyLinz> 然後再用 ghci 載入正在編輯的其他檔案..
+16:01:20 <CindyLinz> hm... monad 和 comonad 是 isomorphic 的, 所以能用 monad 寫的東西都能用 comonad 寫, 能用 comonad 寫的都能用 monad 寫
+16:01:46 <CindyLinz> 差別就是有些情況下選到另一邊, 寫起來會比較迂迴一點...
+16:02:21 <CindyLinz> 不過, 我覺得考慮現實面, 因為 Haskell 對 monad 有 do-notation 可以用, comonad 沒有, 所以常常選擇上偏 monad 有優勢得多 :p
+16:05:16 <favonia> CindyLinz: 你需要 cohaskell... 簡稱 costco 好了
+16:25:50 <CindyLinz> ww
+21:28:47 <mno2> 然後 CindyLinz 就變成 co-CindyLinz
+23:29:22 <monochrom> pumpkin 可不是早改了名做 copumpkin 嗎? XD

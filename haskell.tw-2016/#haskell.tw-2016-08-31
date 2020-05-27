@@ -1,0 +1,15 @@
+16:59:47 <caasih> petercommand: 有用過 intero 嗎？ http://commercialhaskell.github.io/intero/ 之前只聽過 ghc-mod 0rz
+18:07:06 <pkmx> intero 以前叫做 ghci-ng
+18:10:06 <petercommand> 沒有耶，之前是聽到 haskell-ide-engine
+18:10:18 <petercommand> intero 好像可以試試
+18:10:34 <petercommand> https://github.com/haskell/haskell-ide-engine
+18:10:48 <caasih> pkmx: 原來如此 o_O
+18:11:13 <caasih> petercommand: 又讓我對 emacs 心動了 XD
+18:11:18 <petercommand> XD
+18:36:58 <petercommand> intero 遇到 #include 會壞掉XD
+19:51:10 <pkmx> 我後來又換回 neovim + ghc-mod 了XD"
+20:39:57 <CindyLinz> pkmx: neovim 用起來跟 vim 有什麼不一樣?
+23:09:00 <pkmx> 最主要就 async process 和 true color terminal
+23:09:27 <pkmx> 雖然好像 vim 8 也有這兩個 features 了 (被刺激到了?
+23:31:46 <CindyLinz> async process?
+23:34:45 <pkmx> 應該說 async job

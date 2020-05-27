@@ -1,0 +1,2 @@
+17:06:46 <CindyLinz> 問問, 如果我可以「同步」 fold (foldr / foldl) 一起走的結構叫作什麼?
+17:07:07 <CindyLinz> Foldable t 是自己走嘛, 應該不能像 zipWith 那樣同步走?

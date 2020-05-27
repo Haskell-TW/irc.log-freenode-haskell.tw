@@ -1,0 +1,6 @@
+13:57:27 <letoh> 剛剛發現 clojure 也有一個 clojurescript  可以編譯出 js
+19:13:30 <CindyLinz> 從 Flolac 邪教聚會所看到的.. https://personal.cis.strath.ac.uk/conor.mcbride/pub/she/
+19:14:15 <CindyLinz> ghc 用的 preprocessor, 可以寫一層 dependent type
+19:15:04 <CindyLinz> 不過我還不能辨認它跟 Agda 或 Coq 的 dependent type 的 power 是不是一樣, 或是有多大差異
+19:26:26 <MnO2> 邪教聚會所是哪? xDD
+20:49:07 <CindyLinz> FB 社團, 其前身是 Flolac 2012 自救讀書會 XD

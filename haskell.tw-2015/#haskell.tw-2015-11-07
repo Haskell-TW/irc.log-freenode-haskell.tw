@@ -1,0 +1,86 @@
+00:09:58 <suhorngT> 原來有 System.CPUTime.getCPUTime
+00:21:20 <suhorngT> 在 Haskell 裡不靠工具想要 profiling 怎麼如此困難....連 let ! 都無法好好的 force evaluationi Orz
+01:22:10 <CindyLinz> caasih: 我我還不知道什麼是 RPN...
+01:22:46 <caasih> 那個反向波蘭表示式什麼的？
+01:23:28 <CindyLinz> suhorngT: 那是因為 user 寫了不能 instance NFData 的 data 啊～
+01:23:48 <caasih> 應該是我沒想清楚。倒是 SECD machine 的確是設計來跑 lambda calculus 的，
+01:23:53 <caasih> 有種被捏他的感覺。
+01:26:21 <CindyLinz> 不用怕被捏他.. 除了那幾個經典的錯過會可惜以外，這個領域不缺困難的問題可以挑戰 XD
+01:27:05 <CindyLinz> 只要不是習慣性伸手牌，應該常常有問題可以思考吧 :D
+01:27:54 <CindyLinz> suhorngT: 每個語言的 profiling 都需要工具才對 @@
+01:30:03 <suhorngT> CindyLinz: 是吼, 我應該 deriving NFData 一下(這個可以嗎?)
+01:30:30 <suhorngT> CindyLinz: 與其說 profiling, 我只是想要很簡單的知道特定幾個函數的計算花了多久時間
+01:30:48 <suhorngT> 所以用了古典(?)的 cout << clock() - start << endl; 方法
+01:31:30 <suhorngT> CindyLinz: 我原本以為手動在每個 constructor 的 field 裡加上 ! 會 OK....
+01:40:30 <CindyLinz> 每個都加 ! 會增加計算
+01:42:26 <caasih> 在路邊（？）撿到一個寫 C# 的朋友，推坑他看看 FT 的 meetup 了
+01:42:34 <CindyLinz> 如果是兩棵巨大的 tree merge, 會走訪兩棵 tree 一遍，確認都是 eval 好的
+01:43:10 <CindyLinz> caasih: 聽起來...很奇怪 XDDD
+01:43:40 <caasih> CindyLinz: 朋友介紹他來問我台北有什麼活動，是個兼職寫遊戲的研究生
+01:44:02 <CindyLinz> suhorngT: 我不知道 NFData 能不能自動 derivr
+01:44:12 <caasih> 講了半天，他又不是寫 Ruby 的，不能推他 Rails Tuesday...
+01:44:48 <CindyLinz> 可以參加新莊 workshpp
+01:44:58 <CindyLinz> workshop
+01:45:16 <CindyLinz> 教我們寫遊戲....^^|
+01:45:31 <caasih> 貼整個 meetup 網址給他了，看他囉 XD
+01:47:08 <suhorngT> CindyLinz: 糟, 我不懂你意思, 可以舉個例子嗎? 我以為 ! 只會算出 weak head normal form, 也就是 data A = C !D 的話, 只有確定 D 最外層是哪一個 constructor 會算出來
+01:48:24 <CindyLinz> suhorngT: 要算一個函數與它呼叫出去的函數一共算了多久，的確有點難... 自己實作 Haskell 吧 ^^|
+01:49:03 <suhorngT> CindyLinz: 我現在想要的就是把一棵 --開花-- 巨大的樹徹底走訪(恰巧)一遍, 本來以為都加 ! 可以剛好達到這效果
+01:50:24 <CindyLinz> suhorngT: data constructor 裡加 ! 的影響，就是在 assign component 上去之前，case of 它一下，確保是 weak head normal form
+01:50:38 <CindyLinz> 嗯好像不會走訪全部
+01:50:51 <suhorngT> 嗯嗯嗯嗯
+01:51:07 <monochrom> 不不
+01:51:15 <CindyLinz> 不過會多無謂的 check
+01:51:18 <suhorngT> monochrom: Hi!
+01:51:55 <CindyLinz> 就是就算我們 programmer 已知它已算完，仍然要檢查
+01:52:56 <CindyLinz> Hi XD
+01:53:06 <monochrom> 假設 data X = MkX !Bool.  "main = let x = MkX undefined in return ()" 仍沒事
+01:53:06 <suhorngT> 耶說 WHNF 好像是不對的, 因為 case of 假設裡面也有 ! 仍然會繼續算下去, 總之就是好好 case of...吧 嗎orz
+01:53:40 <suhorngT> monochrom: 有道理 所以我們剛剛講的應該要說是, 當要求去 evaluate x 的情況下
+01:53:51 <CindyLinz> 我是看 ddump-simpl 的結果說的
+01:54:12 <monochrom> main = case MkX undefined of MkX _ -> return ()  就有事了
+01:54:43 <CindyLinz> monochrom 的例子是那個 x 整個都沒有建構啊
+01:55:24 <suhorngT> 不過我現在問題是不知為何 do { let !x = compute tree; putStrLn "OK!" } 結果 x 算的時間點在 "OK!" 之後....
+01:55:50 <suhorngT> 有點懷疑是我開了 -O3, inline 造成的問題
+01:56:51 <monochrom> optimizer 有權決定次序
+01:57:30 <suhorngT> okay...無副作用所以是合理的...
+01:57:50 <CindyLinz> ! 是把 let x = MkX undefined 變成 let x = case undefined of v -> MkX v (嗯 可能要換成 seq?)
+01:58:08 <petercommand> haskell 沒有副作用的會怎麼去排呢?
+01:58:13 <suhorngT> CindyLinz: 不是吧?
+01:58:28 <monochrom> 可惜呢! 使用多少記憶, 這已是可見的副作用
+01:58:48 <suhorngT> CindyLinz: 這樣有沒有 ! 不都沒差了嗎? 不會影響 x 是否被求值
+01:59:05 <suhorngT> monochrom: 時間算不算? XD
+01:59:18 <monochrom> 算
+01:59:23 <CindyLinz> suhorngT: 我是講 monochrom 那個 !Bool
+01:59:46 <CindyLinz> 你那個放在ㄗ
+01:59:59 <CindyLinz> 不是 data constructor
+02:00:56 <suhorngT> CindyLinz: 我後來也有用 let!, 不過奇怪, 讀 GHC doc 怎麼看起來好像你說的才是對的(要加上 seq)
+02:01:48 <suhorngT> 喔不對, 不是 let x = case ... 這樣子
+02:05:38 <monochrom> 兩種 ! 都是用 seq
+02:06:55 <CindyLinz> suhorngT: 我看到的 ddump-simpl 是用 case..
+02:07:31 <CindyLinz> suhorngT: 只是我自己覺得奇怪的是 case of 的 branch 裡面只是出現一個 pattern variable 而不是 pattern constructor 的話, 會有作用嗎? orz
+02:08:00 <CindyLinz> 還是出現的是 case seq undefined of v -> 這樣 ^^|
+02:08:02 <monochrom> Core 的 case 不同於 Haskell 的 case
+02:08:10 <CindyLinz> 喔
+02:08:14 <suhorngT> CindyLinz: 但是把 let !x = e1 in e2 變 let x = case e1 of ... in e2 沒效果呀@@ 畢需要在 e2 前有 (x `seq`)
+02:08:33 <CindyLinz> suhorngT: ! 放在最左邊的意義跟放在 pattern 裡面不一樣
+02:08:43 <suhorngT> 對呀, 是放在最左邊
+02:08:47 <CindyLinz> suhorngT: 放在最左邊的話, 意思是說在 let 的 in 開始以前要執行
+02:09:04 <CindyLinz> where 的也有類似定義
+02:09:15 <suhorngT> 嗯嗯
+02:09:20 <CindyLinz> 而放在 pattern 裡的, 是那一個 binding 被執行的時候, 要執行
+02:09:22 <monochrom> 同樣是 "case x of _ -> ()", Core 做 WHNF, Haskell 甚麼也不做
+02:09:32 <CindyLinz> monochrom: 嗯嗯嗯
+02:10:58 <suhorngT> Cool!
+02:13:13 <petercommand> 只有一個 branch 的 pattern matching 應該就跟 let 一樣?
+02:14:18 <suhorngT> 嗯, 在 Haskell 裡好像有這種感覺
+03:21:32 <monochrom> 不, case undefined of () -> () 會死, let () = undefined in () 不會
+03:22:18 <monochrom> 而 let !() = undefined in () 就會了
+08:53:16 <suhorngT> * 果然不瞭解 Haskell
+09:02:48 <suhorngT> ....錯怪 let! 了, 其實我的程式有 GHC 是沒有調順序的, 是我的樹漏加 '!'
+09:03:00 <monochrom> 啊!
+09:03:57 <monochrom> 有一天你改用 Strict Haskell, 你又會漏加 '~'
+09:04:12 <monochrom> 不只你, 我都會
+09:04:48 <monochrom> 世事真是無法盡如人意啊!
+09:05:22 <monochrom> 如果能直接人腦接電腦就好了
+09:10:14 <suhorngT> 阿阿, Strict Haskell 漏加 ~ xDD

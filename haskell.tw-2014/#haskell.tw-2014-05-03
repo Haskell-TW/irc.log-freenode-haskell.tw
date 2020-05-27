@@ -1,0 +1,32 @@
+00:29:51 <monochrom> 我就覺得 Alan Kay 比 Dijkstra arrogant.
+00:32:12 <godfat> 不確定 Alan Kay 生平，不過現在我絕不敢說 Dijkstra 的壞話 XD
+00:41:12 <CindyLinz> godfat: 不是稱讚意味嗎?
+00:41:44 <godfat> 這個.... XDDD nanodijkstras 聽起來是稱讚意味倒是
+00:45:46 <CindyLinz> 意思是 Alan Kay 超過 1T nanodijkstras.. XD
+00:45:51 <CindyLinz> 1 tera
+00:47:13 <godfat> nano (-9), tera (+12), 所以 Alan Kay 是 1k Dijkstra? XD
+00:50:27 <CindyLinz> 喔 應該是 1G.. XD
+00:50:35 <CindyLinz> 衝過頭了 XD
+00:50:49 <monochrom> 我是這樣推論的: 信任人類直感(intuition), 這是一種 arrogance, 是人類自以為是. Alan Kay 當然崇尚直感, 而 Dijkstra 不信.
+00:51:45 <b4283> 直覺
+00:53:41 <godfat> 那我同意 XDD
+00:54:16 <godfat> 不過老實講我個人也是滿講直覺的
+00:55:51 <monochrom> 直覺可以參考, 但必須客觀驗證.
+00:56:54 <godfat> 我大概是這樣，沒有客觀驗證之前是相信直覺，有客觀驗證之後檢討直覺，但不會刻意去客觀驗證（歡迎他人幫我驗證）
+00:58:27 <monochrom> 亦不能讓直覺永恆不變. 必須用事實和邏輯來改變直覺, 而不是用直覺來改變事實和邏輯.
+00:59:46 <godfat> 是，直覺是簡易的預測，需要被驗證與檢討。只是在證據還沒出來前，我可以相信直覺
+01:10:23 <hashcat> GPU跟加速器也可以算是電腦的直覺
+01:10:53 <godfat> 為什麼？什麼是加速器？
+01:12:22 <hashcat> 因為功能少, 速度快, 應用範圍有限, 且沒跟cpu交代結果的來由
+01:12:41 <hashcat> cpu可以按演算法選擇相信直覺或者自己按步驟算
+01:13:14 <hashcat> 差別只在人腦會自己長加速器吧
+01:13:50 <godfat> 有趣的想法，不過 GPU 有可能算錯嗎？CPU 有什麼理由不相信？
+01:14:47 <hashcat> GPU有誤差
+01:15:48 <hashcat> 可以相信阿, 就像你相信眼前看到的東西都不是虛擬實境
+01:16:02 <godfat> 原來 GPU 真的有誤差..
+01:17:36 <b4283> letoh: 在聊 Matrix 了
+01:17:41 <hashcat> 拿來作數值加速才有感覺, 視覺那種大概沒差
+01:19:59 <hashcat> 這世界佈滿著一種難以言喻氣味
+01:22:56 <godfat> 這讓我想起之前讀到一篇，做 wii 模擬器的。說 wii 的晶片可以做整數運算，但是 gpu 不能做整數運算，所以他們用各式各樣的方式去模擬整數運算，常常會有誤差，到處都是黑魔法
+01:29:41 <letoh> b4283: 哪裡?
+01:32:14 <b4283> letoh: 虛擬實境啊

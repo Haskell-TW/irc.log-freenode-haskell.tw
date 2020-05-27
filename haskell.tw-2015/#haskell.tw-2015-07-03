@@ -1,0 +1,19 @@
+09:23:02 <mno2> functional thursday 講的 type inference 如何？
+09:23:30 <mno2> 大家有聽懂嗎？ xD
+11:42:51 <CindyLinz> 我 Hindley-Milner 的部分覺得有懂, 然後 bidirectional inference 的部分, 還有些不確定 @@"
+11:43:17 <CindyLinz> 而兩者結合, 就更不知道要怎麼結合了 ^^|
+11:43:44 <CindyLinz> 可是我問旁邊的人, 包含 __Z2suI3horI2ngE, 都說 bidirectional 比較簡單 orz
+11:43:50 <mno2> 有投影片嗎？
+11:45:16 <CindyLinz> 毛片版.. __Z2suI3horI2ngE 說還待加 remark 與待改 typo.. # https://github.com/suhorng/HaskellExercise/tree/master/ft27/slide
+17:03:40 <miaoski> __Z2suI3horI2ngE: 毛片版我先收了 ^^
+21:08:41 <__Z2suI3horI2ngE> CindyLinz: bidirectional 真的比較簡單. 剛剛改了投影片, 我覺得 CindyLinz 直接跳看最後一頁 appendix 就秒懂 bidirectional 了
+21:10:41 <__Z2suI3horI2ngE> 投影片 http://suhorng.github.io/HaskellExercise/ft27/slide/typeinfer.pdf (或者網頁版 http://suhorng.github.io/HaskellExercise/ft27/slide/typeinfer.html )
+21:10:57 <__Z2suI3horI2ngE> 有些東西也許瞭解的不夠好 還請指點QQ
+21:11:12 <__Z2suI3horI2ngE> monochrom: 你說的原汁原味就是用 substitution?
+21:11:35 <__Z2suI3horI2ngE> 一直加(compose)substitution, 然後問變數時丟進 substitution function 那樣嗎
+22:39:58 <CindyLinz> __Z2suI3horI2ngE: 還不敢看 XD
+22:55:59 <mno2> 不敢看是怎麼回事 xD
+22:56:58 <CindyLinz> 身體不好 QQ
+23:01:39 <monochrom> 原汁原味指 Milner 原著
+23:02:23 <__Z2suI3horI2ngE> 喔~
+23:02:51 <__Z2suI3horI2ngE> 維基上是描述說用 substitution (而非現在維基上那樣寫)...詳細就沒去看XD

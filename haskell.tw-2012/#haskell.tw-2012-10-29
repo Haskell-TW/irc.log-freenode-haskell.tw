@@ -1,0 +1,23 @@
+15:51:41 <MnO2> http://www.technologyreview.com/news/429544/new-programming-language-makes-coding-social-apps-easier/
+15:52:09 <MnO2> 最近有些Tweet在談論dog
+15:52:19 <MnO2> 不過還沒放出來
+15:52:46 <MnO2> 這篇只是看到熟悉的戰神的名字xD
+16:05:21 <b4283> tafdog
+16:08:28 <CindyLinz> 我在想... turing machine model 的 language 是不是也能弄出像 haskell 這樣比較強的 type system 呢
+16:25:35 <MnO2> CindyLinz: 不太懂你的意思，Turing Machine是計算模型，但型態系統是邏輯，兩者好像沒什麼關係？而且計算機只要是Turing Complete，都可以模擬得出來不是嗎？
+16:26:09 <CindyLinz> MnO2: 嗯嗯, 我也是這樣想的... 只是實際上好像沒有看到
+16:26:36 <CindyLinz> MnO2: 人家說: Haskell compile pass 的程式, 出錯率很低.. 應該就是因為 type system 的影響吧
+16:27:11 <CindyLinz> 不過... C 和 turing machine 也沒有長得很像呀? ^^|
+16:28:55 <MnO2> CindyLinz: 因為過了型態系統，邏輯搞對了，程式當然是對的啊
+16:30:32 <MnO2> CindyLinz: 我不太懂為什麼要跟Turing Machine很像？ 要像的話就選brainfuck啦wwww
+16:31:01 <CindyLinz> MnO2: 好吧, 我是想說... 有沒有 compile 過了, 就不太會錯的 C 語言呢?
+16:31:12 <CindyLinz> C-like 語言 :p
+16:31:27 <b4283> cyclone
+16:31:35 <b4283> 據說是..
+16:31:46 <b4283> SAC -- single assignment C
+16:31:55 <CindyLinz> 那撥時間來看一下 :p
+16:35:38 <b4283> 記錯了.. sac 的重點是 concurrency
+16:36:51 <randomclown> http://stackoverflow.com/questions/12963733/writing-cojoin-or-cobind-for-n-dimensional-grid-type
+16:37:35 <randomclown> 看了一头雾水.
+16:56:01 <MnO2> randomclown: 要問Comonad的話要請favonia來回答~
+16:58:07 <MnO2> 不過Comonad本身就比較抽象，之前有一篇文章好像是拿cellular automation來做例子

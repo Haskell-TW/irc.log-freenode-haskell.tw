@@ -1,0 +1,92 @@
+00:43:56 <c9sloud> 考慮把 url rewrite 做進 r3 ...
+01:25:36 <whitglint> R3 最後會變成 web server...
+01:50:50 <c9sloud> XD
+01:50:56 <c9sloud> https://ruby-china.org/topics/12384
+01:51:05 <c9sloud> 200!
+02:11:42 <whitglint> 我看到 404 才想到 http XD
+02:25:14 <letoh> 工作機爛掉後  這兩週晚上沒辦法玩程式  感覺好清閒XD
+02:27:51 <whitglint> 可以把程式寫在窗戶玻璃上
+02:28:25 <letoh> 寫在紙上就好啦
+02:28:36 <letoh> 在還沒買電腦前都是寫在紙上的
+02:49:56 <monochrom> 我也經歷過, 沒錢買 Casio FX-3600P, 所以在家在紙上寫程式, 回校才問人借機驗證.
+02:51:36 <monochrom> 因此年紀輕輕就練出非凡的 證明證確性 能力
+02:52:37 <monochrom> 然後還覺不夠, 於是長大後還去這方面深造...
+20:40:28 <caasihuang> c9sloud: js 上的 tree_compile, tree_match 都會動了，但 payload data 啥時該被回收處理得不好。
+20:41:19 <caasihuang> 試著反向找 tree 中哪個 node 有特定 data ，但 V8 把東西搬來搬去，乾脆先不管它...
+20:47:21 <c9sloud> caasihuang: v8 應該也是用 reference counting ?
+20:47:32 <c9sloud> 你 insert 之前先把 reference count increase 1 ?
+20:48:08 <c9sloud> 然後你可以要 maintain 這些 data 的 reference
+20:48:18 <c9sloud> free 掉之後要把他們的 reference count decrease 1
+20:48:26 <caasihuang> 找不到它的 reference counter ，我只知道用完就丟的叫 Local<Value> ，
+20:49:09 <caasihuang> 不要丟的叫 Persistent<Value> ，這種可以在他要被回收時做些什麼
+20:49:16 <c9sloud> IMPLEMENT_REFCOUNTING(MyV8Accessor); ?
+20:49:34 <caasihuang> 恩，我查一下...
+20:49:36 <c9sloud> 還沒仔細看
+20:49:39 <c9sloud> 好像要先拿到 context
+20:49:40 <c9sloud> https://code.google.com/p/chromiumembedded/wiki/JavaScriptIntegration
+20:51:12 <c9sloud> http://athile.net/library/wiki/index.php?title=Library/V8/Tutorial#Storing_a_reference_to_the_allocated_object
+20:51:19 <c9sloud> 好像要用 std::shared_ptr ?
+20:51:49 <godfat> 沒記錯的話，他的概念是所有 Persistent 都是依附在 Local 下，因此不是用 reference counting
+20:52:27 <c9sloud> http://athile.net/library/blog/?p=1333 有哇
+20:52:33 <godfat> 喔喔，原來要用 std::shared_ptr 包 persistent?
+20:52:59 <godfat> 不過那等於是自己做吧
+20:53:12 <c9sloud> 不過那好像是 LxEngine
+20:53:26 <c9sloud> 抱歉.. 還在忙.. 沒時間仔細看
+20:53:32 <c9sloud> 可能你要自己研究一下 XDD
+20:54:29 <caasihuang> 感謝。
+20:54:51 <caasihuang> 我先把會動的東西都做起來再回頭煩惱這個 XD
+20:55:54 <caasihuang> 如果只是 C++ 世界的東西還好處理，這次麻煩的是，值從 JS 世界來，又要回 JS
+20:56:04 <caasihuang> 又要回 JS 世界。
+20:56:32 <caasihuang> 該到 node.js-tw 問才對，可是那邊人好少 0rz
+20:56:46 <godfat> 你有用什麼 npm package 有複雜的 c 嗎？
+20:58:21 <caasihuang> 一時想不起來，我想，想把 js 的值存在 c++ 那邊是個很怪的需求，也許我的作法一開始就錯了
+20:59:35 <godfat> 那可能反過來要用 js 抓 c 的值了
+20:59:49 <godfat> 然後呼叫時把自己傳進給 c 這樣？
+21:00:45 <caasihuang> 好想口頭跟你講...<
+21:01:35 <godfat> XD 明天用 skype?
+21:01:38 <caasihuang> 現在妙的是，從 js 那邊來的 Value 可以塞到 node->data ，也可以變回 Local<Value>
+21:02:05 <caasihuang> 但一 gc ，下面的 pointer 就搬家啦，沒法比較是不是本來那個值
+21:02:32 <caasihuang> 現在住的地方沒電腦有 skype XD 我長話短說。
+21:03:35 <godfat> 你可能需要一個 handle 抓住 Local, 然後給 r3 handle 不是 Local.. @@
+21:07:13 <caasihuang> 這行的 data 在 gc 後，再取用，變回 Local 或 Persistent Value ，再拿出來的 pointer 會變：https://github.com/caasi/node-r3/blob/master/src/main.cc#L68
+21:07:48 <caasihuang> 晚點再看看是不是誤會 V8 什麼了。
+21:08:35 <CindyLinz> caasihuang: 這就是需要所謂 StablePtr 的地方啦 ^^
+21:09:29 <godfat> copy gc 上用 raw ptr 應該是都不行吧我猜，所以我想 v8 是 copy gc..
+21:10:22 <caasihuang> CindyLinz: 怒啦， v8 沒有啊
+21:10:52 <caasihuang> godfat: 但 v8.h 裡面又跟我說把 pointer 拿出來是安全的...
+21:11:12 <CindyLinz> google style (逃)
+21:11:48 <godfat> 那就完全不知道了 @@"
+21:12:00 <godfat> 去買飯..
+21:12:23 <CindyLinz> 好晚 @@"
+21:12:27 <caasihuang> godfat: https://github.com/v8/v8/blob/master/include/v8.h#L190
+21:12:38 <caasihuang> 我也還沒吃，吃飯去。
+21:15:48 <CindyLinz> caasihuang: 你在 js 裡面 handle 一個 global 的大 object, 然後為每一個 tree 都安排一個 key 來存放對應的 payload
+21:16:03 <CindyLinz> 然後把這個 key 傳給 r3 保存吧?
+21:24:39 <caasihuang> 這聽來不錯，晚上試試！
+23:04:52 <caasihuang> 試著存 Persistent<T> * ，最後拜訪 r3::node *tree 時注意到奇怪的值：
+23:04:57 <caasihuang> https://gist.github.com/caasi/7ce11bf71fa35dcb7a30
+23:06:45 <caasihuang> c9sloud: 上下有一樣的值，是 Persistent<T> * ，我不解的是像 0x49d28b4c00000090 這種，是 node->data 沒有初始化，還是有其它用途？
+23:12:51 <c9sloud> caasihuang: 看不懂 ^^||
+23:13:20 <caasihuang> 喔喔，抱歉，我用你的 tree_dump 輸出一次
+23:13:28 <c9sloud> node_create should set data to NULL
+23:13:30 <CindyLinz> 你這樣直接貼一個 address 要怎麼看啦 XD
+23:14:03 <c9sloud> CindyLinz: 要腦補了 XD
+23:15:34 <caasihuang> 更新了： https://gist.github.com/caasi/7ce11bf71fa35dcb7a30
+23:15:47 <caasihuang> "/" 的 data 很奇怪。
+23:15:48 <godfat> 關於這句 https://github.com/v8/v8/blob/master/include/v8.h#L190
+23:15:48 <godfat> 我猜他的意思是 *handle 是安全的，不是指 handle 裡面的 ptr 是安全的
+23:15:48 <godfat> https://github.com/v8/v8/blob/master/include/v8.h#L235
+23:15:48 <godfat> 不過我透過 *handle 拿出的當下是安全的，又能有多久是安全的？讓我有點困惑
+23:16:48 <caasihuang> godfat: 剛剛踩地雷的結果是， gc 後就不安全了？這意味著我該寫玩具來測試對不對 QQ
+23:17:21 <godfat> 我是推測 raw ptr 都不安全就是了... XD
+23:18:34 <caasihuang> c9sloud: node_create 沒有動到 data XD
+23:18:55 <c9sloud> 所以你給的是 data 在哪
+23:19:37 <caasihuang> 我給的是 0x289xxxx 那些
+23:19:42 <godfat> 不過 v8 看起來真的是滿 idiomatic c++... 我也滿好奇，一堆人在批評 c++, 不過還是很多地方在用。同時我也覺得只用 c 有點不足..
+23:19:48 <caasihuang> https://github.com/c9s/r3/blob/master/src/node.c#L456
+23:19:58 <c9sloud> 呃 還是看不懂 xd
+23:20:02 <c9sloud> 我先吃晚餐...
+23:20:20 <caasihuang> 好的，我先自己改看看
+23:21:17 <godfat> node_create 既然沒有碰 data, 表示是預設值（殘留值）？
+23:27:01 <caasihuang> godfat: 我不懂，自己加了 node->data = NULL 還是爛掉，繼續看...
+23:34:45 <caasihuang> tree_create 那邊也加了就好了，可是我這邊還是 seg fault

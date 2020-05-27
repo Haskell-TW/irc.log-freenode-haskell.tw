@@ -1,0 +1,6 @@
+01:53:51 <monochrom> flora 我覺得最可觀的是把 conjunction 和 sequential 分清楚. 記著幾十年來 prolog 等等一向把它們混為一談, 所以亂象横生.
+13:47:07 <CindyLinz> @pl \a b c d -> a - c * d - b
+13:47:08 <lambdabot> flip . ((flip . ((-) .)) .) . (. (*)) . (.) . (-)
+13:49:39 <CindyLinz> @unpl flip . ((flip . ((-) .)) .) . (. (*)) . (.) . (-)
+13:49:39 <lambdabot> (\ o b c f -> (o - (c * f)) - b)
+19:19:49 <hashcat_> https://plus.google.com/u/0/+AbhimanyuAryan/posts/T22JJnG3shC?cfem=1

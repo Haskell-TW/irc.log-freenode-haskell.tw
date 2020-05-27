@@ -1,0 +1,238 @@
+00:04:47 <letoh> 好像沒找到 r6rs 的 lambda 可以直接在參數的部份做類似 sml 那種 pattern matching
+00:05:05 <letoh> fn pat1 => body1 | pat2 => body2  這種
+00:05:11 <suhorng> 嗯嗯
+00:05:17 <suhorng> 大概還是自己弄吧!
+00:05:37 <letoh> 對呀  但允許先拆掉 list 的確是方便很多
+00:31:47 <favonia> CindyLinz: letoh: suhorng: SML 和 Haskell 不同喔 wwwww
+00:31:57 <favonia> 我是說 foldl/foldr
+00:32:13 <favonia> Haskell 是按照「空間感」來 fold, 所以左右會相反
+00:32:37 <suhorng> favonia: 比較習慣 Haskell 的放法..
+00:32:43 <letoh> haskell 比較好記
+00:32:57 <letoh> sml 的 acc 好像都放第二個?
+00:33:19 <CindyLinz> 好記嗎? 我還是記不起來 orz
+00:34:34 <suhorng> CindyLinz: 我想說看到這個圖就不用記了XD foldr: http://www.haskell.org/wikiupload/3/3e/Right-fold-transformation.png foldl: http://www.haskell.org/wikiupload/5/5a/Left-fold-transformation.png
+00:34:52 <suhorng> foldl for "snoc"-list :P
+00:35:49 <letoh> 其實我看不懂這兩個圖XD
+00:36:01 <favonia> letoh: suhorng: SML 你要想像自己是自動機
+00:36:19 <favonia> 就一直吃新東西，跟左右無關
+00:36:29 <letoh> 嗯嗯
+00:36:31 <suhorng> 自動機..XD
+00:36:44 <letoh> 比較像 foldl' 嗎?
+00:36:55 <suhorng> letoh: foldr 就是把 [] 換成初始值 z, 把 cons 換成 f, 就是 foldr 的那個圖
+00:47:36 <letoh> 分左右有什麼明顯的好處嗎?
+00:48:39 <letoh> suhorng: 我是用計算的順序去記... 但遇到 lazy 就炸了XD
+00:48:58 <suhorng> 分左右噢...
+00:49:09 <suhorng> 我當初的理解是 list 有兩種
+00:49:18 <suhorng> Haskell 裡面那個 list 是那樣
+00:49:30 <letoh> 我最早會用的好像是 python 的 reduce，但 reduce 應該比較像 sml 的 List.fold
+00:49:38 <suhorng> 可是也可以 data ListL a = NilL | ConsL (ListL a) a
+00:49:42 <suhorng> reduce是foldl
+00:49:58 <suhorng> 然後 foldl 就是 ListL 對應的 fold 這樣..
+00:50:35 <letoh> 反過來接的 list ?
+00:50:49 <letoh> 感覺蠻有趣的
+00:51:23 <suhorng> 平常用的 cons 跟 nil 定的類似 data ListR a = NilR | ConsR a (ListR a)
+00:51:35 <suhorng> 但是其實 cons 也沒什麼特別道理把 a 放左邊 ListR a 放右邊
+00:51:42 <suhorng> 反過來就變另一種 list
+00:51:52 <suhorng> foldr 對應到 ListR 的 fold, foldl 對應到 ListL 的 fold
+00:53:07 <favonia> letoh: 這種可以用啊，雖然我覺得實在沒啥用途 xDDD
+00:53:13 <letoh> 反過來接不太直覺
+00:53:43 <suhorng> XD
+00:54:07 <suhorng> 像是 123.456 那前面 123 就是長一邊, 後面 .456 往另一個方向長的(?
+00:54:12 <favonia> letoh: suhorng: https://github.com/faavonia/homotopy/blob/master/Space/List/Lemmas.agda 你看 snoc xDDDD
+00:54:18 <favonia> 這名字不是我發明的
+00:54:44 <suhorng> favonia: 404 QQ
+00:54:59 <suhorng> 阿, 帳號多了一個 a
+00:55:05 <suhorng> cons <-> snoc wwwwwwwwwwwww
+00:55:14 <favonia> 不小心按到 orz
+00:55:39 <letoh> 哇  我突然愛上 snoc 了
+00:55:48 <favonia> 這是用來證明 rev (rev x) 和 x 等價
+00:56:03 <favonia> 很無聊的定理但還是要證明...
+00:56:38 <favonia> 因為用 snoc 很好定義 rev
+00:56:45 <favonia> 反正就這樣了 xDDD
+00:57:28 <suhorng> XDD
+01:03:18 <letoh> 有人寫 data Listl a = Nil | Snoc (Listl a, a) deriving Show
+01:05:59 <suhorng> 嗯?
+01:06:44 <letoh> 就定義一個 Snoc 來用
+01:13:55 <favonia> letoh: www
+01:14:42 <letoh> http://johnbender.us/2009/09/19/algebra-of-programming-chapter-1-section-3/  這裡看到的
+01:25:30 <letoh> http://jaspervdj.be/hakyll/  # haskell 版的 jekyll
+02:42:54 <CindyLinz> 一個怪作法....
+02:43:09 <CindyLinz> 我想在 Monad 裡面作類似 switch..case 的動作
+02:43:31 <CindyLinz> 也就是 branch 裡會有 action 的那種
+02:44:01 <CindyLinz> 那... 因為我想要避免一串 if then else 的連續縮排, 所以想用 guard
+02:44:17 <CindyLinz> 可是剛剛試試 guard 好像不能憑空寫
+02:44:24 <CindyLinz> 所以就寫成這樣: let x
+02:44:37 <CindyLinz> 然後接下來各行寫著 | 條件 = 要做的事
+02:44:52 <CindyLinz> 寫完以後再放一行 x 叫它執行
+02:46:16 <CindyLinz> 欸... 連續 if then else 好像也可以不要連續縮排.. :Q
+02:46:37 <CindyLinz> else if 後面的 then 可以跟 if 前面的這個 else 放在同一個縮排....
+02:47:31 <CindyLinz> 那先繼續用 if then else 好了, 雖然字比較多 ^^|
+03:26:13 <favonia> guard 不能憑空寫的原因是
+03:26:23 <favonia> 不執行的意義是什麼？
+03:27:07 <favonia> IO 的 mzero 是什麼？
+03:27:59 <CindyLinz> favonia: 語法不給過啊
+03:28:13 <favonia> 因為沒有什麼好的答案所以 IO 不是 MonadPlus
+03:28:26 <favonia> 語法不給過的原因是因為沒有好的答案
+03:28:40 <CindyLinz> let x .... ; x 就給過了 XD
+03:28:40 <favonia> 所以沒有 MonadPlus IO 的實作
+03:29:09 <favonia> 等一下我突然發現你在跟我講不一樣的東西
+03:29:30 <favonia> 你用 case 不行嗎
+03:29:59 <CindyLinz> 我不知道 case 的 branch 可以寫運算式..
+03:32:22 <CindyLinz> 然後現在為了避免 DoAndIfThenElse 的問題, 所以一整串 if then else if then else 的第一個 if 會比後面其他所有的 then 和 else 都少一個縮排
+03:32:39 <CindyLinz> 看起來像凸排.. 剛好和我平常 BBS 寫文章的習慣一樣 ^^|
+04:06:55 <favonia> CindyLinz: monad 不 monad 都一樣啊
+04:08:26 <CindyLinz> favonia: 喔, 但如果不是在 monad 裡的話, 每個 expression 都會很自然要有一個 bind 的動作啊; 而在 monad 裡面, 只是要 effectful 的時候, 可能會沒東西要接
+04:10:07 <favonia> ？？？什麼意思 你到底想寫什麼
+04:11:14 <CindyLinz> if cmd == "get" then do ... else if cmd == "gets" then do ... else if cmd == "delete" then do ... else do ...
+04:11:21 <CindyLinz> 像這樣的東西呀
+04:12:12 <CindyLinz> guard 的寫法是 let x ; | cmd == "get" = do ... ; | cmd == "gets" = do ... ; | cmd == "delete" = do ... ; | otherwise = do ... ; x
+04:12:49 <CindyLinz> 這邊的 x 就不是原本會有的東西, 是為了寫 guard 硬湊出來的
+04:15:27 <favonia> > let f x = case x of "123" -> 123; "234" -> 234 in f "123"
+04:15:28 <lambdabot>   123
+04:15:47 <favonia> 這樣就好了吧（？）
+04:16:59 <CindyLinz> 這邊 cmd 是 ByteString 也可以嗎? 我那個 "get" 可以直接 == 是因為我用了 OverloadedStrings
+04:18:02 <favonia> CindyLinz: ViewPatterns
+04:18:15 <CindyLinz> 可以用 case cmd of (fromString "get") -> ... ; (fromString "gets") -> ?
+04:18:31 <CindyLinz> 我看一下 ViewPatterns.. 好像很久以前有用過, 可是全忘光了...
+04:18:56 <favonia> 你應該可以用 case unpack cmd of ...
+04:19:12 <favonia> 窮人版 view pattern
+04:21:02 <favonia> CindyLinz: viewpattern 就是丟給一個函式算出結果後，針對結果做 pattern matching
+04:21:40 <CindyLinz> 隱隱覺得 unpack cmd 這作法, ghc 應該不會聰明到知道要倒過來把 "get" 那邊 pack 回來比對..
+04:22:14 <CindyLinz> 不過 ghc 會事先把 "get" pack 好嗎.. (思)
+04:22:32 <CindyLinz> favonia: 嗯嗯
+04:32:42 <favonia> ShikChen: Hi
+04:33:07 <favonia> ShikChen: 你看起來很像是我認識的人
+04:33:14 <ShikChen> 應該就是 (?
+04:33:31 <ShikChen> 好久沒上 IRC 十分生疏 XD
+04:34:11 <favonia> ShikChen: 我叫王尹
+04:34:25 <ShikChen> @_@
+04:34:59 <ShikChen> favonia: 您不是叫喵喵喵嗎 (?
+04:35:50 <favonia> ShikChen: 是啦啦啦。
+04:36:18 <ShikChen> favonia: 啦啦啦你好
+13:07:43 <CindyLinz> 這什麼情況 orz
+18:08:06 <CindyLinz> 嗚嗚被 lazy 欺負了..
+18:32:27 <CindyLinz> 因為 lazy, 所以在不對的時間進到了 MVar operation, 又加上我 compile 時沒開 -threaded, 所以再也沒有人可以救他出來... :|
+18:34:56 <CindyLinz> 沒有 -threaded 的時候, MVar block 住就真的完全 block 住, 不會 switch 到任何能動的地方呢...
+18:35:44 <CindyLinz> Control.Concurrent 是說沒有 -threaded 的時候, IO block 仍然會 switch 到別的地方, 我以為 MVar 也會一併處理.. 噗噗
+18:35:57 <CindyLinz> 開 -thread, 即使 N=1 也可以...
+20:53:44 <suhorng> ShikChen: 竟然是shik!!
+20:53:53 <ShikChen> suhorng: >///<
+20:54:08 <suhorng> 怎麼會心血來潮回 #haskell.tw XD
+20:54:12 <ShikChen> suhorng: 昨天半夜嘴巴破洞睡不著
+20:54:33 <ShikChen> suhorng: 剛好看到你推文說就心血來潮 XD
+20:54:44 <suhorng> xDD
+21:10:29 <suhorng> 是說 Harper 在部落格上提到 non-strict 的語言才能有真正個 product, strict 的語言才有真正的 co-product
+21:11:29 <suhorng> product那邊我可以理解,  outl .〈f, g〉= f 要成立, 無論 g 是不是 ⊥. 不過 co-product (sum type) 是為什麼呀@@
+21:15:47 <CindyLinz> co-product 就是 sum 嗎?
+21:16:29 <CindyLinz> 我用 Either 來理解的話..
+21:17:09 <CindyLinz> 就是如果 value = Left _|_, 我們 seq value 的時候, 只是看到 Left 就說完工了
+21:18:10 <CindyLinz> 但其實 value 的 Left 是豆腐渣工程.. XD
+21:22:53 <suhorng> 對 是sum
+21:23:08 <suhorng> 唔
+21:23:49 <suhorng> 所以說是可能在應該要 ⊥ 時卻沒有 ⊥ 囉!
+21:24:42 <CindyLinz> 嗯..
+21:26:35 <CindyLinz> 不過這是從你在 product 那邊的描述我去猜想 co-product 應該要怎樣..
+21:26:45 <CindyLinz> 既然 co- 了.. 就會有某種對稱性.. :p
+21:27:21 <suhorng> 嗯嗯!
+21:27:40 <suhorng> 他的條件是 [f, g] . inl = f 以及 [f, g] . inr = g
+21:28:21 <suhorng> 該⊥卻沒⊥聽起來好合理
+21:40:56 <CindyLinz> 分享一個已經找到原因的 lazy 悲劇... https://gist.github.com/CindyLinz/5076125
+21:42:14 <CindyLinz> 它會一直讀指令, 然後把已讀到的指令數存在一個 MVar 裡面
+21:42:31 <CindyLinz> 如果讀到的指令是 out, 就會把這個數字輸出
+21:43:18 <CindyLinz> 如果 out 出現的間隔沒有太長就沒事, 但如果在讀到 out 之前, 有非常多的指令.. 那麼讀到 out 的時候, 就會 crash
+21:44:39 <CindyLinz> 還有一個還沒找到原因的悲劇... 所以也不知道要怎麼描述 orz
+21:45:09 <CindyLinz> 現在只能說, 我的程式有時候跑一陣子以後, 它對一個連線中的 socket 就會停止輸出
+21:45:13 <CindyLinz> tcp socket
+21:45:37 <CindyLinz> 可是程式似乎又沒有死掉
+21:45:57 <CindyLinz> 繼續再開 tcp 連上它, 又可以繼續工作一陣子, 然後再停住..
+21:46:38 <suhorng> 爆掉是記憶體(stack?)爆掉嗎...?
+21:46:41 <CindyLinz> 對
+21:46:43 <suhorng> 因為存太多thunk?
+21:46:44 <suhorng> Orz
+21:46:49 <CindyLinz> 不是 只有一個 thunk 喔
+21:47:12 <CindyLinz> 只是在解開這個 thunk 的時候.. 就會展出一大堆 (((((((....)+1)+1)+1)...+1)
+21:47:31 <CindyLinz> 爆的是 stack
+21:47:57 <CindyLinz> 記憶體的話... 應該可以撐更久..才爆 XD
+21:48:03 <suhorng> 囧...
+21:48:19 <suhorng> 好像有個 GHC extension 是 $!, strict function application?
+21:48:22 <CindyLinz> out 爆是因為 stack.. 如果沒 out 就爆, 那是記憶體
+21:48:45 <suhorng> 嗯....
+21:50:24 <CindyLinz> 我那個 \ count -> return $ count + 1 如果改成 \ !count -> return $ count + 1 也可以
+21:50:49 <CindyLinz> 不過 加 BangPatterns ! 或是 `seq` 的方法, 都是把它變成 strict
+21:51:04 <suhorng> 對呀 @@
+21:51:06 <CindyLinz> 我好奇有沒有讓它繼續 lazy, 但是 evaluate 的時候不會爆的方法
+21:51:31 <suhorng> 可是串很長的時候感覺一定會爆...
+21:51:45 <CindyLinz> 像是我們自己寫一個要跑很深的遞迴, 可以用 accumulator 和行尾遞迴的方法做
+21:51:53 <suhorng> 對
+21:52:00 <CindyLinz> 可是這裡不知道可以怎麼用這方法..
+21:52:43 <CindyLinz> 也就是說.. 有沒有讓它 eval 的時候只有耗時間, 而不用多耗空間的方法 :p
+21:54:06 <favonia> accumulator 也會爆啊
+21:54:08 <favonia> 爆 heap
+21:54:23 <CindyLinz> 這東西有點討厭, 經驗不足, 或是經驗足了但睡眠不足, 就會不小心寫出來.. 乍看之下也沒有錯, 隨手打幾個測試也不會死.. 只是我手癢喜歡極限測試才發現 orz
+21:54:56 <CindyLinz> favonia: heap 通常比 stack 大很多呀, 所以從程式的記憶體使用量可以看出類似 memory leak 的現象而發現問題
+21:55:25 <CindyLinz> 而 memory leak 可以根據 leak 的速度, 有比較溫和的黑箱解法 :p
+21:56:22 <favonia> CindyLinz: 每秒重開一次就好啦（誤）
+21:56:37 <CindyLinz> favonia: 差不多是這個想法沒錯啊 :p
+21:57:31 <CindyLinz> 然後程式的寫法是程式結束的時候可以把「狀態」繼承給後繼者的話, service 就不會中斷, user 無感
+21:57:50 <CindyLinz> 可是這個 stack 爆掉當場 crash 的話就接不了了..
+21:57:57 <b4283> 好像 apache 的 MaxChildConnections
+21:58:09 <CindyLinz> b4283: 是 graceful restart?
+21:58:40 <b4283> 服務到設定的最大 connection 數之後把 process 砍掉重開
+21:58:58 <letoh> 看自己的括號都沒什麼問題，但看別人的括號頭好痛...
+21:59:15 <b4283> 據說是為了避免 memory leak ..
+22:00:05 <CindyLinz> b4283: 如果把這作法當水在喝的話, 應該要有個機制不是直接砍 process, 而是通知 process 等手邊的 request 服務完以後自盡呀
+22:00:30 <CindyLinz> b4283: 不然就會有一個降不下來的比例的 request 是壞的..
+22:00:40 <CindyLinz> 看你砍得多頻繁 :p
+22:02:13 <suhorng> CindyLinz: 是說你測到爆掉大約資料像多大?
+22:02:25 <b4283> hmm
+22:02:38 <CindyLinz> suhorng: 我筆電上面大約 12M 行的時候
+22:02:54 <CindyLinz> 可能跟筆電沒什麼關聯, 是看 RTS 那邊開多大 ^^|
+22:04:09 <CindyLinz> 欸, 我測的時候是寫另一個程式 pipe 給它啦
+22:04:23 <CindyLinz> 然後這個程式吃到 USR1 signal 的時候會丟 out 出去
+22:08:43 <suhorng> 囧 我剛剛用ghci測一直爆不了
+22:09:02 <CindyLinz> 那有發現 out 的時候很慢嗎?
+22:09:08 <CindyLinz> 我是用 runghc T.hs 直接測的
+22:09:29 <CindyLinz> 很慢的話... 表示再努力就有機會了 XD
+22:09:49 <CindyLinz> 不知道你 ghci 的記憶體限制開多大
+22:14:39 <suhorng> 耶終於爆了! test.hs: out of memory
+22:14:53 <suhorng> 15M...剛才開 10M 竟然還沒爆 (我也不知道 ghci 記憶體開多大orz)
+22:16:43 <CindyLinz> 對我 10M 的時候也不會爆
+22:34:06 <suhorng> 失敗了w 本來想改成 continuation passing style 不過還是爆炸
+22:34:45 <CindyLinz> 把 MVar Int 改成 MVar (Int -> a) ?
+22:35:51 <suhorng> 對
+22:44:54 <CindyLinz> suhorng: 這樣 https://gist.github.com/CindyLinz/5076364
+22:45:15 <CindyLinz> \ count -> countEater $! count + 1
+22:45:27 <CindyLinz> 加上 $! 才有用到 accumulator 的效果 ^^|
+22:45:57 <suhorng> 不過這樣不是仍然是變成 strict 了嗎 :-o
+22:46:02 <CindyLinz> suhorng: 真是重要的提示 :p # continuation passing style
+22:46:11 <CindyLinz> 是取值的時候才用到 $!
+22:46:27 <suhorng> 嗯..也是
+22:46:35 <CindyLinz> 運用 accumulator 的時候, 都會這樣用才能生效吧 ^^|
+22:47:41 <suhorng> 不過情感上在 modifyMVar_ 的時候直接 return $! (n + 1) 好像比較沒有 overhead..
+22:47:59 <CindyLinz> 情感上? ^^|
+22:48:23 <CindyLinz> n + 1 這種 eval 出來比 thunk 小的東西, 一定是的呀
+22:49:00 <CindyLinz> 嗯, 還要加上 +1 很好算 :p
+22:50:10 <suhorng> XD
+22:53:45 <favonia> CindyLinz: 萬一實作上 n+1 剛好超過 2^32-1 or 2^64-1 可能就...
+22:54:06 <favonia> 算了應該還是比較小
+22:54:44 <CindyLinz> stack 先爆, 然後再來是 heap, 然後才會輪到 Int -> Int32 -> Int64 ^^|
+22:56:37 <favonia> CindyLinz: 我是說 Integer 的實作方法可能會 +1 後突然用大數
+22:56:41 <CindyLinz> Int64 不行可以用 Integer 啦.. 不過 Integer 雖然理論上無上限, 但它記憶體終究也是會成長的... www
+22:57:13 <CindyLinz> 這邊用 Int, 所以滿了應該是繞回來變成負的 ^^|
+22:58:41 <favonia> 現在不是要省記憶體嗎（？）
+22:58:55 <favonia> 乾脆用 Int8 好了
+22:59:00 <favonia> 爆了就算了
+22:59:34 <suhorng> Int8 wwww
+23:00:32 <CindyLinz> 請不要走極端.. XD
+23:00:46 <favonia> cab remove -r 和 cab outdated 真好用 xD
+23:01:04 <CindyLinz> 可是就算 Int8, 沒加上剛剛那些 seq 或是 $! 的話, 依然會爆啊 ^^|
+23:01:21 <CindyLinz> 那啥
+23:01:30 <favonia> cabal install cab
+23:01:54 <CindyLinz> 噢
+23:02:05 <CindyLinz> 來翻 hackage 介紹 ^^
+23:32:31 <b4283> http://this-plt-life.tumblr.com/post/44373483122/
+23:35:23 <suhorng> 啥鬼XDDDDDD
+23:46:09 <letoh> b4283: 你常常看這種東西會壞掉的吧XD
+23:51:23 <b4283> :P
+23:54:30 <CindyLinz> 雖然笑出來了, 可是我還沒看懂啊 orz
+23:57:38 <b4283> letoh: http://this-plt-life.tumblr.com/post/36425235754

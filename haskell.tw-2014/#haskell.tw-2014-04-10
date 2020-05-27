@@ -1,0 +1,14 @@
+00:03:16 <monochrom> 可以在 iPhone 上玩了!
+00:04:03 <monochrom> 或者我真的應該買部新的 iPod Touch. 現有的已用了5年.
+02:25:32 <mgccl> 想要在Haskell下写个KMP算法... 发现CindyLinz已经写过了... xD
+12:38:56 <CindyLinz> Haskell 實作的 tls https://github.com/vincenthz/hs-tls
+19:50:02 <mgccl> CindyLinz: 我写了个KMP too. 不过这个版本不用array. https://github.com/Mgccl/haskell-algorithm/blob/master/KMP.hs
+21:06:26 <CindyLinz> :D
+21:20:13 <CindyLinz> mgccl_: 完全想不起來我那時怎麼寫的了 XD
+21:22:58 <CindyLinz> mgccl_: 然後我那個 KMP 改過一次版, 因為有個網友跑來跟我說我原本寫的是 MP, 不是 KMP.. 然後丟給我兩個 link
+21:23:03 <CindyLinz> http://www-igm.univ-mlv.fr/~lecroq/string/node7.html
+21:23:07 <CindyLinz> http://www-igm.univ-mlv.fr/~lecroq/string/node8.html
+21:24:19 <mgccl_> CindyLinz: yay. 我看到了你的修改. 恩, 我的是KMP. 我先写了MP以为改1行就能弄成KMP. 没想花了3个小时.= =
+21:27:47 <mgccl_> CindyLinz: thx for the link. 看起来我似乎可以优化一下那代码... (T.T 怎么可以这样C代码比Haskell的短...
+21:27:57 <CindyLinz> mgccl_: 而且... 我改完以後, 他才跟我說他覺得 MP 比 KMP 有用.... = =+
+21:28:13 <CindyLinz> 不過名字都取了 KMP 就算了 ^^|

@@ -1,0 +1,6 @@
+09:36:49 <IN_AL_60h> CindyLinz: 你寫 Haskell compiler 的時候有用查類似的文件來處理 typeclass 跟 GADT 嗎?
+09:37:27 <IN_AL_60h> 看內容好像這篇主要是總結這些方面的理論, 然後 Rank-N polymorphism 則是另外一篇
+14:47:34 <CindyLinz> 沒有查, typeclass 是以前聽陳恭介紹的初代 Haskell 實作的想法, 加一個 witness
+14:47:53 <CindyLinz> GADT 的部分, 在 runtime 不用處理 XD
+14:48:06 <CindyLinz> GADT 是難在 type check
+21:50:11 <IN_AL_60h> 咦XD 那 typeclass 的 type checking 怎麼辦呀? 還是說先不做那些花俏的功能

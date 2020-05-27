@@ -1,0 +1,16 @@
+00:07:33 <c9s> monochrom: 寫得很好! 讀了一半也通一半了 XD
+00:18:30 <c9s> monochrom: 用 .xhtml 當副檔名的原因是?
+00:18:38 <c9s> pocket.io extension 沒辦法用 XD
+00:18:49 <monochrom> 多謝選搭 monochrom 航空公司!
+00:19:52 <monochrom> xhtml 語法有規律得多
+00:23:37 <c9s> :D
+00:23:46 <c9s> 你在 vex.net 工作?
+00:30:59 <c9s> 所以.. 如果像這樣: main = getArgs >>= parse >>= putStr . tac
+00:32:15 <c9s> 就是 args 會 apply 到 parse >>= putStr . tac
+00:32:30 <c9s> 然後 parse 又在 apply callback (putStr . tac)
+00:50:35 <mno2> 應該要趁機推坑 ghc 8.0 的 Strict extension
+00:50:53 <mno2> default to Strict evaluation (module-wise)
+00:55:30 <CindyLinz> 習慣 fine-tune 加 bang pattern 了 @@"
+12:18:54 <monochrom> c9s: 我是 vex.net 顧客
+21:10:19 <caasih> petercommand: 馬上查了一下是哪個漫畫 https://ro-che.info/ccc/23 # lens
+21:20:08 <CindyLinz> caasih: 我是 google: haskell lens comic 第一筆就是了 XD

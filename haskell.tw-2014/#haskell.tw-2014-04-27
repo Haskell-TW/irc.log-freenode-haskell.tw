@@ -1,0 +1,63 @@
+14:50:29 <gansteed> :( 有什么haskell语法高亮插件推荐吗？haskell.vim 连type class都不高亮显示 :(
+14:50:46 <gansteed> vim 插件
+14:51:19 <CindyLinz> gansteed: 聽起來有點怪, 我 default 安裝那些就會變顏色了 @@"
+14:51:47 <CindyLinz> type class data instance 這幾個都是綠色
+14:52:39 <gansteed> 啊 ：（ 我安装了插件以后反而没了？
+14:52:49 <CindyLinz> 呃 XD
+14:53:25 <letoh> 查一下 syn 或 ft 設成什麼了?
+14:54:34 <letoh> :syn 可以檢查一下
+14:55:21 <letoh> 我這邊發現會混一些 cpp 的設定@_@
+14:55:35 <gansteed> :syn 后好多信息
+14:55:45 <gansteed> 不知到怎么看 :(
+14:55:57 <letoh> 那些就是設定高亮的語法呀
+14:56:47 <letoh> type class 可能是用 hsTypedef
+14:57:03 <gansteed> 哦，我看一下
+14:57:24 <letoh> 檢查一下 hsStructure 跟 hsTypedef 的設定
+15:01:50 <gansteed> 太多了，看不过来。。能不能把他的信息输出到文件再用grep帮我找呢？
+15:03:01 <letoh> 直接把 haskell.vim 打開看就好了
+15:03:09 <CindyLinz> gansteed: 在設定檔裡面有, 應該會在一個長像的 syntax/ 的目錄裡面
+15:03:32 <letoh> syntax/haskell.vim
+15:07:07 <gansteed> 找到了
+15:07:43 <gansteed> hsStructure 后面只有data family class where instance default deriving
+15:08:14 <gansteed> hsTypedef 只有 type newtype
+15:08:43 <letoh> 你的 backgroud 是 dark 還是 light ?
+15:09:23 <letoh> 基本上你沒動過設定的話，應該是跑到 syncolor.vim 裡的預設定義
+15:09:56 <gansteed> background = dark
+15:10:02 <letoh> 簡單說就是綠色的，只根據背景會有 LightGreen 或 DarkGreen 的差異
+15:11:30 <letoh> gansteed: 麻煩你做個實驗，隨便打開一個 .hs 檔，然後確認一下 :set syn 的結果
+15:11:43 <letoh> 該不會連 filetype 都沒處理好吧
+15:12:01 <gansteed> 嗯，好 syntax=haskell
+15:12:23 <CindyLinz> 那有 :syn on 嗎?
+15:12:47 <letoh> 這樣應該有正確跑到 haskell 的設定才對... 那 :hi hsTypedef 的結果呢?
+15:13:10 <letoh> 對喔，連 :syn on 都沒有的話就不用說了XD
+15:13:28 <gansteed> xxx links to Typedef
+15:13:42 <letoh> gansteed: 也許先試一下 :syn on ?
+15:13:54 <CindyLinz> 聽說去別人家修電腦的時候, 最常用到的解法是把插頭插上去? XD
+15:14:17 <letoh> 看起來 syntax 設定應該是沒被其他亂七八糟的設定蓋掉...
+15:14:47 <gansteed> .vimrc 里设定了syntax on 哦
+15:14:52 <CindyLinz> letoh: 連我這沒幫別人修過電腦的都知道了 XD
+15:15:08 <CindyLinz> 我自己電腦壞掉都是直接抱到店裡去 XD
+15:15:49 <letoh> 用筆電的話還可以靠電池撐一下XD
+15:16:48 <CindyLinz> 桌機也是啊.. 啊是不能關機是怎樣? XD
+15:17:18 <letoh> 桌機都送給誰修? (沒送修過XD
+15:17:56 <petercommand> letoh: 我都送零件買最多的那家耶
+15:18:41 <gansteed> 宝岛什么电脑最畅销？mac?
+15:18:52 <CindyLinz> letoh: 光華商場我買電腦的店啊~ 像是八德..
+15:18:54 <letoh> 不過送修一定會插電啊... 應該很難遇到沒插電的狀況? 我自己遇過比較扯的是... 把 usb 插到 RJ45...
+15:19:05 <letoh> 跟我說電腦沒反應...
+15:19:18 <CindyLinz> 店家有電啊?
+15:19:23 <CindyLinz> gansteed: 不知道 XD
+15:19:47 <CindyLinz> 巴德 不是 八德 XD
+15:19:51 <petercommand> 肯定不是mac
+15:20:03 <letoh> 對面開了家四維 (誤
+15:21:02 <CindyLinz> ww
+22:41:11 <gansteed> http://lpaste.net/103263
+22:41:37 <gansteed> 可不可以帮我看看这段， Just x == Just y 是怎么来得？
+22:45:01 <b4284> Just x == Just y 應該是指他要 implement 的 pattern
+22:45:53 <b4284> 想作有人求「Just x == Just y」值時，傳回「x == y」的值
+22:50:42 <gansteed> instance 那一行并没有给出 Just x Just y啊
+22:52:10 <b4284> Maybe 的定義是 Just a | Nothing
+22:54:10 <gansteed> 这样一次可以匹配两个？ 只看过 (x:xs) 匹配List， 这种没看果呢。。
+22:58:20 <miaout17> 就只是pattern matching。 (x:xs) == (y:ys) = (x==y) && (xs==ys)
+23:00:21 <gansteed> 我大概有点头绪了 :D
+23:00:33 <gansteed> 谢谢 :p

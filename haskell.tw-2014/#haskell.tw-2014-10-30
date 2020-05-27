@@ -1,0 +1,14 @@
+16:16:58 <CindyLinz> au: 覺得 ghc extension PatternSynonyms 感覺後勁不小耶 :D
+16:17:31 <CindyLinz> 如果 define Pattern 的時候可以用到 ViewPattern 的話就更好了.. (小聲)
+16:18:20 <CindyLinz> 可以封裝得很好的感覺..
+16:19:08 <CindyLinz> 可以讓 bidirectional Pattern 完全取代掉 hack 意味很濃的 smart constructor
+16:21:50 <au> CindyLinz: 本來就可以
+16:21:52 <au> https://news.ycombinator.com/item?id=7562119
+16:22:06 <au> 設計時就是搭配著用的
+16:24:57 <CindyLinz> 噢.. 誤解惹 ._.
+16:25:05 <CindyLinz> "For bidirectional pattern synonyms, all the variables of the right-hand side must also occur on the left-hand side; also, wildcard patterns and view patterns are not allowed." # https://www.haskell.org/ghc/docs/latest/html/users_guide/syntax-extns.html#pattern-synonyms
+16:25:29 <CindyLinz> 原來這邊的 not allowed 的 scope 只有到 bidirectional 的部分, unidirectional 的可以 :p
+16:25:34 <CindyLinz> au: 謝謝.. m(_._)m
+16:26:00 <au> np :p
+17:37:20 <mno2> http://www.reddit.com/r/haskell/comments/2kowzu/category_theory_applied_to_functional_programming/
+17:37:29 <mno2> [Category Theory Applied to Functional Programming]

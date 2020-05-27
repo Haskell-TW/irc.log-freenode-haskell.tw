@@ -1,0 +1,56 @@
+12:37:51 <suhorng> @hoogle f a -> Maybe a
+12:37:52 <lambdabot> Data.Monoid getFirst :: First a -> Maybe a
+12:37:52 <lambdabot> Data.Monoid getLast :: Last a -> Maybe a
+12:37:52 <lambdabot> Data.Maybe listToMaybe :: [a] -> Maybe a
+12:38:20 <suhorng> :i getFirst
+13:27:22 <CindyLinz> 我有試圖用過 Any, All, Last 之類的 Monoid....
+13:27:42 <CindyLinz> 那時初步的感想是..... 它們還是留在理論貢起來就好了 ._.
+13:27:51 <suhorng> 可讀性 ~ 0..
+13:28:13 <suhorng> 我只是想要把資料從 data type 裡面拿出來..
+13:30:43 <CindyLinz> 就.... 用了它們會把程式碼「加一層」.. 我想像應該只有寫一個超長(用程式碼計算)的一堆東西 and 起來的時候, 用 All 可能才會有點好處
+13:32:00 <suhorng> 因為他本來是打算給自訂資料結構用的？
+13:32:01 <CindyLinz> 如果把短短的 (a && (b || c) && ((d && e) || f)) 來用 Any, All 寫的話... 程式碼變超長的... 
+13:32:12 <suhorng> XDDD
+13:32:43 <CindyLinz> 我不知道它目的是什麼, 可能只是在 demo 從最基本的代數東西建構出來?
+13:32:56 <CindyLinz> 我那時試它只是想看看能不能把程式碼變「漂亮」
+13:33:13 <CindyLinz> 可是多太長了... 要一直穿衣服脫衣服..
+13:33:44 <suhorng> 我剛剛在看 Traversable, Foldable 的資料, 感覺是配合那邊用的
+13:33:53 <suhorng> foldMap :: Monoid m => (a -> m) -> t a -> m
+13:34:38 <CindyLinz> Traversable 我得重讀一下... ^^|
+13:35:09 <suhorng> 我才剛看　還沒找到什麼適合他用的情況
+13:38:06 <CindyLinz> 角色有一點太多 :|
+13:38:31 <CindyLinz> 就像 max-flow 演算法要拿來用的感覺, 都會覺得題目要設計得很故意 XD
+13:39:55 <suhorng> max-flow...
+13:46:14 <CindyLinz> 有一題: 有一間餐廳, 他知道接下來每一天會有多少顧客, 要確保每位顧客能使用到一張乾淨的餐巾. 他可以選擇及時買新的(有個單價), 也可以把髒的送洗, 送洗還有兩個選項, 慢速洗要5天(某個單價), 快速洗要3天(某個單價).. 要規劃最低價的方案..
+13:46:25 <CindyLinz> 天數我是亂打的, 不過大概就這意思 :p
+13:48:50 <CindyLinz> 有上下界的最小花費最大流.... ww
+13:51:32 <suhorng> XDD
+13:51:45 <CindyLinz> XD # http://www.ptt.cc/bbs/joke/M.1386478958.A.06A.html
+13:51:55 <suhorng> 他最一開始不是為了解決很實用的問題嗎XD 鐵路運輸規劃之類
+13:52:53 <suhorng> 印象中利用最大流=最小割有很多很可怕的題目...連圖要怎麼建都不好想
+13:53:53 <CindyLinz> 可是角色太多了, 使得建構的時候就不是 問題->解法.. 而是先假設要用 max-flow, 然後套套看每一個參數要放在 max-flow 的哪一個角色, 然後再證明...
+13:54:23 <CindyLinz> 這過程蠻有效的.. 可是覺得不舒服.... ww
+13:55:14 <suhorng> overflow XDDDD
+13:55:39 <suhorng> 兩個都overflow XDDDDDD
+14:06:20 <suhorng> > tree = Node (Leaf 1) 7 (Leaf 2)
+14:06:20 <suhorng> > ex7 = foldMap (Any . (== 1)) tree
+14:06:20 <suhorng> > ex8 = foldMap (All . (> 5)) tree
+14:06:21 <lambdabot>   <hint>:1:6: parse error on input `='
+14:06:22 <lambdabot>   <hint>:1:5: parse error on input `='
+14:06:22 <lambdabot>   can't find file: L.hs
+14:06:31 <suhorng> http://blog.sigfpe.com/2009/01/haskell-monoids-and-their-uses.html 這是我剛才說配合資料結構用的意思XD
+14:06:43 <suhorng> 算是 list 的 any/all 某種推廣..
+15:20:33 <CindyLinz> suhorng: 用 foldr 和 foldl 不是也很好嗎? ^^|  ghc std lib 的 Data.Tree 有 instance Foldable, 所以有 foldr foldl 可以用..
+15:43:42 <mno2> CindyLinz: 所以看起來很搞剛的題目不是都先猜 MFMC ,  wwwww
+15:53:35 <CindyLinz> orz
+22:37:02 <mno2> http://www.rethinkdb.com/blog/high-scalability-sql-and-computational-complexity/    這篇文章也是蠻有意思的。反思是否有設計龐大資料查詢語言的可能性與必要性。
+23:10:58 <godfat> 看起來意思好像是十年內都不會有一個好用的系統 XDD
+23:21:16 <CindyLinz> 十年一下就過了..
+23:22:00 <godfat> 看來我太保守了 XD 那來個三十年吧 XD
+23:23:25 <suhorng> 三十年後說不定就有夠實用的量子電腦了!
+23:25:01 <godfat> 然後可以暴力解這些問題？ XD
+23:25:34 <CindyLinz> 三十年後... 我可能就不在意了.. ww
+23:26:02 <CindyLinz> suhorng: 有實用的量子電腦, 就會有量子電腦生出來的問題要解欸 XD
+23:26:06 <godfat> XDDDD.... 這個回答更厲害
+23:26:42 <suhorng> XDD
+23:59:55 <mno2> CindyLinz: 譬如打敗 Sky Net 嗎？  wwwwww

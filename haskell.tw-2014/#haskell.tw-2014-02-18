@@ -1,0 +1,18 @@
+01:38:22 <CindyLinz> "a monad is like a train that runs backwards in time, which is made of tiny chocolate robots"
+01:38:48 <CindyLinz> 比那個什麼 monoid, category, endomorphism 親切.. 雖然不見得有比較好懂? XD
+01:39:51 <godfat1> chocolate robots...?
+01:40:25 <CindyLinz> 在 #haskell 看來的..
+01:40:46 <CindyLinz> @quote robot
+01:40:47 <lambdabot> acowley says: It [my robot] is standing right behind me, and its arm keeps drifting out to be right over where I'm sitting. I stand up and feel the blunt force trauma of the future.
+01:40:57 <CindyLinz> 咦 不同句 XD
+01:41:56 <godfat> http://www.etsy.com/listing/95738933/robot-chocolate-candy-2-dozen
+01:42:31 <CindyLinz> o.o
+01:43:18 <godfat> @quote chocolate
+01:43:18 <lambdabot> psychobot says: Source not found, so this package chocolate cake mix.
+01:43:41 <godfat> @quote monad
+01:43:42 <lambdabot> geheimdienst says: #haskell has the type a -> m b. you feed in some problem, and out comes a solution invariably involving monads
+01:51:20 <b4283> invariably
+02:00:33 <monochrom> 我是冷血程式員. 我認為親切沒價值. :)
+02:04:57 <CindyLinz> 咦, 我以為你在當教授?
+02:05:30 <monochrom> 好吧, 我是冷血助教 :)
+02:05:49 <CindyLinz> 噗噗 XD

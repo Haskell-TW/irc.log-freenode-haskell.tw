@@ -1,0 +1,90 @@
+01:39:03 <CindyLinz> c9sloud: 對了~ 我報名 flolac 了喔~~
+09:33:02 <mno2_> 昨晚的 meetup 聽到了一個重要的點。對於包含 computation 的 Monad，勢必都容易造成隱晦的 memory leak。像是 Free monads, pipes, 之類的 library。而這跟 ghc 的 semantic 有關，會造成過去的 reference 放不掉。
+09:33:58 <mno2_> 雖然我還沒參透這是什麼意思，晚點等要到投影片再來放。
+09:34:04 <mno2_> 然後 ghc-vis 超酷的
+09:34:21 <mno2_> 可以看到 ghc 的內部 data structure 是什麼樣子
+09:36:28 <mno2_> 另外還有一些點，像是講者提到 coroutine 能表達出來的程式集合是比 continuation passing style 能表達出來的程式集合要小。但我不知道要怎麼證明。
+09:36:55 <mno2_> 也許 cue 一下專家來回答 monochrom
+09:40:06 <mno2_> （受限於英文還沒有非常好，對於一些關鍵點還是會漏掉。）
+09:40:13 <monochrom> 也許 continuation passing 容許你記下然後多次再用同一 continuation, 而 coroutine 不許, 因為不把內部 continuation 給你
+09:41:28 <monochrom> 不過我寧願避談這話題, 因為命題太缺乏定義了!
+09:41:55 <mno2_> 啊，有道理。就是時光回朔的能力
+09:42:41 <mno2_> 的確是缺乏定義，只是我想要有個大致的想法
+09:48:16 <monochrom> 倒是關於隱晦 memory leak 合我脾胃. 我認為只要熟習 lazy evaluation, 就不會有看不出的 memory leak. 雖則, 熟習 lazy evaluation 功夫不少. 不過始終, 不熟習的話, 再簡單的程式也看不出, 依然不是 "包含 computation 的 Monad" 的問題.
+09:50:24 <monochrom> 例如 let xs = [1..1000000] in sum xs * length xs 已經難倒大部份人 :)
+10:06:43 <mno2_> monochrom: 不過我的印象是，不會有看不出的 memory leak。但是就算是高手還是會不小心寫出來，然後要等到發生之後去追，才意識到這邊有 memory leak
+10:08:07 <mno2_> 而且 memory leak 的曲線可能不是線性的。很可能放到 production 環境中好一段時間沒有碰到大資料便不會注意到
+11:44:19 <c9sloud> CindyLinz: !
+11:44:39 <c9sloud> CindyLinz: 你所有的課程都會去嗎? :p
+11:45:20 <c9sloud> http://felsin9.de/nnis/ghc-vis/#basic-usage ghc-vis 看起來很好玩 :-p
+13:02:28 <c9sloud> 這邊有人寫過 http server 嗎?
+13:02:29 <c9sloud> :p
+13:05:39 <c9sloud> http://www.eecs.berkeley.edu/~rcs/research/interactive_latency.html
+13:20:07 <c9sloud> CindyLinz: 突然想到 r3 找 edge 的時候應該要用 first character 做成 hash table.. XD
+13:20:37 <c9sloud> 不過這樣每個 node 就多增加 256 bytes XD
+13:20:47 <c9sloud> 但應該還好
+13:25:57 <c9sloud> 咦 不對，這樣應該是 256 * sizeof(pointer)
+14:15:08 <c9sloud> PR merge 進來的 zmalloc 好像有 side effect ... 居然多加一個 field 就暴了
+14:48:11 <CindyLinz> c9sloud: 都會去吧~ 假都請了.. XD
+14:48:32 <CindyLinz> c9sloud: 這次我想我主要是聽 XX-semantics 的部分
+14:50:42 <mno2_> monochrom: 投影片：https://rawgit.com/meiersi/HaskellerZ/master/meetups/20140327-Pipes/final/pipes.html#(1)
+14:53:43 <mno2_> FLOLAC 無法去，好想看投影片。 au 講完能夠公開投影片嗎？
+14:55:29 <CindyLinz> mno2_: 我可以錄音, 等你寫逐字稿? XD
+14:55:53 <CindyLinz> 只不過記得 au 每一次講東西都超快, 而且還是能把時間塞滿 @@!
+14:56:07 <mno2_> 逐字搞也太累了
+14:56:38 <CindyLinz> 好啦我開玩笑的 :p
+14:56:59 <mno2_> 不過只有錄音沒有投影片也是很累的
+14:57:13 <CindyLinz> 我猜 au 會放吧 ^^
+15:02:22 <au> 都會事前放投影片
+15:02:36 <au> 說不定也會附預演時的逐字稿
+15:02:53 <au> #自己的逐字稿自己打
+15:03:16 <CindyLinz> 預.預演!? o_O
+15:03:40 <CindyLinz> au: 我以為你喜歡 clkao 的準備風格說... 真是誤會太大了 ._.
+15:03:56 <au> http://logbot.godfat.org/channel/g0v.tw/2014-05-20#150
+15:04:17 <CindyLinz> 我準備的時候還只會自己對著投影片沒有聲音地試講測時間而已 ._.
+15:04:31 <au> CindyLinz: 確實是前一天才開始做 XD
+15:04:47 <au> ... 半小時的演講，五倍也才兩個半小時，前一天弄也是很合理的... 「同一個數量級裡的最佳化難道有意義嗎」XD
+15:05:01 <CindyLinz> 真是太認真了... @@"
+15:05:17 <CindyLinz> au: clkao 不是都前一個 section 還在弄嗎 XD
+15:05:45 <au> 臨場微調也是會有，但是還是要預演啊 XD
+15:51:53 <c9sloud> au: clkao 風格是什麼 XD
+15:52:06 <c9sloud> last minute rocks 這樣嗎
+15:52:09 <au> yeah
+15:52:16 <c9sloud> XDD
+15:56:32 <c9sloud> JIT vs Compile binary (逃
+15:56:39 <c9sloud> *compiled
+16:37:23 <mno2_> 這樣 live demo fail 就要丟 runtime exception 了 xD
+18:34:32 <Jhe__> 有人嗎@@?
+18:34:50 <Jhe__> 我想問一下 有關 haskell 排版的事
+18:35:46 <Jhe__> 不是排版 是縮排
+19:15:32 <CindyLinz> 以後先問再說啊~ 反正有空的時候會去翻 log.. XD
+19:50:43 <UCG_Jhe> 解決了@@ 原來是因為我的編輯器的關係
+19:51:13 <UCG_Jhe> sublime Text2 把空格跟 tab 自動對齊了
+19:51:48 <CindyLinz> 推荐使用100%成份無添加全空格 :D
+21:01:06 <c9sloud> 用 vim XD
+22:53:20 <c9sloud> https://github.com/c9s/hypergit.vim # 今天才修 Debian Testing 上的問題 XD
+23:01:07 <monochrom> mno2_: 這樣說來, memory leak 來自再用, 那就回到我的基本例子了.
+23:13:37 <monochrom> 其實我不太喜歡把這種情況也劃為 leak. 如果花大量記憶記不再用的資料, 這當然是 leak. 但現在的情況, 顯然會再用. 記一些會用的東西還算 leak 嗎? 真正問題是你不為意它記下再用, 你以為它先忘記後重算.
+23:18:13 <mno2_> monochrom: 我認為這就是問題啊。你必須要了解 ghc 的 semantic 才知道他會不會重算。而且有沒有開 optimization 還會不一樣
+23:19:12 <mno2_> 而且我認為多數人並沒有意識到這一點。通常都要非常非常深入之後才會知道這邊有個陷阱
+23:20:42 <CindyLinz> 我看不出來為什麼這邊 replicateM 會有 quadratic behavior @_@" # https://rawgit.com/meiersi/HaskellerZ/master/meetups/20140327-Pipes/final/pipes.html#(25)
+23:21:09 <CindyLinz> 下半那個 oooo ++ [n] 可以理解 @@"
+23:23:40 <CindyLinz> mno2_: 不用非常深入啦.. 隨便拋個極限測試就知道痛了 ._.
+23:24:20 <CindyLinz> 不過, 會隨便就拋極限測試的人, 大概是別的語言已經玩得很深入的人(?
+23:24:33 <b4283> 看成拋個媚眼...
+23:25:07 <CindyLinz> 想了一下.. 覺得沒辦法對非人類拋媚眼 XDXD
+23:32:29 <mno2__> CindyLinz: 雖然理論上道理一樣。但問題是意識到 Free Monad structure 跟 Recursive data structure 有類似性質的人應該都玩很深入了吧..
+23:33:12 <mno2__> 問題就是 library 他底下把 Free Monad structure 藏起來了，你用的人可能是用簡單的界面。結果就踩到雷
+23:33:31 <mno2__> 然後你自己去看你也不知道 free monad 是啥鬼
+23:34:47 <mno2__> 應該說問題是沒有意識到糾纏在一起的大資料結構跟很簡單會爆的結構是類似結構的。
+23:35:58 <mno2__> 講者就表明：踩到 Edward Kmett 包的雷。下去查是 Codensity  (WTF is that?)
+23:37:33 <au> Codensity 是雷嗎, 我以為是解法... Proxy 的雷是 Gabriel 自己包的...?
+23:39:09 <CindyLinz> 覺得這邊列出來的 leaking pattern 應該可以用程式 heuristicly 找出來..
+23:39:19 <CindyLinz> HaSonar~
+23:39:19 <mno2__> 我如果沒有聽錯，Codensity 是解法。但實作不完美，還是會有稍早提到的較大資料會爆的問題
+23:39:55 <CindyLinz> 可是我看不出那個 quadratic behavior 啊 orz
+23:42:32 <au> p27 說的似乎是 Request a ca' >>= p  = Request a (\a' -> ca' a' >>= p) 和 (x : xs) ++ l = x : (xs ++ l) 的 callgraph 複雜度相同
+23:44:20 <CindyLinz> 我再讀一下 @@"
+23:45:20 <CindyLinz> 喔 他說的不是 x : xs 的部分, 而是把 action 們串起來的部分喔? (思)
+23:45:48 <CindyLinz> au: 謝謝 :D
+23:49:23 <au> np :)

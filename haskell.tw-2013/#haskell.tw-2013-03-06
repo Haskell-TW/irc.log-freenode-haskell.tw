@@ -1,0 +1,46 @@
+00:23:07 <CindyLinz> suhorng: 你說的那個 safety 的語言是 total 的嗎?
+00:23:52 <suhorng> hmm
+00:24:37 <CindyLinz> total 語言的話, 吃 ⊥  當參數的函數在 runtime 不會被執行到呀
+00:24:59 <suhorng> 他其實只有給 sum types 部份的語法&語義, 我想無論加入其他會不會讓他變 not total 的應該都沒關係
+00:25:07 <CindyLinz> 如果排除 compiler 有 bug, 或是硬體錯誤, 或是記憶體寫穿被 fake 東西進去的時候 XD
+00:25:35 <suhorng> 而且他的 safety 只是說 1.不會化簡之後 type 走樣 2.只要不是值就可以一直算下去
+00:25:51 <suhorng> 他前面有舉過一些不是 total 的例子, 那種情況是 infinite loop, 仍然算 safe
+00:26:37 <suhorng> CindyLinz: 可是他其實沒有用⊥這個字...
+00:26:55 <CindyLinz> 他那個語言有 infinite loop 喔?
+00:27:00 <suhorng> 而是講 type 時就用 void
+00:27:13 <CindyLinz> 真的就不 total 了
+00:27:34 <suhorng> 他講了幾種不同的語言 其中一個是 Plotkin's PCF, 有 general recursion 的語言
+00:29:24 <CindyLinz> 這.. abort 看起來沒有破壞 safety
+00:29:39 <CindyLinz> 因為本來就沒值... 所以能不能算下去都不影響 XD
+00:38:26 <suhorng1> 對
+00:39:14 <suhorng1> 嗯..其實還是感覺有點怪|||
+00:39:33 <suhorng1> 我是覺得根本不會跑到 abort(e) 這一行, 無論 e 是不是值
+00:39:49 <suhorng1> 有點像 assertion 的感覺？
+00:40:10 <suhorng1> 而不是 infinite loop 的問題
+00:42:02 <suhorng1> 雖然說有 infinite loop 的話確實能推出 f = f :: Void 這種 term...
+00:42:28 <suhorng1> 但是沒有 infinite loop 的情況也會對@@
+00:44:07 <CindyLinz> assert 有點像
+01:48:16 <mno2_> favonia: 我先把現有的結果推上去了  http://encoding-mashup.csie.org/
+18:19:54 <CindyLinz> 啊.. 用了 cabal-dev 要怎麼 profiling 啊.... orz
+18:20:03 <CindyLinz> 所有的 document 都走不到一起啊... orz
+18:20:28 <CindyLinz> 它會跟你叫說 Prelude 沒有 profiling 版
+18:20:38 <CindyLinz> 建議重裝 profiling 版的 base
+18:20:50 <CindyLinz> google 到有人說你就裝 haskell platform 就好
+18:21:12 <CindyLinz> 可是 cabal-dev 好像根本也無視 haskell platform, 所以我裝了 haskell platform 也沒用
+18:21:25 <CindyLinz> cabal-dev install --reinstall -p base 也被 reject
+18:21:34 <CindyLinz> 指定 base 的版號或不指定都 reject
+18:23:36 <CindyLinz> 覺得用 haskell 開發東西.. 如果稍微考慮點效能的問題, 不能不 profile 啊...
+18:23:55 <CindyLinz> 它會在你想不到的地方把記憶體耗掉, 把時間吃掉... @@"
+21:25:25 <suhorng> http://snapframework.com/blog/2013/03/05/announcing-io-streams streaming IO in Haskell!!
+21:28:12 <favonia> suhorng: 最近待在 #snapframework 有看到消息 xDDD
+21:29:13 <suhorng> 感覺好有趣
+23:25:57 <suhorng> 是說一般稱的 generic programming 在 Haskell 裡面就是 typeclass...?
+23:26:15 <suhorng> *應該說 Haskell 的 typeclass 能提供 generic programming
+23:32:32 <CindyLinz> 就算沒有 typeclass 也有 generic 耶
+23:32:36 <CindyLinz> 像... [a]
+23:35:34 <suhorng> 嗯, 有點像"代入"其他東西 @@
+23:39:29 <suhorng> PFPL書上定義的 generic 跟想像中不太一樣, 他是給一個 "轉換函數" f :: ρ→ ρ' 以及一個算式 e :: [ρ/t]τ
+23:39:50 <suhorng> 然後轉換成 e' :: [ρ' / t]τ. 這感覺比較像 fmap..
+23:40:52 <suhorng> (其中他為了簡單 明確標出要轉換的地方：t. τ, 例如 t. () + Int × ρ 這樣.)
+23:41:16 <suhorng> 寫在 Haskell 中大概就是定一個新的型別 然後寫他的 fmap..?
+23:41:42 <suhorng> 雖然還是不太一樣的樣子

@@ -1,0 +1,6 @@
+00:39:00 <CindyLinz> @pl \a b -> b a
+00:39:00 <lambdabot> flip id
+00:39:17 <CindyLinz> @pl \a b -> a b
+00:39:17 <lambdabot> id
+01:09:50 <CindyLinz> 開始使用 crypted google drive fs :D
+17:30:25 <mno2> https://simonmar.github.io/archive.html   Simon Marlow 也開始寫部落格了

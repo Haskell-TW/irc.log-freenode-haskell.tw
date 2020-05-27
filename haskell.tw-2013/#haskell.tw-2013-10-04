@@ -1,0 +1,77 @@
+00:05:44 <hychen> "突然被文字編輯器表白" # 被戳中笑點.... XD
+00:06:46 <letoh> 那是怎麼回事@_@
+00:07:36 <petercommand> hychen: 是文字編輯器的彩蛋嗎XD
+00:15:41 <hashcat> 砍了唉
+00:16:00 <hashcat> 不是因為被他表白的關係
+00:16:12 <hashcat> 每次開都要載入一票東西
+00:37:04 <Yu_lin> 手殘不小心把文章發出去了，本來想要明天繼續打的...Orz|||
+00:41:46 <CindyLinz> 下集待續 XD
+01:10:33 <letoh> 那大長篇  還有下集啊?
+01:20:01 <letoh> 某推文：「所有語言只分為OO跟非OO 其他差異都不算大。為什麼會這樣分？是因為這兩種系統的思考方向是不同的。」   這人玩過多少東西可以有這樣的論點啊XD
+01:25:01 <CindyLinz> 然後就被 suhorng 和 Yu_lin 圍了?
+01:25:35 <letoh> 那是另外一篇 c++ 的文章，不是 fp 那篇
+01:26:16 <CindyLinz> 對啊, 下面 suhorng 推了好幾個 :p
+01:27:16 <letoh> 喔  那個 drm... 剛剛沒注意到XD
+01:29:01 <letoh> 唔  那個板竟然還有留我的廢文XD
+01:29:36 <letoh> 然後我回的文原來就是 drm XD
+01:38:47 <CindyLinz> remark 目前用起來感覺不錯, 只剩下一個最嚴重的問題
+01:38:50 <CindyLinz> 內容....||
+01:58:18 <letoh> 內容?
+01:58:25 <CindyLinz> 投影片啊 ._.
+01:58:38 <letoh> 喔喔喔
+02:11:45 <monochrom> 對我來說, 所有語言只分為: 定義了 f x = x+x 後, f (g 5) 是不是等同 g 5 + g 5.
+02:13:53 <monochrom> 這個分別完全決定你可以怎樣把程式組織 (即怎樣把問題分割)
+02:16:12 <monochrom> 這是一個 substitutability principle, 而且比 Liskov's substitutability principle 更基礎!
+02:17:27 <monochrom> 呀, 應該 s/基礎/根本/ , 我想用的英文是 fundamental
+02:56:25 <CindyLinz> suhorng: remark 的頁面裡想要一項一項出來, 方法就是複製貼上整頁, 然後再補上想多出來的項目嗎? @@"
+03:00:00 <monochrom> 那就太可惜了!
+03:02:25 <CindyLinz> 啊, 可以不用!
+03:02:53 <CindyLinz> 假設 page 1 / page 2 有這樣的關係, 就是 page 2 是 page 1 一樣的內容再多加一項
+03:03:13 <CindyLinz> 可以在 page 2 裡面說拿 page 1 當 template
+03:03:19 <CindyLinz> 然後再加 page 2 多出來的內容
+03:05:14 <CindyLinz> remark 這種 browser based 的還做了會和前台連動的 presenter 模式真是很炫的感覺 XD
+03:08:06 <CindyLinz> 可是用 template 的話, 好像需要把被當 template 的頁面取 name @@"
+03:08:14 <CindyLinz> 不知道怎麼跟他說我要用「前一頁」
+10:17:33 <MnO2_> https://www.fpcomplete.com/user/dolio/many-roads-to-free-monads
+10:25:49 <Yu_lin> 本來想說早上起來，頭腦比較清醒，就把 scheme 的心得補完，結果不小心按到送出，只好草草做結了
+10:32:08 <MnO2_> blog? where?
+10:32:26 <Yu_lin> 昨晚 ptt 上那篇
+10:32:29 <_13h> 所以你要發展成大長篇了嗎? XD
+10:32:41 <Yu_lin> 沒有阿，我已經做結了XDDD
+10:32:44 <_13h> 而且還是連載大長篇XD
+10:32:57 <_13h> 喔喔喔  晚上再看看XD
+10:33:55 <Yu_lin> 我對這句推文「所有語言只分為OO跟非OO 其他差異都不算大。為什麼會這樣分？是因為這兩種系統的思考方向是不同的。」有印象，但是想不起來是那邊看到的
+10:34:51 <_13h> ptt.. 往上翻一頁的某一篇文章裡看到的
+11:08:13 <monochrom> 哈哈 monads are just free-monad monad monad-algebras
+11:15:13 <Yu_lin> 好想推 yoco315 那句「連 c 都不會就更好了....」
+11:27:24 <_13h> 那句我有看到，很中肯啊
+12:00:12 <Yu_lin> 咦！coursera 還有這種互動式的課堂小問題喔XD
+12:02:50 <favonia> Yu_lin: yoco315 那句在哪裡？
+12:03:45 <Yu_lin> 所有語言只分為OO跟非OO那一篇
+12:04:32 <CindyLinz> http://www.ptt.cc/bbs/Programming/M.1378091656.A.857.html
+12:21:57 <favonia> xDD
+12:25:38 <_13h> 那個人後來又說 asm 是特例
+12:26:41 <_13h> Yu_lin: 你補的部份 web 版看不到嗎?
+12:27:10 <Yu_lin> 我補的？是說昨天那個 FPL 前途那篇嗎？
+12:27:28 <_13h> 對啊
+12:27:40 <_13h> 你不是說有補 scheme 的部份嗎?
+12:28:22 <Yu_lin> 本來想說早上起來要補的，手滑發出去，就想說算了，好像也沒什麼需要補的了XD
+12:29:54 <Yu_lin> 比起我的看法，讓他去看王垠對 scheme 的解釋會更好吧XDD
+12:40:09 <_13h> 原來 vb 還在用 ocx 元件啊
+12:40:25 <_13h> 而且現在還有人在開發 ocx 元件XD
+13:48:37 <CindyLinz> Yu_lin: 初看那些文章的時候跳到最下面, 突然覺得很疑惑, 奇怪不是轉述 hashcat 的意見嗎, 怎麼竟然會推荐王垠 XDD
+13:49:17 <Yu_lin> XD
+13:53:12 <CindyLinz> 找到.. remark 如果用 -- 分頁而不是 --- 分頁的話, 那麼就是把前一頁的內容再加上這一頁新寫的內容
+14:10:36 <suhorng> sorry, 我沒仔細研究 remark 的語法 orz
+14:10:44 <suhorng> 所以上次的投影片檔案才會那麼大....
+14:11:59 <suhorng> http://stackoverflow.com/questions/13352205/what-are-free-monads
+14:12:10 <CindyLinz> suhorng: 你的投影片是我的 tutorial.. XD
+14:12:52 <CindyLinz> Free monad.. 我前幾天寫了一半這篇的練習..... 目前好像開始有一點點 fu :Q http://blog.ezyang.com/2012/01/problem-set-the-codensity-transformation/
+14:13:28 <suhorng> 是說 Free Monad 就是 GHC TypeHoles 舉的例子, 但是想在 Agda 裡面弄卻不知道要怎麼寫XD
+14:13:49 <suhorng> codensity (!) 一直不知道這是什麼
+14:15:09 <suhorng> 我只記得之前有這篇 http://www.haskellforall.com/2013/06/from-zero-to-cooperative-threads-in-33.html 有人做了demo XD 剛好有使用free monad
+14:15:27 <CindyLinz> 依目前的一點點 fu... 覺得好像是推廣的 [a] 變成 [a] -> [a], 以作出 constant time append 的效果
+14:15:53 <CindyLinz> 這個叫 Hughes list
+14:17:01 <CindyLinz> 我現在的具體想像是把將來可能要接, 但現在還沒出現的後半, 先留在 function 的參數裡, 等將來它真的出現了定案了, 才拿它來把真實的 list 建出來
+14:23:49 <suhorng> 來研究看看
+14:24:53 <suhorng> 上次看到 codensity 這個字出現在 http://blog.sigfpe.com/2008/12/mother-of-all-monads.html (Edward Kmett的留言)

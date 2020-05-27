@@ -1,0 +1,57 @@
+13:15:45 <MnO2> http://blog.sina.com.cn/s/blog_5d90e82f0101jo6r.html
+13:21:01 <MnO2> 我個人還是比較喜歡這種說古類的文章 xD
+13:22:17 <cataska> 喔，因為 dynamic scoping 所以 Lisp Machine 沒起來
+13:26:56 <CindyLinz> "好在现在的大部分语言，其实已经吸取了这个教训，所以你不会再遇到这种地狱般的痛苦。不管是 C，C++，Java, Scheme, Common Lisp, Haskell, OCaml, Python, 都不使用 dynamic scoping... 呃，JavaScript 比较弱智，是个例外，如果你不小心的话。"
+13:27:06 <CindyLinz> 我想他說 Javascript 應該指的是那個萬惡的 this...
+13:27:28 <CindyLinz> 不過他說 Lisp 是第二古老的語言.. 那第一古老是說誰呢?
+13:27:32 <MnO2> 不小心就給他 window 了 xD
+13:29:07 <CindyLinz> 對啊.. 即便寫很久了, 還是偶爾就會不小心犯錯..
+13:29:21 <MnO2> CindyLinz: 可能要先想清楚怎樣才能被他歸類到「程式語言」
+13:29:26 <MnO2> http://en.wikipedia.org/wiki/Timeline_of_programming_languages
+13:29:34 <CindyLinz> 或是幾乎都沒有到犯錯的程度, 只是每次 assign handler 的時候都要多花兩秒想一下 @@"
+13:30:17 <CindyLinz> MnO2: 這列表裡面比 Lisp 早的語言中最有名的應該是 Fortran
+13:30:52 <CindyLinz> 啊, 比 Lisp (concept) 早的最有名的是 Fortran (concept)
+13:31:47 <CindyLinz> 比 List (implementation) 早的話, 有 Fortran I (implementation), Fortran II (implementation), Cobol (concept)
+13:33:24 <MnO2> 想一想 1950 年代就有這些東西就覺得很佩服
+13:39:55 <b4283> Brandon Eich 表示：別這樣嘛.. 設計我只花了一個禮拜
+13:45:29 <MnO2> http://pansci.tw/archives/38570
+13:45:42 <MnO2> pansci 講到 Grothendieck 耶
+13:47:23 <MnO2> 讀 category theory 應該都會碰到
+13:47:26 <MnO2> http://mathoverflow.net/questions/19325/most-striking-applications-of-category-theory
+13:51:28 <b4283> 「我曾经给 Java，C++ 和 TeX 设计了 Lisp 的语法」
+14:43:51 <_13h> "JavaScript 好像比较弱智" XDXD
+14:45:09 <_13h> 所以新版 emacs lisp 的 lexical scoping 到底怎麼樣呢? 大概沒有人去看吧orz
+14:57:54 <kanru> _13h: 看?
+15:18:58 <_13h> 就.. 看看 lexical scoping 是不是真的能用之類的XD
+15:19:48 <b4283> _13h: 對我來說寫寫文字 function 好像沒什麼用處XD
+15:20:10 <kanru> 可以啊 XD
+15:20:41 <kanru> emacs24 的大部份 lisp lib 都是 lexical-binding: t
+15:21:08 <_13h> 咦  是重寫過嗎？
+15:22:02 <kanru> 沒有, 只是修一下, 把真的 dynamic variable 都用 defvar
+15:24:40 <kanru> with lexical-binding: (let ((a 0)) (lambda ())) => (closure ((a . 0)  t) nil)
+15:25:03 <kanru> without: (let ((a 0)) (lambda ())) => (lambda nil)
+15:25:49 <_13h> closure++
+15:28:58 <MnO2> http://tex.stackexchange.com/questions/104248/what-is-the-most-bizarre-thing-you-have-seen-done-with-tex
+15:29:31 <MnO2> 我想 TeX 寫 S-expression 也可以列上去 xD
+15:35:39 <suhorng> Functional Tuesday 確定延期一個月了
+15:35:42 <suhorng> 延到 05/02
+15:35:53 <suhorng> CindyLinz: jaiyalas 說之後再問問你 XD
+15:36:02 <suhorng> scm 最近很忙的樣子...
+15:38:12 <b4283> scm!
+15:45:10 <CindyLinz> suhorng: 嗯嗯嗯
+15:45:29 <CindyLinz> 所以.. 第一個 Functional Tuesday 打算辦在 Thursday?
+15:50:19 <suhorng> 等等 好有道理=口=
+15:50:34 <suhorng> 好像不太對 雖然延期一個月但日期大概不是 05/02.... 對不起orz
+15:50:52 <suhorng> 可能是那時候前後..
+15:51:39 <_13h> 改成 Functional Meetup 就好了，隨便哪一天都能辦XD
+15:51:49 <suhorng> XDD
+15:52:17 <suhorng> 剛剛那篇blog好酷ww (documentclass article (11pt))\n.....
+15:54:33 <_13h> 不過要辦固定聚會的話，時間也固定一點比較好
+15:54:46 <_13h> 時間變來變去的話很難排時間
+15:55:08 <suhorng> 老師原本的構想好像也是要比較固定的時間...
+15:56:15 <_13h> 萬一老闆要求禮拜二加班才可以理直氣壯說有事XD
+15:57:23 <CindyLinz> _13h: 這種用處, 不固定比較好應用啊... :p
+16:01:14 <_13h> 這種情況下，其實固不固定根本不重要XD
+16:01:44 <_13h> 要求加班日永遠有事XD
+16:03:39 <CindyLinz> XD
+16:13:31 <MnO2> 之前 miaout17 有辦過 TWFUG, 跟 Functional Meetup 似乎有點像，miaou17 要不要分享一下經驗？ 譬如說感覺有多少基數是有在練習的？ 這應該會決定題目的深淺？

@@ -1,0 +1,7 @@
+00:51:02 <monochrom> 在 The Lego Movie 裏, Freedom Friday 都是在星期二啊...
+00:55:49 <b4283> Succ Succ Succ Succ Sunday
+01:01:06 <b4283> 4 Succs, so its Forth-day (X)
+20:38:34 <cibs> @src succ
+20:38:34 <lambdabot> Source not found. stty: unknown mode: doofus
+20:39:36 <b4283> utop # succ;;
+20:39:40 <b4283> - : int -> int = <fun>

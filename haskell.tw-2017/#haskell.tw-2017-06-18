@@ -1,0 +1,8 @@
+00:00:55 <caasih> 最後他很推崇 John Reynolds ，說他在做 Algol 時就看到類似的概念？
+00:01:24 <caasih> 文章標題的 the essence of ... 也是跟 the essence of Algol 致敬
+00:02:57 <monochrom> CPS 可試讀我的 http://www.vex.net/~trebla/haskell/cont.xhtml , 頭兩個sections. 不過我不再做 callcc 了.
+00:13:10 <caasih> 感謝，這幾天我找時間看看
+04:45:37 <caasih> 讀了一點，發現我的一個盲點：寫 js 看到 callback 時，雖然知道是 CPS ，
+04:46:12 <caasih> 但用 type 思考時，還是想著本來的 a ，而不是 (a -> r) -> r
+05:04:36 <monochrom> Ah
+05:05:30 <monochrom> 所以說 types 提神醒腦 :)

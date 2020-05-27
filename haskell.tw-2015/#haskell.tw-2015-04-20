@@ -1,0 +1,20 @@
+00:22:59 <suhorngM_> https://lukepalmer.wordpress.com/2008/02/18/spiffy-gadt-thing/ 好驚人唷! 這到底怎麼 compile 成功的?
+00:25:36 <suhorngM_> test' w = case w of IntVal i -> print w 這也可以通過編譯耶 ....
+00:43:17 <monochrom> 讓我也試一下
+00:43:58 <suhorngM_> Agda 的 equational definition 中 pattern matching 影響變數的型態還可以直覺認知一下, GADT 的 case of 這樣子去影響變數的 type 感覺真的有點微妙XD
+01:03:39 <monochrom> 7.8 不通過, 7.6 才通過
+01:04:23 <monochrom> 不過, 7.8 只需加 _ -> "hello" 又行
+01:06:25 <monochrom> GHC 用家指南有句 The key point about GADTs is that pattern matching causes type refinement.
+01:07:31 <suhorngM_> 我這邊 7.8.3 通過耶
+01:07:59 <suhorngM_> 阿 看起來就是這句了
+01:09:13 <monochrom> 我沒有加 type sig. 用家指南還有句 The general principle is this: type refinement is only carried out based on user-supplied type annotations.
+01:10:21 <monochrom> 這裏的 "general principle" 的意思, 按上文下理, 是 "通常, 但有例外"
+01:10:38 <suhorngM_> monochrom: I see... 我有加 type signature
+01:10:53 <suhorngM_> thanks for clarification
+01:12:54 <monochrom> 最後那句 "lots of obscure error messages will occur" 正是我所見的 :)
+01:14:51 <monochrom> 因為訊息說, 它已算出 test' :: W t1 -> t, 但無法算出 t ~ IO (). 完全是風馬牛不相及
+13:43:11 <mno2> http://stackoverflow.com/questions/8296695/is-milner-let-polymorphism-a-rank-2-feature
+13:43:19 <mno2> 看到這個問題我覺得還蠻有趣的
+13:43:28 <mno2> 為什麼有了 System F 不把 let 拿掉
+13:44:30 <mno2> http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=E6EA342CF6A665B7332A2B80D4130CBE?doi=10.1.1.150.5056&rep=rep1&type=pdf
+13:44:40 <mno2> [let should not be generalized]

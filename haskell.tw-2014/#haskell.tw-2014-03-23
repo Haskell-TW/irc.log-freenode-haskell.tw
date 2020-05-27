@@ -1,0 +1,14 @@
+00:00:07 <CindyLinz> 在寫 C++ 的時候, 對 GC 的態度是愛.. XD
+00:01:27 <monochrom> 至少, 有 GC 時, 你不用手寫 "free(x)". 沒有 GC, 你必需選擇寫在哪裏, 而且你一定選錯.
+00:02:17 <monochrom> 因為你必定估錯那千多個菜鳥的動向.
+00:03:47 <CindyLinz> C++ 後來加了 auto_ptr 和 smart_ptr, 還能應付很大部分使用 GC 的情況 ^^|
+00:04:05 <CindyLinz> 就.. reference count.. ^^|
+00:23:28 <monochrom> 如果用 GC 或 reference counting, 就難以計算記憶量. 如果不用, 就難以計算輸出.
+00:24:26 <monochrom> 我覺悟了! 資源與答案不能同時確定. 測不準原理. ^_^
+00:27:26 <CindyLinz> ............||
+00:28:13 <CindyLinz> 有限資源, 就不一定有答案; 保證有答案, 資源就可能無限....ww
+00:28:36 <CindyLinz> 不是很舒服.. ~_~
+03:33:11 <CindyLinz> 以為 GHC 的 tuple 只有定義到 7 項版本
+03:33:42 <CindyLinz> 剛剛試一試... 至少 305 項都還有定義到..
+04:49:33 <monochrom> 三百多, 還真是多得有點可怕 :)
+04:50:10 <monochrom> 可以開拍電影: 300-tuple, the rise of an empire XD

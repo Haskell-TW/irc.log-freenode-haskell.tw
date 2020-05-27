@@ -1,0 +1,271 @@
+01:01:10 <au> 剛幫忙做完下期 iTHome 周刊的封面故事，整篇只有一句話我不太確定... 但是有附網址出處，應該還好吧 XD
+01:01:16 <au> =「今年也將是 Perl 6 和 Haskell 雙雙邁向主流應用的一年」
+01:02:24 <au> ( https://fosdem.org/2015/interviews/2015-larry-wall/ and https://www.fpcomplete.com/blog/2015/01/announcing-lts-haskell-1-0 respectively)
+01:04:03 <CindyLinz> Perl6? 完全沒想到 XD
+01:04:26 <au> avoid (success at all costs)
+01:04:33 <au> XD
+01:06:57 <CindyLinz> 還在用 Perl4.... OAO # Unlike certain other language communities we could name, we are not interested in declaring the end-of-life for any earlier version of Perl. Our policy is that as long as anyone is interested in supported something, why should we stop them? There are still people using Perl 4 out there. Our official slogan is still: “There’s More Than One Way To Do It.” We believe this on many different scales.
+01:08:28 <CindyLinz> LTS Haskell 1.0.... XD
+01:09:40 <petercommand> long term support XD
+01:10:28 <CindyLinz> 兩個消息我都好喜歡 :p
+01:10:40 <CindyLinz> 不過我一點都不了解 Perl6....
+01:14:06 <au> CindyLinz: 像 https://github.com/cosimo/perl6-lwp-simple/blob/master/lib/LWP/Simple.pm 應該是一看就懂了...
+01:15:04 <CindyLinz> 有 type!
+01:15:13 <CindyLinz> my Int constant $default_stream_read_len = 2 * 1024;
+01:15:57 <CindyLinz> 我想到 印象最深刻的是一堆奇怪的 junction..
+01:16:24 <CindyLinz> 而且那時候我還沒聽過 Haskell, 也不知道奇奇怪怪的 monad, applicative, arrow 之類的東西..
+01:16:39 <petercommand> method 就是 function 的關鍵字嗎?XD
+01:16:59 <CindyLinz> 我猜是特指物件的 method?
+01:17:19 <au> 是物件的 method
+01:17:24 <CindyLinz> 畢竟原本用 sub... 以 lazy 著稱的 perl 社群不會沒事換成比較長的字 :p
+01:17:47 <au> CindyLinz: 還有 HsPerl 的 p6 版 https://github.com/niner/Inline-Perl5
+01:18:03 <au> *HasPerl
+01:18:55 <petercommand> 喔喔^^
+01:27:21 <CindyLinz> au: 哎唷.. 我剛一開始一直在找 Haskell 長相的程式碼 XD
+01:27:56 <CindyLinz> au: 咦.. 我印象 Perl6 有很作弊的 pragma, 在 block 開頭的地方可以指定要用的語法?
+01:28:59 <petercommand> 就像 racket  一樣嗎:p
+01:29:55 <CindyLinz> 噢, 不過這個是可以用 perl6 的語法使用 perl5 的東西.. 然後部分用字串的方式 eval perl5
+13:36:29 <favonia> 我覺得 Haskell 很適合拿來寫中選會警告產生器
+13:42:28 <favonia> https://gist.github.com/favonia/5ad545427e43c4dfc386 xD
+13:44:32 <CindyLinz> 我昨天想要寫.. 可是找找沒找到可以怎麼 <script src=haskell.js></script> <script type=text/haskell> ... </script> 就放棄了.....
+13:45:11 <favonia> xD
+13:45:42 <CindyLinz> 有找到這個.. https://github.com/johang88/haskellinjavascript
+13:45:53 <CindyLinz> 可是它的 test.js 跑起來一堆 error, 修不完 orz
+13:45:59 <CindyLinz> 一堆缺少的函數
+13:46:12 <CindyLinz> test.htm
+13:46:34 <favonia> 我只有用非常簡單的函式，應該任何正常的 haskell2js 都要可以動
+13:47:00 <CindyLinz> 就.. 希望別人開 page source 的時候可以看到精簡漂亮的 haskell source 嘛 :p
+13:47:16 <favonia> 嗯
+13:47:33 <favonia> 我寫這段程式碼，其實只是想說這個遞迴用 foldl 很自然而已。那個 level 不太喜歡。
+13:48:24 <CindyLinz> level 那個用接的 XD
+13:48:29 <favonia> 我是說有人用 level 遞迴，然後用 % level 去算出要用什麼括號
+13:48:52 <CindyLinz> 我看 clkao 的 livescript 程式, 不是用遞迴的, 是用迴圈
+13:49:06 <CindyLinz> 其實你用 foldl 感覺也像迴圈 ^^|
+13:51:59 <favonia> foldl 要說是迴圈也沒錯啊～
+13:52:51 <CindyLinz> :t foldl
+13:52:52 <lambdabot> (b -> a -> b) -> b -> [a] -> b
+13:53:05 <favonia> 我只是覺得用 level 再用 level 算出來要用什麼括號，不如對括號 foldl 就結束了
+13:53:30 <CindyLinz> mmm
+13:54:19 <favonia> 我的寫法是 quotes :: [String -> String]
+13:54:29 <CindyLinz> @pl \f b c a -> f a b c
+13:54:30 <lambdabot> (flip .) . flip
+13:55:02 <CindyLinz> :t (flip .) (flip foldl)
+13:55:03 <lambdabot> c -> [a] -> (c -> a -> c) -> c
+13:55:32 <CindyLinz> > (flip .) (flip foldl) 10 [1..5] (\a i -> a * i)
+13:55:34 <lambdabot>  1200
+13:55:36 <petercommand> @unpl flip . flip
+13:55:36 <lambdabot> (\ i -> i)
+13:56:10 <CindyLinz> 如果有一堆 \f b c a -> f a b c, \f c b a -> f a b c 這些像 rot 的函數就好了 :p
+13:57:35 <petercommand> :t foldl
+13:57:36 <lambdabot> (b -> a -> b) -> b -> [a] -> b
+13:57:57 <favonia> import Control.CindyLinz
+13:58:11 <favonia> 我記得第一行寫這個就有了
+13:58:51 <CindyLinz> wwww
+13:58:53 <favonia> 可能要先裝什麼 package
+14:17:04 <CindyLinz> 越來越不會用 hoogle 了 orz
+14:17:58 <CindyLinz> 自己電腦上都開 cabal sandbox 寫東西.. hoogle 不會去抓; 然後網站上的那個不知道怎麼加 package 進去, 所以只能搜 base 和 containers 兩個 package.. orz
+14:20:02 <CindyLinz> Hayoo 好像有代入比較多 package? # http://hayoo.fh-wedel.de/
+14:49:11 <CindyLinz> 想要用用看 yesod-auth-bcrypt.. 但是它對 yesod 的 dependency 要求太舊
+14:49:27 <CindyLinz> 所以就 git 下載下來試試看如果直接把版號加上去是不是就能用了
+14:49:50 <CindyLinz> 為了試這個.. 要在新的 sandbox 裡面重新裝一遍 yesod... *_*
+14:52:56 <CindyLinz> 這樣比較有動力來重灌電腦, 換用 btrfs 了.... QQ
+15:40:31 <miaoski> CindyLinz: btrfs++
+17:21:45 <cibs> miaoski: 快去推薦新書開課
+17:28:56 <miaoski> cibs: 靠你了
+17:29:03 <miaoski> 我要退隱 (誤)
+17:30:06 <CindyLinz> cibs: 什麼新書? btrfs?
+17:30:46 <miaoski> btrfs 為什麼會有書 =,=
+17:31:03 <CindyLinz> 啊... 想說 cibs 在延續你說的前一句話的引伸話題? XD
+17:31:10 <CindyLinz> 但, 為什麼不能有書.. QQ
+17:31:20 <CindyLinz> btrfs 實作徹底剖析
+17:31:36 <CindyLinz> 這書名有沒有侯捷的 fu? XD
+17:35:05 <miaoski> CindyLinz: =,=
+17:36:52 <cibs> CindyLinz: 不其實只是剛好收到信 XD 公司叫人在推薦書要開課 XD
+17:37:11 <cibs> 快快樂樂學 btrfs
+17:37:18 <cibs> 第一次用 btrfs 就上手
+17:37:26 <cibs> 23 教你學會 btrfs
+17:37:35 <cibs> 23 天教你學會 btrfs
+17:39:59 <aksatac> btrs 趣學指南
+17:40:18 <aksatac> btrfs 趣學指南
+17:43:44 <CindyLinz> Using BTRFS, the functional way!
+17:45:09 <godfat> BTRFS considers beneficial
+17:53:36 <aksatac> 只好出絕招了，The Art of BTRFS
+17:54:03 <CindyLinz> XD
+17:55:47 <petercommand> Modern Effective BTRFS
+17:56:36 <godfat> BTRFS for Dummies
+17:56:50 <petercommand> Learn BTRFS in 21 Days
+17:56:50 <CindyLinz> 話說... 有人曾經想寫 File System 嗎?
+17:56:59 <CindyLinz> 我有耶~ 想過好幾次 XD
+17:57:31 <petercommand> 有想過+1
+17:58:50 <godfat> 我大概是還不夠理解 fs, 所以沒想過，想先了解
+17:59:24 <petercommand> 我是想說一邊寫一邊了解:p
+17:59:44 <CindyLinz> godfat: 因為想寫, 所以想去了解嗎? 這樣也算想啊 :D
+17:59:49 <CindyLinz> 想想而已, 又不用寫 XD
+18:00:03 <CindyLinz> petercommand: :D
+18:00:50 <godfat> XDD 可是我覺得不了解前也不知道要寫什麼或是說改善什麼哩
+18:00:50 <godfat> 倒是 mac 的 hfs+ 感覺有一堆 case insensitive 的問題，覺得愚蠢
+18:00:50 <godfat> 但 linux 上的好像又沒聽過類似的蠢問題，那好像換 linux 就好了 (?)
+18:02:12 <CindyLinz> 我想寫的時候.. 沒有想要改善什麼, 只是想做做看 XD
+18:02:37 <CindyLinz> 重新發明輪子會被罵, 哼哼, 那我研究輪子不行嗎!
+18:02:45 <miaoski> Forth 那邊蠻多人做 fs 的
+18:02:50 <miaoski> 都是做簡單的，當然
+18:04:33 <godfat> 是說如果夠閒的話，那我想從 kernel 開始 :PP
+18:04:35 <CindyLinz> 是做那種... 我們在 linux 可以用 mount 使用的嗎?
+18:06:15 <petercommand> 這樣也要做 kernel module 吧?
+19:36:46 <tckf> http://goo.gl/0TEq6 <--好像無法打開耶
+19:49:14 <letoh> petercommand: 做 fuse module 可能簡單一點?
+20:13:26 <petercommand> letoh: 完全不了解 fuse...
+20:13:40 <petercommand> 沒有去看過XD
+22:35:06 <mno2> http://blog.nullspace.io/bond-oss.html
+22:35:26 <mno2> [MSFT open sources production serialization system written partially in Haskell]
+22:39:29 <CindyLinz> ++
+22:47:24 <CindyLinz> XD # To repeat: MSFT has written a nontrivial part of a major technical initiative in Haskell, and open sourced it.
+22:47:47 <godfat> 需要這麼強調嗎？ = =
+22:48:47 <CindyLinz> 他的口音洩漏了他的身份, 他顯然是個 Haskell 極端宗教的熱情支持者.. (逃
+22:49:06 <godfat> XDDD
+22:49:43 <CindyLinz> 走極端是小眾的求生之道啊.. QQ
+22:51:03 <mno2> 所以 CindyLinz 要先把公司 server 端 code 全部用 Haskell 改寫 xD  然後 open source it
+22:51:22 <mno2> 攻下成功案例之一
+22:51:35 <CindyLinz> 我想採取路可以走比較遠的作法... XD
+22:51:59 <CindyLinz> 所以就走了遠路.. (誤
+22:52:28 <godfat> 改用 haskell 為什麼不能走比較遠？ XD
+22:52:55 <CindyLinz> code base 太大, 資源不足... XD
+22:53:23 <godfat> 噢... :( 真可惜，所以走遠路是慢慢加新的嗎？
+22:54:02 <CindyLinz> 先用 Yesod 暖暖手, 看能不能走 Rails 路線....
+22:54:05 <mno2> 那只好另開戰線 open source 出來
+22:54:15 <CindyLinz> 然後被 Haskell 社群唾棄: Yesod is NOT Haskell...
+22:54:21 <CindyLinz> (OAO
+22:56:04 <godfat> XDDDD
+22:56:04 <godfat> 不確定 rails 路線有沒有可能..
+22:56:29 <CindyLinz> 我目前用 Yesod 啊... tutorial 或 introduction / quick start 那些照作沒有問題
+22:57:11 <CindyLinz> 但是自己動一動很容易出現 compile error, 然後... 我覺得那些 error message... 如果是新手的話不太好處理 @@"
+22:57:21 <godfat> 可是用 rails 是一堆初學者，我不知道 yesod 能不能弄到讓初學者亂寫都能動
+22:57:26 <CindyLinz> 很多是埋在 template haskell 那一行
+22:57:53 <CindyLinz> 我那時甚至用 $(...) 這種 template haskell 語法塞 debug message 來確定問題是什麼...
+22:58:29 <mno2> 我還是比較喜歡 snap
+22:58:44 <godfat> 我看到有人說 error message 是一個語言最重要的關鍵
+22:58:48 <CindyLinz> 不過我有想說... 如果把大家新手常發生的 error message 列出來, 我們可以再一一用 FAQ 的方式解釋, 可能是個辦法
+23:00:12 <godfat> 以 rails 的解法是你要另外寫 parser 改寫 error message...
+23:00:41 <CindyLinz> godfat: 你是說.... rails 的作法是.. 弄一個專給新手用的 rails?
+23:00:59 <godfat> 不是，是他們會用任何手段讓程式符合直覺
+23:01:21 <godfat> 就算這個直覺本身是矛盾的
+23:01:42 <CindyLinz> 我在 Yesod 遇到的是.... GHC 說 type check 不過, 這要改還真有點困難 orz
+23:02:20 <CindyLinz> 以前我 expect 和 actually 兩個方向哪邊是哪邊就困惑了好久 orz
+23:04:44 <suhorng> idris 最近好像沒有什麼更新ˊˋ?
+23:04:51 <CindyLinz> 剛剛 link 裡面那個 Bond 在這邊... https://github.com/Microsoft/bond
+23:05:03 <CindyLinz> github 說 Haskell 只佔 5.7%.. XD
+23:05:07 <godfat> @@" 是喔，感覺真的滿難的
+23:05:08 <godfat> 我想如果可以的話，大概是給個 did you mean? 應該就不錯了
+23:05:47 <CindyLinz> 作一個智慧診斷機, 把 yesod compile 噴出來的 error message 倒進去就可以跟你講問題是什麼!
+23:06:49 <CindyLinz> 或是全都作成 wizard 那樣自動加.. 雖然這樣就沒玩到 Haskell 了 :Q
+23:07:24 <godfat> 對於新手應該是滿有幫助的，不過我擔心 yesod 本身改太快很難跟上
+23:07:25 <godfat> 至於全部做成 wizard 一點關係都沒有，反正我也不覺得很多寫 rails 的人在寫 ruby
+23:07:26 <CindyLinz> Yesod.Auto 訓練出來的開發者, 程式直覺比 PHPer 還差... ._.
+23:07:42 <favonia> CindyLinz: 更簡單的作法是弄 Yesod language
+23:07:48 <godfat> XDDD 那也有點離譜，不過換句話說也是這工具太強了
+23:07:51 <CindyLinz> Yesod 已經 1.x 了, 應該不會再改太快吧....
+23:08:24 <CindyLinz> 雖然我下午才幫某 yesod-auth-bcrypt porting, 讓它從 1.2/1.3 能夠上到 1.4, 有部分不相容 ._.
+23:08:31 <CindyLinz> favonia: 聽起來好累 QQ
+23:09:17 <CindyLinz> godfat: 是說... Yesod 的不相容改版再快, 應該也沒有 Rails 快... ww
+23:09:25 <favonia> 我個人是 snap 派
+23:09:40 <godfat> 呃，太有道理了...
+23:09:43 <CindyLinz> mno2, favonia: 說說原因~~ ^^
+23:10:01 <favonia> 架構爽
+23:10:53 <CindyLinz> 你們知道 Yesod 可以不需要 scaffold, 直接打一兩行就上嗎?
+23:10:58 <favonia> 架構清爽有道理。雖然沒有像 Yesod 這麼多 compiler-time 的最佳化，但如果你沒有太要求效率我覺得應該不會差很多。
+23:11:30 <CindyLinz> 寫小網站可以全都寫在 Main.hs 裡面, 就像一般的 library 那樣用
+23:11:38 <godfat> 我 yesod 只有多年前印象拿起來用沒跑過就算了|||b
+23:11:50 <godfat> 那還不錯 :D
+23:12:16 <CindyLinz> 我這次再讀 yesod 才突然發現... 以前以為都是用 scaffold
+23:12:57 <CindyLinz> 所以可以只用 yesod 的週邊.. 像是單用 persistent 來連 DB, 單用 shakespeare 來生 html/css/javascript
+23:13:17 <CindyLinz> shakespeare 的 lucius 和 casius 很像 Ruby 的 sass 和 cass
+23:14:29 <CindyLinz> 我覺得 yesod 的核心是 routes 和 widget 這兩塊... 好像也可以拆開用
+23:16:16 <mno2> 我是少用 QQ 派
+23:17:11 <CindyLinz> mno2: 那用 parseRoutesFile 呢? 把原本寫在 QQ 裡面的東西寫在一個外部檔案裡面
+23:19:05 <CindyLinz> hamlet 和 lucius 這些 template 系的 QQ 搬到外部檔案我想應該接受度可以比較高, 因為它們和最終產物 html / css 很像; 不一定要強求以 blaze-html 的方式, 用函數來生 html?
+23:22:12 <mno2> 我覺得主要是 QQ 疊出來的一層，當出錯的時候我還是得去看他底下的東西。跟我討厭 Framework 的理由一樣
+23:22:39 <mno2> 而且初學者還看不懂
+23:23:10 <CindyLinz> 出錯的時候 error message 都在開頭那一行 XD
+23:23:56 <godfat> 雖然沒用過，不過聽起來跟我當時用 c++ template 有點像
+23:23:56 <godfat> 雖然後來看習慣之後大抵上是看得懂，不過錯誤訊息真的成千上萬很難懂
+23:24:04 <CindyLinz> 我覺得了解 framework 怎麼作的以後, framework 就可以開心用了...
+23:24:11 <CindyLinz> 可是初學者怎麼辦呢 orz
+23:24:23 <godfat> 就怕了解後覺得這作法不好...
+23:24:46 <CindyLinz> 那就學起來當藉鏡啊 別怕別怕 XD
+23:25:05 <mno2> 人生值得浪費在更好的事物上
+23:25:30 <godfat> 是說愛迪生那說法好像很正面樂觀，但真的人生苦短... XD
+23:26:24 <CindyLinz> 應該不只有學教訓啦 XD    Yesod 實作的手法很多可以搬到別的地方應用, 只要還是 Haskell 的話 ^^|
+23:27:16 <godfat> 是沒錯，而且確實 ruby 其他跑出來的 lib 也大多是借鏡 rails XD
+23:27:32 <CindyLinz> 喔喔! 活教材..
+23:28:19 <godfat> 畢竟 rails 其實也算是滿早出來的，又很多使用者，
+23:28:19 <godfat> 很多人都用過，就算跳船已久的也往往都用過
+23:28:25 <CindyLinz> godfat: 問你.. ruby 的 migration.. 就是寫 DB schema 的東西, 如果在 project 上線以後, 去改動它, 它會試圖去把 DB 裡面的 schema 相容地 alter 成跟程式碼一致嗎?
+23:28:39 <CindyLinz> rails 的 migration.. XD
+23:28:50 <mno2> 聽起還是 lock 地獄
+23:29:32 <godfat> CindyLinz, 不是很懂你的問題，不過 rails migration 很單純，想像成跑一個 script 就這樣而已（然後記得這個 script 之前有沒有跑過，下次要不要再跑）
+23:30:15 <CindyLinz> godfat: 那 schema 改版呢?
+23:30:20 <CindyLinz> 例如說想加幾個欄位
+23:30:44 <CindyLinz> 等等.. active record 是直接去 DB 讀 schema 長相, 跟 migration 無關哄?
+23:31:14 <godfat> 對，跟 migration 無關，migration 就只是 script 而已，要怎麼改由你寫
+23:31:14 <godfat> 我現在都直接寫 sql 了，因為 rails 支援的功能太少
+23:31:24 <CindyLinz> 嗯嗯嗯..
+23:32:48 <godfat> 說到這個，我們現在 migration 如果從頭跑還不能一次跑完，
+23:32:49 <godfat> 中間會噴錯，然後要整個重跑才會對覺得超好笑的
+23:32:49 <godfat> 因為一開始某個 column type 假設是 A,
+23:32:49 <godfat> 跑完之後 rails 就認定是 A 了，接著 alter 成 B,
+23:32:49 <godfat> rails 還是認定是 A, 就會噴錯
+23:32:49 <godfat> 重跑之後因為重讀，這時候就知道是 B 了，就能跑完了
+23:32:51 <CindyLinz> yesod persistent 是從寫在程式碼裡面的 schema 生出 access DB 的程式, 然後也從同一個 schema 生出 migrate DB 的程式.. 它 migrate 的時候會檢查 DB 裡面的 schema 和程式裡的 schema 差異如何, 如果是可以相容更新的就更新, 不能相容更新就不動..
+23:33:46 <CindyLinz> godfat: 我以為 rails migration 應該是對全新 DB 才用的, 那為什麼會有 alter type 這種動作呢?
+23:34:40 <godfat> datamapper (ruby lib) 也做過這個（自動更新 schema），不過我現在不確定應不應該這樣做，因為這樣我要不要寫 migration 就變成好像一件不一定的事
+23:35:03 <CindyLinz> perl jifty 是自己在程式的 schema 裡面標版號, 標在 table 上和 field 上 (如果要加 column 的話)... XD
+23:35:46 <godfat> 應該說 rails migration 就是整個 schema 的修改歷史，
+23:35:46 <godfat> 理論上新 database 應該直接用最新的 schema 就好了，
+23:35:46 <godfat> 但在 heroku 上卻不能這樣做，只能跑 migration,
+23:35:46 <godfat> 所以就是等於重跑一次歷史 ._.
+23:36:01 <CindyLinz> 原來是 heroku 的限制 ^^|
+23:36:24 <CindyLinz> 那你改 schema 就變成把要加的「動作」加在最後面這樣的感覺了?
+23:36:53 <godfat> 是的，就是這樣... 所以要建立新 db 的概念就變成重跑歷史 ~.~
+23:37:02 <CindyLinz> 可以理解 :p
+23:37:51 <godfat> jifty 這樣就是可加可不加嗎？每個 table/field 上都有版號..?
+23:39:07 <CindyLinz> 沒有加的就是最初版.. table 有加而所屬 field 沒加的話它們就是同一版..  不過我其實不夠熟 @@"
+23:39:28 <CindyLinz> godfat: 作者在這 channel 可以問 :p
+23:40:07 <CindyLinz> 版號的目的就是, 讓 jifty 知道可以只跑哪些新的部分這樣..
+23:41:35 <godfat> XD http://cpansearch.perl.org/src/SARTAK/Jifty-1.10518/AUTHORS
+23:41:35 <godfat> 其實我不太懂標在 table 上要怎麼標？ users_v1?
+23:41:53 <godfat> 還是有個 table 裡面紀錄 users 現在是 v1?
+23:44:42 <CindyLinz> 實作就真的不知道了 ^^|
+23:45:37 <CindyLinz> 驚.. 原來 author 這麼多..... 你翻出來以前我一直以為是 au 和 clkao 兩個人做的.... ._.
+23:48:02 <godfat> 我目前覺得 db schema 還是手動一點比較好，不過程式輔助沒問題
+23:48:02 <godfat> 例如自動幫我產生 alter sql, 但由我決定要不要跑，我也能夠修改
+23:48:02 <godfat> 這樣用起來應該比較不會危險彈性也大
+23:48:02 <godfat> XDD 我先是想說是 au, 然後想說是 clkao, 不過 clkao 好像沒在這 channel?
+23:48:02 <godfat> 後來想說看一下最清楚 XD
+23:48:23 <godfat> 不過我猜這是所有的 contributors, 有些人可能只是沾一下而已
+23:48:56 <CindyLinz> godfat: 有, 這邊有提到會開 table 來存 schema 版號.. http://api.metacpan.org/source/SARTAK/Jifty-1.10518/lib/Jifty/Model/Metadata.pm
+23:49:21 <godfat> 那就類似 rails 了
+23:50:37 <godfat> 不過 rails 這邊我覺得做好爛... 他整個 test db 用各種很詭異的規則
+23:50:37 <godfat> 像是如果 version 相符，就直接跑，不符則抹掉重建還什麼的...
+23:50:37 <godfat> 每次都搞得我不知道他在幹嘛然後又老是出錯
+23:50:37 <godfat> 碰到問題就是重建 test db 就對了 :(
+23:50:52 <CindyLinz> yesod persistent 的設計看起來還蠻放心的 ^^  跟我會覺得可自動的 case 一樣: 改 column type 的話, 由 DB 決定這 type 有否相容可轉; 加 column 的話, 必須 table 目前沒 data, 或是只加可以 null 的或是有設 default; 加 table 沒問題; 刪 table 或 column 要手動
+23:51:34 <godfat> 他會告訴我有不一致之處，還有他做了什麼事嗎？
+23:51:42 <CindyLinz> 然後.. 不能改名字, 因為 schema 裡面只有寫最新的現狀, yesod persistent 看不出來是從誰改的
+23:51:50 <CindyLinz> 會講, 也可以叫它 dry run
+23:52:14 <CindyLinz> 可用 code 控制.. 它會變成一個函數, 我們決定要不要呼叫它這樣
+23:52:41 <godfat> 好像還不錯，不過細節我大概得試試看 XD
+23:54:45 <CindyLinz> scaffold 裝起來就 500MB 了... (遠目
+23:54:56 <CindyLinz> 不要 scaffold 的話好一點.. 300MB.. XD
+23:55:43 <CindyLinz> 如果也不要 persistent, 不要 auth.. 那可以變成 13xMB.. 不過沒 persistent 就沒有你想試的東西了 囧
+23:55:45 <godfat> 硬碟空間倒是還好，只要能 cabal install XD
+23:55:58 <CindyLinz> 那應該是可以..
+23:56:14 <godfat> 今天本來想試 ghcjs, 結果發現不能 cabal install orz
+23:56:31 <CindyLinz> 我一開始照這作, 蠻順的... http://www.yesodweb.com/page/quickstart
+23:56:49 <CindyLinz> 不過我把 alex happy yesod-bin 也都丟到 sandbox 裡面
+23:56:58 <CindyLinz> 是把 cabal sandbox init 的順序提前
+23:57:08 <CindyLinz> 欸.. 這個是 scaffold 版.....
+23:57:40 <CindyLinz> 不用 scaffold 的話, 可以自己開 cabal init 的 project, 在 .cabal 裡面的 dependency 把 yesod 列進去
+23:58:51 <godfat> 看這個？ http://www.yesodweb.com/book
+23:58:59 <CindyLinz> 也有~
+23:59:13 <CindyLinz> book 的範例就可以不用 scaffold 了
+23:59:40 <godfat> 是說我其實不太喜歡 sandbox, 不喜歡 lib 裝在各個不同的地方

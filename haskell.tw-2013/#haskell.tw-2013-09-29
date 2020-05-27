@@ -1,0 +1,20 @@
+00:02:31 <Yu-Lin> 我愈來愈搞不懂 sml 啦XD
+00:03:55 <Yu-Lin> 除了 sml/nj 用 MLRISC，Mlton 也用
+00:04:12 <Yu-Lin> 看 MLRISC 還看到了用 G machine 實作的 haskell
+00:06:43 <mno2_> http://english.stackexchange.com/questions/8767/changes-in-english-names-of-people  請見等價大全 xD
+00:09:45 <mno2_> 其實去公司隨便抓個 Engineer 大概都不知道 MS 跟 Apple 兩大 founders 的本名吧 xD
+00:10:09 <mno2_> 他們都還有 middle name
+00:10:38 <suhorng> Yu-Lin: 跟 LLVM pk!
+00:21:12 <hashcat> 有人在topcoder嘛
+00:24:12 <monochrom> 嘻嘻, 我就知道 C. A. R. Hoare, Donald E. Knuth, 及 Edsger W. Dijkstra 的全寫!
+00:25:40 <monochrom> C. A. R. = Charles Anthony Richard, E = Ervin, W = Wybe
+00:27:14 <monochrom> Hoare會叫你稱他 Tony, 這是對應 Anthony
+00:29:14 <MnO2> hashcat: 請找 miaout17
+00:31:30 <hashcat> 想問賺外快難不難:D
+00:31:36 <hashcat> :D
+19:25:00 <mno2_> PHPConf 的矛盾大對決是怎麼回事 xDD
+19:56:52 <letoh> 那是什麼?
+22:53:20 <Yu_lin> sml
+22:54:16 <Yu_lin> sml 的 lib 跟函數那邊有比較好查找的
+23:03:59 <hashcat> http://en.wikipedia.org/wiki/Horn_clauses
+23:48:57 <hashcat> F*是dependent type

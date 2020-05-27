@@ -1,0 +1,11 @@
+18:57:50 <suhorngM_> 原來有這種東西 https://hackage.haskell.org/package/strict-io-0.2.1/docs/System-IO-Strict.html
+18:58:09 <suhorngM_> strict 的 getContents, readFile, etc
+18:58:49 <suhorngM_> Haskell report 裡面找不太到關於 IO monad 執行順序的描述   也許其實沒有保證(像 readFile 回傳的 String 是 lazy 的...)
+18:59:32 <CindyLinz> 我要這個!
+19:00:11 <suhorngM_> lazy 的不全部讀進來嗎?
+19:00:18 <CindyLinz> Strict 版的
+19:00:34 <suhorngM_> XD
+19:01:17 <suhorngM_> IO a 真是個大黑箱, 沒有人說它會好好被實作, 也沒有東西規範它   目前沒有大爆炸而已XD
+19:02:11 <CindyLinz> 有透明公開的 unsafeInterleavedIO
+19:02:20 <CindyLinz> 可是有時候就是想找 strict 版 ^^|
+19:03:03 <suhorngM_> 透明公開ww

@@ -1,0 +1,34 @@
+16:21:40 <caasih> 請問遇到欄位很多的 JSON 時，該怎麼用 Aeson 才好？
+17:09:32 <CindyLinz> 如果有比較固定的欄位定義的話, 我覺得定一個 data type 出來, 然後實作 FromJSON 與 ToJSON (看需要哪個方向)
+17:10:07 <CindyLinz> 你定義的 data type FromJSON 可以只是整個 json 的子集合, 只讀取其中少數幾個欄位
+17:10:32 <CindyLinz> 然後你的 data type field 就是有 type 的了, 之後在 Haskell 內部使用會比較舒服
+17:10:43 <CindyLinz> 把 type 編碼的工作集中在「邊界」的地方就好
+17:11:46 <CindyLinz> 另外... 這個編碼解碼的工作, 應該會是你的 Haskell 程式整體之中寫起來比較不舒服的部分
+17:13:20 <caasih> 還在蓋我的 API proxy ，似乎所有 field 都要實作 FromJSON 和 ToJSON ，超不舒服...
+17:13:25 <CindyLinz> 因為 JSON 的使用習慣比較隨便, 數字字串會習慣亂寫混用.. 或是同一個欄位在不同時候放進不同的 type 或是接不同形狀的 js object.. 所以你在解碼的時候需要考慮這些天外飛來的寫法
+17:14:09 <CindyLinz> 然後遇到缺項該選用哪個嚴重程度的 error 也是很煩惱
+17:14:32 <caasih> 還沒嘗試只暴露 data 不暴露那些 record field ，讓 Aeson 幫我處理（這樣就可以避免 id 撞名的樣子）
+17:14:50 <caasih> 發現它有個 (.:?) 可以給 Maybe a 的樣子
+17:16:00 <caasih> 還沒有試過跟任何一種錯誤處理結合，現在仍交給 Servant 處理
+17:17:00 <CindyLinz> 那個自動 Maybe a 你就要看是否方便了
+17:17:06 <CindyLinz> 有時候給 default value 比較方便
+17:17:32 <CindyLinz> Haskell 其實應該很擅長編碼解碼的
+17:17:37 <CindyLinz> 根本就是 parser 王道...
+17:17:57 <CindyLinz> 可是它不擅長定義不清楚的情況, Haskell 沒有什麼「你就依此類推嘛」的寫法
+17:18:01 <caasih> 有發現一個 (.!=) 可以給 default value 的樣子 XD
+17:18:02 <caasih> https://hackage.haskell.org/package/aeson-1.0.0.0/docs/Data-Aeson.html#v:.-33--61-
+17:18:17 <CindyLinz> 薪資範圍必須寫清楚, 不可以寫「依公司規定」... XD
+17:18:26 <caasih> 原來如此 # 沒有依此類推嘛
+17:18:28 <caasih> XDD
+17:19:07 <CindyLinz> 解碼 JSON 或是 url param 的時候... 可能是社群文化的習慣, 還蠻常遇到規格不講清楚, 都用常識去猜的
+17:19:30 <CindyLinz> 而使用 Haskell 的時候就要把那些「常識」 formal 地寫下來....
+17:20:44 <caasih> 其實同事在 Java 中定義換轉成 JSON 的 class 時應該是有講清楚 type 的，
+17:21:06 <caasih> 可是還沒試過 parse .java 然後生 hs 這條路 XD
+17:25:03 <CindyLinz> 嗯如果 JSON 的另一端是 JAVA 的話應該會好很多
+17:25:15 <CindyLinz> 我剛剛那些經驗的對面通常是 javascript, PHP, 或 perl....
+17:25:24 <CindyLinz> 一個個都是默契王
+17:31:46 <caasih> 默契導向程式設計 QQ
+17:31:58 <kuanyui_acer> caasih: XDDD
+17:51:38 <darkx> 默契導向w
+17:53:47 <caasih> \darkx/
+17:54:16 <caasih> darkx: 不是也買了 FP 書嗎？

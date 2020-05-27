@@ -1,0 +1,38 @@
+10:14:36 <Yu-Lin> 發現熟人
+20:17:07 <hashcat> :t 123
+20:17:10 <lambdabot> Num a => a
+20:17:34 <hashcat> :t foldM
+20:17:35 <lambdabot> Monad m => (a -> b -> m a) -> a -> [b] -> m a
+20:18:10 <hashcat> :k Just
+20:18:12 <lambdabot>     Not in scope: type constructor or class `Just'
+20:18:12 <lambdabot>     A data constructor of that name is in scope; did you mean -XDataKinds?
+20:18:18 <hashcat> :k Int
+20:18:18 <lambdabot> *
+20:18:42 <hashcat> :k Num
+20:18:42 <lambdabot> * -> Constraint
+20:20:08 <hashcat> @src 1
+20:20:09 <lambdabot> Source not found. I don't think I can be your friend on Facebook anymore.
+20:20:47 <hashcat> :k Just
+20:20:47 <lambdabot>     Not in scope: type constructor or class `Just'
+20:20:48 <lambdabot>     A data constructor of that name is in scope; did you mean -XDataKinds?
+20:20:52 <hashcat> :t Just
+20:20:53 <lambdabot> a -> Maybe a
+20:22:55 <hashcat> :q
+20:25:00 <hashcat> :k (->)
+20:25:00 <lambdabot> * -> * -> *
+20:25:07 <hashcat> :k (=>)
+20:25:10 <lambdabot> parse error on input `=>'
+20:38:00 <favonia> @src Num
+20:38:01 <lambdabot> class  (Eq a, Show a) => Num a  where
+20:38:01 <lambdabot>     (+), (-), (*)           :: a -> a -> a
+20:38:01 <lambdabot>     negate, abs, signum     :: a -> a
+20:38:01 <lambdabot>     fromInteger             :: Integer -> a
+22:09:05 <hashcat> 有人在嗎
+22:13:32 <banacorn> 你好 :3
+22:13:55 <hashcat> 有沒人研究過type family和gadts之類的
+22:25:10 <hashcat> salut :3
+22:50:24 <petercommand> saluton
+23:32:32 <banacorn> 我好像看到了 esperanto A_A
+23:48:26 <petercommand> XDD
+23:54:30 <hashcat> 不知道你們在講啥
+23:54:51 <hashcat> 新的template haskell有type了

@@ -1,0 +1,12 @@
+16:46:41 <CindyLinz> 想用 deriving ALL.. ^^|
+16:47:07 <CindyLinz> 我只是把一個 Int 用 newtype 改名字, 讓 compiler 幫我作一點 check
+16:47:24 <CindyLinz> 但是想繼承所有 Int 的 class instance.. XD
+21:08:32 <gansteed> @src withFile
+21:08:33 <lambdabot> withFile name mode = bracket (openFile name mode) hClose
+21:09:46 <gansteed> > withFile
+21:09:47 <lambdabot>  Not in scope: ‘withFile’
+21:09:48 <lambdabot>  Perhaps you meant one of these:
+21:09:48 <lambdabot>    ‘writeFile’ (imported from Prelude),
+21:09:48 <lambdabot>    ‘BSC.writeFile’ (imported from Data.ByteString.Char8),
+21:09:48 <lambdabot>    ‘BSLC.writeFile’ (imported from Data.ByteString.Lazy.Char8)
+21:10:43 <gansteed> withFile :: FilePath -> IOMode -> (Handle -> IO a) -> IO a 中的 Handle 是怎么来的呢？ 是 FilePath + ImMode -> Handle 出来的吗？

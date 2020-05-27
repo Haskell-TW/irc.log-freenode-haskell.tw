@@ -1,0 +1,56 @@
+00:04:26 <monochrom> 我不記, 我問 :type
+00:10:38 <caasih> b -> a 是把 b 從左邊(l)往右，吃一個一個的 a ；然後 a -> b 是 b 從右邊(r)往左，吃一個一個的 a 這樣嗎？
+00:11:19 <caasih> * 一個下午過去了才有頭緒 = =
+00:11:28 <monochrom> 不是. 不可靠. 要看整個:
+00:11:35 <monochrom> @type foldl
+00:11:37 <lambdabot> Foldable t => (b -> a -> b) -> b -> t a -> b
+00:12:43 <caasih> 我也覺得看 type 比較安穩，只是想理解「把它想成 infix operator 吧 :p」是在講什麼
+00:12:48 <monochrom> 見到 "t a" 知道 a 指 list element, 回到 (b -> a -> b) 知道 a 仍指 list element.
+00:13:33 <caasih> 嗯嗯...
+00:14:19 <monochrom> 我認為 「把它想成 infix operator 吧 」沒說甚麼. 但凡見到 X->Y->Z 都是 infix operator.
+00:22:23 <pkmx> 其實我也不知道要怎麼想成infix operator...(抓頭
+00:24:18 <caasih> 解鈴還須繫鈴人
+00:24:52 <CindyLinz> foldl f x [a1,a2,a3,...,an] 想成 a1 `f` (a2 `f` (a3 `f` (... `f` (an `f` x) ...)))
+00:25:08 <CindyLinz> f 的參數順序就好記了
+00:25:38 <monochrom> 那似 foldr 多些.
+00:25:50 <CindyLinz> foldr f x [a1,a2,a3,...,an] 想成 ((...) `f` an)
+00:26:00 <monochrom> 那是 foldl
+00:26:08 <CindyLinz> 我名字寫反了 XD
+00:26:50 <CindyLinz> 只是把 f 用 `f` 去想的時候, 就會知道左邊和右邊哪邊是一個元素哪邊是整串
+00:28:15 <CindyLinz> 甚至使用的時候就這樣寫..   bs = foldr f x as where  a `f` as = ...
+00:29:10 <monochrom> 其實乾脆不用 f, 用自製符號. foldr (+>) x [a,b,c] = a +> (b +> (c +> x)).
+00:29:55 <CindyLinz> 那就隨意了
+00:30:12 <CindyLinz> 如果在寫下符號的時候有想到方向的話
+00:30:30 <CindyLinz> 寫定義的地方還沒有太遠, 應該還沒忘吧? XD
+00:30:51 <monochrom> 所以選用樣子不對稱的符號 +>
+00:30:58 <CindyLinz> 除非很故意要用 point-less 的方式寫, 不然一邊 a 一邊 as 的提示性應該很夠了?
+00:31:58 <pkmx> 反正寫反了通常 type check 不會過 =p
+00:32:04 <caasih> where a `f` as 真心不錯
+00:32:13 <pkmx> 至少不會送到客戶手上才發現反了XD
+00:34:34 <monochrom> 寫錯了通常有 type error, 但 type error 通常看不明. 若何? :)
+00:35:57 <CindyLinz> 對, 常常不會只有這一種錯
+00:36:22 <CindyLinz> 所以看 error message 不會一看就知道是寫反 orz
+00:36:54 <monochrom> 下次見到有人說 error message 看不明, 涼薄地答 "不寫錯就不用看 error message 了"
+00:37:15 <pkmx> > foldl' (:) [] [1..5]
+00:37:17 <lambdabot>  error:
+00:37:18 <lambdabot>      • Occurs check: cannot construct the infinite type: a ~ [a]
+00:37:18 <lambdabot>        Expected type: [a] -> [a] -> [a]
+00:37:37 <pkmx> ...真的沒有很好懂
+00:37:38 <monochrom> 會不會被仇家追殺呢?
+00:46:24 <CindyLinz> pkmx: 啊, 如果幫 f 獨立標 type 的話.. 至少寫反的時候, 會製造一個直指該行的 error... XD
+00:48:18 <pkmx> 我也是這樣做... 如果看到一大串 type error 就先把我認為的 type 標上去然後再看 ghc 怎麼說 xd
+00:49:49 <CindyLinz> 不過連那個 f 也標 type 實在很搞剛啊 (艸
+00:51:05 <pkmx> 話說我前幾天不小心讓 ghc 的 type checker loop 了 (掩面
+00:52:34 <pkmx> 我就寫了我覺得應該是錯的東西 結果 ghc-mod 突然變安靜了害我以為是可以過
+00:53:03 <pkmx> 等到過了很久終於要把 ghci 叫起來的時候才發現他已經在那邊 loop 很久了
+00:54:16 <CindyLinz> pkmx: 好酷喔....
+00:57:20 <pkmx> https://ghc.haskell.org/trac/ghc/ticket/12538
+01:00:53 <CindyLinz> 一定解不完的.. 不過能自然地遇上蠻厲害的 XD
+14:44:07 <cibs> nnnnn
+22:20:51 <CindyLinz> @type concatMap
+22:20:53 <lambdabot> Foldable t => (a -> [b]) -> t a -> [b]
+22:25:05 <caasih> CindyLinz: 之前聽你說你們家有服務是用 Haskell 寫的，那 LICENSE 該怎麼寫才好？
+22:25:23 <caasih> 還是說公司私用，就不用放 LICENSE 了？
+22:26:50 <CindyLinz> 私用 LICENSE 沒差啊..
+22:27:10 <CindyLinz> 拿到程式的人都拿到 source 了.. XD
+22:29:32 <caasih> 瞭解，感謝 XD

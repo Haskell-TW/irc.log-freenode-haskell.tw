@@ -1,0 +1,34 @@
+00:23:00 <yen3> 稍微看了一下 yamba haskell package 和 reactive-banana 都有在最近更新啊 ...
+00:23:59 <yen3> yamba 是 2015/07/19 ，reactive-banana 2015/05/01
+00:45:44 <CindyLinz> 真新...
+00:45:48 <CindyLinz> 不過.. 不是 yampa?
+00:46:04 <monochrom> 是 yampa.
+00:46:27 <CindyLinz> yen3: 最近流行挑錯字.. (誤
+00:46:54 <yen3> 是 yampa 沒錯 XD
+00:47:02 <yen3> 完全沒發現 ... Orz
+00:47:51 <yen3> 詢問一下，關於 arrow，看這一篇入門 ok 嗎 ? https://www.haskell.org/arrows/
+00:52:25 <monochrom> 我可能以前學時讀過
+00:52:55 <monochrom> 反正它也沒說甚麼
+00:53:22 <monochrom> 我最後是直讀 GHC user's guide
+00:53:23 <yen3> 嗯嗯
+00:53:28 <yen3> 喔喔喔 ?
+00:54:09 <yen3> 來看看，謝謝你~
+09:15:49 <yen3> 看不到 irc log ~
+10:40:30 <petercommand> 看不到 +1
+10:41:27 <CindyLinz> 開了開了 ._.
+10:41:30 <CindyLinz> web server 沒開
+10:42:08 <CindyLinz> 啊 這幾天 log 還沒 publish
+10:44:20 <CindyLinz> 好了 :p
+10:55:23 <petercommand> :p
+14:23:00 <yen3> :p
+22:24:12 <mno2> http://icfpcontest.org/spec.html
+22:24:22 <mno2> 這題目也太長了吧...
+22:26:11 <CindyLinz> 閱讀測驗 XD
+22:30:09 <mno2> 看好久總算讀完了
+22:30:19 <mno2> 感覺好像在考 GRE 一樣
+22:32:19 <letoh> icfp contest 的題目不是通常都落落長嗎...
+22:32:30 <mno2> 好麻煩喔.. 難怪要比三天
+22:34:34 <mno2> 颱風天就是要比 ICFP 啊，不然要幹麻
+22:52:07 <CindyLinz> mno2: 等等, 你那邊也有颱風? OAO
+23:01:29 <mno2> 沒有啦，我幫 CindyLinz 說的台詞
+23:01:43 <CindyLinz> OAO

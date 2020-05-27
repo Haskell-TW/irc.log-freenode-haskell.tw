@@ -1,0 +1,76 @@
+01:07:58 <monochrom> lisp 排縮後好不好讀, 還真看你慣 prefix 還是 infix
+01:08:32 <monochrom> 我呢, 單日覺得好讀, 雙日覺得不好讀 :)
+01:08:36 <CindyLinz> 需要可以轉 30° 顯示的螢幕 & editor.. XD
+01:09:24 <letoh> 嗯  其實大部份的寫法跟一般語言一樣都是 prefix，只有少數 operator 因為別的地方多用 infix 所以看不慣吧
+01:10:53 <CindyLinz> letoh: 這是 FP 腦的言論.. XD
+01:11:06 <letoh> XDXD
+01:11:38 <CindyLinz> 大部份的語言有一堆 while(){...} foreach, for(.... in ...) if, else... switch..case 之類的語法耶 XD
+01:11:49 <letoh> lisp 也有啊
+01:11:56 <CindyLinz> 這不知道怎麼歸類 infix / prefix... ^^|
+01:11:59 <letoh> 只是括號的位置不太一樣XD
+01:12:11 <CindyLinz> letoh: lisp 還是函數, 仍是 prefix 啊..
+01:12:20 <CindyLinz> 就函數長相的東西 :p
+01:12:32 <letoh> wwww
+01:12:58 <CindyLinz> letoh: 你看 $<-($)->$ jQuery 這句...
+01:13:11 <letoh> 這明明是顏文字XD
+01:13:23 <CindyLinz> 顏語言.. (誤
+01:14:00 <letoh> kaomoji programming
+01:14:06 <CindyLinz> 別的語言 building element 好多 @@"
+01:14:52 <CindyLinz> FP 腦言論就會一臉不屑地說: 那些都只是 syntax sugar..
+01:15:27 <CindyLinz> letoh: 快發!
+01:15:31 <letoh> XD
+01:15:33 <CindyLinz> 不要只說個頭!!
+01:15:43 <letoh> 就只是照你說的 copy 一次而已啊XD
+01:15:43 <CindyLinz> 這樣不道德
+01:15:52 <CindyLinz> 喔 ._.
+01:16:00 <letoh> 但是沒有一臉不屑啦XD
+01:16:07 <CindyLinz> XD
+01:17:10 <CindyLinz> 人家現在討論重點就是 syntax 的長相啊.. 半糖微糖全糖, 感受差很多的 ._.
+01:17:54 <letoh> 如果是說括號位置我是同意啦  但 prefix 的話感覺就沒什麼說服力XD
+01:19:38 <CindyLinz> 一堆括號的 lisp 和極力避免括號(?)的 python, 寫起來反倒剛好都一起變成歪脖風耶 @@"
+01:20:55 <letoh> 像 lisp 常常取一個很長的 function name，縮排對齊參數的話就很麻煩了
+01:21:01 <letoh> 真的會很歪
+01:22:48 <CindyLinz> 我還沒整理出 lisp 風格應該怎麼寫好 @@"
+01:22:56 <CindyLinz> 我是在寫 template haskell 的時候遇到 @@"
+01:23:14 <CindyLinz> 不過我後來在 template haskell 裡面有寫比較多 `...` 這樣的 infix 寫法了..
+01:23:34 <CindyLinz> 而且 7.8 以後的 template haskell 不需要整個用程式碼刻出來了..
+01:23:43 <letoh> 混入 infix 感覺很不一致啊XD
+01:23:44 <CindyLinz> 但還沒用過 7.8.. ._.
+01:24:11 <CindyLinz> 是這樣, 例如說要用 template haskell 生出這樣的句子:  f a b
+01:24:18 <CindyLinz> 就是 f 函數吃兩參數
+01:25:04 <CindyLinz> prefix 語法寫成 appE (appE (varE $ mkName "f") (varE $ mkName "a")) (varE $ mkName "b")
+01:25:41 <CindyLinz> infix 可以寫成 varE (mkName "f") `appE` varE (mkName "a") `appE` varE (mkName "b")
+01:26:05 <CindyLinz> 覺得 infix 寫法感覺比較像原本的 f a b @@"
+01:26:26 <CindyLinz> 嗯, 如果只是 f a b 比較短感覺還好;
+01:26:57 <CindyLinz> 可是遇到的是 f a b >>= \x -> g c d >>= \y -> return (x, y) 之類的 orz
+01:27:16 <CindyLinz> 然後要把這些 (>>=) 也套 appE 來用 orz
+01:27:18 <letoh> 直接寫比較快XD
+01:27:43 <CindyLinz> 用 template haskell 是因為其中的一些項目要預跑程式生出來 @@"
+01:27:57 <CindyLinz> 我是讀 postgres 的 schema 來生程式碼 @@"
+01:28:26 <CindyLinz> 我覺得你喜歡的不是第一種...
+01:28:45 <CindyLinz> 第零種: appE (appE (varE (mkName "f")) (varE (mkName "a"))) (varE (mkName "b"))
+01:28:59 <CindyLinz> 這個才是你最喜歡der.. XD
+01:29:04 <letoh> 不用到這樣啦XD (好像也沒差多少
+01:29:13 <letoh> 主要是解讀的順序比較順
+01:29:32 <CindyLinz> 我一眼看不出第一個 appE 的兩個參數分別是哪兩個範圍欸 orz
+01:29:48 <CindyLinz> 就.. 看不出來是 (f a) b 還是 f (a b)
+01:29:49 <letoh> 放前面或放後面都可以接受，但放中間感覺就很不容易一致
+01:30:13 <CindyLinz> appE (appE (varE (mkName "f")) (varE (mkName "a"))) (varE (mkName "b"))
+01:30:14 <letoh> CindyLinz: 所以你覺得有括號比較容易讀嗎? XD
+01:30:48 <CindyLinz> 用到這個程度我已經覺得不易讀了 @@"
+01:31:07 <CindyLinz> 可能要用看看彩虹色的括號 @@"
+01:32:05 <letoh> https://github.com/jlr/rainbow-delimiters  #支援
+01:32:29 <CindyLinz> CindyLinz 是 vim-only 的系統... QQ
+01:32:57 <letoh> https://github.com/amdt/vim-niji
+01:33:19 <CindyLinz> letoh++ # 收下惹
+01:33:26 <letoh> 好多人做... 為啥 vim 會需要這種東西啊XD
+01:34:00 <CindyLinz> 什麼意思? 這不是跟要編輯的檔案比較有關, 跟 editor 關聯比較小啊?
+01:34:35 <letoh> 嗯  我想說的是.. 我以為 vim 碰到 s-exp 的機會應該比 emacs 小
+01:35:03 <letoh> 雖然有個 -l 參數，但不曉得多少人會用XD
+01:35:29 <CindyLinz> 嗯, 其實 vim 碰到 vim script 的機會也沒比 emacs 碰到 vim script 的機會大多少.. (咦
+01:35:45 <CindyLinz> vim script 根本.......||
+01:36:30 <CindyLinz> vim 還是拿來用就好惹 (小聲)
+01:36:47 <letoh> 我現在裝 vim 都沒裝 addon 了
+01:37:42 <letoh> (要留一些空間裝 elisp script XD
+02:01:17 <CindyLinz> 不會用 orz
+02:01:24 <CindyLinz> 改天再說w

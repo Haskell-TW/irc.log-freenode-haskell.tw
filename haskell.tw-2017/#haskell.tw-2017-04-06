@@ -1,0 +1,6 @@
+01:32:49 <caasih> 做完了 XD http://caasi.github.io/Talk-GMachine/
+01:33:00 <caasih> 腦袋一片空白（逃
+01:40:33 <CindyLinz> 該睡覺了.. XD
+11:12:37 <abel-abel> 大家好，我用的是cabal，我在一個文件裏面寫這麼一句： import Chapter2.DataTypes 。然後cabal configure, cabal build沒有出現錯誤。但是在Ghci裏面:l 這個源文件，就提示說「Could not find module ‘Chapter2.DataTypes’」有哪裏不對嗎？謝謝！
+12:46:33 <CindyLinz> :l 應該是用來載入你的... 文件
+12:47:15 <CindyLinz> 如果你想要在 ghci 裡面有類似 import 的效果, 那是在載入文件以後再用 :module +Chapter2.DataTypes

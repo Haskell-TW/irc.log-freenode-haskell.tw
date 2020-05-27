@@ -1,0 +1,54 @@
+16:05:51 <CindyLinz> @miaout17 的議場
+16:05:52 <lambdabot> Unknown command, try @list
+16:06:31 <CindyLinz> orz
+16:07:01 <_13h> 有實況嗎? XD
+16:08:16 <CindyLinz> 有投影片
+16:08:26 <CindyLinz> http://goo.gl/rHjJ9
+16:09:27 <_13h> 感謝!!
+16:13:42 <_13h> 那個程式碼的投影效果好嗎？以前看過貼這種黑背景的程式碼都會看不清楚@_@
+16:18:16 <CindyLinz> 覺得大貓為函數語言的特性分類圖好棒呀
+16:18:23 <CindyLinz> _13h: 還沒到 XD
+16:18:38 <_13h> 我跑太快了XD
+16:18:55 <CindyLinz> 出現程式碼了
+16:19:02 <CindyLinz> 的確有點暗淡 @@"
+16:19:11 <CindyLinz> 我坐第四排, 看得還算清楚..
+16:28:42 <CindyLinz> 作完語言比較來解釋 pure / impure 以後, 還偷偷置入一個超短版, 不方便比較的 Haskell XD
+16:29:45 <CindyLinz> 聽到目前為止, 有一種拿 Haskell dominate 所有 functional language: 哼哼, 只有我才是真的, 你們都不行啦! 的感覺 XD
+16:30:17 <_13h> 我看完了，可以先問問題嗎? XD 感覺把一些誤會解釋得很清楚，但我還是不懂 FP 怎麼解決 concurrency 的問題
+16:31:26 <CindyLinz> 你就留在這邊吧, 等大貓回來以後再回 XD
+16:31:31 <CindyLinz> miaout17: 推推 :p
+16:33:03 <_13h> 我覺得每次聽到的都是  single assignment / no side-effect / pure 可以解決，但覺得只能取代 atomic operation 之類的東西，但這樣就是全部了嗎？
+16:37:53 <_13h> 一開始貼的那個給 game developer 看的 slide，我好像有看過...
+16:39:08 <_13h> Tim-POPL.ppt
+23:16:30 <miaout17> CindyLinz: 聽到目前為止, 有一種拿 Haskell dominate 所有 functional language: 哼哼, 只有我才是真的, 你們都不行啦! 的感覺 XD -> 聽到最後就發現我不是獨尊Haskell了 @@
+23:18:07 <CindyLinz> miaout17: 糟糕不夠明顯 XD
+23:18:20 <miaout17> 我回答問題好像措辭有點不當。一方面生病覺得思考不太清晰，二方面其實第一個發問者的問題我沒有聽清楚（不知道是收音還是在台上的關係）
+23:18:38 <miaout17> _13h下線了
+23:18:58 <letoh> 嗨  我是本尊
+23:19:20 <miaout17> 疑？ _13h == letoh？
+23:19:32 <CindyLinz> 你中間提的 challenge: 就沒有 side-effect 了? 和 都是 immutable 所以沒有狀態問題了?
+23:19:50 <CindyLinz> 最後都是寫說, 並不是所有的函數語言都 blabla
+23:19:52 <letoh> miaout17: 那個是外出用的帳號XD
+23:19:55 <CindyLinz> 只有少數的才.. blabla
+23:20:03 <miaout17> XD
+23:20:10 <CindyLinz> haskell 最後都碩果僅存啊 XD
+23:22:08 <miaout17> Reply to: 我覺得每次聽到的都是  single assignment / no side-effect / pure 可以解決，但覺得只能取代 atomic operation 之類的東西，但這樣就是全部了嗎？
+23:22:16 <CindyLinz> 是有批評 haskell 的地方, 可是只有小小括號一下 (及其代價).. 而且我覺得代價出現在這個地方好像是揚不是抑.. (逃)
+23:22:45 <letoh> 所以這一場其實是去宣揚國威的嗎? (誤
+23:23:35 <CindyLinz> 而且有一點偏遠交近攻(其他的 functional-like language)型 :p
+23:24:15 <CindyLinz> 那個 functional feature 族譜圖真是太好了 ^^
+23:24:52 <miaout17> 我再想一下怎麼措辭好了....
+23:25:59 <miaout17> 糟糕，我原本還怕我的talk給大家對FP比較負面的想法(其實很多東西都不能無痛解決)，大家的解讀跟我預期的差好多 XD
+23:26:39 <CindyLinz> 我聽起來覺得是, 你希望 Functional Language 真的帶來這些好處嗎? 請洽 Haskell, 別無分店...
+23:26:48 <letoh> 我覺得很不錯耶  圖很清楚
+23:27:19 <miaout17> (抱頭)怎麼跟預期的完全不一樣 XDDD
+23:27:23 <CindyLinz> XD
+23:27:42 <CindyLinz> miaout17: 你沒有真的講痛處呀~
+23:28:56 <CindyLinz> 雖然我覺得 Haskell 目前給我最大的痛處是 lazy... 其實不算是 functional language 的特性 @@"
+23:30:44 <suhorng> Lazy+1..
+23:31:11 <CindyLinz> 可是 lazy 好美妙, 好不想割捨啊.... wwww
+23:42:32 <CindyLinz> miaout17: 不過, 本 channel 相當程度是 FP fans, 這邊的意見會有 bias 的...
+23:44:28 <suhorng> 想問一下.. 我開了 -XRankNTypes, 然後 let f = (\k -> k (id :: forall a. a -> a)) :: ((forall t. t->t)->s)->s
+23:44:34 <letoh> 要到其他頻道繞一圈看看嗎? XD
+23:44:42 <suhorng> 那 f(\k->k 5) 究竟是怎麼 type check的!?
+23:50:41 <suhorng> (\k->k 5)能有 forall t. (Int -> t) -> t 以外的type嗎O_O...

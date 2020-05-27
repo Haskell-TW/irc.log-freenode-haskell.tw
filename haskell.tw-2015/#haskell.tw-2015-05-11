@@ -1,0 +1,82 @@
+00:23:14 <petercommand> 之前在這裡沒看過呢
+11:02:02 <mno2> monochrom, pkmx: 腦袋打結了 xD  pkmx 了解我的意思, thanks
+11:02:11 <mno2> suhorngM_: 沒有貼過耶
+11:02:28 <mno2> 但他 write you a haskell 系列停滯了 xD
+11:02:52 <pkmx> @mno2: @@?
+11:02:52 <lambdabot> Unknown command, try @list
+11:02:55 <pkmx> mno2: @@?
+11:03:12 <mno2> pkmx: 就你貼 > (\f -> (f "foo", f 13)) (\x -> x)
+11:03:29 <mno2> 有點久遠 xD
+11:03:30 <pkmx> 哦...那幾天之前的事情了XD?
+11:03:35 <mno2> lag 了
+11:05:02 <mno2> 最近在做 hindley milner 的教學投影片。打算從 simply typed lambda calculus 的範例開始慢慢加 let 上去
+11:06:50 <mno2> 但有一點想確認一下沒有想錯。 simply typed lambda calculus 所推倒的 type 其實就是 for all 在最外層，當作 global variable 對吧？ 而前進的 hindely milnder 的特點是在於，加了 let 的結構會讓 type variable 有 local variable
+11:07:47 <mno2> 而 higher rank 變成不只是有 local variable，而是 local recursive type variable
+11:08:21 <mno2> 其實變化幾乎就是差在 unification 要做多 general
+11:11:20 <mno2> 而且原來 hindley milner 的 worst case 是 exponential ，我一直以為是 polynomial
+15:44:40 <suhorngM_> mno2: simply typed 實際上沒有 forall 吧, 那個 type variable 沒有 "代換" 這回事
+15:46:06 <suhorngM_> 嗯...我覺得講 for all 不太對, 但 global v.s. local 感覺可以這樣看XD
+15:46:20 <suhorngM_> mno2: 我覺得重點應該是加了 let 會知道要在 *何時* 做 generalization
+15:46:38 <suhorngM_> local recursive type variable 這邊是什麼意思...?
+15:49:17 <mno2> suhorngM_: 就是 type variable 可以再展成 polytype ，有種 recursive 下去的感覺
+15:50:08 <suhorngM_> mno2: 話說我覺得應該從 system F 的角度下去看
+15:50:35 <suhorngM_> hindler milner 跟 higher-ranked 可以看成怎麼做 "限制" 跟 "提示"
+15:54:33 <mno2> suhorngM_: 我以為 forall 的意思就是 allocate 一個 type variable 耶？ 如果 simply typed 沒有 forall 的話，那 type variable 不就都是 free type variable ?
+15:56:16 <mno2> 所以我總覺得跟一個 global forall 的意思是等價的
+15:57:03 <mno2> allocate 可能不太精準，應該說 allocate 某個自由度
+15:58:39 <mno2> 恩，就是 generalization，所以 global forall 就是 globally 只有一個自由度
+15:59:15 <suhorngM_> mno2: 之前貼的 PFPL 的 System F 那一節我覺得把一些關聯性講的比較清楚
+15:59:33 <suhorngM_> mno2: 我想 simply typed lambda calculus 就是沒有 free/bound 或 quantifier 的概念
+16:00:12 <suhorngM_> t ::= t -> t | base type, 而 base type 是一些選定的東西 例如 {nat, bool}, 又例如 {a, b, c, d, e, ... , x1, x2, x3, ... }
+16:00:55 <suhorngM_> mno2: polytype 則是把 System F 的 type 分的細一點 (加入 rank)
+16:01:39 <suhorngM_> 當然這寫從外表或操作來看 v.s. allocate 應該是沒什麼差
+16:02:14 <suhorngM_> 但我覺得 forall 指的意思應該都是 forall quantifier...
+16:04:48 <mno2> 我是覺得如果沒有 forall 的概念的話，在 simply typed 裡面要講 type inference 這件事情怪怪的，因為你還是在推倒一個未知的東西。 但這個未知不能用 forall 描述？ 那要怎麼描述未知這件事？
+16:05:16 <mno2> 就是一個變數 a ?
+16:05:24 <suhorngM_> mno2: type inference 是一回事, 真正系統裡的 type 是一回事阿XD
+16:05:42 <suhorngM_> 一個是 meta 的一個不是. 最後推導出來是 unsolved 的話隨便代入個 base type 就好
+16:05:54 <suhorngM_> 但它就是沒有 forall, 只要不是 base type, 就不是系統中的東西
+16:08:03 <suhorngM_> 像 Simply Typed λ-Calculus 的 typing rule 長這樣 http://en.wikipedia.org/wiki/Simply_typed_lambda_calculus#Typing_rules
+16:15:48 <mno2> 恩.. 就是說 simply typed lambda calculus 之中的 variable 沒有 renaming 這件事
+16:16:48 <suhorngM_> 因為沒有 variable (? 其實就是選一個 base type 那樣
+16:17:00 <mno2> 所以我原本想說其實可以換名字沒差的話，其實是假設了 global quantifier 可以重新換一組 type varaible 的名字，這偷渡了 let poly 的能力到 simply typed ?
+16:17:34 <mno2> 我覺得你的 variable 跟我的 variable 好像定義有點差別
+16:18:51 <mno2> 我的 variable 好像就是你的沒有 variable 。你的 variable 好像是說 meta type variable
+16:19:21 <suhorngM_> 我前面有些講不清楚. 我不應該說 <suhorngM_> 那個 type variable 沒有 "代換" 這回事
+16:20:51 <suhorngM_> mno2: 嗯...分兩部份好了 一個是 System F 中的 type variable, 另一個是 type inference 中的 varaible
+16:22:18 <suhorngM_> 我想以 Simply typed λ-calculus  來說的話, 它的 type 是沒有換名字這一件事, 事實上只是我們選的 base type 看起來可能是外表長得跟 "variable" 很像而已
+16:22:42 <suhorngM_> 實際一點的話可以選項是 nat, bool, unit 這種東西
+16:24:14 <mno2> 恩恩，我理解。因為 pratical-type-inference-for-arbitrary-rank 那一篇都是在講 type inference ，所以我的語言是陷在 type inference 階段的用語
+16:24:25 <suhorngM_> 嗯嗯
+16:24:48 <mno2> 不過也是我把 標記用的用語 跟 type inference 的用語混著用了
+16:25:56 <mno2> 這樣我理解投影片應該要怎麼寫了 :)
+16:26:18 <suhorngM_> 謝謝跟我討論!!
+21:48:18 <petercommand> < suhorngM_> 一個是 meta 的一個不是. 最後推導出來是 unsolved 的話隨便代入個 base type 就好
+21:54:24 <petercommand> 這個我想到的是 haskell 做 IO loop 的時候會發生的事
+21:59:08 <suhorngM_> @口@
+21:59:08 <lambdabot> Unknown command, try @list
+22:01:31 <petercommand> 在 simply typed lambda calculus 中的 variable 我的看法是，一個 variable 只能 instantiate 成一種 base type (包括function)
+22:01:35 <CindyLinz> IO loop 發音: ill-loop (誤
+22:02:04 <petercommand> 在所有的地方該 variable 都需要是同一種 type
+22:03:22 <petercommand> 這樣講對嗎?
+22:05:30 <suhorngM_> well..我是覺得看現在討論什麼東西啦
+22:06:02 <suhorngM_> 之前講了那麼一大串 就是因為我講的是 type system 本身, mno2 在講 type inference algorithm, 兩邊接不起來XD
+22:06:15 <suhorngM_> simply typed lambda calculus 系統裡面就沒有變數這樣
+22:09:34 <petercommand> simply typed 感覺可以看成全部都用 auto 宣告的 const 變數XD
+22:10:24 <petercommand> 有這樣的感覺
+22:12:49 <petercommand> 然後 unsolvable 的就是從頭到尾都沒有賦值的變數XD
+22:15:23 <CindyLinz> petercommand: 本體論前進一階的感覺.... (思
+22:17:39 <mno2> 這邊的本體是 C++ 嗎？ lol
+22:18:09 <petercommand> 本體論是甚麼XD
+22:19:53 <CindyLinz> 本體論說本體論的本體是一個不可知的物自體 (?
+22:20:06 <petercommand> CindyLinz: 甚麼是 type 存在? 甚麼是存在 type?
+22:20:54 <petercommand> 這是甚麼東西XDD
+22:20:58 <CindyLinz> petercommand: 我講到前進一階... 是因為你把 type 當成 value 看待啦 D
+22:20:59 <CindyLinz> XD
+22:21:14 <suhorngM_> dependent type 出現啦
+22:21:45 <petercommand> 這個一階是甚麼XD
+22:22:50 <petercommand> 那句話好難懂orz..
+22:23:30 <petercommand> CindyLinz: 這是往甚麼方向邁進XD
+22:23:48 <mno2> 因為本來的世界觀是 value 用 type 描述。但你現在的對象是 type ，所以提升了一階
+22:24:32 <petercommand> 喔喔...
+22:25:32 <CindyLinz> 感謝 mno2 幫忙解圍....ww

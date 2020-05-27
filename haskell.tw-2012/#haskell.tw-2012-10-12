@@ -1,0 +1,14 @@
+09:17:14 <letoh> http://d.hatena.ne.jp/shinichiro_h/20080910#1220988953  這什麼鬼東西啊  用 grass 寫了一個 164MB 的 quineXD
+13:44:02 <MnO2> opencc看起來不錯
+18:13:38 <_13h> http://tanakh.jp/pub/fp-tudoi-2012/tudoi.html#19   # Applicative 那麼好啊，應該先瞭解這個嗎？
+18:15:55 <CindyLinz> 不知道欸.. 我不知道 Applicative 和 Monad 比, 通常是哪一個比較好懂....
+18:16:15 <CindyLinz> 如果抽象和具體是一條數線的兩端...
+18:16:33 <CindyLinz> 我覺的最難懂的在中間 ^^|   很抽象跟很具體都比較簡單
+18:17:27 <CindyLinz> Applicative 比 Monad 抽象..  不過我覺得它們都蠻靠近中間了
+18:18:01 <_13h> 所以那個階梯只是作者的解讀而已嗎
+18:18:17 <b4283> ！！突然の飛躍！！
+18:18:48 <CindyLinz> 欸, 我覺得應該每個人的「中間」的位置都不太一樣 @@"
+18:20:36 <CindyLinz> 我自己的體會是這樣: 如果是很抽象的概念, 通常 rule 就很少.. 所以覺得好懂.   很具體的東西, 通常比較熟悉.. 所以也覺得好懂
+18:54:47 <letoh> 嗯嗯
+22:17:33 <letoh> 剛剛想把顏文字弄進 Io 裡  結果一遇到 ( 就破功了XD
+22:26:16 <letoh> 原來 codepad 也可以跑 haskell

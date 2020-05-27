@@ -1,0 +1,78 @@
+07:55:41 <miaoski> Yl
+07:55:58 <miaoski> Op, 不過我也被排除了 QQ
+14:16:56 <jyyou> ATS ! # https://funth.hackpad.com/Functional-Thursday--sGic3s4ncNn
+14:17:39 <CindyLinz> 被發現了 XD
+14:17:48 <CindyLinz> 原本想說等 hashcat 上線再跟他說的 :p
+14:20:52 <CindyLinz> jyyou: 隨便找個地方修改個東西吧, 如果有想 +1 的是最好, 沒有就放個空行或空格也行, 好像這樣就可以收到 hackpad 的修改通知了
+14:25:42 <jyyou> CindyLinz: 了解
+18:33:26 <caasih_> @tell caasih hello
+18:33:27 <lambdabot> Consider it noted.
+18:34:25 <caasih_> @tell caasih hello
+18:34:25 <lambdabot> Consider it noted.
+18:35:25 <caasih> hi, lambdabot
+18:36:02 <CindyLinz> 自以為 noted..ww
+18:36:21 <caasih> 試了一下，要該帳號上線「講話」後
+18:36:39 <caasih> lambdabot 才會 msg 給該人說有幾封訊息
+18:36:57 <caasih> 我還以為只要上線就可以的說。
+18:38:44 <CindyLinz> caasih: 喔喔 他有丟你私訊喔?
+18:39:11 <petercommand> @tell petercommand hi
+18:39:11 <lambdabot> You can tell yourself!
+18:39:17 <caasih> CindyLinz: 嗯嗯，作者看來把說明寫在這邊了 https://github.com/jwiegley/lambdabot/blob/master/Plugin/Tell.hs
+18:39:22 <petercommand> @tell petercommand hi
+18:39:23 <lambdabot> You can tell yourself!
+18:39:31 <CindyLinz> wwww
+18:40:04 <caasih> 是說也可以公開羞恥 play 的樣子。
+18:40:08 <caasih> @messages
+18:40:08 <lambdabot> You don't have any messages
+18:45:42 <caasih_> 結果看不懂 code（縮回去看大象書
+18:46:32 <CindyLinz> caasih_: learn you a haskell?
+18:47:05 <caasih_> 對啊， FLOLAC 後來受到證明的打擊後都在看什麼 ttfp
+18:47:41 <caasih_> 這個，也不知道是好書還是不好，至少是免費書： https://www.cs.kent.ac.uk/people/staff/sjt/TTFP/
+18:47:46 <CindyLinz> XD
+18:48:10 <CindyLinz> 結緣書嗎? XD
+18:48:35 <CindyLinz> 好大本..... OAO
+18:48:46 <caasih_> 結緣書？ XD 看了半天才稍微知道 josh 在講啥。
+18:51:11 <caasih_> 結果也只看了 type theory 入門那段。不知道傳說中的 TaPL 怎麼樣，還沒買 XD
+18:51:30 <caasih_> 啊，懂了，免費 -> 結緣書 XD
+18:53:34 <CindyLinz> caasih_: 那我就..... 收下了! 謝謝 :p
+18:55:21 <caasih_> <(_"_)> 感謝作者佛心來著
+20:30:43 <xcycl> 基礎的程式語言理論可以看 Robert Harper 寫的 ... http://www.cs.cmu.edu/~rwh/plbook/book.pdf
+20:32:39 <xcycl> 這本跟 TaPL 比較接近，不過內容相對硬很多
+20:34:12 <CindyLinz> 硬很多 QQ
+20:34:39 <CindyLinz> 560頁這麼大本還硬的話.... 真硬 :|
+21:09:59 <caasih_> whitglint CindyLinz: ping
+21:10:31 <caasih_> cschat.tw 那邊得討論我看到一半，不過幾天前拼死卡在 type theory 的理由之一是...
+21:10:50 <caasih_> 七月七號時我以為課程安排的目的是這樣的： https://twitter.com/caasih/status/487946735885381632
+21:11:09 <caasih_> 囧，打錯字
+21:11:36 <caasih_> 來自於上課配上亂查 wiki 得到的印象
+21:13:17 <CindyLinz> 哇這什麼 :D
+21:13:31 <caasih_> 但看講義，印象中最後重點在歸納法證明與歸納 fix 一定會結束這樣子？不知道卡關後就掉隊了
+21:14:10 <caasih_> 那時查到說 denotatinal semantics 是把程式與數學物件連結起來？還說後來會引入 monad ？
+21:14:35 <whitglint> one piece 的地圖
+21:14:38 <CindyLinz> xcycl 竟然跑掉了 XD
+21:15:40 <caasih_> 從這邊看來的： http://en.wikipedia.org/wiki/Denotational_semantics#Connections_to_other_areas_of_computer_science
+21:37:26 <xcycl> 啊?
+21:43:08 <CindyLinz> xcycl: 21:13 < caasih_> 但看講義，印象中最後重點在歸納法證明與歸納 fix 一定會結束這樣子？不知道卡關後就掉隊了
+21:43:11 <CindyLinz> 21:14 < caasih_> 那時查到說 denotatinal semantics 是把程式與數學物件連結起來？還說後來會引入 monad ？
+21:44:29 <caasih_> xcycl: 感謝 CindyLinz ，是這樣的，七月七號時我對 FLOLAC 的課程規畫有誤解，拼死想要搞懂 TT 在做啥
+21:44:46 <caasih_> 誤解來源是從 wikipedia 上的一小段開始的
+21:44:56 <caasih_> http://en.wikipedia.org/wiki/Denotational_semantics#Connections_to_other_areas_of_computer_science
+21:45:51 <caasih_> 以為 FLOLAC 之所以安排 denotational semantics, type theory 等等是為了在後面能通通聯起來
+21:46:31 <caasih_> 就覺得要是不會證明似乎沒法迎來最後的圓滿大結局
+21:47:40 <caasih_> 還好這邊只是旁聽生，沒有學分壓力 XD
+21:48:10 <xcycl> 更早以前我想講 categorical semantics, 不過兩周內講完學生就吐血了吧. denotational semantics 是程式語言的一種模型
+21:49:10 <xcycl> 不過 simple type theory 的話, 可以用 set theory 詮釋, 沒什麼特別好玩的
+21:49:27 <xcycl>  dependent type theory 的 denotational semantics 又太難 ..
+21:52:03 <xcycl> PCF 的 denotational semantics 比較經典, 在 simple type theory 加上 自然數 跟 fix point ..算是 TT 另一個方向的延伸
+21:52:19 <xcycl> 不過跟 wiki 講得有點距離 ...
+21:55:33 <caasih_> DeS 課最後是想要說：「嘿，你看，沒有 turing complete 但是有可以證一定會結束的 fix 也很棒」嗎？
+21:56:10 <xcycl> 不是耶, 是怎麼去證明 fixed point 的等價性
+21:56:21 <xcycl> PCF 是 *Turing complete* 的呦
+21:56:27 <CindyLinz> 我有找到這個 agda 用來確認一定會終止的條件 # http://wiki.portal.chalmers.se/agda/pmwiki.php?n=ReferenceManual.TerminationChecker
+21:57:32 <xcycl> untyped lambda calculus, PCF 可以在 Agda 寫的原因是只作有限多次的運算
+21:58:11 <xcycl> 不過可以把這個運算的上界設得很高很高~~~
+22:00:15 <xcycl> dependent type theory 跟 simple type theory 一定會結束的性質不好証呀, 上 TT 有談到就好
+22:02:18 <xcycl> CindyLinz: 如果完全在 dependent type theory 寫的話, 只用 induction principle 之類的, 是不需要這個 termination checker .
+22:03:02 <xcycl> CindyLinz: 但是 Agda 的格式比較自由, 所以沒辦法單從格式來保證
+22:09:12 <caasih_> xcycl: 感謝解惑，有空我再重聽 miaoski 辛苦上傳的影片看有沒有機會搞清楚
+22:09:54 <xcycl> 講義應該比投影片清楚, 這次第二段上課好失敗 orz

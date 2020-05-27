@@ -1,0 +1,42 @@
+17:36:21 <CindyLinz> 有個問題..
+17:36:54 <CindyLinz> Data.Map 或 Data.Set module 裡面用的 key type 需要有 instance Ord key
+17:37:23 <CindyLinz> 如果我想要的比較函數是某種 quantize
+17:38:44 <CindyLinz> 例如說靠近 0 的一個範圍都一起視為 0
+17:39:04 <CindyLinz> 但是這個範圍大小不是 compile 時就寫死的, 而是執行時經由使用者輸入的
+17:39:50 <CindyLinz> 好像沒辦法 runtime 才決定好 compare 函數
+17:40:25 <CindyLinz> 如果可以有 local define 的 data 或 local define 的 newtype 就行了 XD
+21:17:05 <petercommand> CindyLinz: 我想到 IORef unsafePerformIO
+21:17:07 <petercommand> XD
+21:17:21 <petercommand> 用個 global variable..
+21:24:13 <pkmx> 用 ekmett 的 reflection ?
+21:33:47 <petercommand> pkmx: 用 refleciton 怎麼做呢?
+21:37:00 <petercommand> 看了 http://okmij.org/ftp/Haskell/tr-15-04.pdf 看起來就是用 type 傳?
+21:37:19 <petercommand> 我是看了 normalize 那個範例
+21:38:41 <petercommand> 不是很清楚他怎麼做的就是
+21:41:20 <pkmx> https://gist.github.com/PkmX/bc72ab799e09127448d0a043d2840f2a
+21:41:27 <pkmx> 是要類似這樣的東西嗎XD?
+21:44:29 <pkmx> 給 0.5 是 True ... 然後給 0.0 是 False
+21:47:50 <petercommand> 為什麼是比較之後才 give 啊
+21:48:04 <petercommand> 很違反直覺XD
+21:50:18 <pkmx> @@ 有嗎
+21:50:18 <lambdabot>  有嗎
+21:50:28 <pkmx> lambdabot: 尼奏凱
+21:53:39 <petercommand> 如果是當成變數來看，我會覺得是要當成參數傳給他啊.. 呼叫完沒給他值是不是會壞掉XD
+21:54:57 <pkmx> 你說 given 嗎? 他就被包在 dictionary 裡面了
+21:55:22 <pkmx> 然後 give 的時候會在 runtime 建 dict 傳給他
+21:56:23 <petercommand> 喔喔..
+21:56:28 <petercommand> 沒傳會 compile error
+21:56:51 <pkmx> 不過 give 底層是用 unsafeCoerce ... 所以恩...
+21:59:10 <pkmx> 之前在 reddit 上面看到: give 就是把 -> 變成 =>, given 就是把 => 變成 ->
+22:03:43 <CindyLinz> * 看看..
+22:03:52 <CindyLinz> petercommand: 否決!
+22:03:58 <CindyLinz> pkmx: 否決!
+22:03:59 <CindyLinz> XD
+22:04:32 <CindyLinz> 比起來直接實作一個 empty 或是 singleton 的時候指定 compare 函數的 Map / Set 比較好w
+22:08:37 <pkmx> 這樣的話 <> 要怎麼寫?
+22:08:55 <pkmx> 如果兩邊的 compare fn 不一樣的話?
+22:20:08 <CindyLinz> 不提供 <> 就好了
+22:41:10 <petercommand> CindyLinz: 我以為你就是不想要自己實作一個啊@@
+22:41:18 <petercommand> XD
+22:55:23 <pkmx> 不需要自己實作一個感覺很誘人XD
+22:56:51 <pkmx> 而且用 reflection 還可以保有所有的 operation 只是全部都要包在 give 裡面這樣

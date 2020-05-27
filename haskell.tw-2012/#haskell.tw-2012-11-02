@@ -1,0 +1,66 @@
+15:11:36 <CindyLinz> 你們有看過 王垠 講 Hindley-Milner 的 let polymorphism 是「錯的」的投影片嗎?
+15:11:49 <CindyLinz> 他舉例說它 un-sound
+15:12:04 <CindyLinz> 我覺得他說的好有道理怎麼辦.. 感覺好不舒服......||
+15:12:59 <CindyLinz> 這一份: https://www.dropbox.com/s/k6fwweq49be4cbh/type-infer-pdf.pdf
+15:13:42 <CindyLinz> 他有做動畫, 所以他放了一份 video 版 http://www.tudou.com/programs/view/GU9GtDuWSMk   不過我只有讀 pdf
+15:14:07 <CindyLinz> 他投影片的風格好 cute 啊~  跟他 blog 上面辛辣措辭的感覺反差好大 :p
+15:45:22 <hychen> 看不懂.....
+15:45:35 <CindyLinz> 你是說投影片喔?
+15:45:43 <CindyLinz> 還是我的描述方式?
+15:47:20 <hychen> 投影片 XD
+15:59:00 <CindyLinz> pdf 從 page 72 開始
+15:59:04 <CindyLinz> pdf 從 page 72 開始看
+15:59:59 <CindyLinz> 然後 page 83 開始講 Hindley Milner 的 let polymorphism 是怎麼設計的
+16:00:44 <CindyLinz> page 101 開始批評 let polymorphism
+16:01:51 <CindyLinz> 欸 我覺得這邊要一直看下去.. 一直到 page 128 開始出現讓人不舒服的例子
+16:02:35 <CindyLinz> page 139 開始講目前的不舒服的解法
+16:03:13 <CindyLinz> 不過這解法令人不舒服之處應該是 page 144 開始講的, 也就是例外很多很雜
+21:12:34 <MnO2> http://blog.ezyang.com/2012/11/hpd3-js-an-interactive-heap-profile-viewer/?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+ezyang+%28Inside+245s%29
+21:12:53 <MnO2> 最近 d3 還真紅，一直看到
+21:20:15 <MnO2> http://byorgey.wordpress.com/2012/11/01/using-multiple-versions-of-ghc-in-parallel-with-gnu-stow/
+21:20:28 <MnO2> 有人要寫 ghcbrew 嗎？xD
+23:05:45 <suhorng> 想請問一下 有人用 Windows 下的 ghc 嗎?
+23:08:10 <suhorng> 我現在用 Windows 下的 ghc, 然後想自己在 cygwin 下 compile 一些 library
+23:08:11 <suhorng> 不過不知道怎麼指定使用 cygwin 的 compiler/環境
+23:12:25 <MnO2> suhorng: 我沒試過，另外我猜這邊應該沒有人試過xD
+23:13:06 <suhorng> 好吧QQ 謝謝!
+23:13:23 <CindyLinz> 我在 windows 只有用 haskell platform 裝過 ^^|
+23:14:30 <suhorng> 我之前也是裝 Haskell Platform
+23:14:42 <suhorng> 不過後來想裝 readline, 一直失敗...
+23:23:02 <MnO2> CindyLinz: 我把yinwang的投影片看完了，雖然之前就知道他丟出來不過一直沒看。
+23:23:37 <CindyLinz> MnO2: 嗯嗯!
+23:23:58 <CindyLinz> MnO2: 不過我也不知道要問什麼.. 只是 murmur 抒發一下 ^^|
+23:24:11 <MnO2> CindyLinz: 不過要等看完下集才知道，他這篇其實只點出問題也沒提出解法啊
+23:24:36 <CindyLinz> MnO2: 他有提一個他自己覺得不實際的解法 -- Intersection Type
+23:24:42 <MnO2> CindyLinz: 總不能就放任變成undecidable..
+23:25:47 <CindyLinz> 這邊的「解法」應該也是找一個 decidable 的 trade-off, 不過這一次要要求它 sound
+23:26:02 <CindyLinz> 可能會比 let polymorphism 弱 :Q
+23:26:24 <MnO2> CindyLinz: 對啊，所以就好奇他下集會講出什麽
+23:27:26 <CindyLinz> MnO2: 我另外有看到他寫的一篇, 他說他不想拿博士了, 所以把他研究到一半的可能有價值的題目拋出來
+23:27:38 <CindyLinz> 不過還沒看內容 :p
+23:28:24 <CindyLinz> 哎~ 這麼有想法, 然後感覺也蠻有料, 然後又致力追求真理不向現實低頭的人說要退出了感覺真可惜啊 :/
+23:30:00 <MnO2> 不會啊，為什麽要可惜？這樣才不會被綁住啊～
+23:30:14 <CindyLinz> 如果他就不碰了就可惜了啊
+23:30:33 <CindyLinz> 好想繼續看他爆料呢.. (八卦模式啟動 :p)
+23:31:02 <MnO2> 他有說不做PL了嗎？而且以他的聰明才智碰其他的東西也說不定一樣厲害啊
+23:31:20 <MnO2> 他只是退出學術界而已，沒有說不碰PL了吧
+23:32:03 <CindyLinz> 不在學術界還能全職弄 PL 的機會不太大啊... 這樣就變業餘的, 時間比較少呀
+23:33:06 <MnO2> 反正人家搞業餘都比我們厲害一百倍...
+23:33:19 <CindyLinz> 嘖嘖 XD
+23:35:37 <MnO2> 反正以他聰明才智弄到經濟無虞又不會太花時間應該是不成問題
+23:38:58 <CindyLinz> 不過我看他英文的 slide 封面真的會頓一下, 想說: 我明明就沒有寫過這 slide 啊 XD
+23:41:02 <MnO2> 我覺得他的slide風格跟某一時期的favonia有點像 xD
+23:41:45 <CindyLinz> 欸 風格沒有跟我像.. 是名字太像 XD
+23:41:56 <CindyLinz> favonia: 裝可愛!
+23:42:56 <favonia> MnO2: 哪一時期啊（？）
+23:43:16 <MnO2> advanced algorithm時期
+23:45:58 <favonia> MnO2: 喔喔我以為現在的版本還是在發展同樣的風格...
+23:46:46 <MnO2> favonia: 我覺得不太一樣耶
+23:48:32 <CindyLinz> MnO2: 你剛剛是看 pdf 還是影片檔呀?
+23:48:58 <MnO2> pdf
+23:50:09 <CindyLinz> 剛剛點影片檔.. 出現「網速有點不給力」.... XD
+23:53:02 <MnO2> http://lingr.com/room/vim
+23:53:08 <CindyLinz> 嘖嘖.. 動畫真花俏啊 XD
+23:53:48 <favonia> MnO2: 喔該不會是字體的問題吧。我現在會儘量避免非自由字體
+23:54:00 <MnO2> vim.jp 選擇用這麼花俏的chat room
+23:54:48 <MnO2> favonia: 大概吧，我不知道

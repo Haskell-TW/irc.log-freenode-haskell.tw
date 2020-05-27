@@ -1,0 +1,26 @@
+12:52:22 <MnO2> http://d.hatena.ne.jp/kazu-yamamoto/20130329/1364525770
+12:52:27 <MnO2> haskell 取時間
+13:08:44 <MnO2> http://www.matrix67.com/blog/archives/5205
+13:09:02 <_13h> matrix67 還不錯
+13:09:15 <_13h> 很多有趣的內容
+13:10:24 <_13h> 一般實用的語言好像至少都要可以在標準庫裡面提供對應 system call 的功能？
+13:10:46 <_13h> 我沒仔細想過一個實用的語言到底要搞到什麼程度才算
+13:12:02 <_13h> 如果有一些公式可以參考的話，也許可以找一個理論上設計不錯的語言 (也許是教學用途)，然後擴充到實用的規模
+14:41:55 <syoon_> hi guys
+14:42:03 <CindyLinz> Hi~~
+14:42:28 <syoon_> surprisingly there is somebody here~
+14:42:36 <CindyLinz> :p
+14:43:09 <syoon_>  Nice to meet you. I am new to Haskell.
+14:43:35 <CindyLinz> Welcome ^^
+14:44:08 <CindyLinz> It's a good beginning :p
+14:45:10 <syoon_> thanks~
+14:46:08 <syoon_> Trying to figure out what's going on here...
+14:50:30 <CindyLinz> syoon_: Do you mean that why is this channel here since there is already a channel #haskell ?
+21:31:00 <letoh> suhorng 跑到 ptt 的 python 板打廣告wwww
+22:12:06 <MnO2> http://blog.sina.com.cn/s/blog_5d90e82f0101jv17.html
+22:12:50 <letoh> 他現在到底在幹嘛  還在念書嗎?
+22:15:02 <MnO2> 他之前說過他在工作啦
+22:17:49 <letoh> 這篇好難懂XD
+22:18:13 <letoh> 我覺得把他所謂的腳本語言想成 DSL 就好啦
+22:21:16 <letoh> 環境變數其實是全域變數XD
+22:38:58 <MnO2> 應該只是想 K 一下設計不良這點吧

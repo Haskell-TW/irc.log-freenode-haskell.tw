@@ -1,0 +1,138 @@
+11:41:35 <MnO2> http://www.yinwang.org/blog-cn/2013/04/21/ydiff-%E7%BB%93%E6%9E%84%E5%8C%96%E7%9A%84%E7%A8%8B%E5%BA%8F%E6%AF%94%E8%BE%83/
+11:46:23 <_13h> 他以前好像提過 ydiff
+11:50:44 <_13h> 我總覺得他最近的文章，其中有很多內容都是以前就發表過的，只是現在又重貼出來而已?
+12:06:05 <MnO2> 因為之前都砍掉了 wwwww
+12:09:56 <_13h> 「那是在助纣为虐。其实我希望这些垃圾语言越早死掉越好。」XDXD
+12:11:13 <_13h> 「我在设计一种新的语言，它将会使用 S-expression 作为它的语法。」   我好像看到另一個 Paul Graham 在發明另一個 Arc XD
+12:13:38 <_13h> 看了一下好像是用 racket 實作的
+12:13:49 <_13h> 他怎麼不用 chez 呢? XD
+12:14:35 <CindyLinz> 應該介紹他 livescript
+12:14:54 <CindyLinz> 他一定鞭得比較好, 這樣我就不用想怎麼鞭了... :p
+12:15:03 <monochrom> racket 都有其好處
+12:15:51 <monochrom> 不過或者你希望有惡搞 XD
+12:16:16 <_13h> 我只是好奇他之前那麼推崇 chez scheme，卻沒有用它來開發專案
+12:16:28 <monochrom> 啊!
+12:17:15 <_13h> 不過還好他用了 racket，這樣我就可以借他的 parsec 來用了:D
+12:17:35 <_13h> haskell 的 parsec 我覺得有點怪...
+12:18:06 <_13h> 方便是方便，但寫起來總覺得很不自然
+12:19:20 <CindyLinz> _13h: 不夠有 BNF 的感覺? http://en.wikipedia.org/wiki/Backus%E2%80%93Naur_Form
+12:19:42 <_13h> 對呀
+12:21:59 <_13h> 我最早接觸的 peg parser 長這個樣子 https://github.com/slavapestov/factor/blob/master/extra/peg/javascript/parser/parser.factor
+12:23:03 <monochrom> 不妨嘗試多用 Applicative 的 <*> 和 Functor 的 <$> (即fmap), 應該會較像 BNF
+12:24:04 <_13h> 謝謝  我研究看看，這兩個我還不太會用XD
+12:25:11 <CindyLinz> parsec 是 Monad, 可以動態「改語法」
+12:25:14 <MnO2> _13h: chez scheme 完整版不是不少錢嗎？
+12:25:59 <CindyLinz> 應該不能改的才會像 BNF.. (思)
+12:26:02 <_13h> 對呀，不過他買的話沒辦法拿到優惠價嗎? XD
+12:27:49 <MnO2> 搞不好打過折還是很貴 xD
+12:28:02 <_13h> BNF 應該也只是某種語法型式而已，我不太懂為什麼不能改的才會像 BNF？
+12:28:48 <_13h> chez 都沒有公開價格，不曉得到底是多貴@_@
+12:30:44 <_13h> "I received a price list from Chez which states that the cheapest single > price is $995."
+12:31:20 <MnO2> 好貴 xD
+12:31:31 <_13h> comp.lang.scheme 上找到的... 可能是 2011 以前的價格，這兩年原物料上漲...
+12:32:56 <_13h> 最便宜的不曉得差在哪，可以編譯出獨立執行檔，但不做最佳化? XD
+12:33:35 <CindyLinz> 編譯出來的執行檔只允許自用?
+12:33:36 <_13h> 想開 -O1 ? 再加個 $100，-O2 就要再加 $200 了 (誤
+12:34:28 <_13h> 花這麼多錢買一個不能賺錢的工具嗎@_@
+12:34:56 <CindyLinz> 已經是最省錢的了...
+12:35:09 <_13h> 不過以商業版 compiler 來說，好像也不算貴
+12:35:10 <CindyLinz> 想賺錢可以啊, 2000 XD
+12:35:18 <_13h> XDXD
+12:36:30 <monochrom> 原物料上漲 XD
+12:36:54 <_13h> monochrom: developer 也是要吃飯的XD
+12:42:24 <_13h> http://www.faqs.org/faqs/scheme-faq/part2/section-2.html#b  # chez v5 的價格 (現在是 v8.4)：Site license fees start at $9000 ($4500 academic)
+12:43:31 <CindyLinz> 4.5 倍... =口=
+12:44:03 <_13h> chez v5 還是 r4rs，有點年代的東西了
+12:44:14 <_13h> 那個時候就賣這種價格...
+12:50:55 <_13h> https://groups.google.com/d/msg/comp.lang.scheme/Ckqcjk0HfnU/b6Gb3AJwfg4J  有提到一些 chez 的運作方式
+15:57:32 <monochrom> GHC 太可怕了! orz  http://thread.gmane.org/gmane.comp.lang.haskell.cafe/104783
+16:00:53 <CindyLinz> 這是在說.. ghc 做了他原本想手動做的辛苦事嗎?
+16:01:29 <CindyLinz> 最下面的「why is GHC making my life hard?!」看起來好負面啊 ^^|
+16:02:02 <CindyLinz> 是不是有人想在 arduino 上跑 ghc 啊~~ (推推 _13h )
+16:02:18 <monochrom> 哈哈
+16:04:32 <monochrom> 我原想證明, fval 理應又冗又慢, 冗過 eval, 但結果, GHC 把 fval 優化到跟 eval 一橂一樣. 我無言了!
+16:05:31 <CindyLinz> 咦 這篇你寫的呀?
+16:05:51 <monochrom> 是呀!
+16:05:53 <hychen> fval 是什麼?
+16:06:23 <CindyLinz> 從 id 猜不出來 ^^|
+16:06:31 <CindyLinz> hychen: 他文中的函數名 :p
+16:06:38 <_13h> 跑得起來嗎? XD
+16:07:21 <hychen> CindyLinz,  台灣有PL的conference可以參加嗎?
+16:08:06 <CindyLinz> hychen: 大貓 miaout17 好像有辦過
+16:08:12 <CindyLinz> 還有 ihower
+16:08:40 <CindyLinz> 然後這個 5.2 這個第一次辦的 Functional (Tuesday -> Thursday)
+16:09:50 <CindyLinz> http://registrano.com/group/tw-fpug
+16:17:39 <MnO2> 除了 conference，有人覺得要建一個 github org 集中處理一些東西嗎？
+16:17:54 <CindyLinz> 像 wiki 的感覺?
+16:18:12 <CindyLinz> 中文的函數咖啡?
+16:18:58 <MnO2> 都可
+16:19:11 <MnO2> https://github.com/rubytaiwan
+16:19:18 <MnO2> 像這樣
+16:19:32 <MnO2> 要用 fpug 或其他什麼名字我都 OK
+16:20:01 <hychen> 台灣有沒有學術研討會可以參加啊
+16:20:05 <MnO2> 一些 lilicoco 可以放
+16:20:25 <MnO2> hychen: 之前 scm 好像有辦過，但不確定是否每年都有
+16:22:13 <MnO2> 理論上看一下 scm 頭過的 paper 有沒有在台灣的就可以知道 xD
+16:22:18 <MnO2> 投
+16:28:08 <CindyLinz> 感覺有這個應該是不錯 :Q
+16:28:53 <MnO2> 我只是怕現在內容產生者太少好像很虛弱..
+16:30:20 <CindyLinz> 整理一下, 比翻 channel log 方便 :p
+16:31:08 <CindyLinz> 那個 github 需要有人管理嗎? 還是 push 進去就會自動更新?
+16:31:33 <MnO2> 哪個會自動更新？
+16:31:53 <CindyLinz> 內容
+16:32:14 <CindyLinz> 像 wiki 的話應該就是修改的人修改完, 成果就出來了, 不需要有專門的人去審之類的
+16:32:15 <MnO2> 我不知道耶，看有沒有拿 github 當 website ?
+16:32:39 <CindyLinz> 我有用過..
+16:33:22 <MnO2> 要不然就是用 hook 從 host machine 自動拉？
+16:33:26 <CindyLinz> http://cindylinz.github.io/Coffee-svg2html_img/
+16:33:45 <CindyLinz> 但是這個 owner 是我自己, 所以是由我來 push @@"
+16:35:22 <CindyLinz> 來看一下 github 的規定..
+16:35:27 <MnO2> 這個是綁每個 user id 的 page
+16:35:41 <CindyLinz> 我貼的這個不是 user page, 是 project page
+16:35:44 <MnO2> 我不知道 github org 是不是一個 org 只有一個
+16:35:48 <MnO2> 喔喔
+16:36:04 <CindyLinz> 喔, 你是說 github 另外有特別給 org 用的東西?
+16:36:17 <MnO2> 如果是 prom 的話那就 member 加一加自己 push ?
+16:36:21 <MnO2> proj
+16:36:45 <CindyLinz> 我在查看看一個 project 可以有幾個參與者
+16:36:52 <CindyLinz> 應該參與者都可以 push 吧
+16:37:08 <MnO2> 對啊
+16:38:33 <MnO2> 雖然我也不知道集中管理顯著的好處啦
+16:38:36 <MnO2> 因為東西太少了
+16:38:51 <CindyLinz> 人少就不用集中管理了
+16:39:03 <CindyLinz> 來亂的人不多就不要多設麻煩了 :|
+16:40:01 <MnO2> 恩
+16:56:15 <CindyLinz> 喔.. org 沒有人數上限耶 https://help.github.com/articles/what-s-the-difference-between-user-and-organization-accounts
+16:57:21 <CindyLinz> Unlimited collaborators (team members)
+21:22:08 <suhorng> tony412: welcome
+21:25:32 <tony412> 大家好 最近想要學Functional Programming 不過之前完全沒有接觸 如果要入門的話有什麼推薦的語言嗎?
+21:28:59 <MnO2> tony412: 這邊會被推坑 Haskell （誤)
+21:29:31 <tony412> 所以說Haskell算是入門的好語言嗎?
+21:29:48 <MnO2> tony412:  正經點說，我個人覺得從 racket 下手比較好
+21:29:55 <suhorng> Haskell一開始會不會踩到一些陷阱？
+21:30:05 <MnO2> tony412: 不， Haskell 嚴格來說不好入門
+21:30:41 <suhorng> ML跟Haskell兩個很讓人印象深刻的是他們的 type system XD?
+21:31:40 <tony412> racket看起來跟lisp好像
+21:31:47 <MnO2> 我是覺得先打好 continuation 等等的概念再來弄 ML 系  type sysytem 會比較好
+21:32:10 <MnO2> tony412: 算是 lisp 大家族的
+21:33:00 <tony412> 那如果想學racket有什麼推薦的書或資源嗎?
+21:33:03 <MnO2> tony412: 或是說你 scheme 已經很熟了，那就比較推薦 Haskell
+21:33:03 <favonia> tony412: 如果你要透過學新的語言來得知最多有趣的東西，最終還是要碰一下 Haskell 或 ML 系列... 然後 "functional" 不一定是這些。太多語言都是 functional 只是他們都不怎麼流行 xD
+21:33:52 <favonia> tony412: 嗯如果你知道 Lisp 就直接衝 Haskell or ML 家族吧 xD
+21:34:04 <favonia> 我是說 Lisp 家族
+21:34:23 <tony412> 看過lisp 可是其實都沒學過XD
+21:34:48 <MnO2> 可以去 coursera 上面，有課程教學
+21:34:59 <MnO2> 這邊剛好也有強者們剛上完課
+21:35:28 <tony412> 是這個嗎? https://www.coursera.org/course/progfun
+21:35:42 <MnO2> 不是
+21:35:47 <MnO2> 另一門
+21:36:56 <MnO2> 應該是這一門 https://www.coursera.org/course/proglang
+21:37:30 <tony412> 喔喔 謝謝
+21:38:50 <suhorng> Coursera的好像要等到下一個session開始才能跟...class archive僅限有參與的課程的樣子
+21:39:34 <MnO2> 這表示就算不上也要先 signup 再說 xD
+21:40:27 <tony412> 看起來是要等到下一個session沒錯
+21:44:28 <MnO2> letoh: lyah 的第八章我 merge 你的 ebook branch 後發現有 windows 編輯後的 ^M
+22:09:04 <letoh> MnO2: 唔，抱歉，我修一下... 我以為之前已經修掉了... 不過完整的是 ebook-and-typofix 那個 branch
+22:09:21 <letoh> 之前嘗試要把一些東西分開，但一分開就全部亂掉了XD
+22:09:55 <letoh> 我等一下再檢查一下，直接拿這個 branch 發 request 好了@_@
+23:17:49 <MnO2> 最近在看一些 JIT 的 paper，覺得 compiler 技術真的是架構上大家都差不多，細節上卻是很 ad-hoc 的東西

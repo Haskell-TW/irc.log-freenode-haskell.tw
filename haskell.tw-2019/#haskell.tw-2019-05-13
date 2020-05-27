@@ -1,0 +1,4 @@
+18:01:11 <CindyLinz> @hoogle [Maybe a] -> [a]
+18:01:12 <lambdabot> Data.Maybe catMaybes :: [Maybe a] -> [a]
+18:01:13 <lambdabot> Distribution.Compat.Prelude.Internal catMaybes :: () => [Maybe a] -> [a]
+18:01:13 <lambdabot> Data.List.HT takeWhileJust :: [Maybe a] -> [a]

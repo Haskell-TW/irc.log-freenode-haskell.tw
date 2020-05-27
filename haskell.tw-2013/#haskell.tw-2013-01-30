@@ -1,0 +1,30 @@
+00:29:44 <letoh> 嗯  總算看到 < 了XD
+00:30:08 <letoh> 之前 x <- [1..10] 會變成  x - [1..10]
+00:34:01 <b4283> 對呀
+10:51:00 <b4283> 想到一個好玩的句子
+10:51:12 <b4283> why is there something, instead of nothing ?
+10:52:06 <MnO2> b4283: ?
+10:52:51 <b4283> MnO2: Maybe  :P
+10:53:45 <MnO2> I see
+12:17:20 <MnO2> c9s 不在... ，理論上 coffeephp 應該只要把 https://github.com/alxlit/coffeescript-php 這個的 codegen 改一改就好了
+12:34:52 <_13h> 好奇怪.. fdoc 設計的 link 語法是 [url text]  這語法很容易爛掉吧?
+12:39:56 <_13h> [text url] 比較安全一點，至少可以拿 scheme name 來分隔兩個 token
+12:40:55 <_13h> 不然只要出現空白應該就會炸掉了@_@
+12:41:21 <MnO2> _13h: 對，這我之前就有注意到，只是懶得改
+12:45:23 <_13h> 嗯嗯，剛剛在改 txt2tags 的設定檔才發現這件事，不過反正不是要做成通用的工具，不改應該也沒關係@_@
+12:46:37 <_13h> 如果我要讓程式碼在 parse 前後跑個額外定義的 filter，有什麼好的改法嗎？
+12:47:08 <_13h> 講錯了  要讓 _post 裡的檔案在 parse 前後另外跑 filter
+12:47:55 <_13h> 最簡單的做法大概就 cat file | preproc | parse | postporc > output
+12:48:14 <MnO2> 目前應該就只有這樣吧
+12:48:15 <_13h> (這是 un*x 流解法XD)
+12:56:45 <suhorng> postproc . parse . preproc (誤)
+12:59:07 <_13h> 對呀，其實 fdoc 應該要重寫成 hdoc 才對XD
+13:01:43 <_13h> 很想改 fdoc 又懶XD 原文的 html 其實還不錯，對排版很友善
+13:02:12 <MnO2> _13h: 要的話就直接用 pandoc 啦
+13:02:31 <_13h> 對喔，都忘了有 pandoc
+23:50:45 <b4283> letoh: 天吶....
+23:51:12 <b4283> 看了原版的才知道 IO action 是 <-
+23:51:26 <b4283> kindle 版只有一個減號
+23:51:43 <b4283> orz
+23:55:20 <mgccl> lol
+23:56:04 <b4283> https://gist.github.com/4666256

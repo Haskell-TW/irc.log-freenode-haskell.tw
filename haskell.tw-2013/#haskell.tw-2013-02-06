@@ -1,0 +1,329 @@
+00:00:04 <CindyLinz> 副作用是空白用很兇
+00:00:27 <CindyLinz> 不小心少了空白黏到了, 就黏在一起變成 unknown identify.. XD
+00:00:53 <suhorng> xDDD
+00:06:28 <letoh> suhorng: 果然有人專門寫了個 reverse 把最後的 list 轉正
+00:09:14 <suhorng> wow
+00:09:47 <suhorng> 囧 我忽然又不懂了順序的差別
+00:10:00 <suhorng> 順序是指手上拿的牌的順序?
+00:10:07 <letoh> 嗯
+00:11:03 <suhorng> 那至少以我的寫法沒差
+00:11:20 <letoh> 不對喔.. 因為 discard 有指定牌，所以應該是沒差才對XD
+00:11:23 <suhorng> remove_card 移除 xs 中的 x (若有重複的, 移除第一個)
+00:11:30 <suhorng> 對呀
+00:11:30 <letoh> 結論就是有人跟我一樣想太多XD
+00:15:14 <mno2> log size 破記錄了 xD
+00:15:37 <letoh> suhorng: 請問一下 nested pattern matching 到底是什麼? 我好像搞錯了
+00:15:39 <suhorng> mno2: 暱稱忽然變小寫!?
+00:15:55 <letoh> 要有 case，而且要 (xxx,yyy) => 這樣嗎?
+00:16:06 <letoh> 我只有 yyy => 算嗎?
+00:16:42 <suhorng> letoh: 我沒上課（爆）  聽起來比較像是很多層 pattern matching
+00:16:54 <suhorng> 例如對於 list, [] 跟 _::_ 是兩種可能的 pattern
+00:17:07 <mno2> suhorng: login from new laptop
+00:17:10 <letoh> 嗯嗯
+00:17:17 <suhorng> 第二種裡面再繼續有其他的 pattern, 例如 (x, y)::xs
+00:17:23 <suhorng> mno2: 喔~
+00:17:48 <letoh> 原來是這樣，差點打錯成績...
+00:17:56 <letoh> suhorng: thanks!
+00:18:22 <suhorng> 所以 x::(x'::xs) 這種應該也算XD
+00:18:43 <letoh> 我看了解答才知道可以這樣 matching
+00:19:33 <hychen> 現在可以改hw2的 peer assignment ?
+00:19:39 <letoh> 可以啊
+00:19:52 <suhorng> hw2 peer assignment 還在進行中吧
+00:20:01 <letoh> 解答那種 same color 算法需要多考慮一種條件
+00:20:15 <letoh> 我的做法可以不用考慮 [_]
+00:20:27 <letoh> 不過我的大概會被扣分XD  怎麼一堆鳥規定...
+00:20:49 <suhorng> 嘛...
+00:21:04 <letoh> 用 x:xs 就夠了
+00:21:24 <suhorng> 取出 head 然後多傳一個參數進去判斷?
+00:21:24 <letoh> 不過需要 local function XD
+00:21:34 <suhorng> 喔~ 應該猜到了!
+00:21:36 <letoh> 嗯  事實上是兩個
+00:21:41 <letoh> 多傳兩個參數
+00:22:07 <letoh> x:xs, black, red  看最後統計結果
+00:22:30 <suhorng> 咦~
+00:22:48 <letoh> 就是投票的做法
+00:22:56 <suhorng> 喔喔 跟我想的不一樣
+00:22:58 <letoh> x 紅色一票
+00:23:10 <letoh> 看最後是不是其中一種顏色都沒票
+00:23:13 <suhorng> 恩
+00:23:46 <letoh> 所以我沒想到 hychen 那個問題  因為 [] 自然就是 true 了XD
+00:23:48 <suhorng> 本來想說傳第一個的顏色進去 看剩下的是不是都這種顏色
+00:23:50 <hychen> 我都做if..else
+00:23:54 <suhorng> 恩
+00:24:07 <hychen> 我切成5個case
+00:24:38 <hychen> a1 = a2 andalso reset (when list length is odd)
+00:24:54 <hychen> a1 = a2 = a3 andalso reset (when list length is even)
+00:25:02 <hychen> 剩下3個都是edge case
+00:25:07 <letoh> 感覺好複雜XD
+00:25:16 <hychen> 我覺得這樣比較簡單 XD
+00:25:39 <letoh> 但你得先算出list length ?
+00:25:53 <hychen> 不用
+00:26:00 <hychen> 用nested patttern
+00:26:10 <letoh> 唔..
+00:26:28 <hychen> c1::c2::c3::[] ->  compare 3個
+00:26:49 <hychen> c1::c2::xs -> compare all
+00:26:59 <letoh> 原來是這樣
+00:27:01 <hychen> c1::c2:: -> compare 2
+00:27:13 <letoh> 我一直沒想到可以切好幾個 head
+00:27:30 <hychen> 所以需要考慮all_same_color([]) 跟 all_same_color([c1])的問題
+00:27:53 <hychen> c1::c2::[] -> compare 2  # 更正
+00:28:07 <letoh> 對我來說 [] 就是唱票結束，直接傳結果
+00:28:27 <hychen> 你這樣要作counting
+00:28:33 <letoh> 對啊
+00:29:05 <hychen> 我是覺得這樣比較不接近all_same_color的口語 XD
+00:29:34 <letoh> 反正藏在 local 還好啦，外面看不到XD
+00:29:37 <favonia> 這作業是都已經教了嗎？
+00:29:42 <hychen> 對
+00:29:46 <letoh> 交出去不能改了
+00:29:49 <suhorng> 現在是 peer review
+00:29:50 <hychen> hw2已經截止了
+00:30:08 <letoh> 不然應該不能討論吧XD
+00:30:20 <favonia> 那這很簡單啊明明只要兩行
+00:30:35 <letoh> 大師請發功~
+00:30:39 <hychen> 來個example XD
+00:30:46 <hychen> 我要寫到5行.... orz
+00:30:59 <favonia> blah (x:y:xs) = x = y and blah (y:xs)
+00:31:04 <favonia> blah _ = true
+00:31:32 <favonia> （請自行改為適當的語法 xD）
+00:31:43 <letoh> 嗯  因為沒用到 case 所以會被扣分XD
+00:31:49 <favonia> 喔喔
+00:31:53 <suhorng> 有吧
+00:31:53 <hychen> lol
+00:31:58 <hychen> 有啦
+00:31:59 <suhorng> 這還是有用到 pattern matching 阿
+00:32:04 <suhorng> 不會被扣
+00:32:05 <hychen> function pattern matching
+00:32:10 <letoh> 嗯
+00:32:21 <hychen> letoh, 我覺得我們想太傅砸了
+00:32:27 <letoh> 可是網頁上說程式會自動檢查有沒有用到 case ?
+00:32:36 <hychen> letoh, 這玩意就是逐一筆對啊 XD
+00:32:39 <favonia> blah l = case l of (x:y:xs) => x = y and blah (y:xs) | _ => true
+00:32:40 <letoh> 嗯嗯
+00:32:46 <suhorng> XDD
+00:32:55 <letoh> 這樣好懂一點XD
+00:32:57 <hychen> letoh, 明明只說會check #1 ,hd, tl不能用
+00:33:18 <favonia> 我現在心情很隨便～就 Haskell/ML 混著用 xD 自己修改 xD
+00:33:31 <letoh> 大概知道意思就可以了啦
+00:33:36 <hychen> 嗯
+00:33:40 <letoh> 感謝大師開示~
+00:34:00 <hychen> 照這種邏輯.. 難怪all_same_color([]) = true
+00:34:23 <favonia> hychen: 不不我是因為知道 blah [] = true 才這樣寫的
+00:34:41 <hychen> 不是, 它最後剩下[] 或是 [a] 一定要傳true
+00:34:59 <hychen> 否則這個式子不成立不是嗎?
+00:35:06 <suhorng> 應該是反過來的意思吧
+00:35:14 <suhorng> 因為這式子要成立 所以那樣寫可以
+00:35:25 <letoh> 對
+00:35:27 <favonia> 我的意思是說，我是先知道數學上要幹嘛，才隨便定義 blah xD
+00:35:32 <hychen> hmmm
+00:35:45 <hychen> 那數學上為什麼 all_same_color([]) =true?
+00:35:54 <favonia> hychen: 問作業啊
+00:36:13 <hychen> 因為我不知道這件事, 所以我再怎樣也不會寫成這樣
+00:36:27 <hychen> 作業的instruction上沒有說all_same_color([]) 是 true
+00:36:40 <favonia> 我沒看 xDDD
+00:37:03 <hychen> 只是有人說這是數學上的定義....
+00:37:43 <favonia> 他到底怎麼寫的啊
+00:37:45 <letoh> 如果一張牌都沒有  你要說顏色不同  好像也很奇怪?
+00:38:21 <hychen> https://class.coursera.org/proglang-2012-001/forum/thread?thread_id=1681&post_id=8392
+00:38:34 <hychen> http://en.wikipedia.org/wiki/Present_King_of_France#Russell.27s_analysis
+00:38:42 <hychen> This is because "true" is the identity value for the logic conjunction (AND).
+00:38:51 <hychen> 有人的answer是這樣
+00:39:12 <hychen> In math, a predicate (logic proposition) that reads like "every element x of a set S verifies property P" is always true for the empty set.
+00:39:50 <favonia> hychen: 我覺得是這樣啦，通常你用一階邏輯全部重寫就好了
+00:40:08 <favonia> hychen: 不要太在意自然語言到底能不能用一階邏輯表達
+00:40:14 <hychen> 所謂的重寫是?
+00:40:15 <CindyLinz> 英文的定義, all 是三個以上.. 所以 length < 3 的時候都是 true.. (逃)
+00:41:17 <favonia> hychen: 很多簡單的邏輯裡面
+00:41:46 <favonia> hychen: "如果太陽從西邊升起，2+2=5" 是對的
+00:41:55 <favonia> hychen: 就算之間沒有關係
+00:42:20 <favonia> 很多理工人腦內自動翻譯成 rise(sun, west) -> 2+2=5
+00:42:45 <favonia> 那你變成要用（最流行的簡單）邏輯去理解他
+00:43:30 <favonia> 就先不要管這樣翻譯合不合理了
+00:43:48 <hychen> 問題是這樣在production就是個bug....
+00:44:14 <b4283> 反過來想可能會比較ok?
+00:44:39 <b4283> list 不包含不符合 pred 的 element
+00:45:12 <hychen> 那function name 應該要叫 different_color
+00:45:25 <hychen> 不過這樣也很奇怪
+00:45:37 <hychen> 空集合應該是不可運算
+00:46:01 <CindyLinz> 如果有個函數是要 test 是否兩兩不同, 這函數在空集合也會是 true @@"
+00:46:16 <CindyLinz> singleton 集合也是 true
+00:46:38 <hychen> test([]) , test([1]) 都是 true
+00:47:01 <hychen> 但這個function期望的list最起碼要有兩個element
+00:47:33 <hychen> 所以沒有數學background 的 engineer 選擇的方式就是raise exception
+00:48:15 <CindyLinz> 這邊喔.. 把它們定義為 true 會比 raise exception 方便喔
+00:48:26 <hychen> why?
+00:48:27 <CindyLinz> 在跟別的東西合用的時候
+00:48:38 <CindyLinz> 例子我要想一想...
+00:49:03 <CindyLinz> 我下這 comment 只是我依數學定義來定義函數行為時的經驗法則..
+00:50:18 <hychen> 如果return true, 那要怎麼catched 到 function 收到意料外的參數?
+00:51:00 <CindyLinz> hychen: 是不是意料外是 spec 決定的.. 我們現在就是在決定 spec 呀
+00:51:20 <CindyLinz> 我們說它不意外, 它就不意外了.. 說它意外, 那它就意外呀..  重點是怎麼選比較方便
+00:56:31 <CindyLinz> 第一個方便之處是 exception safe XD
+00:57:07 <CindyLinz> 還是該說 exception free?
+01:00:37 <favonia> hychen: 我的意思是說大部份人腦中想的都是一階古典邏輯～看到一句話先把他全部改成邏輯符號再說
+01:04:40 <hychen>  你把exception workround 掉了, 蕩然沒有exception...
+01:06:02 <hychen> favonia, 這個大部份人是指CS背景的?
+01:10:12 <favonia> hychen: 應該說包含CS背景 xD
+01:10:59 <CindyLinz> not test(A) or not test(B) -> not test(A 聯集 B) 恆真
+01:11:44 <CindyLinz> 我一定是累了, 幹嘛寫這麼多 not 的版本 orz
+01:12:06 <CindyLinz> test(A 聯集 B) -> test(A) and test(B) 恆真
+01:12:22 <hychen> hmm 好吧, 我沒受過一階古典邏輯的*訓練*
+01:12:31 <CindyLinz> all(A 聯集 B) -> all(A) and all(B)
+01:13:01 <CindyLinz> 不過這兩條性質有什麼用呢?
+01:13:49 <CindyLinz> 「恆真」在開發複雜系統的時候很有用, 可以不用分心去處理和主線問題無關的細節
+01:14:15 <CindyLinz> code base 可以有效變少
+01:15:31 <CindyLinz> 如果實際的例子...
+01:15:39 <hychen> 這是說 all([]) -> all([]) and all([]) 恆真?
+01:15:47 <CindyLinz> 我在遊戲公司, 只拿得出遊戲的例子 ^^|
+01:16:03 <CindyLinz> 欸.. all([]) = true 所以這一式的確成立呀..
+01:16:28 <hychen> 可能需要例子, 否則我還是沒辦法搞懂 orz
+01:16:29 <CindyLinz> 我們麻將有公會戰, 規定四家要分屬四個不同公會 (兩兩不同)
+01:17:00 <CindyLinz> 在湊桌的時候我們就會 alert 出來哪個桌子的成員組成有問題
+01:17:29 <CindyLinz> 那麼直接 apply 這個對 [] 和 [1] 有定義的 test 就可以了
+01:18:12 <CindyLinz> 如果 test 一直出 exception, 我們就要額外去 handle 這些 exception
+01:18:34 <CindyLinz> all_same_color 的話, 可以用在公會聊天頻道
+01:19:28 <CindyLinz> 欸... 需要去 handle exception, 或是說呼叫函數以前一定都要加一段去把數量不對的 input 濾掉
+01:19:39 <CindyLinz> 實際上為了避免重複貼上程式
+01:19:59 <CindyLinz> 我們通常就會再包一層, 把這個數量不對的 input 處理掉或是把 exception 處理掉
+01:20:13 <CindyLinz> 結果包了的這一層, 本質上就是定義了 [] 的原來版本的函數
+01:26:27 <hychen> the law of excluded middle
+01:26:35 <hychen> 剛看了一下wiki
+01:44:42 <CindyLinz> testpack-2.1.2 安裝失敗 QQ
+01:49:07 <MnO2> logbot test
+01:50:49 <MnO2> http://mno2.csie.org:5000/channel/haskell.tw/2013-02-05
+01:51:05 <MnO2> 喔耶
+01:51:33 <favonia> 為什麼會重複 log
+01:51:44 <letoh> 還真酷
+01:51:47 <MnO2> 不知道，我想睡覺了，明天再說
+01:52:24 <letoh> 我以為是 haskell
+01:52:32 <letoh> 結果是 ruby
+01:53:15 <letoh> 界面還不錯
+01:53:34 <MnO2> 先撿現成的，有時間再改。
+01:53:44 <letoh> 嗯嗯
+01:54:07 <letoh> 例如  提到 haskell function 的話可以自動加連結到 wiki / doc ? XD
+01:54:45 <MnO2> 其實可以來改 lambdabot 啊
+01:54:55 <CindyLinz> 唉.. 怎麼馬上就進入 dependency hell 了... orz
+01:56:42 <MnO2> favonia: 我猜 log 兩次是因為時間有 bug
+01:57:04 <MnO2> favonia: 我主機在加州
+01:58:23 <MnO2> CindyLinz: 請愛用 cabal-dev
+02:02:35 <CindyLinz> testpack 2.1.2: Build-Depends: QuickCheck >= 2.1.0.3
+02:02:44 <CindyLinz> 不過我去看 QuickCheck 的不同版本的 code
+02:02:55 <CindyLinz> 覺得 testpack 2.1.2 應該 QuickCheck < 2.5 才行
+02:03:00 <CindyLinz> cabal-dev?
+02:03:22 <CindyLinz> 喔喔
+02:03:36 <CindyLinz> 看起來還是要解一樣的問題呀.. :Q
+03:03:18 <letoh> 好像不收 ctcp action
+11:55:21 <favonia> hychen: 是說上次你說那個 assignment/reference 有講清楚是怎麼回事啊
+11:55:30 <favonia> 他有用什麼有趣的譬喻嗎？我想學起來。
+12:00:25 <CindyLinz> cabal 最棒的是.. 把 .ghc 和 .cabal 移除(或改名)之後, 一切就可以從頭開始了.... wwwww
+12:01:16 <MnO2> ysf: hi
+12:01:33 <ysf> hi
+12:04:06 <favonia> CindyLinz: gentoo 流
+12:07:31 <CindyLinz> favonia: 這.. 如果不是因為已經陷入地獄, 我也不會這麼喜歡這方法的... wwww
+12:08:07 <favonia> CindyLinz: 反正重新 build 也不會花多少時間
+12:08:10 <favonia> 這樣很乾淨啊
+12:18:03 <_13h> 乾淨++
+12:19:59 <_13h> 為什麼 irc log 不收 ctcp action 呢? 有什麼特別原因嗎?
+12:25:48 <MnO2> _13h: Logbot 我看是有的？
+13:16:35 <CindyLinz> 喔, 因為我不知道要用哪個事件收 XD
+13:16:41 <CindyLinz> # action
+14:18:35 <hychen> favonia, 在講closure callback時說清楚的
+14:19:01 <hychen> favonia, 說明在closure callback前一個video
+16:56:51 <_13h> MnO2: 昨晚實驗一下好像沒看到
+21:06:09 <b4283> instance  Functor IO where
+21:06:09 <b4283>    fmap f x = x >>= (return . f)
+21:06:39 <b4283> 居然是 Monad
+21:10:57 <letoh> 唔...
+21:11:19 <letoh> functor 好像會多執行 f
+21:17:09 <suhorng> 每個 Monad 都是 Functor 呀
+21:17:26 <suhorng> 多執行指什麼呢？
+21:33:11 <letoh> 嗯  我記得 monad 好像是直接 return ? 每次看一看沒用到就忘了XD
+21:34:18 <suhorng> 不太懂意思
+21:34:39 <suhorng> Monad 定義的 return 跟 Functor 定義的 pure 我記得是同個東西
+21:35:21 <suhorng> A → F A 把東西丟到裡面去包起來的樣子
+21:46:41 <CindyLinz> 覺得.. 寫 haskell 應用程式.. 從頭到尾自己打造有可能才是正途..... orz
+21:46:44 <CindyLinz> (無力)
+21:48:10 <CindyLinz> 為了裝 haskelldb -> hdbc -> mysql
+21:48:21 <CindyLinz> 已經解了好幾個 package 的衝突了..
+21:48:31 <CindyLinz> 嗯, 的確是用 cabal-dev
+21:48:49 <CindyLinz> 然後把一個一個衝突的 package 複製出來, 把它的 dependency 改掉
+21:48:55 <CindyLinz> 有的是改 code..
+21:49:12 <CindyLinz> 解了一個還一個.... www
+21:49:37 <CindyLinz> 為什麼 perl cpan 沒什麼遇到這種問題呢...
+21:49:50 <CindyLinz> 依 cabal 和 cpan 的設計來比較.. perl 的問題應該比較大啊
+21:50:22 <CindyLinz> 因為 perl 的 dep 只有描述下界沒有上界, 所以 cpan 也沒辦法去比較舊的版本中找出能用的出來...
+21:51:24 <CindyLinz> 是說 haskell 開發社群比較小, 所以整體成熟度比較低, 開發者比較隨便去製造不相容更新嗎.. @@"
+21:51:37 <suhorng> 好崩潰喔@@
+21:52:49 <CindyLinz> 還是沒辦法用 haskelldb on mysql... QQ
+21:53:12 <CindyLinz> 我用 perl 直接用 socket 實作過 mysql client protocol
+21:53:58 <CindyLinz> 所以.. 要用 haskell socket 再實作一次應該是做得出來吧... 可是我只是要寫個簡單的 ticket 管理網站啊...!!!
+21:54:36 <CindyLinz> perl 實作有放 github, 可是太懶一直沒寫 doc, 不好意思放進 cpan XD
+22:12:49 <suhorng> :t (>>=)
+22:12:51 <lambdabot> Monad m => m a -> (a -> m b) -> m b
+22:13:10 <letoh> >>= 是 bind ?
+22:15:49 <suhorng> 是
+23:00:44 <letoh> b4283: ping
+23:01:01 <b4283> yeah
+23:01:18 <letoh> 你在看中文版的 mobi 嗎?
+23:01:33 <b4283> 兩天沒看了
+23:01:50 <b4283> 因為 functor 不太好懂所以英文版再看一遍
+23:01:58 <letoh> 嗯嗯
+23:02:12 <b4283> ghc 762
+23:02:15 <letoh> 因為剛剛發現奇怪的地方  不確定是不是被我搞爛的XD
+23:02:27 <letoh> 還有一句中文翻譯也很怪...
+23:02:37 <letoh> "It defines the states of a traffic light. Notice how we didn't derive any class instances for it."
+23:02:45 <letoh> 紅綠燈那邊
+23:02:59 <b4283> 哪一章呢
+23:03:03 <letoh> 8
+23:03:42 <letoh> 那邊還有一個問題是背景色也跑掉了@_@
+23:04:10 <letoh> 找了一下是原始檔的 markup 就錯了
+23:04:16 <b4283> 中文的句子意思相反
+23:04:25 <letoh> 嗯
+23:04:26 <b4283> 怎麼會這樣~~~~
+23:04:39 <b4283> <*>
+23:04:41 <letoh> 超怪的啊  剛剛看了一下有點混亂XD
+23:04:47 <letoh> lol
+23:05:10 <letoh> "Notice how we didn't derive any class instances for it."  這句怎麼翻比較好呢?
+23:05:45 <letoh> `It' 直接翻成 `他' 也很奇怪@_@
+23:07:53 <suhorng> 那把代稱的名字完整放進去呢?
+23:08:02 <b4283> 這邊注意我沒有用 deriving 設定任何 typeclass
+23:08:29 <letoh> 這樣好像沒翻到 how ?
+23:09:18 <b4283> how 好像沒必要.. 因為就是沒寫 deriving ... 罷了
+23:09:35 <letoh> suhorng: 代稱的名字是指 TrafficLight?
+23:10:15 <b4283> 不提醒搞不好沒人發現
+23:10:26 <letoh> b4283: 沒誤解的話  這邊應該是在講為什麼不使用 deriving
+23:10:35 <suhorng> 因為我不清楚原文在哪看..是 Learn you a Haskell?
+23:10:46 <letoh> suhorng: http://learnyouahaskell.com/making-our-own-types-and-typeclasses
+23:11:12 <b4283> suhorng: 找 "data TrafficLight"
+23:11:15 <letoh> 可能看一下原文的前後文比較清楚  中文版有點可怕XD
+23:11:53 <letoh> 我有做英文版的 mobi XD
+23:11:54 <suhorng> 好!
+23:11:56 <suhorng> 找到了
+23:12:58 <letoh> 從 So once 開始就覺得有點怪了XD
+23:13:58 <suhorng> 恩..原文是比較翻整段的意義
+23:14:01 <suhorng> *中文翻譯
+23:18:19 <letoh> 「當我們有了 class 以後，可以用來做些什麼呢？說實話，不多。但只要為它定義好 type instance 就可以得到一些不錯的性質。」
+23:18:22 <letoh> 這樣呢?
+23:19:55 <letoh> It 那邊直接用  「這個型別定義了...」
+23:20:40 <letoh> 但前面已經用過了  感覺好像大舌頭講兩次XD
+23:24:00 <suhorng> 感覺還好
+23:25:10 <letoh> 中文好難啊  英文都可以看完好幾遍了XD
+23:25:11 <suhorng> 反倒直接寫 TrafficLight 怪怪的XD
+23:25:39 <letoh> 嗯嗯
+23:26:04 <b4283> data ToyStoryCharacters = BuzzLightYear | Woody
+23:27:54 <suhorng> 感覺沒有翻 how 沒關係
+23:28:14 <suhorng> 要翻中文 連後面兩句一起翻然後調整一下順序可能更好？
+23:28:16 <letoh> 對啊  先用 b4283 版本
+23:29:35 <letoh> 那一段應該要一起翻譯才對
+23:38:17 <suhorng> 「...為它定義好 type instance 就可以得到一些不錯的性質。」修改成「不過一旦我們為它寫一些 instance，就會有些好功能」呢？
+23:38:26 <suhorng> functionality 翻性質有點奇怪
+23:41:21 <letoh> 想了一下還是覺得好難... type, class, instance 這些詞的中文...那句要改的話我會改成「這裡定義了紅綠燈的狀態。請注意它並不是任何 class 的實例，雖然我們可以透過 derive 讓它成為 Eq 或 Show 的實例，但我們打算手工打造。下面展示了如何讓一個型別成為 Eq 的實例：」
+23:41:49 <letoh> suhorng: 嗯  性質是目前中文版用的，我也覺得改成 `功能' 不錯
+23:42:28 <letoh> 可是 `instance' 變成 `實例' 的話，留一個 class 維持原文好像怪怪的@_@
+23:43:01 <letoh> 剛剛那句 s/實例/instance/g
+23:43:57 <letoh> suhorng: 我試一下你的
+23:53:52 <letoh> suhorng: http://tinyurl.com/b3b4npu
+23:54:22 <suhorng> 噢噢!!
+23:56:18 <suhorng> 中間那句"不多"不見了？
+23:56:48 <letoh> 那句是我翻的  我只換了你修改的部份XD
+23:57:58 <suhorng> 喔! 我原本想說那個接在你翻的「說實話，不多。」後面
+23:58:24 <letoh> 瞭解..已經改了，不過 rake generate 好慢XD

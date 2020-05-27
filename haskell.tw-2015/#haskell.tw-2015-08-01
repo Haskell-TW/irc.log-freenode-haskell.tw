@@ -1,0 +1,10 @@
+03:05:17 <monochrom> CindyLinz: 你會否考慮直接 throw exception? errnoToIOError 及 throwErrno 等等應該合用. (Foreign.C.Error)
+03:06:27 <CindyLinz> monochrom: 我在接 HFuse 的 handler, 它要我 return 一個 Errno 給它 (eOK 表示沒有出錯).  然後, 為了自己 debug 方便, 想 return 以前印出來看一下 :p
+03:06:45 <CindyLinz> 我的確是用 throw 的, throw Errno, 然後 catch 起來再 return 出去 :p
+03:07:09 <monochrom> 那麼, 我有條毒計
+03:07:12 <CindyLinz> 噢, 你指的是用 errnoToIOError 以後再利用這個 exception 的 show 嗎? XD
+03:07:56 <monochrom> 這個好, 好過我的毒計
+03:08:04 <CindyLinz> 咦! XD
+03:08:06 <CindyLinz> 說來聽聽 XD
+03:08:47 <monochrom> (throwErrno ...) `catch` (\e -> print e) 之類
+03:08:57 <CindyLinz> 好! XD

@@ -1,0 +1,112 @@
+00:00:05 <MnO2> 最後就不必return，直接跳進那個snapshot就好了
+00:00:14 <MnO2> 所以CPS never return
+00:00:29 <CindyLinz> 亂入: 9.13 確定不會缺檔了..
+00:00:50 <MnO2> touch 成功
+00:01:29 <letoh> 嗯嗯，我對於 snapshot 還不太確定，雖然在 scheme 中的 call/cc 是有這個味道
+00:02:19 <MnO2> call/cc就是 call with current continuation 啊
+00:02:22 <letoh> 不過我能不能這樣想  continuation 是某個執行點，所以把這個執行點傳進去
+00:02:31 <MnO2> 所以就是把現在的continuation帶過去
+00:02:32 <letoh> 最後就跳到這個執行點繼續跑?
+00:03:47 <MnO2> 可以這麼想啊，不過更靈活就是了，因為continuation都是first class了
+00:04:12 <letoh> 但你說的 snapshot 的話應該是要帶 closure 包住某個 context ?
+00:04:13 <CindyLinz> 沒有想過 stack 就是 continuation...
+00:04:56 <letoh> 其實是因為前兩天寫了一個小練習，突然覺得 stack / continuation 好像有點關係，但說不出來
+00:05:28 <letoh> 因為我還是用了很多 heap，感覺應該要搞懂那個 heap 轉 stack 的過程
+00:05:57 <MnO2> 搞懂可能在scheme中比較有用
+00:06:10 <MnO2> ghc應該是沒有做cps transformation
+00:06:12 <CindyLinz> letoh: 沒有 closure 的 language 要寫 CPS 會很辛苦 o.o
+00:06:45 <MnO2> 據說是lazy的好像都沒有做，不過原因還沒查到
+00:07:06 <MnO2> 雖然有lazy版的cps transformation，但可能就因為某些原因就不用吧
+00:07:24 <letoh> 嗯嗯  我是在 c 寫的XD  那再接著問，continuation 的 closure 是什麼時候建立的 ?
+00:08:32 <letoh> 先用 k 代替  因為那個字實在太長XD  k 一般是要傳進函式的吧
+00:08:42 <letoh> 例如 foo(a,b,c,k) 這樣?
+00:08:58 <MnO2> 對啊
+00:08:59 <letoh> foo 的最後要 jmp k
+00:09:10 <letoh> 那 k 參考的環境是?
+00:09:57 <MnO2> 這我沒想過耶
+00:10:11 <letoh> 因為 k 在傳來傳去的時候還沒被執行吧
+00:10:22 <letoh> 那環境要跟著 k 一起跑嗎?
+00:10:52 <letoh> 我是指跟著 k 的那一包 closure
+00:12:53 <letoh> 好吧，想不通，可能跟語言實作有關了? 這個先丟著XD 那我問 heap 到 stack 那一段好了，有什麼參考資料或具體的例子嗎?
+00:13:15 <MnO2> 應該是跟語言實做有關
+00:13:39 <CindyLinz> letoh: 你的這個 foo(a,b,c,k) 是 C 語言裡面的嗎?
+00:14:02 <letoh> 嗯  先舉例啦  或是你們習慣 foo a b c k 也可以XD
+00:14:13 <MnO2> http://fsl.cs.uiuc.edu/images/d/d5/CS422-Fall-2006-13.pdf
+00:15:00 <letoh> 感謝，我先看一下  我是知道有 transformation，但看了一下覺得不是很好懂就跳過了XD
+00:16:10 <MnO2> 應該看前面的Data跟Control Context就行了吧
+00:16:17 <CindyLinz> 喔原來哪種語言不是你要說的重點 XD
+00:16:44 <letoh> 我是用 c 沒錯，不過搞懂原理比較重要@_@
+00:16:54 <CindyLinz> 我只是想說我看過別人在 C 裡面寫, 會用一個 function pointer 加一個 void* 的 pointer 放 context
+00:17:13 <CindyLinz> 然後這個 k 函數其中一個參數要吃這個 context
+00:17:33 <letoh> 我一開始沒有這樣寫，但後來覺得 context 應該要跟著 k 跑才對
+00:17:38 <letoh> 但是有一些小問題
+00:17:49 <MnO2> favonia出現了可以問他xDD
+00:18:05 <letoh> 舉個例子好了  我有兩個函式想跳來跳去  就說是 foo bar 好了
+00:18:50 <letoh> 把 bar 當作 foo 的 k 傳進去，然後把 foo 當作 bar 的 k 傳進去  這樣對吧
+00:19:13 <letoh> 舉兩個只是為了方便，我不是想實作某 puzzle XD
+00:20:29 <letoh> 就結果來看會變成兩個函式互相呼叫的間接遞迴
+00:21:43 <CindyLinz> 像
+00:22:03 <favonia> letoh: cps 只是讓 control 很清楚而已
+00:22:32 <letoh> 因為執行的順序可以控制?
+00:24:54 <favonia> letoh: 這樣說好了
+00:25:08 <favonia> letoh: 有很多很酷的東西，像 exceptions 之類的東西
+00:25:29 <favonia> letoh: 當你把 exception 丟出去時會怎樣？
+00:25:38 <favonia> final 要什麼時候執行？
+00:25:59 <favonia> 這些東西全部都可以用 continuation 講清楚（如果你想要講清楚）
+00:26:13 <letoh> 嗯
+00:26:15 <favonia> 然後可以把 throw/catch 之類的都拿掉
+00:26:19 <favonia> 另外就是
+00:26:26 <favonia> 現在的機器上都是 jump
+00:26:35 <favonia> 這樣子可以說稍微比較底層一點
+00:26:51 <favonia> 不過這理由不怎麼樣就是（誰知道以後機器會怎麼設計）
+00:27:30 <favonia> 啊我發現到我答錯了
+00:27:36 <favonia> 你問的是 cps
+00:27:44 <favonia> 我講的是 cps translation 的目的
+00:27:47 <letoh> 我是知道 continuation 可以實作一些神奇的特性  大概都有看過
+00:28:00 <favonia> cps 只是一種寫程式的風格～你爽怎麼做就怎麼做 xDDD
+00:28:17 <letoh> 嗯  所以 translation 的目的是想把不確定的控制變成確定嗎?
+00:28:23 <favonia> 嗯
+00:28:50 <favonia> 你可以把他當作一種很酷的方法去 compile 那些函式
+00:28:53 <favonia> 打錯
+00:28:54 <letoh> 那不確定的原因是來自 lazy 嗎?
+00:28:56 <favonia> 那些語法
+00:29:19 <favonia> lazy 是確定的
+00:29:22 <favonia> 只是不一定是馬上
+00:29:30 <favonia> 你有很多方法弄啦
+00:29:37 <favonia> 可是我想會很醜～～
+00:29:54 <letoh> 嗯對... 我有點誤解 lazy 了... 我說一下我的猜想好了，不曉得對不對  我前兩天在實驗，然後發現最後好像變成 threaded model 了...
+00:30:00 <letoh> 在想這兩個是不是有啥關聯
+00:30:28 <favonia> 退 10000 步看起來應該有關，可是也不是很有關係
+00:30:45 <letoh> 唔，要退那麼多步嗎XD
+00:30:47 <favonia> 嚴格來說 lazy 只是一種實作方法
+00:30:56 <favonia> 他的語意是 strict
+00:31:00 <letoh> 阿  我不是說 lazy，我是說 cps
+00:31:07 <favonia> ?
+00:31:25 <letoh> 我是說 cps 好像最後可以變成 threaded code
+00:31:44 <MnO2> 你是指coroutine?
+00:31:44 <favonia> 你 threaded 的定義是？
+00:31:54 <letoh> http://en.wikipedia.org/wiki/Threaded_code
+00:32:05 <letoh> 就某種實作 vm 的方法
+00:32:51 <letoh> 就是十指交纏那樣的感覺 (誤
+00:33:53 <letoh> 不太會形容XD  因為我用 c 實驗，然後丟給 gcc 後再反組譯，發現似乎跟 threaded 一樣
+00:34:01 <letoh> 跟 threaded code 一樣
+00:34:32 <letoh> 然後就開始懷疑寫成 cps 最後是不是為了方便 vm 執行之類的
+00:34:54 <favonia> letoh: 我剛才看過 orz 感覺這只是最佳化方法吧 orz
+00:35:14 <letoh> 你是指 threaded code 是最佳化方法?
+00:35:40 <favonia> 嗯看起來是這樣啊？
+00:35:46 <letoh> 我不太確定，但其實我是直接寫 threaded code 的，可以把他當作一種風格
+00:36:26 <favonia> 喔喔
+00:36:31 <letoh> 當然也可能最佳化以後變成這樣啦
+00:37:05 <letoh> 不過基本上寫 forth 的人都是直接寫 threaded code @_@
+00:37:52 <letoh> 基本上就是 jmp 來 jmp 去的風格
+00:38:09 <favonia> 啊我知道差別在哪了
+00:38:26 <letoh> 嗯? 請開示
+00:38:29 <favonia> 在 Haskell 這種高階語言根本不知道底下會怎樣
+00:38:48 <letoh> 嗯
+00:47:55 <letoh> CS 有這種課啊...
+00:48:19 <favonia> letoh: 我猜可能有關吧，但我不清楚 orz orz
+00:48:52 <letoh> 唔，沒關係  我先搞清楚 cps transformation 好了  剛剛 MnO2 說了神奇的事
+00:56:18 <letoh> 看了那份 pdf 後好像有一點感覺了
+22:13:26 <MnO2> http://hackage.haskell.org/package/hermit
+22:14:18 <MnO2> 好像是可以做interactive optimization的package
+22:17:41 <MnO2> http://goo.gl/X0uDS  在Redmonk中的名次還蠻前面的

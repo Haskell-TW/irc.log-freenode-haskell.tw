@@ -1,0 +1,10 @@
+11:53:14 <CindyLinz> 想要可以定義在函數內部使用的 data.. (Haskell)
+11:54:35 <CindyLinz> 只好用 tuple 搭配  field accessor 了..  但這樣生出 data 的時候就沒有有名字的 constructor 可以用了.. QQ
+16:02:54 <CindyLinz> Carl Su 做的 haskell Docker 環境.. https://index.docker.io/u/bcbcarl/archhaskell/
+16:03:01 <CindyLinz> 只是我還不會用 Docker.. :Q
+16:48:04 <mno2> Docker 還不錯啊
+16:48:33 <mno2> 不過最近稍微看了一下 SmartOS，真的覺得 SmartOS 還蠻先進的
+16:49:03 <mno2> dtrace 可以直接 instrument production 而不會造成太多 overhead
+16:49:20 <mno2> 然後 Docker 提供的功能 Zone 就內建了
+16:49:25 <mno2> 檔案系統還是 ZFS
+17:20:30 <CindyLinz> 不知道是很快的 ZFS 還是很慢的 ZFS..

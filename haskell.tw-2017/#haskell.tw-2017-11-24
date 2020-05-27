@@ -1,0 +1,5 @@
+01:19:30 <caasih> Paul Hudak 的這本書， 2017 年還值得讀嗎？
+01:19:32 <caasih> https://www.amazon.com/Haskell-School-Expression-Functional-Programming/dp/0521644089/
+02:45:15 <monochrom> 視乎你好哪個學習方向. Hudak 應該是唯一一個一早就有 graphics 有 IO 的. 所以看你喜歡一開始就有眼睛冰淇淋還是一開始就有 pure function 和 algebraic data types.
+16:19:43 <caasih> monochrom: 我是在圖書館發現它的，今天會再去看看。
+16:20:38 <caasih> 他提到 graphic 跟 animation lib 那時是為了 Win95/NT 寫的。不知道那麼多年過去，有沒有人幫他 update XD

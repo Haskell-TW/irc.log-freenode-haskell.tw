@@ -1,0 +1,138 @@
+21:07:09 <mno2> 缺乏給 haskell 中 ~"~   講者 pool 快用完了。不知道亞洲還有哪裏有 haskell 社群。
+21:07:24 <mno2> 如果剛好旅行到新加坡的話可以順便拉來給 talk
+21:08:56 <mno2> （一直在肖想 au 什麼時候有旅行計劃 lol）
+21:09:19 <monochrom> 你們出錢請我飛過來 XD
+21:09:19 <CindyLinz> 這什麼意思? # 缺乏給 haskell 中 ~"~
+21:11:55 <CindyLinz> mno2: 講者可以 reuse 啊? 換 topic 就好啦~~
+21:12:22 <mno2> 少打講者了 xD
+21:12:46 <CindyLinz> 台灣 Funth 的講者也是一再 reuse.... (攤
+21:12:49 <mno2> 是沒錯，但交情比較好的都已經常給 talk 了
+21:12:49 <monochrom> 同一講者又有幾多topic呢?
+21:13:04 <mno2> 總不好意思一直麻煩人
+21:13:36 <CindyLinz> 不過只是4個人輪, 一年就只剩3次了 XD
+21:13:56 <CindyLinz> mno2: 只有你自己可以 re-use 喔? @@"
+21:14:33 <monochrom> 不如一齊看youtube
+21:15:00 <mno2> monochrom: 加拿大機票實在負擔不起 lol
+21:15:33 <mno2> CindyLinz: 已經有別人 reuse 啦，只是 reuse 常常只是 lightning talk
+21:15:41 <mno2> 所以一場要擺兩個
+21:15:44 <mno2> 消耗很快
+21:15:52 <CindyLinz> 這樣好浪費!
+21:16:10 <mno2> 也沒辦法
+21:16:24 <mno2> 總不能人家特別來然後二十分鐘就沒了
+21:17:13 <CindyLinz> 嗯 @@"
+21:17:54 <CindyLinz> mno2: 聽眾是固定的嗎?
+21:18:02 <mno2> 有固定班底
+21:18:35 <mno2> 不過你也知道 FP 就是註冊的人多，但大部分都是浮遊人員
+21:19:40 <CindyLinz> 台灣 Funth 出席的大約是一半固定的教友一半浮動的慕道友.. (誤
+21:20:37 <CindyLinz> 是固定班底的話, 那應該已經不只是好奇了, 是想支持這東東(如果主題是已經會了的), 或是想要深一點學到東西
+21:22:52 <CindyLinz> 也許可以講些有學術內容, 但表面看起來不一定很華麗的東西
+21:22:58 <mno2> 是沒錯，但給 talk 又是另一回事 xD
+21:23:15 <CindyLinz> 比較正式的喔? @@"
+21:25:32 <mno2> 不是啦，都可以。我的意思是有些在學的人距離願意給 talk 是有段距離的
+21:25:49 <CindyLinz> 噢噢 你指的是叫他們講啊? XD
+21:26:00 <mno2> 對啊
+21:26:02 <CindyLinz> push 他們講... 如果推得動倒是不錯...
+21:26:07 <mno2> 因為我現在就是缺講者 xD
+21:26:08 <CindyLinz> 其實我想的是你講 ^^|
+21:26:25 <CindyLinz> 如果能推他們講當然是更好 :p
+21:27:09 <mno2> 我講是可以，只是也是要定期準備就是
+21:27:31 <CindyLinz> 會累是一定的 @@"
+21:28:41 <mno2> 固定工作一定是會做，只是就會比較積極到處問有沒有剛好順道經過的
+21:28:44 <mno2> 之前就有過
+21:29:25 <CindyLinz> 嗯嗯嗯
+21:34:01 <CindyLinz> mno2: 台北有個 Hacking Thursday (也是 Thursday XD)
+21:34:30 <CindyLinz> 他們是事先把主題列出來, 叫大家想辦法去找資料自學, 然後集會的時候就請其中一個人講
+21:34:41 <mno2> 類似讀書會之類的
+21:34:52 <CindyLinz> 嗯嗯嗯
+21:35:02 <CindyLinz> 主持人應該是本來就會
+21:35:16 <CindyLinz> 最近在講 debian package 打包
+21:35:22 <mno2> 我知道日本的 haskell 東京的 haskell 集會似乎是這樣
+21:35:33 <mno2> 恩
+21:36:22 <mno2> au 沒有掛頻道了，要不然原本想問一下有沒有旅行計畫 xD
+21:36:56 <mno2> 如果 au 願意給 talk 應該會爆滿吧 lol
+21:38:21 <CindyLinz> 有在 #g0v.tw, 所以有在 irc 上, 可以 irc 私訊 XD
+21:39:33 <mno2> 剛剛有發現你丟錯頻道了 xD
+21:39:45 <CindyLinz> XD
+21:43:56 <letoh> 單純只推 FP (或某種單一主題) 的話好像推到一定程度就會停下來了?
+21:44:29 <CindyLinz> 還好 Haskell 還在 generate paper... (咦
+21:44:48 <mno2> 感覺就是 pool size 不夠大啊，而且 haskell 社群很容易程度落差很大..
+21:44:53 <letoh> 問題是講的人不一定追得上啊
+21:45:09 <letoh> CindyLinz: 你每週固定講的話應該是沒問題XD
+21:45:11 <CindyLinz> 我最近一次講的還是 2001 年的 paper, 就已經沒幾個人聽過了耶.. 至少還有 14 年份可以講.. (咦
+21:45:13 <rust> haskell 社群程度落差超大......
+21:45:30 <mno2> 對啊，像我都覺得我是最弱的
+21:45:35 <CindyLinz> ......
+21:45:49 <rust> .......
+21:45:51 <letoh> 但是要其他人也可以持續追 paper，然後又要出來分享，我覺得只能靠運氣了XD
+21:46:37 <mno2> 我是認真的啊 lol  社群有好些是做 PL 博士出來的
+21:48:14 <mno2> letoh: 對啊，除非真的很有熱情。但這樣在上班人口中實在是很難達到
+21:49:23 <CindyLinz> mno2: 要建立信仰值... XD
+21:49:39 <letoh> 話說之前還有在跑 pyhug 的時候，每次聚會應該有 1/4 的時間在自我介紹...XD
+21:50:45 <mno2> CindyLinz: 每個禮拜要讀 bible,  going to (Alonzo) Church
+21:51:39 <mno2> letoh: 是浮動人口比例也是很高嗎？
+21:51:59 <CindyLinz> mno2: (Y)
+21:52:11 <letoh> 可能那時候初期吧  每週都有不認識的人
+21:52:26 <CindyLinz> 我前幾天教一個不會寫程式的人 lambda calculus, Church encoding
+21:52:44 <CindyLinz> 旁邊還有兩三個也不會寫程式的人好奇旁聽
+21:53:12 <CindyLinz> 只有教 bool, if, 非負整數, 加法, 乘法
+21:53:30 <CindyLinz> 他說有點感覺了, 覺得很有趣...
+21:53:52 <mno2> 洗腦要從最初開始 xD
+21:53:59 <CindyLinz> 然後就給他自己想 and, or..  今天再引導他想 pair
+21:54:14 <CindyLinz> 跟他說如果 pair 弄出來了, 可以怎樣把 pair 變成 list 用
+21:54:51 <mno2> 有天份
+21:54:51 <monochrom> 你在教九陰真經給郭靖啊!
+21:57:26 <CindyLinz> 然後發現我自己還沒有想過減法和 < 比較要怎麼作, 只有勉強想出藉用 pair 的用法..   wiki 裡面列的作法快快略過去, 覺得應該是直接湊, 沒有藉用抽象結構的輔助的感覺
+21:57:40 <CindyLinz> monochrom: XD
+21:58:30 <CindyLinz> 似乎用 bool + pair(list) 也可以作整數, 然後弄那些四則運算或比較.. 也不一定需要 Church encoding 嘛?
+21:59:06 <CindyLinz> 可能效率差點(?     假裝 lambda calculus 的效率不重要 XD
+22:08:42 <monochrom> 記憶中, "n減一" 是由 (0,1) 數到 (n-1,n).
+22:27:36 <petercommand> church encoding 效率一直都不重要阿XD
+22:28:13 <CindyLinz> QQ
+22:30:02 <petercommand> 像是乘除我也不太記得怎麼做了
+22:30:19 <petercommand> *完全不記得
+22:30:41 <CindyLinz> petercommand: 會連加就行了
+22:31:35 <petercommand> 喔喔，恩恩
+23:11:43 <yen3> 話說，有人知道 parallel and concurrent programming in haskell 這本書嗎 XD?
+23:12:52 <CindyLinz> 我有買..
+23:14:09 <yen3> 電子檔 XD?
+23:14:14 <CindyLinz> 對 電子書
+23:14:27 <yen3> 我買了電子檔之後跑去買實體書 (遮臉)
+23:14:30 <CindyLinz> 我看電子書比紙本書習慣 ^^|
+23:14:51 <CindyLinz> 你應該買電子書的時候一併買實體版的 ^^|
+23:14:53 <yen3> 女友建議我多看紙本，她怕我眼睛瞎掉 XD
+23:14:57 <yen3> 對吼~!
+23:15:01 <yen3> 那時候沒想到
+23:15:23 <yen3> 不過目前進度緩慢，只看到 Ch 3 而己，想問問看看過的人的想法 XD
+23:15:41 <CindyLinz> 好像比我快.. (艸)
+23:15:45 <yen3> ...
+23:15:57 <yen3> 因為我有很多東西搞不太懂，只能反覆的看
+23:16:17 <CindyLinz> yen3: 那你多讀一些, 七月可以分享部分心得 ^^
+23:16:29 <yen3> ... Orz
+23:16:38 <yen3> 我上個月都在看 haskell XD
+23:16:47 <yen3> 這個月的主力已經不能是 haskell 了 XD
+23:16:54 <yen3> 雖然原本就會的不多 ... Orz
+23:17:19 <yen3> 如果有心得會寫在 blog 上的 XD
+23:18:27 <yen3> (目前沒有好的心得，不敢亂寫)
+23:19:38 <CindyLinz> yen3: 強迫自己講 talk 會學得很紮實.. :D
+23:20:42 <yen3> @CindyLinz 怕亂講讓別人有錯誤的認知就不好了 XD
+23:20:42 <lambdabot> Unknown command, try @list
+23:22:07 <CindyLinz> yen3: 不用擔心啊~ 會中與會後會被 challenge, 然後自己的印象會很深刻
+23:22:25 <yen3> 那麼最快也要八九月吧 ...
+23:23:10 <yen3> 我想說等看到 Ch4 or Ch5 結束再來寫 blog  XD
+23:25:05 <CindyLinz> 好歐好歐! ^^
+23:25:20 <yen3> 話說 haskell compiler 目前狀態是 XD?
+23:25:32 <yen3> 只是好奇 DX
+23:25:34 <yen3> XD
+23:26:20 <CindyLinz> 晃來晃去
+23:26:44 <yen3> XDD
+23:26:53 <CindyLinz> 收集資料中 :p
+23:27:26 <yen3> 好厲害的感覺~看來書真的要加緊看了 XD
+23:27:57 <CindyLinz> 什麼都沒有做啊~~~~
+23:28:06 <yen3> 不是在收集資料中 XD?
+23:28:26 <CindyLinz> 收集資料不用厲害啊 XD
+23:48:45 <monochrom> 我買電子書的唯一理由是平及省地方
+23:49:24 <CindyLinz> 我喜歡在交通工具上看, 帶來帶去的
+23:49:37 <CindyLinz> 現在隨時出門都帶幾十本書!
+23:49:44 <monochrom> 我已經堆積很多書及影碟了! 沒地方了!
+23:50:19 <CindyLinz> 買了掃描器.. 如果買了實體書, 也把它掃成電子版 XD
+23:50:52 <monochrom> 還有 Introduction to Algorithms by CLRS 已不可能實體書. 我怎帶回校又帶回家啊!

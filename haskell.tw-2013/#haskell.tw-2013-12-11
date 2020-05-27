@@ -1,0 +1,86 @@
+00:12:20 <suhorng> https://sourcegraph.com/blog/python-static-analysis What makes Python static ananlysis hard and interesting
+00:21:00 <mno2> https://github.com/nominolo/HTTP/commit/b9bd0a08fa09c6403f91422e3b23f08d339612eb   可以快十倍 xD
+00:32:18 <suhorng> O(n^2) => O(n)..
+10:36:02 <mno2> CindyLinz: pgrest 裝起來了
+10:36:30 <mno2> CindyLinz: 你有想好的 schema 嗎？想好我就不用再想一遍 xD
+15:15:42 <hychen> 裝pgrest?
+16:33:17 <mno2> hychen: yes,   for lazy doc project
+16:46:56 <CindyLinz> mno2: 我想用 hpaste 存,   無．schema 啊 ^^|
+16:49:14 <mno2> CindyLinz:  我的意思就是存的欄位啦。
+16:49:39 <mno2> 沒有 schema 但還是要知道存哪些東西吧
+16:51:40 <CindyLinz> backup 用嗎? key: package-module-function 然後, module 和 function 可能留空
+16:53:54 <mno2> CindyLinz: 正經一點還是要個後端 server 吧…
+17:20:07 <CindyLinz> 我也是認真覺得可行嘛... QQ
+17:36:44 <hychen> what is lazy doc project?
+17:42:44 <CindyLinz> hychen: 讀 hackage 的 doc 的時候, 可以由網友補上 code example
+17:42:51 <CindyLinz> 是一個 chrome extension
+17:45:59 <CindyLinz> hychen: https://github.com/MnO2/lazy-doc/
+17:47:03 <hychen> 這樣後端為什麼要pgrest?
+17:47:59 <CindyLinz> hychen: REST 是因為前端是 javascript app 很方便... 而 pgrest 的話.. mno2 說因為想玩 XD
+17:48:27 <hychen> pgrest現在有pgbase喔 XD
+17:51:08 <CindyLinz> 那啥?
+17:51:53 <CindyLinz> non-wysiwyg form builder...
+17:52:03 <CindyLinz> 我超討厭「non-xxxx」這種說明法.... ww
+17:52:27 <CindyLinz> 像是 NoSQL...
+17:52:45 <CindyLinz> 根本就什麼都沒說... ww
+17:57:03 <CindyLinz> 哼, 怒用 ``...`` operator 的方式使用 livescript!
+17:59:03 <hychen> https://github.com/poga/yahnc
+17:59:43 <hychen> 用websocket傳data
+18:01:27 <CindyLinz> pgbase 是 websocket server?
+18:06:21 <hychen> client
+18:06:31 <hychen> pgrest 現在可以支援websocket
+18:06:39 <hychen> https://github.com/pgrest/pgrest-websocket
+18:07:37 <CindyLinz> 噢
+18:07:57 <CindyLinz> hmmm
+22:04:01 <hychen> CindyLinz: 現在沒啥文件 XD
+22:10:27 <CindyLinz> 沒關係 XD
+22:58:34 <CindyLinz> hackage 裡面好像沒有 augmented tree?
+23:04:06 <LQYMGT> 想问一下《haskell趣学指南》有离线的文档吗？
+23:06:04 <CindyLinz> 我沒有看過這個..  等有看過的人來回答好了 ^^|
+23:06:59 <LQYMGT> 嗯……刚刚接触到
+23:07:59 <CindyLinz> 咦, 就是 learn you a haskell..
+23:08:34 <CindyLinz> 可以從這邊下載 https://github.com/learnyouahaskell-zh-tw/learnyouahaskell-zh-tw.github.com
+23:08:52 <CindyLinz> 右邊有個 Download ZIP
+23:09:04 <LQYMGT> 我知道……我git clone
+23:09:24 <LQYMGT> 不过我貌似装不上
+23:10:03 <CindyLinz> 把那個壓縮檔解開來, 應該不用 git, 可以直接用瀏覽器看啦?
+23:12:01 <mno2> LQYMGT: 目前沒有主動提供，不過 letoh 有改過，用 kindlegen 可以弄成 .mobi ，或是網上找找可能也有人弄過
+23:12:17 <mno2> LQYMGY: 或是再等等可以等到紙質版：http://book.douban.com/review/6003123/
+23:13:05 <LQYMGT> CindyLinz: git clone 跟下载解压效果一样嘛……
+23:13:14 <LQYMGT> mno2: 噢 好的 多谢
+23:13:33 <CindyLinz> LQYMGT: 我以為你是說 git 裝不起來 XD
+23:22:14 <letoh> 唔  有什麼需要改的嗎?
+23:22:26 <letoh> 不太懂裝不上是什麼意思? @_@
+23:23:44 <LQYMGT> 准确地说……bundle是哪个包的？
+23:24:07 <letoh> bundle ?
+23:24:27 <LQYMGT> README里面不是说安装是 bundle install吗……
+23:24:57 <letoh> 為什麼會跑出 bundle XD
+23:25:34 <mno2> LQYMGT:   http://dl.dbank.com/c0bzu2lez8
+23:26:25 <letoh> 我之前做好的 mobi 是有公開放出來啦  只是沒有簡中就是XD
+23:26:44 <LQYMGT> letoh: http://imagebin.org/281843 这里不是写着bundle吗……
+23:26:55 <LQYMGT> mno2: 谢了
+23:27:00 <letoh> 那個 bundle 是不是有人改錯的呢? 我手上的檔案不是這個內容XD
+23:27:09 <LQYMGT> 噗……
+23:27:16 <letoh> 我這邊寫的都是 yaourt 阿
+23:27:26 <CindyLinz> LQYMGT: 你找到 bug 了.. ._.
+23:27:32 <LQYMGT> 。。。。。。。。。
+23:28:04 <letoh> 好像是 mno2 改的XD
+23:28:14 <letoh> https://github.com/learnyouahaskell-zh-tw/learnyouahaskell-zh-tw.github.com/commit/ed91746f49b6b1c6110b67baffa1ac5b0179e463#diff-0a369498a5a8db3ac8fa606b544c9810
+23:29:16 <letoh> 唔  是指管理 ruby gem 的那個 bundle ?
+23:29:31 <letoh> 太先進了  我只會用 gem XD
+23:29:39 <LQYMGT> yaourt install也不对啊……
+23:29:44 <letoh> LQYMGT: http://bundler.io/
+23:29:47 <letoh> 我猜是這個
+23:30:20 <LQYMGT> 好吧=  =
+23:30:33 <letoh> LQYMGT: https://github.com/learnyouahaskell-zh-tw/learnyouahaskell-zh-tw.github.com/blob/34d7f53d3df1d18d4b36753a6c926e36b6cc980c/README.markdown  這是前面一點的版本
+23:31:42 <LQYMGT> 要是有个pdf就好了。。
+23:32:06 <letoh> pdf ? 這格式實在不太好XD
+23:32:26 <LQYMGT> 啊？是么……
+23:32:49 <mno2> letoh: yes,
+23:33:29 <letoh> LQYMGT: http://wanderer.tw/post/68483261378/open-web-2   不曉得你能不能看到這篇文章
+23:34:05 <LQYMGT> 有点慢 不过还是打开了
+23:37:19 <LQYMGT> 好吧..
+23:37:21 <letoh> 大概就是我覺得 pdf 不是拿來直接看的XD
+23:38:47 <letoh> 剛好工作上也有一點接觸  個人對 pdf 是有點反感XD
+23:43:59 <LQYMGT> 唔。。明白了，装了个FBReader来看了
+23:44:09 <LQYMGT> 多谢各位了，先睡了

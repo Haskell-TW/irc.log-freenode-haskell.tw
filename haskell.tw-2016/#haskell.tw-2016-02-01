@@ -1,0 +1,12 @@
+15:39:00 <suhorngM_> Haskell 現在有標準的 container typeclass 嗎?
+15:39:47 <suhorngM_> 讓我可以抽換底下資料結構但不用換 type signature...
+15:45:26 <CindyLinz> 標準的... 應該沒有標準的 (?
+15:45:42 <CindyLinz> 自己寫一個 typeclass 吧~
+15:46:00 <suhorngM_> so sad~~
+15:46:24 <CindyLinz> suhorngM_: 有哪個語言有定義這種東西嗎? @@"
+15:46:48 <CindyLinz> 標準函式庫比較巨大的像 Java C# 也都是連實作都給了 @@"
+15:47:27 <suhorngM_> CindyLinz: 因為其他語言不會有人偷懶直接用 [(a,b)] orz.....
+15:47:28 <CindyLinz> suhorngM_: Array, MArray 有
+15:47:40 <suhorngM_> CindyLinz: SML 就算有吧?  ORD_MAP, ORD_SET signatures
+15:48:01 <CindyLinz> suhorngM_: 那可能只有 SML 有? XD
+15:48:13 <suhorngM_> xDD

@@ -1,0 +1,35 @@
+00:18:48 <suhorng> http://www.haskell.org/haskellwiki/ZuriHac2013#FP_Afternoon 原來Haxl那個presentation是在這裡講的
+00:21:19 <suhorng> 是說 emacs Agda-mode 在一個 hole 中時我們可以用 C-c C-. 叫 Agda 推一個 expression 的 type
+00:22:44 <suhorng> 推完之後他會顯示在 "Have: ...", 但是有辦法把剛剛的 expression 也顯示出來嗎?
+00:23:38 <suhorng> 我只知道可以直接打在洞裡面, 一樣按 C-c C-. 讓他去推 type
+09:55:37 <MnO2> http://www.youtube.com/watch?v=E3418SeWZfQ&feature=youtu.be
+09:55:43 <MnO2> 這太白癡了 wwww
+10:10:14 <b4284> XD
+10:49:56 <petercommand> "I can't see the fking photo" XD
+10:54:52 <MnO2> He is a javatar!
+12:16:11 <CindyLinz> GHC 的功能這麼多這麼複雜.. 對 Haskell 社群有負面影響啊..... 讓人一看就害怕, 放棄寫出另一個實作....
+12:51:35 <MnO2> CindyLinz: 那 perl 5 & 6 有很多實作嗎?
+13:04:21 <CindyLinz> MnO2: 6很多, 大家都不完整(?)  5的話我常用的都是同一個, 但我不知道 ActivePerl 那些是不是額外實作
+13:06:23 <MnO2> CindyLinz: 會想要另外的實做通常都是現有實作沒辦法滿足需求。你的需求就是希望有輕量類似 Lua 那樣的實作?
+13:07:11 <CindyLinz> 可以退而求其次, compile 的時候吃比較少資源的版本 ^^|
+13:07:38 <CindyLinz> 也可能都是花在 ld..  不管啦, 反正我們公司的開發機上面不能用
+13:08:24 <MnO2> 我沒有看過 mruby，像那樣是重新再寫一遍還是說取子集啊?
+13:08:58 <MnO2> 現有的 library 會需要重新檢查一遍才能移植嗎 ?
+13:09:33 <CindyLinz> 不該檢查現有的所有 library 啊.. library 有些是綁環境的耶
+13:10:15 <MnO2> 但新的環境總需要 library 吧，全部重刻嗎?
+13:11:10 <CindyLinz> runtime 相依的當然就刻了啊 ^^|
+13:11:22 <CindyLinz> 所以 cpan 裡面有些 lib 會標榜 PP (pure perl)
+13:12:38 <CindyLinz> 然後 cpan 有自動的 matrix test, 不同 OS x 不同 lib 版本 的測試
+13:12:53 <CindyLinz> 還有 x 不同 perl 版本
+13:12:55 <MnO2> standard lib 我相信要重刻，但我覺得其他如果是 pure XX 的話不應該要重刻
+13:14:05 <CindyLinz> 還必須要求這個 pure XX 沒用到環境 depend 的 api XD
+13:14:45 <CindyLinz> 例如說它如果自己依賴了檔案名稱可以很長, 或是檔名可以無視大小寫/分辨大小寫... 還是爆了...
+13:15:01 <MnO2> 所以說才要重新檢查一遍
+13:37:34 <c9s> core modules 才要重刻吧
+13:38:15 <c9s> 不過好像也有 miniperl 的版本
+13:38:19 <c9s> 就是縮小版的 perl
+14:50:13 <MnO2> c9s 好久不見 wwww
+15:09:18 <c9s> MnO2: ohla
+18:07:08 <mno2_> http://stackoverflow.com/questions/13366083/why-does-the-arrow-operator-in-c-exist/13366168#13366168
+19:33:16 <mno2_> CindyLinz: 說實在話， tmonad 要做的事跟 simon marlow 做的事根本是一樣。只是 protocol 跟 format 是 HTTP(s)
+20:03:30 <mno2_> http://stackoverflow.com/questions/12887700/can-code-that-is-valid-in-both-c-and-c-produce-different-behavior-when-compile?rq=1  大家都好會構造 xD

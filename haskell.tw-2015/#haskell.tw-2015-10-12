@@ -1,0 +1,22 @@
+00:22:58 <suhorngT_> "HASKELL...Don't even bother trying to learn it" XDDDDDD https://i.imgur.com/E7zzQ3z.png
+00:23:08 <suhorngT_> from https://www.facebook.com/ekmett/posts/10153519798815339
+00:25:00 <monochrom> 嘻嘻
+00:26:00 <petercommand> https://hackage.haskell.org/package/hask-0/docs/src/Hask-Tensor-Compose.html 從這裡來的XD
+00:30:57 <suhorngT_> petercommand: 嚇死人啦!
+00:32:49 <suhorngT_> petercommand: 一點進去就看到 unsafeCoerce 耶怎麼辦
+00:34:08 <petercommand> XDD
+00:34:39 <petercommand> 恩，很嚇人
+00:35:58 <petercommand> 就是他自己的 library 耶
+00:37:03 <suhorngT_> wwww
+08:14:00 <lancetw> www
+09:22:10 <suhorngT_> https://twitter.com/kmett/status/652953497311277056 這是在酸最近要把 return 從 Monad m 中移掉的 proposal 嗎 XDDD
+09:24:01 <mno2> 移掉要換成麼？ link ?
+09:25:23 <suhorngT_> mno2: 已經有 Applicative => Monad 了, 有人說要把 return 換成 return = pure
+09:25:56 <suhorngT_> https://www.reddit.com/r/haskell/comments/3mb8lb/monad_of_no_return_proposal_mrp/
+09:27:11 <mno2> ohoh
+09:27:19 <mno2> suhorngT_ 今天好早
+09:27:22 <mno2> https://skillsmatter.com/conferences/7069-haskell-exchange-2015#skillscasts
+09:27:33 <mno2> https://www.reddit.com/r/haskell/comments/3ocylu/blog_post_series_on_the_elm_architecture_in/
+09:29:23 <suhorngT_> 早上請假lol
+09:36:20 <mno2> 不是當兵嗎？ 替代役？
+11:38:16 <CindyLinz> unsafePerformIO suhorng  \^o^/

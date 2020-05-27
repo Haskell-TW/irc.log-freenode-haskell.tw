@@ -1,0 +1,50 @@
+15:38:43 <mno2> https://twitter.com/jekor/status/414995501042237440
+15:40:42 <mno2> 我的公司
+15:40:55 <mno2> 意者請洽 xD
+15:42:31 <hashcat> 是做啥的
+15:48:34 <mno2> https://github.com/projectdeltasea/projectdelta/blob/master/README.md
+15:53:01 <hashcat> 百萬客戶跟9位數資金
+15:53:34 <hashcat> 真是有錢
+16:02:40 <hashcat> haskell貌似會影響使用java的心境
+16:02:55 <hashcat> prolog感覺沒啥影響
+16:03:13 <CindyLinz> 這什麼意思? # 16:02 < hashcat> haskell貌似會影響使用java的心境
+16:04:59 <hashcat> 就是會想包裝成haskell的寫法, 只要不取些抽象的名字讓人想到haskell, 看起來挺有新意的
+16:05:58 <hashcat> monad就可以偽裝變成好幾種東西
+16:06:50 <hashcat> 對完全沒寫過haskell的人很唬爛
+16:08:26 <hashcat> 這是程式禪的境界, 人機一體, 沒寫到那境界所無法想像的世界
+16:08:49 <CindyLinz> 喔 XD
+16:09:11 <CindyLinz> 獨孤九劍嗎.. XD
+16:10:02 <hashcat> 或許我該去當房屋仲介了
+16:11:28 <hashcat> prolog就只能讓我想到說要嵌一個搜尋器在java裡, 想不出什麼玩法
+17:11:55 <CindyLinz> 寫紅黑樹的時候覺得有好多左右對稱的程式... 然後就寫了兩遍 :(
+17:35:12 <hashcat> CindyLinz:不把對稱中變動的東西拔出來當參數?
+17:35:31 <hashcat> http://functionaljava.org/
+17:38:26 <CindyLinz> Jλvλ.. XD
+17:39:05 <hashcat> 根本唸不出來
+17:39:12 <hashcat> 只能照字母唸
+17:39:59 <CindyLinz> 以前去東馬來西亞, 有條河就叫作 jalam..
+17:40:26 <CindyLinz> 晚點來試試看套一層 helper function 能不能怎樣變好看
+17:45:51 <hashcat> 馬來西亞是不是阿布薩耶夫那邊
+17:46:17 <hashcat> 好像是菲律賓
+17:46:37 <hashcat> 應該都沒差, 他們貌似在這兩邊跳來跳去
+17:47:45 <CindyLinz> 東馬來西亞是在婆羅洲上
+17:50:00 <CindyLinz> 嗯.. 可能是汶萊.. 是同一趟旅程, 可能記混了 XD
+17:50:31 <hashcat> 反正我不敢去了
+17:51:33 <CindyLinz> 啊? ^^|
+17:52:21 <hashcat> 不然會被綁去喝670萬的現摘椰子水
+17:52:41 <CindyLinz> 好像有很深層不易懂的梗.. ._.
+17:54:10 <hashcat> 是最近沒在看新聞吧
+17:54:26 <CindyLinz> 對 XD
+17:54:48 <hashcat> 阿布薩耶夫組織綁走台灣觀光客張安薇
+17:55:14 <hashcat> 到手6.7M放人
+17:55:38 <CindyLinz> o.o
+17:55:52 <hashcat> 說啥綁匪待遇不錯無凌虐, 還特地去摘椰子水
+17:56:03 <hashcat> 給他待遇不錯
+17:57:14 <hashcat> 貌似我直接說去看聯合報頭版就好了
+17:58:38 <hashcat> 深層的梗就在聯合報頭版
+18:00:15 <godfat> 這觀光客還滿有錢的...
+18:01:53 <hashcat> 說不定是特別費還國務機要費出的
+18:03:19 <godfat> 聽起來頗有內幕
+18:07:35 <hashcat> 嗯各種內幕
+18:08:05 <hashcat> 雇傭兵公司台灣代理都出現了
+18:11:06 <godfat> ....

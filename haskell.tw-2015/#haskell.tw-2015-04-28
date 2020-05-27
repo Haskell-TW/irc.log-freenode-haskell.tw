@@ -1,0 +1,87 @@
+00:27:44 <mno2> http://mathoverflow.net/questions/114083/why-skolemization   皈依邪教就叫做 CindyLinzation
+02:54:31 <monochrom> 問 "(∃t. p(t)) 是不是等於 (∀r. (∀t. p(t) -> r) -> r)" 之前, 先要問 "(∃t. p(t)) 怎樣定義"
+09:35:19 <mno2> monochrom: 你的意思就是 encoding 就是定義嗎？
+09:37:18 <monochrom> 懶的話, 或高程度的話, 會說是. 但我們不一定要這樣做. 你心中有沒有喜歡的 ∃ 定義?
+09:44:20 <mno2> 我不知道耶，我甚至不知道 meta language 應該用哪一套，還有要用古典邏輯還是直覺邏輯
+09:44:38 <mno2> 當然在玩 type theory 應該都是用直覺邏輯？
+09:46:12 <monochrom> 先用直覺邏輯吧, 然後照搬去古典邏輯即可, 這方面沒分別.
+09:51:57 <mno2> 感覺就是 flolac 的投影片 Lecture 1 p51 那個？ Γ ⊢ φ [t/v]   => Γ ⊢ ∃ v. φ ?
+09:53:16 <monochrom> 那是一半. 另一半, 找 ∃-elimination
+09:56:41 <mno2> 同一頁: Γ ⊢ ∃ v. φ       Γ, φ ⊢ ψ        =>      Γ ⊢ ψ
+09:57:18 <monochrom> 是了.
+10:00:28 <monochrom> 用 ∃-elimination, 可以幫你證明 (∃t.p(t)) → (∀r. (∀t. p(t) → r) → r). (主要是用 ψ 做 r.)
+10:01:12 <monochrom> 現在我幫你做 ∀r. (∀t. p(t) → r) → r) → (∃t.p(t)). 但你要先幫我做一件事.
+10:02:31 <monochrom> 你能用 ∃-introduction, "Γ ⊢ φ [t/v]   => Γ ⊢ ∃ v. φ", 證明 ∀t. p(t) → (∃t.p(t)) 嗎?
+10:05:51 <monochrom> 或者其實我應該用 v 不用 t
+10:19:44 <mno2> 從 t 中任挑一個當作 v ，然後套用 Γ ⊢ φ [t/v]   => Γ ⊢ ∃ v. φ ，就可以得到 ∃t.p(t) ?    ( ∃ 周圍的括號應該可以忽略？）
+10:22:55 <monochrom> 那只是一半. 讓我把全部寫出來.
+10:25:27 <monochrom> 反正要寫, 不如乘機改名, ∀w. p(w) → (∃v.p(v))
+10:26:40 <monochrom> 用 ∀-intro, p(w) → (∃v.p(v))  =>  ∀w. p(w) → (∃v.p(v))
+10:27:05 <monochrom> 所以我要證明 p(w) → (∃v.p(v))
+10:28:02 <monochrom> 用 →-intro, p(w) ⊢ ∃v.p(v)  =>  ⊢p(w) → (∃v.p(v))
+10:28:47 <monochrom> (之前漏寫 很多 ⊢, 希望你能自行補上 XD）
+10:29:35 <mno2> 沒問題 :p
+10:29:38 <monochrom> 所以我要證明 p(w) ⊢ ∃v.p(v).
+10:30:48 <monochrom> 用 ∃-intro, p(w) ⊢ p(v)[w/v]  =>  p(w) ⊢ ∃v.p(v)
+10:32:02 <monochrom> 所以我要證明 p(w) ⊢ p(v)[w/v]. 這差不多做完了, 只要看出 p(v)[w/v] 即 p(w) 即可
+10:32:27 <mno2> 對
+10:32:40 <monochrom> 我是把整個證明倒轉次序寫的, 因為這才是思想順序.
+10:34:03 <monochrom> "欲征服世界, 必先征服中國. 欲征服中國, 必先征服滿蒙" 東條英機教的 (逃)
+10:35:51 <mno2> divide and conquer
+10:36:39 <monochrom> p(w) ⊢ p(w)  =>  p(w) ⊢ ∃v.p(v)  =>  ⊢ p(w) → ∃v.p(v)  =>  ∀w. p(w) → ∃v.p(v)
+10:38:06 <monochrom> 好了, 現在證明 ⊢ (∀r. (∀w. p(w) → r) → r) → ∃v.p(v)
+10:39:21 <monochrom> 使用 →-intro, 我要證明 (∀r. (∀w. p(w) → r) → r) ⊢ ∃v.p(v)
+10:41:09 <monochrom> 唔, 我怎樣出 ∀-elim 呢?
+10:41:43 <monochrom> 可能要出 cut
+10:41:49 <mno2> cut 是什麼？
+10:52:20 <mno2> https://github.com/anchor/haskell-cheat-sheets
+10:52:31 <monochrom> 這一次, 用常人的次序會好些.
+10:52:31 <mno2> https://github.com/caiorss/Functional-Programming
+10:56:51 <monochrom> 首先用 assumption, (∀r. (∀w. p(w) → r) → r) ⊢ (∀r. (∀w. p(w) → r) → r)
+10:58:11 <monochrom> 用 ∀-intro (r := ∃v.p(v)), (∀r. (∀w. p(w) → r) → r) ⊢ (∀w. p(w) → ∃v.p(v)) → ∃v.p(v))
+10:59:45 <monochrom> 另外, 先前證明了 ∀w. p(w) → ∃v.p(v), 所以也可以說, 已知 (∀r. (∀w. p(w) → r) → r) ⊢ ∀w. p(w) → ∃v.p(v)
+11:01:01 <monochrom> 現在用 →-elim, 把兩者合用, 得 (∀r. (∀w. p(w) → r) → r) ⊢ ∃v.p(v)
+11:02:20 <monochrom> 用 →-intro, 得 ⊢ (∀r. (∀w. p(w) → r) → r) → ∃v.p(v)
+11:11:44 <mno2>  (∀r. (∀w. p(w) → r) → r) ⊢ (∀w. p(w) → ∃v.p(v)) → ∃v.p(v))  到  (∀r. (∀w. p(w) → r) → r) ⊢ ∀w. p(w) → ∃v.p(v)  這一步不太懂
+11:12:04 <mno2> ∀w. p(w) → ∃v.p(v)  要怎麼代進去？
+11:13:53 <monochrom> 我先前證明了 ⊢ ∀w. p(w) → ∃v.p(v)
+11:15:11 <monochrom> 現在加些無害東西在左邊, (∀r. (∀w. p(w) → r) → r) ⊢ ∀w. p(w) → ∃v.p(v)
+11:15:30 <monochrom> 加它是因為配合整體
+11:17:45 <mno2> 喔喔，懂了
+11:17:47 <monochrom> 這個故事是用兩個支線分開來開始的, 後來才用 →-elim 把兩個支線合起來
+11:19:06 <mno2> monochrom: 謝謝 :)
+11:19:16 <mno2> 這樣兩個方向都有了
+11:19:43 <monochrom> 很有趣的習題
+11:22:33 <mno2> 可以拿來出課堂作業 xD
+11:25:44 <monochrom> 其實用 Haskell 寫, 短得多, 因為有幾個 type instantiation 不用寫. 不知是福是禍
+11:26:24 <monochrom> data E p = forall v. Etor (p v)  這個模擬 ∃v.p(v)
+11:27:19 <monochrom> h :: forall p w. p w -> E p; h = Etor  這模擬 ∀w. p(w) -> ∃v.p(v)
+11:27:58 <monochrom> 最後, f :: (forall r. (forall w. p w -> r) -> r) -> E p; f a = a Etor  就完了
+11:33:08 <mno2> type instantiation 是對應到上列證明步驟中的 代入(r := ∃v.p(v)  嗎？
+11:33:22 <monochrom> 是
+11:34:07 <cibs> 要看懂上面的證明應該看什麼基礎啊 @@ 代數嗎
+11:34:55 <monochrom> cibs, 要 intuitionistic logic, natural deduction
+11:35:11 <cibs> ok~ 感謝
+11:36:19 <monochrom> 至於 Haskell 版, 只要 Haskell 及 ExistentialQuantification, RankNTypes
+11:36:55 <cibs> 我先看懂上面再去看 Haskell 版 XD
+11:37:38 <mno2> cibs: http://flolac.iis.sinica.edu.tw/flolac12/lib/exe/lecture_1.pdf  請參考 FLOLAC 的投影片
+11:37:52 <mno2> http://flolac.iis.sinica.edu.tw/flolac12/zh-tw/logic.html
+11:38:20 <cibs> 喔喔喔~ 謝謝
+11:39:04 <mno2> cibs: 不過學 Haskell 不太需要看懂上面的證明 xD
+11:39:27 <cibs> 不是為了學 Haskell 才去看證明的啊~ :)
+11:40:00 <cibs> 有趣的東西就會令人想看懂~
+11:42:17 <monochrom> 本來我也想過乾脆提議這套投影片的, 問題是它用太多篇幅先證明 "一個 formula 的長度是...", 而為此又要先確立很多無謂的東西.
+11:44:18 <monochrom> 基本上初學的時候, 應該略去 8-15
+11:52:39 <monochrom> 我隨意瀏看到 "FLOLAC'14 唐鳳 函數設計程式的商業用途" youtube 影片
+11:53:37 <monochrom> 然後發覺背景黑版上殘留的微積分好像很吸引
+11:54:11 <monochrom> 寡人有疾, 寡人好微積分
+11:54:34 <monochrom> 孟子再世也解答不了的難題
+11:56:38 <monochrom> 啊, 原來它是討論 chain rule
+11:57:35 <monochrom> 不過 (x^2 - 1)^99999 是夠嚇人的
+14:04:14 <mno2> https://www.fpcomplete.com/blog/2015/04/ghc-prof-flamegraph  好像很有用
+14:04:39 <mno2> http://www.reddit.com/r/haskell/comments/33v4nm/ann_mote_a_tool_bringing_holedriven_development/
+14:10:59 <jle`> a/b 19
+14:11:02 <jle`> sorry
+21:22:42 <suhorngM_> 喔, 原來這裡證雙向, 是證那兩個方向. 這樣確實比較對.
+21:23:16 <suhorngM_> 那份投影片講長度那邊是花了一些篇幅在講怎麼在這上面定義函數沒錯...
+21:23:22 <suhorngM_> 我當初都跳過了

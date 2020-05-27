@@ -1,0 +1,14 @@
+10:49:49 <Yu-Lin> 話說說不定某些壓縮軟體有提供建立自解檔 -> 有喔，例如 7zip
+11:30:59 <favonia> monochrom: 我也覺得 Knuth 的那些書的呈現方法很詭異... 應該說我現在不太覺得像 Turing machine 的模型適合用來了解高層次概念。
+15:39:33 <Yu-Lin> 昨天晚上，後來在聊什麼
+18:09:52 <Yu-Lin> 準備回高雄
+18:10:05 <Yu-Lin> 回家就有時間跟心力研究 haskell 了
+18:16:40 <hashcat> 有人住高雄阿
+18:16:43 <hashcat> 嘿嘿
+21:39:47 <suhorng> Yu-Lin: 不是只建立自解檔 是(自動找temp資料夾)解壓縮後自動執行什麼程式
+23:02:29 <petercommand> 好像蠻多書提到knuth這個人
+23:04:28 <suhorng> Knuth很有名阿 XDD
+23:20:09 <letoh> XDXD
+23:37:59 <petercommand> suhorng: 我記得winrar有這個功能
+23:45:03 <suhorng> petercommand: 恩, 不過其實不是我問的啦XD
+23:46:05 <petercommand> suhorng: XD

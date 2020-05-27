@@ -1,0 +1,41 @@
+00:30:34 <godfat> 天啊旋律油然而生
+02:10:36 <letoh> https://github.com/HackerFoo/peg  # A lazy non-deterministic concatenative programming language
+02:10:40 <letoh> haskell 實作的
+13:49:58 <CindyLinz> GHC 生出來的 c source 可以跨 architecture 嗎?
+15:35:04 <mno2> CindyLinz: 之前應該是不行，但 7.8.1 可能有比較好的支援
+15:35:29 <CindyLinz> 嗯嗯 ^^
+16:28:58 <CindyLinz> ByteString 有個叫作 span 的函數, 給一個分割條件, 把一個 ByteString 切成前後兩半
+16:29:27 <CindyLinz> 例如說 (former, later) = span (/= 32) input 就可以得到沒有空白的 former, 和剩下的 later
+16:29:47 <CindyLinz> 而我在應用的時候, 其實 later 最前端的空白也是要丟掉不要的
+16:30:20 <CindyLinz> 所以之前就會再加寫一個 later' = dropWhile (== 32) later
+16:30:36 <CindyLinz> 剛剛發現配合 Arrow 的寫法不錯
+16:31:11 <CindyLinz> 寫成 (former, later) = second (dropWhile (== 32)) $ break (== 32) input
+16:31:22 <CindyLinz> (break 是 span . not)
+16:35:26 <CindyLinz> 可以再自己改成 cut p = second (dropWhile p) . break p
+16:44:30 <godfat> 應為 latter?
+16:45:17 <CindyLinz> 人家英文不好嘛 ._.
+16:45:35 <CindyLinz> 原來有 latter 這個字 orz
+16:46:05 <godfat> XDDD 我也不好.. 我發現我認得的英文其實滿侷限的 orz
+16:47:00 <CindyLinz> godfat: 我相信你英文不好! 才會拿 fat 當 id...!
+16:47:40 <godfat> XDDDD 跟人講名字真的困擾....
+17:01:44 <darkx> XDD
+19:06:50 <CindyLinz> 覺得開始常用 cabal sandbox 有個問題.....
+19:06:57 <CindyLinz> hoogle index 不到東西了 orz
+20:27:48 <CindyLinz> @pl \p -> second (dropWhile p) . break p
+20:27:49 <lambdabot> ap ((.) . second . dropWhile) break
+20:28:02 <CindyLinz> @src ap
+20:28:02 <lambdabot> ap = liftM2 id
+23:43:25 <monochrom> 想跨 architecture 可能經 llvm 較容易
+23:46:25 <CindyLinz> 嗯我還是在想著怎麼把做好的東西拿給別人用, 如果使用者不需要裝一套 ghc + cabal 的話...
+23:47:53 <monochrom> 如果只是 executable, 把 executable 抄過去就成.
+23:52:31 <CindyLinz> executable 的話 BSD linux 就不通了 @@"
+23:53:35 <suhorng> 話說 ghc 生出來的不是 C-- 嗎？我記得現在不是都不會產生 C code 了？
+23:54:55 <monochrom> 你為 BSD 造一個 executable, 交給 BSD 用家. 又為 linux 造一個 executable, 交給 linux 用家. 這行不行?
+23:55:23 <CindyLinz> 然後把 binary 放在 github 上嗎? @_@"  感覺是有點不舒服 @_@"
+23:55:48 <monochrom> ghc 很久不出 C 了. 而以前出 C 也不是真 C.
+23:56:08 <CindyLinz> 是喔 @@"
+23:56:46 <CindyLinz> 可是我要生出 BSD 的 binary, 得在 BSD 上面 build 吧? @@"
+23:57:30 <monochrom> 在 virtualbox 內裝 BSD, 在裏面 build :)
+23:57:53 <CindyLinz> wwww
+23:58:45 <monochrom> 其實用家想自己 build, 只需要 ghc, 不用 cabal, 因為還有 Setup.hs
+23:59:26 <whitglint> http://www.freebsd.org/doc/handbook/linuxemu.html 這個可以嗎？

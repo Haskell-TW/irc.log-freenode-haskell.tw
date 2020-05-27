@@ -1,0 +1,235 @@
+00:38:10 <petercommand> > (((.) (flip ($) (*))) . (((.) (.)) . ((($) ((((.) (.)) . ((((.) (+)) . (*))))))))) 1 2 3 4
+00:38:11 <lambdabot>  14
+00:38:22 <petercommand> 到底寫了啥...
+00:38:29 <CindyLinz> 賀
+00:40:07 <petercommand> 咦? ($) 的出現會一定是成對的嗎?
+00:41:37 <petercommand> CindyLinz: 這果然是邪教www XD
+00:42:30 <CindyLinz> petercommand: 目前有被真的定調為邪教的組織應該都沒有在自稱邪教的.. XD
+00:43:48 <petercommand> XD
+00:46:10 <CindyLinz> (flip ($) a) . b = ($ a) . b = \x -> (($ a) . b) x = \x -> ($ a) (b x) = b x a = flip b a x = flip b a
+00:55:03 <petercommand> 原來如此XD
+00:56:53 <petercommand> @unpl (((.) (flip ($) (*))) . (((.) (.)) . ((($) ((((.) (.)) . ((((.) (+)) . (*)))))))))
+00:56:53 <lambdabot> (\ ab c n v -> (ab * c) + (n * v))
+00:57:13 <petercommand> 竟然變雙字母XD
+00:59:32 <petercommand> @unpl ((.) (.) (.) (flip $) (.))
+00:59:32 <lambdabot> (\ f i k l -> f (i l) k)
+00:59:44 <petercommand> @unpl ((.) (.) (.) (flip $) + (.))
+00:59:45 <lambdabot> ((\ e f i k l -> e f i l k) + \ n o p -> n (o p))
+01:00:10 <CindyLinz> 真是猜不透啊... XD # 00:57 < petercommand> 竟然變雙字母XD
+01:00:30 <petercommand> 對阿，好神奇...
+01:01:33 <petercommand> 可能是a-z用完了，換aa-az
+01:01:50 <CindyLinz> 喔喔 只是中間用到的字母又被化簡掉了這樣?
+01:01:59 <petercommand> 我猜是這樣..
+01:02:22 <CindyLinz> 來比賽看看誰能製造出最多的變數名字「洞」? XD
+01:02:34 <petercommand> XDD
+01:03:13 <petercommand> 就是最多變書被化簡掉嗎?
+01:03:17 <petercommand> 變數
+01:03:26 <CindyLinz> 對啊 中間過程要盡量變出越多的變數
+01:03:49 <petercommand> @unpl (.)
+01:03:49 <lambdabot> (\ a b c -> a (b c))
+01:03:59 <CindyLinz> 題目限制就是.... 這個函數要跟 \a b c d -> a * b + c * d 等價
+01:04:00 <petercommand> @unpl ((.) (.))
+01:04:00 <lambdabot> (\ b c e f -> b c (e f))
+01:04:10 <petercommand> 喔喔XD
+01:04:23 <petercommand> 聽起來很有趣...
+01:04:29 <CindyLinz> <- 這個人自己完全不知道要怎麼下手......
+01:04:47 <petercommand> 我也不曉得XD
+01:06:26 <CindyLinz> 改成 \a b c d -> a / b - c / d 好了.. 這樣比較方便限制順序
+01:06:39 <CindyLinz> @pl \a b c d -> a / b - c / d
+01:06:40 <lambdabot> flip flip (/) . (((.) . (.) . (-)) .) . (/)
+01:07:10 <petercommand> @pl \a b c d -> a * b + c * d
+01:07:10 <lambdabot> flip flip (*) . (((.) . (.) . (+)) .) . (*)
+01:08:14 <petercommand> CindyLinz: 感覺可以透過pl來產生XD
+01:08:15 <CindyLinz> 我想.. 可能比「低密度」會比「洞數多」要好..
+01:08:29 <CindyLinz> @unpl flip flip (/) . (((.) . (.) . (-)) .) . (/)
+01:08:29 <lambdabot> (\ p f i l -> (p / f) - (i / l))
+01:08:43 <CindyLinz> 變回去了....
+01:08:46 <petercommand> 低密度是?
+01:09:29 <CindyLinz> 像你剛剛那個出現的最後一項是 ab 所以總長度是 26 + aa + ab = 28, 然後有出現的有 4 個, 所以密度是 4/28
+01:09:37 <CindyLinz> 這個比值越小越好
+01:10:04 <CindyLinz> 都在參數裡耶... 它會都變成只用到參數而已嗎? @@"
+01:10:51 <petercommand> 甚麼意思?
+01:11:00 <CindyLinz> 會不會分子一定都是 4
+01:11:08 <CindyLinz> 那比密度跟比總數就一樣了
+01:12:26 <petercommand> 喔喔
+01:14:57 <CindyLinz> @pl \a b c d -> if a < 1 then a / b - c / d else a / b - c / d
+01:14:58 <lambdabot> ap (ap . (liftM2 ap .) . ap ((.) . (.) . (.) . if' . (< 1)) (flip flip (/) . (((.) . (.) . (-)) .) . (/))) (flip flip (/) . (((.) . (.) . (-)) .) . (/))
+01:15:14 <CindyLinz> @unpl ap (ap . (liftM2 ap .) . ap ((.) . (.) . (.) . if' . (< 1)) (flip flip (/) . (((.) . (.) . (-)) .) . (/))) (flip flip (/) . (((.) . (.) . (-)) .) . (/))
+01:15:14 <lambdabot> (\ n -> return ((\ az be k -> (be >>= \ ba -> return ((\ dh e -> (return ((\ bx h i l o -> if' (bx < 1) (h i l o)) az ((\ cj v y ab -> (cj / v) - (y / ab)) az)) az dh) >>= \ b -> e >>= \ a -> return (b >>= \ bk -> a >>= \ bj -> return (bk bj))) k ba)) k) n ((\ cv ai al ao -> (cv / ai) - (al / ao)) n)) n)
+01:15:34 <CindyLinz> 娃.. 好像找到方法無限制增長了.... XD
+01:15:41 <petercommand> XDDDDD
+01:15:44 <pkmx1> iterate (unpl . pl)
+01:16:03 <CindyLinz> 不過它的分子不只是 4, 密度可能還是有得玩....
+01:16:32 <petercommand> 用if好作弊XD
+01:16:33 <CindyLinz> pkmx1: 要看運氣.. 有的會剛好變回去 XD
+01:16:49 <CindyLinz> petercommand: 它沒有把兩個 branch 作比對有沒有一樣 XD
+01:17:05 <petercommand> XD
+01:17:07 <petercommand> @pl (\ n -> return ((\ az be k -> (be >>= \ ba -> return ((\ dh e -> (return ((\ bx h i l o -> if' (bx < 1) (h i l o)) az ((\ cj v y ab -> (cj / v) - (y / ab)) az)) az dh)  >>= \ b -> e >>= \ a -> return (b >>= \ bk -> a >>= \ bj -> return (bk bj))) k ba)) k) n ((\ cv ai al ao -> (cv / ai) - (al / ao)) n)) n)
+01:17:09 <CindyLinz> 原本我想說如果會縮回去, 那我就把其中一個 - 倒過來寫之類的.. :p
+01:17:12 <lambdabot> ap (flip flip id . (ap .) . flip ((.) . (>>=)) . ((return .) .) . flip flip (flip (fmap . (. ((. (return .)) . (>>=))) . (>>=))) . (((.) . (>>=)) .) . join (return . ap ((.) . (.) . (.) . if' . (< 1)) (flip flip (/) . (((.) . (.) . (-)) .) . (/)))) (flip flip (/) . (((.) . (.) . (-)) .) . (/))
+01:17:12 <lambdabot> optimization suspended, use @pl-resume to continue.
+01:17:28 <CindyLinz> petercommand: @pl 被你玩壞.... XDXD
+01:17:37 <petercommand> XD
+01:17:49 <petercommand> @pl-resume
+01:17:51 <lambdabot> ap (flip flip id . (ap .) . flip ((.) . (>>=)) . ((return .) .) . flip flip (flip (fmap . (. ((. (return .)) . (>>=))) . (>>=))) . (((.) . (>>=)) .) . ap ((.) . (.) . (.) . if' . (< 1)) (flip flip (/) . (((.) . (.) . (-)) .) . (/))) (flip flip (/) . (((.) . (.) . (-)) .) . (/))
+01:18:39 <petercommand> 愈變愈可怕惹...XCD
+01:18:50 <CindyLinz> 我不想 @unpl 它了.... XD
+01:19:24 <petercommand> 那我來^ ^
+01:19:26 <petercommand> @unpl ap (flip flip id . (ap .) . flip ((.) . (>>=)) . ((return .) .) . flip flip (flip (fmap . (. ((. (return .)) . (>>=))) . (>>=))) . (((.) . (>>=)) .) . ap ((.) . (.) . (.)  . if' . (< 1)) (flip flip (/) . (((.) . (.) . (-)) .) . (/))) (flip flip (/) . (((.) . (.) . (-)) .) . (/))
+01:19:27 <lambdabot> (\ l -> return ((\ bz f h -> return ((\ n -> f >>= \ fi -> return ((return ((\ ds ah ai al ao -> if' (ds < 1) (ah ai al ao)) bz ((\ ee aw az bc -> (ee / aw) - (az / bc)) bz)) bz n) >>= \ y -> fmap (\ fl -> y >>= \ fo -> fl >>= \ fr -> return (fo fr)) fi)) h ((\ g -> g) h)) h) l ((\ eq bj bm bp -> (eq / bj) - (bm / bp)) l)) l)
+01:19:46 <CindyLinz> fr
+01:20:23 <petercommand> 好可怕的code...XD
+01:21:06 <CindyLinz> 還有人看得出來它是 a / b - c / d 嗎... o.o
+01:21:13 <pkmx> 比較好奇ghc可以optimize這個變成和原本一樣嗎=p
+01:21:27 <CindyLinz> hmmm....
+01:21:57 <petercommand> > (\ l -> return ((\ bz f h -> return ((\ n -> f >>= \ fi -> return ((return ((\ ds ah ai al ao -> if' (ds < 1) (ah ai al ao)) bz ((\ ee aw az bc -> (ee / aw) - (az / bc))                    bz)) bz n) >>= \ y -> fmap (\ fl -> y >>= \ fo -> fl >>= \ fr -> return (fo fr)) fi)) h ((\ g -> g) h)) h) l ((\ eq bj bm bp -> (eq / bj) - (bm / bp)) l)) l) a b c d
+01:21:58 <lambdabot>  Not in scope: ‘if'’
+01:21:59 <lambdabot>  Perhaps you meant ‘f'’ (imported from Debug.SimpleReflect)
+01:22:23 <petercommand> > (\ l -> return ((\ bz f h -> return ((\ n -> f >>= \ fi -> return ((return ((\ ds ah ai al ao -> if (ds < 1) (ah ai al ao)) bz ((\ ee aw az bc -> (ee / aw) - (az / bc))                    bz)) bz n) >>= \ y -> fmap (\ fl -> y >>= \ fo -> fl >>= \ fr -> return (fo fr)) fi)) h ((\ g -> g) h)) h) l ((\ eq bj bm bp -> (eq / bj) - (bm / bp)) l)) l) a b c d
+01:22:24 <lambdabot>  <hint>:1:123: parse error on input ‘)’
+01:22:29 <petercommand> 咦?
+01:23:07 <petercommand> > a
+01:23:08 <lambdabot>  a
+01:24:05 <CindyLinz> 欸.. if' 是什麼東東 @@"
+01:24:25 <pkmx> 壞掉惹
+01:24:37 <petercommand> XD
+01:24:45 <CindyLinz> unpl 偷偷定義了神祕 helper
+01:24:59 <CindyLinz> 拿那個還沒出現 if' 的來試好了
+01:25:39 <CindyLinz> 好像都有 if'.. orz
+01:26:29 <petercommand> @unpl \a b b if' a then b else b
+01:26:29 <lambdabot> <unknown>.hs: 1: 14:Parse error: then
+01:26:58 <pkmx> if' b t e = if b then t else e ?
+01:27:12 <CindyLinz> 可是我看它 if' 好像只有放兩個參數?
+01:27:13 <petercommand> @unpl \a b b if a  b  b
+01:27:13 <lambdabot> <unknown>.hs: 1: 8:Parse error: if
+01:27:21 <petercommand> @unpl \a b b -> if' a  b  b
+01:27:21 <lambdabot> \ a b b -> if' a b b
+01:27:32 <pkmx> @pl \b t e -> if b then t else e
+01:27:32 <lambdabot> if'
+01:27:38 <pkmx> 果然
+01:27:43 <CindyLinz> 來用 pkmx 的版本試試
+01:27:53 <CindyLinz> 喔喔 厲害
+01:28:07 <petercommand> 讚
+01:28:54 <pkmx> :t let if' b t e = if b then t else e in (\ l -> return ((\ bz f h -> return ((\ n -> f >>= \ fi -> return ((return ((\ ds ah ai al ao -> if' (ds < 1) (ah ai al ao)) bz ((\ ee aw az bc -> (ee / aw) - (az / bc)) bz)) bz n) >>= \ y -> fmap (\ fl -> y >>= \ fo -> fl >>= \ fr -> return (fo fr)) fi)) h ((\ g -> g) h)) h) l ((\ eq bj bm bp -> (eq / bj) - (bm / bp)) l)) l)
+01:28:55 <lambdabot> (Ord b, Fractional b) => b -> b -> b -> b -> b
+01:28:57 <pkmx> let if' b t e = if b then t else e in (\ l -> return ((\ bz f h -> return ((\ n -> f >>= \ fi -> return ((return ((\ ds ah ai al ao -> if' (ds < 1) (ah ai al ao)) bz ((\ ee aw az bc -> (ee / aw) - (az / bc)) bz)) bz n) >>= \ y -> fmap (\ fl -> y >>= \ fo -> fl >>= \ fr -> return (fo fr)) fi)) h ((\ g -> g) h)) h) l ((\ eq bj bm bp -> (eq / bj) - (bm / bp)) l)) l)
+01:28:59 <pkmx>   :: (Ord b, Fractional b) => b -> b -> b -> b -> b
+01:29:14 <pkmx> 看起來應該是對的XD
+01:29:49 <CindyLinz> ghc -O3 --make 之後看起來 .o 檔和 .hi 檔的 size 不一樣
+01:30:01 <CindyLinz> 執行檔也不一樣大
+01:30:05 <CindyLinz> -rwxrwxr-x 1 cindy cindy 1382253 Dec 18 01:29 a
+01:30:05 <CindyLinz> -rwxrwxr-x 1 cindy cindy 1382415 Dec 18 01:29 b
+01:31:05 <pkmx> diff一下? 搞不好只是一些metadata不一樣而已
+01:31:32 <pkmx> :t \a b c d -> a / b - c / d
+01:31:33 <lambdabot> Fractional a => a -> a -> a -> a -> a
+01:31:55 <pkmx> 欸欸欸 他生出來的版本多了一個Ord a的constraint
+01:32:28 <petercommand> 壞掉了XD
+01:32:29 <CindyLinz> 理論上一樣嘛.. XD
+01:32:39 <CindyLinz> 應該最後可以把 < 比較丟掉才對 XD
+01:33:18 <petercommand> 喔喔，原來是剛開始有a<1
+01:33:51 <pkmx> 哦哦 了
+01:34:14 <CindyLinz> 啊我是指執行檔的部分 XD
+01:40:51 <petercommand> @pl \a b c d -> if a == 1 then (a / b) - (c / d) else (a / b) - (c / d)
+01:40:52 <lambdabot> ap (ap . (liftM2 ap .) . ap ((.) . (.) . (.) . if' . (1 ==)) (flip flip (/) . (((.) . (.) . (-)) .) . (/))) (flip flip (/) . (((.) . (.) . (-)) .) . (/))
+01:43:00 <CindyLinz> 這樣應該會有 Eq
+01:43:28 <CindyLinz> @type ap (ap . (liftM2 ap .) . ap ((.) . (.) . (.) . if' . (1 ==)) (flip flip (/) . (((.) . (.) . (-)) .) . (/))) (flip flip (/) . (((.) . (.) . (-)) .) . (/))
+01:43:29 <lambdabot>     Not in scope: ‘if'’
+01:43:30 <lambdabot>     Perhaps you meant ‘f'’ (imported from Debug.SimpleReflect)
+01:43:32 <CindyLinz> orz
+01:43:49 <CindyLinz> @type let if' b t e = if b then t else e in ap (ap . (liftM2 ap .) . ap ((.) . (.) . (.) . if' . (1 ==)) (flip flip (/) . (((.) . (.) . (-)) .) . (/))) (flip flip (/) . (((.) . (.) . (-)) .) . (/))
+01:43:50 <lambdabot> (Fractional a, Eq a) => a -> a -> a -> a -> a
+01:44:12 <pkmx> @check \a b c d -> let if' b t e = if b then t else e in (\ l -> return ((\ bz f h -> return ((\ n -> f >>= \ fi -> return ((return ((\ ds ah ai al ao -> if' (ds < 1) (ah ai al ao)) bz ((\ ee aw az bc -> (ee / aw) - (az / bc)) bz)) bz n) >>= \ y -> fmap (\ fl -> y >>= \ fo -> fl >>= \ fr -> return (fo fr)) fi)) h ((\ g -> g) h)) h) l ((\ eq bj bm bp -> (eq / bj) - (bm / bp)) l)) l) a b c d == if a < 1
+01:44:13 <lambdabot>  <unknown>.hs: 1: 398:Parse error: EOF
+01:44:15 <pkmx> then a / b - c / d else a / b - c / d
+01:44:47 <pkmx> @@
+01:45:10 <pkmx> 太長了嗎XDrz
+01:47:43 <CindyLinz> 那縮一下空格? XD
+01:50:27 <pkmx> @check \a b c d -> let if' b t e = if b then t else e in (\l -> return ((\bz f h -> return ((\n->f >>= \fi -> return ((return ((\ds ah ai al ao->if' (ds<1) (ah ai al ao)) bz ((\ee aw az bc->(ee/aw)-(az/bc)) bz)) bz n) >>= \y->fmap (\fl->y >>= \fo->fl >>= \fr->return (fo fr)) fi)) h ((\g->g) h)) h) l ((\eq bj bm bp -> (eq/bj)-(bm/bp)) l)) l) a b c d == if a < 1 then a / b - c / d else a / b - c / d
+01:50:29 <lambdabot>  *** Failed! Falsifiable (after 1 test):
+01:50:29 <lambdabot>  0.0 0.0 0.0 0.0
+01:50:40 <pkmx> 0.0
+01:50:47 <CindyLinz> 真的壞了...........||
+01:50:53 <pkmx> > 0.0 / 0.0 - 0.0 / 0.0
+01:50:54 <lambdabot>  NaN
+01:50:54 <CindyLinz> 不過.. @check 是什麼作用的?
+01:51:04 <pkmx> (0 / 0) == (0 / 0)
+01:51:08 <pkmx> > (0 / 0) == (0 / 0)
+01:51:10 <lambdabot>  False
+01:51:24 <pkmx> 喔 出現NaN所以壞了XD
+01:51:25 <CindyLinz> 丟一堆隨機測試資料進去看看有沒有 False 的例子?
+01:51:37 <pkmx> 恩阿 就quickcheck
+01:51:40 <au> CindyLinz: Test.QuickCheck
+01:51:44 <CindyLinz> 喔喔 所以就是原程式不一致 XD
+01:51:55 <pkmx> 是因為跑出NaN
+01:52:08 <pkmx> NaN /= NaN in haskell
+01:52:33 <CindyLinz> 等等.. 這樣只是在這個比較的 == 的地方不一致呀
+01:52:58 <CindyLinz> 這樣看不出來原程式有沒有不一致 @@"
+01:53:45 <pkmx> @check \a b c d -> let if' b t e = if b then t else e in if b*d /= 0 then (\l -> return ((\bz f h -> return ((\n->f >>= \fi -> return ((return ((\ds ah ai al ao->if' (ds<1) (ah ai al ao)) bz ((\ee aw az bc->(ee/aw)-(az/bc)) bz)) bz n) >>= \y->fmap (\fl->y >>= \fo->fl >>= \fr->return (fo fr)) fi)) h ((\g->g) h)) h) l ((\eq bj bm bp->(eq/bj)-(bm/bp)) l)) l) a b c d == if a<1 then a/b-c/d else a/b-c/d else
+01:53:45 <lambdabot>  <unknown>.hs: 1: 400:Parse error: EOF
+01:53:47 <pkmx> True
+01:54:09 <CindyLinz> (Y)
+01:54:19 <pkmx> @check \a b c d -> let if' b t e = if b then t else e in if b*d/=0 then (\l -> return ((\bz f h -> return ((\n->f>>=\fi->return ((return ((\ds ah ai al ao->if' (ds<1) (ah ai al ao)) bz ((\ee aw az bc->(ee/aw)-(az/bc)) bz)) bz n) >>= \y->fmap (\fl->y >>= \fo->fl >>= \fr->return (fo fr)) fi)) h ((\g->g) h)) h) l ((\eq bj bm bp->(eq/bj)-(bm/bp)) l)) l) a b c d == if a<1 then a/b-c/d else a/b-c/d else True
+01:54:19 <lambdabot>  <unknown>.hs: 1: 284:ViewPatterns is not enabled
+01:54:37 <au> 用 isNaN ?
+01:56:12 <CindyLinz> 怎麼啟動了 view pattern ^^|
+01:56:34 <pkmx> 應該是那裡砍錯空白了吧...
+01:57:01 <CindyLinz> 累 ><
+01:57:42 <CindyLinz> 怎麼會有這種東西.......ww    -- ((\g->g) h)
+02:00:19 <pkmx> @check \a b c d -> let if' b t e = if b then t else e in if b*d/=0 then (\l -> return ((\bz f h -> return ((\n->f >>= \fi -> return ((return ((\ds ah ai al ao->if' (ds<1) (ah ai al ao)) bz ((\ee aw az bc->(ee/aw)-(az/bc)) bz)) bz n) >>= \y->fmap (\fl->y >>= \fo->fl >>= \fr->return (fo fr)) fi)) h ((\g->g) h)) h) l ((\eq bj bm bp->(eq/bj)-(bm/bp)) l)) l) a b c d == a/b-c/d else True
+02:00:21 <lambdabot>  +++ OK, passed 100 tests.
+02:00:56 <au> pkmx++
+02:01:39 <pkmx> 雖然不意外會過 但是還蠻神的XD
+02:02:20 <pkmx> > verboseCheck $ \a b c d -> let if' b t e = if b then t else e in if b*d/=0 then (\l -> return ((\bz f h -> return ((\n->f >>= \fi -> return ((return ((\ds ah ai al ao->if' (ds<1) (ah ai al ao)) bz ((\ee aw az bc->(ee/aw)-(az/bc)) bz)) bz n) >>= \y->fmap (\fl->y >>= \fo->fl >>= \fr->return (fo fr)) fi)) h ((\g->g) h)) h) l ((\eq bj bm bp->(eq/bj)-(bm/bp)) l)) l) a b c d == a/b-c/d else True
+02:02:21 <lambdabot>  <IO ()>
+02:04:26 <CindyLinz> 唔.. 所以關鍵是 \n->f>>=\fi->return... 改成 \n->f >>= \fi -> return... ?
+02:05:04 <pkmx> 我是重新砍空格 不知道原本錯在哪@@
+02:05:18 <CindyLinz> 欸不只.. if a<1 then... 也不見了..
+02:05:34 <pkmx> 喔 因為後面那個then和else本來就一樣啊
+02:05:45 <pkmx> 佔空間就被我砍了
+02:05:57 <CindyLinz> 嗯嗯.. 而且 == 前面那串就是用 if a<1 生出來的
+02:06:07 <pkmx> :t \n->f>>=\fi->undefined
+02:06:08 <lambdabot> parse error on input ‘->’
+02:06:22 <CindyLinz> 因為有看到 (ds<1).. 是個特徵基的 XD
+02:06:26 <CindyLinz> 因為有看到 (ds<1).. 是個特徵基因 XD
+02:06:47 <pkmx> :t \n -> f >>= \fi -> undefined
+02:06:48 <lambdabot> (FromExpr (m a), Monad m) => t -> m b
+02:07:03 <CindyLinz> 啊.. >>=\ 應該會被連著看.. (思
+02:07:16 <CindyLinz> :t \n->f>>= \fi->undefined
+02:07:17 <lambdabot> (FromExpr (m a), Monad m) => t -> m b
+02:07:58 <pkmx> 原來如此 那跟ViewPatterns有啥關係...
+02:09:15 <CindyLinz> \n -> f >>=\ fi -> return... 這邊有一個 \ 和兩個 ->  我想 \ 是去對應了第二個 ->
+02:09:22 <CindyLinz> 而中間的 -> 視為 ViewPattern 的語法
+02:09:48 <pkmx> 所以是\(n -> f>>=\fi) -> return ... 這樣XD?
+02:10:16 <CindyLinz> 嗯, 我覺得是這樣.. 因為 ViewPattern 會出現在 pattern matching 的地方
+02:10:38 <pkmx> 恩 沒關係不重要 平常根本不會這樣寫XD
+02:10:38 <CindyLinz> 而 \ 和 -> 之間接參數的就是個 pattern matching 的地方
+02:11:46 <CindyLinz> 不過 f >>=\ fi 長得不像 pattern... 所以我想就算有開 ViewPatterns, 下一步應該還是會掛.. @@"
+02:12:03 <pkmx> 是啊
+02:12:16 <CindyLinz> f :>>=\ fi 就有機會了 XD
+02:13:10 <pkmx> 這是兩個人坐著抱抱的operator XD?
+02:13:18 <CindyLinz> =口=
+02:19:56 <pkmx> http://ideone.com/naFkH9
+02:21:40 <CindyLinz> 哇 你好行動派! :D
+02:22:24 <pkmx> 其實好像不用開那麼多extension @@
+02:22:58 <CindyLinz> 好想把 (:>>=\) :: a -> b -> G a b 寫成 a :>>=\ b :: G a b .... :p
+02:23:49 <pkmx> data G a b = (:>>=\) a b 就好了 不用GADTs
+02:24:37 <CindyLinz> 這邊想要寫 data G a b = a :>>=\ b ...   嗯, 不行.. 就是想要 GADT.. XD
+02:26:45 <CindyLinz> 哇.. ideone 裡面 prelude 函數都可以點, 會跳 haddock 的網頁.. 好過份啊....
+02:27:25 <pkmx> 真的耶...
+02:27:28 <pkmx> 其它語言也有嗎...
+02:27:42 <CindyLinz> 第一次知道有這種設計 ^^|
+02:28:29 <CindyLinz> Perl 也有.. http://ideone.com/147paY
+02:29:51 <pkmx> http://ideone.com/u7angz
+02:29:57 <pkmx> 壞了吧 科科
+02:30:41 <CindyLinz> wwww
+02:30:43 <pkmx> 果然只是拿名子去match而已 不是真的去分析程式
+08:25:11 <miaoski> pkmx> 壞掉惹   #  CindyLinz 喜歡把繫西玩壞 (咦)
+08:27:14 <miaoski> 上面一堆括號頭暈了
+08:28:06 <miaoski> CindyLinz: 昨天說 monad 是哲學上的單子，完全就是因為妳也已經知道的，這個世界和噴出 hello world 之後的世界，是兩個不同的世界 (還是說平行宇宙?) 的概念啊
+08:30:01 <miaoski> 當初哲學家硬拗地球不會動這種事情，現在看其實很合理。這樣來解釋 monad 或許會比較容易 (?) 被接受？
+08:31:33 <miaoski> 反正大家都可以接受小牛頓把重力場畫成凹下去的一個東西了 (像不像單子論的托盤 :P)
+11:50:38 <cibs> 一晚沒看就冒出這麼多 pl unpl...
+11:51:44 <cibs> CindyLinz: don't mind, 會的就只有這兩個人了，妳沒看有人一臉茫然的盯著妳嗎 www 下禮拜分母會再變多，妳照妳原本步調就好 # 22:15 < CindyLinz> cibs: 奇怪.. 看起來你跟 miaoski 都已經自己讀過很多 haskell 的東西了呀... 覺得我好像應該先收集一下你們哪些部分已經會了 o.o  miaoski
+13:22:24 <miaoski> cibs: 我也是，參見正咩的概念
+13:42:02 <petercommand> @pl \a b -> (a + b) `seq` (a + b)
+13:42:02 <lambdabot> ap (ap . (seq .) . (+)) (+)

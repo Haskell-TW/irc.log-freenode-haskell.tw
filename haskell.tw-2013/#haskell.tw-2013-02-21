@@ -1,0 +1,69 @@
+10:04:23 <miaout17> favonia: Could not find module `Paths_encoding_mashup_server'
+10:04:43 <favonia> miaout17: 你用開發者模式嗎？
+10:04:48 <miaout17> Yes
+10:05:20 <favonia> miaout17: https://github.com/snapframework/snap-loader-dynamic/commit/ba03ce222b3a465029774e6b911a116c3d324602
+10:05:29 <favonia> 我之前剛送 patch 過去
+10:05:52 <favonia> 應該... 還要一點時間吧 ._.
+10:06:01 <favonia> 你可以 git clone 自己 build xD
+10:06:16 <favonia> 我是說還要時間才會發佈到 hackage
+10:06:43 <miaout17> 了解
+10:06:45 <favonia> miaout17: 我也是遇到同樣的問題，然後請教他們後就發現問題了
+10:06:54 <miaout17> static的route好像不見了
+10:07:26 <favonia> 換到 web-ui
+10:07:51 <favonia> 我不知道為什麼 app 本身複製東西會失敗（大概又是奇怪的 bug...）
+10:08:03 <favonia> 總之我把 web ui 獨立出去了
+10:08:10 <favonia> 想說要塞什麼還可以加
+10:08:53 <mno2> favonia:  改目錄之後 keter 會掛掉，他好像只認 config ，我再研究有沒有辦法改
+10:09:10 <favonia> @@
+10:09:13 <favonia> 是喔
+10:09:16 <miaout17> 喔喔，現在在/wui 看到了
+10:09:22 <favonia> mno2: 那就把他改回去吧
+10:09:41 <favonia> 我以為那是你亂取的
+10:09:53 <favonia> 如果是現有工具的限制就算了吧
+10:10:11 <favonia> miaout17: 現在比較酷炫的地方是
+10:10:16 <favonia> 如果你 cabal install
+10:10:28 <favonia> 你另外開一個新的目錄跑 server 時
+10:10:32 <miaout17> 我一陣子，現在一定要pgsql嘛？所以沒有有效的轉資料工具了
+10:10:33 <favonia> 會把檔案複製過去
+10:10:48 <miaout17> 一陣子沒碰
+10:11:39 <mno2> master 的還是 sqlite
+10:11:53 <favonia> miaout17: 不知道耶... 我個人很希望可以重複利用 char-database
+10:12:28 <favonia> 意思是說後端小工具跟前端介面用同樣的 code
+10:12:34 <miaout17> 嗯嗯，不過其實新東西都在new-server?
+10:12:44 <favonia> miaout17: 不然怎麼叫作 new xDDDD
+10:12:49 <miaout17> XD
+10:13:05 <miaout17> 想說現在應該不用改master branch了
+10:13:16 <miaout17> master branch只是舊版一個能動的snapshot而已
+10:13:30 <favonia> 可以 tag 一下
+10:13:33 <favonia> 然後就丟掉
+10:13:34 <favonia> xD
+10:14:11 <favonia> 為什麼 github 認為這個 project JavaScript 佔 60% 以上？！
+10:14:25 <mno2> jquery ?
+10:14:42 <miaout17> jquery handlebars underscore ...
+10:14:48 <miaout17> 都是3rd party的
+10:15:42 <favonia> 好ㄅ
+10:15:51 <favonia> 如果你想要的話
+10:15:56 <favonia> 可以把他砍掉
+10:16:04 <favonia> 然後 web-ui 啟動時
+10:16:10 <favonia> 自動抓新版 + minified
+10:17:16 <favonia> handlebars 沒有 minified 耶
+10:17:59 <favonia> miaout17: anyway, 我覺得這都可以在 web-ui 啟動時做
+10:18:17 <favonia> miaout17: 如果你不喜歡 wui 可以在 Site.hs 改... 我之後可能想改成 web
+10:18:27 <favonia> wui 應該沒人看得懂www
+10:20:23 <miaout17> 其實都好，我剛剛只是一時找不到而已 XD
+10:20:45 <favonia> miaout17: 跟你講個很重要的。現在 server 會去讀 snaplets 裡面的檔案，而不是 resources 裡面的檔案
+10:20:51 <miaout17> 嗯嗯
+10:21:19 <miaout17> 原本想在上班前抽一些時間看的，還沒進入狀況時間就結束了 XD (pgsql剛裝好)
+10:21:22 <favonia> 只要 snaplets 檔案還在，他就不會再複製
+10:21:44 <miaout17> 了解
+10:21:58 <favonia> 你如果覺得要怎樣亂改可以符合你的需要儘管亂改 xDDDD
+10:22:13 <favonia> 開個 branch 直接讀 resources 之類的
+10:22:36 <favonia> 或是多加個 internalUi.hs xDDD
+10:31:11 <miaout17> 其實我只想要他能動 XD 所以我現在該把轉data的格式改成支援pgsql沒錯吧？
+10:35:26 <favonia> miaout17: 嗯
+10:40:51 <favonia> miaout17: 你沒意見的話我把他改成 web
+10:45:25 <favonia> miaout17: mno2: 然後 LICENSE 還是 AUTHORS 還是哪裡都加一加吧
+13:14:37 <cataska> https://github.com/liamoc/learn-you-an-agda
+22:31:08 <Yu-Lin> 學校考 haskell 阿
+22:31:15 <Yu-Lin> 真是好學校XD
+22:31:40 <favonia> Yu-Lin: xD

@@ -1,0 +1,12 @@
+01:10:37 <CindyLinz> 發現... Control.Monad.ST 非常慢 /_\
+01:11:03 <CindyLinz> (ghc 7.10.2)
+01:37:22 <pkmx> @@
+01:44:37 <CindyLinz> 意圖使人用 unsafePerformIO 代替 rusT.......wwwwww
+01:44:44 <CindyLinz> 意圖使人用 unsafePerformIO 代替 runST.......wwwwww
+01:48:44 <CindyLinz> 剛剛測一個東西, 發現 75% 的 allocation 都是來自一個 monad ST 裡面的 pure (一個整數)
+01:49:40 <CindyLinz> 那一行 expression 是 pure $ buffer `V.unsafeIndex` i
+01:50:10 <CindyLinz> buffer 是 Data.Vector.Unboxed.Vector Int
+01:52:36 <pkmx> unsafeIndex 需要 boxing ?
+02:35:59 <CindyLinz> 要, 可是它的用量與 ST monad 的用量有數量級上的差距....w
+02:37:27 <CindyLinz> 同一個 expression, 在 ST monad 佔了 75% allocate, 在 IO monad 佔 0.1% allocate
+03:18:40 <CindyLinz> monochrom: 娃~ 那你就跟我不同時區了.. (X

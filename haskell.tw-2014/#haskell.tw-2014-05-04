@@ -1,0 +1,77 @@
+02:52:41 <CindyLinz> @pl \a b c d -> a * d - b * c
+02:52:41 <lambdabot> (. (*)) . (.) . flip . ((-) .) . (*)
+02:52:55 <CindyLinz> letoh: 你看看這個.....ww
+02:53:07 <letoh> 絕對比 forth 難讀XD
+02:53:23 <CindyLinz> XD
+03:03:00 <monochrom> 再加上深夜無眠 :)
+03:06:46 <CindyLinz> XD
+03:18:47 <letoh> @unpl (. (*)) . (.) . flip . ((-) .) . (*)
+03:18:47 <lambdabot> (\ k w d g -> (k * g) - (w * d))
+03:18:57 <letoh> 真厲害XD
+03:21:26 <CindyLinz> @pl \a b c d -> a $ b $ c $ d
+03:21:27 <lambdabot> (. (.)) . (.) . (.)
+03:21:37 <CindyLinz> 好像還好.. ._.
+03:21:55 <CindyLinz> @unpl (.) . (.)
+03:21:56 <lambdabot> (\ i b c f -> i (b c f))
+04:11:50 <monochrom> unpl 當然容易過 pl
+16:32:18 <godfat1> @src mask
+16:32:18 <lambdabot> Source not found. Just what do you think you're doing Dave?
+16:34:45 <CindyLinz> godfat: http://www.haskell.org/ghc/docs/7.6.3/html/libraries/base-4.6.0.1/src/GHC-IO.html#mask
+16:35:17 <godfat> CindyLinz, 我有 google 到舊版，感謝 XD
+16:35:59 <godfat> 我現在是在想 mask 是不是可以純靠 haskell 寫，或是需要用到 ghc scheduling 的東西
+16:38:20 <CindyLinz> godfat: killThread / throwTo 也是你自己實作的嗎?
+16:40:24 <godfat> CindyLinz, 如果是的話，mask 就能自己做嗎？
+16:41:04 <godfat> 不過這樣怎麼跑那個 thread 是否也要自己做？這樣不就變成 scheduling 了？
+16:42:18 <CindyLinz> godfat: 對啊.. 我是這樣想 ^^|
+16:42:44 <CindyLinz> 覺得 async exception 的處理, 應該就只要應付 throwTo 就夠了吧?
+16:43:15 <CindyLinz> 所以如果 thread 的實作方式還被 ghc 把持(?)住的話, 就得依 ghc 的規則走這樣...
+16:44:01 <godfat> 緣由是這樣，前陣子我在重新調整我一個 ruby lib, 之前 timeout 的部份做得很暴力，就是逾時直接 kill
+16:44:01 <godfat> 也許在新 thread 還沒關係，但是現在我要做 thread pool
+16:44:42 <godfat> thread pool 裡面的 thread 被隨便 kill 掉的話，狀態就不能保持一致了...
+16:44:43 <godfat> 然後找了很多方法看能不能解決這個問題，得到的答案都是絕望 :o...
+16:45:17 <godfat> 所以我在想這是否只能從 scheduling 下手，不知道 ruby 有沒有可能在純 ruby 下做
+16:46:12 <godfat> 正在讀這篇 http://chimera.labs.oreilly.com/books/1230000000929/ch09.html#sec_mask
+16:47:49 <godfat> 看起來 maskAsyncExceptions 跟 unmaskAsyncExceptions 可能是 native 的
+16:49:54 <godfat> 找到了 maskAsyncExceptions# :: (State# (RealWorld) -> (# State# (RealWorld),a #)) -> State# (RealWorld) -> (# State# (RealWorld),a #)
+16:49:54 <godfat> maskAsyncExceptions# = let x = x in x
+16:49:54 <godfat> http://happstack.com/docs/ghc-prim-0.2.0.0/doc/html/ghc-prim/src/GHC-Prim.html#maskAsyncExceptions%23
+16:50:29 <godfat> 我猜就是 native 的意思吧.. orz let x = x in x
+16:50:29 <godfat> 一串東西的定義都是這個
+16:58:24 <godfat> 看不太懂 uninterruptibleMask 的意義，說得好像 mask 也可以被 interrupt? 我以為只有在 restore 的地方可以？
+17:22:05 <CindyLinz> godfat: mask 可以在 restore 的地方 interrupt
+17:22:18 <CindyLinz> godfat: uninterruptibleMask 的話, 連 restort 都不能 interrupt
+17:22:42 <CindyLinz> 效能考量 ^^|  因為如果 restore 裡面要做的事已知很少, 那麼跑去切換 mask bit 很浪費
+17:22:45 <godfat> 如果 restore 也不能 interrupt, 那何必有 restore..?
+17:23:08 <CindyLinz> 形狀一樣比較方便啊 ^^|
+17:23:15 <godfat> ||||b 好吧|||
+19:05:56 <hashcat> http://www.expdev.net/urtutorial/
+19:06:10 <hashcat> ur/web架站
+19:07:05 <hashcat> 客戶端, 伺服器端, 資料庫請求一體成形, 都有很高階的型別系統
+19:08:29 <hashcat> html tag跟db query都原生物件
+19:22:33 <Yu_Lin> 問個小問題
+19:22:35 <Yu_Lin> http://www.ptt.cc/bbs/Programming/M.1399127839.A.D90.html
+19:22:50 <Yu_Lin> 我看不懂這篇想說的是什麼.....
+19:26:31 <Yu_Lin> 他是想說根據可能出現的狀態來讓編譯器決定該用什麼函數編到程式中嗎？
+19:32:47 <CindyLinz> Yu_Lin: 你接著看 PLT 板的轉載文吧, 原作者後來經過 suhorng 的提議以後, 同意他要的好像就是 reactive programming
+19:42:07 <Yu_Lin> 阿阿，這麼一說，我看懂這篇了，原來如此，感謝
+20:08:03 <Yu_Lin> 翻了前面的 log，現在不講 functional programming，改稱「程式同證明」會比較好嗎？
+20:26:49 <CindyLinz> 哪方面好啊? ^^|
+20:41:49 <Yu_Lin> fp 精神方面
+20:43:29 <CindyLinz> 這樣這個 set 好像有點小 @_@"  沒有 type 都被刷掉了, haskell 這種不 total 的也刷掉了.. 老祖宗 lambda calculus 也沒了 QQ
+21:08:40 <Guest8860> test
+21:57:14 <letoh> future condition 這說法感覺有點怪
+21:58:07 <suhorng> http://www.ptt.cc/bbs/PLT/M.1399130710.A.5AA.html 在說這篇?
+21:58:32 <letoh> 嗯  剛剛 Yu_Lin 提到這篇文章
+22:02:57 <letoh> 感覺發問者想要的就是 event-driven/observer 的設計，只是想要有好寫的語法糖?
+22:04:29 <suhorng> 我會想到 FRP! XD
+22:04:47 <suhorng> 特別是這個例子
+22:04:47 <suhorng> // update if changed
+22:04:48 <suhorng> future => changed(a,x,b){
+22:04:48 <suhorng>    y=a*x+b;
+22:04:48 <suhorng> };
+22:05:10 <letoh> 之前有看一點 FRP... 感覺只是比較潮一點的說法而已，要達到的目標好像差不多?
+22:05:24 <suhorng> ...雖然也有點聯想到 always @(a,b,c) （誤）
+22:06:37 <suhorng> 我覺得有點差, FRP應該會有些事做不到(或寫起來很奇怪. event-driven跟observer比較像是底層的實作方式
+22:07:42 <suhorng> 雖然他後來舉得例子其實比較像 event-driven/observer..
+22:08:32 <letoh> 這麼說也沒錯，改成「FRP 感覺是封裝 event-driven 的設計得到的新產物」可能比較好
+22:09:21 <letoh> 他一開始要的 y=a*x+b 這種東西，的確比較接近 FRP 想做的事

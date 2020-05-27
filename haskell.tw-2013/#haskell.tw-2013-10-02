@@ -1,0 +1,121 @@
+00:06:24 <hashcat> 有沒有prolog陣營
+00:07:05 <hashcat> 在妄想後端x10的prolog
+02:58:55 <CindyLinz> 不過我覺得 latex 的描述性不太好, 它是 favor compiler, 不是 favor user...
+02:59:27 <CindyLinz> 有些地方用起來像 state machine... @@"
+03:00:18 <CindyLinz> 這使得偶爾想要重新組織文章內容的時候會麻煩..
+03:07:55 <letoh> 現在當然是把 latex 當作 asm 來用
+03:13:09 <CindyLinz> letoh: 那, 你有用什麼比較高階的語言, 然後再 compile 成 latex 嗎? @@"
+03:13:37 <letoh> 差不多是這樣  類似 markdown 的東西
+03:13:46 <CindyLinz> 嗯嗯嗯
+03:14:13 <CindyLinz> 剛正在想說.. 不該問一個拿 forth 當水喝的人這種問題的 ^^|
+03:15:21 <letoh> 這跟 forth 沒關係啦XD  剛好 emacs 內建一些工具就直接用了
+03:15:57 <CindyLinz> 可是你看組語太順暢了啊 XD
+03:17:15 <letoh> 其實也還好啦  我比較習慣看「寫成 forth 的組語」XD
+12:19:20 <CindyLinz> letoh: 突然覺得.... 你應該也會習慣直接看 lpr 的指令 ._.
+12:19:33 <CindyLinz> 或是 ps 的指令
+12:19:46 <CindyLinz> pdf 的指令不知道是長怎樣了 XD
+12:24:11 <Yu-LIn> pdf 的指令是 ps 修改兼擴充
+12:33:13 <CindyLinz> 噢, 所以拿來當 ps 看也行 ^^
+12:37:50 <Yu-LIn> 我記得可以在 adobe 下載到舊版本的 pdf 定義，pdf 其實可以看成結構化的 ps....XD
+12:39:33 <Yu-LIn> 裡面有一個叫作 xref 的結構，這結構裡面全部只有數字，可能要翻 ascii 或 pdf 規格文件，才會知道那串數字是什麼Orz|||
+12:41:20 <Yu-LIn> 除此之外都是描述一頁是什麼，裡面有哪些東西這樣
+12:48:13 <_13h> xref 就是指到物件的表而已吧，通常是文字或影像之類的
+19:41:32 <letoh> ps 的指令我可以看一點啊，不算很熟就是
+20:34:42 <darkx> letoh: https://github.com/xatier/git_intro
+20:34:49 <darkx> 之前用過  remark 寫簡報
+20:34:53 <darkx> 基本上還不壞
+20:35:06 <letoh> 可輸出 pdf 嗎?
+20:37:03 <darkx> 似乎無法XD
+20:37:14 <darkx> 我正要說輸出成 pdf 是問題 lol
+20:37:23 <letoh> XDXD
+20:37:38 <letoh> 看來只好 print to ps 再 ps2pdf XD
+20:37:48 <darkx> 不過現在都用 html5 的時代應該沒人會在意啦(不對
+20:45:25 <CindyLinz> 以前用過 css 的 print 分頁...
+20:48:15 <letoh> darkx: 剛剛才發現是你自己的帳號
+20:51:15 <darkx> letoh: 裡面太多奇怪的東西惹 >///<
+20:51:19 <darkx> 請不要亂翻XDDDDDD
+20:51:36 <letoh> 有什麼秘密怕被我發現嗎? XD
+20:53:12 <letoh> github 的預設 avatar 什麼意義嗎? 感覺像 tetris XD
+20:55:19 <darkx> 嗚嗚Q___Q
+20:55:26 <darkx> letoh: 不知道耶
+20:56:36 <CindyLinz> g8d_r5e 是 markdown 練習 repository 嗎 >///<
+20:57:12 <darkx> 不是耶 XD
+20:57:17 <CindyLinz> 還有別人 fork.....
+20:57:21 <darkx> XD
+20:57:30 <darkx> 其實也是從別人那邊啟發的想法 lol
+20:57:32 <CindyLinz> 這應該就要推 在一起在一起在一起 了...
+20:57:53 <darkx> 人家是日本人啊  *哭*
+21:01:08 <CindyLinz> 東西好多喔.... ._.
+21:01:25 <darkx> ._.
+21:02:21 <letoh> 強大
+21:02:29 <darkx> QQ
+21:02:40 <darkx> 很多只是把作業推上來而已XD
+21:05:57 <letoh> darkx: http://www.ugo.com/tech/anime-girl  人體暖爐(?
+21:06:23 <darkx> 嗚嗚
+21:10:37 <CindyLinz> 我看過有人平常也穿玩偶裝耶~
+21:10:52 <letoh> 剛剛那個是電腦喔
+21:11:10 <letoh> 但我一時找不到完整的組裝記錄... 很多年前看到的XD
+21:11:21 <CindyLinz> 畫質太差了, 我看手和大腿的部分以為是真人 XD
+21:11:46 <letoh> 不是  那外殼是用保麗龍切的
+21:13:02 <CindyLinz> 這才是人體版 XD # https://fbcdn-sphotos-b-a.akamaihd.net/hphotos-ak-prn2/1375119_740579375968312_52655034_n.jpg
+21:13:21 <letoh> 這應該是真人裝的XD
+21:13:44 <CindyLinz> 對啊 真的人
+21:14:06 <letoh> 十之八九是日本人  日本傳統文化喜歡把自己搞成人偶
+21:14:27 <letoh> 在 acg 裡也搞這套不意外XD
+21:14:47 <Yu_lin> 發生什麼事情，怎麼在討論這個？XD
+21:14:57 <letoh> 人體暖爐XD
+21:15:14 <letoh> 剛剛在找人體造型  又會發熱的東西XD
+21:15:44 <darkx> XDDDDDD
+21:16:15 <Yu_lin> XD
+21:18:30 <CindyLinz> 我找的是人體, 不是人體造型啊~~ XD
+21:18:47 <CindyLinz> 好吧, 裡面是人體, 外面是人體造型..
+21:18:51 <letoh> XDXD
+21:18:54 <letoh> type
+21:19:13 <letoh> 人體是 instance
+21:37:12 <Yu_lin> 有什麼方便簡單的 blog 可以用嗎？想寫寫文章
+21:37:20 <Yu_lin> 如果能用 rst 是最好了
+21:37:24 <CindyLinz> 昨天剛註冊了 logdown XD
+21:37:27 <CindyLinz> rst?
+21:37:50 <Yu_lin> RestructuredText
+21:38:05 <CindyLinz> logdown 是 markdown 派的
+21:38:14 <CindyLinz> xdite 做的
+21:46:47 <Yu_lin> 看起來 lodgown 好像吃 html，來試試看好了
+21:47:29 <letoh> 原來是 xdite... 有支援直接吃 github 或 gist 嗎? XD
+21:48:45 <Yu_lin> 可以直接用 github sign up 耶XD
+21:49:51 <Yu_lin> 下面那一排 Link 居然沒有 plurk 嗎....？
+21:53:40 <CindyLinz> 我昨天才在問他.. # 21:47 < letoh> 原來是 xdite... 有支援直接吃 github 或 gist 嗎? XD
+21:54:02 <letoh> 所以應該很快就會有了? XD
+21:54:43 <CindyLinz> 他說「有計劃排入架構...目前還是 db backend ....」
+21:55:03 <letoh> 嗯嗯... gist 是別人的 db XD
+21:55:04 <CindyLinz> 現在應該就自己用 git 寫完以後
+21:55:11 <CindyLinz> 複製--貼上--- XD
+21:55:24 <letoh> 好麻煩XD
+21:55:38 <CindyLinz> 其實只要能用 git push 上去我覺得就很方便了, 不見得要 github
+21:55:52 <CindyLinz> 反正有 git, 我自己可以設兩個不同的 remote ^^
+21:56:05 <letoh> 也是啦
+21:56:19 <letoh> 我現在很多程式也是都兩個 remote
+22:16:15 <favonia> xref 就是很噁心的 pointer 啊 lol
+22:16:50 <letoh> 這麼說也沒錯XD
+22:48:21 <petercommand> CindyLinz: 我看到同一串XD
+23:08:39 <Yu_lin> 可惡，用 sml 要自己解決 UTF8，可是用 haskell 會遇到 monad，好煩阿XD
+23:10:32 <hashcat> 對monad有困難
+23:13:31 <CindyLinz> petercommand: 啊?
+23:14:02 <CindyLinz> Yu_lin: 那把 monad desugar 以後再用會比較順手嗎?
+23:14:11 <CindyLinz> 其實我是說 do-notation ^^|
+23:15:44 <Yu_lin> 寫 monad 對我來說沒問題，可是要解釋這東西就會出問題XD
+23:17:02 <Yu_lin> 比較怕的是同時出現兩個 monad 的時候，我覺得不太好處理
+23:19:52 <petercommand> CindyLinz: git integration那個留言呀
+23:25:30 <hashcat> 兩個monad不會互相怎樣阿
+23:28:08 <hashcat> 不喜歡用monad可以用Arrow
+23:30:23 <hashcat> 用mercury好了嘿
+23:30:36 <mno2> 我想 Yu_lin 是說兩個 Monad 長得不太一樣的時候吧。  如果是 monad transformer 疊的東西又不太一樣就比較討厭。大絕就是都 run 成 IO
+23:31:04 <mno2> blog 我覺得 scriptogr.am 還不錯耶
+23:31:21 <mno2> 貼到 dropbox 裡面就好了
+23:33:09 <mno2> markdown 還是本地端的軟體好用.. 所以 dropbox 對我來說比較順手
+23:34:31 <mno2> 如果喜歡 markdown 的話可以參考這篇 -> http://scriptogr.am/wastemobile/post/markdown-publishing
+23:34:35 <mno2> RST 就不知道了 ..
+23:38:50 <petercommand> 本地做note的話，我覺得lonote蠻好用的
+23:47:08 <CindyLinz> Yu_lin: 這 monad 是你建立出來的, 不是 library 提供的介面喔?
+23:49:11 <Yu_lin> 不是阿XD
+23:49:24 <Yu_lin> 阿，不是我自己寫的阿
+23:55:17 <CindyLinz> Yu_lin: 嗯, 因為你說要「解釋」, 所以以為是你自己寫的 lib, 要寫 doc 給別人看之類的

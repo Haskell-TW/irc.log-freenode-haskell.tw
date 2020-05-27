@@ -1,0 +1,38 @@
+00:49:14 <monochrom> suhorngM_: 並不是 Haskell 問題, 而是 Haskell 說明問題. 假設世上有個 set 介面, 不要求會員支援 < 或 hash, 甚至不要求會員支援 ==
+00:51:24 <monochrom> 首先, 真的連 == 都不用嗎? 那麼怎做 lookup? (Java 出術, 把 equals 藏在 Object 裏, 所以外表以為不用說出來)
+00:52:59 <monochrom> 是需要 == 的. 現在假設有 set 介面只要求 ==. 試想像我有某 data type X, 它支援 == 但沒有 <, 亦沒有 hash.
+00:56:34 <monochrom> 然後我又有某 algorithm P, 它會開個新 set, 把一些 X 值加入為會員, 稍後又會 lookup, 問某 X 值是否會員. 我這個 P 扮成很開通, 它說: 任你選擇任何符合 set 介面的實作set.
+00:56:47 <monochrom> 真的任你㨂嗎?
+00:57:20 <monochrom> 你不能㨂 binary search tree, 因為我的 X 沒有 <
+00:57:31 <monochrom> 你不能㨂 hash table, 因為我的 X 沒有 hash
+01:00:25 <monochrom> 這個問題並不是 Haskell type system 或任何 static type system 造成的. static type system 只是提早指出問題. 假設你用 dynamic typing, 那麼就是等到 run time 才彈出 "我找不到 < 實作", 問題從來揮之不去.
+01:10:47 <monochrom> 所以 Java 終於明白這點, 定出 ordered dictionary 介面, 講明要求 Comparable. 這是肯定 Haskell 的貢獻.
+01:11:50 <monochrom> (只於 hashed dictionary, Java 出術, 把 hashCode 也藏在 Object 裏, 外表以為不用說出來)
+19:23:48 <suhorngM_> 好奇怪 假如有個 container 介面的話沒問題吧
+19:29:13 <suhorngM_> 雖然大概真的沒有用處..
+19:44:52 <suhorngM_> 嗯...舉例來說, 有個函式 runLocal :: (MonadState (Container key val) m) => ....
+19:47:02 <suhorngM_> 那在 key 上面加限制不會很怪嗎? 若是類似 runLocal :: (Container c k v, MonadState c m) => .... 可以把 k 上的限制丟給 Container class 的 instances
+19:47:28 <suhorngM_> 這樣子改換底下的 container 時, 不必去改動這些 utility functions.
+19:47:41 <suhorngM_> 如果說一開始就要給最強的限制當然也是啦..
+20:58:53 <CindyLinz> 我以為糾結的關鍵是要不要由「官方」來作欸?
+20:59:16 <CindyLinz> 我覺得這跟社群文化方面比較相關
+21:00:07 <CindyLinz> 而除了 GHC standard library 以外, 比較有威信的開發者或團體弄的一組 library 也會有類似「官方」的性質吧
+21:20:51 <suhorngM_> 嗯Q_Q
+21:21:02 <suhorngM_> 肯定是個不重要的事情沒人在乎
+21:29:08 <CindyLinz> suhorngM_: 有時間的話你可以瀏覽看看一些有這種性質的 library, 被使用的次數高不高...
+21:29:11 <CindyLinz> 像是 data-default
+21:29:35 <CindyLinz> suhorngM_: https://hackage.haskell.org/package/data-default-0.5.3/docs/Data-Default.html
+21:30:04 <CindyLinz> 這個應該有像你心目中的, 定規格的 library 吧?
+21:31:12 <CindyLinz> 乾脆你就寫一個 containers 的 class 丟到 hackage 吧?
+22:05:09 <suhorngM_> 我有在 hackage 上找到 deprecated 的呀(撞牆)
+22:05:30 <CindyLinz> deprecated 的理由呢?
+22:05:54 <CindyLinz> 常見的是作者不想維護了, 或是有替代品了
+22:06:15 <CindyLinz> 有替代品的話就用替代品, 作者不維護的話那就你維護 XD
+22:07:10 <suhorngM_> 嗯..唔....
+22:08:53 <CindyLinz> 哪一個啊?
+22:09:47 <suhorngM_> 噢 我找到 monochrom 說的 Edison lib 了...來仔細看看
+22:12:08 <suhorngM_> 也許我該直接用大砲...lenses?
+22:12:31 <CindyLinz> lenses 不是實用的啊~
+22:12:44 <CindyLinz> 不過可以把想用到的部分複製出來就好 :p
+22:13:57 <suhorngM_> 唔喔神秘 http://hackage.haskell.org/package/keys-3.11/docs/Data-Key.html
+22:27:30 <petercommand> 我竟然把 Cofree 看成 Coffee 了..XD

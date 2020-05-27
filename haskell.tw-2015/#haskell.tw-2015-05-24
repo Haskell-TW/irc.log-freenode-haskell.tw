@@ -1,0 +1,59 @@
+00:01:42 <suhorng> mno2: 除了 Types and Programming Languages 這本書會有, 這篇 tutorial http://web.cecs.pdx.edu/~mpj/pubs/springschool95.pdf 裡面有提到一些(section 4), 我想應該會給一些相關的 reference
+00:02:09 <suhorng> 雖然它在講的是其他事
+00:04:38 <suhorng> mno2: 不知道這想對不對 不過應該不用動 unification; 每定義一個 data type 就等同介紹新的一套 inference rule
+00:05:28 <monochrom> 做 unification　時, 把 Maybe 當恆數便是
+00:05:29 <suhorng> 而且有 constructor & pattern matching, 對於 recursive type 等同有適當地位置提醒 type system 要把東西收/放, 應該沒有差
+00:13:31 <monochrom> 舉例: 問 "Maybe x = y" 可不可 unify? 答: 可, y := Maybe x 便成
+00:13:55 <monochrom> 舉例: 問 "Maybe x = m y" 可不可 unify? 答: 可, y := x, m := Maybe 便成
+00:16:04 <monochrom> 舉例: 問 "Maybe x = Option x" 可不可 unify? 答: 不可, 因為 Maybe = Option 矛盾
+00:17:34 <monochrom> 其實第二題應這樣解: "Maybe x = m y" 可不可 unify? 答: 問 "Maybe = m" 可不可 unify, 及 問 "x = y" 可不可 unify.
+02:15:03 <fayong> 1/ignore #haskell.tw MODES JOINS PARTS QUITS
+09:07:20 <mno2> suhourng: 都算有吧。一開始是想問 monochrom 回答的 unify 演算法部分。
+09:07:37 <mno2> https://inst.eecs.berkeley.edu/~cs164/sp11/lectures/lecture22.pdf  後來 google 到投影片就知道演算法了
+09:08:41 <mno2> 就會有點好奇實際在 haskell 實做的這些 type 的 runtime 表示法是什麼？從投影片的實作猜測會是一個 Graph 就是了
+09:10:35 <mno2> 另外一點就是， Haskell98 的推論系統的 recursive types 就是像這一篇 lecture note 一樣加兩條 fold / unfold rule 就可以了嗎？  http://www.cs.cornell.edu/Courses/cs6110/2013sp/lectures/lec34-sp13.pdf
+09:11:08 <mno2> 也就是說根據語法 type constructor / data constructor 是否有 rec 來決定是否用陽春的 unification，或是要用 fold / unfold rule ?
+09:14:54 <mno2> 我覺得 type constructor 真的是個不錯的設計，方便很多。我原本還以為需要苦工一個一個用 Church Encoding 來建立常見的 data type, 像是 pair, tuple 之類的。
+09:15:13 <mno2> 而且有 type system 好像還會帶來其他問題 https://pavpanchekha.com/blog/pair-types.html
+14:42:31 <suhorng> mno2: 我的理解是這樣的: unification 跟 fold/unfold rule 是兩件獨立的事
+14:43:01 <suhorng> 給定如下的 (function application) inference rule:
+14:43:25 <suhorng> Γ |- e1 : α → β     Γ |- e2 : α
+14:43:30 <suhorng> ----------------------------------
+14:43:42 <suhorng>             Γ |- (e1 e2) : β
+14:45:55 <suhorng> 轉換成演算法時, 當輸入是 (Ap e1 e2), 這個 inference rule 說的事情就是還有某個未知的 type α 且跟 e1 的 type 是 α→β; e2 的 type 是 α
+14:46:59 <suhorng> 寫出來就像 do { alpha2beta <- infer cxt e1; alpha <- infer cxt e2;   beta <- freshVar;  unify alpha2beta (TAp alpha beta);  return beta }
+14:47:36 <suhorng> unification 的做用就是像這樣, inference rule 會給出很多 equations, 然後 unification 把這些 equations 解出來
+14:48:06 <suhorng> 所以 fold/unfold 也一樣, 就是另一條 inference rule, 會產生 equations
+14:49:14 <suhorng> 至於後面說的 "type system 帶來其他問題" 其實就只是 "HM 不足以表達這些 church encoding"; 其實 System F 是可以的
+14:50:41 <suhorng> runtime 實作的部份應該跟這邊是完全兩回事, 而且 GHC 的實作又跟 SML/OCaml 一派差超級多
+14:54:08 <mno2> 恩恩，我理解。這樣說來，haskell compiler 應該是有這一條 rule  就是？
+14:54:28 <suhorng> 然後像 data 這樣應該還會有 kind system, 有 kind inference/checking
+14:54:47 <mno2> 就是「也就是說根據語法 type constructor / data constructor 是否有 rec 來決定是否用陽春的 unification，或是要用 fold / unfold rule ?」這句話，撇除掉 unification 用詞不精準外，應該是有這條 rule 在 compiler 裡面？
+14:55:20 <mno2> 在 haskell98 裡面，kind 感覺就只有 check arity ?
+14:56:17 <suhorng> 加那兩條 rule 應該是可以吧 不過寫成直接對於 constructor / pattern matching 的 inference rule 應該更簡單好懂
+14:56:47 <suhorng> 對於 arity 應該還多一點, 比如我們不能寫 data A_A f = A_A (f Int) f
+14:57:47 <suhorng> 最後的 kind 也必須是 *
+14:58:10 <mno2> suhorng: 同意。寫成 constructor / pattern matching 的 inference rule 比較好
+14:59:16 <mno2> 喔喔，對齁。又是另外一層 expression, lol
+15:00:12 <mno2> suhorng: 太通透了
+22:47:07 <suhorng> Array 沒有 fold, 真神奇@@
+22:51:33 <suhorng> :t (I.!)
+22:51:35 <lambdabot>     Not in scope: ‘I.!’
+22:51:35 <lambdabot>     Perhaps you meant one of these:
+22:51:35 <lambdabot>       ‘M.!’ (imported from Data.Map), ‘IM.!’ (imported from Data.IntMap)
+22:51:47 <suhorng> listArray (2,5) [2..5]
+22:51:53 <suhorng> > listArray (2,5) [2..5]
+22:51:55 <lambdabot>  array (2,5) [(2,2),(3,3),(4,4),(5,5)]
+22:52:02 <suhorng> :t (A.!)
+22:52:04 <lambdabot>     Not in scope: ‘A.!’
+22:52:04 <lambdabot>     Perhaps you meant ‘M.!’ (imported from Data.Map)
+22:54:04 <suhorng> (listArray (2,5) [2..5]) ! 3
+22:54:14 <suhorng> > (listArray (2,5) [2..5]) ! 3
+22:54:15 <lambdabot>  3
+22:54:21 <suhorng> :t (!)
+22:54:22 <lambdabot> Ix i => Array i e -> i -> e
+22:57:37 <suhorng> 不知道 Unboxed 的 elems 產出來的 list 有沒有 fusion...
+23:46:53 <suhorng> 唔, 不瞭解為何 Data.Array.IArray 介面中的函數這麼少...
+23:48:06 <suhorng> 像是建立 array 沒有 (Int,Int) -> e -> a i e 和 (Int, Int) -> (i -> e) -> a i e 這兩個
+23:48:14 <suhorng> 雖然都可以用 listArray 配 list comprehension 弄啦..
+23:56:21 <suhorng> 想問一下, 像這裡的範例中那個反斜是什麼? https://hackage.haskell.org/package/array-0.5.0.0/docs/Data-Array-IArray.html#v:accum

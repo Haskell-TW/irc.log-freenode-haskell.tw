@@ -1,0 +1,123 @@
+12:04:14 <favonia> Unsafe 是新語言嗎？
+13:47:11 <CindyLinz> @pl \a b c d -> a * b + c * d
+13:47:11 <lambdabot> flip flip (*) . (((.) . (.) . (+)) .) . (*)
+13:54:28 <petercommand> @unpl \a b c d -> a * b + c * d
+13:54:28 <lambdabot> \ a b c d -> (a * b) + (c * d)
+13:54:51 <petercommand> @unpl flip flip (*) . (((.) . (.) . (+)) .) . (*)
+13:54:51 <lambdabot> (\ p f i l -> (p * f) + (i * l))
+16:05:23 <CindyLinz> miaoski: 其實.. 給你專用的那個充滿 unsafeCoerce 的 gist 是可以在 ghci compile 過的..
+16:05:49 <miaoski> CindyLinz: .....@@
+16:05:51 <CindyLinz> miaoski: 它是個 valid expression... 而如果要用 ghc --make 的話, 其實也只要在最前面補一個 main = 就可以了 XD
+16:06:03 <miaoski> 原來...
+16:06:15 <miaoski> * ror * +
+16:08:13 <CindyLinz> haskell 的 (.) 只能傳遞一個參數.. forth 的.....直接接著擺word.....可以傳遞 N 個, 視當下 stack 上面有幾個就一併傳過去了
+16:08:37 <miaoski> * ROT * +   -- 我背錯指令了
+16:08:56 <CindyLinz> \a b c d 這邊有這麼多個參數... 我直覺覺得那邊一堆 (.) . (.) . 之類的東西是在作出一次搬動好幾個參數的效果
+16:09:25 <CindyLinz> 還要配合 flip.. XD
+16:09:44 <CindyLinz> 翻到最頂部才能搬, 然後搬完再 flip 回去之類的
+16:38:48 <CindyLinz> 我手動練習了一次 point-free 轉換 \a b c d -> a * b + c * d
+16:40:23 <CindyLinz> 不過我用到了 operator section 的寫法, 剛好就不需要 flip 了.. # https://gist.github.com/CindyLinz/b7c08b33f7235a0b7655
+16:44:33 <miaoski> (doh) 看到第 7 行頭就開始痛了
+16:44:59 <CindyLinz> miaoski: 6->7 還是 7->8 ?
+16:49:49 <miaoski> CindyLinz: 別介意了... 頭痛是累積的
+16:50:19 <CindyLinz> QQ
+16:55:54 <cibs> 我才正想手動練習一次就看到巨人的肩膀了
+16:56:23 <cibs> 奇怪一個寫 lisp/forth 的人怎麼會因為看 haskell 頭痛呢
+16:57:02 <CindyLinz> 可以自己練習一次.. 練完這一組應該所有沒遞迴的函數都可以處理了....
+16:57:11 <CindyLinz> 然後就恭喜獲得一項無用技能 XD
+16:58:19 <CindyLinz> 欸不對 練完這一組應該還不熟怎麼用 flip 處理中間遇到 N 個參數的函數時要怎麼翻
+17:09:42 <miaoski> cibs: 我是黑手
+17:45:56 <cibs> 深深的覺得練這組之後寫 lisp 會變強 # 在跟括號奮鬥中
+17:56:09 <CindyLinz> 好像有一點.... @@"
+18:10:18 <cibs> 我拆出來變成這樣 (.) ((flip (.) (*) . (.)) . (+)) . (*)
+18:12:54 <CindyLinz> flip (.) (*) = (. (*))
+18:13:30 <CindyLinz> 不過還是不一樣... 真是沒有唯一解啊 ^^|
+18:13:56 <cibs> 感覺轉一轉就會 formal 了
+18:14:00 <CindyLinz> 選用 * 和 + 的壞處是測試不出來有沒有不小心翻錯的
+18:14:27 <cibs> 我是習慣先把 operator 丟到前面 prefix
+18:16:43 <CindyLinz> 我的 ((((. (*)) . (.)) . (+)) .) . (*) = (((flip (.) (*) . (.)) . (+)) . (*) 好像跟你只差在最前面一個 (.)
+18:17:54 <CindyLinz> 我多寫了個左括號..
+18:18:14 <CindyLinz> > ((flip (.) (*) . (.)) . (+)) . (*)) 1 2 3 4
+18:18:15 <lambdabot>  <hint>:1:35: parse error on input ‘)’
+18:18:21 <CindyLinz> > (((flip (.) (*) . (.)) . (+)) . (*)) 1 2 3 4
+18:18:23 <lambdabot>  No instance for (GHC.Show.Show a0)
+18:18:23 <lambdabot>    arising from a use of ‘M59353936686427249915058.show_M59353936686427249915...
+18:18:23 <lambdabot>  The type variable ‘a0’ is ambiguous
+18:18:36 <CindyLinz> > ((.) ((flip (.) (*) . (.)) . (+)) . (*)) 1 2 3 4
+18:18:38 <lambdabot>  14
+18:18:41 <CindyLinz> 你的才是對的
+18:19:58 <cibs> (((((. (*)) . (.)) . (+)) .) . (*)) 1 2 3 4
+18:20:22 <cibs> > (((((. (*)) . (.)) . (+)) .) . (*)) 1 2 3 4
+18:20:24 <lambdabot>  14
+18:20:49 <cibs> 所以問題可能在 ((((. (*)) . (.)) . (+)) .) . (*) /= (((flip (.) (*) . (.)) . (+)) . (*)
+18:21:02 <cibs> 好多括號真的會頭昏..
+18:21:16 <CindyLinz> > (((((. (*)) . (.)) . (+)) .) . (*)) 1 2 3 4
+18:21:18 <lambdabot>  14
+18:21:37 <CindyLinz> 咦 也沒錯.. ww
+18:21:44 <cibs> 對啊
+18:21:49 <cibs> 我貼的就是妳的啊 XD
+18:22:37 <CindyLinz> @t (. (*))
+18:22:37 <lambdabot> Maybe you meant: tell thank you thanks thesaurus thx tic-tac-toe ticker time todo todo-add todo-delete type v @ ? .
+18:22:41 <CindyLinz> @type (. (*))
+18:22:42 <lambdabot> Num a => ((a -> a) -> c) -> a -> c
+18:22:51 <CindyLinz> @type flip (.) (*)
+18:22:53 <lambdabot> Num a => ((a -> a) -> c) -> a -> c
+18:22:57 <CindyLinz> 一樣啊 /_\
+18:23:38 <CindyLinz> > (((((flip (.) (*)) . (.)) . (+)) .) . (*)) 1 2 3 4
+18:23:39 <lambdabot>  14
+18:23:44 <CindyLinz> wwww
+18:23:53 <cibs> 原來是少括號不是多括號 XD
+18:25:16 <CindyLinz> lisp parenthesis considered harmful....
+18:25:38 <CindyLinz> > ((((flip (.) (*) . (.)) . (+)) .) . (*)) 1 2 3 4
+18:25:39 <cibs> www
+18:25:40 <lambdabot>  14
+18:25:50 <CindyLinz> 嗯 的確不用多那一組括號.. @@"
+18:26:28 <CindyLinz> 啊不對.. 我在中後端有點, 你的拆到最前面
+18:26:39 <CindyLinz> 用眼睛去字串比對沒看出來 XD
+18:26:57 <cibs> 對啊因為我喜歡先把 operator 丟到前面去再開始做 XD
+18:27:06 <CindyLinz> 嗯嗯嗯
+20:09:40 <petercommand> 比lisp還要lisp XD
+20:10:09 <petercommand> 括號括號括號...
+21:03:44 <cibs> 括號是因為 + 和 * 啦，如果換成別的 function 就會少很多
+21:10:16 <CindyLinz> > let { dot = (.) ; add = (+) ; mul = (*) } in (dot (dot (dot (dot (flip dot mul) dot) add)) mul) 1 2 3 4
+21:10:18 <lambdabot>  14
+21:13:33 <petercommand> 根本lisp XD
+21:14:39 <petercommand> cibs: 是因為一堆 (.)吧XD
+21:16:59 <miaoski> CindyLinz: 就說 Forth 其實不難懂嘛
+21:17:21 <CindyLinz> cibs: 習慣這種寫法的話.. 可以很快上手 7.6(含) 以前的 Template Haskell 喔~~
+21:18:09 <CindyLinz> 7.8 的話... 除了這樣搞以外, 有了一般人更容易寫的寫法, 就不需要整片都寫成這樣了.. :p
+21:18:38 <CindyLinz> miaoski: 我我我對 forth 沒有什麼意見啊 XD
+21:18:55 <CindyLinz> 前一陣子學 postscript, 感覺很不錯啊 ^^
+21:19:09 <petercommand> postscript http server!
+21:19:21 <CindyLinz> 不不.. 並不想逆天 XD
+21:20:29 <CindyLinz> 我只是想要拿來排版作圖而已 ^^|
+21:20:36 <petercommand> XD
+21:40:03 <petercommand> > (\a -> ((.) ((.) (flip (.) (*)) ((+) ((*) a)))) 1 2 3 4
+21:40:04 <lambdabot>  <hint>:1:56:
+21:40:05 <lambdabot>      parse error (possibly incorrect indentation or mismatched brackets)
+21:41:08 <petercommand> > (\a -> ((.) ((.) (flip (.) (*)) ((+) ((*) a))) 1 2 3 4
+21:41:09 <lambdabot>  <hint>:1:55:
+21:41:09 <lambdabot>      parse error (possibly incorrect indentation or mismatched brackets)
+21:42:00 <petercommand> > (\a -> ((.) ((.) (flip (.) (*)) ((+) ((*) a))))) 1 2 3 4
+21:42:01 <lambdabot>  Could not deduce (GHC.Num.Num (a0 -> (a1 -> a1) -> a1 -> a1))
+21:42:02 <lambdabot>    arising from the ambiguity check for ‘e_11234’
+21:42:02 <lambdabot>  from the context (GHC.Num.Num ((a1 -> a1) -> a1 -> a1),
+21:42:24 <petercommand> Q_Q
+21:43:25 <petercommand> 看括號看到頭昏眼花了XD
+21:47:36 <CindyLinz> petercommand: 貼到 vim 裡面幫你對一下括號吧 XD
+21:48:06 <petercommand> 我貼到emacs了XD
+21:48:42 <CindyLinz> 也行, 也行.. 我們可以一起鄙視其他 editor 使用者.. (誤
+21:59:53 <petercommand> > (\a -> ((.) ((.) (flip (.) (*)) ((.) (+) ((*) a))))) 1 2 3 4
+21:59:54 <lambdabot>  Could not deduce (GHC.Num.Num (a0 -> a1 -> a1))
+21:59:54 <lambdabot>    arising from the ambiguity check for ‘e_11234’
+21:59:54 <lambdabot>  from the context (GHC.Num.Num (a1 -> a1),
+22:00:30 <petercommand> 再看一下哪裡寫錯了@_@
+22:00:31 <CindyLinz> emacs 失敗了.. (偷偷笑
+22:01:08 <petercommand> 這跟 emacs 有甚麼關係XD
+22:05:36 <CindyLinz> petercommand: 你不是用 emacs 幫你對括號了, 那怎麼還錯.. XD
+22:05:53 <petercommand> XD
+22:06:17 <CindyLinz> error message 看起來是參數沒餵夠?
+22:07:38 <petercommand> 有地方寫錯了...
+22:07:48 <petercommand> 這好噁心阿...QQ
+22:10:35 <CindyLinz> 的確噁心啊 XD
+22:15:17 <CindyLinz> cibs: 奇怪.. 看起來你跟 miaoski 都已經自己讀過很多 haskell 的東西了呀... 覺得我好像應該先收集一下你們哪些部分已經會了 o.o  miaoski 那時候跟我說大家都是連基本的都不會... QQ

@@ -1,0 +1,45 @@
+08:08:02 <letoh> function composition 都是 a->b 這類函式才能接起來嗎?
+08:08:20 <letoh> 看 (.) 的 type 好像是這樣@_@
+08:09:17 <monochrom> 對
+08:10:10 <letoh> 這兩天在想多個參數的函式接起來會是什麼狀況  例如 a->b->(c,d)
+08:11:59 <monochrom> 超過一個參數，就難看多了
+08:12:19 <letoh> 難看的意思是指?
+08:12:44 <letoh> 可能因為 haskell 裡都可以變成 curried function，所以最後都可以處理成 a->b 吧?
+08:17:06 <monochrom> 超過一個參數，例如 f (g x y) (h x z)，很少人用 function composition，多數由得它仍為 f (g x y) (h x z)
+08:18:50 <letoh> 這型式好像跟 function composition 不太一樣?  我本來期待會出現類似 h。g。f 這種東西 h $ g $ f x y
+08:19:00 <letoh> 但不曉得這樣算起來會變什麼樣子
+08:20:30 <letoh> http://ideone.com/pDASKw  像 forth 可以簡單做到這類串接，兩個 a->b->(c,d) 串在一起，而且也是很常見的用法。我才在想 haskell 有沒有類似的定義或應用
+08:21:36 <letoh> 不過現在很多語言傳回值好像都只有一個，多值的情況會變成 tuple 再傳回去
+08:21:58 <letoh> 這樣想套 (apply) 到下一個函式就有點麻煩了@_@
+08:22:54 <letoh> 也許根本沒有這種行為吧XD
+08:23:54 <letoh> 分辨不出下一個函式接受幾個參數... 可能真的只需要一個 tuple，或接受多個參數，需要先拆開 tuple
+10:47:56 <suhorng> > let compose2 f g x y = let (c, d) = g x y in f c d in ((\c d -> (c*2, 'z':d)) `compose2` (\a b -> (a+1, 'c':b))) 1 []
+10:47:58 <lambdabot>   (4,"zc")
+10:48:37 <suhorng> @pl (\f g x y -> let (c, d) = g x y in f c d)
+10:48:38 <lambdabot> (line 1, column 18):
+10:48:38 <lambdabot> unexpected "("
+10:48:38 <lambdabot> expecting "()", natural, identifier or "in"
+10:49:19 <suhorng> @pl \f g x y -> let (c, d) = g x y in f c d
+10:49:19 <lambdabot> (line 1, column 17):
+10:49:19 <lambdabot> unexpected "("
+10:49:20 <lambdabot> expecting "()", natural, identifier or "in"
+10:49:42 <suhorng> @pl \ f g x y -> (let (c, d) = g x y in f c d)
+10:49:42 <lambdabot> (line 1, column 19):
+10:49:42 <lambdabot> unexpected "("
+10:49:42 <lambdabot> expecting "()", natural, identifier or "in"
+17:57:43 <suhorng1> http://shaurz.wordpress.com/2007/03/03/forth-as-a-haskell-dsl-or-lambda-the-ultimate-stack/ 用Haskell寫個Forth interpreter
+17:57:50 <suhorng1> stack被丟來丟去..XD
+18:27:47 <letoh> 哇
+18:27:58 <letoh> 這篇我好像看過XD
+18:28:33 <letoh> webchat 兩天都連不上，聽說被 ddos ? XD
+18:28:51 <petercommand> freenode的嘛?
+18:28:57 <letoh> 嗯
+18:55:21 <suhorng1> 嗯..很不穩
+18:56:30 <letoh> 原來 webchat 回來了
+23:01:13 <letoh> 有辦法自己寫個類似 do 的東西嗎?
+23:01:29 <letoh> 例如 go aaa bbb ccc ddd 自動轉成某種語法?
+23:08:57 <favonia> letoh: 萬用解: template haskell (逃)
+23:09:06 <letoh> XD
+23:09:55 <letoh> 我是想到剛剛那篇 forth in haskell，但 monad 串來串去都不通，改用 arrow 是可以，但要寫一堆 >>> 感覺好瞎XD
+23:10:10 <letoh> 在研究有沒有類似 do 的做法
+23:13:50 <letoh> monad 每次都要把值取出來才能丟給下一個函式，寫起來也挺麻煩的@_@

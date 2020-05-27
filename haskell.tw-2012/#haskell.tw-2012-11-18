@@ -1,0 +1,15 @@
+23:48:17 <MnO2> http://d.hatena.ne.jp/fumiexcel/20121111/1352624678
+23:48:30 <MnO2> Free Monad Transformer來做Goto Monad
+23:48:48 <CindyLinz> goto monad... 真有趣 ^^|
+23:49:12 <MnO2> CindyLinz回得真快，我還以為這個時間沒什麼人
+23:50:11 <CindyLinz> 剛回家呢 XD
+23:50:17 <MnO2> 現在我對於Free Monad有點感覺了，雖然應用上還不是很確定有哪些地方好用
+23:51:25 <MnO2> 目前看到幾乎都是interpreter相關
+23:52:17 <CindyLinz> 你可以從初學的角度講講看嗎? o.o
+23:53:03 <CindyLinz> 如果你學精了, 講出來都是 category 的術語.. 那就聽不懂了 orz
+23:55:33 <MnO2> 嗯... 先從Free講起好了
+23:56:17 <MnO2> 什麽是Free？在抽象代數中Free的含意就是滿足一些代數結構條件下的「最簡單」的東西
+23:58:11 <MnO2> 對於結構更簡單的代數結構，可以不用做什麼就得到複雜一些的結構
+23:59:16 <MnO2> 而Free Monad就是，就是給定一個Functor，你可以用某種特化的方式來得到一種最簡單的Monad
+23:59:30 <MnO2> 把他給增加某些結構的東東
+23:59:49 <MnO2> 所以這有點像是資料與詮釋分離

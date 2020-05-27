@@ -1,0 +1,22 @@
+11:47:59 <miaoski> http://thestrangeloop.com/2016/unikernel-microservices-build-test-deploy-rejoice.html
+11:48:06 <miaoski> HaLVM 耶
+18:52:42 <CindyLinz> 我覺得 Haskell class instance 的 import 規則感覺有些怪怪, 有再修改的空間 @@"
+18:53:51 <CindyLinz> class 可以同時約束 N 個不同的 type, 所以 instance 就沒有一個天然的「家」可以去了
+19:39:00 <caasih> 什麼是天然的家啊 ._.?
+19:56:50 <CindyLinz> 像 Java 的 interface implements, 就會理所當然寫在它指定的 class 的那個檔案
+19:57:01 <CindyLinz> 像 Java 的 interface implements, 就會理所當然寫在它約束的 class 的那個檔案
+20:00:26 <caasih> 如果平常習慣寫在約束的那個 type 的檔案裡，好奇遇到什麼樣子情境不方便寫在那 N 個 type 附近？
+20:00:54 <CindyLinz> 因為 N 個 type 分散在 N 個檔案裡... XD
+20:01:10 <caasih> 要一次改比較麻煩？ XD
+20:01:21 <CindyLinz> 你是說 instance 要寫 N 份嗎?
+20:01:53 <caasih> 對啊，不太懂你描述的情境，我還在把 instance 寫在 type 旁邊的階段
+20:02:22 <CindyLinz> 那你 instance Mult Matrix Int 要寫在 Matrix 還是 Int?
+20:02:37 <CindyLinz> 你寫在 Matrix 的話, Int 那邊就沒有了
+20:04:54 <CindyLinz> 還有一種... 雖然通常不建議這樣寫, 但還是存在的 instance
+20:05:23 <CindyLinz> 像是... instance (Enum a, Eq b) => SomeClass a b where ...
+20:05:25 <caasih> 真的耶，這樣放那邊都不太對 # instance Mult Matrix Int
+20:05:36 <CindyLinz> 我還真不知道要拿這個 a 和 b 怎麼辦.....w
+20:05:47 <caasih> 這是開了 MultiParamTypeClasses 才能用的嗎？
+20:06:01 <CindyLinz> 那是手動預設啦.. 開開開都開!
+20:06:08 <caasih> XDDD
+20:18:55 <pkmx> 不是就是放在定義 Mult 或 Matrix 的 module?

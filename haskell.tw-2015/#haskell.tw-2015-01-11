@@ -1,0 +1,221 @@
+00:29:48 <CindyLinz> miaoski: monad 教學文超多... 可是似乎...... 效果不彰(?  我想試試看互動式的講法 @@"
+00:32:21 <suhorng> 互動式我會想到
+00:32:38 <suhorng> teacher: "A moand is?"
+00:33:00 <suhorng> students: "A monoid in the cat(ry!"
+00:33:03 <suhorng> teacher: "very good!"
+00:51:23 <CindyLinz> orz
+01:03:13 <monochrom> 互動好玩 :)
+01:03:46 <CindyLinz> 要求聽的人教我什麼是 monad.. (欸?
+01:03:54 <au> CindyLinz: 來寫一個「別讓單子不開心」? XD
+01:03:56 <CindyLinz> 他們就會突然覺得 monad 好簡單....
+01:04:18 <CindyLinz> au: 這題目不知道要怎麼寫, 完全無法想像 ^^|
+01:04:21 <au> # https://audreyt.github.io/polygons/
+01:04:30 <CindyLinz> 呃.. XD
+01:04:41 <au> 互動式拼拼圖之類的
+01:05:06 <suhorng> 要用 bind 拼起來嗎XD
+01:05:24 <au> 對啊，然後 Monad Transformer 是多層複寫紙
+01:05:29 <au> Identity 是一張白紙
+01:05:38 <au> (haha only serious)
+01:06:13 <CindyLinz> only serious.. XD
+11:55:10 <miaoski> 別讓單子不開心 +1
+12:17:07 <mno2> 要加上貓，這樣大家就會想學了。 # 貓理論 (Cat Theory)
+12:17:31 <mno2> 投影片全部都是貓。
+12:19:46 <petercommand> miao~~ miao~~
+12:24:00 <petercommand> 我記得剛開始看 lyah 的時候對 record 自動產生的 accessor function 不熟，所以看到 monad 寫啥 runState 之類就不了解他的 type 是啥XD
+12:41:49 <CindyLinz> 我也是..
+12:41:55 <CindyLinz> 還有奇怪的 unXX
+12:42:15 <CindyLinz> 所以我這次投影片裡面就都沒用 unXX, 都是直接用 pattern matching 的寫法
+12:43:02 <CindyLinz> 然後所有省略參數的寫法都在後面用註解補一個參數列出來的寫法 
+12:43:22 <CindyLinz> 他那樣寫, 還真不知道他是不是故意要炫技.... orz
+12:44:00 <CindyLinz> GHC 裡面 Monad [] 的 (>>=) 定義是 m >>= k = foldr ((++) . k) [] m
+12:44:16 <CindyLinz> 我覺得不好讀.. 所以也列了個註解.... 令 m = [m1, m2, m3, ...]
+12:44:28 <CindyLinz> m >>= k   =   k m1 ++ k m2 ++ k m3 ++ ...
+12:44:39 <CindyLinz> 私以為直覺多了 :p
+12:53:15 <suhorng> CindyLinz: 說不定是因為這樣湊一湊 type 對了(ry
+12:53:21 <suhorng> <誤>
+12:55:04 <mno2> 是要追求 Komogorov Complexity 最低 xD
+13:00:16 <CindyLinz> 之前看 darkx 算東西, 作級數的推導, 他直接拿 Σ 寫的式子在處理... 就建議他, 在還在構想的階段先把式子寫散寫成 ... 的型式, 比較好想... 因為寫成 Σ 以後, 就會只看到一項, 不方便看相鄰項或相鄰若干項之間的關聯性
+13:03:09 <monochrom> 對人, 較通常說 m >>= k = concatMap k m = concat (map k m), 這樣容易看出是 k m1 ++ k m2 ++ ...
+13:03:47 <CindyLinz> 就可惜 k m1 ++ k m2 ++ ... 不是個 valid 式子, 只能想想用 ^^|
+13:04:06 <monochrom> GHC 裏面當然是用最快碼而不是最明碼
+13:04:30 <CindyLinz> 可接受 XD
+13:05:09 <CindyLinz> 而且我發現... GHC 這邊用到的 foldr, (++) 都是在同一個檔案裡面自己重新定義的, 還附了一堆 INLINE 之類的 rule
+13:05:31 <CindyLinz> 欸等等.. 好像就是 Data.List... XD
+13:05:45 <CindyLinz> 這樣沒有什麼「重新」定義 XD
+13:07:07 <CindyLinz> 啊 是 GHC-Base... 全都寫一起了.. 只是我昨天是從 Control.Monad 點進去, 以為是寫在 Control.Monad
+13:07:20 <monochrom> concat (map k m) 既是合法程式, 又離淺白說法不遠, 不妨考慮
+13:08:24 <CindyLinz> 好 就把程式裡面的改成 concat :p
+13:09:19 <monochrom> 並且對喜愛代數的朋友說: 試證明它等於 foldr ((++) . k) [] m
+13:09:58 <CindyLinz> 還沒有講過證明的 ^^|
+13:10:56 <darkx> OAO!
+13:11:17 <darkx> 解接數學教的超好的 QQ
+13:13:56 <monochrom> 我是大力支持同時教 k m1 ++ k m2 ++ ... 及 concat (map k m). 同樣地, 同時教 1/1 + 1/2 + 1/3 + ... 及 Σ 1/n. 因為兩種寫法各有啓發性.
+13:14:12 <CindyLinz> 對, 我註解還是保留著 XD
+13:14:21 <CindyLinz> 但那個 foldr 就丟惹
+13:17:03 <monochrom> concat (map k m) 不深但其實蘊含無限智慧, 因為 m>>=k = join (fmap k m) 是普適公理
+13:17:15 <CindyLinz> darkx: 我不像那些天才型的人, 所以還會記得哪些地方容易卡住, 之前是怎麼繞過的 :p
+13:18:09 <monochrom> 而我, 是天才, 而且天才到記得小時候哪裏卡住 XD
+13:18:16 <CindyLinz> monochrom: 猶豫要不要提 join.. @@"
+13:18:31 <CindyLinz> 現在只有放 return 和 (>>=), 連 fail 也是請他們略過..
+13:18:56 <CindyLinz> 也沒有放 (>>), 反正只是懶寫的 (>>=)
+13:19:23 <monochrom> 啊, 當然按下不表, 留待學生們將來自行發現, 到時自然歡喜自在 :)
+13:19:34 <CindyLinz> XD
+13:22:03 <monochrom> 唔, 甚麼是解接?
+13:24:32 <darkx> CindyLinz <-
+13:26:18 <CindyLinz> monochrom: 小屁孩在裝可愛, 把「姐姐」的發音改成兒童不准確的發音方式
+13:26:33 <CindyLinz> darkx: 對～吧～ = =
+13:26:36 <petercommand> XDD
+13:27:55 <monochrom> 哈哈
+13:28:03 <darkx> 0w0
+13:28:21 <darkx> 大解接~
+13:28:22 <CindyLinz> darkx: 你自己放棄解釋, 就由我說了算了... (遠目
+13:28:33 <darkx> CindyLinz: 我在念數學阿 T_T
+13:29:05 <CindyLinz> darkx: 已經等你講出話了.. 但是誰叫你內容不解釋 XD
+13:29:24 <petercommand> 好奇 darkx 在念甚麼數學XD
+13:29:32 <darkx> petercommand: final exam QQ
+13:29:46 <petercommand> 甚麼內容呀?
+13:29:53 <darkx> 看不懂的內容 G_G
+13:30:06 <petercommand> OwO
+13:30:15 <monochrom> 真玄. 禪宗數學.
+13:30:30 <petercommand> 原來如此
+13:30:30 <CindyLinz> darkx: 確定是會看不懂的內容? 那快別看了, 馬上就放假嘍~~~~~
+13:31:16 <darkx> 考完也還有一堆毛要做阿.. 還要寫報告跟出另一堂課的期末考題..
+13:31:52 <CindyLinz> 那可以走棄保路線...
+13:32:33 <darkx> CindyLinz: 所以我期末考的目標是五題解兩題阿 (燦笑
+13:32:54 <monochrom> 如果棄保, 將來會抬不起頭的
+13:33:31 <petercommand> 我們物理 exam 還要寫 essay XDD
+13:33:43 <petercommand> 期中考
+13:33:45 <CindyLinz> 幹嘛抬不起頭 ^^|  當掉什麼的也不丟臉啊
+13:41:37 <suhorng> CindyLinz: 提到 join 的話...不就只好題 (T, η, μ) 了嗎 T_T
+13:42:16 <suhorng> 只有 bind 跟 return 還可以呼嚨一下 η : A → T A 跟 (_)* : (A → T B) → (T A → T B)
+13:50:41 <CindyLinz> suhorng: 沒打算提這個欸, 覺得介紹這幾個符號實際上對用處幫助不太大?  我倒覺得是這樣.. 直接從生活中去聯想找應用的時候, 雖然不會想到一模一樣的符號, 但內涵有了就夠了..
+13:54:23 <petercommand> 這是 denotational semantic 的東西嗎?
+13:54:58 <monochrom> 不. 這只是數學家選用的名字
+13:55:28 <petercommand> 甚麼名子?
+13:55:46 <CindyLinz> 就.. η
+13:55:50 <CindyLinz> 啊不就 return
+13:56:16 <petercommand> 好像沒看過這些符號XD
+13:56:19 <monochrom> η = return, μ = join, k* m = m>>=k
+13:56:30 <CindyLinz> 我覺得學哪一邊都是一樣的.. 前者看起來短, 後者是打字時間比較短
+13:56:53 <petercommand> 原來XD
+13:58:19 <CindyLinz> 就像.. 畢達歌拉斯定理和勾股弦定理還有商高定理.. 應該只要依喜好學其中一邊就好了?
+13:58:26 <suhorng> XDD
+13:58:36 <petercommand> XDD
+13:58:45 <suhorng> 純粹想不到 join 有哪些直接的地方
+13:59:14 <suhorng> *直覺
+13:59:15 <CindyLinz> monad action 用 (.) 連打的時候..
+13:59:30 <CindyLinz> 用 join 來幫忙善後
+14:00:01 <suhorng> 喔喔..也是
+14:00:35 <monochrom> 有些情形, 例如 [], "甚麼是 join? 答案是 concat" 是明顯過 "甚麼是 >>="
+14:01:14 <suhorng> soga!
+14:01:48 <suhorng> concat + map <=> join + fmap 好像確實跟 >>= 解釋簡單XD
+14:03:22 <CindyLinz> 數學家的字集比 programmer 大很多....
+14:03:56 <CindyLinz> 不同字體算作不同的字 OAO
+14:06:41 <monochrom> 非也. 數學家為了把 x*y 寫成 xy, 因此限制了每個名字只准一字母, 等於限了只能有一百個名字以內.
+14:07:07 <CindyLinz> 對哄 @@"
+14:07:36 <CindyLinz> 紙本書寫也常分不出有沒有留空格....
+14:07:48 <monochrom> 程式員雖只有幾十個字母, 但每個名字長度不限, 等於可用無限個名字
+14:08:25 <petercommand> 有 subscript 呀XD
+14:08:38 <petercommand> x_1 x_2...
+14:08:46 <CindyLinz> x*y -> xy 也是個 billion dollor mistake... XD
+14:09:10 <CindyLinz> 覺得 subscript 是括號的一種..
+14:09:22 <CindyLinz> 嗯, 所以 Lisp 程式可以通通改用 subscript 的方式來寫..... (思
+14:09:51 <monochrom> Dijkstra 教的. http://www.cs.utexas.edu/users/EWD/transcriptions/EWD13xx/EWD1300.html
+14:10:06 <CindyLinz> 可讀性嘛... 這個 GUI editor 需要可以一直放大的功能, 不然括號多幾層就看不見了 XD
+14:11:45 <CindyLinz> Dijkstra 一開始講「At a given moment, the concept of polite mathematics emerged」我就開始笑了....... XD
+14:13:48 <monochrom> 可先跳去 "Invisible operators"
+14:14:03 <CindyLinz> mmm
+14:14:15 <CindyLinz> 看整篇好了 @@"
+14:14:26 <CindyLinz> 開頭這麼好笑, 捨不得.....
+14:40:21 <CindyLinz> infix binary operator 只在有 associativity 的時候才不加括號, 好像是個不錯的主意?
+14:41:57 <CindyLinz> 回想小時候第一次遇到「先乘除後加減」的時候, 也是萬分困惑... orz
+15:45:15 <CindyLinz> 好像開始可以理解為什麼 Dijkstra 會堅持手寫 paper.....
+18:14:31 <jeffcyt_> 先跟各位大大請安，想請教一個可能過於基礎的東西
+18:16:05 <jeffcyt_> 為什麼不能比較兩個function 是否相等（我知道在數學上視為indecidable 問題）但是有沒有辦法透過 inferred type 之類的比較？
+18:17:19 <suhorng> 我覺得可以定出某種程度上的相等, 但是用 type 的話不知道多型函數怎麼辦
+18:17:44 <suhorng> 像是 ( \(x,y) -> (x,y) ) 跟  \ pr -> pr 的最 general 的 type 不一樣
+18:18:23 <suhorng> 有些語言是有 "物理" 上相等這一回事@@
+18:20:32 <jeffcyt_> 只要比對兩個functions 的 input /output ?
+18:20:53 <suhorng> 這樣不知道要比多少 input 呢
+18:21:40 <jeffcyt_> （比方說預設一百個ＸＤ）
+18:21:53 <petercommand> quick check XD
+18:21:56 <CindyLinz> 隨便猜一百個, 這一百個剛好一樣就算一樣嗎?
+18:22:17 <petercommand> @quick (\x -> x) == (\y -> y)
+18:22:17 <lambdabot> Not enough privileges
+18:22:23 <petercommand> @check (\x -> x) == (\y -> y)
+18:22:25 <lambdabot>  No instance for (GHC.Classes.Eq (t0 -> t0))
+18:22:25 <lambdabot>  arising from a use of ‘GHC.Classes.==’
+18:22:26 <jeffcyt_> 其實想到的事可否用quickCheck 去測
+18:22:29 <CindyLinz> 這樣可以定啊.. 雖然因為用到 random, 應該會是個 IO 函數不是 pure 函數
+18:22:54 <CindyLinz> 也可以依程式碼結構一模一樣來定
+18:23:10 <petercommand> 忘記quick check 的 lambdabot 用法了XD
+18:23:12 <CindyLinz> 只是說跟數學上說的函數相等的意義不一樣就是
+18:23:27 <suhorng> 就看訂出來的是不是想要的
+18:23:30 <CindyLinz> 對
+18:23:39 <suhorng> 有時候是連怎麼產生 input 也不太知道啦XD
+18:23:51 <CindyLinz> Prelude 比較保守, 共識太低的不敢放進去 ^^|
+18:24:50 <CindyLinz> 給一組兩個函數作比較, 每次比較出來的結果可能不一樣 XD
+18:24:57 <CindyLinz> 因為抽到的測試資料不一樣...
+18:25:18 <jeffcyt_> 在lambda cal (sorry I'm still new to lambda cal as well, hopefully wouldn't say something wrong) 裡面可以透過normal form的方式比到 Church-Rosser ，想說這種化簡應該也可能達成？
+18:26:30 <CindyLinz> 這是什麼意思呀?
+18:27:01 <suhorng> Haskell 有一般的 fixed point, 跟 (simply/polymorphic) lambda calculus 不一樣唷
+18:27:21 <petercommand> CindyLinz: 結果 prelude 塞了像 head 或 last 之類可能是 bottom 的函數XD
+18:27:39 <CindyLinz> petercommand: 那個還蠻有共識的啊, 好用耶 XD
+18:27:44 <suhorng> 可以 type 的東西不一定都有個 normal form, 應該也無法判斷有沒有 normal form
+18:27:46 <petercommand> XDD
+18:28:03 <suhorng> jeffcyt: 而要這樣比較的話等同在編譯期間就要把所有程式跑完@@
+18:30:37 <petercommand> 甚麼叫一般的 fixed point 呀?
+18:31:43 <CindyLinz> jeffcyt_: Church-Rosser 裡面的「一樣」用的是程式碼結構一模一樣. 範圍比數學函數的相等小 (就是更嚴的意思)
+18:32:09 <CindyLinz> 這種定義的一樣, 不會把 QuickSort 和 MergeSort 視為一樣
+18:32:22 <suhorng> 突然想到有 η-extension? Church-Rosser 似乎是不包含這個的?
+18:33:33 <jeffcyt_> @CindyLinz (\x. (\y. y) x) z = (\x. z) y
+18:33:33 <lambdabot> Unknown command, try @list
+18:34:08 <CindyLinz> jeffcyt_: 這等號兩邊看起來不一樣 XD
+18:34:15 <jeffcyt_> 這兩個結構不同
+18:34:19 <CindyLinz> 喔 結果都是 z
+18:34:23 <jeffcyt_> 但是derived 到Ｚ
+18:34:37 <CindyLinz> 它是到變成 z 的時候才比較
+18:34:44 <jeffcyt_> 恩：） 其實這是我看書看到一半想到的
+18:35:00 <CindyLinz> z 在作比較的時候是比結構有沒有一樣
+18:35:51 <jeffcyt_> 恩 了解你前面說的了 謝謝
+18:35:54 <au> jeffcyt_: 這個層次（rewrite rule 簡化後比較程式結構）通常不需要動到 inferred type
+18:36:03 <suhorng> 不過  Church-Rosser 會不會做 η-expansion 阿? 好像不會?
+18:36:27 <suhorng> 他是不是只有 α-equivalence 跟 β-equivalence
+18:36:32 <au> 要用 type 來證明兩個函式有一樣的性質，可以參考 proof-carrying code 如 http://sitr.us/2014/05/05/category-theory-proofs-in-idris.html
+18:36:50 <au> 但一般要手動補上證明策略，不太可能 fully infer
+18:36:54 <petercommand> suhorng: 一般的 fix point 是指 fix 函數嗎?
+18:37:29 <suhorng> petercommand: 恩 就只是指取 least fixed-point 而已
+18:37:36 <CindyLinz> petercommand: 一段的 fix point 不是 fix 函數; 但是在本 channel 的 fix point 是... XD
+18:37:49 <CindyLinz> 一般的 fix point... XD # http://en.wikipedia.org/wiki/Fixed_point_%28mathematics%29
+18:37:56 <petercommand> 了解XD
+18:38:08 <jeffcyt_> au: thanks for reference, 能fully infer的直覺上好像很少
+18:40:28 <jeffcyt> 感謝各位大大的分析 會自己再好好想想
+19:08:56 <suhorng> 突然想到 不知道 dependently typed language 怎麼判相等的?
+19:09:26 <suhorng> 我記得像 idris 的 effects 有一個參數是函數, 這樣做 type checking 怎麼辦...?
+23:46:06 <CindyLinz> petercommand: 玩 @pl ?
+23:46:25 <petercommand> ... lol
+23:47:16 <petercommand> CindyLinz: 一下就玩給人家看很噁心的東西XD
+23:48:23 <CindyLinz> petercommand: 可以玩得不噁心呀~~~
+23:48:27 <petercommand> @pl if i > 0 then (i - 1)/ (i + 1) else (i - 1)/(i + 1)
+23:48:27 <lambdabot> if' (i > 0) ((i - 1) / (i + 1)) ((i - 1) / (i + 1))
+23:48:33 <CindyLinz> @pl \a b -> a + b
+23:48:34 <lambdabot> (+)
+23:48:42 <petercommand> @pl \i -> if i > 0 then (i - 1)/ (i + 1) else (i - 1)/(i + 1)
+23:48:42 <lambdabot> liftM2 if' (> 0) (ap ((/) . subtract 1) (1 +)) `ap` ap ((/) . subtract 1) (1 +)
+23:48:54 <CindyLinz> petercommand: 你看.. 完全是玩家的問題 (攤
+23:49:06 <petercommand> XDD
+23:49:53 <CindyLinz> 嗯.. 不然你都跟 tckf 聊 haskell 的什麼? ^^|
+23:50:36 <petercommand> CindyLinz: 你問 tckf :p
+23:53:06 <tckf> > (((.) (flip ($) (*))) . (((.) (.)) . ((($) ((((.) (.)) . ((((.) (+)) . (*))))))))) 1 2 3 4
+23:53:07 <lambdabot>  14
+23:53:31 <petercommand> CindyLinz: 看，tckf 更噁心XDDD
+23:54:02 <au> @unpl (((.) (flip ($) (*))) . (((.) (.)) . ((($) ((((.) (.)) . ((((.) (+)) . (*))))))))) 1 2 3 4
+23:54:02 <lambdabot> ((1 * 2) + (3 * 4))
+23:56:29 <CindyLinz> tckf: 你根本就會用 lambdabot 啊 XD
+23:56:36 <CindyLinz> 太意外惹
+23:56:51 <CindyLinz> petercommand: 這是上次的習題嗎..
+23:57:10 <tckf> petercommand 在旁邊指導
+23:57:15 <petercommand>  上次我寫的東西...
+23:57:31 <petercommand> tckf: 哪有...你自己貼的阿XD
+23:57:31 <CindyLinz> petercommand: 那你是憑什麼說人家更噁心......ww
+23:57:43 <petercommand> www

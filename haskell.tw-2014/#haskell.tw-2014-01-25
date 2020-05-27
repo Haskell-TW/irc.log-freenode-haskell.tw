@@ -1,0 +1,426 @@
+00:00:58 <suhorng> 沒道理把函數inline阿…
+00:01:30 <hashcat_> 不是說他會inline
+00:01:37 <hashcat_> 是說他
+00:02:02 <hashcat_> 這麼說好了
+00:02:08 <hashcat_> 重來
+00:03:30 <hashcat_> 完全想不出怎講
+00:03:53 <hashcat_> 那只是示意他可以從底部往上推上面該有的型別
+00:04:56 <suhorng> 我是想說實作時該怎麼辦
+00:05:04 <suhorng> 這樣好了，我小改一下例子
+00:05:13 <hashcat_> test :: Test -> IO () 的那個型別 Test 雖然沒有變數在上面, 並不代表他會消滅已經推出來的資訊
+00:05:32 <suhorng> 有辦法傳遞過去嗎@@
+00:05:41 <hashcat_> 傳遞什麼
+00:05:57 <suhorng> 型別資訊
+00:06:35 <hashcat_> 他已經知道型別了, 為啥還要裝成不知道阿
+00:06:43 <suhorng> 他無法知道吧？
+00:07:17 <hashcat_> Test的型別只是用來檢查這種組合, 合不合法
+00:08:03 <hashcat_> 對了對了
+00:08:08 <hashcat_> 我想到怎說了
+00:08:20 <suhorng> 聽不懂..
+00:08:41 <hashcat_> (Test 5) 的時候 Test :: Show a => a -> Test 不是就縮成 Test :: Int -> Test 了
+00:08:54 <suhorng> 是
+00:09:18 <hashcat_> 然後 (Test 5) :: Test
+00:09:33 <suhorng> 是
+00:10:46 <hashcat_> 把整個型別寫滿就是 (Test :: Int -> Test) (5::Int) :: Test
+00:11:12 <suhorng> 對
+00:11:27 <hashcat_> 這樣不就知道了
+00:11:51 <hashcat_> 對了對了對了
+00:11:55 <hashcat_> 更好的講法
+00:12:01 <hashcat_> Test 5是偷懶寫法
+00:12:14 <hashcat_> 其實他會換成 (Test :: Int -> Test) (5::Int) :: Test
+00:12:33 <suhorng> 可是要解決 test 用哪一個多載的 print, 不是嗎?
+00:12:49 <hashcat_> 你把他當成那樣就好解識了
+00:13:58 <hashcat_> 再來(test :: Test -> IO ()) ((Test :: Int -> Test) (5::Int))
+00:14:59 <hashcat_> 展開建構子拿掉就是 (print::Show a => a -> IO () )  (5::Int)
+00:15:21 <hashcat_> a就推論出來了
+00:15:30 <suhorng> 靜態的時候展開...?
+00:15:38 <hashcat_> 嗯嗯
+00:15:50 <hashcat_> 5從頭到尾都存在都沒消失
+00:15:55 <suhorng> 這樣不是就得inline才能知道@@?
+00:16:12 <hashcat_> 型別沒有因為躲在Test就死掉
+00:16:49 <hashcat_> 突然想講你把他當inline算了
+00:17:11 <suhorng> 可是實務上沒辦法所有的東西都 inline 推論吧
+00:17:22 <hashcat_> 我亂講的
+00:17:27 <hashcat_> 不是inline啦
+00:17:40 <hashcat_> 是haskell本來就會展開阿
+00:18:42 <hashcat_> 換種講法好了
+00:18:44 <CindyLinz> 超展開... (亂入)
+00:18:51 <godfat> 這個... 做 type checking 時不是就都知道了嗎？這跟 runtime 要不要 inline 應該是兩件事 @@
+00:19:00 <suhorng> 不是執行期才展開嗎QQ？
+00:19:02 <CindyLinz> (我來從頭看... orz)
+00:19:08 <suhorng> 是想說那個type information到底怎麼過去的？
+00:20:52 <suhorng> 小更新code http://ideone.com/9kgrGB
+00:21:57 <hashcat_> (test :: Test -> IO ()) ((Test :: Int -> Test) (5::Int)) 推推推 ((print :: Show a => a -> IO ()) . (Test的解構子 ::  Show a => a -> Test))  ((Test :: Int -> Test) (5::Int))
+00:22:32 <hashcat_> 看到沒
+00:22:34 <hashcat_> 展開了
+00:22:55 <hashcat_> 好像寫錯了 = ='
+00:23:37 <hashcat_> ((print :: Show a => a -> IO ()) . (Test的解構子 ::  Show a => Test -> a))  ((Test :: Int -> Test) (5::Int))
+00:23:49 <hashcat_> Test -> a 寫反
+00:24:03 <CindyLinz> suhorng: 你是不是想舉這樣的例子... data GenList = GNil | GCons (forall a. Show a => a) GenList
+00:24:10 <godfat> compile 時就知道 testTy 'b' = Test True
+00:24:10 <godfat> 然後 runtime 決定用哪個 branch, 如果知道是 'b', 則用 Test True
+00:24:10 <godfat> 這邊 runtime 才知道的是哪個 branch, 但是 compile 時就已經知道 type 了
+00:24:13 <hashcat_> 其實每個建構子都隱含解構子
+00:24:24 <suhorng> 這問題應該說編譯器怎麼實作typeclass
+00:24:38 <CindyLinz> 要開 RankNTypes extension 才能這樣寫..
+00:24:41 <suhorng> 所以總要某個地方帶 branch 資訊？
+00:24:56 <suhorng> CindyLinz: 用 GADTs 可以把那個 forall 藏起來
+00:25:12 <CindyLinz> 嗯
+00:25:32 <hashcat_>  ((print :: Show a => a -> IO ()) . (Test的解構子 ::  Show a => Test -> a))  ((Test :: Int -> Test) (5::Int)) 這就推得出print的型別啦
+00:25:36 <suhorng> （我一直搞不清楚 RankNTypes, ExistentialQuantification 這兩個extension哪裡有差QQ）
+00:25:59 <CindyLinz> runtime 的時候每個 element 都要帶著它怎麼 show 的函數走... 不過 runtime 應該還是不知道它是什麼 type..
+00:26:12 <suhorng> hashcat_: 動態時拿到的有可能是 ((Test :: Int -> Test) (5::Int)) 也有可能是 ((Test :: String -> Test) ("abc"::String)) 呀
+00:26:24 <suhorng> 就有點像 virtual table ...
+00:26:39 <hashcat_> 我都把解構子補進去了..
+00:26:43 <CindyLinz> suhorng: 還有 Rank2Types.. XD
+00:26:49 <suhorng> 因為執行時期應該沒留下型別資訊吧..？ 這某種程度就像留下型別資訊..
+00:26:50 <CindyLinz> 我知道它是 RankNTypes 的子集 :D
+00:26:58 <hashcat_> 用怪招說明他可以推論出來
+00:27:09 <suhorng> Rank2Types感覺有點差別欸
+00:27:09 <hashcat_> 也不算怪招啦
+00:27:21 <suhorng> 不知道是不是在型別推論的地方有差
+00:27:25 <hashcat_> pattern matching不就隱含解構子的存在了
+00:27:41 <CindyLinz> Rank2Type 指的是 forall 可以寫在 -> 的左邊..
+00:27:42 <suhorng> 有很多種不同的解構子？
+00:27:55 <hashcat_> 從別的方面講Haskell既然說他是statically type就不會騙人吧
+00:28:11 <hashcat_> 執行時期是根本沒型別資訊
+00:28:19 <hashcat_> 不像C++還是有保留
+00:28:20 <CindyLinz> Rank3Type (應該沒這 extension, 想 >2 全都用 N types 了吧?)  就是 -> 的左邊如果是個 ( .... -> .... ), 這個裡面的 -> 的左邊可以有 forall.. XD
+00:28:23 <suhorng> CindyLinz: 是想說 rank 2 types 的型別推論是 decidable， > 2 不是 decidable
+00:28:40 <suhorng> RankNTypes 需要寫type signature 這樣 @口@
+00:28:46 <CindyLinz> 反正我寫不出無法 decide 的 type...ww
+00:29:07 <CindyLinz> DFS 50 層內一定解得出來 (逃)
+00:29:20 <hashcat_> statically type是說他沒法斷定型別就不會讓你編譯過
+00:29:40 <hashcat_> 算了最近對haskell沒興趣
+00:29:40 <suhorng> 就..型別是 Test，然後Test有 Class a =>，所以可以編譯過阿XD
+00:30:11 <hashcat_> prolog.tw
+00:30:23 <hashcat_> 成立成立
+00:31:13 <hashcat_> 突然一陣靜默
+00:31:14 <suhorng> DFS 50層 XDDD
+00:31:22 <suhorng> UndecidableInstances！
+00:31:53 <CindyLinz> suhorng: 我覺得差別是... (不考慮 Typeable 和 Dyn 的話) haskell 裡面一般是無法做 C++ 的 typeof(...) 或 x instanceof y 或是 parent class 往 childe class 的轉型
+00:32:03 <hashcat_> 這麼喜歡動態就看prolog吧
+00:32:51 <CindyLinz> 不考慮 Typeable / Dyn 是因為, 我覺得它是 programmer 額外加上的 note. 如果 programmer 惡意亂指定 TyCon, ghc 也會放行
+00:33:01 <suhorng> 會爆炸XD
+00:33:16 <CindyLinz> 會爆嗎? 就會轉出神妙的東西吧? XD
+00:33:32 <suhorng> 可以讓他segmentation fault!
+00:34:08 <CindyLinz> 呃... 能嗎? @_@"
+00:34:23 <CindyLinz> 我以為只是你存了一個 Int 進去, 取了一個 Char 出來...
+00:34:43 <CindyLinz> 或是你惡搞這個 http://hackage.haskell.org/package/base-4.6.0.1/docs/Data-Dynamic.html 裡面的 fromDyn 和 fromDynamic
+00:34:54 <CindyLinz> 做出一個希格斯粒子 type... ww
+00:35:07 <CindyLinz> 你想要什 type 元素, 我都能生給你!
+00:35:38 <hashcat_> 原來討論的什麼怎樣了
+00:35:56 <CindyLinz> 耶不行... Dynamic 裡的格式不是我們自訂.. 是被 Typeable 定死了
+00:35:59 <CindyLinz> 那只能選一種 XD
+00:36:11 <suhorng> 神秘
+00:36:13 <CindyLinz> 但應該可以把 Int 總是轉成 Char... XD
+00:36:20 <suhorng> Typeable我記得有讓他壞掉的例子XD
+00:37:01 <monochrom> 爆炸也是神妙的東西啊! XD
+00:37:02 <CindyLinz> 用 TyCon 硬寫一個不存在的 type 應該就死了吧?
+00:37:14 <CindyLinz> 我是還沒用過... ._.
+00:37:31 <suhorng> http://okmij.org/ftp/Haskell/types.html#unsound-typeable
+00:38:37 <CindyLinz> 好切回來一下, 我覺得 Dyn 和 Typeable 不算是 Haskell 語言本身的東西, 是 lib 這樣, 所以和 C++ 的情況不同 ^^|
+00:39:19 <CindyLinz> 但不代表 statically 就知道每一個 rigid type, 有可能只確定到一定是某個 class 的 instance 而已
+00:39:47 <suhorng> 我就在想實作怎麼實作; 假設Haskell98的話
+00:40:00 <hashcat> 睡覺
+00:40:04 <monochrom> 自行寫一個 "newtype I = I Int; newtype C = C Char", 然後為它們寫些壞的 Typeable 碼, 應該就可以透過 I 和 C 互換來把 Int 和 Char 互換.
+00:40:05 <CindyLinz> 晚安 XD
+00:40:06 <suhorng> 每次每個多型函數用的時候我們都知道他被instantiate成什麼type
+00:40:13 <suhorng> XD
+00:40:24 <CindyLinz> 壞的 Typeable 碼... XD
+00:40:30 <suhorng> 所以可以在instantiate的時候直接複製一份code
+00:40:36 <suhorng> 像template那樣
+00:40:52 <CindyLinz> 嗯
+00:41:05 <suhorng> 感覺typeclass也是一樣可以靜態知道可能用哪個多載的函數
+00:41:15 <CindyLinz> 是.... 哪些?
+00:41:27 <CindyLinz> 而不能明確縮小到一個吧 @@"
+00:41:53 <CindyLinz> 如果要能實作 showGenList :: GenList -> String 的話..
+00:42:03 <suhorng> 限定Haskell98 XD
+00:42:07 <CindyLinz> 喔喔
+00:44:06 <suhorng> 如果複製一份code的話這樣不需要實作多型表示(或紀錄 runtime type information)之類..
+00:44:34 <CindyLinz> 可是 Haskell98 好卡欸... ww
+00:44:55 <suhorng> 但是現在這種typeclass感覺就不行了吧, 咦定要在constructor裡面帶一些東西 (像哪個branch之類, 或類似 virtual table 那種東西...)
+00:44:56 <suhorng> XD
+00:45:45 <CindyLinz> 沒有 FlexibleInstances 和 ScopedTypeVariable 我活不下去... QQ
+00:46:29 <suhorng> 說到 scoped type variables 我在想 idris 是怎麼做的 |||
+00:46:33 <CindyLinz> virtual table 應該是把 type 帶進去....
+00:46:40 <suhorng> 嗯
+00:46:47 <CindyLinz> 不過 haskell 可以不用帶 type, 而是把要用到的 member function 帶進去
+00:47:22 <CindyLinz> 而且 haskell 的 class 可以是兩三個以上的 type 交互作用... 好吧, 還是可以用 tuple 的方式一次帶 N 個 type... ww
+00:47:24 <suhorng> 詳細一下？是怎樣XD
+00:47:54 <CindyLinz> 剛剛我講的那個 Show 就是把 show 帶進去呀... Int 的 element 就帶個 Show Int 的 show, Char 的 element 就帶 Show Char 的 show
+00:48:28 <CindyLinz> 然後 showGenList 在跑的時候就是逐個拿 show 出來用.. 而它背後是什麼 type, 可以搞不清楚, 用就對了
+00:48:41 <suhorng> 類似對於每次用的時候
+00:48:46 <suhorng> *用constructor
+00:49:01 <suhorng> 給個資料結構, 對每個instance儲存那個函式？
+00:49:14 <CindyLinz> 嗯, 函數指標之類的東西
+00:49:40 <CindyLinz> 好吧, 其實是會存到一個指向整個 Show Int 的表格
+00:49:56 <suhorng> 好吧, 這個可以靜態弄好, 不用動態建立 XD
+00:49:57 <CindyLinz> 也是 table 等級的東西.... 拆散可能效率也沒比較好
+00:50:19 <suhorng> 喔...突然想到我剛剛那個例子不知道能不能用newtype
+00:50:35 <CindyLinz> 所有的 Show a.. Show Int, Show Char, Show Double 應該都會是長度一樣的 struct
+00:50:39 <suhorng> 嗯
+00:51:05 <CindyLinz> Java 的話就是 parent 短, child 長, 但 prefix 一樣; C++ 應該要有一個很動態的查表吧?
+00:51:25 <CindyLinz> 因為 C++ 有多重繼承, 好麻煩 XD
+00:51:35 <suhorng> XDD
+00:51:42 <suhorng> 沒會過C++的作法
+00:51:46 <CindyLinz> ._.
+00:52:16 <CindyLinz> 哪個例子啊? XD
+00:52:31 <suhorng> data Test where...那個
+00:52:42 <suhorng> 因為想到newtype沒有執行時期constructor
+00:53:43 <CindyLinz> 唔.. 在定義 data 的地方放 class constraint 不是要被 deprecate 了嗎? XD
+00:53:47 <suhorng> 喔 Rank2Types 跟我想的不一樣...
+00:53:54 <suhorng> deprecate？
+00:54:04 <suhorng> 真假=口=
+00:54:06 <CindyLinz> 被說是個設計壞了的功能..
+00:54:16 <suhorng> 因為我還在用 GHC 7.4...
+00:54:33 <CindyLinz> 因為在定義這個 type 用的函數的地方, 再加 constraint 就好了
+00:54:41 <suhorng> 我還以為 GADT 可以隨便放 type signature XDDD 原來不行噢...
+00:54:41 <CindyLinz> 而就算 data 加了... 函數的地方還是要再加
+00:54:48 <CindyLinz> 喔不不, 我不是說 GADT
+00:54:51 <suhorng> !? 這裡不用阿XD
+00:55:39 <CindyLinz> 你這個不就是 data Test = Constructor a 嗎?
+00:55:49 <CindyLinz> 啊, 左邊沒 a.. 那可以放 XD
+00:55:49 <suhorng> 是說這個 http://ideone.com/9kgrGB
+00:55:57 <suhorng> 跟 GenShow 同個東西
+00:56:04 <CindyLinz> 是 forall 型的..
+00:56:35 <CindyLinz> 如果是 Test :: Class a => a -> Test a 應該就會被罵吧?
+00:56:53 <suhorng> XDD
+00:57:17 <CindyLinz> 不過因為是 Test :: Class a => a -> Test 就還好
+00:58:52 <CindyLinz> suhorng: 欸.. newtype 的話你這邊 a 得是個具體的 type 吧?
+00:59:06 <CindyLinz> 好像不用.. orz
+00:59:20 <suhorng> !?
+00:59:33 <CindyLinz> 搞錯
+00:59:43 <suhorng> 剛剛用newtype結果能成功, 不知道怎麼實作的
+00:59:56 <suhorng> 好奇怪, 我原本以為 Rank2Types 不用手動寫型別標記, 結果要
+01:02:00 <CindyLinz> 我以為開那個就是為了寫 forall... 你開了又不想寫是什麼打算啊? @@"
+01:02:46 <suhorng> 原本想讓他 type inference 有 rank 2 type
+01:02:55 <CindyLinz> 喔
+01:02:59 <suhorng> 不過我肯定搞錯了東西...
+01:03:14 <CindyLinz> 嗯, 我看以前你貼的這篇... http://www.vidarholen.net/contents/junk/catbag.html
+01:03:29 <CindyLinz> 如果把 type sig 擦掉, 應該還是可以用.. 可是就沒有他想要的效果了?
+01:04:28 <CindyLinz> 也不對 不是看這篇
+01:04:34 <CindyLinz> 我是去看 ST monad 的 source..
+01:04:48 <CindyLinz> 他 data 左邊的 s, 在右邊也有出現, 就直接當 state
+01:05:00 <CindyLinz> 不過它有在一些地方加 forall..
+01:05:03 <suhorng> 唔
+01:05:05 <suhorng> 嗯....
+01:05:13 <CindyLinz> 如果都沒加的話, 這個 s 應該就可以被摸出去了吧?
+01:05:30 <suhorng> 這樣好像 Rank2Types 是 RankNTypes 的子集沒錯
+01:05:38 <suhorng> 原本以為對型別標記的要求不同
+01:05:46 <CindyLinz> 喔~
+01:07:45 <CindyLinz> 欸我看你給的那個 package Effects
+01:07:54 <suhorng> 嘎嘎
+01:07:59 <CindyLinz> https://hackage.haskell.org/package/effects
+01:08:33 <CindyLinz> 我是這樣理解: 它用起來就像.... 如果用 monad trans 的時候, 都是用 liftIO, liftReader, liftState.. 而不用 lift
+01:08:51 <CindyLinz> 然後它提供兩個額外的工具...
+01:09:46 <CindyLinz> 一個是那個 Effect proxy, 當這一群..... monad trans 疊裡面有出現同一種 monad trans 的時候, 還能夠分得出來 (不然純用 monad trans 的話, 同一類型的只能用到其中一個)
+01:09:52 <suhorng> 額外的工具？
+01:10:23 <CindyLinz> 另一個.. 我猜測應該有, 但還不清楚.. 就是直接用 monad trans, 想隨便用 liftIO, liftReader 這些東西的話
+01:10:29 <suhorng> 他的作法感覺完全跟 monad transformer 不同（用起來不知道|||），從頭到尾只有一個 monad...
+01:10:43 <suhorng> 嗯嗯
+01:10:56 <CindyLinz> 我們要為所有用到的 MonadTrans 們 (假設有 N 種), 去定 N*(N-1) 種 instance
+01:11:12 <suhorng> 對..
+01:11:36 <CindyLinz> 就是 instance ReaderMonad m => ReaderMonad (WriterT w m)
+01:11:55 <monochrom> ST 和 IO 的 所謂 "s -> (# a, s #)", 那個 s 請別當真. 它只是用來哄 optimizer "請不要顛倒次序"
+01:13:06 <suhorng> XD...
+01:13:33 <suhorng> 然後最後其實沒有那個 s 存在 XD?
+01:13:52 <CindyLinz> 這個 N*(N-1) 的麻煩, 如果可以容忍 OverlappingInstances extension 的話, 可以變成 N.. 只是我自己對 OverlappingInstances 有一點怕怕的, 因為它會選到誰, 雖然是明確定義的, 但是從程式碼裡面去讀, 不太明顯 @@"
+01:14:30 <CindyLinz> monochrom: 好 XD
+01:14:53 <CindyLinz> suhorng: 作法還沒讀.. 是從使用的 example.hs 感受的 :p
+01:15:07 <suhorng> 他那個明確定義感覺很模糊阿XDDD
+01:15:14 <suhorng> 之前說的 scoped type variable https://gist.github.com/suhorng/8601726
+01:15:29 <suhorng> 因為 variable 本身就有 scope，所以就有 scoped type variable...各種微妙
+01:15:35 <CindyLinz> 有比 monad is just a monoid... 模糊嗎?
+01:15:56 <suhorng> 這lol monad is just a monoid 感覺可以不模糊
+01:16:19 <CindyLinz> 那個 {b} 是什麼啊?
+01:16:21 <suhorng> // ap1 會 compile error
+01:16:33 <suhorng> implicit argument
+01:16:38 <CindyLinz> 噢 .idr XD
+01:16:47 <CindyLinz> 我應該讀作 forall b. 對吧? XD
+01:17:01 <suhorng> ap1 : (a -> b) -> a -> b 其實會變 ap1 : {a : Type} -> {b : Type} -> ...
+01:17:02 <suhorng> XD
+01:17:03 <monochrom> 即是說, 當你寫 "\s0 -> case getinput s0 of (x, s1) -> case output s1 (x+1) of (_, s2) -> output s2 "bye"", 因著 s0, s1, s2 之間的 data dependency, 所以 optimizer 及 code generator 迫著服從你給的順序, 不能像 pure functional code 那樣"次序沒所謂"
+01:17:04 <CindyLinz> 不對 是寫在下面 orz
+01:17:33 <monochrom> 對的, 最後那個 s 不存在.
+01:17:36 <suhorng> monochrom: 好像有點感覺
+01:18:24 <CindyLinz> 那 suhorng 貼的那個 Bag Cat 就沒這效果了? 它只有防止 Cat 被外面摸到
+01:19:22 <suhorng> 驚
+01:21:03 <CindyLinz> suhorng: 我一次遇到 scoped type variable 是在一個 sig 有 forall 的函數裡面定義內用的 helper, 想這個 helper 的 sig, 而這個 sig 裡面用到那個被 forall 的 type
+01:21:16 <CindyLinz> 沒開這個 ext 的話, compiler 說這兩個 type 是不同個..
+01:21:19 <suhorng> 有遇過!
+01:21:21 <suhorng> 真的 XDDD
+01:21:46 <suhorng> 不過 idris 直接當成一個參數把 type 拿近來..
+01:23:20 <CindyLinz> 預設打開了..
+01:23:29 <CindyLinz> 我覺得它是該開啊... QQ
+01:23:31 <suhorng> 不用打開喔lol
+01:23:34 <suhorng> 不是打開
+01:23:39 <suhorng> 而是像那個 {a}
+01:23:44 <CindyLinz> 只是那如果真要用兩個不一樣的 type, 裡面就要換名字了...
+01:23:57 <suhorng> 普通的variable scope，不是另一個不同的 "type" variable
+01:24:40 <CindyLinz> 就.. 裡面用到同一個名字的時候, 就是在指稱它了
+01:25:14 <suhorng> 就是普通的 variable scoping rule
+01:25:25 <suhorng> 跟 f a = ... where ... = ... a ... 一樣
+01:25:34 <CindyLinz> 你第二行的 {b} 和第一行的 b 是同一個東西嗎?
+01:25:35 <suhorng> 只不過現在這個 a 不一定存值, 也可以是type XD
+01:25:47 <suhorng> 那個code我發現我打錯字..改成 {a} 了
+01:26:22 <CindyLinz> 我是說 ap1 {b} 和 ap1 : ( a -> b ) ...
+01:26:31 <suhorng> 對
+01:26:33 <suhorng> 是同一個東西
+01:27:01 <CindyLinz> 然後因為第二行有 {b}, 所以第三行的 apply 可以用 b 來描述 type?
+01:28:00 <suhorng> 對
+01:28:25 <CindyLinz> 如果第二行沒有 {b}, 那第三行的 b 會被當 free variable (forall) 的意思?
+01:28:35 <suhorng> 對 會變新的
+01:28:55 <CindyLinz> 這樣好像比較好..
+01:29:20 <CindyLinz> ghc ext 那樣是要開就整個 module 全開了.. 所有的 forall 都變成 {x} 宣告
+01:29:38 <suhorng> XDDD
+01:30:05 <CindyLinz> 雖然實際上困擾也沒很大? 反正 a 或 b... 通常也都是沒意義的名字, 換了不會心痛 ww
+01:30:33 <suhorng> 是沒錯
+01:30:44 <suhorng> 但是很有趣w 當type變成可以拿來亂弄以後
+01:30:49 <suhorng> 很多東西可以消失不見
+01:31:44 <CindyLinz> 你是說很多 extension 就沒有存在的必要?
+01:32:41 <suhorng> 好像也不是這樣說 T_T
+01:32:58 <suhorng> 感覺..有些事情有統一的處理方法
+01:33:08 <CindyLinz> 我只是想先聽懂你說「消失」指的是哪方面
+01:33:22 <CindyLinz> 畢竟... Agda 裡面要打的字是變多了, 空格也變多了... XD
+01:33:25 <suhorng> e.g. ScopedTypeVariable
+01:33:36 <CindyLinz> 少一個 extension 沒錯.. XD
+01:33:52 <CindyLinz> 我覺得這一個不算.. XD
+01:33:58 <suhorng> 不少用 typeclass 做的事情也不再需要, 像是 type level list
+01:34:18 <CindyLinz> Haskell 弄成每一個 type var 前面加一下 scoped a. 也行啊? XD
+01:34:49 <suhorng> forall a. 那樣綁起來w？
+01:35:29 <CindyLinz> 對啊多一種修飾字這樣... 畢竟 forall 和 scoped 還是講不同的事 @@"
+01:35:44 <suhorng> 嗯嗯XD
+01:36:27 <CindyLinz> 想到 Agda... 再對照你的心得... 譯: 只要把靈魂賣給惡魔, 就不用學一堆怎麼看天氣和開船的技能了...
+01:36:38 <CindyLinz> (ref: 幽靈船)
+01:36:41 <suhorng> 什麼wwwwwwwww
+01:37:00 <suhorng> 惡魔是dependently typed之類嗎XD
+01:37:04 <CindyLinz> 對啊..
+01:37:11 <suhorng> 我是還不能體會他的好處
+01:37:16 <suhorng> 不過他很好玩XD
+01:38:04 <CindyLinz> 嗯嗯
+01:42:16 <CindyLinz> 然後更之前你丟過一篇也是講 Effect 的 paper, 嗯, 我只有看很前面... 覺得它好像比這個 Effects packet 來得動態
+01:42:35 <CindyLinz> 而且, 沒有去處理疊了兩層同一種 effect 的問題...
+01:42:47 <CindyLinz> 應該說, 好像只是名字像, 其實是在處理不同的東西?
+01:43:26 <CindyLinz> 看 Effects example.hs 裡面, 它會用 with (ref 5) $ \x -> with (ref 7) $ \y -> 這樣來寫
+01:43:36 <CindyLinz> 我覺得 action 本身也不太動態呀..
+01:44:00 <CindyLinz> 而如果要在裡面呼叫會使用這邊 5 或 7 的 action... 應該要把 x 和 y explicitly 傳過去
+01:44:34 <CindyLinz> 嗯, 我還要再繼續讀讀.... ^^|
+01:46:50 <suhorng> 來得動態？
+01:46:58 <suhorng> 我之前丟的那個paper出package了
+01:47:12 <suhorng> http://ocharles.org.uk/blog/posts/2013-12-04-24-days-of-hackage-extensible-effects.html
+01:47:31 <suhorng> 我也想比較，可是還不瞭解這個 Effects 的作法 QQ
+01:47:54 <suhorng> x y 直接傳進去感覺更像用可改的變數XD
+01:48:06 <CindyLinz> 我有點希望 Effects 其實就是 MonadTrans 的某種包裝.... 這樣我就可以已經懂一半了 XD
+01:48:28 <CindyLinz> 不一定能改啦... 如果原本那一項對應的是 Reader 的話, 就是 constant XD
+01:48:45 <suhorng> 喔喔喔對 XDD
+01:49:03 <suhorng> 這兩種好像就是要跟 monad transformer 不同
+01:49:48 <suhorng> https://github.com/suhorng/HaskellExercise/blob/master/effect/TestEffect.hs 這個..老實說他的code真的跟 monad transformer 很像
+01:49:57 <CindyLinz> 你是不是還有貼過誰在 stackoverflow 說, 仍然比較喜歡 Monad Transformer?
+01:50:11 <suhorng> 但是他要加更多type = =|||
+01:50:31 <suhorng> 不太有印象，我貼過得可能是不喜歡這個也不喜歡 monad transformer
+01:51:12 <CindyLinz> 記得人名嗎? XD
+01:51:34 <suhorng> 只記得是 pipes 的作者...orz
+01:53:13 <CindyLinz> QQ
+01:53:20 <suhorng> https://groups.google.com/forum/#!topic/haskell-pipes/BTQsITNwflc 第二篇
+01:54:09 <CindyLinz> 歐! 謝謝~~
+01:54:28 <CindyLinz> 厚剛以為是 stackoverflow... 下了 site:stackoverflow.com 原來就把可能的來源刪了.... orz
+01:55:07 <suhorng> XDD
+02:00:49 <suhorng> 天阿我說錯了orzzz 應該是倒數第二封信, 不是第二封信...
+02:04:55 <CindyLinz> 沒關係.. 一整串下來就會看到了 ^^|
+02:06:33 <CindyLinz> 嗯 看 paper 的時候, 蠻前面就拿類似這種例子出來 demo, 感覺的確有一點不舒服... XD
+22:15:53 <hashcat> idris的effect paper很好懂
+22:35:16 <suhorng> 還沒懂他的作法
+22:36:11 <suhorng> 例如他的choice說是可以在 Maybe 或 List 這兩種 context 中做
+22:36:24 <suhorng> 那如果我還想要 IO 的話該怎麼辦呢?
+22:36:53 <suhorng> 是不是我要自己寫一個 IO (List a) 之類的 context？
+23:01:41 <hashcat> ???
+23:03:16 <suhorng> 如果我想要有 IO 又想要有 Selection 的話該怎麼做呢?
+23:11:53 <hashcat> 有列表儲存各種effect
+23:12:53 <hashcat> http://eb.host.cs.st-andrews.ac.uk/talks/idris-cph-lec3.pdf
+23:13:00 <hashcat> 看第18頁
+23:14:22 <hashcat> 有個參數是List EFF
+23:17:15 <hashcat> 看範例好了 : http://www.cs.st-andrews.ac.uk/~eb/effect-examples.tgz
+23:17:26 <hashcat> Lang.idr我覺得最好懂
+23:20:01 <hashcat> 他裡面的型別是長這樣 eval : Expr -> Eff IO [EXCEPTION String, STDIO, RND, STATE Env] Int
+23:20:23 <hashcat> 來自創新詞: 最終效果, 途中效果
+23:24:30 <hashcat> IO 跟 Int 可以想成以前的monad
+23:24:33 <hashcat> IO Int
+23:25:06 <hashcat> 中間那個列表是附加於途中的效果, 像是會扔exception, 有隨機數等
+23:26:11 <hashcat> 主效果 IO 附屬效果 [EXCEPTION String, STDIO, RND, STATE Env] 返回 Int
+23:26:26 <hashcat> 這樣講不知道行不行
+23:27:29 <hashcat> 再看下宣告
+23:27:32 <hashcat> data EffM : (m : Type -> Type) ->
+23:27:34 <hashcat> (es : List EFFECT) ->
+23:27:35 <hashcat> (es' : List EFFECT) -> (a : Type) -> Type
+23:28:12 <hashcat> 這裡 m 意思就等同以前 monad 裡的 m 的常用用法
+23:28:34 <hashcat> a 也等同以前 monad 裡的 a 的常用用法
+23:29:21 <suhorng> 嗯嗯!
+23:29:25 <hashcat> 多出兩個(es : List EFFECT) , (es' : List EFFECT) 就是附屬的效果類似 monad transformer
+23:29:42 <hashcat> 補充下前者是不可變狀態, 後者是可變狀態
+23:30:02 <hashcat> Eff 就是 EffM 少了可變狀態
+23:30:10 <suhorng> 嗯哼
+23:30:43 <hashcat> 繼續研究prolog
+23:30:50 <hashcat> 置入行銷
+23:31:48 <suhorng> XDDD
+23:32:27 <hashcat> 很故意的講出來
+23:33:48 <CindyLinz> 途中效果裡面列的東西, 其順序應該是有影響的?
+23:33:49 <hashcat> 發現超恐怖的東西
+23:34:15 <hashcat> 天網出現之日指日可待
+23:34:20 <CindyLinz> ..
+23:34:30 <hashcat> http://www.cs.ox.ac.uk/activities/machlearn/Aleph/aleph_toc.html
+23:34:52 <hashcat> 我想不按原文翻譯成歸納邏輯理論自動建造機
+23:35:31 <hashcat> 原文是Aleph is an Inductive Logic Programming (ILP) system that supersedes P-Progol.
+23:36:00 <CindyLinz> 會學習會推論不可怕啊.. 天網出現的那一瞬間是出現自覺.. XD
+23:36:17 <hashcat> 機率跟歸納都有了, 整合起來要是加上前端視覺模式識別
+23:36:53 <hashcat> 征服銀河系的就不是人啦, 是歸納邏輯系統
+23:37:01 <suhorng> CindyLinz: 我覺得有點難說..他的作法會不會影響/如何影響實在不像 monad transformer 那樣看容易看出來....
+23:38:02 <hashcat> suhorng: 我怎覺得是 Effect 比較容易一目了然
+23:38:12 <CindyLinz> suhorng: 昨天看了 Pipes 作者對於可以隨意換順序的 Effect 的擔心... 我覺得如果可以隨意換順序的模型, 最好把 Exception 分出去, 不要混一起 ^^|
+23:38:17 <suhorng> 昨天貼的那封信我把他改成用 extensible-effects package, 結果不管 runError 跟 runState 誰先誰後跑出來結果都是 2
+23:39:03 <suhorng> 不同作法之下效果跟 monad transformer 完全不同XD|||
+23:39:04 <suhorng> 不只 exception，可能還要包含任何會影響control的東西，像是 x <- [1..10] 這一類東西
+23:39:33 <hashcat> 設計上跟順序無關才合情合理
+23:39:54 <hashcat> Monad跟Effect作用就是嵌入個語言
+23:40:00 <suhorng> hashcat: 像 s -> Either String (a, s) 跟 a -> (Either String a, s) 還可以人眼看出來, Effects 該怎磨勘呢?
+23:40:04 <suhorng> 不可能無關吧
+23:40:32 <hashcat> 拿設計一個語言來說, 沒人會想說什麼語言特性跟加入那個特性順序有關系吧
+23:40:33 <CindyLinz> 差別在... action 的長相來決定順序, 還是呼叫的地方決定順序 :Q
+23:41:06 <suhorng> 像 MTL 跟 extensible-effects 都是呼叫的地方決定順序
+23:41:20 <suhorng> 但是他們 "不同順序" 造成的影響很不一樣
+23:41:36 <CindyLinz> hashcat: 但是執行到一半發生 exception 了, 那麼 exception 之前已經做了的動作要仍舊保持, 還是 rollback, 是要規定一下的...
+23:41:43 <hashcat> 所有的效果 "同時" 發生, 前後無關才合情合理
+23:42:09 <CindyLinz> suhorng: MTL 是指.. liftIO 的寫法, 而不是 lift 的寫法?
+23:42:26 <suhorng> effects之間怎麼互動沒有一定怎樣才是對的吧? 可以選一種拿來作準 不過其他種也不能說錯
+23:42:28 <hashcat> 嗯嗯
+23:42:41 <suhorng> CindyLinz: 是指 monad transformers
+23:43:13 <CindyLinz> suhorng: monad trans 的 lift . lift . lift 的寫法.. 是定義 action 的地方就決定順序了啊.
+23:43:35 <CindyLinz> 看 lift 用了幾層, 就決定那一層一定要是什麼呀
+23:43:55 <suhorng> 假設使用typeclass自動推論要lift幾層的那種好了~
+23:44:10 <CindyLinz> XD 那就是 liftIO, liftWriter 的寫法嘛 :p
+23:44:24 <suhorng> 就是 mtl package 做的事呀Q_Q
+23:44:54 <suhorng> 大概我有弄混
+23:44:59 <CindyLinz> 嗯嗯, 要標明 不準直接用 lift.. :p
+23:46:31 <hashcat> 問下
+23:46:47 <hashcat> haskell在工作使用情形如何
+23:47:39 <CindyLinz> mno2: (戳戳)
+23:47:54 <suhorng> 可能要去 haskell.sg meetup (誤)
+23:48:36 <mno2> CindyLinz: ?
+23:49:06 <CindyLinz> mno2: # 23:46 < hashcat> haskell在工作使用情形如何
+23:50:42 <mno2> http://functionaljobs.com/jobs/8678-haskell-developer-at-zalora  可以參考 JD
+23:52:40 <hashcat> 亂丟垃圾會重杖打屁股的地方
+23:53:10 <CindyLinz> 可以 remote..
+23:53:18 <CindyLinz> 所以可以繼續亂丟垃圾(?
+23:53:45 <mno2> 丟垃圾？
+23:54:10 <CindyLinz> 他應該是說街上亂丟東西 XD
+23:54:42 <mno2> 喔喔
+23:55:07 <hashcat> 不是我想找, 只是想了解這裡的人有沒啥用到
+23:55:25 <hashcat> 我是完全沒用上
+23:56:07 <CindyLinz> 我用到一半
+23:56:19 <hashcat> 做什麼的
+23:56:24 <CindyLinz> 因為沒有時間壓力, 所以常常會跑去弄別的..
+23:56:58 <hashcat> 聽起來像無業遊民
+23:57:03 <CindyLinz> 資料結構, Augmented RB tree, 要拿來作即時的名次
+23:57:31 <CindyLinz> 應該剩介面整理.. 然後就擺了一陣子 orz # https://github.com/CindyLinz/Haskell-AugmentedRBTree
+23:59:03 <CindyLinz> 現在在弄 Haskell 與 Perl 介接.. 也許就能沿用我們公司原有的, 用 perl 寫的 socket 介面
+23:59:24 <hashcat> 同樣都沒實用, FP的對象我決定轉移到idris了

@@ -1,0 +1,258 @@
+00:10:54 <letoh> MnO2: http://tinyurl.com/a8jsgl5  screenshot
+00:23:29 <CindyLinz> suhorng: 怎麼疊的是各 transformer 自己定義的.. ContT 會反過來, 是因為 Cont monad 的「a」的位置就跟別人不一樣 :p
+00:35:21 <suhorng> 呀...真的就要去看每個分別的 transformer 了？
+00:36:42 <MnO2> letoh:  除了英文中文不一樣大，其他看起來還正常
+00:37:17 <letoh> 嗯  因為我把所有字型指定都拿掉了  那邊會再調整看看
+00:37:21 <suhorng> 在 Functional Programming with Overloading and Higher-Order Polymorphism 中好像有比較 structural 的說法，看我們有
+00:38:53 <suhorng> m (n a) → n (m a) 還是 n (m a) → m (n a) 來決定 m, n 怎麼疊 @@?
+00:39:34 <suhorng> 不好意思先離開了XD"
+10:06:25 <b4283> takeWhile 有定義有點看不懂
+10:06:39 <b4283> takeWhile p (x:xs)
+10:06:40 <b4283>             | p x       =  x : takeWhile p xs
+10:06:40 <b4283>             | otherwise =  []
+10:07:03 <b4283> 其中的 guard "| p x" 的意思是「如果 p x == True」嗎?
+10:08:17 <b4283> take 系列函數好像都是為了從無限 list 取出部份 ..
+10:14:29 <MnO2> b4293: yes, p = predicate
+10:15:17 <b4283> thanks
+10:21:03 <b4283> 老是忘記取 nth 是 "!!"
+11:30:49 <b4283> 現在發展 delphi 的公司原來叫 Embarcadero Technologies
+13:12:29 <CindyLinz> (!!) 取得真不錯, 看上去就有很沒效率的感覺 XD
+13:12:56 <CindyLinz> Array 的是 (!), 少一個 ! 就有效率多了... (逃)
+13:15:57 <MnO2> CindyLinz: 很沒效率的話應該要取 (T_T)
+13:33:19 <CindyLinz> MnO2: 那.. 算是還不夠沒效率好了.. 線性時間而已嘛 XD
+14:03:49 <letoh> p = predicate 這個命名習慣是從 lisp 開始的嗎?
+14:05:06 <letoh> 唔  不對  lisp 的 p 好像是 prediction
+14:10:19 <favonia> CindyLinz: 我想要 l !!!!!!!!!! n
+14:10:51 <favonia> CindyLinz: 看起來就是會爆炸
+14:11:07 <letoh> 視覺化編程
+14:11:59 <letoh> http://chinesetrad.joelonsoftware.com/Articles/Wrong.html  突然想到這篇XD
+14:12:07 <favonia> > let (o_o) = (+) in 1 `o_O` 2
+14:12:08 <lambdabot>   Not in scope: `o_O'
+14:12:08 <lambdabot>  Perhaps you meant `o_o' (line 1)
+14:12:19 <favonia> > let (o_O) = (+) in 1 `o_O` 2
+14:12:20 <lambdabot>   3
+16:51:31 <MnO2> https://gist.github.com/2657075
+16:51:46 <MnO2> c9s 第三名
+17:45:35 <b4283> 看起來 c9s 是個 vim 狂熱者
+19:24:15 <letoh> b4283: c9s 有主持中文的 vim channel 呀
+19:47:17 <CindyLinz> favonia: 要數驚嘆號的個數, 感覺就好難過... zz
+19:48:14 <letoh> 這樣才能避免使用?
+19:49:51 <CindyLinz> letoh: 那不要放不是更快..
+19:51:53 <letoh> 當你的鍵盤只剩 ! 還能用的時候...(誤
+19:52:51 <b4283> 那就只能數了
+19:53:11 <letoh> b4283: 只剩 ! 還能用的時候就該換鍵盤啦XD
+19:54:02 <letoh> b4283: 你要幫忙測試電子書嗎?
+19:54:50 <letoh> 像之前 favonia 寫的 bf interpreter 就放不進去了，layout 得轉成 landscape...
+19:55:28 <letoh> http://zh-haskell.csie.org/   在這個地方輸入 email 後會發生什麼事?
+19:58:40 <letoh> Learn You a Haskell for Great Good! 原來有兩本書嗎?
+19:59:37 <letoh> http://www.goodreads.com/book/show/6593810-learn-you-a-haskell-for-great-good  有猴子封面的
+20:16:42 <MnO2> 猴子封面是最早期版本吧？
+20:17:32 <MnO2> letoh: 輸入 email 之後就.... 你的 email 就被輸入了 xD
+20:18:35 <letoh> 原來是這樣XD
+20:18:59 <letoh> 因為書名少了 beginner's guide   我還以為是進階版
+20:19:23 <MnO2> letoh:  那東西只是想說那夠接觸到早期強烈有興趣的人而已，不過現在有 community 之後好像就沒啥用
+20:22:15 <letoh> 嗯嗯，不過就算有 community 也是得靠廣告，不然一般人應該不曉得去哪找@_@
+20:24:23 <favonia> cyt93cs_: Hi~
+20:28:28 <letoh> MnO2: 請問一下，要跑 fdoc 除了 ruby 外還要裝哪些東西?
+20:28:40 <MnO2> ropencc
+20:29:04 <MnO2> parse.rb 有 include  到
+20:29:04 <letoh> 我找找
+20:29:31 <MnO2> README 裡面應該都有寫了
+20:30:19 <letoh> 看了一下只提到inspired by txt2tags @_@
+20:30:52 <letoh> 找錯文件了  我一直在看 fdoc XD
+20:33:28 <favonia> letoh: 你覺得假如一般人對 Haskell 有興趣... 然後再來會怎麼找？
+20:36:17 <letoh> 完全不曉得，因為在你開這個 channel 之前，我不曉得台灣還有那麼多人在用 haskell
+20:37:00 <letoh> 我之前大概就是看看論文，看看國外 blog 的介紹這樣吧
+20:38:41 <letoh> 以中文的部份來說，我知道的大概就是 ptt 的 plt 板XD
+20:38:49 <letoh> 但那個板的水量實在很少...
+20:39:56 <letoh> 喔  我常看的還有 LtU.. 不過內容就比較雜了，什麼都有
+20:40:22 <favonia> letoh: 了改，看來要在 PLT 版上多廣告？ xD
+20:41:17 <MnO2> letoh: 現在用 google 搜尋 Haskell 應該結果都在前面，流量會導進來
+20:43:18 <favonia> MnO2: 最前面是這個？http://www.haskellcn.org/
+20:44:09 <MnO2> favonia: 可能美國地區比較不一樣，你開無痕還是？
+20:44:32 <letoh> 我的是 lyah 英文版
+20:45:32 <favonia> 天啊有這個 http://www.haskell.org/haskellwiki/Tw/Haskell%E5%85%A5%E9%96%80%E7%9A%845%E5%80%8B%E6%AD%A5%E9%A9%9F
+20:45:50 <letoh> 這個我前幾天才看到
+20:46:18 <favonia> 我一定要把 haskell.tw 很明顯的加到最後面 xDDD
+20:48:49 <MnO2> letoh: 如果不限語言，英文版在前面蠻合理的
+20:49:25 <letoh> 不過  我的 chrome 應該是把日文設在前面才對呀  我檢查一下@_@
+20:50:49 <letoh> 代表日文沒啥資源嗎? XD
+20:51:01 <favonia> letoh: 日文應該要更多資源才對吧
+20:51:13 <letoh> 本物のプログラマはHaskellを使う - ITpro  這個在很前面
+20:51:24 <favonia> MnO2: 我改了 wwww 最大化 #haskell.tw 曝光率
+20:53:09 <MnO2> letoh: 正常，那個專欄應該還不少人讀
+20:53:35 <letoh> 我有看一點  但在電腦上看很累XD
+20:54:46 <letoh> MnO2: http://cielquis.net/religion/results/2cf68ea14896ef51940cdc3dbfe96ed5a1084ccd.html   這篇好像是用程式套樣板產生的文章.. 但蠻有趣的XD
+20:55:50 <letoh> 我搜尋出來的好像都是一些怪東西比較多XD
+20:58:53 <MnO2> xD
+20:59:14 <letoh> 你看旁邊還有 Lisp 信者 / Vim 信者 / Lock-free 信者...
+21:01:59 <letoh> 有些看不太懂  跟 Scala 比較的時候，為什麼回答是說最終都得寫成 point free style ?
+21:03:43 <favonia> @pf \x y = x + y
+21:03:43 <lambdabot> Maybe you meant: bf pl
+21:03:47 <favonia> @pl \x y = x + y
+21:03:47 <lambdabot> (line 1, column 6):
+21:03:47 <lambdabot> unexpected "="
+21:03:47 <lambdabot> expecting pattern or "->"
+21:03:56 <favonia> @pl \x y -> x + y
+21:03:57 <lambdabot> (+)
+21:04:23 <favonia> letoh: 因為 scalabot 沒有 @pl (誤)
+21:04:38 <letoh> 要靠 Haskell 拉近距離的方法，再見面時先說：「上次聊過後，用 Haskell 解了 50 題 Project Euler 的題目」
+21:08:09 <letoh> 看了一下 point free 介紹，感覺就是整理完可以消去重複的參數部份?
+21:09:06 <favonia> letoh: 那只是一種 style~ 在滿足 eta 變換不變的程式語言裡面通常可以這樣亂搞
+21:09:11 <favonia> Haskell 是其中一個
+21:09:24 <favonia> eta 變換就是 "\x -> f x" 和 "f"
+21:09:40 <favonia> 不是所有語言都滿足
+21:09:43 <letoh> 嗯嗯
+21:34:04 <letoh> 嗯  原來如此
+21:34:19 <letoh> http://www.haskell.org/haskellwiki/Eta_conversion
+21:52:57 <b4283> 看完 learn you a good haskell 的 higher-order-function 一章後，覺得 currying 這個特性實在太神了
+21:53:12 <b4283> letoh: 要測啥？
+21:53:32 <letoh> 唔  mobi 格式的電子書@_@
+21:53:51 <b4283> 編成 mobi 之後應該都一樣吧?
+21:54:30 <letoh> 唔，因為有些地方爛掉  需要一頁一頁檢查XD  如果你有在看的話可以順便挑出來XD
+21:54:59 <letoh> 我可能要改掉一些 html 的寫法  讓排版正常一點XD
+21:55:16 <b4283> 是在轉哪一本呢
+21:55:33 <letoh> 就是你正在看的呀  不過是繁中版
+21:55:39 <b4283> 喔喔
+21:55:53 <b4283> 順便校稿的意思嗎
+21:56:11 <b4283> 我記得中文版是 MnO2 弄的
+21:56:24 <letoh> 方便的話啦  其實我也是看英文版  反正就順便練習弄 mobi 檔
+21:56:37 <letoh> 對呀  我拉網頁上的…資料來做的
+21:57:02 <b4283> 我也看英文版
+21:57:39 <b4283> letoh: 檔案放在哪兒
+21:57:57 <b4283> 不對，這個語氣怪怪的
+21:58:08 <letoh> ?
+21:58:14 <b4283> 跪求 learn you a good haskell 中文版 m(_ _)m
+21:58:20 <letoh> 啥鬼XD
+21:58:27 <letoh> b4283: http://dl.dropbox.com/u/1466112/lyah_zh.mobi
+21:58:36 <b4283> thx
+21:59:02 <b4283> 有沒有要特別注意哪些地方
+21:59:04 <letoh> 有看到程式碼被切掉或文字跟圖重疊的地方請告訴我  要改排版
+21:59:12 <b4283> yes sir
+21:59:42 <letoh> 我本來想用 javascript 處理，按一下程式碼的區塊就放大  但 kindlegen 好像會濾掉 javascript ?
+21:59:47 <letoh> 還在研究中@_@
+22:00:56 <favonia> hychen: hello
+22:00:58 <letoh> 這本有 kindle 版，考慮買來研究看看怎麼排版@_@
+22:01:12 <favonia> hychen: 關於昨天的那個 let x = 1 in ... 啊
+22:01:31 <favonia> hychen: 如果你要翻譯一般語言，那就是 let x = ref 1 in ...
+22:01:56 <letoh> MnO2: http://nostarch.com/sites/default/files/imagecache/product_full/haskell_sample2big_0.jpg  拿掉程式碼的背景區塊會不會好一點?
+22:01:58 <favonia> hychen: 在 C, Python, Ruby, C++, Java... 你的「變數」其實是一個 reference
+22:02:29 <favonia> letoh: 上下框建議和程式碼再多幾 pt 的空白
+22:02:42 <letoh> 我有加了 25px margin
+22:02:48 <b4283> 第一頁就怪怪的
+22:03:01 <favonia> 不不我是說和程式碼
+22:03:06 <favonia> 不是和其他文字
+22:03:08 <letoh> b4283: 是指大象嗎?
+22:03:08 <b4283> unordered list 裡面的東西不見了
+22:03:20 <letoh> favonia: 瞭解
+22:04:03 <letoh> b4283: 因為那是惡搞出來的... 我還在修改
+22:04:10 <b4283> oh
+22:04:17 <favonia> hychen: 一般程式語言裡面說 "int x = 1" 其實 x 是一個 reference. 通常我們說「底下的 x 位置都不能動」的意思就是因為那都是同一個 reference
+22:04:44 <favonia> hychen: Haskell 把這些東西都講清楚了，所以是寫 let x = ref 1 in ...
+22:06:29 <letoh> b4283: kindle 不太適合顯示這種漸層色和色塊
+22:07:09 <favonia> hychen: C++ 的 "int &x = y" 意思就是 let x = y in ... 也就是他還是複製了 xD 就是複製那個 reference
+22:07:37 <favonia> hychen: 啊應該也不算「複製」。應該說底下所有 x 都用 y 帶入
+22:08:18 <b4283> 喔，這個解釋蠻有意思
+22:08:33 <letoh> favonia: https://www.dropbox.com/s/fbw1vsvfo5m4nf5/screenshot_2013_01_27T10_05_08-0400.png  現在的樣子
+22:08:46 <favonia> hychen: 其他語言的奇怪功能基本上都寫得出來
+22:08:50 <b4283> 所以說 compiler 在編的時候直接把 y 都當作 x ?
+22:09:06 <favonia> b4283: 不是，而是說等價於這樣
+22:09:11 <favonia> 編譯器要怎麼實作不知道
+22:09:16 <b4283> ok
+22:09:44 <hychen> favonia, hi
+22:09:59 <b4283> 我對 c++ 有點生， int &x = y 若對 x 作改變 y 不會變吧？
+22:10:13 <letoh> y 指向的內容不變
+22:10:19 <letoh> x y 都是 ref
+22:10:53 <favonia> letoh: er y 本身沒有指向東西啊，y 像是一個「洞」，洞要填什麼不知道 xD
+22:10:56 <b4283> ...還是不懂，我翻書去
+22:11:08 <favonia> 這些變數都是洞而已
+22:11:14 <letoh> 嗯  用指向來表達不太對
+22:11:19 <favonia> x y 是洞的編號
+22:11:24 <favonia> 給人類看的
+22:11:25 <b4283> 是洞會讓我想到 FF7
+22:11:36 <letoh> 魔石? XD
+22:11:37 <favonia> hychen: 啊我剛才好像用到 Standard ML 的語法 orz orz orz
+22:11:43 <b4283> yeah XD
+22:12:13 <favonia> Haskell 的變數都是洞～函式的定義就是「我告訴你要怎麼塞」
+22:13:01 <favonia> let x = v in e 就是請把 v 塞到 e 裡面所有叫 x 的洞裡面
+22:14:14 <letoh> 我想確認一下「塞到洞裡」的意思，我的理解是：e 的定義裡面出現 x 的地方都替換成 v
+22:14:18 <letoh> 這樣對嗎?
+22:15:31 <favonia> 嗯。我想再強調到底怎麼實作其實不知道 xD 但應該結果會等價
+22:17:23 <letoh> 了解，我的重點也不在實作，只是想知道怎麼理解這行程式  簡單來說 e = x 會相當於 e = v 的結果
+22:17:34 <favonia> 對
+22:18:02 <letoh> 但你剛剛提到這個還不是 reference ?
+22:18:35 <letoh> 那個 ref 1 是 haskell 的語法嗎?
+22:19:09 <favonia> letoh: 那是 SML
+22:19:15 <letoh> 嗯嗯
+22:19:50 <favonia> letoh: Haskell 是 k <- newIORef 1
+22:19:54 <favonia> letoh: Haskell 是 x <- newIORef 1
+22:19:56 <hychen> 那什麼叫做不能update variable?>
+22:20:41 <favonia> hychen: 你可以更新 reference 指到的內容，但洞填東西下去就是填下去了，不能換啊
+22:21:00 <hychen> hmm
+22:21:04 <hychen> 我想我懂了
+22:21:14 <favonia> x + x 代表一個有兩個洞的敘述，兩個洞名字都是 x
+22:22:15 <favonia> hychen: 雖然你懂了，我繼續講玩這個例子好了 xD do {x <- newIORef 1; readIORef x} 這個嘛...
+22:22:45 <favonia> "readIORef x" 有個洞叫 x, 會被填入 newIORef 1 傳回來的結果
+22:22:53 <favonia> 會填入那個 reference
+22:23:24 <favonia> 所有叫 x 的洞都會填入同樣的東西
+22:23:50 <favonia> 但如果填一個 reference 就可以讀或是改這個 reference 指到的內容
+22:24:19 <favonia> 在 99% 的語言裡面都是填入 reference
+22:24:24 <favonia> 所以你才可以改內容
+22:26:58 <b4283> 所以 int 其實是 int* ? (打結)
+22:27:34 <favonia> b4283: 在 C 裡面你永遠逃不出 reference 的世界
+22:28:19 <favonia> b4283: 所以 int * 只是一個指向指向 int 的 reference (兩層)
+22:28:47 <b4283> 這個 reference 在 c 是指記憶體位置嗎
+22:29:18 <favonia> b4283: 嗯，在 C 這樣理解應該沒問題... 雖然我傾向用抽象的方法理解 xD
+22:29:35 <b4283> ok
+22:30:39 <favonia> b4283: 我相信以上的翻譯方法可以讓你了解 99.9% 語言的意思 xDDD
+22:30:47 <b4283> 是不是因為語言沒設計好導致必須要有 lvalue 和 rvalue 的
+22:30:56 <b4283> 不然就一種就好了
+22:31:04 <favonia> 像是 call-by-reference 其實就是把 reference 自己傳進去
+22:31:07 <favonia> b4283: 對啊
+22:31:10 <b4283> favonia: 我看你 bbs 那篇是這個意思
+22:31:15 <favonia> 是
+22:31:32 <favonia> 想說可能很多人沒看所以再重複說一次 xD
+22:31:42 <b4283> @@
+22:31:50 <favonia> 如果分開的話，本來就不需要分 call-by-value 和 call-by-reference
+22:34:17 <favonia> b4283: 其實我很想說連 const 什麼的可能都不太需要
+22:35:33 <b4283> 因為要修改必須指明是 ref access ?
+22:35:48 <hychen> favonia, 感謝你的解釋
+22:35:59 <b4283> favonia, 感謝你的解釋
+22:36:13 <favonia> letoh: 感謝你的 mobi
+22:36:18 <b4283> hehe
+22:36:27 <b4283> letoh: 感謝你的 mobi
+22:37:30 <b4283> 我真沒貢獻啊 (遮臉)
+22:44:18 <b4283> 我發現 find 的 type 會隨著 argument 改變
+22:44:33 <b4283> :t find
+22:44:34 <lambdabot> (a -> Bool) -> [a] -> Maybe a
+22:44:45 <b4283> :t find (== 1)
+22:44:47 <lambdabot> (Eq a, Num a) => [a] -> Maybe a
+22:44:55 <b4283> :t find (== [1,2,3])
+22:44:56 <lambdabot> (Eq t, Num t) => [[t]] -> Maybe [t]
+22:45:38 <b4283> 嗯， 不對這是 partial，當我沒說 ._.
+22:47:45 <favonia> b4283: find 的最一般 type 是不變的，變的是 "find (== x)" 的最一般 type
+22:48:13 <favonia> b4283: 那個是 GHC 用神奇方法算出來的最一般型態---把所有條件考慮進去算出來的
+22:49:07 <b4283> 它好像會倒過來推論
+22:49:45 <favonia> b4283: 方向不一定
+22:49:59 <b4283> 比如說 concat . concat ，因為後一個定要一個 list 所以套一層在前面那一個上面
+22:50:16 <favonia> 就好象線性方程組一樣，只要最後解出來就好了，不一定從哪裡開始算
+22:50:37 <favonia> 倒推不一定可以很順利解出來
+22:50:44 <b4283> 因為那一天想寫個 concatTwice，結果 type 不會寫只好作弊 :p
+22:50:52 <b4283> 原來如
+22:50:54 <b4283> 此
+22:52:05 <favonia> b4283: 有些語言可以證明有很簡單的方向可以解完
+22:52:20 <favonia> b4283: 有些語言就... (以下10萬字略)
+22:53:29 <b4283> :P
+23:14:43 <suhorng> 請問一下 有些 typeclass 宣告時有 "|"，是什麼意思呀？
+23:15:19 <suhorng> 像是 http://hackage.haskell.org/packages/archive/monad-param/0.0.2/doc/html/Control-Monad-Parameterized.html
+23:15:28 <suhorng> Bind m m' m'' 這個 typeclass
+23:16:42 <CindyLinz> suhorng: http://www.haskell.org/haskellwiki/Functional_dependencies
+23:16:55 <suhorng> 喔!!感謝!!!
+23:17:01 <CindyLinz> 不知道關鍵字的情況下真的很難查...
+23:17:12 <CindyLinz> (苦過來的...)
+23:18:11 <letoh> MnO2: 感謝你的繁中翻譯
+23:38:17 <MnO2> letoh: 感謝你花時間調整 css
+23:39:41 <favonia> （現在感謝球在 letoh 手上）
+23:40:53 <letoh> 怎麼又回來了XD
+23:41:49 <suhorng> XDD
+23:42:10 <letoh> 我剛剛搞定 ruby 了，整理一下應該可以把修改過的 css 先丟出來

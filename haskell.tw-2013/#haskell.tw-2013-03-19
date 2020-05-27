@@ -1,0 +1,82 @@
+09:47:17 <MnO2> CindyLinz: 為什麼要在 data 裡面塞 newtype ?
+11:17:07 <CindyLinz> MnO2: 因為我想用必須是 Ord key 的 Map
+11:17:24 <CindyLinz> 而傳進來的 type 沒有設 instance
+11:17:41 <CindyLinz> 是傳給我一個 key -> key -> Ordering 的 function
+11:17:54 <CindyLinz> 所以我想在「內部」自己組出一個 Ord key
+12:27:32 <CindyLinz>  
+12:28:16 <CindyLinz> 用 ScopedTypeVariables 來寫內層函數的 type signature 感覺真是很棒 ^^
+12:42:41 <MnO2> CindyLinz: 喔喔，然後 key 還需要是 generic ，然後跟 function 的 type 又跟 data structure 的 key 參數要設下限制表示是同一個
+12:44:18 <CindyLinz> 不知道可以怎麼寫.. 類似跟 Map 說: 喂~ 它雖然不是 Ord, 不過我有準備了 Ord 要用的函數了唷~ 你就將就用一下吧.. :D
+12:44:51 <CindyLinz> 現在只會請 caller side 把它弄成 Ord
+12:45:32 <CindyLinz> 只是 Ord 不一定只有一種定法, 不同場合要用不同種, 會打架的時候, 就要再包一層 newtype...
+12:45:54 <CindyLinz> 如果能夠的話, 我是希望髒事臭事往 callee side 塞
+12:54:13 <MnO2> CindyLinz: 也許 GADT 可以解決（我不確定）
+12:56:25 <CindyLinz> 如果我這函數是定義為 class 的 function 的話
+12:56:44 <CindyLinz> 欸 GADT?
+12:56:51 <CindyLinz> 想成 Type Family
+12:57:38 <CindyLinz> 想想看.. :/
+18:12:33 <miaout17> ls -al
+21:23:06 <suhorng> 搜到一個為密碼學演算法設計的語言 http://2012.sharcs.org/slides/hurd.pdf (正式版要錢)
+21:23:26 <suhorng> 他的語法中出現好多很像 Haskell 的東西...XD 例如 [|　|]
+21:24:10 <suhorng> 還有像 where 語法、List comprehension 類似的語法..
+21:24:28 <b4283> hurd !?
+21:24:32 <suhorng> 也說 Cryptol compiler 可以產生 haskell code XD
+21:24:41 <suhorng> b4283: 跟 GNU Hurd 沒有關聯 XP
+21:25:01 <letoh> 看了一下 lens，好像很厲害
+21:25:24 <suhorng> 上次投影片看到一半就撐不下去了w
+21:25:39 <suhorng> mno2在 G+ haskell.tw 貼的那個
+21:25:43 <letoh> 看到某人的 blog 剛好有介紹
+21:26:00 <suhorng> letoh: 有連結嗎?
+21:26:06 <letoh> 太長的東西我實在看不太下去  用電腦看好累XD
+21:27:22 <letoh> http://d.hatena.ne.jp/kazu-yamamoto/20130319/1363661572   我是看這篇，不過有英文的 reference 可以看
+21:27:48 <letoh> http://www.haskellforall.com/2012/01/haskell-for-mainstream-programmers_28.html
+21:28:21 <suhorng> Cool!
+21:33:45 <letoh> 第一句就很好笑
+21:34:13 <letoh> 「見ろ！ Haskell が OO のようだ！」   這是改自天空之城裡的台詞XD
+21:35:07 <letoh> 然後我就看得下去了，不然本來也是打算先跳過的XD
+21:42:21 <b4283> letoh: 看得太熟啦
+21:43:17 <letoh> 名台詞耶XD
+21:46:11 <suhorng> 看不懂日文w
+21:46:30 <letoh> 可以看英文的呀
+21:47:01 <suhorng> 是在說那個台詞XDD
+21:47:31 <letoh> 喔喔喔
+21:49:41 <letoh> 原本的台詞是這句 「見ろ！人がゴミのようだ！」
+21:51:10 <letoh> 意思是「看啊  這些人就像垃圾一樣」  改編的那句變成「看啊  Haskell 就像物件導向語言一樣」
+21:58:17 <letoh> http://www.amazon.co.jp/dp/4873115876/   這是山寨版的嗎? 為什麼可以放個怪生物在封面上?
+21:59:35 <petercommand> letoh: orelly的書不是都這個樣嗎@@ 像駱駝之類的
+21:59:55 <letoh> 但之前都會放真正的動物? 不會放個外星人啊
+22:00:35 <petercommand> XD
+22:00:42 <letoh> http://www.amazon.co.jp/dp/4274069117/  日譯版的 type and programming languages
+22:00:57 <petercommand> http://www.amazon.com/Land-Lisp-Learn-Program-Game/dp/1593272812
+22:01:12 <letoh> 應該是吧我猜  看到原作者名字和 type system，應該是某本橘紅色的書
+22:01:38 <petercommand> 這隻比較有光澤
+22:01:44 <letoh> XD
+22:20:38 <letoh> 為什麼不建議用 head/tail 呢?
+22:22:41 <letoh> 試了一下 sml 的 hd/tl 也一樣會丟出 exception empty
+22:31:03 <letoh> > fibs = 0 : 1 : zipWith (+) fibs (tail fibs)
+22:31:05 <lambdabot>   <hint>:1:6: parse error on input `='
+22:31:13 <letoh> > let fibs = 0 : 1 : zipWith (+) fibs (tail fibs)
+22:31:15 <lambdabot>   not an expression: `let fibs = 0 : 1 : zipWith (+) fibs (tail fibs)'
+22:31:18 <letoh> > let fibs = 0 : 1 : zipWith (+) fibs (tail fibs) in fibs
+22:31:20 <lambdabot>   [0,1,1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181,6765,10946...
+22:31:26 <letoh> 哇  不會死掉
+22:33:18 <suhorng> 不會壓XD
+22:43:43 <letoh> 這招是 lazy 才辦得到嗎?
+22:46:56 <suhorng> 是
+22:47:08 <suhorng> 手動 lazy 應該也可以吧w
+22:49:01 <letoh> 這寫法真是酷
+22:50:14 <MnO2_> http://blog.sina.com.cn/s/blog_5d90e82f0101jbgr.html
+22:51:34 <suhorng> 他最近好像很常寫文章@_@"
+22:55:00 <MnO2_> 有空了吧
+22:58:16 <letoh> 「これをghc -O3でコンパイルする。そのまま走らせると「Stack space overflow」というエラーで死んでしまうので+RTS -K200Mをつけて走らせる」   好好笑XD
+22:58:25 <letoh> 原來可以 runtime 給參數
+22:59:55 <letoh> http://d.hatena.ne.jp/nishiohirokazu/20100622/1277208908  然後執行速度還輸給 python XD
+23:00:03 <petercommand> MnO2_: 數學上很多東西都蠻虛的，而很多這類的數學問題很難用這問題存不存在來思考，因為根本不知道以號有無可能用到
+23:01:17 <petercommand> s/號/後
+23:09:34 <MnO2_> 我只是順手看到貼過來而已 xD     問我想法的話說實在 I don't care ，我覺得這種東西就跟用藍色洛克人全破一樣，對每個人的意義都不一樣。
+23:09:58 <petercommand> XD
+23:10:31 <petercommand> 藍色洛克人是啥呀
+23:11:34 <MnO2_> 就洛克人 X 啊，不拿任何裝備全破
+23:11:51 <MnO2_> 一代的話連衝刺都沒有
+23:12:23 <letoh> 藍色洛克人XD  X一代可以發氣功
+23:13:04 <petercommand> 我對洛克人不太了解@@

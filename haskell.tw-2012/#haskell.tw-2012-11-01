@@ -1,0 +1,91 @@
+00:01:14 <CindyLinz> 好悲情的感覺 XD
+00:02:32 <godfat> diversity is the way to live long XD
+00:07:26 <MnO2> https://chrome.google.com/webstore/detail/chrome-remote-desktop/gbchcmhmhahfdphkhkmpfmihenigjmpp/details
+00:07:28 <MnO2> 這...
+00:07:53 <b4283> elm 很酷，可是產生出來的 js 效能好像不太好
+00:09:12 <godfat> 我還是離 chrome 遠一點..
+00:09:48 <b4283> 嗯,是我的 firefox 有問題 ..@@
+00:09:52 <letoh> 剛剛一直在想 elm... 不是收信軟體嗎...XD
+00:12:00 <b4283> 怪哉，就只有 firefox 在抓滑鼠位置時會卡死
+00:14:26 <MnO2> 真的耶，Firefox會卡卡的
+00:15:40 <b4283> 我清空 ~/.mozilla 就正常了
+00:29:03 <MnO2> favonia: ping
+00:29:13 <favonia> MnO2: pong
+00:29:45 <MnO2> 大概半小時前有聊到FRP
+00:30:05 <favonia> 唔總覺得講完了（？）
+00:30:14 <favonia> 你們的 functional 是在講什麼
+00:30:45 <MnO2> ㄟ，應該是我個人覺得用functional可能不太精確啦
+00:30:50 <CindyLinz> 想問.. 什麼是 functional, 什麼是 composable
+00:32:11 <MnO2> 就是Excel那樣的=funnction應該不算是FRP吧？
+00:38:36 <MnO2> favonia 又不見了 xD
+00:38:56 <favonia> MnO2: hi
+00:39:07 <favonia> 是不是 F 就算了，這個很 RP 啊
+00:39:27 <MnO2> 對啊，那多了F差在哪？
+00:40:15 <MnO2> 以我目前理解應該是差在描述方式以及組合能力
+00:40:20 <favonia> MnO2: F = 輸入一樣輸出就一樣
+00:40:37 <favonia> MnO2: 看語言吧... 我覺得 F 真是太模糊了 orz
+00:40:52 <favonia> 剛才是 function 的數學定義
+00:41:06 <MnO2> 所以應該是 pure reactive programming ?
+00:45:36 <CindyLinz> 那就是 pure 嘛 :D
+00:45:58 <MnO2> 我錯了 xD
+00:46:43 <godfat> XDDDD
+00:53:40 <favonia> MnO2: 我覺得這些名詞好麻煩....
+00:53:58 <favonia> MnO2: 主要像是 splay tree 之類的問題
+00:54:14 <MnO2> favonia: splay tree?
+00:54:30 <MnO2> favonia: 為什麼會跟splay tree有關？
+00:54:45 <favonia> MnO2: 每次存取時都會修改，但外部來看是 "functional"
+00:56:12 <MnO2> 聽起來好像物理的內力外力
+00:58:24 <favonia> MnO2: 我覺得等我想好這些名詞要怎麼定義再說 lol
+00:58:24 <MnO2> favonia: 所以至少要外在符合 function 數學的定義，其他都是語言外加的
+00:58:35 <MnO2> favonia: 好吧
+00:58:58 <favonia> MnO2: splay tree 是一個例子
+01:00:30 <CindyLinz> Disjoint Set Union and Find 應該也算?
+01:00:38 <CindyLinz> 只用 Find 的部分時
+01:01:16 <MnO2> favonia: 那按照這樣的描述，Excel的=function應該也算？
+01:01:41 <favonia> 應該吧... excel 有可以存取網路之類的酷炫 function 嗎
+01:01:56 <letoh> db 算嗎?
+01:03:34 <MnO2> letoh: 不包括在系統中會導致一樣input但不同output就算吧？所以如果DB還有其他程式在寫的話...
+09:58:58 <b4283> https://github.com/orangeduck/CPlus
+13:30:50 <MnO2> http://mwotton.github.com/hs_gbu/
+13:30:54 <MnO2> haskell in production
+14:20:46 <b4283> 這三個人是什麼關鍵人物嗎？
+14:25:46 <CindyLinz> 看起來還好遠呀.. :|
+14:28:02 <MnO2> CindyLinz: 意思是就直接用ruby就好了（誤）
+14:29:10 <CindyLinz> 我不要用 ruby XD
+14:38:49 <b4283> 怪哉，那個投影片我無法用
+14:39:15 <CindyLinz> 按方向鍵
+14:39:35 <CindyLinz> 方向鍵無效的話... 按 ctrl-U  (逃)
+14:39:47 <b4283> 有了 @@
+14:40:12 <b4283> 為啥 ruby 是馬車 XD
+14:40:46 <CindyLinz> 從他的比喻看起來 Haskell 比較不環保.. XD
+14:41:15 <b4283> 實際上比較環保啊 XD
+14:42:33 <_13h> 我是看了原始碼才知道是 slide... 一開始對著那張圖參詳半天不曉得是什麼XD
+14:43:04 <b4283> 我也是
+14:43:32 <b4283> 所以一開始才會問那三個人是啥
+14:44:12 <CindyLinz> 所以要按 ctrl-U 啊 XD
+15:34:59 <_13h> 剛剛才看懂 ctrl-U 的意思XD 我完全沒意識到我每次開原始碼是按這個XD
+15:35:31 <_13h> 手指已經記住的動作跟看到文字會連結不起來XD
+15:39:34 <CindyLinz> XD
+15:44:01 <b4283> C-u 100 w
+15:44:33 <CindyLinz> 100 w ?
+15:44:41 <b4283> wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
+15:45:09 <b4283> 重複命令的意思
+15:45:21 <CindyLinz> 噗噗 ^^|
+15:45:41 <b4283> C-u <times> <cmd> 就是重複 cmd times 次
+15:47:45 <CindyLinz> 你這是啥瀏覽器的巫術....
+15:48:20 <_13h> w
+15:48:22 <_13h> emacs
+15:48:32 <_13h> b4283: 你現在用 erc ?
+15:49:54 <b4283> 又換回 rcirc
+15:50:03 <_13h> 嗯嗯
+15:51:37 <CindyLinz> .....||
+15:53:38 <_13h> vim 也有 irc client script
+22:10:23 <MnO2> 話說，如果有一套Lisp的framework是L開頭的話，縮寫就可以寫成 LOL 了耶
+22:11:32 <MnO2> CindyLinz: 討厭 Ruby 的話趕快去開發一套 xDDD
+22:30:51 <CindyLinz> MnO2: 我也討厭 framework 啊 ^^|
+22:31:04 <CindyLinz> 找別人吧 XD
+22:32:42 <favonia> MnO2: HOHOHO framework (聖誕版)
+22:33:16 <CindyLinz> XDDD
+22:33:41 <CindyLinz> 好多 Haskell 的 library 名字都喜歡用 H 開頭 XD
+22:40:19 <MnO2> H-O-H   <---- 這應該是H2O的分子表示法吧?
+23:18:10 <favonia> H2O framework

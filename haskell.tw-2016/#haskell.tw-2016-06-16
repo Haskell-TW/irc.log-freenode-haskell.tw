@@ -1,0 +1,7 @@
+00:08:48 <CindyLinz> 覺得 newtype 是個非常實作考量的設計.. 如果只考慮 type 理論之類的東西的話... newtype 也許根本不該出現 ^^|
+00:12:02 <monochrom> 不必分清「考慮現實」和「考慮理論」, 因為應該互相影響, 如雙人舞.
+00:13:43 <CindyLinz> XD
+00:14:33 <monochrom> 理論方面, data X = MkX (Maybe ()) 比 Maybe () 多出一個 MkX ⊥, 這是即使理論家都不滿的
+00:18:39 <CindyLinz> 有 strict field 啊
+00:24:13 <monochrom> data S = MkS !() 對 newtype N = MkN (). 那麼跟著就是 case ⊥ of MkS _ 對 case ⊥ of MkN _ 的分別.
+00:26:50 <monochrom> (case ⊥ of MkS _ -> ()) = ⊥, (case ⊥ of MkN _ -> ()) = ()

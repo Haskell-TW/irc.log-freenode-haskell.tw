@@ -1,0 +1,8 @@
+21:33:07 <mno2> 好像終於把 hindley-milner + higher rank 看懂了..
+21:33:16 <mno2> 那篇 tutorial 好長啊
+21:35:09 <mno2> 深深覺得唸 PL 真的要有點天份..
+22:40:30 <c9sould__> 哪篇呀?
+23:09:18 <mno2> c9sould__: http://repository.upenn.edu/cgi/viewcontent.cgi?article=1336&context=cis_papers
+23:11:04 <c9sould__> 話說這邊有人超熟 css 的嗎?
+23:11:19 <c9sould__> http://c9s.blogspot.tw/2015/05/sass_3.html # 遇到這個問題..
+23:12:25 <c9sould__> 我想要在 property value 可以使用 expression 但是又要容許 font: .. 可以用 font-size/line-height 的寫法

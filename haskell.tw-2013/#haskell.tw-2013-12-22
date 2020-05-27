@@ -1,0 +1,27 @@
+15:12:34 <mno2> https://plus.google.com/+YinWang/posts/Bj7tJKaUbc2  Second comment:  Racket can use image?
+15:13:12 <mno2> https://plus.google.com/photos/+YinWang/albums/5960098365186631281/5960098365904262578?pid=5960098365904262578&oid=117380487359344039293
+15:43:55 <CindyLinz> 最近寫 Haskell 遇到一個問題.. QQ
+15:44:14 <CindyLinz> 我在寫一個用不到 Show a 的函數
+15:44:36 <mno2> ?
+15:44:47 <CindyLinz> 但為了 debug 方便, 測的時候放的東西是可以 show 的, 然後想在跑一半的時候 show 它
+15:45:10 <CindyLinz> compiler 當然就叫了.. 因為我操作的函數是 polymorphic 的, 沒有指定實體 type
+15:45:24 <CindyLinz> 然後 class 的要求沒有說要有 Show a
+15:45:32 <CindyLinz> 所以我就暫時加一個 Show a 上去..
+15:45:44 <CindyLinz> 接下來.. 呼叫它的函數也都需要加上 Show a..
+15:46:04 <CindyLinz> 等 debug 完成以後, 再把所有多加的 Show a 通通拔掉
+15:46:19 <CindyLinz> 這實在太苦了 orz
+15:46:45 <mno2> 我也有想過
+15:46:49 <CindyLinz> 這怎麼辦? ^^|
+15:46:56 <mno2> 不過似乎沒有好解法
+15:47:16 <CindyLinz> 如果可以在我要 debug 的函數裡面加上可以 detect type 的寫法
+15:47:41 <mno2> 如果有 unsafeShow 之類的就好了
+15:47:42 <CindyLinz> 可以如果傳進來的時候有 Show a, 那 compiler 就生出會 show 的動作, 不然就用另一個動作
+15:48:04 <CindyLinz> 如果改用 Typeable 和 Dynamic 的話雖然就可以 runtime detect 一些東西
+15:48:22 <CindyLinz> 可是要把所有的函數 type 都加上 Typeable 的話.. 那跟 Show a 一樣慘嘛
+15:48:27 <CindyLinz> 字還更多 XD
+15:48:53 <mno2> 是啊
+16:04:32 <mno2> http://llvm.org/devmtg/2013-11/
+16:04:49 <mno2> 好多 video 可以看
+16:32:47 <drbean> j
+19:18:40 <suhorng> https://github.com/bos/llvm/blob/master/examples/Fibonacci.hs 拿Haskell來實作DSL真的很酷XD
+19:18:59 <suhorng> 看那精美的 `buildMod` 函式, 跟寫 llvm asm 沒兩樣xd

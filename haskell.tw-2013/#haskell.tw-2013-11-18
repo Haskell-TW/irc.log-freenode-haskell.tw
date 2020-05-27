@@ -1,0 +1,60 @@
+00:46:26 <favonia> CindyLinz: 嗯
+16:32:16 <CindyLinz> 貼到 FB 以後有額外收獲...
+16:32:50 <CindyLinz> 獲得「C 語言常見誤解」一篇.. XD # https://docs.google.com/document/d/12cR0qb-kl7jB8RA_eHQu8OSmGKEOshwLeX4Mx5qBzUE
+16:33:24 <letoh> favonia 弄的那個?
+16:33:46 <CindyLinz> 對耶
+16:33:52 <CindyLinz> 沒注意到作者名字 XD
+16:34:34 <CindyLinz> 為什麼要用這麼難認的字啦 XD
+16:34:40 <letoh> XDXD
+16:35:22 <letoh> 反正作者也在，直接問他吧XD
+16:35:55 <CindyLinz> 這種小問題, 如果他沒注意到, 也不用麻煩他了啦 ^^|
+16:36:00 <CindyLinz> 就不用回答了 XD
+16:36:33 <CindyLinz> 另外, 我覺得 Tera 的說法讓我心裡舒服很多:
+16:36:56 <CindyLinz> 「當 compiler 看到 x*=2 這一行的時候, 已知 x>=0, 乘二之後數學上必然會維持 x>=0 (它不用考慮 overflow 的情形, 因為是 undefined behavior), 因此證明出這個迴圈會是 infinite loop.」
+16:37:21 <CindyLinz> 對比於這一個:
+16:37:26 <CindyLinz> 「標準說 overflow 是 undefined behavior，而這段 code 明顯會造成 overflow，所以造成 infinite loop 是符合標準的結果。」
+16:39:03 <letoh> 現在什麼話題@_@  才幾天沒追已經完全跟不上XD
+16:40:33 <CindyLinz> letoh: monochrom 這一篇 https://plus.google.com/102208456519922110915/posts/DZsZ6mvA4T6
+16:40:56 <letoh> thanks! 我研究一下
+16:43:55 <letoh> int 在某些 model 好像會是 64bit
+16:44:30 <letoh> 一般比較常見的系統應該是可以先假設 32bit
+16:45:51 <letoh> 要準的話應該要改用 stdint.h 裡的 int32_t
+16:46:40 <CindyLinz> letoh: 真的假的.................|||| # 16:43 < letoh> int 在某些 model 好像會是 64bit
+16:47:00 <CindyLinz> 是說如果重視 bit 數的話, 我的確會用 long 或 short 或 long long
+16:47:04 <CindyLinz> 不會直接用 int
+16:47:10 <letoh> CindyLinz: http://en.wikipedia.org/wiki/64-bit_computing#64-bit_data_models
+16:47:45 <letoh> 我只記得 LP64 跟 LLP64  另外兩個忘了所以剛好查一下
+16:48:31 <letoh> CindyLinz: 重視 bit 數的話應該用 stdint.h 才對啊XD
+16:52:25 <CindyLinz> letoh: 我沒有聽過 stdint.h 嘛.. orz
+16:53:13 <letoh> 自己用 long 或 long long 的話，傳到人家手上硬塞進 int 還是有機會爆掉
+16:53:29 <letoh> stdint.h 好像是 c99 才有的
+16:54:23 <letoh> 我覺得用這個可能方便一點  至少平台的差異應該會被處理掉@_@
+16:54:55 <CindyLinz> 以後會用 stdint.h 了... ._.
+16:56:10 <letoh> 還有一個 inttypes.h，不過我基本上都用 stdint.h 就夠了
+16:57:09 <CindyLinz> mmm
+16:57:57 <letoh> 像我這邊的程式常常資料大小會直接對應到儲存媒體，就要很小心 bit 數
+16:58:20 <CindyLinz> 你的程式有需要跨平台或跨 compiler 嗎?
+16:58:32 <CindyLinz> 我以為每一支程式都是針對一個特定的 device
+16:58:50 <letoh> 算跨平台(?) 有時 pc client 會直接拿 firmware code 的 header file 來用
+16:59:44 <letoh> 然後開發的 pc 現在也有 64bit 環境了... 以前亂用 long, int 的就可能會出問題...
+16:59:46 <CindyLinz> 噢.. 真不妙....
+17:00:29 <letoh> 有些老程式遇過 pc 送進來的 packet size 不對，把其他資料覆寫掉了XD
+17:01:53 <letoh> (firmware bsp 還沒提供 stdint.h... 只好自己弄一組出來XD)
+17:03:35 <CindyLinz> 我要從 jquery 的存在來想像.. XD
+18:57:35 <hashcat> 平板還能當筆電用
+18:59:09 <hashcat> https://github.com/meefik/linuxdeploy
+20:56:28 <CindyLinz> 然後筆電能當砧板或烤盤用.. (逃) # https://www.youtube.com/watch?v=dGbjbad559M
+20:59:29 <letoh> grandma proof XD
+21:00:02 <hashcat> 塑化劑pizza
+21:09:22 <petercommand> 恐怖pizza
+22:29:04 <favonia> CindyLinz: long, short, long long 都不保證 bits 數量啊...
+22:32:40 <hashcat> 看要不率先改用新語言
+22:35:10 <hashcat> chapel的型別系統看就知道用多少bit
+23:05:06 <CindyLinz> 只是閒聊而已啦.. 我現在生活中沒什麼在用 C 了 ^^|
+23:05:30 <hashcat> 都用啥麼了
+23:10:29 <hashcat> 取代C的
+23:49:30 <CindyLinz> 我平常用 perl 啊 ^^|
+23:49:46 <CindyLinz> 應用領域還蠻有距離的 XD
+23:51:55 <hashcat> 沒應用的意思?
+23:58:56 <hashcat> 什麼是蠻有距離阿
+23:59:52 <CindyLinz> 我平常應用的地方和 C 擅長的方面不符呀

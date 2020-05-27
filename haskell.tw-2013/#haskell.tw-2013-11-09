@@ -1,0 +1,10 @@
+07:56:16 <monochrom> http://www.vex.net/~trebla/haskell/prerequisite.xhtml  新出版
+19:58:28 <yu_lin> 入門書的 Functors, Applicative Functors 與 Monoids 那章，Applicative functors 那一段，
+19:58:41 <yu_lin> 對於 pure 比較好的書法是把一個普通值放到一個預設的 context 下，一個最小的 context 但仍然包含這個值。
+19:59:05 <yu_lin> 那個「書法」是不是「說法」？
+20:05:41 <hashcat>  不用理隻字片語
+20:05:44 <hashcat> 看上下文
+20:07:14 <hashcat> 排除了各種可能之後剩下的就是真相了
+23:26:38 <xcycl> 原文是 A better way of thinking about pure would be to say that it takes a value and puts it in some sort of default (or pure) context—a minimal context that still yields that value.
+23:27:06 <xcycl> 貼近原意的翻譯應該是「想法」
+23:57:35 <hashcat> 與其說沒有狀態, 不如說那種寫法隨時提醒有狀態在這裡

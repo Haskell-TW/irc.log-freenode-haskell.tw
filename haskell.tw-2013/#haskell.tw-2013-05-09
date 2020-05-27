@@ -1,0 +1,8 @@
+18:00:27 <MnO2> https://github.com/orangeduck/libCello  了不起 xD
+18:31:19 <_13h> 我之前也想弄類似的東西，但 c macro 真的很討厭
+18:50:11 <petercommand> cello看起來蠻有趣的耶
+19:19:47 <suhorng> 天哪, libCello 太強了吧
+19:41:35 <petercommand> 對阿
+20:49:25 <suhorng> 原來「.」左右可以不用加空白
+20:55:24 <b4283> 編出來的東西會 segfault 呀
+21:13:49 <suhorng> 原來函數的 closure 真的跟其他地方的 closure 一樣, 就是把該加的東西都加進來直到它 closed... (這裡的話, 就是用到的變數吧..類似scope那樣？)

@@ -1,0 +1,92 @@
+00:37:54 <b4283> 新文對 S-expression 讚譽有加
+01:47:34 <letoh> 我有個問題...
+01:47:50 <letoh> http://learnyouahaskell.com/zippers  第一個很醜的那個程式...
+01:47:59 <letoh> 好像沒有 match 到 'W' ?
+01:48:17 <letoh> 阿阿  看懂了XD
+01:48:26 <letoh> 好多括號真討厭XD
+10:35:32 <MnO2> letoh: 你 lyah 的 css 調整完成了媽？ 你看到 14 章的話應該算沒問題了？ 我想 merge
+10:40:08 <MnO2> 話說 g+ haskell.tw community 50個人了
+12:11:24 <MnO2> http://ircbrowse.net/browse/freenode/haskell?q=reddit
+12:11:52 <MnO2> ircbrowse, CindyLinz 要裝來玩嗎
+14:55:02 <letoh> MnO2: 其實我是跳著看的，看到 functor 有點暈就先跳到後面看XD
+14:55:16 <letoh> css 我後來沒什麼改了，都在修錯字
+14:56:34 <MnO2> 那可以來 merge 一下嗎？ xD
+14:57:40 <letoh> 好啊  不過那個 branch 後來混了修錯字跟電子書的部份  怎麼 merge 比較好? 直接拉整個 branch 去 merge 嗎?
+14:58:42 <MnO2> 如果 commit 有切開的話可以 cherry-pick ?
+14:58:56 <letoh> 單純電子書的話只有兩 commit，應該是可以
+15:00:11 <letoh> 我試試開個新 branch，只 pick 那兩個 commit
+15:00:23 <MnO2> 好
+15:00:56 <letoh> 剛看了一下是 3 個，不過基本上跟內文的修改都有切開，應該不難處理
+15:05:05 <letoh> github 可以線上改 branch name 嗎?
+15:05:17 <letoh> 我怕亂 push 會亂掉XD 之前爛過一次
+15:08:34 <letoh> 我想可能需要一點時間整理  因為有些內文的修改會影響電子書，主要是超連結跟書籤的部份會有問題
+15:08:34 <MnO2> letoh: http://stackoverflow.com/questions/1526794/rename-remote-git-branch , this?
+15:08:55 <letoh> 感謝  我研究一下
+15:09:53 <letoh> 原來有 -m 這個選項  以前沒用過
+15:11:01 <MnO2> 我印象中是看了 Octopress installation 才知道
+15:39:51 <letoh> 唔  結果剛剛在做的時候還是忘了 -m  但看起來資料沒掉XD
+15:40:03 <letoh> 用了不一樣的步驟
+15:40:41 <letoh> branch point 不曉得還在不在XD
+16:19:33 <suhorng> 是說王垠的部落格最下面那篇文章, 寫小人書的老頑童, 中間好多內容好吸引人
+16:20:48 <suhorng> 把程式CPS轉換 => 弄出的 abstract machine 有 stack、register => 提供 CPU 如此設計的 motivation (以及 von-Neumann 架構的想法)
+16:20:54 <suhorng> 聽起來好神奇
+16:23:46 <suhorng> 不知道他提到的 Danvy 的論文是哪一篇 (找了一下, 不知道是不是 A Functional Correspondence between Evaluators and Abstract Machines )
+16:31:43 <MnO2> suhorng: 哪一篇？
+16:32:02 <MnO2> letoh: 用 gitk 看一下？
+16:33:05 <suhorng> MnO2: http://blog.sina.com.cn/s/blog_5d90e82f010177qx.html
+16:33:44 <MnO2> http://stackoverflow.com/questions/1469899/worst-security-hole-youve-seen/1470027  第三個不是 PTT 常玩 xD
+16:38:32 <suhorng> 對阿..社交工程應該比多數程式漏洞有效吧囧
+16:38:51 <letoh> suhorng: 我看過一個講類似東西的 slide.. 我找找看
+16:38:58 <letoh> register 那個
+16:39:17 <suhorng> ohoh, 謝謝!
+16:39:34 <letoh> 阿  我先 merge 檔案免得忘記  等我一下
+16:46:08 <letoh> suhorng: http://mainline.brynmawr.edu/cs245/cps.pdf  我只大概掃一下，你看看這個內容有沒有你要的
+16:46:22 <suhorng> ok, 謝啦!
+16:47:28 <letoh> 可以先跳最後一頁:p
+16:47:46 <suhorng> 看到了XDDD
+16:47:49 <suhorng> 也是滿有道理的
+16:48:21 <letoh> 不曉得王講的方式是不是這個，但這 slide 介紹的方式還蠻直覺的
+16:49:02 <suhorng> 嗯嗯
+16:49:10 <suhorng> 應該滿像的
+16:58:20 <letoh> 所有 function call 都是 continuation  進去就不回來了 (但也可以想辦法跳回來)
+16:59:23 <suhorng> letoh: 不過 Scheme 有很奇怪的 call-with-current-continuation 的說
+16:59:39 <letoh> 那個不就是 continuation 嗎?
+16:59:52 <suhorng> 對呀, 是 first-class continuation
+16:59:54 <letoh> 只是會先記住現在的位置?
+17:00:08 <letoh> 嗯，可以傳來傳去XD
+17:00:15 <suhorng> 相當於直接操作 stack 的感覺
+17:00:36 <suhorng> letoh: 怎麼了啊www
+17:00:57 <letoh> 就 yinyang puzzle 啊，學 scheme 的都要痛過一次XD
+17:01:21 <suhorng> 喔喔喔~ 那個XDD
+17:01:25 <suhorng> 剛才看成 yinwang XP
+17:01:32 <letoh> 喔喔  不一樣啦XD
+17:01:58 <letoh> 那個 puzzle 不就是一堆 continuation 飛來飛去嗎XD
+17:02:17 <suhorng> 對XDDD
+17:02:31 <suhorng> 崩潰崩潰的
+17:02:44 <letoh> 對啊，追完一次就不想再看了XD
+17:03:56 <MnO2> yinwang 有寫過 yinyang
+17:03:56 <MnO2> http://yinwang0.wordpress.com/2012/07/27/yin-yang-puzzle/
+17:04:28 <letoh> 他在寫的時候會寫錯成自己名字嗎? (誤
+17:04:30 <MnO2> (pun intended)
+17:04:50 <letoh> 這也是他的 blog ?
+17:04:56 <letoh> 文章好多
+17:04:57 <MnO2> 對啊
+17:05:24 <letoh> 看了他的新文有點失望
+17:05:39 <letoh> 我以為要講 scheme，結果是在講 s-exp XD
+17:06:04 <MnO2> 發文頻率多就比較水 wwwww
+17:06:59 <letoh> 要學某人久久發一次，每次都是大長篇嗎? XD
+17:07:24 <MnO2> 你是說 steve ?
+17:07:29 <letoh> 對啊XD
+17:07:40 <MnO2> 而且每次發文都引戰 wwww
+17:07:46 <letoh> 哈
+17:07:51 <letoh> 網路戰神
+17:08:50 <letoh> 他的文章如果收一收，弄成一本類似駭客與畫家那種散文集應該不錯
+19:23:38 <MnO2> http://wadler.blogspot.tw/2013/03/siteswap.html
+19:23:42 <MnO2> 這蠻有趣的
+19:24:23 <MnO2> 雜耍對應到數字符號，結果發現了新的丟球方式
+19:29:20 <suhorng> 我好像聽穆老師提過一篇跟這個相關的
+19:54:55 <suhorng> MnO2: 找到了~ http://link.springer.com/chapter/10.1007%2F978-3-642-35308-6_14
+19:56:19 <suhorng> 他弄了一個 type system, 定義什麼叫做 "無法丟出來" (e.g. 球無中生有的蹦出來, 或超過一顆球同時要給一隻手接)
+19:57:12 <suhorng> 然後生成一個 stream, 來代表丟球的pattern
+19:58:13 <suhorng> "We have formalized the validation of juggling toss patterns, called siteswap, in terms of coinduction." XD
+23:33:40 <JuanitoFatas> Haskell 與 Yesod，利用 DSL 加速 Web 開發 http://blog.veryr.com/static/slide/yesod.html

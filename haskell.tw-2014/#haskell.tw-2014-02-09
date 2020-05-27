@@ -1,0 +1,183 @@
+00:00:33 <monochrom> 0秩邏輯, 是 and or not, 跟0無關的
+00:01:05 <monochrom> and or not 抽像些, 還是 + - * 抽像些?
+00:01:05 <suhorng> propositional logic?
+00:01:11 <monochrom> 是呀
+00:01:29 <CindyLinz> 噗噗 我看錯了 orz
+00:02:19 <CindyLinz> 0秩邏輯... 把 not 去掉, 或是規定 not 只能用一次, 可以簡單很多......ww
+00:03:04 <monochrom> 當然, 之所以沒人學我說"0秩", 而是說"propositional", 也是一種"堅持好久不要0" XD
+00:09:37 <CindyLinz> 噗噗
+00:09:45 <monochrom> 甚麼, 竟然有新電影叫 The Zero Theorem?! http://www.imdb.com/title/tt2333804/?ref_=vi_tt_i
+00:11:11 <monochrom> 好玩啊, 有 Christoph Walta, Matt Damon, Tilda Swinton
+00:12:03 <monochrom> Swinton 的個人網頁可以叫 http://.../~swinton , 那個 ~ 會很合適 XD
+16:44:18 <CindyLinz> 無意中發現, 即使是 IO monad, 也能利用 lazy 特性略過某些 action 不執行...
+16:44:32 <CindyLinz> skip :: IO a -> IO ()   skip _ = return ()
+16:44:53 <CindyLinz> skip $ putStrLn "Hi" 這一行不會印出 Hi
+16:46:14 <CindyLinz> 雖然, 我是寫了一個類似 skip 的東西, 但目的不是要它不執行, 我還是希望它執行, 這個函數的目的只是為了 shape 那個 a 的 type ^^|
+16:46:29 <CindyLinz> 所以就改成類似這樣:
+16:47:04 <CindyLinz> dontSkip :: IO a -> IO ()    dontSkip x = fmap (undefined $! x) >> return ()
+17:08:19 <hashcat> 想更正句子..那個函數的目的是讓型別系統推論出a的型別
+17:09:07 <hashcat> 講中文和講英文的人都沒辦法直接聽懂的句子
+17:09:08 <CindyLinz> ok.. XD
+17:10:03 <CindyLinz> 沒有它的時候, 直接寫 action 的話, 因為 return type 沒有指定, ghc 會叫 ambiguous
+17:10:32 <CindyLinz> 然後改成 dummy <- action 然後再 let _ = dummy :: 某type 又很冗
+17:11:06 <CindyLinz> 而且其實都是固定的同一種 type.. 所以加一個空函數套一下
+17:13:49 <hashcat> 哦
+17:14:07 <hashcat> haskell不是也有及早執行
+17:14:34 <hashcat> 貌似加個驚嘆號下去讓他跑完就好
+17:14:36 <CindyLinz> hashcat: 啊不是推論出 a 的型別, 我在 dontSkip 那邊的 a 其實是寫了一個具體的 type, 所以是直接公佈答案給 GHC, 說: 你別瞎猜了, 就這個啦! XD
+17:15:11 <CindyLinz> 就那個 $! 的作用呀.. 只是它不能只是 apply 在 x 上
+17:15:18 <CindyLinz> 要 apply 在 x 「裡面」的東西
+17:15:52 <CindyLinz> 不過這可能是我的例子才這樣, 上面這個 IO 可能不用
+17:15:54 <CindyLinz> 我試一下..
+17:16:30 <hashcat> 我是想說驚嘆號加在型別上
+17:17:06 <CindyLinz> 欸不行, IO 這個也是要 apply 到裡面才行
+17:17:24 <CindyLinz> 加在型別上的是定義 data 時指定 field 為 strict field
+17:18:09 <CindyLinz> GHC 把資料塞到 data field 之前一定會先自動加一下 seq
+17:19:15 <CindyLinz> 用 fmap (undefined $! x) 或 fmap (`seq` undefined)
+17:20:23 <CindyLinz> 寫錯了 orz
+17:20:34 <CindyLinz> 用 fmap (undefined $!) x 或 fmap (`seq` undefined) x
+17:22:51 <hashcat> 想不出為啥加在型別上不行
+17:23:18 <CindyLinz> 就語法沒有啊 @@" 理論考量或只是沒實作就不知道了
+17:23:36 <CindyLinz> 你想的是 dontSkip :: IO !a -> IO () 哄?
+17:24:42 <CindyLinz> 然後那個「跑完」其實只有跑一層喔..
+17:25:18 <hashcat> 我再想一下
+17:26:38 <CindyLinz> 我想理論上不可行 @@"  因為隨意的 m a 這種 type, 也不一定裡面有個可以 strict 的 a.. @@"
+17:27:02 <hashcat> 只是直覺上應該不需要這麼拐彎的作法
+17:28:02 <CindyLinz> 嗯 也不一定不可行... :|
+17:29:18 <CindyLinz> 反正就醜一點規定, type 已經「足夠具體」, 而且被加 ! 的 type variable 有顯而易見的對應的東西的時候才能加, 其他時候 compile error..
+17:30:18 <CindyLinz> 像我用到了 fmap, 所以如果要寫 m !a 這種東西, 要規定 context 有 Functor m
+17:30:39 <hashcat> skip那個應該不是lazy特性
+17:31:14 <hashcat> 只是因為你單純沒用上輸入參數
+17:31:28 <CindyLinz> 沒用到的就不去算, 就是 lazy 特性啊? :|
+17:31:45 <hashcat> let skip a = return () >> a
+17:31:53 <hashcat> 就可以了 ..
+17:32:15 <CindyLinz> skip a = return () >> a 和 skip a = a 有什麼不一樣? @_@"
+17:32:28 <hashcat> skip _ = return () 會把 putStrLn "Hi" 直接丟掉
+17:33:07 <CindyLinz> 如果是 strict 的話, 一定要 skip 的參數都算完了, 才能進 skip 啊
+17:34:33 <hashcat> asd _ a b = a+b 也是會把第一個參數直接丟掉連管都不管
+17:34:51 <CindyLinz> 對啊, 但這就是 lazy 特性沒錯啊 @@"
+17:35:49 <CindyLinz> int asd(int _, int a, int b){ return a + b; } int say(){ puts("say"); return 2; } printf("%d\n", asd(say(), 1, 2); 還是會跑 say() 啊...
+17:36:24 <hashcat> 不是啦
+17:36:25 <CindyLinz> 好像少了個括號 :p
+17:36:33 <hashcat> 只是單純沒接到 Monad 上去
+17:36:54 <hashcat> 只有串接到 main :: IO () 才會被執行
+17:36:55 <CindyLinz> 試一個寫法...
+17:37:26 <hashcat> putStrLn "Hi"執行完成就是回傳一個monad, 並不會實際印出來
+17:37:27 <CindyLinz> 嗯 IO 的 case, dontSkip x = x >> return () 就可以了
+17:37:41 <hashcat> 只有串到main :: IO () 才會被執行
+17:37:58 <CindyLinz> 我試試看我那個
+17:38:24 <CindyLinz> 也是可以 ^^
+17:38:50 <hashcat> 若是沒串到main :: IO ()裡去, 不管printStrLn "Hi"執行完沒有都不會印出來, 所謂執行完也只是建構完一個monad
+17:39:35 <hashcat> 建構完的monad並沒有一定要"執行"
+17:40:00 <hashcat> 所以跟lazy無關
+17:40:34 <hashcat> 想成接水管
+17:40:52 <CindyLinz> 那要來想想看.. 一個會在 IO 裡面跑的 FFI c-pure-function, 能不能怎樣利用這個特性, 讓 GHC 決定有沒有執行的必要
+17:41:04 <hashcat> printStrLn "Hi"是打造完的水管, 但沒串接到出水口這樣
+17:42:24 <CindyLinz> 嗯嗯嗯
+17:42:49 <hashcat> monad接水管噗噗
+17:43:56 <CindyLinz> 有沒有辦法我後續有用到 return 結果才接, 沒用到就自動不接?
+17:45:18 <hashcat> 有吧
+17:45:31 <hashcat> if-then-else不就成了
+17:45:47 <hashcat> 額看錯看錯
+17:46:02 <hashcat> 這樣要預測後續有沒用到
+17:46:11 <hashcat> 不知道
+17:46:21 <CindyLinz> 讓它變成 IO (IO a)
+17:46:36 <CindyLinz> 想用結果的時候多解一層去裡面拿.. (Y)
+17:46:37 <hashcat> 這什麼鬼 XD
+17:47:03 <CindyLinz> 我試一下....
+17:49:17 <hashcat> 不這個我一點都不想試
+17:50:50 <CindyLinz> 有了.. maybeSkip :: IO a -> IO (IO a)   maybeSkip x = return x
+17:51:02 <CindyLinz> res <- maybeSkip action
+17:52:14 <CindyLinz> 如果後來要使用 res 的結果.. 例如這樣:  liftM (putStrLn . show) res  或是 res >>= putStrLn . show
+17:52:20 <CindyLinz> 那麼這個 action 就會執行
+17:52:34 <CindyLinz> 如果後面沒有執行到這個, 那麼 action 就不會執行
+17:55:10 <CindyLinz> 不過這個 res = action 就好了 XD
+17:55:52 <CindyLinz> 白做 XD
+17:57:13 <hashcat> 我貌似只拿haskell寫過一個程式
+17:57:28 <godfat> 我才在想你要做的跟原本的 IO monad 有啥不同... orz
+17:57:39 <hashcat> 之後都只是看有啥特性, 完全沒用上了
+17:57:54 <hashcat> 總有種莫名不可化約的複雜
+17:58:20 <hashcat> 又不支持reflection, rust支持!!
+17:58:33 <CindyLinz> XD
+17:59:13 <hashcat> 等待所有typeclass轉移到rust的時候
+17:59:30 <hashcat> 函數式我就回來了
+17:59:43 <hashcat> 當然是不純函數式
+18:00:21 <CindyLinz> 有種... 玉佛珠 vs 赤鬼王 的感覺? XD
+18:01:09 <hashcat> 那是啥東西
+18:01:25 <CindyLinz> 仙劍奇俠傳的兩個感情很好(?)的 boss
+18:01:49 <CindyLinz> 玉佛珠是一顆想煉成人類的佛珠.. 赤鬼王是一個想煉成妖的人
+18:04:00 <hashcat> 嗯..
+18:10:51 <hashcat> 上次想成立prolog.tw這次想rust.tw
+18:14:37 <b4283> 黑水鎮超可怕，兒時陰影
+18:14:40 <CindyLinz> 好了, 這次 maybeSkip 不一樣了... XD http://lpaste.net/99683
+18:14:50 <CindyLinz> 如果 res 被使用多次, 也只會跑一次 (Y)
+18:15:52 <CindyLinz> 我覺得血池比將軍墓的迷宮好走很多啊 ._.
+18:16:44 <b4283> 血池是鎮妖塔嗎
+18:19:12 <CindyLinz> 不是, 蠻前面的, 就在打完殭屍王(將軍屍體)以後會掉下去的那一塊紅紅的地方
+18:20:49 <b4283> CindyLinz: http://www.youtube.com/watch?v=sH1hNZl7nKM
+18:21:17 <b4283> 我沒什麼印象了 XD
+18:21:31 <b4283> 應該是蠻好走的所以沒印象 XD
+18:22:07 <CindyLinz> 嗯 XD
+18:22:24 <CindyLinz> 對就這張
+18:23:02 <b4283> 林月如真好啊 <3
+18:23:48 <CindyLinz> 打鎖妖塔的時候沒有趙靈兒
+18:24:14 <CindyLinz> 欸... 最後有, 不過只有不成人樣的趙靈兒 ^^|
+18:40:35 <b4283> 拜月教主真可惡啊
+18:41:08 <CindyLinz> b4283: 你在看遊戲錄影喔? ^^|
+18:41:21 <b4283> 對啊，跳著看 XD
+18:42:20 <CindyLinz> XD
+18:43:53 <CindyLinz> 覺得將軍墓底下那種要踩機關的設計好恐怖, 而且有的踩了會把之前已經開了的門關回來..... 還好仙劍團隊沒有拿迷宮 encode 河內塔.....ww
+19:14:57 <suhorng> Haskell 有 monomorphism restriction 這種怪東西...
+19:16:03 <suhorng> http://ideone.com/Tk1L8c
+19:16:21 <suhorng> err 不是 function binding，因此不會被 generalize orz
+19:16:58 <suhorng> 就是它 http://www.haskell.org/onlinereport/decls.html#sect4.5.5
+19:26:45 <CindyLinz> 我出 ambiguous 的時候原因應該不一樣, GHC 沒有提示這個 extension...
+19:26:57 <CindyLinz> 這邊的 call 函數 # https://github.com/CindyLinz/Haskell-Perl/blob/master/src/Perl/Call.hs
+19:27:15 <CindyLinz> 在這邊 test 最下面的 noRet 呼叫的地方 # https://github.com/CindyLinz/Haskell-Perl/blob/master/test/TestMonad.hs
+19:27:25 <CindyLinz> 把 noRet 去掉的時候會有那個 error
+19:29:15 <CindyLinz> 呃 找到一個想去掉的 type signature.. orz
+19:34:33 <suhorng> 哇, 這好厲害XD
+19:35:35 <CindyLinz> 加了個 subDo... orz
+19:36:11 <CindyLinz> 用來去掉那個 test 裡面看起來意味不明的 return () :: PerlSubT s IO ()
+19:36:35 <CindyLinz> 謝謝 :p
+19:37:00 <suhorng> 這裡的 ambiguous 應該真的不一樣
+19:58:12 <suhorng> 嗯..我剛剛在想為什麼這裡會 ambiguous 但是 Text.Printf 可以避開，就去翻 code
+19:58:40 <suhorng> （註：printf :: (PrintfType r) => String -> r ）結果看到 instance PrintfType (IO a) where ...
+19:58:44 <suhorng> 這真是太糟糕了XD
+19:59:31 <suhorng> ghci> printf "Hello World!\n"
+19:59:31 <suhorng> Hello World!
+19:59:31 <suhorng> it :: GHC.Prim.Any *
+19:59:41 <CindyLinz> 糟糕啥? @@"
+20:00:47 <suhorng> 他直接把最後的 IO a 隨便哪個 a 都定成 instance..
+20:00:59 <suhorng> 反正最後一定是 IO 這樣orz
+20:01:35 <suhorng> ghci> a <- (printf "Hello World!\n" :: IO Int)
+20:01:35 <suhorng> Hello World!
+20:01:36 <suhorng> ghci> a
+20:01:36 <suhorng> *** Exception: PrintfType (IO a): result should not be used.
+20:01:58 <CindyLinz> 原來那個 error 是有用處的.....
+20:02:02 <suhorng> XDDD
+20:02:03 <CindyLinz> 可是好像不只這樣 @@"
+20:02:21 <CindyLinz> 就算都有定成 instance, 還是 ambiguous 啊 @@"
+20:02:43 <CindyLinz> 先去吃晚餐 ^^|
+20:02:48 <suhorng> 嗯!
+20:03:22 <suhorng> 我想說只要最後 printf 是用在 IO monad 中(一串do)或是有 liftIO 應該就推得出來了
+21:03:47 <CindyLinz> 欸... 應該是推不出來 @@"
+21:04:14 <CindyLinz> 如果遇到 (>>) 而不是 (>>=) 那麼那個 a 就沒有人去接..
+21:05:05 <CindyLinz> 再來實驗一下 @@"
+21:06:03 <suhorng> 感覺 a 是什麼不重要（反正他的 instance 是 (IO a)）
+21:07:42 <CindyLinz> 嗯 我試了一個 retAny :: IO a    retAny = return undefined
+21:07:54 <suhorng> 我的想法是說，假若已經知道 test :: IO ?，那麼 test = .... >> printf "hi %d" 3 >> ... 就可以推得出來
+21:07:55 <CindyLinz> 然後放一排 retAny 在 monad action 裡面
+21:07:57 <CindyLinz> compile 有過
+21:08:01 <suhorng> 嗯嗯
+21:08:19 <suhorng> 唔
+21:08:22 <CindyLinz> 你這一串 >> 還是推不出 a 的 type 要是什麼呀
+21:08:59 <suhorng> 是，但是不重要，有 instance 就好
+21:09:18 <CindyLinz> 嗯嗯..
+21:10:11 <CindyLinz> 反正實作 instance 的人不在意, ghc 就不介意...? :p
+21:10:27 <suhorng> 大概是喔XDD
+21:12:12 <CindyLinz> 那我這邊可以怎麼做呢 @@"
+21:12:22 <CindyLinz> 真希望能像 Ford 那樣:
+21:12:40 <CindyLinz> 你可以買任何款式的車, 只要你要的是藍色的某某車... :p
+21:13:01 <CindyLinz> 你可以獲得任何的 a, 只要你的 a 是 StorableArray Int PtrSV....
+21:15:08 <suhorng> 天阿, 這會變 OverlappingInstances....

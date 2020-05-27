@@ -1,0 +1,212 @@
+10:50:27 <motephyr_> 這邊專屬於討論haskell嗎？還是functial programming的問題都可以
+10:52:39 <CindyLinz> motephyr_: 都可以唷~
+10:53:12 <CindyLinz> motephyr_: 當時開 channel 的人是說, 寫 Haskell 比較容易引起人興趣, 比較好推廣 XD
+11:00:12 <motephyr_> 想請教一下 假設我想要練習functional programming，以ruby介接haskell的做法適合嗎(比如說某些地方我認為可以這樣改寫的就這樣做)
+11:01:28 <motephyr_> 或是haskell有某些例子是可以試著做什麼project 就直接用hashkell做的
+11:02:23 <CindyLinz> motephyr_: 如果是純練習, 我覺得純用 Haskell 會比較好, 其體會也會比較深刻, 在只有 function 能用的情況下, 找出方法來應付以前我們習慣用 ruby 應付的地方
+11:03:10 <CindyLinz> motephyr_: 混搭我覺得是用在要實用的時候, 一定得做得出來的時候, 擔心因為不夠熟 Haskell, 而進度完全卡死的時候
+11:03:19 <b4283> motephyr_: 如果你想要寫 web 就直接用 haskell 吧
+11:05:32 <motephyr_> b4283: http://snapframework.com 像這個嗎？
+11:05:35 <CindyLinz> motephyr_: 因為只要心裡存著著可以隨時跳槽回去用 ruby, 那個決心會不夠 XD
+11:06:22 <b4283> yes
+11:06:33 <motephyr_> CindyLinz: ...XD 過去了會不想回來嗎？
+11:07:03 <b4283> motephyr_: 會很想回來
+11:07:21 <CindyLinz> motephyr_: 其實過不過去回不回來一般來說是沒什麼要緊, 只是你目的是練習 functional programming 的話, 我會以練習強度較高的方式給建議嘛 ^^
+11:07:38 <CindyLinz> 然後寫 web... 我覺得從 http://hackage.haskell.org/package/wai 這種低階的 lib 入手也很不錯
+11:08:07 <CindyLinz> wai 應該是 yesod 的底層處理 socket 和 http 的部分?
+11:08:43 <CindyLinz> 從這低階入手的好處是東西少, 所以 lib 文件不會看太久
+11:09:13 <monochrom> 我是過了去, 不想回來. 但我有能力回來, 只要你給我錢就行!
+11:09:34 <CindyLinz> 其實我都不知道你們三個講的過去和回來是從哪邊到哪邊 ^^|
+11:09:48 <motephyr_> 應該說 我在找一個比較好的方式來寫程式 好除錯 好修改 開發速度快 (效能也算重要，但在其次) 覺得funtional的寫法應該符合我的需求
+11:09:57 <b4283> monochrom 沒說回到哪 XD
+11:10:43 <CindyLinz> motephyr_: Haskell 的話你說的這些是有.... 只是那是在花過一陣子時間上手以後才有..
+11:10:43 <monochrom> 哈哈. 是過到 haskell 後, 不想回到認識haskell前
+11:11:01 <motephyr_> 所以找個方式來練 那我晚點看看wai是不是符合
+11:11:35 <monochrom> 我是在寫 tutorial 的過程中, 越解釋 haskell 越發現大部份語言的荒謬.
+11:11:51 <CindyLinz> motephyr_: wai 處理 http... 然後如果寫 web 的話應該會需要資料庫.. 如果用 PostgreSQL 的話, 我覺得這個不錯 http://hackage.haskell.org/package/postgresql-simple
+11:12:06 <motephyr_> 我是用psql沒錯
+11:15:07 <motephyr_> 所以照postgresql-simple 可以來處理介接的部分
+11:16:44 <CindyLinz> motephyr_: 介接 postgres? 可以, 連線參數設一設就可以通了
+11:17:04 <CindyLinz> motephyr_: 用起來也是很陽春的, 就是在寫 SQL XD
+11:17:55 <CindyLinz> 然後在 Haskell 這邊餵過去或取回來的資料, 可以是沒有名字的結構像是 [(a, b, c), (a, b, c)] 這樣, 或是自行定義好 data 形狀, 然後再設定對應
+11:18:25 <motephyr_> 嗯 需要花時間研究一下 我想想我是不是可以拿哪個小project翻翻看
+11:20:27 <motephyr_> 興奮到我osdc都沒在聽了XDXD
+11:21:30 <whitglint> 發現 MongoDB driver 也有人寫了 http://hackage.haskell.org/package/mongoDB
+11:21:59 <CindyLinz> motephyr_: 這個是我之前嘗試的 http://lpaste.net/4765458668101566464
+11:22:07 <CindyLinz> wai + postgresql-simple
+11:22:49 <CindyLinz> 嗚嗚我還在家才剛起床 orz # osdc
+11:23:41 <monochrom> 早晨! XD
+11:23:47 <CindyLinz> ............QQ
+11:24:24 <motephyr_> good morning
+11:25:32 <b4283> bonjour
+11:25:45 <b4283> salut
+11:39:17 <motephyr_> monochrom: 應該說每個語言都有他產生的原因和優缺點 我想像中做為計算資料的用途的話haskell應該是蠻適合(通常程式複雜也是會複雜在這邊)
+11:40:36 <motephyr_> 但做呈現功能的話 也許相對來說物件模式比較好想像 (table,button,view...)
+11:51:32 <CindyLinz> motephyr_: 物件模式可以用 Haskell 寫 ^^  你把 member variable 定在一個 data 裡面, 然後把 member function 定為可以對這個 data 操作的函數
+11:51:51 <CindyLinz> 如果是要改物件內容的話, 就讓 return 裡面有這一個 data
+11:52:22 <CindyLinz> 額外的, 你可以定義兩個以上不同物件之間的交互作用, 而不用限制一定要把這個交互作用歸在哪一邊
+11:54:40 <motephyr_> Object有的它也可以做得到就對了 那~~~應該有什麼我不知道的原因haskell不流行吧:p
+11:55:10 <CindyLinz> motephyr_: 沒有變數沒有迴圈就想哭了吧? XD
+11:55:53 <motephyr_> 真想找一個沒寫過程式的人來教他看看haskell 說不定比較簡單
+11:56:12 <CindyLinz> motephyr_: 我相信這是真的... 但是只是相信, 我沒有實驗過 ^^|
+11:56:27 <CindyLinz> 因為聽說剛入手寫程式的人, 對於 C 的 x = x + 1; 很難接受
+11:58:30 <motephyr_> 不然就歷史原因 以前的程式一下就stack overflow了 跑不動大量的recursive
+11:58:47 <motephyr_> 暫時用OO撐著
+12:00:30 <CindyLinz> 歷史因素也是.. 至少我大學以前沒聽過 Haskell...
+12:00:54 <CindyLinz> 不對, 我大學以前沒聽過 Functional language ^^|
+12:02:12 <motephyr_> 沒有人教 都教C++之類的很硬的東西 所以台灣硬體業盛行
+12:02:53 <motephyr_> 教python也好呀 真是的
+12:03:09 <CindyLinz> 現在有開始在教 python 了的樣子
+12:03:29 <CindyLinz> 但是, 真的有比較好嗎 @@"
+12:03:50 <hashcat> 有有有
+12:03:56 <motephyr_> 比教C++和JAVA好吧
+12:04:04 <hashcat> 不然要教perl嘛 = =+
+12:04:05 <CindyLinz> 在 python 裡面我們不會看到記憶體限制之類的東西, 但還是會受限於那些限制, 只是假裝沒看到 @@"
+12:04:18 <CindyLinz> hashcat: no, 我覺得教 C 還是比較好 @@"
+12:04:41 <CindyLinz> C, 以及其下的組語的東西, 找一套來學... 看是 MASM 或 MIPS 都好
+12:05:04 <hashcat> 要高度控制硬體的話, Ada比C好
+12:05:18 <CindyLinz> 以學習來說, C++ 可能沒有 C 好, 雜事太多
+12:05:33 <hashcat> 語意能一目了然
+12:05:57 <hashcat> 耗在怪符號用法的時間最小化
+12:06:15 <CindyLinz> 我覺得用 python 或 perl 作為「母語」, 會對效能的認識很糟
+12:06:31 <motephyr_> 應該也是看打算往什麼方向發展 但我覺得起碼可以告訴人家這個語言的優缺點和用途是什麼來決定個人的發展路線
+12:06:43 <CindyLinz> 因為我們剛開始會很自然地以程式碼的長相來判斷執行效率
+12:07:03 <hashcat> 先Python後C
+12:07:48 <CindyLinz> 所以像是 @a = @b; (perl) 這種, 我相信初學者會以為它是 O(1) 操作
+12:08:02 <motephyr_> 先VB後assembly (flee)
+12:08:28 <hashcat> 現在即使是最慢的語言, 大多數小程序都能瞬間跑完, 效能問題跟編程的概念應該分開建立吧
+12:09:06 <hashcat> 先Python後C先易後難感覺很合理
+12:09:20 <CindyLinz> C比較簡單吧? @@"
+12:09:31 <CindyLinz> 不過組語更簡單 XD
+12:09:36 <motephyr_> 先Python後C 以目前的情況我也支持
+12:09:59 <hashcat> C簡單是你習慣了吧
+12:10:24 <motephyr_> 主要先讓人知道它能做出什麼 再讓想了解的人去了解背後的運作邏輯
+12:10:28 <CindyLinz> 簡單我指的是要學的概念比較少
+12:10:33 <b4283> 為啥 perl 的表情是 =_=+
+12:10:35 <hashcat> 星號一下乘一下指標, &一下位元and一下取參考
+12:10:48 <CindyLinz> 但是以要做出能用的東西當然 C 是比較難的, 只能先寫練習題
+12:10:55 <hashcat> 發動打倒perl的聖戰~
+12:11:08 <b4283> XD
+12:11:26 <CindyLinz> hashcat: 你沒有涉足實務, 要掀起這種戰爭還是放棄比較快 XD
+12:11:27 <motephyr_> XD
+12:12:11 <hashcat> Python用法混淆的問題, 雜項規則和對眼睛的傷害少很多
+12:12:47 <CindyLinz> Perl 是目前世界上少數能活那麼久的語言... 你要涉足實務, 才比較能體會它的原因 @@"
+12:13:25 <hashcat> 應該是沒機會, 我都搞數值分析的
+12:13:53 <hashcat> 只是看過覺得perl比C更多怪符號, 更多怪用法
+12:14:24 <hashcat> 更難學, 速度也沒比較快, 封裝也不太好, 從這些來看無法理解
+12:14:39 <CindyLinz> Perl, 1987 年生..  比 1995 出生的 Java 還老 8 年... 而且 Java 是有大公司在推的, Perl 一直都靠自己, 這是真的很厲害的事實....
+12:15:09 <CindyLinz> C, 1972 年生..
+12:16:30 <hashcat> 早期那些人不知道在想啥
+12:16:57 <hashcat>  比起語意清晰, 結構規整的語言, 他們似乎偏好結構散亂並混用各種符號
+12:17:55 <hashcat> 來出去遊蕩
+12:17:58 <CindyLinz> hashcat: 你還要看這接近三十年來前撲後繼(?)一直出現擁護 Perl 的人是在想什麼. Perl 有你說的缺點, 但是他不是只有你看到的缺點....
+12:18:20 <CindyLinz> 最後一句講錯了 XD
+12:18:27 <motephyr_> 我認為COBOL不好 不過我不反COBOL (因為還有人要靠它混飯吃) 但真正不好的語言你不用反，它就會自已消失
+12:18:37 <CindyLinz> 他還有你沒看到的優點, 而且可能是影響很大的...
+12:19:31 <hashcat> 我想知道哪裡有明示優點
+12:19:46 <hashcat> 用體會的似乎很耗時間
+12:20:07 <hashcat> 出去了
+12:20:13 <CindyLinz> hashcat: 能講得出來的是知識, 經驗是講不出來的.....
+12:20:59 <CindyLinz> Perl 設計的一致性是很好的, 只是這有多重要, 寫多了才能體會得到 @@"
+12:24:05 <CindyLinz> 我比較不能體會的是, 1987 年的人使用 1987 年的電腦, 是怎麼忍受 perl 的效能的....
+12:39:03 <motephyr_> 1987的電腦很貴 有錢人家才玩得起
+12:40:48 <CindyLinz> 應該還是很慢吧 OAO
+12:45:58 <whitglint> 從 #cschat.tw 戰到這邊喔
+12:47:02 <CindyLinz> whitglint: 有人的地方就有戰場, 遇到同樣的人的地方, 就是同一個戰場.. (逃)
+12:52:18 <whitglint> 江湖啊～～～
+12:52:59 <whitglint> JavaScript 完全不用戰
+13:04:02 <CindyLinz> JavaScript 採共識(處)決.. (咦)
+13:10:54 <petercommand11>  /names
+13:11:05 <petercommand11> 阿...
+13:12:02 <mno2> 有人有玩過 datalog 嗎？
+13:15:34 <motephyr_> 沒有很喜歡js 不過它現在太強了 再不喜歡都得摸一下
+13:17:07 <motephyr_> 比武場的規則就是 你拿到什麼武器，你就得會用這個武器作戰 不然你就得強到到哪都可以用這個武器打架
+13:25:37 <whitglint> 早上都在看這個 http://www.haskell.org/haskellwiki/Parallel Parallelism and Concurrency in Haskell
+13:29:20 <whitglint> 連 STM 都有支援，很潮啊
+13:41:03 <whitglint> 不知後端採用 Haskell 的可行性？
+13:44:58 <whitglint> 早上 motephyr_ 提到的 snap framework http://snapframework.com/
+13:51:07 <b4283> 人就是江湖
+13:52:17 <b4283> http://www.youtube.com/watch?v=m4KnVqXHgAI
+13:57:11 <whitglint> b4283: 在 osdc.tw？
+13:57:54 <b4283> no
+13:58:13 <b4283> whitglint: 你有去嗎？
+13:58:30 <whitglint> b4283: 沒
+14:01:03 <whitglint> 文字轉播加減看囉
+14:17:11 <cataska____> http://chimera.labs.oreilly.com/books/1230000000929
+14:17:36 <cataska____> Parallel and Concurrent Programming in Haskell
+14:24:14 <whitglint> 哇！直接就能看內容
+15:13:58 <whitglint> Haskell 入門書推薦？
+15:19:37 <petercommand11> topic那本呢?
+15:23:59 <whitglint> ？？？
+15:30:57 <letoh> HaskellGG (誤
+15:40:08 <petercommand11> whitglint: Learn You a Haskell for Great Good! <---在topic呀XD
+15:57:49 <whitglint> petercommand11: 原來是指 channel topic XDDD
+16:01:13 <whitglint> 什麼！這個頻道有 log！XD
+16:02:00 <letoh> 有喔，所以要注意節操 (?
+16:11:34 <CindyLinz> whitglint: 要不要從 snap 入手（或 yesod）要看人，我喜歡從比較基本的機制掌握了再往上疊，所以比較不喜歡這種的。不過如果喜歡立即可見的效果的話，這一方向就不錯，有點像 rails 的感覺
+16:13:06 <whitglint> letoh: 要節制發言以免 log 爆炸！
+16:13:59 <whitglint> CindyLinz: 我也不喜歡太高階的，Django 我就不太能接受
+16:22:06 <whitglint> 看來 log 很常出現 C++
+17:05:11 <hashcat> haskell art挺有意思 但似乎不怎活躍
+17:06:33 <hashcat> 函數式編程編音樂, 視覺藝術的
+21:27:18 <whitglint> http://www.ptt.cc/bbs/PLT/M.1360789442.A.D06.html 大一必修教 Haskell
+22:25:55 <hashcat> 不是台灣就不算是新聞了噗噗
+23:08:42 <monochrom> 我讀大學時遇過大約 1/3 個課程介簡介 functional programming, 用 lisp. 那是幾十年前了.
+23:09:09 <monochrom> 不過, 還是一見就喜歡.
+23:10:49 <monochrom> 告訴你一個秘密! 我還未見過 functional programming 前, 在只知 Basic, Pascal, C 時, 就已喜歡 recursion.
+23:13:24 <monochrom> 其實 Ada 都不錯
+23:19:06 <monochrom> 我並不同意, 某語言的長壽基於它有甚麼好處. 相反, 看著它各種弊端廣受重用, 只證明人性的醜惡.
+23:22:57 <monochrom> 注意 "各種弊端廣受重用" 沒有寫錯, 牛的確是寫: 弊端受重用.
+23:24:10 <monochrom> s/牛/我/ # 這倒寫錯了. 我不是牛, 我是雞年出生的 :)
+23:31:14 <monochrom> 解釋之前, 先定義一個詞: 下面我說一個程式語言"雜亂無章", 意思是: 想像你要教該程式語言, 而且要教得完全, 不是只教入門; 又或者想像要完整寫下該語言的語法及語言. 如果你發覺你常常要說: "通常這樣這樣, 除非...", 即是說有很多例外及 corner case, 那麼這個語言就是雜亂無章.
+23:36:13 <monochrom> 好了. 一個方便寫作者的語言, 一定雜亂無章, 因為要為各式各樣的 "常用" 特例提供縮寫或優惠. 它們正正成為例外及 corner case. PHP 就是這方面的人類登峰極致之作. 而它的靈感來自上一代掌門 Perl.
+23:38:38 <CindyLinz> monochrom: 我同意你對好壞的看法, 但我反對你對 Perl 的描述.
+23:39:02 <monochrom> 針無兩頭利. 凡是方便作者的雜亂無章例外情況, 必然苦害讀者. 誰是讀者? 維修者就是讀者之一.
+23:39:04 <CindyLinz> 我天天 perl, 不覺得它有為常用特例提供縮寫或優惠. 我覺得 php 很亂
+23:39:22 <CindyLinz> 但 php 也沒有為常用用法提供縮寫
+23:39:28 <CindyLinz> php 的優點是好上手而已
+23:39:41 <CindyLinz> 常用特例提供縮寫優惠應該是 livescript
+23:40:33 <monochrom> 那麼我下次要修正一下.
+23:41:46 <hashcat> 沒想到有人如此推崇愛護駱駝語
+23:42:08 <monochrom> Perl 的一個優惠是數字隨時變身文字, 文字隨時變身數字
+23:43:36 <monochrom> (我還未說 C 開的壞先例, 及 Python 的發揚光大, 任何型別隨時變身真假值哩!)
+23:44:12 <hashcat> 蟒蛇前進吃掉駱駝 ww
+23:44:21 <CindyLinz> hashcat: 畢竟是遇到不熟悉 perl 的人的批評, 有誤解是該澄清啊~ 如果批評的正確, 那我會附和的
+23:44:28 <hashcat> 蛇吞駝
+23:44:43 <hashcat> 我在胡言亂語唉
+23:45:11 <godfat> 有時候也覺得我滿矛盾的，我也討厭特例，也同意 ruby 有很多特例，但仍然覺得 ruby 好用。或許是因為我已熟知各種例外...
+23:45:23 <hashcat> 還在想像兩個駝峰撐起蟒蛇肚子..
+23:45:44 <hashcat> 熟了就不會覺得是特例吧
+23:45:46 <godfat> 大王子
+23:45:51 <CindyLinz> monochrom: 不一樣欸.. C, Python, Java 的 implicit conversion 和 perl 不一樣.. 你可以想成 perl 的寫法總是 explicit conversion
+23:46:14 <monochrom> 怎樣想成呢?
+23:46:14 <godfat> hashcat, 終究是需要多條規則來描述，我想仍然是特例，只是很習慣
+23:46:36 <CindyLinz> monochrom: javascript 的 a + b 會做什麼事, 是依 a 和 b 的 type 而定
+23:46:51 <CindyLinz> 字串的話是接起來, 都數字的話是數字相加
+23:47:19 <CindyLinz> 而 perl 的 $a + $b 一定是數字相加, 所以對應 javascript 的話是 parseFloat(a) + parseFloat(b)
+23:47:34 <CindyLinz> 可以理解為 explicit conversion
+23:47:54 <CindyLinz> 而 perl 的 $a . $b 一定是字串相接, 所以對應 javascript 的話是 (''+a)+b
+23:48:19 <CindyLinz> < > <= >= == !=   /   gt lt le ge eq ne  也是一樣的意思
+23:48:24 <hashcat> 熟了即成慣例, 比較容易跟少用這語言的人, 感覺那些規則是特例的人有代溝
+23:48:58 <CindyLinz> 所以 Perl 因此就成為這次少數拒絕 "Z" > "B" 的語言了.. (Y)
+23:48:58 <monochrom> 不. 真的寫出 parseFloat(a) + parseFloat(b), 一字不漏, 這才算 explicit. $a+$b 缺了 parseFloat, 就是 implicit.
+23:49:12 <hashcat> 至少駱駝 pk 蟒蛇很有畫面
+23:49:39 <hashcat> 紅寶石pk蟒蛇沒畫面能想像
+23:50:16 <CindyLinz> monochrom: 我覺得這是 explicit, 因為 $a+$b 就依定義, 對應那一串 javascript code
+23:50:30 <hashcat> 第一次覺得駱駝比蟒蛇可怕唉
+23:51:08 <monochrom> 我的"例外", "亂" 是很小心的避免主觀的熟不熟. 所以我說: 想像要教別人, 或要完整寫下來.
+23:51:19 <hashcat> 拒絕 "Z" > "B" 是怎麼回事
+23:51:36 <hashcat> 駱駝開外掛
+23:52:07 <CindyLinz> perl 的 > 是數字比較, 所以 "Z" 和 "B" 沒有數字都會視為 0 來比
+23:52:46 <monochrom> 其實可以很簡單的定義: 只要你的解釋越長, 就越亂. 即是說, 越描越黑.
+23:53:06 <godfat> 那 Z == B 了 XDD
+23:53:47 <godfat> 利即是弊
+23:53:47 <godfat> 夯即是劣
+23:53:57 <CindyLinz> godfat: 哎, 反正 Z == B 不紅嘛.. XD
+23:54:46 <hashcat> 越來越無法理解perl的優點了
+23:54:47 <monochrom> 呀, 還有香港諺語: 解釋即是掩飾 XD
+23:56:04 <CindyLinz> hashcat: 反正你都在作科學計算(?) 那你不需要理解 perl 的優點啊, 不要作不實宣傳就好 XD
+23:56:27 <hashcat> 我還不實宣傳了
+23:57:04 <hashcat> 符號多用法怪哪不實了唉
+23:58:08 <CindyLinz> 我覺得常用符號 10 個以內不算多啊, 然後用起來我也覺得不怪啊... 至少我這是天天使用的人的意見 :|
+23:59:34 <monochrom> 是這樣的: 甲語言的 "a+b" 的語義: "a 和 b 必須是數字. 把它們相加."  乙語言的 "a+b" 語義: "如果 a 是文字, 首先轉為數字; 如果 b 是文字, 首先轉為數字. 然後相加". 誰簡單些? 誰複雜些?

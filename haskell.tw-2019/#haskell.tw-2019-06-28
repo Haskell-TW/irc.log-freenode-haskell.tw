@@ -1,0 +1,16 @@
+22:15:35 <FedererChien> 教學:現在讓我們編寫我們自己的函數！打開你最喜歡的編輯器，輸入如下程式碼
+22:15:56 <FedererChien> 打開 ghci，執行 :l baby.hs
+22:16:12 <FedererChien> 結果是
+22:16:13 <FedererChien> <no location info>
+22:16:41 <FedererChien> 弄了三個小時，不知道怎麼解決 QQ
+22:53:59 <ppap> 把編輯器打的指令儲存，就可以找到了
+23:33:19 <monochrom> 我想看全相
+23:34:35 <monochrom> baby.hs 內容?  還有 "<no location info>" 肯定不是事實之全部. (恐怕還是最不重要.)
+23:45:22 <FedererChien> <no location info> error: can't find file: baby.ha
+23:46:59 <FedererChien> 我需要從在編輯器ghci載入編輯器文件的方法
+23:47:13 <FedererChien> 我需要從在ghci載入編輯器文件的方法
+23:47:55 <FedererChien> https://learnyoua.haskell.sg/content/zh-tw/ch02/ready-go.html
+23:48:12 <FedererChien> 初學者的第一個函數，此處卡住 QQ
+23:50:45 <FedererChien> baby.hs 內容:doubleMe x = x + x
+23:51:27 <ppap> 我想要試，功能將一個數字乘以 2
+23:55:10 <ppap> 他

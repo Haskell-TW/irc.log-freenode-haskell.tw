@@ -1,0 +1,422 @@
+00:00:03 <banacorn> 對 C x y 裡面的 x
+00:00:35 <DreamLinuxer> 那條rule投影片有嗎?
+00:01:19 <banacorn> 阿靠那是我符號打錯
+00:02:07 <banacorn> Σ 才對， Type Thoery 第二課第三頁
+00:02:36 <DreamLinuxer> 那條可以這樣用喔O_o
+00:03:57 <CindyLinz> monochrom: 有把 forall 和 exists 放進去..
+00:04:33 <banacorn> monochrom: 對不起那是我符號錯亂 ...
+00:04:57 <CindyLinz> hashcat: 就.. banacorn 貼的連結的圖片的最下面那一行敘述
+00:05:22 <banacorn> DreamLinuxer: 嗯嗯合出來變成那個 pair
+00:05:54 <DreamLinuxer> got it
+00:13:04 <hashcat> 我好像知道為啥人會越變越少
+00:14:45 <CindyLinz> 超濃縮冰醋酸..
+00:16:10 <monochrom> hashcat: 為甚麼? 我想知道
+00:16:23 <hashcat> 弄錯市場
+00:16:27 <DreamLinuxer> 這題真的很confusing，程式出現在type裡面
+00:16:45 <hashcat> 面向計算機行業講些從業用不上的數學證明
+00:17:39 <hashcat> 把那種一長串一堆括號巢狀的東西, 改成由下而上的樹狀圖會很好看
+00:17:46 <hashcat> 由上而下
+00:18:17 <CindyLinz> hashcat: 這課不是專門開給 CS 學系的啊
+00:18:24 <hashcat> 使用推論規則就變成那個剪接樹木
+00:18:38 <CindyLinz> 記得.. CS, Math, 哲學都有人來
+00:19:00 <letoh> 沒有工程方面的? XD
+00:19:28 <DreamLinuxer> 資訊工程
+00:19:43 <letoh> 喔  只是 CS 的話應該沒有工程? XD
+00:19:52 <petercommand> IE才是工程呀XD
+00:21:29 <hashcat> 那怎會在這搞編程的討論
+00:22:53 <caasih_> ㌏ 這個字好妙
+00:22:53 <hashcat> 不然這麼說好了, 市場定向不明
+00:24:12 <letoh> caasih_: SQUARE GANMA
+00:24:37 <caasih_> letoh: 型也顧到了 XD
+00:26:20 <letoh> 的確!!
+00:26:53 <hashcat> 就數學的話, 要展示下他在數學研究解決問題上能有什麼應用, 哲學的話就要點出有啥麼點深度的問題
+00:27:28 <hashcat> 計算機的話就要搞validator
+00:27:40 <letoh> caasih_: 看起來就像校正軟體的 icon
+00:27:54 <hashcat> 都沒有的話就只能一直讓新人進來
+00:31:32 <hashcat> 不過這也是種過濾的過程
+00:32:39 <monochrom> 我倒從對立面看, 為甚麼開始時有這麼多人報名呢? 是不是他們也誤會了課程的目的了?
+00:34:43 <CindyLinz> 不知道, 不過的確人數是一屆比一屆多..
+00:34:56 <CindyLinz> 也有像我這種重修(?)的 XD
+00:36:10 <banacorn> 今年人數大爆滿
+00:36:48 <monochrom> 照計 "課名：程式語言理論與型態系統" 並沒有很大的誤會空間. "理論" "型態" 四個字已經擺得很明了.
+00:37:38 <caasih_> 用現在所學的，找不出 y combinator 的 type
+00:38:28 <CindyLinz> caasih_: y combinator 應該是 type 系統想避掉的東西欸
+00:38:48 <CindyLinz> 找不出就是成功了 XD
+00:38:57 <au> :t Control.Monad.Fix.fix
+00:38:58 <lambdabot> (a -> a) -> a
+00:39:47 <monochrom> 不過呢, 我自己學 type theory 最主要是學多一門邏輯, 幫助釐清思想及表達.
+00:40:07 <CindyLinz> y combinator 不是 \x -> (\x -> x x) (\x -> x x) 嗎?
+00:42:09 <caasih_> 原來是我搞錯了，的確 (a -> a) -> a 合 \y -> f (y f)
+00:42:38 <au> :t \f -> (\x -> f (Unsafe.Coerce.unsafeCoerce x x)) (\x -> f (Unsafe.Coerce.unsafeCoerce x x))
+00:42:39 <lambdabot> (t -> t1) -> t1
+00:42:52 <CindyLinz> unsafeCoerce XD
+00:43:13 <CindyLinz> au: 我明天(今天) 會講這個, 而且特別 mention 你進去 :p
+00:43:20 <au> 喔喔
+00:43:21 <au> sure
+00:43:44 <CindyLinz> "血統不純正的大大 (edwardk) 對這種骯髒透頂的事情最有熱情最熟悉了嗎? OAO"
+00:43:56 <CindyLinz> "看看唐鳳的 unsafeInterleaveIO 用法.. (點點頭)"
+00:44:16 <hashcat> :t \f -> (\x -> f (x x)) (\x -> f (x x))
+00:44:17 <lambdabot>     Occurs check: cannot construct the infinite type: t0 ~ t0 -> t
+00:44:18 <lambdabot>     Expected type: t0 -> t
+00:44:18 <lambdabot>       Actual type: (t0 -> t) -> t
+00:44:37 <CindyLinz> 我也是蠻愛 unsafe 的 XD
+00:44:51 <CindyLinz> 啊我也要 quote 這句! # 00:42  * au 最喜歡各種 unsafe* 了 \o/
+00:45:15 <hashcat> 這樣到底算不算Haskeller
+00:45:22 <CindyLinz> 算吧
+00:45:29 <au> 整個 lazyRead system 都是建立在 unsafeInterleaveIO 上啊
+00:45:30 <au> http://hackage.haskell.org/package/base-4.7.0.0/docs/src/GHC-IO-Handle-Text.html#hGetContents
+00:45:44 <hashcat> unsafe haskeller
+00:46:09 <hashcat> 是說應用層的編程用那個
+00:46:13 <CindyLinz> au: 那天聽你說: 把所有 IO 的地方通通都套一個 unsafeInterleaveIO.. 不小心就笑了 XDXD
+00:47:39 <CindyLinz> hashcat: 總是要一些髒手段才能讓 GHC / Haskell 會動啊.. :|
+00:48:19 <hashcat> 底層實現就算了, 看你們說unsafe說得很熱衷
+00:48:29 <hashcat> 就覺得很多haskell程序都不太妙
+00:49:01 <CindyLinz> hashcat: XD 了解它才會知道何時該用何時不該用啊
+00:49:19 <hashcat> 結果還是要自己檢查源碼才有safe可言
+00:49:31 <hashcat> 怕別人在莫名其妙的地方偷用
+00:49:33 <CindyLinz> 工程師總是在一堆矛盾的規範之間找平衡求生存
+00:49:45 <au> hashcat: 機器會檢查喔
+00:49:46 <CindyLinz> hashcat: GHC 可以 infere safe
+00:49:59 <au> # https://www.haskell.org/ghc/docs/7.8.2/html/users_guide/safe-haskell.html
+00:51:12 <au> 應用層是沒有底層時自己做底層，後來 dons 把 openafp 做的部份集中寫到 lazy bytestring 和現在的 Data.Binary
+00:51:22 <au> 所以 openafp 就不再出現 unsafeInterleaveIO 了
+00:51:55 <au> #所謂的先求有再求好
+00:52:09 <hashcat> 看起來是隨便用unsafe之後, 程序員打個safe他就當safe了
+00:53:34 <au> 對，可是是由程序員決定的，不是 library author 說了算
+00:54:14 <au> 所以 infer 出來不 safe 的 library 可以選擇不用，或是仔細求證過再用
+00:54:16 <hashcat> 結果還是要看源碼
+00:54:24 <au> 不是啊，你可以不用啊 :p
+00:54:27 <hashcat> 好吧不錯的工具
+00:54:44 <hashcat> 還是要看源碼才知道要不要用
+00:54:57 <au> *nod*
+00:55:13 <hashcat> 讓我覺得haskell要分三層才對
+00:55:27 <hashcat> 底層中層高層
+00:55:37 <CindyLinz> hashcat: 信任是無窮後退的 paradox..
+00:55:44 <CindyLinz> (今天聽到 Josh Ko 閒聊講的)
+00:55:45 <caasih_> :t \x -> f (x x)
+00:55:46 <lambdabot>     Occurs check: cannot construct the infinite type: t2 ~ t2 -> t1
+00:55:46 <lambdabot>     Relevant bindings include
+00:55:46 <lambdabot>       x :: t2 -> t1 (bound at <interactive>:1:2)
+00:56:41 <superbil> yllan: 記得在你的座位上有看到講義，不知道有沒有被收起來
+00:56:42 <hashcat> 至少可以知道是自己腦子有問題, 還是實作中層的人腦子有問題
+00:58:10 <caasih_> :t \x -> x x
+00:58:11 <lambdabot>     Occurs check: cannot construct the infinite type: t1 ~ t1 -> t
+00:58:12 <lambdabot>     Relevant bindings include x :: t1 -> t (bound at <interactive>:1:2)
+00:58:12 <lambdabot>     In the first argument of ‘x’, namely ‘x’
+00:58:31 <au> 沒錯，這是 safe haskell 的目的... 底層可以亂用 -XTemplateHaskell -XForeignFunctionInterface -XOverlappingInstances，中層可以用底層模組(要檢核)但自己不能用 unsafe 功能，高層只能用中層模組
+00:58:55 <CindyLinz> TemplateHaskell 會破壞 safe 嗎?
+00:59:12 <CindyLinz> 它能不能等 TemplateHaskell 生完 code 以後再 check?
+01:00:05 <au> 可以，但是也可以有 macro 編譯階段看月相盈虧決定生 safe or unsafe code
+01:00:12 <au> 所以初一 safe 十五 unsafe
+01:00:30 <au> 這樣的模組要怎麼標記呢 XD
+01:00:36 <CindyLinz> 不能標在模組上了 XD
+01:00:49 <CindyLinz> 要 compile 後標在 compile 當下的那個版本上 XD
+01:01:00 <au> yeah
+01:01:37 <CindyLinz> 聽起來是個狼人模組....
+01:01:46 <au> lol
+01:07:41 <CindyLinz> 把「血統不純正」拿掉好了.. 想個辭 :Q
+01:07:54 <hashcat> "純"函數
+01:08:19 <hashcat> 理容院不管純不純都會掛個純字
+01:16:19 <au> CindyLinz: 還有 https://gist.github.com/bitonic/1934179 裡的 treeToLists 也很實用 (??)
+01:17:53 <CindyLinz> au: 被發現了! 我轉貼了這一個, 還有 reddit 上面關於它的討論串
+01:18:00 <au> CindyLinz++
+01:18:36 <CindyLinz> au: 把 edwardk 拉出來講就是因為他在討論串裡面發言超多, 捍衛這程式的可靠性, 還 improve 它 XDDD
+01:19:14 <au> edwardk 真是完全繼承了 -Ofun 精神 (他自己說的 (但是我同意))
+01:19:26 <CindyLinz> 我好想看 scm 或 xcycl 聽到這部分時的表情反應 (小聲)
+01:19:32 <CindyLinz> -Ofun?
+01:19:41 <au> "a compiler should be optimized for fun"
+01:19:45 <CindyLinz> XDDDD
+01:19:50 <CindyLinz> (Y)
+01:22:09 <CindyLinz> 那用「-Ofun 流的大大」好了..
+01:22:15 <au> ++
+01:24:17 <whitglint> hashcat 真有趣呀
+01:54:59 <caasih_> :t \f x -> f x
+01:55:00 <lambdabot> (t1 -> t) -> t1 -> t
+01:55:31 <caasih_> :t \f x -> x
+01:55:32 <lambdabot> t -> t1 -> t1
+01:55:59 <caasih_> :t \f x -> f (f x)
+01:56:00 <lambdabot> (t -> t) -> t -> t
+01:57:58 <monochrom> 哈哈, 初一十五
+02:04:23 <CindyLinz> 啊.. hashcat 離線了
+02:04:44 <CindyLinz> 想跟他說, 我覺得除了 infered safety 以外, 還有 infered author..
+02:05:03 <CindyLinz> 看到是 edwardk 寫的 mod, 就很有信心可以放心用 XD
+02:05:16 <CindyLinz> author safety.. :p
+02:05:50 <monochrom> 一定程度上, 憑人的往績而信任
+02:06:14 <CindyLinz> 我知道這樣不對 ._.
+02:06:17 <au> . o O { rose-colored lens }
+02:06:47 <monochrom> 要全面的解釋, 就要把風險管理由頭說起了
+02:06:53 <CindyLinz> 還有這個 :p http://hackage.haskell.org/package/exceptions
+02:08:34 <au> uninterruptibleMask 之所以不叫 unsafeUninterruptibleMask 可能是因為後者名稱太長了...
+02:08:51 <CindyLinz> uninterruptibleMask 有不安全嗎? @@"
+02:09:13 <au> 主要是會讓進程變成 unkillable
+02:09:20 <au> 因為收不到 sigkill
+02:09:38 <CindyLinz> 用正常的 mask, 可是把所有的動作都集中在 before 或 after 的地方, 不是也一樣了嗎?
+02:09:39 <au> 確實比起破壞參照透明性來說不算什麼啦 XD
+02:09:49 <au> yeah
+02:09:52 <CindyLinz> 嗯嗯嗯
+02:10:11 <CindyLinz> unhonestMask..
+03:12:58 <au> CUFP@FLOLAC'14 音檔: https://soundcloud.com/audrey-tang/cufp-flolac14
+03:13:41 <au> 逐字稿共筆才打到 12:20... 歡迎幫忙，我會慢慢補完... https://hackpad.com/CUFP-FLOLAC14-PoPV1V9wVse
+03:24:37 <caasih_> au++
+03:25:45 <caasih_> 在 agda/haskell 中，我可以幫 type (A -> A) 取名字嗎？譬如叫它 F 之類的？
+03:27:19 <au> type F a = (a -> a) --haskell
+03:28:30 <au> 這樣就有 fix :: F a -> a
+03:32:59 <caasih_> 在做奇怪的實驗，等等 push 一下。來查一下 haskell 文件，還看不太懂， au++
+03:37:42 <caasih_> 這樣惡搞 agda 會過： https://github.com/caasi/FLOLAC-2014/blob/master/DTP/lambda.agda
+03:38:08 <caasih_> 但要 ghci 去算 type 其實每個 \top 不見得是一樣的
+08:51:03 <evast> monochrom: Denotational Semantics, Operational Semantics
+09:07:18 <yllan> superbil: thanks, 我真的忘記帶回去了
+09:14:25 <alexlu> 邪教聚會所？
+09:15:55 <xcycl> 自嘲... xD
+09:27:15 <lcamel> 請問... Agda 裡面的 A -> B 是內建的? 有必要內建嗎?
+09:42:36 <xcycl> lambda 的 computation rule 要做 substitution ...
+09:48:40 <xcycl> 用 data ... where 宣告出來的 type, 則是有一套一般化的 elimination, computation rule
+09:48:59 <xcycl> 而且其實 elimination 就是 induction principle
+09:55:55 <lcamel> xcycl: 謝謝
+09:57:49 <caasih_> CindyLinz: agda-vim 雖然 README.md 寫 nmap <buffer> ,l :Reload<CR>
+09:58:14 <caasih_> 但是 .vim 寫的卻是 nmap <buffer> <LocalLeader>l :Reload<CR>
+09:58:36 <caasih_> 我的 LocalLeader 預設是 \
+10:01:02 <mno2_> au `mappend`  ，弄到凌晨三點也太拼了xD
+10:18:46 <whitglint> 錄音檔不小呢... XD
+10:35:11 <whitglint> 哪有人講話這麼快 XD
+11:34:20 <CindyLinz> 醒了 QQ
+11:34:49 <CindyLinz> caasih_: 我也是.. 看 code 才知道 XD
+11:35:07 <CindyLinz> caasih_: 可是我不管按什麼都會一直出現 Goal is not found 之類的東東 orz
+11:36:22 <caasih_> CindyLinz: 我得先 <LocalLeader>l 後，把游標移到 ? 的後面，才能按 <LocalLeader>g
+11:36:50 <CindyLinz> !!
+11:37:05 <CindyLinz> 我應該是沒按 \l
+11:38:37 <cataska> FLOLAC 的課後作業是公開的嗎？
+11:43:10 <caasih_> cataska: FP 的在這頁最下面 http://flolac.iis.sinica.edu.tw/flolac14/doku.php?id=zh-tw:fp
+11:44:05 <caasih_> 依值型別的在這頁 http://flolac.iis.sinica.edu.tw/flolac14/doku.php?id=zh-tw:dtp
+11:45:14 <cataska> caasih_++
+11:59:29 <caasih_> cataska: <(_"_)>
+13:17:50 <yllan> CindyLinz: 今天沒來？
+13:18:42 <mno2_> CindyLinz 不是 11:34am 才醒嗎？ xD
+14:02:13 <CindyLinz> yllan: 來了 QQ
+14:02:48 <CindyLinz> 昨天想說還是以準備 talk 為重, 稍微犧牲一天好了 ._.
+14:05:28 <miaoski> 哦哦哦~~ 今天 CindyLinz 要去 Mozilla Space
+14:05:32 <CindyLinz> 對啊
+14:06:01 <miaoski> 所以妳講完就結束了? XD
+14:07:27 <CindyLinz> 對
+14:08:42 <CindyLinz> 來補啃講義 ._.
+14:16:53 <CindyLinz> fu fu fu~ 被對 π 的括號 convention 誤解而看不懂講義了~
+14:32:38 <CindyLinz> Josh 好愛「構」這個字 XD
+14:34:53 <CindyLinz> 還好 Josh 有放慢速度, 遲到沒有漏太多 ._.
+15:06:45 <caasih_> 石神 哲哉又要不滿了 # 四色定理
+15:13:08 <superbil> 「寫給一般的數學家看的」
+16:22:36 <banacorn> XD
+16:22:37 <mno2_> CindyLinz: 今天的 talk 初學者能聽嗎？我某位 IMO 的朋友在問
+16:22:52 <mno2_> s/能聽/能聽懂/
+16:28:03 <CindyLinz> mno2_: 不需要基礎..
+16:28:14 <CindyLinz> mno2_: 可是非常快...... o.o
+16:29:18 <CindyLinz> 表面上可以硬跟, 但可能會覺得是無意義的符號遊戲... 要體會其中的意義需要學生自己下課以後一直想
+16:31:57 <mno2_> CindyLinz: 了解
+17:22:47 <infwinston> exit
+17:35:25 <yllan> 前幾天女朋友有事缺課，今天來上課，下課以後哭喪著臉說明天不想再來了 Orz
+17:43:18 <hello> 請問... 今天Josh的教材，有什麼參考資料嗎？網路上的Agda教學，好像沒有類似這樣Natural Number的性質證明
+17:43:45 <hello> 另外，不知道為什麼，早上穆老師說的都懂，程式還蠻容易寫得出來；但是，Josh的部份則完全無法理解...
+17:50:30 <whitglint> 把女孩子弄哭的課程什麼的... XD
+17:55:35 <miaoski> yllan: 正常的吧xd
+18:18:08 <yllan> 問題，看不懂 transport 和 refl 。我想要造一個 t : 1 ≡ 1 ，為什麼不是 t = refl 1 而是 t = refl ?
+19:05:43 <petercommand> > show "\1"
+19:05:44 <lambdabot>  "\"\\SOH\""
+19:06:03 <petercommand> > show "\100"
+19:06:05 <lambdabot>  "\"d\""
+19:06:17 <petercommand> 那個SOH是甚麼呀?
+19:07:02 <petercommand> 剛才在ghc試前幾個數字
+19:07:25 <au> U+0001  START OF HEADING
+19:07:39 <au> (控制碼的縮寫)
+19:08:27 <petercommand> 喔喔
+19:27:16 <yllan> 問題，propositional equality 和 judgemental equality 的差別是，前者是用來描述一個 x = y 的命題，後者是說，證明的過程中，兩個長得不一樣的證明其實是同樣的，是這樣嗎？
+19:35:10 <xcycl> 哎, judgemental equality 跟 propositional equality 難解釋啊 ...
+19:35:24 <xcycl> 等等召喚 josh 上來回答好了
+19:42:55 <xcycl> （召喚失敗... ）
+19:44:28 <xcycl> 要我說的話, judgemental equality 是指可以在 typing 的時候算出來的東西, 對系統內分不出差異的
+19:45:22 <xcycl> propositional equality 則是系統內看起來不一樣，但是可以套用如 induction principle 證明的
+19:45:37 <xcycl> （挖個可能會錯的坑等人來補）
+19:47:18 <yllan> 那這個問題可能比較簡單，我看不懂 https://github.com/josh-hs-ko/FLOLAC-14/blob/master/NatArith.agda 這邊的 refl, transport 定義
+19:48:03 <yllan> 如果要寫下 1≡1 的證明，不是 refl 1 嗎？
+19:48:20 <yllan> 為啥是 refl ?
+19:48:46 <xcycl> 喔! 這個只是 Agda 幫你把 1 推出來了
+19:49:00 <yllan> implicit 的關係？
+19:49:04 <xcycl> 對
+19:49:24 <xcycl> 但它也有推不出來的時候
+19:49:38 <xcycl> 通常 load 之後才知道
+19:51:24 <yllan> 喔喔  所以 implicit 算得出來的時候，你再給他一個 1 就變多餘，無法 type check 了？
+19:52:20 <xcycl>  implicit argument 可以用 { } 包起來給他, 這邊可以寫成 refl {1} 或是 refl
+19:52:25 <xcycl> Agda 不會抱怨
+19:54:04 <yllan> 有錯耶 ^^;;    ℕ !=< Set of type Set when checking that the expression 1 has type Set
+19:55:02 <xcycl> 啊, 還要再寫 type ... : P
+19:55:19 <xcycl> refl {ℕ} {1}
+19:57:37 <miaoski> CindyLinz: 投影片～（伸）
+19:58:24 <miaoski> CindyLinz:  然後我要告狀，mt 和松鼠覺得 moz 好遠就不來了～
+19:58:50 <yllan> xcycl: 謝謝！看來 implicit 的語法我還沒搞很懂
+20:05:18 <evast> unsafe~ unsafe~ unsafe~
+20:09:43 <au> unsafeForeignPtrToPtr~ unsafeIOToST~ unsafeDupablePerformIO~
+20:11:13 <yllan> 這樣我應該看懂 transport 了，所以 transport P p refl = p 分別對應到的 type 是 P : A → Set, p : P x, refl : x≡x, 跳過 y 因為是 implicit
+20:14:29 <evast> yllan: miaoski 想請你在 FLOLAC 結束時幫忙 copy 錄影檔給他，讓他幫忙轉檔和上傳 XD
+20:15:04 <evast> 好消息是這樣影片會比較早出現～ ^_^
+20:16:43 <xcycl> 啊, 對. : )
+20:17:51 <xcycl> implicit argument 有點討厭, 一開始不習慣通通用 explicit. 久了會覺得輸入無聊的 argument 很無聊就開始用 implicit argument 了 ...
+20:19:11 <yllan> evast: 沒問題，所以明天可以 copy 這個禮拜的錄影檔嗎？
+20:21:58 <miaoski> yllan: ++  再和你約時間拿～
+20:22:56 <xcycl> btw, 今天看到很神奇的東西, 在 Emacs 下作 vim 的 key binding http://www.emacswiki.org/emacs/VimMode
+20:23:19 <xcycl> 這樣就不用弄 vim 下的 agda mode 也可以寫得很開心
+20:23:53 <letoh> emacs 有 vim simulation layer
+20:24:26 <letoh> 但我覺得跟原本功能混在一起操作時變得很怪  反而更難用
+20:25:16 <xcycl> 我完全不會用 Emacs, 只當做記事本在用, 可以用 vim 來上下左右就很開心 ... QQ
+20:25:30 <xcycl> g/vim/hjkl
+21:35:44 <mathist> hihi
+21:36:35 <mathist> 請問各位 有沒有C的迴圈for, while轉成函數式編成(例如Map, Nest, tail recursion)的SOP呀@@
+21:37:50 <mathist> 最近FP念得卡卡的 總覺得不太踏實 :P:P
+21:39:41 <mathist> 忍不住就會想依賴for/while @_@
+21:40:48 <letoh> mathist: http://d.hatena.ne.jp/yuki_neko_nyan/20090217/1234850409  # 傳教ing
+21:41:28 <mathist> ..
+21:41:29 <letoh> 譯：變得寫不了迴圈的十個階段
+21:41:32 <mathist> 日文看不懂XDD
+21:42:47 <mathist> google 翻譯翻出最後一個我看得懂, 10級: 什麼是循環？
+21:43:12 <letoh> 我還在 plurk 找我以前的譯文... 但 plurk 搜尋實在很難用XD
+21:43:13 <mathist> 看起來想是在寫修練武功 最高層的時候已經忘掉loop
+21:43:17 <hashcat> mathist:當然有嘿嘿
+21:43:22 <mathist> 嗯嗯
+21:43:31 <mathist> 我不想自己想啦~ 直接上來跟大家要答案
+21:43:38 <mathist> 我不是懶惰鬼 ><
+21:43:46 <mathist> 最近要保護腦力  ~_~
+21:44:09 <hashcat> mathist: 抄懶der~
+21:44:51 <mathist> 念高微還ok, 太偏思考這類問題的東西, 我受不了 xdd
+21:45:04 <hashcat> https://github.com/mmirman/ImperativeHaskell
+21:45:21 <hashcat> 高微是垃圾ㄚ~~
+21:46:25 <yllan> hashcat: 要理解這個原理比自己拆回圈還難很多啊！
+21:46:46 <hashcat> 那是貼整人的
+21:46:53 <hashcat> SOP抄簡單der～～
+21:47:02 <hashcat> 才不告訴你勒~
+21:47:08 <hashcat> = ='
+21:47:21 <hashcat> 因為haskell沒有內部狀態
+21:47:40 <yllan> monad!
+21:47:40 <hashcat> 把所有狀態改成外部, 再遞迴就好了
+21:48:06 <hashcat> 摸ㄋㄟ下去慢死你
+21:50:50 <hashcat> 先把所有變數都改成函數的輸入, 再看你迴圈有啥條件用那個if-then-else做出分支, 再看迴圈裡的各變數需要啥變化, 把函數應用在狀態得到新狀態後, 把新狀態遞迴下去
+21:51:24 <hashcat> 其實也不用, 都給他unsafe下去就好了
+21:52:38 <mathist> 是不是有些特定的簡單的loop不需要用遞迴
+21:52:50 <mathist> 用map或fold, 那些可以做到?
+21:52:53 <petercommand> 問一下，Illegal signature in pattern: Num a => [a] -> b是甚麼意思呀?
+21:53:24 <hashcat> map filter fold reduce有特定用途, 最一般的SOP就是改遞迴了
+21:53:45 <mathist> 了
+21:53:49 <hashcat> 像map啦就是結構不變
+21:53:58 <hashcat> filter就是縮小結構
+21:54:11 <hashcat> fold由線塌縮成點
+21:54:25 <hashcat> scan像那個累積分配函數
+21:54:47 <petercommand> 加了-XScopedTypeVariables後變成`Int' is applied to too many type arguments
+21:55:00 <hashcat> petercommand要看上下文才知道
+21:55:37 <petercommand> 恩
+21:55:40 <hashcat> Haskell超不純der
+21:56:01 <hashcat> 詐騙
+21:57:35 <hashcat> petercommand有可能是排縮錯誤
+21:58:42 <petercommand> 我好像有地方寫錯了@@
+21:59:10 <hashcat> mathist: 所以看你期待的輸出是啥, 就可以猜到要用啥高階函數了
+21:59:52 <hashcat> 的型別
+22:00:13 <hashcat> haskell的型別比他的內涵還重要
+22:00:32 <petercommand> http://ideone.com/XnUxWq
+22:00:50 <petercommand> 阿...
+22:02:34 <petercommand> 改了一下，還是同樣錯誤
+22:02:48 <petercommand> 同一個ideone
+22:04:00 <hashcat> 哪有這款寫法
+22:04:13 <hashcat> 要寫型別宣告跟函數宣告
+22:04:46 <letoh> 這寫法XD
+22:04:59 <petercommand> 阿...原來如此XD
+22:12:15 <yllan> 我好像知道了  judgemental equality 是不是就是 adga 裡面的 = 代表的意思……
+22:24:10 <petercommand> > map (\x -> foldl1 product x) [[1,2,3],[2],[3]]
+22:24:11 <lambdabot>  Occurs check: cannot construct the infinite type: a ~ [a] -> [a]
+22:24:12 <lambdabot>  Expected type: [a] -> [a] -> [a]
+22:24:12 <lambdabot>    Actual type: [a] -> a
+22:24:12 <lambdabot>  Relevant bindings include x :: [[a]] (bound at <interactive>:1:7)
+22:24:58 <petercommand> 這個錯誤在哪裡呢?
+22:26:27 <petercommand> 我希望結果變成[6,2,3]這樣
+22:26:50 <yllan> map product  [[1,2,3],[2],[3]]
+22:27:23 <CindyLinz> miaoski: XDDD
+22:27:23 <yllan> product 一次就是一串了，不用再 fold
+22:27:33 <petercommand> yllan: 恩恩
+22:27:59 <b4283> miaoski 有說話嗎
+22:28:24 <letoh> > map product  [[1,2,3],[2],[3]]
+22:28:26 <lambdabot>  [6,2,3]
+22:29:55 <CindyLinz> b4283: 19:58
+22:30:08 <CindyLinz> b4283: 幹嘛, 對他笑不行嗎!?
+22:30:37 <letoh> b4283: irc 也是 lazy 的XD
+22:30:48 <CindyLinz> miaoski: 找到一個 ttf extract 的 perl script :p
+22:30:56 <CindyLinz> 正要來用用看 :p # http://search.cpan.org/~mhosken/Font-TTF-Scripts/scripts/ttfsubset
+22:37:10 <petercommand> http://pastebin.com/ixAtFsYA
+22:37:13 <banacorn> （到處找 miaoski 在哪裡說話 ._./
+22:38:08 <petercommand> 又有錯誤了@@
+22:39:24 <yllan> petercommand: 你是要把相鄰相同的元素乘起來？
+22:39:34 <yllan> Um, 應該說加起來
+22:39:52 <petercommand> 對呀 相鄰同號的乘起來
+22:40:37 <yllan> type 改成 (Num a) ⇒ [a] → [a] 試試？
+22:40:47 <yllan> 不然不知道 b 是什麼東西
+22:41:43 <letoh> 我以前會先把 type sig 那一行先拿掉  因為我實在太常寫錯XD
+22:42:25 <petercommand> 改成subarrayGroup :: (Num a, Eq a, Ord a) => [a] -> [a]之後成功了XD
+22:43:07 <petercommand> Eq a可以拿掉
+22:45:13 <yllan> 感覺不用 pattern matching, [] 不是特例
+22:45:28 <CindyLinz> 嗯 Ord imply Eq
+22:45:48 <petercommand> yllan: 恩恩
+22:46:17 <CindyLinz> 累 QQ
+22:47:01 <miaoski> CindyLinz: (伸) :D
+22:47:43 <miaoski> mathist: 通常不是用轉換的。寫一寫會突然發現，咦為什麼我以前需要迴圈? (大誤)
+22:49:01 <miaoski> level0: 不會寫遞迴。沒辦法用遞迴思考。覺得可以用迴圈來寫的話真好...
+22:50:15 <letoh> miaoski: level0: ...只覺得用迴圈就夠了
+22:51:09 <CindyLinz> level0 是一個人嗎?
+22:51:10 <miaoski> level1: 學遞迴。用遞迴思考總覺得背後癢癢的 (大誤) 常常忘記停止條件。覺得好麻煩還是想要用迴圈來寫
+22:51:21 <CindyLinz> 看到 level1 突然覺得不是 XD
+22:51:24 <miaoski> letoh: 吊到日文講得好的人了!
+22:51:25 <letoh> 沒有 のに 的話你翻譯就對了
+22:51:51 <letoh> 我幾年前翻譯過，但寫在 plurk 卻搜不到XD
+22:51:54 <miaoski> letoh: 這樣 level2 以後可以交給你嗎? *flee*
+22:52:08 <CindyLinz> 遞迴比起迴圈的好處是 invariant 寫得很自然
+22:52:26 <miaoski> letoh: 搜不到正常的... 我自己寫的即使是幾天前也搜不到 XD
+22:52:30 <letoh> XDXD
+22:53:18 <letoh> 剛剛想用 plurk backup 功能從 archive 撈出來，結果等半天沒有 backup is ready 通知XD
+22:54:00 <miaoski> letoh: 要等一陣子說。幾小時?
+22:54:09 <letoh> 我才等半小時XD
+22:54:12 <miaoski> 上次我的 backup is ready 還被丟進垃圾筒
+22:54:33 <miaoski> level2 真的沒辦法翻 :P 不到 N3 的程度實在不行 :P
+22:54:36 <letoh> 原來如此  那重翻一次好了XD
+22:55:03 <letoh> 喔  那我程度比你低  我只有三級  大概是現在的 N4 XD
+22:55:25 <miaoski> letoh: 你沒去考啦!!! 噫其實我也沒去考...
+22:55:56 <letoh> 我只有考過三級啊  後面就懶得準備了XD
+22:57:04 <miaoski> letoh: 拜託你了 (鞠躬) 說真的 level8 完全看不懂啊...
+23:01:34 <petercommand> 話說腦的恐怖那篇有翻譯嗎?
+23:01:40 <letoh> 有啊
+23:01:56 <letoh> au 那篇翻譯很棒
+23:03:36 <petercommand> 在哪裡呀?
+23:05:35 <CindyLinz> petercommand: Flolac14 的課本裡有 :p
+23:06:00 <CindyLinz> petercommand: 然後... 網路上好像是某 FB 的回應裡.. OAO
+23:06:13 <petercommand> @@
+23:07:02 <petercommand> CindyLinz: 沒課本呀= =
+23:09:51 <caasih_> Haskell 腦的恐怖在這邊 http://audrey.nu/-/2014/05/09/awesomeness-of-the-haskell-brain
+23:10:14 <petercommand> thx
+23:13:15 <petercommand> 超搞笑的XDD
+23:15:06 <hashcat> 寫haskell在老闆面前是level 0
+23:16:57 <miaoski> 對不起我是浪蕩的 LISP 派...
+23:17:27 <hashcat> lisp一直被我嘴
+23:29:39 <b4283> CindyLinz: 如果有冒犯到你我很抱歉，我只是想知道是什麼樣的笑話，能夠引起美妙的你發笑
+23:33:37 <letoh> miaoski: https://gist.github.com/letoh/8543b45f3283b1cbaab9  請指教，有看不懂的地方應該是我的中文太差XD
+23:34:48 <miaoski> letoh: 豈敢...
+23:35:06 <petercommand> letoh: 不輸胡XDD
+23:35:14 <petercommand> typo
+23:35:31 <letoh> 我沒學過正規文法  所以就我流翻譯啦  看得懂就好XD
+23:35:39 <letoh> petercommand: 故意的XD
+23:36:13 <petercommand> XDD
+23:37:03 <petercommand> @src groupBy
+23:37:04 <lambdabot> groupBy _  []       =  []
+23:37:04 <lambdabot> groupBy eq (x:xs)   =  (x:ys) : groupBy eq zs
+23:37:04 <lambdabot>     where (ys,zs) = span (eq x) xs
+23:37:49 <miaoski> level9 ... Clojure 表示哭哭
+23:38:12 <CindyLinz> b4283: 沒有沒有, 我也是在搞笑._.
+23:38:23 <jaiyalas> CindyLinz: scm 說明天想看你表演 Josh 模仿秀
+23:47:23 <b4283> :P
+23:53:53 <CindyLinz> 今天的投影片 https://cindylinz.github.io/Talk-TakeItEasy-DynamicTypedAndUntypedHaskell-UsingGHC/
+23:53:57 <CindyLinz> miaoski: 雖然你已經知道了 XD
+23:54:01 <CindyLinz> jaiyalas: .............||
+23:54:02 <miaoski> CindyLinz: ++
+23:54:27 <miaoski> ㄟ 我發現 lisp.tw 只有幾個人，然後沒有 clojure.tw 或 scala.tw ...
+23:54:50 <miaoski> 只好請大家收留了 (鞠躬)
+23:56:26 <CindyLinz> miaoski: 來玩 Haskell 腦養成遊戲?

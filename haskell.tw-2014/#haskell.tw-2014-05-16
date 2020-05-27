@@ -1,0 +1,385 @@
+00:54:15 <monochrom> 其實讀完王垠的退婚書, 感觸良多.
+01:39:10 <au> letoh: 對了，「マイクロシャフト社の研究所」翻譯修訂成『微暖研究院』了，感謝(一星期前的)指正
+01:45:08 <letoh> au: :-)
+02:17:32 <CindyLinz> @bf .
+02:17:32 <lambdabot>  Done.
+02:17:37 <CindyLinz> @bf +.
+02:17:38 <lambdabot>  Done.
+02:18:21 <letoh> 剛剛突然想試一下 @gf 會怎樣XD
+02:25:29 <CindyLinz> hmmmm...... XD
+02:33:29 <CindyLinz> @bf ++++++++++[>+++++++<-]>++++++.<+++++[>+++++++<-]>.+++++++.<++++[>----<-]>-.<+++++++[>----------<-]>+.<+++++++++[>++++++++++<-]>-.<+++[>---<-]>-.++++++.<+++++++++[>---------<-]>----.<++++[>+++++++<-]>.<+++[>---<-]>.
+02:33:29 <lambdabot>   Love you <3
+02:33:49 <CindyLinz> @@ 好空虛
+02:33:50 <lambdabot>  好空虛
+02:34:51 <darkx> @bf
+02:34:52 <lambdabot>  Done.
+02:35:06 <darkx> @@ CindyLinz 姊姊 <3
+02:35:07 <lambdabot>  CindyLinz 姊姊 <3
+02:35:33 <CindyLinz> 來試試這個 bf 有沒有 unicode...
+02:36:02 <monochrom> 嘗試用 utf-8 吧!
+02:36:15 <CindyLinz> 對喔.. utf8
+02:37:06 <monochrom> 比如說, 萌: 0xE8, 0x90, 0x8C
+02:43:21 <CindyLinz> @bf >++++[>++++[>++++[<<<++++>>>-]<-]<-]+++++[<----->-]<-.>+++++++[<------>-]<.>++++++[<---------->-]<++.
+02:43:22 <lambdabot>  Done.
+02:46:19 <letoh> 結果不會出來?
+02:46:25 <CindyLinz> 被認為沒有字 @@"
+02:46:37 <letoh> 看起來是能跑出結果
+02:46:44 <letoh> 我是說程式看起來沒錯
+02:46:46 <CindyLinz> 你有試出來喔?
+02:46:51 <letoh> 漂
+02:47:09 <CindyLinz> 實在太難寫了, 值得寫一個 compiler......ww
+02:47:11 <letoh> 不是用 lambdabot 跑的@_@
+02:47:18 <letoh> 你自己湊的?
+02:47:23 <CindyLinz> 對啊 手打 @@"
+02:47:30 <letoh> 太累了XD
+02:47:36 <CindyLinz> 真的 QQ
+02:48:33 <monochrom> 辛苦了!
+02:49:50 <whitglint> 手打 bf :O
+02:50:21 <letoh> 我也有手寫過小程式  比寫 forth 還耗心力XD
+02:51:06 <letoh> CindyLinz: 你好像對這種怪東西都有興趣，有聽過 hackvm 嗎?
+02:51:16 <whitglint> 是打人類的 bf 還是程式的 bf
+02:51:38 <letoh> 什麼意思啊? 就是測試用的程式資料
+02:52:00 <letoh> 練習寫了 interpreter 卻沒有資料可以測試，只好自己寫一些來測XD
+02:52:14 <monochrom> 手打 bf 拉麵
+02:52:27 <letoh> 肚子餓了...
+02:52:45 <whitglint> 比拉夫麵
+02:52:54 <monochrom> 稱得上拉麵, 因為長長條的
+02:53:34 <whitglint> 我覺得像魚骨
+02:53:44 <letoh> 魚骨++
+02:54:08 <letoh> whitglint: http://i.imgur.com/IDqmU.png
+02:54:19 <monochrom> 那麼, 魚骨米線吧!
+02:55:06 <whitglint> letoh: 哇這什麼語言？
+02:56:14 <letoh> 半夜(CST)在線上一直出現食物名字(通常是圖片)，在日本被稱為「宵夜恐怖攻擊」
+02:56:37 <letoh> whitglint: http://www.reddit.com/r/haskell/comments/c262b/the_fish_operator/
+02:56:39 <CindyLinz> 剛去切水果.. (成功抵擋攻擊, 並且反擊 :D)
+02:56:44 <letoh> XD
+02:59:11 <monochrom> 那麼在線上出現廚餘(例如魚骨), 又是甚麼攻擊呢? :)
+02:59:29 <whitglint> 這討論串歪了吧 XD
+03:00:05 <CindyLinz> 使用果皮回擊 XD
+03:00:58 <whitglint> 垃圾多放幾天最美味了
+03:01:01 <monochrom> 哈哈
+03:01:21 <letoh> 越來越有味道? XD
+03:01:39 <CindyLinz> ww
+03:02:41 <CindyLinz> Hackage 上 ACME 分類的 package 數量真是太少了啊..ww
+03:04:21 <CindyLinz> 這是什麼!? 太恐怖了.... # http://hackage.haskell.org/package/hs2bf
+03:04:32 <monochrom> 是啊, 我上次四月一日前後, 病了, 沒精神實作我構思了整年的"消彌括號大法", 原本打算放上 acme 的
+03:05:09 <CindyLinz> 構思整年的 acme!!
+03:05:44 <letoh> 這東西好誇張...
+03:06:12 <monochrom> 其實因為是懶人, 所以很簡單的事也空想而不做 XD
+03:06:30 <CindyLinz> 這東西怎麼沒有收到 ACME... XD
+03:08:34 <letoh> 前幾天的 commit: "Rewrite bfi in C++ for future optimization."
+03:08:59 <CindyLinz> for future optimization.. XD
+03:09:12 <CindyLinz> bfi 還是做成實體的比較有趣?
+03:09:28 <letoh> 不過他重寫的那段程式看起來只是個 interpreter
+03:09:56 <letoh> 我以為他主要是 compile to bf 的部份
+03:12:02 <CindyLinz> test 也很重要 (?
+03:12:06 <monochrom> 這樣嗎? 這個將來優化的如意算盤未必打得響. 你以為 C++程式真的那麼容易優化嗎? (但凡看不明的都無可能優化)
+03:13:18 <letoh> CindyLinz: 看起來也有寫一個 haskell 版的 interpreter 耶
+03:16:40 <CindyLinz> letoh: 就那個 Brainfuck.hs 嘛 XD
+03:16:45 <letoh> 對啊
+03:17:02 <letoh> 怎麼不用那個測@_@
+03:27:49 <whitglint> 靜態定型與單元測試之爭 | iThome http://www.ithome.com.tw/voice/87403
+03:28:22 <letoh> 未點先猜良葛格
+03:30:38 <monochrom> 咦, java 8 有 Optional 型別嗎? 好啊, 引頸以待
+03:31:15 <monochrom> 簡直望穿秋水了
+03:31:25 <letoh> java 9 大概要改名為 jaskell 了 (誤
+03:31:48 <monochrom> 不, 簡直失望而改投 Haskell 了!
+03:31:58 <letoh> lol
+03:38:03 <CindyLinz> 這是不是翻譯壞了啊 @@ # 甚至開發者也有辦法編譯器忽略型態錯誤
+03:38:39 <letoh> 那句看不懂就先跳過了
+03:39:52 <monochrom> 我曾經思考過, 得到的覺悟是: type safety 的相反, 可稱為 type cavalierism. cavalier, cavalierism 是指有人認為自己很優越, 很英雄, 所以不需受紀律約束
+03:42:51 <monochrom> 開發者也有辦法 讓 編譯器忽略型態錯誤. 加個 讓 字, 應該就行吧?
+03:45:38 <monochrom> 而 cavalier 是貶義, 指那種自以為英雄的人常闖禍, 連累他人. 我認為作為 type safety 的相反詞, 一針見血.
+03:46:28 <CindyLinz> 超愛 unsafe.. (被打)
+03:48:19 <monochrom> 我最先想到及寫出這個理念是在 http://lambda-the-ultimate.org/node/4816#comment-77080
+03:51:23 <monochrom> 不久之後就再覺悟出: 讀者與作者的階級鬥爭 這個說法, 因為作者想要多些彈性, cavalier power, 而讀者想要多些預測能力
+03:59:01 <monochrom> 假設我寫了個 f :: a -> [a]. 或者你負責測試它, 或者你要猜它做甚麼. 或者你可看我的源碼, 或者不能看. (就算看了, 或者未必一眼看明白, 等於不能看)
+03:59:40 <monochrom> 你的第一個測試, 是 f (). 你得到結果 [(), (), ()].
+04:00:38 <monochrom> 驚世重點! 至此已測試完畢, 你可以斷言, f 'x' = ['x', 'x', 'x'], f 4 = [4, 4, 4] 了!
+04:01:44 <monochrom> 這就是 parametric polymorphism 給我的更大枷鎖, 亦是給你的更大預測能力
+04:04:23 <monochrom> 原因是, 大約來說, parametric polynomial 不准我說: "請問我收到的參數是甚麼 runtime 型別呢? 如果是 Int, 我故意作弄你..."
+04:05:29 <monochrom> 至於詳細證明, 不淺的, 不過可在 Wadler 的 Theorems for Free! 見到一個不太難的版本.
+04:05:42 <monochrom> s/polynomial/polymorphism/
+04:10:09 <monochrom> 在 Java, 如果用 <T> List<T> f(T x), 也是一樣. 因為宣告了 <T>, 就不能對 x 問 instanceof 了!
+09:50:08 <mno2> 同意讀者與作者之爭這種說法。我覺得除此之外，型別也是讓讀者與作者有個最基本的邏輯框架可以在上面討論東西。從一些社會學的角度來看軟體工程也是蠻有趣的。畢竟極端來講，程式及證明。那程式就是體現多元化社會的不同思維。
+09:51:56 <mno2> type safety 加上 pure (no side effect) 的話真的可以大大降低需要寫 unit test 的 space，這也是我喜歡 Haskell 的一個點。
+11:45:07 <CindyLinz> 雖然常常沒有把該證明的東西寫到 type 裡.. so.... XD
+11:45:18 <CindyLinz> 不過就算有 unit test, 也常常有該測沒測的東西 XD
+11:51:29 <darkx> CindyLinz: 用了 Haskell,  證明就是 compiler 的事惹 (誤
+11:51:58 <CindyLinz> darkx: 不不你這慣 programmer (?
+11:52:10 <CindyLinz> darkx: 你要負責說出要證什麼啊 XD
+11:52:31 <darkx> 慣 programmer wwwwww
+12:33:43 <c9sloud> 要把 output 寫成像 `tree` 的 output 還蠻累的
+12:35:29 <c9sloud> CindyLinz:  值得寫一個 compiler XD
+12:35:53 <c9sloud> CindyLinz: 太強了... bf 是要怎麼手打...  XD
+12:38:36 <c9sloud> Russ Cox 有教 Operating System Engineering 耶.. 好想學
+12:52:40 <au> CindyLinz: 用了 Djest，只要寫 unit test 和 type 就可以不用寫程式了 (大誤
+12:52:44 <au> # https://github.com/luqui/Djest
+12:55:48 <c9sloud> au: DHH 表示哭哭 XD
+12:56:34 <au> T=D
+13:16:16 <mno2> 無限期支持 CindyLinz 寫 boyfriend compiler (大誤)
+13:17:54 <mno2> Djest 還蠻有趣的
+13:18:23 <CindyLinz> 把若干 boyfriend compile 成一串....
+13:18:28 <CindyLinz> 很色的感覺... XD
+13:18:52 <CindyLinz> 唔 Djest
+13:22:23 <CindyLinz> c9sloud: 自己的 bf 自己打.. (?
+13:23:45 <c9sloud> XDDD
+13:52:30 <c9sloud> 笨問題問一下.. C 有沒有什麼 library 可以 dump 一整個 int array 或是 char * array 之類的工具可以用
+13:52:45 <c9sloud> char**
+13:58:48 <CindyLinz> 這種 library 一定是巨集..
+14:34:05 <c9sloud> CindyLinz: 話說我利用通勤時間把 prefix trie 的 router C library 寫好了
+14:35:00 <c9sloud> 你有興趣用 XS porting 到 perl 嗎 XD
+14:39:24 <CindyLinz> 好啊好啊~~
+14:39:48 <c9sloud> 那你等我一下，我把 API 改好看一點，晚點 push XD
+14:39:50 <CindyLinz> 不過現在正在公司跟一個 realtime 的怪 bug 鬥智....ww
+14:40:01 <c9sloud> 哦哦哦哦?
+14:40:03 <c9sloud> 加油
+14:40:44 <CindyLinz> 跟不是泡澡狀態的 in2 一起抓, 勇氣百倍 :D
+14:41:08 <c9sloud> 是剛泡完澡這樣嗎 XD
+14:41:48 <CindyLinz> 沒有啦 XD
+14:52:02 <mno2> au 有玩過 nixOS 嗎？
+15:09:00 <au> mno2: Nix 的時候有，NixOS 沒有
+15:10:03 <au> (不過現在 deterministic build 都用 docker 做了，所以一直沒有回去 study nix)
+15:10:32 <whitglint> CindyLinz: in2 也在 gamesofa 工作嗎？
+15:10:38 <CindyLinz> c9sloud: 欸欸, 你有遇過這種問題嗎? @@ https://getsatisfaction.com/low/topics/cannot_call_overloaded_function_for_non_object_when_apc_is_enabled
+15:10:47 <CindyLinz> whitglint: 對啊~~
+15:11:15 <c9sloud> CindyLinz: 你的 PHP 是 5.3 ?
+15:11:18 <c9sloud> 還是 5.4?
+15:11:40 <CindyLinz> c9sloud: 都有~
+15:11:59 <CindyLinz> 也都有發生 :|
+15:12:00 <c9sloud> CindyLinz: 有把 object 存放在 apc 裡面?
+15:12:02 <CindyLinz> 但不確定是不是 @@"
+15:12:13 <c9sloud> 出錯的那行可以看一下嗎?
+15:12:27 <CindyLinz> 沒有手動存的, 但可能 include 的時候會有函數定義被自動存進去?
+15:12:45 <c9sloud> 應該不會 apc 分兩個部分
+15:13:16 <c9sloud> 一個是 zend_execute handler 去把 require 進來的 compiled opcodes 存到 cache 裡面
+15:13:37 <c9sloud> 另一個是透過 apc_fetch / apc_store 做 key-value cache
+15:13:55 <c9sloud> apc.stat=1 有試過嗎?
+15:26:18 <mno2> au:  哇，好早就玩過 nix 了。我只是覺得它的設計很漂亮想聽聽你的想法而已 xD   後來出現的 nixops 也是蠻好用的。
+15:32:59 <c9sloud> 稍微看了一下 nix 是類似 apt-get ?
+15:38:07 <mno2> c9sloud:  他是 pure (no-side effect) 的 package manager
+15:39:36 <mno2> 恩… 該怎麼說呢。就是 configuration management 其實也是運算。跟我們平常寫 code 沒有兩樣，只是根據因為現有 OS 上層的設計有許多 side effect，還有系統間 API 的不同，導致有些問題要解決
+15:39:50 <c9sloud> 嗯嗯
+15:40:10 <mno2> 那 Chef 其實就是 imperative 的方式去解決，等於抽象化裝置，然後在上面寫 script，這是比 bash 要進步一點的地方
+15:40:50 <mno2> 但既然一般寫 code 有 imperative 跟 functional 一些描述問題的缺別，其實 configuration management 也有
+15:41:28 <mno2> 那想用 declarative 的方式去解決就是 puppet，它不只提供抽象，也讓你用描述的方式，然後他會想辦法去執行，就好像 SQL 一樣
+15:41:51 <mno2> 但其實現有底層的套件有 side effect 導致這件事很難做
+15:42:25 <mno2> 那 nix 就是一個重新設計的套件系統，他把每個套件都想辦法弄成近乎于 no side effect
+15:42:37 <mno2> 所有 symbol 加 one way hash
+15:42:47 <mno2> 所有 directory 也會加上 one way hash
+15:42:54 <mno2> 通通存在所謂 nix store 的地方
+15:43:10 <mno2> 就是一般程式中的 symbol table
+15:43:40 <mno2> 然後用 symbolic link 來建成你平常系統中看到的階層結構
+15:43:49 <mno2> 其實背後就是一個大的 variable pool
+15:44:26 <mno2> 並且自創一個程式語言描述要如何去 build 你的系統（叫 nix expression)
+15:44:47 <mno2> 所以你就可以用 nix expression 來操作這些 immutable variable (package)
+15:45:00 <mno2> 變成 functional 的方式建立你的系統
+15:45:14 <mno2> 只要描述你的系統，就會是一個 digraph
+15:45:20 <mno2> 可以做出很神奇的功能
+15:45:54 <b4283> garbage collection
+15:45:57 <b4283> rollback
+15:45:58 <mno2> 就是系統可以同時存在不同的 libc 也沒問題，上面套件也可以同時存在用不同 libc 的 build
+15:46:04 <mno2> 然後可以無限 rollback
+15:46:17 <mno2> 因為 variable pool 保存所有的 immutable variable
+15:46:31 <b4283> mno2: Chef 是個軟體？
+15:46:44 <mno2> 當然你確定不用的時候也可以 gc 掉
+15:47:22 <mno2> 而且系統中每個 user 相當于只是這些 variable 的其中一個 view
+15:47:31 <letoh> 我只聽過程式語言的 Chef XD
+15:47:40 <mno2> 變成不同使用者還可以用不同的版本
+15:47:59 <mno2> 可以裝他自己想要的裝的東西，自己另闢一條道路 xD
+15:48:28 <mno2> b4283: http://www.getchef.com/chef/
+15:48:31 <letoh> 聽起來有點像 virtualenv
+15:51:01 <whitglint> 原來 mldonkey 本身沒有 gui
+15:51:02 <mno2> letoh: 我不是很熟 virtualenv 的全部功能，不過根據我的印象應該是設計漂亮多了。它不只是類似 chroot
+15:51:15 <whitglint> 啊～傳錯頻道 XD
+15:52:41 <letoh> 嗯嗯，virtualenv 功能可能比較有限，只是管理 python 的環境組態而已
+15:54:03 <mno2> nix 只是 package manager，然後基於 nix 用 no side effect 創建整個套件環境變成一個 linux distrubtion 的，就是 nixOS
+15:54:34 <mno2> 有了 nix 跟 nixOS，就有 nixOps 可以 deploy 整個系統到 AWS 或 Virtualbox
+15:58:30 <b4283> 原來上面還有一步
+16:05:58 <c9sloud> mno2: 聽起來很不賴
+16:06:42 <c9sloud> 好像有比 chef 威
+16:10:17 <mno2> 雖然設計很漂亮不過應該跟 Haskell 一樣很難流行吧 xD
+16:11:49 <caa51> mno2: 太神奇了，轉給需要複數 libc 的朋友看...！
+16:12:19 <c9sloud> mno2: 感謝解釋 ^^ 學習了
+16:12:32 <mno2> 由於現存系統實在太多樣化，而且可能太多 legacy bash script，未來應該還是 docker 這種會勝出吧。太難要求大家要根據 nix 的方式 build package
+16:14:09 <mno2> coreOS 不知道能不能長到像 smartOS 那樣很漂亮。內建 Zone, KVM 還有 DTrace
+16:14:37 <mno2> docker 應該就對應 zone
+16:14:42 <mno2> 但其他就不知道了
+16:16:29 <c9sloud> CindyLinz: 雖然知道不公平 XDDD  但剛剛拿這個 pull request (https://github.com/stevegraham/rails/pull/1) 的 sample 來測試 r3 (prefix trie router)
+16:17:00 <c9sloud> 拿到的結果是: 1400227736.99 matched iteration per second
+16:17:23 <b4283> 第一次聽說 SmartOS & CoreOS
+16:17:38 <c9sloud> Ruby router 版本: 10636.5 i/s
+16:17:49 <c9sloud> 有點不太相信這個結果 XD
+16:18:12 <CindyLinz> 嘖嘖..
+16:20:26 <c9sloud> 我還是再確認一下好了
+16:20:41 <c9sloud> 但我覺得如果包成 xs 也的話 overhead 不會太大
+16:20:51 <c9sloud> 因為所有的 operation 都是在 C space 裡面處理掉
+16:21:24 <CindyLinz> 進出 xs 的時候海關會花一些時間
+16:22:05 <CindyLinz> 不過因為 perl 對外部完全信任, 所以花得比較少... (跟 ghc 比)
+16:22:32 <CindyLinz> perl 把 runtime 直接在 spec 寫我會怎樣怎樣怎樣做, 你就看著辦... XD
+16:22:51 <CindyLinz> ghc 就會有一堆排程和 GC 什麼的要整理好才能出去
+16:27:06 <CindyLinz> 怪招啊!
+16:27:15 <CindyLinz> > foldr a [b,c,d]
+16:27:17 <lambdabot>  Couldn't match expected type ‘a
+16:27:17 <lambdabot>                                -> [Debug.SimpleReflect.Expr.Expr]
+16:27:17 <lambdabot>                                -> [Debug.SimpleReflect.Expr.Expr]’
+16:27:17 <lambdabot>              with actual type ‘Debug.SimpleReflect.Expr.Expr’
+16:27:19 <CindyLinz> ...
+16:27:28 <CindyLinz> > foldr (+) a [b,c,d]
+16:27:29 <lambdabot>  b + (c + (d + a))
+16:27:36 <CindyLinz> 可以直接做 symbol 欸!
+16:29:22 <mno2> 太神奇了
+16:48:18 <c9sloud> CindyLinz: 咦 那是 thunk 嗎?
+16:48:33 <c9sloud> 所ˇ他可以 thunk AST => STring
+16:48:36 <c9sloud> ?
+16:48:50 <CindyLinz> c9sloud: 他是 不 正 常 的東西... XD
+16:49:23 <c9sloud> CindyLinz: 問一下.. strncmp 就算比到不同，也會比到完為止嗎?
+16:49:29 <c9sloud> 比到 n
+16:55:23 <CindyLinz> 比 n 個呀
+16:55:28 <CindyLinz> 前 n 個一樣就是一樣了
+16:57:02 <caasi_> c 的嗎？看了看 apple 跟 glibc 的實作都是用 return
+16:57:35 <c9sloud> 如果 n 個之內找到不一樣是直接 return 還是他會繼續比到 n 個?
+16:58:03 <cibs> glibc 的實作是會直接 return
+16:58:10 <cibs> https://github.com/lattera/glibc/blob/master/string/strncmp.c
+16:58:15 <CindyLinz> c9sloud: 有提前發現不一樣就提前 return 呀
+16:58:53 <CindyLinz> 應該正常人都會那樣寫我覺得.. ^^
+16:59:09 <CindyLinz> cibs: NSA 表示.. 有好處
+16:59:16 <c9sloud> hahhaha
+16:59:37 <cibs> 這..XD
+16:59:50 <CindyLinz> NSA 會花錢請你安排後門不是嗎? XD
+17:01:49 <cibs> 那我如果玩神來也大老二會不會有被監控的風險 XD
+17:04:12 <CindyLinz> 目前還沒有賺這種錢....
+17:04:38 <CindyLinz> 可能安全層級還不夠, NSA 說還不必花錢收買, 直接攻破埋蟲就好... QQ
+17:06:12 <b4283> 把安全層級提高後，某天晚上就會有黑衣西裝人敲你家的門……
+17:07:03 <CindyLinz> 好恐怖..ww
+17:13:43 <CindyLinz> NSA 的好處就是我們的壞處.. （握拳)
+17:14:50 <b4283> CindyLinz 升級了，正義感 +1、責任感 +!
+17:15:04 <CindyLinz> wwww
+17:15:15 <b4283> (光煇 Radius +3)
+18:32:14 <CindyLinz> > fix (bug :)
+18:32:16 <lambdabot>  Not in scope: ‘bug’
+18:32:22 <CindyLinz> > fix (b :)
+18:32:23 <lambdabot>  [b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b...
+18:32:26 <CindyLinz> > fix (bu :)
+18:32:27 <lambdabot>  Not in scope: ‘bu’
+18:32:28 <lambdabot>  Perhaps you meant one of these:
+18:32:28 <lambdabot>    ‘b’ (imported from Debug.SimpleReflect),
+18:32:28 <lambdabot>    ‘u’ (imported from Debug.SimpleReflect),
+18:32:28 <lambdabot>    ‘au’ (imported from Control.Lens)
+18:32:32 <CindyLinz> 只能一個字喔?
+18:32:51 <CindyLinz> > cycle [b,u,g]
+18:32:52 <lambdabot>  [b,u,g,b,u,g,b,u,g,b,u,g,b,u,g,b,u,g,b,u,g,b,u,g,b,u,g,b,u,g,b,u,g,b,u,g,b,u...
+18:34:53 <au> > cycle [來]
+18:34:54 <lambdabot>  Not in scope: ‘來’
+18:35:30 <CindyLinz> 太小氣了~
+19:02:53 <petercommand> > cycle [來,來,來]
+19:02:54 <lambdabot>  Not in scope: ‘來’Not in scope: ‘來’Not in scope: ‘來’
+19:04:21 <c9sloud> lambdabot 可以多掛一點 module 嗎 :-p
+19:04:37 <c9sloud> 剛剛的benchmark 果然是有錯
+19:04:47 <CindyLinz> 這隻 lambdabot 不是我們 host 的啊 ._.
+19:04:51 <c9sloud> 正確應該是 5245006.49 i/s
+19:05:13 <CindyLinz> c9sloud: 你給除完的倍數就好了啦 XD
+19:05:52 <c9sloud> rails PR#1 的話是 10462.0 i/s
+19:06:14 <c9sloud> 500 倍 @@
+19:06:30 <c9sloud> 用同一組 route paths 測的
+19:06:48 <c9sloud> 我來 push
+19:07:00 <CindyLinz> 這個如果整合到 perl 裡, 介面應該長什麼樣啊?
+19:07:11 <CindyLinz> 掛 N 個 sub 這樣?
+19:09:52 <c9sloud> 兩個 sub
+19:09:55 <c9sloud> compile & match
+19:10:04 <c9sloud> 我來 push 一下
+19:23:16 <c9sloud> http://github.com/c9s/r3
+19:23:55 <cibs> > cycle ['來']
+19:23:56 <lambdabot>  "\20358\20358\20358\20358\20358\20358\20358\20358\20358\20358\20358\20358\20...
+19:26:41 <c9sloud> CindyLinz: 所以 compile sub 應該是拿 AV 之類的去 insert
+19:27:09 <c9sloud> route_ptr can be anything
+20:06:45 <CindyLinz> c9sloud: r3_tree_create cap 沒拿進去用 寫死 10 :p
+20:13:02 <c9sloud> 嗯嗯?
+20:13:22 <c9sloud> 我覺得 r3_tree_create cap 10 for root 差不多 XD
+20:13:45 <c9sloud> 不過 compile-time 倒是沒差，只要 runtime 效果好就好了
+20:14:06 <c9sloud> 我現在在研究怎麼用 cmake 裝 lib
+20:20:06 <c9sloud> 咦 對耶
+20:20:12 <c9sloud> bug XD
+20:33:54 <c9sloud> 結果發現蠻簡單的
+20:34:03 <c9sloud> CindyLinz: 現在可以 make install 了
+20:55:32 <c9sloud> Lars Bark 說要 trace performance at early time
+20:55:34 <c9sloud> https://www.dropbox.com/s/0z3gxl0lzap4cmn/Screenshot%202014-05-16%2020.56.04.png
+20:55:51 <c9sloud> 把一些東西搬到 compile-time 去做
+21:00:06 <CindyLinz> 未熟調教..
+21:00:35 <godfat> 原來用 haskell 是未熟調教 XDD
+21:00:50 <CindyLinz> 在 cpan 要叫什麼啊? R3 有人了
+21:01:14 <CindyLinz> why haskell?
+21:01:22 <cybeliak> 未熟調教總覺得耳熟耳熟的.... @___@
+21:01:29 <c9sloud> 咦 是喔
+21:01:48 <c9sloud> Router::R3 ?
+21:01:59 <godfat> 因為很多東西都是靜態（預先知道）的 XD
+21:02:20 <c9sloud> SAP 是那家 ERP 公司嗎 XD
+21:02:28 <CindyLinz> 好像機器設備的感覺 XD Router
+21:03:09 <CindyLinz> 應該吧
+21:03:15 <c9sloud> 還是 Path::R3 ?
+21:03:44 <c9sloud> sartak 有 Path::Dispatcher    http://search.cpan.org/~sartak/Path-Dispatcher-1.05/lib/Path/Dispatcher.pm
+21:04:13 <CindyLinz> 其實我沒有特別執念，放炮而已 XD
+21:45:42 <CindyLinz> c9sloud: 好像叫 Router:: 的也有一大堆是 web url dispatcher
+21:45:50 <CindyLinz> c9sloud: 那就 Router::R3 了
+21:48:23 <yllan__> c9sloud: 如果不是我對電腦速度的認識太老舊，那個每秒 15 億的數字一定有問題吧……
+21:52:35 <c9sloud> yllan__: yeahhhh 沒除到 N (逃) XDDDDD
+21:53:23 <yllan__> 噢，每秒五百萬，也算頗強了。你測試的 route 個數有多少呢？如果 route 數量大起來的話不知道會不會撞上 complexity 之壁 :P
+22:00:08 <c9sloud> 是直接用 rails 的 test sample
+22:00:21 <c9sloud> 我找一下
+22:00:28 <c9sloud> https://github.com/c9s/r3/blob/master/gen_routes.rb
+22:00:30 <c9sloud> 這隻
+22:02:11 <CindyLinz> c9sloud: cmake 找不到我的 libjudy-dev @_@"
+22:02:17 <CindyLinz> 不會用 cmake.. ._.
+22:02:32 <c9sloud> 我先把 judy 拿掉好了
+22:02:59 <CindyLinz> 沒用到喔?
+22:03:11 <c9sloud> 還沒
+22:03:16 <c9sloud> 那個要拿來做 cache 的
+22:03:25 <CindyLinz> 喔喔
+22:04:00 <c9sloud> done!
+22:04:08 <c9sloud> cmake CMakeList.txt && make
+22:05:19 <c9sloud> yllan__:  http://c9s.github.io/r3/bench.html  # benchmark updated
+22:12:11 <yllan__> 感覺 journey 有點糗……
+22:21:37 <CindyLinz> c9sloud: github 的 fork 可以怎樣 rebase 嗎? ^^| 還是直接整個砍掉重新 fork?
+22:24:30 <godfat> 我覺得 journey 本來就做錯方向了...
+22:28:13 <c9sloud> 可以~
+22:28:14 <CindyLinz> c9sloud: 喔, 直接 fetch 你的 remote 進來 merge 就行了, github 會自己看
+22:28:17 <c9sloud> yeah
+22:28:21 <c9sloud> CindyLinz:  yeah
+22:32:51 <CindyLinz> c9sloud: 是不是少了 c99 的參數啊? 有很多這樣的 error: ‘for’ loop initial declarations are only allowed in C99 mode
+22:33:50 <c9sloud> 咦 是喔? XD
+22:33:54 <c9sloud> 我這邊沒 error
+22:33:56 <c9sloud> 我看看
+22:34:16 <c9sloud> yeah 改 src/CMakeList.txt
+22:34:23 <c9sloud> 裡面可以加
+22:34:36 <c9sloud> 加上之類的 set (CMAKE_CFLAGS "-Wall -pipe -g3 -funroll-loops")
+22:36:27 <CindyLinz> 加上 -std=c99 好像沒有效果 @@"
+22:36:59 <CindyLinz> hmm 看怎樣直接把 source 拆出來用好了 XD
+22:37:14 <c9sloud> 我 try try
+22:37:54 <CindyLinz> 假設用 cpan 的人沒有 cmake 也沒有裝 check 好了 XD
+22:38:37 <c9sloud> 原來是我沒寫正確 XD
+22:38:43 <c9sloud> set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O0 -ggdb")
+22:39:29 <c9sloud> 有了
+22:39:33 <c9sloud> 我 commit 一下
+22:40:02 <c9sloud> CindyLinz: pushed
+22:46:31 <CindyLinz> -O0 !
+22:46:37 <c9sloud> CindyLinz: 其實 check 應該是 dev requirement
+23:01:35 <CindyLinz> c lib 的相容性好麻煩的感覺 @_@"
+23:01:46 <CindyLinz> c9sloud: 我電腦上沒有 strndup
+23:01:52 <CindyLinz> 不過可以 man 得到.. XD
+23:02:05 <CindyLinz> 我要來手動補 strndup 了 ^^|
+23:02:34 <c9sloud> Diffenert include?
+23:03:05 <CindyLinz> 是不存在, man strndup 有寫一條怎麼 feature test, 我把 feature test 放進去, 果然測說沒有.. XD
+23:03:47 <c9sloud> XD
+23:04:37 <c9sloud> Now i think autotool might be better XD
+23:04:40 <CindyLinz> 不過我用的這個是 glibc 2.10 以後才能用的 test 法 :/
+23:04:54 <CindyLinz> 也許根本不要用 strndup, 直接一律用自己的最方便ww
+23:05:20 <CindyLinz> c9sloud: 可是你那些 autotool 加完整弄得很方便以後, 我也不知道要怎麼包進 cpan 了.. orz
+23:53:14 <c9sloud> 我以為你用 shared linking?
+23:53:22 <c9sloud> XDD
+23:54:10 <c9sloud> CindyLinz: autotool 好難 orzzzzz
+23:57:32 <CindyLinz> c9sloud: shared linking... 覺得要有易裝 binary 才行 @@"
+23:57:42 <CindyLinz> 像是塞到 apt 和 yum 上面...
+23:58:13 <c9sloud> 未來應該會有人包的 hehe
+23:58:24 <c9sloud> 戳戳 hychen
+23:58:29 <CindyLinz> wwww
+23:59:48 <hychen> Autotool 我不熟耶

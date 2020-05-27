@@ -1,0 +1,2 @@
+03:07:32 <CindyLinz> @type any
+03:07:34 <lambdabot> Foldable t => (a -> Bool) -> t a -> Bool

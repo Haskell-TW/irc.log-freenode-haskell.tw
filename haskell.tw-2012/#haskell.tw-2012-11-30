@@ -1,0 +1,37 @@
+01:10:17 <favonia> lambdabot: hello
+14:13:08 <CindyLinz> 原來有這個東西.. 用來 check cabal package 的 dependency XD # http://packdeps.haskellers.com/
+14:17:01 <CindyLinz> 可是看不太懂 orz
+14:55:16 <MnO2> > putStrLn "Hello"
+14:55:17 <lambdabot>   No instance for (GHC.Show.Show (GHC.Types.IO ()))
+14:55:18 <lambdabot>    arising from a use of ...
+14:55:34 <MnO2> > "Hello"
+14:55:36 <lambdabot>   "Hello"
+15:13:18 <MnO2> https://www.facebook.com/notes/facebook-engineering/speeding-up-php-based-development-with-hiphop-vm/10151170460698920
+15:13:33 <MnO2> hiphop VM加速最新近況
+15:13:48 <MnO2> http://www.reddit.com/r/haskell/comments/13z9i4/iostream_simple_and_easy_to_use_primitives_for_io/
+15:14:07 <MnO2> snap framework的作者搞了另外一套io streamming的library
+15:14:23 <MnO2> 他不太滿意conduit, pipe
+15:14:42 <MnO2> 據說也是因為這樣所以snap到現在都不支援WAI
+15:16:09 <MnO2> 不過我還沒想清楚 CPS 跟 asynchronous exception 的關係
+16:04:05 <c9s> favonia: 哦哦 XD
+16:06:27 <c9s> nodejs 的 sample code 已經算是調過了，參考 c10k 相關 post 還加上了 setNoDelay
+16:06:46 <c9s> 不過 setNoDelay 似乎只對 websocket 比較有效果 orz
+16:06:58 <c9s> 除此之外也沒什麼好調的了
+16:08:23 <c9s> fb HipHop 越來越強了.. HHVM 已經超越 HPHPc 了阿!
+17:20:33 <MnO2> 這說明只要肯砸錢，都是可以加速到很快的 xD
+17:21:37 <CindyLinz> 這結論聽起來怪怪的 XD
+17:24:36 <CindyLinz> 我覺得 Conduit / Pipe / Iteratee 和 Functional Reactive Programming 的 Netwire code 看起來感覺有那麼一點點相似啊 o.o
+17:24:51 <MnO2> CindyLinz: 我是指 HipHop
+17:26:44 <CindyLinz> MnO2: 我知道呀 :p
+17:28:56 <CindyLinz> Conduit / Pipe / Iteratee 這一類的東西不知道有沒有名字.. 嗯, 我覺得它們有像 FRP 的子集, 可以直接嵌進去的感覺
+17:31:46 <CindyLinz> MnO2: Snap 作者不喜歡 Conduit / Type 的理由... 就是你貼的這篇嗎? # 15:13 < MnO2> http://www.reddit.com/r/haskell/comments/13z9i4/iostream_simple_and_easy_to_use_primitives_for_io/
+17:32:56 <MnO2> CindyLinz:  大致上吧，算是說得比較簡潔，他其實都會在#snapframework上講
+17:33:15 <CindyLinz> (愧)
+17:33:22 <MnO2> CindyLinz: 至於 stream IO 跟 FRP 的關係沒有仔細想過耶
+17:34:32 <CindyLinz> MnO2: 我是看 Netwire 的 code 看起來有像 Iteratee..  不過 Netwire 看起來好像沒有 source / sink 這種東西.. 是外部用 stepWire 之類的函數去推動. 但基本結構是像的
+18:49:00 <MnO2> CindyLinz: hmm
+18:49:48 <MnO2> CindyLinz: 這其實也連帶讓我想看看netwire對於async exception的處理
+18:51:52 <MnO2> http://hackage.haskell.org/package/hails-0.9.2.0
+18:51:57 <MnO2> Hails...
+18:53:55 <MnO2> 又到了捐款給Wikimedia的季節了
+22:23:33 <CindyLinz> MnO2: 應該是沒有處理 XD

@@ -1,0 +1,493 @@
+00:00:50 <monochrom> yllan__: 試用 binary search
+00:01:29 <letoh> 這也很重要，但要做到公平的 scheduler 也許需要一些限制或條件? 實務上真的在建模時，可能不是所有情況都可以要求公平，也就是說其中一個停擺的狀況也要考慮
+00:01:40 <yllan__> monochrom: Got it. 就是要自己寫就對了
+00:01:41 <b4283> newton's method
+00:02:07 <monochrom> mno2: 我意思是怎樣把兩個機合併一同運行. 所以由兩個機分開作開始.
+00:02:27 <petercommand> 好多東西都叫newton's method呀...
+00:02:36 <whitglint> http://en.wikipedia.org/wiki/File:UML_state_machine_Fig4.png 子狀態
+00:02:45 <b4283> petercommand: 有哪些
+00:03:04 <CindyLinz> yllan__: http://hackage.haskell.org/package/arithmoi-0.4.0.3/docs/Math-NumberTheory-Powers-Squares.html
+00:03:49 <yllan__> CindyLinz++
+00:04:02 <petercommand> b4283: 不對，好像只有一個XD
+00:04:42 <mno2> monochrom: 恩，我理解你的意思
+00:04:46 <letoh> monochrom: thanks, 你這個例子提醒了我要考慮排程問題  我再想想看
+00:04:53 <mno2> 牛頓法應該收斂比較快?
+00:05:19 <monochrom> arithmoi 是好東西
+00:07:09 <yllan__> SICP 記得有用牛頓法做 sqrt 的 chapter
+00:07:50 <petercommand> 有個啥遊戲engine的就用牛頓法+magic number做sqrt
+00:08:25 <whitglint> letoh: 那個問題是你 po 的嗎？
+00:08:36 <letoh> 不是
+00:08:40 <CindyLinz> arithmoi 的 source 翻一翻好複雜 /_\
+00:08:53 <letoh> 剛剛在清未讀文章才看到的
+00:08:59 <whitglint> 喔，想說你怎那麼在意那個問題
+00:09:00 <CindyLinz> 而且有邪惡的 # 結尾的變數和 operator
+00:09:20 <whitglint> 未讀文章什麼的，根本清不完～
+00:09:54 <letoh> 我發現 haskell.tw 的文章比較少，所以優先清掉XD
+00:11:04 <monochrom> letoh: 通常無法在 finite state machine 框架內表達"公平排程". (顯然, 公平排程有無限個可能.) 所以會把"公平排程"的要求放在外邊.
+00:13:53 <letoh> 是  但可能還是需要對排程做一些控制  我遇到的狀況是不能允許一邊停擺太久的，所以排程這件事得考慮進去
+02:01:49 <caasih> godfat: https://gist.github.com/caasi/c36fe6a009011d94f67b
+02:03:07 <caasih> 其他的之後再做看看。ls 好多怪寫法，但這邊還沒看完大象書，用 haskell 會卡更久
+02:05:06 <caasih> 之前寫 powerset 卡住的原因是用了 push 而不是 concat
+02:05:22 <caasih> 好想挖洞躲起來。
+02:11:26 <c9sloud> 大象書是哪一本?
+02:13:25 <c9sloud> CindyLinz: pugs project 現在是一個古蹟的角色，但對 rakudo 來說是很重要的角色，因為有很多東西是從 pugs 參考來的
+02:13:30 <caasih> 這本？ http://learnyouahaskell.com/ 是跟著 poga 講大象書 XD
+02:15:20 <c9sloud> XD
+02:16:01 <c9sloud> CindyLinz, whitglint  但我還是覺得 pugs 最後沒有成為 perl6 主要實作釋出.. 很可惜...
+02:16:52 <c9sloud> 記得那時候 perl5 hackers 好像只有懂 haskell 的才加入了 pugs 專案
+02:17:39 <CindyLinz> 而且 au 是不是那時才剛接觸 haskell 啊?
+02:17:50 <CindyLinz> 然後就寫了 pugs.....ww
+02:18:02 <c9sloud> CindyLinz 她那時候是因為用 parsec 才寫 haskell
+02:18:09 <c9sloud> 好像是某 IB* 的 project
+02:18:15 <CindyLinz> 這樣就能寫了, 想來也是很過份啊啊~~
+02:18:20 <c9sloud> 要跑在 AIX server...
+02:18:36 <c9sloud> 聽說後來她就想要自己練習寫一個 compiler XD
+02:18:47 <c9sloud> 就買了一堆 types & language 的書
+02:19:30 <c9sloud> 我記得....據 interview 指出好像連 au 學透 haskell 也是花了好幾個月 (需考證
+02:19:32 <c9sloud> XD
+02:19:36 <caasih> 按她在 xdite 那邊的留言，應該還請教了弟弟？
+02:19:51 <c9sloud> 咦 哪裡?
+02:20:23 <caasih> 我找一下...
+02:20:40 <monochrom> "花幾個月"學透 haskell 是非常短時間啊!
+02:20:53 <c9sloud> 對阿 超強的
+02:21:08 <c9sloud> 我斷斷續續學了好幾年了 XDDDDDDDD
+02:21:56 <c9sloud> 聽說為了學透 type 還學了 category theory
+02:22:00 <c9sloud> 這我就不懂了
+02:22:20 <c9sloud> http://www.cis.upenn.edu/~bcpierce/tapl/ # 這本列在 pugs 的 README 裡面，也是經典之作
+02:26:00 <c9sloud> http://perlcast.com/2006/03/29/interview-with-audrey-tang/
+02:26:24 <c9sloud> 2007 年 au 去 YAPC::ASIA 發表 Pugs 的時候才 27 歲
+02:26:30 <c9sloud> 印象中
+02:26:59 <monochrom> 就好像有人一口氣學了九陰真經, 九陽神功, 玉女心經...
+02:27:16 <caasih> c9sloud: 看來是 xdite 用 octopress 時的留言，當初應該抓圖的 D:
+02:27:42 <c9sloud> octopress.. 好像很早以前?
+02:28:21 <caasih> 兩篇給尚未大學畢業的朋友的幾個人生建議其中一篇的留言
+02:31:07 <c9sloud> http://blog.xdite.net/posts/2012/10/26/another-advice-for-undergraduate
+02:31:13 <c9sloud> This one?
+02:32:43 <whitglint> 原來 au 指的是唐鳳
+02:35:36 <whitglint> 第一次看到「唐宗漢」這名字是在查「穿戴式運算」時
+02:35:55 <c9sloud> Discuzz is totally unsearchable :(
+02:38:52 <caasih> c9sloud: 從 wayback machine 看， octopress 也是用 disqus ，不懂為啥沒看到
+02:40:27 <caasih> 找到了，記錯篇 http://blog.xdite.net/posts/2012/10/28/force-to-improve-yourself#comment-694447723
+02:41:21 <letoh> 我從 pugs 剛出來就開始學 haskell.. 結果學到現在還是不太懂在幹嘛XD
+02:42:42 <letoh> 幾個月就能學透實在很厲害
+02:42:43 <c9sloud>  Au 好像不到兩年就變成 haskell committee 之一了 XDD
+02:45:07 <whitglint> 樓下宗浩應該是她弟弟？
+02:46:23 <whitglint> 原來天才是遺傳的 # 淚
+02:48:18 <whitglint> letoh 都不太懂在幹嘛了，那我還要學嗎... XD
+02:48:35 <letoh> 勉強寫可以，但就是一直不熟XD
+02:56:03 <hashcat_> 額
+02:56:50 <hashcat_> 不是會寫java就會寫haskell了
+02:57:24 <hashcat_> typeclass就interface
+02:59:04 <hashcat_> 初學除了命令式編程被迫用monad之外, 沒啥麼難點
+02:59:35 <hashcat_> 深入的話就typeclass大全集
+03:00:47 <hashcat_> 這時typeclass就當作把有某些運算律的type分類
+03:01:54 <hashcat_> 型別當集合, 然後就沒了
+03:04:19 <hashcat_> 博大精深些就是各typeclass的應用了, typeclass有時是運算律, 有時是interface
+03:06:22 <hashcat_> 型別和型別變數有時是半殘的命題, 有時當集合使
+03:08:41 <monochrom> 較早時在 #haskell 的討論裏, 我終於看清說得出 type class 比起 object, interface 等等究竟在發生甚麼事了.
+03:09:31 <monochrom> 一般人只分開 run time, compile time 兩個, 忽略了其實應該分為 run time, compile time, write time
+03:11:33 <hashcat_> 睡了
+03:12:42 <monochrom> 啊, 那我繼續寫, 待你明天看
+03:20:06 <monochrom> 舉例說, 你又想寫多個排序算法, 但是, 要等到 run time 讀到輸入才知怎樣比大小. 即時說, 就算你早知要為 int 排序, 但等到讀輸入才知用 < 還是 > 還是其他, 那麼, 這堪稱 run time 才知, compile time 不知. 這當然用各種 runtime dynamic 方法例如 object, dynamic dispatch 都是合理.
+03:23:15 <monochrom> 但如果, 你的"不知"只是指: 你不知為 int 還是 string 還是其他排序, 但只要是 int, 就一定是 int 的 <; 只要是 string, 就一定是 string 的 <; 諸如此類. 那麼, 就只是 write time 不知, 到了 compile time 就知道了.
+03:24:46 <monochrom> 可惜, 一般人把 write time 和 compile time 混在一起. write time 不知, 就當作 compile time 也不知, 於是也用 dynamic dispatch
+03:27:29 <monochrom> parametric polymorphism 及 type class 就正是 write time 不知, 但 compile time 是知的, 根本不用等到 run time.
+03:27:47 <monochrom> 根本無 dynamic 可言
+03:29:37 <monochrom> 然後呢, 討論到了這個地步, 人們就開始熱切地探究 compiler 可以怎樣在這清況下優化代碼. 這使我甚為失望及不滿.
+03:31:43 <whitglint> 聽起來像動態多型與靜態多型
+03:32:43 <monochrom> 跑得快一點的程式, 只能說是程式員的第二重要事項. 花這麼多篇幅在這事上, 卻相對地對第一重要事項隻字不提, 實在違反常理, 本末倒置.
+03:34:18 <monochrom> 第一重要事項就是: 怎樣減少 bug 的溫床
+03:37:14 <monochrom> 床? 牀?
+03:37:15 <whitglint> bug bed XD
+03:37:15 <monochrom> 每一次你用 dynamic dispatch 之類去做一件其實只是 write time 不知道(但 compile time 知道)而所以不是真的 dynamic 的事, 你就是增加一個 bug 的溫牀, 藏身之所
+03:38:29 <monochrom> anyway, Haskell 的 type class 就是 write time 不知, 但 compile time 知的機制. 跟 compile time 也不知的 interface 實在差太遠.
+03:40:44 <monochrom> 在 Java 裏, 結果我是用 <T extends Comparable<T>>, 才就回到 Haskell 的 Ord t. 單是 Comparable (沒有 <T>) 完全不可以跟 Ord 比
+09:15:16 <CindyLinz> write time!
+09:15:24 <CindyLinz> 好讚的講法
+11:00:28 <c9sloud> Lunch time! （逃
+11:17:10 <mno2> adventure time!
+11:17:57 <b4283> it is a good day to die
+11:32:26 <yllan__> hashcat_: 我初學 haskell 想寫一個簡單的問題來練練，但第一題就寫得比 java 還長：統計一個 ascii string 各 character 出現的次數。java 用 loop + array 好簡單的，當時 haskell 只會用 list，尚不知如何 import package
+12:01:12 <c9sloud> http://www.amazon.com/Purely-Functional-Structures-Chris-Okasaki/dp/0521663504/ref=pd_bxgy_b_img_z?tag=fczbkkcom08-20 這本也好吸引人
+12:04:07 <c9sloud> 要追溯 Pugs 歷史的話這邊是 day 1 : http://pugs.blogs.com/pugs/2005/02/day_1_pugs.html
+12:07:04 <b4283> monochrom: 那個 write 指的是什麼東西的 write
+12:07:16 <b4283> 是寫程式的 write 還是 user input 的 write？
+12:07:40 <b4283> CindyLinz: 這個 write time 說法之前好像有說過耶
+12:07:50 <c9sloud> "As I'm finding my way through TaPL and ATTaPL today, it occurs to me that I should implement a real language as an exercise; that real language turns out to be Perl6. So it begins..."
+12:08:43 <c9sloud> yllan__: 我剛剛在想，有點好奇應該怎麼寫最簡潔 ?
+12:09:30 <c9sloud> 如果是用 imperative language 的話應該是用 hash table 做總計
+12:10:16 <c9sloud> haskell 的話好像可以 for ['a'..'z'] 然後用 map traverse 這個 string 回傳 一個 list of tuple ?
+12:10:32 <c9sloud> [('a', 10), ('b', 3)....] so on...
+12:10:34 <c9sloud> 之類的
+12:18:43 <c9sloud> 先來用學到的 section 寫一步: filterChar x str = (filter (x==) str)
+12:18:44 <c9sloud> XD
+12:19:14 <c9sloud> 醜人獻曝
+12:26:24 <yllan__> map (\x -> ((head x), (length x))) $ group $ sort  "This is an example of list!"
+12:27:20 <yllan__> 拋朽木引玉
+12:31:50 <c9sloud> yllan__++
+12:31:52 <c9sloud> nice
+12:34:26 <c9sloud> 原來有 group 可用 XD
+12:35:36 <c9sloud> group 也是 Data.List ?
+12:36:53 <yllan__> 對，和一年前比起來，現在我會 import Data.List 了 ._.;
+12:38:52 <c9sloud> 本來還不會 group.. 我本來是這樣寫的 XD
+12:38:59 <c9sloud> let input = "foobaraaabbbccd" in
+12:38:59 <c9sloud>     print (map (summarizeFunc input) (sort $ nub input))
+12:38:59 <c9sloud>     where summarizeFunc input x = summarizeChars x (filterChars x input)
+12:38:59 <c9sloud>           summarizeChars x xs = (x , length xs)
+12:38:59 <c9sloud>           filterChars x str = filter (x==) str
+12:39:11 <c9sloud> 有點沒效率 XD
+12:41:37 <c9sloud> 感謝.. 今天學到 group 跟 '$'
+12:48:47 <c9sloud> 咦 我好像記錯了 au 好像只花了一個月，就讀懂 darcs 了
+12:48:49 <c9sloud> "So, I spent one month doing nothing but learning Haskell, so I could understand darcs. Which worked well; "
+12:50:33 <c9sloud> "But I digress. Using Haskell to develop OpenAFP.hs led to programs that eat constant 2MB memory, scale linearly, and are generally 2OOM faster than my Perl library."
+12:58:44 <monochrom> b4283: 是寫程式的 write
+13:05:36 <c9sloud> 請教一下，continuations 在 Haskell 是指?
+13:25:36 <mno2> yllan_: 技巧是把一切問題用 recursion 來想，所有 state 都要傳成參數
+13:31:19 <b4283> 變數清倉大拍賣：EVERYTHING HAS TO GO
+13:41:29 <c9sloud> monochrom:   mno2 跟 mno 是同一位嗎
+13:44:44 <yllan__> mno2: 當初我最原始的想法是一個 256 + 1 個 argument 的 function……
+13:46:15 <mno2> c9sloud: 我不是 mno。然後 continuation 跟 callcc 的 continuation 應該沒有差別，都是指現有的所有運行狀態。（我想你應該是看到 continuation monad 之類 ？）
+13:47:15 <c9sloud> yeah 還有看到 caller_continuation XD
+15:22:12 <mno2> https://www.facebook.com/groups/haskell.tw/
+15:22:42 <mno2> CindyLinz: 結果還是沒整理 lol,  不過就放著看看吧 xD
+15:23:16 <cataska> mno2++
+15:27:39 <mno2> 沒想到這頻道兩年已經成立快兩年了耶。歲月如梭..
+15:28:02 <mno2> (correct): 沒想到這頻道已經成立快兩年了耶。歲月如梭..
+16:31:59 <c9sloud> 請問 guard expression 跟 imperative language 的 if else 在 compiler backend 有什麼不同 ?
+16:32:38 <c9sloud> 還是說 ghc 也是用 branch 去做？或是有特別的優化嗎
+16:35:28 <CindyLinz> 一定要跟 imperative language 的 if else 比, 而不是 haskell 自己的 if then else 嗎?
+16:36:14 <CindyLinz> 如果都 haskell 的話, 應該是沒差..
+16:57:08 <CindyLinz> > let f str = flip map ['\0'..'\255'] $ \c -> (c, length (filter (== c) str)) in f "abbbccccde"
+16:57:10 <lambdabot>  [('\NUL',0),('\SOH',0),('\STX',0),('\ETX',0),('\EOT',0),('\ENQ',0),('\ACK',0...
+16:57:30 <CindyLinz> 或是只輸出 > 0 的....
+16:57:48 <CindyLinz> > let f str = filter ((> 0) . snd) $ flip map ['\0'..'\255'] $ \c -> (c, length (filter (== c) str)) in f "abbbccccde"
+16:57:50 <lambdabot>  [('a',1),('b',3),('c',4),('d',1),('e',1)]
+16:58:09 <CindyLinz> yllan__: 256 是 constant, 時間複雜度不用算 :D
+17:04:55 <c9sloud> CindyLinz++
+17:05:21 <c9sloud> 只是好奇在實作上的差異
+17:06:12 <CindyLinz> 可是找不到對應, 不知道要怎麼比較欸 @@"
+17:07:22 <CindyLinz> 因為 haskell 的 if 或 guard expr 要過比較多層語法變換以後, 才會開始找對應的組語
+17:08:22 <CindyLinz> c9sloud: 嗯, 我有時候會用 ghc 加開 -ddump-simpl
+17:08:41 <CindyLinz> 就可以看到其中某一層 ghc 轉換過的長相
+17:08:48 <c9sloud> > map f group $ sort "this is an example" where f a@(x:xs) = (x, length a)
+17:08:50 <lambdabot>  <hint>:1:41: parse error on input ‘where’
+17:08:59 <CindyLinz> -O -O2 什麼的會影響他轉出來的長相
+17:08:59 <c9sloud> QQ
+17:09:54 <CindyLinz> 這種 binding 的 where 只能用在一個 xxx =  ooooo 的裡面, 或是 case ... of 的其中一個 pattern 的裡面
+17:11:33 <c9sloud> 手機打字好累 XDDD
+17:12:16 <c9sloud> > map f (group $ sort "this is an example") where f a@(x:xs) = (x, length a)
+17:12:17 <lambdabot>  <hint>:1:43: parse error on input ‘where’
+17:12:21 <CindyLinz> > let xxxxx = map f group $ sort "this is an example" where f a@(x:xs) = (x, length a) in xxxxx
+17:12:23 <lambdabot>  Couldn't match expected type ‘[GHC.Types.Char] -> t1’
+17:12:23 <lambdabot>              with actual type ‘[(a0, GHC.Types.Int)]’
+17:12:23 <lambdabot>  Relevant bindings include xxxxx :: t1 (bound at <interactive>:1:5)Couldn't m...
+17:12:23 <lambdabot>              with actual type ‘[a1] -> [[a1]]’
+17:18:10 <mno2> 對 ghc 來說，所有的 if else 還有 guard 應該都會轉成 ghc core (ghc 的組語）中的 case … of
+17:19:13 <mno2> 所以第一個要先看 guard （either 在有最佳化或沒有最佳化的情況下），他會轉成什麼樣的 core，然後再看 core 會轉成什麼樣的 C—
+17:19:49 <mno2> 當然如果後端是選 llvm，那又要看 llvm intermediate code 會 code gen 成什麼樣的組語
+17:43:44 <CindyLinz> > @type Array
+17:43:46 <lambdabot>  <hint>:1:1: parse error on input ‘@’
+17:43:50 <CindyLinz> @type Array
+17:43:51 <lambdabot> Not in scope: data constructor ‘Array’
+17:44:10 <CindyLinz> @type Data.Array.Array
+17:44:11 <lambdabot>     Not in scope: data constructor ‘Data.Array.Array’
+17:44:57 <CindyLinz> lambdabot 怎麼沒有 import array 呢 @_@"
+17:45:37 <CindyLinz> @type Data.Map.Map
+17:45:38 <lambdabot> Not in scope: data constructor ‘Data.Map.Map’
+17:45:49 <CindyLinz> @type Control.Monad.liftM
+17:45:50 <lambdabot> Monad m => (a1 -> r) -> m a1 -> m r
+17:45:55 <CindyLinz> @type liftM
+17:45:57 <lambdabot> Monad m => (a1 -> r) -> m a1 -> m r
+17:46:22 <b4283> mne
+17:46:24 <b4283> (let ([str (string->list "abbbccccde")])
+17:46:25 <b4283>   (map (lambda (x) (cons (integer->char x) (length (filter (lambda (y) (= x (char->integer y))) str))))
+17:46:27 <b4283>        (iota 256)))
+17:46:53 <CindyLinz> @type chr
+17:46:54 <lambdabot> Int -> Char
+17:47:53 <b4283> CindyLinz: 為什麼有辦法馬上判斷出使用 0..255 的方法
+17:49:16 <b4283> length . filter 改成 count 更好
+17:49:27 <c9sloud> > map f (group $ sort "this is an example") where f a@(x:_) = (x, length a)
+17:49:29 <lambdabot>  <hint>:1:43: parse error on input ‘where’
+17:49:36 <c9sloud> > let x = map f (group $ sort "this is an example") where f a@(x:_) = (x, length a)
+17:49:38 <lambdabot>  not an expression: ‘let x = map f (group $ sort "this is an example") where ...
+17:50:19 <c9sloud> > map (++) [1..10]
+17:50:20 <lambdabot>  No instance for (Data.Typeable.Internal.Typeable a0)
+17:50:20 <lambdabot>    arising from a use of ‘M38000730492160183138643.show_M38000730492160183138...
+17:50:20 <lambdabot>  The type variable ‘a0’ is ambiguous
+17:50:20 <lambdabot>  Note: there are several potential instances:
+17:50:20 <lambdabot>    instance Data.Typeable.Internal.Typeable Data.Dynamic.Dynamic
+17:50:30 <CindyLinz> b4283: 這句是什麼意思啊? # 17:47 < b4283> CindyLinz: 為什麼有辦法馬上判斷出使用 0..255 的方法
+17:50:36 <c9sloud> > map (+1) [1..10]
+17:50:38 <lambdabot>  [2,3,4,5,6,7,8,9,10,11]
+17:50:52 <c9sloud> let f = (+1) in map f [1..10]
+17:51:05 <b4283> 我想過用 vector (array) 的方式，hashtable 等等
+17:51:06 <c9sloud> > let f = (+1) in map f [1..10]
+17:51:07 <lambdabot>  [2,3,4,5,6,7,8,9,10,11]
+17:51:30 <CindyLinz> b4283: 可是 yllan__ 給了個前提是不能用 import.......||
+17:51:58 <b4283> 但是只有使用 higher-order function 才能接受自動 parallelization 的考驗
+17:53:12 <c9sloud> 意思是說 不可以用 group 跟 sort 嗎 QQ
+17:53:14 <b4283> 我還想用類似 coroutine 一個 thread iterate through string 另一個計算
+17:53:28 <c9sloud> > let f a@(x:_) = (x, length a) in map f (group $ sort "this is an example")
+17:53:30 <lambdabot>  [(' ',3),('a',2),('e',2),('h',1),('i',2),('l',1),('m',1),('n',1),('p',1),('s...
+17:54:05 <c9sloud> as-patterns 好像還不賴
+17:54:31 <CindyLinz> b4283: 有必要搞成這樣嗎..... XD
+17:54:39 <c9sloud> XDD
+17:55:07 <CindyLinz> b4283: 不過, 我寫的那個版本啊.. 也是可以把 map 換成 par 版的 map 呀
+17:55:14 <CindyLinz> 雖然不知道叫什麼名字 ^^|
+17:55:35 <b4283> CindyLinz: 相當於一個字母指派一個 thread 啊
+17:56:00 <CindyLinz> b4283: 嗯 有聽懂 XD
+17:56:55 <b4283> > sort "this is an example"
+17:56:56 <lambdabot>  "   aaeehiilmnpsstx"
+17:57:03 <b4283> > group $ sort "this is an example"
+17:57:04 <lambdabot>  ["   ","aa","ee","h","ii","l","m","n","p","ss","t","x"]
+18:03:11 <b4283> > group [1, 1, 2, 3, 4, 5]
+18:03:13 <lambdabot>  [[1,1],[2],[3],[4],[5]]
+18:03:41 <b4283> > group [Just 1, Nothing, Just 2, Just 1]
+18:03:42 <lambdabot>  [[Just 1],[Nothing],[Just 2],[Just 1]]
+18:04:17 <b4283> hmm, 應該有另種語法....
+18:04:38 <b4283> > Just 1 = Just 1
+18:04:39 <lambdabot>  <hint>:1:8: parse error on input ‘=’
+18:04:48 <b4283> > Just 1 == Just 1
+18:04:49 <lambdabot>  True
+18:05:05 <CindyLinz> sort + group 這方法不錯...
+18:05:31 <godfat> Eq 不是用 == 嗎？ @@
+18:05:33 <CindyLinz> n log n
+18:06:07 <godfat> 喔喔，要先 sort
+18:09:27 <godfat> > map (head &&& length) $ group $ sort "this is an apple"
+18:09:29 <lambdabot>  [(' ',3),('a',2),('e',1),('h',1),('i',2),('l',1),('n',1),('p',2),('s',2),('t...
+18:10:24 <c9sloud> 據我的理解 head 的話好像會 copy
+18:10:33 <c9sloud> as-patterns 可以避免 copy
+18:11:01 <c9sloud> (?)
+18:11:05 <godfat> as patterns 寫起來好長... XD
+18:11:29 <b4283> (head &&& length) "aa"
+18:11:30 <b4283> > (head &&& length) "aa"
+18:11:31 <lambdabot>  ('a',2)
+18:11:57 <CindyLinz> head 應該不會 copy 才對.. 因為沒有新的 constructor 建東西..
+18:12:12 <b4283> > (head &&& length &&& tail) "abba"
+18:12:13 <lambdabot>  ('a',(4,"bba"))
+18:12:51 <c9sloud> 請問一下.. &&& 是啥
+18:12:53 <c9sloud> XD
+18:13:01 <CindyLinz> arrow 的
+18:13:24 <godfat> arrow 某些操作很好用 XD 很適合 compose... http://www.haskell.org/haskellwiki/Arrow
+18:13:35 <CindyLinz> @type (&&&)
+18:13:37 <lambdabot> Arrow a => a b c -> a b c' -> a b (c, c')
+18:13:42 <mno2> 他會把 input fork 成兩份，分別餵到 &&& 兩邊的 function
+18:13:45 <b4283> @src (&&&)
+18:13:46 <lambdabot> f &&& g = arr (\b -> (b,b)) >>> f *** g
+18:13:56 <CindyLinz> 覺得 type 和 src 開下去更難懂.. XD
+18:13:59 <b4283> fork 是真的 fork 嗎
+18:14:09 <c9sloud> 算是一種 composite 的變形?
+18:14:18 <mno2> b4283: 不是，只是概念上比較好理解
+18:14:33 <b4283> 要真的 fork 也可以 (?)
+18:14:40 <mno2> 就像電路的接了兩條出來一樣
+18:14:48 <b4283> repeater
+18:15:49 <mno2> 實作要怎樣做在理解的時候不那麼重要啊。要真的 fork 也可以，就只是殺機焉用牛刀
+18:16:38 <b4283> 那個 >>> *** 根本也不知道什麼意思....
+18:16:52 <b4283> 還要再查 ._.
+18:17:23 <CindyLinz> b4283: 我覺得 arrow 可以全都先用函數來理解..  把 a b c 視為 b -> c, 也就是 a = (->) 這樣
+18:17:23 <mno2> 這就是 operator 允許各種字元的壞處 lol，直覺上根本看不出來是啥
+18:17:34 <mno2> 其實 ._. 搞不好也是某個 operator
+18:17:55 <CindyLinz> 雖然 arrow 包含但不限於函數, 但是拿函數這一個特例來看, 比較好體會
+18:18:30 <CindyLinz> 所以 @type (&&&) 的 Arrow a => a b c -> a b c' -> a b (c, c') 可以視為 (b -> c) -> (b -> c') -> b -> (c, c')
+18:18:45 <CindyLinz> 就, 應該可以不用看 @src 就可以理解了
+18:19:04 <CindyLinz> @type (***)
+18:19:06 <lambdabot> Arrow a => a b c -> a b' c' -> a (b, b') (c, c')
+18:19:18 <b4283> CindyLinz: 概念懂了 感謝解釋
+18:19:19 <CindyLinz> (b -> c) -> ('b -> c') -> (b, b') -> (c, c')
+18:19:45 <CindyLinz> 嗯, 一個函數管 pair 左邊, 一個管右邊
+18:19:48 <CindyLinz> @type (>>>)
+18:19:49 <lambdabot> Category cat => cat a b -> cat b c -> cat a c
+18:19:58 <CindyLinz> Category!
+18:20:07 <c9sloud> what's that
+18:20:16 <CindyLinz> 記得就只是可以 (.) 的東西.... XD
+18:20:36 <c9sloud> @type .
+18:20:37 <lambdabot> parse error on input ‘.’
+18:20:39 <c9sloud> @type (.)
+18:20:40 <lambdabot> (b -> c) -> (a -> b) -> a -> c
+18:20:47 <CindyLinz> 嗯 只是 (.) 只能用在函數這樣..
+18:21:18 <CindyLinz> 如果把那個 cat = (->) 的話, (>>>) 就變成 (.) 了
+18:21:30 <b4283> dog
+18:21:42 <godfat> 我是只把他用在函數上 XDD 一直很懷疑做到這種程度有啥意義... :/  尤其看到 Kleisli arrow 後...
+18:22:25 <CindyLinz> 然後 arr 是把一個函數應到它所在的 Arrow, 那只是我們如果採用的 arrow 就是 (->) 的話, arr 就像 id 一樣沒做事了
+18:22:37 <b4283> 應該是 (b -> c)
+18:22:39 <b4283> 應該是 (b -> c)
+18:22:50 <b4283> 呃... sorry ~_~
+18:23:12 <CindyLinz> godfat: 缺乏很有說服力的使用 generic arrow 的實用案例?
+18:23:49 <godfat> 大概是吧，抽象到我不太能想像有什麼例子可以跨足好幾個 arrow 的實例
+18:25:26 <CindyLinz> 目前, 對我來說 Arrow 最實用的地方就是...
+18:25:32 <CindyLinz> 讓我更了解 Monad 了.. ~_~
+18:25:38 <godfat> XDDDDDD
+18:27:00 <CindyLinz> 喔因為我看了一份 Arrow 的介紹, 裡面有講到各種 Arrow 的變形, 就那些 ArrowZero, ArrowChoice, ArrowApply, ArrowLoop.. 然後某幾個拼一拼以後可以剛好 = Monad
+18:27:31 <caa51> godfat: ping
+18:27:36 <CindyLinz> 然後發現 Monad 雖然介面看起來很簡單, 數學上的只要 (>>=) 和 return 兩個就搞定了..
+18:27:48 <CindyLinz> 可是原來還可以往下拆解這麼多種
+18:28:06 <godfat> caa51 XDD 我剛剛才想說 livescript 看起來果然已經不是 javascript 了，compile 完後長出非常多東西... 好巧？
+18:28:33 <caa51> godfat: 同步了 >///<
+18:28:37 <c9sloud> Arrow 對我來說好像還是有點難理解 XD
+18:28:49 <CindyLinz> c9sloud: 我覺得可能比 Monad 好懂...
+18:28:54 <c9sloud> 我現在覺得他是某種類似 pipe 的東西
+18:28:58 <caa51> 話說我不懂 list monad ，所以用了很奇怪的方法模擬。
+18:29:00 <CindyLinz> 因為比 Monad 抽象.. (咦)
+18:29:11 <c9sloud> 只是光看 signature 沒辦法理解實機上內部的運作機制
+18:29:18 <CindyLinz> 我覺得極端抽象和極端具體的東西都好懂
+18:29:23 <caa51> godfat: 來看看你之前用 ls 寫的例子好了...
+18:29:26 <CindyLinz> Monad 剛好在抽象與具體中間.....
+18:29:43 <CindyLinz> 我找一下那一份 Arrow 介紹文..
+18:29:56 <godfat> 我一直覺得 arrow 有點那個奇怪 prelude 的味道，例如什麼 CanLength, CanFilter, Can... 之類的
+18:30:35 <godfat> caa51, 原來我寫過，好像有點印象... XD
+18:31:02 <CindyLinz> godfat: 因為要把每一個 prelude 的函數版改成 arrow 版?
+18:31:16 <CindyLinz> godfat: 欸~ 你說的這些 CanCanCan 在哪裡啊?
+18:32:22 <godfat> 找到了，沒想到記憶不好的我居然記對名字... 我只是隨便說的說 XD http://www.yesodweb.com/blog/2012/07/classy-prelude
+18:33:00 <godfat> 就是覺得太有針對性了，東西是沒錯，可是到底要用在哪..?
+18:33:37 <caa51> godfat: 你以前寫的 https://gist.github.com/godfat/6171277
+18:33:42 <godfat> 不過我得說那可能只是因為我不太懂而已...
+18:35:51 <CindyLinz> godfat: 函數版才比較針對吧(?
+18:36:38 <godfat> CindyLinz, 說來也覺得這樣講怪怪的，不過我是指那一堆 ArrowOOXX
+18:36:56 <CindyLinz> 奇怪, 我以為我有 po 到邪教聚會所的說.. :|
+18:37:33 <c9sloud> 咦 話說我們頻道要不要邀請 au 進來呀 :-p
+18:38:53 <CindyLinz> 這個 http://www.cse.chalmers.se/~rjmh/Papers/arrows.pdf
+18:39:06 <CindyLinz> Generalising Monads to Arrows
+18:40:15 <CindyLinz> 這份 PDF 的字體是出了什麼問題 orz
+18:40:40 <CindyLinz> 人家細明體之類的加襯線是可以更好認
+18:40:57 <CindyLinz> 這個除了加襯線以外還加了雜線.......||
+18:41:42 <CindyLinz> c9sloud: 我以為 au 知道, 只是懶得進來? ^^|
+18:43:07 <c9sloud> 不知道耶
+18:43:13 <c9sloud> 問問她好了 XD
+18:43:29 <godfat> caa51, 不過我覺得從 haskell 以外的語言理解 monad 還滿難的，因為雖然知道其操作的意義，但卻很難體會這樣做的意義..
+18:43:39 <c9sloud> http://codon.com/the-dhh-problem # "If you don't agrree with DHH, please speak up ... write a blog spot, give a talk, or ...
+18:43:46 <c9sloud> "write a web framework" XDDD
+18:43:53 <caa51> godfat: 看來我還是要循正常方法好好學...
+18:44:15 <CindyLinz> caa51: 大家都在尋找「正常方法」... XD
+18:44:32 <caa51> 話說既然本頻道有文字 log ，難說 au 或其他長輩不會直接看/搜 log 而不見得要加入？
+18:44:39 <caa51> CindyLinz: XDDDDD
+18:45:16 <CindyLinz> 我覺得數學背景, 邏輯背景, 工程背景 的人, 正確的學法應該是不一樣的...
+18:45:28 <godfat> 其實這說來也弔詭，說是學 monad, 其實應該是學 haskell monad, 因為那跟數學上的 monad 老實講我覺得也接不太起來...
+18:46:05 <CindyLinz> 以數學家來學 Monad... 好像他們只要到證明出 Monad law, 覺得很美麗很漂亮, 就算是完全了解了....
+18:46:11 <godfat> 因材施教~~
+18:46:16 <godfat> XDDDDD
+18:47:01 <godfat> arrow pdf 晚點看（待讀待辦累積了一堆 orz
+18:47:31 <CindyLinz> 工程師可能不太滿意, 問: 那所以, monad 到底是什麼呢?  數學家覺得你這問題莫名其妙, monad law 都明明白白列在這了, 也都證明好了, 你還在那邊糾結什麼...
+18:49:20 <godfat> 讓我想起 concrete category theory 這本書...
+18:49:59 <godfat> sorry, 全名 Abstract and Concrete Categories: The Joy of Cats
+18:50:40 <CindyLinz> godfat: 覺得這個 yesod 的 classy... 把那些 prelude 函數都「抬起來」, 讓我們可以用 duck typing 的方式來使用那些 prelude 函數的感覺
+18:51:28 <caa51> 數學上的 monad 不會用在別的證明上嗎？
+18:52:03 <CindyLinz> caa51: 有, 可以用來證明 comonad 和 monad 是 dual....
+18:52:31 <CindyLinz> 只是.....
+18:53:01 <caa51> 那在這樣的過程中，對數學家來說不是靠「使用」 monad 來更瞭解它？還是說這樣的使用就不像工程師的用法？
+18:54:03 <CindyLinz> 我是覺得可能是這樣沒錯
+18:54:39 <CindyLinz> 理查費曼說數學家都只會簡單的東西...
+18:54:48 <CindyLinz> 因為會了以後他們都覺得很簡單...ww
+18:55:05 <CindyLinz> 而且是發自內心覺得簡單... ^^|
+18:56:14 <godfat> prove by claiming it's trivial
+18:56:24 <caa51> XDDDDDDD
+18:57:39 <CindyLinz> hmm... 從工程師不太嚴謹的角度來說, 我覺得要證明 comonad 和 monad 是 dual, 只要其中一個是另一個的名字前面加上 co 就算證完了 XD
+18:57:49 <CindyLinz> 不過 code 和 de 是特例 :p
+18:57:54 <godfat> XDDDDDDD CindyLinz++
+18:58:08 <cybeliak> good special case  XD
+18:58:54 <b4283> godfat: The Joy of Cats 有這本書！！！？？
+18:59:12 <godfat> CindyLinz, 那個 classy prelude 說不定在 SML 的 module 上有好解？
+18:59:26 <CindyLinz> godfat: 不熟 SML /_\
+18:59:35 <godfat> b4283, 有啊，剛剛有查到 amazon 上有，不過我記得我當時是看免費的電子書
+18:59:42 <CindyLinz> godfat: classy prelude 很糟嗎? @@"
+19:00:25 <b4283> godfat: joy 和 cat 都是像 forth 的語言說
+19:00:30 <godfat> 我記得之前我們有討論過呀，奇怪 XDDD 也不是很糟，只是感覺沒啥意義。記得 mno2 跟 favonia 都有過一些評論 XD
+19:00:31 <CindyLinz> 嗯, 我的確曾經有覺得那些 Data.ByteString 上面不能直接用 Data.List 的函數很不開心...
+19:01:00 <godfat> b4283, 你讓我想到 cdr XD 不過應該只是碰巧而已
+19:01:11 <CindyLinz> 使得我如果實作一個... 像是上次寫的字串比對的 KMP 演算法
+19:01:23 <godfat> 我也覺得很煩，很多概念上明明一樣的東西，我都要用不同的名字稱呼
+19:01:36 <CindyLinz> 就不能寫一個 Text, ByteString.Stict, ByteString.Lazy, [a] 都能通用的版本
+19:01:53 <CindyLinz> Eq a => [a] :p
+19:01:53 <godfat> 之前試 ocaml 是這個的極致... 超煩
+19:02:19 <CindyLinz> 啊然後.. ByteString 家族還超多的 XD
+19:02:43 <CindyLinz> 除了 lazy 與 strict 兩個變化以外, 還有 Char / Word8 / UTF8 版..
+19:02:49 <CindyLinz> 然後 UTF-8 還特別怪 XD
+19:02:59 <CindyLinz> 唔, Char8 不是 Char.. :p
+19:03:02 <godfat> 我覺得這可能有點算是當初 API 設計的問題吧 orz 然後 classy prelude 是想從外部的方式修正..?
+19:04:33 <CindyLinz> 我不知道如果從頭設計 API 能怎麼避免欸?
+19:05:07 <godfat> StringLike...
+19:05:34 <CindyLinz> 是可以推一個 StringLike, 然後挑戰就是要讓它知名, 大家都用它.. XD
+19:06:03 <CindyLinz> 覺得像 [a] 這樣的東西, 可以看成 Foldable a 和 Functor a 的合體
+19:06:06 <godfat> 現在是有點難了，我的意思是如果 bytestring 那些是從頭設計的話 :/
+19:06:55 <CindyLinz> Foldable a 就是可以 foldr foldl 的東西; Functor a 就是可以 map 的東西..  合在一起叫.... Listable a? :p
+19:07:47 <godfat> 也好 XD
+19:08:18 <godfat> 或是叫 Lisp a 好了 XDDDDDD
+19:08:23 <CindyLinz> Lisp....
+19:31:33 <CindyLinz> 覺得 ghc import 一定要寫在前面的限制不開心....
+19:34:37 <godfat> 同意
+19:58:12 <CindyLinz> 不過 MichaelSnoyman 描述的困境: 寫到一半, 移到最前面 import, 然後要再來找剛剛寫到一半的地方... 這用 vim 倒是還好 :p
+19:58:53 <godfat> vim 可以跳回剛剛的地方？
+19:59:07 <CindyLinz> 可以按 m[再一個英文字]
+19:59:15 <CindyLinz> 等會就可以 '[剛剛那個英文字]
+19:59:21 <godfat> 我想像是 eclipse... 記得以前可以按個鍵，自動幫我 import
+19:59:28 <godfat> mark..
+19:59:48 <godfat> (筆記)
+20:00:33 <CindyLinz> 錄巨集時這個功能也很有用..
+20:01:14 <godfat> 巨集我每次用完就忘了，下次就要再查，然後就懶了，我就開別的編輯器了（遠目）
+20:34:51 <c9sloud> https://github.com/eagletmt/neco-ghc 這個看起來不賴
+20:35:07 <c9sloud> 這作者有寫一個 ghcmod-vim
+20:35:22 <c9sloud> 不過我上次用是兩百多天以前了 xd
+20:59:50 <CindyLinz> 讚
+21:04:00 <aksatac> 大神真的來了！
+21:04:58 <au> 被 c9s 拉來掛著... 之前就有看 log 啦
+21:05:16 <au> -> 先去晚餐，繼續潛水
+21:05:29 <aksatac> XDD
+21:11:05 <kanru`> XD
+21:11:36 <b4283> nice
+21:12:55 <b4283> 另備有 #cschat.tw #yinwang.talk 等等雜談頻道歡迎參加 XD
+22:21:53 <CindyLinz> c9sloud: 來想像一下好了
+22:22:15 <CindyLinz> 如果有一天真的要發表爭議感想: 程式語言只有一種 -- Haskell -- 其他的不是...
+22:22:36 <CindyLinz> 要怎麼來解釋這句話的後半句呢~~ XD
+22:22:52 <CindyLinz> 嗯, 先假裝沒看到 ML 系的語言好了..
+22:23:39 <CindyLinz> 其他的, 都只是機器描述語言加上巨集.. 就這樣定調好了 XDXD
+22:24:34 <petercommand> 加上超強巨集XD
+22:25:09 <suhorng> 那 prolog 要哭了...
+22:25:31 <CindyLinz> 好, prolog 那一半是邏輯語言~ (切割)
+22:25:50 <suhorng> xDDDD
+22:30:23 <petercommand> CindyLinz: 甚麼樣的巨集呀?XD
+22:30:44 <CindyLinz> petercommand: 你看 C, 就像是組語的巨集啊
+22:31:27 <petercommand> XD
+22:32:14 <CindyLinz> 反正, 它是讓組語變好寫, 而不是拿來描述思想結構
+22:32:40 <CindyLinz> 哎, 不過別討論得太認真, 我一定會被揍得千瘡百孔....ww
+22:33:03 <petercommand> agda呢?XD
+22:33:05 <suhorng> 戰神 Dijkstra：
+22:33:18 <CindyLinz> petercommand: agda 是邏輯語言啊
+22:33:49 <petercommand> 甚麼叫邏輯語言阿?
+22:34:27 <kanru`> https://github.com/czchen/haskell-regular-expression-virtual-machine
+22:35:00 <CindyLinz> petercommand: 就是用來描述推論規則, 證明定理那種的
+22:35:01 <kanru`> 原來 czchen 也在這 :P
+22:35:10 <petercommand> CindyLinz: 嗯...
+22:36:15 <petercommand> 所以像lambda calculus也算了?
+22:36:15 <CindyLinz> petercommand: 你看寫 Agda 的人心裡都沒有在想要怎麼把功能做出來, 都在想怎麼證明定理... XD
+22:37:11 <suhorng> 那只好寫 Idris 了？
+22:39:06 <CindyLinz> 啊, 用了第一招切割法以後, 再來用第二招吧!
+22:39:24 <CindyLinz> lambda calculus? Idris? 那都是 Haskell 啊~ :D
+22:40:15 <suhorng> wwww 這個 equivalent class 真不小
+22:40:42 <petercommand> XDDD
+22:42:24 <suhorng> 唷 http://www.ptt.cc/bbs/Programming/M.1400035830.A.4D1.html
+22:42:31 <c9sloud> au: hihi! :D
+22:42:37 <monochrom> monad 在數學上是有應用的, 用在代數及抽象拓撲學等.
+22:56:25 <mno2> http://www.etymonline.com/index.php?allowed_in_frame=0&search=monad&searchmode=none  好像沒有好好查過字根
+22:56:37 <mno2>  In Leibnitz's philosophy, "an ultimate unit of being"
+22:58:01 <mno2> CindyLinz: Haskell 可以開微波驢嗎？ （時事梗）
+22:59:38 <CindyLinz> mno2: 唔 可是我不知道那梗是什麼欸 @@"
+23:00:38 <mno2> http://2.bp.blogspot.com/-WOypodY0qVY/UckNbrjZjUI/AAAAAAAANk4/RF3hEY-FpVw/s1600/eISPiDG.jpg
+23:01:17 <monochrom> 你是不是打錯字? 是不是微波爐?
+23:01:29 <mno2> 對，打錯字了
+23:03:01 <CindyLinz> 嘖嘖嘖.....
+23:03:30 <CindyLinz> 只要三個步驟就可以把 Haskell 放到冰箱裡這樣? ^^|
+23:52:34 <petercommand> mno2: python超強的XDDDDD
+23:54:23 <mno2> 看來 Does it run backwards 還不夠，還要加上 Does it turn on a microwave?
+23:55:25 <godfat> 我相信 Haskell 應該是會開微波爐的 XDD
+23:55:51 <monochrom> 微波爐會干擾 WIfi
+23:56:24 <petercommand> haskell不是動物阿XD
+23:56:34 <CindyLinz> 不是有人說是大象嗎?
+23:56:58 <godfat> 我以為是人... XD
+23:56:59 <petercommand> 咦?我剛剛去查字典查不到XD
+23:57:37 <godfat> 大象是因為 Learn You a Haskell for Great Good! 這本書的封面是大象
+23:58:21 <CindyLinz> 反正 perl=駱駝 也是因為書的封面, 跟 perl 這個字無關 ^^|
+23:58:32 <monochrom> 大象會不會吃樹葉? Haskell 會不會吃 CLRS? XD
+23:58:54 <aksatac> 咦不是咖喱的發明人嗎？(誤)
+23:59:11 <CindyLinz> CSI LV 有個重要的角色叫作 Nate Haskell
+23:59:24 <CindyLinz> 很厲害的連續殺人魔....ww
+23:59:38 <CindyLinz> 殺人 by induction.. (誤)
+23:59:43 <godfat> XDDDDDD

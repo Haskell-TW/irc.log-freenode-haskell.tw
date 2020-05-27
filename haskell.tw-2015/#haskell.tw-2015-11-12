@@ -1,0 +1,3 @@
+23:14:56 <petercommand> data Test = Test1 { member1 :: Int } | Test2 在這樣的資料型別，我直接套 member1 (test :: Test) 不會出現 non-exhaustive pattern 的 warning 耶..
+23:16:18 <petercommand> member1 Test2 會出現 No match in record selector..
+23:20:19 <petercommand> 原來是要開 fwarn-incomplete-record-updates..

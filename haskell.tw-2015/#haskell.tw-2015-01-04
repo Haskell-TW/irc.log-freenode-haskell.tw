@@ -1,0 +1,91 @@
+00:00:51 <petercommand> 喔喔，了解
+00:36:08 <monochrom> 我走向另一極端. 請愛用 optparse-applicative, 我有範例 https://github.com/treblacy/random-read
+00:38:54 <au> monochrom: combinators 看來很不錯
+00:43:55 <pkmx> 我唯一不能接受的只有他用monoid去建構option modifier...
+00:44:53 <pkmx> 不過他還能幫你生bash completion 這點應該直接打趴其它solution了XD
+00:47:18 <monochrom> 我喜歡這樣用 monoid
+02:31:02 <CindyLinz> 奇怪.. 怎麼跟我印象中的自然演繹不一樣 @@" # http://myweb.scu.edu.tw/~tsemeiwu/documents/NDrules.pdf
+02:31:51 <CindyLinz> 有 DN   p ≡ ~~p 耶
+02:32:18 <CindyLinz> 自然演繹是古典邏輯喔?
+02:36:33 <monochrom> 「繹」字很古怪. 我要問問林語堂有沒有這個字
+02:37:56 <monochrom> 啊, 林語堂都同意 deduction 為 演繹. 有趣.
+02:38:20 <CindyLinz> 為什麼你可以跟林語堂講話.. XDXD
+02:38:37 <CindyLinz> 你剛剛 lift 了嗎? XD
+02:39:54 <monochrom> 「繹」的意思是抽絲剝繭, 有趣
+02:40:35 <monochrom> 其實是林語堂字典: http://humanum.arts.cuhk.edu.hk/Lexis/Lindict/
+02:41:54 <CindyLinz> 喔 XD
+02:43:56 <monochrom> 那個表根本不是自然演繹, 只是某人隨意挑選的一堆規則.
+02:46:28 <monochrom> 自然演繹是: 對每一個運算子, 給一個「引入」(introduction)規則, 及一個「消除」(elimination)規則. 非常對稱的. 及每一規則只談一個運算子, 非常簡單的.
+02:49:46 <monochrom> 例如: 對 ∨, 引入規則有兩條: 線上有p, 線下有p∨q; 線上有q, 線下有p∨q
+02:49:57 <CindyLinz> 嗯嗯..
+02:52:11 <monochrom> 消除規則是: 線上有 p∨q, 有個演繹由p得c, 又有個演繹由q得c, 線下有c
+02:53:41 <monochrom> 那個表裏沒有∨的消除規則.
+02:55:09 <monochrom> 而自然演繹也沒有像那表裏2號那種同時談及∨和¬的規則.
+02:55:40 <monochrom> 該表根本是瞎扯.
+02:57:25 <CindyLinz> 唔.. 以前不知道 natural deduction 的這個特性: 每一規則只談一個運算子
+02:58:11 <monochrom> 自然演譯差不多不用記, 因為有對稱性及每條規則只講一個運算子, 可說千篇一律. 那個表要死記, 因為無規律.
+02:58:54 <monochrom> 那個表的寫作目的是為了降低學生分數.
+03:01:26 <CindyLinz> 因為有錯嗎 XD
+03:01:33 <monochrom> 最後, 自然演繹本身沒有預設古典或非古典立場. 只要加上 特別的 消除雙否定, 就得到古典. 線上有 ¬¬p, 線下有 p
+03:01:49 <monochrom> 因為要死記.
+03:02:20 <monochrom> 自然演繹也沒有替代規則.
+03:05:41 <monochrom> 我的 http://www.vex.net/~trebla/haskell/crossroad.xhtml 有講自然演繹及Haskell
+10:55:09 <mno2_> http://www.zhihu.com/question/27355585   au 有引用上次在 FLOLAC 的影片
+12:06:06 <mno2_> https://github.com/begriffs/postgrest
+12:06:39 <mno2_> 還沒研究跟 pgrest 的差別，不過是用 haskell 寫的
+16:15:40 <au> 我才剛把 postgre.st domain expire 掉... 看來是正確的決定 XD
+16:17:35 <au> (pgrest 是 pl/v8，主要是讓 trigger/stored procedure 用 npm 管理。而 postgrest 和 torodb 一樣，是外面的一層 process 作 adapter。)
+18:50:27 <CindyLinz> > let swap = do { a <- fst ; b <- snd ; return (b, a) } in swap ('a', 2)
+18:50:29 <lambdabot>  (2,'a')
+18:50:54 <CindyLinz> reader monad
+18:51:53 <miaoski> CindyLinz: 本週三要講什麼主題呢？
+18:52:16 <CindyLinz> miaoski: lazy evaluation 啊~ 不是上次說好的嗎? XD
+18:52:26 <miaoski> CindyLinz: 抖抖... 我覺得其實需要實戰經驗。但目前沒力氣寫 Hello World 以外的程式了..
+18:52:41 <miaoski> CindyLinz: 對哦。嗯。配上不吃就不會出現的便當... (大誤)
+18:52:44 <CindyLinz> miaoski: 100 種 hello world 有力氣嗎? XD
+18:52:56 <miaoski> CindyLinz: 想必是沒有...
+18:53:00 <petercommand> 可怕的 hello world XDD
+18:54:31 <letoh> 放個種子演化出一百種不就好了 (誤
+18:56:21 <miaoski> letoh: 施主是要 CindyLinz 用 Haskell 寫 GA 演化出 100 種自動寫 Hello World 的方法？(大誤)
+18:56:45 <CindyLinz> 這樣只有虐電腦沒有虐人不有趣啊~ (咦
+18:57:24 <miaoski> CindyLinz: 寫 GA 還蠻虐人的我覺得...
+18:58:06 <CindyLinz> 會嗎? 你不要寫人類的基因啊, 用果蠅的就好.. XD
+18:59:46 <miaoski> CindyLinz: 太棒了，那你再下一堂課就要用 Haskell 寫 GA?
+18:59:46 <CindyLinz> miaoski: 你看上面那個 swap, 是個沒有 IO, 沒有 side effect 的 monad 用法~~
+18:59:48 <miaoski> (woot)
+19:01:07 <miaoski> Prelude> let swap (a, b) = (b, a)
+19:01:07 <miaoski> Prelude> swap('a',2)
+19:01:07 <miaoski> (2,'a')
+19:01:07 <miaoski> 這樣不好嗎？T_T
+19:01:32 <CindyLinz> miaoski: 通常會用在複雜的地方啦... 參數是一個複雜的 record, 然後要用一堆 accessor 去取內容來用
+19:01:55 <miaoski> CindyLinz: 囧 ... 我討厭 accessor
+19:02:01 <CindyLinz> 不是那種 accessor.. ^^|
+19:02:23 <CindyLinz> haskell 的函數沒有括號, 跟 C 的 struct field 其實蠻像的 :Q
+19:02:36 <miaoski> 那是這種嗎? _ _ _ _ hp _ _ _
+19:02:57 <miaoski> (詳見 CindyLinz 上週的投影片)
+19:03:04 <CindyLinz> 對啊
+19:05:15 <CindyLinz> 混合 Applicative 用法..
+19:05:30 <CindyLinz> > let swap = do { (,) <$> snd <*> fst } in swap ('a', 2)
+19:05:32 <lambdabot>  (2,'a')
+19:14:26 <suhorng> > let swap = snd &&& fst in swap (True, ())
+19:14:28 <lambdabot>  ((),True)
+19:18:38 <miaoski> 好複雜 @@
+19:18:45 <miaoski> (,) 是什麼
+19:20:20 <petercommand> tuple 的 constructor
+19:20:21 <au> (,) x y = (x, y)
+19:22:42 <miaoski> 那 <$> 和 <*> 呢？我發現我可以 :t (,) 但不能 :t 前兩個
+19:23:02 <petercommand> :t (<$>)
+19:23:02 <lambdabot> Functor f => (a -> b) -> f a -> f b
+19:24:23 <miaoski> petercommand: ++
+19:25:09 <miaoski> :t (<*>)
+19:25:09 <lambdabot> Applicative f => f (a -> b) -> f a -> f b
+19:25:23 <miaoski> 要 load extension 吧...
+19:25:35 <petercommand> import Control.Applicative
+19:25:56 <miaoski> petercommand: ++
+19:26:32 <miaoski> 算了光是這樣還是看不到 CindyLinz 那行。決定把它留到下次上課 (誤)
+19:28:11 <petercommand> miaoski: 那行可以不用 do 呀:p 只有一行
+19:28:33 <petercommand> > let swap = (,) <$> snd <*> fst in swap ('a',2)
+19:28:35 <lambdabot>  (2,'a')
+19:30:22 <suhorng> 說到這, idris 有個很人工的 syntactic extension, "!"
+19:31:34 <suhorng> 例子例如 f (!mx) (!my), 其中 f :: a -> b -> m c; mx :: m a; my :: m b
+19:32:16 <suhorng> (!) 看起來有點像是 m a -> a 的東西不過其實只是 compiler 會幫你插入 bind, 變成 mx >>= \a -> my >>= \b -> f a b

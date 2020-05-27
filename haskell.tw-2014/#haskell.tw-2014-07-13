@@ -1,0 +1,57 @@
+10:30:49 <petercommand> > x <- Just 1
+10:30:50 <lambdabot>  not an expression: ‘x <- Just 1’
+10:31:53 <petercommand> > Just 1 >>= (\x -> return x)
+10:31:54 <lambdabot>  Just 1
+10:33:02 <petercommand> 在ghci打x <- Just 1會出現Couldn't match expected type `IO t0' with actual type `Maybe a0'呢...
+10:40:20 <petercommand> > xx <- Just 1
+10:40:22 <lambdabot>  not an expression: ‘xx <- Just 1’
+10:40:44 <petercommand> >show $ xx <- Just 1
+10:40:48 <petercommand> > show $ xx <- Just 1
+10:40:50 <lambdabot>  <hint>:1:1:
+10:40:50 <lambdabot>      Parse error in pattern: show $ xx
+10:40:50 <lambdabot>      Possibly caused by a missing 'do'?
+10:41:00 <petercommand> > show $ do xx <- Just 1
+10:41:01 <lambdabot>  The last statement in a 'do' block must be an expression
+10:41:02 <lambdabot>    xx <- Just 1
+10:41:07 <petercommand> XD
+10:41:32 <petercommand> 跟ghci有點不一樣
+17:04:43 <petercommand> > filterM (\x -> [True, False]) [1,2,3,4,5]
+17:04:45 <lambdabot>  [[1,2,3,4,5],[1,2,3,4],[1,2,3,5],[1,2,3],[1,2,4,5],[1,2,4],[1,2,5],[1,2],[1,...
+17:05:16 <petercommand> 真是神奇XD
+17:10:42 <petercommand> > filterM (const [True, False]) [1,2,3,4,5]
+17:10:43 <lambdabot>  [[1,2,3,4,5],[1,2,3,4],[1,2,3,5],[1,2,3],[1,2,4,5],[1,2,4],[1,2,5],[1,2],[1,...
+17:11:23 <petercommand> @djinn
+17:11:23 <lambdabot> Cannot parse command
+17:12:15 <petercommand> @djinn (a -> rBool) -> [a] -> m[a]
+17:12:15 <lambdabot> Error: Undefined type []
+17:12:27 <petercommand> @djinn (a -> rBool) -> [a] -> m[a]
+17:12:28 <lambdabot> Error: Undefined type []
+17:13:04 <petercommand> @djinn (a -> rBool) -> na -> mna
+17:13:05 <lambdabot> -- f cannot be realized.
+17:13:16 <petercommand> @djinn f (a -> rBool) -> na -> mna
+17:13:16 <lambdabot> -- f cannot be realized.
+17:14:22 <petercommand> @djinn f (a -> nBool) -> na -> mna
+17:14:23 <lambdabot> -- f cannot be realized.
+17:14:26 <petercommand> @djinn (a -> nBool) -> na -> mna
+17:14:27 <lambdabot> -- f cannot be realized.
+17:14:44 <petercommand> 看不懂這個錯誤的意思@@
+17:16:24 <CindyLinz> 看起來像是 djinn 說: 我不會.... XD
+20:36:28 <suhorng> @petercommand 加個 do
+20:36:28 <lambdabot> Unknown command, try @list
+20:36:45 <suhorng> > do { x <- Just False; return x }
+20:36:46 <lambdabot>  Just False
+20:37:14 <suhorng> 在 ghci 裡面直接 a <- m 的話會被放在 IO monad （IO a）裡面
+20:37:24 <suhorng> 所以一樣ｕｌ４
+20:37:29 <suhorng> 要包起來
+23:01:56 <jyyou> http://science.raphael.poss.name/rust-for-functional-programmers.html
+23:05:24 <whitglint> Rust!
+23:25:19 <petercommand> > (\x y ->  ((++) . (:[])) <$> x <*> y ) [1,2,3] [4,5,6]
+23:25:21 <lambdabot>  No instance for (GHC.Show.Show a0)
+23:25:21 <lambdabot>    arising from a use of ‘M13340036210169710011670.show_M13340036210169710011...
+23:25:21 <lambdabot>  The type variable ‘a0’ is ambiguous
+23:25:21 <lambdabot>  Note: there are several potential instances:
+23:25:21 <lambdabot>    instance [safe] GHC.Show.Show
+23:28:03 <petercommand> > (\x y ->  (((++) . (:[])) <$> x) <*> ((:[]) <$> y) ) [1,2,3] [4,5,6]
+23:28:05 <lambdabot>  [[1,4],[1,5],[1,6],[2,4],[2,5],[2,6],[3,4],[3,5],[3,6]]
+23:45:40 <petercommand> > [ x:y:[] | x <- [1,2,3], y <- [4,5,6]]
+23:45:42 <lambdabot>  [[1,4],[1,5],[1,6],[2,4],[2,5],[2,6],[3,4],[3,5],[3,6]]

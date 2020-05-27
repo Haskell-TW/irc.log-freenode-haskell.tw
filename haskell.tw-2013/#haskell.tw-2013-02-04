@@ -1,0 +1,348 @@
+08:28:21 <mgccl> 我发现一个package里面的函数都需要用到一个type class
+08:28:26 <mgccl> 然后这个type class... "it is a hidden module in the package"
+08:28:31 <mgccl> = = 是design这个东西的人的问题还是我的问题...
+08:37:22 <mgccl> well只好把整个module的source copy paste到我的程序里了 = =
+11:01:34 <cataska> hychen: 我是寫 true # 作業2的all_same_color, 當輸入[]時，他要的answer是什麼?
+11:01:55 <hychen> cataska, 為什麼是true?
+11:02:03 <hychen> cataska, 我完全無法理解啊 ~~ XD
+11:02:56 <_13h> 我發現我又丟錯 channel 了
+11:03:15 <hychen> 有差嗎? XD
+11:03:35 <cataska> 什麼都沒有也是一種 same ? XD
+11:04:24 <_13h> hychen: 就是因為到處都看到同一批 nick 才會搞混XDXD
+11:04:51 <hychen> 什麼都沒有怎麼可以說是一樣呢XD
+11:05:10 <suhorng> 如果理解成∀x, ∀y, x∈X and y∈X ⇒ x = y 呢
+11:05:15 <suhorng> 符號不見了OAQ
+11:05:29 <_13h> 我看得到符號
+11:05:34 <suhorng> forall x. forall y. x \in X and y \in X  implies  x = y
+11:06:17 <cataska> hychen: 既然沒有不同的，當然就是相同囉
+11:06:30 <suhorng> 因為裡面沒有東西，前提不成立，所以整個敘述無論如何都是對的？
+11:09:34 <hychen> alright
+11:11:38 <suhorng> 是說 section 3 終於完整介紹 first-class function 了XD
+11:12:12 <cataska> 題目沒說，只要自己猜...
+11:12:27 <cataska> s/要/好/
+11:12:29 <hychen> 這邏輯我不能接受呀 XD
+11:13:21 <cataska> 亂讀九陰真經也是可以練成神功的 XD
+11:16:55 <_13h> cataska: 逆練嗎?
+11:17:38 <suhorng> 練九陰白骨爪吧/o/
+11:18:28 <cataska> _13h: 西毒看了黃蓉亂寫的九陰真經，也是可以練成的
+11:18:44 <hychen> 只不過腦子壞了而已
+11:18:50 <_13h> 但是會走火入魔啊XD
+11:19:00 <cataska> XD
+12:30:00 <favonia> mgccl: 哪個 package 啊...
+12:30:31 <mgccl> segmenttree
+12:31:33 <favonia> Measured ?
+12:33:00 <favonia> 哪個 type class?
+12:34:18 <mgccl> 嗯, Measured
+12:34:27 <mgccl> 我赛怎么猜到的...
+12:35:00 <favonia> mgccl: 我看不懂你上一個句子
+12:35:08 <favonia> mgccl: 他故意藏起來的樣子耶
+12:35:17 <favonia> 你應該只能用他的 Interval
+12:36:03 <mgccl> 有问题啊... 因为不用measured最主要的功能就没了...
+12:36:52 <mgccl> 那里面t这个monoid自己定义的话, 必须要有measured才能map interval to t...
+12:39:27 <favonia> mgccl: ???
+12:39:41 <favonia> 例如你直接用 Interval Integer
+12:39:44 <favonia> 有問題嗎？
+12:40:07 <favonia> (Sum Integer) 是 Monoid
+12:40:37 <favonia> 根據 (Monoid (Sum b), Num a, Num b) => Measured (Interval a) (Sum b) 可以知道
+12:40:48 <favonia> Measured (Interval Integer) (Sum Integer)
+12:42:10 <mgccl> O.o... 原来就是说可以自动的啊... 我来看看...
+12:42:43 <favonia> mgccl: 不算是「自動」吧
+12:42:47 <favonia> 他有寫啊
+12:43:02 <favonia> 就好像 Haskell 有定義怎麼顯示一個 list
+12:43:09 <favonia> Show a => Show [a]
+12:43:25 <favonia> 只要 element 型態可以顯示，就可以顯示一個 list
+12:44:12 <favonia> 他提供一個對所有 [a] 都可以動的一個實作
+12:45:25 <mgccl> 它写了 instance (Num a, Num b) => Measured (Interval a) (Sum b) where
+12:45:26 <mgccl>   measure _ = Sum 1
+12:46:09 <favonia> typeclass 是一個介面 instance 是一個實作
+12:46:54 <mgccl> 比如说我现在要换一个monoid... 比如M... 我是不是也应该写一个...
+12:47:11 <favonia> 以上提供了 Measured a b 的一種特殊狀況... Measured (Interval c) (Sum d) 的實作
+12:47:15 <favonia> 喔
+12:47:19 <mgccl>  instance (Num a) => Measured (Interval a) (M) where
+12:47:40 <mgccl> measure x = M (f x)
+12:48:06 <favonia> 這個... 感覺好像哪裡怪怪的 :/
+12:48:33 <favonia> 通常你不太能這樣寫
+12:48:37 <favonia> 因為這樣 overlap
+12:48:47 <favonia> Haskell 一個方便但也很侷限的地方是
+12:48:53 <favonia> 一個「樣子」只能有一個實作
+12:49:01 <favonia> 例如 Ord Int
+12:49:09 <favonia> Int 只有一種比較方法
+12:49:15 <favonia> Ord Int 只有一個實作
+12:49:38 <favonia> 你不能在一個程式裡引用兩個比較 Int 的實作（兩個 Ord Int 的實作）
+12:50:04 <favonia> 好處就是你不用指定要用哪個實作
+12:50:07 <favonia> 反正只有一個
+12:50:14 <favonia> 壞處就是不太能換.......
+12:51:14 <mgccl> 我倒下了... 原来是Haskell设计的问题...
+12:51:30 <favonia> 例如 sort 要從大排到小 你得用別的 sort 函式(sortBy? 我忘記叫什麼)，或是用 newtype (runtime 沒有什麼 overhead)
+12:51:38 <favonia> 如果你真的要作弊
+12:51:48 <favonia> GHC 也可以讓你作弊
+12:51:57 <favonia> 用 OverlappedInstances 之類的
+12:52:05 <favonia> 還是 OverlappingInstances
+12:52:07 <favonia> 或是
+12:52:35 <favonia> 你如果用其他 Haskell extension 說服 GHC 的確每個狀況下只有一種可能
+12:52:44 <favonia> 那也可以
+12:52:48 <favonia> 就看你啦 xD
+12:52:52 <mgccl> 嗯... 不过现在的问题就是作者专门的hide了Measured... - -
+12:53:08 <favonia> 對啊 所以大概只能用 Sum
+12:53:32 <favonia> mgccl: http://hackage.haskell.org/trac/haskell-prime/wiki/OverlappingInstances
+12:54:37 <favonia> 這文件好像不是很好 :/
+12:55:04 <favonia> mgccl: 如果你想要能自己選實作，請用 SML
+12:55:47 <mgccl> TAT
+12:55:48 <favonia> 如果你想要能自己選實作 + 可以有預設實作，大概敝校 CMU 有奇怪的 Standard ML 版本有支援...
+12:56:14 <mgccl> 正在怀疑Haskell怎么写非常非常抽象的数据结构...
+12:56:25 <favonia> 可以....吧
+12:56:35 <_13h> 那是什麼版本？有公開的嗎?
+12:56:48 <favonia> _13h: 不知道 \o/
+12:56:57 <favonia> _13h: 有論文 \o/
+12:57:05 <_13h> 唔，原來是這樣
+12:57:59 <favonia> > sort [1,2,3]
+12:58:00 <lambdabot>   [1,2,3]
+12:58:08 <favonia> > sortBy compare [1,2,3]
+12:58:10 <lambdabot>   [1,2,3]
+12:58:39 <mgccl> 比如有个数据结构要求input是一个monoid... 然后int可以建立很多不同的Monoid... 每次都要newtype... 或者这个数据结构就直接说给一个monoidBy function....
+12:59:00 <favonia> > sortBy (comparing \x->-x) [1,2,3]
+12:59:02 <lambdabot>   <hint>:1:19: parse error on input `\'
+12:59:05 <favonia> > sortBy (comparing$  \x->-x) [1,2,3]
+12:59:07 <lambdabot>   <hint>:1:23: parse error on input `->-'
+12:59:12 <favonia> > sortBy (comparing $ \x -> -x) [1,2,3]
+12:59:13 <lambdabot>   [3,2,1]
+12:59:26 <favonia> 比較相反過來的數字 xD
+12:59:42 <favonia> 這個就是 sortBy 不用預設比較 Integer 的方法
+12:59:51 <favonia> 改用 (comparing $ \x -> -x)
+13:00:12 <favonia> 因為 Haskell 有個預設實作可以直接用，想換掉有點麻煩\o/
+13:00:21 <favonia> mgccl: 喔對啊你講到重點了
+13:00:39 <favonia> 我想你看到上面的 sortBy 就懂了
+13:01:07 <mgccl> 嗯.
+13:01:16 <mgccl> 好处是sortBy只需要一个function...
+13:01:24 <favonia> xD
+13:01:49 <mgccl> 有可能某个opération需要几十个fonction... 比如monoid就需要两个...
+13:01:58 <b4283> opération...
+13:02:13 <favonia> 在「比較流行」的語言裡面， Standard ML 是我看過這種東西表達能力最強的程式語言
+13:02:16 <mgccl> - - 好神奇的e...
+13:02:17 <favonia> 你可以試試看
+13:02:24 <mgccl> 好吧... orz...
+13:02:38 <mgccl> 好痛苦找不到完美的语言...
+13:02:53 <favonia> 你喜歡數學的話可以看一下 Agda 之類的
+13:03:07 <favonia> 很 Haskell 語法，但完全就是數學
+13:04:34 <favonia> 他的表達能力強到可以用來證明數學定理
+13:04:47 <favonia> 他有很多好兄弟像是 Coq 之類的
+13:06:38 <favonia> 舉例來說，那個介面其實數學上還是很不完美不是嗎
+13:06:53 <favonia> 你 monoid 那些 operator 沒有證明他是對的啊
+13:07:49 <favonia> Agda 可以表達結合律之類的成為介面的一部份。所有 monoid 實作都要符合結合律
+13:08:09 <favonia> 這是目前大家比較常用的程式語言永遠做不到的事情 xD
+13:08:56 <mgccl> e... 总是感觉需要一个balance... 如果一个语言写一行要1小时的话...- -
+13:09:17 <mgccl> http://idris-lang.org/ 我看了这个东西
+13:10:15 <favonia> mgccl: 看來也是 Agda 的好兄弟之一
+13:10:37 <favonia> （雖然裡面可能有很多專家才知道的小差異）
+13:11:15 <favonia> 只看介紹我想他的表達能力夠強（我沒用過）
+13:11:40 <favonia> 你把 Standard ML 和 Haskell 當作目前人們嘗試 balance 的幾個結果之一吧
+13:12:00 <mgccl> 嗯...
+13:12:12 <favonia> 就是在沒有給程式設計師太多負擔的前提下檢查一點錯誤
+13:12:17 <mgccl> 话说如果暂时还没有完美的语言...
+13:12:42 <favonia> 我是覺得不會有耶... 應該這樣說，如果有的話，我這個領域就死掉了 xDDDDDD
+13:12:43 <mgccl> 我还是过几十年再来看看这个领域吧...
+13:13:03 <favonia> 完美 = 沒有改進的空間 = 可以回家睡覺了
+13:15:51 <mgccl> 嗯... 好痛苦现在用什么语言都有一堆让人不爽的事情发生... 我都不想再编程了... = =
+13:18:11 <hychen> 這代表你比較有題目可以作啊XD
+13:22:28 <mgccl> 啊, 我还是过几十年再回来看看吧... 现在只是随便用用不要太专了...
+13:23:04 <mgccl> 实际上我也没有什么原因需要一个好的编程语言... 原来是因为比赛的时候感觉某些程序写的好恶心在想有没有更好的解决方式...
+13:23:28 <mgccl> 现在也不比赛了... 然后要工作了... 而工作的语言又不是自己可以选择的...
+13:23:55 <mgccl> - - 再然后我就读phd, 做理论的东西也不用写代码了...
+13:24:04 <mgccl> (自我安慰的太好了...)
+13:25:01 <favonia> mgccl: er 這個嘛你如果懂程式語言理論到某個很誇張的地步，基本上寫證明跟寫程式是一樣的
+13:25:49 <mgccl> 是的比如coq之类的... 不过还没有什么证明真的要那样写...
+13:26:04 <mgccl> 我是说我的证明还没有需要电脑verify的程度...
+13:26:25 <favonia> mgccl: 可以學一點理論的精神啦，這樣去寫 C 可能都比較好看----至少抽象的層次上可能比較「乾淨」
+13:27:22 <mgccl> 嗯... 还是通过fp了解了点有意思的东西... 比如finger tree...
+13:27:47 <favonia> mgccl: 這個跟 fp 沒有關係吧 orz
+13:27:54 <favonia> mgccl: 這是原本就有的資料結構啊
+13:28:02 <mgccl> 似乎是fp的人才用的...
+13:28:46 <favonia> mgccl: 沒有吧（？）就算一般語言實作你也可以證明一堆好性質？
+13:28:58 <mgccl> 在我看了那么多书也就fp的世界里提到过那玩意... 而且generalize到了一个新的高度...
+13:30:07 <favonia> 喔... 我想這東西可以跟 splay tree 之類的東西擺在一起介紹
+13:31:01 <favonia> mgccl: 你是看哪裡的實作？
+13:31:31 <mgccl> http://www.soi.city.ac.uk/~ross/papers/FingerTree.pdf 这个啊
+13:32:34 <mgccl> 我已经花了3个小时试图用现有的segment tree系统创作一个可以dynamic的(insert/delete)得知interval union在一起的length的程序...
+13:33:27 <favonia> er.... 是可以啦，但我認真的覺得..........
+13:33:32 <favonia> 你自己實作比較快
+13:34:38 <favonia> 我其實還沒看過 finger tree 的定義... 雖然大概可以想像
+13:34:42 <favonia> 你有看 zipper 嗎？
+13:35:01 <mgccl> 没, 不过可以想象... 暂时还没遇到要用的时候...
+13:36:06 <favonia> mgccl: 很好用 xDDD
+13:36:42 <mgccl> 啊实在没有兴趣写10个小时程序只是为了写一个... "实际上dynamic的找interval union长度问题只是finger tree建立在一个有意义的monoid上哦~" 我继续试试...
+13:37:54 <favonia> mgccl: 我覺得你懂了抽象的問題... 要怪就怪現在 segment 實作不符合你需要？xD
+13:39:06 <_13h> 你還真喜歡 zipper
+13:39:13 <mgccl> 嗯. 但是又懒到不想手动写segment tree... 都是现在太懒了...
+13:39:54 <favonia> _13h: zipper 熟的話我相信像 finger tree 這種東西都是輕而易舉
+13:41:59 <mgccl> anyway等我程序写好了我发到这里来...
+14:16:24 <CindyLinz> 學了 Functional Programming, 的確讓我在平常寫出更漂亮的程式
+14:16:38 <CindyLinz> 不過, 可能有變得更難懂 @@"
+14:23:52 <CindyLinz> 對一般 programmer 來說, 遞迴已經是難懂的... 然後 FP lover 的用法就更難懂了 XD
+14:24:00 <_13h> 所以漂亮是怎麼定義的? XD
+14:24:56 <_13h> 很漂亮但一般人看不懂... "這就是藝術" (誤
+14:25:45 <CindyLinz> _13h: 我的定義是這樣.. 在達到同樣功能為前提, 定義很少; 也就是定義出來的不同的東西很少, 而每個東西的參數也盡量很少
+14:25:47 <_13h> 突然想到有一本書叫 real world functional programming
+14:26:43 <_13h> 不確定有沒有誤解，傳統的 SRP 跟 Refactoring 可以達到類似目標嗎？
+14:27:31 <_13h> SRP = Single responsibility principle
+14:28:01 <CindyLinz> 某種角度來說, 它就是 refactor 呀; 第一次寫不是 re-, 但第二次修改就是了.. 但是學了 functional programming, 就像開了一扇門, 多了很多很漂亮的手法可以用來 refactor
+14:28:18 <_13h> 嗯嗯
+14:28:44 <CindyLinz> 欸... 可能也沒有「很多」, 其實就是遞迴一招, 可以用得很玄妙
+14:29:16 <_13h> 有一本書叫 refactoring to patterns，大概就是那種感覺吧
+14:29:58 <_13h> 對一般語言來說，我實在不太敢用遞迴
+14:30:40 <CindyLinz> 就我對美的定義.. 用 pattern 以後可以讓原本亂七八糟的程式碼變成固定幾種制式 pattern, 這樣的確是變美了; 但是 pattern 的數量也最好不要太多
+14:30:54 <CindyLinz> pattern 種類太多, 又不美了
+14:31:32 <CindyLinz> _13h: 對一般應用來說, 演算法不要寫得太爛, 遞迴也不會慢到不可接受呀 ^^
+14:31:52 <_13h> 只要不是硬套 pattern 應該還好吧，大部份的使用情況都是為了解決問題，不用好像也沒其他方法
+14:32:04 <CindyLinz> _13h: python / perl 都能活的地方.. 遞迴不是大問題.. XD
+14:32:09 <_13h> 遞迴倒不是怕慢，是怕爆掉XD
+14:32:55 <_13h> 喔喔，我是指寫 c/c++ 的時候... 不過我寫 python 時也曾經因為遞迴爆掉，只好改寫程式XD
+14:33:00 <CindyLinz> 欸, 那種迴圈寫起來也很自然的地方就不用硬是換遞迴了, 不會變漂亮多少的 XD
+14:33:18 <_13h> 然後同樣程式搬到 scheme 就沒事了XD
+14:39:54 <YuLin> 我通常寫程式前，都會把函數定義寫出來
+14:41:11 <YuLin> 結果變的有點過頭，寫不出定義就寫不出程式了
+14:44:21 <CindyLinz> XD
+14:44:41 <CindyLinz> YuLin: 有什麼情況是定義寫不出來, 程式仍應該寫得出來的時候啊? @@"
+14:49:21 <CindyLinz> YuLin: 你在寫.... undefined 程式? XD
+14:49:41 <YuLin> 當我搞不懂該怎麼解決這題目的時候XDDD
+14:50:01 <CindyLinz> 所以是... 正在摸索作實驗的時候?
+14:50:20 <CindyLinz> 那不是應該是摸索作法, 而實驗作法也是要有定義呀?
+14:50:27 <CindyLinz> 嗯, 我知道有一種開發法....
+14:50:50 <CindyLinz> 就是亂寫, 憑直覺隨手寫隨手加
+14:50:57 <CindyLinz> 然後就跑跑看
+14:51:08 <CindyLinz> 看哪一次剛好沒 error, 那就是寫完了
+14:51:28 <CindyLinz> (回頭看看 php)
+14:51:53 <YuLin> 以前還沒學 haskell 跟 FP 前，我是會用這種直覺亂寫
+14:52:07 <YuLin> 現在就不會這樣靠直覺寫了
+14:52:57 <CindyLinz> 的確是此風不可長... # 亂寫試誤法
+14:53:00 <CindyLinz> XD
+14:53:11 <YuLin> 有時候會覺得自己的算法太簡單，大家都看得懂，就隨便寫下去，然後程式就爆掉了
+14:53:33 <MnO2> CindyLinz: 當我看不懂 legacy code 的時候，就會這樣做 xDDD
+14:54:02 <CindyLinz> 我是希望我搭飛機的時候, 那班飛機上的控制系統不是這種作法生出來的... (抖)
+14:54:17 <YuLin> XDDDDDDDD
+14:56:41 <MnO2> 我希望核四的控制系統不是這種作法生出來的
+14:58:14 <CindyLinz> 記得華航名古屋空難就是資訊系統錯誤造成的
+14:58:24 <CindyLinz> 進到一個 trap state
+15:01:08 <MnO2> 可能大部份比例的空難都是這樣造成的
+15:01:20 <CindyLinz> 那應該不是吧 @@"
+15:02:11 <hychen> 有學生的作業一寫超複雜的...
+15:04:01 <_13h> MnO2: 搞不好核四的控制系統沒問題，但實體建築偷工一樣爆炸 XD
+15:04:59 <_13h> 現實中的失敗應該都有一部份是人禍造成的XD
+15:05:10 <CindyLinz> 華航的澎湖空難是飛機金屬疲勞解體..
+15:05:42 <CindyLinz> 也是人禍, 飛機失事前22年有一次受損維修, 修的方式不對
+15:06:04 <_13h> 我記得 discovery 曾經有個節目在介紹飛機的自動導航系統，內容還蠻有趣的
+15:07:22 <_13h> 不曉得那部片是不是叫 auto pilot error.. 剛剛隨便 google 到的
+15:07:22 <CindyLinz> 是.. 有趣的有趣, 還是很不有趣的有趣 @@"
+15:08:43 <_13h> 印象中就是介紹自動駕駛系統的發展史  當裝也包含一些初期遇到的問題，空難之類的
+15:14:50 <mgccl> favonia: 我想了下我想要解决的问题不能纯粹的naive的利用monoid的性质做出来呢... 我来描述一下...
+15:16:06 <CindyLinz> _13h: 嗯, 這種沈重的問題大概都有趣不起來, 只會有很不有趣的有趣的問題 @@"
+15:16:58 <YuLin> 說到作業寫的複雜，我會想起這個 http://www.willamette.edu/~fruehr/haskell/evolution.html
+15:29:38 <mgccl> favonia: http://chaoxuprime.com/node/72 嗯, 我个人感觉只用那个blackbox是不可能的...
+15:44:51 <hychen> 最後一行.....
+15:45:05 <hychen> letoh, review別人的code也滿花時間的
+16:00:38 <mgccl> 我也不会写code... 我准备彻底放弃coding了... - -
+16:09:56 <hychen> letoh, 我haskell school 可以登入了
+16:28:33 <_13h> hychen: 賀!! 記得現在只有四個主題
+17:38:42 <hychen> xmonad 的 action.search 居然沒辦法打中文...
+17:40:40 <MnO2> hime ?
+17:41:29 <_13h> xmonad 用哪一套 toolkit ?
+17:41:37 <_13h> gtk 嗎?
+17:43:32 <MnO2> _13h: 他只有用 X11 的東西
+17:43:47 <_13h> 那就是 xim ?
+17:44:18 <_13h> 會很難裝嗎? XD 晚上有空的話再裝起來看看
+17:44:41 <_13h> 該不會需要 ghc 吧...
+17:45:47 <MnO2> _13h: 跟用的輸入法無關吧？ 他只是 window manager
+17:45:56 <MnO2> 要 ghc ， 不難裝
+17:46:21 <hychen> _13h, apt-get install xmonad # done
+17:46:50 <_13h> 有關啊，沒辦法打中文的話得看 search box 跟 im 有沒有連上線
+17:46:59 <_13h> 我才不用 apt XD
+17:47:37 <hychen> 應該是沒有
+17:47:46 <hychen> 而且他Xselection有unicode問題
+17:47:53 <hychen> 剛try了一下會爆炸 orz
+17:48:07 <_13h> 唔，看起來是比較陽春的 wm ?
+17:48:31 <hychen> 什麼叫比較陽春...
+17:48:36 <hychen> 功能超強的好不好
+17:48:40 <_13h> 沒用特別的 toolkit 的話，那就是得走 xim 啦，要看 wm 有沒有處理
+17:48:51 <suhorng1> _13h: 這麼說也不用 cabal 嗎www
+17:48:56 <_13h> hychen: 不能輸入中文...
+17:49:09 <_13h> suhorng1: 我沒用過 cabal 耶  如果可以的話我應該不會用
+17:49:35 <suhorng1> cool!
+17:49:43 <_13h> 就像 python 和 ruby 我也都不用 pypi 和 gem 這類東西
+17:49:58 <_13h> 阿  上次不小心用了 gem... 超後悔XD
+17:51:13 <hychen> pip不用?
+17:51:21 <_13h> 從來沒用過
+17:51:27 <hychen> hmm
+17:51:33 <hychen> how do you install module?
+17:51:38 <_13h> 其實有點講錯  我不是反套件管理  是反相依性管理
+17:51:50 <hychen> 人生苦短啊
+17:51:51 <_13h> build/install from source tarball
+17:52:01 <_13h> 用了 apt 才會少半條命XD
+17:52:19 <_13h> 我已經痛很多年了，能不用盡量不碰...
+17:53:04 <_13h> 如果 apt 能去掉相依性管理  我就可以接受了XD
+17:55:54 <_13h> 忘了補充，我也不用 cpan client... 都是直接抓 tarball 下來裝起來用
+17:56:40 <_13h> emacs 也不用 elpa，全部自己裝
+18:00:14 <_13h> cabel 應沒辦法跟系統的套件系統結合吧?
+18:01:24 <_13h> 打錯了  是 cabal  (一提到 apt 就有氣XD)
+18:04:50 <hychen> apt很好用啊
+18:06:16 <_13h> 是不難用啦，畢竟我也用了十幾年了，但真的出問題時很麻煩...
+18:16:21 <suhorng1> cabal的確沒整合呀@@
+18:16:34 <suhorng1> 好像更底層還有個ghc-pkg XD
+18:17:07 <suhorng1> 他跟系統的套件管理是獨立的吧?
+18:17:57 <_13h> 那跟系統套件打架時怎麼處理呢？
+18:27:32 <CindyLinz> _13h: haskell 還好啦, 幾乎沒什麼系統套件是用 haskell 寫的, 所以不會打架 (Y)
+18:27:52 <CindyLinz> _13h: 前提不成立, 所以結論恆真.. (逃)
+18:28:05 <favonia> CindyLinz: 我猜 _13h 在問另外一個問題？
+18:28:18 <favonia> _13h: 以使用者套件優先
+18:28:38 <favonia> _13h: 但如果有很多不同版本時我不知道會發生什麼事情
+18:28:58 <_13h> 我是指，像 debian 包了很多 haskell 套件，所以你們都不用 distro 提供的囉？
+18:29:11 <CindyLinz> cabal 可以一個 project 裡面用同一個 lib 的不同版本, 真是太邪門了 XD
+18:29:19 <favonia> _13h: 我個人作法是絕對不用系統管理系統裝 GHC 預設以外的任何套件
+18:30:10 <favonia> _13h: 每次更新 GHC 或想要更新某重要 packge 就直接把 .cabal 砍掉全部重 build xDDD
+18:30:24 <favonia> 反正全部重 build 也不會很慢
+18:30:36 <favonia> cabal 最惱人的就是 flags 記不住...
+18:30:51 <_13h> 例如 系統裝了 A 套件，但沒有 B 套件 (相依 A) 所以用 cabal 裝，但 cabal 會知道已經裝過 A 了嗎？還是會再裝一次？
+18:31:05 <favonia> 知道裝過 A
+18:31:24 <favonia> 因為系統套件只是塞到 ghc-pkg 看到的地方
+18:31:28 <favonia> 啊應該這樣說
+18:31:29 <_13h> 唔  怎麼知道的？要跟系統講好放在固定地方？
+18:31:43 <favonia> 對
+18:31:54 <favonia> 應該說 ghc-pkg 有規則
+18:32:08 <favonia> 打包的人的工作就是擺到 ghc-pkg 知道的地方
+18:32:10 <_13h> 那遇到不乖的系統不就完蛋了? XD
+18:32:24 <favonia> 那根本連 ghc 都動不了吧
+18:33:41 <favonia> _13h: 我的作法很 gentoo... 反正砍掉重練就好 xDDD
+18:33:48 <_13h> 唔，我不太確定... 沒辦法指定一下路徑就變得可以跑了嗎？
+18:34:14 <favonia> _13h: 不知道耶，你是說你想要裝系統套件？
+18:34:32 <_13h> 我基本上也是... 程式語言相關套件都是我自己編譯管理的，只有系統用的 gcc 裝 distro 給的
+18:35:04 <_13h> 我都自己裝啊，但印象中遇過幾次麻煩情形，apt 強制裝了一些東西...
+18:35:44 <_13h> 例如裝了某個 python 寫的軟體，然後就自動裝了一堆亂七八糟套件，然後就跟我自己裝的打架了
+18:35:57 <favonia> 喔喔
+18:36:13 <favonia> 所有 Haskell 寫的軟體我都用 cabal 自己裝
+18:36:31 <favonia> 就說很 gentoo 了... xDDD
+18:37:06 <favonia> _13h: 基本上 GHC 需要一些很基本很基本的套件
+18:37:17 <favonia> 那些套件我也建議不要自己亂更新比較好
+18:37:26 <_13h> 這也要知道才行呀，有的軟體一時偷懶沒先調查過，不曉得是用 python (或某語言) 寫的... 然後就炸了
+18:37:29 <favonia> 會全世界大亂 xD
+18:37:48 <favonia> 喔喔
+18:38:14 <_13h> 像 apt 的話，我有強制要 apt 不裝某些軟體，或不要亂升級，下場就是 apt 爛掉...
+18:38:42 <favonia> _13h: Haskell 寫得軟體是看得出來的
+18:39:01 <_13h> 惡搞套件記錄的話 apt 又囉哩囉唆的...
+18:39:22 <favonia> 你可以快速看網站然後關掉，然後問自己作者是不是有種莫名其妙的自豪 然後覺得網站仔細看的話字跟字之間都是 lambda
+18:39:30 <_13h> XD
+18:39:56 <favonia> 是的話就打 cabal install 軟體名稱
+18:40:34 <favonia> 大概就這樣 lolol
+18:41:42 <favonia> _13h: 我的想法是以後我想要用 nix~~~
+18:42:06 <favonia> _13h: 沒有什麼衝突的問題，比 gentoo 更暴力 wwww
+18:44:06 <suhorng1> 字跟字之間都是 lambda xDDD
+18:57:46 <YuLin> XD
+19:05:38 <CindyLinz> _13h: 覺得你的偏好是這樣的話, 似乎 FreeBSD 會是比 Linux 好的選擇?
+19:15:06 <CindyLinz> 它套件什麼的比較少, 可是管理得比較嚴密比較整齊
+20:49:08 <_13h> 其實 freebsd 我也有，不過日常使用還是 linux 方便，至少玩遊戲和多媒體方面有 driver
+20:50:15 <_13h> 我用的 distro 暴力度不輸 gentoo，安裝只是把 tarball 解開而已，直接蓋掉，升降級就把舊的砍掉換裝新的
+22:06:43 <b4283> 請問 haskell 有沒有方便的 wiki 軟體
+22:07:07 <b4283> 類似 ikiwiki 那種的
+22:17:20 <letoh> b4283: 那有什麼特別的嗎?
+22:56:35 <b4283> 沒什麼特別，就是簡單而且
+22:56:39 <b4283> 而已
+22:57:59 <letoh> 看起來像是另外轉檔?
+22:58:13 <letoh> vim wiki / ewiki 之類的玩法嗎?
+22:58:55 <b4283> ikiwiki 是支援 git 維護，其他的和一般的 wiki 差不多...

@@ -1,0 +1,21 @@
+13:52:43 <suhorng> idris 出新版了
+13:53:44 <suhorng> 應該是滿正常的更新
+14:22:28 <CindyLinz> suhorng: 可以簡單介紹一下什麼叫作「不正常的更新」嗎? ^^|
+14:28:14 <suhorng> 唔, 我想說的是主要是 bugfix 跟加一些常見的功能 (像是 pattern matching 裡面的 '@')
+14:30:56 <CindyLinz> 某個角度來說就是... 無聊低調到不行的更新? :p
+14:32:25 <suhorng> 就很正常阿XD 不是說什麼更新後「阿我的 code 不能編了」或「有這種 extension 唷 ^.<」
+14:39:14 <CindyLinz> miaoski: 所以.... 昨天 COUT 的 topic 到底是什麼? ^^|
+14:39:37 <CindyLinz> 昨天 COUT 是一個無菜單料理的概念? ^^|
+16:17:52 <miaoski> CindyLinz: 這個... 昨天就大家一起看 CPPCON 的概念
+16:18:08 <miaoski> fre@k 的母親送醫，所以只能開天窗了...
+16:22:52 <CindyLinz> 啊 @@"
+16:29:48 <mno2> https://phabricator.haskell.org/D155 沒注意什麼時候 haskell 換成用 phabricator 了 xD
+16:30:31 <mno2> 應該是去年 11 月左右 xD
+16:30:51 <CindyLinz> (看看 Simon Marlow...)
+16:34:42 <mno2> 他加入很久了吧 xD
+16:35:01 <mno2> 不過是不少人推 phabricator 就是
+16:35:30 <CindyLinz> 喔.. 但是他剛好是 phabricator 和 haskell 的交集啊 XD
+16:39:10 <petercommand> 竟然沒聽過 phabricator...XD
+16:39:42 <petercommand> 他有包含 issue tracker 嗎?
+16:40:33 <petercommand> 阿..看到了
+16:40:47 <petercommand> 看起來好像蠻有趣的 :p

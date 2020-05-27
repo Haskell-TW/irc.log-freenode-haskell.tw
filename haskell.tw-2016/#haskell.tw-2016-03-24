@@ -1,0 +1,31 @@
+00:06:44 <CindyLinz> f (f a -> a) -> f a
+00:06:48 <CindyLinz> @djinn f (f a -> a) -> f a
+00:06:48 <lambdabot> -- f cannot be realized.
+00:07:24 <CindyLinz> @djinn Traversable f => f (f a -> a) -> f a
+00:07:24 <lambdabot> Error: Class not found: Traversable
+00:07:40 <monochrom> djinn 應該不懂 recursive types 例如 []
+00:07:43 <CindyLinz> @djinn (Functor f, Foldable f) => f => f (f a -> a) -> f a
+00:07:43 <lambdabot> Cannot parse command
+00:07:54 <CindyLinz> @djinn (Functor f, Foldable f) => f (f a -> a) -> f a
+00:07:54 <lambdabot> Error: Class not found: Functor
+14:39:11 <pkmx> :t \fs -> let go xs = mapM ($ xs) fs in mfix go
+14:39:13 <lambdabot> (MonadFix m, Traversable t) => t (t b -> m b) -> m (t b)
+14:42:41 <pkmx> > let mloeb fs = { let go xs = mapM ($ xs) fs in mfix go } in mloeb [ Just . (!! 1) , Just . (const 0) ]
+14:42:43 <lambdabot>  <hint>:1:16: parse error on input ‘{’
+14:43:06 <pkmx> > let mloeb fs = let go xs = mapM ($ xs) fs in mfix go in mloeb [ Just . (!! 1) , Just . (const 0) ]
+14:43:08 <lambdabot>  Just [0,0]
+14:43:33 <pkmx> > let mloeb fs = let go xs = mapM ($ xs) fs in mfix go in mloeb [ Just . (!! 1) , Just . (const 0), const Nothing ]
+14:43:35 <lambdabot>  Nothing
+14:53:40 <CindyLinz> mloeb!
+14:53:58 <CindyLinz> 先看到後面的式子形狀有像 XD
+15:12:12 <pkmx> > let mloeb fs = let go xs = mapM ($ xs) fs in mfix go in take 5 $ mloeb [ Just . (1 : ) . (!! 1) , Just . (2 : ) . (!! 0) ] !! 0
+15:12:14 <lambdabot>      Couldn't match type ‘Maybe [a]’ with ‘[[a]]’
+15:12:14 <lambdabot>      Expected type: [a] -> [[a]]
+15:12:14 <lambdabot>        Actual type: [a] -> Maybe [a]
+15:13:04 <pkmx> > let mloeb fs = let go xs = mapM ($ xs) fs in mfix go in take 5 . (!! 0) <$> (mloeb [ Just . (1 : ) . (!! 1) , Just . (2 : ) . (!! 0) ]
+15:13:06 <lambdabot>  <hint>:1:135:
+15:13:06 <lambdabot>      parse error (possibly incorrect indentation or mismatched brackets)
+15:13:14 <pkmx> > let mloeb fs = let go xs = mapM ($ xs) fs in mfix go in take 5 . (!! 0) <$> mloeb [ Just . (1 : ) . (!! 1) , Just . (2 : ) . (!! 0) ]
+15:13:16 <lambdabot>  Just [1,2,1,2,1]
+16:56:03 <pkmx> > let mloeb fs = let go xs = mapM ($ xs) fs in mfix go in take 5 . fromJust . (fromDynamic :: Dynamic -> Maybe [Int]) . head <$> mloeb [ \xs -> toDyn . ((1 :: Int) :) <$> fromDynamic (xs !! 1), \xs -> toDyn . ((2 :: Int) :) <$> fromDynamic (xs !! 0) ]
+16:56:07 <lambdabot>  mueval-core: Time limit exceeded

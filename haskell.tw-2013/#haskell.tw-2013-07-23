@@ -1,0 +1,163 @@
+09:40:54 <Yu-Lin> 感覺工作有危機阿XD
+09:51:01 <godfat> 看起來 livescript 的 |> 應該是 haskell 的 flip ($) ?
+10:05:38 <Yu-Lin> 如果只看這個例子 map (.age), table2 |> fold1 (+)
+10:05:50 <Yu-Lin> 我還以為 |> 等於 haskell 的 .
+10:06:14 <Yu-Lin> fold1 (+) . map (.age) 這樣XD
+10:06:45 <godfat> …XD 是說我實在覺得 livescript 語法太亂了...
+10:10:54 <Yu-Lin> 乍看像是要用 javascript 實作 haskell
+10:11:19 <godfat> 可是 haskell 語法應該是很簡潔才對 @@
+10:28:08 <Yu-Lin> Underscores and appended letters are ignored.
+10:28:17 <Yu-Lin> 這個特性......總覺得怪怪的
+10:28:44 <godfat> appended letters 是指什麼？
+10:29:01 <Yu-Lin> 64_000km -> 64000;
+10:29:06 <Yu-Lin> livescript -> js
+10:29:54 <godfat> 喔喔，數字上
+10:34:09 <Yu-Lin> ........livescript 的 list 是想幹嘛啦XD
+10:35:45 <Yu-Lin> 才看到 list，就覺得他的符號跟特性也太多了
+10:35:54 <Yu-Lin> 我得修正我的看法
+10:36:23 <Yu-Lin> 乍看像是要用 javascript 實作 perl 版的 haskell
+10:36:46 <godfat> perl 版的 haskell XDDD
+10:44:14 <Yu-Lin> 我已經找不到更能表示 livescript 的說法了XD
+10:56:17 <_13h> > let
+10:56:18 <lambdabot>   not an expression: `let'
+10:56:29 <_13h> > let (|>) a f = f a in 3 |> (1+) |> (2*)
+10:56:30 <lambdabot>   8
+10:59:18 <_13h> > let (|>) a f = f a in [1,2,3] |> reverse |> head
+10:59:19 <lambdabot>   3
+12:01:42 <Yu-Lin> _13h: |> 讓我想起 Arrow.loop
+12:02:18 <_13h> Arrow.Loop 好像有點不太一樣? @_@
+12:05:24 <Yu-Lin> 我想說的應該是指同樣都用到 lazy 這點
+12:05:44 <Yu-Lin> 平常自己寫好像都沒善用到 lazy
+12:07:26 <_13h> 唔  我以為 |> 應該沒有特別用什麼 lazy，只是定義另一個 operator 而已?
+12:07:51 <_13h> 單純用 pattern matching 來處理
+12:08:26 <_13h> > let a |> f = f a in 3 |> (+1) |> (*2)
+12:08:27 <lambdabot>   8
+12:09:38 <_13h> 不曉得是不是基礎問題... (2*) 跟(*2)  效果好像是一樣的?
+12:09:59 <_13h> (*2) = flip (*) 2
+12:19:51 <godfat> 這是乘法的性質不是嗎？ XD
+12:20:09 <monochrom> (2 *) = (\y -> 2 * y), (* 2) = (\x -> x * 2)
+12:21:18 <_13h> 唔，我剛剛想到的是，(*2) 跟 (2*) 都可以用，是語言的規範還是哪裡有實作?
+12:21:47 <_13h> 因為套用其他數字也都能用，不太像是預先定義的?
+12:22:31 <monochrom> 如果 (*) 用作矩陣乘數, (* m) 和 (m *) 就不一樣了
+12:23:08 <_13h> 唔  也是  大概只有限定在 Num 的情況下成立
+12:26:09 <CindyLinz> 可是我很喜歡 perl, 很討厭 livescript.. 它們一定有根本上的不相似啊...
+12:26:14 <_13h> 我有辦法自己定義 (4*) 這樣的東西嗎？例如弄一個新的 operator   (@4) 或 (4@) 代表取 index 之類的?
+12:27:46 <_13h> 唔，用 (!!4) 可以  不過自己定義的話該怎麼寫?
+12:28:12 <godfat> _13h, 好像 infix 符號的 function 都可以，沒記錯的話
+12:28:19 <_13h> 嗯.. 不能用 (4!!)
+12:28:19 <CindyLinz> @ 有 syntax 上的特殊用途, 不知道可不可以用.. 一般別的符號的話
+12:28:25 <CindyLinz> 你是先定義 (!!)
+12:28:42 <CindyLinz> 然後 (4!!) 會變成自動幫你代入第一個參數為 4
+12:28:47 <godfat> CindyLinz, 你覺得他們最大的不同點在哪？我兩個都不熟 XD
+12:29:05 <_13h> (4!!) 好像會炸掉?
+12:29:08 <CindyLinz> perl 有盡量維持語意一致性
+12:29:10 <monochrom> ("abcde" !!) 及 (!! 4)
+12:29:25 <_13h> :t (4!!)  ERROR - Cannot infer instance
+12:29:26 <lambdabot> parse error on input `instance'
+12:29:27 <CindyLinz> 不同 feature 「交會」的時候, 不要有兩種或以上的解讀方式
+12:29:45 <CindyLinz> livescript 是努力加 feature, 破壞一致性也在所不惜
+12:29:51 <godfat> XDDDDD
+12:30:10 <CindyLinz> 或說.. 他以破壞一致性為樂
+12:30:24 <_13h> 我覺得加了一堆怪東西  感覺只是作者覺得方便就加? 但整個語言看起來好亂
+12:30:30 <CindyLinz> 讓使用者常有意外驚喜
+12:31:05 <CindyLinz> 很方便作火力展示
+12:31:16 <CindyLinz> 為了一個展示加一條 feature
+12:31:40 <_13h> 我在 google group 上找到 livescript 發表的信，好像是說 coco 跟 coffeescript 有一些不相容，所以就弄了 livescript 把兩邊好的東西合併起來，又盡量維持一部份相容性
+12:32:06 <CindyLinz> 想像, 把想到的語言裡面覺得很讚的寫法, 通通列在一起, 然後說, 這就是我定出來的語言
+12:32:27 <_13h> 最後就是弄出另一套標準，跟大家都不相容XD
+12:32:27 <godfat> 話說還滿高興我不是唯一覺得 livescript 實在很混亂的人 XD
+12:32:27 <godfat> 上次翻時，看到專門為 DOM 操作而設計的語法時，
+12:32:27 <godfat> 覺得實在不知道該說什麼...
+12:32:45 <CindyLinz> domain specific
+12:32:58 <CindyLinz> 因為 clkao 推荐, 我原本是想學的
+12:33:10 <CindyLinz> 那天晚上就讀了他的 spec(?)
+12:33:10 <_13h> 可是感覺上 livescript 把很多 domain 的東西都混進去了?
+12:33:25 <CindyLinz> 讀到一半就覺得, 不該這樣下去, 全讀下去一定是浪費時間
+12:33:49 <godfat> XDDDDDDD
+12:33:51 <CindyLinz> 後來 clkao 說不用讀, 直接看到什麼就用就好了
+12:34:01 <godfat> …..
+12:34:14 <godfat> 這樣不是連自己在寫啥都不知道了？ = =
+12:34:22 <CindyLinz> 我想也是, 用這種東西還妄想要有個整體觀點, 是緣木求魚
+12:34:55 <_13h> 那這東西的語法語意要去哪查？編譯出 javascript code 來驗證？XD
+12:35:24 <CindyLinz> 這邊呀 http://livescript.net/
+12:35:27 <CindyLinz> 右邊可以試用
+12:35:36 <CindyLinz> 中間是說明文件
+12:36:30 <godfat> 我們來弄個 livescript 簡化版，去掉莫名其妙的東西，叫 deadscript 好了
+12:36:58 <CindyLinz> 才不想咧 XD
+12:37:09 <godfat> XDDD
+12:39:08 <_13h> godfat: 去掉莫名其妙的東西後，是不是就變回 coco 了? XD
+12:40:06 <CindyLinz> 啊不對 clkao 是說, 只要看 coffeescript -> livescript 哪邊不相容的那一段就好了
+12:41:26 <godfat> _13h, 也許吧 XD
+12:41:26 <godfat> 是說我也仍然不喜歡 coffeescript, 或是說反正保留 js 語意的就很討厭 ~.~
+12:42:15 <CindyLinz> 那你要寫 runtime 跑 js 的程式會用什麼寫?
+12:42:53 <_13h> 應該只是為了讓熟悉 js 的人可以快一點上手吧，不然就跟學一套全新的語言差不多了
+12:44:53 <godfat> 我很久沒碰了，只寫後端而已，前幾天自己在玩 angular 才稍微又碰了一下
+12:44:53 <godfat> 因為也沒要寫多少，所以就直接寫 js 了
+12:45:17 <_13h> 請教實務上的用法，這些語言在 deploy 時都是編譯成 js 再丟出去嗎？還是可以直接丟出去跑?
+12:46:02 <godfat> 在 rails 裡時，deploy 時會自動 compile 成 js (加上 minify)
+12:46:03 <godfat> 或是 runtime 時第一次呼叫時 compile
+12:46:49 <_13h> 原來如此，如果是第二種方法就是得把 coffeescript 之類的 compiler 也一起丟出去囉?
+12:46:52 <CindyLinz> coffee 的話, 可以事先編譯也可以 online 用
+12:47:06 <CindyLinz> 我開發的時候會用直譯的, 比較方便, page reload 就好了
+12:47:23 <_13h> 看了一下整包 coffeescript 還蠻小的，但 typescript 就大很多
+12:47:45 <CindyLinz> 寫比較大的 client project 時, 我會用自己寫的 GreenDefine 來做
+12:47:47 <godfat> 放在 server 上跑沒錯
+12:47:50 <_13h> npm 抓下來的 typescript 大概 4~5MB
+12:48:18 <CindyLinz> 網址上加上 #compile 就會生出 compiled 版的下載 link
+12:48:26 <godfat> type 了好多 script 呀（誤
+12:48:33 <_13h> XDXD
+12:48:41 <CindyLinz> XD
+12:49:53 <_13h> 我在想，如果 browser 的 js interpreter 可以外掛 frontend plugin 的話，可以直接把這些 compiler 做的事包進去，以後就可以慢慢幹掉 javascript 了XD
+12:50:32 <godfat> <script type="text/coffeescript"></script>
+12:50:33 <CindyLinz> 然後.. 每一家 browser 支援的語言又可以不一樣了.... lol
+12:50:41 <CindyLinz> coffeescript 有這個用法
+12:50:52 <CindyLinz> 把你的 coffeescript 寫在這種 block 裡面
+12:51:04 <CindyLinz> 然後另外再 script src 它的 interpreter
+12:51:10 <godfat> 真不錯
+12:51:30 <CindyLinz> 它是用 ajax 去下載你指定的網址
+12:51:35 <CindyLinz> 所以 domain 必須一樣 XD
+12:52:07 <_13h> 就看各語言的 frontend plugin 有沒有實作出來呀，有支援的話以後搞不好就不用再翻譯成 js 才跑，搞不好直接 cs + jit 跑起來更快?
+12:52:45 <godfat> 那也要有人寫 vm? 還是一樣透過 llvm?
+12:53:17 <CindyLinz> google 弄了一個 Dart....
+12:53:30 <CindyLinz> 我是覺得這些大老們都想弄自己的 @@"
+12:53:44 <CindyLinz> 希望別人來容自己, 而不是自己去容別人...
+12:54:10 <godfat> chrome 可以跑 dart 了嗎？
+12:54:22 <CindyLinz> 沒玩過 @@"
+12:54:54 <godfat> 我是可以理解這種心情啦，不過也沒興趣支持（他們） XD
+12:55:23 <CindyLinz> 它說是 All modern browser, thanks to our Dart-to-Javascript compiler.. # http://www.dartlang.org/
+12:55:45 <cataska> 昨天看了一下，要跑 Dart 還要下載特製版的 Chromium
+12:56:14 <godfat> 隨便…. XD 我是記得聽說他們有自己做 vm
+12:57:04 <godfat> 說到 Chromium, 上次在 windows 想用 chrome, 但找不到灌在 d:/ 的方法，查半天好像會弄得很麻煩，最後找 chromium 解決...
+12:57:21 <CindyLinz> XD
+12:57:35 <CindyLinz> 沒試過把 %PROGRAM% 設在 D:\ ? (逃)
+12:58:16 <godfat> 我不知道，windows 自從 xp 後就沒在用了，搞不清楚…
+12:58:16 <godfat> 我只是想把非系統程式都放在另一槽啊 :(
+12:58:16 <godfat> 臭 google
+12:58:38 <_13h> 我大部份程式也都裝在 D:\   但 chrome 就不太想管它了XD
+12:58:57 <_13h> chrome 好像會裝在很奇怪的地方
+13:01:21 <_13h> 看了一下 wikipedia 的 dart 條目，好像也可以編譯成 js
+13:33:19 <Yu-Lin> 說到 perl，我也曾經是個 perl 愛好者，直到我膝蓋中了 haskell
+13:57:40 <favonia> 我之前好像搞錯 ICFP 比賽日期了，看來今年有機會玩 xD
+14:02:33 <favonia> 這邊好像很多人對 JS 系列很有興趣... 大家都有讀過 ECMAScript 標準嗎？
+14:19:10 <favonia> 因為我覺得 ECMAScript 標準也很奇妙...
+14:21:48 <_13h> 可以分享一下嗎？我對 ecmascript 的印象只有某一版消失的標準，參考實作用 sml 寫的，但現在已經找不到那份程式了XD
+14:41:07 <favonia> _13h: 它把語言各種怪設計詳實的寫下來了... 看到這些東西擺在眼前，讓我有一點不... 習慣。
+15:23:08 <_13h> google 找一下發現有 ecmascript 6... 好像又加了不少新語法
+15:54:16 <Yu-Lin> 那個不是還在開發中嗎？
+15:57:44 <cataska> 我想看 ecmascript sml 的實做！
+16:03:24 <_13h> 記得網頁還在，但檔案抓不下來
+16:04:18 <Yu-Lin> http://tech.mozilla.com.tw/posts/2343/ecmascript-6-features-in-firefox
+16:04:31 <Yu-Lin> 剛搜尋到的 ecmascript 6 相關資料
+16:04:55 <Yu-Lin> 最後那個有點像 pattern matching
+16:05:54 <_13h> cataska: http://lambda-the-ultimate.org/node/2289
+16:47:24 <cataska> _13h: http://www.ecmascript.org/license.php?file=es4-pre-release.M0.source.tar.gz
+16:48:18 <_13h> 怪了  我之前也是這樣下載，根本抓不下來XD
+16:48:21 <cataska> 簽訂契約後就可以下載了
+16:49:17 <_13h> XDXD
+16:50:10 <_13h> cataska: http://research.microsoft.com/en-us/um/people/crusso/ml2007/slides/herman-ml07.pdf  剛剛找到這個
+16:55:19 <cataska> _13h++
+17:22:20 <cataska> 不過 es4-pre-release source code 要怎麼跑啊 Orz...
+17:28:08 <_13h> 應該要裝 sml/nj 編譯?
+22:37:28 <favonia> letoh, cataska: 聽說裝 MLton 比較開心 xD
+23:47:14 <monochrom> 我讀過 ecmascript 4
+23:50:49 <monochrom> 我在 www.w3schools.com 開始學 javascript, 當然那只是皮毛. 之後就完全是苦讀 ecmascript 4 了!

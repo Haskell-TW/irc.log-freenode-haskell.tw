@@ -1,0 +1,280 @@
+00:10:43 <b4283> @@
+02:38:32 <letoh> MnO2: 我轉成 mobi 格式了，看起來很慘...
+02:40:35 <MnO2> letoh: 正常吧，圖都沒切過
+02:40:51 <letoh> 圖還好
+02:41:00 <letoh> 版面的寬度被設成固定的了
+02:41:43 <letoh> 然後字超小調一下應該可以  程式碼的部份對比爛掉，字放到最大也看不清楚
+02:42:06 <letoh> 然後文繞圖的排版也爛掉  有些圖會蓋到字上面
+02:42:38 <letoh> 不過應該調一下 css 可以解決一大半問題
+02:43:41 <letoh> 後來用 browser 看了一下，版面的部份也是有點問題@_@ 還沒深入追 css 的內容
+02:44:15 <letoh> (我是說英文版的就這樣了  中文版應該是直接繼承版型?)
+02:46:35 <letoh> MnO2: 你要看看嗎? 我把檔案給你
+02:46:57 <letoh> 不過你可能要裝好中文字型
+09:40:00 <MnO2> letoh: 好啊～
+10:04:19 <favonia> letoh: 你是直接把網頁惡搞成 MOBI 裡面嵌跛腳 HTML 這樣嗎？
+12:09:44 <mgccl> facebook hackercup. 嗯准备用Haskell做
+14:50:30 <letoh> favonia: 就隨便寫好 opf 描述擋，直接硬轉XD
+15:36:18 <letoh> MnO2: http://dl.dropbox.com/u/1466112/lyah_zh.mobi  這個
+15:36:52 <letoh> 這是昨天晚上的  還在研究 css 的部份
+15:45:14 <MnO2> letoh: thanks
+16:02:36 <letoh> https://leanpub.com/fp-oo  # Book: Functional Programming for the Object-Oriented Programmer   (隨便 google 到的東西)
+16:03:32 <MnO2> fp-oo 看起來很像是另一個 foo
+16:04:48 <letoh> http://young.blog.jp.klab.com/archives/cat_631980.html   klab 的 young blog 上有 haskell 分類
+16:24:05 <MnO2> letoh: 我覺得比我想像中好一些耶 xD
+16:24:17 <letoh> 真的嗎XD
+16:24:22 <MnO2> letoh: 還有你的內容為什麼是舊版 www
+16:24:56 <letoh> 喔  好像是我之前 clone 下來的吧  沒注意到內容XD
+16:25:15 <letoh> 先研究一下 navigation 怎麼設定，寫一堆 xml 很煩XD
+16:25:51 <MnO2> mobi 格式真的有點討厭
+16:25:59 <letoh> mobi epub 都一樣啊
+16:26:20 <letoh> opf 訂出來的規格本來就很囉唆  tag 一堆，效果都不一樣@_@
+16:27:05 <MnO2> epub 至少是 open standard ?
+16:28:20 <letoh> 我到現在還是不太確定這幾個規格的關係，看起來各家轉換器都吃 opf 定義，可以轉出 epbu 或 mobi，應該都有 standard 可以參考
+16:28:53 <MnO2> 我搜尋了一下好像都沒有教學要怎麼將現有給網站的 css / html 轉換成 epub/mobi ，像是要留意哪些東西
+16:29:16 <letoh> 資料很難找... 我現在是先用 kindlegen 這隻程式
+16:30:02 <letoh> 但有其他選擇啦，我找一下筆記XD
+16:30:44 <letoh> http://code.google.com/p/sigil/  這個軟體編輯 epub 會方便一點
+16:31:31 <letoh> 可以從 xml/html/opf/ncx 這些原始定義檔開始編輯  不過聽說還是有限制，所以我暫時直接手寫 ncx/opf
+16:32:37 <letoh> 如果你不在意效果，html 直接丟給 kindlegen 就會跑出 .mobi 了，例如  kindlegen xxx.html
+16:32:44 <letoh> 會產生 xxx.mobi
+16:33:30 <letoh> 但是在多個 html 的情況下就不能這樣了，還是會需要有一份 opf 檔，定義有哪些 html 要整合進來變成一本書
+16:35:33 <MnO2> epub 至少還有編輯器，如果轉 mobi 的效果好就以 epub 為 target xD
+16:35:40 <letoh> 然後書的封面我還不曉得要怎麼做，所以丟進 kindle 只看得到預設樣式 (寫書名的框框)
+16:36:01 <MnO2> mobi 也是蠻惡搞的 format, 裡面還可以安插 SQL
+16:36:26 <letoh> 安插 SQL 可以做什麼?
+16:36:52 <MnO2> 應該就是某些資料希望塞到 local 的資料庫中共用吧
+16:37:20 <MnO2> http://en.wikipedia.org/wiki/Comparison_of_e-book_formats
+16:37:23 <letoh> 嗯  一般的書應該用不到這種功能@_@
+16:39:10 <letoh> 不過有時間的話應該要看一下 amazon kindle publishing guidelines，裡面好像有很多調教電子書的介紹
+16:40:57 <CindyLinz> letoh: 讓大家可以在家練習 SQL injection.. (誤) # 16:36 < letoh> 安插 SQL 可以做什麼?
+16:41:06 <letoh> XDXD
+16:41:31 <letoh> MnO2: http://www.klip.me/  我還找到這個，但好像只能處理單一頁面
+16:43:20 <letoh> MnO2: 新版網頁是有分繁簡版對吧?
+16:43:32 <MnO2> 這種 sendtoreader 都可以做啊。我是想說像 leanpub 上有一些就是把 blog 的文章集合拿來賣
+16:43:42 <letoh> 嗯嗯
+16:43:49 <MnO2> 這種轉換要注意的地方好像沒有經驗分享
+16:44:05 <MnO2> 新版就是以繁體版為主，簡體用 opencc 轉
+16:44:38 <letoh> 我想應該不會是直接拿 html 來轉吧  本文稿應該要是更單純的型式... html 跟 epub/mobi 都是 target
+16:45:10 <MnO2> 對啊，我想發布 blog 的原始格式也不會是 html
+16:45:41 <hychen> 我想問個問題, assignment跟binding的差別?
+16:45:49 <letoh> 出現了XD
+16:46:11 <letoh> hychen: 你有看到我 g+ 上貼的連結嗎?
+16:46:21 <hychen> where?
+16:46:34 <hychen> I seldom to read g+ message
+16:47:18 <letoh> 嗯，就是在 python 文件裡看到對 assignment/binding 的描述，對這些觀念越來越混淆了XD
+16:47:36 <letoh> hychen: 文件裡說 "Assignments do not copy data — they just bind names to objects. "
+16:47:46 <hychen> hmmm
+16:47:59 <letoh> 不過這是 python 的設計
+16:48:02 <hychen> 每個人對assignment定義不一樣
+16:48:02 <MnO2> 要看討論的時候的 context 是什麼？
+16:48:07 <hychen> sml
+16:48:32 <MnO2> sml 我就不懂了，有請 favonia  xDD
+16:48:32 <hychen> sml  的binding 跟 assignment哪裡不一樣?
+16:49:48 <CindyLinz> 我最討厭 PM 對 assignment 的定義.... (遠目)
+16:50:02 <hychen> letoh, 第二週的課就有豁然開朗的感覺
+16:50:37 <letoh> 有什麼資料可以給沒上課的人看的嗎?
+16:50:52 <hychen> letoh, list is a syntax sugar of a tuple, a tuple is a syntax sugar of a record (we call it dict in Python)
+16:51:24 <letoh> 這件是我是從 cons cell 來理解的
+16:51:29 <letoh> 這件事
+16:51:32 <hychen> letoh, all function actually takes a tuple and use pattern matching to do the variable binding.
+16:51:36 <hychen> letoh, yes
+16:52:00 <letoh> 對寫 lisp 的人來說會比較直覺  因為都是用 cons 組合出來的
+16:52:30 <letoh> 用 (1st . 2nd) 變出 tuple 跟 list
+16:52:31 <hychen> letoh, 所以我也可以說其實python的function實際只吃一個tuple, 結構長這樣((), {})
+16:52:51 <hychen> letoh, 我之前在看scheme就一直搞不懂cons是什麼XD
+16:53:05 <letoh> 直接寫一個就懂了XD
+16:53:12 <hychen> letoh, 現在我越來越能感受的資料的運算就是資料的構成這件事
+16:53:31 <hychen> s/構成/結構/
+16:54:05 <hychen> letoh, 不過有很多人光是遞迴就卡住了, 因為直覺上會覺得這樣很沒效率
+16:54:29 <letoh> 不曉得  我覺得遞迴的型式也只是描述而已
+16:54:50 <letoh> 自從知道可以做 tco 以後就不怕了XD
+16:55:23 <CindyLinz> 說服他們: 遞迴會沒效率, 是因為 compiler 沒做好!
+16:56:25 <hychen> haskell 再怎麼慢，也比python快 # 我就是被Cindy這句話打醒 XD
+16:56:37 <letoh> 不過就算 gcc 可以做 tco，我在 c 裡面還是不太敢這樣寫XD
+16:57:02 <CindyLinz> 哈哈.. 我自己是用比 perl 快來提醒自己... XD
+16:58:20 <letoh> MnO2: 我看了一下你給的連結，原來 amazon 自家的 azw 根本就是 mobi，難怪 kindle 對 mobi 的相容性最好
+16:58:36 <MnO2> letoh: yes
+16:59:36 <CindyLinz> 暑假聽陳恭教授教 Lambda Calculus (untyped) 的時候, 學到: 資料本身是什麼不是重點, 重點是你要使用它的時候, 它能給出你要的效果..
+16:59:54 <CindyLinz> 覺得像是你說的這個的反相關係? # 16:53 < hychen> letoh, 現在我越來越能感受的資料的運算就是資料的構成這件事
+17:02:11 <hychen> 資料的運算就是資料的構成 這句是josh說的
+17:02:29 <hychen> 我在問他category theory是什麼的時候
+17:03:07 <CindyLinz> !
+17:03:08 <hychen> CindyLinz, PM 對 assignment 的定義 <- 這遠沒有客戶定義來的糟...
+17:03:49 <letoh> 問一下.. PM 是什麼意思?
+17:03:55 <CindyLinz> hychen: 還好我們公司不會有任何一個單一的重要客戶 XD (客戶的集合很重要, 可是集合太大了)
+17:04:04 <MnO2> Product Manager?
+17:04:05 <letoh> Project Manager ?
+17:04:06 <hychen> it depends. project manager, product manager
+17:04:18 <CindyLinz> letoh: Product Manager, 跟你說產品要有什麼功能要做, 什麼時候要做完的人
+17:04:25 <letoh> 我以為是程式語言的什麼結構XD
+17:04:25 <hychen> program manager
+17:04:36 <CindyLinz> hychen: 這個可能是挑程式風格的人 XD
+17:04:44 <hychen> CindyLinz, no
+17:04:47 <MnO2> 剛剛乍看我還以為是誰的名字的縮寫
+17:05:24 <hychen> program manager is a role like project manager but focus on more abstract high level topic .
+17:05:31 <letoh> MnO2: 新版網頁的寫法...
+17:05:37 <letoh> 會讓影像都爛掉
+17:05:45 <letoh> 可以用相對路徑嗎?
+17:05:56 <CindyLinz> hychen: 原來這個 program 不是程式啊 XD
+17:06:00 <MnO2> letoh: 應該已經改過了？
+17:06:12 <MnO2> letoh: 上次有 patch 過
+17:06:14 <letoh> 我看一下@_@
+17:06:35 <hychen> program manager 比較像擬定合作備忘錄之類的東西
+17:07:05 <hychen> 決定跨BU的合作之類的東西
+17:07:07 <MnO2> letoh: https://github.com/learnyouahaskell-zh-tw/learnyouahaskell-zh-tw.github.com/pull/11
+17:07:43 <letoh> MnO2: https://github.com/learnyouahaskell-zh-tw/learnyouahaskell-zh-tw.github.com/blob/master/zh-tw/introduction.html  像 L41 的 beta.png
+17:08:01 <letoh> L48 L54 的 nxt.png
+17:09:40 <letoh> 改成 ../img/beta.png 就正常了
+17:11:02 <MnO2> letoh: 應該是我沒有重新 generate 一次 html
+17:11:05 <MnO2> letoh: https://github.com/learnyouahaskell-zh-tw/learnyouahaskell-zh-tw.github.com/blob/source/_page.erb
+17:11:10 <MnO2> letoh: source 是對的
+17:11:14 <letoh> 嗯嗯
+17:11:16 <hychen> letoh, 四月份有introduction to logic
+17:11:34 <hychen> letoh, 要上嗎?
+17:11:52 <hychen> letoh, https://www.coursera.org/course/intrologic
+17:12:12 <letoh> thanks  我研究看看  應該可以
+17:12:30 <hychen> 我coursera很少碰到台灣人
+17:12:42 <hychen> 中國人到是不少
+17:13:28 <letoh> MnO2: 你再重新抓一次 mobi... 效果好很多耶
+17:14:23 <letoh> css 的部份有點怪，我再研究看看怎麼調
+17:14:38 <letoh> hychen: 之前在 plurk 看人家討論，有不少台灣人也在上課
+17:14:55 <letoh> 大概是因為不同課程所以遇不到?
+17:15:06 <hychen> 我選的這們只有一個,  但人在美國
+17:15:57 <MnO2> letoh: 404
+17:17:30 <letoh> 真的不見了XD   我重新放一次
+17:19:21 <MnO2> hychen: http://www.ptt.cc/bbs/PLT/M.1325722303.A.2A4.html
+17:19:26 <letoh> MnO2: http://dl.dropbox.com/u/1466112/lyah_zh.mobi  好了
+17:19:44 <MnO2> hychen: favonia 的舊文，不過可能對 assignment, binding 有點幫助
+17:23:38 <letoh> 程式碼的背景要調一下  其他部份看起來還可以
+17:24:32 <MnO2> letoh: 我抓到的好像還是舊的
+17:25:28 <letoh> 4fcc6dd5b0a933fab74e3b65d05bfe14  md5 XD
+17:25:59 <letoh> 檔案大小是 4475147 bytes
+17:27:59 <hychen> 我主要是被sml 的shadow有點搞混
+17:28:01 <MnO2> 喔喔，那應該是對的，只是看到封面還是熊貓就想說是舊的
+17:28:21 <letoh> 封面我沒改耶  我看一下新封面的圖在哪
+17:28:39 <MnO2> letoh: 沒有新的封面耶
+17:28:49 <letoh> 我懷疑是因為 js/css 的 link 爛掉，所以排版就變好了XD
+17:29:06 <letoh> 我發現 js/css 的路徑也是絕對的，所以抓不到
+17:29:26 <MnO2> hychen: 那就要等 favonia 回來了 xD
+17:37:11 <letoh> MnO2: 請問 Inder 是字型嗎? 為什麼需要自己指定字型@_@
+17:38:36 <MnO2> letoh: https://github.com/learnyouahaskell-zh-tw/learnyouahaskell-zh-tw.github.com/pull/7
+17:39:53 <letoh> thanks  原來這裡有答案
+17:41:19 <letoh> 果然是 css 的問題XD
+17:42:48 <letoh> 拿掉 css 後文繞圖排版就正常了@_@
+17:45:03 <letoh> css 應該有辦法把字型設成相對大小?
+17:45:17 <letoh> 我看大部份都直接設定 px
+17:49:33 <MnO2> 我跟 css 不熟 xD
+17:50:28 <letoh> 嗯嗯  我只會一點，先試著改改看
+17:51:19 <letoh> 我剛剛送了 kdk beta 的申請，說我想寫 galgame.. 不曉得 amazon 會不會接受XD
+17:55:50 <letoh> 改了一下寬度就好很多了
+18:12:16 <letoh> 現在的顯示器規格太多... 寫網頁的人應該很辛苦
+18:12:41 <letoh> 以前 css media 頂多就調一下 screen 跟 print，現在有一堆要調XD
+18:13:18 <letoh> http://en.wikipedia.org/wiki/List_of_displays_by_pixel_density#Amazon
+21:13:36 <favonia> MnO2: 為什麼不能安插 Haskell? （搞錯重點）
+21:15:03 <favonia> letoh: 當然有複製啊，複製的是 reference.
+21:16:39 <favonia> CindyLinz: 因為 lambda calculus 只有 function
+21:18:18 <drbean> Coursera去年的nlp-class好了. https://www.coursera.org/course/nlp
+21:19:49 <favonia> letoh: assignment/binding/variable 這些詞都已經被濫用了。全部都在講不同的東西
+21:20:14 <letoh> 嗯嗯  很難分辨到底在講什麼@_@
+21:20:48 <favonia> letoh: 我的作法是，忘了別人怎麼用，學理論版本然後重新翻譯他們的話 xDDD
+21:31:00 <favonia> hychen: 是也不是。「資料的使用就是資料的構成」大概是對的，可是以什麼為主是另外一回事。函式是以使用定義構成，很多語言的自然數是以構成定義使用。
+21:31:52 <hychen> favonia, 理論版本的assigment/binding這要去哪邊看?
+21:32:07 <favonia> CindyLinz: hychen: lambda calculus 只有函式，所以都只能用使用定義構成。
+21:32:24 <favonia> CindyLinz: hychen: 使用方法就是定義
+21:33:14 <favonia> hychen: 我老師那本開頭有點挑戰性的書（？）
+21:33:22 <hychen> favonia, which one?
+21:35:08 <hychen> hmmm, 由使用方法去定義資料嗎?
+21:38:56 <favonia> hychen: http://www.cs.cmu.edu/~rwh/plbook/ ?
+21:40:01 <hychen> 這本我有...
+21:40:07 <hychen> 前面就卡住了 orz
+21:41:15 <favonia> hychen: 我知道前面很有挑戰性... 其實後面章節比較簡單
+21:41:38 <favonia> hychen: 前面的章節是用來建立一個後面章節都可以用的超一般數學基礎
+21:42:10 <favonia> hychen: 所以他要考慮到所有可能的語言的所有語法
+21:42:42 <hychen> favonia, 這本書需要什麼前置知識嗎
+21:43:21 <favonia> hychen: "理論上"沒有特別的前置知識，尤其你學愈多程式語言通常只有負面效果
+21:44:09 <favonia> hychen: 我沒有特別推荐這本書啦 orz
+21:44:27 <favonia> hychen: 因為我也沒有仔細看過其他人的書
+21:44:37 <favonia> hychen: 只能說裡面有講
+21:47:03 <hychen> 為什麼學越多會只有負面效果, 容易混姚嗎?
+21:48:01 <MnO2> 我猜是實務上的 implementation 常跟理論有一些出入
+21:49:06 <favonia> hychen: 因為大家都用了那些詞可是其實意思都不一樣啊 xDDDD
+21:49:48 <favonia> hychen: 連 wikipedia 都因為這樣所以名詞都亂七八糟的
+21:49:49 <hychen> lol, 我就被sml 的shadow搞混了
+21:50:39 <favonia> hychen: shadow 跟這些都沒關係。那像是你懶得打 M.xxx 你可以 open M 然後打 xxx 就好
+21:50:45 <MnO2> favonia: 使用定義是指 operational semantic ?
+21:51:19 <favonia> hychen: 如果之前也有 xxx 那麼你就沒辦法用了
+21:51:45 <hychen> 可是 val x= 1;; val x =2;;
+21:51:51 <favonia> hychen: 這是跟 namespace 管理有關
+21:52:04 <hychen> 這樣是assignment?
+21:52:07 <favonia> hychen: no
+21:52:24 <favonia> hychen: 這是兩個完全沒關係的變數，剛好有相同的名字
+21:53:00 <favonia> 當你打 "x" 時，x 只是一個名字
+21:53:13 <favonia> 會指到哪個變數是另一回事
+21:53:28 <hychen> symbol -> variable -> value
+21:53:31 <hychen> 這樣?
+21:54:57 <MnO2> 名字應該是直接指 value 吧
+21:56:21 <suhorng> 像 val x = 1;; fun f n = x + n;; val x = 2;;
+21:56:35 <suhorng> 可是 f 永遠就是 n + 1
+21:56:37 <favonia> 沒有，一個變數沒有指到一個值。一個變數可以被一個值取代，但不會儲存什麼內容在裡面。
+21:58:31 <favonia> hychen: var x = 1 的意思是說
+21:58:41 <favonia> hychen: 底下的 x 全部取代成 1
+21:59:09 <favonia> fun f n = x + n 那個 n 就沒有講到底是什麼。用的時候才會填進去
+21:59:36 <favonia> > let x = 1 in x
+21:59:38 <lambdabot>   1
+21:59:39 <favonia> > 1
+21:59:41 <lambdabot>   1
+21:59:45 <favonia> 這兩個是一樣的
+22:00:34 <favonia> let x = 1 in ... 某種程度上就是說下面的 x 都填入 1
+22:01:06 <favonia> SML 寫法是 let var x = 1 in x end 其實是一樣的
+22:01:33 <favonia> 這些分號你可以想像成很多層 let let let let...
+22:03:08 <CindyLinz> 一直喊累 XD
+22:04:29 <suhorng> XDD
+22:08:14 <favonia> hychen: hello 還在嗎
+22:12:15 <favonia> MnO2: 不是耶，使用方法來定義就是之前講的負的型態之類的
+22:12:32 <hychen> favonia, y, 剛在寫作業, 卡關中
+22:12:32 <hychen> 所以他是一直replace下去?
+22:13:00 <MnO2> favonia: 我有點忘了上次講什麼了
+22:13:21 <favonia> MnO2: 名字只有指到變數
+22:14:10 <favonia> hychen: 是（至少在理論上）
+22:14:22 <favonia> hychen: 實作上要怎麼搞是另外一回事
+22:21:13 <MnO2> favonia: 了解
+22:21:35 <MnO2> favonia: 還有負的型態我想不起來了，你可以給我個關鍵字查一下嗎
+22:21:46 <favonia> 我找一下
+22:22:38 <favonia> 丟給你了 xD
+22:23:02 <MnO2> OK, thanks
+22:23:51 <mgccl> done with all problems on hackercup
+22:24:41 <mgccl> 最后一题因为Data.MultiSet的size是O(n)的导致挂了= =, 明显是可以O(1)时间的operation竟然implementation里是O(n)的. 改为distinctSize就解决了...
+23:05:32 <suhorng> @unmtl MaybeT IO ()
+23:05:32 <lambdabot> IO (Maybe ())
+23:05:43 <suhorng> @unmtl StateT IO ()
+23:05:43 <lambdabot> Plugin `unmtl' failed with: `StateT IO ()' is not applied to enough arguments, giving `/\A. IO -> () (A, IO)'
+23:05:48 <suhorng> @unmtl StateT Int IO ()
+23:05:49 <lambdabot> Int -> IO ((), Int)
+23:06:03 <suhorng> @unmtl EitherT Bool IO ()
+23:06:03 <lambdabot> EitherT Bool IO ()
+23:06:33 <suhorng> @unmtl ContT Int IO ()
+23:06:33 <lambdabot> (() -> IO Int) -> IO Int
+23:09:22 <suhorng> @unmtl MaybeT (StateT Int) [Char]
+23:09:23 <lambdabot> Plugin `unmtl' failed with: `StateT Int (Maybe [Char])' is not applied to enough arguments, giving `/\A. Int -> Maybe [Char] (A, Int)'
+23:09:59 <suhorng> MaybeT (State Int) [Char]
+23:10:12 <suhorng> @unmtl MaybeT (State Int) [Char]
+23:10:12 <lambdabot> Int -> (Maybe [Char], Int)
+23:16:17 <suhorng> 不好意思洗大家版.. 很好奇它到底怎麼疊上去的XD
+23:16:34 <suhorng> ContT 疊的方向好像跟其他的相反 @@
+23:33:09 <letoh> MnO2: 可以把 css 分開了  根據 media 選擇適合的 style
+23:33:42 <MnO2> letoh: cool, please send a pull request
+23:34:35 <letoh> 只是依 guidelines 實驗一下而已  要改完得花點時間XD
+23:35:16 <letoh> 而且新舊版 kindle 似乎得套用不同 profile...
+23:36:17 <letoh> 可以理解為啥出版社不想搞電子書了XD
+23:36:39 <MnO2> 舊版是多舊？ 2 代？
+23:37:02 <letoh> 不曉得，應該是 paperwhite 之前的就算舊
+23:37:45 <letoh> 新的 media type 叫做 kf8，目前支援的硬體還不多，大概只有 kindle fire 跟 paperwhite
+23:39:09 <MnO2> 喔喔，看起來真的有點麻煩，這種東西當我們想到的時候，理論上應該已經有人作 framework ？
+23:40:14 <letoh> 我查了一下 css3，最多就是從 device-width 搭配 screen 來處理
+23:40:56 <letoh> 像 amzn-kf8 或 amzn-mobi 這種東西看起來就不像標準 media，我猜各個 device 有自己的支援@_@
+23:41:21 <MnO2> 要測了才知道 xD
+23:42:18 <letoh> 對呀... kindle 還有 publishing guidelines 可以查，其他家的 device 有文件就好辦  不然只能寫好幾組 style 測試看看
+23:43:41 <letoh> 我現在是先把 style.css 內原本的設定指定給 pc，再從裡面選一些出來修改給 kindle 使用
+23:46:15 <MnO2> OK
+23:48:43 <letoh> 另外像是 embedded font 也新版才有支援
+23:49:14 <letoh> kf8 多了很多 css3 的支援

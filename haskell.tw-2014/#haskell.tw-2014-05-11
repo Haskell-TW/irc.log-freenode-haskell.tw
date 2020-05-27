@@ -1,0 +1,32 @@
+20:35:10 <c9sloud> 請問一下
+20:35:54 <c9sloud> as-pattern 跟 guard expression 的差異是在於?
+21:33:17 <CindyLinz> c9sloud: as-pattern 是  xx @ (a, b) 這種的嗎?
+21:33:22 <c9sloud> yeah
+21:33:36 <c9sloud> guard expression 會 evaluate ?
+21:33:50 <c9sloud> as-pattern 會 deconstruct 嗎?
+21:33:56 <CindyLinz> as-pattern 只是額外取個別名, 讓你後面方便用而已.. 在 eval 或 pattern match 的考慮上, 你可以當作只有看到 @ 右邊的東西
+21:34:19 <c9sloud> ohoh
+21:34:50 <CindyLinz> guard expression 應該是要檢查它的時候, 會將它 eval 成 True 或 False
+21:35:13 <CindyLinz> 或是奇怪的 otherwise.. 我目前常常直接寫一個 True, 想說比較短 XD
+23:51:15 <c9sloud> 若要譬喻的話
+23:51:57 <c9sloud> 好像是 guard expression 類似 Ternary Operator ?
+23:52:09 <c9sloud>  = true or false ? A : B;
+23:52:51 <c9sloud> CindyLinz: 聽說 pattern deconstruction 會在 runtime 另外 copy 一份 list 而 as-pattern 不會 ?
+23:56:25 <CindyLinz> c9sloud: 應該沒有 else 的部分..
+23:56:34 <CindyLinz> 就是, 沒有 : B 的部分
+23:56:44 <c9sloud> B 就是 otherwise ?
+23:56:46 <c9sloud> :p
+23:56:52 <CindyLinz> 但 otherwise 不一定存在
+23:56:56 <c9sloud> ah
+23:56:56 <CindyLinz> 沒有規定一定要寫
+23:56:57 <c9sloud> right
+23:57:10 <CindyLinz> 不過 Haskell 的 if then else 就真的是 ? : 那種東西了
+23:57:34 <c9sloud> Haskell 也有 if then else ?
+23:57:39 <CindyLinz> 然後... 你說那個 copy...
+23:57:49 <CindyLinz> 我想是跟這個作比較:
+23:58:37 <CindyLinz> let ab @ (a, b) = f in .... (假設有用到 a, b, ab) ....     和 let (a, b) = f ; ab = (a, b) in .... (假設有用到 a, b, ab)
+23:58:50 <CindyLinz> 因為後面那個例子, ab 是重新再建立回來的
+23:59:24 <CindyLinz> 不過這個是「有可能」被 optimize 掉的.. 但是不可信賴 XD
+23:59:35 <CindyLinz> Haskell 有 if then else 啊 ^^
+23:59:56 <CindyLinz> > if 'Z' > 'B' then "Z>B" else "Z<=B"
+23:59:58 <lambdabot>  "Z>B"

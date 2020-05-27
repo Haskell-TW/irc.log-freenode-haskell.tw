@@ -1,0 +1,108 @@
+00:19:11 <miaoski> CindyLinz: 聽說 cibs 星期三要蹺課
+00:19:22 <miaoski> 聽說 ch0upi_bsd 也要蹺課
+00:24:17 <CindyLinz> 那我也要蹺課!
+00:30:50 <CindyLinz> 只少兩個人嗎? 還是大家都要提前放連假? XD
+09:48:52 <miaoski> 只少兩個人啊... 其它人都嘛乖乖工作 XD
+09:49:10 <miaoski> 如果妳也要蹺課的話，就宣佈暫停一次囉! (希望便當也能順延...)
+11:11:12 <cibs> CindyLinz: 如果妳不蹺課的話我就會想辦法把時間橋出來 XD 如果妳也蹺課那最好 XD
+11:11:22 <cibs> miaoski: 便當一定可以的啊都嘛當天才訂
+11:34:37 <miaoski> cibs: 1/14 之後還有沒有便當就看情況囉
+11:42:08 <cibs> 有這麼硬嗎
+11:44:55 <miaoski> cibs: 談談看 :P
+11:50:27 <cibs> miaoski: 加油
+11:50:41 <cibs> 咦所以明天有沒停課啊
+12:05:40 <miaoski> cibs: 讓講師決定囉... CindyLinz 妳說呢
+12:49:33 <CindyLinz> 那不延喔 XD
+13:05:38 <miaoski> CindyLinz: OK... 我剛看到 ch0upi 了，叫他明天來上課
+13:05:48 <miaoski> cibs: 你加油，明天橋時間吧，科科
+13:42:19 <monochrom> esoteric 應該不加個人意見地簡單譯成: 小眾
+14:17:29 <CindyLinz> 等等為什麼, 他們不是有事嗎 囧
+14:18:10 <CindyLinz> 明天希望就可以把 Haskell 講完了 (某種角度.. XD)
+14:57:11 <cibs> miaoski: 時間橋不定 XD 放棄 我明天 pass
+14:57:28 <CindyLinz> cibs: 反正你本來就會....w
+14:57:38 <cibs> CindyLinz: 聽妳講不一樣啊~
+14:57:44 <CindyLinz> 唔.. 不過我猜有一些 7.8 的你可能還沒有聽過....
+14:57:53 <cibs> 對啊，只好自修投影片
+15:05:13 <miaoski> cibs: 可以直播
+15:09:00 <cibs> miaoski: 我沒辦法看 XD
+15:09:19 <miaoski> cibs: 殘念。Allen 也要看直播
+15:09:44 <cibs> 所以不只我和 ch0upi_bsd 請假喔
+15:09:58 <cibs> 明天不會只有你一個人吧 XD
+15:13:08 <cibs> CindyLinz: 所以新的投影片還沒 push?
+15:15:08 <miaoski> ch0upi_bsd 不會請假哦
+15:15:17 <miaoski> 明天只有你和 Allen 不在
+15:15:25 <miaoski> 為了你們，可以直播喲 ... ustream 直播，318 科技
+15:16:53 <cibs> 不行啦沒有電腦
+15:17:18 <cibs> 沒關係我自修吧
+15:17:20 <miaoski> cibs: 有手機就可以了
+15:17:22 <jiang42> 大陆可以看到么？想观摩一下
+15:17:31 <miaoski> jiang42: ustream 看得到就可以
+15:17:50 <cibs> miaoski: 有諸多困難三言兩語難道盡 XD
+15:18:26 <jiang42> http://www.ustream.tv/ 是指这个网站吗？日语无力。。。
+15:18:30 <miaoski> cibs: 不然我用 hangout 好了，到時候你看 youtube ?
+15:18:33 <miaoski> jiang42: 是的
+15:18:42 <miaoski> jiang42:  它它它有英文
+15:19:08 <cibs> miaoski: 喔這個好
+15:19:11 <jiang42> 我用的日本VPS。。。fucking GreatFireWall
+15:19:29 <miaoski> jiang42: 別激動....XD
+15:19:50 <miaoski> hangout 我好久沒設定了，用手機拍要試一試... XD
+15:20:01 <miaoski> 不然我先錄影再上傳，這個比較慢但一定沒問題
+15:20:05 <miaoski> CindyLinz: 妳說可以嗎？
+15:20:15 <jiang42> 果然直连不上。。。我换个美国的代理试试
+15:20:39 <cibs> 如果沒有別人需要的話我可以自修投影片下次再問 Cindy 就好
+15:21:15 <CindyLinz> 不要.. 我不要錄影 XD
+15:21:31 <miaoski> 講師拒絕錄影，那大家就殘念囉
+15:21:40 <miaoski> CindyLinz: 直播也不行嗎？
+15:21:42 <CindyLinz> cibs: 還在寫怎麼 push 啦.. XD
+15:22:00 <CindyLinz> miaoski: 還是怕怕的 orz
+15:22:17 <miaoski> 好吧 大家殘念 ^^;
+15:35:03 <cibs> CindyLinz: 我以為妳寫一部分 push 一部分 XD
+15:37:48 <CindyLinz> 好吧來 push 一下.. @@"
+15:38:08 <CindyLinz> 我自己用 git 的習慣不是很好, 沒有習慣寫到哪 commit 到哪... 都是 editor 一直開著用 @@"
+15:39:51 <CindyLinz> cibs: 在 draft branch 的 syntax2/ 目錄
+16:58:25 <cibs> CindyLinz: thx
+18:37:17 <cibs> 看完了好多 extension 喔 ...
+18:37:31 <cibs>       /,
+18:37:44 <cibs>       \,
+18:37:47 <cibs> 插這邊才對..
+18:49:59 <CindyLinz> 噢.. 我新寫的有些是往前面寫喔 @@"
+18:50:06 <CindyLinz> 不一定是接在最後面 orz
+18:50:19 <CindyLinz> 這個 /, \, 是什麼? @@"
+18:52:20 <cibs> 插入 , 號 XD
+18:52:53 <cibs> -> 看完了 "," 好多
+18:52:55 <CindyLinz> 嗯, 這次應該 existential 和 newtype 就算是把必要的講完了, 剩下的都是沒有不會死, 有了會更開心一點的東西
+18:55:58 <cibs> existential 原本沒看過 XD
+18:57:49 <CindyLinz> 噢.. 如果少了這個, 會有一些程式不能寫
+18:58:02 <cibs> 應該也可以寫成 data Cup :: * where
+18:58:28 <cibs> GlassCup :: Int -> Cup
+18:58:32 <cibs> Mug :: Double -> Cup
+18:58:42 <CindyLinz> GADT 的部分可以.. 但是直接標函數 type 的地方還是要用 forall
+18:58:43 <cibs> 嗎?
+18:59:31 <CindyLinz> 你可以乾脆點寫 ..... where Cup :: a -> Cup 啊 ^^
+19:00:30 <cibs> 喔對耶
+19:01:33 <CindyLinz> 不過 GADT 寫法雖然沒用到 forall 字樣, 但這種用法還是被叫作 existential type 就是.. 只是語法不一樣
+19:01:51 <cibs> 喔喔
+19:02:16 <cibs> 但有沒有辦法不用 glasscup 和 mug 就可以直接把針對 Int 和 Double 不同的 pour 分出來啊
+19:03:17 <CindyLinz> 你說的是 instance Pourable Int 和 instance Pourable Double 嗎?
+19:03:25 <cibs> instance Pourable Cup where
+19:03:57 <cibs> pour (Cup (Int d)) = Cup (d - 1)
+19:04:01 <CindyLinz> 然後也不要用你那個把 data constructor 寫散的方法?
+19:04:05 <cibs> pour (Cup (Double d)) = Cup (d - 1)
+19:04:08 <cibs> 可以這樣嗎? XD
+19:04:29 <CindyLinz> = 後面的程式碼要一樣
+19:04:53 <CindyLinz> 想不一樣就是靠 class / instance
+19:05:03 <cibs> why, 不可以看成 function 的 pattern matching 嗎? @@
+19:05:21 <CindyLinz> function 的 pattern matching 靠的是 value 比較
+19:05:37 <CindyLinz> 所以如果要用 function pattern matching 的話, 要把 type 資訊編碼到 value 裡面
+19:06:08 <CindyLinz> 有一串叫作 Typeable 和 Dynamics 的 (也在 std lib 裡) 就是在作這個..
+19:06:18 <cibs> 喔對耶我怎麼會寫出 Int d 這種東西 囧
+19:06:29 <cibs> 昏頭了
+19:07:22 <CindyLinz> 用 class / instance 的話就是.... 定義起來是分開定義, 但使用 (呼叫) 起來感覺是用同一個
+19:08:17 <cibs> 嗯嗯 如果定義起來也很方便就好了
+19:08:27 <CindyLinz> 定義也不用分很開啦, 連續行寫就好了啊? XD
+19:08:35 <cibs> XD ok
+19:09:39 <cibs> miaoski: 明天記得要少訂我的便當
+19:10:11 <cibs> 其實我可以來聽半小時，但好像沒什麼意義 XD
+19:48:27 <miaoski> 完惹，看不懂，明天屎定惹
+20:13:26 <CindyLinz> 囧
+20:13:47 <CindyLinz> 來加一下 do-notation..

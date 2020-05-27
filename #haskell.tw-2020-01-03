@@ -1,0 +1,3 @@
+04:04:11 <caasih> ptrcmd: 我想我需要的是類似 `sepCap` 這樣的東西，但是還不懂為什麼他要設計成一定成功
+04:04:31 <caasih> https://hackage.haskell.org/package/replace-megaparsec-1.2.0.0/docs/src/Replace.Megaparsec.html#sepCap
+20:51:54 <ptrcmd> caasih: 就像是 many 不會 fail 這樣吧

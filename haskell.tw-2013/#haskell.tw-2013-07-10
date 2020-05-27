@@ -1,0 +1,52 @@
+00:01:07 <hashcat> favonia: 新變數?
+00:02:58 <hashcat> favonia: 沒聽說過欸
+00:03:26 <favonia> hashcat: 例如要證明 "forall x". 可以挑一個沒用過的新變數代進去看看
+00:04:14 <favonia> 如果這樣能找到證明「通常」就沒問題（唉好多技術細節
+00:04:30 <hashcat> favonia: 覺得還是回到haskell好了, 這討論要是展開下去這裡就要改版了
+00:05:02 <hashcat> 我一開始沒想到直接去prolog問
+00:05:44 <monochrom> 啊, 要證明 "forall x, x>45", 選一個別的地方沒用過的名稱, 例如 x9378, 然後只須做 "x9378 > 45"
+00:05:47 <CindyLinz> 回到 haskell.... 我想想要怎麼相關...
+00:06:10 <CindyLinz> haskell 不能表示一階邏輯... ← 這樣
+00:07:13 <hashcat> 這裡每個人好像都不用睡覺阿
+00:07:52 <hashcat> 不會全是bot吧
+00:08:17 <monochrom> 我在多倫多, 我可是1.5小時前才睡醒啊! XD
+00:08:26 <hashcat> 其實我是bot
+00:10:05 <hashcat> 想不起多倫多在哪裡
+00:10:45 <monochrom> 在加拿大東部, 安大略省
+00:12:37 <monochrom> 跟紐約算是同一時區吧
+00:23:54 <hashcat> 睡了
+10:19:13 <MnO2> http://www.reddit.com/r/haskell/comments/1hvymr/what_does_it_takes_to_get_acmicpc_to_allow/
+10:19:20 <MnO2> 看到 mgccl
+10:20:26 <monochrom> 誰是mgccl?
+10:20:45 <MnO2> 之前有在 channel 上出現的一位朋友
+10:21:01 <monochrom> 啊
+10:29:03 <monochrom> 我認為十年內都不用指望acmicpc會加入haskell了. 首先, 在位的那班人, 別說haskell, 就連scheme, ml, f#等都不理(照我所知). 第二, 不少評判及學生都認為, 比賽難度應該來自程式語言迫你徒手寫出各種算法及數據結構.
+10:31:00 <monochrom> 若果你將第二點解讀為: 高階語言使既得利益者失去優勢, 你就讀對了. :)
+10:41:15 <monochrom> 我猜, 就連當初納入java, 也是萬不得已, 是向商業現實屈服而已. (或向IBM屈服? 畢竟是長期強大贊助者 XD) 大佬, java 不用你想幾時free, 程式庫又提供那麼多現成東西, 很多舊思想的人會眼紅的.
+10:51:20 <monochrom> 納入python倒是較有可能
+12:51:12 <favonia> monochrom: Haskell 不是跟 Java 差不多快嗎 xD... 不過我覺得最點點的是，在 ICPC 訓練賽中，我看過太多臨時趕出來，品質很差的 code orz
+12:56:20 <favonia> 然後 ICFP 比賽真的很有趣啊。 #haskell.tw 組一隊來參加吧 xDDD
+12:59:18 <favonia> 用 Haskell 寫 xD
+12:59:27 <favonia> 我有事所以今年不能玩 :/
+13:36:33 <CindyLinz> python 受限效率問題只能解解單題啊... @@"
+15:23:41 <CindyLinz> 台灣時間星期五早上八點開始啊? QQ
+15:26:11 <CindyLinz> 這樣如果只玩 lightning 的話.. 就是幾乎玩不到了啊.. 囧
+15:51:16 <Yu-Lin> 那時候應該在上班阿XD
+16:05:25 <CindyLinz> 對啊.. 下班以後只剩後半, 而且累了 orz
+16:54:26 <Yu-Lin> 深深體會到沒有 pattern match 是多不方便的事情Orz|||
+18:11:45 <_13h> icfp2013 在大陸辦啊?
+18:12:02 <_13h> 唔  不對  是另一個同名的XD
+18:56:57 <_13h> https://gist.github.com/egonSchiele/5752172   這個例子中，hello 跟 bye 的 ask 都可以拿到 "adit" 嗎？
+21:46:37 <suhorng> http://augustss.blogspot.tw/ 好有趣的blog, 可惜最後一次更新是 2011-07
+21:54:42 <suhorng> _l3h: 是
+21:55:52 <suhorng> _13h: 是
+23:20:15 <suhorng> > trace "text" (1 + 3)
+23:21:57 <favonia> suhorng: lambdabot 不見了...
+23:22:07 <suhorng> !!!
+23:22:10 <favonia> suhorng: 不知道為什麼（攤手
+23:22:19 <suhorng> 好吧 XD
+23:22:23 <petercommand> netsplit
+23:22:27 <suhorng> http://www.haskell.org/ghc/docs/latest/html/libraries/base/Debug-Trace.html 原來有這種debug工具
+23:23:03 <suhorng> 某方面來說很糟糕
+23:24:06 <suhorng> http://www.haskell.org/ghc/docs/latest/html/users_guide/ghci-debugger.html 這個可能健康些 不過我實在不會用 XD
+23:52:10 <favonia> petercommand: "freenode: Sorry folks, it's Silly Hour again as the DOS kiddies wake up and decide it's Attack freenode day. Services may be unresponsive."

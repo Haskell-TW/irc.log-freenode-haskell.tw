@@ -1,0 +1,40 @@
+10:28:46 <MnO2> GG, 昨天log檔斷掉了
+10:29:35 <MnO2> randomclown 是新朋友？
+10:30:32 <randomclown> MnO2: 新朋友，我一般在#haskell呆着.
+10:31:28 <MnO2> randomclown: 歡迎歡迎:)  你寫haskell很久了嗎？
+10:33:06 <randomclown> MnO2: 还好吧。已经不是特别菜了。
+10:39:06 <MnO2> randomclown:  I see.    所以是尋找 #haskell.* 的 channel 找到 #haskell.tw 的嗎？
+10:41:02 <randomclown> MnO2: haskellwiki上看到的
+10:45:28 <MnO2> OK, 歡迎常來交流一下 :)     irc 的 log 可以先看看 http://cindy.csie.org/irc.log/
+11:08:12 <randomclown> MnO2: 很安靜呀
+11:10:15 <MnO2> randomclown: channel 人比較少又是週日囉 :p
+11:15:50 <Yu-Lin> 我只有六日有空能稍微上來看一下阿，沒什麼機會參與主題阿XD
+11:17:55 <MnO2> Yu-Lin: 六日剛好是人最少的時候xD
+11:18:36 <favonia> 我竟然忘記開 irc.....
+11:18:48 <favonia> 最近忙到頭暈了 囧
+11:20:44 <randomclown> > replicateM 3 "abc"
+11:20:45 <lambdabot>   ["aaa","aab","aac","aba","abb","abc","aca","acb","acc","baa","bab","bac","b...
+11:29:02 <favonia> randomclown: Hi~
+11:29:11 <favonia> MnO2: 頻道應該沒有發生什麼怪事吧
+11:31:40 <randomclown> favonia: hi
+11:33:53 <MnO2> favonia: 你的怪事是指什麼？我這樣反問應該就是代表沒有什麼特別的事吧 xD
+11:34:07 <favonia> MnO2: ya 我安心了
+17:23:29 <CindyLinz> 不知道 Lambda Calculus 版的 Piet 會長什麼樣子 :p # http://www.dangermouse.net/esoteric/piet.html
+17:24:03 <letoh> piet 好像是視覺化編程
+17:26:02 <CindyLinz> 長得很像 Piet 畫的圖 XD
+18:58:59 <MnO2> 沒什麼水， 那這樣寫一下我看完 rust 0.4 tutorial 後的一點粗淺感想好了。
+18:59:40 <MnO2> 目前感覺他混雜了好幾種語言的特色
+19:00:00 <MnO2> trait, impl 分別對應 Haskell 的 typeclass 跟 instance
+19:00:42 <MnO2> 然後幾乎都是expression，這點就很像 lisp
+19:01:10 <MnO2> 但語法讓他表面看起來比較像 ruby, 畢竟ruby也受lisp影響很深。
+19:02:18 <MnO2> 可以仿製 OO 的風格， 但了解夠深之後感覺比較像 lisp 混 Haskell
+19:03:30 <MnO2> 然後因為著重在 system programming ，所以有三種 owner 的概念，幾乎對應 C++ 的 copy, move 跟 ref
+19:03:51 <MnO2> 雖然我也不知道 C++ 那些概念是從哪裡來的
+19:04:48 <MnO2> 有了copy 來順便帶進了 erlang 的 model ，應該說預設是像 erlang 用 copy  ，這樣 task 也好做
+19:06:08 <MnO2> 我覺得會可能吸引到主流語言的人的興趣大概會是寫 C++ 或 ruby 的人吧
+19:07:13 <MnO2> 其實他稍微有點複雜，大概寫python的人不會喜歡
+22:10:54 <favonia> MnO2: 最近沒有在追 rust... 這語言已經定死了嗎？
+22:11:16 <favonia> MnO2: 資源管理大概都是來自 linear logic 或 affine logic 吧
+22:11:32 <MnO2> favonia: 沒有耶， 還不停在改動
+22:11:44 <MnO2> favonia: 0.3 -> 0.4 變動還不少
+22:12:31 <MnO2> favonia: 我看距離1.0 milestone走了大概才三分之一

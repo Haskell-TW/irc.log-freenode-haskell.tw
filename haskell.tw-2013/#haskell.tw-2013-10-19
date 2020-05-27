@@ -1,0 +1,118 @@
+00:00:08 <letoh> 例如.. nvidia driver 的 installer 也是類似的東西  還有遇過幾個商業軟體也是這種裝法
+00:01:58 <suhorng> 真是神秘XD shell script 裡面到底可以塞什麼東西......... exit 之後東西就隨便你放!
+00:02:51 <letoh> 類似 sfx 檔? http://en.wikipedia.org/wiki/Self-extracting_archive
+00:03:05 <suhorng> 算是
+00:03:20 <CindyLinz> 77MB 的 .sh 檔!
+00:03:24 <letoh> 嗯  習慣就好XD
+00:03:33 <suhorng> 但如果用 python 這類的 shell 就不算能這樣了吧...XD
+00:03:50 <letoh> 什麼意思  應該可以吧?
+00:04:06 <letoh> 也許要用 data="""...""" 之類的
+00:04:09 <suhorng> 這樣不是變成要把檔案編碼嗎?
+00:04:11 <suhorng> 喔喔
+00:04:27 <CindyLinz> 重點是.. 如果那 77MB 意義上都是紮紮實實的程式碼, 不是多媒體資料的話, 真的是很恐怖啊 @@"
+00:04:47 <letoh> 我遇過壓縮檔將近 200MB 的
+00:04:55 <suhorng> letoh: 什麼魔術...
+00:04:56 <letoh> 不過其實編譯完才幾十 MB...
+00:05:18 <letoh> 那個 build system 可以客製一堆功能  我還沒試過全部編譯進來
+00:07:25 <CindyLinz> perl 檔在 __DATA__ 之後也是可以隨便放東西, 然後在前面的程式裡面可以用 open my $file, <DATA>; 來讀取後面這一塊的內容 @@"
+00:07:39 <letoh> 很實用的設計XD
+00:08:13 <letoh> 根本就 linker script XD
+00:08:48 <CindyLinz> Inline::CPP 的使用法, 有一種就是把程式碼寫在最後面 __CPP__ 裡面, 如果整個程式幾乎都是 C 的話, 可以把 vim syntax 設成 c.. XD
+00:09:07 <suhorng> CindyLinz: 不愧是perl
+00:09:26 <hashcat> http://megastep.org/makeself/
+00:10:14 <CindyLinz> hashcat: 教學文! XD
+00:10:51 <hashcat> 不算是吧
+00:11:27 <hashcat> 不過就我所知是無數.sh的幕後首腦
+00:11:42 <letoh> XDXD
+00:13:21 <letoh> 遇過一些都是取名 xxx.bin  其實裡面就是這種東西
+00:15:30 <suhorng> www
+00:15:54 <suhorng> 說到壓縮 讓我想到解壓縮以後還是自己的壓縮檔
+00:16:05 <suhorng> #1HZT1a_u (LPH66) [ptt2.cc]
+00:16:10 <suhorng> http://research.swtch.com/zip
+00:17:14 <letoh> 壓縮 quine ? XD
+00:17:18 <monochrom> 真可怕 XD
+00:17:21 <letoh> zip quine ?
+00:18:25 <suhorng> zip quine, tgz quine, .gz quine XD
+00:18:45 <hashcat> 不動點
+00:18:53 <suhorng> :p
+00:19:12 <hashcat> 解壓算法的不動點
+00:19:38 <hashcat> quine自身產生自身
+00:20:18 <hashcat> 跟得要經過解壓算法的輸出意義差有點遠
+00:20:40 <suhorng> 也是啦...w
+00:21:10 <suhorng> 就像今天看到一個"程式" http://mamememo.blogspot.no/2010/09/qlobe.html
+00:21:21 <suhorng> 跑八次後會回來 (地球儀轉一圈)
+00:21:43 <suhorng> 就..自己可以跑的比較有趣(?)
+00:21:53 <monochrom> 太可怕了 XD
+00:26:25 <hashcat> 好邪惡的東西
+00:26:43 <CindyLinz> 解不開的 r.gz (Y) # http://swtch.com/r.gz
+00:31:02 <suhorng> The nice thing about r.gz is that even broken web browsers that ......" Orz
+00:31:50 <CindyLinz> !
+00:31:59 <CindyLinz> 還好我是用 wget 下載下來 gunzip?
+00:32:25 <suhorng> hashcat: 其實我在想, 壓縮檔勉強也算是某種程式語言XD? 那解壓縮程式就是interpreter了
+00:33:34 <monochrom> 壓縮檔未算程式. 但不動點始終是有趣的.
+00:33:55 <suhorng> um, 不知道真的有什麼browser會去自動解壓 .gz 嗎...@@
+00:33:58 <CindyLinz> 不動點始終是有趣的.... wwww
+00:34:00 <hashcat> 壓縮檔語言應該是寫不出無窮迴圈吧
+00:34:44 <hashcat> 也沒有輸出入之類
+00:34:52 <suhorng> 對喔
+00:34:56 <suhorng> 不動點!
+00:35:35 <CindyLinz> 解壓縮應該就是 iterate 一次..
+13:19:18 <suhorng> Scheme的append這種不定參數的程式要怎麼實作阿？
+13:19:46 <suhorng> 該不會是 (define append (lambda (xs . xss) ..... (apply append xss)) 這樣直接用apply吧...
+13:22:08 <suhorng> 嗚 好像真的是這樣
+13:22:22 <letoh> http://srfi.schemers.org/srfi-16/srfi-16.html  ?
+13:23:02 <suhorng> case-lambda?
+13:24:11 <suhorng> 我原本是想說有沒有 (function x1 x2 . xs) 這種語法XD
+13:24:31 <letoh> 你要的可能是 rest 這種東西?
+13:26:17 <suhorng> 喔喔XD MIT Scheme有這個extension!
+13:26:51 <letoh> 有的會有類似 rest 或是 optional 之類的東西可以用  實作起來應該簡單一點
+13:34:13 <suhorng> 感覺比apply開心多了 XDD
+15:10:21 <CindyLinz> haskell 應該是用 class 生出一整排這種函數..
+15:10:42 <CindyLinz> 不過呼叫的時候要手動放結尾
+16:13:58 <CindyLinz> 練習了一下 https://github.com/CindyLinz/CodeSnippet/blob/master/haskell/VarArg.hs
+16:14:12 <CindyLinz> prt $ 3 <$> 4 <$> 'a' <$> Endl
+16:14:24 <CindyLinz> 如果能把夾在中間的 <$> 去掉就更好了 @@"
+17:13:11 <Yu_lin> http://helloworldquiz.com/#/game
+17:13:20 <Yu_lin> 從 hello world 猜程式語言
+17:13:45 <Yu_lin> 只要這程式語言有 class 的我都錯Orz|||
+17:14:13 <MnO2> http://www.reddit.com/r/programming/comments/1oi8wd/ruby_is_a_dying_language/ccs8yr8  這戰文還蠻有條有理的~ 雖然標題殺人。
+17:14:54 <letoh> Yu_lin: 剛好看到正在玩XD
+17:15:25 <Yu_lin> XD
+17:16:08 <petercommand> Yu_lin: 好多冷門語言= =
+17:16:12 <letoh> 有些題目超賊...
+17:17:02 <Yu_lin> 真的，有些題目（看向某題）
+17:17:05 <hashcat> 一下就死了
+17:17:30 <petercommand> 連Shakespear都出來了...
+17:17:53 <letoh> 錯一題了XD
+17:18:04 <CindyLinz> MnO2: ruby 再次被 rails 拉下水了.. XD
+17:19:13 <MnO2> 讓我想起 yinwang 說的戴帽子程式結果卻碰到有人沒有頭
+17:21:08 <MnO2> 那遊戲好多語言聽都沒聽過...
+17:21:27 <petercommand> 有一個好多lol就選lolcode結果錯了XD
+17:21:34 <Yu_lin> 只要不是物件導向的語言，其實都蠻好分辨的XD
+17:21:38 <letoh> 1600 XD
+17:21:58 <letoh> petercommand: 那題我也被騙XD
+17:22:10 <MnO2> 還有 lolcode 這種語言 xD
+17:22:29 <petercommand> XD
+17:23:44 <MnO2> 跟 CindyLinz 介紹的 happy 有異曲同工之妙。所以 error function 會寫成 GG 嗎？ xD
+17:24:03 <CindyLinz> XD
+17:24:30 <CindyLinz> 以前好像 clkao 寫了個 XD library
+17:24:35 <CindyLinz> 後來就無法維護了....
+17:24:44 <CindyLinz> 因為檔案開起來就會開始狂笑.......
+17:24:47 <petercommand> XDXDXD
+17:25:03 <Yu_lin> XDDDDD
+17:25:25 <petercommand> XXXXXXXD
+17:26:40 <CindyLinz> 隱隱覺得這是個重要特性... # 17:21 < Yu_lin> 只要不是物件導向的語言，其實都蠻好分辨的XD
+17:34:21 <letoh> 第二次又遇到一堆不認識的語言，不過這次猜到 2300 了
+17:35:45 <letoh> languages count 70 是說裡面只整理了 70 種嗎?
+17:37:58 <Yu_lin> 最高有人玩到 7k，這是全猜對嗎？XD
+17:39:15 <letoh> 不 google 可以玩到 7k ?
+17:40:05 <Yu_lin> 我不 google 只能玩到 3k，不知道那個 7k 的到底是怎麼玩
+17:44:04 <hashcat> 可能是用編譯器玩的
+17:44:13 <CindyLinz> 準備70種 compiler 嗎? @_@"
+17:45:02 <hashcat> 有些有線上的解釋器
+17:46:00 <Yu_lin> 我放棄了，那些有 class 的語言都太像了，我無法分辨....Orz|||
+17:46:04 <hashcat> 可能有人已經寫自動下載編譯的機器人
+17:46:21 <hashcat> 也不用全準備
+17:46:42 <hashcat> 選擇題當然要用刪去法
+17:47:58 <hashcat> 然後就滿分了
+23:02:49 <suhorng> CindyLinz: 上次看到 Text.Printf 是用 typeclass. 我記得很久以前這裡出現過 Haskell 的 variadic function 各種作法XD

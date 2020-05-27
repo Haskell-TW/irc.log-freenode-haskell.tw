@@ -1,0 +1,71 @@
+12:01:19 <b4283> _13h: 昨天的討論蠻有趣的
+12:01:54 <_13h> 哪裡的討論?
+12:02:22 <_13h> 我積了好幾天的 log 還沒空看，明天又要消失了
+12:02:29 <b4283> 這個頻道有 logbot XD
+12:04:07 <_13h> 我出門以後基本上就沒辦法上網了XD
+12:05:37 <favonia> b4283: ？
+12:08:20 <b4283> 昨天第一次聽到把 stack 當 continuation 的說法
+12:09:00 <b4283> 在王垠解說 complier vs interpreter 那一篇
+12:09:28 <_13h> 來個連結? 不過本來就是這樣不是嗎? XD
+12:14:58 <favonia> 我也有這種感覺。看過很多種 continuation 都可以寫成類似 stack 的樣子
+12:15:03 <b4283> http://www.zhihu.com/question/21486706
+12:15:10 <b4283> http://www.zhihu.com/question/19643954
+12:15:20 <b4283> www.zhihu.com/question/21483774/
+12:15:26 <favonia> 應該說可以寫出一個有 stack 的虛擬機器，把整個 stack 串起來就是 continuation
+12:16:37 <b4283> 舒跑寫的 lambda vm briefing 好像也有寫到這個耶
+12:18:08 <b4283> 等一下，會不會我搞錯了
+12:37:14 <_13h> 第一個連結有點無聊，第二個連結在回文裡有看到 vczh 回應
+12:42:32 <_13h> b4283: 沒看到 continuation 的討論啊@_@
+12:43:40 <b4283> 對..我記錯了，抱歉 @@
+12:45:55 <_13h> 喔沒關係啦  所以這幾天有在討論這個話題喔？等有空再回頭看一下XD
+12:48:53 <_13h> 那天的投影片我只看了前面一點點而已，但我對 continuation 理解其實是把動作串在一起而已，簡單的做法就是把 ret 變成 jmp
+12:50:15 <_13h> 然後就會變成 forth (小誤XD
+12:50:38 <_13h> 就類似 threaded code interpreter 那樣的運作方式
+13:17:48 <miaout17__> https://plus.google.com/u/0/117380487359344039293/posts/SR5nvQ2J1Xi
+13:18:01 <miaout17__> Comment: Scala is very weird (?)
+13:25:50 <CindyLinz> "Yin programming language" !
+16:41:51 <mno2> 我也不太喜歡 scala ，不過好像越來越多人用，為了吃飯還是學一下。
+17:22:30 <hashcat> scala哪不好了
+19:34:25 <MnO2__> 先說這只是我看一個下午的感覺。我覺得就純粹語言的層面，Scala 有點複雜。所謂複雜就是你看的語法不太能想像他究竟是怎麼實作或組出來的。很可能你看了一段時間之後，發覺你的直覺跟他的實作機制不同。這點類比的感覺就是 C++
+19:35:05 <godfat> 同感
+19:35:07 <MnO2__> 另外有一些特性，像是 implicit，多少會讓人想到 C++ 會自己做 implicit conversion。
+19:35:20 <MnO2__> 如果沒有加 explicit 的話啦。
+19:35:30 <godfat> implicit 超恐怖... 比 c++ 更恐怖 XD
+19:36:24 <MnO2__> 其實這一項很難想像是一個好處列出來比壞處多的。感覺就是很常會被誤踩的地方 (雖然我沒有實際數據佐證)
+19:36:59 <MnO2__> 我個人直覺可能類似是 hack，為了要讓某些表象的語法看起來很漂亮而加的
+19:37:04 <godfat> 我可以想像的狀況是，例如只有 stdlib 裡面這樣用，其他人不要用之類的
+19:37:38 <godfat> 其中一個狀況是讓 Integer 自動轉成 RichInt
+19:37:55 <MnO2__> 恩，但這一項也會讓人想到 C++,  我很難想像 C++ 沒寫過一段時間的人可以去碰 STL 裡面的程式
+19:38:29 <godfat> 要很熟 template 和設計理念 XD
+19:38:36 <MnO2__> 是的
+19:42:02 <MnO2__> 不過牽扯到實際面，要在 JVM 上挑一個語言，可能還是會挑 Scala
+19:42:19 <godfat> exactly my points...
+19:42:45 <MnO2__> 在這個年代找工作要迴避掉 JVM 實在太困難了 xD
+19:43:55 <godfat> 所以我很期待 https://github.com/Frege/frege XDDD
+19:43:55 <godfat> 雖然都沒實際試過...
+19:48:40 <MnO2__> 這個嘛.. 聽說 Clojure 有碰到一些 JVM 實作的困難，所以某些寫法 performance 一直上不去。所以我停留在目前 JVM 上 functional lang 感覺是不太有搞頭的印象 xD
+19:50:34 <godfat> 我記得聽說 clojure 有不少東西是在 clojure 層面自己做，
+19:50:35 <godfat> 所以確實效率有點上不去。不過 clojure 滿動態的，
+19:50:35 <godfat> 我會覺得應該跟 scripting language 比啦... XD
+19:53:02 <MnO2__> 恩，所以我覺得大概就是某些沒那麼要求的 case 用吧
+19:53:17 <MnO2__> 我自己是學一套就希望他盡量可以弄到夠快
+19:53:44 <godfat> 我在 ruby 裡打滾久了，不介意 XDD
+20:43:48 <Yu-Lin> 沒人要去申請 PLT 版主嗎？
+20:45:07 <favonia> 老實說，沒有版主到底會怎樣啊？
+20:45:52 <godfat> 暫時不會怎麼樣，久了可能會被取消（不一定）
+21:11:53 <MnO2__> 待廢看板在三個月內無人申請板主，予以砍除看板。
+21:15:08 <MnO2__> 但沒查到沒人認領究竟會不會進入待廢
+21:16:45 <MnO2__> http://www.ptt.cc/man/TransPSY/D1B1/M.1229631737.A.D24.html  舊規定有無版主一個月會進入待廢
+21:16:50 <MnO2__> 但新的好像沒看到
+21:18:50 <hashcat> implicit 是用來傳參數的吧
+21:19:55 <hashcat> 怎看都沒隱轉換那麼恐怖
+21:20:05 <MnO2__> "abc".map(_.toInt)
+21:20:30 <MnO2__> "abc" 會從 String 變成 StringOps
+21:21:01 <hashcat> 先去收東西
+22:41:05 <hashcat> StringOps 是什麼
+22:59:51 <miaout17__> Scala的String是Java的java.lang.String，但Scala想要對其定義新的操作 (ex. toInt)
+23:01:09 <miaout17__> 所以就定義了一個class StringOps，定義implicit conversion String->StringOps
+23:01:43 <miaout17__> 呼叫"123".toInt時，"123"就先自動被轉型為StringOps，再call member function
+23:04:52 <miaout17__> 不過Scala的implicit可能來自很多地方，規則非常混亂 Orz 之前Scala Taiwan聚會walter前輩有一場相關的talk
+23:04:55 <miaout17__> http://stackoverflow.com/questions/5598085/where-does-scala-look-for-implicits
+23:05:18 <miaout17__> 不同版本行為還可能不一樣 (雖然是edge case, 2.8vs2.9)

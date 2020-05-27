@@ -1,0 +1,16 @@
+14:43:12 <cataska> http://a.haskellcn.org/topic/531f134d98942416ea000062 # 對岸出了 haskell 中文書
+14:44:59 <CindyLinz> 「編著」耶 看起來像是自己寫的不是翻譯的?
+15:07:46 <cataska> 對，是自己寫的
+16:36:52 <mno2> http://product.dangdang.com/23434287.html#catalog
+16:38:04 <CindyLinz> 比起英文書, 真是超便宜...
+16:38:09 <CindyLinz> 只是沒有電子版 @@"
+16:41:20 <mno2> 便宜就買一本啊 :p
+16:42:01 <CindyLinz> 可是實體書很難看 orz
+16:42:56 <cataska> 現在流行自炊電子書甚麼的
+19:06:10 <motephyr> 咦 Functional Thursday想到的時候就過了..
+22:46:34 <suhorng> http://dev.stephendiehl.com/hask/ What I Wish I Knew When Learning Haskell 2.0 （這網址…）
+22:46:55 <suhorng> 話說這懶人包也太強大了吧（望向左邊的目次）
+22:47:12 <suhorng> 在我的電腦上甚至會超出螢幕...
+23:54:59 <monochrom> Prelude 已有 error, 實不應 import GHC.Err
+23:55:34 <monochrom> 要上課了!
+23:56:11 <suhorng> 好驚人,為什麼會特別注意到那一點XD

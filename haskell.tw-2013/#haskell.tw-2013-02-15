@@ -1,0 +1,236 @@
+00:10:59 <UncleHandsome> 請問一下有人的wm是xmonad嘛XD？
+00:15:03 <favonia> UncleHandsome: ._./
+00:15:49 <UncleHandsome> 想請問一下使用的感想跟方便性XD 因為現在是用awesome 想說試試看！！
+00:16:45 <favonia> UncleHandsome: 如果喜歡 Haskell 和 awesome 的話應該會很開心，兩方優點和起來。
+00:18:33 <UncleHandsome> favonia: 哦哦 謝謝
+00:19:14 <favonia> UncleHandsome: 簡單來說就是用 Haskell 寫 rc.lua
+00:20:40 <CindyLinz> xmonad ._./
+00:20:57 <CindyLinz> 超級方便...
+00:20:59 <favonia> UncleHandsome: 因為重新編譯等等問題已經在 library 中處理掉了，所以就只剩 wm 設計小差別（tags, workspace）和語法（Haskell <-> lua）問題 xD
+00:21:32 <favonia> UncleHandsome: 我講 awesome 的優點是拿一個程式當設定檔。xmonad 也是這樣子。
+00:21:38 <CindyLinz> 稍微用上手了就回不去了...
+00:21:57 <UncleHandsome> 哦哦XDD 太好了！！ 感謝兩位大大的解釋！！
+00:22:13 <favonia> 就寫個小小設定檔
+00:22:19 <CindyLinz> (小聲) 我什麼都沒有解釋啊 :p
+00:23:04 <favonia> UncleHandsome: 有個我覺得贏的地方是... 3 行寫出來的預設 wm 就很好用啦！！！我沒用過 awesome 但聽說要馬上有個可以用的稍微比較麻煩一點 xD
+00:23:40 <favonia> 不過反正最後程式都愈寫愈大（愈改愈多） xD
+00:24:00 <UncleHandsome> awesome預設丑丑的 我也只是加個按鍵再家個潮一點的邊框而已XD
+00:24:18 <UncleHandsome> 我自己就沒有去改lua的library了QQ
+00:24:29 <CindyLinz> 從說明初看 tile base 的 window manager 覺得很蠢.. 但實際用下去, 發現它極簡的幾個動作, 就完全覆蓋我原本用 Window 時所有的拉視窗大小和位置的動作的目的..
+00:25:05 <UncleHandsome> 這是我awesome目前的配置
+00:25:06 <UncleHandsome> http://i.imgur.com/87LHcza.jpg
+00:25:41 <CindyLinz> 我目前還沒有放 status bar
+00:25:51 <UncleHandsome> 所以都是空的XD？
+00:25:56 <favonia> 你都喜歡開到最大的話，這些 wm 都沒什麼差吧 xD
+00:26:15 <CindyLinz> 對啊, 而且在只有一個窗的時候連一 pixel 的邊都沒有
+00:26:15 <favonia> UncleHandsome: 當然不會有空的... 每一個 pixel 都要用到！ xD
+00:26:26 <UncleHandsome> XDDDDDD
+00:26:45 <UncleHandsome> 聽起來好有趣www
+00:26:50 <CindyLinz> 特別去設定這個沒有邊的情況, 是為了在用有些軟體的時候可以直接把滑鼠推到最邊邊用
+00:27:15 <CindyLinz> 例如說 chrome 的 tab 在最上邊, 如果還多個 xmonad 邊的話, 滑鼠推到最上面就點不到 tab 了
+00:27:29 <UncleHandsome> 哦哦
+00:27:35 <favonia> CindyLinz: 這有人已經寫好「自動迴避」啦
+00:27:45 <CindyLinz> favonia: 我應該就是用那個吧.. ^^|
+00:27:47 <favonia> 我就有用 lol
+00:27:52 <UncleHandsome> 那不能就更加不需要滑鼠了XD？
+00:27:58 <CindyLinz> 我不是自己寫的啊, 只是是說 default 不是這樣 ^^|
+00:28:11 <favonia> UncleHandsome: 滑鼠是邪惡的東西！！！（逃
+00:28:19 <favonia> 用鍵盤比較快
+00:28:20 <CindyLinz> UncleHandsome: 看用什麼... 用 chromium 瀏覽網頁的時候還是沒什麼辦法 :Q
+00:28:34 <favonia> 因為網頁本身就很邪惡，所以沒辦法
+00:28:50 <CindyLinz> 不是每個網站都可以用 tab 或 ctrl-f 就走透透的 @@"
+00:29:03 <favonia> CindyLinz: 因為網頁本身很邪惡啊～～
+00:29:06 <UncleHandsome> favonia: 贊同滑鼠是邪惡的東西！！
+00:29:12 <CindyLinz> 然後有的程式也不是 non-mouse friendly @@"
+00:29:15 <CindyLinz> favonia: XD
+00:29:18 <letoh> 邪惡!
+00:29:26 <UncleHandsome> CindyLinz: 真的 像是fb 只能靠w3m了(誤
+00:29:46 <letoh> 左下角的顏文字XD
+00:29:52 <favonia> CindyLinz: letoh: UncleHandsome: 只要想想滑鼠給對電腦不熟的人造成多少負擔就覺得很崩潰
+00:30:13 <favonia> 只要不能用非慣用手操作的，都對使用者要求太高啦！！！
+00:30:30 <favonia> 滑鼠需要的動作都太累了
+00:30:45 <UncleHandsome> letoh: 歸派氣功玻！！
+00:31:10 <letoh> 竟然還有人可以設定 mouse gesture... 太可怕了，手會提早壞掉吧
+00:31:22 <UncleHandsome> favonia: 真的太贊同了lol 決定要換xmonad了！
+00:31:23 <favonia> 我真的很希望這些介面偶爾體諒一下操作電腦不方便的人
+00:31:27 <UncleHandsome> 感謝各位的建議XD
+00:31:49 <CindyLinz> 還有 rdesktop 連別台 windows 遠端桌面的時候.... wwww
+00:31:59 <favonia> letoh: 雖然 xmonad 好像可以裝這個...
+00:32:01 <CindyLinz> 還有 virtualbox 裡面放 windows 的時候.... wwww
+00:32:05 <favonia> 有人寫好的樣子
+00:32:27 <favonia> letoh: http://xmonad.org/xmonad-docs/xmonad-contrib/XMonad-Actions-MouseGestures.html
+00:32:35 <letoh> 我看到同事在玩 gesture 時，感覺好像被什麼滑鼠仙上身...
+00:32:48 <CindyLinz> letoh: 你確定人家不是用 eye-track 在用? XD # mouse gesture
+00:32:56 <favonia> xmonad-contrib 收集了一堆大家寫的東西
+00:33:23 <favonia> 想要什麼功能可以從裡面翻翻看有沒有人寫了
+00:33:31 <letoh> 不是XDXD  好像是 firefox 的功能? 看他操作網頁就覺得很痛苦@_@
+00:33:35 <favonia> 像 gesture 這麼邪惡的東西當然有人加上去了 xDDD
+00:33:42 <UncleHandsome> lol
+00:33:52 <CindyLinz> Firefox 好像好多年以前就有 gesture..
+00:35:00 <CindyLinz> letoh: 可是他本人很開心很得意? ^^|
+00:35:15 <letoh> 好像是這樣沒錯@_@
+00:35:42 <UncleHandsome> 如果他可以用滑鼠寫code那我說不定就會福了XD
+00:35:51 <favonia> letoh: 快改用 xmonad 設計一些更誇張的 gesture
+00:35:53 <CindyLinz> UncleHandsome: 不是不行唷...
+00:36:01 <CindyLinz> UncleHandsome: 我不是說螢幕小鍵盤
+00:36:07 <favonia> letoh: 例如寫 letoh 的筆劃電腦就會閃一下
+00:36:11 <CindyLinz> 是有一個叫作「衝鋒輸入法」的東西 XD
+00:36:25 <letoh> favonia: 要編譯時就畫個魔法陣之類的?
+00:36:39 <CindyLinz> http://jedi.org/blog/archives/003182.html
+00:36:45 <favonia> letoh: 畫不圓怎麼辦
+00:37:00 <letoh> 就 compile error 吧XD
+00:37:17 <letoh> 魔法陣畫錯不是都會召喚出奇怪的東西嗎? XD
+00:37:30 <favonia> 那...
+00:37:31 <UncleHandsome> http://www.youtube.com/watch?v=0d6yIquOKQ0 這也太帥了XDD
+00:37:35 <favonia> 應該讓視窗上下顛倒？
+00:37:37 <CindyLinz> 繪圖軟體也只用滑鼠嗎?
+00:37:44 <CindyLinz> 繪圖軟體也不用滑鼠嗎?
+00:37:50 <CindyLinz> (打錯 ^^|)
+00:37:52 <favonia> CindyLinz: 繪圖軟體，顧名思義...
+00:37:56 <CindyLinz> 我看同事是都用繪圖板
+00:37:57 <favonia> 當然要用繪圖版啊
+00:37:58 <letoh> 我有繪圖板
+00:38:02 <favonia> 不過我比較窮
+00:38:06 <CindyLinz> 所以繪圖板不邪惡了? XD
+00:38:10 <CindyLinz> 還是更邪惡了 XDD
+00:38:14 <letoh> 最多再加個 trackball
+00:38:29 <letoh> 不過這兩個在畫圖以外的場合很少用就是
+00:38:32 <CindyLinz> track ball 和滑鼠已經相去不遠了吧 ^^|
+00:38:44 <favonia> 我不反對這種滑鼠用法啊。你可以發現到你不會因為滑鼠操作失誤而有糟糕的結果
+00:38:48 <favonia> 也不需要很精確
+00:38:56 <favonia> 我的意思是說如果滑鼠介面 ok
+00:39:09 <favonia> 請不要要求使用者要能很精確的控制
+00:39:13 <CindyLinz> 那些作美術的同事, 好多都直接拿繪圖板代替滑鼠了
+00:39:13 <letoh> 我覺得 trackball 比滑鼠好操作 (不玩遊戲的話)
+00:39:21 <favonia> 例如剛好可以到視窗邊邊
+00:39:24 <favonia> 穩定的按下
+00:39:24 <letoh> 嗯  繪圖板比較方便
+00:39:27 <favonia> 拉開
+00:39:29 <favonia> 這是有病嗎
+00:39:35 <CindyLinz> 玩射擊遊戲的話, 繪圖板會死 ^^|
+00:39:53 <CindyLinz> 會不能無限旋轉
+00:39:58 <letoh> 筆頭會先被點壞吧XD
+00:39:59 <favonia> CindyLinz: xD
+00:40:11 <letoh> 有空試試好了XD
+00:40:16 <CindyLinz> letoh: 射擊是小事, 可能可以設在鍵盤上 :p
+00:40:27 <CindyLinz> letoh: 可是繪圖板轉身的話轉到最邊邊就止住了 ^^|
+00:41:11 <letoh> 轉身的話大概就一直畫線吧? 感覺還來不及繞背就會被幹掉了XD
+00:41:26 <CindyLinz> 你板子又沒有無限大 XD
+00:41:47 <CindyLinz> 繪圖板不是絕對定位嗎?
+00:42:24 <letoh> 唔  對啊  但轉一點點以後  鏡頭就會轉向正面了不是嗎?
+00:42:33 <letoh> 喔.. tps 好像不行XD
+00:50:54 <CindyLinz> xmonad 剛裝完什麼都沒改, 第一次啟動的時候會不知道什麼時候啟動完成了...
+00:51:13 <CindyLinz> 因為下 startx 之後螢幕會黑掉.. xmonad 啟動完以後螢幕還是黑的... ._.
+00:51:55 <CindyLinz> 後來加上了啟動後自動幫我開一個 term ^^|
+00:52:16 <UncleHandsome> 5k4
+00:52:20 <UncleHandsome> 這XD
+00:52:23 <CindyLinz> 所以現在 startx 之後, 覺得還是在文字模式... XD
+00:52:29 <CindyLinz> 又沒邊..
+00:52:35 <CindyLinz> 根本就一樣 XD
+00:52:37 <UncleHandsome> 我先照arch wiki改動好了XD
+00:52:52 <UncleHandsome> 有utf8支援的console嘛XDD
+00:53:00 <CindyLinz> 不過啟動真的是超快.. 可能螢幕黑下去的那瞬間其實是真的已經好了 XD
+00:53:21 <CindyLinz> 啊現在也多事加了個桌布
+00:53:41 <CindyLinz> 可是只要正在用的那個 screen 裡面有正在用的視窗..
+00:53:46 <CindyLinz> 桌布就看不見了.... ._.
+00:54:27 <CindyLinz> 只要有一個, 一個窗就好, 桌布就會不見 XD
+00:54:40 <UncleHandsome> XD
+00:55:20 <letoh> 用 tiling wm 還需要桌布嗎?
+00:55:33 <letoh> 應該很少看到桌面吧
+00:55:39 <CindyLinz> letoh: 告訴我這個 screen 是空的 XD
+00:56:31 <letoh> 唔，會出現底色... root 不特別設的話好像是灰的?
+00:57:00 <CindyLinz> 唔.. 不過我那時裝完是純黑色.. ^^|
+00:57:33 <CindyLinz> 真的是什麼都沒有, 無極而太極... zz
+00:57:42 <letoh> 那就真的跟文字模式一樣了XD
+00:58:08 <favonia> letoh: 可以擺嚇自己的圖案
+00:58:11 <favonia> letoh: （誤）
+00:58:12 <CindyLinz> orz
+00:58:15 <UncleHandsome> 這樣就真的回歸道上個時代了lol
+00:58:37 <letoh> 幹嘛這樣...XD 放個美女圖也好啊
+00:59:49 <CindyLinz> 哎呀, 發現滑鼠游標會露餡 XD
+01:00:18 <favonia> CindyLinz: 快換成透明的滑鼠游標
+01:00:20 <letoh> 好像可以設成一段時間不動就消失?
+01:00:26 <letoh> 透明的...XD
+01:00:28 <favonia> 寫 script 放進快速鍵裡面
+01:00:32 <CindyLinz> 考慮一下... ^^|
+01:00:49 <CindyLinz> 正在用滑鼠的時候也透明好像不太好..
+01:00:56 <favonia> 這樣才刺激啊
+01:01:01 <CindyLinz> 不過靜止幾秒就透明的話可能不錯
+01:01:04 <favonia> 透明滑鼠採地雷
+01:01:11 <CindyLinz> 有時候滑鼠真會擋到要看的東西 @@
+01:01:34 <CindyLinz> favonia: 這... 人活得好好的, 何必.....
+01:02:13 <CindyLinz> 咦, 發現我現在正在用的 gnome-terminator 裡面, 只要鍵盤一按, 滑鼠游標就會消失
+01:02:38 <CindyLinz> 那只要按一下就可以藏起來了 XD
+01:03:19 <UncleHandsome> urxvt就沒這個功能了XD
+01:04:10 <CindyLinz> gnome-terminator 有點肥.. 而且我有了 xmonad, 就完全用不到它的 tab 功能了... ._.
+01:04:16 <CindyLinz> 不是 tab, 是 split
+01:07:45 <UncleHandsome> <-不喜歡gnome lol
+01:08:39 <CindyLinz> 因為會牽拖一大堆可能用不到的 lib 嗎?
+01:08:45 <CindyLinz> 還是因為 unity 介面? ^^|
+01:09:16 <CindyLinz> 可是別的 term 我字體設不好.. :(
+01:09:38 <UncleHandsome> 對阿 太肥了
+01:10:00 <UncleHandsome> 之前debian系統跑起來吃了8xxM的記憶體
+01:10:08 <UncleHandsome> 現在arch只要11xM lol
+01:10:23 <UncleHandsome> arch是awesome XD
+01:10:25 <CindyLinz> 真小....
+01:11:33 <CindyLinz> 我這台是筆電, 之前用 debian.. 顯示卡 driver 有問題, 偶爾會整台機器死當 @@"  現在換 ubuntu server 以後這個問題才消失.. QQ
+01:12:24 <UncleHandsome> http://i.imgur.com/MsCbA5Q.jpg 像這樣lol
+01:12:42 <UncleHandsome> term推荐用urxvt 字體我用inconsolata + lihei pro
+01:12:45 <UncleHandsome> 整個很舒服XD
+01:13:26 <CindyLinz> apt 裡面沒有 lihei 的樣子?
+01:13:45 <UncleHandsome> 網路下載的XDD
+01:14:47 <letoh> lihei 好像是 apple 的?
+01:14:52 <UncleHandsome> 嗯嗯
+01:15:06 <letoh> 儷黑吧
+01:15:29 <CindyLinz> 我需要學習一下 urxvt 的設定檔怎麼弄 ._.
+01:15:49 <UncleHandsome> 其實很好弄 可以參考arch wiki XD
+01:15:58 <letoh> urxvt 會比 vte-based term 好用嗎?
+01:16:22 <CindyLinz> *rxvt 系列的設定檔是不是用法都一樣?
+01:16:49 <letoh> mrxvt 有自己的設定檔
+01:17:01 <letoh> rxvt 好像是設 xresource
+01:17:15 <UncleHandsome> 嗯嗯
+01:17:18 <CindyLinz> https://wiki.archlinux.org/index.php/Rxvt
+01:17:48 <CindyLinz> 一眼就看到 perl extensions 的 section :p  是天生就很 programmable 的 term 嗎?
+01:18:06 <UncleHandsome> 這是我個人用的http://pastie.org/6115221
+01:18:11 <CindyLinz> 啊! urxvt 又是那個德國人寫的對不對!
+01:18:28 <letoh> 德國人喜歡 perl 嗎?
+01:18:36 <UncleHandsome> who!?
+01:18:37 <CindyLinz> 那個 libev, 還有 perl 的 AnyEvent 系列 / JSON::XS 的作者!
+01:19:18 <CindyLinz> libev 用在 ghc 和 nodejs 底層的 IO event queue
+01:19:26 <UncleHandsome> 哦哦
+01:19:42 <CindyLinz> 我有種到處都會遇到他的奇異感覺....||
+01:20:12 <UncleHandsome> 看來是位超級大大XD
+01:22:26 <UncleHandsome> 不得不睡了 感謝各位的幫忙XD have a good night
+01:24:51 <letoh> 快換 twm.. 吃掉的記憶體應該更少XD
+01:29:00 <CindyLinz> 晚安 ^^
+01:30:37 <CindyLinz> xmonad 說是很小.. 1200 行 code.. 可是要裝 xmonad 就會把一整套 ghc 裝下來 ^^|
+01:31:01 <letoh> 怎麼感覺有點像詐欺 (誤
+10:07:43 <UncleHandsome> 早安 lol
+10:07:51 <UncleHandsome> CindyLinz: 然後我就裝了整個ghc了...
+12:40:22 <favonia> @pl f = 1:foldr(\e l->(1+e:1:l))[]f
+12:40:22 <lambdabot> f = fix ((1 :) . foldr ((. (1 :)) . (:) . (1 +)) [])
+12:43:28 <favonia> @pf fix((1:).foldr((.(1:)).(:).(1+))[]
+12:43:31 <lambdabot> Maybe you meant: bf pl
+12:45:42 <favonia> @unpl fix((1:).foldr((.(1:)).(:).(1+))[]
+12:45:42 <lambdabot> Unbalanced parentheses
+12:45:45 <favonia> @unpl fix((1:).foldr((.(1:)).(:).(1+))[])
+12:45:45 <lambdabot> fix (\ g -> 1 : (foldr (\ j p -> ((:)) (1 + j) (1 : p)) [] g))
+12:47:25 <favonia> @pl (\ j p -> ((:)) (1 + j) (1 : p))
+12:47:26 <lambdabot> (. (1 :)) . (:) . (1 +)
+12:49:03 <favonia> @pl (\ p -> ((:)) (1 + j) (1 : p))
+12:49:03 <lambdabot> ([1 + j, 1] ++)
+13:22:43 <CindyLinz> UncleHandsome: XD
+13:22:54 <CindyLinz> UncleHandsome: 不管啦~ 你要相信這是個好的開始!
+13:23:01 <CindyLinz> (更像邪教了..)
+13:25:54 <CindyLinz> 沒 ghc 就不能改 xmonad config 了.. 我覺得就算有 xmonad 編好的 binary 還是需要有 ghc ^^|
+13:27:41 <CindyLinz> 我在想.. 為這種純作 config 使用的 haskell.. 也許可以考慮弄一個輕量型的 ghc library, 可以編進要拿 haskell 當 config 的程式裡面
+13:28:20 <CindyLinz> 這種情形的應用, 應該比較不需要 ghc 強大的 optimize.. 甚至直接用 dynamic type 的方式實作都行吧 :p
+14:12:32 <mno2> c9s: welcome back
+14:18:46 <c9s> mno2: XDD
+14:18:51 <c9s> yeah
+14:19:26 <c9s> 太忙了
+14:19:28 <c9s> @@
+22:09:51 <favonia> CindyLinz: 重點在於型態檢查啊...
+23:00:05 <letoh> 改掉吃空白的行為後  現在斷行的結果很滿意
+23:00:11 <letoh> 再來改其他的XD
+23:50:46 <favonia> CindyLinz: 沒有那些東西，我想連決定到底要呼叫哪個函式都有困難吧

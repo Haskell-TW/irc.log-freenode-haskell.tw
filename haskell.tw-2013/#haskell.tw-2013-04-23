@@ -1,0 +1,42 @@
+10:30:52 <MnO2> http://crooney.github.io/cinder/graph.html
+10:35:42 <MnO2> http://10th.paperboy.co.jp/workshop#kidsruby     小朋友也能學 Haskell 嗎？xD
+10:48:34 <MnO2> http://www.yinwang.org/blog-cn/2013/04/21/programming-languages-are-not-tools/
+10:48:45 <MnO2> 作為一個程序語言，並不是好心想「幫助人」就可以說是好的。如果是這樣的話，那麼我就可以把所有國家的髒話都加到你的語言裡面，因為它們可以幫助我們罵人。
+10:49:26 <MnO2> 我很喜歡他妙語如珠 xD
+10:53:24 <_13h> 我覺得 haskell 的抽象概念太多了，小朋友可以理解嗎？
+10:53:51 <monochrom> 我倒覺得, 充滿髒話的程式語言一定大受歡迎!
+10:55:35 <MnO2> _13h: yeah 我也這麼覺得
+10:55:55 <MnO2> monochrom: 這時候就不得不提草泥馬語了, https://code.google.com/p/grass-mud-horse/
+10:57:36 <suhorng> letoh: 像「可是 Haskell 做得过分了一点，由于对类型推导，一阶逻辑和 category theory 等理论的盲目崇拜，Haskell 里面引入了很多不必要的复杂性。(下段略)」?
+11:01:32 <_13h> 把 wtf 當作 delimiter 好像不錯.. defun foo (...)  <body>  wtf
+12:33:54 <favonia> _13h: f*ck foo (...) shut up 這樣？
+12:35:10 <_13h> 先不說現在已經很少人願意去當學徒，遇到有的學徒什麼都還沒學到，就先會要求一堆福利 (晚上班 早下班)
+12:35:19 <_13h> 丟錯了XD
+12:35:28 <_13h> 這種語言不會越寫越火大嗎? XD
+12:35:49 <_13h> 剛剛在裝 google hangout  結果 chrome 好像快當掉一樣XD
+13:42:11 <suhorng> 草泥馬語XDDDD
+14:43:39 <CindyLinz> 我曾經用過「囧」當 dilimiter XD
+14:43:55 <miaout17> 冏
+14:44:30 <CindyLinz> 那時要找一個平常程式裡面沒用到的字來當 dilimiter
+14:44:40 <CindyLinz> 就不用一天到晚 escape ^^|
+14:45:25 <miaout17> 來寫個冏囧語好了。冏囧莔崮
+14:45:40 <CindyLinz> orz
+14:55:13 <hychen> 用 orz 結尾
+14:55:23 <hychen> a = 1234 orz
+14:55:30 <hychen> b = "hello" orz
+14:55:34 <hychen> 一天到晚orz
+15:15:50 <CindyLinz> .......
+15:52:48 <MnO2> miaout17: 囧囧語只有一種表情，不如用這個：http://utf-8.jp/public/aaencode.html
+15:55:01 <_13h> 又是竹迫良範的作品嗎@_@
+15:57:20 <MnO2> 不是耶。Yosuke HASEGAWA
+16:02:02 <_13h> 看到了，但是對這個名字沒什麼印象XD
+16:15:02 <miaout17> 喔喔，他去年哪個conference有來台灣
+16:16:33 <CindyLinz> 經過該 conference 的啟發, 後來我就在公司寫 polyglot 程式並且上線了.. :D
+16:16:58 <miaout17> HITCON2012 (我有去，雖然都在埋頭wargame，還是有看到他demo aaencode XD) http://www.hitcon.org/hit2011/session.html#s009
+16:17:14 <CindyLinz> 咦? 我沒有去 hitcon
+16:17:19 <CindyLinz> 是在 coscup 之類的聽到的
+16:17:43 <miaout17> 喔喔，那可能來了不只一場
+16:19:40 <_13h> 大概是我記錯了，竹迫是玩 polyglot 的沒錯，以前的 ppencode 也是長谷川的作品嗎？
+16:22:29 <CindyLinz> 顏文字怪程式和 ployglot 我好像會搞混在一起 orz
+17:56:55 <_13h> 查了一下 ppencode 的作者應該是竹迫良範
+17:59:00 <tony> exit

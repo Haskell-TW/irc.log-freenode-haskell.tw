@@ -1,0 +1,231 @@
+01:08:39 <godfat> http://pfacka.binaryparadise.com/articles/guide-to-advanced-programming-in-C.html
+01:08:39 <godfat> 現在才知道這種事...
+01:08:40 <godfat> long i = -1;
+01:08:40 <godfat> unsigned long u = 1;
+01:08:40 <godfat> i > u // true
+01:09:59 <monochrom> 唔, 升級到 unsigned long 嗎?
+01:10:06 <godfat> 對...
+01:10:25 <godfat> 連個 warning 都沒 XD
+01:16:05 <monochrom> 細看標準, 確有這一條. "if the operand that has unsigned integer type has rank greater or equal to the rank of the type of the other operand, then the operand with signed integer type is converted to the type of the operand with unsigned integer type". 而 unsigned long 跟 long 有另文確認同rank
+01:16:35 <CindyLinz> weak type...
+01:17:14 <godfat> 所以或許可以說認定為同 rank 本身就錯了，我想
+01:18:29 <godfat> 或是一定要比較大才能 promopt
+01:18:46 <monochrom> 這不是 weak, 這是 implicit. 不過, 也許不必深究. 總之方便作者, 苦害讀者的, 都是萬惡.
+01:20:02 <CindyLinz> 可能定標準的人只知道 total order, 不知道 partial order, 所以任兩個整數 type 放一起, 不是 < 也不是 > 的時候就是 =..
+01:20:39 <godfat> 或是他的比較標準是 entropy? bytes 一樣 XD
+01:21:26 <CindyLinz> 那真的就 total order 了..
+01:22:29 <CindyLinz> 覺得 java 和 postgresql 乾脆沒有 unsigned type, 倒是少了這個危險
+01:25:15 <godfat> 忽然覺得這確實是個明智的選擇 XD
+01:26:36 <CindyLinz> 啊, postgres 有假的 unsigned int..
+01:26:51 <CindyLinz> user 可以額外加 constraint, 讓它遇到 <0 的時候就 reject... XD
+01:27:07 <CindyLinz> 可用的正數部分沒有變多 XD
+01:46:44 <godfat> 畢竟沒法依賴不可靠的 c, 只好做在 application 層吧 @@
+01:51:46 <CindyLinz> 哎唷我那搞笑的啦 XD
+01:51:58 <godfat> XDDDD
+01:52:18 <CindyLinz> 就只是負的部分不准用嘛, 是用原本的 signed type 啊
+01:53:11 <godfat> 是啊，這樣變成 negative 時我們還知道是發生 underflow 了，不像 c 又說不確定
+01:53:26 <CindyLinz> 對, 都確定了 :D
+01:54:13 <CindyLinz> 我用 mysql 的時候, 有遇過一個狀況...
+01:54:42 <CindyLinz> 我們家習慣存時間的時候是用距離 unix epoch time 的秒數
+01:54:53 <godfat> 說到這，我那天在 ruby 裡看到一個很奇怪的錯，
+01:54:53 <godfat> 說什麼 bignum 塞不下 long 裡面
+01:54:53 <godfat> 我直覺跟 32bit 機器有關，果然苦主是用 32bit 的虛擬機
+01:54:53 <godfat> 後來找到是我們用的其中一個，寫得很爛的 library,
+01:54:53 <godfat> 他把 array 拿去 rotate 一個很大的數字
+01:54:56 <CindyLinz> 遊戲嘛, 減來減去算 range 方便
+01:55:03 <CindyLinz> 咦, 你一次講好多 XD
+01:55:24 <godfat> 就打好一次送出... XD 我的 client 可以讓我方便斷行
+01:55:44 <CindyLinz> 那一個 bignum 的實作方式只能在 64bit 的機器上才會正確喔?
+01:56:03 <monochrom> "苦主" XD
+01:56:25 <godfat> 我也常常覺得都用 unix epoch 最好了 XD
+01:56:26 <godfat> 不是，是 ruby 的 array rotate 不能 rotate 一個 bignum
+01:56:26 <godfat> 在 32bit 機器上是 bignum 的數字在 64bit 上只是一個 fixnum
+01:57:07 <CindyLinz> 這... 功能不一樣了啊 @_@"
+01:57:14 <CindyLinz> 32bit 的 bignum 比較大 XD
+01:58:14 <CindyLinz> 咦.. 其實 spec 只是要實作到 64bits 而已?
+01:58:25 <CindyLinz> 那我有一點感覺了 :p
+01:58:39 <godfat> 功能不一樣？我後來拿 bignum 去 mod array size, 再去 rotate 就好了
+01:58:39 <godfat> 完全沒必要 rotate 那麼大的數字，超過 array size 根本就循環了...
+01:59:09 <monochrom> 說的也是
+01:59:18 <CindyLinz> 喔喔, 是用來描述要 rotate 的偏移量喔?
+01:59:24 <godfat> 對
+01:59:45 <godfat> 雖然 ruby 居然會噴 bignum 塞不下 long 我也覺得算是 bug 吧...
+02:00:31 <CindyLinz> 我猜 lib author 只用 64bit 的環境測過吧? 如果自己每天遇到的機器都是 64bits, 會忘記這世界上還有 32bits XD
+02:00:49 <CindyLinz> 我覺得我差不多是這樣了 ^^|
+02:01:07 <CindyLinz> m(_._)m
+02:01:26 <letoh> 要測 64bit 就開 vm
+02:01:47 <hashcat> 還有8bit
+02:01:47 <godfat> 是沒錯，可是我怎麼也不會想去 rotate 一個會循環很多次的數字 = =
+02:01:47 <godfat> 又或是可能他覺得 ruby 會幫他 mod 算一下吧..
+02:02:12 <CindyLinz> XD
+02:02:15 <monochrom> 我沒有忘記, Casio FX-702P 是用兩顆 4-bit 核去扮 8 bit
+02:02:18 <letoh> hashcat: 8bit 有點難找  但我有 16bit
+02:02:22 <godfat> 8bit 拿來看或是聽音樂就好了 XD
+02:02:45 <monochrom> 我還保有一顆 6502 哩!
+02:02:55 <letoh> 太神了!!
+02:03:07 <CindyLinz> 啊對繼續講 mysql...  不知道誰, 把某兩個存時間的欄位 ctime dtime 用成 unsigned int
+02:03:15 <monochrom> 很久以前貪得意買下
+02:03:31 <letoh> 那有 z8 嗎?
+02:03:40 <monochrom> 沒有
+02:03:49 <godfat> 結果就 underflow 了嗎？
+02:03:49 <CindyLinz> ctime 是遊戲開始, dtime 是結束... 然後我要統計超過一分鐘的遊戲資料, 所以就在 where 裡面打  dtime - ctime >= 60
+02:04:04 <CindyLinz> 然後整個 sql 就 runtime error 了...
+02:04:11 <godfat> XDDDDD
+02:04:36 <CindyLinz> 有 dtime < ctime 的 case... 應該是某些遊戲沒正常結束, dtime = 0 之類的..
+02:04:50 <CindyLinz> 重點是, 它就直接 error 了.....||
+02:05:23 <godfat> 不過還真巧，昨天我正在弄時間差異相關的東西，我真是覺得 postgres 愈用愈滿意。他時間相減的 type 是 interval, 跟 time 本身是不相容的，但是 time + interval 是沒問題的。type safe 呀，我亂寫他都會幫我找出不合理的操作
+02:05:36 <CindyLinz> 以後看到這種欄位就要很小心, 移項變號寫成 dtime >= 60 + ctime.. orz
+02:06:01 <CindyLinz> 那部分是不錯 @@"
+02:06:17 <godfat> 他是不能發現 60 是 signed, 然後 promote 到 signed long 嗎？
+02:06:21 <monochrom> 其實根本不應用 0 來代表 "未知 dtime" 吧?
+02:06:32 <CindyLinz> 我們沒有用 0 來代表未知 dtime
+02:06:54 <CindyLinz> 只是沒機會寫入, 該局應該就出什麼 exception 就結束了 XD
+02:07:17 <godfat> mysql 真是什麼奇怪的事情都會聽到...
+02:07:18 <CindyLinz> 然後... 實際上, 我們會用 0 來代表未知, 因為多 NULL 的 cost 太高....
+02:07:25 <monochrom> 好吧, 總之天下程式一樣黑
+02:07:54 <godfat> 我曾經覺得不應該有 NULL, 不過有時候有 NULL 確實方便滿多的
+02:08:03 <monochrom> 唉, 有人的地方就有 bug
+02:08:28 <godfat> 有生命的地方就有 bug
+02:08:36 <monochrom> 便宜莫貪呀!
+02:08:38 <CindyLinz> 有 bug 的地方就有生命...
+02:08:44 <godfat> 有 bug 的，我才想說... XD
+02:08:59 <CindyLinz> 那邊如果用 null, 也是 runtime error 啊 ^^|
+02:09:44 <CindyLinz> 而且 dtime >= 60 + ctime 變得超難寫...  dtime is not null and ctime is not null and dtime >= 60 + ctime
+02:09:47 <monochrom> 真是寫程式的黑暗時代, 幾時才破曉呢?
+02:10:07 <CindyLinz> 生命本身就是個 bug?
+02:10:14 <godfat> 不過我這幾天的經驗，如果欄位有 null, 跟那筆資料有關的操作都會被忽略掉，也確實這會是我要的
+02:10:27 <CindyLinz> 熵值會下降的例外奇異空間 XD
+02:11:31 <monochrom> 這是因為 sql 沒提供 Maybe Monad. 所以我才說, 黑暗時代
+02:12:39 <CindyLinz> godfat: 通通都被吸成 null 這樣?
+02:14:25 <godfat> CindyLinz, 老實講有點忘記狀況。好像是我裡面用了 generate_series function, 然後其中一個 argument 我給某個欄位，那個欄位有可能是 NULL.
+02:14:26 <godfat> 結果有 NULL 的那些資料，等於完全沒有跑這個 function, 直接假裝那些資料都不存在
+02:15:11 <CindyLinz> 喔是說 stored procedure 的部分... hmm
+02:15:18 <godfat> 表達能力是沒 maybe monad 好，不過直接忽略真的很方便 XD
+02:15:41 <CindyLinz> 我以前試過用 postgres pgsql 寫程式....
+02:16:03 <godfat> sql 真的要寫起邏輯應該很痛苦吧？
+02:16:04 <CindyLinz> 寫下去發現它的函數功能有洞... QQ
+02:16:08 <godfat> XDDDDDD
+02:16:30 <CindyLinz> 我只是想對 bytea (postgres 的 binary type) 作 xor 運算
+02:16:36 <CindyLinz> 完全沒門!
+02:16:49 <CindyLinz> 有個 bits type 有 xor 運算
+02:17:07 <CindyLinz> 而 bytea 只有接起來, 或是截取其中一段的功能
+02:17:23 <CindyLinz> 然後 bits 和 bytea 不存在互轉的功能..
+02:17:57 <CindyLinz> 最後這一個功能是裝 plperl 用 perl 實作....||
+02:18:02 <godfat> 不知道現在會不會已經有了？ XD 我昨天是寫完才發現我用到 9.3+ 的功能
+02:18:17 <CindyLinz> 那時可能 9.0..
+02:18:26 <godfat> 那也算新了... XD
+02:19:14 <CindyLinz> 可是我現在覺得想不開才用它寫程式 orz  跟 mysql 比它功能真的很多, 可是跟別的正常的程式語言還是不能比... QQ
+02:20:14 <godfat> 我是看到有一本書在講怎麼做 materialized view, 做到複雜得跟鬼一樣，不懂為什麼，才注意到原來原生的是 9.3+ 才有... 瞬間覺得那本書那章像是廢了 XD
+02:20:28 <godfat> sq	l 還是讓他查詢就好了吧 XD
+02:21:10 <CindyLinz> 9.3+ 不能用嗎? @@"  我以為如果標 6.0- 比較悲劇 XD
+02:21:53 <godfat> 應該可以吧，可是他做了一堆事情，明明 9.3 一行就收工的 XD
+02:23:07 <CindyLinz> 喔, 所以它真的是提供了一個 9.3- 才有意義的作法 XD
+02:23:47 <godfat> 我沒細看，是這樣猜的... 他寫了一堆很複雜的 trigger...
+02:24:07 <CindyLinz> 讚 XD
+02:24:57 <godfat> http://enterpriserails.chak.org/full-text/chapter-12-materialized-views
+02:25:47 <godfat> 本來想細讀的，但他例子太複雜了，後來就懶了，反正我做完了 @@
+02:26:32 <CindyLinz> 好像可以學點東西 @@"
+02:26:56 <CindyLinz> 只是寫這種東西在 postgres 的環境超難測試的... @@"
+02:27:25 <godfat> 應該有不少經驗與實例在裡面，所以原本才想說可以細看一下
+02:27:25 <godfat> 用 postgres 自己的測試？ XD 我上次為了做 plruby 試了一下，
+02:27:25 <godfat> 覺得還不錯
+02:27:54 <CindyLinz> 不是那意思啦 ^^|  只是自己寫的 trigger 或 function, postgres 的作法是執行到的 branch 才會 parse..
+02:28:36 <godfat> 嗯？我的意思就是測試 function 或 trigger 本身
+02:28:39 <CindyLinz> 所以很多一般 compiler 會幫忙挑錯誤的功能都等於沒有了 @@"
+02:28:52 <godfat> https://github.com/godfat/plruby/tree/master/expected
+02:29:05 <CindyLinz> 可是這種會連環發射的 trigger, 每一層都還有 branch 的話怎麼確定有測完啊? orz
+02:29:49 <CindyLinz> 欸你這是 plruby, 不是 plpgsql 啊?
+02:29:53 <godfat> 這跟一般程式很難測到所有 branch 有差嗎？
+02:30:43 <CindyLinz> 好像是一樣, 只是一般程式我常常沒有測完所有 branch 就有信心了 ^^|
+02:31:31 <godfat> 因為我就寫個 Makefile, 然後就多了
+02:31:32 <godfat> make installcheck
+02:31:32 <godfat> 他可以自動幫我開個 db, 我在其他地方寫 trigger/function,
+02:31:32 <godfat> 然後自動執行，自動驗證輸出，感覺是可以做測試的框架 XD
+02:31:36 <godfat> XDDDDDD
+02:32:39 <godfat> 測試案例寫在
+02:32:40 <godfat> https://github.com/godfat/plruby/tree/master/sql
+02:32:40 <godfat> 然後預期輸出在
+02:32:40 <godfat> https://github.com/godfat/plruby/tree/master/expected
+02:32:40 <godfat> 我想應該可以套在任何地方？
+02:35:00 <CindyLinz> 跑一次通常會多久啊?
+02:35:51 <CindyLinz> 最近在寫 haskell 的東西, 每寫一個小段落下一次 cabal build 要等個幾秒鐘, 我漸漸開始不耐煩了 orz
+02:35:54 <godfat> 看來我測試壞了... XD
+02:35:55 <godfat> 不過那三個花的時間是：
+02:35:55 <godfat>         0.59 real         0.05 user         0.04 sys
+02:36:11 <CindyLinz> 一秒應該還行
+02:36:19 <CindyLinz> 不對 0.59 是半秒 XD
+02:36:29 <godfat> 是說案例才三個而已，不知道多起來快不快
+02:37:29 <CindyLinz> 如果有 createdb / dropdb 為什麼這麼快啊....
+02:38:01 <godfat> 我沒細究耶，也許他用別種方式，例如 memory db?
+02:38:52 <CindyLinz> 太詐了!
+02:40:14 <CindyLinz> 一時沒找到 memory db 相關的資訊 @@"
+02:40:36 <godfat> 我正在看 http://www.postgresql.org/docs/9.3/static/extend-pgxs.html
+02:40:36 <godfat> 看看有沒有說 make installcheck 到底做啥
+02:41:34 <godfat> 他應該不會其實偷偷寫在我的某個 db 裡但是沒清乾淨吧？ XD
+02:41:45 <CindyLinz> mysql 的 memory table 不能有 blob 和 text.. 
+02:43:35 <godfat> 喔，他有印資訊.. --dbname=contrib_regression
+02:43:35 <godfat> 看來是額外建沒錯
+02:44:06 <godfat> mysql 那樣限制的理由是啥？memory 應該要最強吧？ socket 都給我存進去
+02:44:59 <CindyLinz> mysql? mysql 的限制不需要理由的... (遠目)
+02:45:10 <godfat> XDDDDDD
+02:45:23 <CindyLinz> 就他不想做啊.. @@"
+02:45:44 <CindyLinz> 聽說 bug 也不太想修.. @@"
+02:46:40 <CindyLinz> On the other hand, the MySQL team will routinely degrade bugs (to "not a bug") without providing any solution, and accept the fact that there's a problem and not fix it for 5 years. # http://www.wikivs.com/wiki/MySQL_vs_PostgreSQL
+02:46:54 <CindyLinz> 這個 wiki 是 MySQL 與 PostgreSQL 的比較
+02:47:42 <CindyLinz> 想起幾個月前有看過一隻 MySQL bug 7 歲生日的祝賀影片 XD
+02:48:03 <CindyLinz> https://www.youtube.com/watch?v=oAiVsbXVP6k
+02:48:09 <godfat> .....啥鬼...難怪他會很開心地賣掉然後再說別人搶他的東西
+02:48:38 <godfat> 喔喔，那影片我也看過 XD
+02:48:42 <CindyLinz> XDDDD
+02:50:04 <monochrom> 哈哈, 竟然有慶祝 bug 生日的
+02:50:18 <monochrom> 有人的地方, 就有生日會? XD
+02:50:43 <CindyLinz> 我覺得影片後半瘋瘋地狂笑也好好笑 XD
+02:51:46 <godfat> 也許我沒看完，晚點看看 XD
+02:52:52 <CindyLinz> 記得戴耳機 XD
+02:53:19 <monochrom> 是呀, 最後很詭異地狂笑, 最好不要睡前看了 XD
+02:53:38 <godfat> XDDDD 某種巫術嗎，不過沒說沒注意到好晚了.....
+02:55:16 <monochrom> 用大笑來遮掩內心的失望 XD
+02:56:26 <godfat> 是說這時候也許也會有人跳出來說，這麼不滿意就自己修呀... O_o
+02:56:44 <monochrom> 嘻嘻
+02:57:49 <monochrom> 真的或許有一天, 有班人忍不下去, 把心一橫 fork 了它
+02:58:03 <CindyLinz> godfat: mysql 的話還好.... # 02:56 < godfat> 是說這時候也許也會有人跳出來說，這麼不滿意就自己修呀... O_o
+02:58:15 <monochrom> 而我呢, 早就把心一横轉投 postgresql 了!
+02:58:43 <CindyLinz> 剛剛那篇 wiki 裡面:
+02:58:44 <CindyLinz> One criticism of the MySQL development model has been the historical reluctance of its corporate development team to accept patches from external sources. This has prompted some to say MySQL is not a "true" open source project. 
+02:59:01 <godfat> mysql fork 確實是超多的... @@
+02:59:03 <CindyLinz> 所以, 自己修他也不收這樣....
+02:59:40 <monochrom> 啊呵, 我太脱節了!
+03:00:02 <godfat> 聽說 google 的不少產品也是
+03:00:11 <godfat> （不太收外部 patch 這件事）
+03:00:20 <CindyLinz> jserv: 這不是啃的Git..
+03:00:48 <godfat> 紙包 git
+03:01:59 <CindyLinz> 他是說 google 丟出來 android git 弄得很亂, 沒打算讓人看得懂的樣子 @@"
+03:02:27 <godfat> 是喔？有明顯不是原本的開發紀錄嗎？
+03:02:34 <CindyLinz> 那我不知道
+03:02:47 <CindyLinz> 總知他就動手把它們整理一遍 @@"
+03:02:54 <godfat> XDDDDDDD
+03:03:08 <godfat> 整理開發歷史這工程浩大呀
+03:03:09 <CindyLinz> 然後說: 現在總算變成啃的git了..
+03:03:42 <godfat> 不過社群應該要看哪個呀..?
+03:06:08 <monochrom> 讓我把那生日歌貼到 google+
+03:07:17 <CindyLinz> 這個 slide, 第 37 頁 http://www.slideshare.net/jserv/build-your-own-android-toolchain-from-scratch
+03:07:22 <CindyLinz> monochrom: XD
+03:07:48 <monochrom> 成了! https://plus.google.com/102208456519922110915/posts/S99UmDb3HAp
+03:08:25 <CindyLinz> slide 解析度好差, 看不出東西..
+03:09:11 <CindyLinz> 精簡若干 branch 之後 12GB 的 git? orz
+03:09:21 <godfat> 喔喔，我猜他是說 gcc 的歷史不見了之類的？
+03:10:00 <CindyLinz> 「只要有經驗, 就不需要讀文件, 反正也沒有這回事 :)」.... orz
+03:10:34 <CindyLinz> 我以為是在講 android @@"
+03:10:38 <monochrom> 無端出示美女合照, 果然加入宅男妒想
+03:11:17 <CindyLinz> 跳過就好 ^^|
+03:11:23 <godfat> 我是猜 android 裡面有 gcc, 然後裡面的 gcc 像是 source 匯入這樣
+03:11:23 <godfat> 不過我沒細看啦.. XD
+03:12:02 <monochrom> 每兩張 slide 就一張美女照. 天啊, 這是宅男還是炮男了?!
+03:12:06 <godfat> 不過這麼巨大的歷史，全保留也是個開發困擾
+03:12:07 <godfat> 忽然想到 bitcoin 交易紀錄？
+03:12:33 <CindyLinz> 他後來好像就比較沒再這樣放了 XD
+03:13:00 <godfat> 我不知道，只是好像什麼事情最後都變成 scale 的問題 XD
+03:14:40 <monochrom> 弊, 打錯字, "妒想" 應該是 "幻想". 可惜, 這樣就意外地創造了 "妒想" 一詞, 恐怕會流傳後世.
+03:16:17 <godfat> XDDDD 等 haskell 流行起來大家開始考古 haskell.tw 後再來煩惱這個
+18:35:58 <hashcat> 法國人說得英文真清楚
+18:36:38 <hashcat> 美國人的都聽得很吃力

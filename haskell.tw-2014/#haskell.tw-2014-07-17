@@ -1,0 +1,366 @@
+08:46:56 <godfat> CindyLinz, 最近都沒好好看 irc @@" 說到 const, c++ 是有兩種 const, 一種是說 variable 本身不能改變所指，另一種是 target 本身不能被改變。改變的定義是，所有沒有被 const 修飾的 function 都不能被呼叫
+08:47:16 <godfat> 因此我覺得好像也不是非常需要 deep_const?
+08:48:24 <godfat> 雖然說也許 c++ 這樣已經把大部分的狀況都涵蓋到了，但是我覺得一如 c++ 以往的缺點，就是搞成這樣實在太複雜了..
+11:00:42 <caasih_> godfat!!!
+11:01:04 <godfat> XD
+11:01:38 <godfat> 課程還好？
+11:02:38 <caasih_> 結果就是把一個 lib 的 API 包得太好無法延伸？ XD #const
+11:03:24 <godfat> 哪個 API? XD
+11:03:44 <caasih_> godfat: 結束好幾天了，還沒寫信跟你訴苦嗎？好像還沒 XD
+11:03:55 <caasih_> irrlicht
+11:04:30 <godfat> XDD
+11:04:30 <godfat> 那就需要 const_cast 之類的..?
+11:05:13 <caasih_> 好吧其實是我太甜，記得你跟老林是直接改了 source ？
+11:05:43 <godfat> 我沒怎麼碰那塊，不過老林是直接 fork 沒錯，畢竟太多要改的了
+11:05:56 <caasih_> 來查 const_cast...
+11:05:59 <godfat> (不過我記得主要是 freetype 的部份)
+11:06:27 <godfat> 記得那時候他說要升級其實也沒有說特別麻煩，主要就是 freetype 那邊要重弄一次
+11:07:36 <caasih_> 想利用他的 entity tree 之類的做 event bubbling ，失敗 0rz
+11:08:21 <caasih_> 記得他說他得自己手動 patch
+11:09:30 <godfat> 我們那時候可能沒做太複雜的事？
+11:09:56 <godfat> 你這邊是在接 oculus 嗎？
+11:10:14 <caasih_> 也快一年了，結果那個 project gg 了，不知何時會撿回來做
+11:10:25 <caasih_> 嗯，接 oculus
+11:11:05 <caasih_> 我弄的 oculus camera 還有效率問題，悶
+11:17:00 <godfat> 等 oculus 正式版？ XD 希望有生之年能玩到完全版
+11:19:27 <caasih_> 說到這個，老林有衝 DK2 的樣子？
+11:19:52 <godfat> 太久沒注意了，DK2 是啥？ XD|||
+11:20:04 <caasih_> 10 號跟他拿 DK1 有 chat 一下
+11:20:33 <godfat> 暫離吃飯 @@
+11:20:39 <caasih_> 新的 Rift ，有 head tracking 和更好的螢幕
+11:20:44 <caasih_> see you
+11:21:27 <godfat> (說真的有點想回遊戲界 @@)
+11:28:04 <caasih_> 從沒進過，怕也進不去了 XD
+12:21:03 <godfat> 噢，大概是 development kit, 真期待
+12:21:04 <godfat> 至少你是在旁邊看了很多了，我現在則有點脫節 XD
+12:52:25 <CindyLinz> godfat: 有兩層而已啊 ._.   struct A { int a; }; struct B { struct A * b; }; struct C { struct B * c; };   然後 const struct C * const ptr;
+12:52:55 <CindyLinz> 這樣的動作應該是沒有擋吧 ptr->c->b->a = 3;
+12:53:37 <godfat> 噢... 跳過去的話確實就沒擋了，我的思考點不包含直接存取 properties @@
+12:54:15 <godfat> 用 method 的話，const method 也應回傳 const reference/pointer
+12:55:08 <CindyLinz> 我想的 deep 是 ptr 一直指下去這懂 :Q  雖然以 C 的角度是這不叫巢狀資料結構, 只有看第一層, 是個有指標的資料而已.. 可是用的時候常是拿它當巢狀資料結構看待啊 :Q
+12:56:41 <CindyLinz> 喔~ 所以應該完全採用 setter/getter 的設計, 就可以由 programmer 來定義資料的領域算到哪裡嘍?
+12:59:57 <godfat> 對... 這樣說來確實是沒照顧到直接存取 struct 的部份
+13:02:06 <CindyLinz> 欸.. 在 const member method 裡面去改某個 member ptr 所指到的東西, 會被擋下來嗎?
+13:02:55 <CindyLinz> const 的限制會不會是整個 object 所佔的這一塊連續記憶體而已呢? 這樣定義也比較明確啦? :p
+13:04:18 <godfat> 老實講愈想愈覺得自己忘光了 XD 我的印象中 const 的設計還滿看使用者決定的，不是由是否可改記憶體決定的。還有 mutable 可以讓 const 可以被修改 ._.
+13:04:56 <godfat> (你的問題我猜是不行，但不確定 )
+13:07:10 <CindyLinz> 等一下來試試 ^^
+13:11:17 <godfat> 試完了，比我記憶中來得單純... 所以你的問題是可以改，只要 member ptr 不是 const. 也就是說，內部是可以亂動的
+13:11:32 <CindyLinz> 可惡..... XD
+13:11:33 <godfat> 你的問題（的答案）
+13:11:39 <CindyLinz> 我才打了六行....
+13:11:43 <godfat> XDD
+13:12:53 <CindyLinz> 如果我實作一個 sort 函數.. 會要求使用者給我一個 compare 函數, 然後我想限制使用者在這個函數裡面不會亂改 element
+13:13:17 <godfat> 用 const reference 抓 compare 函數？
+13:13:29 <CindyLinz> 假設是一個對 (void *) 排序的函數
+13:14:04 <CindyLinz> void sort(int (*cmp)(const void * const, const void * const), void * begin, void * end);
+13:14:19 <godfat> 應該是類似這樣
+13:14:38 <CindyLinz> 但這個 cmp 參數裡的 const 是不難規避的哄 :Q
+13:15:05 <whitglint> * 右邊不用 const, 那只是限制 ptr 本身不能改指別的東西
+13:15:17 <CindyLinz> 也是哄 XD
+13:15:48 <godfat> c++ 真的要應該有一堆怪招可以跳過去 @@?
+13:16:02 <CindyLinz> 不過想想, 只要這語言容許到處都有 side effect 的話, 就注定限制不了了....
+13:16:17 <CindyLinz> 如果說, 這些 ptr 裡面存的是一個整數, 代表某個 global array 的 index
+13:16:18 <mno2_> 我的理解 C++ 要完全限制是不可能的
+13:16:28 <whitglint> 指標是沒有極限的 # 逃~
+13:16:35 <godfat> 對啊 @@" 我覺得這些考慮到最後只會有一個結論，就是只要 mutable + alias 就死了
+13:16:37 <CindyLinz> 而值是存在那個 global array 裡面.. 無論如何人家都可以偷改這個 global array 的....
+13:17:54 <godfat> 我現在都避免 mutate 東西，array/hash 大部分都用 copy 的
+13:18:27 <CindyLinz> godfat: 改一個 element 就複製一條 array 嗎 OAO
+13:19:39 <godfat> 看情況耶，或是說，我會改 arrary 裡面存的東西的東西，但不會改 array 本身
+13:19:39 <godfat> hash 是比較常碰到
+13:20:03 <godfat> 改 array 裡面的東西就都是 map
+13:20:16 <CindyLinz> 真的是複製一條 array... XD
+13:20:45 <godfat> 對，懶得時候甚至 map map 再 map, 不合併了
+13:20:45 <godfat> (反正 n 通常 < 100)
+13:21:21 <CindyLinz> 不是 C++ 吧? @@"
+13:21:27 <godfat> ruby XD
+13:21:39 <CindyLinz> 這是一個我偶爾想到就會笑的事情:
+13:21:51 <CindyLinz> 我平常是 perl 或 C
+13:22:25 <CindyLinz> 我用 C 寫東西的時候就心理會很斤斤計較寫法浪費與否, 但用 perl 的時候就很大方....
+13:22:44 <godfat> 我也是，有點.. 莫名 XD
+13:22:46 <CindyLinz> 但明明 C 已經比 perl 快很多了, 就算浪費還是沒有 perl 浪費.. XD
+13:23:08 <godfat> 不過我覺得某方面也是因為 c/c++ 就是強迫你去想那些事 @@
+13:23:31 <CindyLinz> 程式碼複雜度正比於效能消耗的設計?
+13:24:21 <CindyLinz> 欸~ 這是一個我有時候覺得學寫程式還是應該從 C 學起的點.. 如果重視對效能的感覺的話, 用這種的比較好
+13:24:26 <godfat> 程式碼複雜度是指我們寫的程式嗎？
+13:24:51 <CindyLinz> 一個很模糊的形容啦 :p  就是看起來就會覺得慢
+13:25:16 <monochrom> 少年時, 我曾想過, 如果由組合語言學起, 會怎樣?
+13:25:36 <CindyLinz> 遇到函數就會是一個 unknown, 所以 strlen() 不會從字面上感受它的快慢就是
+13:25:48 <CindyLinz> 但如果寫了一個迴圈, 就清楚了, 就是一條....
+13:26:09 <CindyLinz> monochrom: 我覺得不錯啊 :D
+13:26:35 <CindyLinz> 學習目的不一樣就是了.. 和 Functional Lang 比的話
+13:26:55 <CindyLinz> 只是, 我還是不覺得以 Python 當第一語言是好事...
+13:27:28 <CindyLinz> 放克神諾．爛規矩
+13:27:49 <monochrom> 學海無涯, 回頭是岸 :)
+13:28:21 <godfat> 我覺得以 js/php 起手可能更慘
+13:28:27 <CindyLinz> 下半句怪怪的 XD
+13:29:02 <CindyLinz> 可是 python 有學校在推當第一語言的樣子, 比較嚴重?
+13:29:19 <godfat> 說到這，正好今天還昨天跟同事聊到，覺得有趣
+13:29:19 <godfat> 他說，好像做前端的人，比較不會跨到後端；反之多少都會碰一下前端
+13:29:39 <godfat> 那碰碰 cython 解解毒？ XD
+13:29:41 <CindyLinz> hmmm
+13:30:20 <godfat> 我還是覺得有句話很貼切，就是由奢入儉難 XD
+13:30:26 <CindyLinz> cython.. 不清楚 ^^|   只是如果它還有 dict 或可變長度的 array 可用的話, 就會嚴重破壞效能感受性呀
+13:31:08 <CindyLinz> dict 可能是最嚴重的, 比可變長度 array 嚴重許多
+13:31:31 <godfat> 不過我用 c++ vector 覺得其實也沒很慢呀 XD 當然真的要比還是差很多，可是大部分的狀況，其實我們是需要可變長度的。要自己做可變長度的話，也很麻煩，也不一定能做得更好，除非針對那個問題
+13:31:49 <CindyLinz> 由其那種經由 optimizer 以後「有可能」進步極大的, 最慘 ^^|
+13:32:03 <mno2_> CindyLinz: 時代真的變了。我以為某段時間第一語言很可能是 VB(A) 。
+13:32:20 <godfat> 我猜未來也有可能是 js...
+13:32:48 <CindyLinz> 那個如果經由 static analyze 發現某顆 dict 用到的 key 都是固定那幾個, 所以直接 optimize 成 static struct, 就變得超快.. 覺得這個對感受性的影響超大
+13:32:57 <CindyLinz> 因為能不能 optimize 成功的判斷很不明顯
+13:33:11 <CindyLinz> 寫法都一樣, 效能卻差很多...
+13:33:34 <godfat> 用 luajit 好像很容易會有這種感受
+13:33:55 <CindyLinz> 嗯..... 覺得這種東西實用可以, 拿來當第一語言不太好啊...
+13:34:47 <CindyLinz> lazy eval 的 Haskell 在這方面也是問題, 但是從 type 那角度來看, 把事情說清楚的角度來說, Haskell 就超棒了 :p
+13:34:55 <godfat> 我不知道耶，我覺得很多東西我學會之後，就忘記原本的感受了
+13:35:52 <CindyLinz> 哎, 我們同事會這樣寫程式: 想算比某個數字 N 大的, 最小的一個 5 的倍數.. (要湊組隊人數之類的)
+13:36:17 <CindyLinz> 他用一個 k 和一個迴圈, 把 k 從 0 開始一直加 5 直到比 N 大為止就 break....
+13:38:05 <godfat> 這個應該是沒在想吧？|||b
+13:39:25 <au> 要想 O(1) 比較累，電腦跑 O(N) 不會累啊~ # for small N
+13:40:58 <CindyLinz> code 還打比較多欸, 手會痠啊~~
+13:41:02 <au> > head [n | n <- [0,5..], n > 42]
+13:41:04 <lambdabot>  45
+13:41:12 <au> @pl \n -> head [n | n <- [0,5..], n > 42]
+13:41:12 <lambdabot> head . ap ((:) . (<- [0,5..]) . join (|)) (return . (> 42))
+13:41:26 <au> @pl \x -> head [n | n <- [0,5..], n > x]
+13:41:27 <lambdabot> const (n | n <- [0,5..])
+13:41:34 <godfat> 想起一個故事，一個寫程式的人要教另一個人寫程式，問對方累加 (1+2+3+...) 的程式，對方直接回答套公式。然後教別人的這個人聽到這個回答呆了，覺得自己腦筋是死的
+13:41:54 <CindyLinz> XDDD
+13:42:06 <CindyLinz> 竟然是寫程式版, 不是高斯小時候的神話故事
+13:42:13 <godfat> XDDD
+13:43:13 <godfat> pl 之後居然 join 都出現了 @@
+13:43:26 <CindyLinz> 也許可以先學 Haskell 學習把事情做對, 然後再學一套組語 -> C, 學習考慮效能相關的事?
+13:44:47 <CindyLinz> 可能因為先學了組語, 都在 register 和 addressed memory 那邊搞來搞去, 所以第一次看到 C 的 x = x + 1; 的時候就不會有障礙了? :p
+13:45:15 <au> 「什麼竅門？我就是用無窮級數算的啊！」—馮紐曼
+13:45:29 <CindyLinz> 囧
+14:45:12 <miaoski> monochrom: 第一語言是組語不會很好。如果 Apple BASIC 不算的話，我的第一個語言是組語
+14:45:51 <miaoski> 成長過程會太過斤斤計較每個指令的 clock, 然後看不太到演算法層面的東西。
+14:46:39 <miaoski> 然後長大了突然發現 pipeline 變多了，指令的 clock 和小時候不一樣了，很多很浪費的東西現在只要 1 clock
+14:47:16 <miaoski> 寫 C 的時候一直想 borland 會怎麼翻譯，但卻沒想到未來有 LLVM 這種東西...
+14:49:21 <miaoski> 我忘了 au 的第一個語言是不是 MS Basic (compiler) ?
+14:54:02 <au> GW-BASIC
+15:13:09 <au> (接著是 Logo)
+15:23:05 <CindyLinz> miaoski: 我覺得從注重效能和機器怎麼運作的角度來說, 組語不錯啊 :Q  比較偏向在描述機器行為的角度
+15:24:53 <CindyLinz> 嗯, 就不要看演算法了.. XD
+15:25:30 <CindyLinz> 如果用 Haskell 來實作那些演算法.. 覺得 IORef 不該列為禁用才對 :p
+15:49:39 <miaoski> Logo++ ...
+17:47:26 <caasih_> 如果從 bf 開始(誤
+17:49:47 <caasih_> Logo++ #只在書上看過
+17:51:21 <caasih_> godfat: 教人的老兄本來是要講 loop ？
+17:53:15 <godfat> 對呀 XD
+18:05:07 <caasih_> 今天去聊的公司，說後端還在用 Perl XD #網碩
+18:12:44 <CindyLinz> perl 好啊 :D
+18:13:06 <CindyLinz> 我們公司還一直在持續製造新鮮的 perl 程式碼 XD
+18:20:50 <caasih_> 不知現在新鮮的 Perl 肝那來？
+18:21:25 <CindyLinz> 很好教啊~ 只要有新鮮的肝, 就可以簡單變成新鮮的 perl 肝 XD
+18:21:50 <CindyLinz> 不過偶爾還是有已經 perl 化的肝來報到就是 :p
+18:22:28 <caasih_> 硬化 Perl 肝 XD
+18:22:34 <CindyLinz> 才不會 XD
+18:22:59 <CindyLinz> 硬化是工作量安排有問題吧, 一直亂榨的話什麼肝都能硬..ww
+21:08:07 <monochrom> 我覺得高階低階都要學. 所以頓悟學海無涯. :)
+21:08:45 <monochrom> P.S. IORef 一點也不快
+21:11:10 <au> 但是 ForeignPtr 很快 :)
+21:13:18 <CindyLinz> XDXD
+21:13:29 <CindyLinz> au: unsafe driver XD
+21:14:25 <au> 冤枉啊，我沒有說要用 unsafeForeignPtrToPtr XD
+21:14:38 <CindyLinz> XDXD
+21:14:45 <CindyLinz> au: 只是沒說而已  XD
+21:15:48 <au> mallocForeignPtr / withForeignPtr 都是在 IO 啊
+21:15:55 <au> 能用 IORef 的地方就能用
+21:15:58 <au> 不需要 unsafe
+21:16:56 <CindyLinz> 欸.. 為什麼 IORef 背後不用一樣的方法呢? 如果效能有差的話 @@"
+21:17:01 <CindyLinz> 我還真不知道效能會有差 :|
+21:17:41 <petercommand> haskell裡unsafe的意思主要是甚麼呀?
+21:18:21 <petercommand> learn you a haskell完全沒提到耶XD
+21:18:31 <CindyLinz> petercommand: 壞孩紙!
+21:18:36 <au> 主要是表示會破壞南無參照透明性
+21:18:44 <petercommand> XDXD
+21:18:58 <CindyLinz> au: 快收 petercommand 為徒~ XD
+21:19:03 <au> 就是說會造成同一個函數同樣的參數跑兩次結果不同 (or worse)
+21:19:23 <CindyLinz> au: 他也是什麼髒的都很有興趣 XD
+21:19:31 <petercommand> CindyLinz: @@@
+21:19:47 <au> CindyLinz: peek/poke 要 instance Foreign.Storable 所以是 strict, unboxed, packed, memory access
+21:20:11 <au> IORef a 自由多了，什麼都可以
+21:20:15 <CindyLinz> 以 C 語言來說, petercommand 最喜歡的技巧就是在一個 char[] 裡面寫機器碼編號, 然後 void (*)() 轉型以後呼叫.....
+21:20:36 <petercommand> orz...
+21:20:56 <au> castPtrToFunPtr :: Ptr a -> FunPtr b
+21:21:05 <au> Haskell 也有耶真巧
+21:21:06 <CindyLinz> au: 噢, IORef 用到了 Storable? @@"
+21:21:11 <petercommand> CindyLinz: 幹嘛到處宣傳阿XD
+21:21:21 <yhsiang> 這邊好high ..
+21:21:48 <CindyLinz> :x
+21:22:28 <au> CindyLinz: 沒有，IORef 後面是 STRef，後面是 GHC.ST，沒有 Storable
+21:22:28 <CindyLinz> petercommand: Haskell 裡面 unsafe 開頭的意思就是, 你會有興趣的意思... (中肯)
+21:22:39 <au> 一般 Storable 是跟 ForeignPtr/Ptr 搭配使用
+21:22:57 <petercommand> CindyLinz: @_@
+21:22:57 <au> peek/poke 是 Storable 裡的 function。
+21:23:44 <CindyLinz> IORef 應該是只存一個 address, 不需要 serialize 內容吧?
+21:24:16 <CindyLinz> au: 不對, 我想問的應該是.. 為什麼會講到 peek/poke?
+21:25:28 <CindyLinz> 我來翻 source 好了 ^^|
+21:27:09 <au> CindyLinz: 因為 monochrom 表示 IORef 一點也不快，而我表示 ForeignPtr 很快
+21:27:11 <petercommand> IO本身就是unsafe這樣講對嗎?
+21:27:18 <petercommand> IO action
+21:27:22 <au> petercommand: 不對。IO 本身是 safe
+21:27:33 <au> 因為它只是描述動作，並不是執行動作
+21:27:55 <petercommand> 喔喔，所以是perform IO是unsafe?
+21:28:10 <CindyLinz> petercommand: perform IO 也是 safe
+21:28:13 <au> 對，但程式本身不 perform IO ( 除非你用 unsafePerformIO )
+21:28:23 <CindyLinz> 是 perform IO 卻宣稱沒有 perform IO 那就是 unsafe
+21:28:46 <au> 程式只是以世界為參數，再以世界為回傳值的描述而已
+21:28:54 <CindyLinz> 像是宣稱只是拍拍肩.... (ry
+21:29:05 <petercommand> 像a <- getLine種是unsafe嗎?
+21:29:10 <CindyLinz> petercommand: safe.. XD
+21:29:16 <petercommand> @@
+21:29:20 <au> 都是 safe 因為它只是說 getLine >>= \a -> ...
+21:29:23 <CindyLinz> petercommand: 因為沒有宣稱沒做 IO..
+21:29:42 <petercommand> 是沒錯啦...
+21:29:54 <au> 好比說 f = getLine >>= putLine
+21:30:03 <au> 你呼叫它十次，得到的都是同一個 IO ()
+21:30:06 <au> 所以是 safe
+21:30:08 <petercommand> 恩
+21:30:22 <CindyLinz> @type unsafePerformIO getLine
+21:30:24 <lambdabot> Not in scope: ‘unsafePerformIO’
+21:30:26 <petercommand> 那整個IO的do block呢?
+21:30:27 <CindyLinz> 哎呀 XD
+21:30:34 <CindyLinz> petercommand: 都還是 safe 唷~
+21:30:35 <au> petercommand: 也都是 safe，意思相同
+21:30:49 <au> f = do { x <- getLine ; putLine x }
+21:30:55 <au> 和 f = getLine >>= putLine 是完全等價的。
+21:31:18 <CindyLinz> 但是如果你把整個 do block 塞到 unsafePerformIO 裡面, 對外面說, 我這裡面沒有用到 IO.... 就髒掉惹
+21:31:59 <petercommand> 恩...
+21:34:21 <petercommand> 可是兩次做getLine的結果會不同呀
+21:35:23 <petercommand> 雖然getLine都是傳回一樣的IO ()
+21:35:28 <au> petercommand: 但是不是函數在做
+21:35:33 <au> 是作業系統在做
+21:35:57 <au> main 只負責傳完一個函數告訴作業系統碰到什麼世界時要做什麼
+21:36:12 <au> safeness 不管執行期間的事
+21:36:24 <petercommand> 喔喔..
+22:02:04 <mno2_> http://maskray.me/blog/2013-12-31-summary  書本譯者的 blog ?
+22:03:50 <petercommand> @src getLine
+22:03:51 <lambdabot> getLine = hGetLine stdin
+22:03:58 <petercommand> @src hGetLine
+22:03:58 <lambdabot> Source not found. :(
+22:20:39 <CindyLinz> au: 是不是說.. 對於 IORef a 來說, 有可能是 _|_, newIORef _|_, newIORef 3 這三種可能; 而 ForeignPtr 的話就只有 _|_, malloc >>= newForeignPtr_ 這兩種
+22:21:24 <CindyLinz> 而後者 malloc 出來的一定是一塊存在的記憶體, 雖然裡面還是有可能塞一團垃圾.. 只是反正它少了額外 deref box 的一層
+22:22:49 <au> CindyLinz++ # 好認真，完全正確。
+22:23:30 <CindyLinz> au: 不太服氣就是了.. :|
+22:23:52 <au> 還有就是， modifyIORef 時是整存整付
+22:24:02 <CindyLinz> 我還是期待有一天 optimizer 更厲害了, IORef 可以比 ForeignPtr 快... XD
+22:24:17 <au> 但是 poke 可以零存整付，改裡面的某個 str[iu]ct field
+22:24:34 <CindyLinz> 可以改零頭真的是很.. 唉
+22:24:39 <au> 大致是這兩點不同
+22:24:58 <CindyLinz> 我意思是, 我好希望那個整存整付只是 logically 整存整付, 底下也能聰明地實作成只改一部分 @@"
+22:25:25 <au> accelerate / dph / etc 就是做這個 iirc
+22:25:28 <CindyLinz> 因為之前自己試著拼 benchmarkgame 的時候, 在這一點輸大了 orz
+22:25:55 <CindyLinz> accelerate / dph / etc 是三個 project 的名字? 還是 GHC extension 的名字?
+22:26:56 <au> http://hackage.haskell.org/package/accelerate https://hackage.haskell.org/package/dph-examples
+22:27:04 <au> etc 表示還有很多類似的
+22:27:12 <CindyLinz> 竟然是 library package 層級.. XD
+22:27:17 <CindyLinz> 還以為要從底層改咧
+22:29:04 <CindyLinz> 等等 dph 是 DataParallelHaskell... XD
+22:30:01 <CindyLinz> 覺得太 over 了.... XD
+22:30:35 <CindyLinz> accelerate 的 backend 有: CUDA, OpenCL......
+22:37:08 <petercommand>  (liftM $ take 10) $ mapM (\ x -> x >>= putChar) $ repeat getChar
+22:37:20 <petercommand> 這個東西像不work耶...
+22:37:32 <petercommand> 希望10項就停了
+22:37:51 <petercommand> s/像/好像
+22:39:26 <petercommand> 我想說是lazy的阿，所以可以只取10項
+22:41:06 <CindyLinz> @src getChar
+22:41:07 <lambdabot> getChar = hGetChar stdin
+22:41:13 <CindyLinz> 查錯了 XD
+22:41:15 <CindyLinz> @src repeat
+22:41:15 <lambdabot> repeat x = xs where xs = x : xs
+22:41:30 <CindyLinz> @type repeat getChar
+22:41:31 <lambdabot> [IO Char]
+22:41:57 <CindyLinz> 這邊會有一整排(無窮多個) IO action
+22:41:58 <CindyLinz> 然後..
+22:42:13 <CindyLinz> @type mapM (\ x -> x >>= putChar) $ repeat getChar
+22:42:16 <lambdabot> IO [()]
+22:42:30 <petercommand> 對阿，就像list 那裡也是這樣
+22:42:32 <CindyLinz> 這個會把前述這無窮多個 IO action 串起來
+22:43:09 <petercommand> > take 10 [1..]
+22:43:10 <lambdabot>  [1,2,3,4,5,6,7,8,9,10]
+22:43:12 <CindyLinz> 也就是說, 當 Haskell runtime 想要確認這個 mapM 有沒有「成功執行」的時候, 需要先一一執行過那無窮多個 action
+22:43:45 <CindyLinz> 所以就執行不完了
+22:44:40 <CindyLinz> @src mapM
+22:44:41 <lambdabot> mapM f as = sequence (map f as)
+22:44:46 <CindyLinz> @src sequence
+22:44:47 <lambdabot> sequence []     = return []
+22:44:47 <lambdabot> sequence (x:xs) = do v <- x; vs <- sequence xs; return (v:vs)
+22:44:47 <lambdabot> -- OR: sequence = foldr (liftM2 (:)) (return [])
+22:44:59 <CindyLinz> @type sequence
+22:45:01 <lambdabot> Monad m => [m a] -> m [a]
+22:46:09 <CindyLinz> sequence 會把交給它的一整個 list 串起來, 檢查每一個都能成功執行之後, 就是它有成功執行
+22:46:46 <CindyLinz> petercommand: 所以一般來說, 如果你知道想要的就是 10 個, 在送給 sequence 或這邊是 mapM 之前, 就只送 10 個給它吧
+22:46:51 <CindyLinz> 把 take 10 放到右邊一點
+22:46:57 <petercommand> 恩..
+22:47:04 <petercommand> :t (liftM $ take 10) $ repeat getChar
+22:47:05 <lambdabot>     Couldn't match expected type ‘[a]’ with actual type ‘IO Char’
+22:47:05 <lambdabot>     In the first argument of ‘repeat’, namely ‘getChar’
+22:47:05 <lambdabot>     In the second argument of ‘($)’, namely ‘repeat getChar’
+22:47:18 <petercommand> :t take 10 $ repeat getChar
+22:47:19 <lambdabot> [IO Char]
+22:47:49 <petercommand> 恩，成功了
+22:48:01 <CindyLinz> ^^
+22:48:26 <CindyLinz> 雖然 au 有別的壞方法.. (轉頭)
+22:48:51 <petercommand> XDD
+22:48:59 <petercommand> 是甚麼呀?
+22:49:04 <CindyLinz> 我才不說咧 XD
+22:49:19 <au> 網路謠言不可輕信 XD
+22:49:47 <petercommand> au: 我完全相信耶XD
+22:50:08 <CindyLinz> petercommand: 先用好方法就好了.. 壞方法是好方法行不通的時候才用的 XD
+22:50:17 <petercommand> XDD
+22:51:10 <mno2_> https://hackage.haskell.org/package/base-4.7.0.0/docs/src/GHC-STRef.html  看不太懂 STRef 的實作耶..
+22:51:29 <mno2_> 查下去 newMutVar# 是說：Create MutVar# with specified initial value in specified state thread.
+22:51:41 <mno2_> http://www.haskell.org/ghc/docs/7.8.1/html/libraries/ghc-prim-0.3.1.0/GHC-Prim.html#t:MutVar-35-
+22:51:56 <mno2_> state thread 那個 thread 是什麼意思？
+22:52:11 <mno2_> http://blog.ezyang.com/2014/01/so-you-want-to-add-a-new-concurrency-primitive-to-ghc/
+22:52:16 <CindyLinz> 我理解是一組 runST 時的那個 s
+22:52:26 <mno2_> 這邊又說 alls to primitive operations like readMutVar# and writeMutVar# are translated into actual memory reads and writes in C--
+22:52:52 <mno2_> CindyLinz: 我不 care type 啊，我比較在乎實作
+22:52:54 <CindyLinz> 一個存放一堆 local variable 的 pad 這樣 (思)
+22:53:30 <mno2_> 因為我看不出來為什麼放進去的值是 box 的
+22:54:15 <mno2_> 啊，a 就是代表 box 的
+22:54:18 <monochrom> 如果你問 ST 的 state thread, 那一定只是 type 問題, 因為 state thread 只在 type 存在, 沒有 code
+22:54:21 <mno2_> newMutVar# :: a -> State# s -> (#State# s, MutVar# s a#)
+22:54:22 <CindyLinz> 覺得那個 thread 跟 OS 或排程的 thread 沒有關聯, 只是一個 runST 就是一個「thread」, 然後 thread 之間彼此不互通
+22:54:35 <mno2_> 應該要解讀成 (#   #)
+22:54:39 <mno2_> 不是 a#    )
+22:54:48 <mno2_> 匹配錯誤
+22:54:48 <CindyLinz> 好討厭的 style.. XD
+22:56:05 <mno2_> 我只是好奇要整存整付到底是 GHC.ST expose 出來的 primitive 就已經沒救了還是說有救 xD
+22:56:34 <monochrom> state thread 兩個作用: 防止把兩個 runST 混淆; 迫使 optimizer 不改先後次序
+22:57:28 <CindyLinz> mno2_: 用 tail recursion 把同一個 record 經由參數傳下去也會整存整付欸 Q_Q
+22:58:29 <mno2_> 用到 Box 的東西就沒救吧？
+22:58:48 <mno2_> 只是我好奇到底是可以從哪邊可以下手改
+22:58:49 <CindyLinz> field 是 strict unboxed 的 :D
+22:59:08 <CindyLinz> 可是整個 record.. 我不知道能怎麼辦 @@"
+23:00:01 <monochrom> 自動零存, 需要 linear type 或 uniqueness type, 例如 clean
+23:00:40 <mno2_> 我覺得 unboxed type 有一大堆 # 讓人看起來好怒啊。每個 function 都很怒的感覺。State# == State 凸
+23:00:53 <CindyLinz> XDDD
+23:01:12 <CindyLinz> 「#」讀音「快」.. 感覺有沒有好點? XD
+23:01:39 <CindyLinz> 噢, 整個 record 給它改成 (#     #) 就好了哄
+23:01:42 <mno2_> 我剛剛不就打了我腦中的讀音 xD
+23:01:50 <monochrom> ##樂樂學 Haskell?
+23:01:54 <CindyLinz> 那個讀音會讓你心情比較差 XD
+23:03:56 <CindyLinz> 用 (#   #) 就沒有 type 了, 有點 Haskell 自廢武功的感覺 QQ
+23:04:46 <CindyLinz> 唔 再 newtype 包一次?
+23:08:20 <monochrom> 怎會沒 type? (# x, y #) 與 (# x, y, z #) 就已不同 type
+23:19:07 <petercommand> compile time能夠做IO嗎?比如說compile的時候問[Debug? y/n]
+23:21:18 <petercommand> 想說剛剛講的都是runtime的時候才做IO, 換成compile time XD
+23:23:08 <petercommand> 看起來可以耶...template haskell..
+23:23:22 <petercommand> 好像蠻強大的
+23:28:22 <petercommand> CindyLinz: 上次你說你看的那個haskell教學是哪一個呀?
+23:29:04 <CindyLinz> petercommand: 書?
+23:29:21 <CindyLinz> monochrom: 就 (# x, y #) 與 (# x, y #) 分不出來嘛 ^|
+23:29:23 <CindyLinz> ^^|
+23:29:33 <CindyLinz> petercommand: begining haskell
+23:30:09 <petercommand> 恩恩
+23:31:05 <CindyLinz> petercommand: 可以唷, 我用 template haskell 在 compile time 連 postgresql.. XD
+23:31:18 <petercommand> XD
+23:31:32 <CindyLinz> petercommand: 不過... debug 這個放在 compile 參數比較好吧? o.o
+23:31:45 <petercommand> 恩
+23:49:49 <mno2_> Template Haskell 問 [Debug? Y/n] ，回答 y 然後就下 rm -rf ，bug 通通都消失了。  誤)
+23:53:44 <CindyLinz> Malware....ww
+23:56:15 <au> 感覺上是 TDDD #TestDeletionDrivenDevelopment 的進階版

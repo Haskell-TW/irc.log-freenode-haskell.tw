@@ -1,0 +1,16 @@
+02:14:49 <CindyLinz> 那真是好問題..
+11:16:02 <MnO2> 這兩天在看ghc commentary，ghc的parser寫得比較寬鬆，一些東西都是後面的階段才reject
+11:17:05 <MnO2> 而且parser會把所有expression都當作right-associative，當過了renamer之後才會調整
+20:05:07 <MnO2> Yoneda Lemma看不懂...
+22:24:40 <CindyLinz> MnO2: 之前在看 conduit / pipe 的時候, 你有提到 exception 要能妥善處理才好.. 想問你有沒有可以參考的文章或討論串或程式範例
+22:26:12 <CindyLinz> 我從 reactive programming 的角度去想的時候, 感覺事件產生的 exception (網路斷掉之類的), 感覺自然的處理方式是分成不同類型的事件, 而不是一般 exception 用的 try catch
+22:26:36 <CindyLinz> try catch 應該就只有用在每個「node」自己內部邏輯用
+22:26:50 <CindyLinz> 好像問得沒頭沒尾的 orz
+23:01:19 <MnO2> CindyLinz: 我記得我說的應該是 async exception ?
+23:04:45 <MnO2> CindyLinz: 不過一般exception可能就夠討厭了，譬如要拆兩路做，一路丟了一個不知道怎麼處理的exception，另一路可能也會不知道怎麼處理
+23:05:26 <MnO2> CindyLinz: 不過一般exception至少比較不用擔心resource leak
+23:06:01 <MnO2> CindyLinz: async就要看是哪個層級mask掉
+23:08:21 <MnO2> CindyLinz: 以iteratee來講可能不好compose
+23:10:08 <MnO2> CindyLinz: 範例的話，snap吧，不過他是用iteratee，你comment搜async
+23:15:14 <favonia> MnO2: GHC 那是什麼奇妙 parser lol
+23:16:09 <MnO2> favonia: 我也覺得很奇妙，但commentary就這麼寫

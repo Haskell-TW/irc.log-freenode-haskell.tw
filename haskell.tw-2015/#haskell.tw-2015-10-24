@@ -1,0 +1,15 @@
+00:42:10 <monochrom> 即是說: mdo { x <- f y; y <- f x; return (x, y) } 要譯作 mfix ( \ ~(x,y) -> do { a <- f y; b <- f x; return (a, b) } )
+00:43:03 <monochrom> 不只是 mfix, 就算 fix 都要 fix ( \ ~(x,y) -> ... )
+00:43:52 <monochrom> 不過 fix 也是 mfix 特例
+12:17:55 <c9sould__> CindyLinz: 簡報字體好棒
+12:17:57 <c9sould__> http://cindylinz.github.io/Tutor-Haskell/?volume=syntax2#3
+12:21:35 <c9s> 好久沒用 irssi XD
+12:21:45 <c9s> CindyLinz: 簡報字體好棒
+12:21:50 <c9s> http://cindylinz.github.io/Tutor-Haskell/?volume=syntax2#3
+12:26:07 <c9s> CindyLinz: 不過第一集在哪邊? XD
+12:26:31 <c9s> dynasm 看起來很不賴啊
+12:29:57 <c9s> 好像回錯頻道 XD
+13:13:47 <CindyLinz> c9s: 你開一下它的 github repo 頁
+14:03:59 <suhorngT_> XD
+14:39:51 <c9s> 哦哦看到了!
+14:39:56 <c9s> CindyLinz: 3Q~!

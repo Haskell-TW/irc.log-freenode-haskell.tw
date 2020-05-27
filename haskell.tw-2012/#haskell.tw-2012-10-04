@@ -1,0 +1,9 @@
+18:42:27 <_13h> http://www.cs.york.ac.uk/fp/reduceron/  # The Reduceron: High-Level Symbolic Computing on FPGA
+18:43:53 <_13h> 剛剛發現竟然有人做這種東西
+18:44:00 <_13h> 跑 haskell subset 的
+21:36:21 <favonia> _13h: 我看過有人嘗試設計適合跑在硬體上還是 GPU 上的 FP xD
+21:42:43 <CindyLinz> 結果咧結果咧
+21:54:13 <favonia> CindyLinz: 不知道... 我沒追 xD
+21:59:47 <CindyLinz> 喔 好吧 XD
+22:11:55 <MnO2> http://jp.monmonkey.com/?p=5126
+22:11:59 <MnO2> 好潮的計算機xD

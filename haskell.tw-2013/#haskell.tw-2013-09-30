@@ -1,0 +1,15 @@
+00:00:21 <hashcat> 集群用得dependent type
+00:14:22 <gko> 有人在中華嗎？現在下載超慢... wget http://optimate.dl.sourceforge.net/project/pidgin/Pidgin/2.10.7/pidgin-2.10.7.exe => 20 KB/s...
+00:15:09 <gko> Youtube也斷斷續續...
+23:24:00 <YuLin> 在 #sml 也看到了常見的帳號
+23:45:51 <YuLin> http://www.catonmat.net/blog/on-functors/
+23:46:08 <YuLin> 正在看 SML、Haskell、c++ 的 functor
+23:46:27 <YuLin> c++ 我直接跳過沒看，直接看 SML 的部份
+23:47:22 <YuLin> SML 的 funtor 看起來很像 dispatcher
+23:50:18 <suhorng> 不是三個完全同的東西嗎...?
+23:50:45 <suhorng> *完全不同
+23:52:07 <YuLin> 恩，在看一篇解釋四者的 functor
+23:52:18 <YuLin> prolog
+23:52:22 <YuLin> 沒打到
+23:55:50 <letoh> YuLin: https://www.fpcomplete.com/blog/2012/07/the-functor-pattern-in-c  這個呢?
+23:59:40 <YuLin> 這個沒看過，不過在我有生之年，能不要接觸 C++ 就不想接觸XD

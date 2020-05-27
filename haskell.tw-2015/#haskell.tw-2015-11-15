@@ -1,0 +1,24 @@
+00:56:20 <caasih> CindyLinz: 覺得自己 Haskell 基本知識太貧乏，還是會看些 Core 惡補
+01:01:02 <CindyLinz> 如果看得很舒服就盡量看呀~ 我那時是嫌用 Core 的話要介紹好多東西, 而且我自己都講不清楚為什麼非這樣作不可 ^^|
+01:01:10 <CindyLinz> 應該說我自己也不知道為什麼非這樣作不可
+01:04:01 <CindyLinz> 然後 Core 有 type, 有它自己的 type check / type inference
+01:04:59 <caasih> 看那篇的介紹， type check 在 Haskell 那邊就做完了？
+01:05:04 <CindyLinz> 想來想去, 總覺得有點多餘 @@"
+01:05:06 <CindyLinz> 咦 是喔?
+01:05:15 <caasih> 通常不會用到 Core 的 type check
+01:05:41 <CindyLinz> 喔~~
+01:06:12 <caasih> 嗯嗯，我是擔心用 ulc 更多事情要處理，但自己並沒有夠的知識來判斷 Core 好不好，還有哪些東西要做之類的
+01:06:28 <caasih> *還有哪些東西要多做...
+01:12:02 <CindyLinz> 我也沒有夠的知識來判斷 Core 好不好... XD
+01:12:18 <CindyLinz> 可以都做啊! (有空的話w
+01:25:43 <caasih> 時間不夠就跟 yulin 借時光機 XD
+06:41:58 <suhorngT> CindyLinz: OK...真是痛苦 XD
+10:20:18 <CindyLinz> suhorngT: 可以把它抽出來作成函數, 然後用到的時候就使用函數, 塞在 ViewPattern 裡面
+18:14:48 <suhorngT_T> 對喔! GHC 有 veiw, 可以彌補一下這個部份
+18:16:12 <CindyLinz> suhorngT_T: 我寫的就是用了 ViewPattern 呀~
+18:16:30 <suhorngT_T> 嗯哼嗯哼 當初沒有注意到 只看到 case of
+18:16:33 <CindyLinz> 只是 sample 裡面只放一個 function name 的地方我塞了一大坨 lambda
+18:17:27 <suhorngT_T> 當時沒讀懂 -> (x, t) -> 的含意 --還以為是 arrow--
+18:17:49 <CindyLinz> XD
+18:18:17 <CindyLinz> arrow 向左..
+18:18:20 <CindyLinz> 五樓到了....

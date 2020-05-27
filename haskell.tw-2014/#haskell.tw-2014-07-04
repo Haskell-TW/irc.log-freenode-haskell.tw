@@ -1,0 +1,363 @@
+00:00:24 <miaoski> CindyLinz: 我是浪蕩的 LISP 啦... <del>最多一起玩 unsafeCoerce</del>
+00:02:11 <CindyLinz> 這樣不對啊啊~~
+00:03:01 <suhorng> believe_me : a -> b    #idris
+00:03:52 <jaiyalas> believe_suhorng : a -> b
+00:03:52 <miaoski> suhorng: ++
+00:04:33 <suhorng> jaiyalas: ...
+00:05:00 <miaoski> believe_cindy = unsafeCoerce unsafeCoerce -- *flee*
+00:07:57 <CindyLinz> miaoski: 我才不會這樣!! (大囧)
+00:08:24 <CindyLinz> miaoski: 你寫的那個剛好是「猙獰的應用」裡面 undefined 的定義 XD
+00:50:47 <b4283> miaoski: #cschat.tw welcomes you XD
+07:50:37 <yllan> 這 type system 之所以 decidable 是否因為沒辦法自我指涉，說出 A : A 這句話？
+09:35:19 <yllan> 這樣 zero:: zero:: zero:: nul 會爛？
+10:39:03 <CindyLinz> yllan: 嗯嗯, 不能自我指涉是 N 層 universe 的部分; 另外也不允許「參數不會縮小」的遞迴
+10:39:20 <hashcat> 看看重量級的dependent type http://www.ats-lang.org/DOCUMENT/
+10:39:22 <CindyLinz> 今天比昨天早起一個小時... ._.
+10:41:05 <hashcat> 一堆template跟type
+10:41:36 <hashcat> 還有不該出現的尖括號
+10:42:22 <hashcat> example跟library都一大堆
+10:42:27 <hashcat> 跟c一樣快
+10:43:48 <hashcat> http://www.ats-lang.org/htdocs-old/EXAMPLE/example.html
+10:45:27 <hashcat> 而且疑似是只有一兩個人弄出來的
+10:46:52 <_13h> ats 看過一些日本人在玩
+10:47:31 <hashcat> 那堆範例作者怎翻都是Hongwei Xi
+10:48:40 <hashcat> 好像翻不到Hongwei Xi之外的作者
+10:55:04 <hashcat> ATS有點硬
+11:06:30 <xcycl> CindyLinz: type checking 是 decidable 跟 universe 沒什麼關係耶
+11:07:06 <CindyLinz> xcycl: 我放在分號後面嘛 :p
+11:08:00 <CindyLinz> xcycl: 不能自我指涉應該是 universe 吧?
+11:08:21 <CindyLinz> 那 universe 是 soundness 的部分?
+11:09:42 <xcycl> 有演算法可以推 universe 是第幾層, 也就是說可以把 index 拿掉, 然後由 type checker 幫你把 U : U 算出正確的 index
+11:10:06 <CindyLinz> xcycl: 不是昨天 Josh 講的那個 type in type?
+11:11:22 <CindyLinz> 哦~ 這個 U : U 算出正確的 index, 會幫左邊和右邊 assign 不同的 index?
+11:13:00 <petercommand> 為甚麼Num a不能推導出Ord a呀
+11:14:56 <xcycl> 對 (但 Agda 沒有做這件事情)
+11:14:57 <CindyLinz> petercommand: 我們定一個有 Num a 卻沒有 Ord a 的 type 好了...
+11:15:13 <petercommand> 喔喔
+11:15:21 <CindyLinz> petercommand: 你覺得複數怎麼樣? ^^
+11:15:30 <petercommand> typeclass跟overloading是不是一樣的呀?
+11:15:35 <petercommand> CindyLinz: 恩恩XD
+11:16:15 <CindyLinz> petercommand: 同一個名字的函數, 底下其實是不同的程式; 這一個角度來說, 是
+11:16:51 <petercommand> 恩
+11:16:54 <CindyLinz> petercommand: 它和 Java 的 overloading 很不同; 只是常常可以用來解一樣的問題
+11:17:02 <CindyLinz> 但是各有勝場
+11:17:31 <CindyLinz> 我們常常遇到的情況是它們的交集這樣..
+11:17:44 <CindyLinz> 這個「常常」是經不起考驗的.. (逃)
+11:17:57 <CindyLinz> xcycl: 嗯 XD
+11:18:01 <petercommand> XD
+11:19:30 <CindyLinz> 嗯 Haskell 那些 Monad, Traversable 之類的玩很大, 是 Java object method overloading 玩不到的部分..  Java exception 是 Haskell class 沒得玩的部分
+11:20:45 <petercommand> 我完全沒有玩過java XD
+11:20:55 <CindyLinz> 好吧 XD
+11:22:12 <CindyLinz> petercommand: 那留意一下就好了, 萬一以後要碰 Java, 記得 Haskell 的 overloading 和 Java 的不一樣, 可能會被混淆到而困惑, 它們只是有些角度有相似感, 所以叫法一樣而已.
+11:23:10 <petercommand> 恩恩
+13:29:19 <jaiyalas> josh: 「假設 Star Trek type 是對的」
+13:30:43 <CindyLinz> XD
+13:33:46 <CindyLinz> Josh 得意地笑了 # 我們有 440 行的程式要看
+13:41:48 <CindyLinz> 「把它們抹掉，你就會回到1930年代」
+13:42:00 <CindyLinz> 今天是妖術 section.. (誤)
+13:43:04 <CindyLinz> ------------ 可以這樣用的喔 XDDDD
+13:43:08 <lcamel> 好個註解
+13:43:19 <CindyLinz> 剛剛在想這什麼語法.. XD
+13:43:39 <lcamel> 等下會出現 ascii art 嗎
+13:43:46 <CindyLinz> XD
+13:44:08 <CindyLinz> 在 Agda 裡面用 ascii art 是對 Agda 的一種侮辱 (嗯!)
+13:44:32 <CindyLinz> 欸不對, Agda unicode 也只有一個字以內, 超過一個字的範圍還是 art 一下好了   XD
+13:45:46 <CindyLinz> 為什麼在 channel 上面感嘆的話會被 Josh 發現呢.. (抖)
+13:46:23 <CindyLinz> 喔喔 :: 是 List 的 constructor XD
+13:46:27 <jaiyalas> 因為他有偷看(?)
+13:47:03 <CindyLinz> 「完全自然!」
+13:53:36 <lcamel> 從第2天開始的問題: 回推時選擇用 Introduction 或 Elimination 除了用暴力之外, 有 algorithm 可以幫忙挑 rule 嗎?
+13:55:19 <CindyLinz> lcamel: 已經選定要用某個 rule (例如說 →), 只是不確定要用 intro 還是 elim 嗎?
+13:56:28 <CindyLinz> lcamel: 如果 rule 也未定的話.. 看系統有多複雜... First order logic 是 undecidable; Tautology 應該是可以
+13:56:29 <jaiyalas> 「當然, 我們都是從零開始數的, 我們都是文明人」
+13:56:38 <CindyLinz> 我漏掉了 ><
+13:57:00 <CindyLinz> 「偽裝成數學家的計算學家」
+13:57:44 <CindyLinz> 「因為那時沒有計算學家, 所以只好偽裝成數學家; 不過雖然他們是計算學家, 也做了一堆跟數學家一樣的事」
+13:57:56 <CindyLinz> 就是個同構的概念嗎? XD
+13:58:25 <lcamel> CindyLinz: 謝謝
+14:00:03 <CindyLinz> lcamel: 不就算整體是 undecidable, 局部搜搜有時候也是可以的.. (c-c c-a XD)
+14:00:32 <lcamel> CindyLinz: 搜到某個 timeout 到了為止嗎 ? XD
+14:01:22 <CindyLinz> lcamel: Agda 比較挑, 要她覺得有信心預知一定做得出來才會做.. 應該是這樣 @@"
+14:01:54 <lcamel> CindyLinz: 還有這樣的 !  @_@
+14:02:12 <au> CindyLinz: re "Java exception 是 Haskell class 沒得玩的部分"... 是說 checked exception 嗎 (相當於 ErrorT 配一個 typeclass-constrained existential type?)
+14:02:32 <jaiyalas> 為什麼在 free/bound 這裡講那麼慢 XDDD
+14:03:08 <CindyLinz> au: 我指的是 GHC 的 Control.Exception 呀~ extensible hierachy exception
+14:03:56 <au> ok~ 那相當於 unchecked exception
+14:04:04 <au> 兩種都有得玩啊
+14:04:27 <CindyLinz> au: 然後, 我也覺得先把 existential type 遮掉不看的部分
+14:05:50 <CindyLinz> au: 嗯, 所以我那一句是講成: Java 的 exception.. XD
+14:06:16 <au> 可是 Java 式的 exception 的 haskell 實作就是 typeclass 做的... http://hackage.haskell.org/package/control-monad-exception-0.11.1
+14:06:25 <au> #對不起稍微認真了
+14:06:46 <CindyLinz> 「逼塔~ 我在講什麼?」 # 外星通話插曲
+14:07:23 <au> 不吵你聽課了 XD 先去午餐
+14:08:08 <CindyLinz> au: 有用到 typeclass, 但是還得用層層 data constructor 套起來作到 hierachy
+14:08:31 <CindyLinz> au: 而 Java 的 class 是天生(或說規定定死)一定要把這個層層結構實作進去
+14:08:32 <jaiyalas> 助教穆老師... XDDDD
+14:08:44 <CindyLinz> 不是 請教穆老師 嗎? ^^|
+14:11:45 <evast> CindyLinz: 昨天有學生寫信來說 FLOLAC'14 網站上助教名單裡沒有 **穆信成助教** 的 email 讓他很困擾
+14:12:15 <CindyLinz> XDXDXD
+14:12:18 <CindyLinz> 原來是這樣
+14:14:12 <au> (-XExistentialQuantification encoding 的意思是實作 hierachy，但避開層套的 data constructor)
+14:14:16 <au> class Throwable a; class Throwable a => Error a; class Error a => IsLinkageError a
+14:14:19 <au> data LinkageError = forall a. IsLinkageError a => LinkageError a
+14:14:26 <au> #大致像這樣
+14:16:30 <CindyLinz> 這樣有通用的 catch 嗎? @@"
+14:16:51 <au> 再 instance Exception LinkageError 就有了 \o/
+14:21:03 <CindyLinz> 這個好像要加開 UndecidableInstances?
+14:21:21 <CindyLinz> 啊不對 是 class 不是 instance
+14:22:23 <CindyLinz> 這樣不算通用的 catch 吧, 通用的部分只有 catch 這個名字啊 XDD 每一種 exception 都要提供一個特定的 catch 法 XD
+14:23:34 <CindyLinz> 然後, 這種寫法應該沒有限定要 hierachy, 可以自己隨便套成網狀之類的都行; 不過話說回來, 我偶爾沒事想想的時候也會懷疑強迫一定要作成一個樹狀是不是對的 @@"
+14:26:01 <CindyLinz> 嗯不過如果有機會介紹 Haskell class 與 Java class 的差異處時, 我會把 ExistentialQuantification 看成不是 class 的一部分, 但是它們組合在一起可以有更多能力這樣
+14:26:29 <CindyLinz> 因為只有 class 的時候, 整個情況看起來是非常 static 的
+14:26:46 <CindyLinz> 相對於 Java 是非常 dynamic 的..
+14:27:01 <au> 如果每一層都實作 toException / fromException 到單一 parent 就是 java model 了 (single inheritance)
+14:27:02 <CindyLinz> 而加上 existential 之後, 有加了一些 runtime 的東西進來
+14:27:22 <au> 這就是 @simonmar 在 Control.Exception 的寫法
+14:27:36 <au> 但是當然可以任意寫... XD
+14:28:09 <CindyLinz> 好像也是哄.. 現在是因為每種 exception 的 fromException 裡面的寫法是直有試一次他的唯一 parent
+14:28:16 <CindyLinz> 如果改成多試幾個就變成多線繼承了
+14:28:39 <CindyLinz> 是這樣嗎? (懷疑了起來 XD)
+14:28:49 <jaiyalas> 竟然要講 de Bruijn index........ 囧
+14:29:06 <CindyLinz> 不行啊, toException 只能放一個 parent 啊, 不然 parent 會不認得自己 @@"
+14:31:05 <au> 放兩個 parent 的話，toException 層也要用 instance 來 encode
+14:31:06 <au> instance CompilerException MismatchedParentheses
+14:31:07 <au> instance FrontendException MismatchedParentheses
+14:31:31 <au> 詳見 https://github.com/duairc/really-extensible-exceptions
+14:31:35 <CindyLinz> 嗯嗯嗯, 那應該是不能用現在這一組 Control.Exception 的意思
+14:31:44 <CindyLinz> 現在被高層訂死了 XD
+14:32:02 <au> 對，但 control-monad-exception 沒有挑 member type
+14:32:08 <au> 所以可以抽換
+14:32:13 <CindyLinz> 嗯嗯嗯
+14:32:15 <au> Control.Exception 就不行了。
+14:32:43 <au> #以上都是 GHC 7.8 限定
+14:32:54 <CindyLinz> GHC 7.8 會整個換過去 (驚)
+14:33:06 <CindyLinz> 感覺會爆一堆 library....ww
+14:33:15 <CindyLinz> ?
+14:33:22 <au> 應該預設還是用舊的 typeable single inheritance
+14:33:50 <au> 只是說如果想換成新的 polymorphic Typeable 的話，有一條路可以走 (really-extensible-exceptions)
+14:34:09 <CindyLinz> 這樣以後要保證接住所有的 exception 的話, 不就要寫兩層 catch, 一層 for 舊版 error, 一層 for 新版 XD
+14:34:36 <au> 但說實話這個新版(實驗版)不在 base 裡的話我想沒什麼人要用 XD
+14:34:40 <CindyLinz> 我知道了! 用 unsafeCoerce 來讓新舊版相容.. (被拖走..)
+14:34:51 <au> 畢竟 multiple inheritance 很多人覺得是 antipattern
+14:34:56 <au> unsafeCoerce 最高 \o/
+14:34:58 <CindyLinz> XDXD
+14:35:56 <CindyLinz> 覺得 Exception 這種東西, 要大家一起配合都用同一套才會動啊 ^^|
+14:37:08 <au> 其實我都只用最簡單的 error :: [Char] -> ⊥ (掩面
+14:37:10 <CindyLinz> 「這裡不是教堂，這是一個人！」
+14:37:24 <CindyLinz> error 在 GHC 也是可以用 catch 接啊
+14:37:41 <au> yup
+14:38:21 <CindyLinz> error 應該也只能選一邊站 o.o
+14:38:27 <CindyLinz> 可能要來個 newError (誤)
+14:38:43 <CindyLinz> errror vs error (逃)
+14:38:52 <au> -> ⊥ 的話可以選所有邊站 XD
+14:39:03 <CindyLinz> undefined 現在也是選一邊站啊 o.o
+14:39:12 <CindyLinz> 遞迴不停的話.... (默)
+14:43:21 <CindyLinz> Josh 化簡 Y-combinator 中
+14:45:27 <jaiyalas> CindyLinz: 是 ω 唷
+14:49:32 <banacorn> = ω =
+14:52:05 <CindyLinz> wwww 用 Agda 證明 Curry-Howard isomorphism....
+14:52:18 <au> 周二講完後，有一位朋友(不確定是不是 evast)問說有沒有數學家在做可機器驗證/協助的整套數學系統...
+14:52:35 <au> 當時忘記推薦 (在 github 上協作完成的) Univalent Foundations of Mathematics 了 XD
+14:52:38 <au> # http://homotopytypetheory.org/
+14:52:39 <CindyLinz> 可是 Agda 的證明是有效的, 前提是 Curry-Howard isomorphism 是對的? XD
+14:52:47 <CindyLinz> au: 是他沒錯
+14:53:06 <au> 那往 HoTT 看就對了
+14:54:04 <au> #只是要多學一套 Coq 的語法可能比 agda 麻煩
+14:54:34 <CindyLinz> au: 昨天 Funth 我有跟人推了一下下 Coq
+14:54:54 <CindyLinz> 我說: 如果你希望一個成熟的, 不要偶爾就出狀況的, 不要改來改去的系統的話, 可以考慮 Coq
+14:54:59 <CindyLinz> 可是它的語法醜很多 XD
+14:55:06 <CindyLinz> 但至少很穩 :p
+14:55:47 <xcycl> homotopy type theory 跟 Coq 兩個其實不大一樣
+14:56:22 <CindyLinz> xcycl: Agda 是 HoTT, 但 Coq 不是?
+14:56:36 <xcycl> 兩個都不是
+14:56:41 <xcycl> HoTT 還沒"做"出來
+14:57:08 <xcycl> HoTT 是 Marting Lof's type theory 外加兩條規則
+14:57:22 <CindyLinz> (我還沒辦法聽... ww)
+14:57:53 <caasih_> 雖然我還卡在 A -> \bot ，
+14:58:06 <xcycl> 一條是 univalence, 前陣子才有人解決計算意義, 但還沒有能用的語言
+14:58:19 <caasih_> 但亂逛 github 有發現個 HoTT-agda ...
+14:58:36 <CindyLinz> xcycl: 聽起來只要下苦工就可以出來的東西? # 還沒有能用的語言
+14:58:54 <xcycl> 應該是正在弄了啦 ....
+14:58:59 <CindyLinz> 嗯嗯嗯
+14:59:33 <xcycl> HoTT-agda 則是把新的規則在 Agda 上假設, 然後去證明 HoTT 的定理
+15:00:35 <xcycl> 咦 favonia 是 hott-agda 的作者啊 問他 (指
+15:00:39 <CindyLinz> XD
+15:01:14 <CindyLinz> 「下一節, 我們會進到.. 另外一個部分, 是靈異(?)的部分」
+15:01:32 <xcycl> 語意
+15:04:23 <au> 咦原來有 HoTT-Agda #太好了，這就來裝
+15:20:27 <favonia> lol 誰在拖我下水
+15:21:02 <CindyLinz> favonia: 不是你自己挖的游泳池嗎? (指)
+15:22:37 <favonia> 我現在在旁邊曬太陽錯了嗎
+15:22:46 <CindyLinz> XD
+15:39:11 <caasih_> :t (\g -> b)
+15:39:11 <lambdabot> t -> Expr
+15:39:38 <caasih_> :t (\g -> b)(\a -> b)
+15:39:39 <lambdabot> Expr
+15:39:46 <banacorn> XD
+15:40:48 <caasih_> :t (\f -> a)((\g -> b)(\a -> b))
+15:40:48 <lambdabot> Expr
+15:40:59 <au> :t g
+15:40:59 <lambdabot> FromExpr a => a
+15:49:27 <lcamel> ... refl
+15:51:47 <CindyLinz> XD
+15:53:13 <CindyLinz> 「我們已經所有的東西寫到 Agda 裡面了！」
+15:55:44 <lcamel> type引導程式 type引導證明 tdd ..
+15:56:23 <CindyLinz> XD
+16:00:13 <lcamel> 這樣是要倚賴 set theory 的結果嗎?
+16:02:20 <caasih_> :t \f f -> g
+16:02:21 <lambdabot>     Conflicting definitions for ‘f’
+16:02:21 <lambdabot>     Bound at: <interactive>:1:2
+16:02:21 <lambdabot>               <interactive>:1:4
+16:02:45 <caasih_> :t \f g -> h
+16:02:45 <lambdabot> FromExpr a => t -> t1 -> a
+16:03:02 <caasih_> :t \f -> g -> h
+16:03:03 <lambdabot> parse error on input ‘->’
+16:03:18 <lcamel> "blahblah 在這下面是不 valid 的 (by 某些集合論的結果) , 所以 p 不可證" 這樣?
+16:03:21 <caasih_> :t \f -> \g -> h
+16:03:22 <lambdabot> FromExpr a => t -> t1 -> a
+22:39:02 <petercommand> 空list []的type是甚麼呢?
+22:39:48 <CindyLinz> [a], a 可以是任意 type
+22:40:40 <CindyLinz> 如果你用在必須知道 a 是什麼 type 的地方, GHC 由 [] 是無法判斷這個 a 是誰的, 那就可能需要手動加註 type
+22:41:11 <petercommand> 所以如果像[] == []這個expression就是type [a]和type [a]的比較了?
+22:41:51 <CindyLinz> 對.. 然後我記得 GHC 對於 [] 可以直接混過去的地方, 會偷偷塞 Any XD
+22:42:16 <petercommand> any是?
+22:42:19 <CindyLinz> > show []
+22:42:21 <lambdabot>  "[]"
+22:42:32 <petercommand> > :t Any
+22:42:33 <lambdabot>  <hint>:1:1: parse error on input ‘:’
+22:42:39 <CindyLinz> @type Any
+22:42:41 <lambdabot> Bool -> Any
+22:42:45 <CindyLinz> 不是這個 XD
+22:42:49 <petercommand> XD
+22:43:02 <CindyLinz> @type GHC.Prim.Any
+22:43:03 <lambdabot> Not in scope: data constructor ‘GHC.Prim.Any’
+22:43:08 <CindyLinz> ww
+22:43:34 <CindyLinz> 就是個 type, 但不知道它是什麼
+22:44:04 <petercommand> :t Int
+22:44:05 <lambdabot>     Not in scope: data constructor ‘Int’
+22:44:05 <lambdabot>     Perhaps you meant one of these:
+22:44:05 <lambdabot>       ‘In’ (imported from Lambdabot.Plugin.Haskell.Eval.Trusted),
+22:44:21 <petercommand> @src Int
+22:44:21 <lambdabot> data Int = I# Int#
+22:44:25 <petercommand> @src Integer
+22:44:26 <lambdabot> data Integer = S# Int#
+22:44:26 <lambdabot>              | J# Int# ByteArray#
+22:45:01 <petercommand> 那個#代表甚麼呀?
+22:45:41 <CindyLinz> 只是名字的一部分, 通常用來代表 GHC 底層內建的一些結構
+22:47:05 <petercommand> 這裡的那個"|"似乎不是guard?
+22:47:28 <au> # 表示不是 thunk 而是 unboxed value
+22:48:33 <au> 就是說不適用惰性求值，也省略一些檢查 http://www.haskell.org/haskellwiki/Unboxed_type
+22:48:43 <au> "|" 和 data Bool = True | False 裡的 | 是一樣的
+22:48:57 <CindyLinz> au: 可是我看到 S# 以後, 原本想這樣解釋卻突然縮了 ^^|
+22:49:37 <au> XD 惰性求值是 data 這層 (constructor) 加回去的
+22:49:52 <CindyLinz> 啊 S# I# J# 是 data constructor, 不是 data type
+22:49:56 <au> 對
+22:50:00 <CindyLinz> Int# ByteArray# 才是 data type
+22:50:04 <au> yup
+22:51:00 <petercommand> 恩恩
+22:51:22 <CindyLinz> 怎麼不叫「慵懶求值」呢, 看起來多舒服 XD
+22:51:52 <petercommand> 先來看一下
+22:52:18 <CindyLinz> 「憊懶求值」.. 好像太負面了 XD
+22:52:34 <petercommand> unboxed是甚麼意思呀?(字面上的)
+22:53:15 <CindyLinz> 沒盒子的 XD
+22:53:19 <petercommand> XDDD
+22:53:25 <CindyLinz> 我是認真的!
+22:53:45 <petercommand> 應該是我想太多了XD
+22:58:49 <petercommand> au: data Bool = True | False裡的 | 是甚麼意思呀?
+22:59:50 <au> 型別為 Bool 的值要嘛是 True，要嘛是 False
+22:59:56 <au> 所以是「要嘛是」的意思
+23:00:19 <petercommand> XD
+23:00:48 <CindyLinz> 不是愛馬仕 QQ
+23:01:31 <petercommand> 所以應該沒有association的問題?譬如說data Sometype = A | B | C這樣
+23:01:54 <CindyLinz> 嗯 一次就 N 個, 也沒有結合的關係在
+23:02:54 <CindyLinz> 如果這邊 A, B, C 都是一大串, 或是有很多串的話, 我常常會這樣寫: data Sometype[換行]  = A[換行]  | B[換行]  | C[換行]
+23:03:23 <CindyLinz> 但如果像 data Bool = True | False 短短的就可能會寫在同一行
+23:03:58 <au> data CindyAccessory = Rolex | Hermes  -- 「Cindy 的配飾要嘛是勞力士，要嘛是愛馬仕」
+23:04:08 <petercommand> 喔喔X
+23:04:16 <petercommand> XD
+23:04:46 <CindyLinz> XD
+23:05:09 <au> 還有另一個寫法叫 -XGADTs ，可以把建構函數的型別給出來
+23:05:11 <au> data Bool where True :: Bool; False :: Bool
+23:05:23 <au> 意思是一樣的 (但是可以做比較多事)
+23:06:07 <CindyLinz> 也可能比較好懂(?
+23:06:20 <au> 對啊，只是要打多一點點字
+23:06:24 <CindyLinz> 至少我有一段時間把 = 右邊的 data constructor 和 data type 搞混
+23:06:34 <CindyLinz> 用 GADT 寫法應該就不會有這問題
+23:06:37 <au> yeah
+23:07:51 <petercommand> 跟data Bool = Bool { True :: Bool, False :: Bool }一樣嗎?
+23:07:52 <CindyLinz> 可是如果要讀別人的程式的話, 一般寫法還是得會...ww
+23:08:16 <au> 這就是知難行易的道理 (誤
+23:08:25 <CindyLinz> 不一樣.. 你這一個是 record syntax, 相當於 data Bool = Bool Bool Bool
+23:08:54 <CindyLinz> 不過 True, False 依規定這邊一定要小寫開頭
+23:09:18 <petercommand> 恩
+23:09:43 <au> 要用 gadt + record syntax 的話要寫成...
+23:09:44 <au> data Bool where True :: {} -> Bool; False :: {} -> Bool
+23:09:56 <CindyLinz> 然後會自動生出一些輔助函數, 還有 pattern match 的時候可以用名字而不是位置來表示欄位
+23:10:16 <au> data Maybe a where Nothing :: {} -> Maybe a; Just :: { fromJust :: a } -> Maybe a
+23:10:20 <au> etc
+23:10:40 <au> (「{} ->」的部份一般省略不寫)
+23:10:51 <CindyLinz> 剛好 True 和 False 都沒有欄位, 這樣寫好累又沒用處 XD
+23:11:32 <petercommand> 那個GADT是縮寫嗎?
+23:11:53 <au> =Generalized algebraic data type
+23:11:53 <petercommand> 該不會是gadget吧XD
+23:11:59 <petercommand> 喔喔
+23:14:24 <au> data Object where New :: { value :: a, toString :: a -> String } -> Object
+23:14:52 <au> #這樣是做到 -XExistentialQuantification (類似 OOP 物件封裝) 的效果但用 -XGADTs 語法取代
+23:16:08 <CindyLinz> 左邊沒有右邊有的 a
+23:16:23 <au> exactly
+23:16:51 <au> 當時會實做這個語法是因為實在覺得 forall 看不懂 XD
+23:17:05 <au> (「這裡的 forall 讀作 exists...」)
+23:17:10 <CindyLinz> 又是你實作的!?
+23:17:15 <au> 是啊
+23:17:20 <CindyLinz> 怎麼到處都會撞到你實作的東西 XD
+23:17:26 <petercommand> !!
+23:17:27 <CindyLinz> ++
+23:18:12 <CindyLinz> 問個祕訣.. 我在 emacs (有 agda-mode) 要怎麼啟動 agda 的 unicode input 模式? ^^| (註, 我不會 emacs)
+23:18:31 <au> <- 只會 atom 不會 emacs
+23:18:47 <CindyLinz> atom 也是 editor?
+23:18:51 <petercommand> atom 是?
+23:19:18 <au> https://atom.io/ 據說這星期終於在 2013 年以前出的電腦上可以用了
+23:19:41 <au> (要進 Preferences 裡開 Settings -> Use React Editor)
+23:19:44 <mno2_> react.js 來改善 painting
+23:19:51 <petercommand> binary只有mac XDD
+23:21:08 <au> windows 的話有 http://atom.someguy123.com/#sthash.prmB88hC.dpbs
+23:21:19 <CindyLinz> au: 你說的是 atom?
+23:21:38 <au> Ubuntu 的話有 ppa:webupd8team/atom
+23:21:41 <au> CindyLinz: yeah, atom
+23:21:50 <CindyLinz> 噗 For OSX or later..
+23:21:53 <petercommand> 用debian XD
+23:22:03 <CindyLinz> 喔喔 ubuntu 有..
+23:22:15 <au> debian 的話 https://launchpad.net/~webupd8team/+archive/atom 說不定可以
+23:22:20 <CindyLinz> 晚點.. 先還是考慮跟老師他們一樣的 editor ^^|
+23:23:36 <CindyLinz> 有了!
+23:23:44 <CindyLinz> meta-x toggle-input-method
+23:23:57 <CindyLinz> 喔 應該用 C-\ 就可以執行這個
+23:23:58 <caasih_> CindyLinz: emacs 上用 \bn \to ？
+23:24:02 <CindyLinz> 對
+23:25:00 <monochrom> 天下太多 editors 了!
+23:25:44 <CindyLinz> 至少可以不算 emacs?
+23:25:53 <CindyLinz> 它是 OS.. (逃)
+23:27:36 <monochrom> 可惜 Knuth 用 emacs :)
+23:28:15 <CindyLinz> 哦~ Knuth 不用 editor.. XD
+23:29:19 <caasih_> http://xkcd.com/378/
+23:31:09 <au> (xkcd378 的 mouseover title text 就是 Permutation City 這本小說的劇情設定)
+23:31:44 <caasih_> au++ 感謝推薦，馬上來查看看 XD
+23:31:49 <monochrom> 有一次 Knuth 到訪加拿大滑鐵盧大學, 包括兩場公開答問大會, 第一場 "任何非宗教問題", 第二場 "任何宗教問題". 舉例說, 在第一場, "你怎樣看 P vs NP?" 是合法問題, 而他也答了他的想法.
+23:33:05 <monochrom> 在第一場, 有同學問, "不知這算不算宗教問題: 你用甚麼編輯器?" 全場都笑了.
+23:33:32 <CindyLinz> XD
+23:33:46 <monochrom> 結果他是用 emacs. 後來還說到 window manager, 他用的是 fvwm.
+23:35:31 <monochrom> 他唯一不滿意, 最希望改變的是: 有腳踏板, 就如同風琴 organ 一樣
+23:43:13 <petercommand> atom蠻不錯的耶
+23:45:27 <au> 而且可以用 ghc 寫它的 plugin
+23:45:45 <au> #這是我一開始用atom的動機
+23:46:55 <CindyLinz> 心動了一下ww
+23:47:13 <CindyLinz> 還是先繼續乖乖寫練習作業好了...ww
+23:47:26 <letoh> atom 不是在 browser 上跑的?
+23:47:44 <au> 是，node + chromium
+23:48:00 <CindyLinz> 那為什麼用 ghc 寫 plugin 啊?
+23:48:09 <letoh> 正想問XD
+23:48:17 <au> 因為要找藉口練 ghc 7.8 的 ghcjs
+23:48:17 <letoh> 寫完轉成 javascript 嗎?
+23:48:22 <au> # https://github.com/audreyt/markdown-preview-ghcjs
+23:48:37 <au> 直接把 hackage 模組轉成 js
+23:49:08 <CindyLinz> ghcjs!

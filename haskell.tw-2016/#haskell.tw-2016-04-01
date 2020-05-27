@@ -1,0 +1,10 @@
+01:07:12 <caasih> CindyLinz: Haskell-HVG 最新的 commit 是不是沒 push ？找不到 bezier 版的 link
+01:13:02 <CindyLinz> caasih: ? https://github.com/CindyLinz/Haskell-HVG/blob/master/test/Entity.hs#L79
+01:13:39 <CindyLinz> caasih: 喔喔.. 對那個在筆電
+01:13:46 <CindyLinz> 白天去公司再 commit
+01:13:48 <caasih> CindyLinz: 欸...
+01:14:10 <CindyLinz> 嗯不過那個檔是免洗版.. 這邊完全沒有
+01:15:06 <caasih> CindyLinz: 那明天 commit 後再跟你要 XD
+01:15:27 <CindyLinz> 好
+01:15:47 <caasih> GitHub 的版本也還沒有 Draw = IO () 什麼的...
+01:17:12 <caasih> 啊，有，看錯了。在 Type.hs

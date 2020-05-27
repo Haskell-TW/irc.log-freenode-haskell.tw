@@ -1,0 +1,21 @@
+00:01:49 <hashcat> 什麼阿
+00:02:36 <hashcat> ghc磨練不夠
+00:02:49 <hashcat> 要加強訓練 ghci -fobject-code -fllvm -O3 -fforce-recomp
+00:04:19 <CindyLinz> ...
+00:04:29 <CindyLinz> 需要黑幕嗎?
+00:05:27 <hashcat> 需要果防布
+10:19:58 <MnO2> http://chrisdone.com/posts/haskell-homepage-thoughts
+10:20:14 <MnO2> 看起來要推動 renew logo
+11:38:04 <c9s> CindyLinz: 順利嗎?
+13:50:18 <CindyLinz> c9s: 靠腎上腺素撐完了. 現在好累 XD
+15:49:25 <c9s__> CindyLinz: XDD 聽說人很多？
+17:22:37 <CindyLinz> c9s: 比我預期地多很多... 我沒注意有多少, 只是我以為應該有十幾二十個就算多了..
+17:23:03 <CindyLinz> 題目看起來就很硬, 而且我覺得台灣在用 perl 的應該不太多
+17:40:28 <petercommand> 是啥活動呀
+18:00:11 <CindyLinz> coscup
+18:17:48 <petercommand> 喔喔
+18:23:48 <letoh> 以前覺得 perl 還蠻常聽到的，這幾年感覺聽到 ruby 的機會比較多
+23:12:16 <MnO2> 記錯 ICFP contest 的時間，看對話還以為 CindyLinz 一個人跑去比
+23:13:31 <CindyLinz> 還是星期五早上開始啊 QQ
+23:14:41 <MnO2> coscup 有聽到甚麼有趣的嗎?
+23:18:15 <kanru`> 沒聽到 CindyLinz 的 talk (fasepalm)

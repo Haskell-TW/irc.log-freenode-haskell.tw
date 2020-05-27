@@ -1,0 +1,58 @@
+11:14:39 <favonia> Idris 感覺好有趣喔 www
+19:58:11 <suhorng> 好像很有趣 http://www.cs.uoregon.edu/research/summerschool/summer13/curriculum.html
+20:18:59 <hashcat> 下載真慢
+21:08:01 <mno2> http://bpodgursky.wordpress.com/2013/08/21/average-income-per-programming-language/
+21:15:21 <hashcat> 好!!丟棄haskell
+21:16:41 <mno2> 本 channel 從今日起改為研究 ActionScript  !
+21:17:19 <favonia> hashcat, mno2: 所以現在變成 Functional Programming in ActionScript 嗎
+21:17:21 <hashcat> 折衷一點
+21:17:25 <hashcat> scala
+21:19:30 <favonia> hashcat: 不是應該學 ActionScript 拉低平均嗎
+21:20:07 <mno2> 好想知道標準差喔 xD
+21:20:10 <hashcat> 主打函數式又不會太低的玩意
+21:20:20 <hashcat> haskell也太低了吧
+21:20:45 <mno2> PHP 有 facebook 會不會是雙峰結構分布
+21:21:41 <mno2> Haskell 應篩是學界拉低的吧，Standard Charter, Galois 應該沒那麼低
+21:21:55 <hashcat> 可能facebook也是血汗工廠
+21:22:11 <hashcat> 維持單峰
+21:22:26 <b4283> 渣打銀行有在用 haskell？
+21:23:01 <hashcat> 貌似有個銀行在大規模用scala
+21:23:01 <b4283> 前十名有三個是 jvm
+21:23:05 <hashcat> 忘記哪間
+21:23:27 <favonia> 結論：請大家多學 ActionScript 拉低平均
+21:24:05 <mno2> b4283: Standard Charter 收留一狗票 Haskell 界的領頭人物吧 xD
+21:24:17 <favonia> 我發現學 CSS 好像不錯耶
+21:24:20 <mno2> 應該是一個一個牽進去的
+21:24:54 <favonia> 學 Coffeescript 不如 Javascript (誤)
+21:24:59 <b4283> favonia: CSS2 以下好像沒什麼好學的...
+21:25:07 <b4283> CSS3 改變好像蠻大的
+21:25:11 <favonia> b4283: 重點是 $$$$$
+21:25:14 <b4283> XD
+21:25:14 <favonia> b4283: 對啊
+21:25:39 <mno2> CSS 看完原理都懂，但自己下去刻，去排還是都要搞半天..
+21:26:01 <hashcat> java真高
+21:26:09 <b4283> 問一下，有人公司有專職的 ui engineer 嗎
+21:26:10 <mno2> Java 高不太意外
+21:26:37 <b4283> 不曉得 ui design 和 programmer 的工作是怎麼切的
+21:27:04 <favonia> Google 好像有吧
+21:27:09 <favonia> 上次亂翻看到的
+21:27:26 <mno2> Web 的話通常是 UI 畫好版給 Frontend 切啊
+21:28:02 <mno2> 為什麼我看到的都是說 G 要通才啊 xD
+21:28:14 <mno2> G 連 Frontend Engineer 的職位都沒有吧
+21:33:07 <b4283> soga
+21:50:03 <suhorng> 是說我記得 Simon Marlow在Facebook工作, 那他的語言要算哪一種XD
+22:04:38 <mno2> PHP 應該多少會碰到吧 xD
+22:04:42 <mno2> http://www.cnblogs.com/cathsfz/p/what-did-hackers-hack-50-years-ago.html
+22:28:12 <favonia> mno2: 「某些无效号码会把所有来电都接到一跟线路上，然后播放号码无效的录音，只要你大声说话所有人都能听见。」 xDDDD
+23:00:33 <b4283> really?
+23:04:12 <suhorng> mno2: logbot是不是出了什麼事@_@
+23:05:39 <mno2> memory 又被吃完了 xD
+23:06:27 <suhorng> 指有 memory leak!?
+23:07:30 <mno2> 不知道，不是我寫的 xD
+23:08:02 <mno2> 我也不太確定 matz ruby 的 GC 問題還是 event machine 的問題
+23:08:48 <favonia> mno2: lol 感覺很神奇
+23:08:54 <mno2> 但他明明有 foreman 卻不會自動重啟
+23:10:46 <suhorng> 不明XD
+23:12:05 <mno2> 之前 g0v 的 logbot 好像也有發生類似問題。結果 au 的解法好像是搬到比較好點的機器 xD
+23:14:33 <suhorng> XDD
+23:20:32 <favonia> ...

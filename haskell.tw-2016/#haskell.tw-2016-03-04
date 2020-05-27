@@ -1,0 +1,8 @@
+04:38:54 <xcycl> >最近對定理證明有點困惑, 用 dependent type system 的最大優點/目的是什麼?
+04:39:15 <xcycl> correctness by construction 啊
+04:40:20 <xcycl> 與之相對應的就是 verification 的手法，先做出來再證明正確性
+04:58:00 <xcycl> 兩者的優劣除了個人美感外，有看到有文章從時間跟金錢成本考量來比較，結論是 correctness by construction 的方法比較好而且便宜。但找到的文章有點久 ..不曉得有沒有新一點的
+19:12:18 <selor> 有人在么？
+19:13:08 <selor> 大家好 我是还没入门的新手 想了解一下这门语言
+20:24:39 <CindyLinz> Hi ^^
+20:47:12 <petercommand> Hi, selor ^^

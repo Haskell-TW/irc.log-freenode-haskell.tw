@@ -1,0 +1,94 @@
+00:03:24 <favonia> letoh: 人太少
+00:36:31 <miaout17> 我的用詞可能不精確。我以為在variable可以重複assign的語言中，closure綁到的值會被改掉很正常。
+00:36:39 <miaout17> 如 http://en.wikipedia.org/wiki/Closure_(computer_science)#Lexical_environment ECMAScript的例子。
+00:37:11 <miaout17> 所以本來就要「自己做closure」
+00:38:10 <miaout17> 當然Haskell在這個問題上毫無疑義
+00:42:44 <letoh> 意思是說  closure 其實只記錄名字? 所以值要看 closure 實際被執行時被改成什麼才知道?
+00:44:01 <letoh> miaout17: 我之前在玩的時候，想過一件事。以前面提到的例子來說，closure 抓到的 i 到底哪一個 i ?
+00:45:14 <letoh> 在 python 裡面對同樣的名字重複做 assignment，其實是會綁到不同物件上
+00:46:20 <letoh> 如果只是以名字為準，然後 env 又用 dynamic scoping，那最後查到的 i 的確就會像 python 跑出來的結果一樣
+00:46:49 <letoh> 每次查到的 env 內容都可能不一樣
+00:49:01 <letoh> miaout17: 甚至我還可以做一件事 http://ideone.com/Tdczde
+00:49:25 <letoh> 在一個環境完全不同的情況下執行，結果就炸掉了
+00:59:47 <letoh> http://ideone.com/30u5Tt  也可以這樣
+01:00:43 <letoh> 時好時壞  不過 python 好像有發明什麼規則去解釋這些行為的樣子...
+01:01:41 <letoh> 可能因為 python 可以自由亂改 env，變得很難解讀這些行為XD
+01:34:32 <miaout17> letoh: 我以為variable binding會隨call stack改變，才算dynamic scope ( http://en.wikipedia.org/wiki/Scope_(computer_science)#Dynamic_scoping )
+01:34:56 <miaout17> 剛寫了一下common lisp(沒很熟) http://ideone.com/MIGDgy
+01:35:48 <letoh> 嗯  我剛剛用 dynamic scope 不太對  但又找不到詞可以描述  原本是想說 env 是變動的
+01:36:11 <letoh> 所以實際上在 lookup 時，會查到哪一個變數並不知道
+01:36:54 <miaout17> 我還真沒想過del這件事....XD
+01:37:36 <letoh> 因為 python 在查名字是動態的  所以很容易找到戳它的方法XD
+01:37:49 <letoh> 或者那個 i 被換成 list 之類的其它型別
+01:38:02 <letoh> 程式就會炸掉了
+01:38:37 <miaout17> 不過照定義應該還是lexical (找變數是往code block的上層找，不是call stack的上層)
+01:39:15 <letoh> 嗯  這個之前找人討論過，我也覺得是 lexical
+01:39:42 <letoh> 我覺得主要還是那個 name resolution 造成這些問題
+01:39:53 <letoh> 變成在寫的時候要很小心
+01:40:26 <miaout17> 不過我比較好奇favonia心中的正確實作是什麼，在變數可以重新binding(assign? 我用詞可能不精確)的語言中，closure怎麼實作比較好
+01:40:59 <letoh> 重新 bind 以後應該要算不同變數了
+01:41:29 <letoh> 定義時參考的應該要是舊的變數這樣?
+01:41:38 <miaout17> 可是我記得closure的一個經典例子是拿來當counter
+01:42:21 <letoh> 對  但你可以弄很多 counter 不互相干擾吧
+01:42:52 <miaout17> http://en.wikipedia.org/wiki/Closure_(computer_science)#Lexical_environment
+01:43:46 <miaout17> 有點confuse，假設++x其實是x = x+1，建一個新的整數然後bind到x
+01:44:01 <letoh> 嗯
+01:44:34 <letoh> 我覺得這樣應該會有兩個變數  一個是以前的 x，一個是 +1 以後的 x
+01:44:59 <letoh> 不過我不確定這樣是不是就算「正確的實作」:p
+01:45:39 <miaout17> 來寫一下code..
+01:45:48 <letoh> 如果你在 x = x + 1 之前產生一個參考到 x 的 closure，應該要參考到原本的 x
+01:46:07 <letoh> 之後雖然做了 x = x + 1，也不能影響 closure 的行為
+01:46:25 <letoh> closure 並不知道新的 x
+01:50:22 <miaout17> http://ideone.com/puwDY3
+01:50:28 <miaout17> 寫了下JavaScript
+01:51:01 <letoh> http://ideone.com/AwA5Vg  像這個就比較像我喜歡的行為
+01:51:23 <letoh> http://ideone.com/0ykLsZ   python 會跑出奇怪的結果XD
+01:52:34 <miaout17> 嗯嗯，理解。這樣就不能做JavaScript那個例子那樣的事
+01:53:08 <letoh> 嗯  counter 的例子沒問題  不過我其實之前也有注意到，在 toplevel 玩這些行為常常會出現預期外的結果
+01:53:29 <letoh> 但先在一個函式的環境內處理好像會正常一點
+01:55:04 <letoh> miaout17: 其實要說哪個行為正確，我還真說不出來  我後來發現我寫那麼久 python，很自然會避開這些可能出包的寫法XD
+01:56:07 <letoh> 會發現 closure 有問題也是因為某次不小心踩到，花了很多時間 debug 後才開始覺得怪怪的
+01:56:48 <miaout17> python踩過同樣問題++
+01:57:21 <letoh> 而且我那次還加上遞迴，結果變得很難找出原因XD
+01:58:10 <letoh> 像 ml 那樣的話，至少我不必擔心函式會不會換個環境就跑出不同結果XD
+01:59:16 <letoh> miaout17: http://en.wikipedia.org/wiki/Name_resolution#In_programming_languages  我之前參考的是這篇
+01:59:32 <monochrom> 我的意見：凡是妨礙我把程式斬件分析的行為，就是不正確的行為。
+02:00:11 <miaout17> https://github.com/miaout17/blogtrans/blob/master/blogtrans/blogger/BloggerExporter.py#L65-L66
+02:00:28 <miaout17> 我竟然還記得第一次踩到python lambda問題在那段code XD
+02:00:41 <letoh> monochrom: 很合理  不過我覺得不同程式語言會訓練你用不同方式思考，也許 python 這類語言就是希望你不要挑戰設計的極限吧XD
+02:00:48 <miaout17> 四五年前寫的，現在在看覺得code好爛...
+02:01:06 <letoh> miaout17: 還記得真的很厲害!!
+02:01:55 <miaout17> 因為bug很鬼打牆啊啊啊，撞過一次
+02:02:19 <letoh> 我踩到地雷那次，好像是想做 memoization，結果就出包了XD
+02:02:22 <miaout17> 繞過去的方法就自動記起來了 (多def一層來做clousre或lambda a=a)
+02:02:39 <letoh> 對呀
+02:03:09 <letoh> 經過慘痛的教訓後學會自動避開XD
+02:03:50 <letoh> 可能也是接觸 ml 後才發現以前做了那麼多原本可以不用管的工作XD
+02:11:58 <letoh> http://ideone.com/l5D17R  想到一個很爛的例子 (這寫法並不是應該推薦的風格)
+12:12:44 <MnO2> yinwang 最近都沒有新文章，突然覺得好空虛
+12:21:12 <CindyLinz> 對不起.. ._.
+12:23:52 <_13h> 大概一口氣出太快，把存檔都用光了XD
+12:31:35 <MnO2> 那只好來看一下 Paul Graham
+12:31:36 <MnO2> http://paulgraham.com/design.html#hn
+12:48:06 <_13h> (廣告詞) 雖然我買不起 911，但我用 Arc
+13:41:03 <cataska`> Arc: 新世紀的救世主
+15:03:24 <miaout17> 決定了，下個自我進修目標是找個括弧很多的語言學好
+15:04:09 <CindyLinz> miaout17: 那是不是要弄一個按括號可以不用壓住 shift 的方式啊 ^^|
+15:04:56 <miaout17> XD
+15:05:18 <_13h> miaout17: 在很多語言裡，你可以寫很多括弧而不影響程式XD
+15:08:39 <miaout17> http://ideone.com/CVPPyx
+15:08:49 <miaout17> 對不起我無聊了...Orz
+15:10:19 <_13h> miaout17: 你辦到了，一堆括弧XD 可以開始找新的進修目標XD
+15:11:08 <b4283> 好累的程式語言
+17:05:40 <hychen> ['#haskell.tw', 'Haskell \xe5\x8f\xb0\xe7\x81\xa3 | \xe5\xb0\x8d\xe8\xa9\xb1\xe7\xb4\x80\xe9\x8c\x84 http://goo.gl/oFPLX | G+ http://goo.gl/t48uq | \xe5\x85\xa5\xe9\x96\x80\xe6\x9b\xb8 Learn You a Haskell for Great Good! [\xe8\x8b\xb1] http://goo.gl/XdyKi [\xe4\xb8\xad1] http://goo.gl/d5yBQ [\xe4\xb8\xad2] http://goo.gl/0TEq6']
+20:47:04 <favonia> CindyLinz: 開發 SquareLisp 把 [] 和 () 掉換不就好了（？）
+20:48:32 <favonia> Square Lisp: protecting Lisper from destroying the shift key
+22:04:56 <MnO2> suhorng1: 上次那個東西應該是叫 Kleisli Arrow
+22:05:51 <letoh> 直接改 keymap 應該比較快? XD
+23:32:43 <MnO2> suhorng: 上次那個東西應該是叫 Kleisli Arrow
+23:33:29 <suhorng> MnOw: 就是說 Kleisli category 裡面的 arrow？
+23:33:42 <suhorng> 打錯orz
+23:38:04 <MnO2> 應該是吧
+23:38:05 <MnO2> A Kleisli arrow (Kleisli m a b) is the arrow (a -> m b) for all monads
+23:52:33 <suhorng> 嗯
+23:52:37 <suhorng> 瞭解!

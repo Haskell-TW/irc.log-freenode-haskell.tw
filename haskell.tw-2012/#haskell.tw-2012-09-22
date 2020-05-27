@@ -1,0 +1,76 @@
+00:14:32 <CindyLinz> 發現 Fay 的 future work 是加上 type class
+00:14:45 <CindyLinz> 原來現在沒有 type class 可用啊 QQ
+20:11:30 <CindyLinz> 在 Haskell 裡面 (GHC) 我能定義一個 data type 在一個 function 的內部使用嗎?
+20:12:21 <CindyLinz> 或是, 在實作 instance 的時候, 定義 "為了實作 instance function 而用的 data type" ?
+20:16:33 <CindyLinz> 就... 能不能不要汙染到 top level? :p
+22:16:56 <MnO2> 沒有耶，但你可以在module層不要export出去就好了。
+22:24:19 <favonia> CindyLinz: 請看 SML xD
+22:26:13 <CindyLinz> QQ
+22:26:31 <CindyLinz> 謝謝啦.. 也算是個完整的答案啦 QQ
+23:43:54 <MnO2> jediac: hi
+23:45:02 <jediac> 你好
+23:45:53 <MnO2> 看到新面孔打一下招呼 :p
+23:46:16 <jediac> 我很訝異台灣還上的了 irc
+23:46:30 <MnO2> 怎說?
+23:47:26 <jediac> 剛 google... hinet, seed.net 的 irc server 都歷史...
+23:47:57 <jediac> 好不容易找到有在上 freenode
+23:48:23 <jediac> 所以上來玩玩 XD
+23:49:10 <MnO2> OK
+23:49:18 <MnO2> 所以怎麼會逛到#haskell.tw ?
+23:49:22 <MnO2> 看到有 .tw ?
+23:49:44 <favonia> MnO2: xD .tw 應該有很多吧 xD
+23:49:52 <jediac> 我用了 search, 尋找全部有帶到 tw 的 channel
+23:50:05 <jediac> 滿多的
+23:50:18 <jediac> 但都很安靜
+23:50:30 <letoh> 一般都有人啦
+23:50:52 <jediac> 是都有人, 但都是掛著吧
+23:51:12 <letoh> 因為不會一直盯著畫面呀，通常會做點其他事
+23:51:33 <letoh> 有特別的事就會動一下
+23:51:50 <jediac> 也對... 可是這樣不無聊嗎. 怎麼沒有人跑些遊戲script 還是什麼的 :P
+23:52:21 <CindyLinz> 這個 channel 有 lambdabot .. (謎)
+23:52:22 <letoh> 你是說像 lambdabot 那種東西嗎?
+23:52:22 <favonia> jediac: 你說像這種嗎
+23:52:26 <favonia> > 1 + 2
+23:52:27 <lambdabot>   3
+23:52:40 <jediac> 挖, 對對
+23:52:44 <CindyLinz> 大家都想到一樣的東西 XD
+23:52:58 <letoh> 哈
+23:53:00 <jediac> 1+3+4+7564535345345
+23:53:08 <MnO2> 要prefix ">"
+23:53:14 <jediac> 喔, 了
+23:53:16 <jediac> 哈哈
+23:53:25 <favonia> @run 1+3+4+7564535345345
+23:53:26 <lambdabot>   7564535345353
+23:53:41 <jediac> 酷~
+23:54:29 <CindyLinz> > scanl1 [1..]
+23:54:30 <lambdabot>   Couldn't match expected type `a -> a -> a'
+23:54:31 <lambdabot>         against inferred type `[...
+23:54:37 <CindyLinz> > scanl1 (+) [1..]
+23:54:38 <jediac> > help
+23:54:39 <lambdabot>   [1,3,6,10,15,21,28,36,45,55,66,78,91,105,120,136,153,171,190,210,231,253,27...
+23:54:39 <lambdabot>   Not in scope: `help'
+23:54:45 <favonia> @help
+23:54:46 <lambdabot> help <command>. Ask for help for <command>. Try 'list' for all commands
+23:54:59 <CindyLinz> > scanl1 (*) [1..]
+23:55:01 <lambdabot>   [1,2,6,24,120,720,5040,40320,362880,3628800,39916800,479001600,6227020800,8...
+23:55:01 <jediac> list, 會不會 flood
+23:55:13 <favonia> 沒記錯的話 ">" 是 "@run" 的縮寫
+23:55:27 <jediac> 嗯嗯
+23:55:29 <favonia> jediac: 什麼意思？
+23:55:34 <jediac> @run list
+23:55:35 <lambdabot>   Not in scope: `list'
+23:55:50 <jediac> @run help list
+23:55:51 <lambdabot>   Not in scope: `help'Not in scope: `list'
+23:55:59 <favonia> @list
+23:56:00 <lambdabot> http://code.haskell.org/lambdabot/COMMANDS
+23:56:03 <MnO2> 是說被lambdabot洗版?
+23:56:14 <jediac> 是
+23:56:32 <jediac> 看來不會~
+23:56:52 <letoh> 有的功能會一次吐好幾行
+23:57:12 <jediac> 嗯, 那就洗板了
+23:57:59 <jediac> @run slap jediac
+23:58:00 <lambdabot>   Not in scope: `slap'Not in scope: `jediac'
+23:58:06 <jediac> @slap jediac
+23:58:06 <lambdabot> *SMACK*, *SLAM*, take that jediac!
+23:58:12 <jediac> 哈哈
+23:58:35 <jediac> 還可以打人

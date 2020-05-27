@@ -1,0 +1,40 @@
+16:47:05 <MnO2> 週末把 io-streams 看了一下。我是覺得以後沒有特別考量的話，輸入輸出就用這個就好了
+19:37:25 <suhorng> 因為作業需要 練習寫了個AES http://ideone.com/TU0Tm4
+19:37:30 <suhorng> 歡迎大家糾正XD
+19:42:33 <suhorng> 之前發現 Haskell 有 rem 跟 mod 函式 原來這兩個有差...
+19:42:38 <suhorng> > 5 `mod` (-3)
+19:42:40 <lambdabot>   -1
+19:42:41 <suhorng> > 5 `rem` (-3)
+19:42:43 <lambdabot>   2
+19:42:47 <suhorng> rem 真的是數學上的取餘數XD
+20:20:09 <CindyLinz> suhorng: 4.2 那個啊, 如果有需要的話, 我可能可以講我在實作 memcached server protocol 的時候學到的經驗, 有前所未有的感覺棒的部分, 也有遇到從來都不會遇到的問題
+20:21:03 <CindyLinz> 我也會分享程式碼, 有些部分可以問問在場的人有沒有想到比較好的寫法 ^^
+20:22:30 <suhorng> CindyLinz: 耶!!! 那我寄信跟 jaiyalas 講囉?
+20:23:29 <suhorng> http://ft.jaiyalas.org/ 地點好像定在 "果子咖啡" (某間咖啡店..?)
+20:23:51 <letoh> 果子咖啡好像是很多人辦活動會選的地點
+20:24:03 <suhorng> 需要有投影機?
+20:25:33 <CindyLinz> suhorng: 投影機.. 好, 人如果不多的話可以看我螢幕就好 XD
+20:25:41 <CindyLinz> 人多了點的話就要投影機了
+20:25:52 <CindyLinz> suhorng: 已經到「有需要」了嗎? ^^|
+20:26:49 <suhorng> CindyLinz: 我寄信問問看 jaiyalas 好了..好久沒有消息了@@ 看起來兩個時段都是 TBA 的說
+20:27:07 <suhorng> 原話轉達好了？(包含 "有需要"那句 XD)
+20:27:10 <CindyLinz> XD
+20:27:27 <CindyLinz> AES 這麼短啊? @@"
+20:28:19 <suhorng> 這個只支援 128-bit key length, 沒有去支援 192、256 的XD 而且沒有解蜜
+20:28:24 <suhorng> *解密
+20:42:50 <letoh> http://home.educities.edu.tw/wanker742126/asm/how_use_asm.html   從以前筆記裡挖出來的舊連結
+20:50:52 <suhorng> 同意 u8123033 的看法
+20:51:21 <suhorng> 我第一種程式語言也是學組合語言就是..@@ 年幼無知(?)
+20:52:52 <suhorng> !!!是穆老師嗎..
+20:53:09 <letoh> 噗
+20:53:46 <suhorng> 哪招XDD
+20:54:21 <letoh> 小時候看這些文章還不曉得在討論啥，過個幾年再回頭看好像有一點懂了XD
+20:56:48 <suhorng> 好古老的戰文喔XD
+20:56:56 <suhorng> 趕快備份
+20:57:50 <letoh> 小時候很喜歡看 William 的回文... 其他人老實說完全沒印象XD
+20:59:02 <letoh> 收這篇只是因為有一堆 William XD  不過我開始學電腦以後 maxwell 就倒站了，聽說精華區裡還有一堆經典討論 (可能是戰文XD
+20:59:52 <suhorng> 喔QQ
+20:59:55 <suhorng> 真可惜
+21:00:43 <letoh> 那個交大資科 bbs 可能也有不少?  不曉得還在不在
+21:03:54 <suhorng> 後面回文就變正常了...不再在語言的層面討論
+21:04:14 <letoh> 現在 gopher 站應該也都收光光了...

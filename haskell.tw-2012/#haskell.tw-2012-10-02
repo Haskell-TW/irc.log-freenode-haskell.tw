@@ -1,0 +1,58 @@
+00:19:07 <MnO2> http://www.typescriptlang.org/
+00:19:22 <MnO2> Anders 出招了
+00:21:29 <CindyLinz> Anders 又是哪方面的人呀?
+00:22:02 <letoh> 開發 delphi 的那位?
+00:22:04 <letoh> .net
+00:22:10 <CindyLinz> 喔..
+00:22:10 <letoh> 後來跑去搞 .net
+00:22:13 <MnO2> Borland創始人之一啊
+00:22:33 <letoh> 就寫超強 pascal compiler
+00:22:50 <MnO2> 當年Turbo Pascal他一個人用組語刻出來
+00:22:59 <CindyLinz> 用過 Turbo Pascal
+00:23:03 <CindyLinz> TP7
+00:23:08 <CindyLinz> compile 超快
+00:23:12 <MnO2> 然後被Microsoft挖角後，就開發了C#
+00:23:20 <CindyLinz> 比同期的 Turbo C / Borland C 快很多
+00:23:25 <letoh> 弄出來的 binary 很小
+00:23:36 <CindyLinz> 原來就是他啊
+00:23:50 <MnO2> 對啊，請見Borland傳奇
+00:26:05 <letoh> 以前沒收到這本書XD 不過有看過李維的線上連載版
+00:28:14 <MnO2> 看起來好像沒有什麼特別的，不過大公司都開始這麼做，就表示Javascript正式邁入組語時代?
+00:29:56 <CindyLinz> MnO2: Microsoft 做的 language 我覺得指標性沒有很大耶, 因為他們錢太多, 覺得他們是有用沒用都拿來做...
+00:30:26 <CindyLinz> 有點像是以前開玩笑說 Bill Gates 的業餘興趣是買公司 XD
+00:31:01 <CindyLinz> 請秘書幫他買 skype 點數, 沒講清楚, 不小心就把整間 skype 買了.. (誤)
+00:33:14 <letoh> 可是 js 的設計不是很多人不喜歡嗎
+00:33:32 <letoh> 就好像你拿了一顆爛處理器，想辦法在上面刻自己的應用XD
+00:34:01 <MnO2> 而且有趣的是Microsoft出來的語言好像都不是唸PL出身的人設計的，明明就養了一堆PL人的說xD
+00:34:22 <CindyLinz> MnO2: 你是說列在 .Net 裡面的喔?
+00:34:46 <MnO2> 對啊
+00:35:19 <letoh> MnO2: 你的意思是說 microsoft 其實是松鼠嗎? XD
+00:35:30 <CindyLinz> 不過我也只知道 C# 和 VB, 加上剛剛聽到的這個 typescriptlang 是他們自己設計的
+00:35:49 <MnO2> letoh: 其實是神奇寶貝訓練家
+00:39:17 <MnO2> 唸PL好像蠻慘的，現今世界上主流是PL人設計的語言不多，還會被一般developer酸是lambda宅
+00:39:40 <CindyLinz> 被宅宅說宅.... www
+00:39:54 <CindyLinz> perl :D
+00:41:01 <MnO2> perl怎麼了?
+00:41:15 <CindyLinz> 設計人可以算是 PL 人吧
+00:41:34 <letoh> 現在很多語言是根據實際需求設計出來的吧
+00:41:37 <MnO2> 應該是後來才轉職的吧
+00:41:47 <CindyLinz> MnO2: 轉職的不能算啊?
+00:41:57 <CindyLinz> 這樣太嚴了啦 XD
+00:42:18 <MnO2> 也可以啦，只是可能要Perl 6比較算xD  沒有遺毒
+00:42:22 <CindyLinz> 這樣台灣就不會有 PL 人了..?
+00:42:41 <CindyLinz> MnO2: 難怪 Perl 6 還不能實裝... (誤)
+00:42:59 <letoh> rakudo 呢?
+00:44:14 <CindyLinz> letoh: 已經可以實用了喔?
+00:44:36 <letoh> 不曉得  我只是看一看而已，根本沒拿來用XD
+00:45:57 <letoh> 為啥一堆人喜歡取專案名稱時選用日語? XD
+00:50:00 <MnO2> 喜歡看Anime?
+00:50:23 <favonia> letoh: 所以來用世界語吧
+00:50:34 <letoh> 也許吧  好像蠻多西洋人是日本 ACG 宅
+00:50:41 <letoh> favonia: 你有研究啊?
+00:50:55 <favonia> letoh: 沒有
+00:51:02 <letoh> 啊
+00:51:20 <CindyLinz> letoh: 想到那 YOOOO~ 也是歐美人拍的 XD
+00:51:46 <letoh> 唔... 好像是XD
+00:51:48 <favonia> 先閃人啦各位
+00:51:55 <CindyLinz> 掰掰~~
+12:10:06 <CindyLinz> 原來 TypeScript 是從 http://jsx.github.com/ 衍生來的

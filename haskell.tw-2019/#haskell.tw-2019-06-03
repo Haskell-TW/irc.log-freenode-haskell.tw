@@ -1,0 +1,7 @@
+02:12:00 <caa51h> 終於看完 imperative functional programming
+02:12:04 <caa51h> 文中還比較過去幾種不同的 IO 作法，來強調 monadic IO 的好處，也提到當年怎麼轉譯成 C 的
+02:12:29 <caa51h> TL;DR: 可以靠 Monad 保證 single thread ，只要保證不摧毀或複製一直傳遞下去的 context
+02:29:05 <monochrom> 咦, 作者是誰?
+02:29:43 <caasih> SPJ 和 Philip Wadler 那篇
+02:29:44 <caasih> https://www.microsoft.com/en-us/research/wp-content/uploads/1993/01/imperative.pdf
+02:31:09 <monochrom> 啊

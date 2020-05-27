@@ -1,0 +1,36 @@
+00:49:16 <monochrom> SML 裏可用 #34 代表 tuple 裏第34項. 在 Haskell 沒有. 除非用 lens. 其實, 或者應該用 lens.
+00:53:43 <CindyLinz> 用 template haskell.. XD
+09:26:18 <mno2> 雖然理解 lens 的好處，不過實在太肥了..
+11:26:56 <cibs> 雖說 SML 可以那樣用不過我在寫也是只用 #1 ~ #3 而已，真的有必要用到 #34 嗎...XD
+11:34:07 <CindyLinz> cibs: 反正一個函數寫下去, 用的是內建整數不小心就 2^63-1 了嘛... XDD
+11:35:06 <CindyLinz> 我還不知道 lens 這個 package 該怎麼實用好...
+11:35:49 <CindyLinz> 覺得 edwardk 是拿它作一個集大成的概念, 順便收集滿一大堆 lens 概念的延伸.. 而實際上我們用不到這麼多
+11:36:36 <CindyLinz> 我自己寫 library 的話, 會採取作出 lens package 的「形狀」, 但不 depend lens package 的作法, 所以想用的時候可以自己 import lens 使用
+11:37:04 <CindyLinz> 只是... 想用的時候, 又不想因為 import lens 而讓 dependency 變成一大把... 就不知道怎麼做好
+11:37:14 <CindyLinz> copy lens package 的部分程式碼出來用嗎 XD
+21:45:37 <caasihuang> Paul Hudak 講 FRP 那演講才聽了開頭就知道自己還缺太多概念不了解 XD
+21:46:53 <caasihuang> 像是什麼是 Arrow 啊？他的 `-<` 具體是做了什麼啊？ 0rz
+21:58:17 <CindyLinz> orz
+21:58:49 <CindyLinz> caasihuang: 急著看的話... 先把 Arrow 想成是函數的某種抽象 (函數是 Arrow 的一個實體)
+21:59:39 <CindyLinz> 好像沒有比較清楚ww
+22:01:43 <caasihuang> 是不急，我先查 Arrow 好了。本來看 FRP 的目的是為了在用 redux - JS, React 的 framework - 前先對他師法的對象有點概念。
+22:05:07 <CindyLinz> caasihuang: 推荐你一本論文, Arrow Monad 一起學
+22:05:29 <caasihuang> * 聞到危險的味道
+22:05:49 <CindyLinz> caasihuang: http://www.cse.chalmers.se/~rjmh/Papers/arrows.pdf
+22:06:13 <CindyLinz> 主角是 Arrow.. 但是讀過去會對 Monad 有更深的體會.. (如果原本還沒有這一層體會的話 ^^|)
+22:06:31 <CindyLinz> 也是我貼在 FB Functional Thursday 社團的, 同一份
+22:08:32 <caasihuang> 謝分享，等噎到再來問 XD
+22:09:50 <CindyLinz> 這論文... 我用「本」當量詞, 因為有40頁 XD  頁數夠多, 所以不會太艱澀
+22:19:06 <au> 這篇看完可以接著手目 "Idioms are oblivious, arrows are meticulous, monads are promiscuous" (Idiom 就是後來的 Applicative)
+22:19:16 <au> s/手目/看/
+22:21:39 <CindyLinz> au++ (來收..
+22:22:56 <au> * 也正在想 moedict-webkit 要不要改用 redux 重寫好了
+22:25:41 <CindyLinz> 不擔心 co-contributor 跟不上嗎... ^^|
+22:26:18 <au> 我一直是跟著 co-contributor 的進度在跑的 XD 之前 webpack 也是看 caasi 用才用
+22:26:28 <CindyLinz> 喔喔! (Y)
+22:28:46 <CindyLinz> caasihuang: 你累積了 59 頁的讀本...
+22:32:53 <caasihuang> 咦？不是 yhsiang 嗎？ XD
+22:33:20 <caasihuang> 配上別的入門課，不只 59...
+22:33:37 <caasihuang> au++ (先收著
+22:34:14 <CindyLinz> 配上別的入門課 XD
+22:38:48 <cataska> * 筆記

@@ -1,0 +1,162 @@
+00:01:37 <monochrom> http://hackage.haskell.org/package/async-2.0.1.5/docs/Control-Concurrent-Async.html#g:6 有多款選擇
+00:03:40 <monochrom> 不過呢, 它內部做法就是用 TMVar, 所以你自己寫分別不大 :)
+00:11:19 <CindyLinz> 喔 謝謝 ^^
+00:15:44 <CindyLinz> monochrom: 我要來寫第三遍某個 concurrent 程式了.....ww
+00:15:53 <CindyLinz> 正在摸索怎麼寫比較好維護 @@"
+00:16:14 <CindyLinz> 不然推不出去.. QQ
+00:32:59 <monochrom> 那麼, 多些用現成的 async 內東西, 就較好維護. 一般自己寫少些就容易維護些 :)
+00:34:31 <monochrom> async 的對外界面也是設計得很好很易用. 給人一種可以安心用的感覺.
+00:38:49 <CindyLinz> 嗯嗯嗯
+00:50:58 <CindyLinz> 開 race :: IO a -> IO b -> IO (Either a b) 分頭進去等 MVar.. XD
+00:52:41 <CindyLinz> @type race
+00:52:42 <lambdabot> Not in scope: ‘race’
+00:52:57 <CindyLinz> 好吧, 不能用 lambdabot 公然地玩.. XD
+00:57:57 <darkx> XDD
+01:00:39 <CindyLinz> 真該弄一個可以亂裝 mod 的 lambdabot 來 XD
+01:26:59 <monochrom> 覺悟了! 有人寫程式要求浪漫激情, 有人寫程式要求安全感. (我是後者.)
+01:27:34 <CindyLinz> 這個「浪漫激情」是什麼啊 XD
+01:28:47 <monochrom> 浪漫激情那種, 自然常說"動態形別好好玩喔! self-modifying program 好好玩喔!"
+01:29:48 <letoh> 爽度XD
+01:30:07 <CindyLinz> letoh: 原來是在說你喔 XD
+01:30:42 <letoh> 這個我承認，很難抗拒這種誘惑XD
+01:30:55 <CindyLinz> 用 ghc as lib 寫程式, haskell 也可以 self-modifying 歐~~ XD
+01:31:31 <CindyLinz> 不過你的標準.. 可能要能 modify 這個 ghc lib 才夠味 ._.
+02:53:26 <CindyLinz> c9sloud: 咦? 沒有 r3_node_destroy 函數?
+02:55:13 <CindyLinz> r3_tree_destroy.. :p
+02:55:27 <CindyLinz> 喔 r3_tree_free ^^
+03:00:24 <whitglint> c style
+03:28:52 <CindyLinz> c9sloud: 問你.. 如果 match 的時候, 給的字串符合第一個 insert 的 pattern 的話, route_ptr 是不是會亂指?
+03:29:23 <CindyLinz> 但如果符合後面幾個 pattern 的話, route_ptr 是好的 ._.
+07:05:04 <c9sloud> CindyLinz: 你是說 /foo => a, /foo/bar => b ，然後 match /foo 的狀況嗎？
+07:05:28 <c9sloud> 應該是 insert 到 left 的時候才會 save route_ptr, 然後 endpoint++;
+07:05:41 <c9sloud> 不然就是我發燒寫錯了 XD
+07:06:12 <c9sloud> 可能是 create 的時候忘了把 route_ptr = NULL;
+07:06:16 <c9sloud> 所以才會亂指?
+07:15:13 <c9sloud> CindyLinz: 好像可以拿這個來m/4 http://www.ryandesign.com/canviz/
+07:15:21 <c9sloud> 不知道有沒有更好的 library
+08:02:23 <c9sloud> CindyLinz: 找到了.. 好像是為了修 strndup 出來的新 bug
+08:02:23 <c9sloud> XD
+08:03:01 <c9sloud> CindyLinz: cherry-pick 一下 "dc86115"
+08:03:49 <monochrom> 寫C永遠寫不完
+08:19:47 <c9sloud> CindyLinz:  http://imgur.com/J2LdzeK
+08:29:37 <c9sloud> monochrom: 所以每改一次就 make check 一次這樣 XD
+08:30:19 <c9sloud> 剛剛改善了 plain string edge matching 的效能.. 速度再往上飆了一百萬個 matches
+09:10:09 <c9sloud> CindyLinz: master 新版要裝 graphviz 唷
+09:11:20 <c9sloud> 等等.. linux 版本好像又壞掉了
+09:12:28 <c9sloud> 哭杯... debian 上面的 graphviz 是舊版的
+09:12:45 <c9sloud> 居然還在 2010 年的版本: dot - graphviz version 2.26.3 (20100126.1600)
+09:12:59 <c9sloud> 只好來加 --enable-gvc option ...
+11:34:43 <c9sloud> 整個 github timeline 都是 r3 watch XD 突然暴衝到 45 stars
+11:43:06 <petercommand> c9sloud: 甚麼是url router呀?
+11:45:14 <petercommand> 是不是很白痴的問題= =
+12:14:16 <c9sloud> petercommand: 就是.. 幾乎每個 framework 都會有的東西，把不同的 URL dispatch 到不同的 controller 去
+12:27:21 <c9sloud> petercommand: 一般來說，framework 裡頭的 router 都是用 regexp 去 dispatch
+12:27:39 <c9sloud> 所以如果有 N 的 path，就要用 regexp 比對 N 次
+12:40:59 <petercommand> 嗯 找時間來了解一下好了
+13:27:34 <letoh> petercommand: 類似看到某一個路徑後，要決定該顯示哪個頁面/內容的程式
+13:33:14 <petercommand> 恩
+13:37:36 <c9sloud> 遇到一個 API design 的問題 XD
+13:38:00 <c9sloud> CindyLinz: 為了解決 /foo/bar (POST) 跟 /foo/bar (GET) 的 dispatch ..
+13:38:33 <c9sloud> 我增加了一個 route struct {  } ... contains path, request method, host ... 等等的
+13:39:04 <c9sloud> 不過這個 struct 在架構上考量只會被當做 leaf 新增在 node* 底下
+13:39:13 <c9sloud> 感覺取名叫做 route 也不太對
+13:39:36 <c9sloud> 本來是取名叫做 condition
+13:40:19 <c9sloud> 但是也可以被 r3_tree_insert_route( route ); 拿來用.. 若取名叫 r3_tree_insert_condition(cond); 拿來註冊路徑... 好像也蠻奇怪的
+13:40:44 <c9sloud> 現在是 r3_tree_insert_route(route); 從外面看還蠻 make sense 的
+13:54:59 <c9sloud> https://github.com/c9s/r3/blob/master/tests/check_tree.c#L251
+13:58:49 <CindyLinz> c9sloud: 覺得沒必要為 POST/GET 而加欄位欸..
+13:59:03 <CindyLinz> c9sloud: 想那樣用的人自己把 method 接在整個 url 最前面就好啦~
+13:59:25 <c9sloud> 是喔，不過我是考慮到 restful url
+13:59:29 <CindyLinz> c9sloud: 然後 POST/GET 皆可的話就放一條 POST 用一條 GET 用 XD
+13:59:45 <c9sloud> 像這樣 /=/post (POST) create,   /=/post (GET) get collections
+13:59:57 <CindyLinz> 畢竟是底層 lib 嘛, 讓它簡單點 XD
+14:00:26 <c9sloud> 我本來的思考是 route condition 可以用也可以不用
+14:00:35 <c9sloud> 不用的時候就用 insert_path
+14:00:40 <c9sloud> 比較簡單
+14:01:44 <CindyLinz> 啊對, 我有試了 {id:\d+} 這樣好像會 match 不到的樣子, 就算放的是數字也一樣 @@"   然後如果有兩個 capture 而且 match 到的時候, route_ptr 會變成 NULL
+14:02:18 <CindyLinz> 另外 /a/b/{xx}/{yy} 可以 match 到 /a/b/oooooo   (而這時候 route_ptr 有出來 XD)
+14:02:30 <CindyLinz> 給 /a/b/ooo/xxx 的話 route_ptr 才會不見
+14:03:13 <c9sloud> 那我來寫個 failing tests 好了 XD
+14:04:57 <c9sloud> CindyLinz: struct 有一點點變動喔
+14:05:07 <c9sloud> route_ptr 改名為 data
+14:05:20 <CindyLinz> 現在 perl 的用法是這樣 $r3 = Route::R3->new('/a/b' => 123, '/c/d/{id}' => sub { ... });   match 的時候用 ($sub, \%captures) = $r3->match('/c/d/xx')
+14:05:21 <c9sloud> insert_pathn => insert_pathl 然後多加一個參數
+14:05:29 <c9sloud> 好嗨!
+14:05:38 <c9sloud> CindyLinz++
+14:05:58 <CindyLinz> 如果你功能加了, 說明趕快寫... XD  要新想介面弄成怎樣  ^^|
+14:06:48 <c9sloud> OKK XDDD
+14:07:33 <c9sloud> 其實沒有變很多
+14:07:35 <c9sloud> 我寫一下
+14:12:50 <c9sloud> CindyLinz:  https://github.com/c9s/r3/#routing-with-conditions
+14:18:06 <c9sloud> CindyLinz:  test 加上了 https://github.com/c9s/r3/blob/f4bb3204702e9f1b50debf2c56df9441e23d69ae/tests/check_tree.c#L250 不過好像沒問題 XD
+14:18:10 <c9sloud> 可能要複雜一點
+14:20:02 <CindyLinz> 我先把昨晚弄的放上去了..
+14:20:22 <CindyLinz> 目前用起來是這樣的感覺 # https://github.com/CindyLinz/Perl-Router-R3/blob/master/Router-R3/try.pl
+14:21:00 <c9sloud> CindyLinz: 讚耶
+14:21:08 <c9sloud> CindyLinz: 後面幾組 pattern 有 match 到嗎?
+14:21:15 <c9sloud>   /post2... so on
+14:21:16 <CindyLinz> c9sloud: 沒有 XD
+14:21:24 <c9sloud> 好 XDD
+14:21:44 <CindyLinz> 那邊不是直接走 PCRE 了嗎? @_@"  以為要可以的
+14:22:48 <c9sloud> 阿
+14:22:54 <c9sloud> 有可能是昨天的某個 bug
+14:23:01 <c9sloud> 我修正了
+14:23:14 <c9sloud> 我剛剛寫的 test case 有過
+14:23:25 <CindyLinz> 喔喔
+14:23:55 <c9sloud>    \d{3} 的話好像要修
+14:24:00 <c9sloud> slug compile function
+14:24:45 <CindyLinz> 我有支援歐 :D
+14:24:56 <c9sloud>   \d{3} 果然 fail 了 XD
+14:24:58 <c9sloud> 咦?
+14:26:05 <CindyLinz> 我這邊要把 capture 的 key 先抓出來另外存好, 因為 match 的時候要用來生 hash
+14:28:32 <c9sloud>    \d{3} 已經修正~~
+14:28:40 <c9sloud> 哦哦!
+14:29:04 <c9sloud> 因為我這邊 compile_slug 本來只有找下一個 "{" 所以會變成 match \d{3}} 的前面一個 "}"
+14:30:26 <c9sloud> CindyLinz: 阿對了
+14:30:32 <c9sloud> 你新 pull 下來的
+14:30:38 <c9sloud> 要 ignore 掉 gvc.c
+14:30:43 <c9sloud> 如果你是用 copy 的話
+14:30:48 <c9sloud> gvc is for graphviz
+14:32:37 <c9sloud> ya ... linux 有 build 成功.. 來去睡 XD
+14:41:17 <c9sloud> http://www.complang.org/ragel/
+14:43:24 <CindyLinz> 哎~ 又想到 lambda calculus 的小玩具了.. 好多想做的玩意兒拖著拖著就沒了 QQ
+17:29:03 <c9sloud> https://news.ycombinator.com/item?id=7761669
+17:29:20 <c9sloud> 有人說不要用 automake XD
+18:08:11 <CindyLinz> monochrom: 嗯, 不過還是不能在 Async 的 race 裡面使用 takeMVar 或 putMVar, 因為 race 放的那兩支隨時都會被 async exception kill 掉, 這樣出來的結果就 non-deterministic 了 @@"
+18:09:03 <CindyLinz> 就算 takeMVar 是其中一支的最後一個指令, 還是有可能 takeMVar 成功之後瞬間被 kill, 只有 take, 卻沒有被拿出來用
+18:10:26 <CindyLinz> c9sloud: 好像把東西丟到 hacker news 可以收集建議喔?
+18:11:18 <c9sloud> CindyLinz: 對阿 但是其實每個人看法都差很多 XDD 南轅北轍
+18:11:35 <c9sloud> 我現在還是覺得 autotools 比較好一些
+18:11:52 <CindyLinz> 哈哈.. 他說不要用 autotool 的原因是, autotool 比你的 project 還大... XD
+18:11:54 <c9sloud>  autotools 要設定一些 --enable-*  --with-* 的比較方便
+18:12:05 <c9sloud> XDD yeahh
+18:12:35 <CindyLinz> 嗯, 反正 cpan 是給人 default 裝方便的, 所以應該就想好一種, 給他獨裁下去就好了 XD
+18:13:05 <CindyLinz> 想用別的 config 的話, 就另外 fork 一個 Router::R3::WithXXX 來用 :p
+18:13:13 <c9sloud> XD
+18:14:04 <CindyLinz> 在 cpan 上面, 獨裁一直都是事實, 革命一直都是受歡迎的 (咦)
+18:16:56 <c9sloud> XD
+18:17:21 <c9sloud> 還有個人主義者.. 把自己名字當成 cpan module namespace XD
+18:17:59 <CindyLinz> XDD
+18:25:33 <CindyLinz> c9sloud: 意見相反沒關係啊, 反正就... 朕知道了.. XD
+18:25:50 <c9sloud> 哈哈哈 XDDD
+18:27:29 <petercommand> 這樣聽起來cpan好像是甚麼個人playground XDD
+18:36:07 <CindyLinz> 也有人在 module doc 裡面寫文章筆戰吵架的, 很熱鬧啊 XD
+18:47:28 <CindyLinz> 說著說著.. cpan 的網站掛掉了 ww
+18:50:11 <petercommand> CindyLinz: 我連的上QQ
+18:50:51 <petercommand> CindyLinz: 不過search.cpan.org掛了
+18:51:03 <CindyLinz> 喔喔.. 我的確是走 search.cpan.org.. XD
+18:51:09 <petercommand> 首頁正常XD
+20:20:53 <c9sloud> cpan 掛蠻久了
+20:21:09 <c9sloud> 要上 meta.cpan.org
+20:21:20 <c9sloud> http://metacpan.org/
+20:27:48 <c9sloud> CindyLinz: 有的蠻奇怪的地方...
+20:28:21 <c9sloud> http://c9s.github.io/r3/bench.html # 早上改了 edge finder 的 code 優化，曾經衝到 13M..
+20:28:51 <c9sloud> 後來也沒有去改演算法 (應該?)，然後加了 graphviz, autotools options... 等等
+20:29:04 <c9sloud> 就回到 10M 左右 XD
+20:29:23 <c9sloud> 嘖嘖.. 應該要同時記錄 commit 的
+20:29:53 <c9sloud> 有沒有可能跟 struct 新增 field 有關?
+20:29:58 <c9sloud> memory offset 之類的
+20:41:08 <c9sloud> 或 aligment 之類的
+20:41:11 <c9sloud> 這太神祕了
+20:56:49 <c9sloud> http://imgs.xkcd.com/comics/regular_expressions.png
+21:05:02 <c9sloud> 羅素考課絲對 regexp 非常有經驗的樣子 http://swtch.com/~rsc/regexp/ 整個一系列的 re 文, 還自幹 plan9 的 re engine

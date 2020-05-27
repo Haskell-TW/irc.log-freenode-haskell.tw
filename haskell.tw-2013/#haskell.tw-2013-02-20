@@ -1,0 +1,31 @@
+00:25:11 <favonia> mno2: miaout17: Travis-CI 到底有沒有真的更新 haskell platform 啊... 竟然 transformers 還是 0.2.x ... 我去查 platform 明明是 0.3 啊 o_O
+00:25:42 <favonia> 我和 Travis-CI 一定有個人搞錯... 就當作 Travis-CI 搞錯好了 xD
+00:28:40 <mno2> cabal update 也沒用嗎?
+00:29:28 <favonia> mno2: 有用，但如果你動到 transformers...
+00:29:33 <favonia> 就有一些東西要重裝
+00:29:37 <favonia> 就會爆炸
+00:30:33 <mno2> 那大概也只能寄信去請他們升
+10:28:10 <miaout17> 那你知道 DELETE 也沒有明文說不能帶 body 嗎 xD > YES I know
+14:20:41 <favonia> mno2: miaout17: hi, 我覺得 resources 不是用來擺 scripts 的地方...
+14:21:11 <favonia> 根據 Snaplet tutorial, resources 是用來擺預設資料，不是 script @@
+14:25:41 <favonia> mno2: miaout17: 你們有在大改嗎？
+14:27:59 <favonia> resources 擺的是 server 在某個目錄啟動時，所要複製的所有資料
+14:47:13 <mno2> favonia: 那就移到 script 之類的目錄好了
+14:47:33 <favonia> mno2: 好我來改造一下現在的目錄
+14:54:06 <favonia> done
+15:00:47 <mno2> great
+15:57:35 <CindyLinz> 我希望 command line hoogle 出來的結果可以附一個 url 讓我點了直接去看該 package 的說明網頁 :p
+15:58:32 <miaout17> favonia: 我好一陣子沒動了
+16:15:13 <favonia> miaout17: 喔喔
+16:15:35 <favonia> mno2: 我把他惡搞成第一次啟動看起來會成功（不過卻沒有資料）
+16:16:28 <favonia> mno2: 啊我稍微改一下名字
+16:21:12 <favonia> mno2: done.
+16:21:51 <favonia> miaout17: mno2: 可以看一下現在的架構。現在第一次啟動 server 時會複製很多東西，要自動產生什麼也可以做。
+22:19:00 <CindyLinz> 問問~ 定義 class 的時候, 可以要求 instance 必須提供某個 type, 這個叫什麼啊? 或是.. 想參考一下 sample 看語法 ^^
+22:22:57 <favonia> Haskell 好像叫他 associated data type
+22:50:17 <CindyLinz> favonia: 啊! 謝謝!
+22:52:51 <CindyLinz> aka type family # http://www.haskell.org/haskellwiki/GHC/Type_families
+22:58:39 <CindyLinz> hackage 裡面, 同樣的 package 一直 repeat 啦... 這是詐欺啊.. Q_Q
+22:59:26 <favonia> CindyLinz: ?
+23:00:05 <CindyLinz> favonia: 因為一個 package 可以 tag 好幾個分類..
+23:00:12 <CindyLinz> 所以它就會出現好多次...

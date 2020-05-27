@@ -1,0 +1,238 @@
+00:04:20 <petercommand> > typeRep 1
+00:04:21 <lambdabot>  No instance for (Data.Typeable.Internal.Typeable a0)
+00:04:22 <lambdabot>    arising from a use of ‘Data.Typeable.Internal.typeRep’
+00:04:22 <lambdabot>  The type variables ‘k0’, ‘a0’ are ambiguous
+00:04:29 <petercommand> > typeRep (1 :: Int)
+00:04:30 <lambdabot>  Couldn't match expected type ‘proxy0 a0’
+00:04:30 <lambdabot>              with actual type ‘GHC.Types.Int’
+00:05:18 <petercommand> :t typeRep
+00:05:19 <lambdabot> Typeable a => proxy a -> TypeRep
+00:05:56 <petercommand> getTypeRep (1 :: Int)
+00:06:00 <petercommand> > getTypeRep (1 :: Int)
+00:06:02 <lambdabot>  Not in scope: ‘getTypeRep’
+00:06:02 <lambdabot>  Perhaps you meant one of these:
+00:06:02 <lambdabot>    ‘typeRep’ (imported from Data.Typeable),
+00:06:43 <petercommand> > typeof undefined (Just 1)
+00:06:44 <lambdabot>  Not in scope: ‘typeof’
+00:06:45 <lambdabot>  Perhaps you meant one of these:
+00:06:45 <lambdabot>    ‘typeOf’ (imported from Data.Typeable),
+00:06:50 <petercommand> > typeOf undefined (Just 1)
+00:06:51 <lambdabot>  Couldn't match expected type ‘Data.Maybe.Maybe a1 -> t’
+00:06:51 <lambdabot>              with actual type ‘Data.Typeable.Internal.TypeRep’
+00:07:37 <petercommand> > typeOf (Just 1)
+00:07:38 <lambdabot>  Maybe Integer
+00:10:07 <suhorng> 剛剛才知道有 Data.Generics 這種東西, 可以解決之前寫 compiler 遇到的問題, 可是它需要 type cast....
+00:11:43 <suhorng> 像 mkT f = case (cast f) of { Just g -> g; Nothing -> id } 這種東西實在太詐了阿, 根本可以避免重複的 code 都是靠這個
+00:11:45 <CindyLinz> 這邊應該貼一下... XD # http://tioj.ck.tp.edu.tw/
+00:12:08 <CindyLinz> 可以傳 Haskell 的解題練習網站 ^^
+00:12:16 <suhorng> XD
+00:12:33 <suhorng> codeforces 也可以不過 GHC 版本就超舊的而且 package 東漏西漏
+00:13:06 <CindyLinz> 我以前有用過.. 感受被 C/C++ 霸凌的感覺.......
+00:13:26 <CindyLinz> 不過那時我還不會 peek poke 這種東西.... :p
+00:13:28 <suhorng> 還要瘋狂避免 memory leak ="=
+00:13:30 <suhorng> WWWW
+00:14:08 <CindyLinz> 喔喔那時也還不會 unbox
+00:14:20 <CindyLinz> Int#
+00:14:33 <petercommand> 咦? 還有 GHC.Genericcs 耶...
+00:15:15 <suhorng> C#, F#
+00:15:24 <CindyLinz> wwww
+00:16:54 <petercommand> CindyLinz: 是指 Foreign.Storable 嗎?
+00:16:57 <suhorng> unboxed 用起來不會很卡嗎 @_@
+00:18:11 <CindyLinz> petercommand: 對啊~
+00:18:39 <CindyLinz> suhorng: 寫過 C++ 還怕什麼卡... (咦
+00:21:40 <CindyLinz> suhorng: 挖坑中.... :p
+00:21:58 <suhorng> 這...XD
+00:22:20 <CindyLinz> 我覺得這對推廣會很有好處呀~~~
+00:24:07 <suhorng> 嗚~ 可是很多題目都是給命令式演算法的
+00:24:13 <suhorng> 大量使用 mutable array
+00:24:23 <petercommand> CindyLinz: 感覺 peek poke 就是 untyped program 吧XD
+00:25:14 <CindyLinz> petercommand: 加一層 newtype 把關呀~~ :p
+00:25:52 <CindyLinz> petercommand: 要逼效能的時候不要有潔癖了啦 XD
+00:26:36 <petercommand> XD
+00:27:36 <suhorng> 直接用 GHC core language ... (X
+00:29:13 <CindyLinz> 被棄坑了 QQ
+00:30:11 <suhorng> wwwww
+00:31:49 <CindyLinz> suhorng: 1003 對 FP 很友善.. (咦
+00:33:18 <suhorng> 啊哈哈哈哈哈 XDDD
+00:43:47 <petercommand> codeforce 有甚麼特別的地方嗎?
+00:44:07 <petercommand> 有看到同學在玩呢XD
+00:47:06 <petercommand> 好像是有限時比賽之類的
+00:49:32 <suhorng> 嗯~ 演算法跟資料結構解題
+00:49:36 <suhorng> 有比賽沒錯
+00:53:58 <CindyLinz> package 太少的話會玩得很無力.... @@" # codeforces
+01:08:34 <petercommand> 當 do 有很多層的時候，要怎麼看 where 適用的 scope 是哪裡呀...
+01:09:17 <petercommand> 應該說某個特定 indent 的 where ，後面接的東西會在哪個 scope
+01:09:35 <petercommand> 有時候感覺好混亂XD
+01:10:49 <CindyLinz> petercommand: do 裡面不能寫 where 吧? ^^|
+01:10:59 <CindyLinz> 你的 where 應該是跟在別的東西下面?
+01:11:08 <petercommand> 對，下面
+01:11:22 <CindyLinz> 應該會在某個 case of 裡面, 或是某個 let 的裡面?
+01:11:34 <CindyLinz> 不然就是 do 的外面....
+01:12:18 <CindyLinz> 不過咧.... 會感覺混亂的時候.... 可能就是考慮不要用 where 的時候了 @@"
+01:13:24 <CindyLinz> 來試試看有人 C++ MLE 的題目 @@" PID=1566
+01:13:27 <petercommand> 我是有時候寫在 do 最下面
+01:13:47 <CindyLinz> 如果直接想不到演算法就..... 就不是 Haskell 的錯!!
+01:13:48 <CindyLinz> (咦
+01:14:26 <CindyLinz> petercommand: 你指的是一個 top-level 的函數, 一進來就是個 do 的那種?
+01:14:52 <CindyLinz> 那這個最下面的 where 是跟這一組 function pattern
+01:15:04 <petercommand> 前面還有接 pattern matching 甚麼的..
+01:15:16 <CindyLinz> pattern matching 是說在函數參數的地方?
+01:15:23 <petercommand> 不是
+01:15:30 <CindyLinz> 咦? 有 case of?
+01:15:34 <petercommand> 對
+01:15:39 <petercommand> case of
+01:15:52 <CindyLinz> 那真的要看你 where 寫多深了 @@" 可能是最外面, 也可能是 case 的最後一個 branch
+01:16:35 <CindyLinz> 噢對了.. 也可以考慮打大括號 @@"
+01:16:50 <petercommand> 恩恩XD
+01:25:28 <monochrom> 甚麼? 是日竟然沒有 haskell-cafe 新文?
+03:46:16 <CindyLinz> 奇怪....
+03:47:00 <CindyLinz> 我測試記憶體的使用量..... 我開一個 1M 個 element 的 IntMap Int, 吃掉 80MB 左右
+03:47:27 <CindyLinz> Data.IntMap.Strict.IntMap Int.. 80MB
+03:47:32 <CindyLinz> Data.IntMap.Strict.IntMap Int32.. 160MB
+03:47:35 <CindyLinz> Data.IntMap.Strict.IntMap Int64.. 160MB
+03:47:55 <CindyLinz> 然後我的 maxBound :: Int 是 9223372036854775807
+03:48:11 <monochrom> 那就要找 IntMap 儲甚麼
+03:48:33 <CindyLinz> 我以為 Int32 應該會比 Int 少啊.. o.o
+03:49:19 <monochrom> 不過 IntMap Int 不等於 IntMap Int64, 就真奇怪了
+03:49:57 <CindyLinz> data IntMap a = Bin {-# UNPACK #-} !Int {-# UNPACK #-} !Int !(IntMap a) !(IntMap a) | Tip {-# UNPACK #-} !Int a | Nil
+03:50:47 <CindyLinz> 該不會是 addr align.. @@"
+03:51:12 <monochrom> 不會, 全部已經 align 好
+03:51:50 <CindyLinz> data Int32 = I32# Int#
+03:51:54 <CindyLinz> 等等!
+03:51:59 <CindyLinz> 為什麼裡面是 Int#
+03:52:35 <CindyLinz> data Int = I# Int#
+03:53:11 <CindyLinz> 覺得 Int 可能又被特別優化 @@"
+03:57:28 <monochrom> 1M 個 element, 本身就要 16MB
+03:57:54 <monochrom> 然後要 1M 個 Tip, 加 24MB
+03:58:19 <CindyLinz> 是說 80MB 的 IntMap Int, 平均一個 entry 佔 10 個 64bits 的空間，還真有點貴 @@
+03:58:53 <monochrom> 然後, 如果我理解得對, 再加 1M - 1 個 Bin. 40MB.
+04:00:04 <monochrom> 剛剛好 80MB 喎!
+04:00:16 <CindyLinz> QQ
+04:01:06 <CindyLinz> 限制 64MB  那只好自己刻資料結構了 QQ
+04:01:56 <monochrom> 你怎樣刻, 都逃不過以下命運:
+04:02:11 <monochrom> 1. 每個 constructor 都值 8 bytes
+04:02:32 <CindyLinz> 喔 可曾
+04:03:08 <CindyLinz> 可是我可以不要用到那麼強的功能 ^^|
+04:03:48 <monochrom> 2. 每個數字都值 8 bytes. 這還未計例如 "data Int = I# Int#" 裏的 constructor I#. 即是說, Int# 值 8 bytes
+04:04:04 <CindyLinz> 一個頭大的地方是，我只需要32bits整數，但反而更大 orz
+04:04:24 <monochrom> 3. 每個不被 unpack 的 field, 都是一個 pointer, 又值 8 bytes
+04:05:37 <CindyLinz> 可以用 unbox array/vector 來省 constructor XD
+04:06:02 <monochrom> 是的
+04:07:04 <monochrom> 不過我算不出為甚麼 IntMap Int64 會雙倍. 因為無論如何都應等同 IntMap Int
+04:08:19 <CindyLinz> 為什麼 constructor 要那麼大? 一個 sum type 不太可能有那麼多種變化啊?
+04:08:41 <monochrom> 方便 compiler 作者.
+04:08:50 <monochrom> 還有易於 align
+04:08:53 <CindyLinz> 好吧 orz
+04:09:56 <CindyLinz> 沒有
+04:10:10 <CindyLinz> 按錯 orz
+04:12:21 <monochrom> 我想, 維持 alignment 是最大原因, 因為就可以在 pointer 偷用最低 3 bits 來表示: 指向的是一個 thunk, 抑或是 constructor 一號, 抑或是 constructor 二號, ...
+04:12:56 <monochrom> 這樣 pattern matching 會超快. 這是以空間換取時間
+04:13:56 <monochrom> "我軍轉移有利陣地" 會到抗日戰爭時期了!
+04:14:47 <monochrom> s/會/回/
+04:16:15 <CindyLinz> 這個標記可能不能存在 ptr, 因為一個 thunk 可能被好幾個 ptr 指到，標記會散落好幾份，當 thunk 被算出來以後沒辦法通通抓來更新
+04:20:37 <monochrom> 不擔心這個問題. 你有個 pointer 未更新, 不怕, 有一天你 dereference 之時, 還是會發現是 constructor. 但新製的 pointer 就反映了.
+04:43:35 <monochrom> 越來越發覺 cmm 易讀過 asm
+05:06:43 <monochrom> 啊, 對了, constructor 佔用 8 bytes 還有是因為: constructor 也可當 function 用, 儲存 constructor 就是儲存一個 pointer 指向該 function. 這在以前未做 pointer tagging 時, 尤其重要. 那時, value 要和 thunk 表面上沒有分別, 劃一處理. thunk 需要一個 pointer 指向一個 function, 然後一些 pointers 指向參數. 因此同理, value 需要一個 pointer 指向代表 constructor 的 function, 然後一
+05:06:44 <monochrom> 些 pointers 指向參數.
+05:10:27 <monochrom> 如今做了 pointer tagging, 還是要保留這個做法, 因為正如你想到, 還有很多 pointers 未更新, 因此對它們來說, 必須維持 value 像 thunk 的安排.
+10:35:33 <suhorng> 該改用 IOUArray 了XD
+10:35:40 <suhorng> 時間上那題應該要做到線性
+11:12:38 <CindyLinz> monochrom: 省小花大啊... QAQ
+11:13:18 <CindyLinz> suhorng: 哼哼我早就有列出來了 XD
+11:13:54 <monochrom> 據 benchmark 說快了很多.
+11:14:00 <CindyLinz> suhorng: 欸不過我覺得 unbox vector 可能會比 unbox array 快一點... 因為 unbox vector 有提供 unsafe 的操作.. 不檢查 index 有沒有出界
+11:14:11 <CindyLinz> monochrom: 而且還很多嗎? XD
+11:14:37 <CindyLinz> monochrom: 啊你是說哪一個?
+11:14:58 <monochrom> 用了 pointer tagging 以後, 快了很個.
+11:15:05 <CindyLinz> 喔喔...
+11:15:30 <suhorng> 神秘XD
+11:15:57 <monochrom> 不過說回來, 未用 pointer tagging 前, 一樣要用那麼多記憶. 所以不吃白不吃.
+11:16:22 <CindyLinz> 覺得 constructor 只要 1byte 以下就好了..... QQ
+11:16:45 <CindyLinz> 是有誰會用到一個 type 256 種 constructor 啦~~ ._.
+11:16:52 <monochrom> 對 eager 語言來說, 對
+11:18:41 <monochrom> 唔唔, 或者在 lazy 都對, 在別的地方變一下就可以
+11:19:46 <monochrom> 誰會去寫呢? 寫 compiler 是厭惡性行業...
+11:19:56 <CindyLinz> suhorng: 10000000 * lg(1000000) = 200000000 不算線性嗎? XD
+11:20:14 <CindyLinz> 塞在 lg 裡面的數字只有 n 的 1/10 耶~ XD
+11:20:43 <suhorng> CindyLinz: 欸~@@""
+11:20:49 <suhorng> 應該不只一個 lg 吧
+11:21:00 <suhorng> 我是說高度, 是某個 k * lg n 之類
+11:21:20 <CindyLinz> 我沒有用到那個 k 在複雜度裡面 @@"
+11:21:27 <suhorng> XD
+11:21:29 <CindyLinz> 不是要剛好 k 嗎?
+11:21:37 <CindyLinz> 不用 1~k 試一遍啊?
+11:21:58 <suhorng> 唔 沒啦 我說的 k 不是題目的那個 k
+11:22:09 <CindyLinz> 喔... 那 k=2? XD
+11:22:22 <suhorng> 是一般平衡樹算常數的話, 最差的高不也不是一個 lg 而已
+11:22:45 <CindyLinz> 2個? ^^|
+11:23:17 <suhorng> 詳細不知道XD 紅黑樹好像是兩個沒錯
+11:23:47 <CindyLinz> IntMap 好像比較類似 suffix tree @@"
+11:24:03 <CindyLinz> 不對 應該說 trie.. 只是有 path compress
+11:24:22 <suhorng> 喔喔, 有路徑壓縮的 trie
+11:25:44 <CindyLinz> 就是胖了點 QQ
+11:26:00 <CindyLinz> 如果 value 可以 strict unbox 的話就可以再省一點了 QQ
+11:26:27 <suhorng> wwwww
+11:36:47 <CindyLinz> monochrom: suhorng 熱衷寫 compiler, 對寫 compiler 有嗜好.. (逃 # 11:19 < monochrom> 誰會去寫呢? 寫 compiler 是厭惡性行業...
+11:37:39 <au> dons 也熱衷寫 compiler，他認為所有的軟體系統都可以拆成 compiler 和 interpreter 的組合~
+11:38:17 <monochrom> 有點像榴槤了
+13:37:34 <mno2> 寫 compiler 要學會爬樹跟園藝的功夫
+16:07:01 <CindyLinz> 1M element 的 [Int] 大小 64MB
+16:07:39 <CindyLinz> suhorngM1: (指指) Q___Q
+16:08:19 <CindyLinz> 1M [Int32] 25MB
+16:08:51 <CindyLinz> 1M [Int64] 64MB  這個 Int32 有神祕到..
+16:12:58 <CindyLinz> 我以為 [Int] 應該 4 倍而已 @@"
+16:14:02 <au> > Foreign.Storable.sizeOf (1 :: Int)
+16:14:03 <lambdabot>  Not in scope: ‘Foreign.Storable.sizeOf’
+16:14:16 <au> 64bit 的時候是 8
+16:16:11 <CindyLinz> au: 對啊.. 想說 8B * 4 = 32MB 啊..
+16:16:51 <CindyLinz> 我是這樣想.... (:) a 這邊 2 個, 然後 I# Int# 這邊也 2 個.. 共 4 個 :p
+16:21:07 <au> thunk?
+16:21:56 <CindyLinz> 我印了一次 length 和一次 sum
+16:22:04 <CindyLinz> 然後 sleep 1000 秒.. 用 ps 看
+16:22:48 <au> 或是 heap 預設 alloc 時留了賭倍空間
+16:24:24 <CindyLinz> 噢 逾期未歸還..? ^^|
+16:24:30 <au> yeah
+16:24:53 <CindyLinz> Data.Vector.Unboxed.Mutable vector Int 1M: 32MB
+16:25:54 <CindyLinz> 欸 看錯..
+16:29:28 <CindyLinz> orz... unboxed mvector Int 1M: 34MB,   unboxed mvector Int32 1M: 53MB..
+18:10:05 <pkmx> > recursiveSize $! (listArray (0, 999) (repeat 1) :: UArray Int Int32)
+18:10:07 <lambdabot>  Not in scope: ‘recursiveSize’Not in scope: type constructor or class ‘UArray’
+18:10:07 <lambdabot>  Perhaps you meant ‘Array’ (imported from Data.Array)
+18:10:08 <pkmx> 4088
+18:22:02 <CindyLinz> 哇 recursiveSize
+18:22:30 <CindyLinz> 感覺是個好東西 :p
+18:53:11 <pkmx> 這個package https://hackage.haskell.org/package/ghc-datasize
+18:53:31 <pkmx> 宜配合deepseq服用
+18:55:40 <CindyLinz> 嗯嗯嗯 ^^
+18:55:52 <CindyLinz> 也可以一邊跑一邊觀查 thunk 展開的情況?
+18:56:36 <pkmx> 話說UArray沒有NFData的instance......
+18:59:42 <CindyLinz> UArray 沒辦法 generic 實作吧, 每一種 element type 要獨立實作 @@"
+19:00:26 <CindyLinz> 欸.. Array 和 Vector 配合 Storable 都只能用 ForeignPtr, 不能用 Ptr.. @@"
+19:01:03 <CindyLinz> Foreign.Marshal.Pool 配合的是 Ptr 不是 ForeignPtr, 因為它們要一起跟著 Pool free 掉
+19:03:15 <CindyLinz> 喔.. 倒是可以配一個 noop finalizer.. XD
+22:44:36 <CindyLinz> suhorngM1: 用 Foreign.Marshal.Array 開一個 12000000 個 Int32 的 Ptr 來存答案 (因為最後要先輸出數量)... 用掉 47MB.... orz
+22:45:09 <CindyLinz> 好像很合理? XD
+22:53:12 <au> Vector 和 MVector 是 NFData...
+22:53:43 <au> generic deriving 可以交給 TH 解決: http://hackage.haskell.org/package/vector-th-unbox-0.2.0.1/docs/Data-Vector-Unboxed-Deriving.html
+23:34:32 <CindyLinz> 講一下目前的觀察.. (然後可能要收工&放棄惹...ww)
+23:35:10 <CindyLinz> 都是用 Foreign.Marshall.Array 要記憶體, 然後再塞給 Data.Vector.Storable..
+23:35:44 <CindyLinz> 我這個程式依序 1.要 2M 個 Int32, 2.要 2M 個 Int32, 3.要 12M 個 Int32
+23:36:38 <CindyLinz> 記憶體用量的變化是.. 23MB -(1)-> 31MB -(2)-> 38MB -(3)-> 86MB
+23:37:11 <CindyLinz> 最前面那個 23MB 不知道該怎麼辦 orz
+23:38:00 <CindyLinz> main 一進來就開 threadDelay 1000000000 的時候看的 ps 就 23MB.. @@"
+23:38:27 <au> 這原本是想拿來做什麼呢 (抱歉沒跟到
+23:38:50 <CindyLinz> au: 寫這題.. XD # http://tioj.ck.tp.edu.tw/problems/1566
+23:38:55 <CindyLinz> 記憶體限制 64MB..
+23:39:47 <CindyLinz> 在起跑點就輸了 1/3 圈.. (哭
+23:41:32 <CindyLinz> 這樣好像後面都是白講.. 要記憶體什麼的行為都符合預期 ^^|
+23:42:15 <au> 有試過 -c 嗎?
+23:42:31 <au> +RTS -M100M -c30 # 之類的，30 可以調
+23:42:33 <CindyLinz> 不知道 -c.. ^^|
+23:42:51 <CindyLinz> 這個可以用 {-# PRAGMA #-} 之類的設定嗎?
+23:42:54 <au> https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/runtime-control.html#rts-options-gc
+23:43:06 <au> 是 runtime 設定，可以用 env 帶
+23:43:22 <au> 編譯時用 --with-rtsopts
+23:54:05 <CindyLinz> 唔.. 加了 -M56m 和 -K8m 以後, 還是直上 86MB..  可能 RTS 吃的記憶體不算在 heap + stack..
+23:54:12 <CindyLinz> 再設小一點試試 @@"
+23:57:26 <CindyLinz> 設到 -M5m -K4m.. 這樣 malloc 應該要不夠才對, 可是還是可以跑, 而且依然吃 86MB..
+23:58:31 <CindyLinz> 加 -c5 還是一樣.. o.o

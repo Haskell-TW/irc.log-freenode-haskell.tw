@@ -1,0 +1,70 @@
+11:08:28 <_13h> 我剛剛才突然想通為什麼 (->) 指的是 function XD
+11:19:48 <_13h> let f ~(x,y) = 1 in f undefined    什麼時候會需要用到 ~ 呢？
+11:20:15 <_13h> 查了一下才知道還可以這樣寫@_@
+11:22:13 <_13h> http://en.wikibooks.org/wiki/Haskell/Laziness#Lazy_pattern_matching
+11:27:06 <CindyLinz> _13h: 如果當然 strict pattern match 會當場無窮遞迴的時候需要.. :p
+11:27:10 <CindyLinz> _13h: 如果當場 strict pattern match 會當場無窮遞迴的時候需要.. :p
+11:28:02 <_13h> 唔，什麼狀況會變成無窮遞迴？有簡單的例子嗎？XD
+11:28:16 <CindyLinz> 我覺得這個例子蠻實在的, 不過拿來解釋 ~ 會有點大砲打蚊字... ._. # http://www.haskell.org/haskellwiki/MonadFix
+11:28:55 <CindyLinz> 看 mfix 的版本
+11:29:58 <CindyLinz> 然後.. 我來寫一個簡單運用的 ~ 例子, 不過這邊不會造成無窮遞迴, 也沒有必要性, 只是寫起來(可能)開心.. XD
+11:35:30 <CindyLinz> _13h: https://gist.github.com/CindyLinz/5779282
+11:35:55 <CindyLinz> 這是在第一次 Functional Thursday 討論中學到的用法 ^^
+11:36:20 <CindyLinz> 如果沒有 ~ 的話, 在 n=1 或 n=2 的時候, 那個 let ... = args 會出 exception
+11:36:26 <CindyLinz> 因為給進去的 list 不夠長
+11:36:42 <CindyLinz> 有 ~ 的話, 只要沒真的用到, 就不會出 exception
+11:37:07 <CindyLinz> 不過這樣寫起來不但要加 ~ 還要加括號, 會不會比較開心就不一定了 ^^|
+11:37:12 <_13h> 我試著跑一下網頁上給的程式，但會提示錯誤，錯在 rec p <- newIORef (Node 0 p) 這一行：Undefined variable "p"
+11:37:29 <_13h> 不能指到自己嗎？
+11:38:29 <_13h> CindyLinz: thanks, 我研究一下你給的例子
+11:38:36 <CindyLinz> 可以指到自己, 是這網頁內容的重點啊 orz
+11:39:00 <CindyLinz> 你也是用 ghc, 然後有開那個 extension 嗎?
+11:39:33 <CindyLinz> 不過你試的 rec 應該沒用到 ~ ?
+11:40:52 <_13h> 嗯  因為我沒有 ghc ，所以可能是 hugs 的問題？回家再試試 ghc
+11:41:22 <CindyLinz> mfix 版沒有 extension, 可能 hugs 也能用?
+11:41:53 <CindyLinz> mfix 版就沒有用到指到自己的變數名了
+11:42:04 <_13h> 你給的例子還蠻容易懂的，之前我在 sml 就遇過類似問題，只好多寫幾條 matching rule 把短一點的資料處理好XD
+11:42:24 <CindyLinz> 對, 我去之前就是多寫幾條 match rule
+11:42:34 <CindyLinz> 會多一堆無意義變數
+11:43:18 <_13h> lazy matching  真方便XD  為什麼不預設 lazy matching 呢？已經到處都 lazy 了
+11:43:44 <CindyLinz> lazy match 就沒辦法用 pattern match 來作 branch 了啊
+11:46:20 <_13h> 唔，這麼說也對
+11:47:44 <_13h> 你的例子裡面，a b c 都會是一個 thunk 嗎？所以沒 match 到的，不用算的就不管它了？
+11:48:36 <CindyLinz> 對
+11:48:47 <CindyLinz> 這個 thunk 會在 : 之前這樣...
+11:49:01 <CindyLinz> runtime 相信它一定會是 :, 所以就不用先去 check 了
+11:49:43 <CindyLinz> 但萬一要用的時候竟然不是 :, 那就 exception 了
+11:50:44 <_13h> 這樣的話好像也有不少隱藏地雷XD
+11:51:30 <CindyLinz> 好像不是新地雷..
+11:51:42 <_13h> fetch [2, 5] 就炸掉了
+11:52:05 <CindyLinz> 它這種 exception 意義上和 partial function 遇到指定 pattern 外的 input 的情況是一樣的
+11:52:44 <CindyLinz> 就算不用 lazy pattern, 也是在 runtime 才會 exception
+11:53:08 <CindyLinz> 就像 head [] 會炸掉一樣
+11:53:12 <_13h> 嗯，當作 static assertion 之類的東西來看好像還不錯XD
+11:53:57 <CindyLinz> 你要 assert 的效果的話, 把 ~ 去掉還是有啊?
+11:54:06 <CindyLinz> 比較早發生 :p
+11:55:53 <CindyLinz> 用 ~ 好像無可避免地一定要加括號... 這麼麻煩的設計應該可以有效避免濫用 (誤)
+11:56:18 <_13h> 輸入括號是真的很麻煩  不然我還蠻喜歡的，總覺得很親切XD
+11:56:50 <CindyLinz> XD
+11:57:59 <CindyLinz> 喜歡實作 scheme?
+11:59:01 <_13h> 實作的話，我只有做過簡單的 lisp，還沒實作過 scheme (sicp 那個算嗎？XD
+11:59:56 <CindyLinz> :p
+21:59:30 <monochrom> hugs 不知道 rec p <- ..., 因為這是後來的.
+22:01:44 <monochrom> hugs 應該知道 mdo
+22:23:24 <suhorng> 發現 Essentials of Programming Langauges (EoPL) 買到的第三版 把第一版中我想看的一些部份砍掉/縮減篇幅了QQ
+22:23:43 <suhorng> 有可能是第一版那些部份比較接近 compiler 而跟語言比較沒有關係..
+22:24:00 <letoh> 所以應該找第一版?
+22:26:45 <suhorng> 有的 有在圖書館借到
+22:26:55 <suhorng> 但是絕版了
+22:45:29 <UncleHandsome> suhorng: EoPL的難度怎麼樣XD？
+22:45:33 <suhorng> 這個是目錄 https://gist.github.com/suhorng/5782353 https://gist.github.com/suhorng/5782426
+22:45:49 <suhorng> 難度我不會分欸XD 非常好看就是
+22:46:52 <UncleHandsome> 感覺滿不錯的 被拿掉會不會是因為out-dated了？？
+22:46:59 <UncleHandsome> Perface有解釋嘛XD？
+22:47:01 <suhorng> 第三版整個比第一版精練很多（好的意思），雖然簡直可以當不同書來看了..
+22:47:39 <suhorng> 遭，我沒看 Preface 欸XD 不過那些沒有 out-dated
+22:48:10 <suhorng> 應該是整個重新組織架構過了 然後跟語言教學差比較多的份量就減少（第一次看到越後面的版本頁數越少…XD）
+22:48:20 <letoh> 糟  1e 好像很棒
+22:48:44 <suhorng> 買不到了...
+22:49:07 <letoh> 只好長期借用圖書館的書了XD
+22:50:04 <UncleHandsome> 我來看Perface有沒有解釋lol

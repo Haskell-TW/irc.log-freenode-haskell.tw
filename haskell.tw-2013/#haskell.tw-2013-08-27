@@ -1,0 +1,149 @@
+00:02:38 <hashcat> 對偶非對稱
+00:03:44 <monochrom> ok, 摩根定律對偶, 不對偶的是 intuitionistic logic.
+00:06:09 <favonia> 我以為 linear logic 是當初 girand 想要恢復對稱性搞出來的
+00:06:43 <favonia> 不過又有不對稱的 intuitionistic linear logic
+00:20:45 <suhorng> 有空來看linear logic ><
+15:01:30 <CindyLinz> 覺得 NuSMV 裡面, 指定 non-deterministic value 的這部份很美妙..
+15:10:51 <Yu-Lin> https://www.coursera.org/course/progfun   在 FB 看到有人貼這個
+15:11:03 <Yu-Lin> scala.....
+15:21:40 <cataska> 我覺得這個課程不錯呀
+15:31:49 <Yu-Lin> 跟 scala 不熟
+15:51:21 <cataska> 上了這門課就會了 XD
+15:52:04 <Yu-Lin> 也對XD
+15:53:02 <Yu-Lin> fp 的課只有這個阿.......
+15:53:33 <CindyLinz> 台大資訊的 OOP 只教 Java 啊.. XD
+15:56:09 <_13h> Yu-Lin: 上 coursera 的 proglang 也是講 fp 啊
+15:56:20 <_13h> Yu-Lin: 後面會提一點 oop，但比重不大
+16:00:04 <cataska> 其實 progfun 只是用基本的 scala 來講 fp，跟 scala 不熟沒關係
+16:00:23 <Yu-Lin> https://www.coursera.org/course/proglang  這門課？
+16:01:16 <_13h> 我之前有看過一點 scala，但看了幾天覺得不是我的菜@_@
+16:02:24 <_13h> Yu-Lin: 應該是吧，我這邊連不上XD
+16:03:01 <Yu-Lin> 稍微看一點 wiki，scala 也不會是我的菜 ++
+16:03:28 <CindyLinz> hmm.. 什麼特點不舒服嗎?
+16:04:19 <_13h> 我的話倒是沒什麼不舒服的，只是也沒感覺到舒服呀XD
+16:04:22 <CindyLinz> 符號和 keyword 混雜的關係?
+16:04:32 <CindyLinz> val s = for (x <- 1 to 25 if x*x > 50) yield 2*x
+16:04:41 <CindyLinz> <- to if 混在一起
+16:05:19 <_13h> 我對那種東西的接受度還蠻大的XD
+16:06:41 <cataska> scala 爸爸 Martin Odersky 親自上課耶 XD
+16:07:39 <CindyLinz> 這樣可以一邊上課一邊提 wish issue.. XD
+16:08:52 <_13h> 課堂上 demo 發現 bug ? XD
+16:09:42 <cataska> FLOLAC 是不是也可以線上函授啊
+16:11:22 <_13h> irc 授課 (誤
+16:11:30 <CindyLinz> 我猜資源很不足.. :Q
+16:12:13 <CindyLinz> 今年應該午餐和網路都有出點意外
+16:13:28 <Yu-Lin> 雖然只是一點小問題，但我很不喜歡 scala 用一堆 {}，這會讓我想直接用 Scheme....XD
+16:14:56 <CindyLinz> hmm... Scala
+16:15:09 <CindyLinz> 如果環境是 JVM 的話, 就沒得選了
+16:21:32 <Yu-Lin> 網路上看到的 scala 教學，有寫到這樣 val list = List(1,2,3).map( x => x + 1 )
+16:25:31 <_13h> 這有什麼問題呢?
+16:26:26 <_13h> 像 ruby 也是這樣做的... python 比較怪胎一點，但只要歪著頭看好像也差不多是這個樣子XD
+16:26:26 <Yu-Lin> 單純是習慣問題，有點不習慣這種寫法
+16:27:04 <_13h> 那以這個例子來說，習慣的寫法大概長什麼樣子?
+16:28:15 <Yu-Lin> 大概長 map f list 這樣吧
+16:29:22 <cataska> val list = List(1,2,3) map(_ + 1) 這樣寫有比較習慣嗎...
+16:29:32 <CindyLinz> 算作文字和符號之間的節奏問題 :p
+16:30:00 <_13h> 唔，我覺得寫成 (mapcar #'(lambda (x) (+ x 1)) '(1 2 3)) 或寫成 List.map  在語法的理解其實差不多，但物件那種方式可以往後一直串下去，寫起來方便一點
+16:30:23 <gko_> (mapcar #'1+ '(1 2 3))
+16:30:31 <CindyLinz> 可能 .map() 看起來是函數呼叫代參數, 裡面放了個 => 不好看?
+16:36:13 <Yu-Lin> 就我自己來看， .OO 這種做法，要直接加上後續處理可能會比較方便
+16:37:22 <CindyLinz> 可以串下去不是物件特點啊 @@"
+16:38:19 <Yu-Lin> 不過我不習慣那種寫法阿XD
+16:40:15 <_13h> 唔  我想講的是類似 fluent api 那種寫法，看起來的順序比較直覺
+16:40:40 <_13h> 只是要串起來的話，當然有很多種做法
+16:41:47 <CindyLinz> 欸, 更甚... 串起來的話, 覺得是破壞物件特性 @@"
+16:42:14 <CindyLinz> x.map(...) 應該要變這個 x 的 internal 屬性..
+16:42:42 <CindyLinz> 拿物件語法做違背物件的事 @@"
+16:44:58 <_13h> 或者應該這麼說，我是把語法和解題思維分開看... 雖然拿物件語法做不是 oop 的事有點怪，但對於寫 c++ 和 python 的人應該會非常親切XD
+16:45:10 <CindyLinz> 沒錯...
+16:45:34 <CindyLinz> 反正 C++ / Python 也不太尊重 OOP.... XD
+16:46:00 <_13h> 主要還是看到底在處理什麼樣的問題，如果有一些東西要保存起來，沒有 closure 就是生個物件來幫忙存啦XD
+16:48:06 <_13h> 剛好 c++ 跟 python 的 class 都提供 callable interface，根本也不用去區分到底是物件還是函式XD
+16:52:00 <mno2> Scala 有飯吃 <-- 重點
+17:03:12 <hashcat> ciao-lang.org
+17:13:36 <Yu-Lin> scala 有飯吃（cry
+17:14:01 <Yu-Lin> 讓我想起之前那篇各語言的平均薪資了
+17:14:47 <hashcat> 那個
+17:14:56 <hashcat> 一定沒飯吃
+17:15:09 <hashcat> 但是特性就各種神奇
+17:16:55 <hashcat> ciao基於prolog, 一堆擴展
+17:17:46 <hashcat> 像啥 Higher-order predicates, Active modules (high-level distributed execution)
+17:18:38 <hashcat> Fuzzy Prolog, OO, Functional, And-parallel execution
+17:20:00 <hashcat> 應用函式庫也是齊全
+17:20:27 <hashcat> 各種神奇, 各種傻眼
+17:22:12 <Yu-Lin> ciao 潮？XD
+17:23:18 <hashcat> 那專案從1984年開始
+17:24:02 <mno2> 應該是 hello 吧，義大利文
+17:27:46 <hashcat> Haskell沒typeclass的話覺得怎樣
+17:28:52 <hashcat> 有個haskell-like語言也是各種神奇
+17:29:00 <hashcat> 但沒有typeclass
+17:30:26 <Yu-Lin> 名子是？
+17:30:37 <hashcat> Curry
+17:36:35 <hashcat> http://www-ps.informatik.uni-kiel.de/currywiki/
+17:40:25 <hashcat> 沒有typeclass這實在不舒服
+17:53:18 <hashcat> 還有個有typeclass但語法是prolog的
+17:53:43 <hashcat> http://www.mercurylang.org/about.html
+17:57:35 <hashcat> 他有個想法跟monad有得比
+17:58:35 <hashcat> 把外部世界當成狀態變數, IO之類就會引用到這變數, 沒有用到那變數就是純邏輯函數世界
+17:59:06 <hashcat> 不過最強大貌似還是ciao
+17:59:49 <CindyLinz> ciao-lang 發音是「超爛」嗎.... wwww
+18:00:54 <mno2> 照 CindyLinz 的邏輯，那 go-lang 不就變成 「夠爛」嗎？   (會被打吧 xD)
+18:01:11 <CindyLinz> 趁他還沒強大趕快講...
+18:01:24 <CindyLinz> (聲勢壯大)
+18:01:47 <mno2> CindyLinz 挑軟柿子吃
+18:03:16 <CindyLinz> 吃個水果當然要挑熟的啊.... wwww
+18:03:42 <CindyLinz> 今天講到的 NuSMV.. 沒有遞迴..
+18:04:24 <CindyLinz> 老師說如果拿來驗證有遞迴的程式, 要先想辦法自己展開 (重寫), 所以如果原本的遞迴屬性很強的話, 就會用起來很累
+18:04:38 <CindyLinz> 所以目前最成功的應用是在硬體方面, 然後再來是 driver 程式
+18:04:45 <mno2> 看到 NuSMV 我就一直想到 NuSkin
+18:05:33 <CindyLinz> 另外, NASA 火星車和飛航控制相關的程式, 都會限制程式裡面不可以遞迴, 不可以用動態記憶體, 其實也是這樣才容易作 model checking
+18:05:35 <CindyLinz> XD
+18:06:10 <mno2> 好想看原始碼喔
+18:06:30 <mno2> 我還以為這種重要的程式應該都是用產生的
+18:06:32 <CindyLinz> 另外, 我問老師說如果拿來作程式驗證, 是不是會把 NuSMV 的程式寫在原本的程式之間, 像註解之類的那樣, 以方便對照.. 而如果原始程式改版的話也才方便知道驗證的部分要改哪邊
+18:06:50 <CindyLinz> 老師說聽起來很不錯, 可是實際上沒有什麼聽說在這樣做
+18:07:22 <CindyLinz> 可能實際上要這樣做太困難了.. 今天上課講的例子, 驗證 Peterson's Algorithm
+18:07:34 <CindyLinz> 其中兩個 Thread 都會去更新同一個 Flag
+18:07:53 <CindyLinz> 但因為在 NuSMV 裡面, next(flag) = XXXX 只能寫在一處
+18:08:32 <CindyLinz> 所以這一部分老師就把原始演算法和這個 Flag 相關的部分, 依 NuSMV 能接受的寫法重新寫了 :Q
+18:08:46 <CindyLinz> 如果這種地方多了, 那就不太可能把 NuSMV 寫到原始程式裡面了
+18:08:56 <mno2> 結構太不一樣了吧
+18:09:10 <CindyLinz> 對
+18:10:12 <CindyLinz> 這樣.. 拿 model checking 放到 Functional Language 上面, 非常困難的感覺...
+18:10:53 <_13h> 那就是一般開發 firmware 的慣例了吧，沒有遞迴和動態記憶體
+18:14:04 <CindyLinz> 然後.. Model checking 的動作是 decidable 的, 而 First Order Logic 的推演是 undecidable 的
+18:14:40 <CindyLinz> 不過在建立 model 的過程其實人工加入很多啦
+18:15:08 <_13h> 這種 checking 有什麼好處?
+18:15:20 <CindyLinz> 而且, 好像如果描述得複雜了, 也不容易看出描述的 model 還是不是符合原本的程式行為, 還有也不容易看出檢驗的屬性是不是真的反映我們要的屬性
+18:15:32 <CindyLinz> _13h: 證明程式沒有錯誤啊
+18:16:05 <_13h> 唔，在實務上好像幫助不大@_@
+18:16:30 <CindyLinz> _13h: 今天就是驗證 Peterson's Algorithm 不會有兩個人同時在 critical section 裡面, 而且下了 request 以後, 就進得到 critical section (under 一些假設)
+18:16:31 <hashcat> mercury寫好了
+18:16:58 <CindyLinz> _13h: 實務上 Intel 從 1995 年開始用這一套去驗證每一顆 CPU, 然後 AMD 那些的後來也都學去了
+18:17:14 <CindyLinz> _13h: 然後微軟應該是進 2000 或 XP 的時候也開始導入
+18:17:22 <CindyLinz> 不過微軟不是拿來證明自己的程式
+18:17:39 <CindyLinz> 是拿來指出週邊硬體的 driver 哪裡有問題 XD
+18:17:46 <_13h> 可是不是每個專案都在開發 cpu 或 os 啊XD
+18:18:04 <CindyLinz> _13h: 你應該直接說, 不是每個專案都重視正確性....
+18:18:15 <_13h> 我正想說這句
+18:18:34 <_13h> 有時候我還覺得是要允許不正確的程式
+18:18:54 <CindyLinz> 這樣你很難說它幫助大不大... 要看從錢的量來說還是案子個數來說...
+18:19:01 <CindyLinz> 從錢的量來看我覺得蠻大的....
+18:19:15 <CindyLinz> NASA 一個案子可以抵掉一大堆案子 XD
+18:19:23 <_13h> 例如 spec 說要 50us，但實際程式卻要寫 60us，這要怎麼驗證呢? 跟規範都對不起來啊XD
+18:19:38 <CindyLinz> 這個用它還是有幫助的
+18:19:40 <_13h> 還是訂出來的 model 就是要提供這樣的空間?
+18:19:51 <CindyLinz> 你會去假設每一個 step 需要多少時間之類的
+18:20:10 <_13h> 當然不是說這方法完全無用啦，我只是在想效益能有多大
+18:20:18 <CindyLinz> 如果假設錯誤當然結果就不用太期待, 但是通常小單位的元件, 其變異數是比較小的, 可以作比較好的假設
+18:20:26 <CindyLinz> 這工具還有一個用法..
+18:20:43 <CindyLinz> 就是你的程式真的有 bug, 有很難找的 race condition 造成問題的時候
+18:20:49 <CindyLinz> 它可以告訴你什麼 case 會發生
+18:21:00 <CindyLinz> 好我有事要先走了 XD
+18:21:52 <_13h> 好
+18:22:17 <_13h> race condition 的問題真的很煩，所以我也在找有什麼好方法可以幫忙處理
+18:29:28 <_13h> 如果要用在小單位元件，感覺就是一般 unit test 的概念了?
+18:35:31 <hychen> OS wide的race condition 超煩
+22:46:23 <CindyLinz> _13h: 但今天看老師拿 NuSMV 來 model checking Peterson's Algorithm 感覺蠻威的耶
+22:46:42 <CindyLinz> Peterson's Algorithm 是用來作兩個 thread 的 critical section 的演算法
+22:47:15 <CindyLinz> 嗯, 也可以作那個 Bekery Algorithm.. 不過老師只有 demo 只有兩個 thread 的 case ^^|

@@ -1,0 +1,45 @@
+00:09:57 <Yu_lin> 我終於知道問題出在哪了Orz|||
+00:10:03 <Yu_lin> 害我花了一天去找
+00:10:29 <Yu_lin> 我忘了 sml 的 andalso 的特性了
+00:12:58 <CindyLinz> short circuit 版的 and 喔?
+00:14:37 <Yu_lin> 對阿，搞了半天才想到這件事
+00:16:39 <favonia> xD
+00:16:51 <favonia> 應該是名字太長的關係（誤
+00:17:14 <CindyLinz> 我剛沒看出來這是兩個字接在一起
+00:17:29 <CindyLinz> 拿去丟 google 跳出 MSDN VB 的 AndAlso 才知道...
+00:24:23 <monochrom> 人家已經特地起名叫 andalso 了 :)
+00:24:46 <monochrom> 還有 orelse
+00:25:55 <CindyLinz> monochrom: 以為是什麼神祕語言的字啊 an-dal-so
+00:27:12 <monochrom> 我也很久沒玩 SML 了, 需要幾秒才認得
+01:54:20 <CindyLinz> #haskell channel 現在有個講話的人, nick 和 favonia 好像 XD
+11:28:21 <Yu_lin> https://spark-public.s3.amazonaws.com/proglang/proglang-002/red_dog/homework1_Gc76UVW2rpe6MRviIpzZTlapyHq0WN.jpg
+11:28:23 <Yu_lin> XDDDDDDD
+18:20:23 <CindyLinz> 最近正在學 Haskell 的 free monad, 看起來是一個可以拿來在不使用 template 外掛的情況下, 用純 Haskell 和 do-notation 製造 embedded domain specific language 的東西
+18:20:56 <CindyLinz> (雖然 Template 是純 Haskell 的標準內容... 只是私以為它比較像外掛 ^^|)
+18:21:34 <CindyLinz> (就跟 foreign function interface  一樣, 是標準的..... 外掛 XD)
+19:46:29 <suhorng> http://www.yinwang.org/blog-cn/2013/10/05/random-words/ 不過我不喜歡 S-expressions...
+19:47:09 <letoh> 為什麼呢?
+19:47:59 <suhorng> 主要還是人眼匹配上的問題, 有時候排版不那麼明顯 (例如印出來的 list 很多層的時候)
+19:48:32 <suhorng> 雖然這可能比較像印出來的程式可以印的更好XD
+19:49:53 <suhorng> 像 r6rs 中在 () 之外允許 [], 不就是為了方便閱讀？
+19:50:42 <letoh> 其實我對人眼匹配問題覺得還好，排版一下的話就跟看 c 差不多，多看一點就會比較習慣
+19:51:27 <letoh> 不排版就真的很難看... 我只覺得 s-exp 不適合輸入而已，要按括號很麻煩XD
+19:51:52 <suhorng> 很多層的時候讀起來不方便吧？不知道哪層對哪層
+19:52:00 <suhorng> 輸入的話有 ParEdit mode, 不怕XD
+19:52:04 <CindyLinz> s-exp 的層數會多很多
+19:53:18 <letoh> 嗯  是會比較多  但還是可以排版啊  不過我自己也沒寫過很多行的就是  有寫的話一個函式大概兩三個螢幕畫面的程度
+19:53:45 <suhorng> 例如一個很多層的例子是
+19:53:46 <suhorng> ((((((f x y) g h) i)
+19:53:46 <suhorng>    (j k l)
+19:53:46 <suhorng>    (p q r))
+19:53:46 <suhorng>   a b c))
+19:53:54 <suhorng> 這樣實在對不出來 a b c 是在哪一層阿...
+19:54:06 <letoh> 而且喔  一般 scheme/lisp 的 s-exp 其實就跟一般寫 c 很像  配合 progn 的效果
+19:54:27 <letoh> 其實就是一行一行而已  不必硬塞在某個括號裡
+19:54:41 <suhorng> progn是什麼？
+19:55:00 <letoh> (progn (exp1) (exp2) (exp3) ...)
+19:55:30 <letoh> 可以想成 do 那樣的語法型式? (實際運作上當然不太一樣)
+19:55:47 <suhorng> 嗯, 跟 Scheme 的 begin 很像
+19:56:14 <suhorng> 那個很多層的我想是在把資料印出來時會遇到
+19:56:20 <letoh> 嗯嗯
+19:58:26 <suhorng> 不過 Scheme 寫了一些之後再寫其他程式就出事了 XDD 寫出 (func) 還想說奇怪怎麼type不太對

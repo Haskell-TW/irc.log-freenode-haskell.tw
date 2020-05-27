@@ -1,0 +1,12 @@
+01:39:26 <monochrom> f is strict: f ⊥ = ⊥
+01:40:44 <monochrom> 舉例: not ⊥ = ⊥, 所以 not 是 strict
+01:44:20 <monochrom> 舉例: const False ⊥ = False ≠ ⊥, 所以 const False 是 non-strict
+11:19:15 <Yu_LIN> 我在找 functional database 看到這篇
+11:19:17 <Yu_LIN> http://www.infoq.com/presentations/datomic-functional-database
+11:19:42 <Yu_LIN> 好有趣的網站，投影片會跟著影片自動切換XD
+22:42:55 <suhorng> flter: 嗨
+22:43:23 <letoh> 看成 filter XD
+22:45:21 <flter> suhorng: hi /)
+22:45:35 <flter> 誤會誤會:)
+22:45:54 <suhorng> > filter (> 5) [3..10]
+22:45:55 <lambdabot>   [6,7,8,9,10]

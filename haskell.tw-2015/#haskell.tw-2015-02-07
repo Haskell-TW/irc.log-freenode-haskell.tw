@@ -1,0 +1,40 @@
+00:24:54 <CindyLinz> 贊成~~~ :D # 把 Foldable, Traversable 搬到 Prelude 中
+02:07:06 <pkmx> 好物 hackage reverse dependency # http://packdeps.haskellers.com/reverse
+02:09:58 <CindyLinz> ++
+02:21:37 <CindyLinz> 啊.. 那天 tioj 問我說除了 haskell platform 以外還會常用什麼 package..
+02:21:46 <CindyLinz> 嗯 用在 tioj 上..
+02:21:55 <CindyLinz> 只是我還不熟 haskell platform.. ^^|
+02:22:12 <CindyLinz> 現在發現, haskell platform 上面沒有 edwardk 的 lens!
+03:03:07 <pkmx> 我也不熟 (攤手
+03:03:34 <pkmx> 我都是裝ghc然後直接去cabal install需要的套件 haskell platform上面有啥根本不清楚xd
+03:11:11 <CindyLinz> 沒錯 XD
+04:12:43 <monochrom> 終有一天 platform 會有 lens. 我們要耐心等候別人思想進步. :)
+20:41:42 <petercommand> https://ideone.com/jw4Mn2
+20:42:02 <petercommand> 那句 from the context (Integer ~ Integer) 是甚麼意思呢?
+20:47:47 <pkmx> ~ 是type level equality
+20:47:56 <pkmx> :t quot
+20:47:57 <lambdabot> Integral a => a -> a -> a
+20:48:13 <petercommand> 我知道是 type level equality  呀..
+20:48:30 <petercommand> 兩邊這樣不是一定成立嗎@@
+20:49:52 <pkmx> 是的
+20:51:06 <petercommand> 寫出這個的用處是甚麼呢?
+20:51:48 <pkmx> 沒有用處XD
+20:51:54 <petercommand> XDD
+20:51:57 <pkmx> 應該只是因為你pattern match (Div a b)
+20:52:12 <pkmx> 所以refine後得到type為Expr Integer
+20:52:34 <pkmx> 然後跟你的signature剛好一樣這樣...
+20:53:38 <petercommand> 喔喔... 剛剛把 signature 換成 Expr a -> Expr a ，他的錯誤訊息就變成 (a ~ Integer) 了
+21:02:05 <CindyLinz> petercommand: 為什麼 eval :: Expr Integer -> Expr Integer 而不是 eval :: Expr Integer -> Integer ?
+21:03:08 <CindyLinz> eval 完還是 expr 好討厭喔.. XD
+21:06:03 <petercommand> hmm..隨便寫的XD
+21:06:50 <petercommand> 的確很討厭，要些一堆 instance..
+21:07:46 <CindyLinz> 或是換個 type 變成 Val Integer 之類的 XD
+21:08:46 <petercommand> 嗯...這樣還是要寫一堆 instance 呀XD
+21:10:30 <petercommand> 感覺 Val Integer 蠻不錯的XD
+21:11:38 <petercommand> 咦? 寫 Val Integer 就不能寫 eval (Plus a b) = eval a + eval b 了...
+21:11:49 <petercommand> 感覺不太好XD
+21:13:56 <petercommand> 還是 Expr a -> a 好:p
+21:26:19 <CindyLinz> petercommand: 的確還是要啊.. 只是覺得 Expr 被 eval 過以後還是 Expr 覺得不舒服而已 XDXD
+21:26:48 <CindyLinz> 欸 改成 Val 會不能那樣寫... 是因為 Val 還沒有加 instance XD
+21:26:56 <CindyLinz> 你可以用 newtype 然後 deriving 就好 :p
+21:27:35 <petercommand> 恩恩

@@ -1,0 +1,30 @@
+13:42:32 <CindyLinz> 想問一個 GHC 的 strict 的問題
+13:43:21 <CindyLinz> 在運行的時候, 如果有一個「變數」, 不是在 compile time 就判斷為 alwayse strict 的話
+13:43:51 <CindyLinz> 就是說, 它在運行的時候, 有可能是已算出的值, 也有可能是待計算的 thunk
+13:44:03 <CindyLinz> 即使它已經算完, 是一個值了
+13:44:34 <CindyLinz> 取它的值出來用時, 應該還是會有一個 if 來看是不是已經算完了哄?
+13:45:01 <CindyLinz> 然後, 因為它不是 strict, 所以應該會是 Boxed, 所以 if 判斷過後, 還要再 dereference 一次把東西取出來
+13:45:20 <CindyLinz>  
+13:45:42 <CindyLinz> 而如果是 compile 就判斷為 strict 的東西, 這些 overhead 應該就可以省掉了
+13:45:55 <CindyLinz> 那.. seq 應該是一個可以影響 compile 判斷的東西
+13:45:59 <CindyLinz> DeepSeq 呢?
+13:46:30 <CindyLinz> deepSeq 是不是只有 runtime 時強迫計算的效果, 對 compile 時判斷的 semantic 是不影響的?
+13:47:13 <CindyLinz> 如果去 force 一個長得像 f = g ( h x ) 的函數, 而且沒有把整個 h x 都 inline 進來的話
+13:47:40 <CindyLinz> (離開一下...)
+14:04:24 <CindyLinz> (繼續講 XD)
+14:04:54 <CindyLinz> 那, h x 被別人使用的時候有時候 strict 有時候 non-strict 的話... h x 當然就一定要做成 non-strict 嘛
+14:05:46 <CindyLinz> 不過, 如果 1.所有使用 h x 的地方都剛好是 strict, 那 h x 的輸出會做成 strict 嗎? 2. 如果 h x 有被 inline 進來, 那這個 inline 進來的版本會 strict 嗎?
+14:24:56 <CindyLinz> 我最後面說的 force 都是指 deepSeq
+15:26:10 <MnO2> CindyLinz: 聽起來怪怪的，strict是一個性質吧？ 只是說 f undefined -> undefined
+15:26:37 <MnO2> CindyLinz: strict 跟有沒有 boxed 有點關係但也是不同概念
+15:26:56 <CindyLinz> MnO2: 我講的 strict 是指, 被 compiler 作 strict analysis 之後判斷為 always strict 的東西
+15:27:06 <MnO2> CindyLinz: 就算算完了還是可能是 boxed 啊， 假如你不是用 unboxed type?
+15:27:42 <CindyLinz> 例如說 add a b = a + b 相當於 add !a !b = a + b
+15:28:15 <CindyLinz> 如果要求 add a b 的 weak head normal form 的話, 一定需要把 a 和 b 的 weak head normal form 都求出來
+15:28:46 <CindyLinz>  
+15:29:10 <CindyLinz> 我只是想問說 deepSeq 也能作為改變 compiler 判斷的 hint 嗎?
+15:29:26 <CindyLinz> 還是只能一層一層都用 seq 才行
+15:29:32 <MnO2> http://hackage.haskell.org/packages/archive/deepseq/1.3.0.1/doc/html/src/Control-DeepSeq.html
+15:29:39 <MnO2> 他內部也是一層層seq啊
+15:32:03 <CindyLinz> 原來如此 :p
+15:32:16 <CindyLinz> MnO2: 謝謝~

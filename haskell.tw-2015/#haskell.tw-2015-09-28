@@ -1,0 +1,14 @@
+00:21:40 <monochrom> 我肯定 "U : U" 是 "U_n : U_n+1" 的簡寫, 對應 Agda 的 Set_n : Set_n+1, Coq 的 Type_n : Type_n+1
+00:22:05 <monochrom> 它們全都寫 Set : Set, Type : Type
+00:22:24 <suhorngT> monochrom: 那個是正常的 dependent type 程式, 現在這個是自己土砲的 inconsistent 版XD
+00:22:47 <CindyLinz> 完備版 (Y)
+00:22:49 <monochrom> 略去不寫第幾重, 是因為可以 infer
+00:23:34 <monochrom> 哦
+10:08:05 <mno2> https://gundersen.net/functional-floppy-disks-in-2015/
+10:14:47 <monochrom> heh
+15:47:36 <suhorngT> huh
+16:28:05 <mno2> hoh
+16:39:34 <CindyLinz> hah
+16:39:43 <suhorngT> 看到的一些 dependent type system 的 formalzation (像 MLTT, HoTT 裡面的, FLOLAC 給的之類)跟 Agda, Idris 的差距真是超級大的...難怪會有個 elaboration phase
+16:40:35 <suhorngT> 像是這種寫起來很冗https://i.imgur.com/DVMiAsf.png  這個又不知道x要哪裡來https://i.imgur.com/XO2Xbze.png
+16:45:42 <suhorngT> idris 的 reflection 耶 https://www.reddit.com/r/Idris/comments/34efzs/simple_proof_automation_with_reflected_elaboration/

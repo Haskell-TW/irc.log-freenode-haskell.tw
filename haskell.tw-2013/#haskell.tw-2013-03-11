@@ -1,0 +1,8 @@
+22:24:05 <suhorng> @pl \(a, b) -> (f a, b)
+22:24:06 <lambdabot> first f
+22:24:22 <suhorng> :t first
+22:24:24 <lambdabot> Arrow a => a b c -> a (b, d) (c, d)
+22:24:39 <suhorng> Orz.....
+22:24:57 <suhorng> :t first (\n -> n + 1)
+22:24:59 <lambdabot> Num c => (c, d) -> (c, d)
+22:25:28 <suhorng> :i (,)

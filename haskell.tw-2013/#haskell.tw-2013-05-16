@@ -1,0 +1,34 @@
+03:20:21 <monochrom> 用 arrow notation
+03:22:16 <monochrom> f >>> g >>> h 可寫為 proc x -> do { y <- f -< x; z <- g -< y; h -< z }
+03:28:40 <letoh> 看了一晚... 總覺得 haskell 跟海關一樣，拆箱->裝箱->...
+03:28:54 <monochrom> 哈哈
+03:29:09 <letoh> 我的 monad 串不起來是因為混了一個 pure function
+03:29:27 <letoh> 要另外包成一個 a->m b 才能串起來
+03:29:36 <letoh> 才能用 bind 串起來
+09:39:20 <MnO2> http://adit.io/posts/2013-05-15-Locks,-Actors,-And-STM-In-Pictures.html
+09:40:04 <MnO2> http://snapframework.com/blog/2013/05/15/snap-0.12-released
+09:40:08 <MnO2> snap framework 0.12
+11:32:44 <favonia> 0.12 主要是改了什麼...?
+11:36:59 <favonia> 好像有人說之後要寫 blog xD
+11:45:37 <MnO2> http://hackage.haskell.org/package/charade-0.1
+11:45:41 <MnO2> 這個吧
+13:46:14 <_13h> hychen: ArrowLoop 蠻有趣的
+13:47:47 <_13h> choise 還沒看懂，不太確定 either monad 要怎麼用@_@
+13:50:43 <hychen> _13h, 就只是在type system提前跟表明這個運算會有side effect
+13:51:34 <hychen> _13h, 所以任何使用處理這個運算的人都要考慮到正確執行跟錯誤執行的狀況
+13:52:04 <hychen> _13h, 我覺得這東西比較exception來得實用多了....
+13:52:09 <hychen> s/較/起/
+13:52:34 <_13h> 你是指 choice 還是 either ?
+13:52:41 <hychen> either
+13:52:48 <hychen> 喔, 你是說choise嗎?
+13:53:11 <hychen> haskell 有choise嗎?, 那東西是我自己做的耶 @@
+13:53:45 <_13h> 那 maybe 不好嗎？也有 nothing 可以用，比較大的問題大概就是沒辦法表達其他錯誤?
+13:53:58 <_13h> ArrowChoice
+13:54:37 <_13h> 在 Control.Arrow 裡面，我還沒看你的，是直接看 haskell lib 裡怎麼實作
+13:55:37 <hychen> _13h, 我的fanin是從ArrowChoice抽出來的
+13:55:45 <hychen> _13h, 我有寫對應的ArrowChoice
+14:27:21 <_13h> 我覺得 fanin 應該很實用吧，只是要先搞懂 either XD
+15:57:00 <hychen> _13h, 很實用啊
+15:57:26 <hychen> _13h, fanin 我自己改它多加了一個filter function 去決定哪個output要被丟出來
+15:58:21 <hychen> _13h, python 是dynamic  , 所以我的arrow沒有完全follow Haskell, 我有做很多daynamic language才能有的動作
+23:37:10 <MnO2> http://matthew.brecknell.net/post/btree-gadt/

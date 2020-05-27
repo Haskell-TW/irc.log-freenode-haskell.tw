@@ -1,0 +1,21 @@
+11:12:23 <monochrom> https://github.com/treblacy/random-read
+11:43:56 <Yu_LIN> @hoogle IO () -> [IO ()] -> IO ()
+11:43:57 <lambdabot> Network.HTTP.Base catchIO_ :: IO a -> IO a -> IO a
+11:43:57 <lambdabot> Control.Exception.Base finally :: IO a -> IO b -> IO a
+11:43:57 <lambdabot> Control.Exception finally :: IO a -> IO b -> IO a
+11:44:46 <Yu_LIN> @hoogle  (IO () -> IO a) -> [IO ()] -> IO ()
+11:44:46 <lambdabot> No results found
+11:44:51 <Yu_LIN> @hoogle  (IO () -> IO a) -> [IO ()] -> IO a
+11:44:51 <lambdabot> No results found
+23:01:06 <CindyLinz> mno2: 加了那個 theme, 初看有種眼睛一亮的感覺 :p
+23:01:45 <mno2> 哪個 theme?
+23:02:10 <CindyLinz> mno2: lazy-doc
+23:02:40 <mno2> 你是說 code 使用 tomorrow_night_bright 嗎
+23:03:13 <CindyLinz> 嗯, 但可能只是因為跟 hackage 的色系很不搭, 所以就跳出來了 XDDD
+23:08:10 <mno2> 是啊
+23:08:21 <mno2> 我用 livescript 你應該不會介意吧 xDD
+23:09:18 <CindyLinz> 我著墨的部分不要用它就是了 XD
+23:10:15 <mno2> 你著墨什麼部分？ xD
+23:10:43 <CindyLinz> 反正我只碰沒有 livescript 的部分 XD
+23:10:46 <mno2> CindyLinz: 其實我寫了一下整體來說也不太喜歡 xD  但好像暫時也找不到更好的
+23:11:13 <mno2> 我大概只會用某些子集吧

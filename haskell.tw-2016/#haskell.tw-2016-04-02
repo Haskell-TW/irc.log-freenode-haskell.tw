@@ -1,0 +1,20 @@
+14:14:52 <caasih> https://www.reddit.com/r/haskell/comments/43jauf/vim_and_haskell_in_2016/ # vim
+17:27:22 <CindyLinz> 對了我這幾天設定了 vim 的 makeprg 和 errorformat 以後, 可以在 vim 用 :make 來 stack build, 並且從 :copen 裡面可以直接跳到出錯誤的那一行那一個字了
+17:27:32 <CindyLinz> 覺得可以省非常多時間...
+17:28:53 <caasih>  原來是要這樣用⋯ o_o
+17:30:01 <caasih> 比起來 hlint 有點吵， ghcmod 功能太強還不知道怎麼用才好
+17:39:45 <alex_lu> ghcmod-vim 很好用說，尤其是  :GhcModType 可以原地看 type 很方便
+17:43:14 <caasih> 好像還有幫你補 pattern 的功能？
+17:50:00 <alex_lu> 我沒補成功過，不知道是不是 GHC 版本的問題
+18:09:41 <CindyLinz> 哼, 那是不想清楚就寫程式的人才需要的功能! (逃 # 17:39 < alex_lu> ghcmod-vim 很好用說，尤其是  :GhcModType 可以原地看 type 很方便
+18:23:28 <CindyLinz> .vimrc https://github.com/CindyLinz/Config/commit/8304308fc1c2524bb135bbfc0edd36f3dc1665b6
+22:52:42 <monochrom> 我有想清楚, 但我貴人善忘 XD
+23:22:02 <CindyLinz> XD
+23:26:35 <caasih> 搞半天決定把 syntastic 丟掉，用 :make 就好，
+23:27:04 <caasih> 另外查到除了 :copen 外，如果有錯誤才開，沒錯誤自動什麼都不做，可以用 :cw
+23:27:17 <caasih> 關掉除了用 :q 外，還可以用 :ccl
+23:28:00 <caasih> 然後 ghcmod-vim 裝了備而不用（先不設快速鍵...
+23:28:59 <caasih> * 不確定先衝了再 refactor 是有想清楚還是沒想清楚...
+23:45:04 <CindyLinz> 我現在是在主視窗下 :only
+23:45:15 <CindyLinz> :cw 聽起來不錯
+23:51:56 <monochrom> 另一角度: 我叫電腦幫我想清楚 :)

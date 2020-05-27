@@ -1,0 +1,149 @@
+01:56:14 <letoh> > \x -> x
+01:56:16 <lambdabot>   No instance for (GHC.Show.Show (t0 -> t0))
+01:56:17 <lambdabot>    arising from a use of `M11155...
+01:56:37 <CindyLinz> 函數都印不出來 ^^|
+01:57:01 <letoh> > let f = \x k -> k x in f 1 (\x -> x)
+01:57:03 <lambdabot>   1
+01:57:16 <letoh> 這算 identity 嗎?
+01:57:27 <letoh> > :t \x -> x
+01:57:29 <CindyLinz> \ x -> x 就是 id 啊
+01:57:29 <lambdabot>   <hint>:1:1: parse error on input `:'
+01:57:54 <letoh> 嗯  剛剛突然想到 cps 的 identity... 有這種東西嗎?
+01:58:06 <letoh> 好像有點怪
+01:58:24 <letoh> 應該也是用 \x -> x 就夠了
+01:58:24 <CindyLinz> letoh: 你可能要描述一下 cps 的 identity 的行為是怎樣? o.o
+01:58:42 <letoh> 不曉得  可能就直接傳回參數吧XD
+01:59:25 <CindyLinz> 可能是... \x next -> next x ?
+01:59:43 <letoh> 嗯...
+01:59:56 <letoh> f = \x k -> k x
+01:59:57 <CindyLinz> 把它收到的前一步的結果, 傳給下一步去用
+02:00:20 <letoh> 剛剛寫的那個應該就算了吧
+02:00:40 <CindyLinz> 嗯
+02:01:01 <CindyLinz> 把我的 next 換成 k.. 作個 alpha conversion 就完全一樣了 XD
+02:01:24 <letoh> haskell 都用 next 嗎?
+02:01:39 <CindyLinz> letoh: 沒有規定呀
+02:01:54 <letoh> 是沒有規定啦  只是想瞭解一下一般的習慣
+02:01:55 <CindyLinz> @pl \x k -> k x
+02:01:56 <lambdabot> flip id
+02:02:05 <CindyLinz> letoh: 用 flip id 吧.. (逃)
+02:02:10 <letoh> XD
+02:02:18 <CindyLinz> 我不知道一般的習慣是什麼.. 不過我覺得一些有名的 lib 的習慣很差... :|
+02:02:27 <CindyLinz> 他們 type variable 喜歡用一個字母...
+02:02:51 <CindyLinz> 一個 type 裡面有四個 type variable, 全都是一個字母.. 誰知道你在寫什麼啊 orz
+02:02:53 <letoh> 我只有 local 喜歡用XD
+02:03:19 <letoh> A T G C ?
+02:03:36 <letoh> 這樣還蠻直覺的XD
+02:03:52 <CindyLinz> 像 WriterT 就 WriterT w m a
+02:04:02 <letoh> 喔喔喔
+02:04:27 <letoh> 寫成那樣還不如 WriterT wa ha ha
+02:04:40 <letoh> 阿 m 跟 a 是不同的嗎? XD
+02:04:54 <letoh> wa sa bi
+02:05:02 <letoh> 我在 python 喜歡用 s
+02:05:09 <letoh> self 要打太多字了...
+02:05:10 <CindyLinz> w 是要 write 的東西, m 是 monad, a 是 momad 的結果
+02:05:23 <letoh> s.__name__  很方便又不佔空間
+02:06:14 <letoh> 喔  那就不一樣了XD  不過 m a 還蠻常看到的，應該也是某種慣例吧
+02:07:41 <CindyLinz> 找個比較支持我論點的例子好了... :p
+02:07:47 <CindyLinz> package conduit:
+02:07:58 <CindyLinz> data Pipe l i o u m r
+02:08:13 <CindyLinz> HaveOutput (Pipe l i o u m r) (m ()) o
+02:08:20 <CindyLinz> NeedInput (i -> Pipe l i o u m r) (u -> Pipe l i o u m r)
+02:08:33 <letoh> 這個就蠻可怕的...
+02:08:55 <CindyLinz> pipe :: Monad m => Pipe l a b r0 m r1 -> Pipe Void b c r1 m r2 -> Pipe l a c r0 m r2
+02:10:36 <letoh> 這種寫法久了作者都會忘記吧
+02:11:18 <CindyLinz> 嗯.. 不過他都會留 blog 文章... :|
+02:11:37 <letoh> blog 是不可靠的XD
+02:12:13 <CindyLinz> 我既然覺得這很糟, 為什麼還要為他辯解呢 XD
+02:12:20 <letoh> 有些 blog 文章會突然不見啊
+02:16:09 <CindyLinz> 來 release 用中文字當 type variable 的 package 好了.. 反正 unicode 正夯.. :p
+02:16:33 <letoh> 可是在程式寫中文很麻煩XD
+02:17:14 <letoh> 台灣寫 forth 的老前輩們都喜歡寫中文程式，看了總覺得不太舒服...
+02:17:45 <CindyLinz> class Server 伺服器 where { get :: 伺服器 -> 索引 -> IO (Maybe 值) }
+02:18:03 <CindyLinz> forth 用中文寫啊?
+02:18:21 <letoh> forth 預設只要不是空白的資料都可以用
+02:18:26 <CindyLinz> 這麼低階的語言也 unicode 會不會太奢侈 XD
+02:18:47 <letoh> 不是 unicode，根本是不管編碼的做法...
+02:19:27 <letoh> 預設除了 ascii 32 以外的東西都可以用啊，name resolve 的話直接 bitwise matching
+02:20:13 <CindyLinz> 嗯嗯嗯
+02:20:33 <CindyLinz> 那寫起來應該跟 Agda 一樣需要很多很多空白
+02:20:50 <letoh> 不過 unicode 真的太浪費了... prog space 很貴的XD
+02:20:51 <CindyLinz> 其實也不是什麼壞事 :|
+02:21:01 <CindyLinz> 我是說空白多...
+02:21:05 <letoh> token 間一個空白就夠了吧?
+02:21:39 <CindyLinz> 對啊, 可是每個 token 間都要空白, 其實比平常很多語言都多呀
+02:22:10 <letoh> 是沒錯啦，不過其他語言在寫的時候，不太會通通擠在一起吧
+02:22:11 <CindyLinz> 主要是平常用 binary operator 接起來的 expression 比吧
+02:22:14 <letoh> 又不是 ioccc XD
+02:22:34 <CindyLinz> if( b*b - 4*a*c < 0 )
+02:22:53 <CindyLinz> if( b * b - 4 * a * c < 0 )
+02:23:57 <letoh> 嗯，不過實務上比較常用的方式是編譯成 bytecode ( = machine code) 再儲存或執行
+02:24:45 <CindyLinz> 所以 prog space 就不用考慮的意思? :p
+02:25:16 <letoh> 也可以存原始碼呀，但這樣就真的得考慮空間
+02:26:09 <letoh> 一般完整的 forth 系統還會帶一個 terminal 跟 editor... 你能想像在 8051 那種小東西上，用類似平常在電腦寫程式的習慣進行開發的方式嗎? XD
+02:26:36 <CindyLinz> 只要能外接鍵盤和螢幕, 有何不可 XD
+02:27:48 <letoh> 是沒錯啦，只是每次想到拿 51 當做電腦用，就好像山頂洞人一樣
+02:28:37 <CindyLinz> 想想.. 以前用 80386 時開遊戲, 比現在最快的電腦開遊戲還快呢 :p
+02:28:40 <letoh> 而且想到不到 1k 的系統就可以有 os+compiler+term，會感動到流淚
+02:29:04 <letoh> 因為當時也沒辦法同時跑其他東西吧?
+02:29:09 <CindyLinz> 而且還有直譯語言的用法? XD
+02:29:20 <CindyLinz> 可以同時跑遊戲修改大師!
+02:29:34 <letoh> 對喔XD  我還買了一套來用
+02:30:00 <CindyLinz> 不過我沒用過 XD
+02:30:22 <letoh> 感覺就特殊化的 debugger
+02:30:58 <CindyLinz> 有一堆 INT 可以攔..
+02:31:08 <letoh> 以前有朋友寫了 library，人人都可以用 vb 自己開發一套出來...
+02:31:23 <CindyLinz> 開發那種程式的時候出 bug 時.. 只能看著程式碼檢查...
+02:31:29 <CindyLinz> 電腦只能重開機....
+02:31:56 <CindyLinz> 因為鍵盤整個飛掉了.. 或是 timer 不會動了, 或是沒有 CPU 可以用了 :/
+02:31:59 <letoh> 那時不曉得有沒有 bochs 了XD
+02:32:03 <CindyLinz> bochs?
+02:32:12 <letoh> 類似 qemu 的東西
+02:32:26 <CindyLinz> 虛擬機器啊?
+02:32:30 <letoh> 有 vm 開發起來會輕鬆一點
+02:32:40 <letoh> 不過跑不跑得起來都是問題XD
+02:32:41 <CindyLinz> 那時連實機自己的資源都不夠用欸 o.o
+02:32:59 <letoh> 應該吧  我沒用過那麼早的機器XD
+02:33:35 <CindyLinz> 我有攔過鍵盤中斷...
+02:33:42 <CindyLinz> 也因此重開機過.... zz
+02:34:21 <letoh> 這倒是有玩過，不過是在 vm 裡玩的
+02:34:46 <letoh> 爛掉就把 qemu 踢掉就好XD
+02:34:55 <CindyLinz> 要攔鍵盤中斷, 才能對鍵盤作事件驅動.. 不然就要用無窮回圈一直檢查了
+02:35:36 <CindyLinz> qemu 應該還可以 snapshot?
+02:35:44 <CindyLinz> 這樣就可以使用「LS神功」了
+02:36:06 <letoh> 這倒是沒試過，不過 kernel 很小，所以直接重開比較快
+02:36:59 <CindyLinz> 可以停在爆炸的前一刻, 一再重播精彩片段 XD
+02:37:15 <letoh> 這玩法感覺很變態...
+02:38:30 <CindyLinz> 要看清楚才好改啊 XD
+02:39:32 <letoh> 想到連續劇都會讓壞人一死再死...
+02:40:08 <CindyLinz> 阿尼嗎 @@"
+02:40:35 <letoh> 阿尼不太一樣，他應該是一直死，每次都不同死法吧XD
+02:40:56 <CindyLinz> 不然一個人是怎樣一死再死 @@"
+02:41:09 <letoh> 就只是一直重播啊XD
+02:41:45 <CindyLinz> 喔 XD
+14:05:00 <suhorng> letoh: 話說那個 f x = \k -> k x 其實就是 Cont Monad 的 return(?)
+14:05:35 <suhorng> 感覺雖然是 identity, 但是是同情況下的 identity XD
+14:05:54 <_13h> 對呀  這個我知道
+14:07:19 <suhorng> 驚 是同一個人嘛
+14:07:21 <suhorng> *嗎?
+14:10:08 <_13h> 阿? XD
+14:10:14 <_13h> 同一個人XD
+15:31:20 <_13h> lwhsu: hihi
+15:49:25 <hychen> 我感覺depend type 很有搞頭
+16:15:40 <suhorng> hychen: 你看什麼介紹的嗎?
+16:17:35 <hychen> adga
+16:17:56 <hychen> agda
+16:18:02 <hychen> https://www.google.com.tw/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&ved=0CDQQFjAA&url=http%3A%2F%2Fwiki.portal.chalmers.se%2Fagda%2F&ei=sJ45UcedFYjVkQWKw4Ew&usg=AFQjCNFQ4_TfAz9PdA84yJUJH3bPaZXlmQ&sig2=WZRTLq23oi-tH7DcngP2Wg
+17:57:22 <CindyLinz> 哪方面的搞頭啊?
+17:57:32 <CindyLinz> 增加工程師的痛苦指數嗎? XDDD
+17:58:39 <hychen> depend type-safety shell
+17:59:51 <CindyLinz> 喔 XD
+18:00:45 <hychen> haskell 的 type的限制還不太夠
+18:01:11 <hychen> design pattern 才是增加工程師的痛苦指數 (誤)
+18:04:20 <CindyLinz> hychen: http://www.haskell.org/ghc/docs/7.6-latest/html/users_guide/promotion.html
+18:05:11 <CindyLinz> 還是沒那麼完全, 不過不一定那麼不夠用 ^^
+18:08:59 <hychen> oh, 我的意思是目前haskell 主要在用的type不夠用,
+18:12:30 <hychen>  我只是嘴泡而已 XD
+22:21:38 <MnO2> http://blog.sina.com.cn/s/blog_5d90e82f0101irad.html
+22:23:39 <MnO2> 每天都寫文章
+22:26:39 <letoh> 哇~
+23:03:39 <b4283> On Semantics

@@ -1,0 +1,9 @@
+18:23:29 <suhorngM_> http://hackage.haskell.org/package/applicative-quoters-0.1.0.8/docs/Control-Applicative-QQ-Idiom.html  語法醣ww
+18:24:24 <suhorngM_> http://comonad.com/reader/2015/free-monoids-in-haskell/ free monoid 的問題: "⊥ 怎麼辦?"
+18:24:53 <suhorngM_> 或者說, 做出來的 datatype 會多東西, 怎麼辦
+18:35:03 <petercommand> haskell wike 好像壞掉了..
+18:35:06 <petercommand> eiki
+18:35:12 <petercommand> wiki
+18:57:58 <petercommand> free monoid 就是 Kleene closure 嗎?
+19:31:56 <petercommand> 我是看維基 http://en.wikipedia.org/wiki/Free_monoid
+19:32:15 <petercommand> 上面的敘述看起來就是 Kleene closure

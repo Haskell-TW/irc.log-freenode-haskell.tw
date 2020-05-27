@@ -1,0 +1,254 @@
+10:17:39 <b4283> http://manuel.github.com/virtua/ 逆流而上?XD
+10:20:00 <CindyLinz> 好多 language.. 什麼時候會有人寫書 -- 快快樂樂學會設計程式語言 XD
+10:26:16 <MnO2> virtua 還蠻小的，當練習不錯
+10:33:31 <_13h> CindyLinz: 有實作的，不曉得算不算設計
+10:33:48 <_13h> 快快樂樂學會實作程式語言
+10:39:56 <CindyLinz> _13h: 沒設計只有實作, 那他是實作哪個語言啊?
+10:42:34 <_13h> 就教一些基本特性的實作
+10:43:51 <_13h> http://pragprog.com/book/tpdsl/language-implementation-patterns  這本書
+10:47:31 <CindyLinz> 唔.. 如果不用考慮執行效能的話, Pure Functional Language 好像會比較好實作的感覺..
+10:48:37 <CindyLinz> 奇奇怪怪的 feature 比較少
+10:49:45 <_13h> 不曉得，我實際做過可以動的只有 forth 跟 lisp @_@
+10:52:35 <_13h> 順便問個問題，如果我要在 pure function 裡輸出一段文字 (有 i/o)  有沒有什麼資料可以先參考的？有點像以前在程式埋一堆 printf 方便 debug
+10:53:18 <_13h> 是靠 transformer 嗎?
+10:54:32 <CindyLinz> pure function 的裡面的話.. 就不能輸出了
+10:54:57 <_13h> 嗯，所以一定都得綁個 IO xxx 這樣？
+10:55:47 <CindyLinz> 可以把它弄成 generic 一點的 Monad m => m a 這樣, 然後如果要直接輸出的話 m 給的是 IO
+10:56:12 <CindyLinz> 然後在需要塞在某個 pure 的場合的時候, m 可以給一個不是 IO 的東西
+10:56:34 <CindyLinz> 然後接給它的 monad 裡面實作有用到的函數, 把原本的輸出吃掉
+10:57:01 <CindyLinz> 「吃掉」可以是直接丟棄, 或是存在某個 buffer 裡面, 最後再從別的地方取出來用
+10:57:58 <favonia> _13h: 你給我程式我可以改給你看 xD
+10:58:17 <favonia> _13h: functional debug 法：只看輸入輸出
+10:58:29 <favonia> _13h: 而且把這原則用到極致
+10:58:40 <_13h> 唔，具體做法還不太確定，不過這樣的意思是要變成把所有資料都包在 Monad 丟來丟去嗎？
+10:59:06 <favonia> _13h: 我的作法跟 CindyLinz 不一樣 orz
+10:59:50 <CindyLinz> 嗯, 我講的作法你的 code 寫起來應該就像在 IO monad 裡面
+11:00:07 <CindyLinz> 他的作法你的 code 看起來就會比較 functional
+11:00:08 <_13h> http://pastebin.com/1gSN712h  我只是在做簡單的實驗，但不曉得要怎麼串起來@_@
+11:00:42 <favonia> _13h: er 沒有實際例子好像有點難改...
+11:03:09 <favonia> _13h: 應該說在 Haskell 的世界裡面強迫不能有 IO 之類的（除非你作弊）
+11:03:21 <CindyLinz> 作弊 (Y)
+11:06:43 <CindyLinz> 有個還沒想到好方法的情境: 當我寫類似 server 性質的程式, 它要長期跑的. 有些錯誤在開發的時候很難預料到, 發生率也非常低, 是服務上線以後一段長時間, 或是經過使用者大量使用之後才會偶爾出現一次
+11:06:59 <CindyLinz> 為了處理這種 bug, 就要在程式碼裡面埋 log
+11:08:20 <CindyLinz> 可是埋 log 的程式碼跟主線邏輯是不相關的, 就會希望可以在看主線程式的時候不要看到 log 程式, 而 log 也可以很容易加上去或拔掉..
+11:09:45 <CindyLinz> 還有, 埋 log 的地方都會被汙染為 impure.. (或是那種看起來 impure 的 pure ^^|)
+11:14:49 <CindyLinz> _13h: 你的這個例子, 可以在 foo 的參數和輸出各加一個 [[Char]]
+11:15:08 <CindyLinz> 然後把你 foo 裡面的 print 改成 ++ 到這個 list 上面
+11:16:04 <CindyLinz> 而這個 [[Char]] 可以看成我講的 Writer Monad 配合 List Monoid 的情況
+11:17:10 <CindyLinz> 包成 Monad 的話, 就是可以把這個 List 藏在 Monad 裡面 :p
+11:27:57 <_13h> CindyLinz: 我也是想到這方法XD  感覺就是要有個方法把狀態傳來傳去
+11:33:49 <CindyLinz> :D
+11:36:22 <_13h> http://pastebin.com/kwTbv2re  不過傳回值的地方不曉得怎麼處理比較好，只好包個 tuple
+11:41:01 <CindyLinz> 應該就 tuple 吧 XD
+11:42:32 <CindyLinz> 不然你可以花俏點弄一個 data FooResult = FooResult String, [String] XD
+11:42:36 <CindyLinz> 不然你可以花俏點弄一個 data FooResult = FooResult String [String] XD
+11:43:00 <CindyLinz> 不過你寫的好像是 String String, 你直接把 log 都拼在一起了, 而不是一則一則 :p
+11:44:07 <_13h> 嗯，用 [[Char]] 應該比較適合
+11:45:54 <favonia> _13h: 喔要 log 的確有點麻煩。在 Haskell 目前最輕鬆的作法可能是用 Monad / MonadTransformer 包
+12:12:22 <MnO2> 如果是要debug的話，用Debug.Trace比較方便吧？
+12:17:02 <MnO2> 如果是要 log ，自己幹的確用 MonadTransfomer / Monad
+12:17:11 <MnO2> library 可以用 hslogger
+12:17:13 <MnO2> http://hackage.haskell.org/packages/archive/hslogger/1.2.1/doc/html/System-Log-Logger.html
+12:18:10 <CindyLinz> 只是覺得 code 裡面有埋 log, 就像穿插一堆 assert 一樣好醜 XD
+12:19:21 <MnO2> 不過他也是跑在 IO Monad 中，所以要用需要 lift
+12:25:24 <_13h> 我對這種設計還是有不少疑惑... 既然實際的使用上到處都需要 impure，也許 impure 才是常態，pure 是特例吧？那語言預設 pure 會比較好嗎？感覺為了 pure 做出不少犧牲@_@
+12:26:38 <MnO2> _13h: 這種設計就是要逼迫你想清楚吧？
+12:27:09 <MnO2> 所以才會覺得難學
+12:27:46 <_13h> 我覺得要不要想清楚跟預設要不要 pure 應該可以分開討論?
+12:28:19 <_13h> 預設 impure 會變得不用想清楚嗎? (想想好像又真的是這樣...orz
+12:28:50 <favonia> _13h: 歡迎來到 ML 的世界（錯誤廣告）
+12:29:29 <favonia> _13h: 我真的覺得到現在都還是 open problem. 完美的解答還沒有想出來
+12:29:57 <_13h> 嗯
+12:30:47 <favonia> _13h: 所以我（們）才有繼續研究的空間 xDDDDD
+12:31:39 <_13h> favonia: 這個亂七八糟的世界就交給你們調律了XD
+12:32:25 <favonia> _13h: 如果你希望你的程式看起來還是 Int -> Int
+12:32:34 <favonia> 但裡面可以作怪事情（例如 log）
+12:32:46 <_13h> 對呀
+12:32:52 <favonia> 然後你覺得是程式設計師的責任確保是 functional
+12:32:53 <_13h> 可以辦到嗎?
+12:33:16 <favonia> 像是 splay tree 裡面也是亂改 但程式設計師有責任維持 functional
+12:33:21 <favonia> 像是 ByteString
+12:33:25 <favonia> 諸如此類的
+12:33:35 <_13h> 其實那個怪事情可能是臨時加上去的，用不到就拿掉之類的情況
+12:33:40 <favonia> 看你啦 Haskell 的分界法說 除非你作弊 不然一定是 functional
+12:33:52 <_13h> 嗯嗯
+12:34:15 <favonia> ML 意思是說我就是要讓程式設計師可以寫這些東西 不過這就變成程式設計師負責啦
+12:34:31 <favonia> 我是說你要負責變成 functional 之類的
+12:35:05 <favonia> Haskell 實務作法就是加上 unsafePerformIO 來弄這些事情
+12:36:13 <favonia> _13h: 總之就是我還沒看到一個很強很酷的系統 可以「正確」的分出「好」的程式
+12:36:20 <favonia> 讓大家都很開心
+12:37:17 <favonia> _13h: 所以就自己挑一個吧（不負責發言）
+12:38:21 <_13h> 我對 haskell 的做法其實沒什麼意見，或者說這應該是我會喜歡的方向，雖然我學了很多年都在入門XD
+12:39:20 <_13h> 只是少了很多習慣的工具覺得無從下手XD  像 scheme/lisp 沒有分那麼清楚，用起來好像快樂一點XD
+12:39:29 <favonia> _13h: 那就用個 monad 什麼的包一包吧
+12:39:51 <favonia> _13h: 可是就有很多地方容易錯誤啊 xD 然後自己也不知道
+12:40:01 <_13h> 是沒錯啦
+12:40:16 <_13h> 就因為 debug 很累所以才要方便加 log ? XD
+12:40:48 <favonia> _13h: 不過這又是看個人品味啦... 我可以想像有些人不喜歡 Haskell/ML 或其他根本沒實作的理論語言所加的限制
+12:41:59 <_13h> 可能要看情況，以我來說，我還不會想在工作上用 haskell (因為根本寫不好XD)
+12:42:41 <_13h> 但工作以外的情況還是可以玩得很開心
+12:42:48 <favonia> _13h: 還是認真寫個 project 學最快啊
+12:42:58 <favonia> _13h: 例如 Haskell 輸入法（誤）
+12:43:20 <_13h> 像 python 這種不用學就可以直接寫的語言最方便了XD
+12:44:10 <favonia> _13h: 到某程度以後都不用學啊（咦）
+12:44:30 <_13h> favonia: 輸入法擺比較後面啦，等我先搞定 pure/impure 再說XD
+12:45:16 <_13h> 現在挑工具大概就是找上手快，module 夠多，而且可以跨平台的吧
+12:46:01 <MnO2> _13h: 所以大家才看好 Scala
+12:46:25 <MnO2> http://www.infoq.com/presentations/Scala-LLVM
+12:46:30 <MnO2> Compiling Scala to LLVM
+12:46:34 <_13h> Scala 的 module 夠多嗎？還是連 Java 都一起算進來了?
+12:47:48 <MnO2> _13h: 應該把 Java 也算進去吧
+12:48:27 <MnO2> _13h: 據說沒有用到 Reflection 某些功能的應該都可以包一包直接用
+12:48:46 <_13h> Scala 我以前有看一點點，但是我實在不太想花時間在綁 JVM 的語言 (像 clojure 什麼的也是)
+12:49:39 <favonia> _13h: 你可以用 forth 寫 JVM
+12:49:42 <favonia> 然後就沒差了
+12:49:56 <_13h> 這樣好像會開心一點XD
+12:50:53 <MnO2> 學綁 JVM 的語言好像比較有飯吃
+12:51:02 <_13h> 可能以前寫 Java 被嚇怕了吧，那種要一直轉型的語言感覺很麻煩XD
+12:51:55 <_13h> 如果很無聊的話可能會挑一種吧，大概會是 Scala 或 Clojure 之一
+12:52:00 <favonia> _13h: 麻煩的語言消失不了才是真正的麻煩...
+12:52:11 <_13h> XDXD
+12:55:23 <MnO2> 像 C++, Java, PHP 大概再過十年也不會消失吧
+12:55:51 <favonia> MnO2: 我認真覺得這些語言之中 PHP 可能會消失
+12:55:57 <_13h> PHP 好像很多人不喜歡?
+12:56:58 <_13h> 記得用一篇大陸的文章用船比喻程式語言  還蠻好笑的
+12:57:35 <favonia> _13h: ?
+12:58:35 <_13h> http://news.networkmagazine.com.tw/forum/libraene/2008/04/18/430/  找了一下發現有原文
+12:58:42 <_13h> http://compsci.ca/blog/if-a-programming-language-was-a-boat/
+12:58:53 <b4283> 剛看到一個 rows.pdf 還不錯
+12:59:10 <b4283> https://www.cs.cmu.edu/~neelk/rows.pdf
+13:01:51 <MnO2> favonia: 我也覺得三者中 PHP 比較有可能，但我不覺得會在十年內
+13:02:58 <CindyLinz> PHP must die!!
+13:04:06 <MnO2> CindyLinz 有慘痛經驗？
+13:04:09 <CindyLinz> 這句話表示 PHP 很頑強, 就像 IE6 一樣.. (逃)
+13:04:45 <CindyLinz> MnO2: 不慘痛啦.. 因為第一眼看起來就知道不能把命運交給他... XD
+13:05:28 <MnO2> 我是覺得只要 Apache 市占率還很高， 有 Facebook 之類的公司還活著的一天， PHP 就不會死
+13:05:48 <CindyLinz> 它的設計竟然出現過像 magic quote 這種東西... -- 把所有 param 進來的資料裡所有的可疑字元前面加上 \
+13:06:29 <MnO2> PHP 有許多可怕的設計
+13:07:09 <CindyLinz> 嗯, 這個設計之中我覺得最糟糕的一個點是, 教育使用者只要有 magic quote 就安全了...
+13:07:24 <CindyLinz> 一個強烈的 hint..
+13:09:08 <CindyLinz> 中過的招.... 我曾經寫過像這樣的 code 不能用: echo "abc $data[1][2]\n"
+13:09:44 <CindyLinz> 後來去爬 PHP compiler.. 發現是 syntax tree 裡面就把這用法排除了.. 這種用法只能用「一層」  $data[1] ok, $data[1][2] 不行
+13:09:54 <b4283> XD
+13:10:01 <CindyLinz> 要用的話要寫成 {$data[1][2]}
+13:12:14 <MnO2> 太爛了..
+13:12:27 <CindyLinz> 慘痛一點的.. foreach( $data as &$item ) $item .= '.'; foreach( $data as $item ) echo "$item<br>";
+13:13:04 <CindyLinz> 應該會發現印出來的最後一項總是變成跟倒數第二項一樣.. (Y)
+13:13:05 <favonia> MnO2: 我嘗試在 2023/1/15 加上一個條目好了
+13:13:27 <favonia> 「記得看 PHP 還在不在」
+13:13:31 <CindyLinz> XDDD
+13:13:41 <MnO2> favonia: 時空膠囊 xDDD
+13:14:19 <MnO2> 塞一個紙條埋在樹下，上面寫「記得看PHP還在不在」
+13:15:03 <favonia> MnO2: 這樣不行 要有一些 PHP 的介紹
+13:15:11 <favonia> 免得太久了以後根本看不懂
+13:15:43 <CindyLinz> favonia: 沒關係, 只要 MnO2 輸了, PHP 還在, 那大家就還都知道 PHP 是什麼 XDD
+13:16:04 <CindyLinz> 欸 MnO2 是說十年內不會發生
+13:16:04 <favonia> CindyLinz: 方向相反了吧...
+13:16:50 <CindyLinz> favonia: 對我弄反了 XD
+13:17:46 <_13h> 「很久很久以前，曾經有個叫 PHP 的...」
+13:20:10 <CindyLinz> 「....結果, 就很不方便.」
+13:21:51 <MnO2> 這時候就要quote 「劣即是夯」
+13:23:06 <CindyLinz> 哇.. 字還長這麼像!
+14:02:21 <hychen> 少力就是大力
+14:04:35 <MnO2> 文青版: 微大力
+14:07:35 <hychen> lol
+17:28:53 <c9s> favonia: PHP 不太可能消失, 只要 facebook, yahoo 存在，PHP 就不可能消失 XDD
+17:30:09 <c9s> 別忘了 flickr 也是 PHP 寫的 XDDD
+17:35:23 <c9s> CindyLinz: 我覺得你遇到這個問題純粹是 Zend Engine 實作上的缺陷...
+17:36:09 <c9s> 連 HipHop team leader 都說 zend engine 的 implementation 真的是 horrible
+17:46:02 <b4283> elec 2012 videos 上面那個 link 往下捲有 jserv
+17:46:22 <b4283> 咦
+17:46:25 <b4283> http://free-electrons.com/blog/elce-2012-videos/
+17:48:14 <MnO2> b4283: 我今天稍早就有看到 xD
+17:48:30 <b4283> :P
+17:57:24 <_13h> Char 不能跟 Num 比大小XD 太習慣 c 的寫法了XD
+17:57:51 <CindyLinz> 轉數字以後再比呀
+17:58:16 <CindyLinz> c9s: 不過我講的 case 這兩個應該都是 by definition 會這樣耶
+17:58:38 <CindyLinz> c9s: 如果 HipHop 實作出來結果不一樣的話... 那會是另一種悲劇的形式 XD
+18:07:21 <MnO2> PHP 應該也是 Zend 實作 = 標準 ?
+18:24:36 <MnO2> southp0105: hi
+18:40:28 <_13h> 回家前再小改一下我的 bf interpreter，總算可以動了XD
+18:41:11 <b4283> XD
+18:42:55 <_13h> 不過我是拿之前在 scheme 寫的想法來改的... 還是不太會寫 haskell XD
+18:43:39 <b4283> _13h: 我覺得在 scheme 上寫 stack 很彆扭耶 XD
+18:43:52 <_13h> 為什麼?
+18:45:10 <b4283> 我的 let 記一堆變數，不是很流暢
+18:45:35 <_13h> 我好像沒有變數
+18:47:23 <b4283> 回家
+20:31:10 <letoh> http://www.willamette.edu/~fruehr/haskell/evolution.html  # The Evolution of a Haskell Programmer
+22:03:24 <letoh> http://tinyurl.com/b4wq3cr  # 放到 github 了，不過還有奇怪 bug... 只能跑簡單測試XD
+22:19:24 <letoh> 丟給 ghc 快一點
+22:54:03 <CindyLinz> letoh: 酷!
+22:54:22 <CindyLinz> letoh: 你驗證了 haskell 是 turing complete XD
+22:54:57 <letoh> 目前還有 bug XD  rot13 的程式跑不過  不過今天已經累了XD
+22:56:17 <letoh> 不過實際寫一次問題還不少，一般程式會這樣一直產生新的 Bfvm value 嗎?
+22:56:43 <letoh> 不太懂寫 haskell 時需不需要在意 pass by value/ref 這類問題
+22:56:45 <CindyLinz> letoh: 是 haskell persistent 的天性才會有吧
+22:58:00 <letoh> 唔，這句不懂@_@
+22:58:15 <CindyLinz> 就.. 變數不能「改」的天性
+22:58:41 <letoh> 嗯，所以也只能這樣處理囉?
+22:58:55 <CindyLinz> ghc 有很多噁心的最佳化...
+22:59:16 <letoh> 這我相信... 跑起來比 hugs 快好多XD
+23:01:56 <letoh> 之前寫半天覺得很難搞，後來用 scheme 寫過一次，突然就瞭解 haskell 怎麼寫了XD
+23:01:56 <CindyLinz> 直接寫的話, 都是 pass by ref. 從 language 的角度來看, 應該是沒去討論它是哪一種, 不過 ghc 可以額外加 hint 說你要誰是 by value
+23:03:33 <letoh> 嗯嗯  本來想說太慢的話要來研究一下傳參數的問題  不過暫時可以先放著了XD
+23:03:46 <CindyLinz> by value 的東西不能變成 bottom, 而且 strict (欸 strict 好像就包含前面那個條件了)
+23:04:44 <letoh> 是因為 value 已經是最後算完的結果了?
+23:05:25 <CindyLinz> 它目的就是讓你可以不用放一個擺著未算的 thunk 呀
+23:05:44 <CindyLinz> 這在像是 (1+2)*3 這種情況下, 可以省很多資源
+23:06:10 <CindyLinz> by value 是我講的.. 其實它描述這東西的時候, 沒有說它是 by value 這個辭
+23:06:23 <CindyLinz> ghc 是寫說 unboxed
+23:06:51 <letoh> 嗯  這算是最佳化的一種嗎?
+23:06:54 <CindyLinz> 是
+23:07:05 <letoh> 聽起來像 compile-time 就把能算的先算完
+23:07:24 <CindyLinz> 啊啊不是啊
+23:07:33 <letoh> 唔..
+23:07:37 <CindyLinz> runtime 輸入的東西也有啊
+23:08:01 <letoh> 嗯  應該是我描述的方式不對
+23:08:29 <letoh> 不過我玩過有的語言  輸入的東西也算 compile XD
+23:08:44 <CindyLinz> 我找一下 ghc doc, 如果我講不明白的話你也可以直接對著看
+23:09:28 <letoh> 嗯  感謝!! 剛剛看了一下 bottom 發現很多文章以前都看過，但沒有實際寫的話都是看看就忘了XD
+23:10:09 <letoh> thunk 的話之前也大概看過一遍
+23:11:06 <CindyLinz> http://www.haskell.org/ghc/docs/latest/html/users_guide/primitives.html
+23:11:29 <CindyLinz> 上面這是 ghc 的 doc
+23:11:43 <CindyLinz> 然後這邊是 haskell wiki 講 performance 的時候提到 unbox http://www.haskell.org/haskellwiki/Performance/GHC#Unboxed_types
+23:12:21 <letoh> thanks! 我看一下，這兩篇沒看過
+23:15:17 <CindyLinz> hmm... 你是說輸入的東西也當成是 compile time 就 ready 的東西?... 那什麼東西不算 compile 啊? @@"
+23:15:56 <letoh> 嗯  應該是說  runtime 輸入的東西也可能變程式碼的一部份
+23:16:37 <letoh> 所以都會先編譯 (compiling) 成某種型式才真的執行
+23:17:02 <letoh> 不過應該是某些語言的特別稱呼啦  別太在意
+23:17:25 <CindyLinz> 那把你說的 compile 理解成是 aggresively, 沒人跟你要你也自己跑去算的方式嘍?
+23:18:26 <letoh> 我不太確定跟你說的一不一樣  不過我以前沒玩過 lazy 的系統@_@
+23:18:35 <letoh> 應該都是丟進去就開始算了吧?
+23:19:59 <letoh> 這類 unboxed type 的處理，應該算是 ghc 的特異功能?
+23:36:11 <letoh> 把 take drop 的操作改成 head/tail 不曉得會不會有改善
+23:43:43 <CindyLinz> 是 ghc 的特異功能.. XD
+23:44:25 <CindyLinz> head = take 1    tail = drop 1   這樣換會有差嗎? @@"
+23:44:55 <letoh> 不是  是在我的實作裡  需要做 slice 操作
+23:45:40 <letoh> take p d  之類的  把目前 ip 指到的位置拆成左右兩邊
+23:46:26 <letoh> 不過我只是在亂想啦，像 lisp 用 car/cdr/cons 操作的時候很方便啊
+23:47:03 <letoh> 把 ip 設計在 head 的地方，後續操作起來應該會簡單一點，不必像我先拆開再重新串起來
+23:51:48 <CindyLinz> letoh: 同時 take 並且 drop 嗎? 那用 splitAt 剛剛好
+23:52:12 <CindyLinz> 咦
+23:52:25 <CindyLinz> 如果你把要用的東西都放在頭的話當然會好很多
+23:52:31 <letoh> (take p d ++ [succ $ dd] ++ (drop (succ p) d))  就像這樣
+23:52:33 <CindyLinz> take n 或 drop n 都是 O(n)
+23:52:38 <letoh> 嗯嗯
+23:53:09 <letoh> 我覺得這個小程式應該殺掉我 30% 腦細胞了XD
+23:53:30 <letoh> 我昨天晚上還在查 pattern matching 語法  因為怎麼寫都不會過XD
+23:53:38 <CindyLinz> 那主要是殺在左腦, 還是右半腦? XD
+23:54:05 <letoh> 奇怪  這語法也沒說多複雜，怎麼看了那麼多次都記不太起來XD
+23:54:32 <letoh> 判斷左右腦的腦細胞已經被殺掉了，所以我現在無法回答XD
+23:55:08 <CindyLinz> 嗯, 語法應該有比別的語言簡單.. 可是難在別的地方 XD
+23:55:15 <letoh> 不過至少找到一條路了... 先變成 scheme 再改寫XD
+23:55:16 <CindyLinz> 哈哈 XD
+23:56:15 <letoh> 其實我不太寫 scheme 的，程度大概跟 haskell 差不多，但不曉得為什麼就是跟 scheme 比較要好XD
+23:57:07 <CindyLinz> 初看 lazy 的確有一種怪怪的感覺, 有時候覺得神祕, 有時候覺得很難搞.. @@"
+23:57:47 <letoh> 不過我寫這個程式好像沒用到什麼 lazy 的性質?
+23:58:08 <CindyLinz> letoh: 你寫的可是 state machine 欸.... XD
+23:58:36 <letoh> 唔，state machine 跟 lazy 有關嗎? 我在寫的時候直接當作 scheme 改寫，完全沒想到要不要 lazy
+23:58:49 <letoh> 就一直遞迴遞迴...
+23:58:50 <CindyLinz> letoh: 有了!
+23:59:00 <b4283> !
+23:59:31 <CindyLinz> letoh: 你可以寫一個長度無限的 input 餵給他 XD
+23:59:46 <CindyLinz> letoh: 長度無限的 input 就非 lazy 不可了 :D

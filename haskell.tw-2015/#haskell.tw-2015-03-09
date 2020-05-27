@@ -1,0 +1,95 @@
+00:00:30 <herozem> 我是gansteed， 你发的我看到了，但是刚刚学校网络断线了，电脑上无法回复
+00:00:44 <herozem> 不好意思
+00:04:44 <suhorng> https://www.cse.unsw.edu.au/~chak/papers/ghc-llvm.pdf 喔喔喔!, 介紹 GHC 的 LLVM backend, 2010 年的文章
+00:05:04 <suhorng> 不過作者的 thesis 是 2009 年完成的 @@
+00:05:19 <petercommand> 現在 ghc 還可以編成 C code 嗎XD
+00:05:48 <suhorng> http://blog.llvm.org/2010/05/glasgow-haskell-compiler-and-llvm.html 這大概之前在本頻道出現過, 關於這個的 blog post
+00:06:50 <suhorng> petercommand: 是編成 C--, 不是 C. 預設大概就是這個 backend?
+00:07:24 <suhorng> 呃.... GHC 6 好像是真的有編成 C 的就是了
+00:14:24 <monochrom> 實質上已不能出C了
+00:16:55 <monochrom> 古時做法是: 出C, 等收asm, 再用一perl script修改asm以求控制stack. 久後, 該perl script已落後, 無人更新, 所以空出C而不能用
+00:34:47 <petercommand> 喔喔，就是那個 the evil mangler
+00:35:12 <au> <- 2007 年最後一次更新該 script 的古人
+00:35:50 <au> 沒記錯的話，要 bootstrap 到新的 arch 時，unregisterised mode 還是會用到
+00:36:30 <suhorng> 喔喔 evil mangler!!
+00:58:57 <caasihuang> 被 google indexed 就自爆的站！ https://news.ycombinator.com/item?id=9165725
+01:02:11 <caasihuang> oops ，又錯頻 0rz
+14:09:24 <CindyLinz> 覺得 functional language 普遍有 syntax 貧乏的現象? (思
+14:54:29 <godfat> 是個問題嗎？
+14:55:13 <CindyLinz> 不是問題XD  只是突然有這樣的感覺, 所以問問有沒有別人有同感 ^^|
+14:55:31 <CindyLinz> (因為正在看 perl5 的 regex.....)
+14:56:59 <godfat> 那我覺得確實是這樣沒錯，要說原因嘛，
+14:57:00 <godfat> 我的感覺是用 functional 的人比較在乎一致性與... 同樣的東西就該叫同樣的名字，
+14:57:00 <godfat> 或是用同樣的方式造出來的那種感覺。而 imperative 的思維，
+14:57:00 <godfat> 比較在於我想要什麼，就要給我什麼... (望 scala)
+14:58:46 <CindyLinz> 你前幾行講得這麼有說服力, 然後就丟出一個反例ww
+14:59:04 <godfat> XDDD
+14:59:18 <godfat> 我想說的大概是 scala 很 imperative 吧哈哈哈
+15:00:12 <CindyLinz> 有時候對 Haskell 的括號規則很不爽啊 QQ
+15:00:14 <godfat> 像是 haskell 我們常常會說 a 就是 b + c 或 b compose c
+15:00:15 <godfat> 而寫 ruby 的人就會常常想說，對，是這樣沒錯，
+15:00:15 <godfat> 但他就是想要一個名字直接做這件事
+15:00:42 <godfat> 是 source layout 嗎？還是 association 順序？
+15:01:15 <CindyLinz> f a b >>= g h (\x y -> ...)
+15:01:19 <CindyLinz> 當這邊 ... 很長的時候
+15:01:32 <CindyLinz> f a b >>= g h $ \x y -> ... 會 GG
+15:02:15 <godfat> f a b >>= g h j where j x y = 如何？ XD
+15:02:41 <CindyLinz> 在 do- 裡面不能這樣寫 where, 只能在前面寫 let @@"
+15:02:56 <godfat> orz...
+15:03:17 <CindyLinz> 但前面寫 let 的話, 就不能用到這 expression 裡面(如果有的話)定義的 symbol
+15:03:30 <CindyLinz> where 好像也有這限制.... 跳過跳過XD
+15:03:45 <godfat> 讓我想到 let rec...
+15:06:13 <CindyLinz> 如果很希望最後面不要有右括號的話.. 可能會寫成 (f a b >>=) $ g h $ \x y -> ...
+15:06:26 <CindyLinz> 看著就蠻難過的... 囧
+15:07:39 <godfat> 我看到 $ 時就已經先難過了.. XD
+15:07:57 <CindyLinz> 然後... 擴大聯想, 不知道是不是搞 Functional language 的人對 syntax 都沒什麼興趣.. 反正 semantic 的花樣超豐富都研究不完了 :Q
+15:08:40 <godfat> 那倒是真的，我還是覺得 lisp 那樣不行
+15:09:06 <CindyLinz> lisp 是更極端了點.. 聽說 syntax 的部分是個半成品啊 ^^|
+15:09:30 <godfat> 你說當初設計時其實還沒設計完嗎？
+15:10:14 <CindyLinz> 對啊.. 就他們想說先把 AST 用括號寫出來擺著, 先實作底下的東西.. 晚點再來想看看上面的 syntax 要怎麼設計.
+15:10:40 <godfat> =_=... 這停擺也太久了點
+15:11:08 <CindyLinz> 因為... 能用啊, 所以就直接標 final 上去 XDXD
+15:11:38 <godfat> 這太偷懶了啦 =_=
+15:13:21 <CindyLinz> 最早的版本 M-expression http://en.wikipedia.org/wiki/M-expression
+15:13:43 <CindyLinz> 說是要 translate to S-expression.. 可是後來實作的人都只實作 S-expression.. XD
+15:17:05 <godfat> 不大懂耶，看起來不難做，幾乎是一對一，
+15:17:06 <godfat> 還是說正因為是這樣，反而讓人覺得不需要？
+15:18:43 <miaout17> (冒出)
+15:24:26 <CindyLinz> godfat: 如果我是實作者... 我也會先做 S-expr 的部分 XD  剩下的看有沒有人想接著做
+15:24:35 <CindyLinz> 只是剛好就沒有人想接著做了XDXD
+15:27:18 <miaout17> 好像流傳的故事多少有點出入。我記得的版本是原本lisp被設計來討論理論的
+15:27:43 <miaout17> 要拿來執行時被說「不要把理論與實際搞混了，醒醒吧阿宅]
+15:27:48 <miaout17> （誤）
+15:28:06 <godfat> 好個剛好就沒有，但接下來的工還是要做完吧 = =..
+15:28:11 <CindyLinz> 不是要用來算 AI 嗎? @@"
+15:28:41 <godfat> lisp 都市傳說...
+15:30:05 <miaout17> http://en.wikipedia.org/wiki/Lisp_(programming_language) 第二段前三句，應該是先拿來研究理論，後拿來算AI
+15:31:49 <CindyLinz> 嗯嗯嗯
+15:35:23 <miaout17> http://blog.youxu.info/2009/05/13/hpl/ Quote: 因为当 IBM 的一个叫 Steve Russell的工程师宣称要实现 eval 的时候, McCarthy 还连连摇手说理论是理论, 实际是实际, 我不指望这个能被实现
+15:35:45 <miaout17> 我以前看的source應該不是這個，一時找不到
+15:36:14 <CindyLinz> 後來就事與願違地被實現了這樣? ^^|
+15:38:07 <miaout17> 大概吧 XDDD
+15:43:10 <mno2> 聽起來有點傲嬌 xD
+15:44:31 <miaout17> 「人家才不想被執行呢！」 # Lisp擬人化
+15:46:46 <CindyLinz> execute 是不是也有「處死」的意思?
+15:47:17 <miaout17> 是耶 Orz
+15:47:52 <CindyLinz> 「人家一點都不想被處死啊~~~」 # much more sense.. (逃
+15:48:11 <miaout17> 這樣就不傲嬌了 XD
+15:48:43 <miaout17> Haskell那麼Lazy應該有公主病
+15:48:51 <CindyLinz> OAO
+15:50:32 <miaout17> https://imgur.com/cZLbB43 如果有PL版有人會想看嗎 =.=
+15:51:47 <CindyLinz> 會.. 至少會有一圈子人轉來轉去 XD
+15:52:18 <CindyLinz> 那種沒劇情的 programming language 擬少女圖鑑都被轉了一堆
+22:06:11 <gansteed> > [1,2] >>= \n -> ['a','b'] >>= \ch -> return (n,ch)
+22:06:12 <lambdabot>  [(1,'a'),(1,'b'),(2,'a'),(2,'b')]
+22:07:04 <gansteed> 后面一个lambda可以使用前面的值(n)？
+22:07:18 <petercommand> 對
+22:07:35 <petercommand> 一直延伸到最後面
+22:07:50 <gansteed> 哦
+22:13:09 <CindyLinz> gansteed: 如果把括號加一加, 剛剛那串是寫成這樣: [1,2] >>= (\n -> ['a','b'] >>= (\ch -> return (n,ch)))
+22:13:22 <CindyLinz> 所以後面的可以用前面的, 因為後面的是在前面的「裡面」
+22:14:50 <gansteed> CindyLinz, 这是因为Monad的 >>= 的缘故还是lambda的缘故呢？
+22:16:55 <suhorng> gansteed: (1) 加括弧是 (>>=) + lambda 整個運算式解析的結果 (2) 裡面的 lambda 可以用外面的值這個是 lexical scoping, Haskell 的 lambda 的設計本來就是這樣
+22:19:41 <gansteed> 原来是这样 ;)
+22:22:11 <petercommand> 標題的 "中2" link 不 work (指指
+22:22:15 <petercommand> 好久了XD

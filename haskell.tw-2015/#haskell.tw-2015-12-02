@@ -1,0 +1,12 @@
+17:50:20 <suhorngT> petercommand: tagless spineless G-machine?
+17:52:45 <suhorngT> mno2: Cool XD   是 mini-caml 還是 MinCaml?
+17:54:53 <petercommand> suhorngT: 那篇應該是 tagless spineless G-machine 那篇裏面提到的原始 G-machine
+17:55:38 <petercommand> 還有一個 <v, G> machine 的樣子..
+17:56:34 <petercommand> 目前在看 tagless spineless G-machine 那篇
+18:01:23 <CindyLinz> 縮寫不是 STG 嗎?
+18:01:23 <suhorngT> soga~
+18:01:32 <suhorngT> CindyLinz: 好啦我順序打錯了XD
+18:01:52 <CindyLinz> 雖然意思是一樣, 可是縮寫反了會查不到資料 XD
+18:02:22 <CindyLinz> 結果 STG 的 S 和 T 意思是沒有 S 沒有 T.....ww
+18:02:33 <suhorngT> 不要查縮寫就好啦(?
+18:06:23 <petercommand> XD

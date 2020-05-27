@@ -1,0 +1,17 @@
+17:44:41 <CindyLinz> 這邊 page 39 是 GHC evaluation 方式的現狀嗎? # http://takenobu-hs.github.io/downloads/haskell_ghc_illustrated.pdf
+17:45:19 <CindyLinz> 有兩個疑問: 1. 為什麼 Thunk 算完以後是變成一個指向 Int 的 Indirect, 而不是直接變成 Int
+17:46:54 <CindyLinz> 2. payload 的地方有兩個 slots, 計算以前用後面那一個存計算時需要用到 x 的 ptr; 計算完以後用前面那一個存 Indirect 指到結果 Int 的 ptr
+17:47:03 <CindyLinz> 為什麼不是只用 1 個就好?
+18:03:20 <CindyLinz> 1.的部分是要等 GC 的時候才把 Indirect 消除嗎?
+18:03:53 <CindyLinz> 為了讓一個例如 Maybe Int 的 Thunk 如果計算結果是 Nothing 的話, 不要多佔一個沒用到的 Int 的空間?
+18:04:53 <CindyLinz> 我覺得 Indirect 那一層可以先留著 Just 的空間, 而如果存的是 Nothing, 可以在 GC 之後再縮成剛好 Nothing 的大小
+18:09:35 <CindyLinz> 欸... 還是說, Thunk 算完以後, 原本指向 Thunk 的 ptr 會改指向 Indirect 所指的新位置, 也就是那個 Int, 而在 Indirect 這邊留著 forward ptr 是為了別的指向同一個 Thunk 但還不知道身在哪裡的 ptr 後續更新之用?
+22:00:15 <monochrom> 我相信這是䀆量統一 thunk 及 whnf
+22:03:24 <CindyLinz> 它的作法跟我想的作法應該都不破壞這個呀 @@"
+22:04:04 <CindyLinz> (我是說 1. 的部分..)
+22:05:28 <CindyLinz> 差異是... 我想的方法在擺了大量最終不會去計算的 thunk 的情境裡, 有可能會因此擺了一堆過胖的 thunk
+22:05:39 <CindyLinz> 假設這些 thunk 的 type 是 (,,,,,)
+22:06:13 <CindyLinz> 而 GHC 的作法缺點部分是在 thunk 計算之後, 會多一次 allocate
+22:07:03 <CindyLinz> 並且一個 value 被 share 著使用的時候, GHC 的作法會讓其他 N-1 次使用都要多一次 ptr deref
+22:07:18 <CindyLinz> 各多一次
+22:09:28 <CindyLinz> 我的作法裡, 最終沒去計算或擺太久(拖了好幾次 GC)才計算都會影響. 因為它比較胖, 會讓 GC 發生次數高一點

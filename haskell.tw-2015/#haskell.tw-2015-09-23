@@ -1,0 +1,8 @@
+00:30:42 <monochrom> 多數唯物語言做Functor都已是悲劇. 這是因為它們沒有 kind * -> *
+00:31:40 <monochrom> 有 kind * -> * 的話就有沒有物件都無害.
+00:32:25 <CindyLinz> 現在比較後現代(?)的物件語言只有提供到官方內建的 Maybe a
+00:32:42 <CindyLinz> 有的還會有 Promise a / Future a
+00:32:53 <CindyLinz> 但都不是我們小民可以自定義的 * -> *
+20:44:41 <petercommand> http://www.willamette.edu/~fruehr/haskell/evolution.html #神奇的 haskell 文章XD
+21:02:10 <miaoski> petercommand: 這個好笑
+22:28:18 <CindyLinz> 下面好像 agda... orz

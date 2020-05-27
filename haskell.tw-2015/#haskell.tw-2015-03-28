@@ -1,0 +1,41 @@
+21:45:02 <CindyLinz> @hoogle Char -> [Char] -> [[Char]]
+21:45:05 <lambdabot> Data.List intersperse :: a -> [a] -> [a]
+21:45:05 <lambdabot> Data.Text.Internal.Functions intersperse :: a -> [a] -> [a]
+21:45:05 <lambdabot> System.FilePath.Windows (</>) :: FilePath -> FilePath -> FilePath
+21:45:32 <CindyLinz> @hoogle (Char -> Bool) -> [Char] -> [[Char]]
+21:45:33 <lambdabot> Prelude dropWhile :: (a -> Bool) -> [a] -> [a]
+21:45:34 <lambdabot> Data.List dropWhile :: (a -> Bool) -> [a] -> [a]
+21:45:34 <lambdabot> Prelude filter :: (a -> Bool) -> [a] -> [a]
+21:45:51 <CindyLinz> 沒有把一個字串一次切成好幾段的嗎? ._.
+21:47:37 <CindyLinz> 只好寫迴圈 (遞迴) 惹
+21:52:50 <petercommand> @hoogle split
+21:52:51 <lambdabot> Data.Text split :: (Char -> Bool) -> Text -> [Text]
+21:52:52 <lambdabot> Data.Text.Lazy split :: (Char -> Bool) -> Text -> [Text]
+21:52:52 <lambdabot> Data.ByteString.Char8 split :: Char -> ByteString -> [ByteString]
+21:53:33 <petercommand> > split (== ' ') "Hi hello ^^"
+21:53:35 <lambdabot>      Couldn't match expected type ‘Splitter Char’
+21:53:35 <lambdabot>                  with actual type ‘Char → Bool’
+21:53:35 <lambdabot>      In the first argument of ‘split’, namely ‘(== ' ')’
+21:54:51 <petercommand> > split (== ' ') $ pack "Hi hello ^^"
+21:54:52 <lambdabot>      Not in scope: ‘pack’
+21:54:53 <lambdabot>      Perhaps you meant one of these:
+21:54:53 <lambdabot>        ‘BS.pack’ (imported from Data.ByteString),
+21:55:02 <petercommand> > split (== ' ') $ Data.Text.pack "Hi hello ^^"
+21:55:05 <lambdabot>  Not in scope: ‘Data.Text.pack’
+21:55:57 <petercommand> > split (== ' ') $ BS.pack "Hi hello ^^"
+21:55:59 <lambdabot>      Couldn't match expected type ‘Splitter a’
+21:55:59 <lambdabot>                  with actual type ‘Char → Bool’
+21:55:59 <lambdabot>      In the first argument of ‘split’, namely ‘(== ' ')’
+21:56:09 <petercommand> :t split
+21:56:10 <lambdabot> Splitter a -> [a] -> [[a]]
+21:56:53 <petercommand> > splitOn " " "Hi hello ^^"
+21:56:54 <lambdabot>  ["Hi","hello","^^"]
+21:57:14 <petercommand> :t splitOn
+21:57:15 <lambdabot> Eq a => [a] -> [a] -> [[a]]
+21:57:35 <petercommand> :t splitWhen
+21:57:36 <lambdabot> (a -> Bool) -> [a] -> [[a]]
+21:58:21 <petercommand> https://hackage.haskell.org/package/split-0.1.1/docs/Data-List-Split.html
+21:59:30 <petercommand> CindyLinz: 你是要 splitWhen 這種嗎 ^^
+22:04:41 <CindyLinz> 是耶~~
+22:04:50 <CindyLinz> 哎可是我寫完惹 orz
+22:05:24 <petercommand> XD

@@ -1,0 +1,45 @@
+00:42:54 <monochrom> 把 desugar 譯做 糖融化 真妙 :)
+00:45:09 <au> :D
+00:47:11 <monochrom> 我支持 derivative (\x -> x^2 + 1) = (\x -> 2*x), 不喜歡 d(x^2+1)/dx = 2*x. 不喜歡, 但容忍, 因為知其方便, 但觀念混淆.
+00:52:01 <mathist1> 我看過有超多數學教科書寫類似 (x^2+1)' 這種四不像東西的
+00:52:04 <mathist1> 看過超多次
+00:52:22 <mathist1> 頗不順眼
+00:52:34 <mathist1> 要嘛就寫 (x-|-)
+00:52:45 <mathist1> 更正: (x|->x^2+1)'
+00:53:13 <monochrom> dc/dx = 0, du/dx ≠ 0, 為甚麼? 啊, 原來 c 背後沒有隠藏 x, u 背後有隠藏 x 撑腰. 這已近乎 "你猜我心意" 遊戲
+00:53:34 <mathist1> 這很噁心
+00:53:43 <mathist1> garbage
+00:55:15 <petercommand> 一般應該要寫清楚不同代號指的是甚麼吧?
+00:58:23 <monochrom> 發展到後來多維空間再加上轉換座標, 隨時有 8 個名字時而函數時而變數, 你經常都要重新 chase dependency, 簡直是玩人了.
+00:59:55 <petercommand> 你猜我心意XD
+01:08:11 <mathist1> 爛的符號 爛的寫法 應該消滅!!
+01:08:47 <mathist1> 我覺得匿名函數真的是能讓很多時候的函數書寫變得很清晰
+01:10:59 <mathist1> 不過我也不是念物裡的 不太知道符號一多起來有多麼煩人:p
+01:12:43 <monochrom> f(x) = x^2+1 裏, 那個 x 叫 x 還是叫甚麼都不重要, f(牛屎) = 牛屎^2+1, f(謝迅) = 謝迅^2+1, 都一樣. 而 "dy/dx" 正正違反這原則.
+01:13:31 <CindyLinz> d(x^2+1)/dx 就沒違反了 :Q
+01:14:58 <monochrom> 你們有沒有讀過金庸的倚天屠龍記呢? "牛屎謝迅"是出自那裏的 :)
+01:15:03 <au> 據說 Smooth infinitesimal analysis 完全沒有這個問題 :p
+01:16:19 <au> monochrom: λ 既無物，何況於 η #reduction
+01:18:33 <mathist1> 一般來講,  dy /dx 一類的符號 比較正規的寫法, 不要寫dy/dx
+01:18:38 <mathist1> 寫df(x)/dx
+01:18:47 <mathist1> or df(k)/dk, etc
+01:19:04 <mathist1> 別寫du/dx,  要寫 du(x)/dx
+01:19:31 <mathist1> 然後譬如f: (x|->x^2),  那  df(x)/dx = 2x,  df(y)/dy = 2y
+01:19:37 <mathist1> 不要寫什麼 df(x)/dx = 2y
+01:19:49 <mathist1> 或者 df(u)/du = 2x
+01:20:11 <mathist1> 就是說你用什麼variable name去bind, 得到的結果就用什麼variable name來寫
+01:20:42 <mathist1> 所以如果要取 f'(3),  要寫 df(x)/dx | x= 3 (|g4取值符號)
+01:20:49 <mathist1> (|是取值符號)
+01:21:07 <mathist1> 或者 df(y)/dy |y=3,  不要寫 df(y)/dy | x=3
+01:22:18 <mathist1> 所以 df(g(x))/dx  =  du/dy *  dy/dx 就是很不標準很不標準的寫法
+01:23:06 <mathist1> 寫 df(g(x))/dx = [df(y)/dy |  y= g(x)]   * [dg(x)/dx] better
+01:24:09 <mathist1> 寫  df(g(x)) /dg(x)  個人覺得也是個糟糕的符號= =
+01:24:32 <mathist1> 我不知道更高等的數學的東西裡面這些符號是不是必要, 不過如果單看微積分、高等微積分、微分方程
+01:24:43 <mathist1> 都不須要用這些模稜兩可的符號
+01:24:59 <mathist1> df(g(x)) /dg(x)   => weird
+16:50:02 <mathist1> http://ppt.cc/XRpW
+16:51:02 <mathist1> 剛發現的
+23:36:15 <suhorng> 是說在用 Applicative 的時候 f <$> x1 <*> x2 <*> x3 ...
+23:36:28 <suhorng> 有的時候 f 不是 a -> b -> c -> d 而是 a -> b -> c -> m d
+23:36:44 <suhorng> 這種時候就要寫成 join $ f <$> x1 <*> x2 <*> x3
+23:37:11 <suhorng> 這種寫法有沒有名字(或是類次的 lift 方法)呢?

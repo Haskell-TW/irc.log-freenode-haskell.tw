@@ -1,0 +1,5 @@
+03:08:38 <ltchen> 問: DiffArray 已經死掉對吧?
+03:16:12 <monochrom> 應該是. 很久沒聽過了.
+03:59:13 <ltchen> 在看 Union-Find 的做法才想到 DiffArray，HaskellWiki 上有提到效率不佳, 不過 DiffArray 還是出現在比較舊的資料沒拿掉 ...
+04:00:11 <ltchen> Union-Find 好像沒有純 functional 但跟 imperative 版本一樣複雜度的做法
+04:16:47 <ltchen> 用 FingerTree 或其他 functional random-access list 會有個 log n 的差距

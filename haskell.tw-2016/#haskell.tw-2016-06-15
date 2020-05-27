@@ -1,0 +1,11 @@
+23:32:50 <caasih> monochrom: 這邊說的第 (k) 條和第 (l) 條要去哪裡找？
+23:33:39 <caasih> 聽起來正途像是先了解設計緣由才對，所以會想知道出處。
+23:33:57 <monochrom> Haskell 2010 3.17.3
+23:34:42 <caasih> monochrom: 謝謝
+23:37:24 <monochrom> 緣由是想有個新型別, 但執行時與舊型別一讓快.
+23:37:38 <monochrom> s/讓/樣/
+23:39:30 <monochrom> 4.2.3 也講及
+23:44:08 <mno2> https://www.ptt.cc/bbs/Soft_Job/M.1465987621.A.9DE.html
+23:44:13 <mno2> 有聽過這家嗎？
+23:45:20 <mno2> 居然列了 Haskell
+23:49:56 <mno2> http://www.worksap.co.jp/hue/

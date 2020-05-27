@@ -1,0 +1,6 @@
+00:12:59 <MnO2> http://docs.racket-lang.org/lazy/index.html
+00:13:03 <MnO2> racket也有lazy
+01:09:16 <letoh> racket 好像搞了很多奇怪的東西  跟其他人不太一樣
+21:45:55 <MnO2> http://stackoverflow.com/questions/12805335/whats-wrong-with-ghc-haskells-current-constraint-system
+21:46:23 <MnO2> 關於ghc typeclass constraint的一點討論
+21:48:32 <MnO2> 最近事情太多了難得可以丟點東西出來

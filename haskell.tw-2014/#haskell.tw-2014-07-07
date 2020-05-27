@@ -1,0 +1,128 @@
+00:18:29 <mno2_> free-software 新解：此 software 內含 free monad
+09:21:16 <CindyLinz> 老師投影片被偷改了嗎 XD
+09:26:29 <CindyLinz> evast: 英文版課程 wiki 的課表看起來是錯的 o.o
+09:26:46 <evast> 英文版的網站各種漏洞呀 XD
+09:52:16 <miaoski> evast: 手上的影片上傳好了~~ 謝謝 yllan 告訴我每一節是誰的課程。有錯誤請告訴我，我再去修改:
+09:52:17 <miaoski> https://www.youtube.com/watch?v=-DEsqlpqSp0
+09:52:27 <miaoski> https://www.youtube.com/watch?v=UgXC_7BSfFA
+09:52:31 <miaoski> https://www.youtube.com/watch?v=YRJjMI0x-ug
+09:52:34 <miaoski> https://www.youtube.com/watch?v=vZRn76xbjTg
+09:52:38 <miaoski> https://www.youtube.com/watch?v=Bu6sB9stu74
+09:52:41 <miaoski> https://www.youtube.com/watch?v=SmMbeqj_LBg
+09:52:45 <miaoski> https://www.youtube.com/watch?v=Yukv2eHr1tk
+09:52:48 <miaoski> https://www.youtube.com/watch?v=wMuDHRrWyaI
+09:52:52 <miaoski> https://www.youtube.com/watch?v=8uR8z4ZmOj0
+09:52:56 <miaoski> https://www.youtube.com/watch?v=M25N47rRTgQ
+09:52:59 <miaoski> https://www.youtube.com/watch?v=4eYFRfV4wLI
+09:53:05 <miaoski> https://www.youtube.com/watch?v=bOckPUcSh-A
+09:53:16 <evast> miaoski: !!!!! 你太棒了！！！！
+09:53:31 <evast> 我直接去看你上傳的所有影片就看到清單了～
+09:53:36 <evast> 謝謝你！！！！
+09:53:39 <miaoski> evast: 呃，要感謝 yllan  ... 我只有抓下來然後上傳，別的都沒做...
+09:53:44 <evast> 等下下課馬上上台公告！！！
+09:54:14 <miaoski> 不確定柯向上老師的 session 的順序是不是 183, 184, 185, 186, 184-1, 185-1, 186-1, 187-1 這樣
+09:54:24 <miaoski> 如果是的話，我再改成 part (1/8) part (2/8) ...
+09:54:35 <evast> 當然也要謝謝 yllan ！！
+09:54:53 <evast> 謝謝你們一個幫忙轉交，一個幫忙轉檔 XD
+09:55:07 <miaoski> evast: 偷偷告訴妳，現在 YouTube 不用轉檔囉.....
+09:55:08 <evast> 我現在看一下 XD
+09:55:16 <miaoski> 頻寬催下去就可以 :$
+09:55:27 <evast> miaoski: 原來如此 XDDDDDDDDDD
+09:55:39 <evast> 我從沒用過 youtube XDDDD
+09:55:53 <evast> 硬碟太小，不會想玩影片………………………
+09:56:01 <miaoski> XD
+09:56:14 <miaoski> 總之真是太感謝了... 雖然回家看還是看不懂 >_<
+09:56:42 <poga> miaoski++
+09:59:30 <evast> miaoski: 請問 184 跟 184-1 的先後順序是什麼呢？
+09:59:49 <evast> 好像那個編號也沒有真的按照時序 ._./
+10:00:34 <evast> 我把檔案給老師們讓他們自己編號排序好了………
+10:15:06 <caasih_> yllan++ miaoski++ # 晚上可以慢慢補了！
+10:43:10 <evast> miaoski: 穆老師的課程影片編號如下
+10:43:13 <evast> 179 -> DTP 07/03 (1)
+10:43:13 <evast> 180 -> DTP 07/03 (2)
+10:43:13 <evast> 181 -> DTP 07/03 (3)
+10:43:15 <evast> 182 -> DTP 07/03 (4)
+10:43:43 <evast> DTP = 依值型別編程
+10:46:43 <evast> 把標題改成這樣好了： FLOLAC'14 (181) 穆信成老師 依值型別編程 -> FLOLAC'14 依值型別編程(Dependent Typed Programming) 穆信成老師 (Part 3 / 4)
+10:46:49 <evast> 長一點應該沒關係 XD
+10:51:11 <caasih_> 今天的課程算是 order theory ？
+10:52:02 <CindyLinz> 現在是 denotational semantics
+10:52:15 <CindyLinz> order theory?
+10:52:40 <CindyLinz> 投影片標題寫 basic domain theory
+10:52:58 <xcycl> 對.. domain theory 是 order theory 的一支
+10:53:28 <xcycl> 接下來會把程式語言的
+10:53:43 <xcycl> term 算成某個 domain 上的 element ..
+10:54:18 <CindyLinz> 它定義 (a , b) 的 bottom 是 (bottom, bottom).. 嗯如果是 haskell 的話, 應該還要再多一個純 bottom?
+10:54:34 <CindyLinz> 它→他.. XD
+10:55:55 <caasih_> 不太懂老師講 sum 得到新 bottom 是最 bottom 還是之前的 set 的 least upper bound
+10:57:38 <xcycl> 哪一個 sum?
+10:58:37 <caasih_> 抱歉， lift ， sum 等等問，我整理一下要怎麼講
+10:59:00 <xcycl> Coalesced Sum 的話是作 disjoint union 把兩邊的 bottom 黏起來, 作 quotient 就好 ...
+10:59:29 <caasih_> 老師畫圖說 lift 1 會比 1 多一個 bot(lift 1) ，又說那個新的 bot(lift 1) 比本來的小
+11:00:35 <caasih_> 這邊的「小」是指？因為講義是寫得好像是 bot(1) is a semantically weaker than bot(lift 1)
+11:01:06 <CindyLinz> 他有說新的 bottom 不在原本的集合裡面
+11:02:12 <caasih_> 嗯嗯，那 2 = lift(1) 裡的 top 應該就是 bot(lift 1) ？
+11:03:02 <CindyLinz> top? bot?
+11:03:49 <caasih_> 第五頁中間的例子？
+11:04:00 <caasih_> Domain 1 and Domain 2 那段。
+11:05:59 <CindyLinz> 「這我們沒辦法接受捏, 所以一定要 monotonic」.. XD
+11:07:55 <CindyLinz> 嗯嗯, top(2) 應該是 bot(1)
+11:08:10 <CindyLinz> bot(2) < top(2) = bot(1)
+11:11:32 <caasih_> 結果老師說 2 的 \top 是 1 的 \bot
+11:12:21 <caasih_> 2 的 \bot 則是新的 \bot ，難怪比較小 0rz
+11:13:09 <caasih_> CindyLinz: 跟你講得一樣，瞭解...
+11:22:50 <caasih_> xcycl: 剛剛本來要問關於 sum 的是，按照普通的（沒有 coalesced ）的 sum 的定義
+11:23:36 <caasih_> domain 1 跟 domain 2 不可以 + ，因為有共同的 \top(2) == \bot(1)
+11:24:00 <CindyLinz> xcycl: 你怎麼也沒有也去偷改 把對 D_1 -> D_2 改成 [ D_1 -> d_2 ] XD
+11:24:26 <xcycl> 講義上的聯集應該寫成 disjoint union
+11:24:49 <xcycl> 這樣就不會有左邊的 bot 跟右邊的 bot 是一樣的事情 orz.
+11:25:34 <xcycl> D1 -> D2 容易跟一般的 function 混淆啊 orz.
+11:25:48 <CindyLinz> 我第一眼就混淆了 XD
+11:26:32 <xcycl> 要不然寫 hom(D1, D2) 好了
+11:26:47 <xcycl> ＱAQ
+11:27:24 <caasih_> xcycl: disjoint union ，感謝！
+11:31:58 <xcycl> 莊老師應該沒睡飽, 四點多他還上傳習題解答... orz.
+11:33:00 <miaoski> evast: done. 柯向上老師的就要麻煩你們了 (咦)
+11:33:21 <evast> 沒問題，我們會迫使他克服觀看自己上課影片的恐懼的
+11:33:37 <miaoski> evast: 6/30 - 7/2 的看要不要我中午過去? 我可以騎 u-bike 去找你們 ... (啊可是今天沒帶硬碟)
+11:33:45 <miaoski> evast: 壞人 (指)
+11:34:08 <evast> miaoski: 有 yllan 的硬碟 (?)
+11:36:39 <miaoski> yllan: 如果你有帶的話 XDDD 我今天中午就可以過去. 不然要星期三中午才能去找你們喲 XD
+11:41:56 <CindyLinz> 寫 Agda 的時候.. 覺得 T / \top   x / \x 好難分啊.. QQ
+11:44:46 <geoffr> 改用\x\^^ XD
+11:45:05 <evast> CindyLinz: 我之前也想過這問題，不知道有沒有比較好的字型可以幫助區分 XD
+11:46:01 <CindyLinz> geoffr: 喔 XD
+11:46:16 <CindyLinz> evast: 需要一個 Agda font? XD
+11:50:09 <CindyLinz> 唔, 今天目前講到的部分, 跟我想像中的 semantic 還很遠的感覺 o.o
+12:13:02 <yllan> evast: miaoski 我的硬碟直接拿去沒關係
+12:16:33 <caasih_> 如果 2 = lift(1), 3 = lift(2), 想問 length(sum 2 3) 跟 length(coalescedSum 2 3) 是否為 6 和 4
+12:18:36 <miaoski> yllan: 哦哦哦哦哦~ 那我現在過去找你
+12:19:10 <miaoski> 在新生 203 嗎?
+12:25:24 <miaoski> 方便先 copy， 我走過去拿？ubike 被掃空了 QQ
+12:28:33 <yllan> miaoski: 硬碟在 evast 手上，我還在小福吃飯 XD
+12:32:07 <evast> miaoski: 在新生202，scm 正在把影片從攝影機裡拿出來～～
+13:18:10 <mno2_> yllan++ miaoski++
+13:27:02 <CindyLinz> 台上正在鞭 C++... XD
+13:27:21 <CindyLinz> 「反正這就是很髒的東西啦」
+13:35:26 <CindyLinz> 「我們就從左邊這個一直涮涮涮...」
+13:38:28 <alexlu> 請問一下，typing rules裏面var這條的context有個Δ是什麼意思
+13:38:52 <CindyLinz> 不知道.. 以為是隨手寫的 XD
+13:39:33 <caasih_> 隔了多年再貼一次： http://worrydream.com/AlligatorEggs/ # 又是 Bret Victor
+13:43:27 <CindyLinz> xcycl 給大家15分鐘練習... 其中一題要把 (\x. x x)(\x. x x) derive 出來嗎.. OAO
+13:47:32 <caasih_> 壞心眼 XD
+13:52:47 <CindyLinz> alexlu: 剛剛去前面問了, xcycl 說那個三角形就... 也是 context
+14:00:07 <alexlu> 喔喔 所以是不在Γ裡的剩下的部份囉？
+14:02:00 <CindyLinz> alexlu: 對 剩下的..
+14:02:20 <CindyLinz> 他說他只是想表達左邊有一大串, 右邊也有一大串 XD
+14:02:59 <alexlu> 原來如此 懂了xd
+15:38:45 <CindyLinz> 「你可以自己試著去展開 fact 2, ....那會很痛苦 (笑)」
+16:06:25 <CindyLinz> @src fix
+16:06:26 <lambdabot> fix f = let x = f x in x
+20:48:12 <miaoski> 今天 copy 的影像都上傳到 YouTube 囉~
+20:48:20 <miaoski> 對不起再麻煩大家幫我下一下 title ... :$
+20:49:39 <CindyLinz> miaoski: 好熱血啊~~ :D
+21:07:27 <caasih_> miaoski++
+21:14:15 <caasih_> 189, 190, 191, 192: 莊庭瑞老師 指稱語意
+21:56:29 <miaoski> caasih_: ++
+22:01:48 <monochrom> 指稱語意好好玩喔!
+23:59:21 <xcycl> 呼 ...

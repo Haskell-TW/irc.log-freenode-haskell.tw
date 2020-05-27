@@ -1,0 +1,101 @@
+21:23:21 <suhorng> 那只好等 Haskell Platform 2014.2 了 XD
+21:23:49 <suhorng> 是說我之前吵過 runStateT 到底需不需要是 s -> m (a, s) 還是 s -> m a
+21:24:35 <suhorng> 剛剛發現根本有個函數 evalState :: StateT s m a -> s -> m a ... 本來就有了Orz
+21:25:09 <suhorng> 還有個 execStateT :: StateT s m a -> s -> m s
+22:17:42 <gansteed> 请问 search needle haystack =      let nlen = length needle     in  foldl (\acc x -> if take nlen x == needle then True else acc) False (tails haystack)  中foldl是什么用法？
+22:19:53 <gansteed> 我觉得这里不需要foldl也行吧..
+22:21:22 <CindyLinz> (murmur) 討厭 needle haystack 這種用字.. 因為我英文不好 XD
+22:22:28 <CindyLinz> gansteed: 想看看不用 foldl 你打算怎麼寫? 畢竟 foldl 的確可能拆散成別的寫法, 例如直接寫遞迴之類的
+22:30:58 <gansteed> tails 会一直递归下去到“”为止，而foldl也会递归到“”为止。他们是什么顺序呢？
+22:32:07 <gansteed> needle haystack是原作者例子里的，没有理解清楚就复制粘贴来了 XD
+22:32:30 <CindyLinz> ok 的.. 反正 php 的 strstr 也是用這兩個字... /_\
+22:34:04 <CindyLinz> 欸.. 你 tails 是要用在 haystack? tails haystack 以後, 還是要 foldl 一下啊?
+22:37:15 <gansteed> 是tails “hello” ，然后就 foldl(\...) False "hello", 然后 foldl(\...) False "ello" 这样子的顺序？
+22:37:30 <CindyLinz> 對啊?
+22:39:01 <gansteed> 为什么tails没有一直递归到“”为止， 然后再foldl呢？因为作者的描述是inits and tails are like init and tail, only they recursively apply that to a list until there's nothing left. Observe.tails会一直递归到“”为止 XD
+22:39:02 <CindyLinz> 還是你在嫌他沒有一找到就 break?
+22:39:24 <CindyLinz> > tails "hello"
+22:39:26 <lambdabot>  ["hello","ello","llo","lo","o",""]
+22:40:37 <CindyLinz> 有到 "" 為止沒錯呀.. foldl 的最後一步遇到了 "" 所以除非 needle 是 "", 不然那個 if 應該會走 else 那邊, 然後採用之前的結果 acc
+22:43:13 <CindyLinz> > let search needle haystack = foldr (\str later -> if needle `isPrefixOf` str then True else later) False (tails haystack) in search "ell" "hello"
+22:43:15 <lambdabot>  True
+22:43:19 <CindyLinz> > let search needle haystack = foldr (\str later -> if needle `isPrefixOf` str then True else later) False (tails haystack) in search "Ell" "hello"
+22:43:21 <lambdabot>  False
+22:43:51 <CindyLinz> foldr 應該有 short-circuit 效果
+22:44:24 <gansteed> > True
+22:44:26 <lambdabot>  True
+22:44:44 <gansteed> lambdabot 真是机器人？  :)
+22:45:15 <CindyLinz> 是
+22:45:18 <CindyLinz> 名字都說是了 XD
+22:45:57 <CindyLinz> foldl 的我等等想想 :|
+22:46:14 <CindyLinz> 覺得每過一陣子沒想, 再遇到 foldl foldr 的問題還是會糊掉 ._.
+22:46:35 <gansteed> 你说的 short-circuit 目前还没遇见过-。-
+22:47:02 <gansteed> 我过了几天没看，今天突然看fold就卡住了 T_T
+22:47:28 <CindyLinz> XDXD
+22:47:41 <CindyLinz> @src foldl
+22:47:42 <lambdabot> foldl f z []     = z
+22:47:42 <lambdabot> foldl f z (x:xs) = foldl f (f z x) xs
+22:47:47 <CindyLinz> @src foldr
+22:47:48 <lambdabot> foldr f z []     = z
+22:47:48 <lambdabot> foldr f z (x:xs) = f x (foldr f z xs)
+22:48:34 <gansteed> lambdabot 这么好玩儿 ~~
+22:48:48 <CindyLinz> 把 source 列出來方便思考 :p
+22:49:02 <gansteed> :)
+22:56:28 <gansteed> 瞬间我就理解了作者的意思  :)  原来刚刚我懵了
+22:57:42 <CindyLinz> gansteed: foldl 版看起來也是有 short circuit 效果..
+22:58:12 <CindyLinz> 不過它還是會走過一遍 N, 然後從最後面的 "", "o", "lo", .. 這樣的順序來比較 needle
+22:58:23 <CindyLinz> 一旦找到就直接輸出 True
+22:59:54 <CindyLinz> gansteed: 我拿 foldl 版的 search needle "hel" 手動展開看... http://lpaste.net/5354857150390730752
+23:00:53 <CindyLinz> 不過 tails 的展開順序偷懶了, 我一開始就假設它是展完的..
+23:00:53 <gansteed> 嗯~
+23:01:25 <CindyLinz> 問問, 有沒有這種模擬 haskell 展開順序的東西呀?
+23:02:00 <gansteed> 在这里应该是一开始就已经展开了吧？就是(tails "hello")一开始就已经展开了
+23:02:06 <gansteed> > tails "hello"
+23:02:08 <lambdabot>  ["hello","ello","llo","lo","o",""]
+23:02:22 <gansteed> 然后传到foldl
+23:02:25 <gansteed> > foldl
+23:02:27 <lambdabot>  No instance for (Data.Typeable.Internal.Typeable a0)
+23:02:27 <lambdabot>    arising from a use of ‘M677828379823064032129435.show_M6778283798230640321...
+23:02:27 <lambdabot>  The type variable ‘a0’ is ambiguous
+23:02:27 <lambdabot>  Note: there are several potential instances:
+23:02:27 <lambdabot>    instance Data.Typeable.Internal.Typeable Data.Dynamic.Dynamic
+23:03:07 <CindyLinz> gansteed: 應該不是.. 嗯 我再模擬一個版本...
+23:03:14 <gansteed> foldl f z (x:xs) = foldl f (f z x) xs foldl接受一个起始值和一个list
+23:03:25 <CindyLinz> @src tails
+23:03:26 <lambdabot> tails []         = [[]]
+23:03:26 <lambdabot> tails xxs@(_:xs) = xxs : tails xs
+23:04:25 <gansteed> 对了，你说的模拟haskell展开顺序的东西我也不太清楚。。  :（
+23:06:04 <CindyLinz> gansteed: 加上 tails 的話, 應該是這樣.. http://lpaste.net/538991217094950912
+23:06:36 <CindyLinz> 是在 foldl 想依那個 list 是 [] 還是 x:xs 來決定要走哪一條 branch 的時候展一步
+23:08:14 <gansteed> 可是 (tails "hello") 是加了括号的， 不应该先执行完括号里的部分嘛？
+23:09:03 <CindyLinz> gansteed: 不會呀, 括號只有影響它們誰要跟誰作用, 只影響語法上的順序 (例如 (1+2)*3 和 1+(2*3) 的差別) 不影響運算的順序
+23:09:34 <CindyLinz> gansteed: haskell 運算的順序要用 case ... of 或 seq, ($!) 之類的東西來影響
+23:10:18 <motephyr> CindyLinz: 題外話XD 請教一下irc的log是怎麼抓的？ 你下午做的那個小程式的流程應該是把整個log撈出來，去對每個人得到多少++的次數
+23:10:30 <gansteed> 哦， 这样子的啊
+23:10:52 <motephyr> hubot看來很好玩XD
+23:11:03 <CindyLinz> motephyr: 我寫在 irssi 的 script 裡面
+23:11:29 <CindyLinz> motephyr: irssi 可以載入 script, 我是放在 .irssi/scripts/ooo.pl
+23:11:41 <CindyLinz> 然後在 irssi 裡面下 /load script ooo.pl 就可以跑了
+23:12:07 <CindyLinz> motephyr: 精確點說, irssi 可以載入的是 perl script.. ^^|
+23:12:16 <gansteed> 这样说来foldl和tails是“同步”递归呢 XD
+23:12:27 <CindyLinz> gansteed: 嗯 XD
+23:12:49 <motephyr> o ic
+23:13:21 <CindyLinz> 然後用 Irssi::signal_add_last 'message public', sub { ... } 可以聽大家講的話
+23:13:55 <motephyr> 我真的粉久沒碰irc了 配上hubot感覺很神
+23:14:50 <CindyLinz> 我還沒看 weechat over irssi 有哪些好東西.. 不過希望 perl script 這功能不要沒有了, 不然現在在用的 script 全都要重來了 XD
+23:15:42 <CindyLinz> 嗯, 看起來有類似的.. http://www.weechat.org/files/doc/stable/weechat_scripting.en.html#_perl
+23:15:57 <CindyLinz> weechat 支援的語言更多..
+23:16:11 <motephyr> 你對perl有愛
+23:16:32 <CindyLinz> 那邊列的語言我只會 perl 和 lua 啊.. ^^|
+23:16:47 <CindyLinz> lua 是為了玩遊戲... XD
+23:17:06 <CindyLinz> 啊 ruby 會 1.8 以前的 XD
+23:17:08 <cybeliak> 可惜好像沒有haskell binding ._.
+23:17:21 <motephyr> 啥遊戲要寫lua?
+23:18:03 <CindyLinz> motephyr: minecraft 的 computercraft mod.. XD
+23:18:20 <motephyr> CindyLinz++
+23:20:05 <CindyLinz> cybeliak: HaskellWiki 教你用 ghci 上 irc... (咦) http://www.haskell.org/haskellwiki/Roll_your_own_IRC_bot
+23:20:40 <CindyLinz> motephyr: 太不經濟了 XD
+23:20:57 <cybeliak> 竟然還有這種東東@@!
+23:47:54 <cataska____> 可以用 emacs 上 irc (逃)
+23:48:06 <CindyLinz> XDD
+23:54:58 <monochrom> 我的 http://www.vex.net/~trebla/haskell/lazy.xhtml 有教開展次序

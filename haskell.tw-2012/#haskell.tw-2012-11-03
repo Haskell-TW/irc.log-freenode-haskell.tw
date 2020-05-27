@@ -1,0 +1,32 @@
+10:46:14 <MnO2> http://www.youtube.com/watch?v=iSmkqocn0oQ
+10:46:25 <MnO2> Simon Peyton Jones - Haskell is useless
+10:46:37 <MnO2> 這叫後台花絮嗎？ xD
+10:53:49 <b4283> "we put up the embarrasment for many years"  XD
+22:00:38 <MnO2> http://alpmestan.com/posts/2012-11-02-cabal-hackage-what-you-can-do-about-it.html
+22:00:43 <MnO2> The cabal/hackage situation, and what you can do about it
+22:37:26 <CindyLinz> 去年 perl community 有了一個叫作 carton 的東西.. 就 Plack 的作者 Miyagawa 做的
+22:38:51 <CindyLinz> 它的功能是.. locally 安裝 cpan (perl 的 cabal/hackage) module, 執行程式的時候用 carton 指定使用這一組
+22:38:55 <MnO2> 看cpan上是寫說bundler for perl
+22:39:06 <CindyLinz> 然後, 可以把這一組所安裝到的 module 「freeze」起來
+22:39:24 <CindyLinz> deploy 的時候就可以方便安裝一組版本完全一樣的環境
+22:39:38 <CindyLinz> 這個「freeze」的記錄可以放到 git 之類的 version control 裡面
+22:39:57 <MnO2> 嗯嗯
+22:40:00 <CindyLinz> 所以遇到更新會爆的情況, 可以做到 downgrade 的效果
+22:40:15 <MnO2> 大家解決方式都差不多
+22:40:31 <CindyLinz> cpan 在更新模組的時候會自動去找 dependency 一併更新, 可是如果要 downgrade 就會悲劇....
+22:42:39 <MnO2> 目前hackage上面也沒有像cpan一樣有一些test的結果
+22:50:08 <CindyLinz> 反正 compile 過了就不會錯了... (誤)
+22:51:00 <MnO2> 的確是比一些謎一般的語言好多了啦，不過還是有些需要Unit Test的地方
+22:55:45 <MnO2> http://hackage.haskell.org/trac/ghc/wiki/Building/Preparation/Tools
+22:56:00 <MnO2> Perl version 5 at least is required. GHC has been known to tickle bugs in Perl, so if you find that Perl crashes when running GHC try updating (or downgrading) your Perl installation. Versions of Perl before 5.6 have been known to have various bugs tickled by GHC, so the configure script will look for version 5.6 or later.
+22:56:21 <MnO2> 只不過是安裝script到底可以戳到什麼樣的bug... 好好奇
+22:57:36 <CindyLinz> 5.6 耶, 好古老的感覺...
+22:58:23 <CindyLinz> 5.6.2 announcement 是 2003.11.16
+22:58:34 <CindyLinz> 不過它說的是 < 5.6.0
+23:00:08 <CindyLinz> draft of 5.6.0 announcement 2000.3.27 # http://code.activestate.com/lists/perl5-porters/10331/
+23:05:15 <MnO2> perl 版號的跳法會讓人覺得好像沒有很早 (誤)
+23:05:34 <CindyLinz> 現在是 5.14 ~ 5.16 了耶!
+23:05:51 <CindyLinz> 其實應該是 5.8 停太久啦 ^^|
+23:06:30 <CindyLinz> 5.8~5.10 中間超長的... 那時候應該是在想說要不要 5.x 就停了, 所有的新東西都搬到 Perl 6...
+23:13:45 <MnO2> 所以現在Perl 6的狀況是？
+23:14:02 <CindyLinz> 不知道 XD

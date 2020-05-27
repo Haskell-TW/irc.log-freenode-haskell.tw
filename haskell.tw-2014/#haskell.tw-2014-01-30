@@ -1,0 +1,12 @@
+00:39:07 <monochrom> 世上還有 http://en.wikipedia.org/wiki/X86_calling_conventions , 大家有個約定俗成. 因此, 想狎玩 stack 的話, 還是有根有據的. :)
+00:44:50 <letoh> x86 calling convention 也有好幾種啊XD  cdecl 跟 fastcall 就不同
+10:24:53 <petercommand> 不過function裏面就不一定會free掉用不到的local variable了.....stack快炸了不知道會不會free掉用不到的
+14:25:42 <CindyLinz> petercommand: 應該不會
+14:25:58 <CindyLinz> petercommand: runtime 還去加這種 check, 比直接 free 掉還辛苦 ^^|
+14:26:16 <CindyLinz> 所以如果考慮這個問題的話, 應該是加上會立即 free 掉的程式 :p
+14:41:07 <petercommand> :p
+14:47:01 <CindyLinz> 嗯, 判斷加下去至少要一條 cmp 和一條 ja, 就兩條了, 無論結果如何這兩條都要執行到... free 掉才一條 sub, 要減的量是 compile time 就決定的 @@"
+14:54:02 <letoh> 所以都不要檢查  找幾個關鍵地方直接把 sp pop 回來還原  連 sub 都可以省掉?
+14:58:35 <CindyLinz> sp pop 回來就是 sub 的意思啦 :p  只是一個 sub 可以帶一個數字當成連續 pop
+14:59:06 <CindyLinz> 因為那種情況下, 不需要把 stack 裡丟掉的資料拿出來了
+15:00:09 <CindyLinz> 只是現代 CPU 的實作好噁心... 可能 sub sp, 3 和 sub ax, 3 的速度還不一樣.... *_*

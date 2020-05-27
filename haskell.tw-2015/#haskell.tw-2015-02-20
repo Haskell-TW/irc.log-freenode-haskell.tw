@@ -1,0 +1,34 @@
+00:27:39 <petercommand> @hoogle t m a -> m t a
+00:27:42 <lambdabot> Data.Map.Lazy mapKeysMonotonic :: (k1 -> k2) -> Map k1 a -> Map k2 a
+00:27:42 <lambdabot> Data.Map.Strict mapKeysMonotonic :: (k1 -> k2) -> Map k1 a -> Map k2 a
+00:27:42 <lambdabot> Control.Monad.Trans.Reader withReader :: (r' -> r) -> Reader r a -> Reader r' a
+00:29:05 <CindyLinz> petercommand: 猜你想找 MonadPeel 或 MonadControl..
+00:29:26 <CindyLinz> 覺得 MonadPeel 讀起來比較簡單, 不過聽說 MonadControl 比較有效率..
+00:31:02 <CindyLinz> petercommand: layers package 裡面有對它們的綜合介紹, 我覺得還不錯 XD..
+00:31:37 <CindyLinz> 因為 layers 想要解釋它為什麼它們好, 所以就把它們通通抓出來介紹(鞭)一遍... XD
+00:31:44 <CindyLinz> 因為 layers 想要解釋它為什麼比它們好, 所以就把它們通通抓出來介紹(鞭)一遍... XD
+00:32:00 <petercommand> XDD
+00:32:22 <CindyLinz> 咦我沒貼 link.. http://hackage.haskell.org/package/layers-0.1/docs/Documentation-Layers-Overview.html
+00:33:00 <petercommand> 哇，只有 document 的 module 耶XD
+00:33:26 <petercommand> 來看一下..
+00:34:33 <petercommand> @hoogle [Maybe a] -> Maybe [a]
+00:34:35 <lambdabot> Prelude sequence :: Monad m => [m a] -> m [a]
+00:34:36 <lambdabot> Control.Monad sequence :: Monad m => [m a] -> m [a]
+00:34:36 <lambdabot> Data.Maybe catMaybes :: [Maybe a] -> [a]
+00:35:41 <petercommand> 原本是想找這種的XD
+00:47:31 <CindyLinz> 噢.. 那.. traverse?
+00:47:37 <CindyLinz> :t traverse
+00:47:39 <lambdabot> (Traversable t, Applicative f) => (a -> f b) -> t a -> f (t b)
+00:48:11 <CindyLinz> :t sequenceA
+00:48:13 <lambdabot>     Not in scope: ‘sequenceA’
+00:48:14 <lambdabot>     Perhaps you meant one of these:
+00:48:14 <lambdabot>       ‘T.sequenceA’ (imported from Data.Traversable),
+00:48:18 <CindyLinz> :t T.sequenceA
+00:48:20 <lambdabot> (Traversable t, Applicative f) => t (f a) -> f (t a)
+02:32:00 <pkmx> :t T.sequence
+02:32:02 <lambdabot> (Traversable t, Monad m) => t (m a) -> m (t a)
+10:52:20 <petercommand> @hoogle t (m a) -> f (t a)
+10:52:22 <lambdabot> Test.QuickCheck.Gen promote :: Monad m => m (Gen a) -> Gen (m a)
+10:52:23 <lambdabot> Test.QuickCheck promote :: Monad m => m (Gen a) -> Gen (m a)
+10:52:23 <lambdabot> Control.Monad.List ListT :: m [a] -> ListT a
+10:53:42 <petercommand> 看來就是 T.traverse ....看來我上面忘記加括號了XD

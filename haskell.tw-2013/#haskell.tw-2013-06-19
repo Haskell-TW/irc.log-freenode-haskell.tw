@@ -1,0 +1,23 @@
+11:29:17 <miaout17> 承yinwang話題… 我個人是覺得，如果團隊中有SE(Software Enginner)及SDET(Software Enginner in Test)或QA的角色
+11:29:58 <miaout17> Unit test我會讓SE寫，SDET和QA測比較偏黑箱的部份
+11:30:58 <miaout17> Unit Test是讓SE更負責的交出高品質的code，不是讓SE把責任丟給SDET/QA用的 XD
+11:32:41 <miaout17> 看到樓上關於test team的討論，我想與yinwang的case應該也不太一樣，他應該是要開發兼測試覺得很煩吧 XD
+11:33:43 <miaout17> 我不同意他的測試無用論，但我能理解「不要依靠測試寫一堆garbage code」
+11:35:45 <miaout17> 有的engineer是很負責的寫implementation & unit test, test coverage很高，也不常出錯。
+11:36:18 <miaout17> 但把不失可讀性30行可以寫完的code用300行的實作來寫。
+11:37:19 <miaout17> 有時多想一下問題的本質，在不失可讀性下，可以簡化實作，少繞些路，更不容易出錯。
+14:08:08 <CindyLinz> 因為我是聊完了才去看他的文章 (艸)
+14:14:16 <hychen> CindyLinz, 你有用過QuickCheck生測試用的資料嗎? ;p
+14:14:31 <hychen> 最近想用這個, 剛好wiki有一篇
+14:17:58 <CindyLinz> hychen: 沒有, 我用 haskell 還沒到那麼實用的階段 @@"
+14:18:26 <hychen> CindyLinz, 糟糕.. 我越級打怪...
+16:29:19 <banacorn> hychen: 之前有用過一陣子，用來測我 formal language 的證明有沒有寫對，是有找到一兩個 bug 但感覺就是用錯地方了囧 XD
+16:35:25 <CindyLinz> hychen: 我不是個好的比較標準啦~ 現實生活環境是不鼓勵我用 Haskell 的, 一不小心一鬆懈就沒進展了.. QQ
+18:53:40 <_13h> CindyLinz: 所以弄個 hs2pl compiler 就能在現實環境用了嗎? XD
+18:55:31 <CindyLinz> 如果可以方便 link 給 perl 用的話, 可能就可以偷偷用
+18:55:54 <CindyLinz> 可是 ghc 很大... compile 時很吃資源, 這一關還是很難過
+18:56:12 <_13h> 一定要 ghc 嗎@_@
+18:56:15 <CindyLinz> cpan 上面有唐鳳寫的 perl 用 haskell, 不過是用 hugs
+18:56:35 <CindyLinz> 沒 ghc 的話, 能用的 lib 比較少啊..
+18:56:58 <_13h> 嗯  所以只好自己把缺的補完了？XD
+18:56:59 <CindyLinz> 喔不過 cabal 有 dependency hell, 所以 lib 可能不那麼重要.. (誤)

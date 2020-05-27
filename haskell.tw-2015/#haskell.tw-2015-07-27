@@ -1,0 +1,6 @@
+13:41:37 <caasihuang> https://github.com/joelburget/react-haskell 用的是 ghcjs 而不是 haste
+13:53:27 <CindyLinz> ghcjs :D
+14:11:28 <mno2> http://www.yesodweb.com/blog/2015/07/http2  kazu 動作好快..
+14:11:35 <mno2> http2 完成
+16:46:51 <mno2> https://www.youtube.com/watch?v=snOBI8PcbMQ Julian Ani 講 servant ，我蠻推薦這一套，可以快速製作 rest api
+16:47:11 <mno2> Julian Arni 現在在幫 liquid democracy 寫 haskell 的那一部分 lol

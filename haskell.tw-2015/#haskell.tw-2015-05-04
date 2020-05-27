@@ -1,0 +1,27 @@
+11:18:00 <mno2> https://hackage.haskell.org/package/acme-everything  這 acme library ..
+11:27:28 <CindyLinz> ww
+11:44:58 <pkmx> 這東西怎麼感覺有點實用XD # https://hackage.haskell.org/package/acme-omitted-2.0.0.0/docs/Acme-Omitted.html
+16:44:50 <mno2> 發覺 hackage 上的東西好像越來越全了。一些第三方套件也都開始穩定了
+16:45:09 <mno2> 想找一些好的小題目練功發覺好像不是那麼容易
+16:46:14 <CindyLinz> 真好.. (咦
+16:48:08 <mno2> 想題目是最困難的 QQ
+16:48:36 <CindyLinz> 從自己生活中遇到的問題找呀
+16:48:57 <CindyLinz> 除非是學界的人, 生活中可能比較沒問題 ^^|
+16:49:44 <mno2> 就是因為想到一找 hackage，發覺好像都被解掉了 xD
+16:50:12 <mno2> 大概只剩下 document 吧 xD
+16:50:26 <mno2> lazydoc 就沒有做下去了 lol
+16:50:27 <CindyLinz> 這樣一找就有很棒啊 XDXD
+16:50:51 <CindyLinz> 或是.. 假設你找到的 package 叫作 aa-mod
+16:51:01 <CindyLinz> 你可以再寫一個, 取名 aa-mod-better   (逃
+16:51:19 <mno2> 可是被解掉了就沒有梗可以給 talk 了
+16:51:32 <CindyLinz> aa-mod-much-better
+16:52:10 <mno2> 可是你也知道 haskell 社群，都是一堆怪物，有時候很難寫 better ..
+16:53:52 <CindyLinz> 名字 better 而已嘛 ._.
+16:55:20 <CindyLinz> 平常生活中遇到的問題, 比較 niche, 就沒被寫掉的機會比較大啦 :p
+16:55:47 <CindyLinz> 或是.. 自己定義一個壓縮格式, 那也不會有別人寫過, 因為沒有人聽過 XD
+16:57:15 <mno2> 會被問為什麼現有的格式不能用吧？
+16:59:10 <CindyLinz> 問就問啊 (?
+17:00:11 <mno2> 就掛板了
+17:00:19 <mno2> 只能會 bottom
+17:01:40 <CindyLinz> 壓縮還好啦, 現有的格式那麼多, 各有勝場
+20:06:51 <pkmx> https://hackage.haskell.org/package/acme-safe-0.1.0.0/docs/Acme-Safe.html

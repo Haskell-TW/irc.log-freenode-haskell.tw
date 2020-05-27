@@ -1,0 +1,60 @@
+00:55:29 <houshuang> 中文没有monad的翻译吗？这里用的英文单词特别多http://learnyouahaskell-zh-tw.csie.org/zh-cn/chapters.html
+00:56:41 <petercommand> 有人把monad翻成單子
+00:57:12 <au> 意思是把一串函數寫在單子上，好按照順序執行（大誤）
+00:57:24 <monochrom> 哈哈
+00:57:33 <petercommand> XDD
+01:00:11 <monochrom> "monadic second-order logic" 的 monad 譯成單子是對的, 因為意思是1個參數. 但 Haskell 或 category theory 的 monad 完全不同, 沒有這個意思.
+01:01:15 <houshuang> 木偶那的 ：）
+01:01:28 <houshuang> 某那的
+01:02:19 <CindyLinz> 我覺得台灣對名辭的英翻中不是非常努力 ^^|
+01:03:03 <CindyLinz> 除非有人想寫什麼「輕輕鬆鬆學會XXX」, 「24小時學會OOO」之類的書, 作者才會去想翻譯.. 不然平常就直接用英文字了
+01:04:22 <houshuang> Cindy：我总是觉得看这种文章，有特别多英文单词，不太顺眼。某那的也许比较难，但是functional programming languages， (control flow) variable， side effect等应该都有比较标准的中文翻译吧。
+01:05:06 <CindyLinz> houshuang: 這些字... 我們平常討論的時候... 好像真的用英文比中文多 @@" 雖然知道中文應該是什麼....
+01:05:13 <houshuang> 也许大陆比较重视纯中文，但是那里也有人很“烂”。
+01:05:24 <monochrom> 我把 object-oriented programming 譯為 唯物世襲制 :)
+01:05:39 <CindyLinz> monochrom: 只有你這樣譯吧 XDXD
+01:05:52 <godfat> 唯物世襲制不錯 XD
+01:05:59 <CindyLinz> 是譯得不錯 XD
+01:06:03 <monochrom> :)
+01:06:20 <houshuang> 既然我的母语不是中文，我好像更重视这个。我跟中国人在一起写文章的时候，他们写“email”， 我改成电视邮件：）
+01:07:22 <petercommand> e不是指電子嗎?XD
+01:07:27 <petercommand> email的e
+01:07:44 <CindyLinz> hmm... 以前的確有用過「電子郵件」.. 可是現在好像都講 email 了...
+01:07:54 <CindyLinz> 「寄一個 email 給我」
+01:07:55 <houshuang> 电子哈哈
+01:08:01 <houshuang> 电视邮件胡很有意思哪。
+01:08:12 <petercommand> 依妹兒
+01:08:21 <CindyLinz> 為什麼要叫電視郵件? 我以為你是不小心寫錯..
+01:08:32 <houshuang> 伊妹儿：）
+01:10:33 <houshuang> Cindy：肯定是不小心。后来开始想想真正的电视邮件会是什么样子的
+01:10:39 <CindyLinz> 喔喔 XD
+01:11:02 <CindyLinz> 大陸好像比較喜歡把中文縮寫, 都講成「電郵」
+01:12:12 <monochrom> 有些人會在大電視上用面書, 微博等等, 或者這算電視郵件.
+01:14:53 <CindyLinz> 凹得有點硬啦 XD
+01:16:56 <houshuang> 说道翻译，印度语跟日本语都一样，可以很容易的把外文单词“融化”到他们的自体。有的时候看到印度语的牌子但是读起来都是英文单词跟语法。中文没这么荣誉（某那的：）。
+01:17:03 <houshuang> 荣誉=容易
+01:20:07 <houshuang> CindyLinz: 这个看起来很有趣，有PPT、代码还是录影吗？
+01:20:08 <houshuang> Dynamic typed and Untyped Haskell using GHC
+01:20:32 <CindyLinz> houshuang: 那個網頁就是投影片, 沒有錄影
+01:20:50 <CindyLinz> houshuang: https://cindylinz.github.io/Talk-TakeItEasy-DynamicTypedAndUntypedHaskell-UsingGHC/
+01:21:09 <houshuang> 谢谢
+01:21:11 <CindyLinz> houshuang: 用到的範例程式這邊有 https://github.com/CindyLinz/Talk-TakeItEasy-DynamicTypedAndUntypedHaskell-UsingGHC
+01:21:23 <CindyLinz> demo1.hs 和 demo2.hs
+01:21:25 <houshuang> 很好，多谢
+01:22:32 <CindyLinz> ^^
+01:23:04 <houshuang> （我需要一个IRCplugin可以自动的翻译繁体到简体：）
+01:24:42 <CindyLinz> 你用什麼東西連 irc?
+01:26:02 <houshuang> CindyLinz: 我现在在考虑怎么设计Haskell的"data.frame"（像R一样），所以对Haskell的dynamic types很感兴趣https://github.com/sdiehl/frame/blob/master/NOTES.md
+01:28:29 <CindyLinz> 那也參考這邊吧~~ https://downloads.haskell.org/~ghc/7.8.1/docs/html/libraries/base-4.7.0.0/Data-Dynamic.html
+01:29:24 <CindyLinz> 雖然 GHC 7.6 和 7.8 在這邊的實作有大改.. 不過就使用的角度來講, 應該沒有變...  只是 7.8 可以自動 deriving 支援 Dynamic 的 type 更多了
+01:31:06 <CindyLinz> 但我想... 實作你想要的東西, 也有可能不用 Dynamic. 除非你的使用者是以寫 Haskell 程式來跟你的主程式 link 在一起的方式使用
+01:32:04 <CindyLinz> 不然我猜可能這些 type 最基本的是數字, 文字, 時間日期之類的.. 然後再加上你提供的一些作用在這些東西上的函數?
+01:33:20 <CindyLinz> 嗯.. 可能要你自己嘗試看看哪一種作法比較直覺好寫了....
+01:39:33 <CindyLinz> houshuang: 這個也給你參考... ^^ # https://github.com/quchen/articles/blob/master/loeb-moeb.md
+01:41:46 <houshuang> CindyLinz: 谢谢。我要慢慢看你的讲座，可能以后会有几个问题想参考你一下：）
+01:44:06 <CindyLinz> 哎呀~ 人不見了 XD
+01:45:52 <petercommand> 那個loeb和moeb好像蠻有趣的XD
+01:46:27 <CindyLinz> petercommand: 超棒!!
+01:46:49 <CindyLinz> petercommand: 而且不是髒東西! 多學有益!!
+01:51:16 <CindyLinz> 可惜不方便用在對外邦人(?)傳教的時候使用.. 跟那個 filterM 的 powerset 一樣很難快速讓完全沒接觸過的人聽懂.. QQ
+10:07:49 <b4283> Sabastian Loeb

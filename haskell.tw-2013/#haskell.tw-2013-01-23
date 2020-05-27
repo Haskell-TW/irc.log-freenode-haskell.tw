@@ -1,0 +1,12 @@
+23:55:25 <letoh> 來問一下問題好了... 用 data 語法的時候， data xxx = foo yyy | bar zzz   那個 foo, bar 是什麼? 算是 type 嗎? 感覺不太像，比較像 value 中的 label ?
+23:55:44 <letoh> 不太確定該怎麼看這些東西，雖然用起來好像會動...XD
+23:56:54 <CindyLinz> 是 data constructor
+23:57:01 <CindyLinz> xxx 是 type
+23:57:21 <CindyLinz> yyy zzz 應該是別的 type
+23:57:21 <letoh> 嗯  xxx 應該是 type，因為 :t 會看到推出 xxx
+23:57:52 <letoh> 不過 print 的時候會看到 foo <val>
+23:57:53 <CindyLinz> foo :: * -> xxx
+23:58:09 <letoh> 一直很好奇那個 foo 是做什麼用的  陰魂不散XD
+23:58:24 <CindyLinz> letoh: 可以把 foo 想成是 type level 的函數
+23:58:34 <CindyLinz> letoh: 吃一個 type, 生成另一個 type
+23:59:14 <letoh> 嗯嗯  所以 haskell 會記住是哪一個 constructor 產生的資料?

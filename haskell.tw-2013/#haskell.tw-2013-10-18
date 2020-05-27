@@ -1,0 +1,26 @@
+01:36:29 <godfat> XDDD 我好久沒動我的耳機系統了 @@
+10:46:00 <Yu_lin> https://gist.github.com/miyagawa/290978
+10:46:18 <Yu_lin> 在看 evolution of a ??? programmer
+10:46:41 <Yu_lin> Perl 的 Regex 版.....Orz||| 看不懂
+14:43:31 <CindyLinz> 結果那天找了半天要搜尋 ByteString 裡面的 */ 的功能
+14:43:36 <CindyLinz> 要丟掉了 orz
+14:44:35 <CindyLinz> 因為 sass 裡面 字串 (".." / '..') 裡面可以有 interpolation #{..}, 然後 interpolation 裡面可以有任意 expression
+14:45:08 <CindyLinz> 所以字串還是丟到 parser 裡面認比較方便
+14:45:16 <CindyLinz> 不是 regular language 了
+14:45:39 <CindyLinz> 然後, 字串裡面有可能出現長得像 /* ... */ 的東西, 得被視為字串的一部分
+14:45:55 <CindyLinz> 所以也就不能直接用 regular language 把註解抓出來了
+14:46:41 <CindyLinz> 它們通通要丟到 parser 裡處理了 = 3=
+17:08:26 <CindyLinz> 不過.. 用 context free grammar 寫這種: 除了 * 以外的所有符號.. 真是惡夢 orz
+17:10:02 <CindyLinz> 有時候要「除了 * 以外所有符號」, 寫一遍已經很不開心了.. 然後馬上又要「除了 / 以外所有符號」.... orz
+17:11:08 <CindyLinz> 如果能讓 lexer 來做... 然後我 parser 一邊走, 一邊可以去開關 lexer 的狀態, 跟它說, 現在開始進入註解模式, 現在開始進入字串模式 就好了 @@"
+17:11:34 <CindyLinz> Happy 有 Monad 模式的 lexer, 可以跟 parser 串起來用
+17:12:30 <CindyLinz> 可是, 這種用法它的設計會黏死 parser 使用 lexer 的方式
+17:13:17 <CindyLinz> 而我想在這個 .y 裡面同時寫兩三個不同的 parser, 只有其中一種要去直接使用 lexer, 其他的想直接吃 token list, 不要使用這一個 lexer.. @@
+17:15:04 <CindyLinz> 拆成兩三個 .y 檔的話, 可以用自己的方式黏 parser+lexer, 不過有很多根本一模一樣的 token 描述就要重貼一遍....
+17:18:05 <CindyLinz> 不過.. 反正 .y 是用來產生 .hs 的東西... 我也可以弄一個用來產生 .y 的東西.... ww
+18:51:13 <mno2> http://www.haskellcast.com/episode/001-edward-kmett-on-lenses/    edward kmett 有提到他想設計他自己的語言，結果越寫越被說像 perl 6，結果就跑去看 perl 6，當時僅有的實作是 pugs，然後 pugs 是 haskell 寫的，因此就認識了 Haskell
+19:41:52 <CindyLinz> (Y)
+19:42:19 <CindyLinz> 那他的語言後來如何了咧?
+23:57:32 <suhorng> racket的debian安裝檔是個 77MB 的 .sh 檔(可執行!), 這到底是什麼樣的概念....XD
+23:58:10 <suhorng> 把 .tar.gz 接在後面到底是怎樣啦XDDDDD
+23:59:30 <letoh> 很常見啊

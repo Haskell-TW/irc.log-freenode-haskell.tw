@@ -1,0 +1,59 @@
+10:50:16 <MnO2> https://plus.google.com/communities/103015857789020103513
+10:50:32 <MnO2> 實驗性地開了一個community
+10:53:24 <MnO2> 該不會最後這個會跟Google Group整合
+11:12:16 <favonia> 感覺還有一些明顯的功能還沒弄～
+11:16:45 <favonia> 像那個 category 最後可以變成標籤嗎 lol
+11:16:51 <favonia> 現在好像不能重複 tag
+11:53:29 <MnO2> 改了圖片跟增加category
+12:11:45 <MnO2> https://plus.google.com/communities/104818126031270146189
+12:11:57 <MnO2> global haskell community
+12:19:33 <MnO2> 看起來community不是real time indexing
+13:29:34 <mgccl> 有人会用Parsec么... 我看到的tutorial里面都有run... 现在的parsec没有...
+13:44:26 <MnO2> mgccl: 你是用 Parsec 3 ?
+13:44:33 <mgccl> yeah
+13:44:41 <MnO2> mgccl: 剛剛隨便搜尋的  https://gist.github.com/89786
+13:44:55 <MnO2> mgccl: 我也只有跑過一些簡單範例
+13:45:26 <MnO2> mgccl: 不過2 跟 3 都是 Parser，只是 3 是用 Text，我猜測用法應該差不多
+13:46:12 <mgccl> 啊哈... 好久都没有弄懂... 各种奇怪的错误比如expected type `Data.ByteString.Lazy.Internal.ByteString'...
+13:47:15 <MnO2> 要用對type吧？ 如果是要parse bytestring可能用attoparsec會比有效率？
+13:47:42 <MnO2> parsec 3 跟 Text 綁得比較緊
+13:49:42 <mgccl> 我查起来没看出要求用那个的... 不知道里面哪个function突然得到这种error...
+13:52:54 <MnO2> mgccl: 也許這對你有幫助？ http://stackoverflow.com/questions/2090399/using-haskells-parsec-to-parse-a-bytestring?rq=1
+13:54:55 <MnO2> mgccl: 重貼一遍剛剛的link， http://stackoverflow.com/questions/2090399/using-haskells-parsec-to-parse-a-bytestring?rq=1
+13:55:01 <MnO2> mgccl: 也許這有幫助？
+14:14:24 <mgccl> 哇果然有帮助...
+14:14:43 <mgccl> 我import了Text.Parsec.ByteString.Lazy = =
+14:14:51 <mgccl> 因为我直接copy paste其他人的代码的...
+14:23:41 <MnO2> mgccl: glad it helps
+14:24:00 <mgccl> 感谢
+14:25:05 <mgccl> 我有没有在这里说我2月份去Google工作?
+14:25:20 <MnO2> mgccl: 沒有
+14:26:06 <mgccl> MnO2: yay. 那里估计能找到Haskell用户...
+14:27:39 <MnO2> mgccl: snapframework跟containers的作者都在Google，不過整體使用比率可能也不高， 可以參考王垠的經驗
+14:27:47 <MnO2> (暫離)
+15:35:56 <MnO2> back
+16:18:56 <letoh> https://plus.google.com/u/0/communities/103015857789020103513  # Taiwan Haskell User Group
+16:19:09 <letoh> 喔  原來前面貼了XD
+16:20:47 <MnO2> letoh: 我建立的啊 xD
+16:21:26 <letoh> 想說怎麼會突然跑出這東西，應該跟這裡脫不了關係XD
+16:23:35 <MnO2> letoh: 不過只是實驗性質，還在想要不要丟出去share，總覺得戰場有點開太多，只是大部分人有不太用 irc ，但對台灣而言 g+ 跟 irc 又差不多 xD
+16:24:07 <letoh> 那台灣一般都是? ptt 嗎? XD
+16:24:47 <MnO2> letoh: 不知道，至少 ptt PLT 版最近兩篇文章是新手文 xD
+16:25:08 <MnO2> 表示有人會去那邊發問
+16:25:19 <letoh> 可以問的地方太少了
+16:27:26 <MnO2> letoh: 就大家不了解去哪吧， irc 太少人用了
+16:27:46 <letoh> 我接觸過可以討論的大概就 ptt/google group/irc 比較多人，可能還有一些零星的論壇沒研究
+16:27:58 <MnO2> 嗯，原則上當然希望把各個零星的集中，但就有限.. 感覺應該去PLT回一下文推廣一下
+16:30:40 <letoh> 希望這 g+ community 不會像之前的 wave 那樣玩一玩就消失了XD
+16:32:02 <MnO2> 猜測應該不至於啦
+16:32:18 <MnO2> 畢竟也是這一兩年的主戰場
+16:34:58 <letoh> 剛剛發現 www.javaworld.com.tw 有開 python 跟 ruby 的討論區XD
+16:37:55 <letoh> g+ community 的功能跟 pages 會有衝突嗎?
+16:40:39 <letoh> 嗯.. community 比較像討論區
+16:42:25 <MnO2> 對啊， page是單向
+16:49:39 <letoh> 原來昨天有 rubyconf.tw 辦的 matz 見面會XD
+16:50:39 <letoh> 正想報名才發現已經結束了XD
+17:07:46 <MnO2> xD
+20:05:15 <MnO2> 如果要以g+ community為主，也許可以寫個發文機器人把每一個禮拜的irc log定期貼一次。不過這可能要問大家的意見。
+20:05:40 <MnO2> 用web界面的好處是也許會多一點人進來看。
+20:06:41 <MnO2> 當然也有人可能會覺得g+不好用反而阻礙

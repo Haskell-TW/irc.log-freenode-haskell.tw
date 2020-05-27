@@ -1,0 +1,46 @@
+23:37:47 <MnO2> 大家都沒問題的話我就亂丟一些資訊好了xD
+23:37:50 <MnO2> http://adinapoli.github.com/cumino/
+23:40:35 <MnO2> http://www.iij.ad.jp/en/company/development/tech/mighttpd/    mighttpd的架構
+23:44:22 <MnO2> http://hackage.haskell.org/package/grid   可以處理一點計算幾何的lib
+23:50:23 <CindyLinz> 辛苦了 ^^|
+23:51:35 <CindyLinz> MnO2: 你成功 touch 了 log 檔 XD
+23:51:50 <CindyLinz> 如果整天都沒有人講話, 就會有缺檔了 XD
+23:52:13 <letoh> 缺檔XD
+23:52:37 <CindyLinz> 就... 不會有 2012-09-12 的檔案 ^^|
+23:52:57 <MnO2> 大家得了FLOLAC後遺症xD
+23:53:11 <CindyLinz> 那是什麼?
+23:53:30 <MnO2> 就是回歸正常啊xDD
+23:53:38 <MnO2> FLOLAC期間那麼多log才是異常
+23:54:23 <letoh> 我可以問 cps 嗎?
+23:54:40 <CindyLinz> XD
+23:54:43 <letoh> 這東西應該不是手寫用的吧?
+23:54:45 <MnO2> 可以啊，只是可能也不一定會xDD
+23:54:55 <CindyLinz> 嗚嗚... FLOLAC 以前也是很常講話的呀
+23:55:05 <CindyLinz> 在趕工不算啦 :p
+23:55:09 <letoh> 應該是 compiler 在用的?
+23:55:14 <MnO2> letoh: 那應該是有一段時間的programming style
+23:55:32 <letoh> 意思是曾經流行過?
+23:55:38 <MnO2> 但後來一些strict的lang會在compile前先做轉換
+23:55:50 <MnO2> 把非CPS的code轉成CPS style
+23:55:55 <CindyLinz> cps = continuation programming style?
+23:55:57 <MnO2> 然後再去compile
+23:56:03 <MnO2> CindyLinz: yes
+23:56:03 <letoh> passing style
+23:56:10 <MnO2> 看錯xD
+23:56:16 <letoh> :p
+23:56:23 <CindyLinz> 喔
+23:56:30 <MnO2> 那轉成CPS的好處是
+23:56:37 <letoh> 我不太確定這樣的好處是什麼
+23:56:52 <letoh> 找了一些資料好像是跟 async 有關?
+23:57:09 <letoh> 還有方便轉成 tail call ?
+23:57:18 <MnO2> 就是可以把heap variable轉成stack variable
+23:57:31 <letoh> 喔喔喔!!
+23:57:36 <MnO2> 這樣對於現在的機器就是可以用stack做就好了
+23:57:40 <letoh> 原來是這樣，這點要研究一下
+23:57:48 <MnO2> 因為stack其實就是continuation
+23:58:02 <MnO2> 跑跑跑，然後jump回原點，就好像什麼都沒發生過
+23:58:27 <letoh> 唔，這個要想一下，雖然很常玩 stack，但 continuation 還不熟
+23:59:10 <MnO2> continuation就是計算到某一點的snapshot
+23:59:27 <MnO2> continuation passing style就是function多一個參數
+23:59:38 <MnO2> 那個參數吃計算2k7
+23:59:47 <MnO2> 那個參數吃計算的snapshot

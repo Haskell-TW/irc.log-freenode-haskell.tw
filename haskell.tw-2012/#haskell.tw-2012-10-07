@@ -1,0 +1,34 @@
+00:02:14 <letoh> 剛剛突然想了一下 Y... 雖然以前有看一下，但現在回想一下還是很多地方卡住
+00:02:23 <letoh> 糟  不小心 touch 了? XD
+00:03:26 <CindyLinz> 啊.. 中文的程式語言...  唐鳳寫過一個 perl module: http://zh.wikipedia.org/wiki/PerlYuYan
+00:03:44 <CindyLinz> 這一頁有附一個中文寫的質數篩法
+00:03:51 <letoh> 這蠻有名的  當初在 list 看到真是嚇一跳
+00:03:56 <CindyLinz> 嚴格說是文言文 XD
+00:04:28 <letoh> 那時候剛好開始學 perl XD
+00:04:47 <CindyLinz> 真是教壞小孩大小 XD
+00:05:15 <letoh> 還是每天跑 perl 連線板的時候... 那時候的 perl 板沒啥廣告XD
+00:05:55 <MnO2> 「又曰ok矣」，我覺得這句有莫名的喜感
+00:14:33 <letoh> 看了用 Y 加速的方式後，有被騙的感覺XD
+00:20:49 <CindyLinz> letoh: 你這句話讓我有興趣看了.. XD
+00:21:19 <letoh> http://matt.might.net/articles/implementation-of-recursive-fixed-point-y-combinator-in-javascript-for-memoization/
+00:21:34 <letoh> 用的方法其實跟 Y 沒什麼關係
+00:22:30 <letoh> http://tinyurl.com/9sxwamx  剛剛是先看到這一篇，想知道這是什麼神奇的 Y
+00:22:43 <letoh> 不過這 slide 已經消失了...
+00:23:40 <CindyLinz> 加速是 memoization?
+00:23:46 <letoh> 嗯
+00:24:02 <CindyLinz> Y 是... 被加速的東西, 主要功能是聽起來很炫, 算是行銷方面的功能? XD
+00:24:11 <letoh> 對呀XD
+00:25:07 <letoh> 我都不曉得這種方法竟然還有名字
+00:25:14 <letoh> 不是很常用的手法嗎@_@
+00:26:06 <letoh> 下次寫報告的時候得用一下，看起來真的比較炫
+00:26:51 <CindyLinz> Y combinator 嗎? 應該不太常用吧 @@"   static type 還寫不出來說
+00:27:09 <letoh> 唔  我是指 memoization
+00:27:14 <CindyLinz> 喔喔
+00:27:17 <letoh> 我應該是用不到 Y
+00:27:40 <CindyLinz> 對啊, 以前不小心用到, 都隨便叫它 cache XD
+00:27:58 <letoh> 其實在我們這也都習慣講 cache，但換個大家都沒聽過的名字就很厲害XD
+00:28:24 <CindyLinz> 這樣就有個學拉丁文/希臘文的動力了? XD
+00:28:39 <CindyLinz> 斯拉夫語太容易打不出來, 所以還是算了 XD
+00:29:00 <letoh> 聽起來不錯XD
+00:30:42 <CindyLinz> 啊 polymorphic type 好像寫得出來.. 是 simply type 寫不出來 (Y combinator)
+02:15:52 <favonia> CindyLinz: 寫得出來～只要有 recursive type 就好... 然後你用的語言都有內建 fixed-point combinator

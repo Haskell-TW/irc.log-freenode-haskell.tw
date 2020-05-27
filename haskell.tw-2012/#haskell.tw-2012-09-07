@@ -1,0 +1,113 @@
+00:53:15 <favonia> CindyLinz: 沒有啊...
+01:01:57 <CindyLinz> 喔
+02:50:03 <favonia> CindyLinz: 是很好玩，可是還沒到天天寫的地步 xD
+07:43:28 <Steva> ??
+07:43:49 <Steva> No one's here \o\
+07:48:59 <CindyLinz> Hi:p
+07:52:52 <Steva> ~~~
+07:52:57 <Steva> Good morning!!!!
+07:52:58 <Steva> XD
+09:47:27 <MnO2> 隨著FLOLAC接近尾聲，irc log size也越來越小 xD
+09:49:50 <b4283> as flolac closes it tail, irc log size grow come grow smaller
+11:21:14 <yen3> 現正熱烈考試中 XD。
+11:21:42 <_13h> 所以今天是傳說中的最後一天測驗?
+11:22:07 <yen3> 對啊 XD
+11:22:14 <yen3> 現場轉播中~
+11:22:15 <_13h> 難怪一早就很安靜 (這幾天好像都這樣@_@
+11:22:19 <yen3> XD
+11:22:27 <yen3> 可能也是因為一早是 coq 吧 XD
+11:23:04 <_13h> 喔喔喔
+11:23:16 <yen3> 對法抗戰很辛苦 ?
+11:23:49 <_13h> lol  Coq 好像也是可怕的東西
+11:24:26 <yen3> 我也這樣子覺得 ..
+11:24:32 <yen3> [.. \ ...]
+11:27:13 <yen3> 奮戰什麼呢 ?
+11:28:14 <_13h> 復習基本 haskell 語法呀，想辦法搞懂 monad XD
+11:28:29 <yen3> 我還在很努力的搞懂 Applicative Functor XD
+11:30:11 <_13h> 前兩天玩一下，應該還是先從 brainfuck interpreter 開始吧
+11:30:30 <yen3> 你指的是 monad 嗎 ?
+11:31:50 <_13h> 嗯，我應該知道怎麼用笨方法寫了，但覺得還是應該試試用 monad 才對
+11:32:17 <yen3> 會簡化很多嗎 ?
+11:32:51 <yen3> 這個我倒是不知道，沒有對 brainfuck interpreter 有研究
+11:33:21 <_13h> 不曉得耶，還在努力搞懂... 不然學 haskell 就沒意義啦
+11:34:24 <_13h> 網路上有好幾個版本，不過我暫時不看，打算先試著自己寫一個出來
+11:34:32 <yen3> 嗯嗯，我好像不怎麼看 XD
+11:34:45 <yen3> 那麼有先用笨方法寫一個出來嗎 ?
+11:36:09 <yen3> 先來忙了，準備做事哩 XD。
+11:36:10 <yen3> 8~
+11:57:13 <_13h> 在 hugs 裡執行 hSetBuffering stdin NoBuffering  好像無效@_@
+13:39:07 <jaiyalas> agda 教學中！
+18:53:57 <CindyLinz> _13h: 覺得用 haskell 去實作 brainf**k 應該會比較辛苦, 會讓你覺得 haskell 很難用 ^^|
+18:54:10 <CindyLinz> _13h: 因為 brainf**k 長得太像圖靈機了 ^^|
+18:54:27 <CindyLinz> _13h: 如果用 haskell 實作 lambda calculous 應該會比較順 ^^
+19:08:36 <MnO2> 可以實作unlambda
+19:12:58 <_13h> 嗯... 很難用XD
+19:17:55 <CindyLinz> 沒聽過 unlambda... 不過 MnO2 跑掉了 ^^|
+19:19:04 <CindyLinz> _13h: 我的想法是這樣.. 圖靈機或函數迭代都是想像的模型.
+19:19:10 <_13h> 也是一個怪語言
+19:19:23 <CindyLinz> _13h: 它們最後執行的時候都是一堆機器指令, 理論上是一樣的
+19:19:55 <CindyLinz> _13h: 如果我們面對的問題的模型, 和我們寫程式時心中想的模型, 越接近的話, 寫起來就會越順
+19:20:06 <CindyLinz> _13h: 差異越大, 寫起來就會越迂迴
+19:21:02 <CindyLinz> _13h: 所以.... 如果你能夠用函數迭代的方式去理解 brainf**k 的話, 那用 haskell 可能也會很好寫 ^^|
+19:21:24 <CindyLinz> 可是它(至少表面上)和圖靈機那種模型太像了 XD
+19:21:29 <_13h> 嗯  前面我明白，但最後一句還在努力
+19:21:41 <_13h> 一直卡在 type
+19:22:20 <CindyLinz> 嗯, 有可能不是個好方向... 但也許如果到達了 Josh Ko 說的「得道」的境界時, 就沒問題了 XD
+19:22:55 <CindyLinz> Josh Ko 說.. 如果有一天, 你覺得世間萬事萬物都是 induction 的時候, 你就得道了....
+19:23:49 <_13h> 那大概還有很久XD  我是直接把我實際的需求拿來練習
+19:24:03 <_13h> 不過對型別的判斷實在太不熟了
+19:24:23 <_13h> 尤其是牽涉到 IO
+19:25:09 <CindyLinz> _13h: 會不會是你現在在做的東西, 它的 type 太少了, 所以讓你覺得很沒 fu, 寫起來很像 weak type?
+19:27:35 <_13h> 我沒有辦法判斷耶，我只用最簡單的 Char 和 Int 而已，但還是一直卡關，卡在 IO
+19:28:13 <CindyLinz> _13h: 等你卡到快瘋掉的時候再問人吧~
+19:28:32 <_13h> 嗯，努力中
+19:28:43 <CindyLinz> _13h: 胡亂想的過程應該也會不小心有新發現 :D
+19:28:43 <_13h> 要把 IO 跟其他運算分開實在太麻煩了
+19:29:48 <_13h> 例如，我沒辦法在遞迴裡又做 IO
+19:30:07 <_13h> 可能有什麼神奇的語法我還沒學到吧
+19:31:39 <CindyLinz> 如果你的遞迴函數的 return type 長的像 IO () 或 IO a 之類的話, 就可以喔
+19:32:20 <_13h> 我試試看
+19:43:56 <CindyLinz> > let f n = if n >= 0 then do { putStrLn $ show n ; f (n-1) } else return () in f 3
+19:43:57 <lambdabot>   <IO ()>
+19:44:17 <CindyLinz> 呃... 印出來的東西 lambdabot 不會貼上來 ^^|
+21:18:02 <favonia> CindyLinz: 沒有印出來啊... (?) 你只是寫說要印，沒有印出來...
+21:18:21 <favonia> CindyLinz: 食譜跟食物是不一樣的
+21:38:48 <letoh> 我覺得我應該還是卡在型別的判斷  程式回報的型別跟我想的都不太一樣XD
+21:48:06 <CindyLinz> favonia: 我用 ghci 跑是有印出來的呀
+21:48:22 <CindyLinz> favonia: 最後面有 in f 3
+21:48:26 <favonia> CindyLinz: 那是 GHCi 的功能啊 :/
+21:48:52 <CindyLinz> favonia: 等等.. 你是在講認真的還是在幽默啊 o.o
+21:49:14 <CindyLinz> favonia: 用 putStrLn 應該是要印出來沒錯啊 o.o
+21:49:53 <MnO2> Kindle paperwhite好生火啊~
+21:51:30 <favonia> CindyLinz: 那是 GHCi 幫你把某些食譜做出食物來，兩者還是不一樣的
+21:52:32 <CindyLinz> favonia: 你是要說 lambdabot 的 IO 收到 putStrLn 以後是不會做事的?
+21:52:55 <letoh> 意思是 let ... in .. 算是宣告?
+21:54:13 <favonia> CindyLinz: lambdabot 不會做危險的事情
+21:54:24 <favonia> CindyLinz: 你自己電腦上爆炸無所謂
+21:54:29 <CindyLinz> letoh: 是這個 ^^| # 21:52 < CindyLinz> favonia: 你是要說 lambdabot 的 IO 收到 putStrLn 以後是不會做事的?
+21:54:59 <letoh> 唔... 那什麼時候才會做事呢?
+21:56:08 <favonia> letoh: lambdabot 把食譜算出來了啊，只是不煮飯而已
+21:56:28 <letoh> 這是正常行為嗎?
+21:56:49 <favonia> letoh: 正常。GHCi 那個才是惡搞
+21:57:00 <favonia> letoh: 或是說不惡搞也沒辦法
+21:57:05 <letoh> 那什麼時候才會煮?
+21:57:17 <CindyLinz> letoh: 你可以想成是同一段 java 程式, 拿到不同的 jvm 上面, 行為會不一樣
+21:57:32 <favonia> letoh: 在 Haskell 的外面
+21:58:20 <favonia> letoh: 概念上 Haskell 的 main 只是算出食譜而已
+21:58:25 <letoh> 唔... 外面是指? haskell 外的世界?
+21:58:28 <letoh> 喔喔喔
+21:58:37 <favonia> letoh: 怎麼執行是「外面」的事情
+21:58:46 <letoh> 所以 GHCi 是因為實務上需要才這樣做的?
+21:58:59 <favonia> letoh: 可以這樣說吧，不然可能有點難用（？）
+21:59:10 <favonia> 當然實作有很多最佳化，但我覺得了解概念時先不要管那個
+21:59:20 <letoh> 嗯嗯
+22:01:12 <favonia> 食譜符合 monad 的介面... 對食譜來說 monad 那些操作可以把小食譜組合成更大的食譜
+22:01:55 <favonia> 還有很多奇怪的東西也符合 monad 的介面
+22:13:32 <CindyLinz> 哇~ unlambda 就是 Lambda Calculous 嘛 :p # http://www.madore.org/~david/programs/unlambda/
+23:49:23 <b4283> http://axisofeval.blogspot.tw/2011/09/kernel-underground.html
+23:49:33 <b4283> 下面那張圖蠻好玩的
+23:51:38 <CindyLinz>  XD
+23:55:06 <yen3> Kindle DX 變成棄嬰了 ... ORz
+23:56:18 <yen3> 我笑了 XD
+23:58:05 <MnO2> xD
+23:58:52 <yen3> Kindle DX 為什麼沒有 paperwrite 版 XD?

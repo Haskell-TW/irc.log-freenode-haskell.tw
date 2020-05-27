@@ -1,0 +1,24 @@
+00:09:36 <monochrom> SML 的應該不是 subtyping
+00:09:51 <suhorng> 恩, 剛剛試了一下確實不是
+00:10:33 <suhorng> 我真的不懂 Appel 的 Compiling with Continuation 的 Closure Conversion 那步...轉出來應該不會 type check 才對 @@"
+18:34:26 <cibs> @src intersperse
+18:34:26 <lambdabot> intersperse _   []     = []
+18:34:26 <lambdabot> intersperse _   [x]    = [x]
+18:34:26 <lambdabot> intersperse sep (x:xs) = x : sep : intersperse sep xs
+23:00:18 <suhorng> 呃..假如我是 import qualified A ((:+:))
+23:00:31 <suhorng> import qualified A ((:+))
+23:00:42 <suhorng> 那我該怎麼在 pattern matching 中使用 A.(:+) 呢..
+23:03:10 <suhorng> 找到了, 竟然是直接 A.:+   @@"
+23:04:22 <suhorng> 原來 record 的 pattern matching 不能套很多層? 不能寫 RecordA { fieldA = Pattern } @@?
+23:04:56 <suhorng> 喔沒事可以...
+23:18:35 <CindyLinz> :p
+23:21:37 <suhorng> 但是我還是對 A.:+ 不太理解XD 竟然不是 A.(:+)
+23:21:48 <CindyLinz> (A.:+) 就可以了?
+23:22:33 <CindyLinz> 這邊語法應該是有 ambiguity 的 @@"
+23:22:45 <CindyLinz> 如果有個 data constructor 叫作 A
+23:22:49 <suhorng> 會 parse error 耶
+23:23:04 <CindyLinz> A . (:+) 應該是函數組合吧
+23:23:52 <suhorng> 咦 不對, (A.:+) OK
+23:24:04 <suhorng> 恩..是呢, 可能會變 composition
+23:24:17 <suhorng> 不過 pattern matching 的位置應該比較固定阿....
+23:25:25 <CindyLinz> 嗯 反正沒有 n+k 了.. XD

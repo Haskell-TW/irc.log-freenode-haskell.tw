@@ -1,0 +1,16 @@
+01:27:07 <monochrom> 如果你有 replicate 3 (head "abc"), seq 會算至 head "abc" : replicate 2 (head "abc"), deepseq 會算至 'a' : 'a' : 'a' : []
+09:36:20 <favonia> deepseq 有點醜我覺得。還是把整個語言改成 strict-by-default 比較"簡單"...
+10:33:49 <pkmx> ghc -XStrict: https://ghc.haskell.org/trac/ghc/wiki/StrictPragma
+10:45:41 <miaoski> petercommand: CindyLinz 每次 extension  都開一堆
+10:47:37 <petercommand> XD
+10:48:24 <petercommand> 不會造成問題的extension 開下去都沒有關係呀 :p
+11:09:32 <suhorng> 竟然有 -XStrict...
+11:10:45 <suhorng> 唔, 這個是在很多地方都加成 "!" 的而已..?
+13:13:14 <CindyLinz> miaoski: 我沒有開一堆啦~ 那是為了講起來方便啊
+13:13:39 <CindyLinz> 要一次用到那麼多種, 很困難耶 XD
+20:31:22 <petercommand> @src ($!)
+20:31:22 <lambdabot> f $! x = x `seq` f x
+23:13:31 <suhorng> https://raw.githubusercontent.com/Dobiasd/articles/master/programming_language_learning_curves/haskell.png # https://github.com/Dobiasd/articles/blob/master/programming_language_learning_curves.md
+23:17:19 <petercommand> XDXD
+23:41:01 <jiang42> XD
+23:55:16 <suhorng> 想到到現在都還沒搞懂的 moeb 跟 MonadPeel XD

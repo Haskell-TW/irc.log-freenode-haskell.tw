@@ -1,0 +1,17 @@
+21:23:28 <mno2> CindyLinz: 我有一位 Haskell 朋友大概會在五月中左右拜訪台灣，然後待個一個月左右
+21:23:41 <mno2> 他是 servant 的作者之一
+21:24:03 <mno2> 不知道你有沒有興趣弄個 meetup 然後我推他給 talk  xD
+21:24:51 <mno2> https://hackage.haskell.org/package/servant
+21:29:12 <CindyLinz> 5.19 有 #39, 如果他時間可以在一個小時內的話可以放在下半場~~ :D
+21:30:12 <CindyLinz> 好像有點有趣 ^^ # http://haskell-servant.github.io/tutorial/0.4/server.html
+21:31:09 <CindyLinz> btw, 這兩天發現 meetup 的網頁改了, 有變得比較清爽 ^^
+21:31:11 <mno2> OK, 讓我問問他。
+21:31:38 <CindyLinz> 謝謝 :D
+21:32:57 <mno2> 不過他的 talk 是英文的就是
+21:33:00 <mno2> 希望不會有問題
+21:33:40 <mno2> 他對自造 Haskell compiler 也有興趣
+21:36:04 <CindyLinz> 沒問題~ 明天的也是英文 XD
+21:36:26 <CindyLinz> 頂多就是我聽不懂... (艸  還是有別人可以聽懂 QQ
+21:38:43 <CindyLinz> 啊如果他聊天的時候會想聊自造 compiler 的話, 他可能要有耐心一點 ._.
+21:56:29 <mno2> 了解
+23:45:17 <monochrom> 老眼昏花看錯了, 白造 Haskell compiler...

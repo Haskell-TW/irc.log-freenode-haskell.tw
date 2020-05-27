@@ -1,0 +1,205 @@
+01:41:44 <letoh> http://www.debuggex.com/  # A visual regular expression debugger, tester, and helper.
+01:41:48 <letoh> 好酷
+01:42:07 <letoh> 比 emacs 的 regex builder 還棒XD
+03:08:17 <favonia> 讓我想到 json 網站的圖
+03:19:05 <letoh> 有像
+03:28:44 <favonia> @pl \x -> f (g x) (h x)
+03:28:44 <lambdabot> liftM2 f g h
+03:29:34 <favonia> @pl \x -> f (g x) (h x) (i x)
+03:29:35 <lambdabot> ap (liftM2 f g h) i
+03:29:41 <favonia> @pl \x -> f (g x) (h x) (i x) (j x)
+03:29:41 <lambdabot> ap (ap (liftM2 f g h) i) j
+04:05:03 <letoh> 奇怪  上次那篇 oo 文，新的推文完全看不懂了...
+04:05:40 <letoh> 『雖然C++11加了lambda 但是離「純種」OO語言還是有一段距離在 @@』  這句話到底想講什麼?
+16:39:32 <suhorng> 加了lambda跟OO有什麼關係阿@@
+16:40:29 <_13h> 你有看到那篇文章最後幾個推文嗎?
+16:40:53 <_13h> 印象中是在講什麼 pure oo ?
+16:41:01 <suhorng> 他在說 function 也是 object 喔...
+16:41:25 <suhorng> 好吧我不懂OO....
+16:41:30 <_13h> 我印象中 java 最早的廣告好像有說自己是 pure oo language?
+16:42:16 <_13h> 不過 pure oo 的標準是什麼？只能允許一種 programming paradigm ?
+16:45:51 <suhorng> 嗯...像 "pure" lambda calculus 那樣的純XD?
+16:47:27 <suhorng> 話說 CMU 把 OO 移除那篇文章 下面回應也是戰一大串.....
+16:47:28 <_13h> 因為也有人說 c++ 有 generic 所以不純XD
+16:47:52 <suhorng> 不是聽說 Java 也有 generic @@
+16:48:26 <_13h> http://en.wikipedia.org/wiki/Object-oriented_programming#OOP_languages   java 被列在不純的那邊耶:p
+16:49:09 <_13h> "Languages designed mainly for OO programming, but with some procedural elements. Examples: C++, Java, C#, VB.NET, Python."
+16:50:25 <suhorng> 不管如何還是 multi-paradigm 的語言比較愉快XDDD
+16:50:48 <_13h> "If you want a pure OO language, try Smalltalk. Everything is an object in Smalltalk. This is not the case for Java, where primitive types (int, float) aren't objects by themselves."
+16:50:53 <suhorng> 嗯...不算Haskell, Haskell那樣感覺是non-strict的必然結果
+16:50:58 <_13h> suhorng: 太純的不好用嗎? XD
+16:51:22 <suhorng> 總是有些問題比較適合某種作法吧?
+16:51:37 <_13h> http://stackoverflow.com/questions/2148559/looking-for-a-pure-object-oriented-language
+16:51:41 <_13h> 是啊
+16:52:20 <_13h> 但借用那篇文章出現的 OOPer 這個名詞，對他們來說應該所有問題都可用 OOP 解掉? XD
+16:54:31 <suhorng> 我不覺得 囧
+16:54:33 <_13h> http://en.wikipedia.org/wiki/Law_of_the_instrument
+16:56:42 <_13h> http://stackoverflow.com/users/57582/nvram  這人的帳號真酷XD
+16:58:27 <b4283> Ruby 是吧
+17:02:11 <_13h> b4283: 怎麼了？我跟 ruby 不熟XD
+17:03:35 <b4283> 因為 ruby 的 slogan 就是 everything is an object
+17:04:49 <b4283> 但是 r6rs 裡面也都是叫 object，但它的意思就是一個東西... 不是有 method 有 field 的那種 object
+17:10:52 <_13h> 你是說 ruby 嗎？可能要看它的 object model ?
+18:42:01 <miaout17> 亂入 http://www.diveintopython.net/getting_to_know_python/everything_is_an_object.html
+18:46:15 <letoh> 依這觀點的話，python 應該要列入 pure oopl 呀XD
+20:27:11 <CindyLinz> C++ 是 pure 惡搞導向程式語言... (抖)
+20:39:13 <letoh> 嗯..pure XD
+22:05:10 <suhorng> everything is object第一個想到的是Python, 囧
+22:06:10 <letoh> 我是 Io，不過 Python 也是
+22:06:42 <suhorng> 沒用過 Orz
+22:07:02 <suhorng> 還有對於 OOP 我一直不瞭解的是演算法該怎麼包裝
+22:07:49 <letoh> class Algo { public retType algo1(args); };   這樣? XD
+22:07:52 <suhorng> 想不出來怎麼把它變成某種物件的method...(例如, Dijkstra's、一些 optimization problem 等等)
+22:07:57 <suhorng> 這不對吧www
+22:08:31 <letoh> 加油啊  helloworld 都可以 oop 了XD
+22:11:15 <suhorng> 還有我一直不懂 "functions are objects too"
+22:11:36 <letoh> callable object ?
+22:11:47 <suhorng> 想不到他有什麼method。 「funcobj.call」XD?
+22:11:58 <suhorng> 喔喔
+22:14:32 <letoh> Python 主要是 class 也是 object 這一點我蠻喜歡的
+22:17:01 <suhorng> 話說回來，OOP之外，這篇 http://existentialtype.wordpress.com/2011/03/16/what-is-a-functional-language/ 對 functional language 的觀點也滿有趣的
+22:17:20 <suhorng>  「For as readers of this blog surely know, there is no better imperative language than a functional language!  In fact I often say that Haskell is the world’s best imperative programming language; I’m only half (if that much) joking.」
+22:17:27 <suhorng> 後面列的那五點有點看不懂就是..
+22:18:03 <letoh> 有點想去玩那個 c++ 大師課程
+22:18:28 <suhorng> 衝一發吧www
+22:18:29 <letoh> 字好多  先丟到 kindle XD
+22:18:32 <suhorng> 加油
+22:18:33 <suhorng> XDD
+22:19:10 <letoh> 自從買了 kindle 以後，我留下的 tab 降到 5 個以下
+22:34:03 <CindyLinz> suhorng: OOP 的概念沒有那麼低階能伸入每個角落啦 :p # 22:07 < suhorng> 還有對於 OOP 我一直不瞭解的是演算法該怎麼包裝
+22:35:55 <CindyLinz> suhorng: 不像 Turing machine / Lambda calculus 的等級能夠用來定義計算
+22:37:26 <suhorng> 嗯...
+22:38:58 <letoh> 那五點好像有點能理解
+22:40:13 <CindyLinz> 有時也覺得怪怪的..
+22:40:17 <suhorng> 他說的 computation by evaluation / execution 那邊我不太瞭解指什麼XD
+22:40:49 <suhorng> CindyLinz: 哪個東西怪怪的~?
+22:41:08 <CindyLinz> 我沒有覺得 Haskell 用起來很低階, 可是 Haskell 看起來原始的 Lambda Calculus 味道還蠻重的
+22:41:28 <CindyLinz> 而 Turing maching 的世界裡, 高階一點的語言都和 Turing machine 長得一點都不像
+22:42:03 <CindyLinz> 大部分寫過程式的人, 回過頭來學計算理論, 初接觸到 Turing machine 的時候, 應該都會覺得, 哇! 怎麼有這麼爛這麼笨的機器
+22:42:26 <CindyLinz> 總覺得這兩個世界應該要對稱一點啊.. :|
+22:42:33 <letoh> suhorng: 我的理解是比較高階的語法和實作細節的差別?
+22:43:57 <suhorng> 嗯哼
+22:44:05 <CindyLinz> 覺得 Functional language 的世界也應該有許多和原始的東西不一樣的花樣..
+22:44:17 <CindyLinz> 嗯 Haskell class 應該算是一個
+22:44:48 <suhorng> 像SML的模組？
+22:45:41 <CindyLinz> suhorng: 有沒有 SML 的模組系統的簡單介紹? ^^| 就, 不用學整個 SML, 只看模組的部分的?
+22:45:55 <suhorng> 我覺得有不同的 data type 跟 pattern matching 也算？
+22:46:23 <CindyLinz> 想想...
+22:46:53 <CindyLinz> 所以其實 Turing machine 發展得奇形怪狀, 幾乎也都是 type 在往上疊而已嗎? (思)
+22:46:54 <suhorng> 那門PL課的影片算嗎XD week 4 的部份
+22:47:28 <CindyLinz> 可是 Turing machine 系統怎麼可以有函數呼叫啦...
+22:47:46 <CindyLinz> 應該要 goto 飛來飛去的啊 XD
+22:47:59 <suhorng> Turing machine 喔..
+22:48:22 <letoh> function call 不也是 goto 跑來跑去嗎?
+22:48:41 <CindyLinz> letoh: 可是會記得來時路 :|
+22:48:46 <CindyLinz> suhorng: link 來一下 :p
+22:49:24 <suhorng> CindyLinz: https://www.coursera.org/course/proglang
+22:49:40 <letoh> 要不記得也是可以的
+22:49:52 <letoh> 不過大部份語言應該沒得選XD
+22:50:06 <CindyLinz> 也許是 Turing machine 的原始長相跟人類的思路差異太大了, 所以人就會比較積極去找變通, 不然日子過不下去..
+22:50:14 <suhorng> 記得那個感覺已經跟現在的機器架構分佈開了
+22:50:25 <suhorng> 真不知道當初怎麼想到把 stack加進去的
+22:50:50 <CindyLinz> letoh: 重點不是能不能選擇不要回來的版本, 是不該有能回得來的版本可選啦 ^^|
+22:51:17 <CindyLinz> letoh: 是說, 現在有誰能夠只用不回來的版本寫程式而不吐血的嗎 XD
+22:51:41 <letoh> 寫 forth 的人大概都沒問題@_@
+22:52:13 <CindyLinz> P老師說他以前寫 fortran 寫到把 1 變成 2... XD
+22:52:28 <CindyLinz> 他一輩子忘不掉, 我覺得我聽了這個鬼故事以後也是一輩子忘不掉 XDD
+22:52:48 <letoh> 什麼意思啊?  1 變成 2 ?
+22:53:03 <CindyLinz> 寫了程式發現有錯, 所以就下去 trace debug
+22:53:18 <CindyLinz> trace 到最後發現 1 這個應該是常數的東西, 不知道為什麼它的值是 2
+22:53:28 <CindyLinz> 不知道為什麼會改到
+22:53:53 <letoh> 好可怕...
+22:54:25 <suhorng> 我有聽說wwww
+22:54:42 <suhorng> 因為 fortran compiler 把一些常數儲存起來
+22:54:48 <suhorng> 然後程式不小心改到就GG
+22:55:13 <CindyLinz> 所以.. fortran 如果寫類似 1:=2 是可以的嗎?
+22:55:54 <CindyLinz> suhorng: 啊 謝謝.. for link ^^
+22:56:23 <letoh> 現在 coursera 有台大開的課了
+22:56:29 <letoh> 上次逛一逛看到中文嚇一跳
+22:56:34 <suhorng> 找到囉XD http://stackoverflow.com/questions/1995113/strangest-language-feature
+22:56:40 <suhorng> letoh: pcyeh老師的機率!!
+22:56:56 <suhorng> 在那個 stackoverflow question 搜 fortran 會有XD
+22:57:08 <letoh> 我不認識XD 可以選嗎?
+22:57:47 <suhorng> 可以吧? 我也不清楚XD
+22:58:06 <letoh> 我還蠻想好好念一下機率，以前只囫圇吞棗隨便看過而已
+22:58:16 <CindyLinz> 讚.. XD # fortran f(1), all parameters were passed by reference
+22:59:15 <letoh> 是為了省 copy 的操作嗎?
+23:01:05 <suhorng> 說不定是懶而已, 所有函數呼叫都 pass by referene
+23:02:49 <suhorng> 剛剛看到這個又笑了
+23:02:55 <suhorng> "hello".toUpperCase()
+23:02:59 <suhorng> 3.toString()
+23:03:12 <CindyLinz> 很 ruby 的感覺?
+23:03:27 <suhorng> 後者在 javascript 中 parse 會錯, 應該要 3.0.toString()、3..toString() 之類
+23:03:51 <suhorng> 或 (3).toString()
+23:04:14 <CindyLinz> 物件 method 看不出來是改到它自己還是 return 一個不一樣的版本出來 :|
+23:04:23 <CindyLinz> 這個感覺不好....
+23:04:49 <suhorng> 其實根本是因為它看到 3.toString() 的 3. 期待這個應該是浮點數之類..
+23:05:29 <CindyLinz> 這語法好苦澀...
+23:05:32 <letoh> 好蠢...
+23:05:51 <letoh> 是語言定義就這樣嗎?
+23:06:04 <suhorng> 不確定欸XD 沒有研究過
+23:12:40 <letoh> python 裡面可以  3.0.hex()
+23:13:22 <CindyLinz> 呼叫 3 物件的 0 member 的 hex method  (誤)
+23:13:29 <letoh> XDXD
+23:13:34 <letoh> 3.0.is_integer()  -> True
+23:13:37 <letoh> 這啥鬼XD
+23:14:51 <suhorng> python裡面整數跟浮點數好像會自動轉型？
+23:15:10 <letoh> 自動轉型?
+23:15:10 <suhorng> oh no, 3.hex() 在 python 裡面也會 parse error..
+23:15:46 <letoh> dir(int) 裡沒有 hex
+23:15:54 <suhorng> 喔喔!!
+23:16:08 <letoh> 不過有 real，但試著呼叫看看... 3.real  爛掉
+23:16:33 <letoh> 怎麼弄出來的啊，明明 slot 裡有，卻辦法用XD
+23:16:38 <letoh> 怎麼弄出來的啊，明明 slot 裡有，卻沒辦法用XD
+23:16:45 <suhorng> 神秘
+23:16:59 <CindyLinz> (3).real 試試?
+23:17:47 <suhorng> 3..real 也可以 XDDDDD
+23:17:52 <letoh> 可以XD
+23:17:57 <suhorng> 兩個點太有趣了
+23:18:17 <CindyLinz> 那如果有個變數叫 real
+23:18:30 <CindyLinz> 3..real 可以當 range 用嗎?
+23:18:47 <letoh> 還好 python 沒這個語法
+23:19:12 <letoh> python 好像不太喜歡語法糖XD
+23:19:15 <suhorng> 不行吧XDDD
+23:19:47 <letoh> range 得真的寫 range(3, real)，想變個語法都不太容易XD
+23:23:07 <CindyLinz> suhorng: 你給的課程 link 是不是要 sign up 才能看啊?
+23:23:19 <letoh> 好像是
+23:23:26 <suhorng> 是
+23:23:38 <CindyLinz> 這樣, 如果 sign up 只是為了看一篇是不是不太好? ^^|
+23:27:56 <suhorng> hmm..
+23:28:12 <suhorng> 我之前也有 sign up 過密碼學不過一篇都沒看 囧
+23:28:35 <CindyLinz> 哦~ 所以我至少有看一篇這樣? XD
+23:30:43 <CindyLinz> 它的 Honor Code 不包含不能缺課 :D
+23:31:49 <suhorng> 哈哈
+23:32:58 <suhorng> letoh: forth看起來好有趣喔
+23:33:32 <letoh> 還不錯啦  其中一種 model 叫做 dtc.. 都靠 jmp 跳來跳去，完全沒有 call
+23:33:58 <suhorng> CindyLinz: 剛才才看到 Standard ML 的 wiki page 就有了XDrz
+23:34:02 <suhorng> dtc...
+23:34:09 <letoh> 沒有 call stack，根本回不去
+23:34:44 <CindyLinz> suhorng: 哼哼, 我還是開投影片了!
+23:37:19 <CindyLinz> suhorng: 看起來跟 Haskell 的差別是 SML 可以把好幾個 structure 合寫在同一個檔案裡, 而 Haskell 是一個 module 一個檔?
+23:37:31 <CindyLinz> 還是說 SML 的 structure 可以巢狀?
+23:37:41 <CindyLinz> structuer 裡面還有 裡．structure 這樣?
+23:46:01 <letoh> 百行內隨便刻一下就可以弄出一套，然後就可以開始用各種腳本做測試了
+23:46:12 <suhorng> wow...
+23:46:34 <letoh> 當時選過 lua，但要 port 到硬體上，搞好久還是有問題...
+23:47:41 <letoh> 主要是我的平台沒有 os 或 clib... 自己刻語言最快
+23:48:41 <suhorng> 等等　連 os 都沒有..
+23:49:10 <letoh> 嗯  或某種小型 rtos，總之不是 windows 或 linux
+23:49:20 <suhorng> 嗯..
+23:49:58 <letoh> suhorng: 對了  那個百行是說 asm 喔
+23:50:25 <letoh> 所以連 c compiler 都不需要就可以先弄出來了... 功能不見得完整，但至少可以用XD
+23:50:49 <suhorng> !!
+23:50:51 <CindyLinz> 是有 .while, .if, .else 可以用的 asm 還是沒有的? :p
+23:50:59 <suhorng> 滿厲害的
+23:51:02 <letoh> 不需要那些耶
+23:51:13 <letoh> 語言自己可以變出來  類似 lisp 那樣
+23:51:15 <suhorng> 第一次聽到這種語言XD
+23:51:21 <suhorng> 強大的macro？
+23:51:25 <letoh> 對
+23:52:03 <letoh> while if 可以用其他 primitive 變出來..
+23:53:25 <letoh> 唔  當作古老神話就好，台灣的 forth 時代已經過去很久了... 連當時出版的書在圖書館都很難找到XD
+23:58:56 <CindyLinz> wiki 上面前面的例子看起來有點像stack base的組語耶
+23:59:05 <CindyLinz> 像 ps 檔的那種感覺
+23:59:16 <letoh> 是吧  就是 stack machine
+23:59:43 <letoh> 喔..ps 有點像 typed forth? XD

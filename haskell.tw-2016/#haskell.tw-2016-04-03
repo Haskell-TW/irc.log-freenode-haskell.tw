@@ -1,0 +1,6 @@
+00:03:31 <pkmx> 比起我的大腦 我比較選擇相信GHC (無誤
+00:10:28 <monochrom> 最理想是自己和電腦互相啟發
+00:39:20 <CindyLinz> 聽起來被 monochrom 用過的 ghc 會和正常的不一樣...
+07:04:20 <caasih> :cw 只能開 quickfix window ，沒有關掉的功能... 的確還是 :only 方便 XD
+11:33:14 <caasih> 原來 vim-dispatch 可以跟 xmonad 一起用。 https://github.com/tpope/vim-dispatch/issues/155
+11:33:32 <caasih> 我只有 tmux ⋯

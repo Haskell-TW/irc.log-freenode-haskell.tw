@@ -1,0 +1,72 @@
+21:06:05 <suhorng> http://www.yinwang.org/blog-cn/2013/04/17/languages/
+21:11:52 <suhorng> 「之前写了那么多 Haskell 的不好的地方，却没有提到它好的地方。其实我必须承认，我从 Haskell 身上学到了非常重要的东西，……」XD
+21:13:12 <suhorng> 但是到底該怎麼理解 type 呢... 上次有沒學過 Haskell 的人問我什麼是 type, 答不出來... 後來跟他說 type system 是一種邏輯系統不知道洽不恰當 QQ
+21:17:41 <CindyLinz> 你想讓他「會」到什麼程度?
+21:17:56 <CindyLinz> 如果沒很在意讓他「會」的話, 可以講得禪味重一點 Zr
+21:17:57 <CindyLinz> :p
+21:18:26 <CindyLinz> type 可 type, 非 proper type.. (逃)
+21:19:44 <suhorng> 他是學數學的人 我想用正常數學系的角度跟他介紹 "type" 是什麼東西XD
+21:20:24 <CindyLinz> 認真說, 我覺得 type 是我們拿來簡化, 拿來理解這個世界的模型.. type system 越完整, 能夠描述越複雜的情境, 讓我們能事先推導推論並掌握這錯綜複雜的處境中的所有可能情形
+21:20:43 <CindyLinz> 呃, 我這段是偏工程的 :Q
+21:21:07 <suhorng> 嗯, 感覺可以從很多不同的角度, 但也很難說實際上 "是什麼".... 沒有實際用不好體會？--不可言傳--
+21:22:01 <CindyLinz> 數學系的話... type 就是一個 entity set 和作用其上的 operator set, 還有它們之間的性質, 這樣就好了 :p
+21:22:54 <suhorng> XDDD
+21:23:27 <CindyLinz> 數學系應該更形而上.. 我們應該就不用煩惱要怎麼翻譯得具體了.....
+21:27:11 <suhorng> 另外就是對於這樣的程式：data Nat = Zero | Suc Nat 跟 FLOLAC 教的 heyting arithmetic (zero, suc zero, .., (suc x) + y = suc (x + y) 等等...) 我原本以為是對應的東西, 可是後來發現後面那個應該是在 type 上面的 :( 兩者不在同一層...
+21:27:36 <suhorng> 這樣舉例用前者來舉例給數學系的聽感覺好像比較沒說服力
+21:27:53 <CindyLinz> 嗯嗯, 你要講成邏輯, 用 Agda 比較好
+21:28:11 <CindyLinz> Haskell type 的描述性還不夠
+21:29:05 <suhorng> 瞭解
+21:29:29 <CindyLinz> Flolac 的時候 Josh Ko 根本就是故意在置入 Agda 的啊.... wwww
+21:30:42 <CindyLinz> type 層次的 data Nat = Zero | Suc Nat 在 ghc 裡面有加 extension 來做了.. 很 hack 的感覺, 不知道完整性多高 :p
+21:30:47 <suhorng> 包括第三天講義的後面XDDD
+21:30:57 <CindyLinz> hack 感覺就應該是東漏西漏的 XD
+21:31:00 <suhorng> 嘔嘔~GHC也太厲害了
+21:33:21 <CindyLinz> http://www.haskell.org/ghc/docs/7.6-latest/html/users_guide/promotion.html
+21:37:32 <suhorng> 天阿可以這樣玩耶XDDDD
+22:34:05 <MnO2> 「我曾經對人說 C++ 裡面其實有一些好東西，但是我沒有說的是，C++ 裡面的壞東西實在太多了。」我看到這句話撲疵了
+22:36:39 <suhorng> XD 可惜我在學校還沒碰過能用 C/C++ 以外語言寫的作業
+22:37:03 <letoh> 以前我的作業幾乎不限語言
+22:37:34 <MnO2> 先猜測他要說 C++ 的好的部份是 linear type 的部份
+22:37:42 <MnO2> 不知道會不會中
+22:41:53 <suhorng> 噢漏了一個, OOP得用Java..
+22:42:18 <suhorng> 「我还是下次再讲吧。」w
+22:43:56 <MnO2> 關於解釋型態，我剛剛想到的是象棋
+22:44:19 <MnO2> 每種棋子都有描述他行走的規則
+22:45:17 <suhorng> 然後也有規則是棋子間的互動？
+22:45:30 <MnO2> 所以規範了每盤棋的狀態移轉
+22:45:59 <MnO2> 如果你寫了一個 function 把馬當車用，那就「犯規」
+22:46:09 <suhorng> 嗯
+22:46:34 <letoh> 原來是搬家了..
+22:47:09 <MnO2> 這個例子是我想到比較同時兼具 programming, 清楚的「分類」，跟代數的 fu 的例子
+22:48:05 <MnO2> 然後又是每個人都能具體理解的例子
+22:49:37 <MnO2> 如果跟數學系但沒有稍微開竅直接說代數的話，我覺得會直接被反問說，那跟代數有什麼區別
+22:50:12 <suhorng> 這 XDDD
+22:51:35 <suhorng> 想起另一種說法，type 是 expression 行為的近似
+22:52:34 <MnO2> 那就看 expression 定得多複雜？
+22:53:45 <suhorng> 有人提出這樣的想法：先定義了λ-calculus要怎麼跑(改寫,訂出語義), 然後作一些抽象化跟模糊化, 得到 type & type inference algorithm
+22:54:08 <suhorng> 所以這裡的expression大概是λ-expression加一些常數的等級XDrz
+22:55:24 <suhorng> 但是比起來果然還是不太一樣, 這樣好像不太能凸顯type跟跑程式一個是靜態一個是動態的區分@@
+22:56:44 <MnO2> 不過要跟大家解釋 λ-calculus 就...
+22:56:51 <suhorng> 是 Q_Q
+22:57:27 <MnO2> 我覺得如果講到哲學程度，就是玩各種符號系統
+22:57:47 <MnO2> 只要看到有趣的系統、規則就可以去參一腳
+22:58:08 <MnO2> 近年來看 cchan 好像也會去參加一些 Machine Learning 會議
+22:58:33 <MnO2> 也許機率模型也有符號系統可以玩
+22:59:14 <suhorng> 真有趣
+23:02:09 <letoh> 看完了  我一直以為 nil/#f 那件事才是對的耶
+23:02:17 <letoh> 一直到我學了 java
+23:02:47 <letoh> boolean 很機車  花了一點時間習慣它XD
+23:04:01 <suhorng> letoh: LISPer!
+23:05:14 <letoh> 我是先學 lisp 沒錯呀XD  不過後來學 c 也是類似設計  所以一直覺得沒什麼錯
+23:06:02 <letoh> 最近寫 python 一直覺得什麼東西都可以 if / if not 感覺好怪XD
+23:06:06 <MnO2> 所以我一直覺得每個人第一個學的語言影響很大 xD
+23:08:18 <MnO2> http://stackoverflow.com/questions/16015020/what-does-coalgebra-mean-in-the-context-of-programming
+23:08:26 <MnO2> 回答太專業了
+23:08:31 <letoh> forth 也是 0 以外的東西都是 true... 不過真正的 true 是 -1
+23:10:00 <MnO2> https://www.fpcomplete.com/page/case-studies  增加了兩個新 cases
+23:11:05 <letoh> 以前忘了在哪看到的  if(!ptr) 跟 if(NULL == ptr) 意義是不一樣的
+23:11:20 <letoh> 不過基本上我還是常常寫 if(!ptr) XD
+23:14:13 <MnO2> 先不說型態問題。以前 NULL 並不一定是 0 吧，雖然好像最後標準屈服了。
+23:18:30 <letoh> 舊的程式碼裡還是很常看到 char *data = 0; 啊  而且這個 char * 其實是當作 void * 來用
+23:22:18 <MnO2> 那就是看編譯器了

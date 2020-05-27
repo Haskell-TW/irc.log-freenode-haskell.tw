@@ -1,0 +1,9 @@
+14:23:10 <hashcat_> 其實沒啥好說
+14:23:22 <hashcat_> 看看就知道了
+14:23:54 <hashcat_> 只是看到有小傻眼
+23:12:09 <jiajun> 请问是不是函数定义的时候普通函数就会用typeclass而高阶函数就不用呢？
+23:13:19 <jiajun> 比如:quicksort :: (Ord a)=> [a] -> [a],而map :: (a -> b) -> [a] -> [a]
+23:18:28 <CindyLinz> jiajun: 這問題聽不是很明白欸.. 普通函數或高階函數都可以選擇用或不用 type class 時
+23:18:35 <CindyLinz> jiajun: 這問題聽不是很明白欸.. 普通函數或高階函數都可以選擇用或不用 type class 啊
+23:23:29 <jiajun> 嗯，有人刚给我解答了，是因为quicksort需要直接处理数据，所以要指定typeclass，map不需要:)
+23:49:31 <CindyLinz> jiajun: 嗯嗯^^

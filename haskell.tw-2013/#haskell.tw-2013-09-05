@@ -1,0 +1,35 @@
+15:00:06 <mno2> http://www.infoq.com/presentations/Expression-of-Ideas
+23:47:03 <CindyLinz> suhorng: :D
+23:47:43 <suhorng> hihi!
+23:47:52 <suhorng> 投影片我修一下錯字再po XD
+23:48:19 <CindyLinz> suhorng: 跟你確認一下, 你這個 VM 做的事情是不是就是把一個 lambda language 先 compile 成類似現在一般組語的東西, 然後再執行
+23:48:54 <CindyLinz> 不過你執行的時候是用 haskell 這種 functional language 去實作一個, 比較像 imperative 的組語?
+23:49:30 <suhorng> 是compile成類似一般組語的東西
+23:49:39 <CindyLinz> 因為我看你的執行時期的環境, 有 stack, symbol table, 感覺跟 x86 蠻像的?
+23:49:52 <suhorng> 至於最後用 Haskell 寫或用 C/C++ 寫都可以 (C/C++的部份今天沒貼出來)
+23:50:15 <CindyLinz> 嗯嗯 好 ^^
+23:50:45 <suhorng> 對阿, 有 stack, 而且有好多個 stack. 跟 x86 還是有段差距啦XD 我們這個比較 "重用" stack, 不是 registor-based
+23:50:47 <CindyLinz> 因為我一開始有誤會你的題目, 以為是一個環境看起來就像 lambda 的 VM, 所以有一大半時間在苦惱哪個是哪個
+23:50:55 <suhorng> *register
+23:51:05 <suhorng> XD
+23:51:47 <CindyLinz> 是到後半開始腦筋慢慢轉彎才開始好像聽得懂了.. 不過回來還是跟你確認一下 ^^
+23:52:02 <CindyLinz> 講的時候氣勢很讚..
+23:52:13 <CindyLinz> 不過有點像是緊張的時候才會冒出來的氣勢.. :p
+23:52:55 <suhorng> 嗯w 像這種 stack-based 的機器感覺就比較像是專門給 λ-calculus 用的一樣(欸, 不過我不會 forth...), SECD也是 stack-based, Lisp machine 好像也是(沒仔細看)
+23:53:02 <suhorng> 氣勢很可怕嗎orz?
+23:54:30 <CindyLinz> 真的嗎?? 在你說 ocaml 是用這種模型的機器的時候, 我還訝異了一下.. XD
+23:54:47 <CindyLinz> 看起來不太 lambda 啊... ._.
+23:55:18 <CindyLinz> 因為用 stack 這樣堆堆.. 我就覺得好像 x86 XD
+23:55:29 <suhorng> XDD 沒有樸素 \-calculus 的感覺
+23:55:33 <CindyLinz> 對對對
+23:55:51 <CindyLinz> 而且還有 destructive 把 stack[top] += 1 之類的動作
+23:56:17 <suhorng> 欸? 不能 destructive 阿!
+23:56:33 <CindyLinz> 咦? 你實作沒有存回去嗎?
+23:56:56 <suhorng> 我實作是 non-destructive, new一個出來然後新指標指到那邊
+23:57:09 <CindyLinz> 那這邊沒跟到... www
+23:57:33 <suhorng> 有點像直接把 Haskell 寫的轉成 C++ (除了 lazy 變 strict) 嗯..因為想說更低階的部份隨便大家怎麼寫XD
+23:58:12 <CindyLinz> mm
+23:58:29 <suhorng> 就像 eval (Inc c) env (I n : vs) stk = eval c env (I (n+1) : vs) stk 這個部份我是直接 cons, 所以是 new 一個記憶體出來指過去
+23:58:40 <CindyLinz> 你有 new 新的出來歐? 那你有回收舊的嗎?
+23:58:44 <suhorng> 舊的 I n 沒有被動
+23:59:05 <suhorng> 交給 GC .. XD

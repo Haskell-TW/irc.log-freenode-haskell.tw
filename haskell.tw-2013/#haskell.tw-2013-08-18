@@ -1,0 +1,44 @@
+00:04:07 <suhorng> hashcat: Member t (t :> r) 這個嗎?
+00:04:39 <hashcat> 有種不一致的感覺
+00:05:16 <suhorng> 像是拿來當遞迴終止條件
+00:06:12 <suhorng> 應該有更好的作法 ._. 比起這樣用 Member t (t :> r) 跟 Member t r => Member t (t' :> r) 這樣詭異的寫法
+00:07:47 <hashcat> http://www.haskell.org/ghc/docs/latest/html/users_guide/type-class-extensions.html#instance-overlap
+00:08:13 <hashcat> The -XOverlappingInstances flag instructs GHC to allow more than one instance to match, provided there is a most specific one.
+00:14:35 <hashcat> 用FunctionalDependencies?
+00:15:19 <suhorng> 唔
+00:16:17 <suhorng> 這邊說的一個比較 specific 雖然可以不過也有點勉強...
+00:16:40 <suhorng> 來想想看怎麼用@@
+00:22:48 <CindyLinz> 記得我那時候是這樣用: 我弄了一個 type, 是 ReaderT, WriterT, StateT 之類的疊起來的
+00:23:12 <CindyLinz> 我希望這個 type 同時滿足 MonadReader, MonadWriter, MonadState, 讓我可以直接用它們的函數
+00:23:36 <CindyLinz> 然後我又想偷懶, 不要自己一層一層加
+00:25:17 <suhorng> 到目前為止好像還OK?
+00:25:35 <CindyLinz> (正在用力想那時怎麼寫的)
+00:26:00 <CindyLinz> 我記得我寫了個 generic 的, MonadReader 可以自動往外推的東西
+00:26:40 <CindyLinz> 但是這在最裡面的 ReaderT 會出現重疊, 因為它自己也是 MonadReader 符合我加的規則, 同時它自己又有 MonadReader 的定義
+00:26:50 <CindyLinz> 所以不開 extension 會壞掉
+00:28:40 <suhorng> 有點像遞迴的終止條件那層?
+00:28:50 <CindyLinz> 有像
+00:29:37 <CindyLinz> 我寫了個.. type PutT m a = WriterT B.Builder m a
+00:29:37 <hashcat> 我想到了一招
+00:29:52 <CindyLinz> 然後我定義了 class (Monad m) => MonadPut m
+00:30:01 <CindyLinz> instance (Monad m) => MonadPut (WriterT B.Builder m)
+00:30:09 <CindyLinz> instance (MonadTrans t, MonadPut m, Monad (t m)) => MonadPut (t m)
+00:30:26 <CindyLinz> 最下面這一條需要開 extension
+00:30:40 <hashcat> instance (Functor t', Member t (t'' :> r), Member t'' r) => Member t (t' :> t'' :> r) where
+00:30:46 <hashcat> 定義成這鳥樣子
+00:31:42 <CindyLinz> (腦筋繼續打結中....)
+00:32:05 <suhorng> 看起來的確有重疊的味道XD
+00:33:09 <CindyLinz> 我加這最後一條, 為了不用去把 ReaderT, WriterT, StateT 這些, 每一個可能用到的都拿出來寫一遍 MonadPut 的 instance
+00:33:37 <CindyLinz> GHC 內建的 lib 是已經把彼此的排列組合都定好了...
+00:33:41 <hashcat> 放棄 = =
+00:33:44 <suhorng> 唔
+00:33:57 <CindyLinz> 可是我自己寫的 MonadPut, GHC 沒幫我寫.. XD
+00:34:10 <suhorng> XDD
+00:34:18 <suhorng> 話說我看到的最原本的 implementation 用 Data.Typeable.. 外掛 orz
+00:34:36 <CindyLinz> Typeable.. XD
+00:40:06 <suhorng> hashcat: 還不太能理解, 後面 Member t'' r 有點怪?
+00:41:00 <hashcat> 我是想說能不先展開, 提供instance多點資訊
+00:41:32 <suhorng> 多弄個幾層這樣?
+00:41:32 <hashcat> 結果接下來要定義的也要用到OverlappingInstance
+00:42:01 <suhorng> QQ
+10:54:51 <Yu-Lin> 看著網路上一些 sml 的討論，越看那程式碼就越覺得我好像到了 ada 的世界一樣

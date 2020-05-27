@@ -1,0 +1,11 @@
+18:38:22 <suhorng> [haskell] 如果說我有個 String, 要切出每一段 /ab*/ 大家會怎麼寫? (比較漂亮&易懂)
+18:38:51 <suhorng> p.s.只是示意 實際上不是直接match  ab*, 而 a b 都是某種判斷式之類...
+18:59:54 <Yu-Lin> 下班回家
+20:14:50 <CindyLinz> 你寫得這麼 regex.. 那就找個 regex 的 lib 來用?
+20:25:18 <hashcat> 問一下
+20:25:44 <hashcat> 有人知道MIT JUMBO是啥玩意嘛
+23:35:43 <monochrom> @type break
+23:35:44 <lambdabot> (a -> Bool) -> [a] -> ([a], [a])
+23:36:11 <monochrom> > break ('a' ==) "bbbabbb"
+23:36:12 <lambdabot>   ("bbb","abbb")
+23:38:34 <monochrom> 我可能會在break上再加一些

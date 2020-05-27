@@ -1,0 +1,169 @@
+09:54:44 <MnO2> ghci 似乎沒有 explain 某個 expression 每一段的 type 的功能？
+09:55:31 <lcamel> 因為看了昨天的 log , 有一段看不懂
+09:56:06 <lcamel> 所以只好人工 explain ... 想問看看有沒有讓 compiler / parser / interpreter 和我多講一點話的方法
+09:57:00 <lcamel> 昨天 05:35:25 <favonia> > (return 100 >>= (+) >>= (*) >>= (-)) 2
+09:57:20 <lcamel> 但是這句丟到 ghci 裡面會有 error
+09:57:52 <lcamel> 後來請教 MnO2, 他說, 要 import Control.Monad.Instances, 做了, 的確好了!
+09:59:21 <suhorng> MnO2: GHC 7.8
+09:59:29 <suhorng> http://www.haskell.org/haskellwiki/GHC/TypeHoles
+09:59:54 <lcamel> 那, 第一個問題是, lambdabot 有沒有 command 可以問它, "你現在 import 了什麼?" ?
+10:01:21 <lcamel> 現在假設我知道要 import Control.Monad.Instances 了, 當我看到一句看不懂的 expression 時, 比方說, (return 100 >>= (+) >>= (*) >>= (-)) 2, 有沒有什麼程式/工具可以 "explain" 一下這句的意思?
+10:01:36 <lcamel> 上面是第二個問題.
+10:03:17 <lcamel> 第三個問題是: 現在透過 "人工 explain" 的機制, :info >>= 知道 >>= 是 infixl, 所以上面那句加括號變成 (((return 100 >>= (+)) >>= (*)) >>= (-)) 2
+10:10:12 <lcamel> 所以單看 return 100 >>= (+) ,  其中 (>>=) 是 m a -> (a -> m b) -> m b  , 所以 (+) :: a -> (a -> a) 是 a -> m b , 也就是 a -> a 是 m b, 到這邊要怎麼問(:t ? :i ? ..?)才能問出這裡是 Monad ((->) r) ?
+10:11:48 <lcamel> 以上是全部的三個問題, 謝謝.
+10:12:58 <favonia> lcamel: (1) 看 lambdabot 的原始碼可能最快...
+10:13:09 <favonia> lcamel: 我不知道有沒有其他比較友善的方法
+10:13:46 <favonia> lcamel: (2) 可以以去查 Monad 有哪些 instance
+10:14:12 <favonia> 這就到了 3
+10:14:31 <lcamel> favonia: (1) 了解了
+10:14:38 <favonia> a -> m b 和 a -> (a -> a) 要變成一樣，那就是...
+10:14:52 <favonia> m b = a -> a
+10:15:32 <lcamel> favonia: (2) 想多問一下, 有類似 explain 的工具嗎? 至少會告知 user 是 >>= 是 left association 幫加 () 的 ... ?
+10:15:47 <favonia> @hoogle >>=
+10:15:47 <lambdabot> Prelude (>>=) :: Monad m => m a -> (a -> m b) -> m b
+10:15:47 <lambdabot> Control.Monad (>>=) :: Monad m => m a -> (a -> m b) -> m b
+10:15:47 <lambdabot> Control.Monad.Instances (>>=) :: Monad m => m a -> (a -> m b) -> m b
+10:15:48 <suhorng> favonia: 所以還是要知道 ((->) r) 是個 Monad?
+10:16:09 <suhorng> lcamel: 用 :i (>>=) 也會噴出來
+10:16:59 <lcamel> favonia: (2) 的問題不是單針對原來那句 expression, 是 general 的, 丟一句話給 ghci 或誰, 會吐出詳細的, 類似 tree 狀的, reference 哪個 module 的哪個 function 的資訊
+10:17:38 <lcamel> favonia: 因為現在我沒找到, 所以才進行 (3) 的 "人工 explain" 程序
+10:17:45 <favonia> @info Monad
+10:17:45 <lambdabot> Monad
+10:18:27 <favonia> lcamel: 你可以在 ghci 用 :i Monad
+10:18:54 <lcamel> favonia: 嗯嗯
+10:21:04 <lcamel> favonia: 所以, 我到了 m b 是 a -> a 之後, 問 :i Monad 看每句 instance, 然後看出應該是 instance [safe] Monad ((->) r) 這句造成的?
+10:21:31 <favonia> 通常只有一個會滿足
+10:21:45 <favonia> 除非又用了 GHC 的什麼怪功能
+10:21:58 <lcamel> favonia: 謝謝 ~
+10:22:36 <suhorng> 不過 :i 也需要有 import 的才會顯示 XD
+10:23:00 <lcamel> suhorng: 所以要回頭問/看 lambdabot XD
+10:23:22 <favonia> lcamel: http://hackage.haskell.org/packages/archive/base/latest/doc/html/Prelude.html#t:Monad
+10:23:27 <suhorng> 跺耶直接問lambdabot XDD
+10:24:01 <favonia> suhorng: lambdabot 超多怪東西
+10:24:05 <favonia> > 1 2 3 4 5
+10:24:06 <lambdabot>   Could not deduce (GHC.Num.Num
+10:24:07 <lambdabot>                      (GHC.Integer.Type.Intege...
+10:24:11 <favonia> > 1 2
+10:24:12 <lambdabot>   Could not deduce (GHC.Num.Num (GHC.Integer.Type.Integer -> t))
+10:24:13 <lambdabot>    arising f...
+10:24:18 <favonia> 咦
+10:24:20 <favonia> 關掉了嗎
+10:24:25 <lcamel> suhorng: 我看 commands http://code.haskell.org/lambdabot/COMMANDS 有 import 字樣的, 只有 instances-importing, 但是問它 @instances-importing 沒有好結果
+10:25:07 <suhorng> @instances
+10:25:08 <lambdabot> Couldn't find class `'. Try @instances-importing
+10:25:16 <suhorng> @instances-importing
+10:25:17 <lambdabot> Plugin `instances' failed with: Prelude.init: empty list
+10:25:25 <suhorng> 天阿
+10:25:34 <favonia> @instances-importing Monad
+10:25:34 <lambdabot> ((->) r), ArrowMonad a, ContT r m, Either e, ErrorT e m, IO, Maybe, RWST r w s m, ReaderT r m, ST s, StateT s m, WriterT w m, []
+10:25:44 <favonia> @instances-importing suhorng
+10:25:44 <lambdabot> Couldn't find class `suhorng'. Try @instances-importing
+10:25:53 <suhorng> 原來如此!!
+10:26:14 <favonia> @instances-importing Monad Foldable
+10:26:15 <lambdabot> Couldn't find class `Foldable'. Try @instances-importing
+10:26:35 <favonia> @instances-importing Monad Functor
+10:26:36 <lambdabot> ((,) a), ((->) r), Either a, IO, Maybe, []
+10:26:56 <favonia> @instances-importing Monad Functor MonadFix
+10:26:56 <lambdabot> Couldn't find class `MonadFix'. Try @instances-importing
+10:27:12 <favonia> @instances-importing Monad Functor Applicative
+10:27:12 <lambdabot> Couldn't find class `Applicative'. Try @instances-importing
+10:27:19 <suhorng> 咦..
+10:27:28 <favonia> @instances-importing Monad Functor Num
+10:27:29 <lambdabot> Double, Float, Int, Integer
+10:27:39 <favonia> 所以根本只有最後一個參數有效
+10:27:48 <favonia> @instances-importing lambdabot lambdabot lambdabot Num
+10:27:49 <lambdabot> Double, Float, Int, Integer
+10:27:58 <favonia> 這到底是誰寫的。。。
+10:28:26 <favonia> @instances lambdabot lambdabot lambdabot Num
+10:28:27 <lambdabot> Couldn't find class `lambdabot lambdabot lambdabot Num'. Try @instances-importing
+10:28:35 <favonia> @instances Num
+10:28:36 <lambdabot> Double, Float, Int, Integer
+10:28:55 <favonia> 我覺得我不看原始碼不知道這兩個指令真正的意思
+10:29:01 <suhorng> @let abcdefghijklmnopqrstuvwxyz = 5
+10:29:02 <lambdabot>  Defined.
+10:29:11 <suhorng> > abcdefghijklmnopqrstuvwxyz
+10:29:15 <lambdabot>   5
+10:29:18 <suhorng> 這...
+10:30:17 <suhorng> http://hackage.haskell.org/packages/archive/lambdabot/4.3/doc/html/Lambdabot-Plugin-Instances.html
+10:31:03 <suhorng> @instances-importing Text.Html Data.Tree Show
+10:31:04 <lambdabot> (), (a, b), (a, b, c), (a, b, c, d), Bool, Char, Double, Either a b, Float, Int, Integer, Maybe a, Ordering, [a]
+10:33:47 <lcamel> 那要問  @instances-importing 加什麼可以得到 Control.Monad.Instances ... ?
+10:44:07 <lcamel> 不好意思引一下自己問過的問題, 上面問題 2 可以看成是這個問題的一個 instance: https://www.facebook.com/LCamel/posts/10200721277408848
+16:20:49 <godfat1> @instances Monad
+16:20:50 <lambdabot> ((->) r), ArrowMonad a, ContT r m, Either e, ErrorT e m, IO, Maybe, RWST r w s m, ReaderT r m, ST s, StateT s m, WriterT w m, []
+17:09:15 <Jhe__> list comprehension 跟 pattern matching 有分說誰好誰壞嗎@@?
+17:10:32 <godfat1> 這兩個好像不是同等關係..?
+17:11:38 <Jhe__> 是說 有一些東西 list comprehesion  跟 pattern matching 都可以作
+17:11:52 <Jhe__> 以同樣要求的前提下
+17:12:07 <Jhe__> 都可以嗎@@?
+17:12:18 <Jhe__> 感覺有一些 list comprehension 用起來比較漂亮
+17:12:34 <godfat1> 有例子嗎？就我所知，list comprehension 是建構 list, 但 pattern matching 是解構 data
+17:13:05 <Jhe__> 自訂一個 length function
+17:13:16 <Jhe__> 入門書 裡面的 sample
+17:13:36 <Jhe__> sum [1 | _ <- xs]
+17:14:16 <Jhe__> pattern matching 就要寫三行@@
+17:15:09 <godfat1> 意思類似 sum (map (const 1) xs)
+17:15:47 <Jhe__> const 是 @@?
+17:15:56 <godfat1> 你的例子裡，兩個演算法似乎就不同了，這樣不太好比
+17:16:03 <godfat1> > :t const
+17:16:04 <lambdabot>   <hint>:1:1: parse error on input `:'
+17:16:53 <godfat1> const :: a -> b -> a
+17:16:54 <godfat1> const a b = a
+17:17:11 <Jhe__> return first argument @@?
+17:17:24 <Jhe__> 類似 tuple 的 fst ?
+17:17:28 <godfat1> 對，所以 map (const 1) 是把接下來的 list 都變 1
+17:17:51 <godfat1> 跟你的 list comprehension 的意思一樣
+17:18:24 <godfat1> 你說的 pattern matching 的那個版本，大概不會建立中途的 list
+17:19:17 <Jhe__> 所以順手就了嗎 ...
+17:19:53 <godfat1> 什麼意思？
+17:19:55 <Jhe__> 好多有趣的 function
+17:19:58 <godfat1> src const
+17:20:02 <godfat1> > src const
+17:20:03 <lambdabot>   Not in scope: `src'
+17:20:04 <lambdabot>  Perhaps you meant `scc' (imported from Data.Graph)
+17:20:27 <Jhe__> ?
+17:20:27 <godfat1> 忘記 lambdabot 怎麼用 orz
+17:20:47 <godfat1> > :i const
+17:20:48 <lambdabot>   <hint>:1:1: parse error on input `:'
+17:20:51 <godfat1> :i const
+17:21:03 <Jhe__> 他會自己跑嗎@@?
+17:21:10 <godfat1> 對啊
+17:21:14 <godfat1> > 1 + 1
+17:21:15 <lambdabot>   2
+17:21:33 <godfat1> @src const
+17:21:33 <lambdabot> const x _ = x
+17:21:38 <godfat1> 有了有了
+17:21:58 <godfat1> @type const
+17:21:58 <lambdabot> a -> b -> a
+17:22:26 <Jhe__> src 是標準庫裡的定義嗎@@?
+17:23:17 <godfat1> 那是 lambdabot 的功能，不確定 ghci 有沒有
+17:23:30 <Jhe__> ghci 裡好像沒有這個
+17:24:32 <godfat1> 看起來沒有 http://stackoverflow.com/questions/5786372/function-definition-in-haskell-ghci
+17:25:37 <Jhe__> soga
+17:25:43 <Jhe__> @src print
+17:25:43 <lambdabot> print x = putStrLn (show x)
+17:38:01 <_13h> 一般 pattern matching 的實作行為會是怎樣的呢？找出對應的結構貼上標籤嗎？還是真的把對應結構拆出來建立新資料?
+17:40:25 <godfat> 結構上本來就有標籤吧？
+17:51:44 <_13h> 但是不同 pattern 會有新的標籤不是嗎?
+17:52:00 <_13h> 或者是 binding ?
+17:57:46 <godfat> 什麼意思？
+18:36:53 <Jhe__> ?src ($)
+18:36:54 <lambdabot> f $ x = f x
+18:39:58 <Jhe__> @src ($)
+18:39:59 <lambdabot> f $ x = f x
+18:40:22 <Yu-Lin> 問一下，<*> 這個定義在那？
+18:43:57 <hashcat> Control.Applicative
+18:46:31 <Yu-Lin> 感謝
+18:49:21 <hashcat> @hoogle (<*>)
+18:49:22 <lambdabot> Control.Applicative (<*>) :: Applicative f => f (a -> b) -> f a -> f b
+19:00:20 <hashcat> ＠pl (\x -> (+) x 1)
+19:00:55 <hashcat> @pl (\x -> (+) x 1)
+19:00:55 <lambdabot> (1 +)
+21:58:16 <MnO2> 上次聚會有討論到以往的文獻是否有 PL 結構的使用者經驗研究
+21:58:36 <MnO2> 剛剛 google 找了一下，好像以前某段時間對於 while, for loop 的結構討論很多
+21:59:11 <MnO2> Cognitive Strategies and Looping Constructs 之類的
+22:03:34 <MnO2> http://i.stack.imgur.com/QoIfB.jpg
+22:03:41 <MnO2> 這個 XKCD 好好笑
+22:25:44 <suhorng> 這www
+22:31:21 <letoh> 好笑XD

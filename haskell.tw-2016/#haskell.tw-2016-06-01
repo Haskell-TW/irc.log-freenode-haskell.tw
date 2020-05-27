@@ -1,0 +1,22 @@
+16:53:06 <c9s> 原來良葛格也寫了一些 haskell 相關的文章..
+16:53:12 <c9s> 跟風?
+17:12:10 <CindyLinz> 嗯不過我覺得不好 @@"
+17:12:42 <CindyLinz> 照那個學下去會只有語法的皮看起來像 Haskell
+17:16:11 <c9s> yeah
+17:16:36 <c9s> 我覺得好像不少人都有學過 可是好像沒什麼人真的在寫 -"-
+17:16:47 <c9s> 結果就寫了一堆文章
+17:38:51 <CindyLinz> monochrom 無辜中槍...
+17:39:21 <CindyLinz> 我好像都沒寫過這種文章
+17:39:26 <CindyLinz> 我寫的都是政治文章 XDDDD
+17:41:47 <CindyLinz> ← 沒有在搞政治的人寫政治文章....w
+22:11:27 <mno2> ghc 7.10 之後根本又另外一個世界了
+22:11:50 <mno2> 大家開始往 type level 疊東西
+22:59:55 <CindyLinz> 咦?
+23:00:05 <CindyLinz> 今天不小心看到一些 ghc 8 的 base 4.9
+23:00:13 <CindyLinz> 發現多了一些基本的資料型別
+23:00:27 <CindyLinz> 像是 NonEmpty, SemiGroup, Option..
+23:00:50 <CindyLinz> Option 說希望以後會不見, 然後 Maybe 改成 Option 的實作 XD
+23:06:19 <letoh> 聽起來像冬蟲夏草?
+23:14:33 <CindyLinz> SemiGroup 應該是想墊在 
+23:14:36 <CindyLinz> Monoid 下面
+23:14:43 <CindyLinz> 是個沒有 mempty 的 Monoid

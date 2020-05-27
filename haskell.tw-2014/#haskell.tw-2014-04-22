@@ -1,0 +1,267 @@
+01:33:37 <CindyLinz> 在這邊, 看到 haskell pattern 的地方有一些 XML 相關的 pattern http://hackage.haskell.org/package/haskell-src-exts-1.15.0/docs/Language-Haskell-Exts-Syntax.html#t:Pat
+01:34:01 <CindyLinz> 不知道是什麼, 不知道是不是 haskell-src-exts 自己的延伸? 但應該不會自己亂加才對 :Q
+02:09:37 <monochrom> 果然離奇.
+02:12:21 <CindyLinz> 發現 expression (Exp) 的部分也有 :Q
+02:17:06 <godfat> 原來 haskell 跟 scala 一樣直接吃 xml syntax, 太神了
+02:18:30 <CindyLinz> godfat: 來個 ref 瞧瞧看怎麼用.. ^^|
+02:19:35 <godfat> 我只知道 scala.. haskell 是開玩笑的 XD
+02:19:35 <godfat> scala> <xml>
+02:19:35 <godfat>      | </xml>
+02:19:35 <godfat> res0: scala.xml.Elem =
+02:19:35 <godfat> <xml>
+02:19:35 <godfat> </xml>
+02:19:58 <CindyLinz> 喔 XD
+02:20:21 <godfat> 看來不行
+02:20:21 <godfat> >> <xml></xml>
+02:20:21 <godfat> <interactive>:3:1: parse error on input `<'
+02:20:26 <godfat> > <xml></xml>
+02:20:27 <lambdabot>  <hint>:1:1: parse error on input ‘<’
+02:20:51 <CindyLinz> XD
+02:21:22 <CindyLinz> 唔.. 不過我倒可以直接用這邊的 ADT 拼出 data, 然後再叫它印出來看看語法長怎樣...
+02:21:59 <CindyLinz> 喔可是有點累 orz
+02:22:46 <godfat> scala 範例，其實還滿炫的
+02:22:46 <godfat> $ scala -e 'println((<xml></xml>).getClass)'
+02:22:46 <godfat> class scala.xml.Elem
+02:22:58 <CindyLinz> 再說好了, 對 xml 興趣不是很大...ww
+02:23:13 <godfat> 他可以用 ast 重建 source?
+02:23:37 <CindyLinz> haskell-src-exts 嗎? 可以
+02:24:02 <CindyLinz> 它可以 parse 出 AST, 也可以 print AST 成 source 的長相, 而且可以使用它自動排版
+02:24:16 <godfat> 好強
+03:08:49 <CindyLinz> bug 不能亂修.....
+03:08:54 <CindyLinz> > fix ("bug" :)
+03:08:56 <lambdabot>  ["bug","bug","bug","bug","bug","bug","bug","bug","bug","bug","bug","bug","bu...
+03:47:06 <favonia> CindyLinz: 你看看你～
+05:07:07 <favonia> godfat: 用 template haskell 應該可以 lol lol
+05:07:19 <favonia> 應該也有人做了
+10:21:48 <motephyr> 學haskell有老師在教的嗎？ 感覺大家都是自已看
+12:42:39 <CindyLinz> favonia: XD
+12:44:17 <CindyLinz> motephyr: 台灣沒有聽說專門教 Haskell 的, 但是有作這方面研究的教授, 有時候會在學校開課教
+12:57:56 <cybeliak> 對岸好像也有教授在開haskell...
+13:03:19 <cataska> Erik Meijer 會在 EdX 開一門 haskell 的課
+13:03:29 <favonia> CindyLinz: 我以為台大哪裡好像有在教？
+13:07:48 <cataska> https://twitter.com/headinthebox/status/439425470388396032
+13:10:47 <b4283> C9 ?
+13:26:49 <cataska____> Channel 9
+14:13:21 <CindyLinz> favonia: scm 教授我不確定是這學期還是上一學期開 programming language, 然後著重 functional language 的樣子
+14:14:33 <CindyLinz> motephyr: 然後, 每年暑假在台大有 Flolac 暑期學分班, 可旁聽 ^^ 每兩年會輪一次 programming language 的主題, 雖然不一定會教到 haskell, 但是會教相關性很高的東西.
+14:58:02 <mno2> open course 都一定要學校的教授才能開嗎？如果社群合起來開一門課不知道有沒有可能？
+15:09:20 <cibs> 兩年到了嗎? XD # Flolac
+15:29:57 <motephyr> 前陣子有碰幾天的erlang 目前看到的東西非常的像
+15:30:32 <motephyr> 但是haskell感覺要慢~慢~看
+15:31:07 <motephyr> 如果有什麼機緣可以聽個課 就可以把自學的和人家上課的彼此印證一下
+16:05:12 <CindyLinz> cibs: 今年是語言年
+16:07:00 <CindyLinz> mno2: 覺得教學好難歐~ XD  這不是內容的東西都會了就教得出來的耶 ^^|
+16:08:23 <motephyr> 好像要上的是邏輯課 不是程式語言相關的課
+16:10:09 <CindyLinz> 我來看一下今年的課綱...
+16:10:32 <cibs> motephyr: 因為 erlang 是 parallel 的，而 functional lang 沒有 side effect 的特性非常適合
+16:10:49 <cibs> CindyLinz++
+16:12:36 <CindyLinz> motephyr: scm 有教 12 小時的 programming 呀~ http://flolac.iis.sinica.edu.tw/flolac14/doku.php?id=zh-tw:start
+16:14:27 <motephyr> CindyLinz++
+16:14:36 <CindyLinz> motephyr: 玩 type 玩很大是 functional language 的一個特色, 雖然不是所有的 functional language 都這樣玩.. 只是, language 會傾向把資料變數都抓在手上不放不給 programmer 改的特性, 會比較適合這樣玩
+16:16:03 <CindyLinz> 然後也比較會去討論語意, 因為東西都抓著, 所以從語言的角度來說可以控制的程度也比較高
+16:17:05 <CindyLinz> motephyr: 可能會吐一點血啦... (經驗)
+16:17:30 <CindyLinz> 不過瘀血吐一吐對身體更好... (逃)
+16:17:58 <motephyr> 這看起來很屌XD 我那時好像沒有看到type這邊
+16:18:17 <motephyr> 再研究一下
+16:19:48 <CindyLinz> motephyr: type 玩到 dependently typed 的時候, 可以和 first order logic 作全等對應, 所以他們有時候用的措辭是 type, 有時候用 logic, 不過都是在講同一回事... :p
+16:21:30 <CindyLinz> motephyr: 嗯, 他們也可能有改課綱 XD 我看這頁最下面寫編輯日期是 2014.4.22.. XD
+16:21:39 <CindyLinz> 今天嘛....ww
+16:23:24 <motephyr> 不急 看懂了有空再去
+16:23:36 <motephyr> 看不懂去了也是看不懂XD
+16:23:58 <motephyr> 雖然有點吊詭就是
+16:24:11 <b4283> 咦咦，全名的縮寫就是 scm !!
+16:24:34 <b4283> 我一直以為是 scheme 的副檔名 .scm  ....
+16:24:44 <CindyLinz> ._.
+16:48:55 <motephyr> 主要的問題好像會遇到一大堆類似作用的函數名但作用在不同型態的參數上 像 cycle repeat之類的 = =
+16:49:16 <motephyr> 應該有個function字典XD
+16:52:09 <CindyLinz> motephyr: 如果是 Haskell 函數的話, 可以在 ghci 裡面用 :i 函數名 或是用 hoogle
+16:52:19 <CindyLinz> 也可以在這邊找 lambdabot.. XD
+16:52:25 <CindyLinz> @i cycle
+16:52:25 <lambdabot> Maybe you meant: id ignore index instances instances-importing irc-connect irc-password v @ ? .
+16:52:28 <CindyLinz> @info cycle
+16:52:29 <lambdabot> cycle
+16:52:30 <CindyLinz> ...
+16:52:33 <CindyLinz> @t cycle
+16:52:34 <lambdabot> Maybe you meant: tell thank you thanks thesaurus thx tic-tac-toe ticker time todo todo-add todo-delete type v @ ? .
+16:52:42 <CindyLinz> @src cycle
+16:52:43 <lambdabot> cycle [] = undefined
+16:52:43 <lambdabot> cycle xs = xs' where xs' = xs ++ xs'
+16:52:51 <CindyLinz> @type cycle
+16:52:51 <b4283> undefined
+16:52:53 <lambdabot> [a] -> [a]
+16:53:10 <motephyr> @i cycle
+16:53:11 <lambdabot> Maybe you meant: id ignore index instances instances-importing irc-connect irc-password v @ ? .
+16:53:13 <CindyLinz> motephyr: 用 @type 或 @src.. XD
+16:53:23 <CindyLinz> ghci 的 :i 不知道變成什麼了 :Q
+16:53:37 <motephyr> ....XD 這irc有夠搞怪
+16:53:53 <cibs> @src foldr
+16:53:54 <lambdabot> foldr f z []     = z
+16:53:54 <lambdabot> foldr f z (x:xs) = f x (foldr f z xs)
+16:54:17 <cibs> @src seq
+16:54:17 <lambdabot> Source not found. Maybe you made a typo?
+16:54:18 <motephyr> @src foldr
+16:54:18 <lambdabot> foldr f z []     = z
+16:54:18 <lambdabot> foldr f z (x:xs) = f x (foldr f z xs)
+16:54:21 <CindyLinz> ghci 的話是用 :i 或 :t..  不過如果不是 Prelude 裡面的函數, 要先用 :m + XXX import 進來.. 如果不知道它在哪個 module 會比較困擾..
+16:54:52 <CindyLinz> seq 只能 native 實作, 不會有 haskell source ^^|
+16:55:00 <motephyr> 熟悉基本的先
+16:55:10 <cibs> 其實我只是想看看他會不會罵人 XD
+16:55:23 <cibs> # 19:21 < CindyLinz> 原本預期 lambdabot 給一個 <<native>> 之類的, 結果竟然罵人.. ._.
+16:55:25 <CindyLinz> motephyr: 用網頁版的 hoogle 找的話, 可以有 link 直接連接到 api 說明頁
+16:55:28 <CindyLinz> cibs: ............
+16:55:45 <cibs> 妳是不是偷改 code 了
+16:55:51 <CindyLinz> cibs: 那個又不是我寫的 ._.
+16:56:13 <cibs> 他沒有罵我耶
+16:56:43 <CindyLinz> 這是歧視.... = =
+17:02:51 <motephyr> 嗯嗯 hoogle也不賴 那有沒有反過來找的方法 比如說我想找 動差生成函數之類很專業的(這比較可能有) 或是用一段描述來找我要用什麼函數的鬼東西XD
+17:03:29 <motephyr> 不過看來就是看到什麼函數就記下來 看不懂的就查這樣
+17:04:12 <CindyLinz> motephyr: 可以用 type 的形狀找
+17:04:22 <motephyr> 哦哦
+17:04:31 <CindyLinz> motephyr: 但如果要用中文或英文找的話... 那不能用 hoogle, 要用 google... XD
+17:04:58 <CindyLinz> @hoogle a -> [a]
+17:04:59 <lambdabot> Prelude repeat :: a -> [a]
+17:04:59 <lambdabot> Data.List repeat :: a -> [a]
+17:04:59 <lambdabot> Test.QuickCheck.Arbitrary shrinkNothing :: a -> [a]
+17:05:05 <motephyr> 嗯嗯 反正至少知道會知道出來的type是什麼嘛
+17:06:03 <CindyLinz> 我昨天想找 zipper 產生器, 就不知道用 type 講的話要怎麼講了... ^^|
+17:07:27 <motephyr> zipper是什麼? 丟address code 出來 中文地址之類的東西嗎？
+17:08:37 <CindyLinz> motephyr: 一種叫作拉鍊的 design pattern.. XD # http://www.haskell.org/haskellwiki/Zipper
+17:12:53 <CindyLinz> 中文的語意好亂啊.. Women talk 某篇的原標題:「被龍捲風討論的女生提告了」  請問原 po 有沒有被告? XD
+17:18:38 <mno2> 看成「被龍捲風討論的女生告白了」
+17:19:15 <CindyLinz> mno2: 心裡有魔的走開... XD
+17:19:20 <motephyr> CindyLinz: XD 就這句話來講 原po被告了
+17:19:57 <motephyr> CindyLinz: 但要知道更多的事實 才會知道她是告新聞龍捲風(應該啦)
+17:20:14 <CindyLinz> 被(龍捲風討論的女生)提告了 vs (被龍捲風討論的女生)提告了.. XD
+17:21:29 <CindyLinz> vs (被龍捲風討論)的(女生提告了)
+17:25:59 <CindyLinz> 沒別的 context 的時候第一句看起來是原 po 被告啊.. 省略主辭
+17:28:05 <motephyr> true
+17:30:00 <motephyr> 英文應該也有類似的情況啦 不過比起中文來說好一點
+17:31:16 <motephyr> @type repeat
+17:31:17 <lambdabot> a -> [a]
+17:31:22 <motephyr> @src repeat
+17:31:22 <lambdabot> repeat x = xs where xs = x : xs
+17:31:56 <b4283> repeat "y"
+17:32:32 <CindyLinz> > repeat "y"
+17:32:34 <lambdabot>  ["y","y","y","y","y","y","y","y","y","y","y","y","y","y","y","y","y","y","y"...
+17:33:40 <motephyr> > [1..20]
+17:33:42 <lambdabot>  [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+17:34:30 <motephyr> > let a = "hello"
+17:34:31 <lambdabot>  not an expression: ‘let a = "hello"’
+17:34:40 <motephyr> > a = "hello"
+17:34:42 <lambdabot>  <hint>:1:3: parse error on input ‘=’
+17:38:20 <CindyLinz> motephyr: 你可能要這樣用..
+17:38:24 <CindyLinz> > let a = "hello" in a
+17:38:26 <lambdabot>  "hello"
+17:38:44 <CindyLinz> 畢竟 let 指定完, 就是要用的嘛? :p
+17:38:59 <motephyr> 我想說可以之後用
+17:39:09 <motephyr> 從此以後 > a
+17:39:13 <CindyLinz> 噢...
+17:39:22 <CindyLinz> 永久性的用法我不熟 ._.
+17:40:44 <motephyr> 大家進來基本上就換用haskell來溝通 不會寫不給發言 XDDDDDD
+17:40:55 <b4283> 什麼！沒有 global variable！(誤)
+17:42:37 <b4283> 好像只是在 ghci 裡沒辦法這樣寫：pi = 3.14 ?
+17:42:45 <CindyLinz> motephyr: 這樣就進不來了啊...
+17:42:52 <CindyLinz> b4283: ghci 用 let pi = 3.14
+17:43:17 <b4283> > let pi = 3.14
+17:43:18 <lambdabot>  not an expression: ‘let pi = 3.14’
+17:43:20 <CindyLinz> b4283: 想像它在一個 IO a 的 do-notation 裡面
+17:43:25 <CindyLinz> b4283: lambdabot 不是 ghci.. XD
+17:43:34 <b4283> o_O
+17:44:06 <b4283> CindyLinz: thx for the tip
+17:44:07 <CindyLinz> b4283: ghci 正常是也不能打 @src 的啊 XD
+17:44:36 <b4283> > let pi = _ -> 3.14
+17:44:37 <lambdabot>  <hint>:1:12: parse error on input ‘->’
+17:44:43 <motephyr> > pi
+17:44:45 <lambdabot>  3.141592653589793
+17:44:56 <motephyr> > pi*pi
+17:44:58 <lambdabot>  9.869604401089358
+17:44:58 <b4283> > let pi = \_ -> 3.14
+17:44:59 <lambdabot>  not an expression: ‘let pi = \_ -> 3.14’
+17:45:19 <motephyr> > pi^pi
+17:45:21 <lambdabot>  Could not deduce (GHC.Real.Integral b0)
+17:45:21 <lambdabot>    arising from a use of ‘GHC.Real.^’
+17:45:21 <lambdabot>  from the context (GHC.Float.Floating a)
+17:45:21 <lambdabot>    bound by the inferred type of it :: GHC.Float.Floating a => a
+17:45:21 <lambdabot>    at Top level
+17:46:21 <b4283> ˊ_>ˋ
+17:50:03 <CindyLinz> motephyr: (^) 是整數用, 這邊要用 (**)
+17:50:55 <motephyr> > pi**pi
+17:50:57 <lambdabot>  36.4621596072079
+17:52:33 <motephyr> 唔 有些這樣的細節需要融會貫通一下
+17:52:49 <CindyLinz> 可以看 type ^^
+17:52:53 <CindyLinz> @type (**)
+17:52:54 <lambdabot> Floating a => a -> a -> a
+17:52:55 <CindyLinz> @type (^)
+17:52:56 <lambdabot> (Num a, Integral b) => a -> b -> a
+17:54:51 <motephyr> CindyLinz++
+17:55:46 <motephyr> > "cindy"++"Linz"++"++"
+17:55:48 <lambdabot>  "cindyLinz++"
+17:55:58 <CindyLinz> @_@"
+17:56:21 <CindyLinz> 記得 lambdabot 可以這樣玩...
+17:56:22 <motephyr> 這東西真的可以很白爛耶XD
+17:56:24 <CindyLinz> @@ CindyLinz++
+17:56:25 <lambdabot>  CindyLinz++
+17:56:55 <motephyr> @@ @@
+17:57:10 <motephyr> @@ hello?
+17:57:10 <lambdabot> Plugin `compose' failed with: Unknown command: ""
+17:57:18 <motephyr> @@ hello
+17:57:18 <lambdabot>  hello
+17:58:28 <b4283> 我突然想到一個主角叫 Charlie 的獨角獸動畫
+17:58:49 <motephyr> 我前陣子有重新複習過那個動畫
+17:59:09 <b4283> motephyr: You have a bad connection !
+18:00:04 <motephyr> 那部動畫含意很深 要自行體會
+18:01:12 <hashcat> CindyLinz: 那個用prolog寫就很清楚啦
+18:01:34 <b4283> motephyr: https://www.youtube.com/watch?&v=eaCCkfjPm0o#t=104
+18:01:50 <CindyLinz> hashcat: 厚, 用 prolog 寫又找不到 haskell lib.....ww
+18:02:40 <CindyLinz> hashcat: 用 prolog 寫, 應該存在不只一種寫法吧? 然後電腦又做不到自動的同語意分析 XD
+18:03:09 <motephyr> b4283: XD
+18:03:58 <motephyr> b4283: 你真的記得很清楚
+18:05:15 <b4283> XD
+20:08:48 <hashcat> CindyLinz: 寫prolog就能搞清楚能有幾種語意
+20:09:28 <hashcat> 我剛剛看到一個有點難翻的英文句子, 也是分析哪些是atoms哪些是predicates
+20:09:53 <hashcat> pred是套用到哪個term等等,就翻譯出來了
+20:10:45 <hashcat> CindyLinz: prolog本來就沒有常識, 你要求太多啦
+20:12:30 <hashcat> motephyr: 順便看一下 ur/web
+20:14:58 <hashcat> 最近最近看到號稱functional的火星人作業系統
+20:15:10 <hashcat> http://urbit.org/
+20:15:25 <hashcat> 整個就是火星來的
+20:25:29 <mno2> http://java.metagno.me/  這遊戲超難的...
+20:36:03 <motephyr> 這到底要玩到什麼時候...
+20:37:09 <hashcat> 超難玩..
+20:44:44 <CindyLinz> hashcat: XDDD
+20:44:56 <motephyr> http://urbit.org/ 這個 嗯 如果我五十歲的時候它普及了的話
+20:45:02 <motephyr> 我就承認我老了
+20:45:07 <CindyLinz> motephyr: 玩到你上火星的時候好了? XD
+20:45:38 <motephyr> 我們每天都要當做自已只能活到今天
+20:46:12 <motephyr> 所以不如玩自已有興趣的東西就好 火星人的東西留給火星人玩
+20:48:55 <CindyLinz> 這個 urbit 是只能用在它自己的 vm 上喔? @@"
+20:50:18 <b4283> 沒看懂過那個 Urbit 是在幹啥的
+20:54:44 <CindyLinz> 看起來... 最底下是一個叫作 Nock 的 vm & op code, 運算模型類似 SKI combinator.. 也拿來作為它這個世界裡的組語
+20:56:13 <CindyLinz> 但是最標準的 interpreter 很慢.. 嗯, 因為它用的自然數是用 Z, S(Z), S(S(Z)) ... 這樣去表示的..
+20:56:55 <CindyLinz> 然後他另外有一個比較快的 interpreter, 會認 Nock 語言, 但是會用內建的一些加速寫法
+20:57:14 <CindyLinz> 然後 Hoon 是一個 Functional Language, 可以 compile to Nock..
+20:57:34 <CindyLinz> 再來 Arvo 是用 Hoon 寫的 OS
+20:58:49 <CindyLinz> 一個 event-driven 的 OS, 用的 event library 叫作 libuv, 和 node.js 一樣.. (這邊我不太懂, 為什麼 Nock vm 裡面能用 libuv)
+20:59:46 <CindyLinz> 然後 Arvo 再配合一個叫作 Clay 的 file system
+21:00:24 <CindyLinz> "What can it do now?"
+21:00:34 <CindyLinz> "Urbit at present is not good for anything but screwing around. For screwing around, it answers all your needs and is happy to consume any amount of unwanted time."
+21:00:34 <CindyLinz> XD
+21:02:38 <petercommand> 根本就是神奇project XD
+21:23:01 <motephyr> hashcat: ur/web這個我看看我haskell摸到一段看不看得懂
+21:23:29 <motephyr> 現在還不確定它用來做web的優點是什麼
+21:35:02 <CindyLinz> 應該就首頁列的那個 "may not" 列表吧? ^^
+21:51:04 <b4283> http://lists.scheme-reports.org/pipermail/scheme-reports/2014-April/003994.html
+21:55:04 <letoh> 那個 java 問答是什麼東西啦XD
+22:06:14 <hashcat> motephyr: 可能一開始看不太懂
+22:06:38 <hashcat> 裡面有ML的模組還有比haskell多一層的type-level
+22:06:55 <hashcat> 優點當然是他編譯時期特性超強
+22:07:03 <hashcat> 模組化也超好
+22:07:37 <hashcat> 很多錯誤都能用type-level programming就攔下了
+22:08:16 <hashcat> 當然也有繼承haskell的優點
+22:10:22 <CindyLinz> 建議選一個語言深究, 然後其他有相關的就大概看一看這樣..
+22:25:03 <hashcat> 跟比較新的語言比起來haskell算是比較簡陋了
+22:34:17 <CindyLinz> 嗯, 最近的感想.. 覺得 Haskell 可以算是蠻低階的語言.. 如果只是要掌握語法和其代表的意義, 不會太久..
+22:34:21 <CindyLinz> 難的都是 lib....
+22:34:37 <CindyLinz> 回想以前學組語也是這種感覺.. XD
+22:34:56 <CindyLinz> 只是 lib 的難法不一樣...
+23:51:43 <CindyLinz> 23:47 < haroldwu> 嗨大家，來宣傳一下，剛剛在 #emacs.tw 熱烈討論通過成立 #yinwang.talk 王垠討論頻道，對王垠有任何不滿(或支持)的朋友可以常掛 XDD

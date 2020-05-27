@@ -1,0 +1,62 @@
+18:51:58 <suhorng> learn you a haskell Chap 3. Types and Typeclasses
+18:52:06 <suhorng> 原文: Typeclasses 101A typeclass is a sort of interface that defines some behavior.
+18:52:20 <suhorng> 翻譯: Typeclasses入門型別定義行為的介面，
+18:52:23 <suhorng> 是不是有點怪?
+18:53:47 <suhorng> 例如, 若說「Typeclass 是定義了某種行為的介面。」會不會比較順?
+19:05:41 <letoh> 我還有一些翻譯的修改沒 merge 過去@_@
+19:06:21 <letoh> 我是怕越改風格越不一致，但裡面實在有不少段落都翻得很怪，對照原文後還是看不懂中文在寫什麼XD
+19:07:06 <hashcat> 我覺得把typeclass說成型別類就好了
+19:07:34 <hashcat> 若是不同的型別同屬於一個型別類, 則擁有同樣的函數名稱(重載)
+19:07:42 <suhorng> 最近有學弟在看才發現的@_@"
+19:07:53 <letoh> 舉個例子，像 typeclass 有的地方會保持原文，有些地方又翻成型別類，看起來就很怪
+19:08:18 <letoh> 記得還有前後翻譯不一致的
+19:08:34 <hashcat> 是在翻譯啥麼
+19:08:54 <hashcat> 個人意見..與其翻譯不如重新寫一篇中文的
+19:08:55 <letoh> 如果有看到奇怪的東西可以提醒我一下，也許有些我已經修掉了
+19:09:18 <letoh> 找個良辰吉日 merge 回去
+19:09:31 <hashcat> 畢竟文化背景不同, 老外開的玩笑就算翻譯過來也不見得能懂
+19:09:51 <letoh> 還沒有到玩笑的部份啦
+19:10:02 <letoh> 光是一般的敘述就有很多翻譯問題了
+19:10:18 <suhorng> hashcat: 就是Learn You A Haskell的英翻中
+19:11:02 <hashcat> 專有名詞就加附錄對照表, 一律翻成中文好了
+19:12:12 <hashcat> 中英混合的狀況下, 硬要用中文文法還是英文文法也是挺混亂的
+19:12:37 <letoh> 我是蠻習慣專有名詞保留原文，jjhou 的書看慣了XD
+19:13:00 <hashcat> 更扯淡些的, 有些翻譯常見明明全是中文, 文法卻是英文的鬼狀況
+19:13:03 <letoh> 這樣想進一步找資料也方便
+19:13:26 <letoh> 喔  句子當然是要改成符合中文的描述方法，這是基本的
+19:13:43 <letoh> 不然就直接丟給 google 姐翻譯就好XD
+19:14:35 <letoh> 其實我覺得 closure 翻成閉包就很不習慣，但簡中的資料幾乎都用閉包這個詞了
+19:15:39 <hashcat> 我覺得專有名詞用翻成中文用粗體字或底線標注, 章節第一次出現附帶英文, 這樣讀者就知道要知道那玩意的英文就可以翻附註了
+19:17:57 <hashcat> closure就算是英文也挺怪的
+19:18:44 <suhorng> 閉包很奇怪+1...
+19:18:56 <suhorng> 英文的話, closure從數學在用的詞意思就滿一致的, 所以感覺還好
+19:19:41 <letoh> 可能還看不慣閉包吧  像 pointer 翻成指標或指位器 (黑皮書 only) ? 但看了那麼多年也習慣了XD
+19:19:42 <hashcat> closure一點都沒封閉的感覺
+19:20:54 <suhorng> letoh: 中國不是都翻成指針嗎w
+19:21:10 <letoh> 對  簡中都是用指針orz
+19:21:44 <letoh> 指標算是繁中的標準翻法了? 指位器應該只有早期看過黑皮書的人才會看到
+19:22:05 <hashcat> 雖說有很多奇怪的慣例, 但我還是覺得意譯會比直翻好多了
+19:23:56 <letoh> reference 翻成「參考」
+19:24:10 <letoh> dereference 翻成「提取」?
+19:26:19 <letoh> http://web.archive.org/web/20060627064930/http://www.jjhou.com/terms.htm   早期參考用的術語對照表
+19:26:23 <hashcat> 想把reference翻譯改成同位變數 xd
+19:27:22 <letoh> 要創新名詞有個問題，大家看不慣或不直覺的話可能會被邊緣化XD
+19:27:47 <hashcat> 傳值變成異位複製體
+19:28:12 <hashcat> XD
+19:28:25 <letoh> jjhou 的 reference 翻成「址參器」XD
+19:28:59 <hashcat> :D
+19:29:07 <letoh> 印象中以前看 c++ primer 中譯本好像把 reference 翻成「參用變數」之類的?
+19:29:14 <letoh> 書已經丟了沒辦法查證XD
+19:30:23 <letoh> 講一些以前比較少出現的好了  例如 shadowing 怎麼翻比較好? XD
+19:31:29 <letoh> binding 翻成「綁定」我就覺得還不錯
+19:33:27 <suhorng> 才發現現在跟同學討論全部專有名詞都直接講英文的www
+19:33:49 <letoh> 我也習慣這樣
+19:45:10 <suhorng> 話說reference翻成參考真的超怪的...
+19:45:18 <suhorng> 不過大家都這樣翻ˊωˋ
+19:45:42 <letoh> 不然學 pointer 翻成「參位器」好了XD
+19:51:40 <godfat> 參標？
+19:51:53 <letoh> 好怪XD
+19:52:29 <godfat> 中國好像翻參照
+19:53:17 <letoh> 完全沒印象@_@  比較少看簡中的
+19:57:56 <godfat> http://zh.wikipedia.org/zh-tw/參照
+19:59:04 <hashcat> :D

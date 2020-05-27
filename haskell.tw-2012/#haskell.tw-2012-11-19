@@ -1,0 +1,203 @@
+00:00:11 <MnO2> Functor 也許是 List ，也許是 Tree
+00:00:29 <MnO2> Compiler Front End 吐出來的就是 Abstract Syntax Tree
+00:00:39 <MnO2> 至於怎麼interpret是另一回事
+00:03:19 <MnO2> AST 是 Functor ， 是純粹的一種結構性資料
+00:03:58 <MnO2> 但你可以透過一個不花代價就可以得到的Free Functor把他 Lift 成 Free Monad
+00:04:31 <MnO2> 然後就有了額外的詮釋
+00:06:36 <MnO2> 就是讓你對資料特化比較方便的東西，或是對資料做某種詮釋
+00:07:26 <MnO2> 不過我這邊好像比較像在講 Free Monad Transformer xD
+00:07:45 <MnO2> Free Monad是特化後的產物
+00:08:48 <MnO2> 講完了
+00:08:58 <MnO2> CindyLinz: 這樣應該聽不懂吧 xD
+00:14:10 <MnO2> http://hackage.haskell.org/package/cassava-0.2.0.0
+00:14:19 <MnO2> 要parse csv的話這個看起來不錯用
+00:23:32 <CindyLinz> (呼, 剛剛去邪教聚會所貼了一篇 初學者理解的 codata)
+00:23:44 <CindyLinz> 啊 你剛好跑掉了 orz
+00:25:36 <CindyLinz> 我理解的 codata: https://www.evernote.com/shard/s248/sh/9bd1262f-8229-48a8-ba31-1fd5a633115b/67f55c86aa314bfa74e221f578fd3650
+00:27:18 <CindyLinz> MnO2: free 的意思可以理解, free 的價值應該是在於它需要的前提非常少, 就像是 zero dependency library 的感覺, 到處都可以用
+00:28:04 <CindyLinz> MnO2: 不過你講到這邊, 感覺要開始多看一點實例, 看一下這種免費的午餐能多有料... :|
+10:17:46 <favonia> MnO2: 不一定「最簡單」。free 的意思是說
+10:18:33 <favonia> 他有最大的自由度。
+10:19:05 <MnO2> favonia: category字彙上是要滿足universal property
+10:19:33 <MnO2> favonia: 所以自由度跟inital/terminal object的關係是？
+10:19:51 <favonia> 也就是你給其他 monad X, 都可以找到一個 arrow(=morphism=function=mapping=...) 從 free monad 到 X
+10:21:55 <favonia> MnO2: 我想想看... (之前沒想過)
+10:22:26 <favonia> 他應該是某個 category 的 inital obj
+10:22:29 <favonia> 但我沒有想過
+10:25:46 <MnO2> 嗯嗯，的確用自由度會比較好
+10:26:44 <favonia> 譬如說 monoid
+10:26:55 <favonia> 沒有說可以 a * b = b * a
+10:27:07 <favonia> 所以 free monad 就沒有這條規定
+10:27:43 <favonia> 打錯
+10:27:46 <favonia> free monoid
+10:28:11 <favonia> 你挑個 monoid 有這個等式 那可以找到從「同樣類別的 free monoid」到這個 monoid 的 morphism
+10:28:30 <favonia> 因為他是最自由的
+10:28:55 <favonia> 這個 morphism 把最自由的構造中當作不同的東西變成同樣的東西
+10:29:06 <favonia> 因而讓等號成立
+10:30:56 <favonia> 最自由的構造 = 可以有 morphism 到其他滿足同樣條件的東西
+10:34:07 <MnO2> 嗯
+10:34:43 <MnO2> favonia: 這應該就是category theory中「最自由」的formalization
+10:35:04 <favonia> MnO2: 是～反正就當定義了 xD
+10:36:17 <favonia> 漂亮的地方就是，「最自由」的概念可以純粹用 category 的語言講完
+11:48:30 <CindyLinz> hychen: 啦啦~ 我昨天把筆電從 debian testing 換成 ubuntu-server, 當機的問題好像真的就好了耶 ^_^
+11:48:45 <hychen> CindyLinz, @@
+11:48:52 <hychen> CindyLinz, 設定都一樣嗎?
+11:49:41 <CindyLinz> hychen: 沒作特別設定呀.. 變化最大的應該是 SCIM -> ibus, 還有 chromium -> chromium-browser, 還有 iceweasel -> firefox ^^|
+11:49:52 <CindyLinz> hychen: 覺得應該是顯示卡 driver 的問題.
+11:50:11 <hychen> CindyLinz, kernel 應該有變吧
+11:50:34 <CindyLinz> hychen: 我前天做了一個 chrome extension, 功能是把正在看的網頁裡的所有圖檔, 收集起來開一個 tab 放在裡面
+11:51:09 <CindyLinz> hychen: 在重灌以前, 如果我正在看的是圖比較多的 blog, 這個 extension 只要多點幾次, 通常是5次內, 系統就會當住
+11:51:36 <CindyLinz> hychen: 重灌以後這個 extension 點過很多次了, 沒有當.
+11:51:49 <CindyLinz> hychen: kernel 當然是變了呀 :p
+11:52:23 <CindyLinz> hychen: 換 ubuntu, 因為我一直記得你說過 ubuntu 在 driver 方面比 debian 新而且問題少.. ^^
+11:54:10 <hychen> 對啊
+11:54:29 <hychen> 那部份是台北的人在負責的
+11:54:58 <hychen> 有些BIOS的變動會跟原本driver衝到
+11:55:09 <hychen> 所以我們這邊常常處理這類的bug
+11:55:22 <hychen> patch 通常都會回到mianline
+11:55:33 <hychen> 不過debian就不會這麼快了
+11:56:05 <CindyLinz> 嗯嗯嗯
+11:57:32 <CindyLinz> 裝的過程有奇妙差異: 因為我這台是 Win7 Win8 Linux 三系統.. 所以 grub 要裝在獨立分割區, 不能放在 MBR, 會被 Windows 蓋掉
+11:57:55 <CindyLinz> 裝 Debian 的時候, grub 分割區可以用 ext2, 裝 ubuntu 的時候好像只能用 ext4
+11:58:31 <CindyLinz> 我裝 Debian 的時候因為從人家 step-by-step 的方式照著裝, 所以以為 grub 只能放 ext2
+11:58:50 <hychen> grub支援很多種partition
+11:58:52 <hychen> type
+11:58:55 <hychen> 包括VFAT
+11:59:22 <CindyLinz> fat 真是歷久彌新..... @@
+11:59:22 <hychen> ubuntu 應該是兩年前預設type都改成ext4
+12:00:02 <CindyLinz> Debian 還是 ext3.. 但我裝的時候也是改成 ext4..  結果幾個月前看到 ext4 有個會掉檔案的 bug 文章, 抖了一下...
+12:00:26 <hychen> 而且EFI出來後, 也要多割一科FAT partition放grub-efi application
+12:01:11 <hychen> CindyLinz, 你是裝12.04 LTS?
+12:01:14 <CindyLinz> 不知道 EFI o.o
+12:01:24 <CindyLinz> hychen: 是裝 12.10
+12:01:31 <hychen> CindyLinz, 這麼衝 @@
+12:01:44 <CindyLinz> hychen: 這樣很衝嗎? orz
+12:01:53 <hychen> CindyLinz, 也不會啦
+12:02:15 <CindyLinz> hychen: 我看還有 13.04 啊 /_\   我以為正式 announce 就是可以了說 XD
+12:02:41 <hychen> CindyLinz, 看人囉
+12:03:43 <CindyLinz> hmm... 用舊一點的版本, 是不是出問題的時候可以找得到資料比較多
+12:03:51 <hychen> 嗯
+12:04:14 <CindyLinz> 那不然等 13.10 anonunce 的時候, 才升 13.04 好了 :|
+12:04:49 <hychen> 12.10跟12.04差不了太多
+12:04:53 <_13h> 一般裝軟體不是都用前一版+patch 嗎? XD
+12:05:55 <CindyLinz> 嗚嗚, 我以為 announce 了就是可以給一般人吃也吃不死了啊 /_\
+12:07:19 <hychen> CindyLinz, 理論上是這樣沒錯...
+12:07:38 <_13h> 順便問一下，debian 上要裝 ghci 得裝什麼特殊套件嗎?
+12:08:14 <hychen> 中午了, 你們不吃飯啊
+12:08:20 <_13h> 我裝完只有 ghc.. 感覺很不安XD
+12:08:22 <CindyLinz> favonia: 你是說.. free 指的不是對原始 structure 的要求條件很少; 而是指說, 生出的這一個 free XXX, 可以隨我們的意思, 選取若干原始 structure 的性質, 讓這些性質也在這個 free XXX 上面出現?
+12:08:41 <hychen> _13h, haskell-platform?
+12:08:43 <CindyLinz> hychen: 中午一堆同事好擠, 我通常會想慢半小時 XD
+12:08:44 <_13h> 我叫同事順便幫我弄個便當了@_@
+12:08:53 <_13h> hychen: thanks, 我研究看看
+12:09:02 <favonia> CindyLinz: 什麼叫原始 structure?
+12:09:06 <hychen> _13h, 包含一些基本的lib都有
+12:09:12 <_13h> 我在 arm 平台
+12:09:29 <hychen> _13h, arm我就不了解了
+12:09:40 <CindyLinz> favonia: 例如說原本有一個 Int, 然後 free Monoid 是 [Int]
+12:09:47 <hychen> 最近都在玩xbox.. haskell都沒碰 XD
+12:09:48 <CindyLinz> favonia: 原始 structure 是說這個 Int
+12:10:00 <_13h> 嗯嗯，我打算把一些怪東西都丟到 rpi 上跑
+12:10:26 <_13h> xbox 有啥好玩的？在寫 kinect 程式嗎?
+12:10:35 <CindyLinz> hychen: 你講這個 看人囉, 理論上是.. 聽起來真是毛毛的.. :|
+12:11:02 <hychen> _13h, 在玩戰爭機器3的持久戰...
+12:11:12 <_13h> 會不會是 看人(品)囉  (大誤
+12:11:16 <CindyLinz> orz
+12:11:25 <hychen> CindyLinz, 我通常都等annonuce 2~3個月後升級
+12:11:45 <_13h> 持久戰是線上的嗎?
+12:11:47 <CindyLinz> 嗯嗯.. 現在才一個月 :|
+12:11:54 <favonia> CindyLinz: 你應該不是在用 Haskell 不然你講的大概是錯的
+12:12:08 <hychen> CindyLinz, 不過現在出貨都出12.04, 所以為了做事方便應該繼續留在12.04
+12:12:13 <hychen> _13h, Y
+12:12:19 <favonia> 那你說選取若干原始 structure 的性質，是要取 Int 的什麼性質？
+12:12:59 <CindyLinz> favonia: 如果是 Sum Int 的話, 就會有交換性呀
+12:13:19 <favonia> 但這不是 Int 的性質啊
+12:13:21 <CindyLinz> newtype Sum = Sum Int 這種
+12:13:24 <favonia> 這跟 Int 沒有關係
+12:13:29 <CindyLinz> 嗯嗯
+12:13:44 <favonia> 我這邊假裝 Int 是真的 natural numbers
+12:13:50 <favonia> Haskell 的 Int 不是
+12:15:04 <_13h> hychen: haskell-platform 的 dependency 好可怕...
+12:15:51 <CindyLinz> 欸... 你說如果是 Haskell 的話, 我講的是錯的, 是說, 是因為 Haskell 的 Int 不是真的自然數所以錯, 還是拿自然數當例子根本就不對?
+12:16:35 <favonia> CindyLinz: 是因為 [Int] 不是 list
+12:17:29 <CindyLinz> [Int] 不是 list of Int 嗎? @_@"
+12:18:04 <favonia> CindyLinz: no
+12:18:23 <CindyLinz> @@"
+12:18:37 <MnO2> CindyLinz: 有可能是bottom, 也可能是list of bottom
+12:18:39 <favonia> 嚴格上來說（尤其當你想要討論 category theory 時不得不用嚴格的數學...）不是
+12:18:53 <favonia> MnO2: list of bottom 是 Int 本身的問題
+12:19:12 <MnO2> favonia: 的確
+12:19:39 <hychen> _13h, 開發平台, 當然包山包海
+12:19:45 <CindyLinz> favonia: Haskell [Int] 不是 list 是因為它是 list of Int + _|_ 嗎?
+12:19:57 <favonia> CindyLinz: no
+12:20:16 <CindyLinz> 那還差在哪呢 @@"
+12:20:17 <favonia> CindyLinz: 他還包括其他東西
+12:20:35 <favonia> 像是 1 :: _|_
+12:21:42 <CindyLinz> 如果它是 Agda 裡面的, total 就好了?  應該有限項的 data 或無窮項的 codata 都可以
+12:23:39 <favonia> CindyLinz: 不太確定你的意思... _|_ 不代表無窮項
+12:23:56 <favonia> 算不完只是 _|_ 的一種狀況
+12:24:00 <CindyLinz> favonia: 我沒有把 _|_ 當無窮項呀..
+12:24:37 <favonia> 我建議先跳過 Haskell 然後先討論 list 就好
+12:24:42 <CindyLinz> 嗯
+12:28:00 <_13h> hychen: 查了一下 ghci 好像不用特別裝，但在 ghc 這 package 裡只有 ghci-usage.txt，沒有 binary XD  不曉得是不是漏包了@_@
+12:28:43 <MnO2> _13h: ghc --interactive
+12:29:09 <_13h> <command line>: not built for interactive use
+12:29:10 <_13h> XD
+12:29:21 <CindyLinz> 我裝 aptitude install xmonad, 然後 ghc / ghci 都有了 XD
+12:29:23 <_13h> 這是 rpi 上的 ghc
+12:29:38 <_13h> xmonad 啊  不過我不需要 x
+12:29:40 <MnO2> _13h: 那就沒轍了
+12:29:52 <CindyLinz> 好吧 ^^|
+12:29:54 <_13h> 只能自己重新編譯一份囉？
+12:30:03 <MnO2> _13h: 對啊
+12:30:20 <_13h> 唔，好吧  想說省點時間，結果還是不能偷懶XD
+12:30:49 <_13h> MnO2: 你後來有拿 rpi 來玩什麼嗎?
+12:31:38 <MnO2> _13h: 還沒有耶，沒空xD
+12:32:00 <MnO2> _13h: 只有開起來隨便弄弄
+12:32:40 <_13h> 我有看到你之前講的 cloud haskell，不過看介紹感覺有點像 erlang ?
+12:32:58 <MnO2> _13h: 他就是抄erlang啊
+12:33:08 <MnO2> _13h: 多了type checking的erlang
+12:33:44 <_13h> 原來如此.. 所以 erlang 的 model 特別適合 cloud computing 嗎? 我是有看過 erlang 但沒啥感覺@_@
+12:34:43 <MnO2> _13h: cloud 只是廣告用的吧，總之erlang預設是copy的行為本來就比較適合多機器的情況啊
+12:34:52 <_13h> 嗯嗯
+12:34:53 <CindyLinz> _13h: 「適合」是說它問題比較少的意思, 所以應該要從體會別的 model 會有什麼更多的問題的方式來感覺
+12:35:08 <CindyLinz> 沒感覺就是最好的感覺啊 :p
+12:36:40 <_13h> 嗯嗯  我的確是想用類似的觀點找其他 model 碴XD
+12:37:09 <_13h> 總之就是瞭解一下現在用的東西會有啥問題之類的
+12:37:43 <CindyLinz> _13h: 好像現在比較大的 cloud framework 也都是走這種 actor model...  像是 map reduce / Storm 之類的
+12:38:07 <CindyLinz> _13h: 有啦.. 有一個很經典的 model!
+12:38:16 <CindyLinz> _13h: 叫作 RPC - remote procedure call
+12:39:11 <_13h> 我只碰過 xmlrpc，感覺只是送一堆資料過去，另一邊有個 interpreter 可以執行對應功能而已@_@
+12:39:33 <CindyLinz> 那如果送資料過去, response 沒有再回來了呢?
+12:39:48 <_13h> 這就看 protocol 怎麼訂啊
+12:40:21 <CindyLinz> 到底是對方 response 的時候斷的, 還是送 request 的時候斷的, 還是對方處理到一半的時候掛掉
+12:40:57 <CindyLinz> 手動處理重送的話, 就失去 RPC 的樣貌了
+12:41:24 <_13h> 嗯  看來 rpc 封裝的行為比較多
+12:41:43 <_13h> 我以前是用 bus 在傳東西的方式來理解的XD
+12:42:02 <CindyLinz> 成功率極高的時候應該是很方便很好用啦
+12:43:07 <CindyLinz> 但失敗情形要列入考慮的時候, RPC 就會很麻煩, 一部分是這個問題本來就麻煩, 但另一半還要加上去為了跟 RPC 樣貌搞在一起產生的更麻煩
+12:43:14 <_13h> 如果要把重送這個動作也封裝在 rpc 的操作裡  會不會對反應時間有影響？還是得額外設計 timeout ?
+12:43:26 <_13h> 我現在都是手動重送，但也有不重送的情況
+12:44:43 <CindyLinz> 重送有時候會反而製造錯誤呀.. RPC 要自動恰當地做好, 是困難的 o.o
+12:45:02 <_13h> 嗯嗯，這樣一說還真是個麻煩的東西
+12:47:24 <_13h> http://alenribic.com/writings/post/running-haskell-on-raspberry-pi  # there is no current support for GHCi on ARM type architecture
+12:48:25 <_13h> 大家都說 rpi 是 $25 computer... 但實際上沒有人買 $25 那一款吧 (可能也買不到)
+12:49:16 <_13h> "The good news is that in 7.4.2, there is, for the first time, support for GHCi on ARM."   喔喔喔
+12:49:38 <_13h> rpi 上面包的是 7.4.1 XD
+13:01:06 <_13h> 我試了那篇文章的程式碼，弄出一個將近 10MB 的執行檔XD
+13:10:22 <favonia> _13h: lol 感覺好可怕... 不過可能不久以後就覺得 10MB 跟 1bit 差不多
+13:18:06 <_13h> -rwxr-xr-x 1 pi pi 9269503 11月 19 13:03 hello    helloworld 程式的大小
+13:20:10 <_13h> strip --strip-unneeded hello  以後 3.8MB，感覺還是蠻可怕的XD
+13:46:38 <MnO2> _l3h: http://stackoverflow.com/questions/6115459/small-haskell-program-compiled-with-ghc-into-huge-binary
+13:52:53 <_13h> MnO2: thanks! 原來要調整編譯選項，我試試
+13:54:44 <favonia> Don Stewart 的評語... lol
+14:04:39 <_13h> 'Could not find module `Prelude'  Perhaps you haven't installed the "dyn" libraries for package `base'?" XD
+14:13:51 <MnO2> http://stackoverflow.com/questions/11711197/could-not-find-module-prelude-dyn-libraries-for-package-base
+14:17:17 <_13h> thanks, 這篇我剛剛好像有找過.. 不過我覺得目前 arm 上面的狀況太多，暫時先不要管這些小問題好了XD
+21:44:51 <MnO2> http://stackoverflow.com/questions/9611904/haskell-lists-arrays-vectors-sequences/
+21:45:08 <MnO2> Finger Tree是有這麼威就是...
+21:46:48 <MnO2> http://code.google.com/p/tapl-haskell/
+21:47:27 <MnO2> 要把課本的code都翻一遍也太熱血了...
+22:13:25 <MnO2> http://stackoverflow.com/questions/13404208/in-pure-functional-languages-is-there-an-algorithm-to-get-the-inverse-function
+22:46:14 <MnO2> http://stackoverflow.com/questions/3412577/haskell-char-unicode-and-turkish
+22:46:47 <MnO2> 土耳其人好可憐

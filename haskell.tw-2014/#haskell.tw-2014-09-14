@@ -1,0 +1,41 @@
+21:03:55 <letoh> > filterM
+21:03:57 <lambdabot>  No instance for (Data.Typeable.Internal.Typeable a0)
+21:03:57 <lambdabot>    arising from a use of ‘M686209309857179267014146.show_M6862093098571792670...
+21:03:57 <lambdabot>  The type variable ‘a0’ is ambiguous
+21:03:57 <lambdabot>  Note: there are several potential instances:
+21:03:57 <lambdabot>    instance Data.Typeable.Internal.Typeable Data.Dynamic.Dynamic
+21:05:05 <CindyLinz> 你想看 type?
+21:05:12 <CindyLinz> @type filterM
+21:05:14 <lambdabot> Monad m => (a -> m Bool) -> [a] -> m [a]
+21:06:17 <letoh> thanks  是想看 type 沒錯
+21:07:25 <letoh> 看到某個 powerset 實作嚇到了
+21:07:38 <CindyLinz> 覺得好像看過... ._.
+21:08:07 <CindyLinz> 有個... [True, False] 的嗎?
+21:08:09 <letoh> 嗯
+21:08:13 <letoh> 就是那個XD
+21:09:39 <CindyLinz> 值得一背的驚悚作品 ._.
+21:10:09 <au> 即使看攻略還是想了三分鐘才搞懂 ._.
+21:10:21 <CindyLinz> @pl filterM (const [True, False])
+21:10:21 <lambdabot> filterM (const [True, False])
+21:10:38 <CindyLinz> 通過無點流測試.. (Y)
+21:10:43 <letoh> XDXD
+21:12:06 <CindyLinz> > filterM (const [True, False]) [1,2,3]
+21:12:08 <lambdabot>  [[1,2,3],[1,2],[1,3],[1],[2,3],[2],[3],[]]
+21:12:13 <CindyLinz> @pl filterM (const [True, False]) [1,2,3]
+21:12:13 <lambdabot> filterM (const [True, False]) [1, 2, 3]
+21:12:17 <CindyLinz> 還是過 XD
+21:14:32 <CindyLinz> 可惜覺得介紹 Haskell 的時候, 這個例子不適合拿來作火力展示.. @@"
+21:17:41 <CindyLinz> 會不會覺得這個 powerset 令人看不懂而嚇不到?
+21:18:11 <letoh> 就是這樣XD
+21:18:28 <letoh> 只覺得很神  但還是睡得著XD
+21:18:59 <CindyLinz> 像是.... 幼稚園的小朋友看到恐怖電影畫面: 一個人用手插到另一個人的身體裡面把心臟抓出來, 然後心臟就在他手上跳
+21:19:31 <letoh> CindyLinz: 你比較驚悚  為啥可以想出這個例子XD
+21:19:35 <CindyLinz> 嗯, 那個小朋友就是我 XD
+21:19:43 <letoh> XDXD
+21:20:37 <CindyLinz> 因為我後來不知道怎樣的情況下 (還是幼稚園的時候), 疑惑地跟大人說, 人的心臟拿出來應該還不會死吧?
+21:20:56 <CindyLinz> 我記得還會跳啊~~
+21:21:10 <letoh> (電影分級制的重要性...
+21:21:28 <CindyLinz> (小時候看到那個畫面, 以為那是正常的... 自以為長知識了.. ww)
+21:21:38 <CindyLinz> 完全不知道應該要害怕 XD
+21:40:34 <CindyLinz> > filterM (const [False, True]) [1,2,3]
+21:40:36 <lambdabot>  [[],[3],[2],[2,3],[1],[1,3],[1,2],[1,2,3]]

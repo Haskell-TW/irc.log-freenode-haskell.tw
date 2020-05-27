@@ -1,0 +1,46 @@
+22:13:22 <mno2> 請問有文獻記載說， let polymorphism 當初是怎麼想出來的嗎？ 我可以理解原理但一直覺得我不太了解這個靈光一閃是怎麼出來的，抓不到高斯的狐狸尾巴。總覺得 lambda calculus 離想出 let 這種結構還是有段距離
+22:13:58 <mno2> 每次看到 hindley 的投影片就是給出個 mini lang，但我不知道這個 mini lang 是怎麼想出來的
+22:14:20 <mno2> 猜想跟數學一樣，要反過來學才對
+22:15:50 <CindyLinz> 有的人在發佈的時候會故意抹掉他思考的痕跡...
+22:18:42 <mno2> 或是只寫下空間不夠了 xD
+22:20:50 <mno2> suhorngM_ 給的那篇 higher-rank 的 paper 不錯，不過好厚看到快昏掉了
+22:25:27 <mno2> 另外，看到某一篇投影片說到，reference type 的話，hindley milner 就會變成 unsound ，有沒有什麼例子啊？
+22:27:11 <mno2> 這應該也是為什麼依賴於 hindley milner 的話一定要具備 let xxx 然後是 immutable 的結構 ？
+22:28:16 <mno2> 有沒有是不依賴於 let xxx 但型別表達力又很強的 functional language 啊？
+22:50:22 <CindyLinz> mno2: yinwang 的投影片裡面有
+22:51:44 <petercommand> 預設是 rank 1 type 應該算是 haskell 的特色，而不是 hm type system 的特點這樣講對嗎?
+23:00:04 <mno2> CindyLinz: 好像是什麼 intersection type 的？
+23:00:33 <CindyLinz> mno2: 我找不到那份投影片... orz
+23:02:02 <CindyLinz> 不過我和 suhorngM_ 實驗過... 記得 Haskell 嚴格地把 IO 和 pure 分開以後, 有避開這問題的樣子
+23:02:35 <mno2> CindyLinz 是回答 reference type 的部分？
+23:02:40 <CindyLinz> 對
+23:02:47 <CindyLinz> 我們在 Haskell 是用 IORef
+23:02:50 <mno2> 可以再講詳細點嗎？
+23:03:11 <CindyLinz> 如果用了 unsafePerformIO 的話, 可以重現這問題, 拿來實作 unsafeCoerce
+23:03:26 <CindyLinz> (回復記靜中..)
+23:03:34 <CindyLinz> (回復記憶中..)
+23:07:14 <CindyLinz> let unsafeSuHorng a = let bad_fun = unsafePerformIO (newIORef Nothing) in unsafePerformIO $ writeIORef bad_fun (Just a) >> readIORef bad_f
+23:07:16 <CindyLinz> un >>= \(Just b) -> return b in putStrLn $ show $ (unsafeSuHorng "abc" :: Int)
+23:07:24 <CindyLinz> 斷行了..
+23:07:30 <CindyLinz> let unsafeSuHorng a = let bad_fun = unsafePerformIO (newIORef Nothing) in unsafePerformIO $ writeIORef bad_fun (Just a) >> readIORef bad_fun >>= \(Just b) -> return b in putStrLn $ show $ (unsafeSuHorng "abc" :: Int)
+23:10:40 <mno2> 重現這問題我可以理解，但 IO 跟 pure 分開來避開 hindley milner 中的問題我想不太透
+23:12:22 <CindyLinz> yinwang 用的例子是 ML, 然後看起來相當於用了 unsafePerformIO 的 Haskell
+23:12:22 <mno2> 然後 hindley milner 跳到語言中有 Monad 我也還是關連不起來
+23:14:02 <mno2> 語言中要有 Monad 應該至少要有 * -> * ，但 hindley milner 中有 kind 的概念嗎？
+23:14:14 <petercommand> 阿...我應該問 hindley milner 沒有 higher-ranked type 的原因是甚麼呢?
+23:14:56 <mno2> 所以應該用 haskell 的 type system 類比可能就不太精準，因為 haskell 98 的 type 就已經強過 hindley 很多了？
+23:15:39 <petercommand> 一直都對整套的 type system 沒有很完整的概念
+23:17:20 <mno2> petercommand: 就我的理解就是 hindley milner 這套給定的形式系統，沒有經過修改的演算法就是推不出來 higher-rank
+23:17:23 <CindyLinz> 我在想... Hindley Milner type 應該根本沒有描述 side effect 是一個怎樣的概念...?
+23:17:37 <mno2> 可以去修改，但那樣還叫不叫 hindley milner 就是另一回事
+23:17:43 <CindyLinz> 所以 ref 這種東西根本不存在
+23:18:16 <mno2> 的確
+23:18:27 <CindyLinz> 有 polymorphism 的 ref 就會有 * -> * 了耶
+23:18:28 <CindyLinz> ?
+23:18:34 <mno2> 對啊
+23:18:39 <mno2> 難怪需要 monad
+23:18:42 <CindyLinz> 那就可以有 monad 了 XD
+23:18:44 <mno2> 但 * -> * 是從哪來的
+23:18:57 <mno2> 要加什麼結構？演算法要多加什麼部分？
+23:20:54 <mno2> http://cs.stackexchange.com/questions/23249/does-there-exist-a-type-system-for-a-non-let-polymorphic-lambda-calculus
+23:21:46 <mno2> http://cstheory.stackexchange.com/questions/20536/what-are-the-practical-issues-with-intersection-and-union-types/20555#20555

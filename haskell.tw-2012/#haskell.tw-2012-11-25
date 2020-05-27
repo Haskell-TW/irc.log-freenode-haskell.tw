@@ -1,0 +1,19 @@
+01:20:43 <MnO2> http://ics.p.lodz.pl/~stolarek/blog/2012/09/why-foldr-works-for-infinite-lists-and-foldl-doesnt/
+01:56:18 <CindyLinz> 我覺得講到這件事的時候如果能提一下 normal reduction order 和 applicative reduction order 的話, 我那時就會理解得比較快
+01:56:42 <CindyLinz> 因為心中只知道 normal reduction order.. 就會覺得 lazy 很神祕很奇怪
+02:06:47 <MnO2> http://joyridelabs.de/game/
+02:06:52 <MnO2> haskell 寫的遊戲
+02:07:16 <MnO2> 不過據說沒有用 FRP
+02:09:44 <CindyLinz> haskell 寫的, 那應該不會 windows only 吧 :p
+02:10:07 <CindyLinz> 看到 linux download 了 :p
+02:12:33 <CindyLinz> 好像不能試玩, 直接就要買了才能玩
+14:19:20 <MnO2> http://www.aosabook.org/en/ghc.html
+16:56:13 <MnO2> http://ics.p.lodz.pl/~stolarek/blog/2012/07/expressing-foldl-in-terms-of-foldr/
+17:58:01 <CindyLinz> 明天早上三點到中午十二點間我這隻帳號不會在線上, 這段時間講的話不會有 log 喔~~
+18:07:51 <CindyLinz> 原來 1992 年份的 GHC, Main component 裡面有 3000 行 perl
+19:45:19 <MnO2> http://ics.p.lodz.pl/~stolarek/blog/2012/05/towards-understanding-haskells-monomorphism-restriction/
+19:55:57 <MnO2> http://ics.p.lodz.pl/~stolarek/blog/2012/07/monomorphism-restriction-strikes-again/
+20:25:17 <MnO2> http://blog.edwardamsden.com/2012/09/video-introduction-to-functional.html
+21:33:13 <CindyLinz> FRP 竟然有人 porting 到 Agda 鬼面 
+21:33:17 <CindyLinz> FRP 竟然有人 porting 到 Agda 裡面 @@"
+23:36:54 <CindyLinz> "If you come from object-oriented programming community then no doubt you’ve heard about polymorphism. That’s bad" XD

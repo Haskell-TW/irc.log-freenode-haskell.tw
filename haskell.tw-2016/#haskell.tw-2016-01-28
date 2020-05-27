@@ -1,0 +1,17 @@
+01:41:06 <pkmx> @pl \m e -> maybe pure (throwError e) m
+01:41:07 <lambdabot> flip (maybe pure . throwError)
+01:42:57 <pkmx> @pl \e s -> readMaybe s `note` e
+01:42:57 <lambdabot> flip (note . readMaybe)
+01:53:13 <petercommand> :t note
+01:53:14 <lambdabot>     Not in scope: ‘note’
+01:53:14 <lambdabot>     Perhaps you meant one of these:
+01:53:14 <lambdabot>       ‘not’ (imported from Data.Bool),
+01:57:07 <pkmx> @pl \m e -> maybe (throwError e) pure m
+01:57:07 <lambdabot> flip (flip maybe pure . throwError)
+01:57:21 <pkmx> 難怪覺得怪怪der
+01:59:04 <pkmx> > let m `note` e = maybe (Left e) pure m in (Just 1 `note` "", Nothing `note` "kerker")
+01:59:06 <lambdabot>  (Right 1,Left "kerker")
+03:49:32 <pkmx> > let m `note` e = maybe (Left e) pure m in (Just 1 `note` "", Nothing `note` "kerker")
+03:49:33 <lambdabot>  (Right 1,Left "kerker")
+03:57:27 <pkmx> @pl \f g -> \x -> f x >> g
+03:57:28 <lambdabot> flip . ((>>) .)

@@ -1,0 +1,129 @@
+09:09:58 <miaoski> @CindyLinz 要不要講講這個？昨天 abwang 在 freak 的噗上提到... http://csg.csail.mit.edu/projects/languages/ph.shtml
+09:09:58 <lambdabot> Unknown command, try @list
+09:10:30 <miaoski>  @CindyLinz =+
+10:43:31 <CindyLinz> miaoski: 沒看過的東西要怎麼講咧....
+15:04:57 <miaoski> CindyLinz: 和妳說一下學員的反應哦....
+15:05:34 <miaoski> Allen 回來後看著 GHCi 發呆了好久... 我猜他迷惘了
+15:05:42 <miaoski> Spark 默默地看著投影片
+15:06:25 <miaoski> 我還在想我應該要重看 lyah .. .不然 x = go where go = blahblah 我走不出來
+15:06:49 <miaoski> cibs 和 ch0upi_bsd 看來是唯一心滿意足地離開的
+15:07:10 <miaoski> 其實 lazy eval 很好懂 der ... 我覺得我是卡在 loeb
+15:07:21 <miaoski> 但我卡的地方大概和別人不太一樣，所以我自己處理就好
+15:14:59 <CindyLinz> Spark 應該是在看之前的?
+15:17:42 <CindyLinz> miaoski: 嗯.. 想請 Spark 和 Allen 除了想自己把迷惘解開以外, 也想一下是卡在哪邊, 這樣萬一到下週還沒有解開的話, 我們也可以用外力幫忙解 ^^
+15:54:02 <CindyLinz> miaoski, cibs: release 到 master 和 gh-pages 嘍
+16:04:56 <cibs> CindyLinz++
+16:05:56 <CindyLinz> 有沒有人想寫 lazy evaluation 的逐步模擬器? ^^
+16:06:43 <CindyLinz> Haskell 有現成的 parser, 可以拿它生出來的資料結構去作變換 :D # https://hackage.haskell.org/package/haskell-src-exts-1.16.0.1/docs/Language-Haskell-Exts.html
+17:10:52 <cibs> 讀進來，eval 一段之後再 build 回去 XD
+17:16:28 <CindyLinz> 正常的 Haskell 不會有這種「跑一步」的動作啊
+17:20:02 <au> CindyLinz: 這就是 hat 吧
+17:20:03 <au> http://projects.haskell.org/hat/
+17:20:09 <au> elm 家也有 http://debug.elm-lang.org/
+17:20:55 <CindyLinz> au++ 來讀讀 hat.. 以前沒聽說過 :p
+17:24:00 <CindyLinz> au: 哪一種用法呢?
+17:24:13 <CindyLinz> hat 看起來是個 debug 工具的感覺
+17:25:18 <au> hat-trail 是逐步展開
+17:25:31 <CindyLinz> 想要作出像是這頁開始的步驟 http://cindylinz.github.io/Tutor-Haskell/?volume=lazy#92
+17:26:17 <CindyLinz> 哦~ 它是從結尾往開頭看
+17:26:29 <au> 由前往後好像是 hat-explore
+17:26:46 <au> 可以自己選 evaluation strategy
+17:27:40 <au> 在滿足 totallity 的程式裡可以用來 demo Church-Rosser property
+17:27:49 <CindyLinz> 這麼多選項 orz..  那還是裝起來試好了, 不能只看網頁介紹.....ww
+17:46:41 <mno2> 我覺得 ghc-vis 那樣把整個 graph 畫出來比較有感覺耶
+17:48:09 <mno2> 畢竟 haskell 的「一步」是 graph reduction
+17:49:09 <au> 說得也是
+18:33:29 <CindyLinz> 不好裝... /_\
+18:50:16 <miaoski> (expand-macro-1) 大誤 逃
+19:07:11 <cibs> 裝 hat 有一堆 warning 好可怕
+19:31:15 <petercommand> Could not deduce (Num a0) arising from the literal '0'
+19:31:20 <petercommand> 好神奇XD
+19:31:35 <petercommand> 於是我改成 0 :: Integer 就過了..]
+19:33:17 <petercommand> 感覺好像是 bug..
+19:38:19 <petercommand> > [0..]
+19:38:21 <lambdabot>  [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,2...
+19:38:54 <petercommand> https://gist.github.com/petercommand/c58e0ac92c2d2c71abb0
+19:43:02 <petercommand> [0..] 的 type 或語意應該不會隨使用的地點變吧?
+19:43:20 <petercommand> :t [0..]
+19:43:20 <lambdabot> (Num t, Enum t) => [t]
+19:43:37 <petercommand> :t 0
+19:43:38 <lambdabot> Num a => a
+19:43:44 <petercommand> @@
+20:02:19 <CindyLinz> petercommand: Haskell (or GHC?) 有 default instance 的設計, 我記得是把 Num a 的 default instance 設為 Integer
+20:02:31 <petercommand> ghc
+20:02:58 <CindyLinz> 一般來說... 0 這樣一個 literal 應該是天生不知道 type 的.. 沒事就加一下 type 吧 XD
+20:03:24 <petercommand> XD
+20:03:29 <petercommand> 感覺怪怪的
+20:03:54 <CindyLinz> 有設 default instance 的 class 很少.. 就當它是個不良設計的特例吧... (逃
+20:04:27 <petercommand> XDXD
+20:06:14 <petercommand> 可是為甚麼這裡不會變成 default instance 呢?
+20:08:30 <CindyLinz> petercommand: 你又沒給 source, 是要解夢嗎? XD
+20:08:47 <petercommand> XDXD
+20:13:56 <CindyLinz> "Haskell 1.4 caused the otherwise unconstrained value 1 to be given the type Int, whereas Haskell 98 and later defaults it to Integer" # https://downloads.haskell.org/~ghc/7.4.1/docs/html/users_guide/options-sanity.html
+20:16:21 <CindyLinz> petercommand: http://stackoverflow.com/questions/2861988/haskell-defaulting-constraints-to-type
+20:17:46 <petercommand> 怪...我把其他函數拿掉這裡就不會錯誤了..
+20:18:05 <petercommand> 本來想化簡 source 貼上來的..
+20:18:16 <petercommand> @@
+20:19:25 <CindyLinz> XD
+20:19:32 <CindyLinz> 你把錯誤化簡掉惹
+20:19:49 <CindyLinz> 只好將計就計把 project open source.. (誤
+20:20:04 <petercommand> XDD
+20:20:20 <CindyLinz> 不過我可能也幫不了多少.. @@"  我可能偶爾也遇到, 但是就順手加加 type 過去...
+20:30:07 <petercommand> ghc 7.8.3 會有這個錯，而 ghc 7.6.3 好像就不會..
+20:59:32 <CindyLinz> 問問意見 @@"..
+20:59:41 <CindyLinz> do-notation 裡的 list 該怎麼 indent 好呢? # https://gist.github.com/CindyLinz/358fc13b29de732b5095
+21:00:12 <CindyLinz> 我 list 折行以後的逗點因為和 list 開頭的 [ 的縮排一樣, 所以會 compile error..
+21:00:45 <petercommand> 我的逗號都擺最後面耶
+21:02:04 <suhorng> 天阿這好囧
+21:07:31 <CindyLinz> haskell 的 parser 不知道是不是 spec 定義的.. 真是不太聰明? XD
+21:08:03 <CindyLinz> if..then..else 已經處理好了.. 不過 list (我猜 tuple 和 record syntax 也一樣) 還沒處理 ^^|
+21:09:06 <suhorng> 恩....
+21:09:24 <CindyLinz> petercommand: 那最後一個的後面不能寫逗號欸?
+21:09:25 <suhorng> 之前的 if-then-else 就是 spec, 這個不知道
+21:09:43 <CindyLinz> 我別的語言也是習慣逗號寫後面.. 不過 Haskell 就學別人把逗號改寫在前面 @@"
+21:10:37 <petercommand> CindyLinz: 對阿...
+21:10:56 <suhorng> > if True; then 1; else 2
+21:10:58 <lambdabot>  1
+21:11:09 <suhorng> 所以現在 `do`-notation 才不會 compile error
+21:11:22 <CindyLinz> suhorng: if-then-else 沒有縮排規則為什麼要 ; 啊?
+21:11:36 <au> CindyLinz: https://gist.github.com/CindyLinz/358fc13b29de732b5095#comment-1367521 ?
+21:11:53 <CindyLinz> au: 好! XD
+21:12:00 <CindyLinz> 第二列開始.. 一項不寫 XD
+21:12:27 <au> 而且如果第一個變數是單一字母的話，也算是一種推齊
+21:12:33 <CindyLinz> 欸不對.. 第一項的長度如果不是一個字.. 還是醜醜的 @@"
+21:12:59 <au>     [foo, b, c
+21:13:00 <au>         , d, e
+21:13:00 <au>         , f, g ] <- someAction
+21:13:00 <suhorng> CindyLinz: 我的意思是說因為現在 if-then-else 可以在那兩個地方放 ';', 所以現在 do-notation 中插入的 ';' 才不會造成錯誤
+21:13:09 <au> 可以改縮排啊 XDD
+21:14:00 <CindyLinz> suhorng: 喔喔..
+21:14:39 <CindyLinz> au: 一直想守著用固定深度的縮排而不是依某一列的字的位置來縮 /_\
+21:14:48 <CindyLinz> 覺得這樣子可以按一個縮排比較方便..
+21:16:12 <au> CindyLinz: 那只剩一個選項了
+21:16:13 <au>     [ moose, foo
+21:16:13 <au>       , bar, baz ] <- someAction
+21:16:33 <CindyLinz> Q____Q
+21:18:06 <CindyLinz> 有一好.... QQ
+21:18:25 <au> 其實我覺得主要是逗號視覺上左右不對稱
+21:18:29 <au> 改冒號就好了
+21:18:33 <au>     ( moose
+21:18:34 <au>       : foo : bar
+21:18:34 <au>       : baz : [] ) <- someAction
+21:19:10 <CindyLinz> 覺得... 在 ( 或 [ 被 close 以前... do-notation 的 layout syntax 就先不要跑出來亂啊...
+21:20:07 <suhorng> layout syntax 情感上不是在那之前做的嗎?
+21:20:36 <CindyLinz> haskell 欸... 當然要 mutually recursive 的作法才合格 XD
+21:24:24 <au> CindyLinz: 前天我在重看 HPMOR 同人誌的時候有聯想到這段...
+21:24:28 <au> 「圖靈機可以回到過去的某一點，重算一個不同的未來，預言機可以依靠其他的機器來解決停機問題，可是你剛才說的是，現實能以一種自洽的方式一遍算完，用的是……還沒有發生過的信息……」 # Control.Monad.Fix.mfix
+21:24:33 <au> ref. http://hpmor.lofter.com/post/382652_1370539
+21:49:33 <CindyLinz> 跟不上orz
+21:49:58 <CindyLinz> 我想的情境應該傳統的 LALR(1) 就可以處理呀 o.o
+21:53:22 <CindyLinz> 還沒有發生過在這邊是指誰呀? 我想說 [ 或 ( 已經看到了呀
+21:58:33 <CindyLinz> gist 不會通知回應的 comment 好討厭..
+22:14:22 <au> CindyLinz: 這和 do notation 無關... 在 toplevel 寫
+22:14:22 <au> [ a
+22:14:23 <au> , b ] = [1, 2]
+22:14:37 <au> 也是不會過，因為 "Code which is part of some expression should be indented further in than the beginning of that expression"
+22:15:49 <CindyLinz> 嗯嗯...
+22:16:19 <CindyLinz> 希望以後這個 indent 規則可以寬宏大量一點 XD
+22:16:34 <au> 「還沒有發生過」只是在說 mutual recursion XD
+22:16:53 <CindyLinz> 喔 :p

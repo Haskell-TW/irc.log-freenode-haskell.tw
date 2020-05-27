@@ -1,0 +1,115 @@
+19:39:23 <suhorng> 最近寫 monad code 犯了很好笑的錯
+19:40:44 <yu_LIN> 什麼錯？
+19:53:50 <suhorng> 原本我的程式是 pure 的 (有用 monad 但最後都 run 掉了)
+19:54:22 <suhorng> func ... = Constructor data1 data2 where {data1 = ... commonData ...; data2 = ... commonData; commonData = .... }
+19:54:37 <suhorng> 後來為了 debug 我把他全部丟入 `IO` 裡面, 變成
+19:55:03 <suhorng> func ... = Constructor <$> data1 <*> data2 where {data1 = ... commonData ...; data2 = ... commonData; commonData :: IO ... = .... }
+19:55:18 <suhorng> 然後我的程式就變成(幾乎)兩倍慢了 囧
+19:57:08 <yu_LIN> 再次證明 IO 盡量別用，不算犯錯阿
+19:59:11 <suhorng> 不是這樣吧 XDDDD
+19:59:47 <suhorng> 假如改成 monadic code 果然應該好好把 pure value 拿出來....XD　　　做兩次實在太好笑了阿...
+20:00:34 <suhorng> 其實也不只是 IO, 一般 monadic code 都是 Orz
+20:04:39 <yu_LIN> 比我最近寫的 C code 好多了，起碼你還容易 debug.......XD
+20:07:41 <suhorng> C code到底怎麼了..?
+20:18:29 <yu_LIN> 忘記怎麼用 for 跟 while，結果兩個亂混用
+20:20:43 <yu_LIN> 完全就是反面教材的狀態
+20:42:15 <hashcat_> for跟while能有啥差別, 感覺就是哪個方便用哪個
+20:43:31 <hashcat_> suhorng: 沒想到IO沒有優化
+20:45:24 <hashcat_> 我用haskell幾乎只有主程式用IO Monad
+20:45:36 <suhorng> hashcat_: 其實是不能優化，不是沒有優化
+20:45:43 <suhorng> 加 IO 純粹為了 debug T_T
+20:45:49 <hashcat_> http://en.wikipedia.org/wiki/Static_single_assignment_form
+20:46:06 <hashcat_> 想不出啥情況非得用IO來debug
+20:46:07 <suhorng> 用 <$>, <*> 變成把一個 IO a 串了兩遍，一定得跑兩次……
+20:46:26 <suhorng> hashcat_: 不然 Haskell 該怎麼debug阿？
+20:46:26 <hashcat_> 我發現Haskell整個很意外地簡單 = =
+20:46:58 <hashcat_> 當然是用ghci
+20:47:26 <hashcat_> 設斷點樹展開, 在記憶體長啥樣都一目了然
+20:47:28 <suhorng> 咦
+20:47:37 <suhorng> 天阿 斷點orz
+20:47:41 <hashcat_> ???????
+20:47:48 <suhorng> 主要de的是演算法的bug
+20:48:45 <hashcat_> ghci會顯現所有內在的東西
+20:49:23 <hashcat_> 載入模組後, 可以對某個函數debug, 沒理由都要搞成IO吧
+20:49:27 <CindyLinz> 洩漏點星期四 topic 的內容好了... 用 Debug.Trace 裡面的 trace 和 traceShow 來 debug 吧 :p
+20:49:42 <hashcat_> 哦被我走漏了
+20:49:48 <hashcat_> 最近發現Haskell除了IO有點麻煩, 剩下跟imperative根本可以一對一翻譯了
+20:49:51 <suhorng> 有用過 trace T_T
+20:50:50 <hashcat_> 在where區塊用Static single assignment form(靜態單賦值式)
+20:50:54 <suhorng> 不過不太熟 (我的程式只能說一團糟阿.. https://github.com/suhorng/compiler13hw/tree/hw5-mips-trans )
+20:51:00 <hashcat_> 迴圈用遞歸
+20:51:13 <hashcat_> 根本用不上monad
+20:51:14 <suhorng> hashcat_: 我以為這個 bug 跟這件事沒關係？
+20:51:28 <hashcat_> 我想也是沒啥關係
+20:51:40 <hashcat_> 手癢想貼
+20:52:09 <CindyLinz> 就... Main.hs 喔?
+20:52:33 <CindyLinz> 好短喔.. XD
+20:52:47 <CindyLinz> 喔喔 Language/ 裡面還有一大堆.... /_\
+20:53:01 <hashcat_> 所以說還是只有prolog可以說是不同的範式
+20:53:28 <hashcat_> 嘿噗胡言亂語拉人
+20:53:54 <hashcat_> 速入prolog坑
+20:54:54 <suhorng> XDD
+20:55:14 <suhorng> 本來我們最後的 IR 也想作成 SSA, 不過沒空處理 φ 就算了
+20:56:29 <hashcat_> Prolog明明也是各種內涵, 也不像Haskell各種天馬行空, 阿不知道怎樣就沒人
+20:56:53 <hashcat_> 算了打住
+20:57:12 <suhorng> FP也是最近幾年才紅起來？
+20:57:26 <hashcat_> 好像是
+20:57:47 <hashcat_> 印象中是隨著多核心崛起
+20:58:44 <letoh> 唔  我覺得應該再更早一點?
+20:59:22 <letoh> 說真的就算有多核心了，但真的用 fp 在開發的專案也不多吧? 應該還是用傳統的模型，跟 lock 奮鬥?
+20:59:25 <hashcat_> 猜測是基於可擴展性引入函數式範式, Haskell身為純種而受到關注
+20:59:51 <hashcat_> 我覺得lock比什麼純函數麻煩吧
+21:00:20 <letoh> 很麻煩  但因為大部份的人習慣了
+21:01:19 <hashcat_> FP先天就是可以平行的, 不用鎖來鎖去
+21:01:27 <CindyLinz> 可是我用 Haskell 寫 concurrent 的程式, 用 MVar 感覺跟 lock 沒什麼差啊.. orz
+21:01:36 <hashcat_> 鎖成死鎖和不知道怎開的鎖
+21:01:46 <CindyLinz> 還是我寫的方式不對? @@"
+21:01:50 <letoh> 我沒有特別觀察，不過我猜 fp 這件事，ruby 應該幫上不少忙?
+21:01:51 <hashcat_> CinzyLinz:也可以不用
+21:02:06 <letoh> 或 python (很不想舉它當例子XD
+21:02:14 <CindyLinz> 甚至.. 因為我習慣在 perl 寫 event driven (explicit callback) 的.. 用 MVar 反而更不習慣 orz
+21:02:19 <hashcat_> 對python有偏見
+21:02:28 <CindyLinz> hashcat_: 那用什麼咧? @@"
+21:03:02 <CindyLinz> 在 haskell (GHC) 裡面用了 forkIO.. 後面寫起來整個 fu 就是 multi-thread 的感覺 orz
+21:03:32 <suhorng> 因為 forkIO 就真的是 multi-thread 吧...?
+21:04:07 <CindyLinz> suhorng: 如果把 do-notation 都展開.. 視為 callback 系的嗎? @@"
+21:04:08 <suhorng> 問題是要通信(或sync)的部份有辦法不用鎖嗎...?
+21:05:01 <letoh> actor model 呢?
+21:05:07 <hashcat_> 可能是我都是寫那種不用很多IO的程序, parallel包就很夠了
+21:05:15 <suhorng> 嗯..我不太清楚QQ, 就算用perl寫callback, 不會有同步的問題嗎? 還是同時一定只有一個callback能被執行
+21:05:26 <CindyLinz> 同時只有一個 callback 能被執行
+21:05:49 <letoh> 不用 lock 的情況，最簡單的就用 cooperative model 吧
+21:07:54 <suhorng> 那像 forkIO 就好比同時有很多個callback可能執行？
+21:08:32 <CindyLinz> 而且如果我沒開 -thread
+21:08:44 <CindyLinz> MVar 就直接 dead-lock...
+21:09:23 <suhorng> 悲劇..XD
+21:09:30 <CindyLinz> perl 有人直接寫 user code 做出 condition variable @@"
+21:09:51 <CindyLinz> 所以我那時也覺得 ghc 沒加 -thread 的時候應該也要能動 @@"
+21:10:34 <CindyLinz> 嗯, perl 那個作法有個限制: 在 handler 裡面不可以去 wait 一個 condition variable, 只能放一個 callback 在 condition variable 上面
+21:11:03 <letoh> http://adit.io/posts/2013-05-15-Locks,-Actors,-And-STM-In-Pictures.html
+21:11:07 <CindyLinz> 該 condition variable DONE 的時候會去呼叫放在上面的 callback
+21:12:17 <CindyLinz> ===分隔線===
+21:12:37 <CindyLinz> 那在 ghc 裡面, 不開 -thread 的時候流行怎樣寫 concurrent 程式呢?
+21:13:37 <suhorng> 沒有經驗..
+21:19:44 <hashcat_> 我應該是搞錯了
+21:19:59 <hashcat_> 平行化跟concurrent的概念不一樣
+21:20:23 <hashcat_> concurrency我就不知道了
+21:23:12 <hashcat_> CindyLinz: 你是用STM嘛
+21:28:23 <hashcat_> STM的機制比原來的好
+21:44:10 <CindyLinz> hashcat_: 沒有用 STM.. 嗯, 我不知道 STM 要怎麼運用在 concurrent @@"
+21:44:57 <CindyLinz> 我是說.. 拿來當作 concurrent 程式的主幹..
+21:48:57 <hashcat_> http://en.wikipedia.org/wiki/Concurrent_Haskell 捲到最底下有範例
+21:54:19 <hashcat_> 搞定死鎖和惡性競爭
+21:57:38 <hashcat_> 像是atomically這函數
+21:57:45 <hashcat_> X10也有這機制
+22:31:19 <suhorng> 我電腦上跑 idris REPL 速度好慢 QQ
+22:48:49 <suhorng> 現在 GHC 的 IO 竟然是丟給 ST monad 做
+23:02:25 <favonia> CindyLinz: MVar 不用 -threaded 會炸掉嗎？
+23:02:38 <favonia> CindyLinz: -threaded 應該只跟 OS thread 有關吧...
+23:04:48 <favonia> Haskell thread 本來就可以很多個
+23:05:20 <CindyLinz> hashcat_: 謝謝, 等下來讀 @@"
+23:05:29 <CindyLinz> favonia: 我原本也以為不會炸.....
+23:05:44 <CindyLinz> 不過這應該是一年多前, 可能 7.2 的時候的事
+23:09:37 <favonia> CindyLinz: 你還有程式碼嗎？
+23:18:06 <CindyLinz> favonia: 這邊, 我的 source 就是 http://funth.kktix.cc/events/55c147
+23:18:19 <CindyLinz> 不過我現在也試一下簡單的例子好了..

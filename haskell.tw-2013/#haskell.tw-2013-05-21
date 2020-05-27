@@ -1,0 +1,44 @@
+01:06:15 <letoh> 請問一下 "Enum members are sequentially ordered types — they can be enumerated. The main advantage of the Enum typeclass is that we can use its types in list ranges." 後面那句的 in list ranges 是什麼意思? 是指可以當作 list index 的意思嗎?
+01:08:10 <letoh> 就是那個 [1..n] 裡面的東西?
+01:32:13 <monochrom> 就是了. data Whee = CC | AA | ZZ deriving Enum. 現在可以用 [CC..ZZ] 了
+01:36:46 <letoh> thanks! 看來沒理解錯
+12:20:54 <MnO2> http://mth.io/talks/haskell-in-production/#/
+19:07:07 <_13h> 我現在覺得很麻煩的是拆箱跟封箱的工具都不熟，遇到函式接不起來的都不曉得要找什麼工具來串接XD
+19:07:19 <_13h> 到處都是箱子好討厭XD
+20:13:00 <CindyLinz> 你說的箱子不是 ghc 的 Box / Unbox 哄
+20:17:26 <_13h> 不是XD
+20:20:40 <CindyLinz> _13h: 你說的這種困境, 我以前用 C++ 寫東西玩的時候也有深刻感受 @@"
+20:21:05 <CindyLinz> 那時選 C++ 來玩, 想說 C/C++ 的 lib 非常豐富
+20:21:32 <CindyLinz> lib 豐富可以踩在巨人的肩膀上省很多時間
+20:22:14 <CindyLinz> 結果投入更多時間, 只為了讓這些互相看不順眼的巨人能夠互相疊起來 orz
+20:22:26 <_13h> 巨人太高容易摔XD
+20:23:09 <_13h> 如果還有 C++/CLI 進來就真的是惡夢了
+20:25:31 <CindyLinz> CLI 是 一套 lib 喔? 我以為是 command line interface 的縮寫, 是一堆同類型 lib 的總稱
+20:26:11 <CindyLinz> 我是有在幻想, Haskell 的 type system 可以相當程度輔助這種接不起來的問題
+20:26:30 <CindyLinz> 我那時的情境是... compile 會過, 執行會當...
+20:26:51 <_13h> C++/CLI 其實是某個長的很像 C++ 的東西
+20:26:52 <CindyLinz> 而且可能看不太懂為什麼沒串好.. 有可能我誤會文件的意思.. :Q
+20:27:20 <_13h> 可能類似 JScript 跟 JavaScript 的關係XD
+20:27:32 <CindyLinz> 噢
+20:28:02 <CindyLinz> bended C++
+21:32:41 <MnO2> http://www.alephcloud.com/#!jobs/c1ksz
+22:49:44 <monochrom> CLI 亦可指 .NET
+22:50:18 <monochrom> Common Language 甚麼的
+22:52:55 <monochrom> (同理, CLR 亦可指 .NET 的 common language runtime, 又或者 Cormen, Leiserson, Rivest 合著的那本厚霸天下的算法課本 XD)
+22:54:07 <monochrom> (我想看人用它表演轉書!)
+22:55:07 <letoh> 手指會先斷掉XD
+23:05:56 <CindyLinz> 極限運動還不能買保險.. (搞錯重點)
+23:12:08 <MnO2> CindyLinz: 今天閒下來了？
+23:12:36 <MnO2> 好像很久沒出現了說
+23:13:52 <CindyLinz> 還沒閒下來
+23:13:55 <letoh> 終於讓公司正式導入 haskell 開發專案了? (誤
+23:14:15 <CindyLinz> 可是想到好久都沒碰這些了有點愧對教主(?)... (默)
+23:14:16 <MnO2> 因為導入 Haskell，所以我的工時減少了 1/3
+23:14:33 <letoh> 然後就有時間上 irc 了? XD
+23:15:18 <CindyLinz> 從上次 Functional Thursday 之後到現在完全沒有接觸 Haskell.. (汗)
+23:15:47 <CindyLinz> 中間出國玩了一週, 前後就會積一堆事 orz
+23:39:50 <letoh> 在宣告 data 的時候有沒有什麼建議的縮排風格? 不要往左邊拉太長的
+23:40:19 <letoh> 雖說有寬螢幕  但我不想因為幾行就用掉一個螢幕xd
+23:52:41 <monochrom> 或者你會喜歡 https://github.com/tibbe/haskell-style-guide/blob/master/haskell-style.md
+23:53:25 <letoh> thanks, 我先看一下
+23:57:11 <letoh> 剛剛改成很類似的寫法  | 開始換到下一行

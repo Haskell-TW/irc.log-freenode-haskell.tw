@@ -1,0 +1,21 @@
+15:45:18 <CindyLinz> 嘖.. DestructAssign 用開心了, 開始想用 ConstructAssign 惹...
+15:45:48 <CindyLinz> des{ $x, $y, $z } = {x => 1, y => 2, z => 3} 獲得 $x=1, $y=2, $z=3
+15:46:09 <CindyLinz> con{ $x, $y, $z } 生出 {x => $x, y => $y, z => $y}..
+15:48:29 <au> use deconstruction;
+15:48:56 <au> (目前還沒有這個 pragma，先上傳先贏)
+15:51:23 <CindyLinz> 覺得 {} 的前面還是要放關鍵字啦 ^^|
+15:51:34 <au> 要啊
+15:51:37 <CindyLinz> 因為原本就可以寫 {$key, $value} 呀
+15:51:55 <au> 只是說可以混合成一個 pragma
+15:51:56 <CindyLinz> 那.. 現在 use DestructAssign qw(des); 不行嗎? o.o
+15:52:04 <au> use methods-invoker; # 像這樣
+15:52:39 <au> 行，作者最大 XD 我只是說一般 macro 可以考慮小寫的模組名。
+15:52:42 <CindyLinz> pragma 的意思是把某個 block, 或是某個檔案, 整個 semantic 都換掉嗎?
+15:52:55 <au> 通常是 lexical block 的 semantic / macro
+15:54:37 <CindyLinz> 這樣.. {$x, $y, $z} = {x => 1, y => 2, z => 3} 是視為 des{$x, $y, $z} = des{x => 1, y => 2, z => 3} 嗎?
+15:55:40 <au> 不能只對 LHS 作用嗎？
+15:56:07 <au> 但是我本來的意思是保留 des{} con{} 語法，只是用一個小寫的模組代為 import DestructAssign 和 ConstructAssign
+15:56:21 <au> 就不用 use 兩次，的意思。
+15:56:30 <CindyLinz> 喔喔 去認 LHS...
+15:56:49 <CindyLinz> 咦? 只是這樣喔? XDXD
+15:57:43 <CindyLinz> 我想太多了 XD

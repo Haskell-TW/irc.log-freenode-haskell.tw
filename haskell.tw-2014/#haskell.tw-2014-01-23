@@ -1,0 +1,18 @@
+17:00:50 <CindyLinz> 剛報了 OSDC 2014, 不過內容還沒準備好... ww
+17:01:17 <CindyLinz> 目前 subject: The marriage of Haskell and Perl.      abstract: To write Haskell code in Perl. To write Perl code in Haskell. Combine the type most language and the type least language together...
+17:03:12 <petercommand> marrige....
+17:03:22 <petercommand> marriage....
+17:03:24 <petercommand> XDD
+17:03:29 <CindyLinz> 反正隨時可改啦 ^^|
+17:03:42 <CindyLinz> 我心中想像的畫面是史密斯任務..
+17:04:00 <godfat> type most 聽起來也有點像要打很多字 XD
+17:04:12 <petercommand> 哈
+17:04:42 <CindyLinz> 囧.. feature 比較那邊會提到... 在 Haskell 裡面寫 Perl, 可能可以寫比較少 code... (OS: 但其實 Haskell 的程式碼也不會比 Perl 長....)
+17:05:05 <CindyLinz> 只是 Perl 程式很短是大家的印象
+17:20:48 <b4284> most typed
+17:21:12 <b4284> the purest and the dirtiest (誤)
+17:21:43 <b4284> the most unclean
+17:29:42 <CindyLinz> 反正這種事就是.... 報了 talk, 到時候就會學會自己要講的內容了... <囧>
+18:06:06 <petercommand> XDD
+22:38:34 <suhorng> 有人用過這個package嗎？http://hackage.haskell.org/package/effects
+22:42:19 <suhorng> idris對類似lifting那一類的問題(雖然他是list, 不是monad transformer)好像是用auto proof search lol

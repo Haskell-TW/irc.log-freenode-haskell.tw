@@ -1,0 +1,24 @@
+10:49:45 <cibs> undefined 也沒什麼不好啊 XD
+12:22:51 <petercommand> -fdefer-typed-holes (Y)]
+16:53:51 <CindyLinz> cibs: 很長耶....
+16:54:05 <CindyLinz> 而且還要加時態, 對非英文語系很不友善!
+16:54:13 <CindyLinz> undefining 不行嗎 = =
+16:58:17 <petercommand> > let 未定義 = undefined in 未定義
+16:58:19 <lambdabot>  *Exception: Prelude.undefined
+16:58:46 <petercommand> :p
+18:36:27 <pkmx> > _
+18:36:28 <lambdabot>  Found hole ‘_’ with type: t
+18:36:29 <lambdabot>  Where: ‘t’ is a rigid type variable bound by
+18:36:29 <lambdabot>             the inferred type of it :: t at Top level
+20:17:20 <CindyLinz> 喔喔.. lambdabot 有這個 hole
+22:45:43 <Yulin> 看到前幾天 suhorg 有講到 elm
+22:45:57 <Yulin> 現在台灣有專門玩 elm 的社群嗎？
+23:25:51 <suhorngM1> Yulin: 竟然有在 irc 發言XD
+23:25:55 <suhorngM1> off line qq
+23:29:24 <CindyLinz> suhorngM1: 你答非所問, 誰要理你... XD
+23:32:41 <suhorngM1> xD
+23:37:15 <letoh> 他之前一直說要寫個 forth，寫到現在不曉得怎樣了@_@
+23:44:09 <CindyLinz> WYAF
+23:46:56 <suhorngM1> 不知為何有 W 有 F 看起來就不太好
+23:47:18 <suhorngM1> Yulin 好像也有在看 Erlang XD?
+23:47:46 <CindyLinz> Welcome To Facebook..

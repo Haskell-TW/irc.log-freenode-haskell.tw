@@ -1,0 +1,88 @@
+10:33:29 <yulin> 問個語法問題，我記得以前這邊好像有討論過類似的？
+10:35:21 <yulin> 先不考慮用 fp 跟 oop 的風格去寫程式，下面那種語法普遍來說會比較有可讀性？
+10:37:38 <yulin> 例如 f3.f2.f1 data 跟 f1 (f2 (f3 data)) 這樣
+10:38:35 <letoh> 討論可讀性應該要看對象吧  背景不同的話對可讀性應該會有影響
+10:41:28 <letoh> 我想現實中大概是 f1 (f2 (f3 data)) 能讓比較多人接受
+10:42:11 <letoh> 很多人看到 f3.f2.f1 先想到的應該不會是 function composition
+10:43:52 <letoh> 不曉得「只學過」haskell 的話  會很習慣 f3.f2.f1 嗎? 我常常看到時還是想成 OOP 裡常見的語法XD
+10:49:35 <yulin> 一想到 f1 (f2 (f3 data)) 這種寫法要寫好多括號，就好想寫成無點流 XD
+10:59:57 <petercommand> 有可能是field access之類的 哈
+11:00:46 <petercommand> 很多點點的那個
+11:02:06 <letoh> petercommand: 你亂學一堆東西，心靈也被汙染了
+11:04:03 <petercommand> XD
+11:46:52 <CindyLinz> yulin: FP 可以寫 f3 & f2 & f1
+11:47:22 <CindyLinz> yulin: 不過不是 Prelude, 也不是 base, 是 Control.Lens 裡面的...
+11:47:44 <CindyLinz> yulin: 但也不用 Control.Lens 啦, 自己定義一下 let (&) = flip ($) 就有了
+11:47:47 <au> 而且某些語言裡 foo . bar 和 foo.bar 意思也不一樣
+11:48:18 <CindyLinz> .............||
+11:48:28 <au> f1 . f2 . f3 $ data -- 因此這樣寫並不難懂
+11:48:55 <CindyLinz> Haskell 的話, foo.bar 如果要和  foo . bar 不一樣, 是寫成 Foo.bar 的時候, 大寫的話會是 module name
+11:49:35 <CindyLinz> au: 這是個我自己猶豫的地方, 我看很多人寫 f1 . f2 . f3 $ data, 我猶豫要不要寫成 f1 $ f2 $ f3 $ data
+11:49:38 <au> 而 Foo . bar 是建構式
+11:49:56 <au> CindyLinz: 少按三個 shift 可以保護手腕喔~
+11:50:16 <CindyLinz> au: 因為這樣如果後來發現後面的 data 要去掉, 少用一層的話, 可以直接縮成 f1 $ f2 $ f3, 而 . 的寫法要多改一個 . -> $
+11:51:09 <au> f123 data where f123 = f1 . f2 . f3
+11:51:39 <CindyLinz> 啊我講錯, 應該不是 data 去掉.. data 去掉的差異好像差很大
+11:52:01 <au> 這樣一個 shift 都不用按. 而且意思比 $ 較清楚
+11:52:05 <CindyLinz> 應該是中段去掉, 那應該就不會有 . -> $ 的問題才對.... 嗯, 等下次再遇到的時候再講好了, 看是發生什麼事 :Q
+12:00:20 <au> 還好簡報難度下修了 #繼續刪程式碼多放圖片
+12:00:54 <CindyLinz> :D :D
+12:01:14 <CindyLinz> 今年人數超過去年/前年的兩倍啊
+12:01:31 <CindyLinz> 這是 coscup 人數成長率的概念 XD
+12:02:39 <au> lambda 紅明顯
+12:32:59 <c9sloud> 神秘的 202
+12:33:48 <whitglint> 想聽演講的人太多了 XD
+12:34:01 <c9sloud> 60 人的 capability ?
+12:38:26 <CindyLinz> 前年是70人參加啦
+12:38:34 <CindyLinz> 去年忘了 :p
+12:41:37 <CindyLinz> 助教有寄旁聽確認信喔~ 要記得回~~
+12:41:54 <CindyLinz> 重點是..... 他寄到我的 SPAM 信箱.......||
+13:15:40 <caasih_> CindyLinz: 要不是您提醒，還真不知道有這兩封信
+13:16:08 <caasih_> 通通在 gmail spam 匣裡。
+13:30:37 <CindyLinz> caasih_: 兩封!?
+13:31:57 <caasih_> 都是提醒要在 27 前確認旁聽，一封早些，一封兩天前。
+13:33:00 <caasih_> 一封 25 日，一封 27 日。
+13:35:28 <CindyLinz> 喔.. 那應該是他知道會被丟 spam 以後多寄的....... another spam... XD
+13:43:37 <caasih_> > repeat "spam"
+13:43:39 <lambdabot>  ["spam","spam","spam","spam","spam","spam","spam","spam","spam","spam","spam...
+13:59:33 <whitglint> repeat "歐拉"
+13:59:41 <whitglint> > repeat "歐拉"
+13:59:43 <lambdabot>  ["\27472\25289","\27472\25289","\27472\25289","\27472\25289","\27472\25289",...
+15:56:46 <petercommand> learn you a haskell說"When using lazy folds on really big lists, you might often get a stack overflow error."耶....
+15:57:01 <petercommand> 上次好像是爆heap
+15:57:57 <mno2> hakyll compile 速度還不錯。想把 octopress 丟掉了，compile 太慢。
+15:58:23 <mno2> petercommand: list 應該是爆 heap 沒錯
+15:58:24 <letoh> octopress 是用 ruby ?
+15:58:31 <mno2> letoh: yup
+15:58:42 <mno2> octopress = octo + wordpress
+15:58:47 <letoh> (亂猜的
+15:58:57 <mno2>  haskel + blogspot = ?
+15:59:09 <mno2> haspot
+15:59:15 <mno2> 直接翻譯為：笑點
+15:59:20 <mno2> ha + spot
+15:59:42 <mno2> (亂起名字)
+15:59:51 <letoh> 我以為是 haha point (誤
+16:00:18 <mno2> 你的部落格有笑點嗎？（大誤）
+16:00:43 <petercommand> 看起來learn you a haskell又有錯誤了XDD
+16:01:17 <petercommand> 不過上次寄信去，作者都沒回
+16:02:16 <mno2> petercommand: 他好像消失了 xD   之前我想問他跟出版社授權的事結果也聯絡不到
+16:02:46 <petercommand> 好吧XD
+16:07:34 <CindyLinz> foldl 有機會爆 stack..
+16:07:39 <CindyLinz> (無 ')
+16:07:51 <CindyLinz> 因為 stack 通常比 heap 小很多
+16:08:09 <CindyLinz> 有可能展開 list 的時候 heap 剛好還沒爆
+16:08:19 <CindyLinz> 而在把一堆 (+) 算出來的時候爆 stack
+16:08:48 <CindyLinz> 要算的東西剛好比 heap 小, 比 stack 大的時候爆 stack.. XD
+16:08:52 <CindyLinz> 比 heap 大的時候爆 heap..
+16:19:37 <mno2> CindyLinz: 為什麼算一堆 (+) 的時候會需要 push 到 stack 上啊？
+16:21:15 <mno2> 我以為 symbol 對應到的 thunk 都是算在 heap 上，只是要算某個 (+) 的時候丟到 stack 上
+16:26:07 <CindyLinz> mno2: 我覺得是 ghc optimizer 作的決定..
+16:26:24 <CindyLinz> 經過 strict 分析以後覺得這一大串一定是一口氣算完, 所以就直接在 stack 上面算
+16:26:55 <CindyLinz> 應該說, 使用真遞迴, 而不再一一檢查是不是 thunk 要不要算之類的
+21:16:34 <CindyLinz> petercommand, mno2: 我開 ulimit -S -v 4197152 然後跑 foldl (+) 0 [1..1048576*20] :: Int 之後會得到 stack overflow
+21:23:08 <mno2> CindyLinz: 其實 ghc 本身用 rtsopts 就可以限制了，我都是這樣改的
+21:23:42 <mno2> ./test +RTS -M1M -K1M -RTS 之類的
+21:39:02 <CindyLinz> 我只是要試出會 stack 爆而沒有 heap 爆的例子啊 ._.
+22:44:57 <petercommand> CindyLinz: XD
+22:50:39 <mno2> CindyLinz: 我的意思就是改 rt 的 stack size 跟 heap size 不是更快。把 stack 調小一點，這樣不用很大的數字就爆了。
+23:15:58 <CindyLinz> mno2: 喔 XD

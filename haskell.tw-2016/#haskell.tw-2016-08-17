@@ -1,0 +1,3 @@
+01:06:34 <IN_AL_60H> :t Control.Monad.Loops.whileJust
+01:06:36 <lambdabot> Monad m => m (Maybe a) -> (a -> m b) -> m [b]
+01:06:40 <IN_AL_60H> hackage so strong

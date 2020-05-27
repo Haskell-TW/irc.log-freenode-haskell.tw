@@ -1,0 +1,5 @@
+21:31:05 <mno2> 想問一下，如果想瞭解 existentail type 還有 rank-n polymorphism 的實作 type inference 實作（從 hindley milner 擴充上去），應該要看哪一篇 paper ?
+22:54:04 <suhorngM_> spj 有一篇詳細寫 Rank-n polymorphism type system 跟給出完全實做的
+22:54:38 <suhorngM_> Practical type inference for arbitrary-rank types
+22:59:12 <suhorngM_> mno2: 另, 這裡有個 ref https://ghc.haskell.org/trac/haskell-prime/wiki/ExistentialQuantification
+23:03:59 <mno2> suhorngM_: 感恩

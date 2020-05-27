@@ -1,0 +1,24 @@
+01:34:29 <monochrom> 想找到用 haskell 做 startup 的人, 可能要延請西人
+09:40:08 <mno2> monochrom:  什麼是西人？
+09:40:38 <monochrom> 西洋人
+09:43:14 <mno2> 目前社群的確還是在歐美居多。 聽說德國忘了哪個城市的聚會可以到 1x 人，倫敦可能多一些。 美西也許跟倫敦差不多。
+09:43:16 <mno2> https://superginbaby.wordpress.com/2014/11/18/learning-haskell-as-a-nonprogrammer/
+09:43:27 <mno2> [LEARNING HASKELL AS A NONPROGRAMMER]
+09:47:24 <monochrom> 呀, 誠然, 我忘了起初 "甚麼是 editor" 都可以是個問題
+09:49:42 <monochrom> 不過, 早已 recursion 當飯吃的人有福了
+13:00:30 <suhorngM_> https://downloads.haskell.org/~ghc/7.10.1/docs/html/users_guide/partial-type-signatures.html 這個好像很有趣!!
+13:02:31 <CindyLinz> 等好久惹 QQ
+13:02:46 <suhorngM_> 7.10 好像真的改了不少阿..還有個 migration guide
+13:03:36 <CindyLinz> 包含把 MB 變成 GB 的改變? 囧
+13:03:49 <suhorngM_> xDDDDD
+13:04:44 <suhorngM_> https://ghc.haskell.org/trac/ghc/wiki/Migration/7.10#GHCsaysNoinstanceforFoldable...arisingfromtheuseof... Foldable
+13:07:39 <CindyLinz> partial type signature 竟然也可以把 wildcard 放在 class context 的地方 XD
+13:08:45 <suhorngM_> 真是非常有用
+13:09:51 <suhorngM_> 不知道 type checker plugin 好不好寫!
+13:12:11 <CindyLinz> 只要 check, 不用 derive 的嗎? 聽起來應該不會太難 (?
+13:12:56 <suhorngM_> derive?
+13:16:12 <CindyLinz> infere XD
+13:16:18 <CindyLinz> 用錯字 QQ
+13:16:34 <suhorngM_> 好像可以支援 infer 耶
+13:17:04 <CindyLinz> 那好像有點難 orz
+13:17:05 <suhorngM_> document 說可以連到 SMT solver 之類的

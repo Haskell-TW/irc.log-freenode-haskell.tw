@@ -1,0 +1,59 @@
+00:12:47 <petercommand> > (truncate pi) + 0.1
+00:12:49 <lambdabot>  No instance for (GHC.Show.Show a0)
+00:12:49 <lambdabot>    arising from a use of ‘M299051206468229635815530.show_M2990512064682296358...
+00:12:49 <lambdabot>  The type variable ‘a0’ is ambiguous
+00:12:49 <lambdabot>  Note: there are several potential instances:
+00:12:49 <lambdabot>    instance [safe] GHC.Show.Show
+00:13:41 <petercommand> 這個是要指定type來解決嗎?
+00:14:36 <suhorng> :t truncate
+00:14:37 <lambdabot> (RealFrac a, Integral b) => a -> b
+00:14:54 <suhorng> > fromIntegral (truncate pi) + 0.1
+00:14:56 <lambdabot>  3.1
+00:15:16 <suhorng> truncate 出來是 integral 的東西，不能直接 + 0.1
+00:16:26 <petercommand> :t fromIntegral
+00:16:27 <lambdabot> (Num b, Integral a) => a -> b
+00:16:46 <petercommand> @src fromIntegral
+00:16:47 <lambdabot> fromIntegral = fromInteger . toInteger
+00:17:13 <petercommand> @src fromInteger
+00:17:14 <lambdabot> Source not found. You untyped fool!
+00:17:28 <petercommand> @src toInteger
+00:17:29 <lambdabot> Source not found. Your mind just hasn't been the same since the electro-shock, has it?
+00:17:32 <petercommand> @@
+00:18:32 <petercommand> suhorng: 恩...我看一下
+00:21:35 <CindyLinz> truncate 會出 Integral
+00:21:58 <CindyLinz> 可是 (+) 還是吃了 :Q
+00:23:03 <CindyLinz> 喔 外面套了 fromIntegral
+00:23:19 <CindyLinz> @type fromIntegral
+00:23:20 <lambdabot> (Num b, Integral a) => a -> b
+00:23:28 <CindyLinz> 就可以變為 Num 了..
+13:50:59 <mno2_> CindyLinz: 咦？原來 a127 去創業了？ http://www.skymizer.com/
+15:40:14 <mno2_> http://www.youtube.com/watch?v=Klwkt9oJwg0&feature=youtu.be [Edward Kmett on Hask]
+15:40:25 <mno2_> 前面那個 Ryan Gosling 是怎麼回事 wwwww
+22:35:33 <suhorng> fix f = foldr (\_ -> f) undefined (repeat undefined) #WTF xDDD 為什麼要這樣寫 # from http://en.wikipedia.org/wiki/Fold_%28higher-order_function%29
+22:39:29 <suhorng> ... f (f (... f ( _|_) ... ) ) ...
+22:44:39 <CindyLinz> XDDD
+22:46:35 <petercommand> > foldr (const f) undefined (repeat undefined)
+22:46:37 <lambdabot>  No instance for (GHC.Show.Show a0)
+22:46:37 <lambdabot>    arising from a use of ‘M55490390334291274878459.show_M55490390334291274878...
+22:46:37 <lambdabot>  The type variable ‘a0’ is ambiguous
+22:46:37 <lambdabot>  Note: there are several potential instances:
+22:46:37 <lambdabot>    instance [safe] GHC.Show.Show
+22:46:50 <petercommand> > foldr (const 1) undefined (repeat undefined)
+22:46:51 <lambdabot>  No instance for (GHC.Show.Show a0)
+22:46:52 <lambdabot>    arising from a use of ‘M59250393254053852098473.show_M59250393254053852098...
+22:46:52 <lambdabot>  The type variable ‘a0’ is ambiguous
+22:46:52 <lambdabot>  Note: there are several potential instances:
+22:46:52 <lambdabot>    instance [safe] GHC.Show.Show
+22:47:05 <petercommand> > foldr (const (++)) undefined (repeat undefined)
+22:47:07 <lambdabot>  Couldn't match type ‘[a] -> [a]’ with ‘[a]’
+22:47:07 <lambdabot>  Expected type: [a] -> [a]
+22:47:07 <lambdabot>    Actual type: [a] -> [a] -> [a]
+22:47:50 <petercommand> 這到底是啥XD
+22:48:13 <suhorng> 給 f 一個實際東西帶進去XD 例如說
+22:48:47 <suhorng> > let f self = \n -> if n == 0 then 1 else n * self (n - 1) in foldr (const f) undefined (repeat undefined) $ 5
+22:48:49 <lambdabot>  120
+22:49:15 <suhorng> 原先的 fix 定義應該是 fix f = f (fix f) XD
+22:49:21 <suhorng> Y-combinator
+22:55:52 <petercommand> @src fix
+22:55:53 <lambdabot> fix f = let x = f x in x
+23:31:09 <suhorng> 寫成 let x = f x in x 大概又是某種避免 memory leak 的解法...

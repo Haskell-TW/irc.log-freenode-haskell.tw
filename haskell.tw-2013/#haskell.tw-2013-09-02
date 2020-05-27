@@ -1,0 +1,49 @@
+12:27:58 <CindyLinz> 我想弄的東西要 parse Haskell.. 希望語法上盡量和 GHC 一樣 (可能不一定用得到那一堆 extension, 而在 extension 之外希望是一致的)
+12:28:41 <CindyLinz> 不知道該直接拿 ghc 的 happy syntax 來用, 還是自己從簡單的 happy syntax 開始建立...
+12:28:58 <CindyLinz> ref: ghc 的 happy 檔 http://ghc.haskell.org/trac/ghc/browser/compiler/parser/Parser.y.pp
+12:29:46 <CindyLinz> 用 ghc 的 happy 檔當然就會非常一致了.. 只是裡面好像有許多我還不知道是什麼東西的東西
+12:30:18 <CindyLinz> 自己寫的話起步比較簡單, 可是擔心寫出來的 syntax 會有些 corner case 不一樣.. @@"
+14:41:20 <mno2> https://news.ycombinator.com/item?id=6311717
+14:50:08 <Yu-Lin> 有沒有人看過這本 http://www.cis.upenn.edu/~bcpierce/tapl/
+14:50:13 <Yu-Lin> 想知道評價如何
+14:53:32 <_13h> 這本應該不用問評價了吧? XD
+14:53:49 <_13h> 印象中好像還有續集?
+14:53:58 <Yu-Lin> XD
+14:54:39 <Yu-Lin> Advanced Topics in Types and Programming Languages 續集
+14:55:08 <Yu-Lin> 我在考慮要不要買回去看
+14:56:35 <_13h> mit press 的書沒代理，買起來好貴XD
+14:57:12 <Yu-Lin> 因為我昨天在天攏看到實體書XD
+14:58:10 <_13h> 天瓏賣多少啊?
+15:00:20 <Yu-Lin> 印象中是兩千接近三千，如果我沒記成別本的價格的話
+15:02:35 <_13h> amazon 的價格怎麼會是 $50.49... mit press 網頁上寫的是 $80，差很多耶XD
+19:42:44 <MnO2> http://www.udpwork.com/item/4840.html
+19:42:53 <MnO2> PerlYuYan 居然也上榜了
+21:36:30 <MnO2> CindyLinz 要弄內嵌 haskell ?
+21:46:14 <CindyLinz> MnO2: eventually 是這目標...
+22:24:38 <hashcat> scala的一個實驗特性讓我準備要無視haskell了
+22:24:40 <hashcat> http://docs.scala-lang.org/overviews/reflection/overview.html
+22:25:26 <letoh> reflection 不是很多人都有?
+22:26:15 <hashcat> 在haskell貌似等幾年都等不到
+22:27:15 <hashcat> 跟haskell一樣那種型別系統又同時有reflection沒見過
+22:28:48 <hashcat> 望著Data.Dynamic多時
+22:31:20 <MnO2> Reflection 好像都是看到跟 OO 一起出現。有文獻探討過 Reflection 到底是什麼跟有甚麼好處嗎?
+22:31:58 <letoh> 你是說學術上的理論?
+22:32:48 <MnO2> 有學術上的理論也可以啊，雖然不一定有道理。只是想說有沒有人認真思考過
+22:32:57 <letoh> c++ 其實也有人在搞 reflection，但沒進 standard 的東西就變成一個消失的方言XD
+22:33:29 <favonia> 如果想要證明正確性，難度只會指數暴增吧
+22:33:39 <MnO2> Reflection 最先出現在哪個語言中?
+22:33:47 <letoh> http://en.wikipedia.org/wiki/Reflection_(computer_programming)
+22:34:14 <letoh> 第一句? XD
+22:35:17 <letoh> "Brian Cantwell Smith's 1982 doctoral dissertation[2][3] introduced the notion of computational reflection in programming languages, and the notion of the meta-circular interpreter as a component of 3-Lisp"
+22:40:27 <MnO2> 恩.. 感覺要 runtime 改變行為就不像是學界會想做的事
+22:40:48 <favonia> hashcat: 我覺得想要證明合理版本的 abstraction theorem (polymorphism theorem) 的語言應該都不太會加 orz
+22:41:02 <favonia> MnO2: 應該會有人吧，又不是每個人都在乎 xD
+22:42:30 <MnO2> 我不知道一般針對 runtime 的描述工具有哪些?
+22:42:43 <MnO2> 這樣能發 paper 嗎? xD
+23:27:23 <CindyLinz> reflection 是和實作相依的.. 如果 standard 裡面有規定 reflection, 那就是實作都被定死了..
+23:27:44 <CindyLinz> Java 有 reflection 是因為 JVM 的實作方式是 Java 規定的
+23:29:10 <CindyLinz> Haskell 裡只能有 GHC 版的 reflection, Hugs 的 reflection, 但不會有 Haskell 的 reflection
+23:31:25 <letoh> 不太懂，我以為 reflection 可以只定義行為，但看你的說法，應該是連拿到的結果也要規定?
+23:31:33 <letoh> 所以才會跟實作相依?
+23:32:08 <CindyLinz> letoh: 我看過的 reflection 至少都規定 runtime 要保留 symbol table 了呀
+23:32:54 <CindyLinz> 應該也會限制 inline 可以做到哪

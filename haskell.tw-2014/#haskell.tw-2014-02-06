@@ -1,0 +1,11 @@
+00:30:37 <monochrom> Haskell 支持 mutual import modules 呀, 但實際上很難做. GHC 有做呀, 只是要你寫多幾行幫它.
+00:55:23 <CindyLinz> !
+00:56:57 <CindyLinz> 謝謝~~ 找到了這個! http://www.haskell.org/haskellwiki/Mutually_recursive_modules
+00:59:24 <CindyLinz> 然後這個 http://www.haskell.org/ghc/docs/7.0.3/html/users_guide/separate-compilation.html#mutual-recursion
+02:02:35 <monochrom> 7.0.3 很舊了. 儘管, 在這問題上沒變.
+02:03:15 <monochrom> 我是不是唯一一人有讀過 GHC 說明書呢?
+02:04:32 <monochrom> (我這樣說, 會得罪多少人呢?)
+02:07:49 <monochrom> 誠然, 幫 GHC 寫多那幾行也是煩. 因為每次轉變程式, 都要額外擔心那幾行怎樣跟著變. 這就是我們廣東人說, 多隻香爐多隻鬼...
+02:08:47 <monochrom> 多個 file 多個 bug :)
+02:19:47 <CindyLinz> 我大前年有把 ghc manual 讀過一遍... 不過... (艸)
+18:53:56 <kanru> 開始了嗎？

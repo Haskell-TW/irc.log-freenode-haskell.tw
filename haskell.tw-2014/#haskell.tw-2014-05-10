@@ -1,0 +1,33 @@
+00:22:15 <CindyLinz> 用 Haskell 寫 multi-thread 程式, 好像可以用函數 type 的形狀來限制哪些函數一定是專屬哪一個 thread 呼叫的感覺?
+02:20:05 <monochrom> 應該不是.
+17:40:41 <godfat> 忽然才意識到原來 ruby 有 Thread.handle_interrupt 可以處理之前說的 mask 問題... 幾時有的，我怎麼不知道 @@
+18:04:40 <CindyLinz> godfat: 哼哼, 幾時會不見你也不會知道的! (逃)
+18:05:17 <godfat> XDD 我的程式用他並停止運作時我就知道了 orz
+18:05:33 <CindyLinz> 好歐~~ XD
+18:06:08 <CindyLinz> 可是要剛好跑到那行才會知道.... 唉, 對於不存在的 method 問題 perl 也是一樣 ww
+18:06:11 <godfat> 不過這下我真的要重想該怎麼做了 囧> 之前都已經做最壞打算，就是等他到天荒地老了說
+18:06:25 <godfat> XD 這動態的都一樣吧 XD
+18:06:48 <godfat> 動態讀 .so 也是，就算 header 對了實際 binary 也不一定對
+23:21:08 <CindyLinz> 遇到一個情況, 不知道怎麼選寫法.. @@"
+23:21:33 <CindyLinz> 我有一個函數, 它會 return 兩種可能狀態: *繼續做 *結束
+23:21:52 <CindyLinz> 而繼續做的時候, 還會有一個額外的參數, 繼續做的時候會用到
+23:22:24 <letoh> 感覺像在寫 lexer
+23:22:33 <CindyLinz> 現在有兩種可能的 return type: * Maybe Data * (Bool, Data)
+23:22:48 <CindyLinz> Maybe Data 的話.. 就是 Just d 時繼續做, Nothing 時結束
+23:23:06 <CindyLinz> 而 (Bool, Data) 的話, 就是 (True, d) 時繼續做, (False, undefined) 時結束
+23:23:28 <CindyLinz> 從 type 看, Maybe 那種比較好看.. 至少不會出現一個用不到的 undefined
+23:24:04 <CindyLinz> 可是 (Bool, Data) 這種, 我可以這樣命名變數 (shouldContinue, myData)   然後後面 if shouldContinue then ....
+23:24:11 <monochrom> 可以用 Maybe, 或自定 data R = Stop | Continue Data
+23:24:28 <CindyLinz> 而 Maybe 的... 變數就會取作 maybeData.. 好像比較醜? @@"
+23:24:55 <CindyLinz> 嗯嗯...
+23:24:57 <mno2> monochrom++
+23:25:06 <CindyLinz> 我覺得好像是變數名的部分讓我有點猶豫 @@"
+23:25:16 <monochrom> 自定吧! (Bool, Data) 是很多 Java 程式員的錯誤作法(因為 Java 沒有 algebraic data type)
+23:25:45 <CindyLinz> 好! 看起來意見一面倒......ww
+23:25:49 <CindyLinz> 謝謝 ._.
+23:27:59 <monochrom> 主旨是在設計 type 內容時, 如果有辦法輕易把不想發生的事化成跟本寫不出的事, 就應該採用.
+23:28:31 <CindyLinz> 嗯嗯
+23:29:23 <monochrom> 每一個不想發生但仍寫得出的事, 就是暗藏多一個殺機.
+23:29:57 <CindyLinz> undefined 應該死很快? XD
+23:31:38 <monochrom> 死得很意外哩! 就如你們較早時說到, dynamic 的問題是剛好跑到那行才驚覺
+23:31:47 <CindyLinz> 對 XD

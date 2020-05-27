@@ -1,0 +1,127 @@
+00:19:58 <hashcat> http://research.microsoft.com/en-us/projects/fstar/
+00:20:06 <hashcat> 可以編譯到 javascript
+00:51:44 <monochrom> 啊, gansteed 走了. 本來可以讀我的 http://www.vex.net/~trebla/haskell/IO.xhtml
+00:53:24 <monochrom> 不過, 如果要求中文的話, 我要收錢了! XD
+01:00:20 <monochrom> 你們應該籌組 monochrom 讀者會 XD
+14:49:59 <motephyr> hi
+14:50:25 <motephyr> 我改用weechat上irc
+17:14:30 <CindyLinz> 這篇在幫我解釋「不要臉的髒東西」耶~ :p http://queue.acm.org/detail.cfm?ref=rss&id=2611829
+17:15:05 <CindyLinz> The Curse of the Excluded Middle: "Mostly functional" programming does not work. -  by Erik Meijer | April 26, 2014 
+17:29:58 <whitglint> CindyLinz: tldr...
+17:30:20 <whitglint> 可否白話說明一下...
+17:30:21 <CindyLinz> whitglint: 三天前的文章你是在 tl 什麼啦 XD
+17:32:10 <CindyLinz> 這篇應該算白話, 裡面還舉了不少實際的程式碼例子.. 我覺得你想問的是懶人包? ^^|
+17:32:14 <whitglint> 我比較想聽到「C# 是個糞語言」之類的
+17:32:45 <whitglint> 猜對了！XDDD
+17:33:16 <CindyLinz> C# 那麼擬 java, 不算在那種想吃 haskell 豆腐的範圍裡啦 :p
+17:36:01 <CindyLinz> 他說, 很多開發者只是試了一些「十分鐘神奇練習」, 就覺得好像學到了什麼很棒的東西, 可以簡單地搬到他們原本在應用的領域, 然後就造出了這些所謂的 nearly functional programming
+17:37:33 <CindyLinz> 可是 mostly pure 就像 mostly secure 是差不多的事情, 只要有一點 imperative effect, 就像一顆細菌, 可以破壞整個無菌環境的功能..
+17:38:01 <CindyLinz> 抹剎掉 purity 的好處..
+17:43:37 <godfat> 同感，所以我已不再隨便提 functional programming 了..
+17:44:53 <CindyLinz> godfat: 怎麼這樣! Q_Q
+17:45:04 <motephyr> 哦？身為fp的新手而言 我當初碰是覺得程式碼可以比較看得懂
+17:45:25 <motephyr> 沒有特別要它原本訴求的功能就是
+17:46:18 <motephyr> 不然想要寫多長多亂的程式都可以依你的創意而定...XD
+17:46:31 <miaout17> 王垠表示…
+17:46:47 <godfat> CindyLinz, 不如直指核心，請來玩 haskell XD
+17:50:07 <CindyLinz> whitglint: 然後下面就開始舉實例說明他這些論點了
+17:51:14 <CindyLinz> motephyr: 我覺得就算只是把那些「十分鐘神奇練習」裡體會到的東西, 拿去任意地方運用, 只要用得巧, 可以解決問題, 也是好事~ 但..
+17:51:42 <miaout17> 但？
+17:51:49 <CindyLinz> motephyr: 糟糕的是有很多就宣稱那些附上 FP trick 的語言 also functional
+17:52:02 <godfat> 對，我受夠了
+17:52:10 <CindyLinz> 這樣會誤導的.. 以為 functional 就只有這些 trick...
+17:52:17 <godfat> 結果反而讓精明的人以為這樣根本沒意義
+17:52:18 <motephyr> 那就扯了
+17:52:46 <CindyLinz> 那我覺得這樣就不好了.. 因為會阻礙一些潛在的, 其實是可能願意多花時間來研究更深入的人, 不知道這邊其實還有東西可以玩
+17:53:08 <miaout17> 不反對，但好奇大家心中介紹functional programming的底限是什麼？
+17:53:45 <CindyLinz> 如果介紹對象是已經在寫程式的人
+17:54:14 <motephyr> 我自已覺得是還好 只是第一次聽到fp這個名詞的確不太確定有什麼好處，只大概知道可以解決multi thread的問題
+17:54:17 <CindyLinz> 我傾向多介紹哪些哪些不要用, 而因為去掉了這些這些功能, 所以我們可以有那些那些性質
+17:54:31 <motephyr> 所以又晚了兩年才摸
+17:56:03 <CindyLinz> 至少也要體會一下 FP 令人痛苦掙扎的部分啊~ (誤)
+17:57:22 <motephyr> ...XD
+17:57:44 <CindyLinz> 「升天」的各種意味都要體會一下, 這人生才有意思嘛... (逃逃逃)
+17:58:55 <CindyLinz> 但是如果對象沒有寫過程式, 那麼就不用講什麼不能用了.. 畢竟 dustructive 的 operation 應該在正常人的心中是沒有的, 所以也沒有「去掉」的意義
+17:59:00 <CindyLinz> destructive
+18:00:42 <motephyr> 嗯 不知道耶 如果講到哲學的話說不定會有 比如說學運我覺得算一個例子
+18:00:55 <CindyLinz> 竟然能跟學運有關.... XD
+18:00:56 <motephyr> 不過離題太遠 :p
+18:01:41 <CindyLinz> motephyr: 你是說推廣學運訴求的方式嗎?
+18:02:31 <motephyr> 我指的是 學運讓我看到這個世界運作的方式 和我原本過去三十年想像中的完全不一樣
+18:02:33 <whitglint> fp 十分鐘介紹看來看去都是計算費氏數列什麼的，看不出來跟用 C 寫有什麼差別
+18:02:58 <motephyr> 這樣:p
+18:03:34 <CindyLinz> whitglint: 如果是用無窮數列法的話, 跟 C 的差別非常大吧? @@"
+18:03:47 <motephyr> 但我是有寫程式的人 不知道對於沒碰程式的人感受如何就是
+18:04:18 <CindyLinz> whitglint: 以下這個..
+18:04:28 <godfat> 那個最經典的 fib 要來了
+18:04:41 <CindyLinz> > let fib = 1 : 1 : zipWith (+) fib (tail fib) in take 10 fib
+18:04:43 <lambdabot>  [1,1,2,3,5,8,13,21,34,55]
+18:04:53 <CindyLinz> godfat: XD 變成默寫了....
+18:05:10 <CindyLinz> 以前我用 C 寫 qsort 也是默寫 XD
+18:05:12 <godfat> 喔喔，我還沒辦法默寫，要想 XD
+18:05:45 <CindyLinz> 嗯 C 的 qsort 比較難, 還好我以前比較年輕, 記性更好.. (嘆)
+18:06:53 <godfat> c 寫 qsort 超痛苦....
+18:07:54 <CindyLinz> 而且我背的是從左右往中間夾擠的版本唷~~ (挺)
+18:08:11 <whitglint> 我記得以前在學校教資料結構與演算法是用 basic 實作！
+18:09:07 <CindyLinz> 唔.. 突然發現不知道 basic 的效能怎麼樣..?
+18:09:21 <godfat> 我沒有太研究 qsort... XD 另一點則是發現當長度夠短的時候，直接丟 insertion sort 可以處理絕大部分的邊界問題...
+18:09:48 <whitglint> 資料量少的話，氣泡也是能打贏 qsort  # 應該沒記錯
+18:09:59 <CindyLinz> 我之前讀了 sgi stl 的 qsort (其實是 introsort).. 真是..... 厲害.....
+18:10:37 <CindyLinz> 正常情況下它先用 qsort 下去跑, 跑到每一截到了一個特定長度以下的時候 (可能 16 或某個更大的數)
+18:10:49 <CindyLinz> 它竟然不是改採 insertion sort
+18:11:12 <CindyLinz> 而是就直接留下來不管, return 回去了
+18:11:41 <CindyLinz> 但是最左邊那一截會先跑一次 insertion sort,
+18:11:49 <CindyLinz> 然後其他截合在一起最後跑一次 insertion sort
+18:12:12 <CindyLinz> 這樣做, 可以讓右邊那一大區在跑 insertion sort 的時候, 不用檢查 index 是不是已經跑到最左邊了!
+18:14:39 <cibs> 咦那為什麼不每截都跑 insertion sort?
+18:15:03 <CindyLinz> cibs: 跑迴圈要設定 i 的初值, 就浪費了..
+18:16:03 <b4283> 因為一小截即使跑完 sort 也不代表最後的結果？
+18:16:06 <godfat> 我之前也是讀 sgi stl 的 qsort (introsort!), 超複雜的
+18:16:36 <CindyLinz> b4283: 每一截都獨立跑 insertion sort 會對啦, 只是就浪費了重設 i 很多次的時間 ^^|
+18:16:56 <cibs> b4283: qsort 會保證你右邊那截一定比左邊大
+18:17:16 <CindyLinz> 嗯 sgi stl 的 sort, 為了穩定性還去計算深度, 如果太深的話會突然變身 heap sort...
+18:17:25 <CindyLinz> 所以 code 裡面還包了一組 heap...ww
+18:17:42 <CindyLinz> 然後我實測跑起來比 C 的 qsort 函數還慢 XD
+18:17:48 <cibs> CindyLinz: 右邊那截如果太大的話，重設 i 搞不好比較划算
+18:18:30 <CindyLinz> cibs: 右邊是很多截合起來的, 每一截之間是由 qsort 切開的, 所以 insertion 的時候 i 移動的範圍不會超過原始的一截
+18:18:51 <CindyLinz> 呃, 這邊應該說是 j... XD
+18:19:10 <cibs> CindyLinz: 可是原始的一截很大不是嗎
+18:19:29 <cibs> CindyLinz: 還是說他是從最左邊的一小截一截一截 insertion 過去？這樣就不用重設 i 了
+18:19:36 <CindyLinz> cibs: 就 16 之類的啊, 是實測找出 qsort 和 insertion 在多大的時候速度會交插
+18:19:47 <cibs> 前一截跑完剛好到下一截的頭
+18:20:15 <CindyLinz> cibs: 對, 就是這樣; 只有最左邊那一截會自己跑, 因為要檢查 j 有沒有跑到 0
+18:21:03 <cibs> 喔喔那我知道了，右邊那截會自動因為比較小就停完全不用檢查j
+18:21:19 <CindyLinz> 嗯嗯
+18:22:48 <CindyLinz> motephyr: 遞迴的效率會差, 也是跟 mostly pure 有關係, 因為能作的假設比較少的話, optimizer 能做的也會比較受限..
+18:23:47 <CindyLinz> 以前我默寫 C 版 qsort 的時候, 其中一邊用 tail recursion 也是自己手動背進去改成迴圈, 不能依賴 C-compiler @@" 不知道現在有沒有比較厲害?
+18:25:37 <CindyLinz> 想想, 我背的可能不是 C 版, 是 pascal 版... C 的 stdlib.h 有 qsort 了幹嘛背啦 ^^|
+18:27:17 <motephyr> mm 我看到的是 不是fp language的話 對recursive不會特別去做optimize
+18:31:28 <CindyLinz> motephyr: 其實是想做也很難做的 @@"  然後接下來就是, 如果因此而不敢大量使用 recursive 的話, 就會錯過 fp 的重點了.. 因為我們都是這樣: 先用簡單的, 等用熟了以後就會開始想怎麼搞怪, 怎麼玩出更漂亮的花招 XD
+18:31:47 <CindyLinz> 如果一開始就因為一些因素不敢試了, 那後面就不會有了 @@"
+18:32:11 <motephyr> 這麼說也是
+18:32:32 <CindyLinz> 嗯, 搞怪會玩出很多日後被證明是負面的東西.. 但是很棒的東西也會有的, 然後再隨著時間經過慢慢收斂, 就出了一本 design pattern... XD
+18:32:45 <motephyr> 要搞點怪才會知道還可以玩什麼花樣
+18:32:57 <CindyLinz> 對, 雖然常常會被罵 XD
+18:33:10 <motephyr> ....XD
+21:54:09 <gansteed> map print [1,2,3,4] 产生a list of I/O 为什么必需用sequence串联起来才能显示？ 是因为show 只能接受一个 I/O action吗？
+22:00:40 <godfat> 這跟 show 沒有關係。也許想像成，IO action 必須被「觸發」才會執行
+22:05:57 <gansteed> 在ghci中输入map print [1,2,3] 报错就是因为没有被“触发”吗？
+22:06:44 <godfat> 那倒不是，只是 show 不知道怎麼顯示 [IO ()] 而已
+22:09:00 <godfat> 可以用 foldr1 (>>) 來觸發
+22:09:07 <godfat> > foldr1 (>>) $ map print [1,2,3]
+22:09:08 <lambdabot>  <IO ()>
+22:09:14 <godfat> 可惜看不到 XD
+22:10:19 <gansteed> :d
+23:20:04 <hashcat> 看型別
+23:20:25 <hashcat> [1,2,3,4]是List Int
+23:20:44 <hashcat> :t print
+23:20:45 <lambdabot> Show a => a -> IO ()
+23:21:03 <hashcat> :t map print [1,2,3,4]
+23:21:04 <lambdabot> [IO ()]
+23:21:35 <hashcat> 能被執行的是IO的Monad
+23:22:11 <hashcat> :t print 1
+23:22:12 <lambdabot> IO ()
+23:23:20 <hashcat> 型別對不上main :: IO ()就不會執行啦
+23:27:17 <hashcat> ghci 沒有在自動把 [IO ()] 轉換成一連串 IO () 動作, 型別不對就不對了, 不會做隱轉換這種對haskell來說是多餘的事
+23:27:28 <hashcat> :t  foldr1 (>>) $ map print [1,2,3]
+23:27:29 <lambdabot> IO ()

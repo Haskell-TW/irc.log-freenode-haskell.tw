@@ -1,0 +1,9 @@
+23:27:04 <favonia> CindyLinz: UncleHandsome: 天啊我竟然漏掉這個 undefined behavior!!!
+23:30:23 <CindyLinz> 啊對.. 我直接去 G+ 問能不能轉貼好了 :p
+23:34:33 <favonia> 等一下，在 C 根本不是 undefined 吧。。。。
+23:42:38 <CindyLinz> 你說的是哪一個啊? monochrom 的那一篇, 我試了結果跟他一樣...
+23:42:47 <CindyLinz> -O -O2 的結果會不一樣
+23:42:50 <CindyLinz> gcc
+23:44:46 <favonia> 我是說 loop
+23:58:37 <CindyLinz> 嗯??
+23:58:51 <CindyLinz> 你說我從 Tera 那邊貼的那篇喔?

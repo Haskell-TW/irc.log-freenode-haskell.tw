@@ -1,0 +1,235 @@
+21:50:41 <mno2> http://www.serpentine.com/blog/2014/05/31/attoparsec/
+21:50:51 <mno2> [A major upgrade to attoparsec: more speed, more power]
+22:05:29 <godfat> 想像有一天 haskell toolchain 和各式各樣 libraries 都足夠了也夠快了也夠成熟了（我不知道現在是不是），他會在社會上紅起來嗎？雖然這有點是雞蛋問題...
+22:25:24 <CindyLinz> godfat: 既是 雞/蛋 問題, 那原問題就好回答了... 「會」
+22:25:30 <CindyLinz> (逃)
+22:25:40 <godfat> XDDDDDD
+22:26:29 <CindyLinz> 嗯... 夠快與否要看他 focus 的領域, 有些領域來說已經是快過頭了...
+22:26:45 <CindyLinz> 成熟的話也是看領域, 現在可能只有在學界成熟吧 :|
+22:26:55 <CindyLinz> 適合出 paper... orz
+22:27:20 <godfat> 快過頭會怎麼樣？過熱嗎？ XD
+22:27:57 <CindyLinz> godfat: 跟 ruby / perl 比啊...ww
+22:28:06 <CindyLinz> 應該不需要比吧 ._.
+22:29:14 <godfat> 可是做的事情不一樣呀... XD 這樣不應該比效能？
+22:29:24 <CindyLinz> 對啊, 所以說要看 focus 的領域..
+22:29:43 <godfat> 也是，那先取代 c 好了
+22:29:55 <CindyLinz> 有覺得 Yesod 像 Rails 嗎?
+22:30:13 <godfat> 沒試過 yesod, 不過憑感覺是差滿多的
+22:30:16 <CindyLinz> 要踩 C 的領域, 應該速度很不夠吧 :Q
+22:30:30 <godfat> mno2 那篇不就狂勝了？ XDD
+22:31:18 <CindyLinz> 就.. 也是會自動生出整個框架做網站.... 用起來手感不見得要一樣啦, 不然也沒什麼意義了, 直接宣稱 faster rails 就完結了 ^^|
+22:31:44 <CindyLinz> godfat: 那個是沒有用 r3 的關係. (咦)
+22:32:08 <godfat> XDDDD 也是
+22:32:08 <godfat> 那還沒到 parse path 吧？ XD
+22:32:33 <CindyLinz> 如果在一個領域成熟了.. 其中一個指標應該是可以翻到很多很多 code 片斷來抄?
+22:33:07 <godfat> 把成熟換成很多人在用，那我同意？（因為想到 js...）
+22:33:40 <CindyLinz> 竟然不是 php...ww
+22:33:56 <godfat> 我覺得 js 更慘說 @@
+22:34:41 <CindyLinz> XDXD
+22:34:53 <godfat> vm 成熟，社群不成熟（？（或是說成熟比很低，不過我猜流行的東西成熟比一定都很低就是了...像是新發明一個東西，本人做的本人當然最熟呀 :s））
+22:37:41 <hashcat> 哈死口
+22:37:43 <CindyLinz> 我覺得 Haskell 有點神祕.. 別的語言都相當實用導向, 發明出來都是為了某個應用而做, 所以會在那一個應用範圍內深入, 通常不會太久就定下來了
+22:38:28 <hashcat> 哈死口很實用, 前提是先學會怎用
+22:38:44 <CindyLinz> 可是 Haskell 實在是很像數學.. 那是一個無盡探索的過程....
+22:39:03 <godfat> (S)ML 呢？
+22:39:09 <CindyLinz> godfat: 我不熟... (攤)
+22:39:34 <hashcat> SML類的還比較複雜
+22:40:03 <CindyLinz> ocaml 應該也算是應用導向? 想把 OO 拉進來的話, 應該是想應用的傾向很強烈吧? :p
+22:40:26 <letoh> sml 好像還算乾淨，但 ocaml 就差蠻多的
+22:40:42 <godfat> 真奇妙，就算出發點不同，總是會有人想拿來做應用吧？
+22:40:55 <hashcat> 總體來說, 編譯語言就是沒法跟解釋語言一樣流行
+22:41:17 <godfat> 流行的編譯語言也很多啊
+22:41:36 <letoh> c XD
+22:41:48 <CindyLinz> 嗯, 我講這個 Haskell 和數學無盡探索是說, 我覺得 Haskell 可能會一直有 paper 可以出.. 一直讓人看到奇怪的東西
+22:41:50 <hashcat> C++
+22:42:00 <hashcat> 然後沒了.. java算嘛
+22:42:21 <letoh> 不過這種流行的討論也是要看領域 像 web 就比較少見這些語言
+22:43:22 <godfat> java 算啊，不過熊熊我還真發現舉不了太多例子... coffeescript 應該不算吧 XDD
+22:44:03 <hashcat> 有vm的貌似都不能算吧
+22:44:15 <CindyLinz> godfat: 紅的語言總數也不多啊... XD  多的話人數分一分, 就不是紅的了 XD
+22:44:19 <hashcat> vm就比很多解釋器還重量級
+22:44:34 <CindyLinz> hashcat: java 用 gcj 也不算嗎?
+22:44:44 <godfat> 有 vm 就不算喔，那就真的沒多少了 @@
+22:45:08 <hashcat> gcj掛掉了
+22:45:10 <CindyLinz> godfat: java 有 gcj 可以算 XD
+22:45:16 <godfat> CindyLinz, 那我們用絕對人口來算，不要用比例算好了 XD
+22:46:02 <hashcat> 要應用很簡單, 從這裡抓幾個人組公司
+22:46:04 <godfat> ghc 算有 vm 嗎..?
+22:46:16 <CindyLinz> 有 runtime, 但應該不算 vm
+22:46:27 <CindyLinz> C++ / C 也有 runtime...
+22:46:33 <CindyLinz> 只是 C 的 runtime 很小
+22:46:51 <godfat> vm 的定義是某種 bytecode interpreter..?
+22:46:57 <CindyLinz> 就.. 呼叫 main() 以前的那個.. :p
+22:47:05 <hashcat> runtime只是一層作業系統的包裝吧
+22:47:15 <hashcat> vm是有自己的指令集
+22:47:22 <hashcat> 完整的機器
+22:47:51 <CindyLinz> 可是這些「沒vm」的語言, 也在 compile 過程中多少會出現 intermediate code @@"
+22:47:51 <godfat> 嗯嗯..
+22:48:36 <hashcat> 以後部知道會不會越來越模糊
+22:48:46 <CindyLinz> 我覺得已經很糊了.... XD
+22:48:50 <godfat> 我現在就覺得已經滿模糊的了 :o
+22:48:53 <hashcat> to js的語言都被叫做compiler了
+22:49:01 <letoh> vm 跟 bytecode interpreter 能有點差別? (我不太確定
+22:49:23 <godfat> vm 可以做 jit 就不是 bytecode interpreter?
+22:49:52 <letoh> 就像 hashcat 說的，要從機器指令集開始設計
+22:50:01 <letoh> 但這跟 bytecode 好像還是不太一樣?
+22:50:30 <godfat> a program to execute instructions?
+22:50:44 <CindyLinz> 那 swift 是基於 llvm 設計的... 這個呢?
+22:51:22 <letoh> 不太確定  至少沒看到它的 abstract machine design
+22:51:45 <CindyLinz> 重點是假機器嗎?
+22:52:00 <hashcat> 想想應該是不少interpreter引入了越來越多vm的技術
+22:52:01 <godfat> stack or registers based 這樣嗎？
+22:52:18 <letoh> 我的認知是這樣啦  因為有些 interpreter 只是把一些函式對應到 bytecode 這樣
+22:52:55 <letoh> 並不是真的有考慮什麼 machine design
+22:53:01 <hashcat> interpreter跟vm的差異就變少了
+22:53:43 <letoh> 嗯嗯  vm 常常用 interpreter 方式來實作啊
+22:53:55 <hashcat> 好像很久以前interpreter跟vm差別很明顯
+22:55:06 <hashcat> runtime跟vm的差距就還是很明顯
+22:55:16 <CindyLinz> CPU 也是用 interpreter 的方式來實作... (思)
+22:55:58 <godfat> letoh, 把 function 對應到 bytecode 是什麼意思？還是反過來是說 bytecode 對應到 function?
+22:56:08 <letoh> CPU 應該也算吧  只是做到硬體裡了 (或 micor program ?)
+22:56:52 <letoh> godfat: 我可以說得不太完整  簡單說就是寫完一個程式  發現有一段落常常出現，然後就規劃成一個 bytecode
+22:57:20 <CindyLinz> 這樣想想, compiled 語言好像不該是一種分類方式..
+22:57:25 <letoh> 類似呼叫結構化程式設計的搞法  只是在外面加一層 interpreter 去跑
+22:57:48 <CindyLinz> 因為 compile 是一個過程, 而且也不一定說 compile 之後生出來的產物一定要是怎樣低階長相的 op code
+22:57:48 <letoh> 然後那一段 interpreter 就可以變成 scripting engine
+22:57:54 <godfat> 嗯嗯（那跟我理解成看到某 bytecode 就呼叫某 function 的意思差不多）
+22:58:02 <hashcat> 我在想另一種分類方式
+22:58:14 <CindyLinz> java bytecode 和 x86 的 machine code 感覺低階程度差不多啊..
+22:58:17 <hashcat> 可以執行時期修改程序的就是interpreter
+22:58:26 <hashcat> 不行的叫compiler
+22:58:34 <letoh> godfat: 對  你是從執行時期的角度來看
+22:59:08 <CindyLinz> hashcat: 執行時期能修改的也不多欸 @@" 頂多就是載入一整塊 module 這樣? 除了 forth 那種....
+22:59:23 <CindyLinz> hashcat: 可是載入一整塊 module 的話... C 也可以...
+22:59:35 <letoh> hashcat: 那 jit 呢?
+23:00:08 <hashcat> CindyLinz: python是根本沒有不能改的部分阿
+23:00:18 <letoh> 其實只要在程式裡編入一段 code generator，就可以在 runtime 改變 (self modifying code?)
+23:00:23 <hashcat> letoh: 無視
+23:00:26 <CindyLinz> 不然用速度判斷好了? 比 java 5 倍慢還快的一類, 比 java 5 倍慢還慢的一類?
+23:00:53 <letoh> java 5 變成單位了?    1/2 java5 之類的
+23:00:53 <hashcat> JIT算interpreter好了
+23:00:58 <godfat> wwwww 這什麼單位
+23:01:05 <letoh> jit 不是 interpreter... 是 compiler
+23:01:08 <CindyLinz> hashcat: 那個不是真的改 code 啊, 只是把 function pointer 或是代表 class 的 flag 換掉而已
+23:01:13 <hashcat> julia就變compiler了
+23:01:26 <CindyLinz> 我覺得速度標準很實用啊.... XD
+23:01:29 <CindyLinz> 不覺得嗎?
+23:01:57 <CindyLinz> 而且不容易 fake.. XD
+23:01:57 <hashcat> 以上標準julia就變成compiled語言了, 可是明明就不是
+23:02:17 <godfat> 可是我覺得這太實作導向了 XD 像是 v8 出來 js 效能才狂飆的
+23:02:26 <letoh> 原來是 5 倍慢  我看成 java 5  (剛剛電腦太忙  畫面沒更新好XD
+23:02:27 <hashcat> CindyLinz: 不管底層怎實作, 純就語意來說
+23:03:05 <godfat> 不然就 static typing 或 dynamic (non) typing 好了...
+23:06:06 <CindyLinz> godfat: 我下個月 fun thursday 想分享 Dynamic typed / Untyped Haskell 的說... XD
+23:06:44 <godfat> 很好啊，haskell 上的 DSL XD
+23:09:02 <CindyLinz> 希望我把 c9sloud 給的那篇 perl internal 看完以後, 可以來弄點 static perl 試試 @@"
+23:10:20 <c9sloud> static typing perl?
+23:10:27 <godfat> 為了安全還是效率？
+23:10:28 <c9sloud> 要 patch 了嗎 XD
+23:10:36 <CindyLinz> 為了效率..
+23:10:45 <hashcat> 不是為了製造靜態型別的解釋器語言?
+23:11:04 <CindyLinz> 畢竟雖然它是 dynamic language, 可是我們寫 code 真的狂用它 dynamic 特性的地方很少啊
+23:11:05 <c9sloud> https://github.com/Perl/perl5 # 只有 77 個 stars 哭哭
+23:11:19 <c9sloud> CindyLinz: 如果有 type 的話就可以丟給 LLVM optimize 了!
+23:11:36 <CindyLinz> 只是能被程式找出來 static 的 pattern 可能也不太多就是... 這就靠 heuristic 一直加吧?
+23:11:48 <c9sloud> CindyLinz: 你要直導 perl5 core 嗎
+23:12:15 <CindyLinz> c9sloud: perl 本體是 C, 所以我想的是把認得出來的 static pattern 變成 C 程式就好了, 像 XS 那樣
+23:12:26 <hashcat> 現在是連python都能compile的年頭
+23:12:39 <godfat> 想起之前有看過有人說 js 寫到效能可以跟 c 比，可是他的其實就是照著 c 的格式在寫了，還要熟知 v8 內部的最佳化策略，然後一個寫錯就會效能狂降
+23:12:41 <c9sloud> CindyLinz: 類似 zephir 那樣嗎？或是  cython
+23:12:43 <CindyLinz> 只是如果能認得, 掌握的部分越多, 那些 inline / fusion 什麼的都可以一併做
+23:12:50 <c9sloud> 可以把 python 轉成 python extension
+23:12:55 <c9sloud> 之類的
+23:13:03 <hashcat> godfat: julia隨便亂寫都能跟c比
+23:13:04 <godfat> cython?
+23:13:18 <godfat> hashcat, 這麼神？看來我該去翻翻了
+23:13:36 <c9sloud> godfat:  cython 可以把 python code 轉成 c extension
+23:13:41 <hashcat> godfat: 是完整python特性都能compile的nuitka
+23:13:45 <c9sloud> http://cython.org/
+23:13:49 <c9sloud> which is static compiled
+23:13:54 <hashcat> nuitka.org
+23:14:05 <c9sloud> 還蠻厲害的
+23:14:10 <hashcat> 記錯網址
+23:14:10 <c9sloud> Perl 目前好像還沒有 QQ
+23:14:30 <letoh> cython 這種就是設計一個長得很像 python 的語言，然後 compile to c 這樣
+23:14:31 <godfat> c9sloud, XDDD 我剛剛其實還沒看到你提，想說是想做 perl 版的 cython 嗎？才看到你提結果就像是我在問那是啥了 XD
+23:14:36 <hashcat> http://nuitka.net
+23:15:16 <hashcat> libpython就變成runtime了
+23:15:19 <letoh> 然後可能加一小段可以變成 python module 的 glue code
+23:15:48 <c9sloud> letoh: php 的 zephir 也是 :-p
+23:15:51 <godfat> 我之前有稍微試玩一下，真的只有一下，不過感覺不錯
+23:16:22 <hashcat> godfat: julia?
+23:16:27 <CindyLinz> 我不清楚 cython 是怎樣的東西欸, 所以不知道是不是.. 我是直接就 perl XS 特性去發想的, 就只是想解決自己的問題, 還沒有想到怎樣去跟 python 的東西類比
+23:16:42 <godfat> hashcat, 對不起，我是說 cython XD 正在看 julia 網站
+23:16:51 <letoh> php 世界不太熟  不過看了一下 zephir 好像是做一樣的事沒錯
+23:17:06 <hashcat> CindyLinz: 其實就是看起來像python的C
+23:17:55 <CindyLinz> 例如說.. sub max { $_[0] > $_[1] ? $_[0] : $_[1] } 然後, programmer 可以 hint 說, 我這邊一定只會傳 32bit 整數當參數.. 那麼我應該就可以直接生一個 C 函數 I32 max(I32 a, I32 b){ ... } 吧
+23:18:16 <letoh> 應該就是變成 c ，不用跟著其他 python bytecode 在那邊瞎攪和，速度就有機會提昇XD
+23:18:17 <hashcat> CindyLinz: 以前python的extension用C寫, 有人覺得一下C一下python很煩躁, 就做出Cython
+23:18:20 <CindyLinz> 但聽起來 cython 可以完全不用任何 hint 就把一個 python 程式變成 C native?
+23:18:38 <CindyLinz> 我的心比較小一點 XD
+23:18:54 <hashcat> 要宣告型別
+23:18:55 <godfat> 不用任何 hint 應該就是因為都要講明吧？
+23:19:08 <CindyLinz> 喔喔要宣告喔? 那可能就真的蠻像的 :p
+23:19:48 <CindyLinz> 我是覺得如果沒有 hint 參數的 type, 然後要直接去分析出所有的 use case.. 實在有點恐怖 @@"
+23:20:05 <hashcat> Cython在我看來就是類python語法的C語言
+23:20:24 <hashcat> 那nuitka才叫恐怖
+23:20:57 <godfat> julia 居然用到 fortran...
+23:21:39 <hashcat> 連python都能不用改就編譯的年頭, 討論compiled跟interpreted的差異真是暈
+23:21:53 <hashcat> godfat: 直接調用無須包裝
+23:22:29 <godfat> hashcat, 因為本來想說要 compile 的
+23:23:10 <godfat> 這 dependencies 真驚人...
+23:23:39 <letoh> 印象中 cython 好像不完全等於 python，所以我才說它算是發明一個很像 python 的語言，然後 target to c
+23:24:18 <hashcat> godfat: macro也很傻眼, 原來沒想到沒括號的語言也能這樣玩
+23:24:22 <CindyLinz> 我是希望能直接用原本的 perl 加上額外的註解就好, 可以不用重寫舊程式 @@"
+23:25:20 <hashcat> letoh: 想執行時期亂玩就知道哪不一樣了, 跟python一點都不像, 跟C倒是很像
+23:25:45 <hashcat> CindyLinz: 歡迎加入Python
+23:25:57 <CindyLinz> hashcat: 那不就是重寫...
+23:26:06 <letoh> 語法上很像 python 啊
+23:26:09 <CindyLinz> hashcat: 比 perl-like 的重寫還重寫.. XD
+23:26:11 <hashcat> 以後不用重寫 XD
+23:26:34 <CindyLinz> 賣點不足 @@"
+23:26:42 <letoh> 但並不是拿個 python code 來就可以編譯成 c
+23:27:54 <godfat> 喔喔，所以 nuitka 就只是包裝 libpython...
+23:28:35 <hashcat> godfat: Python to C++還帶了一票優化
+23:28:40 <godfat> 忽然有點羨慕 python 的生態圈 XD
+23:29:34 <letoh> godfat: 可能要看跟誰比? XD
+23:29:37 <CindyLinz> godfat: perl 可以 embed haskell 喔~ XD
+23:29:59 <CindyLinz> (挺)
+23:30:46 <godfat> letoh, 內心是跟 ruby 比，不過有什麼比 python 工具還多的環境嗎？
+23:30:46 <godfat> CindyLinz, ....XD
+23:30:52 <hashcat> python可以call haskell~
+23:31:29 <letoh> godfat: javascript ? XD
+23:31:30 <godfat> nuitka, cython, pypy, 選擇真多呀
+23:31:52 <godfat> javascript 的工具多是多，但大部分的跟我沒啥關係... XD
+23:32:10 <CindyLinz> godfat: 你這一句下去.. 除了 ruby 有什麼能過得了關啦 ww
+23:32:22 <CindyLinz> godfat: 這是綁標.....
+23:32:25 <c9sloud> CindyLinz: 不過我記得 perl 後來可以加 type?
+23:32:25 <c9sloud> http://blogs.perl.org/users/rurban/2011/02/use-types.html
+23:32:26 <godfat> 不會呀，python 跟 perl 就是考慮範圍呀
+23:32:43 <CindyLinz> c9sloud: 我從來不知道呢 ww
+23:32:53 <godfat> javascript 是一堆前端的東西，我不在乎...
+23:33:28 <hashcat> godfat我也覺得python滿奇妙的, python專吸神人, 連統計語言R都能砲
+23:34:09 <hashcat> 但python.tw不知道為啥很久沒動靜
+23:34:47 <godfat> 嗚嗚，可惜我沒很喜歡 python
+23:35:13 <hashcat> python.tw頻道人數明明多出一番的
+23:35:27 <CindyLinz> 可是覺得講的話比這邊少很多?
+23:35:43 <hashcat> 根本沒活動
+23:35:52 <godfat> 是說這邊講話的也就這幾個.... XD
+23:36:09 <CindyLinz> 還是贏了這才過份啊? XD
+23:36:19 <godfat> XDDDD
+23:37:04 <hashcat> 嗯太過份啦
+23:37:25 <hashcat> 這裡好像24H隨時都在捲動
+23:38:30 <CindyLinz> 因為有好幾個時區的人嗎? XD
+23:38:37 <CindyLinz> 日不落 channel.. XD
+23:39:02 <hashcat> python.tw就是日不起 channel
+23:39:59 <CindyLinz> ._.
+23:40:06 <godfat> 加起來正好是地球
+23:40:36 <CindyLinz> godfat: 加上極圈嗎 ._.
+23:41:20 <godfat> XDDDDDD 本來是想說白天跟黑夜，極圈好像比較有笑點
+23:45:06 <hashcat> 這邊北極, 那邊南極
+23:55:58 <CindyLinz> 回來這邊好了, 別打破人家的寧靜.. ._.
+23:56:07 <letoh> XDXD
+23:56:37 <letoh> 我有時會跑去 #forth 掛個幾天  然後覺得很無聊又離開XD
+23:56:58 <CindyLinz> letoh: 這漸漸會形成一種宗教儀式....
+23:57:06 <letoh> XDXD

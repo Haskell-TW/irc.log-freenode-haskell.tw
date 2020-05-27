@@ -1,0 +1,12 @@
+01:15:48 <caasihuang> CindyLinz: 亂逛逛到 Diagrams PostScript backend，不知道你用不用得上 https://github.com/diagrams/diagrams-postscript
+01:17:12 <CindyLinz> caasihuang: 看起來.. 等到 browser 裡面可以直接 interpret haskell 的時候就用得上了 ^^|
+01:17:44 <caasihuang> 0rz 以為你是要生靜態的
+01:20:08 <CindyLinz> caasihuang: 是想寫投影片的時候邊寫邊改邊 reload 看這樣 :p
+01:20:18 <CindyLinz> caasihuang: 然後順便玩 ^^|
+01:23:45 <CindyLinz> 前兩天試了個 PostCavnas
+01:23:50 <CindyLinz> PostCanvas
+01:24:14 <CindyLinz> http://www.feiri.de/pcan/
+01:25:24 <CindyLinz> 它畫這隻範例老虎沒問題 http://www.feiri.de/pcan/example1.html  不過我隨便丟一個 ps 文件給它就爆了, 而且 error message 看起來是 tokenize 那一步的實作就不太對, 沒有照 spec 裡指定的 token delimiter 來切 token @@"
+01:53:42 <letoh> 老虎這種有名的圖大概會特別處理XD
+01:57:00 <CindyLinz> file_name (tiger.ps) eq {native_draw_tiger} if
+09:00:18 <mno2> http://www.reddit.com/r/haskell/comments/38p89t/hiring_infrastructure_engineer_elastic_makers_of/  elastic search 也落向 dark side lol

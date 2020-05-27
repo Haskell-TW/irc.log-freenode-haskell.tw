@@ -1,0 +1,5 @@
+18:11:56 <petercommand> https://hackage.haskell.org/package/xmonad-0.13/docs/XMonad.html#v:.-124-. 為甚麼只有 or 阿XDD
+18:14:46 <petercommand> 只好 import Data.Bits 了XD
+18:23:21 <CindyLinz> petercommand: 不發 pull request? XD
+18:28:59 <petercommand> CindyLinz: 來開個 issue 問問好了XD
+18:31:18 <CindyLinz> 也是 XD

@@ -1,0 +1,256 @@
+03:15:35 <JuanitoFatas> http://lisp.tw 開站….
+03:18:45 <favonia> letoh: 什麼什麼？
+03:29:50 <letoh> 哇... lisp.tw  有開 channel 嗎
+03:30:28 <letoh> favonia: 就 sml 的 curry 語法，我呆呆地寫成  fun foo => fn .. => fn .. => fn ..
+03:30:37 <letoh> 原來可以省掉 fn
+03:30:56 <favonia> letoh: 嗯嗯 @@
+03:31:07 <letoh> 害我想說這麼麻煩誰要在 sml 用 curry XD
+03:31:20 <favonia> letoh: 如果需要寫這麼多 fn 我一定馬上換掉 xDDDD
+03:31:51 <letoh> 我也這麼覺得  所以之前寫作業覺得很痛苦啊  怎麼會搞得那麼麻煩XD
+03:32:06 <letoh> 看完影片才知道有語法糖可以吃XD
+03:32:54 <letoh> lisp.tw 站上的 tag 竟然有 haskell
+03:35:42 <letoh> 還真的有  #lisp.tw
+03:37:35 <favonia> letoh: 那頻道好像還沒真的成立 xD
+03:37:45 <letoh> 嗯嗯
+03:46:07 <letoh> haskell 有類似 lisp macro 那種東西嗎?
+03:55:15 <letoh> photoshop v1.0.1 原始碼好像放出來了
+03:56:01 <letoh> "There are 179 files in the zipped folder, comprising about 128,000 lines of mostly uncommented but well-structured code."
+03:56:24 <letoh> "By line count, about 75% of the code is in Pascal, about 15% is in 68000 assembler language, and the rest is data of various sorts."
+03:58:44 <favonia> letoh: Template Haskell 算嗎？
+04:00:54 <letoh> 唔  不太確定  看了一下也是在 compile-time 處理的
+04:01:47 <letoh> 我還是覺得那個 lisp.tw 越看越像 lisp.cn ...
+04:44:34 <JuanitoFatas> 沒有 IRC channel (#lisp.tw).
+04:48:51 <letoh> JuanitoFatas: 上面沒幾個人啊
+04:51:09 <JuanitoFatas> 可能是別人創的
+05:38:52 <letoh> http://shuklan.com/haskell/  # Introduction to Haskell
+06:37:29 <favonia> letoh: lol lisp.tw 是真的有人註冊耶
+06:37:37 <favonia> letoh: kanru2 註冊的
+10:39:09 <suhorng> 之前在PLT板問Haskell考試的那篇, 說他們把learnyouahaskell的內都教完了0..0
+10:40:08 <favonia> learnyouahaskell for GG
+10:40:23 <favonia> xD
+10:41:34 <suhorng> 不知道到底是多久的課orz
+12:21:14 <favonia> 花了點時間把 iteratee 看完了 xD
+12:22:59 <mno2> favonia: 心得？
+12:23:22 <favonia> foldM
+12:24:41 <mno2> favonia: 那你 iteratee + async exception 那塊通透了嗎？
+12:25:52 <favonia> 還沒有仔細想耶
+12:26:08 <favonia> async exception 其實也不在標準裡面（攤手）
+12:26:58 <mno2> 但 practical 還蠻重要的啊
+12:27:47 <favonia> 我的意思是說其實我一直不確定要怎樣好好理解他。
+12:29:23 <mno2> 有語言標準有定義 async exception 嗎？
+12:36:25 <favonia> 不知道... :/
+12:36:48 <favonia> 如果把那些定義沒有 200% 清楚的語言都丟掉的話
+12:54:15 <letoh> 原來是 kanru... 結果他自己都沒上線
+13:24:03 <favonia> mno2: 我比較不能理解的是為什麼 Snap 要寫 (:[]) 不寫 singleton xD
+13:27:32 <favonia> lambdabot 的 @check 壞了 lol
+13:41:01 <favonia> > (:[]) 1 == singleton 1
+13:41:03 <lambdabot>   Not in scope: `singleton'
+13:41:04 <lambdabot>  Perhaps you meant one of these:
+13:41:04 <lambdabot>    `BS.singleton...
+13:41:59 <favonia> 唔原來內建沒有。難怪 @@
+14:22:08 <CindyLinz> mno2: 一般有 OutOfMemory 就算是有 async exception 吧?
+14:35:41 <mno2> CindyLinz: OutOfMemory 是寫在 spec 中嗎？
+14:54:50 <CindyLinz> mno2: http://docs.oracle.com/javase/7/docs/api/java/lang/OutOfMemoryError.html
+14:55:14 <CindyLinz> 我覺得 java 的 standard api 應該算是 spec :p
+14:55:32 <CindyLinz> 這個 OutOfMemoryError 繼承 VirtualMachineError
+14:55:42 <CindyLinz> VirtualMachineError 應該都是 async exception
+14:55:57 <CindyLinz> 名字看起來就像 XD
+14:56:09 <CindyLinz> 然後 VirtualMachineError 繼承 Error
+14:57:01 <CindyLinz> Error 和 Exception 並列為同一層級, 都是 Throwable
+15:05:49 <mno2> hmm, 不知道這樣算不算有定義清楚 xD
+16:20:04 <miaout17> > take 3 [1..]
+16:20:06 <lambdabot>   [1,2,3]
+16:20:10 <miaout17> > [1..]
+16:20:12 <lambdabot>   [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28...
+16:20:32 <miaout17> > "你好"
+16:20:32 <lambdabot>   mueval: recoverEncode: invalid argument (invalid character)
+16:20:45 <miaout17> > "Could you speak chinese?"
+16:20:47 <lambdabot>   "Could you speak chinese?"
+16:21:38 <letoh> suhorng: 剛剛看了講義上的 polymorphism... 跟 oop 裡的好像不完全一樣?
+16:22:04 <miaout17> @type reverse
+16:22:06 <lambdabot> [a] -> [a]
+16:22:13 <miaout17> > reverse [1..]
+16:22:18 <lambdabot>   mueval-core: Time limit exceeded
+16:23:12 <miaout17> @type ByteArray
+16:23:18 <lambdabot> Not in scope: data constructor `ByteArray'
+16:23:38 <miaout17> @type GCH.Prim.ByteArray
+16:23:40 <lambdabot> Couldn't find qualified module.
+16:24:21 <miaout17> 擾頻抱歉，剛剛才發現有lambdabot覺得很有趣
+16:25:30 <letoh> 其實看別人玩 bot 也很有趣XD
+16:28:41 <miaout17> 你們最近在上coursera的programming language嗎？有點後悔沒跟。我報名了cryptography結果也都沒上課...Orz
+16:30:35 <letoh> 對呀，報名後比較有動力XD
+16:32:07 <letoh> 現在應該還可以參加吧，不過前三次作業沒辦法交而已 (而且前三次的內容其實不太有趣XD
+16:38:35 <miaout17> 之前上Machine Learning和Game Theory都全拿滿分，以此為目標比較有動力 XD (作業可以無限重交的課滿分很好拿XD)
+16:39:34 <letoh> 那兩門課有考試嗎? 有點想選 Machine Learning
+16:41:29 <suhorng> letoh: 講義上的是說ML的嗎？
+16:41:37 <suhorng> 那是指完全不同的東西
+16:41:41 <letoh> 嗯嗯
+16:41:55 <letoh> 感覺比較像 c++ 的 generic ?
+16:41:56 <miaout17> letoh: 我選的時候沒考試
+16:42:26 <suhorng> 說 template? 我跟 C++ 不太熟
+16:42:30 <letoh> miaout17: 瞭解  等 logic 結束再考慮好了XD
+16:43:31 <letoh> suhorng: 嗯，我只是覺得有點像而已  例如 'a 可以代表任意型別
+16:43:57 <suhorng> 嗯
+16:45:23 <suhorng> 查了查wiki, 似乎在OOP中是叫 generic 沒錯
+16:46:32 <letoh> 然後 oop 的 polymorphism 好像又是另外的東西XD
+16:46:37 <suhorng> letoh: 找到了, OOP那個在wiki上的頁面叫 subtype polymorphism
+16:47:05 <suhorng> 之前用 ML 那類的叫 parametric polymorphism
+16:47:38 <letoh> 原來有這樣的分別，不然大家都用同一個字，找資料很難找XD
+16:48:24 <letoh> http://en.wikipedia.org/wiki/Subtyping   旁邊的分類連 multiple dispatch 都算在 polymorphism 裡了
+16:49:24 <letoh> duck typing 不曉得算不算?
+16:49:51 <suhorng> 咦？
+16:50:17 <suhorng> 那個連結是很多種不一樣的「polymorphism」總整理的樣子
+16:50:24 <letoh> 嗯嗯
+16:51:12 <suhorng> 然後我沒學過OOP, 其實不知道 duck typing 詳細是什麼QQ 跟 Java 的 interface 有什麼差嗎？
+16:51:48 <letoh> 就實作一大堆 interface 這樣? XD
+16:52:25 <letoh> http://en.wikipedia.org/wiki/Duck_typing
+16:52:34 <suhorng> 嗯
+16:53:01 <letoh> 突然想到 Java 也有 generic 了，以後用 Java 來類比好了
+16:54:41 <letoh> duck typing 好像比較鬆散，不要求 subtype (?)
+16:55:29 <letoh> 以前 oop 要處理 polymorphism 得要是 subtype 才行，只好繼承一堆 class XD
+16:58:39 <miaout17> duck typing不求type XD
+16:59:09 <letoh> 應該還是有 type 吧，只是會變來變去?
+17:19:38 <mno2> 可能要先定義一下每個人提到的 Type 是指什麼
+17:20:07 <miaout17> letoh: suhorng: 據我的理解，duck typing的精髓在於檢查合法性時，不需要檢查型別，只需物件有實作相當的介面即可。
+17:20:13 <miaout17> mno2: 嗯嗯
+17:20:18 <miaout17> letoh: suhorng
+17:21:24 <letoh> 我會以為有 type，是因為 wiki 上還是把 duck typing 當作一種 typing 機制
+17:21:43 <suhorng> hihi XD
+17:21:44 <letoh> 不過實際在寫的時候的確只要管界面就可以了
+17:22:32 <mno2> 就我很粗略的理解，在學術的 context 底下，提到 type 都是指 compile time 所做的檢查，dynamic typing 提到的 type 會稱做 type tag，就是付在物件上的一個 attribute，做操作時會檢查
+17:22:55 <mno2> 詳細請問 favonia
+17:23:40 <miaout17> letoh: suhorng: Duck typing和Java的interface剛好是相反的概念。因為Java(大多數的狀況下)需要檢查型別，又沒有多重繼承，所以才需要interface。反觀Ruby,Python,Perl,JavaScript...因為不需要檢查型別，只要物件有實作正確的介面就好，所以不需要interface。
+17:23:43 <letoh> 原來如此.. type 這個詞到處都看得到，實在很混亂XD
+17:24:16 <JuanitoFatas> 只要像鴨子一樣瓜瓜叫走路 就是個鴨子
+17:24:19 <suhorng> 嗯..有點神秘
+17:24:32 <miaout17> 呱呱
+17:24:34 <JuanitoFatas> 動態類型
+17:24:40 <JuanitoFatas> 執行食材檢查
+17:24:47 <JuanitoFatas> 執行*時才*檢查
+17:25:58 <letoh> "執行食材檢查" 也是合法句子XD
+17:26:17 <JuanitoFatas> XD
+17:29:52 <CindyLinz> 昨天讀了 go lang 的 tutorial
+17:30:10 <CindyLinz> 感覺 go 是 static 的 duck typing..
+17:30:17 <miaout17> 只是想跳出來說duck typing和interface截然相反
+17:30:35 <CindyLinz> go 沒有 class, 有 interface..
+17:30:36 <miaout17> BTW, Java其實有Covariance and contravariance http://goo.gl/UXhRh
+17:31:06 <CindyLinz> interface 的 implement 是 duck typing, 沒有 explicit implement
+17:33:57 <letoh> 我有點搞混 mno2 跟 miaout17 所說的... 那麼在 dynamic typing 的情況下，會檢查 type 嗎?
+17:35:24 <mno2> letoh: 在學術的 context 底下，會說 dynamic typing 只有一種 type，但操作的時候也許會檢查 type tag，看語言規格或是實作
+17:36:27 <letoh> thanks, 比較清楚了
+17:36:54 <miaout17> mno2++ 解譯的很清楚
+17:39:02 <suhorng> 感謝
+17:40:01 <suhorng> 不過還是有不太懂的地方，看維基上的簡介，duck typing 是只要呼叫時有那些定義出來的函數使用就好嗎？
+17:40:41 <suhorng> 而這個專門指 dynamic typing？
+17:40:49 <letoh> 其實我覺得 duck typing 只看界面的話好像不是很嚴謹
+17:41:30 <letoh> 例如說某隻牛說自己也會呱呱叫，但是實際呼叫時卻是發出哞哞的聲音
+17:42:23 <letoh> 這樣很難把牛當成鴨子XD
+17:43:13 <letoh> 但牛以為自己那種叫法就是呱呱了，不見得清楚別人的呱呱其實是不一樣的東西
+17:44:57 <suhorng> 應該是故意允許這樣的？
+17:44:58 <mno2> suhorng: 按照 wiki 的講法是這樣沒錯
+17:44:59 <mno2> Duck typing is similar to but distinct from structural typing. Structural typing is a static typing system that determines type compatibility and equivalence by a type's structure, whereas duck typing is dynamic and determines type compatibility by only that part of a type's structure that is accessed during run time.
+17:45:23 <mno2> CindyLinz: wiki 是把 go 分做 structural type
+17:46:28 <suhorng> 所以說　像interface那類是透過繼承（類似的）等去決定他應該要實做哪些功能，然後其他程式就可以指定輸入的參數必須要符合某某某介面
+17:48:07 <suhorng> 反過來說，duck typing 是 "使用" 導向。你拿到了之後去使用某些功能，若該物件沒有這些功能，會導致 runtime type error。若有，變把他當成我們想像中的那種物件（那種 type？duck？）
+17:48:37 <suhorng> 也因此不可能做 static type checking @@
+17:49:06 <suhorng> wiki上 Java 的例子有不少沒學過得東西所以看不太懂orz
+17:52:09 <mno2> 我覺得他沒有想像中的某個對象耶，因為理論上他也不需要檢查 type tag，只要能 call 不會掛就好
+17:52:27 <suhorng> 嗯嗯
+17:53:02 <letoh> 感覺就是每個人都提供相同的查詢界面功能，只要查得到想要的界面就不會有問題
+17:53:18 <JuanitoFatas> 7天7語言 2.2.5 解釋的不錯喔
+17:53:23 <JuanitoFatas> 7周7語言= =
+17:53:38 <letoh> 不過針對「想要的界面」這件事，不用做 type checking 嗎?
+17:53:46 <letoh> JuanitoFatas: 好拼...XD
+17:53:52 <JuanitoFatas> ....
+17:54:14 <letoh> 這樣一年可以學 365 種語言XD
+17:55:33 <JuanitoFatas> 嗯嗯不用檢查類型喔 只要行為跟鴨子一樣就好了
+17:56:14 <letoh> 唔，我的問題是：「行為跟鴨子一樣」這件事情也是要檢查的吧?
+17:57:38 <JuanitoFatas> 假設鴨子聒聒叫＝鴨子的行為 如果你要把字串跟浮點數相加 Ruby的.to_i就是這個行為
+17:57:40 <JuanitoFatas> XD
+17:57:40 <miaout17> letoh: 不檢查，runtime掛畢再說
+17:57:45 <miaout17> 掛掉
+17:58:00 <JuanitoFatas> ＝Dynamic Typing
+17:59:47 <miaout17> 在Python/Ruby/Perl/JS做car.swim()的話，會去找car有沒有swim這個method/property，沒有的話就拋出NoMethodError/AttributeError/call to undefined之類的東西
+18:00:15 <letoh> 嗯，我是想確認一下所謂的「檢查」跟「不檢查」的範圍有多大... 不過通常好像都限定 compile-time 而已?
+18:00:36 <letoh> NameError 或 TypeError
+18:00:44 <letoh> (python 的情況)
+18:01:11 <miaout17> "不過通常好像都限定 compile-time 而已?" => 不太懂
+18:01:53 <miaout17> (不重要)Python是AttributeError， try: "car".swim，不過這只是實作細節
+18:02:37 <letoh> 嗯  例如 swim 這個 method signature 符不符合需求，都是在 runtime 才檢查，但這算是有執行 type checking 嗎?
+18:04:00 <letoh> 還是針對 car 的檢查才算是在做 type checking ?
+18:04:09 <miaout17> 概念上他從來沒去檢查type (or __class__ if taking Python as example)
+18:04:31 <letoh> 嗯
+18:11:08 <miaout17> http://ideone.com/n4zLP4 Car類別什麼也不會，但有一台車天生神力可以游泳
+18:41:39 <favonia> 我個人覺得有些 duck typing 的例子只是因為用的語言的 type 太無聊，沒辦法寫好程式碼，乾脆放棄 type 檢查 xD
+18:44:29 <favonia> 我個人也不覺得 duck typing 可以用 testing 解決的原因是... 一旦程式夠大時，沒辦法分開檢查。假如有 A.py 和 B.py 你不能在改 A.py 時只檢查 A.py. 因為你根本不知道 B.py 會把 A.py 定義的東西當恐龍還是汽車 xD
+18:44:46 <favonia> 每次都要檢查整個程式超不划算
+19:13:47 <letoh> 像 python 這類可以在 runtime 載入 A.py 的語言，能做什麼檢查嗎?
+19:14:01 <letoh> 應該就是跑到爛掉  然後看有沒有處理 exception 吧?
+19:24:55 <favonia> 就很難「檢查」（證明程式是對的）之類的
+19:25:03 <favonia> 我的意思是說
+19:25:09 <favonia> 就算要用測試的
+19:25:14 <favonia> 他也不知道要測什麼
+19:25:55 <favonia> 可以測試，跟可以分檔案測試（而且改一個檔案只要測試改過的檔案）是兩回事情
+20:27:24 <CindyLinz> letoh: python 應該還有 eval 大魔王? XD
+20:30:04 <CindyLinz> letoh: 「跑到爛掉」不是 decidable 的 process 啊 XD
+20:39:24 <letoh> 我好幾次都只能這樣  發現 import 進來的東西少了一些 method，然後再檢查下版本看對不對，可能要升級什麼的
+20:43:30 <CindyLinz> dependency..... (痛)
+20:46:43 <letoh> 有時 method 是一樣，但裡面實作變了...
+20:49:04 <CindyLinz> letoh: 這是詐欺吧.....
+20:53:17 <letoh> 總之就是類似鳥事遇過不少，要解決是不難啦，只是有點煩XD
+20:54:37 <CindyLinz> letoh: 要認明有口碑的開發者 ^^
+20:55:02 <letoh> 有蓋 CAS 之類的標章嗎? XD
+20:56:04 <CindyLinz> letoh: 像我在 perl cpan 就認那個 Marc Lehmann :p
+20:56:59 <mno2> 寫 library 是良心事業 xD
+22:16:57 <c9s> letoh: 這些問題感覺用 go 就解決了... XDDD
+22:17:26 <c9s> CindyLinz: miyagawa 也不賴..
+22:18:07 <CindyLinz> c9s: miyagawa 不一定... :/
+22:18:18 <CindyLinz> c9s: 他有興趣的時候還行..
+22:18:46 <CindyLinz> c9s: 可是像他寫的 PHP session decoder 的問題他大概沒興趣了, 所以回報也不理了 QQ
+22:28:18 <c9s> CindyLinz: XDDDD
+22:28:36 <c9s> CindyLinz: 他好像是自己有興趣的東西 文件寫的會很完整
+22:29:01 <letoh> 一般都是這樣吧? 沒興趣的東西不會花時間在上面呀
+22:31:23 <c9s> $$ does matter
+22:31:23 <c9s> XD
+22:31:54 <letoh> 這時有興趣的標的就會變成 $$ 了XD
+22:32:16 <CindyLinz> letoh: 沒興趣的東西是看責任感
+22:32:30 <CindyLinz> letoh: 沒興趣你可以一開始就不要做
+22:33:00 <letoh> 但良心事業很難評估責任感吧?
+22:33:01 <CindyLinz> letoh: 東西做出來人家在用了, 被你搞爆了要不要修是看責任感
+22:33:30 <CindyLinz> letoh: 的確是沒有統一標準.. 可是把不同開放者放在一起, 是可以看出高下的 :p
+22:34:06 <letoh> 所以只好在 release note 裡加一行 use at your own risk ? (誤
+22:34:13 <c9s> CindyLinz: 的確是這樣
+22:34:25 <CindyLinz> 從 lib 使用者的角度來看, 就是你會考慮到用這個作者的作品之後, 你會變孤兒的機會有多大
+22:34:48 <c9s> ---那 ruby library developer 很沒責任感?--- 因為每次升級就爆炸了
+22:34:51 <c9s> XD
+22:34:55 <CindyLinz> letoh: 那個是可以加啊, 但是不會改變什麼的.. 我說的不是法律上的避責啊 ^^|
+22:35:07 <c9s> 奇怪 irc 好像沒辦法用刪除線
+22:35:14 <CindyLinz> 所以我就不敢用啊.. orz
+22:35:14 <letoh> 就  有盡到提醒的責任XD
+22:35:17 <c9s> 慘了，剛剛才注意到這邊有在記錄對話.... XDD
+22:35:23 <c9s> 我會被殺 XDDDD
+22:35:38 <letoh> 這個 test 有底線嗎?
+22:35:38 <c9s> strok
+22:35:48 <c9s> 有底線 不過沒刪除線
+22:35:59 <CindyLinz> letoh: marc 也會有些地方那樣寫, 他會在 doc 裡面諄諄解說這東西有怎樣的風險, 使用的時候要怎樣怎樣小心, 但實在遇到了他可能也沒辦法
+22:36:01 <letoh> 喔你要 strikeline ? 好像沒有
+22:36:37 <letoh> 唔，不過這麼細心的開發者不算多吧?
+22:36:42 <CindyLinz> 不過 Marc 個性強烈.. 有的人很討厭他.. ^^|
+22:36:58 <c9s> CindyLinz: 怎麼樣強烈法?
+22:38:05 <CindyLinz> 可以參考他寫的這一段說明體會一下 :p # http://search.cpan.org/~mlehmann/JSON-XS-2.33/XS.pm#JSON_and_YAML
+22:40:05 <c9s> 我讀起來感覺還好 (?)
+22:40:15 <c9s> XDD
+22:40:49 <c9s> 不過這文件好細心
+22:41:17 <CindyLinz> 這一段後面一定有故事啊! I have been pressured multiple times by Brian Ingerson (one of the authors of the YAML specification) to remove this paragraph, despite him acknowledging that the actual incompatibilities exist. As I was personally bitten by this "JSON is YAML" lie, I refused and said I will continue to educate people about these issues
+22:43:45 <c9s> XDDD
+22:43:56 <c9s> Brian Ingerson 感覺是個愛面子的人
+22:44:04 <CindyLinz> 他在 libev 裡面罵 OS/X 也很讚 :p http://pod.tst.eu/http://cvs.schmorp.de/libev/ev.pod#OS_X_AND_DARWIN_BUGS
+22:44:19 <CindyLinz> The whole thing is a bug if you ask me - basically any system interface you touch is broken, whether it is locales, poll, kqueue or even the OpenGL drivers.
+22:44:29 <letoh> 把文件當 blog 寫? (誤
+22:44:42 <CindyLinz> 可能我習慣每一行都看才會發現? ^^|
+22:45:11 <c9s> 我都是先看 code.. 再看 description 比較多
+22:45:52 <CindyLinz> 能看 code 的時候先看 code 也是不錯啦.. :p
+22:45:57 <c9s> Marc 真是太酷了
+22:46:03 <c9s> "I refused and said I will continue to educate  people about these issues
+22:46:06 <CindyLinz> libev 的 code 我不太想看...||
+23:53:41 <favonia> 剛才那頁有 "The default compile environment on Solaris is unfortunately so thread-unsafe" lol

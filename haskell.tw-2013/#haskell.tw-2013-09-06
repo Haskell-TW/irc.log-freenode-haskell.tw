@@ -1,0 +1,82 @@
+00:00:03 <CindyLinz> hmm... 因為都是放在 symbol table 裡, 不是放在 stack 裡?
+00:00:29 <suhorng> 這邊的 symbol table 是指哪個部份呀
+00:01:20 <CindyLinz> 你執行階段的那個 tuple 裡面有一項是 symbol table
+00:01:34 <CindyLinz> 我以為所有執行階段的狀態都在這個 tuple 裡
+00:01:48 <suhorng> 噢, (Code, [(String, Value)], [Stack], [Value]) 那個 [(String, Value)] environment?
+00:01:55 <CindyLinz> 對
+00:02:55 <suhorng> 嗯..我目前底層實作時 [(String, Value)] 跟 [Value] 裡面的 value 的確是 shared 的 (同一個), 所以不能改, 會錯
+00:03:12 <suhorng> 最後長起來其實有點變 tree
+00:03:45 <suhorng> 不過copy一份好像也沒關係....
+00:04:34 <CindyLinz> 不同的函數裡面的同名變數的處理方式就是把 [(String, Value)] 的 Value 部分存到 [Value] 裡面, 然後離開函數的時候再 pop 回來?
+00:05:17 <CindyLinz> 這邊我先等看你的投影片好了
+00:05:28 <CindyLinz> 你先準備明天的考試 XD
+00:05:40 <suhorng> XD
+00:05:48 <CindyLinz> 看是需要知識上的準備, 還是精神力方面的準備.....
+00:06:10 <suhorng> 或是心理建設... (?)
+00:06:26 <CindyLinz> 不知道能建設什麼 XD
+00:57:38 <letoh> 求 slide XD
+10:00:57 <Yu-Lin> 其實我昨天看舒跑的 vm 時，某種程度上還蠻像 forth 的XD
+10:18:58 <_13h> 舒跑?
+10:32:13 <Yu-Lin> suhorng
+10:34:21 <_13h> 現在的分享內容都沒有公開嗎? t_t
+12:15:37 <Yu-Lin> 要等他們今天考完試，suhorng 才會放出他的投影片吧
+12:19:01 <_13h> 有辦法錄影放上 youtube 嗎? 像 http://www.youtube.com/channel/UCKQj0xe3FBIw7ag95luACKQ 這樣
+15:13:57 <_13h> darkx: 你怎麼突然跑來這邊了?
+15:35:07 <MnO2> CindyLinz: 我沒看到你開的 github group 耶
+15:35:36 <MnO2> twitter 開好了: https://twitter.com/haskelltw
+15:35:49 <MnO2> 雖然我也不知道要貼甚麼 xDD
+15:35:56 <MnO2> 先搶帳號
+15:36:29 <_13h> 搶帳號XD
+15:36:44 <MnO2> http://haskelltw.tumblr.com/  tumblr 可以自訂版型拿來擺首頁
+15:37:19 <MnO2> tumblr 真的還蠻彈性的
+15:37:29 <MnO2> http://vanity-theme.tumblr.com/#/profile   about.me 的
+15:37:34 <MnO2> http://jumble.precrafted.com/
+15:37:38 <MnO2> 也可以做成這種
+15:38:11 <MnO2> _13h: 因為有 haskell.tw domain name 被搶走的前例 xD
+15:38:21 <MnO2> 可能是網路蟑螂之類的
+15:38:41 <_13h> 我不小心進去了，但我忘了剛剛到底敲了哪一組密碼XD 實在太久沒登入了
+15:42:32 <_13h> tumblr 是類似 plurk 這種東西嗎?
+15:43:06 <MnO2> 應該不算是吧
+15:43:30 <MnO2> 我覺得還是比較像 blog
+15:43:55 <MnO2> 主要是米國鄉民會貼 gif
+15:44:11 <_13h> 唔，因為現在版面是空的，不太確定這東西是怎麼玩的@_@
+15:44:33 <_13h> 喔喔喔喔 (gif 不死XD
+15:47:59 <MnO2> 昨天有提到有 .hs 的 TLD 存在，但註冊不到
+15:51:28 <darkx> _13h: 我一直都在啊(?
+15:51:51 <_13h> 完全沒印象你有出聲XD
+15:54:24 <_13h> 我看了一下，感覺像現代風的糟糕島公佈欄XD
+15:54:40 <MnO2> 是啊，裡面應該很多糟糕物
+15:54:51 <MnO2> 所以受年輕鄉民歡迎
+16:19:34 <_13h> 請問一下. twitter 有沒有簡潔界面模式?
+16:19:56 <_13h> 類似 http://www.plurk.com/m/u/<user>  這種
+16:21:22 <_13h> 我一直覺得 twitter 網頁很難搞，版面也亂七八糟，一直沒辦法在上面長時間停留XD
+17:12:29 <mno2_> http://haskelltw.tumblr.com/
+17:12:47 <mno2_> 把 irc 嵌進去 (偷學 g0v)
+17:17:33 <suhorng> 昨天的投影片 http://suhorng.github.io/llintr/lvm.html
+17:17:39 <suhorng> 先溜XD 晚上再回來
+17:29:28 <mno2_> 耶，投影片放出來了～ suhorng 昨天講得很棒
+17:29:59 <_13h> 賀!!
+17:38:27 <_13h> logbot 竟然會抓 ctcp action 了XD
+20:40:53 <CindyLinz> MnO2: 這邊? https://github.com/organizations/Haskell-TW
+20:40:58 <CindyLinz> MnO2: 其實我不太會用... orz
+20:54:46 <MnO2> CindyLinz: 進不去耶
+21:15:03 <CindyLinz> orz
+21:15:45 <letoh> 應該只是舉例而已?
+21:18:27 <CindyLinz> mno2: 直接把你加進 owner, 這樣應該就看得到了? XD
+21:35:26 <MnO2__> 看到了
+21:38:13 <CindyLinz> 不知道要怎麼把 group 公開, 也許 github 的設計是 group 的 repository 公開就好?
+21:38:35 <CindyLinz> 嗯 在 profile 頁有看到 url... 如果是讓我們指定一個在 github 上的 url... 想來有點怪 @@"
+21:46:59 <MnO2__> https://github.com/Haskell-TW
+21:47:25 <MnO2__> username 跟 org name 好像是同一個 namespace
+21:49:04 <hychen> yes
+21:49:26 <CindyLinz> 噢 把 organizations 去掉就好嘍?
+21:49:50 <MnO2__> 對啊
+21:51:11 <MnO2__> https://plus.google.com/117380487359344039293/posts/UL6Bf8hCdE1
+21:51:17 <MnO2__> 第二項 xDDD
+21:51:43 <CindyLinz> 終於看到他的長相了....
+21:52:15 <CindyLinz> 不知為什麼, 以前總想像他是個頭髮有一點灰白的大叔... :p
+21:52:35 <MnO2__> 其實長得還蠻帥的啊~
+21:53:13 <CindyLinz> 以前又沒看過..... wwww
+22:03:54 <MnO2__> http://www.iaeng.org/publication/IMECS2009/IMECS2009_pp1095-1099.pdf
+22:04:00 <MnO2__> Ada's Vital Role in New US Air Traffic
+22:04:00 <MnO2__> Control Systems

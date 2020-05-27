@@ -1,0 +1,192 @@
+00:07:06 <CindyLinz> pkmx: 把 acme 字樣拿掉嘛 XD
+00:11:17 <pkmx> 為什麼要拿掉 感覺有點恐怖 ._.
+00:11:32 <CindyLinz> th-shellcode 就好啦 多平實啊 XD
+00:11:42 <suhorng> 原來 Foldable 比真正的 fold 還弱
+00:11:51 <suhorng> 有些可以 fold 的 datatype 不是 Foldable...
+00:12:16 <suhorng> 被名字騙了 QQ
+00:13:49 <suhorng> 這樣不知道移到 Prelude 裡面到底 generalize 了多少? (好像不少@@)
+00:14:46 <suhorng> :t sequenceA
+00:14:47 <lambdabot>     Not in scope: ‘sequenceA’
+00:14:48 <lambdabot>     Perhaps you meant one of these:
+00:14:48 <lambdabot>       ‘T.sequenceA’ (imported from Data.Traversable),
+00:14:51 <suhorng> :t T.sequenceA
+00:14:52 <lambdabot> (Traversable t, Applicative f) => t (f a) -> f (t a)
+00:15:23 <suhorng> :t T.sequenceA :: [IO a] -> IO [a]
+00:15:24 <lambdabot> [IO a] -> IO [a]
+00:16:33 <CindyLinz> suhorng: 真正的 fold?
+00:16:44 <CindyLinz> 真正的 fold 是誰呀?
+00:17:30 <CindyLinz> sequenceA 也許以後會變成 sequence.. (猜
+00:17:56 <suhorng> CindyLinz: 舉例來說, data BinaryTree a = Leaf a | Node (BinaryTree a) a (BinaryTree a)
+00:18:01 <CindyLinz> 以後強制 class Applicative m => Monad m, 那麼, monad 就直接用 applicative 的 sequence 就好了吧
+00:18:19 <suhorng> 那 BinaryTree 的 fold 可以讓我們計算一棵 binary tree 的高度
+00:18:25 <suhorng> Foldable 的 fold 不行
+00:20:05 <CindyLinz> fold 怎麼可以去偷看 tree 的結構 XD
+00:20:38 <suhorng> 唔, BinaryTree 的 fold 會是 fold :: (a -> b) -> (b -> a -> b -> b) -> BinaryTree a -> b 呀
+00:20:44 <CindyLinz> 會去看結構的東西沒什麼機會 generalize 啊
+00:21:09 <CindyLinz> 只好弄個 class BinaryTreeLike t... XD
+00:21:15 <suhorng> 改名叫 foldB 好了. 那 foldB (const 0) (\lch _ rch -> max lch rch + 1) 就是高度
+00:21:28 <suhorng> 一般的 fold 是 fold :: (f a -> b) -> Fix a -> b
+00:21:33 <suhorng> 打錯=,=
+00:21:58 <suhorng> 打錯 是 fold :: (f a -> a) -> Fix f -> a
+00:22:08 <suhorng> 會給個 "一層" 的 functor
+00:24:09 <suhorng> 像上面就變 data BinaryTreeF a x = Leaf a | Node x a x deriving (Functor);  type BinaryTree a = Fix (BinaryTreeF a)
+00:28:05 <CindyLinz> suhorng: 可以幫 BinaryTree 對應一種特殊的 fold 專用的 type
+00:28:50 <CindyLinz> 然後 Foldable 在 fold 的時候, 可以除了資料本身以外, 額外拿到現在輪到的結構長什麼樣的資訊 :p
+00:30:29 <suhorng> 嗯哼
+00:32:19 <suhorng> 唔 不過 Foldable 裡面 fold 出來的東西不是都要求是 monoid?
+00:34:04 <CindyLinz> 用 fold 的話是... 但可以用 foldr 和 foldl
+00:34:22 <CindyLinz> 欸... 不過也就像是個每次手動給 mappend 的 monoid
+00:34:56 <CindyLinz> 但實用上可能就可以不用浪費名字去造一個只用一次的 newtype XD
+00:35:28 <suhorng> 不過那種東西都能作成 monoid 嗎@@
+00:35:44 <suhorng> 記結構的
+00:36:05 <suhorng> foldr跟foldl....
+00:36:44 <suhorng> 所以該不會 Foldable 沒有什麼 law 吧0.0
+00:40:09 <pkmx> 沒有 ...
+00:40:20 <pkmx> 這就是現在大家在爭論的一點XDrz
+00:41:06 <CindyLinz> 可能會像這種感覺.... attachHeightInfo :: BinaryTree a -> BinaryTree (HeightInfo a) 然後就可以 instance Monoid (HeightInfo a)
+00:41:41 <CindyLinz> 或是仁慈一點用 instance Monoid a => Monoid (HeightInfo a)
+00:41:53 <CindyLinz> 沒有這個 context 的話, 擺明是要把 user 放的 a 棄置 XD
+00:42:35 <suhorng> orz, default implementation 是 foldMap f = foldr (mappend . f) mempty 還有 foldr f z t = foldMap f t z, 其中 mempty = id, mappend = (.)
+00:42:45 <suhorng> 我覺得這有種世界會大亂的感覺.....
+00:43:31 <suhorng> 如果全用 foldr, 那個 HeightInfo 應該不太會是 monoid....
+00:43:32 <CindyLinz> 它們會盡可能互相引用啊, 這樣我們 instance Foldable t 的時候就任選一兩個實作就好了
+00:43:55 <suhorng> 我知道 這個是 default impl
+00:44:16 <suhorng> 但是這些 default impl ..... 自由度超級高耶
+00:44:27 <suhorng> foldr 可以各種惡搞 0.0
+00:46:41 <CindyLinz> 不行 monoid 嗎? 我們應該可以讓這個 XXInfo 的內容是一個中序走訪的一截, 然後留有前後的洞?
+00:47:18 <CindyLinz> 如果是要算高度的話, 那就是記錄目前這一段本身看到的最大高度有多高, 然後前後的洞是在多高的位置?
+00:48:26 <CindyLinz> (我不知道這樣子日子會不會更難過 XD)
+00:49:05 <CindyLinz> 我現在已經開始覺得難過了, 可是想到 lens 的威力... 我覺得不能太早下結論 ._.
+00:50:52 <suhorng> 還想不太出來實際上是怎麼樣
+00:52:14 <suhorng> 唔, 總之現在是要對 foldMap f (Node x a x) = (foldMap f x) `mappend` f a `mappend` (foldMap f x) 找出一個對的 HeightInfo 對不對?
+00:52:17 <suhorng> 舉例的話
+00:53:51 <CindyLinz> 對
+00:54:06 <CindyLinz> 不對
+00:54:29 <CindyLinz> 那個 x 要 x :: HeightInfo a 的喔?
+00:55:30 <CindyLinz> data HeightInfo a = HeightInfo { height :: Int, prevHole :: Maybe Int, nextHole :: Maybe Int }
+00:55:41 <suhorng> foldMap 出來就會是 HeightInfo 了
+00:55:46 <CindyLinz> 或 data HeightInfo a = HeightInfo { height :: Int, prevHole :: Maybe Int, nextHole :: Maybe Int, data :: a } (如果有 context 的話)
+00:55:48 <suhorng> foldMap f x :: HeightInfo a
+00:56:06 <CindyLinz> 對, 最終結果的 HeightInfo 裡面 prevHole 和 nextHole 應該都是 Nothing
+00:56:13 <suhorng> 嗯哼...
+00:57:55 <CindyLinz> 想到.. 我覺得 BinaryTree 可能不應該直接作成 Foldable 的 instance, 因為自然的順序就有前序中序後序三種了.. @@"
+00:58:12 <CindyLinz> 用 newtype 來決定順序和拿到的東西
+00:59:03 <suhorng> 那個是 Data.Foldable haddock 的例子.......這是某種 Foldable 不應該被加入 Prelude 的 argument 嗎0.0
+00:59:59 <CindyLinz> 唔? 可是 Prelude 沒有 BinaryTree 吧?
+01:00:24 <suhorng> 是阿XD
+01:00:37 <CindyLinz> 那 prelude 是在糾結什麼 XD
+01:00:56 <suhorng> 那我們先隨便定個 instance 就好(?) 就 foldMap f lch `mappend f a `mappend foldMap f rch XD
+01:00:56 <CindyLinz> 看一下 haddock XD
+01:01:25 <CindyLinz> 隨便定的這個.. 那應該是要內容物自己 monoid, 然後幫他用中序合併這樣?
+01:01:53 <suhorng> 對, 這個是中序合併 其實就純粹是依照結構
+01:02:35 <CindyLinz> 嗯嗯.. Foldable 的定義方式會決定 fold 出來會拿到什麼 @@"
+01:02:38 <suhorng> prevHole 跟 nextHole 是想要描述什麼呀?
+01:02:40 <suhorng> 嗯嗯
+01:02:43 <CindyLinz> 高度
+01:02:59 <CindyLinz> 它本身應該是中序的某個中段?
+01:03:16 <CindyLinz> 所以它最左邊應該有個 edge 是被剪斷的, 最右邊也是
+01:03:32 <CindyLinz> 記錄這個斷口距離這一段裡面的 root 的高度
+01:03:48 <CindyLinz> 到邊邊沒有斷口了就變成 Nothing
+01:03:48 <suhorng> 唔
+01:04:01 <CindyLinz> 斷口也可能在 root 往上的 parent edge
+01:04:03 <suhorng> 那到目前這樣的話, height 其實不一定是真的高度是不是? 可能只是暫時的
+01:04:07 <suhorng> 耶!?
+01:04:10 <CindyLinz> 對.. 是自己這一段的
+01:04:23 <suhorng> 為什麼會有 root 往上?
+01:05:03 <CindyLinz> 例如說這一段是別人的整棵左子樹.. 那麼右端斷口就在 root 呀
+01:05:39 <CindyLinz> 想一下... XD
+01:05:59 <CindyLinz> 因為中段好像也有可能單邊沒斷口, 不知道是不是有古怪...
+01:06:10 <suhorng> 所以...不是只是往下的斷口..?
+01:07:20 <CindyLinz> 斷口記的數字不太對..
+01:09:09 <CindyLinz> 先把問題變簡單, 實作變複雜好了... 斷口記錄不要用 Maybe Int.. 情況有3種: 1是已經整棵樹的最邊邊了, 2是剪斷的edge, 3是leave, 但是接下來往這個方向會往上跳好幾層高的 parent
+01:09:38 <CindyLinz> 那再加一種 4是root 好了 XD
+01:10:57 <CindyLinz> 剪斷的 edge 要記錄斷口距離自己這一段裡面的 root 有多遠 (其實就是高度); 要往上跳的要記錄往上跳的距離是從自己的 root 再往上跳多遠
+01:11:12 <CindyLinz> 自己的 root 和最邊邊不用記數字
+01:11:34 <suhorng> 唔........
+01:11:51 <CindyLinz> suhorng: 貼心附圖幫助思考 :D # http://mathworld.wolfram.com/images/eps-gif/CompleteBinaryTree_1000.gif
+01:12:30 <CindyLinz> 在這圖裡的 tree, 隨手截一段中序的範圍, 然後看一下需要記什麼才接得起來 XD
+01:13:25 <suhorng> 耶 但是這樣的話
+01:13:26 <CindyLinz> 例如... 20-10-5-11-23 這顆子樹, 左端是 root, 右端是 leave (root+2)
+01:14:04 <suhorng> 呃
+01:14:10 <suhorng> root 跟 root+2...?
+01:14:10 <CindyLinz> 21-10-5-11-23 的話, 左端改成 edge (root-1)
+01:14:33 <CindyLinz> root 是說它是root, leave (root+2) 是說它是 leave, 往上跳的高度是 root + 2
+01:14:39 <suhorng> 這兩段都不是中序阿?
+01:15:39 <CindyLinz> 我講 20-10-5-11-23 指的是輪廓線 XD 意思是 20-10-21-5-22-11-23
+01:15:40 <CindyLinz> XD
+01:15:52 <CindyLinz> 21-10-5-11-23 是 10-21-5-22-11-23
+01:15:54 <suhorng> 喔喔
+01:16:05 <suhorng> 那左端是 root 這個是什麼意思?
+01:16:21 <CindyLinz> 左方斷點在 5 的左上 edge
+01:16:25 <CindyLinz> 5 是這一段的 root
+01:16:26 <suhorng> 是說這樣做出來的 HeightInfo, 該不會只對特定某個實際的 BinaryTree 才會是 monoid...?
+01:16:36 <suhorng> 嗯....
+01:16:49 <suhorng> 然後沒有右端斷點?
+01:17:11 <CindyLinz> 有, 右端是 leave, 要記錄那個 1 是從 root(5) 往上跳 2 層
+01:17:55 <suhorng> 咦咦.......
+01:18:14 <CindyLinz> 這個 HeightInfo... mappend 都寫下去了, 就一定 monoid... 只是如果背後不是對應某個實際的 BinaryTree... 算出來的東西不知道是什麼鬼東西 o.o
+01:18:16 <suhorng> 所以簡而言之
+01:18:47 <suhorng> 就只是要紀錄它這整個中序在樹李面的位置而已嘛...實際怎樣的 representation 可以待選
+01:18:49 <suhorng> orz
+01:19:20 <suhorng> 對錯 binary tree 弄出來的也不知道是什麼鬼東西
+01:19:56 <CindyLinz> suhorng: 你整理得真好.. (Y) # 01:18 < suhorng> 就只是要紀錄它這整個中序在樹李面的位置而已嘛
+01:20:20 <CindyLinz> 想想 Foldable 的 fold 的那個 monoid.. 就是這個意義呀....
+01:20:32 <CindyLinz> 只是看要怎麼 summarize 這個位置
+01:20:44 <suhorng> 那個是對任意的 monoid m 阿QQ
+01:20:52 <suhorng> 跟特定的 t a 也沒有關系
+01:21:08 <CindyLinz> 喔喔, 你如果夠狠的話, 這個 monoid 就放兩個 iterator 就好了 XD
+01:21:23 <CindyLinz> mappend 就是把相接點的 iterator 丟掉, 留下兩端 XD
+01:21:39 <CindyLinz> 然後用 iterator 可以爬出整棵樹結構 XD
+01:21:53 <suhorng> XDDDDD
+01:22:03 <suhorng> 感覺挺好的
+01:22:22 <CindyLinz> 實際上 iterator 我想應該是用 Zipper (思
+01:22:31 <pkmx> 已經完全無法理解你們在討論什麼了 (默...
+01:23:05 <CindyLinz> ._.
+01:24:01 <suhorng> pkmx: In short: 對於 Data.Foldable haddock 上面那個 BinaryTree 的 instance, 怎麼計算 binary tree 的高度?
+01:25:29 <CindyLinz> suhorng: 是說.. 辛辛苦苦弄出這個可以計算高度的 Foldable..
+01:25:40 <CindyLinz> 然後就只有計算整棵樹的高度的功能嗎? XD
+01:26:10 <CindyLinz> 如果沒辦法跟 user 放進 tree 裡面的 a 來點互動.....
+01:26:30 <CindyLinz> 囧
+01:26:33 <suhorng> lol
+01:26:47 <CindyLinz> 例如說... 加權高度? (Y)
+01:26:52 <suhorng> 可以有其它功能阿 手動再生一個不同的 xxxInfo
+01:27:03 <CindyLinz> 有的 node 本身就很高這樣? XD
+01:27:14 <suhorng> XDD
+01:27:39 <CindyLinz> 可是算高度這個好像很雞肋... 直接寫一個算高度的函數, 比湊那個 HeightInfo 和 mappend 還好寫.....ww
+01:27:55 <CindyLinz> 啊.. HeightInfo + mappend 有個好處...
+01:28:06 <CindyLinz> 可能可以被丟去平行處理?  :p
+01:28:26 <CindyLinz> 一個 core 算左半, 一個 core 算右半..
+01:28:43 <suhorng> XDDDD
+01:29:17 <suhorng> 請支持 fold :: forall f a . Functor f => (f a -> a) -> Fix f -> a
+01:29:35 <CindyLinz> 目前覺得 Fix f 不甚友善.......ww
+01:30:34 <suhorng> XD
+01:38:54 <CindyLinz> 對了.. 如果不需要跟 a 互動的話, 我想到一個更簡單的 HeightInfo a
+01:39:50 <CindyLinz> type HeightInfo a = Const Int a
+01:41:18 <CindyLinz> 不對.. 不是 Const.. 用 First 或 Last.. XD
+01:41:29 <pkmx> 其實我覺得Foldable應該改名叫做ListLike XD
+01:42:00 <CindyLinz> type HeightInfo a = First Int
+01:42:57 <CindyLinz> wrap 的時候就把高度算好了放進每一個節點裡面 XD
+01:43:37 <CindyLinz> 我有一種被騙的感覺 OAO
+01:45:43 <suhorng> XDDDD
+01:48:00 <suhorng> https://www.haskell.org/pipermail/libraries/2015-January/024777.html 阿阿~ 這裡的 Q1
+01:48:20 <suhorng> 當時還困惑很久怎麼會冒出 toList :: t a -> [a]
+01:48:59 <suhorng> 還有 Q3...
+01:51:10 <CindyLinz> 欸.. GHC.Exts.IsList 有對應的 -XOverloadedLists 嗎
+01:53:35 <suhorng> hmm..
+01:55:52 <pkmx> 號其它到底有哪些instances 除了 [a] 以外
+01:55:56 <pkmx> 好奇*
+01:57:45 <suhorng> 好像目前沒有?
+01:59:23 <suhorng> Prelude> :t \x -> [x]
+01:59:23 <suhorng> \x -> [x] :: GHC.Exts.IsList l => GHC.Exts.Item l -> l
+01:59:53 <pkmx> > ['a'..'z'] :: Text
+01:59:55 <lambdabot>  Not in scope: type constructor or class ‘Text’
+01:59:56 <suhorng> 好像預設會 export 那個, 就會跑出用這個函數
+02:00:51 <pkmx> 發現Data.Text有...
+11:45:53 <petercommand> 那個 Acme 是甚麼意思呀XD
+13:11:56 <au> Acme 就是搞笑模組的意思
+14:24:48 <CindyLinz> 記得 au 在 perl cpan 的 Acme::comefrom 模組 XD
+14:25:15 <CindyLinz> haskell hackage 記得有個 Acme.Dont 這樣的模組 XD
+15:23:24 <pkmx>  https://hackage.haskell.org/package/acme-realworld
+15:30:25 <suhorng> wwww這會發生什麼事 可能會讓 GHC 優化壞掉嗎
+16:02:08 <suhorng> http://www.monohaskell.com/ 啥鬼 XDDDD
+16:02:52 <suhorng> http://www.reddit.com/r/haskell/comments/2vrfix/whoever_created_the_haskellceo_account_on_twitter/ .........

@@ -1,0 +1,79 @@
+16:46:38 <suhorng> mno2: 終於下定決心去看 發現大方向是不是滿直接的?
+16:47:29 <suhorng> 用 bidirectional type system 想辦法把有 annotate 的 type 傳進去,
+16:48:03 <suhorng> 遇到的困難是弄成 syntax-directed form 時, 原先 Odersky et all 定義的 subsumption rule 不夠用
+16:48:08 <suhorng> 這樣講對嗎?
+16:51:27 <suhorng> 昨天跟 CindyLinz 在 #cschat.tw 聊到 typed racket, 還滿有趣的
+16:51:50 <suhorng> 然後找到這個XD http://ceylon-lang.org/documentation/tour/types/ intersection 跟 uion type system 頗有趣
+16:58:29 <mno2> 他的 bidirectional 只是想再多 cover 一些 case 吧。其實沒有一定要 bidirectional
+16:59:40 <suhorng> mno2: 嗯, 確實, 不過確實 bidirectional 感覺比較實用? 不然實在沒道理重複寫 type annotation
+17:00:05 <suhorng> 不知道 Agda 那種 implicit parameter 該找什麼文獻讀
+17:01:15 <mno2> 其實感覺蠻 hacky 的
+17:01:30 <mno2> 只是把 forall 都給浮出去
+17:02:08 <suhorng> mno2: 真的喔!!XDDD 我有個印象是 Idris 跟 Agda 也都是 bidirectional, 不知道對不對
+17:02:28 <suhorng> 好像是個改善 type inference 滿常見方法 (之前還有聽到什麼 local type inference 的名詞之類)
+17:02:36 <mno2> 我是說那篇 paper 啦。 Agda 不知道
+17:03:15 <suhorng> okok
+17:03:32 <suhorng> http://www.cs.cmu.edu/~joshuad/papers/bidir/
+17:04:45 <mno2> 我六月要給這個相關的 talk
+17:04:57 <mno2> 等我投影片做好可以再來實況一下
+17:05:03 <suhorng> (Y))
+17:07:53 <suhorng> 不過覺得像 Agda/idris 那樣 type 也可以操作, polymorphism 很直接, 然後配合 implicit parameter 的方法滿漂亮的
+17:12:13 <CindyLinz> 有用過 Haskell 的 implicit parameter 嗎? XD
+17:12:35 <CindyLinz> 我還說不上來它是好東西還是壞東西 :|
+17:16:28 <suhorng> 沒有用過 不過應該不能傳 type .. XD
+17:16:36 <suhorng> 只記得有看到問號
+17:18:20 <CindyLinz> 對 問號 XD
+20:19:29 <b4283> ceylon 的 intersection type 好怪喔 XD
+20:20:14 <b4283> 像是多重繼承的另一種寫法
+21:58:51 <suhorng> b4283: 多重繼承這邊怎麼說阿?
+21:59:19 <suhorng> 我之前看到的例子是說, 例如 + 可以對 Int 跟 Double 做, type 就可以是 (Int -> Int -> Int)&(Double -> Double -> Double)
+22:01:16 <b4283> 讓我想到 Java class 同時實作多種界面時很長的名字
+22:01:27 <b4283> suhorng: 那應該是 | 吧？
+22:01:57 <b4283> & 是都要同時存在
+22:03:23 <b4283> Persistent & Reader & ...
+22:04:45 <b4283> https://www.quora.com/What-are-the-most-ridiculous-Java-class-names-from-real-code XD
+22:06:56 <mno2> 對啊，感覺那樣是 union 而不是 intersection ?
+22:07:45 <suhorng> b4283: "|" 只有其中之一, "+" 因為同時是 Int -> Int -> Int 和 Double -> Double -> Double 所以是 intersection
+22:08:44 <suhorng> b4283: 喔喔, Persistent & Reader & ... XD
+22:09:19 <b4283> soga
+22:10:22 <mno2> 還是覺得怪怪的耶，他 intersection 背後隱含的 set 是什麼啊？
+22:11:18 <suhorng> 嗯....所有 Int -> Int -> Int 的函數跟所有 Double -> Double -> Double 的函數的交集?
+22:11:45 <suhorng> 換個例子好了, id :: (Int -> Int)&(Char -> Char)
+22:14:04 <mno2> 這兩個交集不是 Int -> Int -> Int 嗎？
+22:20:10 <suhorng> 應該不是吧, 只剩下 Int -> Int -> Int 的話就不能丟 double 進去了呀
+22:20:41 <b4283> 再看一下發現代碼很多地方都可以用 & | 這種型態
+22:21:35 <b4283> String|Integer|Float x = -1;  what ?
+22:21:49 <b4283> 這是 non-determinism 嗎 XD
+22:22:18 <suhorng> XDDDDDDD
+22:22:33 <suhorng> String跟Float都沒用到就是
+22:28:29 <CindyLinz> 不是說 union 嗎? 那不就這次是先用 Integer 這個 slot?
+22:34:48 <suhorng> ++
+23:00:46 <mno2> 我還是不太懂為什麼要叫 intersection
+23:03:48 <monochrom> Double 是實際上的還是理論上的?
+23:03:57 <suhorng> 集合的 intersection 沒錯; 假設 x : A 而且 x : B, 那 x : A & B
+23:04:18 <suhorng> 嗯..實際上的 理論上的?
+23:05:31 <mno2> 這樣不是 subtyping 嗎？
+23:06:17 <suhorng> subtyping 是在講另一回事吧, 很多東西都可以有 subtyping, 不一定只有 intersection 這一種
+23:06:52 <suhorng> 這裡類比大概是 x \in A 而且 x \in B 那麼 x\in A \cap B
+23:07:28 <suhorng> 複雜一點的話, λf. λx. f (f x) 的 type 可以是 A → B & B → C) → A → C
+23:07:47 <monochrom> 實際的 Double 是 IEEE 754, 它不能儲所有實際 64-bit Int
+23:08:12 <suhorng> ((A → B) & (B → C)) → A → C
+23:08:42 <b4283> 上面那個是 apply？
+23:09:21 <monochrom> 理論上的 Double 可理解為 ℝ
+23:10:17 <mno2> 可是 A \cap B 空集合怎麼辦？ 還是這是另外一種 algebra ?
+23:11:55 <mno2> 「很多東西都可以有 subtyping, 不一定只有 intersection 這一種」，所以 intersection 還是一種 subtyping ?
+23:12:06 <mno2> 那有什麼是 intersection 但不是 subtyping ?
+23:15:38 <suhorng> monochrom: 嗯嗯 不過不太懂這裡跟 Double/浮點數精不精確有沒有關聯. (+)的case這裡沒有講清楚, 沒有講語言怎麼定的. 不過如果 + 的 dynamics 是遇到輸入兩個 int 會輸出 int, 遇到輸入兩個 double 會輸出 double, 那這樣子應該沒問題? 無論 double 是哪一種 (因為畢竟不是 "int & double" 而是 "int -> int -> int & double -> double -> dou
+23:15:44 <suhorng> ble"
+23:16:29 <suhorng> mno2: 空集合我也不知怎麼辦XD 這裡 \cap 是個直覺描述, 實際上應該比較接近 Γ |- x : A 且 Γ |- x : B 則 Γ |- x : A & B
+23:18:18 <suhorng> 至於 subtype 那裡我想表達的是我們可能可以訂 subtyping relation, 但不一定是用 intersection 才去訂出來的 (例如繼承也是一種). intersection type system 訂的時候也不一定要牽涉到 subtype
+23:19:45 <mno2> 喔喔，聽起來是新定義規則的運算，只是借用了 symbol
+23:20:25 <suhorng> 嗯, 而且還沒有個統一的定法
+23:28:05 <monochrom> 那麼, 我先問: {0,1}->{0,1} & {1,2}->{1,2} = ?
+23:29:40 <monochrom> 別忘記 {a,b}->{a,b} = { {(a,a), (b,a)}, {(a,a), (b,b)}, {(a,b), (b,a)}, {(a,b), (b,b)} }
+23:33:46 <suhorng> monochrom: 原來如此 我懂了
+23:34:47 <monochrom> :)
+23:35:00 <suhorng> 所以講 \cap 是有問題的 實際上 & 還有更多東西
+23:37:10 <suhorng> monochrom: 啊 好像不太一樣, 事實上是取程式的 term 的交集, 這樣就對了?
+23:38:00 <suhorng> e_t = { e |  e:t } 這種 set 的交集
+23:42:53 <monochrom> 又好像是

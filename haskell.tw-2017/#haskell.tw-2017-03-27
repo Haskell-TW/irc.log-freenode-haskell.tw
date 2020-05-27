@@ -1,0 +1,5 @@
+15:38:03 <pkmx> @info (->)
+15:38:03 <lambdabot> <unknown>.hs:1:2:Parse error: ->
+15:38:25 <pkmx> :i (->)
+16:55:00 <petercommand> :t (->)
+16:55:02 <lambdabot> error: parse error on input ‘->’

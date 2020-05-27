@@ -1,0 +1,56 @@
+20:40:44 <CindyLinz> 來講講後續 :p  這是那位朋友學 lambda calculus 的呼喊 https://gist.github.com/CindyLinz/913fb8e5a0d755716481
+20:41:22 <letoh> CindyLinz: 那位朋友就是你嗎?
+20:42:16 <CindyLinz> letoh: 不是啊
+20:42:18 <CindyLinz> 我是教他
+20:42:40 <letoh> 喔喔  剛剛看到是你的 gist
+20:42:59 <CindyLinz> 因為我轉貼 XD
+20:50:22 <caasihuang> 以為會先講 SUCC XD
+20:52:23 <CindyLinz> SUCC 已經會了啊
+20:52:43 <CindyLinz> 但是 SUCC 像定義, 沒有東西可以比對驗證的感覺
+20:55:35 <caasihuang> 好奇課程規劃！
+20:57:48 <CindyLinz> 沒規劃啊.. 明明就約好在自造 Haskell compiler workshop 的時候再學就好, 他就偏偏想偷跑, 一直丟訊息問東西 ._.
+21:04:35 <caasihuang> 為什麼 lambda calculus 那麼吸引他？
+21:05:34 <CindyLinz> 然後我跟他說 Scott encoding 想起來心理負擔比較小, 所以到時候會用 Scott encoding.. 然後他說那好, 我就先來想 Church encoding.....||
+21:06:40 <caasihuang> * 來看 scott encoding...
+21:55:35 <suhorngM_> 不如加入 CindyLinz 開的 workshop channel?
+21:55:48 <suhorngM_> 咦, 那個是不是沒有公佈過?
+21:59:33 <CindyLinz> 嗯 還沒
+22:03:05 <CindyLinz> 只是還沒講而已 ^^|
+22:05:05 <cataska> O_o
+22:05:20 <suhorngM_> 要不要搶先公佈(誤) 不然裡面人好少好孤單
+22:06:40 <yen3> XD
+22:09:03 <CindyLinz> https://gitter.im/CindyLinz/BuildYourOwnHaskellCompiler
+22:09:16 <CindyLinz> 可是現在都在講寫的東西.. 一邊寫一邊 murmur
+22:09:28 <CindyLinz> 我怕沒在寫的人會很無聊或煩 @@"
+22:09:41 <CindyLinz> 欸~ 那我算是警告過了喔 XD
+22:10:27 <suhorngM_> 我覺得以後可能也都是這個 style 呀XDD 只是 murmur 的人從一位變成一群
+22:10:58 <CindyLinz> XD
+22:11:38 <suhorngM_> 老實說我完全沒想過 weak head normal form v.s. normal form 耶, 想想 FLOLAC 講的是不是也會有這個問題啊
+22:11:52 <suhorngM_> 只是它給的直接是 operational  semantics 而不是 equational theory 所以沒有遇到這個問題
+22:12:24 <CindyLinz> 對啊, 我原本也只是想就直接 normal form 下去, 然後就爆了, 然後試試看 weak normal form..
+22:12:29 <suhorngM_> 我們也可以直接給 ULC 一個 call-by-name operational semantics, 這樣就不用擔心 normal form 跟 normal order evaluation 的問提了
+22:12:48 <suhorngM_> 因為 equational theory 是可以直接 apply to any subterm....
+22:12:57 <CindyLinz> 嗯, 這邊可以洗沒關係哄? XD
+22:14:55 <CindyLinz> normal order 在 A B 這邊只說先 apply 而沒說 A 要 eval 成什麼程度
+22:15:56 <CindyLinz> 然後... call-by-name semantics 的話, 其實(我覺得)就是 weak normal form.. 如果最後結果只要求到 weak normal form 的話, 那就看不到我們想看到的長相
+22:16:15 <suhorngM_> soga
+22:16:27 <CindyLinz> 以 Church number 來說.. 只要開頭變成 \f \x 以後, 裡面不管有沒有 apply, 都會擺著不動
+22:16:41 <suhorngM_> 咦...那突然想到 我們不考慮函數的 η-equality 這樣?
+22:17:22 <suhorngM_> 突然有點疑惑要判斷兩個 λ-term 在 apply 的狀況下是否相等, 真的是 decidable 的嗎?
+22:17:25 <CindyLinz> 考慮是什麼意思?
+22:17:50 <suhorngM_> 就是最後算的時候要不要 λx. f x    reduce to   f   這樣,  若 f 是 λ
+22:17:56 <CindyLinz> 我現在的寫法... 直接就是 normal order, 所以不需要手動加一層 lambda 來 defer evaluate
+22:18:19 <suhorngM_> 唔, 這跟 defer evaluate 沒有關係
+22:18:29 <CindyLinz> 這個應該要視為南無參照透明性, 想做想不做都可以, 反正結果一樣啊
+22:18:38 <suhorngM_> xDDD
+22:18:39 <CindyLinz> 影響的是效率, 就自己決定吧
+22:18:44 <suhorngM_> 但是我們不是要看算出來的結果嗎
+22:18:53 <CindyLinz> 喔 對哄
+22:18:56 <CindyLinz> 我現在沒做
+22:19:08 <suhorngM_> 就是看算出來的結果時, f 跟 λxx. f x 到底該不該被視為一樣....
+22:19:16 <suhorngM_> 我到時候寫 ULC 的時候可能就直接只做 env
+22:19:31 <suhorngM_> 然後直接加入 primitive 而不用  encoding  這樣
+22:19:45 <suhorngM_> 加上只求 weak head normal form
+22:22:30 <CindyLinz> 沒有 head.. XD
+22:27:53 <CindyLinz> 我也想可以不用把 data constructor 擺進來.. 列為自己的選加效能提升項目就夠了 ^^
+22:29:53 <suhorngM_> 嗯嗯XD

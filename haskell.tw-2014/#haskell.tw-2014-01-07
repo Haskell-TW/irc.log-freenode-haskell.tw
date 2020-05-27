@@ -1,0 +1,57 @@
+00:13:07 <CindyLinz> 暫時試不出來, 真是好消息.. XD
+01:29:30 <favonia> CindyLinz: 現在不能 git clone 都覺得好麻煩（疑
+01:56:53 <CindyLinz> orz
+02:20:11 <favonia> 而且我的 base 好像太新了 囧
+02:35:52 <CindyLinz> 其實我也是 orz
+02:36:18 <CindyLinz> 我剛是把 .cabal 裡面不合的版號都調大, 反正應該沒用到什麼不相容的功能 :p
+15:53:34 <_13h> http://yapb-soc.blogspot.tw/2012/08/implementing-maybe-monad-in-c.html  看了一下這個 blog 上的幾篇文章，都是在做苦工XD
+16:04:04 <_13h> https://github.com/splinterofchaos/Pure
+16:05:52 <b4283> @@
+16:06:09 <b4283> Pure 好像是老牌的 abandonware
+16:29:21 <b4283> oh no，我記錯了，我腦中想的是 Potion
+16:30:29 <_13h> 程式語言的那個 potion ?
+16:30:36 <b4283> _13h: Potion 好像有人接手了！！
+16:30:41 <b4283> https://github.com/perl11/potion
+16:30:52 <b4283> _13h: 對啊就你介紹的那個 prototype lang
+16:31:23 <_13h> 喔  印象中之前有人備份而已，原來另外有人繼續接手了
+16:32:12 <b4283> http://perl11.org/potion/index.html
+16:32:20 <_13h> 不知道 jit 修好了沒... 原作者最後幾版的 jit 有點問題，一跑就 crash XD (但早一點的版本是好的
+22:02:11 <suhorng> 突然發現我不知道怎麼在 Idris 裡寫個 strExplode : (s : String) -> Vect (length s) Char 的函數……
+22:06:18 <suhorng> 阿不對, 是 string 沒得 pattern match..
+22:07:58 <hashcat_> 有那麼悲催
+22:08:32 <suhorng> 好吧, Prelude 裡的 unpack : String -> List Char 前面有個「assert_total」……看來 string 是無法了
+22:10:01 <hashcat_> String不是List of Char阿
+22:10:10 <suhorng> 不是呀
+22:10:13 <hashcat_> 不愧為重視效率的實作
+22:10:19 <suhorng> 真的
+22:10:32 <hashcat_> 感覺像是Hasekll的Text
+22:11:22 <hashcat_> 在想用prolog寫DSL產生Idris程式和證明
+22:11:38 <suhorng> www
+22:11:46 <suhorng> 然後用 Idris 產生 javascript (誤)
+22:12:25 <hashcat_> 直接產生javascript整個有難度
+22:12:45 <suhorng> 所以才透過 idris XD?
+22:13:05 <hashcat_> 昨天我發現一種prolog包忍不住想吹
+22:13:16 <hashcat_> 叫啥CLP(Q,R)
+22:13:31 <hashcat_> Q是有理數, R是實數
+22:14:04 <hashcat_> 在有理數和實數域上做推論
+22:14:29 <suhorng> 0.0
+22:14:53 <hashcat_> clp(z)是在整數域, clp(fd)是有限域
+22:15:20 <hashcat_> 不像其他程序所謂實數都是用浮點數冒充
+22:18:07 <hashcat_> http://www.swi-prolog.org/man/clpqr.html
+22:20:20 <hashcat_> idris也挺好XD
+22:21:03 <suhorng> 竟然有取 inf 跟取 sup
+22:21:13 <hashcat_> 可能可以嵌類似prolog DSL並透過ffi跟prolog串起來
+22:22:09 <hashcat_> 等Idris穩了來試試
+23:13:07 <suhorng> 好難過XD Idris好像比Agda少一些些判斷資訊
+23:13:34 <suhorng> 假如我有個函數
+23:13:34 <suhorng> fn ('d'::xs) = ...1
+23:13:34 <suhorng> fn (x::xs) = ...2
+23:13:50 <suhorng> 在 ...2 的時候他好像沒辦法推出 x /= 'd'
+23:16:13 <hashcat_> 改用prolog算了
+23:16:18 <hashcat_> 不過真的很冷門
+23:16:21 <hashcat_> 暈
+23:21:02 <suhorng> http://stackoverflow.com/questions/17905537/dependently-typed-printf-in-idris 大家都想寫printf
+23:21:12 <suhorng> 我寫不出來...
+23:26:33 <suhorng> 喔不對寫出來了 xDD 可是他過不了totality check (那不就沒用了嗎)
+23:28:21 <hashcat_> 不要check就好, 本來就不一定過得了吧
+23:35:32 <suhorng> https://gist.github.com/suhorng/8301097 我到底寫了什麼糟糕的東西 XDDD

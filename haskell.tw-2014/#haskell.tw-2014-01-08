@@ -1,0 +1,76 @@
+00:02:28 <hashcat> printf 貌似是那種過陣子就會出現在標準的東西
+01:23:33 <favonia> hashcat: 變成業界標準了
+01:28:49 <CindyLinz> 某領域是超愛做 todo list....
+01:29:24 <letoh> 對啊  為什麼是 todo list ?
+01:29:42 <CindyLinz> 我沒去關心原因.. @@"
+01:30:10 <CindyLinz> 只是聽到說在比可以有什麼 XXX種寫 todo list 的方法.. 就覺得很病態 XDrz
+01:32:21 <letoh> X 種 hello world ? XD
+01:33:02 <godfat1> 我猜是因為好做而且好驗證？
+01:39:11 <favonia> CindyLinz: 你可以私底下丟給我訊息嗎 lol
+01:39:29 <favonia> CindyLinz: 我好想知道該領域喔～～～
+01:39:38 <CindyLinz> 不用私下啊
+01:39:44 <CindyLinz> 就寫網站的啊
+01:39:58 <CindyLinz> 然後我那時候剛好在看 node.js 的東西..
+01:40:20 <CindyLinz> XD
+01:40:41 <favonia> CindyLinz: 你剛才好像講了一個頭會痛的東西，我不太想重複名字
+01:40:44 <godfat> angularjs 或什麼什麼 js framework 等等都滿常用 todo list 當範例
+01:40:54 <godfat> XDDDDDDDD
+01:41:24 <CindyLinz> 呃... @____@
+01:41:32 <CindyLinz> node.js 嗎? 好我幫你講... XD
+01:41:44 <letoh> XDXD
+01:42:25 <favonia> godfat: 我以為該領域會用 login 畫面做例子
+01:43:06 <favonia> 然後改一個參數就有二階段認証之類的（咦
+01:43:52 <CindyLinz> 可能重點會偏到怎麼加密儲存密碼? @@"
+01:44:12 <favonia> 喔
+01:44:44 <CindyLinz> 欸.. 我不是很認真想的 ^^|
+01:44:48 <godfat> XDDDD
+01:44:48 <godfat> javascript can do anything
+01:44:48 <godfat> anything could be done in javascript
+01:44:48 <godfat> welcome to zombo.com
+01:44:55 <letoh> texlive.js – A LaTeX Compiler for Javascript
+01:45:38 <CindyLinz> texlive.js 倒不錯 :p
+01:46:21 <letoh> javascript can do anything... 說組語能做出任何東西沒意義啊....XD
+01:46:51 <CindyLinz> 是因為以前只能在瀏覽器裡跑的關係吧, 突破了就會喊很大聲 :p
+01:47:16 <godfat> http://en.wikipedia.org/wiki/Turing_tarpit
+01:48:33 <favonia> CindyLinz: 自從 javascript 可以啟動 Linux 後
+01:48:59 <favonia> 我覺得是時候在裡面跑 X 了
+01:49:14 <favonia> 最好在裡面再跑個 firefox
+01:49:28 <godfat> we need to go deeper
+01:49:31 <letoh> 然後裡面再跑個 linux ?
+01:50:06 <favonia> letoh: 喔每多跑一輪你的電腦評價就會加一分
+01:51:03 <CindyLinz> ...
+01:51:11 <CindyLinz> 還不如拿來挖礦...... ww
+01:51:38 <favonia> CindyLinz: javascript 沒有 bitcoin 程式嗎？
+01:52:05 <favonia> CindyLinz: http://www.bitcoinplus.com/miner/embeddable
+01:52:23 <favonia> 你只要在最裡層的 firefox 跑這個就好了
+01:52:26 <CindyLinz> favonia: 我是說.. 這樣子層層包來耗效能..... ww
+01:53:19 <godfat> facebook 可以裝這個，然後挖到礦之後寄回給 facebook
+01:53:26 <CindyLinz> (Y)
+01:53:36 <CindyLinz> 用 facebook 對 facebook 說讚.... ww
+01:53:43 <godfat> 一切都是為了 distributed mining
+01:53:54 <favonia> godfat: in javascript
+01:54:02 <favonia> godfat: 你漏掉重要的兩個字
+01:54:05 <godfat> XDDDD
+01:54:10 <CindyLinz> ...........||
+01:54:38 <letoh> 這個字頭就不會痛嗎?
+01:54:41 <godfat> 把這些討論搬到 javascript 討論板上搞不好就變成正向討論
+01:54:47 <favonia> letoh: 麻痹了
+01:54:54 <CindyLinz> 我們太不正經了.... QQ
+01:54:54 <letoh> XDXD
+01:55:19 <favonia> CindyLinz: 我們最正經了～
+01:55:35 <letoh> 其實我覺得剛剛還蠻正向的啊，還能再更正向啊? XD
+01:58:03 <godfat> 我以為都是嘲諷口氣.... XD
+01:58:17 <favonia> letoh: 他的意思是說我們不應該正經的諷刺 javascript
+01:58:28 <letoh> 好吧XD
+01:58:35 <favonia> letoh: 應該要發自內心的愛 javascript
+01:59:27 <favonia> letoh: 即使不寫 javascript 可能對某些人來說是更正向的事情但那都無關緊要
+01:59:35 <letoh> XDXD
+02:39:43 <monochrom> 哈哈, 原來還有人知道 zombo.com
+02:40:23 <godfat> 我超愛的 XD
+02:43:34 <monochrom> 還有! http://www.vex.net/~trebla/humour/lmcify.html
+02:46:39 <favonia> monochrom: 好吧 http://www.vex.net/~trebla/humour/lmcify.html?t=JavaScript+is+great.
+02:48:39 <monochrom> 對了!
+03:41:09 <favonia> monochrom: ?
+03:41:45 <monochrom> 你懂得用我的 lmcify.html :)
+21:22:50 <mno2> http://www.cs.utexas.edu/users/EWD/OtherDocs/To%20the%20Budget%20Council%20concerning%20Haskell.pdf
+21:23:28 <mno2> 不愧是戰神 Dijkstra (誤)

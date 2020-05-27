@@ -1,0 +1,16 @@
+00:01:07 <suhorng> !!
+00:15:06 <hashcat> $$( [|| \x->x+1 ||] )
+00:15:46 <hashcat> 貌似就每個符號多寫一次的樣子
+01:50:29 <favonia> hashcat: 世界語～
+01:55:16 <hashcat> 看不懂唉
+01:55:51 <hashcat> 猜跟salut同義
+02:04:07 <hashcat> :t (,,,)
+02:04:08 <lambdabot> a -> b -> c -> d -> (a, b, c, d)
+02:04:14 <hashcat> :t (,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,)
+02:04:15 <lambdabot> a -> b -> c -> d -> e -> f -> g -> h -> i -> j -> k -> l -> m -> n -> o -> p -> q -> r -> s -> t -> u -> v -> w -> x -> y -> z -> t28 -> t29 -> t30 -> t31 -> t32 -> t33 -> t34 -> t35 -> t36 -> t37 ->
+02:04:15 <lambdabot>  t38 -> t39 -> (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, t28, t29, t30, t31, t32, t33, t34, t35, t36, t37, t38, t39)
+22:36:52 <hashcat> 問下誰知道FPComplete到底是做啥的
+22:37:19 <hashcat> 看他們吹haskell許久
+23:10:42 <monochrom> FPComplete 有 Snoyman, 應該是做 web app 吧
+23:13:19 <hashcat> 看他們如火如荼有模有樣的
+23:13:48 <hashcat> 貌似是

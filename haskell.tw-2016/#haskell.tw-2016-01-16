@@ -1,0 +1,4 @@
+00:44:11 <monochrom> arch 上面的 haskell-stack, 是原汁原味的 stack 嗎? 是經 arch 人改過的 stack 嗎?
+00:45:32 <monochrom> linux distro 人把別人軟件改到不倫不類, 我見得多, 例如 fedora 人把 GHC 拆到身首異處
+00:46:02 <b4283> monochrom: 可以下 PKGBUILD 來看看內容如何
+00:46:49 <b4283> https://gist.github.com/480365df275b2131602f

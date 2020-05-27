@@ -1,0 +1,24 @@
+16:22:23 <CindyLinz> miaoski: 還在猶豫要不要做投影片.. ._.
+17:27:18 <petercommand> CindyLinz: 在做甚麼有趣的主題嗎?
+17:27:30 <CindyLinz> petercommand: 介紹 Haskell.. 超樸實 ^^|
+17:27:41 <petercommand> XD
+17:28:16 <petercommand> 不是滿滿的unsafe?
+17:28:53 <CindyLinz> unsafe 很少用啊
+17:29:55 <petercommand> 因為即使不知道unsafe是啥，unsafe聽起來就很有趣 (誤
+17:30:22 <CindyLinz> 如果想天天 unsafe 的話, 幹嘛不用 C.. @@"
+17:30:59 <CindyLinz> 如果想天天 undefined behavior 的話, 推荐使用 C++.. (逃
+17:31:06 <petercommand> XD
+18:49:03 <miaoski> CindyLinz: 妹妹你慢慢考慮吧 xdddd 反正我只要負責準備便當～
+18:49:23 <miaoski> petercommand: 是
+18:49:42 <miaoski> 滿滿的unsafecoerce
+18:50:55 <CindyLinz> 決定額外準備一份只給 miaoski 用的 slide...
+18:54:30 <darkx> 0w0
+18:54:58 <darkx> 天天 unsafe -> 天天都是危險期 (羞
+19:01:04 <miaoski> CindyLinz: cool!
+19:02:25 <miaoski> 妳說了喲，我專用的投影片要給我
+19:05:18 <CindyLinz> miaoski: (遞) https://gist.github.com/CindyLinz/802ca8dba22e59f2231b
+19:09:44 <cibs> unsafeMiaoski
+23:23:22 <miaoski> CindyLin1: 這個不能 compile ... 退
+23:26:53 <CindyLinz> miaoski: 為什麼你要去 compile slide 呢?
+23:27:27 <miaoski> cibs: unsafeCindy
+23:27:39 <miaoski> CindyLinz: 我也不知道，順手就 compile 了 (誤)

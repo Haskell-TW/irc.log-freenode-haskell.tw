@@ -1,0 +1,9 @@
+14:54:15 <petercommand> @src error
+14:54:16 <lambdabot> error s = throw (ErrorCall s)
+14:55:06 <petercommand> @src throw
+14:55:07 <lambdabot> throw exception = raise# exception
+14:55:27 <petercommand> :t error
+14:55:28 <lambdabot> [Char] -> a
+15:09:44 <CindyLinz> 一個「什麼都可以承諾, 你實際上就什麼都不會得到」的概念
+15:13:03 <petercommand> 這個type蠻神奇的XD
+15:13:52 <petercommand> 而且還具有side-effect

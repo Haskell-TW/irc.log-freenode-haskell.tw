@@ -1,0 +1,11 @@
+14:03:38 <petercommand> caasih: 嗯嗯
+14:05:04 <petercommand> 只有 a -> mb 和 b -> m c 生不出 m c
+14:05:48 <petercommand> *a -> mc
+14:05:56 <petercommand> 我也打錯orz
+14:06:45 <petercommand> caasih: 有 m b -> m a 和 join 怎麼生出 m c 阿?
+14:07:18 <petercommand> 沒有 a 可以用呀
+14:07:49 <petercommand> :t mfix
+14:07:51 <lambdabot> MonadFix m => (a -> m a) -> m a
+14:08:38 <petercommand> 是用 mfix 之類的嗎?
+14:10:02 <petercommand> 好像不太對orz
+14:12:15 <petercommand> mfix 有點可怕XD

@@ -1,0 +1,56 @@
+12:24:31 <CindyLinz> 隔壁 channel 看來的 :p
+12:24:38 <CindyLinz> 12:09 < jmcarthur> Level 1: Use type classes like you would use object-oriented classes. Level 2: Use type classes like you would use Java interfaces. Level  3: Use type classes like they were intended. Level 4: Use type classes in ways the designers did not foresee.
+12:24:49 <CindyLinz> 12:09 < carter> level 5: you are now oleg
+12:25:01 <CindyLinz> 12:10 < bristlesquirrel> level 6: prove turing completeness in typeclasses
+12:25:10 <CindyLinz> 12:11 < heatsink> level 7: Add type class extensions to GHC
+12:26:02 <CindyLinz> you are now oleg.....ww
+12:26:11 <CindyLinz> 7 好像比 5 和 6 簡單 XD
+15:31:53 <godfat> 把 7 移到 5, 然後 5, 6 往下好了 XDDDD
+17:34:03 <CindyLinz> XD
+20:31:49 <godfat> 不過說實在我不知道要怎麼把 typeclass 當 oo 的 class 用...
+20:35:01 <CindyLinz> class A a => B a where ... 就當繼承用啊 :p
+20:36:14 <godfat> 唔，概念差好多，有點難想像... @@
+20:36:39 <CindyLinz> 然後每一個 class 最多只有一個「直接的」 instance
+20:37:48 <CindyLinz> instance B SomeB where ... 然後 SomeB 這個 type 就會有 A 和 B 的所有 method
+20:38:04 <godfat> 這樣做似乎沒啥意義，function 直接寫死型別就好了... XD
+20:38:25 <CindyLinz> 直接寫死的話, 就不能在 super class 的地方作多型了啊
+20:39:14 <godfat> 不是反正只有一種 instance?
+20:39:28 <CindyLinz> 我是強調「直接的」只有一種, 間接的可能很多 ^^|
+20:39:40 <CindyLinz> 像是這邊 SomeB 就是 class A 的一個間接的 instance
+20:39:55 <godfat> 喔好吧... XD
+20:40:31 <CindyLinz> 可能另外有 class A a => C a where ... 和 instance A a => C SomeC where ...   就可以用 A a => 的函數來服務 SomeB 和 SomeC 了, 有沒有很像! (配合一下 :p)
+20:41:17 <godfat> umm, interesting... XD
+20:41:51 <CindyLinz> 然後... 我好奇去查 oleg 的資料.. 好像全名是 Oleg Kiselyov?
+20:42:31 <CindyLinz> 然後... wikipedia 說他是俄羅斯手球國家代表隊球員??? https://en.wikipedia.org/wiki/Oleg_Kiselyov
+20:43:31 <CindyLinz> 其實只是好奇他多大歲數 :p
+20:43:33 <godfat> 我之前也查過很多次，發現同名的人應該很多
+20:43:45 <CindyLinz> 好吧 orz
+20:43:56 <letoh> 意思是這是俄羅斯的菜市場名嗎?
+20:43:57 <CindyLinz> 大隱隱於市的名字啊.... orz
+20:44:02 <godfat> 我記得好像是 50 ~ 70? 這範圍會不會太大？ XD
+20:44:26 <CindyLinz> 會, 而且比 wiki 寫的這個還大.... 我原以為他跟我們同輩的 @@"
+20:44:48 <godfat> 不知道是不是菜市場名，只知道不好查（也許名人都用這名字 XD
+20:45:11 <CindyLinz> 還是他從小祟拜這個球員, 所以故意 ID 取跟他一樣? XD
+20:45:24 <godfat> 我的印象算是長輩了（至少白髮不少，沒記錯的話
+20:45:48 <CindyLinz> 我 google image 也不知道要怎樣確認哪一個是他 ^^|
+20:46:02 <CindyLinz> 等等, 俄羅斯人年輕的時候也是白髮啊 XD
+20:46:15 <godfat> 他上次來 floac 我有見過，我看照片？ XD
+20:46:20 <CindyLinz> !
+20:47:07 <godfat> http://nasslli2012.com/images/250/oleg-kiselyov.jpg
+20:47:38 <CindyLinz> 唔, 是金髮.. 或是色差 XD
+20:48:16 <godfat> 金髮或白髮... XD
+20:49:03 <CindyLinz> 俄羅斯人, 然後做美國海軍的外包工作噢..... 嘖嘖 XD
+20:50:09 <godfat> @@ 是喔？難怪比較低調？（有嗎？ XD 不過資料真的難查
+20:50:10 <lambdabot>  是喔？難怪比較低調？（有嗎？ XD 不過資料真的難查
+20:50:17 <CindyLinz> lol
+20:50:28 <godfat> ...又來了 XD
+20:51:25 <CindyLinz> 聽老師說是作軍艦上的天氣預測程式
+20:52:14 <godfat> 蘇聯的天氣控制裝置要來了
+20:53:22 <CindyLinz> 難怪今年北美這麼冷.... (牽拖)
+22:59:04 <hashcat_> godfat typeclass比較像interface
+22:59:17 <CindyLinz> 那是 Level 2.. XD
+22:59:52 <hashcat_> haskell裡type就是class
+23:03:53 <hashcat_> function第一個參數接受一個type的實例就可以該class的method了
+23:06:54 <hashcat_> data -> class, typeclass -> interface, function and its first arg data -> method anx its class
+23:37:12 <suhorng> http://okmij.org/ftp/
+23:38:39 <suhorng> Oleg http://hackage.haskell.org/package/HList http://hackage.haskell.org/package/iteratee

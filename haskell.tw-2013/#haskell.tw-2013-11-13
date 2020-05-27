@@ -1,0 +1,173 @@
+01:45:24 <CindyLinz> 我剛剛在小善學長的 FB 留的言 :p # 我覺得 Haskell 用的符號真的比 Perl 還多... 不過 Perl 是州官放火, Haskell 是百姓點燈..
+01:45:59 <godfat> ++
+01:50:44 <CindyLinz> 暫時不想討論 Agda 這種顏文字語言.. XD
+02:10:03 <darkx> CindyLinz: 州官放火的譬喻是什麼意思?
+02:13:19 <CindyLinz> darkx: Perl 是內建的一堆環境變數或運算子就用了一堆符號, 而 Haskell 裡面會有一堆符號主要來源只是 Haskell 允許我們使用符號來定義函數, 所以許多寫 lib 的人就用一堆符號來定義他們的函數
+02:14:12 <darkx> 你的意思是，符號的使用是語言本身(州官)定的，或是 user (百姓) 自訂？
+02:14:16 <darkx> 了解XD
+02:14:42 <CindyLinz> 不過 Perl 也有允許我們使用符號來做奇怪的事, 所以也是可以百姓點燈, 但我覺得實際上不太常見, 而且列進去文句就不有趣了 XD
+02:15:22 <darkx> Haskell 我碰的不多不知道，不過 Perl 的話自己感覺是會特異拿符號來惡搞的人不多XD
+02:15:34 <CindyLinz> 對啊, 沒什麼印象 :Q
+02:15:58 <darkx> 況且 Perl 要寫乾淨的人就已經不多見了，何況是有本事拿 Perl 來惡搞的 QQ
+02:16:36 <CindyLinz> 這句話怎麼聽起來動機有矛盾? @_@" 02:15 < darkx> 況且 Perl 要寫乾淨的人就已經不多見了，何況是有本事拿 Perl 來惡搞的 QQ
+02:16:46 <CindyLinz> 他到底是想寫乾淨, 還是想惡搞啊? ^^|
+02:17:02 <letoh> 乾淨的惡搞
+02:17:12 <darkx> 我的意思是，要寫的乾淨需要一些經驗，要駕馭 Perl 惡搞的話更難  lol
+02:17:15 <darkx> letoh: yap
+02:18:07 <CindyLinz> 啊.. 最近又想來繼續惡搞我某個 perl lib 了.. XD
+02:19:22 <darkx> https://github.com/CindyLinz/Perl-Combinator 這個嘛XD
+02:19:54 <CindyLinz> 對啊, 想加上一次跳出比較多層的 return
+02:20:08 <CindyLinz> 看同事在用, 還要用 flag 來一層一層跳出來實在好累 @@"
+02:20:34 <letoh> 不是放個 k 就好了? XD
+02:21:49 <CindyLinz> 他們的程式碼普遍有點長, 而且縮排不一定有好好縮.... (艸)
+02:22:12 <CindyLinz> 如果跳出來是放一個常數 k 的話, 程式後來加一加, 這個 k 就錯了 orz
+02:22:17 <letoh> 沒辦法用工作排版嗎?
+02:22:27 <CindyLinz> 那啥? ^^|
+02:22:27 <letoh> 阿我是指 continuation XD
+02:22:31 <letoh> 工具
+02:22:34 <letoh> 打錯字XD
+02:23:03 <CindyLinz> 我不知道有什麼比較穩定的工具 @@"  至少 vim 的 % 還蠻常失敗的 @@"
+02:23:36 <darkx> gg=G ?
+02:23:45 <CindyLinz> 啊我講錯了, 是 = XD
+02:24:07 <darkx> CindyLinz: 應該是想到 % 是 gg 到 G  lol
+02:24:09 <CindyLinz> 我是想用類似 perl 的 label block 的作法, 在想跳出的那一個 block 加個 label
+02:24:23 <CindyLinz> 然後跳出的時候指定 label
+02:24:33 <darkx> 不過這樣 label 要自己定位?
+02:24:42 <CindyLinz> runtime search.. XD
+02:24:53 <darkx> lol
+02:25:19 <darkx> 那這樣 user 一方不只可以跳出多層 return 還可以跳到想要的任意地方阿 (?
+02:25:38 <CindyLinz> 沒辦法啊, 實作也做不出來.. XD
+02:25:47 <darkx> Hmm
+02:25:56 <CindyLinz> 應該就一層一層 return, 只是順便看一下 label 是不是指定的, 如果是就可以停了
+02:25:57 <letoh> goto label ?
+02:26:02 <darkx> Anyway, 期待惡搞成功 :P
+02:26:18 <CindyLinz> 如果 label 打錯... 那就會一路 return 到底這樣 ^^|
+02:26:50 <darkx> 直接跳到最外層，然後發生靈異現象XD
+02:27:06 <darkx> 這樣會超超超難 debug lol
+02:27:09 <CindyLinz> letoh: perl 這種用法是在 block 上面加 label, 只能從 block 內說要跳出這個 block
+02:27:24 <CindyLinz> 可以 runtime warning 說你跳了一個不存在的 label
+02:27:27 <letoh> 嗯嗯
+02:27:41 <letoh> 就 try catch 的變形?
+02:27:51 <darkx> 不太像
+02:28:27 <letoh> 聽起來還蠻像的  語法可能不太一樣啦
+02:28:36 <CindyLinz> letoh: 主要用在 deep block 的跳出. try catch 來模擬的話, 像是在最外層放一個 catch 特定的 exception, 然後要跳出的時候就 throw 那個特定的 exception
+02:28:47 <CindyLinz> 不過 exception 這樣用會有報應的....
+02:28:54 <letoh> 對啊  我就是說這樣XD
+02:29:18 <darkx> 喔喔，我懂了
+02:29:37 <darkx> 但是這樣的寫法我自己沒用過，也很少看到
+02:29:48 <darkx> 除了在某些髒髒的 C++ ...
+02:31:02 <CindyLinz> exception 這樣用.. 就像拿安全網當跳墊彈簧床吧.. XD
+02:32:20 <darkx> XDDDD
+02:34:24 <letoh> 雖然我覺得有點髒，不過既然沒限制就代表可以這樣用XD
+02:35:09 <darkx> 這是 Perl 合法的語法阿
+02:35:39 <CindyLinz> 可是 compiler 實作者會假設 exception 是罕用 branch, 所以會考慮大量犧牲 exception 的效能來換取一點點主線的效能 @@"
+02:35:48 <CindyLinz> 我以為是在說 try..catch ^^|
+02:36:00 <letoh> 其實我也以為在說 try catch XD
+02:36:08 <darkx> Orz
+02:36:12 <CindyLinz> Perl 的 last label 應該沒問題啦, 看起來就不像 exception :p
+02:36:19 <darkx> 對阿XD
+02:36:41 <CindyLinz> eval { .. return } 看起來就慢, 應該也不會有誤會 XD
+02:36:56 <letoh> 唔  其實我覺得那只是某種 control flow   不管是 label 什麼的好像都差不多
+02:37:11 <darkx> 應該是 "看起來就髒" XD
+02:38:06 <darkx> 阿... 不知不覺兩點半了 o囧o
+02:38:07 <CindyLinz> 我們家的程式還蠻常包 eval 的... 沒想清楚的話, 就 eval 解決... zz
+02:38:27 <darkx> CindyLinz: eval 造成的問題用 eval 解決XDDDDD
+02:39:20 <CindyLinz> orz
+02:39:32 <darkx> QQ
+02:39:36 <CindyLinz> 掰掰 XD
+02:39:40 <darkx> ._./
+02:39:45 <CindyLinz> 考試加油~
+03:10:24 <monochrom> 哈哈, 安全網和彈床, 還可以有甚麼分別呢?
+03:11:11 <monochrom> http://www.drmaciver.com/2009/03/exceptions-for-control-flow-considered-perfectly-acceptable-thanks-very-much/ 完全認為是彈床 :)
+03:12:15 <letoh> 這題目很多年前就戰^H討論很大了XD
+03:22:53 <monochrom> 以前有位好教授跟我討論軟體規格, 但他從用者最後怎樣用來看. 他問: "電話留言機的規格是留言, 結果人們用它做甚麼?" 我知道, 我答: "結果人們用它來擋閒雜電話, 聽見是熟人才接". 這正是他要的答案, 他想我重新檢視規格的意義. 我笑說, "那麼, 微軟 Word 的用途豈不是接收及傳播病毒?" 他也肯首. XD
+03:24:07 <CindyLinz> XD
+03:24:29 <letoh> 不過「接收及傳播病毒」的比例可能不高啊，而且這其實也不是一般使用者真正的用途XD
+03:25:08 <letoh> 留言機那個例子倒是很不錯
+03:25:28 <monochrom> 是好事者設計病毒的平台 :)
+03:25:30 <CindyLinz> 能說服實作者就可以了... ^^|
+03:26:17 <CindyLinz> 可樂糖漿 和 3M便利貼的膠, 應該也可以算是不錯的例子
+03:35:17 <monochrom> 嗯, 試把 Word 比作蘋果. 對你我和飛鳥來說, 蘋果的意義是好吃, 而且好吃跟種子的比例是 99% 對1%, 但對蘋果樹來說, 那 1% 才是真章
+03:38:56 <monochrom> 因此, 陰謀論地說, 為了做有效病毒平台, 才大費周章給你文書功能, 引你用. XD
+03:39:48 <monochrom> (下回課題: Word 可以當飯吃嗎? XD )
+12:25:39 <CindyLinz> 用手機看 Agda 介紹網頁蠻痛苦的, 字型不足會有一堆缺字... orz
+14:44:49 <UncleHandsome> 強者我同事表示perl不是Context Free的呀
+14:45:57 <UncleHandsome> 如果寫的程式有bug並沒有standard可以參考到底是哪裡錯~
+14:49:59 <godfat> 什麼是有標準可以參考和沒標準可以參考啊？
+14:50:41 <godfat> 不過既然連 c++ 都不是 context free 了，我相信還有很多語言也都不是
+14:50:55 <godfat> 這跟有沒有標準好像也沒什麼關係..
+14:51:45 <_13h> 我很想問... forth 算不算 context free ? XD
+14:52:24 <godfat> 不會 forth ><
+14:53:15 <UncleHandsome> XD 我想同事應該是認為C++錯惹至少還有標準可以查錯哪 perl的話就...? 還是其實有地方可以查XD？
+14:53:19 <UncleHandsome> forth QQQQQ
+14:54:09 <godfat> c++ 是有語言標準，不過我想大部分的語言都沒啥標準，實作就是標準
+14:54:10 <godfat> 不過這跟有沒有得查應該也是兩件事說，應該是文件的問題
+14:55:18 <godfat> javascript 也有標準，讀起來很痛苦 XDD
+14:57:22 <UncleHandsome> 這lol
+14:57:25 <_13h> 遷就實作真的是很現實的問題... 之前遇到我們用的 c compiler 在最佳化時有問題，也只能自己改寫法XD
+14:59:43 <godfat> 這會超難 debug 的 @@
+15:01:59 <_13h> 不開最佳化沒問題  然後同一份程式在 pc 上跑也沒問題... 但換個 target 後只有開最佳化才有問題XD
+15:02:22 <godfat> 是廠商提供的 c compiler 嗎？
+15:03:35 <_13h> 算是吧，舊版的 rvds
+15:04:26 <godfat> 不知道那是啥 XD 不過我是聽說 gcc -O3 常常有 bug
+15:05:47 <UncleHandsome> 那後來有找到bug嘛？？
+15:06:04 <_13h> arm 自己出的 compiler，不過出錯的那台電腦好像是用 4.0 版的XD  這東西太貴了，沒辦法每台電腦都裝最新版
+15:06:22 <_13h> 就改寫法，逼 compiler 產生不一樣的結果XD
+15:06:52 <godfat> 是喔 @@" 沒想到 arm 自己賣 compiler 還賣很貴... XD
+15:07:23 <_13h> 修改的細節我就不太清楚了，不是我自己遇到的
+15:07:51 <UncleHandsome> ARM compiler超強的！！
+15:07:53 <_13h> 那是一整套的開發套件啦，包括 ICE 之類的... 不過 IDE 根本是 eclipse 改來的...
+15:08:20 <_13h> 舊版還是用 code warrior，不曉得從哪一版開始改用 eclipse
+15:08:52 <godfat> codewarrior! 好久沒聽到這個東西了
+15:09:25 <_13h> 真的很久了，本來好像是獨立產品，後來被 arm 買下來包進自己的開發套件裡
+15:10:37 <_13h> 聽說現在 arm 的網站上也提供 eclipse + gcc 的開發套件了
+15:11:15 <_13h> 之前有同事抓下來，發現裝起來還是 eclipse 有點崩潰XD (他是 vs.net 派的
+15:11:44 <UncleHandsome> www Xilinx的也是用eclipse改的呀XDD
+15:12:54 <_13h> eclipse 真的是蠻厲害的  不過線上更新不曉得為什麼常失敗XD
+15:17:42 <UncleHandsome> 我這幾天才剛學著用cdt trace 一些程式XD
+15:18:01 <godfat> visual studio 只要 open source 就可以讓 arm 包了 XDDDD
+15:22:59 <CindyLinz> perldoc 還蠻詳細的呀.. 它只是名字不叫「標準」而已; 而 C++ 的雖然叫「標準」, 但是裡面列了一堆 undefined 和 unspecified.. XD
+15:25:41 <suhorng> 像Haskell就叫Haskell Report, Scheme也是 XD?
+15:30:22 <CindyLinz> 我兩年前吧(?) 曾試著讀 open document 的標準..
+15:30:48 <CindyLinz> 想說 MS Office 2007 的 docx xlsx 也列在裡面真好..
+15:31:07 <CindyLinz> pdf 拿來好像五千還七千頁吧... 讀了半天找不到想看的部分... orz
+15:32:29 <UncleHandsome> 這... 我聽說M$還會把某些細節藏起來 那實作有困難？？
+15:33:35 <CindyLinz> 那我就不知道了... 反正他沒打算藏的部分我也找不到啊 orz
+15:34:01 <CindyLinz> spec 7k page, 這是大隱隱於市的硬道理.. (誤)
+15:34:17 <suhorng> 說不定是 spec 的 .tar.gz 有 7k (X
+15:35:24 <suhorng> 可是還有些我不太懂得 像是 Haskell 的 non-strict 怎麼個 non-strict 法
+15:36:52 <CindyLinz> 我是說 pdf, 正常字體, N千頁啊... orz
+15:37:01 <CindyLinz> 還分了四五個檔... @@"
+15:37:41 <CindyLinz> suhorng: 你講 non-strict 是延續 spec 沒講清楚的話題嗎?
+15:38:08 <suhorng> 應該是說 我去翻了之後 實在不太懂到底是怎樣個 non-strict 化簡 XD
+15:38:34 <suhorng> 他列了很多, pattern matching 怎麼處理 _|_, if 怎麼處理 _|_, ... 各種狀況
+15:39:10 <suhorng> 不過實際上對於函數的部份他是直接講說就像 lambda calculus 那樣XDDD
+15:39:13 <CindyLinz> haskell report? 這個嗎? http://www.haskell.org/onlinereport/
+15:39:28 <suhorng> 是
+15:40:37 <suhorng> "Although the kernel is not formally specified, it is essentially a slightly sugared variant of the lambda calculus with a straightforward denotational semantics."
+15:40:55 <CindyLinz> 是這邊第一句嗎? XD # http://www.haskell.org/onlinereport/basic.html#sect6.2 
+15:41:08 <CindyLinz> # Function application in Haskell is non-strict; that is, a function argument is evaluated only when required
+15:41:20 <suhorng> 然後在其他一些地方提到 "since Haskell is non-strict..." "error is treated as _|_...."
+15:41:22 <suhorng> 對對XD 這裡有提到
+15:42:43 <CindyLinz> 這個「a function argument」裡的「function」不知道有沒有包含 data value constructor
+15:42:54 <CindyLinz> 如果包含的話, 就和我的理解一致了
+15:43:23 <CindyLinz> 然後就... 算是講清楚了? :p
+15:45:15 <suhorng> 是耶XD 好像就清楚了
+15:45:16 <UncleHandsome> 標準真的是微言大意的東西呀XD
+15:45:42 <suhorng> constructor我不太確定, 好像不是用function來說, 而是用 pattern matching 怎麼做來定義的
+15:45:58 <CindyLinz> 看看 w3c 的 html / css / dom 標準們... (嘆)
+15:46:36 <suhorng> XDD
+15:46:36 <CindyLinz> 還有被丟掉的 xhtml...
+15:46:44 <suhorng> 看看 IE 活得多自在!
+15:46:47 <UncleHandsome> XDDDDD
+15:47:39 <UncleHandsome> 我之前才被M$的某個標準表過lol
+15:48:11 <CindyLinz> 唔, pattern matching 那段有 informal 和 formal 的 semantics
+15:48:18 <CindyLinz> http://www.haskell.org/onlinereport/exps.html#sect3.17
+15:48:20 <suhorng> 嗯嗯
+22:37:59 <hashcat> 高性能haskell計算有解決方案, 若是可以屈居haskell98的話
+22:39:36 <hashcat> 用jhc輸出C代碼在parallella跑
+23:40:58 <UncleHandsome> hashcat: 可以介紹下jhc嘛！！
+23:50:07 <hashcat> 不行嘿嘿
+23:50:12 <hashcat> 我得睡覺啦
+23:50:56 <hashcat> UncleHandsome: http://repetae.net/computer/jhc/
+23:51:03 <hashcat> 先看看吧

@@ -1,0 +1,55 @@
+07:08:29 <caasihuang> Transducers really sound like monads. Are they the same thing? https://news.ycombinator.com/item?id=8344002
+07:08:45 <caasihuang> 純轉貼，今天才知道 Transducers 0rz
+11:47:19 <suhorngM1> caasihuang: https://themonadreader.wordpress.com/2011/10/26/issue-19/ 裡的 Coroutine Pipelines 有提到一點
+11:47:31 <suhorngM1> 不知道是不是這個就是(?
+13:36:13 <caasihuang> suhorngM1: 看了 https://blog.othree.net/log/2015/02/14/csp/ 才知道 Transducers 的，
+13:38:06 <caasihuang> 這邊第一個反應以為是像 monad 那樣拆開了做事情然後再包起來，然後才想去查 Transducers 是不是類似的東西，結果好像搞錯了 XD
+13:38:18 <caasihuang> 正在看你說的 issue 19
+15:25:49 <CindyLinz> caasihuang: 我還沒聽過 Transducer :p
+15:27:56 <caasihuang> XD
+15:28:32 <caasihuang> CindyLinz: 想貼東西給你和 godfat 看，雖然只是老把戲
+15:28:38 <caasihuang> https://github.com/caasi/sandbox/blob/master/livescript/csp.ls
+15:29:36 <caasihuang> 抱歉又是 livescript ， Haskell 裡會把 channel 拆開用完再包起來嗎？
+15:34:11 <CindyLinz> Haskell 沒有語言上的官版 channel, 要指定一個 channel library 才能討論行為 ^^|
+15:34:56 <CindyLinz> caasihuang: 拆開/用完/包起來 是什麼意思啊?
+15:36:13 <caasihuang> 想做 (a -> b) -> (Channel a -> Channel b)
+15:37:18 <CindyLinz> 聽起來是一個... unwrap, 使用, wrap 的節奏?
+15:37:25 <caasihuang> 也想問有 Channel a -> (a -> Channel b) -> Channel b 嗎？
+15:37:43 <CindyLinz> Haskell 的 code 通常都是長這樣..
+15:37:50 <caasihuang> 恩，就跟之前惡搞 promise 一樣， unwrap 、使用、 wrap
+15:37:53 <CindyLinz> (不考慮 optimize 以後會怎麼處理的話)
+15:39:32 <CindyLinz> caasihuang: 這是 Conduit... # https://hackage.haskell.org/package/conduit
+15:40:01 <CindyLinz> 應該是實用型的..
+15:40:15 <CindyLinz> 不過它應該不是 focus 在 multi thread 之間的傳遞 ^^|
+15:42:02 <CindyLinz> caasihuang: 你這個 Channel 也沒有特別要 multi-thread 之間用哄?
+15:42:46 <CindyLinz> 你的 sample 都是在同一個 thread 嘛 :p
+15:43:05 <caasihuang> 沒有，我沒有考慮過這件事，只是幼稚地想試試看拆跟包
+15:45:31 <CindyLinz> caasihuang: 你的 lift 有像 Haskell 的 Applicative
+15:45:43 <CindyLinz> add3 = out0.lift (a, b, c) -> a + b + c
+15:46:43 <CindyLinz> Haskell 可能長得像 add3 = (+) <$> ((+) <$> a <*> b) <*> c
+15:47:56 <caasihuang> 喔喔喔喔？我再去看一次 LYAH 講 Applicative 看會不會有新體會 XD
+15:48:33 <CindyLinz> 有 liftA 系列 (liftA, liftA2, ...)
+15:48:37 <CindyLinz> @type liftA3
+15:48:39 <lambdabot> Applicative f => (a -> b -> c -> d) -> f a -> f b -> f c -> f d
+15:49:21 <CindyLinz> 也可以寫 add3 = liftA3 (\a b c -> a + b + c)
+15:49:28 <CindyLinz> 欸 這個跟你的 lift 比較像 XD
+15:49:34 <caasihuang> XD liftAN
+15:49:56 <CindyLinz> 要用到 N 只好用 <$> 和 <*> 去接, 可以一直接下去...
+15:51:16 <CindyLinz> 不知道以後會不會去用 DataKind 還是 KindPolymorphism 作出可以吃不同數量參數的同一個函數... 這方面我還不會掌握, 不知道能作到哪些事..
+15:54:30 <caasihuang> 實務上會用到吃不同數量參數嗎？還是給 list 就好了？
+16:00:02 <CindyLinz> 不會 runtime 混用..
+16:00:11 <CindyLinz> 只是... liftAN 很笨啊 (?
+16:00:26 <CindyLinz> 如果它定義到 17 個, 剛好我想用 18 就 GG 了... XD
+16:01:23 <caasihuang> XD
+16:04:15 <caasihuang> 可以給 N 請它準備好 liftAN 嗎？還是說這就是你提到的 "作出可以吃不同數量參數的同一個函數"
+16:06:00 <CindyLinz> 你是說.... 發現我想用 N 的時候.. 去 ghc core team 提 proposal, 等下一版 ghc 更新嗎? OAO
+16:06:21 <CindyLinz> 嗯, 我想的是一個可以隨意用的 N
+16:06:44 <CindyLinz> 例如說.... type 中其中一項就是一個, 用來代表參數個數的 Nat
+16:07:04 <CindyLinz> 它會根據這個 Nat 展開成需要的 arity
+16:08:00 <CindyLinz> 現階段呢.. 除了 f <$> a <*> b <*> c <*> d ... 可以自己接到想要的數量以外, 也可以用 template haskell (可以想成 haskell 世界的 macro) 生成
+16:32:08 <CindyLinz> 覺得 Applicative 的 <$> 和 <*> 在處理 binary (infix) operator 的時候用起來不太舒服..
+16:33:06 <CindyLinz> 也許可以弄個什麼 liftAOP :: Applicative f => a -> (a -> b -> c) -> b -> f a -> f b -> f c 之類的東西
+16:33:23 <CindyLinz> 用起來會像 liftAOP 3 (+) 4
+16:33:48 <CindyLinz> 再看怎樣可以像 <$> <*> 一樣一路串到底的用法 @@"
+17:34:39 <CindyLinz> 我 type 寫錯了  請忽略ww
+23:17:29 <pkmx> 你需要的是這個 # https://ocharles.org.uk/IdiomBrackets.html

@@ -1,0 +1,15 @@
+13:46:34 <miaoski> 為什麼不應該用 xs == [] ?
+13:56:13 <petercommand> > let ham = [1]:[[2*a,3*a,5*a] | a <- join ham ] in take 10 $ [ a | a <- nub $ join ham]
+13:56:16 <lambdabot>  [1,2,3,5,4,6,10,9,15,25]
+14:02:02 <petercommand> 剛才在看為甚麼nub是lazy的XD
+14:02:49 <petercommand> 原來是另外放一個list保存出現過的東西
+14:11:38 <miaoski_home> xs ==  []
+14:11:49 <miaoski_home> > xs == []
+14:11:50 <lambdabot>  Not in scope: ‘xs’
+14:11:50 <lambdabot>  Perhaps you meant one of these:
+14:11:50 <lambdabot>    ‘x’ (imported from Debug.SimpleReflect),
+14:11:50 <lambdabot>    ‘s’ (imported from Debug.SimpleReflect)
+14:26:41 <CindyLinz> miaoski: 為什麼不應該用 xs == [] ? @@"
+14:28:40 <petercommand> CindyLinz++
+14:28:46 <petercommand> 我也想知道
+14:30:27 <CindyLinz> xs == [] 只能用在 Eq a => [a], 而 null xs 可以用在 [a].. 不過如果已知 Eq a 的話, 倒也沒什麼不好?

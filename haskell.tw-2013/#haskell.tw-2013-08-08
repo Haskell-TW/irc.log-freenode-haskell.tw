@@ -1,0 +1,172 @@
+12:16:56 <mno2> CindyLinz: 我在研究 cache server 中 cache 要用什麼樣的資料結構跟實作。想說跟 python dict 來比，結果發現現有 haskell 實作都打不贏。查了一下才發現 python dict 跑超快的..
+12:32:23 <_13h> 之前好像聽過有人說 python dict 是地表最快實作XD
+12:35:00 <CindyLinz> 我以為 mno2 你需要的是 disk 上面的 cache 結構?  python dict 應該是 memory 裡面的吧? @@"
+12:36:23 <CindyLinz> 另外... 我猜(因為我沒實際看過) python dict 是針對短資料的 cache 結構, 而 web cache 應該是長資料的.. value 會超長, 幾K起跳, 而 url 雖然比較短, 但仍然是正常 python dict 會用到的 key 的很多倍長才是
+12:36:28 <Yu-Lin> python 只能用 exec eval 之類的來玩像 macro 一樣的事情嗎？
+12:36:31 <Yu-Lin> Orz|||
+12:37:24 <CindyLinz> 如果是用記憶體內的結構.. memcached 的呢? 一般應用, memcached 適用的長度應該也是比 python dict 長的
+12:37:38 <CindyLinz> Yu-Lin: ??
+12:37:50 <CindyLinz> 為什麼突然心情大轉折 XD
+12:38:09 <Yu-Lin> 妳心情大轉折？XD
+12:38:50 <CindyLinz> Yu-Lin: 你啊.. 你是發現了什麼, 怎麼突然丟 「Orz||」
+12:40:47 <Yu-Lin> 因為沒有 macro，讓我只能複製貼上，只好用 Orz||| 表達自己的心情了
+12:49:47 <CindyLinz> 喔 :p
+13:18:54 <mno2> CindyLinz: 總要先寫 memory 才能 sync 到 disk 啊，至少也要有少量當作 L1 Cache
+13:19:16 <_13h> Yu-Lin: 有別條路
+13:19:26 <mno2> 我測試是用 random 512 bytes 當 key, value 就只是 count
+13:19:42 <mno2> 還是跑超快的
+13:20:09 <Yu-Lin> _13h: 怎麼走？
+13:20:12 <mno2> memcached.. 不知道，他內部是用什麼資料結構
+13:20:54 <mno2> traffic server 的結構是他會區分看 value 的大小
+13:21:15 <mno2> 如果夠小的話就存一份，太大的話就會拆成 disk 好讀的 segment size
+13:21:31 <cataska> _13h: 詳細希望
+13:21:31 <mno2> 然後用 libaio
+13:23:31 <_13h> Yu-Lin: 例如走 pep263... 不過這東西要改到隔壁聊嗎? :p
+13:23:34 <mno2> 真希望 ghc 7.8.1 趕快 release, 會有 parallel IO manager
+13:26:49 <Yu-Lin> 沒關係，之後就直接放空 python 吧XD
+13:28:10 <_13h> Yu-Lin: python 的確搞了很多奇怪的限制，所以我也贊成放空它XD
+13:31:02 <hashcat> parallel IO manager是做啥的
+13:34:09 <mno2> hashcat: http://haskell.cs.yale.edu/wp-content/uploads/2013/08/hask035-voellmy.pdf
+13:34:44 <mno2> 原本 bos 跟 tibb 改的 even-driven io manager 只有用單一 os native thread 來跑
+13:35:06 <mno2> 然後 kazu yamamoto 寫 mighttpd2 的時候就撞到瓶頸
+13:35:21 <mno2> 因為他嘗試 scale 到 40 cores 的樣子
+13:35:52 <mno2> 所以就需要一個可以利用 multi-core 的 io manager
+13:36:35 <hashcat> mno2: 我還沒見過40 cores的機器
+13:36:45 <mno2> 然後 Andreas 就寫了，已經 merge 進 trunk，預計 7.8.1 release
+13:37:25 <mno2> 我也沒看過，yamamoto 不知道哪裡弄來的
+13:37:50 <hashcat> 分佈式某方面來說比較實際
+13:38:22 <hashcat> 畢竟弄到很多台一般主機比40 cores實際些
+13:38:54 <hashcat> 我前陣子在看 eden compiler 但怎都沒法編譯過
+13:39:04 <hashcat> hdph貌似不錯
+13:40:34 <hashcat> 是能用類似Strategies的方式做分佈式兼多核運算
+13:42:35 <mno2> 主要還是想把現有的 4 cores 到 8 cores 的能力榨乾吧，40 cores 現在應該還不是普通領薪水可以弄到的
+13:42:42 <mno2> hdph 跟 cloud haskell 的差別是？
+13:43:37 <hashcat> mno2: http://hackage.haskell.org/package/hdph
+13:43:54 <hashcat> 類似 parallel 包的方式
+13:44:18 <hashcat> cloud haskell 據他說是模仿 erlang
+13:46:10 <mno2> 所以感覺主要是解決同樣的問題，但操作上設計不同？
+13:46:39 <hashcat> eden compiler就是純函數式了, 但我沒成功編譯過
+13:47:21 <hashcat> hdph 仿造原本就在 haskell 的 parallel
+13:47:57 <hashcat> 模型不同
+13:48:11 <mno2> I see
+13:50:07 <_13h> ga144 那種算嗎? 不過那個好像是 multi computer
+13:50:28 <_13h> http://www.designspark.com/blog/hands-on-with-a-144-core-processor
+13:51:21 <_13h> 88-pin QFN package
+13:51:59 <hashcat> 先忙去了
+14:01:25 <CindyLinz> mno2: https://github.com/memcached/memcached/blob/master/memcached.h
+14:01:36 <CindyLinz> 文字搜尋 typedef struct _stritem
+14:02:51 <mno2> _13h: 不知道耶..  也許是 Parallella 那種？
+14:03:29 <_13h> 嗯嗯  只是封了一堆 cpu 在裡面，做成一顆完整的 processor
+14:05:18 <mno2> CindyLinz: 這只是單一的 cache object 在某一層用 chaining 吧？但他更上面的結構是？
+14:07:29 <CindyLinz> hash.. 還沒翻 :p
+14:09:32 <mno2> 現在流行的 noncrypto hash 是用什麼？ murmurhash3 ?
+14:09:56 <mno2> 或是說還沒被打爆的 xD
+14:17:57 <CindyLinz> noncrypt 有什麼被打爆的問題嗎?
+14:19:25 <mno2> hash collision DoS
+14:20:28 <CindyLinz> 反正它有作 collision chain 沒差? XD
+14:20:41 <CindyLinz> 只是變超慢 XD
+14:20:55 <mno2> 對啊，所以 DoS
+14:20:57 <CindyLinz> XD
+14:21:00 <mno2> search time 變 linear
+14:23:13 <b4283> 想起來之前有人就是用這個特性去功擊的...
+14:23:21 <b4283> *攻擊*
+14:23:24 <CindyLinz> 要防制惡意使用者.. 值得嗎? @@"
+14:23:48 <CindyLinz> 把簡單的位移和bit運算換成 md5.... orz
+14:23:49 <b4283> 先寫出來，反正 hash function 抽換掉就好 XD~
+14:24:55 <CindyLinz> 可是 hash function 可能是用 Haskell 最好寫的的部分, 讓人忍不住想寫久一點? XD
+14:25:31 <b4283> 或者是混雜用多種
+14:26:19 <CindyLinz> mno2: 覺得.. 資料結構也是可以抽換的, 所以一開始可能也不用太在意
+14:26:36 <CindyLinz> 用 Haskell 應該會比較好抽換.. Type 不變即可
+14:26:51 <mno2> 的確啦，只是第一版寫出來很慢的話還是會不爽 xD
+14:27:05 <CindyLinz> 第一版不要開 -O
+14:27:16 <CindyLinz> 就會很慢但不會不爽 :p
+14:29:35 <mno2> CindyLinz 要不要檢查一下公司的 PHP, nginx 版本。稍舊版都有這個問題 xD
+14:30:03 <mno2> 雖然可能也不會被打 :p
+14:30:26 <mno2> 被打通常是一則以喜，一則以憂
+14:31:14 <CindyLinz> key 不會被 user 輸入啊 ^^|
+14:32:01 <CindyLinz> 能輸入的 key, 長度都很短.. 那個 chain 也接不長呀
+14:36:16 <mno2> 只要人造 request 就好了吧？ key 輸入都是進到 app logic 後的事情?
+14:36:20 <mno2> http://blog.codinglabs.org/articles/hash-collisions-attack-on-php.html
+14:37:40 <CindyLinz> 喔 我剛剛只有 focus 在 memcached
+14:38:26 <CindyLinz> 不過這文章是 2012.1 的, 我們用 php5.4 應該不太會有了吧
+14:39:25 <mno2> 5.4 是修掉了沒錯
+14:40:42 <CindyLinz> 以前真沒想過這種攻擊法耶
+14:43:20 <mno2> 據文獻說法好像已經出現很久了，只是以前是口耳流傳，沒有人把他寫下來並宣揚
+15:04:39 <CindyLinz> 不過想想, hash collision dos 要有效, 其中一個必要條件是在程式裡面有巨大的 hash
+15:04:49 <CindyLinz> 不然就算全掃也不會太久
+15:04:59 <CindyLinz> 我想一般 php 程式裡面不常出現就是
+15:05:15 <CindyLinz> 但 memcached 或 web cache server 就真的很大了
+15:05:37 <CindyLinz> nginx 的這東西是用在 web cache 嗎?
+15:07:47 <mno2> CindyLinz: 不確定
+15:11:29 <CindyLinz> mmm
+15:14:20 <CindyLinz> 有一點點想自己實作一次 haskell (compiler + interpreter)
+15:15:12 <CindyLinz> 覺得 ghc 好巨大, ghc api 搞不懂要怎麼用.. :(
+15:16:40 <CindyLinz> 如果有了自己的 haskell, 掌握度比較高, 如果想加什麼功能, 或是 embed 到別的語言裡面, 都比較容易
+15:17:12 <CindyLinz> 如果先不做 type inference 和 optimize 的話, 我在想, haskell 可能不太難實作..
+15:17:24 <CindyLinz> 應該比 perl 簡單 :p
+15:17:48 <CindyLinz> 雖然這樣的 haskell 用起來很累.. 但可以一步一步來嘛 :p
+15:22:07 <CindyLinz> mno2: 那, 我就從讀 mighttp 的 code 開始喔
+15:22:58 <CindyLinz> 還是我就先去搞一個能用的 on disk key-val 的資料結構出來, 這樣好像也不用讀過 mighttpd ^^|
+15:25:10 <mno2> CindyLinz: 如果沒有 type inference 的話.. 每一步都要寫 type xD
+15:25:44 <mno2> 如果有 lambda calculus 的 virtual machine ，類似 llvm 的存在就好了
+15:25:50 <mno2> 這樣好像就輕鬆很多
+15:26:11 <CindyLinz> 對啊.. 每一步都要寫... 但至少是個很難用但能用的起頭嘛 :p
+15:26:58 <CindyLinz> 之後加上 type inference 後, 希望可以有個功能, 就是用 compiler 把自己推論得出的 type 通通加到 source 裡面
+15:27:21 <CindyLinz> 在用 ghc 遇到 type 衝突的時候, 報出錯誤的點常常不是我真正寫錯的點
+15:27:22 <mno2> 我覺得最討厭的部份會是 in memory cache sync to disk cache 的部份
+15:27:46 <CindyLinz> 如果把推論出來的 type 都列出來, 我覺得對我這樣的 programmer 幫助很大 @@"
+15:28:26 <mno2> 有種在作 code merge 的感覺：「你要選哪種 type」
+15:28:45 <CindyLinz> 你有想到哪些可能作法嗎? 我想到的可能有... sync 的時候作 serialize, 或是直接用 mmap
+15:29:03 <CindyLinz> 不過以 Haskell 的資料結構... mmap 我沒想到怎麼做會方便
+15:29:43 <mno2> mmap 的話就不能有效利用 IO manager 了
+15:29:48 <mno2> 都要自己刻
+15:32:07 <CindyLinz> 嗯嗯, 大概自己要做一組管理要被 mmap 記憶體的 pool
+16:06:45 <hashcat> 有沒人用過plugins
+16:07:17 <hashcat> 用haskell產生並執行時期編譯haskell程序
+16:07:41 <hashcat> 跟執行時期解釋器hint打對台
+16:27:43 <Yu-Lin> 有機會我需要研究一下 haskell 轉出來的 asm......Orz|||
+22:42:11 <favonia> hashcat: 有用過用 hint/plugins 的程式
+22:43:15 <hashcat> favonia: 是啥嚜
+22:43:52 <favonia> hashcat: snap web framework 裡面可以邊改程式邊測試的機制
+22:44:24 <hashcat> favonia: 本來想說用這個可以克服Data.Dynamic不支援多態的問題, 結果照樣不太行
+22:44:50 <favonia> hashcat: 還有 lambdabot
+22:45:02 <favonia> lambdabot 用 mueval
+22:45:07 <favonia> mueval 用 hint
+22:45:52 <hashcat> favonia: 找不到方法檢查 Int 是 Num a => a 的特例
+22:51:15 <favonia> > let x = () :: Num (Int -> Int -> Int) in x
+22:51:16 <lambdabot>   Predicate `GHC.Num.Num (GHC.Types.Int
+22:51:16 <lambdabot>                          -> GHC.Types...
+22:51:24 <favonia> > let x = () :: Num (Int -> Int -> Int) => () in x
+22:51:25 <lambdabot>   Non type-variable argument
+22:51:25 <lambdabot>    in the constraint: GHC.Num.Num
+22:51:25 <lambdabot>               ...
+22:51:34 <favonia> 可惡失敗了
+22:53:17 <favonia> > let numId = id :: Num a => a -> a; x = numId x :: Int -> Int in ()
+22:53:19 <lambdabot>   No instance for (GHC.Num.Num (GHC.Types.Int -> GHC.Types.Int))
+22:53:19 <lambdabot>    arising f...
+22:53:23 <favonia> 耶
+22:53:28 <favonia> > let numId = id :: Num a => a -> a; x = numId x :: Int in ()
+22:53:29 <lambdabot>   ()
+22:53:46 <favonia> hashcat: 可以改 Int 看會不會編譯成功 xDDD
+22:53:50 <favonia> hashcat: 超醜的 hack
+22:56:27 <hashcat> favonia: 我寫了個專案, 仰賴執行時期的型別系統, 單態部分完成了
+22:58:06 <hashcat> favonia: 要是 Data.Dynamic 有多態版本或者 ghc api 有個函數可以檢查Int 是 Num a => a 的特例
+22:58:18 <hashcat> 就結束了..不過好像沒有
+23:02:18 <hashcat> favonia: 妄想Haskell支持超編程
+23:18:36 <hashcat> https://github.com/mmirman/caledon
+23:18:42 <hashcat> 這太好完了
+23:25:23 <suhorng> 其實之前也想用Haskell寫個小compiler XD
+23:26:51 <suhorng> 不過遇到個問題是常常要在 AST 上加資料, 然後就不知道該怎麼寫了... (有考慮過弄成 data AST a = .... 這樣來加標記..後來沒試XD)
+23:27:14 <suhorng> 然後說到跑 lambda calculus 的VM, 那些機器不算嗎? (e.g. SECD machine)
+23:32:53 <CindyLinz> suhorng: 果然需要一個自己改得動的 haskell compiler 對吧 :p
+23:33:08 <CindyLinz> 好像誤會了 *_*
+23:33:51 <suhorng> CindyLinz: 有的話也是挺好得!!!
+23:34:49 <suhorng> 而且 Haskell 沒有 type inference 真不知道要怎麼過? typeclass完全要依賴type吧?
+23:39:09 <CindyLinz> 可以一直提示你說 lack type, lack type... 逼你補完啊 XD
+23:39:36 <suhorng> XDDD
+23:39:45 <CindyLinz> 對於 Haskell / 或 Hindly-Milner 初學者是個不錯的練習題目.. (逃)
+23:39:49 <CindyLinz> 至少會 check 啦 :p
+23:41:24 <suhorng> 手算萬能!
+23:43:09 <suhorng> http://lambda-the-ultimate.org/node/366 Essential Haskell Compiler, 算是教育用的吧
+23:43:41 <suhorng> 雖然有段時間了. 另一個之前找過的資料叫 Typing Haskell in Haskell
+23:44:14 <suhorng> 應該不算是paper...?

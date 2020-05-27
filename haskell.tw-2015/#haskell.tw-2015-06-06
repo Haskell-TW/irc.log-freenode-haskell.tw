@@ -1,0 +1,5 @@
+02:24:41 <monochrom> 有一天, 我想通了 fixed point, recursion, induction 等等, 所以自此很喜觀它們
+14:00:01 <CindyLinz> (Y)
+23:43:04 <CindyLinz> 如果要 Parse Haskell... 用 Haskell 的 parser combinator 和用 dev 環境語言的 parser generator 相比, 感覺用 Haskell parser combinator 的爽度應該比較高, 有 self-bootstrap 的感覺
+23:44:08 <CindyLinz> 可是要先弄一個簡易版的 interpreter, 能夠跑寫起來不會太不舒服的 parser combinator 的話, 這個 interpreter 的完成度好像已經有點高了 orz
+23:44:57 <CindyLinz> 如果先用 parser generator 弄出這個簡易版的.. 又會想說為什麼不再多做一點就做完了呢 ^^|

@@ -1,0 +1,51 @@
+00:20:10 <b4283> https://gist.github.com/4309040  ; this is currying, right?
+00:27:09 <CindyLinz> 是
+00:28:48 <b4283> 想了很久，寫起來倒是比想像中簡單
+00:30:28 <b4283> 上次看到 haskell 的 flip，能把 function 的兩個 arg 相反過來，有點給了啟發 ^_^;
+00:48:48 <favonia> b4283: 看過去有點不太懂... 這是要解決什麼問題？
+00:49:28 <b4283> favonia: 把原本的 function 轉換成 curry 版
+00:55:53 <favonia> 喔～
+11:39:00 <favonia> 我想問個問題
+11:39:14 <favonia> 平常 MnO2 丟很多東西大家對於怎樣的新聞比較有興趣？
+11:41:13 <CindyLinz> 我好像對 conference 資訊以外的都有興趣.. :Q
+11:42:27 <CindyLinz> 有的是介紹一個抽象的東西可以怎麼應用; 有的是介紹 GHC 的新進展或規劃; 也有就是純教學, 或是 bloger 自己的學習心得的
+11:43:16 <CindyLinz> library 介紹的話就不一定
+11:56:55 <favonia> 所謂抽象的東西怎麼應用的意思是？
+12:03:15 <CindyLinz> 像這篇在介紹 lens, 它介紹 lens 是在怎樣的場合下應用, 然後最下面又再放一些我比較沒有想到過的用法 # http://ocharles.org.uk/blog/posts/2012-12-09-24-days-of-hackage-lens.html
+12:07:36 <CindyLinz> 嗯, 還有一些.. 可能比較多是 stackoverflow 的 link, 是實用上怎麼 tune 效能之類的討論, 感覺也不錯
+12:09:07 <favonia> 嗯
+12:10:25 <CindyLinz> conference 資訊的話.. 因為去不了... ^^|
+13:45:38 <JuanitoFatas> hello~
+13:50:59 <CindyLinz> hi ^^
+13:58:06 <JuanitoFatas> first time here :P
+13:58:32 <JuanitoFatas> Haskell.tw — Cool
+13:58:45 <JuanitoFatas> I mean the irc channel
+13:58:47 <JuanitoFatas> :P
+14:04:09 <CindyLinz> XD
+14:39:50 <favonia> JuanitoFatas: Hi~
+14:40:38 <JuanitoFatas> aloha
+15:08:25 <favonia> JuanitoFatas: 為什麼會想到要來這個版呀 :P
+15:20:13 <JuanitoFatas> 逛逛～看看大家在聊什麼 :D
+15:38:45 <favonia> JuanitoFatas: 哈。這裡是主要是聊 Haskell, 一個程式語言
+15:39:41 <b4283> A Programming Langauge
+15:40:08 <kanru`> APL!
+15:42:16 <b4283> XD
+15:51:44 <b4283> array 類語言我覺得也是超酷的，看了 R tutorial 一陣子的感想
+15:59:02 <b4283> 所有的 value 都是 vector，apply 都是整個 vector 全部丟進去
+15:59:25 <CindyLinz> SIMD 的感覺 (single instruction multiple data)
+16:00:37 <b4283> (筆記不曉得丟哪了 @@)
+16:01:05 <CindyLinz> 其實就是 default 套一層 functor 嘛! (逃)
+16:02:48 <cataska> K,Q,J
+16:03:56 <CindyLinz> cataska: 你在打牌嗎... XD
+16:04:00 <b4283> 玩家梅花 K 牌面大，玩家說話
+16:04:25 <cataska> CindyLinz: 都是 APL 家族啊，哈
+16:07:14 <cataska> J http://en.wikipedia.org/wiki/J_%28programming_language%29
+16:10:28 <kanru`> APL 看起來好像咒語 xD
+16:11:21 <b4283> 要用特殊鍵盤才能 coding ...
+16:11:33 <b4283> 現在最流行是 J 吧
+16:12:28 <cataska> J 有開源
+16:12:40 <cataska> K 和 Q 沒有
+16:13:53 <cataska> 但是有人做了 K 的開源版 https://github.com/kevinlawler/kona
+16:14:26 <b4283> cataska: 好熟喔
+16:15:22 <cataska> 我只知道這樣 XDDD
+16:15:58 <b4283> XD

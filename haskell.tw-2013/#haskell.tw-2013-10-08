@@ -1,0 +1,181 @@
+00:07:09 <CindyLinz> fun-thursday mailing list 信寄不出去啊 QQ
+00:07:17 <CindyLinz> 需要 approval
+00:58:57 <godfat1> 咦，我以為我有收到？
+00:59:19 <godfat> 喔，可能是時差，已經被 approval 了 XD
+01:04:04 <mno2> 明天 in2 有要到喔？ xD
+01:04:22 <mno2> 突然備感壓力 xD
+01:06:13 <godfat> XDD
+01:07:53 <CindyLinz> 我抓的 :D
+01:08:13 <CindyLinz> 結果我跑去 FB post 以後就收到有人回信說收到了 ._.
+09:57:14 <MnO2> http://aosabook.org/en/index.html 有了新章節：The Performance of Open Source Applications
+09:57:28 <MnO2> http://aosabook.org/en/posa/from-socialcalc-to-ethercalc.html   au 也有寫
+10:02:07 <b4283> 第一次聽說 Ninja
+10:04:44 <godfat1> 我也是，不知道好用嗎
+10:05:42 <b4283> 喔喔，原來亮點是 Audrey Tang
+10:07:04 <b4283> http://martine.github.io/ninja/
+10:09:33 <godfat> 看起來不適合我 :o 不過 gyp 我在 mac 上一直有問題，
+10:09:33 <godfat> 所以 v8 build 不起來，然後 node 有他們自己的 patch... = =
+10:10:07 <godfat> 這個問題
+10:10:07 <godfat> http://code.google.com/p/gyp/issues/detail?id=292
+10:10:42 <godfat> 有時候我真覺得 google 的 open source 假假的...
+10:12:20 <caasih> MnO2: godfat: 乍看 Multi-core Scaling 那段想起 godfat 之前的演講
+10:13:19 <mno2> 我不知道是 godfat 哪一段演講 xD
+10:16:10 <godfat> rubyconf 的？
+10:16:10 <godfat> http://www.slideshare.net/godfat/concurrent-ruby-application-servers
+10:17:18 <caasih> yes yes yes XD
+10:17:42 <mno2> 晚點再看一下~
+10:18:16 <godfat> 我後來發現這投影片做得太華麗了，翻起來有點慢... XD
+10:19:11 <caasih> 之前應該是抓下來看的，筆電網上看，翻一頁超過一分鐘XDDD
+10:19:55 <caasih> 不對，是 slideshare 下面的按鈕壞掉了。
+10:20:01 <caasih> 用左右小手就正常
+10:20:23 <godfat> ....O_o 那比我想像的還誇張 orz
+10:20:23 <godfat> 不過我在自己電腦裡翻也很慢，可以感覺到停頓，也沒辦法快速翻頁 orz
+10:21:40 <caasih> 剛才看完你貼來的 SKI ，循線索才知道有 uncomputable number @_@
+10:22:05 <caasih> 另外 lunadance 回台灣了，但是 24 號又要離開 D:
+10:22:53 <godfat> 我沒聽過 uncomputable number... XD
+10:22:53 <godfat> 太好了，你們可以好好聊聊 XD
+10:23:27 <caasih> 沒法把他抓到你面前啊....XDD
+10:23:37 <caasih> 順其自然好了 :p
+10:23:43 <godfat> :D
+10:24:09 <caasih> > Every computable number is definable, but not vice versa. There are many definable, noncomputable real numbers
+10:24:10 <lambdabot>   <hint>:1:37: parse error on input `,'
+10:24:22 <caasih> http://en.wikipedia.org/wiki/Computable_number
+10:24:35 <caasih> oops, 抱歉， lambdabot XD
+10:26:40 <godfat> The binary representation of the halting problem 不知道是？
+10:26:41 <godfat> 不過我的想像是，其實這是表示法的問題？
+10:28:38 <caasih> halting problem 的證明記得是把 program 都編碼起來，然後證明有種編碼會矛盾？ # 抱歉只看過科普版
+10:33:20 <godfat> 我不知道 XD 不過這讓我想到之前看到不完備定理的證明
+10:34:14 <caasih> 我看的也是科普版 0rz 數學少女中的證明說明讓我覺得 Godel 在寫程式XDDD
+10:34:39 <godfat> 這倒是還沒看完 orz 不過應該快了，我先把這本看完好了... XD
+10:35:11 <caasih> 他編碼的方式讓他可以用某種方式取他要的值XD 但現在書不在手邊...
+10:35:22 <caasih> 現在在看的是...？
+10:35:48 <godfat> 確定性的失落 XD
+10:36:26 <caasih> 另外 wiki 也有提到不完備定理與 halting problem 的關聯
+10:36:59 <caasih> http://en.wikipedia.org/wiki/Halting_problem#Relationship_with_G.C3.B6del.27s_incompleteness_theorems
+10:39:47 <caasih> 妙的是，結成浩老師在數學少女中對不完備定理的態度比較光明。
+10:40:08 <caasih> 與西方科普書有點悲觀的看法不同XD
+10:42:44 <favonia> caasih: 在 lambda calculus 的世界裡面 halting problem 可以有很多種表達形式
+10:43:05 <favonia> caasih: 因為 lambda calculus 有真。function. 不像 Turing machine 所有東西都是 bits
+10:44:25 <caasih> 好處是比較好證明？ <-- 門外漢XD
+10:44:47 <favonia> caasih: 如果你是要證明「不能存取到程式碼」的真。函式版本，其實滿短的 lol 可以存取到程式碼的版本概念也滿簡單，但要嚴謹寫下來有點長（就是要寫清楚怎麼編碼程式）
+10:45:53 <favonia> caasih: 順便一提，所謂 "Turing-complete" 是指如果只看「整數到整數」的函式。如果你還想探討「函數到函數」的計算等等， Turing machine 先天就無法表達 xD
+10:46:59 <godfat> caasih, 我去把書翻出來好了，一時沒找到 XD
+10:47:00 <godfat> 對於光明的態度感到好奇 XD
+10:47:12 <favonia> caasih: 基本原則是一樣的啦，但我相信嚴謹寫下來一定是 Turing machine 比較崩潰
+10:47:23 <caasih> favonia: 崩潰XDDD
+10:47:56 <caasih> 等等來查查好了，函數到函數那部份其實聽不懂 XD
+10:48:03 <caasih> favonia: 謝謝 <(_"_)>
+10:49:54 <favonia> Turing complete 是說，你定義的「整數到整數」(類似 Int -> Int) 的函式的能力，跟 Turing machine 一樣厲害
+10:50:03 <caasih> godfat: 印象中他的態度是認為，這樣我們有工具可以比較兩個體系誰比較大誰比較小...
+10:50:24 <favonia> 但像 Haskell 隨便就可以寫 (Int->Int)->[Int]->[Int] 這種...
+10:50:32 <caasih> 讓我想到前幾周葉李華教授提到的科學實證主義什麼的...
+10:50:33 <favonia> 這種就不在比較範圍內
+10:51:15 <caasih> favonia: 啊，我不清楚的是，不能把 Int->Int 編碼成某種 Int 嗎？
+10:51:25 <caasih> 還是說這樣就會出事？XD
+10:51:36 <favonia> caasih: 系統內不能。系統外可以。
+10:52:46 <favonia> caasih: 我舉個比較遠的例子來說明。如果集合論用一階邏輯寫下來，而且有合理的 model, 那就有個 countable model....
+10:53:06 <favonia> caasih: 意思是說在這 model 中什麼都是可數的
+10:53:52 <favonia> caasih: 可是在集合論內我們還是可以討論「不可數的東西」。原因是整數和實數中間的對應「系統內」不存在
+10:55:04 <favonia> 剛才講說什麼都是可以數的狀況是系統外才看得到
+10:55:42 <favonia> 你剛才說把程式編碼，那是因為你從上帝的角度，在系統外看整個東西，才有機會把程式編碼成一個數字
+10:56:45 <favonia> 這種編碼方法，在（合理的）系統內是不存在的...
+10:57:47 <caasih> 是指：把所有的函數都編碼，這件事不存在嗎？
+10:57:59 <caasih> 在系統內不存在
+10:58:21 <favonia> 對。在大多數合理的系統中，可以說明系統內不存在。
+10:59:05 <caasih> 好像有點頭緒了，如果只是編一些些做得到，但是要把所有 Int->Int 的都編碼做不到，
+10:59:31 <caasih> 和科普的 halting problem 證明似乎有點像
+10:59:46 <favonia> 基本技巧其實都是一樣的
+11:00:29 <favonia> 這其實是好事。你看，這樣代表我們可以在系統內討論不可數的東西
+11:01:04 <favonia> 即使系統外有上帝覺得什麼都可數 xDDD
+11:02:00 <Yu-LIN> XD
+11:02:07 <caasih> favonia++
+11:02:09 <favonia> 在系統內你拿到一個函式 Int -> Int 時，基本上只能測試 input/output
+11:02:22 <favonia> 這樣怎麼可能知道裡面到底是什麼
+11:02:38 <favonia> 當然這只是直覺啦，要真的證明還是要花點功夫
+11:06:30 <caasih> 問個奇怪的問題，在系統內，就算能建出一個，在有限數量的 i/o 都和某個 Int -> Int 函式執行結果一樣的函式
+11:07:10 <caasih> 也因為無法測試所有的 i/o ，而無法說新的函式與本來的一樣？
+11:07:42 <favonia> 嗯
+11:08:07 <favonia> 應該是說像這種測試很容易就找到反例吧
+11:08:35 <favonia> 這跟 halting problem 的直覺是一樣的
+11:08:41 <favonia> 基本上你也只能跑跑看
+11:08:55 <favonia> 其他都不會比較好
+11:09:31 <caasih> 這個系統可以讓 i/o 是無窮的可數集合嗎？還是說和計算機一樣礙於時間做不到XD
+11:10:04 <favonia> ? Int 就無窮啦
+11:10:25 <favonia> 你可以想像更難搞的 (Int -> Int) -> (Int -> Int)
+11:10:41 <caasih> 啊，我想說的是測試的時候XD 就，真的要跑過才知道？
+11:11:12 <favonia> 應該是說你最後發現，再怎樣設計也跟實際跑跑看一樣糟糕
+11:11:18 <caasih> XDD
+11:11:20 <favonia> 反正這問題本來就無解
+11:11:35 <favonia> 給一個 f : (Int -> Int) -> (Int -> Int) 應該會「更慘」 xDDD
+11:11:40 <favonia> 我是說如果你要編碼 f
+11:13:17 <caasih> favonia: 啊，又想到一個門外漢問題XD
+11:14:05 <caasih> 從你以上的說明，我知道函數集合不可數，那我們可以比較哪個函數比另外一個函數複雜嗎？
+11:14:49 <caasih> 譬如把某些可以編碼的彼此比較之類的？
+11:17:47 <caasih> 再來想請教，不知道有無推薦的入門書？不然怕自己只會問更多對各位來說已經是常識的問題。
+11:18:30 <caasih> 這邊的能力大概停在可以看懂簡單的證明（歸納法什麼的），
+11:19:13 <caasih> 但是太複雜的抽象的很難讀懂，像是幾何中點跟面角色互換那種
+11:47:37 <favonia> caasih: 我沒有仔細想過，不知道 lol
+11:55:43 <caasih> favonia: 無論如何，再次感謝說明。我還是順其自然好了XDD
+12:03:52 <mno2> http://aosabook.org/en/posa/warp-images/benchmark.png   mighttpd2 scale 得也太漂亮了吧 xD 讓人不太敢相信
+12:05:12 <godfat> 單台電腦？ @@
+12:06:13 <mno2> 對啊。他們都是有錢人
+12:06:56 <mno2> http://aosabook.org/en/posa/warp.html
+12:07:07 <mno2> Two “12 core” machines (Intel Xeon E5645, two sockets, 6 cores per 1 CPU) connected with 1 gbps Ethernet.
+12:09:02 <godfat> 真是一般人暫時還無法用 XD
+12:09:02 <godfat> 也來讀讀.. http://aosabook.org/en/posa/warp.html
+12:09:52 <mno2> 如果數據沒有出錯真的是很厲害….   mighttpd2 不是那種 minimal server，很多功能都有
+12:10:20 <godfat> 當 application server 用這樣？
+12:10:39 <mno2> 對啊
+12:14:17 <b4283> cool
+12:16:47 <godfat> 是喔？ XDDD
+12:16:48 <godfat> : Node.js used the event-driven architecture in the past, but recently it also implemented the prefork technique
+12:19:32 <mno2> 應該很早就是了。標準招式啊 ~
+12:20:41 <godfat> 只是想說之前相信 node 的 hype 的人實在是 XD
+12:20:42 <godfat> 我應該趕快忘記那些可笑的言論 XD
+12:29:25 <godfat> warp 那篇看一看有種難以言喻的感覺
+12:29:25 <godfat> 很多在這邊理所當然的東西，在其他地方別人不理解也不相信
+12:29:25 <godfat> 更遑論那些更巧妙先進的方式了..
+12:35:51 <CindyLinz> godfat: 你開始有王垠的氣勢了.... (蓋章)
+12:36:35 <godfat> ......~.~ 雖然這樣說聽起來好像是好事（？）
+12:36:35 <godfat> 但說真的這一年實在好感嘆呀...
+12:38:41 <CindyLinz> 呃... 怎麼開始沈重起來 @@"
+12:39:30 <godfat> 可是這句「其他地方別人不理解也不相信」本身不就是比較沉重的話嗎？ XD
+12:49:56 <CindyLinz> godfat: 你這一年遇到了什麼啊 @@"
+12:50:12 <CindyLinz> 我以為那一句到處都在發生啊 @@"
+12:53:23 <godfat> CindyLinz, XD
+12:53:23 <godfat> 是沒錯啦，但這麼切身又老是在發生，又覺得這樣很不合理，感觸就特別深
+12:53:23 <godfat> 簡單地說就是一年前我在弄這種 model:
+12:53:23 <godfat> http://aosabook.org/en/posa/warp-images/4.png
+12:53:23 <godfat> 結果被質疑到現在，我老是要重複解釋，現在他們不信邪又要換別的事...
+12:53:37 <godfat> s/事/試/
+12:59:45 <CindyLinz> 聽起來很悶...
+13:00:02 <CindyLinz> 往好處想你就不用負責了....
+13:00:16 <CindyLinz> 咦不對 已經開始用了
+13:02:13 <godfat> 是啊... 悶到我快受不了了
+13:02:13 <godfat> 是說要換回來也只是一行而已，反正我都寫好放在那邊隨便他們換著試
+13:02:13 <godfat> 只是這感覺實在好差
+13:14:08 <CindyLinz> 嗯 orz
+14:05:13 <godfat> 晚上 jaiyalas 不便參加聚會了 @@
+14:05:14 <godfat> 我看看能不能早點過去，看有沒有需要處理什麼事之類的
+15:12:58 <CindyLinz> 嗯嗯嗯
+15:14:42 <CindyLinz> godfat: 早點是多早啊?
+15:14:58 <CindyLinz> 六點半才能入場哄?
+17:50:01 <petercommand> Int->Int是甚麼?
+17:51:29 <b4283> petercommand: 吃一個 Integer 給一個 Integer
+17:52:18 <CindyLinz> 要出發去 Functional Thursday 了 (緊張..)
+17:53:36 <petercommand> (Int->Int)->(Int->Int)呢?
+17:53:58 <CindyLinz> 吃一個函數, 給一個函數
+17:54:08 <petercommand> 喔喔
+17:54:27 <CindyLinz> 吃一個(吃一個Integerer給一個Integer的函數)給一個(吃一個Integerer給一個Integer的函數)
+17:54:54 <petercommand> 恩
+17:55:18 <petercommand> 應該了解了@@
+17:56:17 <b4283> (lambda (f) (lambda (x) (+ (f 1) x))
+17:56:33 <b4283> ) XD
+20:06:20 <petercommand> 原來這叫first-class function
+20:08:17 <letoh> petercommand: 跟 lisp 有什麼不一樣嗎? XD
+20:08:44 <petercommand> 沒有XD
+20:28:36 <petercommand> 只是沒聽過叫first-class function而已= =
+20:34:11 <mno2> CindyLinz: https://docs.google.com/presentation/d/1ZODuGNVnddLy2DG_IiPnBb5LBl0r1Rwhm_5LGGDQECY/edit#slide=id.p
+20:45:09 <Yu-LIN> 讚
+23:23:25 <CindyLinz> QQ 原來 scm 也沒去
+23:24:07 <CindyLinz> 來整理 material..

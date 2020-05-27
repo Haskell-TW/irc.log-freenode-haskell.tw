@@ -1,0 +1,164 @@
+00:20:08 <suhorng> 請問有intersection type跟union type相關的資料嗎？好像常聽到這兩種系統 可是維基頁面好短 找到的資料也挺凌亂的
+00:23:18 <suhorng> 一開始找到大概 http://www.cis.upenn.edu/~bcpierce/papers/index.shtml#Intersection and Union Types 這幾篇...
+04:22:15 <Jhe__> @i test
+04:22:15 <lambdabot> Maybe you meant: id ignore index instances instances-importing irc-connect v @ ? .
+06:32:31 <Jhe__> 中文
+11:29:47 <cataska> http://shop.oreilly.com/product/0636920026365.do # Parallel and Concurrent Programming in Haskell
+11:32:08 <_13h> 推薦嗎?
+11:33:28 <cataska> 哈，剛出版
+12:05:33 <Yu-Lin> 喔波
+12:07:43 <Yu-Lin> 看到這本只能說，還清就貸的日子又更遠了嗎？
+12:12:42 <_13h> 之前如果有 prelease 的話，應該也是打對折賣
+14:12:26 <Jhe__> 測試測試 ...
+14:59:54 <Jhe__> 有人嗎＠＠？
+15:17:56 <CindyLinz> 嗯嗯?
+15:18:23 <Jhe__> 喔＠＠
+15:18:26 <Jhe__> 我在測試中文
+15:18:34 <Jhe__> 今天改用 Xchat了
+15:18:42 <Jhe__> 之前都用 web 版的
+15:20:24 <Jhe__> haskell 好難 ..
+15:29:05 <CindyLinz> ._.
+15:29:14 <Jhe__> ._.
+15:29:29 <CindyLinz> 我猜.. 是你想拿 haskell 做你平常用別的語言做的事, 所以難
+15:30:00 <CindyLinz> 難的不是 haskell 本身, 是你對別的語言的熟悉所產生的業障 XD
+15:30:10 <_13h> 「haskell 好難 ..」這句是在測試中文嗎？XD
+15:30:18 <CindyLinz> XD
+15:32:41 <Jhe__> 業障 ...
+15:33:15 <Jhe__> 腦子就是轉不過來 ...
+15:33:20 <Jhe__> 被業障卡住了＝＠＝
+15:33:39 <CindyLinz> 想像.. 假裝你不會寫程式可以緩解一點 :Q
+15:34:33 <CindyLinz> 不然.... 你用既有武功, 用內力硬拼出來的 haskell 程式會很像用 C 寫的...
+15:35:21 <Jhe__> 遞迴只應天上有 凡人應當用迴圈
+15:35:22 <cataska> 不會寫程式來學 haskell 不知道是怎麼樣的，挺好奇
+15:35:25 <Jhe__> 我是凡人 ...
+15:35:33 <CindyLinz> 是說我一開始寫 perl 被別人說是 C.... @@"
+15:35:49 <Jhe__> 應該會說 寫成是好難 投降！！
+15:35:55 <Jhe__> 程式*
+15:35:55 <CindyLinz> 遇到字串處理的時候, 先用 split 把它拆成 array... XD
+15:36:10 <Jhe__> 很直覺壓＠＠
+15:36:48 <CindyLinz> 正常的 perl 一般都是用 regex 之類的去做呀 XD
+15:37:02 <Jhe__> 喔～
+15:37:06 <Jhe__> 我不會perl
+15:38:25 <Jhe__> 學很多沒一個精的也算是業障嗎 ...
+15:39:24 <CindyLinz> 要先看你有沒有想要學一個精的.
+15:39:54 <CindyLinz> 如果想學一個精的, 而在學的過程常常讓你感到不耐煩的話.. 就會是了 @@"
+15:40:30 <CindyLinz> 可是學精不是什麼必要的人生目標 :p
+15:40:50 <Jhe__> 學精才能當飯吃 ...
+15:41:11 <Jhe__> 弱到還不能稱上是遇到高原現象 ...
+15:41:18 <CindyLinz> 跨領域結合是另一種吃飯法 :D
+15:42:03 <CindyLinz> 在寫 haskell 的時候, 心中如果想的是: 第一步, 怎樣怎樣, 第二步, 怎樣怎樣, 然後重覆一段, 怎樣怎樣
+15:42:36 <CindyLinz> haskell 拿來描述這種想法的作法.. 我覺得有點像是在模擬它
+15:42:41 <CindyLinz> 所以會很累...
+15:43:09 <CindyLinz> 這種想法, 會用到很多給不出名字, 講不出意義的啞變數
+15:43:24 <CindyLinz> haskell 天生又不讓你重覆用同個名字
+15:43:45 <_13h> 昨天在本板得到的啟發，只要貫徹 lazy 信念就可以精通 haskell，也就是說，沒必要的話不要寫 code (喂
+15:43:52 <CindyLinz> 寫的是行尾遞迴, 但是心中想的是迴圈... @@"
+15:44:33 <CindyLinz> 行尾遞迴.. 看起來就不像迴圈, 不能直覺地表達心中的迴圈想法...
+15:44:57 <CindyLinz> _13h: 那就可以當教授了... (逃)
+15:45:04 <_13h> coding by needed
+15:45:17 <_13h> 教授XDXD
+15:45:38 <Jhe__> CindyLinz, 本日最中肯
+16:05:57 <CindyLinz> 我剛剛買了這本.. # 11:29 < cataska> http://shop.oreilly.com/product/0636920026365.do # Parallel and Concurrent Programming in Haskell
+16:06:40 <CindyLinz> 想 *試讀* 的可以私下給我 email, 覺得不錯的話, 還請付費支持一下 :p
+16:08:59 <_13h> fp 的例子好像常常出現 sudoku solver ?
+16:13:38 <cataska> Great !!
+16:16:35 <Jhe__> email ?
+16:16:43 <Jhe__> 弄成 pdf 嗎＠＠？
+16:16:50 <CindyLinz> 對啊, 我買電子版的
+16:16:59 <CindyLinz> pud epub mobi 格式都有
+16:17:05 <CindyLinz> pdf.. 不是 pud XD
+16:17:26 <Jhe__> 喔＠＠
+16:35:59 <Yu-Lin> coding by needed wwwwww
+16:41:36 <b4284> pudding
+17:10:07 <Jhe__> 原文書好貴
+17:16:54 <CindyLinz> 習慣就好 ^^|
+17:33:00 <hashcat> 我覺得學數學會對Haskell無障礙
+17:34:15 <hashcat> function一般函數集合論, type就數理邏輯
+17:34:53 <hashcat> 不一定學到像啥型別論還是lambda
+17:36:09 <hashcat> 另外要整個命令式的話, 也有些整個是命令式的函式庫可以讓人覺得 Haskell 根本是最好用的命令式語言
+18:12:04 <Yu-Lin> 話說這本什麼時候會出實體？
+18:15:00 <CindyLinz> 有實體啊
+18:15:11 <CindyLinz> 再加 12USD.. ^^|
+18:18:46 <Yu-Lin> XD
+18:19:00 <Yu-Lin> 應該說，天攏什麼時候會進這樣XD
+18:22:42 <_13h> http://www.amazon.com/dp/1449335942  # Price:	$32.59
+18:23:12 <_13h> 實體版還在 pre-order
+18:26:32 <CindyLinz> 唔.. 可是我看 O'reilly 右邊 Buying Option 列的三個: Ebook, Print & EBook, Pre-Order Print 耶
+18:26:40 <CindyLinz> 中間那個不是現貨嗎
+18:29:45 <_13h> 不曉得耶  我沒有按進去看... 還是紙本是 oreilly 商場限定?
+20:43:28 <godfat1> 話說下次 Functional Thursday 會講上次 concurrent haskell 的續集，
+20:43:28 <godfat1> 但還欠一個講者，這邊有人有興趣想講什麼嗎？
+20:57:51 <hashcat> 講平行化?
+20:58:20 <godfat1> 相關的主題
+20:58:35 <godfat1> eval monad, par monad, etc
+20:58:49 <hashcat> hdph
+20:58:56 <hashcat> 看有沒人要講
+20:59:20 <godfat1> 這個？
+20:59:20 <hashcat> 同時支持多核跟分佈式
+20:59:20 <godfat1> https://github.com/PatrickMaier/HdpH
+20:59:27 <hashcat> 嗯嗯
+20:59:34 <hashcat> 我太遠去不了
+20:59:40 <godfat1> 啊啊，真可惜..
+21:00:20 <hashcat> 看有沒人要看看講講
+21:01:03 <Jhe__> 不會講 能去聽嗎？
+21:01:11 <godfat1> 當然可以
+21:01:56 <Jhe__> 可視聽不懂＠＠
+21:02:11 <godfat1> 沒有說一定要聽懂才能聽呀 XD
+21:02:36 <letoh> 可以去放空體會 lazy 精神 (大誤
+21:03:44 <godfat1> 錄在大腦裡，要用時才開始回憶學習 XD
+21:05:40 <Jhe__> ＠＠
+21:05:54 <Jhe__> 大腦空間不足
+21:06:13 <godfat1> 只好用外部記憶裝置
+21:11:35 <letoh> 剛剛一開 ocaml-nagoya 的網頁就笑出來了... 他們在 3 月辦了「Functional花見2013」這種活動XD
+21:11:46 <letoh> 賞花跟 functional 有啥關係啊XD
+21:14:06 <godfat1> 用 functional programming 畫出各種自然花的圖案
+21:14:39 <letoh> godfat1: 喔喔喔喔!!! l-system 嗎XD
+21:15:14 <godfat1> 我只記得關鍵字是 context-free grammar, 查了一下果然是 l-system XD
+21:15:41 <letoh> 我記得有好幾套，但 l-system 比較有名，其他的忘了XD
+21:16:22 <godfat1> XDD 之前有看到一整本書在講，但忘記書名了..
+21:18:29 <letoh> godfat1: 你說的是 the algorithmic beauty of plants 嗎?  我的書單只有這本比較接近
+21:20:09 <godfat1> 看起來滿像的，不過好像沒看到印象中的圖案 XD
+21:20:24 <godfat1> 我翻翻看硬碟 XD
+21:20:44 <letoh> 好像有其他書  不過這本有開放 pdf，所以我的筆記只有這一本XD
+21:21:20 <godfat1> 喔喔，那很可能就是這本，因為我當時抓時也就是因為他有開放 pdf
+21:21:49 <letoh> 可是我抓完以後就放置了XD 根本沒看幾頁
+21:22:04 <godfat1> 我也是 XDDDD
+21:23:41 <letoh> http://algorithmicbotany.org/papers/#abop  整本書的檔案都在這，有興趣的人可以抓下來看看
+21:24:19 <godfat1> 找到了，十之八九就是 XD 可能是因為網頁改了，
+21:24:19 <godfat1> 所以當時印象中的圖就變了
+21:25:03 <letoh> 忘了網頁有沒有改過，我好像把網址整個抓出來以後就丟給 curl 慢慢抓了XD
+21:25:24 <godfat1> XD 我記得當時是有個直接連接到 pdf
+21:27:16 <letoh> 又看了一下真是有趣，但暫時還是先放置好了，不然本來在看的東西又要中斷了XD
+21:27:40 <godfat1> XDDDDD
+21:28:17 <letoh> 這也是 lazy XD
+21:29:36 <godfat1> 雷殛™
+21:30:50 <letoh> 為什麼還有™ XD
+21:31:28 <godfat1> Coming Soon™
+21:31:28 <godfat1> It works on my computer!™
+21:31:28 <godfat1> 等等 XD
+21:33:12 <letoh> http://en.wikipedia.org/wiki/WSFN_(programming_language)  去年看到這東西，所以順便整理一些 l-system 的資料
+21:33:50 <letoh> 台灣人發明的
+21:34:39 <godfat1> 沒有中文頁 ><
+21:34:39 <godfat1> http://en.wikipedia.org/wiki/Li-Chen_Wang
+21:34:47 <letoh> 不過這是很古老的小玩具了... 1977 年
+21:35:02 <letoh> 王博士應該是去年回台灣
+21:36:14 <letoh> "All Wrongs Reserved"  蠻有趣的
+21:36:22 <godfat1> 好像滿有趣的
+21:36:42 <letoh> 有點類似小海龜的 robot language
+21:37:00 <godfat1> 不過 WSFN 看起來難多了…. XD
+21:37:59 <letoh> Dr. Wang 比較有名的應該是 palo alto tiny basic  在一些老資料上看過，沒想到也是他的作品
+21:40:25 <letoh> 剛剛 google 到 http://blog.sina.com.cn/s/blog_4dd6d4750102eu9l.html  這篇文章有一些介紹
+21:41:48 <letoh> 去年他還有一個新的小玩具，我有拿到 source 但還沒研究
+21:46:24 <godfat1> 這麼神秘嗎？|||b
+21:46:24 <godfat1> >> 行者從網上找到一份「資料」，證實Li-Chen Wang就是王理瑱
+21:47:26 <godfat1> copyleft 第一人喔？ XDD
+21:47:30 <letoh> 應該是因為他很早就去美國發展，中文這邊的技術圈很少有介紹他的資料吧
+21:47:55 <godfat1> 看起來是這樣… XD
+21:48:32 <letoh> 看到的都是用英文名字發表的，很難找到中文名的對應，只好想辦法考證XD
+21:49:43 <godfat1> 看起來真的很厲害，期待能看到什麼成果~
+21:54:38 <letoh> 我去年想找 1976 的 dr. doobs journal，但找了半天沒看到掃描檔，完全沒人備份
+21:55:47 <godfat1> 唔唔，看來要去當時存在的幾個圖書館裡面找？ @_@
+21:56:52 <letoh> 應該吧，只有找到 source code 而已
+21:57:30 <letoh> 裡面的確是寫 ALL WRONGS RESERVED  (就只是為了看這個XD
+22:10:31 <godfat1> XDDDD
+22:12:59 <letoh> 朝聖是很重要的XD

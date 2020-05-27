@@ -1,0 +1,321 @@
+00:00:18 <petercommand> caasihuang: 是那個小山坡啦
+00:01:00 <caasihuang> 正在查 XD
+00:01:30 <caasihuang> matlab? http://www.mathworks.com/products/matlab/
+00:01:35 <CindyLinz> caasihuang: 這要怎麼查 @@" 截那一小塊下來 google image? @@"
+00:01:57 <caasihuang> 腦內 image match 然後 google QQ
+00:02:11 <petercommand> matlab
+00:02:19 <petercommand> 查到了XD
+00:02:33 <petercommand> CindyLinz: 對!XD
+00:04:53 <letoh> 左邊有隻蝴蝶蠻可愛的
+00:05:14 <petercommand> perl6
+00:06:47 <petercommand> au: 為甚麼會把lambda塞在java裏面呀XD
+00:33:02 <au> petercommand: 那是 java 8 的 project lamba 的圖
+00:33:27 <au> *lambda
+00:43:50 <CindyLinz> 這是一種褻瀆的概念! (逃
+00:46:37 <au> 這是一種這年頭說 functional programming (first-class closures) 已經沒什麼意義的概念
+00:46:56 <mno2> CindyLinz: 別這樣嘛。我印象中 Philip Wadler 有說過 Java 的 type system 是有 formal semantic 證明過的。應該沒幾個主流語言有這樣做過，人家也是很先進的。
+00:46:58 <au> 因為每個主流語言都是 functional programming language 了 (除了邊邊上的那四個)
+00:50:12 <CindyLinz> mno2: 你看那個圖啊~ # 23:55 < letoh> 看起來像 lambda 被綁起來燒....XD
+00:50:21 <whitglint> Rust 上榜！
+00:53:57 <au> whitglint: Rust 接下來連續三張都有上榜~
+00:54:04 <au> http://images.plurk.com/5nHIkzxQu5Y9xDYnZDtVRG.jpg http://images.plurk.com/4znTSQ9JUccWmzFJ3cR6aR.jpg http://images.plurk.com/1FJkFoBZay7p8vDj5QkMxl.jpg
+00:54:05 <whitglint> 結果 Rust 只被用來指出 R 左邊 R 右邊 XD
+00:55:05 <whitglint> au: 這是什麼簡報？好想看看
+00:55:25 <au> whitglint: 下周二的 FLOLAC 簡報，還在趕
+01:01:38 <CindyLinz> au++
+01:01:39 <petercommand> whitglint: 我以為是R programming langugage....
+01:02:08 <caasihuang> au++
+01:03:13 <caasihuang> whitglint: 演講可以旁聽耶，請見此表格： https://docs.google.com/forms/d/1Vvj0f_YubgDU7OebjrxRx3w5dAkzPVi_dPt5jUXcuqM/viewform
+01:05:05 <au> 有想過要加 R，可是要加 R 就要加 Julia... 畫面不夠大
+01:05:41 <au> #而且重點是兩個我都還沒學過XD
+01:07:08 <CindyLinz> 那半透明墊在背景當浮水印 XD
+01:07:42 <au> OK 我想想，先寫完別的部份再說 XD
+01:07:46 <letoh> 會不會明天就變學過了 (誤
+01:10:38 <CindyLinz> (Y)
+01:12:04 <whitglint> 函數程式設計的商業應用！
+01:13:56 <whitglint> 為了寫簡報順便把這些語言都摸熟了 :|
+01:33:58 <mathist> au: flolac 還可以旁聽嗎~~
+01:34:03 <mathist> 偷溜進去
+01:34:16 <mathist> 我們學校不承認暑假去外校修課的學分
+01:34:32 <mathist> 本來要報, 既然沒承認學分, 就不報了
+01:35:00 <au> mathist: 演講可以(填表就可以了)，課程部份我不清楚
+01:35:17 <mathist> 只聽演講會不會聽不懂
+01:35:46 <mathist> 阿 該睡了 ~
+01:38:42 <au> 演講應該是最容易懂的部份 #在應Cindy要求下修難度之後只剩講故事了
+01:50:31 <whitglint> au: 演講後簡報可以公開下載嗎？
+01:51:05 <CindyLinz> whitglint: 演講前可以 XD
+01:52:08 <au> whitglint: 演講前可以，而且連逐字稿 XD
+01:54:11 <whitglint> 逐字稿不是演講後？XD
+01:54:39 <au> whitglint: 現在規格都提高了 XD
+01:55:31 <petercommand> au: 背稿嗎?
+01:56:17 <petercommand> XD
+01:58:01 <au> petercommand: 對，因為文字播報的朋友屢次反應我講快太快無法記錄...
+01:58:12 <au> 只好自己的逐字稿自己打
+01:59:36 <whitglint> XD
+02:11:33 <whitglint> petercommand: 你不是要問逐字稿怎少了 haskell
+02:12:04 <whitglint> railsgirls 的逐字稿
+02:17:28 <au> 因為那段影片被剪亂了，導致有頭無尾
+02:17:55 <au> 前面問 Matz 說初學者用什麼語言最好，他說「用 Ruby，不然 Haskell 吧」這段沒錄到
+02:18:11 <au> 只錄了我接續的那段，逐字稿就略過了
+02:19:34 <au> 略過的那段中譯大約是: 我想對前面「用什麼語言來構建原型程式」這個問題多說一點點。我同意使用 Ruby 是非常快速的。如果你完全知道自己實際到底要做什麼，那就用 Haskell。可是如果你根本不知道自己要寫什麼，那就應該使用 Ruby。我是說真的。
+02:21:46 <whitglint> 一開始我知道要做什麼，做到最後我也不知道自己在做什麼了 # 誤
+02:31:58 <CindyLinz> whitglint: 先用 haskell, 然後到中期用 haskell 定出 ruby embeded language 嵌在 haskell 裡面, 到最後就寫 ruby 了...
+02:32:36 <CindyLinz> whitglint: 我是說假的... (逃)
+02:33:38 <au> CindyLinz: 被你猜到我的簡報了... http://images.plurk.com/4OTxUzchwcMqvMEBPJmkFm.jpg
+02:33:54 <au> 這樣說來幫 HsPerl 打廣告也是很合理的
+02:34:34 <CindyLinz> XDXD
+02:36:23 <CindyLinz> 被 au 凹成真的了...
+02:36:36 <whitglint> 弄假成真了
+02:36:56 <CindyLinz> 哎哎 ^^|
+02:40:44 <CindyLinz> au: 難怪你叫 au.. (逃)
+02:41:44 <au> lol
+07:48:19 <aksatac_> Flolac 兩場演講分別是幾點？
+10:51:33 <cibs> http://www.au.kddi.com/
+10:55:03 <cibs> aksatac_: http://flolac.iis.sinica.edu.tw/flolac14/ 有課表
+10:55:48 <cibs> 話說只有報 au 的 talk, 主辦單位都沒有回信 confirm, 好不踏實...orz
+11:16:23 <aksatac_> cibs++
+14:13:15 <petercommand> :t head
+14:13:16 <lambdabot> [a] -> a
+14:13:37 <petercommand> 原來這個也work
+14:28:51 <cibs> :i head
+14:28:58 <cibs> @info head
+14:28:59 <lambdabot> head
+14:50:50 <CindyLinz> lambdabot: 大大有說等於沒說啊...
+14:50:58 <CindyLinz> @src head
+14:50:58 <lambdabot> head (x:_) = x
+14:50:59 <lambdabot> head []    = undefined
+14:51:30 <CindyLinz> 我也希望 ghci 有查 source 的功能
+14:51:41 <CindyLinz> haddock 要翻 source 還是有點累
+14:52:02 <godfat> ghc reflection! hs2hs
+14:59:22 <caasihuang> > let cs xs = head xs:[x+c|x<-xs,c<-tail cs xs] in take 10 cs [1,1..]
+14:59:23 <lambdabot>  Couldn't match expected type ‘[t1] -> t’ with actual type ‘[a1]’Couldn't mat...
+14:59:24 <lambdabot>  Relevant bindings include
+14:59:24 <lambdabot>    x :: t2 (bound at <interactive>:1:26)
+14:59:24 <lambdabot>    xs :: [t2] (bound at <interactive>:1:8)
+14:59:24 <lambdabot>    cs :: [t2] -> [t2] (bound at <interactive>:1:5)Couldn't match expected typ...
+15:00:23 <caasihuang> > let cs xs = head xs:[x+c|x<-xs,c<-tail cs xs] in let rs = cs [1,1..] in take 10 rs
+15:00:24 <lambdabot>  Couldn't match expected type ‘[t] -> [t]’ with actual type ‘[a0]’
+15:00:24 <lambdabot>  Relevant bindings include
+15:00:24 <lambdabot>    x :: t (bound at <interactive>:1:26)
+15:00:24 <lambdabot>    xs :: [t] (bound at <interactive>:1:8)
+15:00:24 <lambdabot>    cs :: [t] -> [t] (bound at <interactive>:1:5)Couldn't match expected type ...
+15:01:13 <CindyLinz> caasihuang: 你這兩個 let, cs 和 rs 可以寫在同一個 let 裡面, 用分號隔開 ^^
+15:01:42 <caasihuang> CindyLinz: 喔喔，感謝，我先到 ghci 試試 XD
+15:01:48 <CindyLinz> cs 看起來不是 list
+15:01:54 <CindyLinz> tail cs xs 會壞
+15:02:06 <CindyLinz> 你可能要的是 tail (cs xs) ?
+15:04:50 <caasihuang> 昨天被大家鼓舞（？），想試的是這個：
+15:04:53 <caasihuang> > let cs xs = head xs:[x+c|x<-tail xs,c<-cs xs] in take 10 (cs [1,1..])
+15:04:55 <lambdabot>  [1,2,3,4,5,6,7,8,9,10]
+15:05:00 <caasihuang> 但是失敗了，
+15:05:06 <caasihuang> > let cs xs = head xs:[x+c|x<-tail xs,c<-cs xs] in take 10 (cs [1..])
+15:05:08 <lambdabot>  [1,3,5,7,9,11,13,15,17,19]
+15:05:31 <CindyLinz> 說著說著就成功了?
+15:05:36 <caasihuang> 想求 convolution ，不知到有沒有一行的辦法？
+15:06:03 <CindyLinz> caasihuang: 整個遞迴纏成一團?
+15:06:11 <caasihuang> 想要的是 [1, 3, 6, 10..]
+15:06:31 <caasihuang> CindyLinz: 你的巴斯卡三角轉四十五度的結果 XD
+15:07:19 <CindyLinz> caasihuang: 你可以手動展開一點算式嗎? XD
+15:07:36 <CindyLinz> caasihuang: 只看結果的話我們就用 N 次梯形公式了 XD
+15:07:41 <caasihuang> 好，我找個地方貼
+15:09:57 <CindyLinz> > let cs xs = head xs:[x+c|x<-tail xs,c<-cs xs] in cs (cs [1,1..])
+15:09:59 <lambdabot>  [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33,35,37,39,41,43,45,47,49,51,53...
+15:10:07 <CindyLinz> > let cs xs = head xs:[x+c|x<-tail xs,c<-cs xs] in cs (cs (cs [1,1..]))
+15:10:09 <lambdabot>  [1,4,7,10,13,16,19,22,25,28,31,34,37,40,43,46,49,52,55,58,61,64,67,70,73,76,...
+15:10:24 <caasihuang> 想噴出這個： https://gist.github.com/caasi/5e879bc31ea205a1dd63
+15:13:23 <CindyLinz> > let cs xs = [ a+b | a <- xs | b <- 0 : cs xs ] in take 10 $ cs $ cs [1,1..]
+15:13:25 <lambdabot>  [1,3,6,10,15,21,28,36,45,55]
+15:13:56 <caasihuang> CindyLinz++ 喔喔喔喔喔喔喔！
+15:14:17 <CindyLinz> , 和 | 的差別 XD
+15:14:34 <au> ParallelListComp++
+15:15:43 <caasihuang> au++
+15:21:36 <CindyLinz> 覺得用前端補 0 的方式來作 shift 一項比用 tail 好看的感覺
+15:21:51 <CindyLinz> > let fib = 1 : [ a+b | a <- 0 : fib | b <- fib ] in fib
+15:21:53 <lambdabot>  [1,1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181,6765,10946,17...
+15:23:24 <CindyLinz> > let fib = 1 : zipWith (+) fib (0:fib) in fib
+15:23:26 <lambdabot>  [1,1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181,6765,10946,17...
+15:24:11 <CindyLinz> 不過 fib 大家都知道是用前兩項來加, 所以如果不先放個兩項在最前面, 應該會比較難懂..
+15:27:16 <caasihuang> CindyLinz: 原來如此，補零寫起來的確清楚
+15:27:53 <caasihuang> > let cs xs = [ a+b | a <- xs | b <- 0 : cs xs ]; rss = [1,1..]:[cs xs | xs <- rss]; r = take 10 rss in [take 10 xs | xs <- r]
+15:27:54 <lambdabot>  [[1,1,1,1,1,1,1,1,1,1],[1,2,3,4,5,6,7,8,9,10],[1,3,6,10,15,21,28,36,45,55],[...
+15:28:30 <CindyLinz> 賀!
+15:28:52 <caasihuang> 用的是你的成果啊 XDD
+15:29:00 <au> > let fib@(1:etc) = 1:1:[ a+b | a <- fib | b <- etc ] in fib
+15:29:01 <lambdabot>  [1,1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181,6765,10946,17...
+15:29:15 <CindyLinz> @src iterate
+15:29:15 <lambdabot> iterate f x =  x : iterate f (f x)
+15:29:58 <caasihuang> 話說原來 ghci 要加 -XParallelListComp 才能用 | ，
+15:30:16 <caasihuang> 它竟然是自己發現，建議我加這個參數
+15:30:21 <CindyLinz> > let cs xs = [ a+b | a <- xs | b <- 0 : cs xs ]; rss = iterate cs [1,1..]; r = take 10 rss in [take 10 xs | xs <- r]
+15:30:23 <lambdabot>  [[1,1,1,1,1,1,1,1,1,1],[1,2,3,4,5,6,7,8,9,10],[1,3,6,10,15,21,28,36,45,55],[...
+15:30:35 <CindyLinz> caasihuang: XDD
+15:30:48 <caasihuang> 喔喔喔喔， iterate
+15:32:03 <CindyLinz> 覺得 list comprehension 是 point plenty style.. XD
+15:32:05 <caasihuang> au: @(1:etc) 這算 array destructing 嗎？
+15:32:37 <caasihuang> s/array/list/
+15:33:23 <whitglint> Haskell 是一門用來探討 Fibonacci sequence 的語言...
+15:34:24 <CindyLinz> 哼 來換一個!
+15:34:47 <CindyLinz> whitglint: 早就換了啊.. 我們在討論 pascal triangle 和 convolution 耶~~ XD
+15:35:20 <CindyLinz> caasihuang: 我不知道名字.. pattern alias?
+15:35:59 <CindyLinz> caasihuang: 所有的 pattern matching 的地方都可以用, 其實就是 @ 右邊的那個 pattern 去 match, @ 左邊幫右邊取一個名字, 以方便後用
+15:36:32 <b4283> may i ask what is convolution
+15:36:38 <caasihuang> 查到了： http://en.wikibooks.org/wiki/Haskell/Pattern_matching#As-patterns
+15:38:08 <caasihuang> b4283: 新的第 i 項，是舊的總和到 i 這樣子？
+15:38:10 <CindyLinz> b4283: 欸.. 其實我原本不知道這一個情況也叫 convolution.. (遮臉)
+15:38:57 <caasihuang> 對不起，我也不知道該不該叫 convolution ，從離散課本看來的（遮臉
+15:38:59 <CindyLinz> 我所知道的是兩個數列或兩個函數, 一條從正面一條從反面相加再加總或積分...
+15:39:16 <CindyLinz> 只是這次兩條都是同一個方向所以怪怪的 XD
+15:40:44 <CindyLinz> 例如說函數 f(x) 和 g(x) 的 convolution h(x) = 積分 t=(-∞,∞) (f(t)+g(x-t)) dt 這樣
+15:41:37 <CindyLinz> 中間的 + 改成 *
+15:42:26 <CindyLinz> 逐項(雖然是連續多項)相乘再積分加總, 是一個內積的概念
+15:43:48 <CindyLinz> 如果 h(x) 是 constant 0 的話, f(x) 和 g(x) 就是垂直(正交)的..
+16:04:05 <caasihuang> 發現 Mathematica 可以這樣做 ListConvolve[[1,3,6,10,15,21,28,36], [1,2,3,4,5,6,7,8], {1, -1}, 0];
+16:04:45 <caasihuang> 那個 {1, -1} 是變成兩條同方向 XD
+16:05:36 <CindyLinz> 所以離散版的 convolution 是可以同向的嗎?
+16:06:56 <caasihuang> 查到現在，似乎只有 Mathematica 有這個奇妙的功能
+16:10:37 <mathist> http://xahlee.info/UnixResource_dir/writ/currying.html
+16:10:48 <mathist> 插個話
+16:10:54 <mathist> 我覺得currying好討厭@_@
+16:11:51 <mathist> 像mathematica那樣的雙變數函數partial application寫法(網址裡面)又順手又直觀又數學
+16:13:29 <CindyLinz> 取捨嘍..
+16:15:22 <CindyLinz> mathist: 不過你是討厭哪個點? ^^|
+16:16:18 <au> mathist: http://livescript.net/#functions-partial 也不賴~
+16:16:37 <au> (livescript 同時有 partial application (underscore form) 和 currying (--> form)，需要時再用)
+16:17:10 <CindyLinz> 對 haskell 語法不滿意的話, 應該可以出一個 sweet haskell
+16:17:14 <au> haskell 的話用的是 section form
+16:17:23 <au> 只能處理雙變數
+16:17:26 <CindyLinz> 在 haskell 前面堆滿 syntax sugar... XDXD
+16:18:00 <CindyLinz> 覺得這名字不錯 XDD Sweet Haskell
+16:18:08 <au> 對啊, template haskell 多好用， http://www.haskell.org/haskellwiki/Template_Haskell#Select_from_a_tuple 這裡有一堆
+16:19:48 <CindyLinz> 就可惜自訂的 quotation 不能 nested @@"  7.8 以後好像系統的 [d| .. ] 那些可以了, 不知道自訂的行不行 @@"
+16:20:18 <au> 不行，要追 https://github.com/bmillwood/haskell-src-meta/issues/9
+16:20:39 <au> aavogt 最近修了，但還沒測的樣子
+16:20:59 <CindyLinz> 嗚.. 這 issue 停在快一年前 ._.
+16:21:17 <au> 上個月才有 code 啦
+16:21:23 <CindyLinz> 噢!
+16:21:28 <mathist> 喔喔
+16:22:02 <mathist> 也是啦 haskell可以用lambda寫出currying的東西
+16:22:28 <mathist> 變成等於是currying要不要用隨使用者 我就提供你這種權利
+16:22:33 <mathist> 講起來好像不是缺點~"~
+16:22:56 <mathist> *也是啦 haskell可以用lambda仿Mathematica的方式寫出currying的東西
+16:25:03 <au> \lambda the ultimate kitchen utensil/
+16:26:20 <petercommand> 為啥lambda是kitchen urensil XD
+16:26:24 <petercommand> 為啥lambda是kitchen utensil XD
+16:26:31 <au> petercommand: source: http://james-iry.blogspot.tw/2009/05/brief-incomplete-and-mostly-wrong.html
+16:26:49 <mathist> "CindiyLinz:  mathist: 不過你是討厭哪個點?"
+16:26:49 <mathist> CindyLinz:  我討厭learning you的作者在教currying之前沒有先教lambda...xd
+16:26:55 <petercommand> au: 恩 來看看
+16:27:11 <CindyLinz> .....||
+16:27:37 <au> petercommand: 這是在開 http://en.wikipedia.org/wiki/History_of_the_Scheme_programming_language#The_Lambda_Papers 的玩笑
+16:29:00 <au> 「嵐達萬能指令式」「嵐達萬能宣告式」「嵐達萬能跳轉式」「嵐達萬能指令集」「嵐達萬能廚房用具」
+16:29:24 <au> #只有最後一個paper名稱是開玩笑的前面都是真的
+16:30:19 <petercommand> 恩恩 那篇文好長阿XD
+16:31:37 <au> petercommand: 有簡體版 http://www.oschina.net/news/41233/brief-incomplete-and-mostly-wrong
+16:32:48 <petercommand> XD
+16:32:58 <mathist> au: LiveScript 我以前沒聽過 剛看了一下那網頁
+16:33:00 <mathist> 太扯了!
+16:33:23 <mathist> 若是熟悉函數式編程的是不是可以寫livescipt, 無痛轉入js領域 XDXD
+16:33:38 <mathist> 頂多可能不會用jQuery
+16:33:46 <au> mathist: 是的，反之亦然。這年頭我 80%+ 的 code 都是用 livescript 寫的 :p
+16:34:11 <petercommand> au: 那兩篇都是笑話:p
+16:34:38 <au> 對 :p
+16:37:50 <mathist> au: 太扯了!!  我幾年前半調子學過js, 書有點看不太懂, 就放棄了
+16:38:10 <mathist> 我那時也覺得 js有些語法怪怪的 不太雅觀
+16:38:28 <mathist> livescript官網的幾個example一看  太優雅了啊!!
+16:38:45 <au> 「JS: 只取優良部份」
+16:39:32 <au> 歡迎跳坑學 livescript，想必不久之後就要把你推到隔壁 #g0v.tw 鍵盤拆政府了 XDD
+16:39:59 <caasihuang> mathist: add = (a) -> (b) -> a + b; console.log (add 1) 2 # 來亂的
+16:40:16 <caasihuang> mathist: 快來拆政府 XD
+16:40:19 <mathist> cassihuang: ?_?
+16:40:29 <CindyLinz> livescript 只能照 example 有列的才寫, 千萬不能組合著寫.....
+16:40:35 <mathist> = =?
+16:40:56 <mathist> 喔喔 你說會compile出亂七八糟的東西來嗎XD
+16:41:30 <mathist> au: 那你jQuery的部分是硬著用嗎?
+16:41:33 <caasihuang> mathist: 只是想說 ls 也可以手寫 currying
+16:41:35 <CindyLinz> mathist: 會寫出 livescript interpreter/compiler 覺得很明確, 但是人類覺得有無窮可能的東西...
+16:41:35 <au> (add = (a, b) --> a + b); console.log (add 1)(2)
+16:41:38 <au> (add = (+)); console.log (add 1)(2)
+16:41:46 <mathist> 還是說jQuery的語法畢竟經過設計, 比js單純簡單許多, 不會太困擾
+16:42:15 <mathist> 所以直接用jquery的方法寫jquery, 不透過livescript二手轉換
+16:42:19 <au> mathist: 是的。然後現在可以跳過 jquery 直奔 angular (& angularFire, goAngular, famous-angular... etc)
+16:42:36 <au> 所以就一切都是宣告式的，再也沒有命令式的了
+16:42:52 <au> #符合數學學者的品味
+16:42:55 <CindyLinz> 例如 (f && g) -[1 2] 會生出 f([-1, -2]) && g([- -1, - -2]);
+16:43:20 <au> CindyLinz 從很久之前就對 livescript 的策略性空白的用法印象深刻
+16:43:23 <au> XD
+16:43:29 <au> (還有策略性的問號用法)
+16:43:36 <CindyLinz> au: 你覺得後面的 - -1 沒意見嗎? @_@"
+16:43:54 <CindyLinz> 而 (f && g)-[1 2] 會生出 (f && g) - [1, 2];
+16:44:16 <au> CindyLinz: prefix unary op distributive...
+16:44:25 <au> (try (f && g && h) -[1 2 3])
+16:44:58 <au> #我是覺得可以算是 bug 啦
+16:45:04 <CindyLinz> 為什麼不是 f([-1, -2]) && g([-1, -2]) @@
+16:45:30 <au> 因為
+16:45:30 <au> $ lsc -bcep ' (x && y) (f && g) [1 2]'
+16:45:31 <au> x(f([1, 2]) && g([1, 2])) && y(f([1, 2]) && g([1, 2]));
+16:45:42 <au> 但是 unary minus 要不要算在 distribution 裡可以討論
+16:46:16 <au> 它現在等於是同時 literal apply 了一層，又 unary distribute 了一層
+16:46:27 <au> 所以應該算是 bug
+16:46:40 <CindyLinz> 說是 bug 突然覺得舒坦許多... ww
+16:47:44 <whitglint> 感受到頗深的怨念
+16:47:58 <CindyLinz> 不過如果都乖乖只照 example 抄, 每一種寫法都獨立各用各的, 不要組成連續技就會好很多....
+16:48:46 <CindyLinz> 可是我的個性就愛連續技... QQ
+16:49:27 <au> 我剛學 haskell 的時候也有這個感覺... 一星期之後學了 template haskell 就舒坦了
+16:49:30 <au> 2005-01-05 17:31:57 <autrijus> what do I do with a compiler with exploding brains?
+16:49:57 <mathist> template haskell 又是什麼
+16:50:06 <mathist> haskell + some library?
+16:50:15 <CindyLinz> mathist: 用程式寫 haskell
+16:50:17 <au> mathist: 就是 macro，haskell 的內建的自定語法方式
+16:50:29 <au> cf. https://www.fpcomplete.com/user/marcin/template-haskell-101 https://www.fpcomplete.com/user/marcin/quasiquotation-101
+16:53:04 <CindyLinz> whitglint: 當初知道喜歡 Haskell 的 au 喜歡 livescript, 可是讓我難過了好一陣子..
+16:53:12 <CindyLinz> 不對, 是難過到現在 XD
+16:53:41 <whitglint> CindyLinz: 之前我也以為你喜歡 livescript 呀 XD
+16:53:57 <CindyLinz> whitglint: 還說呢~ 我們都知道你喜歡 javascript 了! (逃)
+16:54:11 <whitglint> 就知道會來這招~
+16:54:15 <au> livescript 裡面 coco 的部份已經在慢慢抽掉了...
+16:54:26 <au> 到 ls2 時 CindyLinz 一定就不會難過了!
+16:54:32 <CindyLinz> whitglint: 我中計了 ><
+16:54:56 <CindyLinz> au: 我會丟掉成見重新看的!
+16:55:05 <caasihuang> whitglint: 愛之深責之切
+16:55:21 <whitglint> CindyLinz: 我不會丟掉成見重新看 javascript 的!
+16:55:22 <CindyLinz> au: 我沒接觸過 coco, 嗯, 所以我也不知道現在 livescript 裡面哪些是 coco 的影子就是 :|
+16:55:38 <CindyLinz> whitglint: javascript 也不會丟掉包袱的 XD
+16:56:23 <au> CindyLinz: https://github.com/satyr/coco/wiki/additions
+16:56:39 <au> 你念茲在茲的 unary spread 就在裡面
+16:56:57 <whitglint> javascript 丟掉包袱就剩下註解語法了
+16:57:39 <CindyLinz> au: 不能這樣啦.. XD  我討厭的不是哪一個 feature, 而是這一堆 feature 通通加在一起的時候沒有整體設計
+16:57:45 <au> coco 等於是把 perl6 的語法層能抄的全部抄了
+16:57:50 <au> 但是沒有整體設計
+16:58:04 <au> livescript 用 haskell 的想法重新整理過一遍
+16:58:07 <CindyLinz> 能抄的全部抄.......||
+16:58:10 <au> 但是有很多漏的
+16:59:02 <au> 對啊，satyr 看 spec 看得超細，連 unspacing 這種支微末節都不放過
+16:59:29 <CindyLinz> 漏的好.. 我比較能接受 in-complete, 比較不能接受 in-consistent... Q_Q
+16:59:37 <au> yeah
+17:18:39 <cibs> in-complete 藏著希望，in-consistent 令人絕望
+17:20:43 <petercommand> 完全沒錯XD
+18:16:24 <CindyLinz> cibs: XD
+22:32:36 <CindyLinz> > let a = a + 1 in a
+22:32:40 <lambdabot>  mueval-core: Time limit exceeded
+23:04:25 <CindyLinz> @src foldl
+23:04:25 <lambdabot> foldl f z []     = z
+23:04:26 <lambdabot> foldl f z (x:xs) = foldl f (f z x) xs
+23:04:27 <CindyLinz> @src foldl'
+23:04:27 <lambdabot> foldl' f a []     = a
+23:04:28 <lambdabot> foldl' f a (x:xs) = let a' = f a x in a' `seq` foldl' f a' xs
+23:04:56 <CindyLinz> 這個 `seq` 就是說它要先確認它左邊有值, 才去走右邊
+23:05:05 <CindyLinz> 左邊就是這個 a'
+23:28:22 <petercommand> > foldl` (+) 0 [1..10000000]
+23:28:23 <lambdabot>  <hint>:1:8: parse error on input ‘(’
+23:28:35 <petercommand> > foldl' (+) 0 [1..10000000]
+23:28:38 <lambdabot>  50000005000000
+23:28:55 <petercommand> > foldl (+) 0 [1..10000000]
+23:28:59 <lambdabot>  mueval-core: Time limit exceeded
+23:37:25 <petercommand> 看了au之前的一個演講，竟然用日文簡報搭配英文演講XD
+23:43:13 <au> ppencode?
+23:44:31 <petercommand> au: http://www.youtube.com/watch?v=aqM36cwcZOQ 這一個
+23:45:37 <au> 對，因為在東京，所以請宮川直接翻成日文了
+23:47:12 <au> 之前周遊列國的時候到哪邊就請朋友把 Pugs.hs 的開頭詩翻成那國語言...
+23:47:15 <au> # http://svn.openfoundry.org/pugs/docs/other/earendil_translations
+23:48:31 <petercommand> XDD
+23:49:31 <petercommand> 要翻譯也不容易阿= =

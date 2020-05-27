@@ -1,0 +1,20 @@
+12:02:18 <suhorngM_> 突然想到XD 沒有多型的話, 只要有 match _ with (或 case _ of) 好像可以取代 let..in
+12:03:48 <monochrom> 用 lambda 也行. (let x = 5+5 in x*x) = (\x -> x*x) (5+5)
+12:07:34 <suhorngM_> lambda 沒辦法表達 pattern matching, 要另外編碼的說
+12:07:51 <suhorngM_> 喔 我有想過直接把 let 轉成 lambda XD
+12:08:08 <suhorngM_> 但是好像 let 都有支援 pattern matching
+12:08:36 <monochrom> > let x:xs = "hello" in x
+12:08:38 <lambdabot>  'h'
+12:08:44 <suhorngM_> 嗯嗯
+12:10:26 <mno2_> 這叫 smart let，簡寫成 lets  (誤)
+13:30:17 <mno2_> https://twitter.com/headinthebox/status/473565502535507968 原來 Eric Meijer 不喜歡 ADT
+13:42:58 <petercommand> >let x = y y in x x
+13:43:06 <petercommand> > let x = y y in x x
+13:43:08 <lambdabot>  Couldn't match expected type ‘Debug.SimpleReflect.Expr.Expr -> t1’
+13:43:08 <lambdabot>              with actual type ‘Debug.SimpleReflect.Expr.Expr’
+13:43:08 <lambdabot>  Relevant bindings include x :: t1 (bound at <interactive>:1:5)
+13:47:26 <petercommand> > let a = \x -> x in (a True, a 0)
+13:47:27 <lambdabot>  (True,0)
+13:48:40 <petercommand> > (\a -> (a True, a 0)) (\x -> x)
+13:48:41 <lambdabot>  No instance for (GHC.Num.Num GHC.Types.Bool)
+13:48:42 <lambdabot>    arising from the literal ‘0’

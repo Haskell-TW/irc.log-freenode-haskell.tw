@@ -1,0 +1,4 @@
+01:55:02 <monochrom> suhorngM_: 就是這個原因
+14:36:09 <suhorngM_> 最近對定理證明有點困惑, 用 dependent type system 的最大優點/目的是什麼? Curry-Howard correspondence 給我們很多東西嗎? (像 HoTT 給的更深入的看法?)
+14:40:54 <suhorngM_> 如果我們只是要檢查每一步等式代換或邏輯推論規則都用的正確, 直接寫程式檢查就夠了; 各式各樣的 theorem prover 裡面基於 dependent type system 佔的比例也不多
+14:44:23 <suhorngM_> 正在讀的 The Little Prover 裡面寫的東西幾乎基於 ACL2, 除去掉 induction 的部份用起來感覺很像 equational reasoning

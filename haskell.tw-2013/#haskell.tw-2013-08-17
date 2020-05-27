@@ -1,0 +1,204 @@
+12:15:59 <Yu-Lin> 話說搜尋時發現 sml 的中文資料比 haskell 少非常多
+12:16:44 <hychen> sml比較少人寫吧?
+12:24:01 <favonia> Yu-Lin: 快去開個 sml.tw (誤)
+12:24:20 <favonia> （...其實 sml 頻道本身就很少人了（哭））
+12:25:36 <Yu-Lin> Orz|||
+12:26:14 <Yu-Lin> 其實我對昨天有提到 sml 有比較多乾淨的理論這點蠻有興趣的
+12:26:33 <Yu-Lin> 雖然看不看的懂又是一回事XD
+12:32:55 <b4283> !!
+12:33:02 <b4283> 剛剛發現 mlton-20130715
+12:37:21 <b4283> 不過 source 檔真夠大的... 24 MB
+12:39:41 <suhorng> "Javascript 是 Lisp 裝成 C 的樣子" 驚訝, 原來這不是講師自己說的... (上次 Python, Golang, ....那個)
+12:41:24 <suhorng> http://www.quora.com/Programming-Languages/Why-did-they-say-JavaScript-is-Lisp-in-Cs-clothing
+12:42:04 <suhorng> 要登入才看得到回答= =+
+14:43:08 <letoh> sml 很棒啊  然後我覺得 ocaml 的語法實在太複雜了點XD
+14:43:20 <letoh> f# 好像有繼承到這一點XD
+14:49:18 <CindyLinz> .Net 系的都很複雜啊.. 可能要牽就一堆既有 lib 的共通性吧
+14:49:50 <letoh> 我是說語法本身耶  還沒到 .net lib
+14:50:18 <hychen> f#還沒看過
+14:50:27 <hychen> 不過sml滿簡潔的
+14:50:50 <CindyLinz> letoh: 語法不調整的話有些 lib 會變得很難用呀 :Q
+14:51:09 <letoh> 語法看起來其實就跟 ocaml 非常像，沒在 windows 上開發的話可以不用特別去看
+14:51:54 <letoh> 嗯  這點還沒感覺  等多寫一點程式再觀察看看好了@_@
+14:52:41 <CindyLinz> mno2: 過了一段時間再回來看 tmonad, 覺得已經跟不上了..  makeLenses, Conduit 都好有距離感 orz
+17:43:51 <Yu-Lin> 最遙遠的距離
+17:48:23 <Yu-Lin> 我終於知道怎麼用 hime 打出 ┴ 這個符號了Orz
+17:48:36 <letoh> 那是表格符號吧
+17:54:13 <Yu-Lin> 對阿，總算知道這怎麼打了
+17:58:04 <CindyLinz> 那.. ⊥ ?
+17:59:15 <hashcat> 可能也是表格符號
+17:59:54 <hashcat> 確定不是要找bottom? 這年頭找表格符號要作啥
+18:01:55 <CindyLinz> 我貼的這個應該是 bottom 呀
+18:02:38 <letoh> http://www.unicodemap.org/details/0x22A5/index.html
+18:02:54 <letoh> 不是表格
+18:03:43 <letoh> 0x2200 - 0x22FF : Mathematical Operators
+18:12:46 <petercommand> 從來沒看過的math operator XD
+18:14:27 <letoh> bottom 在這邊應該很常出現XD
+19:32:26 <favonia> Yu-Lin, CindyLinz: 似乎在這個版上... bottom 比表格符號更切題 xDDD
+19:32:28 <favonia> > 1 + 1
+19:32:30 <lambdabot>   2
+19:33:34 <hashcat> > ⊥
+19:33:35 <lambdabot>   <hint>:1:1: parse error on input `⊥'
+19:34:49 <petercommand> > 1 ⊥ 1
+19:34:50 <lambdabot>   Not in scope: `⊥'
+19:40:56 <favonia> > "⊥"
+19:40:57 <lambdabot>   "\8869"
+19:42:09 <petercommand> > '⊥'
+19:42:11 <lambdabot>   '\8869'
+19:44:32 <favonia> "_|_"
+19:44:35 <favonia> > "_|_"
+19:44:36 <lambdabot>   "_|_"
+19:44:39 <favonia> 耶
+19:44:45 <favonia> 總算顯示出來了
+19:48:30 <petercommand> > "_|_"
+19:48:31 <lambdabot>   "_|_"
+19:48:34 <petercommand> favonia: XDD
+19:48:40 <petercommand> > "|"
+19:48:41 <lambdabot>   "|"
+19:48:53 <petercommand> > '|⊥|'
+19:48:54 <lambdabot>   <hint>:1:2: parse error on input `|⊥|'
+20:26:54 <Yu-Lin> 忘了在那邊看到 http://cyukang.com/2011/03/03/ood_for_wife.html
+20:27:19 <Yu-Lin> 良好的 FP 程式似乎自動符合那五個原則？XD
+20:29:33 <CindyLinz> 我星期五的時候跟同事講一些寫乾淨程式的原則, 然後我說, 如果我們用 FP, 那麼我們就會傾向很自然地寫出乾淨的程式
+20:30:17 <letoh> FP 可以自動滿足 DIP 嗎?
+20:30:24 <CindyLinz> 問題是, 就會不方便寫不乾淨的程式... 如果我們被 PM 追殺, 給了亂七八糟的 spec, 想要寫不乾淨的程式的時候.. 就會被 FP 夾殺.. 後有 PM, 前有 FP....
+20:30:39 <letoh> 中肯XD
+20:31:37 <favonia> CindyLinz: 這是謎題嗎？答案是 FPM 對不對
+20:31:47 <favonia> CindyLinz: P = Programmers
+20:31:49 <CindyLinz> 啊??
+20:31:55 <CindyLinz> ............||
+20:32:11 <Yu-Lin> 可以偷偷跟我講那些原則嗎？XD
+20:33:45 <favonia> letoh: 「模組」可以符合
+20:34:20 <letoh> 嗯嗯
+20:34:24 <favonia> letoh: 我覺得以這個目的來說 OOP 的繼承其實比較差...
+20:34:33 <favonia> 常見 OOP 的繼承
+20:35:13 <letoh> 我剛剛在想  這種說法到底是想說 FP 優勢在哪? 是語言特性  還是說設計方面的思考
+20:35:33 <CindyLinz> Yu-Lin: 我們是在看這本書啦: Clean Code - A Handbook of Agile Software Craftsmanship
+20:35:37 <CindyLinz> by Martin
+20:36:00 <letoh> 通常講「用了 A 就可以有 B 的效果」  這種話一般在公司都是當笑話聽的吧?
+20:36:05 <favonia> letoh: FP 的定義很混亂啊 orz
+20:36:42 <letoh> 主管：東西不交出來還講一堆廢話
+20:37:44 <favonia> letoh: 這個問題比較像是... 如果引擎和其他部份是不同人設計的，那設計引擎的人沒辦法「強制性的」透過程式語言本身來把封裝徹底包好。
+20:37:48 <letoh> 例如以前就是常聽到「這個地方就是要用 OO 啦」或是「這邊套一下 XX patten 就可以 YY」
+20:38:23 <favonia> letoh: 你可能可以透過奇妙的 programming style 來規定
+20:38:52 <favonia> letoh: 不過 programming style 推到極端，用組語和 Haskell 也就沒什麼差別了
+20:38:56 <letoh> 但這樣其實跟 FP 的關係就沒那麼大了?
+20:38:58 <hashcat> 為啥依賴倒置叫做依賴倒置
+20:39:07 <letoh> 變成人為的約定
+20:39:27 <letoh> 就把依賴方向反轉過來
+20:39:34 <favonia> letoh: 所以我講的是程式語言本身能不能表達---一般的 OOP 沒辦法只透過程式語言內的機制強制規定這件事情。
+20:40:25 <CindyLinz> 我覺得 FP 的思考方向比較接近人類理解問題的方式, 所以在 FP 裡面比較直接的寫法比較接近好維護的程式
+20:40:35 <hashcat> letoh: ??
+20:40:41 <letoh> 這我明白，不過我覺得那只是要做多少苦工的差別而已，有些設計方式用 FP 語言可能比較輕鬆一點
+20:40:52 <favonia> letoh: 這方面 Standard ML 遠勝 Haskell orz
+20:41:00 <letoh> 苦工就像用 C 實作一套繼承機制那樣XD
+20:41:09 <CindyLinz> 而我在讀那些如何寫乾淨程式的建議的書, 常常我會覺得它在教我們在一般其他語言裡面模擬 FP 的寫法, 來達到好維護的效果
+20:41:42 <CindyLinz> 我們用的語言對我們的思考有強烈的引導性
+20:41:51 <hashcat> CindyLinz: FP有數學背景, 數學有定義明確, 單一且可操作的傳統
+20:42:23 <CindyLinz> 如果語言不引導我們寫乾淨, 我們就只好用比較多的外力, 約束夥伴要怎麼去寫, 哪些寫法盡量避免等等
+20:42:27 <letoh> hashcat: 就是一般常常會針對實作細節來做設計  但 DIP 建議針對界面來做設計
+20:42:35 <favonia> hashcat: 也有人為 OO 建立數學背景啦...
+20:42:39 <CindyLinz> 欸不過.. DIP 是指什麼? @_@"
+20:42:44 <Yu-Lin> 因為 sml 沒有 monad 所以苦工比 haskell 少嗎？XD
+20:43:11 <letoh> 就 hashcat 說的依賴倒置XD
+20:43:20 <favonia> Yu-Lin: 不是。是因為 Standard ML 有 Haskell 中比較虛或是沒有的 module 語法
+20:43:25 <CindyLinz> 只是我看到同事(比較用心的同事), 偶爾會興奮地說: 啊! 這個地方用 OO 可以怎樣怎樣
+20:43:27 <hashcat> favonia: FP實現以前他的理論就完成了
+20:43:53 <letoh> sml 的 module 我還蠻喜歡的
+20:44:03 <favonia> hashcat: 追加也算吧 xD
+20:44:10 <CindyLinz> 可是他用到的並不是 OO.. 只是剛好 OO 寫法裡面某個其他思維也有的特性.. 例如說 OO design pattern 裡面的 delegation pattern
+20:44:10 <favonia> hashcat: 不然那些人不就哭哭了
+20:44:26 <hashcat> 數學嚴格的一致性, 無矛盾, 定義的原則都直接被FP繼承
+20:44:52 <favonia> Yu-Lin: 這個我覺得你有空學一學就可以體會到。
+20:44:58 <hashcat> OO是先反過來, 先有這東西, 才開始精煉嚴格
+20:45:01 <CindyLinz> 就像是, 他想用履帶, 所以很高興地製造一台戰車來用...
+20:45:13 <letoh> OO 是從實際需求來的吧
+20:45:26 <CindyLinz> 但是他只是要用履帶, 其實用不到戰車的
+20:45:42 <letoh> 東西要先能做出來啊，誰在管理論/數學模型XD
+20:46:10 <hashcat> letoh:出來講 XD
+20:46:27 <letoh> ??
+20:46:41 <favonia> Yu-Lin: 你可以清楚的表達「介面」，甚至可以選擇把一個實作用某個介面封起來，其他人只能透過你指定的介面存取。
+20:46:49 <CindyLinz> 或是.. 有時候他想要用鋼製的水管.. 所以, 也高興地說: 耶! 可以做一台戰車, 然後拿它的炮管來接水用.... wwww
+20:46:53 <letoh> 聽起來像是出來釘孤枝之類的宣言? XD
+20:47:25 <favonia> Yu-Lin: 我說「封起來」就是... 程式語言中沒有任何方法可以破壞那個封裝了...
+20:47:56 <Yu-Lin> favonia: 也就是說不能再修改那段程式嗎？
+20:48:07 <favonia> Yu-Lin: 不是。我舉個例子
+20:48:17 <favonia> 例如你先定義好什麼叫作 queue
+20:48:33 <favonia> 然後你用 tree 實作 queue
+20:49:31 <favonia> 你可能在實作時順便實作了其他東西 像是把整棵樹印出來啦 數個數啦 之類的來 debug
+20:49:47 <favonia> 或是一些 helper function 來減少重複的程式碼
+20:50:02 <favonia> 你可以把實作包成一個很大的 structure
+20:50:25 <favonia> 之前關於 queue 的定義則是用 signature 表示
+20:50:37 <favonia> 現在你有兩種寫法
+20:51:19 <favonia> 一種是你用 queue 這個 signature 封死。所有 signature 沒寫的東西從此以後就沒人知道了。
+20:51:39 <favonia> 例如如果 queue 沒有寫說底層是 tree
+20:51:54 <favonia> 只是說有個抽象的型態 t 代表底下的資料結構
+20:52:12 <favonia> 那別人永遠也不能知道 t 到底是什麼...
+20:52:43 <letoh> 就像給個 FILE * 但不曉得長什麼樣子? 可以這樣說嗎?
+20:52:57 <favonia> letoh: 對。而且語言內沒有任何惡搞方法 xD
+20:53:11 <favonia> 另外一種是，你只是「檢查」你的實作有沒有符合 queue
+20:53:33 <favonia> 剩下那些多出來的東西還是可以存取
+20:55:26 <favonia> 如果都用第一種的話... 那個 DIP 就變成是廢話 xDDD
+20:56:05 <letoh> 我換個角度來說 DIP 好了  算實例吧
+20:57:36 <letoh> 像我們以前常常專案要找個儲存裝置，要考慮用 flash 或 eeprom，但這兩種東西的存取方式常常差很多，實際寫 code 的人就會在用 flash 的時候寫一套，用 eeprom 時寫一套
+20:58:18 <letoh> driver 完全長得不一樣 (操作方式/api 界面)，導致 app 的寫法也得改
+20:59:15 <letoh> 要用 DIP 的方式就是改成先把「操作儲存裝置」的行為和界面先設計出來
+20:59:35 <letoh> 但老實說這個觀念說了很久還是很難被接受XD
+20:59:59 <favonia> 這在 Standard ML 中變成理所當然的事情... lol lol
+21:00:03 <letoh> 可能因為依賴細節比較自然?
+21:00:07 <hashcat> 就haskell來說就是先設計typeclass跟typeclass之間關係吧
+21:00:24 <CindyLinz> letoh: 很難被接受嗎? 網頁設計公司常常都是先畫版型給客戶選啊 XDD
+21:00:26 <letoh> 要改成先去思考象界面來設計，反而是需要特別訓練過才辦得到的事
+21:01:12 <letoh> CindyLinz: 會有問題喔  例如網頁想呈現在什麼媒體上? 不同版面就會有不同效果  也有適用性的問題
+21:01:31 <favonia> hashcat: 有點像。但 typeclass 除了可能比較方便以外，表達能力其實比較虛。也有人想要在 Standard ML 上加上這種「由 type 自動選 module」的機制。
+21:01:36 <letoh> 所以會變成說  要做個手機網頁  那就先朝手機網頁的 layout 來思考
+21:02:32 <CindyLinz> letoh: 但是順序的確是你講的這樣呀.. 畫版型的時候沒在管苦命工程師要怎麼實作, 客戶點頭說好了以後, 工程師才開始為各種平台加班..... orz
+21:02:45 <letoh> XDXD
+21:03:28 <Yu-Lin> XDDD
+21:03:41 <letoh> 如果要拉到那個層級來說  其實我們也是這樣  例如那個專案，對客戶開的規格就是「某些記錄可以保存下來」  也算 DIP 吧orz
+21:04:23 <letoh> 所以 DIP 其實是 PM 在用的? XD
+21:04:28 <CindyLinz> 但是跟標準 DIP 還是有個差距.. 就是這邊的規格是浮動的.... highly unstable... XD
+21:05:31 <Yu-Lin> 回頭看了一下 CindyLinz 的戰車論，還蠻有趣的XD
+21:05:57 <CindyLinz> letoh: 我覺得 DIP 和 favonia 講的東西沒有衝突欸, favonia 講的是個在工程上比較低階的工具, 也是可以應用在 DIP 作法的
+21:06:19 <letoh> 沒有衝突啊  我只是換個例子講而已
+21:06:19 <CindyLinz> 應用在 DIP 的時候, signature 由 application 端來定
+21:06:34 <letoh> 那種方法就是 DIP 想達到的目標沒錯
+21:06:41 <letoh> sig 那種方法就是 DIP 想達到的目標沒錯
+21:07:17 <CindyLinz> 這兩句連著看像是反駁嘛XDD # 20:55 < favonia> 如果都用第一種的話... 那個 DIP 就變成是廢話 xDDD # 20:56 < letoh> 我換個角度來說 DIP 好了  算實例吧
+21:07:30 <CindyLinz> Yu-Lin: :p
+21:07:39 <hashcat> DIP讓我想到當兵了
+21:07:56 <letoh> 或者說  用 DIP 努力協調團隊內的開發方式  其實一個 sig 就做到了XD
+21:08:40 <hashcat> 將軍先做戰略規劃, 軍士官喬好戰術, 小兵實作演練
+21:09:07 <hashcat> 長官:不管你怎麼做, 反正就是要這樣子
+21:09:39 <letoh> DIP 之生活實踐XD
+21:09:42 <CindyLinz> 想到洪仲丘... orz
+21:12:00 <hashcat> 總統就像在操作Interface
+21:16:06 <Yu-Lin> 各國就像不同公司
+21:16:37 <hashcat> CindyLinz: 設計有bug
+21:23:38 <Yu-Lin> hashcat: 你前面提到的「FP實現以前他的理論就完成了」是指什麼？
+21:28:19 <Yu-Lin> 阿阿，我懂了
+21:36:12 <Yu-Lin> 說到 sml，實作間的差異有像 scheme 或 cl 那樣大嗎？
+21:42:10 <b4283> Yu-Lin: 應該說 scheme 的 guile 和 chicken ...
+21:43:19 <Yu-Lin> 對....
+22:34:59 <hashcat> Yu-Lin: lambda calculus 跟 type theory
+23:45:20 <suhorng> 好可怕orz 用了 OverlappingInstances 這個 extensinon 卻完全不知道為什麼程式能動
+23:49:27 <suhorng> https://gist.github.com/suhorng/6257537
+23:49:30 <hashcat> 啥嚜狀況
+23:50:02 <suhorng> 主要的 code 是 data Union r v 以及 instance Member t r 這兩個
+23:50:11 <suhorng> 目標是
+23:50:35 <suhorng> 寫出資料型別 Union r v 讓我們可以有 Union (t1 :> t2 :> ... :> tn :> Void) r 這種型別
+23:50:46 <suhorng> 並且可以有 inj, prj, decomp 這三個函數
+23:51:20 <suhorng> 等於是我可以用 Union r v 的 r 這個 type variable 來限定我這個 disjoint union 裡面允許出現哪些 type
+23:52:28 <suhorng> 並且 inj 類比 data constructor, prj 及 decomp 類比 pattern matching 比較是不是由某個 constructor 建立的
+23:53:14 <hashcat> Member instance 有重複定義
+23:53:28 <suhorng> 對
+23:53:29 <hashcat> 應該調整Context
+23:53:40 <suhorng> 還想不到QQ
+23:53:55 <suhorng> 只要 t' = t 就重複了...
+23:56:25 <suhorng> 喔, 然後如果 t1 :> t2 :> ... :> tn :> Void 中有重複的話是希望 decomp 可以被最頂層的抓到...
+23:57:05 <CindyLinz> 我以前也有用過 OverlappingInstances
+23:57:19 <CindyLinz> 感覺開心 XD
+23:57:57 <suhorng> 可是怎麼選 Instance 感覺很不明... (GHC document)
+23:58:36 <suhorng> 這份code尤其我不懂怎麼有辦法選到正確的那個 囧
+23:59:45 <CindyLinz> 唔.. 不就... 重複的時候選「最嚴」的那個嗎?
+23:59:47 <hashcat> 我覺得第一個定義根本不該存在

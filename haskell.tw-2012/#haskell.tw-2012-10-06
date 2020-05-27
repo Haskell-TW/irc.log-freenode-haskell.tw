@@ -1,0 +1,39 @@
+23:26:43 <MnO2> 哇今天快過完了還沒有說話
+23:26:59 <MnO2> 問個問題好了
+23:27:57 <MnO2> CindyLinz: 如果想要像svn或git那樣有subcommand的話，也就是svn co, git clone那樣有第二個指令的話，Perl用什麽package比較好？App::Cmd?
+23:28:57 <letoh> python 的話有現成的  perl 好久沒寫了XD
+23:29:09 <MnO2> python應該是argparse?
+23:29:39 <letoh> 嗯
+23:31:09 <MnO2> http://code.google.com/p/grass-mud-horse/  從jserv那看來的，大家來寫草泥馬語!
+23:31:47 <letoh> 這好像出來蠻久了
+23:32:09 <MnO2> 對啊，但之前不知道，我之前只知道丙正正之類的東西
+23:32:26 <letoh> 丙正正是古老的歷史了吧XD
+23:33:23 <letoh> 那 grass 有聽過嗎? (每次提到 esoteric language 都要推一次XD)
+23:33:47 <MnO2> 不知道
+23:34:02 <letoh> http://www.blue.sky.or.jp/grass/
+23:35:21 <MnO2> 蠻可愛的xD
+23:35:39 <letoh> 還不錯.. 還可以實作 Y XD
+23:36:11 <letoh> 沒有研究就是了  只是看到就想笑XD
+23:37:34 <MnO2> 之前也看過顏文字是合法的Javascript的
+23:39:21 <letoh> 這樣寫起來好像會變得很歡樂XD
+23:51:12 <CindyLinz> MnO2: 我沒有做過這樣的事, 沒辦法給建議 @_@"
+23:51:43 <MnO2> CindyLinz: 好吧@@ Thanks
+23:52:39 <CindyLinz> MnO2: 我們公司有用 Getopt::Std
+23:53:08 <CindyLinz> MnO2: 它是用在像是 xxx.pl -o abc -p 2345 -x -u cindy 的場合
+23:53:15 <MnO2> 但一般不是都鼓勵用Getopt::Long了?
+23:53:18 <CindyLinz> MnO2: 不過這不是有 sub command 的
+23:53:37 <MnO2> 我知道，我有查過
+23:53:42 <CindyLinz> MnO2: 2007 2008 年的 code 嘛... 而且不是我寫的 (撇清 XD)
+23:53:49 <CindyLinz> 我那時還沒進公司 XD
+23:54:09 <MnO2> 老code就是討厭xD
+23:54:22 <CindyLinz> MnO2: 尤其討厭的一點是它能動... XD
+23:54:30 <CindyLinz> 而且 work well..
+23:54:35 <MnO2> 不能動的才可怕吧...
+23:54:56 <CindyLinz> MnO2: 不能動的就有機會重寫了, 會正常動的... 就沒動力改它了
+23:55:24 <MnO2> 那也要code base夠小才能重寫..
+23:55:57 <CindyLinz> MnO2: 這個「最糟的是它還會動」是不知道哪次 conference 聽來的 XD
+23:57:09 <MnO2> 血淚分享啊xD
+23:58:26 <CindyLinz> 我現在正在寫 require.js 的替代品.. QQ   遇到程式啟動時間太長的問題, 好像是 require.js 造成的..
+23:58:39 <CindyLinz> IE 的 javascript engine 太慢了 QQ
+23:58:55 <CindyLinz> 是不是叫作 查克拉?
+23:59:11 <CindyLinz> Chrome - webkit - V8 就快到沒感覺...

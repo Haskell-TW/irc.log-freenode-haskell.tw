@@ -1,0 +1,140 @@
+00:04:25 <CindyLinz> 應該是在寫 haddock 寫錯了.. XD
+00:04:44 <CindyLinz> 我也常搞不清楚各種不同 block 裡面要怎麼 escape....
+00:06:06 <CindyLinz> suhorng: 用 elems 再 fold?
+00:10:33 <suhorng> > traceShowId 5
+00:10:35 <lambdabot>  Not in scope: ‘traceShowId’
+00:10:54 <suhorng> CindyLinz: 唔, 也是可, 應該會 fusion 掉....吧.....
+00:16:35 <CindyLinz> suhorng: http://www.thebuzzmedia.com/wp-content/uploads/2011/05/troll-face-high-resolution.png
+00:17:22 <monochrom> 怎麼 troll face 都要高清了, 這年頭真是...
+11:53:32 <suhorng> 囧, 如果我還想要用 mutable array 又要重複import array & import array interface 的迴圈一次...
+11:54:15 <suhorng> 要反轉 adjacent list 真麻煩
+16:22:56 <suhorng> @hoogle (e' -> e) -> a i e' -> m (a i e)
+16:22:57 <lambdabot> Data.Graph.Inductive.Graph emap :: DynGraph gr => (b -> c) -> gr a b -> gr a c
+16:22:57 <lambdabot> Control.Arrow (^<<) :: Arrow a => (c -> d) -> a b c -> a b d
+16:22:57 <lambdabot> Control.Arrow (>>^) :: Arrow a => a b c -> (c -> d) -> a b d
+16:23:11 <suhorng> @hoogle (MArray a e' m, MArray a e m, Ix i) => (e' -> e) -> a i e' -> m (a i e)
+16:23:11 <lambdabot> Data.Array.MArray mapArray :: (MArray a e' m, MArray a e m, Ix i) => (e' -> e) -> a i e' -> m (a i e)
+16:23:11 <lambdabot> Data.Array.MArray.Safe mapArray :: (MArray a e' m, MArray a e m, Ix i) => (e' -> e) -> a i e' -> m (a i e)
+16:23:11 <lambdabot> Data.Graph.Inductive.Graph emap :: DynGraph gr => (b -> c) -> gr a b -> gr a c
+16:23:29 <suhorng> @hoogle (MArray a e' m, MArray a e m, Ix i) => (e' -> m e) -> a i e' -> m (a i e)
+16:23:30 <lambdabot> Data.Map.Lazy mapMaybe :: (a -> Maybe b) -> Map k a -> Map k b
+16:23:30 <lambdabot> Data.Map.Strict mapMaybe :: (a -> Maybe b) -> Map k a -> Map k b
+16:23:30 <lambdabot> Data.Map.Lazy updateMax :: (a -> Maybe a) -> Map k a -> Map k a
+16:30:27 <CindyLinz> suhorng: 這個.. (e' -> e) -> a i e' -> m (a i e)
+16:30:54 <CindyLinz> 不就是 mapArray :: (MArray a e' m, MArray a e m, Ix i) => (e' -> e) -> a i e' -> m (a i e) 嗎?
+16:31:40 <suhorng> CindyLinz: 對, 但不知道為何第一次 hoogle 沒搜到; 可是我想要的是 e' -> m e  Q__Q
+16:32:21 <CindyLinz> 看起來都只會列前三筆 XD
+16:32:36 <suhorng> 原來如此...
+16:32:55 <CindyLinz> suhorng: 你好手氣失敗 (咦
+16:33:29 <suhorng> Q__Q 十分困擾 我現在是 array of array (第二層 array 的長度會不一樣)
+16:33:33 <suhorng> 好難用..
+16:35:19 <CindyLinz> bound <- getBounds array; forM (range bound) $ \i -> do .... 吧
+16:36:55 <suhorng> :t range
+16:36:57 <lambdabot> Ix a => (a, a) -> [a]
+16:37:13 <CindyLinz> 如果找一個不認得 array 的函數... r1 w1 r2 w2 r3 w3 ... rN wN 和 r1 r2 r3 .. rN w1 w2 w3 .. wN 兩種順序不知道怎麼分辨呢 @@"
+16:37:57 <CindyLinz> forM 改成 forM_ XD
+16:38:03 <suhorng> XD
+16:38:32 <suhorng> 過程中用 list 處理應該是沒問題, 但我有點在意過程中會不會整個 list 都被產生出來
+16:38:43 <CindyLinz> 一定會
+16:38:52 <suhorng> 尤其用到 mapM 跟 sequence...很悲劇
+16:38:55 <suhorng> 嗚嗚, 都是 IO 的錯
+16:38:59 <CindyLinz> 除非它 internal 用 unsafeInterleavedIO
+16:39:08 <suhorng> 真希望可以 incremental QQ
+16:39:08 <CindyLinz> 但這東東通常沒事不會用 XD
+16:39:15 <suhorng> 嗯嗯 真危險
+16:39:23 <CindyLinz> 用才危險啊 ._.
+16:39:58 <suhorng> 嗯, 好像有看過失敗的例子XD
+16:40:16 <CindyLinz> (想想..)
+16:41:01 <suhorng> 也許我該用 Data.Graph   orz
+16:41:10 <CindyLinz> suhorng: 考慮 Lens 嗎?
+16:41:47 <suhorng> CindyLinz: 咦~ 不知道這兩個怎麼連起來
+16:41:55 <CindyLinz> 覺得有兩層類似結構就可以開始考慮 Lens 了
+16:42:35 <CindyLinz> 你會想送一個 modify 函數進去, 叫它走訪一遍.... 嗯 感覺像這樣 @@
+16:43:00 <suhorng> 嗯...還沒有到那種複雜的地步
+16:43:19 <suhorng> 我會想想看XD
+16:43:38 <suhorng> 阿, Data.Graph 是用 list Orz 放棄
+16:50:43 <CindyLinz> suhorng: 幫 MArray 實作一下 Traversable?
+16:51:05 <CindyLinz> 也許 std 沒有提供是為了... 擔心每個人想用的順序不一樣 o.o
+16:51:30 <CindyLinz> naturally 的順序就有正序和逆序兩種 @@
+16:53:02 <CindyLinz> 形狀看起來很合 # traverse :: (Traversable t, Applicative f) => (a -> f b) -> t a -> f (t b)
+16:53:15 <CindyLinz> f 是 IO, t 是那個 MArray 的 a
+16:53:50 <CindyLinz> 咦.. 看起來是產生一個新的.. XD
+16:57:32 <suhorng> 唔...
+16:58:11 <CindyLinz> 這應該不是你要的 XD
+16:58:24 <suhorng> 不過其實即使只是 IO + IOArray, 自己寫也是沒問題就是
+16:58:25 <CindyLinz> 你應該想 inplace 吧
+16:58:32 <suhorng> e' -> e 總是得產生一個新的
+16:58:49 <CindyLinz> 嗯... e' -> e' 才能不生新的
+16:58:53 <suhorng> 嗯嗯嗯!
+16:58:54 <CindyLinz> 你應該是要同 type 的吧?
+16:58:57 <suhorng> 我是不同 type
+16:59:03 <CindyLinz> 欸也不用生新的啊
+16:59:09 <CindyLinz> 好吧要生新的 XD
+16:59:12 <suhorng> wow, 為何?
+16:59:13 <suhorng> XD
+16:59:14 <CindyLinz> 想成 void* 好開心了 XD
+16:59:36 <CindyLinz> 是個適合使用 unsafeCoerce 賺取空間效能的地方 (?
+16:59:37 <suhorng> 我只是不想要中間過程有 linked-list 多一堆指標
+16:59:40 <suhorng> xDDDD
+16:59:50 <suhorng> 只好等我測測 bottleneck 在哪
+17:02:18 <CindyLinz> 用 unsafeCoerce 把不同 type 的 result 塞回同一個 slot, 然後全部完成以後再用 unsafeCoerce 換成新 element type 的 array? /_\
+17:04:16 <suhorng> WWWWWWW
+17:06:46 <CindyLinz> 危險性在於... 語法上不能限制 input 的 array 在這函數處理完成以後不會再被使用 @@"
+17:07:34 <CindyLinz> 嗯.. 既然要生新的, 那實作 Traversable 可能是個待選正解了 ^^
+17:08:45 <suhorng> 嗯..既然是 mutable array, 看來是沒問題了
+17:09:02 <CindyLinz> ?_?
+17:09:31 <CindyLinz> 沒哪種問題? XD
+17:09:44 <suhorng> CindyLinz: 阿阿沒事 XD
+17:11:11 <suhorng> 我現在做的事是 IOArray Int (IOUArray Int Int) -> Array Int (UArray Int Int) 這樣
+17:11:14 <suhorng> 才會有兩層XDD
+17:11:38 <CindyLinz> 出來是 Array 不是 IOArray 了喔?
+17:12:25 <suhorng> 這沒有關係, 先變 IOArray Int (UArray Int Int) 也是 OK 的
+17:12:42 <CindyLinz> 這樣 list 有機會 fusion 了 :p
+17:12:57 <CindyLinz> 取出來的 list 和後面的 listArray 可以 fusion
+17:14:07 <suhorng> 唔...我直接寫是 listArray bnd =<< (mapM freeze =<< getElems outArr)
+17:14:40 <suhorng> 如果是 (e' -> m e) -> a i e' -> a i e 的話可以裡面先 freeze 一次外面再 freeze 一次XD
+17:15:54 <CindyLinz> 欸 中間夾一個 mapM.. 感覺不妙
+17:16:30 <suhorng> 所以才想說有 mapMArray 的話就可以裡面先 freeze 再外面 freeze
+17:17:34 <CindyLinz> 不過多生的 list 只有在脊椎骨的部分
+17:17:54 <CindyLinz> 如果內層的 array 平均長度是 N, 那浪費的量大約 1/N.. XD
+17:17:55 <suhorng> 也是
+17:17:58 <suhorng> XDDDD
+17:18:21 <CindyLinz> 而且分母只有算到內層 array 的骨架, 不含 element 的部分
+17:18:29 <CindyLinz> 但是就不開心.. :/
+19:08:54 <suhorng> 奇怪耶QQ 到底該怎麼建立有 default value 的 array 才是對的
+19:09:08 <suhorng> > array (0,10) []
+19:09:10 <lambdabot>  array (0,10) [(0,*Exception: (Array.!): undefined array element
+19:09:17 <suhorng> > accumArray const 0 (0,10) []
+19:09:19 <lambdabot>  array (0,10) [(0,0),(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0),(8,0),(9,0),(1...
+19:14:30 <suhorng> > accumArray const 0 (0,10) [(2,5)]
+19:14:32 <lambdabot>  array (0,10) [(0,0),(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0),(8,0),(9,0),(1...
+19:14:37 <suhorng> > accumArray (const id) 0 (0,10) [(2,5)]
+19:14:39 <lambdabot>  array (0,10) [(0,0),(1,0),(2,5),(3,0),(4,0),(5,0),(6,0),(7,0),(8,0),(9,0),(1...
+19:50:54 <CindyLinz> > array (0,10) (repeat 0)
+19:50:58 <lambdabot>  mueval-core: Time limit exceeded
+19:51:55 <CindyLinz> > listArray (0,10) (repeat 0)
+19:51:58 <lambdabot>  array (0,10) [(0,0),(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0),(8,0),(9,0),(1...
+19:52:01 <CindyLinz> 這樣?
+20:25:57 <suhorng> right...
+20:26:16 <suhorng> 奇怪? array (0,10) (repeat 0) 為何這個沒有 type error @@
+20:28:06 <petercommand> :t array
+20:28:07 <lambdabot> Ix i => (i, i) -> [(i, e)] -> Array i e
+20:28:56 <petercommand> > array (0,1) [0,1]
+20:28:59 <lambdabot>      No instance for (Show i0)
+20:28:59 <lambdabot>        arising from a use of ‘show_M666617308233032601919311’
+20:28:59 <lambdabot>      The type variable ‘i0’ is ambiguous
+20:29:27 <petercommand> type check 過了...ww
+20:29:55 <petercommand> > array (0,1) [(0,0),(1,1)]
+20:29:58 <lambdabot>  array (0,1) [(0,0),(1,1)]
+20:34:38 <petercommand> > array (0 :: Int,1) [(0,1]
+20:34:41 <lambdabot>  <hint>:1:25: parse error on input ‘]’
+20:34:49 <petercommand> > array (0 :: Int,1) [0,1]
+20:34:52 <lambdabot>      No instance for (Show e0)
+20:34:53 <lambdabot>        arising from a use of ‘show_M96978310763151464519432’
+20:34:53 <lambdabot>      The type variable ‘e0’ is ambiguous
+20:35:15 <petercommand> > array (0 :: Int,1) [0 :: Int,1]
+20:35:19 <lambdabot>  mueval-core: Time limit exceeded
+20:35:32 <petercommand> ...
+20:36:32 <petercommand> 這發生甚麼事了..@@
+20:38:48 <suhorng> ...
+23:16:18 <suhorng> 這啥啦XDDDD (“It's just a simple functional language” is an unregisterised trademark of Peyton Jones Enterprises, plc.)  # https://downloads.haskell.org/~ghc/7.8.1/docs/html/users_guide/options-debugging.html

@@ -1,0 +1,7 @@
+02:05:00 <pkmx> > (\f -> (f "foo", f 13)) (\x -> x)
+02:05:02 <lambdabot>      No instance for (Num [Char]) arising from the literal ‘13’
+02:05:03 <lambdabot>      In the first argument of ‘f’, namely ‘13’
+02:05:03 <lambdabot>      In the expression: f 13
+02:06:06 <monochrom> 這方面 SML 也一樣
+23:30:16 <suhorngM_> mno2: 不知道之前有沒有貼過這個 http://www.stephendiehl.com/posts/essential_compilers.html
+23:30:22 <suhorngM_> A Haskell Implementation Reading List

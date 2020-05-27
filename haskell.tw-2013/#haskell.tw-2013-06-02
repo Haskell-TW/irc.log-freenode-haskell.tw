@@ -1,0 +1,55 @@
+00:00:03 <c9s> 複製的話應該是寫 newline := line[:]  而不需要寫 line[0:len(line)-1]
+00:00:09 <CindyLinz> c9s: Lookahead is not for power I think.. It's for effeciency
+00:00:46 <c9s> 不過如果是複雜的 grammar 的話，lookahead 應該是會比較需要
+00:01:05 <CindyLinz> c9s: There's Arrowic parser in Haskell.. More control, more tired XD
+00:01:44 <c9s> soga XDDDD
+00:02:00 <c9s> http://benchmarksgame.alioth.debian.org/ 可以 fork 出來改 sample code 嗎
+00:02:08 <c9s> 還蠻好奇的改完之後結果怎麼樣
+00:05:24 <c9s> 不過好像大多數 sample 不相上下
+00:07:17 <c9s> CindyLinz: http://benchmarksgame.alioth.debian.org/u64q/benchmark.php?test=revcomp&lang=all&data=u64q # 用 quad core 的話比 haskell 快
+00:07:34 <MnO2> CindyLinz: 是說 parsec 裡面的實作就寫死了嗎？我印象中他也有 applicative 的介面，如果那樣他也會慢嗎？
+00:08:20 <c9s> 阿我知道了 http://benchmarksgame.alioth.debian.org/u64q/program.php?test=revcomp&lang=go&id=1 # 這是用 goroutine 寫
+00:08:56 <CindyLinz> c9s: your link is 'reverse-complement' case only @@"
+00:09:20 <CindyLinz> but 'all benchmark' didn't provide a rank...
+00:10:05 <c9s> ah right
+00:10:05 <c9s> XD
+00:11:17 <c9s> http://lestrrat.ldblog.jp/archives/27060688.html # http://lestrrat.ldblog.jp/archives/27060688.html
+00:11:20 <c9s> Perl5 Census Japan 2013
+00:13:08 <CindyLinz> MnO2: I think that it cannot be faster. Because parsec provide the monadic interface. If we insist to use the Applicative one, it still have provided the power of Monad.. @
+00:13:09 <CindyLinz> @@
+00:16:38 <MnO2> CindyLinz: 不太確定耶，可是這邊：http://www.serpentine.com/blog/2011/02/25/faster-better-cleaner-new-aeson-and-attoparsec-releases/ 又有一句說了 Instead of parsing via the Applicative typeclass, we now use a custom parsing monad, improving both ease of use and performance.  假設 attoparsec 可以辦到，parsec 不行的理由是？
+00:17:11 <MnO2> 理論上 parsec 應該要被 benchmark 很多了，但都找不到相關文獻
+00:17:29 <MnO2> 大家都不在乎嗎？ xD
+00:17:51 <CindyLinz> A toy for teaching? XD
+00:18:01 <CindyLinz> for education :p
+00:19:33 <MnO2> CindyLinz: 你是有親身經歷他很慢嗎？
+00:21:07 <CindyLinz> MnO2: I've not experience it SLOW myself, it's only learned from article. But I do have experience NOT HALT indefinitly XD
+00:21:27 <CindyLinz> My syntax has a left recursion... orz
+00:22:31 <monochrom> String->[(a,String)] 才是 toy for teaching
+00:23:36 <CindyLinz> My testing source is only... less than 20 bytes.. :p
+00:24:20 <suhorng> 印象中好像哪裡有看過說怎麼用 parsec 的函式庫處理 left recursion...
+00:25:13 <monochrom> 可嘗試 chainl, chainl1 等等
+01:08:38 <c9s> CindyLinz: au 好像有拿 parsec 做正事過 :-p
+01:10:55 <c9s> 咦 Pugs 好像就是用 parsec
+01:11:21 <CindyLinz> c9s: Extreme person can use anything to do everything.. (Y)
+01:14:52 <c9s> XDDDD
+01:15:49 <c9s> 有空想分別用 goyacc 跟 parsec 寫個小東西試試 XD
+01:30:39 <CindyLinz> And you can point out how they different.. Sounds good.. :D
+17:04:29 <MnO2> https://www.fpcomplete.com/page/leadership 剛剛在看 FPComplete ，突然發現關於 Michael 的介紹：Over the past five years, Michael has used Haskell to solve a variety of problems for companies in different industries, including Cisco, Dell, Emerson, and HTC
+17:04:40 <MnO2> HTC <-----  真好奇是什麼樣的問題
+17:24:33 <CindyLinz> Cisco 也很有趣
+17:25:05 <CindyLinz> 感覺 Cisco 都是超低階的機器
+18:08:57 <Yu-Lin> 這幾天都在寫 chicken scheme，寫的有點痛苦Orz|||
+18:24:48 <letoh> chicken scheme 有什麼不同嗎?
+18:49:16 <Yu-Lin> 我無法理解為什麼同一個程式，用 csi 會符合我的預期，但 csc 出來的東西完全不符合Orz|||
+18:52:38 <letoh> 奇怪的靈異事件.... 那用其他 scheme 跑起來也是這樣嗎?
+19:14:19 <Yu-Lin> 我沒用其他的 scheme 跑
+19:14:27 <Yu-Lin> 還在測試中
+19:16:33 <Yu-Lin> 我決定先吃個晚餐看個非公認，回頭再繼續打拼
+19:16:41 <letoh> 非公認XDXD
+20:16:30 <CindyLinz> CSI!
+20:31:44 <b4283> Miami, New York?
+20:40:54 <Yu-Lin> 總算能弄出我想要的了....
+22:14:50 <Yu-Lin> 可惡，我程式都寫好了，非公認還沒看完.....
+22:16:28 <letoh> 非公認有播那麼久嗎?
+22:19:12 <Yu-Lin> 我這邊載入太慢

@@ -1,0 +1,24 @@
+01:05:47 <MnO2> http://programmers.stackexchange.com/a/61677
+01:06:03 <MnO2> Edward Kmett 的故事
+01:07:20 <MnO2> 看起來寫Scala真的比較有飯吃 xD
+01:19:41 <favonia> MnO2: xD
+01:19:45 <favonia> 是說這個人好強
+01:23:48 <MnO2> favonia: 很強啊，我原本還以為他是正職寫Haskell的，但我最近漸漸發現Haskell community活躍的人大概一大半都不是職業Haskell寫手
+01:24:04 <MnO2> 太詭異了....
+01:37:47 <MnO2> http://cufp.org/videos
+01:37:57 <MnO2> CUFP的影片現在都有了
+01:44:56 <MnO2> 日本IOI選手營就在教Haskell了.. http://www.ioi-jp.org/seminar/2011/report.html
+01:50:50 <favonia> MnO2: ..........
+01:53:00 <CindyLinz> 以後日本辦比賽就把 Haskell 納入可用語言, 然後考寫 compiler...
+01:53:27 <MnO2> 疑? CindyLinz 也還醒著 xDD
+01:54:06 <MnO2> CindyLinz: 其實我覺得主要是他們有一位前國手在狂推Haskell
+01:54:24 <CindyLinz> 快睡了 :p
+01:54:38 <MnO2> CindyLinz: 沒記錯的話就是寫mighttpd的那位
+01:55:03 <CindyLinz> 這看起來對比賽沒有直接幫助的 topic 也能夠入閣... (讚嘆)
+01:55:54 <MnO2> CindyLinz: 的確很神奇，大概是運用他的惡勢力吧xDDD
+12:04:45 <MnO2> http://www.reddit.com/r/haskell/comments/13130p/10gen_the_company_behind_mongodb_is_looking_for_a/
+12:04:56 <MnO2> 10gen 在找 Haskell 傳教士
+23:01:04 <MnO2> 剛剛在調查 Alpha heavy, 觀察 Nathan Howell 的經歷我覺得應該是之前公司賣給 ebay 閒錢太多，所以就索性自己開了一家 hedge fund,  wwwwww
+23:01:53 <MnO2> Alpha Heavy的co-founder也是他的前同事
+23:01:59 <MnO2> http://www.steveseverance.com
+23:06:48 <MnO2> Booking.com 居然要徵 25 個 Perl Developer

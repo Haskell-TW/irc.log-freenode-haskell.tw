@@ -1,0 +1,68 @@
+16:47:28 <s1yfox> 新手發問~ 請分析這兩個程式的執行時間
+16:47:40 <s1yfox> len [] = 0 len (a:as) = 1 + len(as)  queen a sz   | check a < 1 = []   | len a < sz = foldr (++) [] [queen (x:a) sz | x <- [1..sz]]   | otherwise = [a]  check [] = 1 check (x:a)   | x `elem` gan 1 a = 0   | otherwise = 1  gan d [] = [] gan d (a:as) = [a, a-d, a+d] ++ (gan (d+1) as)  eight_queen = queen [] 8
+16:47:55 <s1yfox> 怒… 無法貼 code
+16:50:15 <s1yfox> 已上傳至  http://robotics.cs.columbia.edu/~slyfox/haskell/
+16:50:35 <s1yfox> 兩個程式執行時間差距很明顯
+16:50:50 <s1yfox> 感謝回答!
+18:27:39 <s1yfox> 是不是因為 checkEat 會強迫一個 permutation 被完全展開才會遞迴，所以 prune 的效果不好…
+18:53:35 <MnO2> http://hpaste.org/76568
+18:54:26 <MnO2> 以我目前的知識來看主要問題有幾個
+18:55:05 <MnO2> 1. 當然如你提到的，演算法就不一樣了，pruning條件也不一樣
+18:55:23 <MnO2> 應該說pruning時機
+18:56:27 <MnO2> 2. 自己刻的permutation就佔了太多時間了， \\的複雜度是 O(n)
+18:56:44 <MnO2> 用Data.List中的permutations瞬間就可以降好幾秒
+18:58:31 <MnO2> 3. eat沒有加型態，預設會推斷成Integer，算起來沒有效率，加上型別用Int會比較有效率，也可以再省下些時間
+18:59:45 <MnO2> 4. 用Bang Pattern不要讓thunk累積在heap上
+19:03:49 <MnO2> 從profiling來看應該還有再下降的空間，但我對於optimization還沒有那麼深入的研究，理論上還可以用streamfusion之類的
+20:58:25 <CindyLinz> MnO2: 發現, 你回答的時候他不在線上了 ^^|
+21:02:10 <MnO2> CindyLinz: 我有另外丟FB chat，看log
+21:03:48 <CindyLinz> MnO2: 喔 XD
+21:04:37 <CindyLinz> 我想跟他說, 如果自己知道這段程式不會有 short circuit 的效果的話, 要算時間複雜度可以直接把它當成 strict 來算就好了
+21:04:52 <CindyLinz> 反正每一步都少不掉, 順序換一換而已
+21:05:33 <CindyLinz> 不過如果要去計較 constant 大小的話...  Bang pattern 去掉 thunk 之類的就還是要考慮了...
+21:07:02 <MnO2> CindyLinz: 問題是這邊constant不小啊xDDD
+21:07:47 <MnO2> 應該說碰到thunk的問題constant都很大
+21:08:46 <CindyLinz> 我看到你說的 2. 以為他是輸在時間複雜度
+21:09:37 <MnO2> 2. 的確複雜度不太好
+21:11:19 <MnO2> http://stackoverflow.com/questions/327955/does-functional-programming-replace-gof-design-patterns
+21:11:24 <CindyLinz> 我以前對 lazy evaluation 有過度的幻想 XD
+21:11:59 <CindyLinz> 覺得 list ++ [x] 感覺好應該是 O(n)
+21:12:21 <CindyLinz> 可是 head ( list ++ [x] ) 卻是瞬間跑出來, 好厲害唷!!
+21:13:06 <MnO2> 單看一個例子都是不準的xD
+21:13:45 <CindyLinz> 然後我就在心中 trace 看看, 如果我下了一整排 head 下去, 要怎麼出現 O(n^2)
+21:14:02 <CindyLinz> (如果先放了 n 次 list ++ [x] 的之後)
+21:14:10 <CindyLinz> 然後就昏掉了... orz
+21:16:05 <MnO2> 複雜度真的是lazy的痛
+21:17:41 <MnO2> 我說以後有人要討論design pattern的話就先貼那篇好了xD
+21:18:54 <CindyLinz> 咦, 原來你在中間偷渡了一個不相關的 link
+21:19:51 <MnO2> 我要接下一句說明的時候你就先回了，所以只好接下去講xD
+21:19:56 <CindyLinz> 喔 XD
+21:19:58 <CindyLinz> 好 XD
+21:30:45 <CindyLinz> 呵呵 :p # I've seen some pretty funny attempts at F#, where literally every function was just a string of 'let' statements, basically as if you'd taken a C program, and replaced all semicolons with 'let'. :)
+21:59:14 <MnO2> 記得F#差不多就是OCaml ?
+22:00:35 <CindyLinz> 嗯 聽說是
+22:16:28 <MnO2> http://stackoverflow.com/questions/434414/what-is-the-most-evil-code-you-have-ever-seen-in-a-production-enterprise-environ/434562#434562
+22:16:35 <MnO2> 這太慘了xDDD
+22:20:06 <letoh> 看到最後 "I have sent this story to TheDailyWTF, and then I quit my job."
+22:21:53 <MnO2> 可以榮獲年度WTF
+22:24:45 <CindyLinz> XD
+22:35:55 <b4283> 我想看同樣的人寫 haskell  XD
+22:37:14 <CindyLinz> 為什麼要這樣呢
+22:37:32 <CindyLinz> 這根本就是程式語言終結者啊啊... 囧
+22:37:41 <b4283> 奇異的寫法
+22:38:01 <b4283> 測試 haskell 的設計是否真的完備 (誤)
+22:38:21 <CindyLinz> 弄一個 c-- to haskell-- 的 compiler 來玩玩? XD
+22:39:21 <b4283> 看完之後覺得 c# 和 java 好像差不多..
+22:39:22 <MnO2> CindyLinz: 應該是maintainer終結者吧，程式語言還是能動啊xD   maintain到那份code的人大概都撐不了多久吧
+22:40:03 <b4283> 他有說 crashes 40-50 times a day
+22:40:05 <CindyLinz> MnO2: 一個沒看過這個 target 語言的人如果對這語言的第一印象是看這人的 code, 那這語言的形象就完蛋了 XD
+22:40:36 <b4283> 有用 thread 但沒用 mutex
+22:41:29 <MnO2> CindyLinz: 難怪之前好像有看過一篇偏激的文章說如果看到履歷上出現.NET的人都該小心
+22:42:10 <CindyLinz> MnO2: 嗄?
+22:42:30 <MnO2> 我現在找不到了，英文的，但我有印象
+22:42:47 <CindyLinz> MnO2: 那你略講一下好了 ^^|
+22:42:51 <b4283> NET 的 thread 有對應到 os thread 嗎？
+22:43:32 <MnO2> 就是說履歷中出現 .NET 有很高的機率是腦殘 blah blah blah
+22:44:17 <MnO2> 這就是形象完蛋的意思吧xD
+22:44:51 <CindyLinz> 喔喔 XD
+22:53:31 <hychen> 這是偏見 XD

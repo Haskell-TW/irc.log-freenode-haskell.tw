@@ -1,0 +1,14 @@
+16:53:34 <hychen> 在mac踩到haskell地雷
+16:53:43 <hychen> https://github.com/haskell/cabal/issues/1496
+16:57:47 <CindyLinz> ticket 可以這樣, 開了又關, 關了又開嗎~
+17:00:21 <petercommand> 應該可以吧
+17:03:37 <godfat> XDDD
+17:03:38 <godfat> 我個人覺得比較禮貌的方式還是請事主關
+17:03:38 <godfat> 是說看了那篇才發現我 mac 很久沒更新了...
+17:03:38 <godfat> 10.8.2 => 10.8.4
+17:03:38 <godfat> 難怪我沒問題 -_-
+17:03:38 <godfat> 以前不都會自動更新嗎？怎麼現在還要我自己去確認...
+17:08:15 <godfat> 算了，我還是要更新，祝我好運 XD
+17:25:15 <godfat> 直接跳 10.8.5 了 @_@
+17:48:09 <mno2> http://www.rustforrubyists.com/book/index.html
+22:08:20 <petercommand> 以前常看到書名叫how to teach yourself blah blah in XX days, 現在直接放fuxnum了XD http://www.ccs.neu.edu/home/dorai/t-y-scheme/t-y-scheme.html

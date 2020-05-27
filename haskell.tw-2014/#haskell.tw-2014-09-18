@@ -1,0 +1,11 @@
+04:05:13 <CindyLinz> au: stream monad 是什麼樣的東東啊, 是一個跟 [a] 很像, 但是順序什麼的不一樣的東西嗎?
+09:30:43 <mno2_> 聽起來比較像是 [Multiset a] ?
+12:12:54 <au> CindyLinz: 是一個 oleg 的 Logic Monad 的實作 http://okmij.org/ftp/Computation/monads.html#fair-bt-stream
+12:57:40 <CindyLinz> au: 感謝增加書單 ^^|
+19:19:25 <suhorng> 他那個 monad 好像主要是把 mplus 跟 >>= 換掉 (實作的話, 只需要一個介面就足以實現這兩者)
+19:19:48 <suhorng> 因為一般的 mplus, (>>=) 會造成 list monad (之類的) 一定是 depth-first 的樣子
+19:21:06 <suhorng> CindyLinz: http://hackage.haskell.org/package/logict-0.2.3 這個~?
+21:59:26 <CindyLinz> 還沒有看, 才剛 push 進待讀 stack ._.
+22:01:33 <petercommand> 竟然是stack不是queue XD
+22:01:44 <suhorng> priority stack!
+22:04:24 <CindyLinz> 而且是個 regression stack, push 久了沒拿出來就自動淡忘了..ww

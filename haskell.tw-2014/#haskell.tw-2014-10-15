@@ -1,0 +1,14 @@
+21:27:07 <CindyLinz> http://www.ptt.cc/bbs/Programming/M.1413377349.A.0A4.html
+21:27:09 <CindyLinz> □  [問題]用遞迴寫一個PowerSet,求解釋
+21:27:33 <CindyLinz> 剛看標題的時候以為又要看到那個 filterM 的說... XD
+21:27:54 <petercommand> 我也以為是filterM XD
+21:27:58 <au> CindyLinz: 一行 haskell 推文上!
+21:28:19 <CindyLinz> 這樣好嗎.... 人家都已經在苦惱了 XDXD
+21:28:54 <au> 推 CindyLinz : 他要表達的意思就是 filterM (const [True, False])
+21:29:02 <au> XD
+21:29:12 <CindyLinz> 好壞心啊啊~~~~~~~~ O_________O
+23:40:25 <mno2> 舉辦推文寫 Haskell 活動
+23:41:02 <mno2> push golf
+23:54:45 <CindyLinz> perl 以前就是辦 perlgolf 給人負面印象, 後來推廣上有不良影響欸...
+23:56:24 <CindyLinz> http://www.dagolden.com/index.php/163/stop-with-the-perl-golf-already/
+23:56:54 <CindyLinz> 唔不對 這個不是 official 的

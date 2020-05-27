@@ -1,0 +1,8 @@
+20:31:34 <gansteed> 为什么a ++ (b ++ c) 和 (a ++ b) ++ c会有效率上的差别呢？每次都是需要把左边的从头遍历到尾部才对啊？
+20:57:33 <mno2> 從其他語言帶入的印象對 Haskell 不適用 :p   要了解 Haskell 怎麼一步步去計算
+20:58:00 <gansteed> 嗯，请问有相关地方有描述吗？
+20:58:07 <gansteed> haskell report?
+20:58:50 <mno2> 試著從 `++` 怎樣用 `:`化約的角度想
+21:01:20 <gansteed> :) `++` 其实是用`:`实现的？是这样的话，倒是可以理解
+21:04:09 <mno2> http://hackage.haskell.org/package/base-4.8.1.0/docs/src/GHC.Base.html#%2B%2B
+21:11:53 <gansteed> :) thanks

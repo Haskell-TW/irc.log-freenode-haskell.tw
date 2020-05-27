@@ -1,0 +1,8 @@
+00:52:45 <caasih> https://www.reddit.com/r/haskell/comments/55dkc7/contribution_opportunities_help_upgrade_to/
+00:53:10 <caasih> > Are you looking for a way to contribute to the Haskell ecosystem?
+00:53:12 <lambdabot>  <hint>:1:66: error:
+00:53:12 <lambdabot>      parse error (possibly incorrect indentation or mismatched brackets)
+00:53:33 <caasih> 這個機會不是屬於我的 KD
+01:08:47 <CindyLinz> 只要能 compile 過就好了!
+01:08:59 <CindyLinz> (結果到處塞 undefined) (ry~
+01:09:30 <caasih> KD

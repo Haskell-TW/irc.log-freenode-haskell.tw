@@ -1,0 +1,55 @@
+00:27:25 <favonia> CindyLinz: no. 不管是用 ghc 編譯還是用編譯 ghc 恐怕都不是跑 gcc 了
+00:27:27 <favonia> CindyLinz: 公平是說你自己從頭編譯 gcc 就知道...
+00:28:39 <favonia> CindyLinz: 我是說最後一步應該都不是跑 gcc 了...
+00:29:01 <favonia> 裡面應該還是有一些部份用 C 寫
+00:39:54 <CindyLinz> favonia: 嗯 我看到 MnO2 貼的 stages 就知道了 ^^
+00:41:45 <MnO2> 結果我連用7.4.1 build 6.12.1 都有困難... 碰到一些 cabal 的問題...
+00:42:07 <MnO2> 更早的就不用說了.. 還蠻慘的
+00:43:25 <CindyLinz> MnO2: 你為什麼要建立 ghc 陣列啊? @@"
+00:43:43 <MnO2> CindyLinz: 評估 ghcbrew 的難度啊
+00:44:04 <CindyLinz> 看看他有沒有宣稱的那麼方便?
+00:44:06 <MnO2> CindyLinz: 正確的說是要納入哪些功能的難度
+00:44:50 <MnO2> CindyLinz: cabal 很可怕，不要問
+00:47:33 <MnO2> cabal 基本上跟 ghc 是糾結在一起
+00:47:39 <CindyLinz> 唔.. 那你現在要從低版本開始交錯往上建?
+00:48:37 <MnO2> 不知道耶，因為東西糾結在一起所以有些東西還不知道該怎麼辦
+00:49:20 <MnO2> 難怪到現在都沒人做 xD
+00:50:28 <CindyLinz> cabal 的 dep 限制可以描述上界和下界, 這個「上界」的部分感覺是個兩面刀?
+00:50:50 <CindyLinz> 如果沒有限制上限的話, 應該很多問題... 就可以當作看不到了 XD
+00:51:00 <CindyLinz> 當作沒看到 XD
+00:52:14 <MnO2> 那個還是小問題..
+00:52:32 <CindyLinz> 那你還碰到了什麼呀?
+00:55:14 <favonia> MnO2: 糾結～糾結～
+00:56:03 <favonia> ghcbrew 到底要幹嘛啊
+00:56:18 <MnO2> CindyLinz: http://stackoverflow.com/questions/10474413/ghc-package-conflicts 之類的吧
+00:56:52 <MnO2> CindyLinz: 就是6.12.1 compiler 內部好像有用到 haskell98-2.0.0.1
+00:57:49 <MnO2> favonia: http://byorgey.wordpress.com/2012/11/01/using-multiple-versions-of-ghc-in-parallel-with-gnu-stow/
+00:58:25 <MnO2> favonia: http://perlbrew.pl/Perlbrew-%E4%B8%AD%E6%96%87%E7%B0%A1%E4%BB%8B.html
+00:59:41 <MnO2> favonia: 簡單說就是方便切換不同版本的 interpreter / compiler 環境，甚至包含 runtime, package sandboxing
+00:59:49 <MnO2> favonia: 看要做到什麼程度
+01:00:16 <favonia> MnO2: 感覺好難... 雖然沒有理論上的阻礙 :/
+01:03:18 <MnO2> favonia: 就是要處理雜事吧 xD
+01:04:24 <MnO2> favonia: 我覺得 ghc 太麻煩了，cabal 跟 ghc 牽扯不完
+01:57:33 <CindyLinz> MnO2: 弄這個是為了可以方便做一個像是 perl 的 matrix test 的東西?
+16:10:27 <CindyLinz> 重丟一次 :p
+16:10:33 <CindyLinz> MnO2: 弄這個是為了可以方便做一個像是 perl 的 matrix test 的東西?
+16:11:34 <MnO2> CindyLinz: 雖然我大概可以猜到你在說什麼，但我不確定什麼是matrix test
+16:24:01 <CindyLinz> 這個 http://matrix.cpantesters.org/?dist=Combinator+v0.4.2
+16:31:47 <MnO2> 嗯，那跟我想得一樣
+16:32:34 <MnO2> CindyLinz: 我沒有做到那麼誇張，只是基本上測試一下用新版的是否能build舊版的ghc
+16:33:34 <CindyLinz> 純實驗而不是要做一個一直用下去的東西喔?
+16:34:53 <MnO2> CindyLinz: 有要作一直用下去的東西啊，但現在只是隨便挑幾個做點簡單的評估而已
+16:35:07 <MnO2> CindyLinz: 譬如說 perlbrew 也沒有支援到 5 之前的啊
+16:36:01 <MnO2> 我只是想說6.12之前的就不管還是說連6.x都不管
+16:37:25 <CindyLinz> MnO2: 嗯嗯嗯
+16:37:34 <CindyLinz> MnO2: 就.. 「從今天起」吧 XD
+16:39:10 <CindyLinz> MnO2: 不然弄了你自己也沒打算用的版號, 動力會很缺的...
+16:39:45 <MnO2> 所以我在考慮是不是 7.x 開始
+16:40:14 <CindyLinz> 不過我從來沒看過 perl 4..  perl 5.000 announcement 是 1994 年... 囧
+16:41:42 <MnO2> CindyLinz: 漫畫中都是越初代的人物越強，而且大家都沒看過 xD
+16:41:50 <CindyLinz> MnO2: 嗯, 等你弄好的時候, 6.x 已經沒什麼人在用的話, 你應該會很辛酸吧 @@"
+16:42:29 <MnO2> CindyLinz: 其實理論上直接寄信去問有這個使用傾向的人問就好了
+16:43:00 <MnO2> CindyLinz: 直接去問Brent Yorgey：「請問你裝stow是要測哪一版的？」
+16:44:51 <CindyLinz> 哎, 問之前可以自己決定不做的, 問了以後就不好意思了耶 XD
+16:47:13 <MnO2> CindyLinz: 這是某種持續下去的方法xD
+16:54:12 <CindyLinz> 就是需要 push!

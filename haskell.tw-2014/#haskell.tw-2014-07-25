@@ -1,0 +1,47 @@
+00:38:10 <suhorng> 天阿, 完全沒注意到 ICFP contest 就要開始了
+00:38:53 <suhorng> starts in 19hrs
+00:57:20 <suhorng> 用了 TypeHole 真是各種感動 T___T 只不過比起 Agda 或 Idris 的訊息感覺差了那麼一點；型別的資訊給的有點亂
+01:01:04 <CindyLinz> TypeHole 是什麼 extension 嗎?
+01:03:42 <suhorng> Yea, 是預設開啟的 extensino
+01:04:17 <CindyLinz> ! 長知識++
+01:04:19 <CindyLinz> http://www.haskell.org/haskellwiki/GHC/TypedHoles
+01:04:30 <suhorng> 在暫時還沒寫東西進去的地方放 _ （就像 Agda 的 {!!}）， GHC 會噴 Warning 把那個地方的所有 binding + type 都顯示出來
+01:04:35 <suhorng> available in 7.8 :D
+01:05:06 <CindyLinz> 有 agda c-c c-, 的感覺...
+01:06:02 <suhorng> 就是那樣XD
+01:09:16 <suhorng> http://hackage.haskell.org/package/lens-4.3.1/docs/Control-Lens-Tuple.html 我的天阿, 原來 functional dependencies 可以亂成這樣嗎....
+01:13:35 <CindyLinz> suhorng: 我有寫過 N 個 N-1 -> 1 的... (艸)
+01:13:54 <CindyLinz> 講反 是 N 個 1 -> N-1  :p
+14:17:05 <CindyLinz> Haskell 處理完整 unicode 的字串建議用什麼啊?
+14:17:14 <CindyLinz> Text 看起來只有 16bits 的樣子
+14:22:18 <au> Text 是 UTF-16 plus surrogate，是完整支援沒錯啊
+14:22:52 <CindyLinz> 所有 21bits 都 unicode 都能用嗎?
+14:22:59 <CindyLinz> 所有 21bits 的 unicode 都能用嗎?
+14:23:51 <au> 是，支援 astral plane
+14:24:00 <CindyLinz> 喔喔!
+14:25:08 <CindyLinz> 謝謝 ^^
+14:25:44 <au> np
+14:25:45 <CindyLinz> 因為看到 Text source 裡面, payload 的部分是:  {-# UNPACK #-} !A.Array          -- payload (Word16 elements)
+14:25:54 <CindyLinz> 擔心了一下 :p
+14:26:59 <au> 嗯， http://hackage.haskell.org/package/text-1.1.1.3/docs/src/Data-Text-Internal-Encoding-Utf16.html#chr2 有處理
+14:27:05 <au> (surrogate astral promotion)
+14:27:45 <CindyLinz> 所以是 variable length 的作法.. :p
+14:28:00 <au> 一定要的啊
+14:28:24 <CindyLinz> XD
+15:10:26 <petercommand> http://www.haskell.org/ghc/docs/6.12.1/html/users_guide/primitives.html
+15:10:40 <petercommand> "he representation of a Haskell Int, for example, is a two-word heap object."
+15:10:51 <petercommand> "The representation of a Haskell Int, for example, is a two-word heap object."
+15:11:04 <petercommand> 這裡的word是指甚麼呀?
+15:11:22 <au> 16-bit unsigned int
+15:11:53 <petercommand> 喔喔...
+15:12:27 <petercommand> 被叫作word有甚麼原因嗎?
+15:13:53 <au> 好像是 PDP-11 時代的遺緒
+15:18:43 <CindyLinz> 以前 x86 組語裡面 1,2,4,8 bytes 叫作 db (byte), dw (word), dd (double word), dq (quad word)
+15:21:29 <petercommand> 剛剛查了wikipedia...16bit 32bit 64bit的通通都有word這個名稱XD
+15:21:34 <petercommand> https://en.wikipedia.org/wiki/Integer_%28computer_science%29
+22:33:54 <monochrom> GHC 那個 word 指 machine word size, 即是說用 64-bit CPU 就是 64 bits, 用 32-bit CPU 就是 32 bits.
+22:37:56 <monochrom> x86 及 amd64 組語的 word 則堅定不移是 16 bits, 因為是關鍵字, 沒理由變更語義.
+22:50:36 <au> ahh, 因為是 boxed
+22:50:45 <au> 我看錯意思了。 monochrom++
+22:51:40 <au> 所以第一個 word 是 pointer，指向第二個 word (heap object) 用來表示 Int 的值
+22:53:20 <petercommand> 喔喔...原來是這樣阿

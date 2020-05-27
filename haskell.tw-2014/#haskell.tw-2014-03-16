@@ -1,0 +1,4 @@
+13:59:13 <CindyLinz> 覺得用 GHC 的 IsString 和 OverloadedStrings 可以拿來作 poorman's Template Haskell
+22:50:07 <monochrom> 那是一種濫用. 我們在 haskell-cafe 曾拗過類似問題. 主要問題是: parser error 怎麼辦?
+22:51:37 <monochrom> 唔, 或者是在 glasgow-haskell-users 而不是 haskell-cafe
+23:59:12 <CindyLinz> 都 poorman's 了, 發生 error 當然是 error "parse error" 啊 XD

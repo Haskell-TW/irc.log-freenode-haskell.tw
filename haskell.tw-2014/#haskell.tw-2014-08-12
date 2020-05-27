@@ -1,0 +1,5 @@
+04:50:54 <monochrom> 我教學生 big-O 是用 limit 的, 一計就知, 不會有錯覺.
+04:51:48 <monochrom> lim (n+1)!/n! = lim n+1 = ∞, 所以 (n+1)! 不在 O(n!)
+04:52:25 <monochrom> n*(n!) 不在 O(n!), 同理
+22:29:13 <suhorng> http://ro-che.info/ccc/25
+23:43:16 <suhorng> 原來有把 tutorial 放在 document 中的方式... # http://hackage.haskell.org/package/pipes-3.0.0/docs/Control-Proxy-Tutorial.html

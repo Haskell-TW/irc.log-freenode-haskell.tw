@@ -1,0 +1,5 @@
+03:11:06 <caasih> CindyLinz: 今天才知道怎麼避開 OSX 下的 terminal buffer 問題，
+03:11:18 <caasih> 要裝 expect 裡面的 unbuffer ，然後...
+03:11:25 <caasih> `unbuffer stack exec HVG ./demo.hs > ./sample.html`
+03:13:15 <caasih> 結果 return 那句沒有召喚出 monochrom （逃
+14:57:59 <monochrom> monochrom 要去遊香港誠品, 不容易召喚 ^_^

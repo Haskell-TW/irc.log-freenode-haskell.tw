@@ -1,0 +1,27 @@
+00:41:10 <monochrom> 問題捉錯用神
+21:27:52 <gansteed> 请问lambda表达式可以进行模式匹配，但是不能对一个参数进行多重匹配例如[]和(x:xs)，这句话怎么理解呢？
+21:28:58 <gansteed> 是因为使用(x:xs)会不断进行的原因吗？
+21:33:46 <CindyLinz> Haskell 的每一個 pattern matching 都沒有「 or 」的動作啊
+21:34:02 <CindyLinz> 所以你要 [] 一個 pattern, 然後 (x:xs) 一個 pattern
+21:34:27 <CindyLinz> 啊我聽懂了, 你是說 \(x:xs) -> 的時候?
+21:34:42 <CindyLinz> 這部分我覺得只是語法設計的問題 ^^|
+21:35:47 <CindyLinz> 如果開 GHC 的 LambdaCase extension 的話, 可以寫 \case { [] -> ... ; x:xs -> ... }
+21:36:07 <CindyLinz> 這個應該是你想要的?
+21:36:43 <godfat1> @@
+21:36:44 <godfat1> 直接 \x -> case of x 呢？
+21:37:05 <godfat> \x -> case x of
+21:37:18 <gansteed> XD 不是，我初学，你写的我看不懂，，我只是不理解为什么为什么(x:xs)会被称作“多重匹配”
+21:37:18 <CindyLinz> 那要寫兩次再也用不到的 x, 很不方便!
+21:37:45 <godfat> 噢，好吧，也是...
+21:38:02 <godfat> 多重匹配的原文是什麼？
+21:38:15 <gansteed> several patterns
+21:38:17 <CindyLinz> gansteed: 就, 因為 lambda 的語法, 那邊只能寫一個 pattern, 所以不能又寫 [] 又寫 (x:xs)
+21:38:41 <godfat> 看來要看整句了，這樣不是很明白指什麼
+21:38:48 <CindyLinz> gansteed: 你可以把當視為設計弱點, 這樣會比較釋懷一點 ^^|
+21:38:54 <CindyLinz> gansteed: 你可以把它視為設計弱點, 這樣會比較釋懷一點 ^^|
+21:39:24 <gansteed> 原句：And like normal functions, you can pattern match in lambdas. The only difference is that you can't define several patterns for one parameter, like making a [] and a (x:xs) pattern for the same parameter and then having values fall through.
+21:39:45 <godfat> 那就是 CindyLinz 說的，語法差異而已
+21:39:54 <gansteed> 也许吧，，刚看lambda， 理解还不够XD
+21:40:29 <CindyLinz> 感覺好像是 Begining Haskell 的書辭
+21:40:56 <gansteed> learnyouahaskell.com 的哦~
+21:41:08 <CindyLinz> 好吧 QQ

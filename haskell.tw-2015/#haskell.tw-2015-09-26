@@ -1,0 +1,24 @@
+10:48:00 <mno2> https://www.reddit.com/r/haskell/comments/3mctup/megaparsec_monadic_parser_combinators/
+10:48:13 <mno2> 看起來對於 parsec 有不少怨言 xD
+13:02:47 <suhorngM_> mno2: XDDDD
+13:06:22 <suhorngM_> Overloaded string 真是邪惡! 像是 data Expr = Var String | String :=> Expr {-lambda-} | Expr :@ Expr
+13:06:52 <suhorngM_> 然後寫 "x" :=> "y" :=> "z" :=> ("x" :@ "z") :@ ("y" :@ "z") 之類. 雖然還是不好讀可是不用寫 Var..
+13:25:09 <CindyLinz> IsString 是 parser frontend XD
+13:33:16 <suhorngM_> XD
+13:56:26 <CindyLinz> 你在寫 lambda interpreter?
+14:41:25 <suhorngM_> 我在寫 lambda pi interpreter, 不過是笨的版本
+14:41:35 <suhorngM_> 呃應該是 type checker
+14:45:16 <CindyLinz> 什麼是 dependent lambda calculus type checker?
+14:45:49 <suhorngM_> 把 FLOLAC 2014 TT logic 那個系統做出來 XD
+14:46:05 <CindyLinz> 忘了 orx
+14:47:18 <suhorngM_> 我難過
+20:55:35 <mno2> Oleg 人超 nice 的
+20:56:13 <mno2> 寄信問他會不會順道來新加坡給 talk，結果他還幫我列舉好多他認識的人~
+21:02:46 <suhorngT> wow
+21:03:11 <CindyLinz> mno2: XDD
+21:26:00 <mno2> CindyLinz 或 suhorngT:  看看禮拜四要不要帶個月餅請他吃 xD
+21:26:16 <mno2> 他現在在花蓮玩耍 :p
+21:29:36 <CindyLinz> 而且聽說迷路了.....
+21:54:03 <suhorngT> XD
+22:13:47 <mno2> 是在太魯閣迷路了嗎？ xD
+22:14:39 <CindyLinz> 火車站 -> 旅館 走反了.. :p

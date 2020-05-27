@@ -1,0 +1,49 @@
+12:18:23 <Yulin> 問一個 elm 的問題
+12:21:27 <Yulin> 我現在需要使用 Random 產生一組座標，我希望把 Generate (Int, Int) 包到 (Int, Int) 中，elm 能把 type 降階嗎？
+12:39:33 <CindyLinz> 如果是 Haskell 的話不行... 或說是 in general 不行, 必須看那個提供 Generate 的 library 有沒有提供 Generate (Int, Int) -> (Int, Int) 的函數
+12:39:53 <CindyLinz> 一般如果有的話, 習慣上名字會取叫 unGenerate 或 runGenerate
+12:40:32 <CindyLinz> (不會 elm, 只能講 Haskell 當參考 ^^|)
+12:53:37 <petercommand> http://elm-lang.org/learn/Union-Types.elm #感覺跟 haskell 一樣，要看 library 有沒有裸露的 constructor 或是提供函數來做降階
+12:54:54 <suhorng> 沿著第一個 column + - + - + .. 展開降階..誤
+13:00:57 <Yulin> 剛剛試了一下，要用 initialSeed 跟 generate 自己取 fst 轉成 Signal
+21:05:46 <pkmx> > do { let x = 1 ; let y = 2 ; x + y }
+21:05:48 <lambdabot>  <hint>:1:36: parse error on input ‘}’
+21:08:11 <suhorng> > do { let x = 1 in let y = 2 in return (x + y) }
+21:08:13 <lambdabot>  No instance for (GHC.Show.Show (m0 a0))
+21:08:14 <lambdabot>    arising from a use of ‘M824059474339998447318882.show_M8240594743399984473...
+21:08:14 <lambdabot>  The type variables ‘m0’, ‘a0’ are ambiguous
+21:08:54 <petercommand> > do { let x = 1 ; let y = 2 ; return $ x + y }
+21:08:55 <lambdabot>  <hint>:1:45: parse error on input ‘}’
+21:09:06 <petercommand> > (do { let x = 1 ; let y = 2 ; return $ x + y })
+21:09:07 <lambdabot>  <hint>:1:46: parse error on input ‘}’
+21:12:05 <pkmx> @@ 結果沒有人知道 do 裡面有 let 一行要怎寫 XDD
+21:12:06 <lambdabot>  結果沒有人知道 do 裡面有 let 一行要怎寫 XDD
+21:12:39 <suhorng> desugar 之後應該沒有那種東西吧?
+21:13:06 <pkmx> > do { let x = 1 in let y = 2 in x + y }
+21:13:08 <lambdabot>  3
+21:13:15 <pkmx> 應該是這樣才對 @@
+21:13:23 <suhorng> 好驚人, 這是啥 monad...
+21:13:57 <suhorng> > do { let x = 1 in let y = 2 in return (x + y) } :: IO Int
+21:13:59 <lambdabot>  <IO Int>
+21:14:03 <suhorng> orz
+21:14:04 <pkmx> 剛剛看到的: do notation 沒有 Monad 也可以 XD
+21:14:37 <suhorng> 因為是全部變成 >>= 嗎...只要 >>= 不出現的話....
+21:14:43 <pkmx> 對啊
+21:15:02 <pkmx> 其實想想ghci就是這樣
+21:15:41 <suhorng> Haskell 真神奇
+21:17:19 <pkmx> > do { let x = do 1 in let y = do 2 in do { do x + do y } }
+21:17:20 <lambdabot>  3
+21:17:36 <suhorng> XDDDD
+21:17:36 <pkmx> > do do do do do 42
+21:17:38 <lambdabot>  42
+21:17:42 <pkmx> XDDDDDDDDDDDD
+21:22:26 <CindyLinz> ...............||
+21:39:26 <pkmx> > [1.0, 3.0 .. 10.0]
+21:39:27 <lambdabot>  [1.0,3.0,5.0,7.0,9.0,11.0]
+21:43:17 <suhorng> >[ 0..0 ]<                     []
+21:43:51 <suhorng> > [ ()..() ] <                                              []
+21:43:52 <lambdabot>  False
+22:38:44 <CindyLinz> 為什麼 1.0, 3.0 .. 10.0 出來的最後一個是 11.0 呢?
+22:39:53 <pkmx> 因為 instance Enum Float 的定義非常奇怪...
+22:42:04 <pkmx> [e1 .. e2, e3] 要到比 e3 + (e2 - e1) / 2 大才會停 @@
+22:42:20 <CindyLinz> 噢...

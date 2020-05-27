@@ -1,0 +1,123 @@
+11:00:13 <mno2> 不知道 CindyLinz 或是 suhourngT 知不知道答案：像是 Parsec 3 可以用 applicative style 寫，那用 applicative style 來 parse regular language 的話會是 linear time 嗎？
+11:00:27 <mno2> 另外發現 au 不見了 :p
+11:56:33 <suhorngT> 用 Parsec 3 + Applicative 照著 grammar 來寫 regular language 的 parser?
+12:19:23 <mno2> suhorngT:  是可以寫，但問題是要怎麼測是不會用到那麼多 input 大小的 memory (也就是不需要 keep all of the input）
+12:19:58 <mno2> 等於說可以跟 state machine 的速度還有 memory 大小對等
+12:21:22 <mno2> 單看一個 applicative 是可以理解為什麼用過就可以丟掉，但不確定 parsec 3 的實作
+12:21:32 <suhorngT> 嗯.....
+12:22:00 <suhorngT> 不過原本沒有 try 的話, 本來就會用過丟掉吧?
+12:26:06 <mno2> 其實我不確定耶，用 try 鐵定有 backtracking，可是如果寫起來跟 monadic style 跟 applicative style 的複雜度一樣的話，為什麼大家要唾棄 monadic style ?
+14:28:16 <suhorngT> 唔, 我想 Applicative/Monad 的 dependency 影響主要是用戶端這邊, 而 Parsec 內部實作印象中本來就是會丟掉
+14:28:40 <suhorngT> 不太確定XD
+15:27:53 <CindyLinz> 我覺得唾棄 monadic style 時所講的 monadic style 和現在 parsec 的 parser monad 是不一樣的
+15:28:13 <CindyLinz> monadic style 的 branch 應該內建 try 的功能
+15:28:57 <CindyLinz> 依 monad plus 的定義來說, 試了一個 branch 失敗以後改試第二個 branch 時, 第一個 branch 做過的任何事情都應該要像沒發生過一樣才對吧?
+15:33:44 <suhorngT> 沒有這條 law 吧?
+15:34:21 <CindyLinz> 那 law 是什麼啊?
+15:35:04 <suhorngT> 嗯.... "And the HaskellWiki page cites another (with controversy)" (m `mplus` n) >>= k  =  (m >>= k) `mplus` (n >>= k)
+15:35:16 <suhorngT> 這個是你說的跟沒發生過一樣XD
+15:36:11 <CindyLinz> 作點微調..
+15:36:33 <suhorngT> 然後 Control.Monad 裡面又說 v >> mzero = mzero? 咦?
+15:36:35 <CindyLinz> 不一定要像沒發生過一樣, 而是第二個 branch 的結果不應該受第一個 branch 有沒有執行過影響?
+15:37:04 <CindyLinz> v >> mzero = mzero 有什麼奇怪嗎? @@"
+15:37:08 <suhorngT> 真是複雜XD 結果 MonadPlus 到底該有什麼 law 該不會沒有統一....
+15:37:18 <CindyLinz> 喔, v 的 side-effect 會被丟掉的感覺?
+15:37:21 <suhorngT> CindyLinz: 例如 modify (+1) >> mzero = mzero?
+15:37:23 <suhorngT> 對
+15:37:41 <CindyLinz> 欸 可能是沒問題的 (?
+15:37:50 <CindyLinz> 因為 mzero 會毀滅這個宇宙
+15:38:21 <CindyLinz> 如果已知明天是世界末日了, 今天許多事情都可以隨便來 XD
+15:38:47 <CindyLinz> 而.... 如果是一個 monad plus transformer 的話..
+15:38:53 <CindyLinz> 反正數學上沒這東西 (?
+15:41:44 <suhorngT> 欸抖..我們知道 non-deterministic monad T 跟 state monad T 疊的順序不同有不同影響
+15:42:25 <suhorngT> 所以其實要限定某一種疊法才能有 MonadPlus instance 之類..
+15:44:12 <suhorngT> 因為其中一種疊法的 backtracking 狀態是會傳下去的
+15:45:55 <CindyLinz> 覺得... 疊起來以後, 上層對下層 (標定一下方向: IO 是只能在最下層的那種) 要有怎樣的保證, 有可能是個沒有規範的領域, 實作者自己說了算?
+15:48:20 <suhorngT> 不過問題在於 MonadPlus 的 typeclass instance 方式好像沒辦法限制這點 (undo effects)
+15:52:05 <CindyLinz> Haskell type system 不能描述的東西不差這個啦 ^^|
+15:52:26 <suhorngT> 這條 law 就有問題? XD
+15:53:14 <CindyLinz> 像那個 monoid 的結合律, 如果實作者亂搞不是 type system 也會給過嗎?
+15:54:43 <suhorngT> 嗯嗯
+16:00:45 <suhorngT> 不過要是接受那條 law, 其實就真的不能有 non-deterministic monad transformer
+16:00:51 <suhorngT> 不過顯然有而且有不少...
+16:10:24 <CindyLinz> [a] ?
+16:44:49 <mno2> 恩.. 再看一遍 oleg 說的他的確是說用 mplus 是個 bad idea。所以其實問題是 mplus
+16:47:22 <CindyLinz> Parser 重點就是那個 plus / alternative 啊 QQ
+16:47:45 <mno2> 可是他覺得是 bad idea xD
+16:47:57 <mno2> 他比較推薦 uu-parsinglib
+16:48:20 <mno2> 可是看了一些 reddit 的文章好像上手苦手
+16:49:17 <mno2> 另外也推 PEG paerser
+16:49:28 <mno2> 不過也不知道哪一套好
+16:50:56 <CindyLinz> 欸... 他說 mplus 的 bad 是因為自動 try 嗎?
+16:51:00 <suhorngT> CindyLinz: BacktrackT IO a 會壞XD
+16:51:07 <mno2> 我覺得 haskell 的 parser lib 好像處於那個關於「標準」的狀態：世界上有 N 種標準，有個人都覺得其他的標準很爛，想要創造另外一個，結果世上就變成 N+1 種標準了
+16:51:11 <CindyLinz> 如果沒有自動 try 的假 mplus 是不是就沒那麼 bad 了?
+16:51:18 <mno2> CindyLinz: 沒提到自動 try
+16:51:31 <suhorngT> Connection failed. auto retry...3
+16:51:33 <suhorngT> Connection failed. auto retry...2
+16:51:36 <suhorngT> Connection failed. auto retry...1 (誤
+16:51:45 <mno2> 但印象中 parsec 應該沒有自動 try 啊
+16:52:17 <suhorngT> 應該是沒有吧?
+16:55:50 <CindyLinz> parsec 沒有自動, 可是我讀 arrow 介紹裡面對 monadic parser 的缺點, 講的應該是會自動 try
+16:55:56 <mno2> Do. Or do not. There is no try.
+16:56:04 <CindyLinz> 因為根本沒有 try 函數, 所以應該會自動 try
+16:56:42 <suhorngT> CindyLinz: 如果是 String -> [(a, String)] 這種 monadic parsing 是有自動 try + backtracking
+16:56:53 <suhorngT> 但 Parsec 沒有
+16:57:17 <CindyLinz> 嗯.. 在想 oleg 討厭的 mplus 有包含 Parsec 嗎?
+16:57:35 <CindyLinz> 然後 Parsec 類型的... 我看 edwardk 的 http://hackage.haskell.org/package/parsers 好像不錯..
+16:57:49 <CindyLinz> 有夠抽象... (謎
+16:57:50 <suhorngT> 我覺得 Parsec 的 <|> 還是要 try 而不是自動 try, 這個會寫錯..
+16:58:20 <suhorngT> 不知到 Oleg 在說得 mplus 不好句子是怎麼說的, 到底指什麼 XD
+16:58:22 <mno2> CindyLinz:  有啊。會講到這就只是我把上一次社群 meetup 的錄影給他看，然後其中是教 monadic parser (類似 parsec)
+16:58:33 <mno2> 然後他就說 parsec 是個很糟糕的 lib
+16:58:57 <suhorngT> 更正: <|> 不會自動 try 很違反直覺 XD
+16:59:02 <CindyLinz> mno2: 哎呀 ^^|
+16:59:07 <suhorngT> 就有點像做壞(?)的 mplus
+16:59:15 <CindyLinz> suhorngT: 同意.. QQ # <|> 不會自動 try 很違反直覺 XD
+16:59:20 <mno2> Parsec is actually a pretty bad parser combinator library:
+16:59:28 <mno2> it is slow and it is a memory hog. Using mplus for parsing,
+16:59:36 <mno2> is really a bad idea because you will leak a lot of memory (you will retain the
+16:59:44 <mno2> whole input). Also, it is very easy to get exponential blowup this way.
+16:59:54 <mno2> ReadP is slightly better, and UUlib (parsing library from Utrecht) is much better.
+16:59:57 <CindyLinz> suhorngT: 那如果 <|> 會自動 try, 然後加一個 aggresive 表示它會吃人不吐骨頭好嗎? XD
+17:00:17 <suhorngT> XDDD
+17:00:23 <CindyLinz> 原本的 try a <|> b 是現在的 a <|> b; 原本的 a <|> b 是現在的 aggresive a <|> b
+17:00:31 <CindyLinz> 我還不確定做不做得出來 :p
+17:00:37 <suhorngT> 不確定++
+17:01:10 <suhorngT> ekmett 那個我之前有找一陣子, 那個是不是只是介面而已, 沒有實作？　還是有實作？
+17:02:42 <CindyLinz> 我不知道該怎麼說 XD
+17:02:50 <CindyLinz> 它有實作, 可是沒有底...... XD
+17:03:12 <CindyLinz> 只要給它任意一個底, 就是任意一個完整的 parser
+17:03:17 <suhorngT> XDDD
+17:03:30 <suhorngT> 因為我看後來還是接 ReadP 或 Attoparsec
+17:03:48 <suhorngT> 或 Parsec
+17:03:55 <CindyLinz> 那個讀取字串 stream 或 token stream 的要使用者提供
+17:04:07 <suhorngT> 喔, combinator 自己做這樣
+17:04:20 <CindyLinz> 它提供 combinator
+17:04:28 <CindyLinz> 包含那個 permutation parsing 那個 XD
+17:07:34 <suhorngT> mno2: 真的完全不懂XD 是該去研究他們的實作了嗎..
+17:08:11 <mno2> CindyLinz: 他 stream 不是直接接 parsec 的？
+17:08:46 <suhorngT> mno2: 下面那一堆 instances http://hackage.haskell.org/package/parsers-0.12.3/docs/Text-Parser-Combinators.html#t:Parsing
+17:10:02 <mno2> 恩..
+17:11:13 <mno2> 主要是我現在回答不了到底 parsing lib 要用哪一套。 每個人都說 parsec 爛，然後問他們今天要用哪一套的時候，很多人都跟我說他想自己擼一套..
+17:13:36 <CindyLinz> mno2: 其實 Haskell 天生還蠻容易自己弄一套的呀 ^^|
+17:13:47 <CindyLinz> 直接寫成遞迴函數也行啊 XD
+17:13:59 <mno2> CindyLinz: 所以我才會提那個標準的笑話啊 xD
+17:14:39 <CindyLinz> 哎~ 就像炒菜作飯, 家家戶戶每個人都會的東西, 誰理它什麼標準流程啊~~ XD
+17:15:23 <suhorngT> the List Curse...
+17:16:55 <mno2> CindyLinz:  但教學碰到就是很自然的問題啊 xD    回答自幹一套比較快人家會覺得你在開玩笑
+17:18:13 <CindyLinz> mno2: 那就隨機講一套就好啦~
+17:18:26 <CindyLinz> 「今天吃什麼?」「隨~便~~」
+17:18:41 <mno2> CindyLinz: 然後就會被 oleg 說，用什麼爛 library,  loll
+17:19:19 <CindyLinz> mno2: 會跟 oleg 講到話, 我們就沒責任教了~ 啦啦啦~~~
+17:20:09 <mno2> 是講師被酸啊 xDD
+17:23:36 <CindyLinz> wwwww
+18:07:57 <mno2> http://bezirg.net/afp_presentation.pdf
+18:08:22 <mno2> 有的舊的資料，不過大概有個概念
+18:24:03 <mno2> http://comonad.com/reader/wp-content/uploads/2009/08/A-Parsing-Trifecta.pdf
+18:31:17 <mno2> http://stackoverflow.com/questions/20846429/performance-of-uu-parsinglib-compared-to-try-in-parsec
+20:07:04 <CindyLinz> 有人在用 Arrow parser 嗎？
+20:42:13 <mno2> 沒有耶
+20:42:38 <mno2> * 我曾經用 Parsec 直到我膝蓋中了一箭
+20:43:01 <mno2> (誤
+21:43:42 <mno2> https://launchpad.net/~hvr/+archive/ubuntu/ghc   可以拿來做 travis-ci 的 source

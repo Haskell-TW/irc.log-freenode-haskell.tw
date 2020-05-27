@@ -1,0 +1,61 @@
+14:13:53 <MnO2> http://stackoverflow.com/questions/10342876/differences-between-functors-and-endofunctors
+14:26:15 <MnO2> http://stackoverflow.com/questions/3273373/are-all-haskell-functors-endofunctors
+14:26:36 <CindyLinz> MnO2: reactive 應該是目前已知最適合 functional GUI 程式的寫法?
+14:46:49 <MnO2> CindyLinz: 其實我不知道耶，大概吧。只是我實在不太喜歡callback就是
+14:48:53 <CindyLinz> MnO2: 在 Haskell 裡面, callback 不就是 CPS - continuation passing style 嗎? XD
+14:50:24 <MnO2> CindyLinz: 沒有吧，不一樣吧
+14:50:36 <CindyLinz> 寫 perl 的時候, event driven 的寫法的確讓我很不好 debug
+14:50:54 <CindyLinz> 不知道 reactive 會不會也不好 debug.. :Q
+14:52:04 <CindyLinz> 唔.. 如果可以噴出某一個時間點附近, 每一個 note 的「output」是什麼的話, 可能就可以 debug 了...
+14:52:08 <CindyLinz> 唔.. 如果可以噴出某一個時間點附近, 每一個 node 的「output」是什麼的話, 可能就可以 debug 了...
+14:52:43 <CindyLinz> MnO2: 不一樣嗎? 囧
+14:55:57 <MnO2> CindyLinz: CPS的流程結構比較一般化吧。一般說callback只是呼叫做些事情就結束這樣。你想的話javascript也可以寫CPS啊
+15:03:47 <CindyLinz> 嗯, 對...
+15:04:03 <CindyLinz> CPS 應該比較像是, 放一個 handler, 然後用一次就丟掉的那種 callback
+15:09:03 <CindyLinz> 覺得 reactive 不但處理了 event callback 要怎麼接, 也處理了「state」的問題
+15:09:48 <CindyLinz> 有點像是.. 物件導向的 GUI 程式裡面, state 被強迫要放在元件裡面. 而 reactive 程式的話, state 像是散佈在整個網絡裡面
+15:21:06 <MnO2> CindyLinz: 其實我覺得reactive programming常常應用在大型分散式系統中啊
+15:21:37 <MnO2> CindyLinz: Complex Event Processing之類的
+15:22:24 <MnO2> CindyLinz: 所謂的Enterprise Architecture Pattern之類的接起來整個來看幾乎就是reactive programming吧
+15:23:22 <CindyLinz> MnO2: 嗯..
+15:23:26 <MnO2> CindyLinz: 只是看應用而言有些是pure有些不是
+15:24:08 <CindyLinz> 欸欸, 不過我是在找的是 GUI 該怎麼寫 ^^|
+15:24:57 <MnO2> CindyLinz: 喔喔，那你就嘗試看看reactive-banana吧
+15:25:10 <CindyLinz> 讀 WxHaskell 的時候它說它覺得它不是給一個好的 functional 的寫法, 而是給一個現存的很穩定的 library 的 wraper, 所以就好奇那「好的 functional 寫法」是什麼呀 XD
+15:25:23 <CindyLinz> 嗯嗯嗯
+15:25:35 <CindyLinz> 看到 reactive-banana 好像有跟 wxhaskell 接
+15:25:37 <MnO2> reactive-banana有接WxHaskell的界面吧
+15:25:42 <MnO2> 嗯
+15:29:13 <CindyLinz> 東西好多.. 都讀不完了 (貪婪貌)
+15:33:23 <MnO2> CindyLinz: 還有Open Data要關心，時間就更不夠了xD
+15:35:26 <CindyLinz> open data 比較接近政治問題... 使不上力 :Q
+15:38:51 <MnO2> 那就努力推動Close Data好了，這樣就完全不用費力> (誤)
+15:40:00 <CindyLinz> 幹嘛這樣 XD
+15:51:26 <CindyLinz> 我喜歡 Open Data.. 不過現在的局面真不知道該怎麼辦 :|  原本 Open Data 和那個實價登錄網站雖然是有一點相關, 但是是不同的兩回事. 不過現在 Open Data 和政府的實價登錄網站立場對立了...
+15:57:26 <MnO2> CindyLinz: 不太懂你的意思？ 你是覺得對立為手段對達成目標不利？
+15:59:58 <CindyLinz> MnO2: 因為政府的實價登錄網站背後也是一堆人, 而且是有關係, 在政府內有影響力的人 (開發團隊和主導這案子的官員們). Open Data 要弄出來當然是政府出來做, 如果在政府裡面有一夥有影響力的人成為 Open Data 的敵人, 那就會很不好搞
+16:01:14 <CindyLinz> 感覺照現在的路子走, 不等大家遺忘實價登錄網站這回事的話, 對 Open Data 最好的發展, 就是拉到一夥更高層的人向我們靠, 而且他們的處境必須是可以跟這個爛掉的實價登錄網站作切割
+16:01:24 <CindyLinz> 然後把中間這一團人弄掉
+16:01:36 <CindyLinz> 這過程聽起來就很血腥啊
+16:02:03 <CindyLinz> 這一夥高層去這樣做的時候, 是很可能把他自己搞死的
+16:02:58 <CindyLinz> 如果等大家遺忘實價登錄網站的話.. 我覺得可能會比較順利, 不過要拖一段時日了...
+16:03:25 <CindyLinz> 而且現在大家好 high 啊, 不會走這種緩進的路... @@"
+16:05:13 <CindyLinz> 現在 Open Data 這邊的人是無組織的游擊隊, 沒有一個人的發言可以代表所有人的意見, 所以也沒有人可以代表大家向政府作承諾 (例如說你如果怎樣怎樣開放, 我們就保證不怎樣鬧, 不會再讓你這政府更丟臉)
+16:06:13 <MnO2> CindyLinz: 不知道耶，我覺得可能需要對政府結構有了解的人來擬定手段策略。如果說有權力的那群人需要台階下的話其實就應該幫他們想好台階。這樣做事也許會順利一點。
+16:06:28 <CindyLinz> 所以政府想談也沒門沒路.. 只能無償退讓... 那等於是跟全民說, 我錯了! 而且也換不到任何好處, 仍然會繼續被打, 繼續認錯
+16:07:09 <MnO2> CindyLinz: 不過當參與的人成長到一定人數，某種程度群眾的風向就會很難操控。參與的人的目的跟手段都不同
+16:07:17 <CindyLinz> 沒錯! 所以, 我覺得這方面對我有一點遙遠, 可能比 category theory 還難懂.. (咦)
+16:08:28 <MnO2> CindyLinz: 不過這很難講，總是要做了點嘗試實驗也才知道兩邊的反應。
+16:09:44 <MnO2> CindyLinz: 這就是社會運動困難的所在...
+16:09:52 <CindyLinz> 聽說政府推那個實價登錄網站, 其實跟 Open Data 沒有關係.. 政府只是想說公開交易實價, 算是阻止房地產炒作的措施
+16:10:05 <CindyLinz> 沒想到好心推個服務出來被打個滿頭包
+16:10:17 <MnO2> 嗯
+16:10:36 <CindyLinz> 如果 ledia 那個地圖晚半年再出就好了 XD
+16:10:42 <MnO2> 我想也是他們始料未及的
+16:11:11 <CindyLinz> 對啊, 這也算是「嘗試實驗」所以就知道了「反應」的例子 XD
+16:24:11 <CindyLinz> 現在那些官員應該在想, 早知道就不要推實價登錄, 就不會惹這一身腥了.. ^^|
+16:39:02 <MnO2> 躺著也中槍xD
+18:13:38 <c9s_> 其實實價登錄效果不錯，真的有打房的效果出現
+18:14:10 <c9s_> CindyLinz 你有要去 g0v 玩 open data 嗎 ? XD
+21:05:40 <CindyLinz> c9s_: 應該就不去了, 那天早上有事 :p
+23:19:30 <MnO2> http://stackoverflow.com/questions/13341937/whats-the-status-of-current-functional-reactive-programming-implementations

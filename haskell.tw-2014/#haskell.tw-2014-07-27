@@ -1,0 +1,49 @@
+11:24:50 <suhorng> 有人用過 trifecta （parser）嗎 :P ?
+11:26:48 <suhorng> 然後用 parsec 這一類的 parser 需要忽略空白時（e.g. 用空白分割 token)，除了手動寫一個 skipSpace 有什麼好解法嗎？
+11:45:59 <au> tok = (<* whiteSpace)
+11:46:14 <au> suhorng: 然後出現 foo 的地方寫 tok foo
+11:46:31 <au> @pl \x -> whiteSpace *> x <* whiteSpace
+11:46:31 <lambdabot> (<* whiteSpace) . (whiteSpace *>)
+11:46:38 <au> 也可以這樣
+11:59:55 <suhorng> ohoh! 原來如此
+12:00:15 <suhorng> 自訂一個新的 combinator 來做這件事
+12:00:29 <suhorng> <* . *> 這個到還真的沒有想到...
+16:47:23 <petercommand> 那兩個<* 和 *>是甚麼呀?
+16:49:52 <au> https://hackage.haskell.org/package/base-4.7.0.0/docs/Control-Applicative.html#v:-42--62-
+16:50:18 <au> Applicative 版本的 << 和 >>
+16:55:13 <petercommand> <<是在哪裡定義的呀?
+16:55:20 <petercommand> Control.Monad找不到XD
+16:57:58 <petercommand> @src (<<)
+16:57:58 <lambdabot> Source not found. Have you considered trying to match wits with a rutabaga?
+16:58:04 <petercommand> @src (>>)
+16:58:04 <lambdabot> m >> k = m >>= \_ -> k
+16:59:16 <petercommand> au: 是不是<<需要自己定義呀?
+17:00:32 <au> yeah :p
+17:00:48 <petercommand> 竟然是不對稱的XD
+17:01:38 <au> 也可以定義叫 ⁏ XD
+17:02:30 <petercommand> 為啥叫;呀?
+17:02:34 <au> > let (⁏) = flip (>>) in putStrLn " world" ⁏ putStr "hello,"
+17:02:36 <lambdabot>  <IO ()>
+17:02:49 <au> ⁏ 是反過來的分號
+17:02:55 <petercommand> XDDD
+17:03:11 <petercommand> 鍵盤沒有阿...
+17:05:24 <petercommand> > print 123
+17:05:26 <lambdabot>  <IO ()>
+17:06:01 <petercommand> 有辦法perform IO嗎?
+17:07:09 <au> 似乎沒辦法，內建 sandbox
+18:08:25 <pkmx> :t modify
+18:08:26 <lambdabot> MonadState s m => (s -> s) -> m ()
+18:09:24 <pkmx> @hoogle modifyM
+18:09:25 <lambdabot> Control.Concurrent.MVar modifyMVar :: MVar a -> (a -> IO (a, b)) -> IO b
+18:09:25 <lambdabot> Control.Concurrent.MVar modifyMVar_ :: MVar a -> (a -> IO a) -> IO ()
+18:09:25 <lambdabot> GHC.Conc.Sync modifyMVar_ :: MVar a -> (a -> IO a) -> IO ()
+18:09:52 <pkmx> :t get >>= f >>= put
+18:09:53 <lambdabot> (FromExpr (m a), MonadState a m, Show a) => m ()
+18:10:03 <pkmx> :t \f -> get >>= f >>= put
+18:10:05 <lambdabot> MonadState a m => (a -> m a) -> m ()
+18:10:30 <pkmx> :t \f -> get >>= lift . f >>= put
+18:10:31 <lambdabot> (MonadState a (t m), MonadTrans t, Monad m) => (a -> m a) -> t m ()
+18:17:44 <CindyLinz> :t \f -> get >>= return . f >>= put
+18:17:46 <lambdabot> MonadState a m => (a -> a) -> m ()
+18:21:15 <CindyLinz> @pl \f -> get >>= return . f >>= put
+18:21:16 <lambdabot> (put =<<) . (get >>=) . (return .)

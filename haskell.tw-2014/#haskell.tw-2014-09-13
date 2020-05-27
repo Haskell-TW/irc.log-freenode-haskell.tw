@@ -1,0 +1,7 @@
+00:02:01 <suhorng> CindyLinz: 原來如此
+00:06:13 <CindyLinz> 也許在現有 CPU cache 結構的加持下, immutable 的資料結構的表現有不少實際上會不錯的地方..
+00:06:55 <CindyLinz> 在 access memory 的時候, 實際上是以一個 cache line (32bytes 或 64bytes) 為單位
+00:07:15 <CindyLinz> 這大小應該常常會比我們一個 record 大吧
+00:08:42 <suhorng> 還大滿多的...
+00:11:35 <CindyLinz> 這邊 2002 年的資料, 是說 cache fetch 一次大約是 50~2000 次 instruction 執行的時間, 現在應該會更大吧 (? # http://judy.sourceforge.net/downloads/10minutes.htm
+00:12:05 <CindyLinz> 所以 Judy array 的設計是去拼最低的 cache fetch 次數

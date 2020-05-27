@@ -1,0 +1,6 @@
+09:50:03 <mno2> https://www.reddit.com/r/haskell/comments/3re0kp/jpmorgan_haskell_team_is_hiring/  JPMorgan 也開始請 haskeller 了
+20:55:56 <petercommand> https://wiki.haskell.org/Pattern_guard
+20:56:15 <petercommand> "Haskell 2010 changes the syntax for guards by replacing the use of a single condition with a list of qualifiers." 以前不是 a list of qualifiers 嗎?
+20:56:52 <petercommand> 還是說以前要擺 list of qualifier 要開 extension
+21:00:10 <CindyLinz> 不知道以前怎樣, 只知道現在可以在 guard 裡面用 let 定義東西
+21:04:41 <petercommand> https://mail.haskell.org/pipermail/haskell-prime/2006-November/001910.html 看起來很久以前就可以了XD

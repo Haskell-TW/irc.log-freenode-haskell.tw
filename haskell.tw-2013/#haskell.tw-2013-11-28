@@ -1,0 +1,61 @@
+13:52:52 <yu_lin> 我在 Control.Concurrent 的 forkIO 中看到這段   case (fork# action_plus s) of (# s1, tid #) -> (# s1, ThreadId tid #)
+13:53:12 <yu_lin> 那個 # s1 中的 # 是什麼？
+14:56:48 <monochrom> (# x, y #) 是 GHC 的特有 unboxed tuple
+14:59:10 <monochrom> 因此, 要把 "(#" 看成一個 token, "#)" 看成一個 token
+16:47:17 <CindyLinz> 正常的 ( x , y ) 在記憶體裡面應該是 [(), [x], [y]]  (每一組 [] 代表一個指標, 可能是個 thunk, 也可能解下去出來是個 bottom)
+16:48:28 <CindyLinz> 歐 (# x , y #) 在記憶體裡面是 [(), x, y]
+16:48:57 <CindyLinz> (為什麼會打出 歐.. orz)
+16:49:11 <kanru> 歐~
+16:50:34 <CindyLinz> 所以用起來比較快, access x, y 的時候可以少一層 deref, 不過如果這整個 (# x , y #) 不是 bottom 的話, x 和 y 都不能是 bottom
+16:50:53 <petercommand> 呦~~
+16:52:19 <CindyLinz> 然後在 GHC 裡面定義 data OO = ... 的時候可以在 member 的 type 前面打 ! 代表這個 field 不會是 bottom (否則整個 record 是 bottom)
+16:52:39 <CindyLinz> 它額外提供一個 compile 選項是自動把這種 field 都 unbox 掉
+16:54:48 <CindyLinz> 不知道這邊的 x y 如果是像 Maybe a 這種 type, 兩個 branch 的長度不一樣, unbox 完會長什麼樣子 @@"
+18:11:51 <b4283> 喲~~~
+18:16:53 <hashcat> union?
+18:18:40 <hashcat> 至少可以說會隨著分枝增加而增加不合理
+18:28:06 <CindyLinz> union 的話就是取最大的那一個
+18:29:44 <CindyLinz> 感覺合理
+19:13:19 <hashcat> 考慮真要吵的話, 誰會吵贏這樣
+20:27:20 <CindyLinz> hashcat: ??
+21:43:15 <hashcat> 就要怎設計編譯器, 貌似不是像union取最大的方案都吵不贏
+22:11:50 <hashcat> idris版本號進了一小步
+22:31:21 <suhorng> 馬上裝來玩
+22:32:51 <hashcat> 你的一大步
+22:33:46 <suhorng> 可以在現實世界跑的 depend type PL www
+22:33:54 <suhorng> ***depend
+22:33:57 <suhorng> ***dependent
+22:34:00 <hashcat> 其實我不知道自己在講啥, 只是想亂套名言
+22:34:23 <hashcat> 也要請得到人用
+22:34:59 <suhorng> XD
+22:36:14 <hashcat> dependent type要怎翻譯
+22:36:30 <suhorng> 相依型別如何
+22:37:12 <hashcat> 應該是英文這名字原本就取得不好才會這麼難翻
+22:37:20 <hashcat> 不知道ㄟ
+22:37:56 <hashcat> 為啥是相依不是依賴
+22:38:07 <hashcat> 雖說兩者都看不出意義
+22:40:05 <suhorng> 剛好跟 linearly dependent 翻譯成線性相依合 (呃 不過也都沒關聯就是)
+22:40:58 <suhorng> Effect package好像滿有趣的
+22:43:49 <hashcat> 這語言啥麼都有趣
+22:44:32 <CindyLinz> dependent - a. 懸垂的, 吊著的
+22:44:43 <CindyLinz> dependent type 叫作 吊型 好了? :p
+22:45:14 <hashcat> 嗯很有周董的味道
+22:48:31 <hashcat> 最近已經夠冷了
+22:49:14 <hashcat> 相依型別, 解釋成數值和型別互相依賴
+22:49:20 <hashcat> 好像解釋的通
+22:50:22 <CindyLinz> 懸吊式類型系統不好嗎.. 拿來用在剎車系統之類的聽起來好像就很厲害 XD
+22:50:59 <suhorng> 需要防鎖死(compiling)呀 :P
+22:52:43 <CindyLinz> totality 和 dependent type 應該沒有連帶關係吧, 只是剛好 Coq Agda 都是兩者都有這樣 ^^|
+22:52:46 <hashcat> 天氣真的夠冷了 :P
+22:54:57 <favonia> idris 有 IRC channel 喔
+22:55:13 <suhorng> 比 agda 的還熱鬧...XD
+22:55:26 <favonia> 我雖然都掛著... 但沒在看 xD
+22:55:43 <suhorng> idris不用保證totality? 那他要怎麼確保compiler不會跑到無窮迴圈?
+22:56:13 <CindyLinz> suhorng: 沒, 我只是在講 懸吊式類型系統, 不一定有防鎖死的特性 XD
+22:56:13 <suhorng> 有些東西想在 Agda 中試卻因為 totality 不知道怎麼弄進去QQ
+22:56:23 <suhorng> xDDD
+22:56:49 <favonia> suhorng: 像什麼啊
+22:58:13 <CindyLinz> 那來掛一下 idris channel 看看...
+22:58:14 <suhorng> favonia: 給個 functor => 弄出 free monad
+22:58:21 <hashcat> Agda跟idris有很多一樣的人
+22:59:29 <suhorng> 還有上次看那篇 Agda tutorial 才知道 recursive datatype (給個functor取least fixed point那個)可以怎麼寫進去...

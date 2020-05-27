@@ -1,0 +1,194 @@
+00:08:10 <godfat1> 是說我也是看了那串才知道 python 把空字串當 false
+00:08:54 <7JTAAIB9M> 然後我得承認我曾誤信 c 過，我猜 XD
+00:09:07 <godfat> 7JTAAIB9M 哪裡來的...
+00:09:43 <monochrom> 隨機的臨時 nick :)
+00:10:03 <godfat> freenode 的機制嗎？ @@
+00:10:37 <monochrom> 說來話長, 不過, 是.
+00:12:28 <godfat> ok XD
+00:13:09 <letoh> 我覺得 python 的條件判斷規則有點怪  但其實還不錯用XD
+00:13:35 <godfat> 怎麼說？
+00:14:15 <letoh> 很多空的東西都可以當作 false
+00:14:21 <letoh> 然後還有一個 None
+00:14:49 <letoh> 我本來比較習慣只有一個 #f XD
+00:16:00 <letoh> 然後真正需要 None 的時候要用 xxx is None 來判斷
+00:17:21 <godfat> 用個 empty? 來判斷不是比較顯然 (explicit) 嗎？
+00:18:07 <letoh> 對啊  用 empty? 都比現在 python 的做法好
+00:19:01 <godfat> ruby 這邊的作法是 nil 跟 false 是 false, 其他都是 true
+00:20:15 <CindyLinz> perl 把 0, '', '0', undef 當 false, 其他當 true
+00:20:49 <CindyLinz> php..... 0, '', array(), null
+00:20:52 <letoh> '0' 當作 false 不科學XD
+00:21:10 <godfat> 但很 javascript (無誤?
+00:21:11 <CindyLinz> perl 的哲學是沒有 type, 所以 0 和 '0' 是一樣的
+00:21:13 <letoh> XD
+00:21:13 <CindyLinz> no
+00:21:19 <CindyLinz> javascript '0' 是 true
+00:21:24 <godfat> ....orz
+00:21:36 <monochrom> 我認為應該寫明你在測試甚麼.
+00:21:52 <CindyLinz> javascript 還是有 type, 而且很明顯 @@"  a+b 可能是數字加也可能是字串相接 @@"
+00:22:16 <CindyLinz> perl 的 '0' + '3' 還是 3... javascript 就變 '03' 了
+00:23:14 <monochrom> 然後對於 list, set 之類, 甚至跟本不應用 if-then-else, 應用 pattern matching. 例如 list: case mylist of [] -> a; x:xs -> b
+00:23:34 <CindyLinz> perl 程式的確習慣會寫明我們在測試什麼
+00:23:52 <CindyLinz> 當數字用會用 ==, 當字串用要用 eq, 什麼都沒有的時候當 bool 用..
+00:24:38 <monochrom> 因為 mylist 不空的話, 你還會有後著, 要抽取其中一員甚麼的. 何不一次過既測試又抽取.
+00:24:57 <monochrom> http://www.vex.net/~trebla/haskell/crossroad.xhtml
+00:26:00 <godfat> 真是看到哪裡覺得不對來這裡抱怨就對了（誤
+00:26:32 <CindyLinz> monochrom: 因為我們要貫徹 do one thing and do it well 的原則, 所以不可以既測試又抽取.. (逃)
+00:27:01 <CindyLinz> godfat: 被你說成取暖舔傷區了... QQ
+00:27:27 <godfat> XDDDD
+00:27:30 <monochrom> 清醒程式員互助會 :)
+00:30:21 <CindyLinz> 不過那個 time 啊.. 如果是用 unix epoch time 的話, 把 0 當 false 就沒那麼嚴重了吧.. 反正是個用不到的廢域 XD
+00:30:36 <monochrom> 我知道你在說笑. 不過, 回到認真的話, 我那篇文有解釋為甚麼在這件事上, 一件頭簡單過分拆.
+00:30:38 <CindyLinz> 但如果是 time interval 就比較恐怖了
+00:31:56 <CindyLinz> 來認真讀一下 ^^
+00:33:41 <monochrom> unix epoch 是 1970 年嗎? 但我早過它一年出生.
+00:34:51 <monochrom> 我要學聖經裏的人物 約伯 嗎? "願我的生日受詛咒, 列入 unix time 的廢域" XD
+00:35:54 <godfat> XDDDD 1970-01-01 00:00:00
+00:36:11 <CindyLinz> 啊拿來記生日的話還是不行....
+00:36:12 <godfat> 這刻出生的人不知有多少
+00:36:26 <godfat> 可以用負數（誤
+00:36:34 <CindyLinz> 記生日的話負的還是不行啊
+00:36:48 <godfat> 因為..?
+00:36:57 <CindyLinz> 只是我用它的時候都是用來記錄正在發生的事情, 所以不用考慮過去太久的時間
+00:37:04 <CindyLinz> 1970 以前就是負的啊
+00:37:33 <godfat> 對啊，用負的有關係嗎？ XDDD
+00:38:03 <monochrom> 或者不少程式用 unsigned
+00:38:49 <CindyLinz> 欸不是, 我回答的是拿來當 false 可能會出問題
+00:39:30 <godfat> 1970-01-01 00:00 是唯一假
+00:40:27 <monochrom> 設想一下: 成人網頁:"你幾時出生?" 我:"1969年" 成人網頁:"即是2037年. 小子, 你還未夠班" XD
+00:41:53 <godfat> XDDDD
+00:42:10 <CindyLinz> 我們家統計玩家資料, 所有生日在 1.1 的都不算...
+00:42:32 <CindyLinz> 避開了 1970.1.1 的問題, 也避開了玩家亂填時填 1.1 的機率特別高
+00:43:58 <letoh> 所以實際上填 1.1 的真的很多嗎?
+00:46:17 <monochrom> 有沒有人試過填 13 月 42 日呢? :)
+00:46:42 <godfat> 我確實常常填 1970-01-01 XDD
+00:48:31 <letoh> 可以亂填的時候，我通常都填當天日期  年份就倒推 20 年
+00:50:47 <CindyLinz> 那沒差, 因為是作統計, 均勻的亂填就沒什麼大影響
+00:50:58 <CindyLinz> 但 1.1 會吸一大堆人...
+00:55:17 <CindyLinz> pattern matching 配上 ViewPatterns 就更好用了 ^^
+00:57:22 <CindyLinz> 雖然 GHC ViewPatterns 說明裡給的例子有些用法看起來很邪門, 我不太確定那是不是應該鼓勵的用法 @@"
+00:57:45 <CindyLinz> example :: ((String -> Integer,Integer), String) -> Bool
+00:57:51 <CindyLinz> example ((f,_), f -> 4) = True
+00:58:42 <godfat> ,_),
+00:58:55 <CindyLinz> godfat: 你的斷句法更邪門...... www
+00:59:01 <godfat> XDDD
+01:15:48 <monochrom> 是呀, ViewPatterns 可以做 f (minView -> Nothing) = a; f (minView -> Just (x, more)) = b. (minView 屬於 Data.Set)
+01:17:06 <monochrom> 用 pattern matching 就從來不存在 "好不好空集代表false" 的問題, 因為根本不需要
+02:11:57 <CindyLinz> yet another 勸世文.. XD # http://www.vaikan.com/object-oriented-programming-is-dead/
+02:13:09 <godfat> quote: 並不是任何東西都可以成為對象
+02:18:12 <CindyLinz> 不要 oriented 就好了 :|
+02:19:39 <CindyLinz> 為什麼能面試得到這種人啊.. 好難想像 ._. # 有一个做招聘工作的人回复道“我已经疲倦了面试那些只知道Haskell语言却不会使用C里的strlen()函数的实习生。”
+02:22:33 <godfat> 會不會是說不知道 strlen 可能不安全？
+02:22:39 <CindyLinz> 噢....
+02:22:55 <CindyLinz> 這個不會使用不知道是指什麼 XD
+02:23:25 <CindyLinz> 今天在讀 Exception 的時候突然想到一件事
+02:23:40 <godfat> 不會拿來做 buffer overflow XDD
+02:23:48 <CindyLinz> Haskell (至少 GHC) 裡面有實作處理 asynchronous exception 的機制
+02:24:08 <CindyLinz> 而這個東西... 好像在我比較熟知的高階語言裡都沒有了?
+02:24:29 <CindyLinz> Java 把 Thread.kill (還是 Thread.stop) 列為 deprecated 
+02:25:06 <CindyLinz> C++ 的話.. 反正 undefined 是它的天性, 所以很好實作, 但好像也沒什麼討論的意義 :/
+02:25:38 <godfat> asynchronous exception 真的超難搞呀，之前在弄 ruby 的，搞到我暫時放棄 orz
+02:26:06 <CindyLinz> go 是 cooperative 的所以應該沒有這種東西, perl 的 ithread... 嗯 沒有在用, 沒印象有這種東西
+02:26:32 <godfat> go 沒有是什麼情況呀？
+02:26:38 <godfat> 我以為有 thread?
+02:26:53 <CindyLinz> 是 goroutine, 同時只有一個人在跑, 所以別人也不會醒過來 kill 它吧?
+02:27:14 <CindyLinz> 我記得它們都是用 channel 來溝通啊
+02:28:04 <CindyLinz> Haskell 處理 async exception 的函數, type 的確是長得很噁心.. mask :: ((forall a. m a -> m a) -> m b) -> m b
+02:28:09 <godfat> 喔喔，反正全部透過 channel, 是否一起跑就不重要了
+02:29:01 <godfat> 沒用過 :s 也許應該參考一下，我之前一直弄不好，都有怪怪的情況
+02:29:12 <CindyLinz> 但好像設計得這麼噁心才能保證開了一定關, 而且不會有某個瞬間漏抓
+02:30:16 <CindyLinz> 用法是這樣 mask (\unmask -> do { 不能被打斷的工作 ; unmask ( do { 可以被打斷的工作 } ) ; 不能被打斷的工作 })
+02:30:57 <letoh> 看起來就像一堆 lock/unlock
+02:31:08 <godfat> 噢，我正是需要這樣...
+02:31:09 <CindyLinz> 有點好奇, 這會不會是 Haskell 一個很有殺傷力的 feature
+02:32:07 <CindyLinz> letoh: 我是把它理解為 x86 組語裡面的 interrupt mask
+02:32:12 <godfat> 我是寫半天才發現 ruby 的 ensure 如果有 async exception, 可能不被執行。也就是說，如果我用了 async exception, 那程式裡根本就不會有安全的程式，也就是我完全不能 lock!
+02:33:04 <CindyLinz> 好像是 cli 和 sti?
+02:33:15 <letoh> CindyLinz: 嗯  我覺得是一樣的，應該有不少 lock 實作裡面就是去操作 interrupt mask
+02:36:02 <monochrom> @type callCC
+02:36:03 <lambdabot> MonadCont m => ((a -> m b) -> m a) -> m a
+02:36:47 <monochrom> CindyLinz: mask 用法和用意正是你所說
+02:37:08 <CindyLinz> 嗯嗯嗯
+02:37:54 <CindyLinz> 想用來殺 Java.. ._.  殺手面罩 -- kill & mask
+02:38:30 <monochrom> 這是比 lock, unlock 好一點的, 因為 mask 記得幫你開頭lock, 結尾unlock. unmask亦類同.
+02:38:53 <CindyLinz> 嗯 自動成對
+02:39:33 <CindyLinz> 而且還把 建立 清除 這兩個 critical section 都成對了
+02:40:20 <monochrom> 所以話, 高秩函數 higher-order function 多好! :)
+02:41:26 <CindyLinz> 那個 mask 的 type, 要開 RankNTypes extension 才能 compile... ._.
+02:42:50 <monochrom> 因為它的確是 higher-rank type. (rank 又跟 order 不同, 哈哈, 死未!)
+02:43:46 <CindyLinz> 開 Rank2Types 還不夠..  然後沒有 Rank3Types, 只有 RankNTypes 可以開了
+02:44:46 <monochrom> order譯作秩(還是序呢?), level譯作階(high-level language 高階語言), 那麼rank怎樣譯才好呢? 詞窮了
+02:46:02 <CindyLinz> 不知道.. 台灣對專有名辭的英翻中常常是直接列英文 XD
+02:46:06 <CindyLinz> 不翻
+02:46:11 <letoh> 對  自動 unlock 的確是方便
+02:46:38 <letoh> 想了一下不曉得能不能用 c macro 處理掉XD
+02:47:46 <CindyLinz> letoh: 要先定義一下 async exception 的來源... 是 signal 嗎?
+02:48:14 <letoh> 我不太確定我理解的 async exception 對不對
+02:48:19 <monochrom> 其實, 我還真有本電算學名辭英中對照辭典, 以前在溫哥華某華人書店偶遇的
+02:48:23 <letoh> 我可以當作 hardware interrupt 嗎?
+02:49:10 <CindyLinz> letoh: 如果你說的程式是 OS, 或是在沒有 OS 的地方執行的程式, 或是 driver 的話, 那可以是
+02:49:31 <CindyLinz> 不然我們一般應用程式不會直接摸到 interrupt 吧?
+02:49:46 <letoh> 嗯嗯  因為我常常在沒有 os 的環境開發，一時只能聯想到這個XD
+02:50:32 <letoh> 當然都是封裝過的  但其實還是 interrupt，只是披著羊皮而已
+02:50:42 <CindyLinz> 嗯嗯嗯
+02:51:02 <monochrom> 啊, 它譯level做級(高級語言), order譯做階(higher-order logic 高階邏輯)
+02:51:21 <CindyLinz> 呃... 我比較習慣聽到講高階語言 @@"
+02:51:50 <monochrom> 它是大陸來的
+02:51:55 <CindyLinz> 好吧 XD
+02:52:15 <monochrom> 我也是只見過"高階語言"
+02:52:17 <CindyLinz> 最高階語言, 又稱中南海語言.. (誤)
+02:52:55 <CindyLinz> 前一陣子在翻 linux manpage, 發現 out of memory 這種 exception 可以不用處理了.....
+02:53:02 <letoh> 印象中在台灣一些 lisp 老書看過高級語言這個說法
+02:53:25 <letoh> 不過那種書通常都是被封印在圖書館，幾十年來只有一兩個人借過那種XD
+02:53:39 <CindyLinz> 它說 malloc return non-null pointer 的時候, 「不代表」你一定能使用, 它只是就先給你一個 non-null pointer
+02:54:02 <CindyLinz> 等你真的用下去的時候才會配, 萬一來不及配....
+02:54:14 <CindyLinz> 它就跑某一段處理常式, 把你的 process 殺了......ww
+02:54:36 <monochrom> 這本辭典很強的. 下至ink jet printer, 上至 isomorphic graph都有
+02:57:04 <monochrom> 是呀, linux 給你的是 lazy 記憶. 明白了 lazy 記憶, 那麼學 Haskell 就無難度啦!
+02:58:11 <monochrom> 這幾天家人外出, 只有我在家, 我也快要實施 lazy 洗碗碟了!
+02:58:40 <letoh> 缺碗的時候才開始找一個來洗
+02:59:01 <CindyLinz> 好像有點噁 orz
+03:00:15 <letoh> 依照那個 non-null 的方法，應該是缺碗時還是會先找個碗，等真的要扒飯的時候...(不敢想像下去了
+03:00:33 <CindyLinz> letoh: 你就去廁所 core dump 吧!
+03:00:37 <letoh> XD
+03:00:56 <letoh> 那個 non-null 的處理好噁心...
+03:01:04 <monochrom> 哈哈哈哈哈
+03:01:14 <CindyLinz> 他說這樣效率比較好... 的確是沒錯啦.. 只是.........ww
+03:01:58 <CindyLinz> 然後我電腦上 chromium 每個 tab 開起來就先要個 1.2G.. 當然都是虛的要了沒用 :Q
+03:12:50 <CindyLinz> XDD # 面向对象编程语言的问题在于，它总是附带着所有它需要的隐含环境。你想要一个香蕉，但得到的却是一个大猩猩拿着香蕉，而其还有整个丛林。” — Joe Armstrong（Erlang语言发明人）
+03:13:46 <letoh> 他好像評過不少東西，都蠻有趣的
+03:14:53 <CindyLinz> 啊忘了貼來源.. 我正在看這篇 :p http://www.vaikan.com/object-oriented-programming-is-inherently-harmful/
+03:15:42 <CindyLinz> 也是戰神一名嗎? XD
+03:17:35 <letoh> harmful stuff XD
+03:46:47 <CindyLinz> 為什麼 GHC api 自訂自用的 ExceptionMonad 的 mask 裡面沒有寫 forall 啊..... 囧 # http://www.haskell.org/platform/doc/2013.2.0.0/ghc-api/Exception.html#t:ExceptionMonad
+03:47:33 <CindyLinz> 然後我就不能套用自己已經實作好的 Control.Monad.Catch 的 instance 來用了 orz
+11:36:55 <CindyLinz> Dijkstra 罵人的用語真的不太有水準 XD # “Object-oriented programming is an exceptionally bad idea which could only have originated in California.” — Edsger Dijkstra
+12:18:10 <CindyLinz> 這個是 Java 粉的觀點... # http://ingramchen.io/blog/2014/03/learning-deep-and-wide-not-duplicate.html
+12:18:52 <CindyLinz> 拒絕 scala 的原因有二: 其一是我的實驗失敗了，其二是 Scala 可做到的 Java 都做的到，沒有理由增加員工學習維護的成本。
+12:42:37 <cataska__> 不知道他的實驗是什麼
+12:43:29 <cataska__> Java8 的出現的確會威脅到 Scala
+12:52:54 <CindyLinz> 還沒有看過 Java8
+12:57:28 <CindyLinz> 應該也要來了解了解 :Q
+12:58:59 <CindyLinz> 這不適合閱讀啊... QQ # http://openjdk.java.net/projects/jdk8/features
+13:01:21 <CindyLinz> lambda 的用法: (參數列) -> 函數body
+14:23:20 <godfat> 他的文章往往讓我同意一半，也不能說反對另一半，只是就有點微妙微妙，風格不合吧... 昨天看到一堆人在轉，也是微妙微妙 XDD
+14:56:04 <cataska__> godfat: 同意哪一半?
+14:59:17 <godfat> 比方說，追逐類似的 web framework. 不過淺嚐自然不在此限，熟悉 web framework 的人可能花不了多少時間就能大概知道另一個 web framework 的狀況，這樣成本也不高，也是有好處
+15:09:00 <godfat> 以小結而言... 這句同意：
+15:09:01 <godfat> : 研究和學習別的平台怎麼做同樣的事，增廣見聞是好的。但如果你同時會 Spring、Rails、NodeJs、Django 開發 web app，那你可能浪費了無謂的時間，因為他們的成果都一樣。
+15:09:01 <godfat> 這句反對：
+15:09:01 <godfat> : 而且在同個團隊導入重覆功能的技術，只是增加學習和維護的成本，長遠來看是扣分，而不是加分。
+15:09:26 <godfat> 當然這可能看「同個團隊」要怎麼定義就是了
+16:37:31 <CindyLinz> 喔, 看他的 blog 就可以看到一些「能讀」的 Java 8 介紹了 :p
+18:12:58 <letoh> 我還在想昨天那個 mask... 感覺好神奇   CindyLinz 給的例子中間插了一段可以被中斷的工作，意思是這段工作做完後會自動再 mask 回去嗎?
+18:39:13 <CindyLinz> letoh: 對, 做完了會回到外層
+18:40:04 <CindyLinz> 總共有 3 層.. 最外層當作是呼叫 mask 前, 與 mask return 後 (這邊的前後是 syntax 上的, 實際執行順序我不太肯定..)
+18:40:46 <CindyLinz> 然後中間層, 就是我前一句講的「外層」, 是傳給 mask 的 action; 最內層是傳給中間層收到的 unmask 的 action
+18:41:04 <CindyLinz> 中間層有 mask, 最內層和最外層沒有 mask
+18:41:09 <letoh> 嗯嗯  mask; 不可中斷; unmask; 可中斷; mask; 不可中斷; unmask;  這樣?
+18:41:21 <CindyLinz> 對
+18:41:43 <letoh> 不過可以自動恢復 context 真是方便
+18:43:43 <letoh> 為我之前工作上的 code 就有這種情境，要處理完整也是挺傷腦筋
+18:55:29 <CindyLinz> 嗯嗯
+21:19:47 <miaout17> 他的文章往往讓我同意一半，也不能說反對另一半++
+23:38:24 <suhorng> 結果還是買了Beginning Haskell XD
+23:53:09 <CindyLinz> (Y)

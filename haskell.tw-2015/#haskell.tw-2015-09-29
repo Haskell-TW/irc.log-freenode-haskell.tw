@@ -1,0 +1,37 @@
+00:58:45 <mno2> 結果跟 Oleg 聊一聊越聊越大了 xDD   我原本只是提我很懷念台灣有 FLOLAC，想說如果在新加坡也有的話多棒
+00:59:19 <mno2> 他很認真回我說他最近也在想這件事，如果亞洲也有類似 Oregon Summer School 之類的話就太好了
+00:59:45 <mno2> 大家對於這個有想法嗎？
+01:00:14 <mno2> 要聚在同一個地方感覺經費有點困難
+01:00:23 <mno2> 不過我在想有沒有有創意一點的方式
+01:00:33 <mno2> 遠端進行之類的
+01:02:47 <monochrom> Oregon Summer School 錢是贊助商 (例如 galois.com) 及學費共同承擔. 學生亦自費機票.
+01:04:07 <monochrom> 而學生, 即碩士博士生, 有他們的導師出錢
+01:05:21 <monochrom> 而他們的導師, 錢來自每數年申請得到的研究經費
+01:07:01 <monochrom> 總之, Oregon Summer School 顧客是公費的碩士博士生, 所以錢不成問題
+11:29:01 <suhorngT> Does it run backward? https://www.facebook.com/ekmett/posts/10153497744710339
+11:31:08 <suhorngT> wow, Oregon Summer School...
+11:32:53 <suhorngT> 另一方面, 學生的方面也是個問題呢~ 以亞洲為 scale 可能沒問題, 但臺灣的話就無法了XD
+11:33:11 <suhorngT> 感覺要辦可能會在日本?
+12:17:52 <mno2> 我也覺得學生方面是個問題，沒有 $$$$
+12:18:04 <mno2> 至少也要有機票錢
+12:41:29 <suhorngT> 我覺得不只是 $, 現在 FLOLAC 是面向基礎的課程, 這跟 Oregon 的內容很不一樣
+12:42:11 <suhorngT> 臺灣大部分學生沒有 PL 基礎(有 PLT 類似課的學校很少, 大多數就只是教教其他語言語法而已)
+12:50:12 <CindyLinz> Oregon 的內容是進階主題喔?
+12:50:24 <CindyLinz> 是最新研究之類的嗎?
+13:49:12 <CindyLinz> 印出 100,000,000 以下所有 amicable 的程式 https://gist.github.com/CindyLinz/9c877826639c885a55c8
+13:49:42 <CindyLinz> 我的程式在 Intel(R) Core(TM) i5-3320M CPU @ 2.60GHz 跑 12 分鐘, 用 2MB 記憶體
+13:50:01 <CindyLinz> 這是 tera 用 C++ 寫的, 只需要 25 秒
+13:50:05 <CindyLinz> 演算法不一樣.
+13:50:54 <CindyLinz> 他開了一個 100,000,000 個 unsigned 的 vector 來存東西
+13:52:35 <CindyLinz> 我限制記憶體只能用 4GB (因為機器只有裝 8GB, 不想碰到 swap.. ^^|), 一億個 Int 的 Array 就開不出來了 ._.
+13:53:38 <CindyLinz> UArray 的話, build array 的時候不能讀取已經算出值的 array element
+13:53:50 <CindyLinz> IOUArray/STUArray 的話... 好醜喔 QQ
+13:56:19 <CindyLinz> 需要一個 unsafe 的 UArray.....!
+17:03:01 <mno2> 我覺得內容是可以彈性的，一開始沒有那麼多人信教可以用淺顯一點的內容吧
+17:03:18 <mno2> 因為這話題也是聊到 FLOLAC 而開始的
+17:03:33 <mno2> 但總之是希望全亞洲吧 xD
+17:03:42 <mno2> 因為他現在在日本
+17:19:58 <CindyLinz> XDD
+18:23:41 <suhorngT> CindyLinz: e.g. https://www.cs.uoregon.edu/research/summerschool/summer15/schedule.html
+20:20:28 <CindyLinz> 好像很棒 QQ
+20:30:02 <suhorngT> 簡直太棒了阿QQ 剛剛還翻到去年有一個課是教你作個簡單(但 non-trivial)的 dependently typed language

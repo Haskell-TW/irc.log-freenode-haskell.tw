@@ -1,0 +1,26 @@
+01:02:02 <monochrom> "What You WIll Learn" 有講
+09:55:40 <mno2> https://www.reddit.com/r/haskell/comments/3ji3p0/haskell_is_a_complete_joke_when_it_comes_to/  群情激憤 xD
+09:56:33 <mno2> https://www.youtube.com/channel/UCwRL68qZFfub1Ep1EScfmBw  [ICFP videos]
+11:32:34 <CindyLinz> 一句話惹毛 Haskeller.... XD
+11:40:25 <cibs> $something is a complete joke when it comes to practicality
+11:40:49 <cibs> 一句話惹毛 ${something}er
+14:46:42 <caasihuang> CindyLinz: Functional Reactive Animation 那篇才看了前三分之一，現在看 (>>=) 和 (>>) 就知道那個 = 差在那邊了 XD
+14:48:11 <CindyLinz> (Y)
+14:48:45 <CindyLinz> caasihuang: 雖然應該不是個 monad 主題的東西 XD
+14:50:05 <caasihuang> 那時不流行 Monad 嗎？ at 跟 occ 看來是拆開 Behavior 跟 Event 用的。
+14:50:30 <caasihuang> 然後可以給 >>= 作的事情被 lift 取代。
+14:51:40 <CindyLinz> caasihuang: monad 是背景音樂 ^^|
+14:51:53 <caasihuang> 注意到 Behavior 裡可以放 Time, Behavior 跟 Event ，而 Event 裡可以放 Event 也可以放 Behavior 後才讀得順一點...
+14:52:01 <caasihuang> 不懂 XD 背景音樂？
+14:52:27 <CindyLinz> caasihuang: 不是主角, 可是無所不在..
+14:53:11 <caasihuang> XD
+15:12:21 <cataska> Functional Reactive Animation 的文章在哪
+15:18:19 <caasihuang> cataska: 筆記我不知道，原文是 http://conal.net/papers/icfp97/
+15:21:34 <CindyLinz> 那我來申筆記..
+15:21:43 <CindyLinz> 去找講者申 :p
+15:21:48 <cataska> caasihuang: 謝謝
+15:22:14 <cataska> CindyLinz++
+15:25:29 <caasihuang> CindyLinz++
+15:26:43 <cibs> CindyLinz++
+15:43:54 <CindyLinz> 來嘍~~ http://www.meetup.com/Functional-Thursday/events/224626446/comments/454286227/?a=uc1_rd&read=1&_af=event&_af_eid=224626446&itemTypeToken=COMMENT
+16:21:01 <caasihuang> CindyLinz++ geoffrasb++

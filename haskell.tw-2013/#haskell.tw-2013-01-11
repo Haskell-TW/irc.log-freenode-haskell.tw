@@ -1,0 +1,155 @@
+11:48:23 <CindyLinz> 覺得拿 haskell 作 javascript 用的方式, 還是要能把 haskell compiler 本身 compile 成 javascript (或重新用 javascript 實作), 然後作成 <script type=text/haskell> 才方便使用
+11:49:55 <CindyLinz> 也許不用到 ghc 等級的.. script 的使用方式會在執行時期耗用 compile 時間, 所以作成 lightweight interpreter 也是個選項
+11:57:17 <_13h> CindyLinz: 你是說像 O'Browser 或 Brython 那樣?
+11:57:34 <CindyLinz> _13h: 我先去看一下你說的這兩個東西是什麼 ^^|
+11:57:49 <MnO2> 我只聽過Brython
+11:57:53 <_13h> http://www.brython.info/index_en.html
+11:57:57 <CindyLinz> _13h: 我講這東西的時候是因為最近一直在用 coffeescript
+11:58:15 <_13h> O'browser 是 Ocaml
+11:58:23 <b4283> very cool
+11:58:47 <CindyLinz> coffeescript 可以這樣用, 也可以 compile 後再用.. 不過它的 compiler 的 optimize 只有稍微做一點點, 生出來的 javascript 其實完全可以看出來原始碼怎麼寫的
+11:58:50 <MnO2> CindyLinz: 你討厭 Livescript 嗎？ xDD
+11:58:55 <CindyLinz> MnO2: 討厭啊
+11:59:47 <CindyLinz> _13h: Brython 差不多是那樣的感覺
+12:00:11 <CindyLinz> _13h: 不過當然.. 如果也有 compile mode 可以選就更好了 XD
+12:00:21 <MnO2> CindyLinz: 我對Livescript完全沒有研究，不過我好奇你討厭的點，想研究一下
+12:00:33 <CindyLinz> MnO2: 噗 XD
+12:01:08 <MnO2> CindyLinz: 好像有 space sensitive 的問題？
+12:01:43 <CindyLinz> MnO2: livescript? 嗯, space 是有嚇到我過, 不過應該不是最主要討厭的原因..
+12:01:52 <MnO2> 如果Haskell要做成那樣，其實我也不確定現階段是技術上有困難，還是只是資源不足而已。
+12:02:40 <MnO2> 不過GHC連ARM的支援都還不充分，Javascript就別說了。社群人力超缺
+12:03:22 <CindyLinz> MnO2: livescript 有很多 feature, 每一個單看都很簡潔方便. 但它們不是從一個統一一貫的思想或風格演繹出來的, 所以這些 feature 在交會的時候會衝突.
+12:03:54 <CindyLinz> 每一個衝突點都要直接像特例一樣列出來它會怎麼作. 而它 feature 很多, 所以這種特例也很多
+12:04:01 <CindyLinz> 例如...
+12:04:09 <CindyLinz> f! 表示 f()
+12:04:23 <CindyLinz> (前面是 livescript 後面是 javascript)
+12:05:09 <MnO2> hmmm
+12:05:11 <CindyLinz> {unary operator}{array literal} 表示把這個 operator apply 到 array 裡面的每一項
+12:05:16 <CindyLinz> 所以... f![1,2,3]
+12:05:51 <CindyLinz>  f! [1,2,3] 和 f ![1,2,3] 的意思是不一樣的.. 而 f![1,2,3] 是衝突點
+12:06:31 <MnO2> 這三個意思都不一樣？
+12:07:05 <b4283> 為啥要這樣設計..
+12:07:13 <b4283> map 才三個字
+12:07:20 <CindyLinz> 欸 都不一樣
+12:07:44 <CindyLinz> 啊對不起 我剛這個例子還用到第三個 feature
+12:07:57 <CindyLinz> f! [1,2,3] 的話是 f()([1,2,3])
+12:08:00 <MnO2> 聽起來有點恐怖
+12:08:14 <CindyLinz> f ![1,2,3] 是 f([!1,!2,!3])
+12:08:30 <CindyLinz> 因為它和 coffeescript 相似, 函數呼叫可以不加括號
+12:09:09 <b4283> f! ![1,2,3]
+12:09:25 <b4283> f!![1,2,3]
+12:09:27 <CindyLinz> f![1,2,3] 是... f() 的return值(必須是array) 取其 [1], [2], [3] 拼成 array
+12:09:35 <CindyLinz> livescript 的網頁可以直接實驗
+12:10:53 <CindyLinz> 好吧.. f![1,2,3] 有異於另兩者的解讀 orz
+12:11:04 <MnO2> 驚嘆號地獄
+12:11:54 <CindyLinz> b4283: livescript 有不少這樣的設計.. 多列一條 feature 來偶爾省一兩個 byte
+12:12:11 <CindyLinz> 像是... f {某東西} a
+12:12:49 <CindyLinz> 在這個 {某東西} 看起來是一個不可能是函數的 literal 的時候, 這一個式子會解讀為 f({某東西}, a)
+12:13:13 <CindyLinz> 如果這 {某東西} 有可能是函數的話, 這一個式子會解讀為 f({某東西}(a))
+12:14:02 <CindyLinz> 這一條 feature 只省一個逗號.. 不過還是要放至少一個空格, 所以沒有省到 byte.. 顯示上省了幾個 pixel 就是了 ^^|
+12:16:20 <MnO2> 這真的是爽度問題的feature xD
+12:18:36 <_13h> 加 feature 的目的是為了省 byte 數嗎? 感覺有點怪
+12:19:30 <MnO2> 省byte數是CindyLinz自己推測的還是哪裡Mailing list有寫？
+13:52:54 <CindyLinz> MnO2: 當然我隨口亂諷的啦 ^^|
+13:54:30 <MnO2> CindyLinz: I see
+13:54:38 <CindyLinz> 從出品的 livescript 看, 然後往回想.. 我覺得 livescript 的設計沒有全局的想法, 而是各 feature 單獨看, 看起來很酷就加進來
+13:54:57 <CindyLinz> 所以 livescript 在火力展示的時候真是非常厲害
+13:55:46 <CindyLinz> 每一個展示的例子都能顯示它非常方便, 非常乾淨.. 可是每一個例子都是獨立的不同 feature 的感覺
+14:01:22 <CindyLinz> 我覺得有件很無奈的事情....
+14:02:00 <CindyLinz> 很久以前, 應該是 livescript 大約出了一兩個月的時候, clkao 推荐我用這個.. 所以我那天晚上就讀了 livescript
+14:02:25 <MnO2> then?
+14:02:30 <CindyLinz> 讀了大約 1/2 以後, 我覺得這東西太邪門了, 光那 1/2 feature 的量我覺得這東西不該花時間繼續學下去
+14:02:53 <CindyLinz> 結果因為後來看到越來越多人去用它喜歡它.. 所以忍不住偶爾就會出言批評一下
+14:03:04 <CindyLinz> 為了批評它.. 我花了更多時間去學它............||
+14:03:13 <CindyLinz> 不應該這樣的啊 orz
+14:03:59 <MnO2> CindyLinz: 聽起來讓我聯想到C++, wwwwww
+14:04:43 <CindyLinz> MnO2: 你為了刀刀見骨地批評 C++, 所以就精通 C++ 了這樣? XDD
+14:05:10 <MnO2> CindyLinz: 我一點都不精通C++啊
+14:05:33 <CindyLinz> MnO2: 就.. 反而學了更多 C++ 細節? XD
+14:06:56 <MnO2> CindyLinz: 對啊。但C++也讓我有這種拼湊感
+14:07:39 <CindyLinz> MnO2: 我覺得我的態度對 livescript 好像有比較嚴厲..
+14:08:19 <CindyLinz> 可能我覺得 C++ 一直在用, 然後一大堆拼湊的 feature 是長時間慢慢累積起來的..
+14:08:33 <CindyLinz> 而 livescript 是出生那天就搞成這樣
+14:09:24 <CindyLinz> 啊前兩週為了寫 WinPhone8 app 學了 C#.. 它 feature 也是好多啊..
+14:09:38 <CindyLinz> 不過應該沒有 C++ 那麼 free form 啦 :p
+14:10:18 <MnO2> 不知道 livescript 從無到第一版花了多少時間
+14:10:33 <CindyLinz> 嗯, 不知道..
+14:14:32 <hychen> CindyLinz, 我覺得livescript 很直覺ㄟ -.-
+14:15:41 <CindyLinz> hychen: 我批評的點不是它的 feature 單純直接用的時候呀~
+14:16:15 <CindyLinz> hychen: 是不同 feature 在語法上重疊的部分
+14:16:29 <hychen> CindyLinz, 開發中的東西都會這樣吧
+14:16:46 <hychen> CindyLinz, 我在寫我的打雜系統中, 也是很多東西衝突來衝突去....
+14:17:35 <hychen> https://github.com/hychen/boliau
+14:18:06 <hychen> 為了要做到更容易組合, 就覺得每個小單元重複的code太多... 正在想怎麼精簡 =.=
+14:18:09 <CindyLinz> hychen: 但我猜你應該不是一開始就希望它這樣衝突來衝突去, 而是可能一直冒出新的需求, 而且急著要上線急著用, 來不及解決了所以才暫時這樣忍耐它
+14:18:20 <hychen> CindyLinz, 中!
+14:19:40 <CindyLinz> hychen: 可是 livescript 這個方向應該是一去不復返了.....
+14:20:12 <CindyLinz> hychen: 要返也很麻煩啦, 因為會產生一大堆 incompatible change
+14:20:43 <hychen> 太早紅起來也是個缺點 XD
+14:22:10 <CindyLinz> hychen: 他一開始就是設計成這樣, 應該是方向上就沒有這方面的考量, 它一開始就已經把所有的細節訂死了
+14:22:39 <CindyLinz> 不是沒考慮到, 是都考慮到了, 而且覺得這樣並無不妥...
+14:23:08 <hychen> CindyLinz, livescript 是要背很多特例...沒錯. 我每次寫都要查syntax
+14:23:50 <hychen> CindyLinz, 遇到意外時還要看compiled 的js 長怎樣
+14:27:10 <CindyLinz> 我討厭特例, 它好醜, (可能也因為我記性不好).. 不過我也覺得難免一定會有特例, 只好我在設計東西的時候就盡量減少特例.. 所以我看到有 language 這麼不加修飾而粗暴地恣意放一堆特例的時候, 我討厭這個 language ^^|
+14:32:16 <MnO2> 我覺得可能是太快第一版了。
+14:33:01 <CindyLinz> 把作者綁架出來拷問.. (誤)
+14:34:01 <CindyLinz> 的確是有點好奇 @@"
+14:40:21 <hychen> https://class.coursera.org/proglang-2012-001/class/index
+14:40:30 <hychen> 這門14上課
+14:40:40 <hychen> 用的語言是ML, Raket, Ruby....
+14:40:52 <hychen> 這門14號上課
+14:59:43 <_13h> c++ 的問題跟它支援 multi-paradigm 有關嗎？
+16:50:13 <CindyLinz> _13h: 我覺得是 C++ 後來加入的語法背後的概念, 是一開始有 C++ 的時候還沒有的.
+16:50:36 <CindyLinz> _13h: 所以原始 C++ (其實我指的是 C) 在設計的時候完全沒有為它們作考慮
+16:51:11 <CindyLinz> _13h: 而後來硬是把它們加上去, 當然就會產生不連貫的地方..
+16:51:30 <CindyLinz> _13h: 例如說 C++ 現在有 lambda closure
+16:52:20 <CindyLinz> _13h: 一般有 closure 的語言, closure 裡面如果存取了外層函數裡的變數.. 這些變數就會真實地存活直到這個 closure 不再會被呼叫為止
+16:53:00 <CindyLinz> _13h: 而 C++ 的定義卻是: 如果外層函數比 closure 還早 return 的話.. 這個存取外層的動作是 undefined
+16:54:49 <CindyLinz> 看 C++ 的 spec.. undefined / unspecified 應該是常用字.. (逃)
+17:58:36 <MnO2> CindyLinz: C++ 一開始根本就只是 C 的 preprocessor 而已，後來變成正式語言也是意外
+17:59:51 <MnO2> 所以某種程度上人還是會學習的，livescript 至少一開始就是一個語言，不是 preprocessor
+18:00:22 <CindyLinz> 嗯嗯嗯
+18:00:39 <CindyLinz> 以前聽教授說 C++ 一開始是用 #define 之類弄出來的 XD
+18:00:44 <CindyLinz> tshsu
+18:00:52 <CindyLinz> 他一邊說就一邊唱衰 C++ XD
+18:01:01 <CindyLinz> 說它這個沒有原則的東西
+18:01:47 <CindyLinz> 不過現在「preprocess」這個概念好混亂啊 XD
+18:02:01 <CindyLinz> 可以說 livescript 是 javascript 的 preprocessor 嗎?
+18:03:26 <MnO2> tshsu 是徐讚昇嗎？
+18:04:12 <MnO2> CindyLinz: 當然我說的名詞並不是 well - defined 的，所以也不用鑽牛角尖
+18:10:10 <CindyLinz> MnO2: 對呀~
+18:10:17 <CindyLinz> MnO2: 好喜歡他上的課 :p
+18:10:43 <MnO2> 他 compiler 教蠻好的， 雖然他根本不是做 compiler
+18:10:44 <CindyLinz> MnO2: 可是他後來都不上課了... 不過後來我也不是學生了.... 噗
+18:10:52 <CindyLinz> 我就是上他教的 compiler ^^
+18:11:15 <CindyLinz> 雖然他上課都一直針對我.... QQ
+18:11:21 <MnO2> CindyLinz: 最後根本沒有 compiler 課了吧
+18:11:35 <CindyLinz> MnO2: 那是更更後來的事了.. (嘆)
+18:12:33 <MnO2> CindyLinz: 不知道拿掉的理由是什麼，我是覺得沒有PL課也沒有compiler課真的是少了些什麼
+18:14:02 <CindyLinz> MnO2: 那次去中研院聽演講的時候, 有一個年輕的, 應該已經是教授的人透露說
+18:14:16 <CindyLinz> MnO2: 他覺得 ntucsie 現在一整個都往應用偏
+18:14:25 <CindyLinz> 理論的越來越沒空間了
+18:14:47 <CindyLinz> MnO2: 我問他說那自動機怎麼辦....
+18:15:01 <CindyLinz> 他說自動機也有被討論... @@"
+18:15:35 <CindyLinz> 的確都是應用的主題才有錢啊..
+18:16:52 <MnO2> CindyLinz: 這就是現實啊
+18:22:31 <CindyLinz> 不過系上好像真的很缺錢.....
+18:22:40 <CindyLinz> 窮到請不起 217 助教了
+18:23:05 <CindyLinz> 從去年八月到現在, 應該是用奇怪的名目擠出奇怪的名額來填
+18:23:11 <CindyLinz> 錢從四萬變三萬的樣子...
+18:23:18 <MnO2> 大囧
+18:23:43 <MnO2> 應該是五年的燒錢計畫燒完了
+18:23:45 <CindyLinz> 因為學校說要砍助教還是什麼職務的名額的樣子
+18:23:55 <CindyLinz> 系上就會被分配要壓到多少以下
+18:23:59 <MnO2> 太閃了
+18:24:01 <MnO2> 慘
+18:24:33 <CindyLinz> 被錢逼急了.. 什麼長遠發展的考慮就不能考慮了... @@"
+18:27:17 <MnO2> 對啊。 (我要先閃了)
+20:19:13 <_13h> CindyLinz: 是常用字無誤XD
+21:53:21 <CindyLinz> GHC api 一大包.. 要把 parser 獨立出來乍看起來好困難啊 @_@"
+22:18:57 <MnO2> CindyLinz 也開始看 GHC  囉？
+22:28:01 <CindyLinz> MnO2: 已經不是第一次開始看了.... (默)
+22:40:10 <MnO2> GHC 讀書會 xD
+22:41:38 <MnO2> 我覺得這幾個月真的有明顯感覺到談論Haskell的文章數有增加，但我覺得認真投入的還是不多就是
+22:41:44 <MnO2> TIOBE都衝到32名了
+23:54:03 <CindyLinz> 哎呀~ 讀書會 XD

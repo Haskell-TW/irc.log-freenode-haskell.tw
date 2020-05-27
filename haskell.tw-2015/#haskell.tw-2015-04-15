@@ -1,0 +1,4 @@
+05:48:37 <monochrom> 啓示! Foo, Bar, Baz 的最尾字母先後是 o, r, z
+06:01:09 <au> 用 agda-mode + vim-mode in Atom 寫 .agda 相當有趣... 兩種 keybinding 混搭的感覺
+20:52:59 <mno2> http://www.reddit.com/r/haskell/comments/3201mh/what_we_learned_porting_our_integration_tests/  看到這個討論串裡 bos 的回覆，再去看 Aeson 的 document，提到用 TH 產生的 from & to 可能會比 generic 有效率。是什麼樣的性質讓 generic 沒辦法跟 TH 自己刻的要好？
+20:55:00 <mno2> 之前聽過 heisenbug 的 talk，我覺得刻在 type level 也是蠻有趣的，只是感覺 type level programming 比較難寫..

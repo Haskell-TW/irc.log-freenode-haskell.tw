@@ -1,0 +1,393 @@
+00:07:07 <whitglint> c++ concept 應該會比較簡單, 但是它被否決了 http://zh.wikipedia.org/wiki/%E6%A6%82%E5%BF%B5_%28C%2B%2B%29
+00:07:24 <suhorng> type of type xD
+00:07:29 <suhorng> Time for Agda!
+00:08:16 <CindyLinz> Agda 說 type in type 以後就崩壞了.. OAO
+00:08:48 <suhorng> XDDDD
+00:27:02 <CindyLinz> hashcat: 真是好 hack 的 trick 啊.. 覺得 Haskell 的黑技巧 partial signature 比起來還真是太乾淨了....ww
+00:28:11 <hashcat> 開始覺得haskell只有表面乾淨了
+00:29:24 <CindyLinz> 你不是也就看到 unsafeCoerce?
+00:29:41 <CindyLinz> 以前看到 FFI 的時候怎麼沒這樣的感覺?
+00:31:09 <hashcat> 型別系統也有一票難理解的擴展
+00:31:39 <hashcat> 函式庫使用黑魔法的頻率比想像多出一級
+00:32:23 <CindyLinz> hashcat: 你真的有看到人家常用嗎?
+00:32:43 <CindyLinz> 不過 FFI 沒關係嗎?
+00:33:33 <CindyLinz> 有 FFI 就有 unsafeCoerce 效果了啊
+00:33:41 <hashcat> cloud haskell就全部都是
+00:33:50 <CindyLinz> 可是能用的東西會有 FFI 不是顯然又顯然嗎 @@"
+00:34:11 <hashcat> yesod也全都是
+00:34:29 <CindyLinz> 還好我都沒用過? XD
+00:34:46 <hashcat> 覺得用python或C++出包的機率還比較少
+00:35:17 <hashcat> 我看過得FFI比較少被用到
+00:35:29 <CindyLinz> C 的話用到 malloc 的都算犯規嗎?
+00:35:38 <hashcat> 不算底層綁定的話
+00:36:00 <CindyLinz> 沒有算底層啊, 只是用 malloc 一定要 void* 一下的 ^^|
+00:38:50 <au> 尖端科技先從黑魔法開始，慢慢漂白很正常啊... GHC 之前的組合語言產生器完全是用 perl5 script 一堆逐列字串替換寫的 (稱作 "Evil Mangler")
+00:38:55 <hashcat> template haskell的特性真是破壞級
+00:39:29 <au> 在維護時就開玩笑說哪天用 GHC 重寫才能叫 Glorious Mangler ("G" in GHC)... 後來就重寫了
+00:39:55 <au> TH 也是從弱型別開始，這幾年慢慢進入強型別，這些事情都要時間的
+00:39:58 <CindyLinz> 驚! ghc 早期也用 perl5.. @@"
+00:40:09 <CindyLinz> perl5 是眾生之母嗎.....ww
+00:40:19 <hashcat> 不等了
+00:40:19 <au> CindyLinz: 我幫忙 maintain 了一段時間因為沒人想去碰...
+00:40:23 <hashcat> 轉向ATS2
+00:40:38 <au> hashcat++ # 記得寫 blog 分享~
+00:40:41 <hashcat> 看看ATS2有沒符合我理想
+00:40:43 <CindyLinz> au: m(_._)m
+00:42:53 <CindyLinz> au: 快發 patch 邀請信給 hashcat # 00:40 < hashcat> 不等了
+00:43:13 <au> CindyLinz: 已經發了 16:40 < au> hashcat++ # 記得寫 blog 分享~
+00:43:32 <CindyLinz> XDD
+00:43:34 <hashcat> ghc也已經好久了
+00:43:57 <hashcat> 結果就是這樣暈
+00:44:23 <au> hashcat: 如果只用 haskell2010 的話，就不只是表面乾淨，語義也乾淨
+00:44:44 <au> 但是用 ghc 擴展的話就沒辦法，確實是暈到底
+00:46:46 <hashcat> template haskell滿危險的, 有心人可以亂整你電腦
+00:47:10 <hashcat> hackage不知道有沒在過濾這個
+00:47:57 <hashcat> 可能發生編譯中, 結果自己電腦被幹掉或信用卡全部上傳這類事情
+00:48:12 <au> hashcat: cabal --no-extension-flags 就好了
+00:48:29 <au> 這樣就只會裝 haskell standard 裡的模組
+00:49:14 <au> (不過當然還是開個 vm / docker 比較保險)
+00:50:59 <hashcat> 把haskell遇到的問題比對下ATS2, 看會不會也有
+00:51:30 <hashcat> 沒有或比較少就改鑽ATS2拉
+00:52:25 <au> GHC 要綜合工業界、學術界和娛樂界三方面的需求，確實比較難兼顧，ATS2 很可能會好些
+00:52:56 <au> (娛樂界就是 @ekmett 這類人士)
+00:52:57 <suhorng> 娛樂界 XD
+00:53:14 <CindyLinz> 欸, 就算沒有 template haskell... 直接在 cabal 的 Setup.hs 寫邪惡的東西就行了啊 @@"
+00:54:03 <hashcat> template haskell會躲在程式堆裡
+00:54:04 <CindyLinz> 不是 sandbox 的話, 那些「安全」都不包含防止 author 亂搞吧 XD
+00:54:42 <au> runtime 也可以躲在程式堆裡... putStrLn 也可以寫成月圓時格式化硬碟
+00:55:14 <petercommand> 娛樂界是啥XD
+00:55:17 <suhorng> unsafePutStrLn :: String -> IO ()
+00:55:19 <hashcat> cabal時就被幹掉比較不舒服
+00:55:35 <suhorng> 不對... unsafePutStrLn :: String -> Moon -> IO ()
+00:55:54 <CindyLinz> suhorng: -Ofun
+00:56:06 <hashcat> 阿對了說道sandbox
+00:56:33 <mno2_> 那 safe haskell 可以保證到什麼程度？
+00:56:38 <CindyLinz> 不是也有在 install script 裡面寫 rm -rf / usr/lib/... 的嗎? XD
+00:56:55 <hashcat> 我挖到一個os還沒試過
+00:57:10 <hashcat> http://qubes-os.org/
+00:57:46 <au> mno2_: 可以 restricted io, 詳見 https://www.haskell.org/ghc/docs/7.4.1/html/users_guide/safe-haskell.html
+00:58:00 <au> er, https://www.haskell.org/ghc/docs/7.8.2/html/users_guide/safe-haskell.html
+00:58:04 <hashcat> Xen跟linux混合核心, 所以不是Xen也不是linux發行版
+00:58:59 <CindyLinz> au 都在偷偷置入 7.8 XD
+00:59:34 <au> 真的，依值型別和 ghcjs 太有趣了 XD
+00:59:35 <mno2_> 7.8 是 state of the art 當然應該要推啊。而且加了很多新功能
+01:00:03 <mno2_> 而且 7.8 還有 mio
+01:00:24 <CindyLinz> mno2_: 咦, mio 聽你講了那麼久, 是到 7.8 才有喔?
+01:01:03 <au> 對啊，傳說中的 Nettle 核心
+01:01:10 <au> #SDN "14 million flows per second, near-linear scaling up to 46 cores, and latency under 10 ms with loads consisting of up to 1500 switches"
+01:01:23 <CindyLinz> 那我要晚一點入手... # 怕怕der
+01:01:24 <mno2_> 我講的時候 7.6 已經出來啦，那時候就是 targe 7.8
+01:01:34 <mno2_> target
+01:01:50 <CindyLinz> 嗯嗯嗯
+01:07:07 <whitglint> 剛試了一下 boost::LessThanComparable, 它只是試試看 a < b 的回傳值能不能轉成 bool 變數, 但一編譯下去還是跟你說沒有 operator<, 其實跟在 sort() 裡直接寫 a < b 沒什麼差別... # 應該沒人在意這個問題了? XD
+01:07:38 <CindyLinz> orz
+01:08:07 <CindyLinz> 覺得是大家約好把這些條件寫在函數接近開頭的地方?
+01:09:13 <suhorng> 應該主要是要寫在 type 裡面？
+01:11:58 <whitglint> 可以在 sort() 開頭寫 static_assert(std::is_convertible<decltype(*begin < *end), bool>::value, "There is no operator<"); 雖然錯誤訊息不是 static_assert 指定的那個, 但至少看得出來錯在這一行
+01:12:10 <CindyLinz> 啊我看 hashcat 給的那些, 算是 hack.. 是寫在 code body 的任何地方
+01:12:17 <CindyLinz> 但應該都會寫在開頭
+01:15:28 <suhorng> 我也有想過如果硬要標在 type 的話，那出來的錯誤訊息會是一堆 substitution failed 之類的，應該也不會比較清晰明確
+01:15:50 <suhorng> 唯一的差別只有你只要看 type 會發現沒有那個一定會師拜
+01:16:09 <whitglint> 我覺得 hashcat 貼的那個方法應該也是一樣的錯誤訊息, 如果無法用 static_assert 自己寫易懂的錯誤訊息, 那其實沒兩樣...
+01:16:11 <suhorng> 但是反正 C++ 一定得查 document，寫在開頭也不會比較差吧？
+01:18:13 <whitglint> type traits 只能判斷 is 但沒有 has XD
+01:19:20 <whitglint> 不知 rust 在這方面有沒比較強
+01:20:42 <suhorng> 對，is，那就…一樣用 is_convertible 配上 enable_if？
+01:21:21 <suhorng> 不知道只考慮 operator< 的話能不能用 result_of<(T::operator<(T))>::type 啦lol
+01:21:21 <whitglint> enable_if 的結果是一個 type, 不是 bool
+01:22:03 <suhorng> 是，不過這邊用途可以是寫在 type 中當個 constraint，讓它不能做的話直接 substitution failed？
+02:04:01 <whitglint> 看了一下 mio, 是針對 green thread 設計的吧
+02:11:24 <whitglint> http://www.reddit.com/r/haskell/comments/1k6fsl/mio_a_highperformance_multicore_io_manager_for/
+02:19:27 <letoh> type_traits 只是一種 pattern，沒有限 c++11 吧?
+02:20:24 <letoh> 不然 boost 那一堆 traits 碰到 c++03 都要爛光光了
+02:20:54 <whitglint> 對, 只是 c++11 多一些方便的東東
+02:21:42 <letoh> 嗯嗯... pattern 用久了就該變 primitive 了XD
+02:22:40 <whitglint> Boost.Concept_Check 就沒用到 c++11
+02:23:18 <whitglint> <au> 尖端科技先從黑魔法開始，慢慢漂白很正常啊...
+02:23:48 <letoh> 今天訊息還真多  應該要明天才看得完XD
+02:24:46 <whitglint> 可以挑戰一下 CindyLinz 提出的問題
+02:25:24 <whitglint> 我不擅長寫那麼深入的, 我只用 c++ subset 中的 subset 寫一些簡單的程式
+02:26:16 <whitglint> # 有 log 的頻道一定要謙虛無誤
+09:25:33 <caasih_> 今天的投影片 https://dl.dropboxusercontent.com/u/5096640/flolac2.pdf
+09:33:38 <CindyLinz> 「Not very exciting, because not recursive」.. XD
+09:47:29 <miaoski> 請問一下... 課表完全是照這個嗎? http://flolac.iis.sinica.edu.tw/flolac14/doku.php?id=zh-tw:start
+09:47:55 <miaoski> i.e. au 的 Talk 是在 7/1 下午... 之類的 (需要好好把 YouTube 的順序和日期編輯一下)
+09:48:07 <CindyLinz> 對
+09:48:26 <CindyLinz> 中文版的是對的
+09:48:57 <miaoski> 然後柯向上老師的 TT 分別就是 part1 = 7/1 上午 part2 = 7/2 下午之類的...
+09:50:12 <CindyLinz> 嗯嗯
+09:51:02 <miaoski> CindyLinz: ++
+09:51:43 <miaoski> CindyLinz: 可以幫我看一下野生的 DTP 是哪天嗎? https://www.youtube.com/watch?v=Yl2TYS3UTc4
+09:53:19 <CindyLinz> miaoski: 不行.. 上週晚上準備 funth 早上好幾天沒起來 orz
+09:53:30 <miaoski> CindyLinz: 好吧 :P
+09:53:36 <miaoski> 靜待有緣人了
+09:53:42 <CindyLinz> ._.
+09:53:53 <miaoski> 總之我手邊的都傳上去囉....
+09:53:59 <CindyLinz> (Y)
+09:57:53 <alexlu> miaoski: 那個應該是第1堂DTP吧？ 7/02的上午那堂
+10:31:09 <miaoski> alexlu: 感謝~ 來 update
+10:32:42 <miaoski> alexlu: 唔 所以 part 1, 2, 3, 4 有一些是 7/3 有一些是 7/4 的... QQ
+10:40:24 <alexlu> vector那邊應該都是7/3的課
+10:41:36 <caasih_> 一直忘了問，旁聽要交什麼雜費嗎？
+10:57:26 <CindyLinz> caasih_: 沒有
+11:14:35 <caasih_> CindyLinz: 瞭解
+12:33:54 <CindyLinz> 覺得.. 要展現 Haskell (or other functional language) 很適合作 EDSL, 除了用 Haskell 實作一遍完整例子以外, 也隨便拿一個.. 例如說 C++ or Java 實作一次
+12:34:16 <CindyLinz> 而這個對照組可以不用實作完, 只要揭露一點點, 感受一下就好了 :p
+13:09:07 <alexlu> 旁聽生可以考試嗎?
+13:09:46 <CindyLinz> 應該可以~ 我前年有考 :p
+13:14:31 <alexlu> ok，那也可以吃pizza囉xd
+13:15:12 <au> 不曉得 Emacs 能不能用 opentype ligature...
+13:15:13 <CindyLinz> 我前年沒吃... XD
+13:15:13 <au> https://github.com/i-tu/Hasklig
+13:15:23 <CindyLinz> 不過我是中午有事 XD
+13:15:48 <au> #Atom可以用 text-rendering: optimizeLegibility 引入這種打 -> 出 → 的字型
+13:16:15 <CindyLinz> au: 直接藉用 Agda 的 input?
+13:16:24 <CindyLinz> \to 或 \-> 會變成 →
+13:16:27 <au> CindyLinz: 不是，只是字型~
+13:16:34 <CindyLinz> 喔 只有字型喔 XD
+13:16:56 <CindyLinz> au: 問問, 你有在用文字模式的 editor 嗎?
+13:17:10 <au> 還是有在用 ssh + vim
+13:17:11 <CindyLinz> 有沒有特殊符號字寬對齊不對的問題? @@"
+13:17:15 <au> er, mosh + vim
+13:17:36 <CindyLinz> 出現一個沒弄好的符號, 可能接下來每一行會呈階梯排列 orz
+13:17:40 <au> iTerms2 不要開 ambiguous-width characters as double width 就好了
+13:17:47 <au> 這方面 iTerms2 還不錯
+13:17:50 <CindyLinz> QQ
+13:18:27 <b4283> 只是字型可以 例如把 lambda 顯示成 λ
+13:21:28 <CindyLinz> Haskell 這樣玩的話, 如果又用常用的 layout format, 不會很容易對錯格嗎? @@"
+13:21:44 <CindyLinz> 還是它會自動在後面補足空格?
+13:21:56 <au> ligature 的寬度設成一樣就行了
+13:22:15 <CindyLinz> 就會變成一個超胖的 λ 喔?
+13:22:46 <CindyLinz> 好像蠻炫的....
+13:22:58 <au> yeah XD 但 haskell 沒有 lambda (6 chars) 關鍵字，所以這是假設性問題
+13:24:19 <CindyLinz> 對哄......
+13:24:25 <CindyLinz> b4283: 被你拐到了 QQ
+13:26:03 <CindyLinz> :: 和 -> 就有差了..  嗯, 不過我覺得 :: 比 ∷ 好看, 因為 :: 會排成正方形 XD
+13:26:57 <au> https://github.com/i-tu/Hasklig 裡的 :: 是更正的正方形 XD
+13:28:21 <CindyLinz> 變小了 XD
+13:28:29 <petercommand> atom有辦法開大檔案嗎?
+13:28:30 <CindyLinz> 喔喔它還置中..
+13:28:45 <CindyLinz> 純文字就不太方便置中了? @@"
+13:29:25 <au> petercommand: 目前的 2mb limit 在 react.js merge 到 master 之後有望解除(吧)
+13:29:42 <petercommand> XD
+13:29:50 <miaoski> CindyLinz: 7/7 我只有 copy 到 4 個檔案，可以幫我問一下穆老師? 7/7 下午的我好像沒 copy 到...
+13:30:08 <CindyLinz> 嗯嗯
+13:32:08 <superbil> au:「Haskell has a solid niche as a PhD generator」 陳恭：「我也其中一個」
+13:32:16 <superbil> s/也/也是
+13:32:25 <au> XDD
+13:33:53 <CindyLinz> miaoski: 老師說如果有漏的話那很可能是沒有錄到.. 所有的檔案都倒過去了 o.o
+13:34:32 <miaoski> 嗯，因為我 7/7 是中午過去的... 所以可能是昨天漏了 coyp
+13:34:46 <miaoski> s/coyp/copy/
+13:35:57 <au> 應該來寫個 MoreThesis.hs: 一用就愛上的博士論文產生器
+13:36:16 <au> (像 http://pdos.csail.mit.edu/scigen/ 這種的)
+13:36:33 <CindyLinz> miaoski: 要怎麼檢查啊? 是在攝影機裡嗎? 那等下午放學以後拿來看?
+13:37:54 <miaoski> CindyLinz: 嗯，在攝影機裡，比對檔名就好。7/7 我只有 00189.MTS  00190.MTS  00191.MTS  00192.MTS 四個檔案
+13:38:16 <CindyLinz> miaoski: 好那我晚點來看
+13:38:23 <miaoski> 感謝~~\
+13:39:36 <miaoski> TT (柯向上老師) 那個部份有點混亂... 因為跨了 4 天，我有點 map 不起來 Q
+13:39:55 <CindyLinz> 「1990 年的時候, SML 起來, 剛好我在做 Haskell 嘛? 所以要研究一下, 知己知彼」.. XD
+13:40:41 <CindyLinz> 等下順便看一下有沒有 mtime. XD
+13:43:36 <CindyLinz> 「哎唷~ 很面熟歐~ 你政大來的哄」
+13:43:45 <CindyLinz> 這啥情況 XD
+13:46:51 <CindyLinz> 原來 Haskell class 叫作「class」的原因是當年覺得看起來有點像 object 的 class..
+13:47:45 <CindyLinz> Haskell 的出現, 是因為前身 Miranda 不 open source... XD
+13:51:51 <CindyLinz> 還是不習慣把 Eq 念為「依可」.. ^^|
+13:54:00 <CindyLinz> 今天這 talk 講得好實作好工程感啊 (心)
+13:56:18 <superbil> 真的，這樣聽起來好棒 !
+13:57:56 <whitglint> 那要唸「一鍋」還是「E Q
+13:58:07 <whitglint> 」嗎?
+13:58:20 <CindyLinz> 我都念字母欸
+14:00:47 <miaoski> CindyLinz: 7/3 下午的 TT 好像也沒有....
+14:01:03 <miaoski> 我把能補完的都補完了... 按照課表來猜
+14:01:09 <miaoski> 不知道會不會補錯 @@
+14:01:17 <CindyLinz> miaoski: 要不要貼一下你的 file list?
+14:03:31 <CindyLinz> 「How to make ad-hoc polymorphism less ad-hoc」.... 這些搞程式語言或邏輯的都喜歡遞迴或 paradox.... XD
+14:04:58 <CindyLinz> (Considered harmful is considered harmful) XD
+14:05:35 <CindyLinz> 「如果慢慢你會變成重度 Haskell 使用者的話, 你就會遇到的問題....」
+14:07:03 <miaoski> https://www.irccloud.com/pastebin/aJ8mopuq
+14:07:21 <CindyLinz> 好 ^^
+14:08:01 <xcycl> 好工程 （倒
+14:08:18 <CindyLinz> 明天考實作啦.. (逃)
+14:08:20 <miaoski> https://www.irccloud.com/pastebin/sEGjIEKO
+14:08:32 <miaoski> https://www.irccloud.com/pastebin/Rii2ZDd1
+14:08:40 <miaoski> https://www.irccloud.com/pastebin/qDJ5N2ld
+14:08:48 <miaoski> https://www.irccloud.com/pastebin/KgEDRzpt
+14:08:56 <miaoski> https://www.irccloud.com/pastebin/3g4UzcFj
+14:09:03 <miaoski> https://www.irccloud.com/pastebin/ducl4GgA
+14:09:20 <miaoski> OpS 和 TT 的我這邊兜不起來 QQ
+14:09:51 <xcycl> Type class 沒有 categorical semantics .....
+14:10:31 <CindyLinz> xcycl: 所以才會有時發生 ambiguous 嗎?
+14:11:48 <xcycl> 應該是⋯
+14:12:02 <xcycl> http://cstheory.stackexchange.com/questions/12524/a-mathematical-categorical-description-of-type-classes
+14:12:33 <CindyLinz> 唔, 可能我因果應該倒過來: 因為有時會發生 ambiguous, 所以不存在 categorical semantics.. ._.
+14:12:57 <CindyLinz> 老師好 high :D
+14:13:06 <CindyLinz> 語氣 high 了起來 :D
+14:15:47 <CindyLinz> 「學 Haskell 的時候剛開始很討厭的就是: 1 不是整數 XD」
+14:16:09 <b4283> CindyLinz: 不知道是不是想要這樣的效果 http://itsuwa.org/~b4283/test-0000.mpeg
+14:17:07 <CindyLinz> b4283: 不行這個會縮短 @@"
+14:17:24 <b4283> @@
+14:17:58 <CindyLinz> b4283: 用在 Haskell 的話啦, 如果剛好遇到要對齊的時候長度很重要啊
+14:18:49 <CindyLinz> 「class Coerce a b where coerce :: a -> b」... XDDD
+14:21:53 <b4283> recordmydesktop 一直漏 frame 弄不好，後來是用 xvidcap
+14:22:40 <CindyLinz> 太辛苦了 ._.
+14:23:00 <b4283> 還沒有 _13h 辛苦 (誤) 唉呀他不在 ._.
+14:23:36 <petercommand> b4283: nyan cat!!
+14:24:35 <au> @djinn-add class ((:>:) a) b where (>:>) :: b -> a
+14:24:35 <lambdabot> Cannot parse command
+14:24:46 <au> > class ((:<:) a) b where (<:<) :: a -> b ; instance (b :<: a) => (a :>: b) where (>:>) = (<:<)
+14:24:47 <lambdabot>  <hint>:1:1: parse error on input ‘class’
+14:25:03 <au> 好吧, -XTypeOperators -XMultiParamTypeClasses -XFlexibleInstances -XUndecidableInstances 似乎要求太高了 XD
+14:25:06 <CindyLinz> 「(1989年) type class 剛出來, 好像很好玩, 玩一玩, 就覺得不夠好玩!」....
+14:44:50 <suhorng> @口@...剛剛覺得 parametric type class 感覺語法滿乾淨的 結果現在看 monad....
+14:44:50 <lambdabot> Unknown command, try @list
+14:45:21 <banacorn_> lambdabot make me sandwich
+14:45:41 <suhorng> @_@"....可能是這樣比較慘. 至少前面有些東西還可以用 functional dependency 來用
+14:45:42 <lambdabot> Unknown command, try @list
+14:45:43 <caasih_> 演講滿滿的怨念
+14:45:48 <CindyLinz> XDDD
+14:45:52 <suhorng> > sudo lambdabot make me a sandwich
+14:45:53 <lambdabot>  Not in scope: ‘sudo’Not in scope: ‘lambdabot’Not in scope: ‘make’
+14:45:54 <lambdabot>  Perhaps you meant one of these:
+14:45:54 <lambdabot>    ‘take’ (imported from Data.List),
+14:45:54 <lambdabot>    ‘Seq.take’ (imported from Data.Sequence),
+14:45:54 <lambdabot>    ‘BSLC.take’ (imported from Data.ByteString.Lazy.Char8)Not in scope: ‘me’
+14:46:45 <banacorn_> > lambdabot, why there's a trailing underscore in my name?
+14:46:46 <lambdabot>  <hint>:1:10: parse error on input ‘,’
+14:46:54 <CindyLinz> suhorng: constructor class 只是寫起來比較累, 要去順著 syntax 的毛摸這樣?
+14:48:08 <suhorng_> 可是如果不用 constructor class 而像剛剛的話還要寫一堆 ma ~ mb 這種條件限制 orz
+14:48:13 <CindyLinz> banacorn_: lambdabot hint 你了
+14:48:31 <CindyLinz> 果然要選 constructor class XD
+14:49:07 <banacorn_> > <hint>:1:0: parse error on input "<hint>:1:10: parse error on input ‘,’"
+14:49:07 <CindyLinz> SML 好兇 XD
+14:49:08 <lambdabot>  <hint>:1:1: parse error on input ‘<’
+14:49:16 <suhorng_> 只是現在看起來有 type family 也還有 closed type family，有些 functional dependency 應該不需要了？
+14:49:53 <suhorng_> 不知道效率相比如何就是
+14:50:52 <suhorng_> http://haskell.cs.yale.edu/wp-content/uploads/2011/03/ParametricTC-LFP92.pdf 找得到耶XD
+14:51:55 <CindyLinz> ad-hoc data type......ww
+14:52:12 <suhorng_> extensible data type :P, open union data type...
+14:52:21 <suhorng_> "expression problem" XD
+14:52:29 <au> "expression problem"
+14:52:33 <au> 未看先猜中 XD
+14:52:44 <suhorng_> xDDD
+14:52:53 <banacorn> sandwich à la carte
+14:53:19 <suhorng_> FP 好！毫無任何限制的 parametric polymorphism （誤）
+14:53:33 <CindyLinz> 「如果都認為 OOP 比較好的話, 就不用學 Haskell 了!」
+14:57:04 <au> 按時間順序的話，下一篇應該是 Instance Chains，然後是 Closed type families with overlapping equations
+14:58:02 <au> ( 後者終於進了 GHC 7.8.1 - http://www.haskell.org/haskellwiki/Type_families#Closed_family_simplification )
+14:59:13 <au> suhorng_: 沒記錯的話，和 fundep 的執行效率相同，編譯效率不確定但可以忽略
+14:59:22 <CindyLinz> 可忽略 (Y)
+15:00:00 <suhorng_> 真是太好了XD
+15:00:20 <caasih_> DEK: "Beware of bugs in the above code; I have only proved it correct, not tried it."
+15:03:05 <CindyLinz> 陳恭 to suhorng:「你繼續留下來研究吧, 繼續念研究所吧！」
+15:03:28 <caasih_> 不知道陳教授說的是不是 Lions' commentary on UNIX 6th edition
+15:21:43 <CindyLinz> miaoski: 那個.. 現在只剩 7.1, 7.4, 7.8, 7.9 以後的錄影 @_@"
+15:31:51 <miaoski> CindyLinz: T_T
+15:32:45 <miaoski> CindyLinz: 不過其實我沒聽懂妳的意思...
+15:40:27 <miaoski> CindyLinz: 7/1 下午的 161-168 好像是柯向上老師的 TT, 這個應該沒問題. 7/1 上午 TT 下午 au 都有
+15:41:17 <miaoski> CindyLinz: 7/4 上午的 DTP 是 178-182 我猜 TT 是 184-187
+15:43:56 <miaoski> CindyLinz: 嗯，所以只缺 7/3 下午的 TT (有兩個檔案，但應該不夠...) 和 7/7 下午的 OpS
+16:06:13 <miaoski> CindyLinz: 啊好混亂 @@ 我想先確定上面的影片裡，TT 是不是都齊了. 上面我猜有全部的 TT
+16:08:10 <miaoski> CindyLinz: 目前我找不到的是 DTP 7/4 上午
+16:08:40 <miaoski> CindyLinz: 和 Ops 7/7 下午
+16:11:26 <miaoski> CindyLinz: 然後 7/3 的 181/182 其實是妳在 functional thursday 的 talk .. XDDD
+17:04:55 <CindyLinz> miaoski: 我意思是.... 老師這邊存在的所有檔案.. @@"
+17:05:15 <CindyLinz> miaoski: 他刪掉很多影片來留空間錄新的 @@"
+17:05:36 <miaoski> CindyLinz: 那... 7/4 上午的 DTP 還可以補 (好險) 但 7/7 下午的 OpS 就 GG 了 ...
+17:06:01 <miaoski> 幫我和穆老師說一下? 不能再刪了 QQ
+17:06:09 <CindyLinz> miaoski: 等等, 你是也有缺嗎? 我沒有跟說他要留下來 @@"
+17:06:20 <CindyLinz> miaoski: 不過明天沒課了應該也不會刪了 XD
+17:06:27 <miaoski> CindyLinz: 我缺的是 7/4 上午的 DTP 和 7/7 下午的 OpS
+17:11:19 <CindyLinz> miaoski: 對了, 最後一批的影片要怎麼處理啊?
+17:11:33 <miaoski> CindyLinz: 我明天中午會過去 copy 呀
+17:11:45 <CindyLinz> miaoski: 喔喔 那就都在機器裡了.. :D
+17:13:15 <miaoski> CindyLinz: 剛剛寫信給穆老師了... 囧 希望 7/7 的 OpS 還在...
+18:00:22 <petercommand> 問一下，像這個http://pastebin.com/8hi9TimV
+18:00:55 <petercommand> 裏面的(a, newState) = h s的"h s"是甚麼意思呢?
+18:11:12 <petercommand> 喔，應該是我把這個s和type sig的s搞在一起了...
+18:43:45 <petercommand> 還是不太理解..XD
+20:15:54 <CindyLinz> petercommand: h s 的 s 由 code 看來是同一行左邊 State $ \s -> 的 s
+20:22:49 <CindyLinz> 然後它就會是這個 state monad 在執行的時候一路上 runState 時所接進來的狀態
+20:28:27 <petercommand> 因為(>>=) :: m a -> (a -> m b) -> m b，所以那個f是a -> m b對嗎?
+20:30:29 <petercommand> 然後(State g) = f a 這裡的g就是m b
+20:34:10 <CindyLinz> 都對
+20:34:24 <CindyLinz> 不對
+20:34:39 <CindyLinz> f 是 a -> m b, 所以 Stage g 是 m b, 不是 g
+20:35:43 <CindyLinz> Stage g 拿去 pattern match f a 出來的東西, 所以 g 應該會配到 State 裡面那個 runState 欄位
+20:36:53 <petercommand> 就是s嗎?
+20:39:10 <CindyLinz> 是個 s -> (a, s) 的函數啊 你看 data State 的定義
+20:40:12 <petercommand> 嗯...
+20:41:00 <CindyLinz> 所以最下面拿 newState 塞給 g
+20:45:55 <petercommand> 為何把newState塞給g呢?
+20:47:14 <CindyLinz> state monad 所構成的程式可以看成這樣子:   初始狀態 -> f1 -> f2 -> f3 -> f4 -> 最後狀態
+20:48:03 <CindyLinz> 有一個 s 會從頭傳到尾, 中間可能會被竄改之類的
+20:48:41 <CindyLinz> 然後, 這些 f 之間也會額外地互相溝通, 這是 monad 的特性
+20:49:03 <CindyLinz> f 之間的溝通就是那個 m a, m b 的 a 和 b, 每一步的 type 都可以不一樣
+20:49:32 <CindyLinz> 然後, 我們用 curry function 的角度來看這些 f
+20:49:53 <CindyLinz> 假設它們的第一個參數是 f 之間溝通的 a, b, .. 等等
+20:49:57 <CindyLinz> 第二個參數才是這個 s
+20:50:18 <CindyLinz> 如果這樣想像, 這部分算直覺嗎?
+20:51:43 <CindyLinz> 所以這些 f 們的 type 形狀就是 \a s -> (b, s)
+20:52:22 <CindyLinz> 跟現在看到的 runState 欄位 \s -> (a, s) (或是 \s -> (b, s)) 不太一樣
+20:53:12 <au> 從 reader monad 開始學比較不會搞混
+20:54:23 <petercommand> CindyLinz: 我想一下@@
+20:54:30 <CindyLinz> 那我補完一下好了 XD
+20:54:38 <CindyLinz> 雖然可能還是先看 reader 比較好 ^^|
+20:55:09 <petercommand> reader是指這種嗎?http://pastebin.com/UWzHVSUY
+20:55:17 <letoh> 哇  看到 state 了
+20:55:56 <au> petercommand: http://hackage.haskell.org/package/mtl-1.1.0.1/docs/src/Control-Monad-Reader.html
+20:55:56 <CindyLinz> 這 State Monad 裡面的作法, f a 的部分就是先餵那個 a, 然後 g newState 的部分就是餵 s, 兩個都餵完了就可以生出它們這一段最後的 (a, s)
+20:57:47 <au> 然後如果要看 State 的話，Control.Monad.State.Lazy (mtl) 裡的定義比較直觀 (imho)
+20:57:50 <au> m >>= k = State $ \s -> let (a, s') = runState m s in runState (k a) s'
+20:57:58 <CindyLinz> Lazy 的通常比較好讀 (Y)
+20:58:17 <au> Reader 的是:
+20:58:17 <au> m >>= k  = Reader $ \r -> runReader (k (runReader m r)) r
+20:58:43 <CindyLinz> au: 你貼的這個看起來跟 petercommand 貼的一樣啊?
+20:59:51 <CindyLinz> 只是 pastebin 用的是 pattern match 取出 State g 的 g, 然後你貼的是用 runState (k a) 生出對應的 g
+20:59:57 <au> 對。
+21:00:03 <au> 語義是一樣的
+21:00:32 <CindyLinz> 那個 runState 欄位名子, 以前讓我困惑好一陣子 @@"
+21:00:47 <CindyLinz> 因為我以為 runState 應該是只在最外面呼叫一次的.... o.o
+21:01:35 <petercommand> pastebin那個我是從這裡貼的http://learnyouahaskell.com/for-a-few-monads-more 想說貼一段就好XD
+21:02:12 <au> 之所以我覺得比較直觀是因為 newtype 的建構式和欄位函式都可以消去
+21:02:49 <CindyLinz> petercommand: 選一個看得順眼的看? :D
+21:03:19 <petercommand> au: 是指哪一個呀?(newtype 的建構式和欄位函式都可以消去)
+21:03:23 <au> 所以例如像 reader，就可以看成 m >>= k = \r -> k (m r) r
+21:03:35 <CindyLinz> au: 糟糕你扯遠了 XDDD # newtype
+21:04:03 <petercommand> CindyLinz: QQ
+21:04:33 <au> 而因為 reader a 本身是 r -> a，所以 (>>=) 的型別是:
+21:04:33 <au> (>>=) :: (r -> a) -> (a -> (r -> b)) -> (r -> b)
+21:06:02 <petercommand> 所以就是類似function composition的type
+21:06:21 <au> 白話說，就是「拿環境給 a 值」的動作，連上「拿 a 值給「拿環境給 b 值」的動作」時，想要成為「拿環境給 b 值」的動作
+21:07:14 <au> 具體做法是，拿環境，套用到左方得出 a 值（也就是 (m r)），然後套用到右方得出動作（也就是 k (m r)）
+21:07:37 <au> 然後套用動作到環境上（也就是 k (m r) r）得出 b 值
+21:07:39 <au> 結束
+21:08:10 <CindyLinz> 好多括號, 也好多引號 XD
+21:08:18 <au> XD
+21:09:09 <au> @djinn (r -> a) -> (a -> (r -> b)) -> (r -> b)
+21:09:10 <lambdabot> f a b c = b (a c) c
+21:09:22 <au> djinn++
+21:10:56 <au> petercommand: 消去的意思是，看到 newtype State s a = State { runState :: s -> (a, s) } 時，可以直接把它看成 type State s a = s -> (a, s)
+21:11:03 <CindyLinz> 以前我實作自己 monad 的時候, 寫到裡面套來套去都暈了, 都不記得直覺意義了, 就開始湊 type....
+21:11:09 <au> 所以 State $ 和 runState 都可以假裝沒看到
+21:11:23 <CindyLinz> 湊出來, 只要不是 bottom 就是一輩子^H^H^H成功了
+21:11:46 <au> @djinn (s -> (a, s)) -> (a -> (s -> (b, s)) -> (s -> (b, s))
+21:11:46 <lambdabot> Cannot parse command
+21:11:53 <au> @djinn (s -> (a, s)) -> (a -> (s -> (b, s))) -> (s -> (b, s))
+21:11:53 <lambdabot> f a b c =
+21:11:53 <lambdabot>     case a c of
+21:11:54 <lambdabot>     (d, e) -> b d e
+21:12:08 <petercommand> djinn是做甚麼的呀?
+21:12:20 <CindyLinz> 給他 type, 他給你程式
+21:12:27 <petercommand> 喔喔...
+21:12:28 <au> petercommand: 你寫命題給他，他還證明給你
+21:12:47 <petercommand> 恩
+23:11:16 <banacorn> 有同學上 FLOLAC 上到今天被她媽抓去收驚 XDDDDD
+23:14:42 <CindyLinz> .................OAO
+23:15:00 <CindyLinz> 為什麼會這樣 OAO
+23:20:58 <xcycl> 收驚? @@
+23:21:06 <xcycl> 有這麼可怕嗎 ...
+23:57:14 <xcycl> @djinn (a -> b -> c) -> b -> a -> c
+23:57:14 <lambdabot> f a b c = a c b
+23:57:37 <xcycl> 真的有這東西 !!
+23:59:26 <xcycl> @djinn forall a. (a -> a) -> a
+23:59:27 <lambdabot> -- f cannot be realized.

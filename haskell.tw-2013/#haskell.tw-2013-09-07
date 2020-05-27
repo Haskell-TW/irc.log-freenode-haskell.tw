@@ -1,0 +1,40 @@
+14:42:14 <MnO2__> scala 看起來有點複雜，godfat 從 PLT 版看來你投入了不少時間研究過 xD
+14:45:27 <CindyLinz> godfat: Ruby 和 PLT 板都在 po 徵板主文了怎麼辦啦 XD
+14:49:42 <MnO2__> CindyLinz: 如果太久沒有人認領是會廢板嗎
+14:49:51 <MnO2__> CindyLinz: 那天說的是 https://plus.google.com/117380487359344039293/posts/LSEvXRcg51B
+14:50:08 <MnO2__> 不過我覺得好像不只 scala 可以對號入座..
+15:01:21 <CindyLinz> mmm
+15:01:41 <CindyLinz> MnO2__: 廢板規則我不清楚了 :Q
+15:02:50 <CindyLinz> 當板主好像有點難...
+15:03:02 <CindyLinz> 如果都沒有文章的話就簡單了 XD
+15:06:44 <CindyLinz> 不過廢板前應該會先標一個「待廢」之類的? :p
+15:12:12 <CindyLinz> 看到以前有檢舉 godfat 這個帳號沒上線的文章... 他是截圖看 godfat 的上次上線日期, 還有現在狀態是不在線上
+15:13:26 <CindyLinz> 覺得這證據實在很薄弱啊, 我都一直連在線上不太重新登入的, 狀態都切隱形, 好像看起來也會一樣 XD
+15:23:04 <MnO2__> 看 PLT scala 的 convariant 那一串討論真是有點昏~
+15:47:36 <yulin> 該買藍莓派來玩還是買 types 那本，好猶豫…
+16:12:40 <MnO2__> http://stackoverflow.com/a/1745245/1022246   Ada Compiler 好貴 xD
+16:15:46 <MnO2__> http://www.seas.gwu.edu/~mfeldman/ada-project-summary.html
+16:18:40 <MnO2__> F-22 裡面系統是 Ada 寫的
+16:18:44 <MnO2__> http://zh.wikipedia.org/wiki/F-22%E7%8C%9B%E7%A6%BD%E6%88%B0%E9%AC%A5%E6%A9%9F
+16:32:50 <CindyLinz> hmm... 那不用愁買家出不起? XD
+17:10:29 <godfat> scala 我有一段時間沒看了，不過確實曾經很認真看過
+17:10:30 <godfat> 我真的覺得其實 scala 跟 c++ 很像 XD
+17:10:30 <godfat> 當然不是真的指語言很像，而是他們的設計都是啥鬼都全包.. @@
+17:10:30 <godfat> 怎麼說呢，可能這種語言對我來說一直有一定的吸引力吧.. XD
+17:10:30 <godfat> 只是還是覺得 scala 有點走火入魔了..
+17:10:30 <godfat> 那時寫最多的大概是踩地雷的 AI 吧，有個踩地雷 AI 大賽，
+17:10:31 <godfat> 用 java 的，所以我可以用 scala XD
+17:11:00 <godfat> 我登上 ptt 看看狀況好了 @@"
+17:11:01 <godfat> 自從被踢板主後，老實講就懶得看了.... XD
+17:14:55 <MnO2__> 從我看了幾個小時的印象來看，也是覺得像 C++
+17:20:39 <godfat> 說到 ada, 之前 fumin 分享的那個，原本是用 ada 寫的
+17:20:40 <godfat> 聽他的心得，我認真覺得 ada 實在也是個爛語言 XD
+17:20:40 <godfat> 裡面講求正確的東西，感覺全部都是靠 assertion...
+17:20:40 <godfat> function contract 之類的
+17:48:43 <MnO2__> 那個 function contract 跟 racket 的 contract 是同一個東西嗎?
+17:55:42 <godfat> 看起來我的意思是那樣沒錯，不過細節上有差多少我就不知道了
+17:58:31 <godfat> 一時找不到範例，印象中大概是在 ada 中我可以宣告一個 vector 一定有多長，
+17:58:31 <godfat> 或是裡面的值一定處在某個範圍內
+17:58:32 <godfat> 但這是 runtime 的檢查，不是規範在 type 裡
+18:07:52 <MnO2__> 讓我想到 gorillascript  xD
+18:28:32 <godfat> XD

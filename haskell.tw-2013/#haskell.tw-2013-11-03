@@ -1,0 +1,223 @@
+00:01:41 <hashcat> 弄清楚那系統裡面有啥東西是啥作用, 不要再把不是命題邏輯裡的概念拿進來了
+00:01:47 <hashcat> 我有點鬼打牆了
+00:03:15 <hashcat> 最後一點是 Set : Set 是不折不扣的鬼打牆, 參閱羅素悖論
+00:05:16 <CindyLinz> XD
+00:07:46 <hashcat> suhorng: 現在想想, 是還滿多人看原文書看到中文不知道是啥的
+00:10:57 <hashcat> CindyLinz: 這樣有沒看懂 @@
+00:12:35 <suhorng> hashcat: ._./ 而且我看到中文也不知道原文是啥...
+00:12:54 <CindyLinz> 我以為我在這邊就已經懂了? # 23:22 < CindyLinz> 用這個 sigma 來要求要存在 fst 塞到 snd 函數的證明?
+00:12:58 <CindyLinz> 23:22 < CindyLinz> 如果只用 cartesian 的話, 可以給一個 List, 和一個要代別的 List 才會存在的證明, 就沒有限制到了?
+00:13:06 <xcycl> hashcat: ._./ 而且我看到中文也不知道原文是啥...
+00:13:37 <suhorng> 咦
+00:14:26 <hashcat> http://zh-classical.wikipedia.org/wiki/%E9%9B%86%E8%AB%96
+00:14:27 <suhorng> 為什麼我上一句話暱稱變xcycl...
+00:14:37 <hashcat> 貼個離題的東西
+00:14:46 <xcycl> A x B x C 可以讀作 A 且 B 且 C, 而這樣的程式相等於證明 A, B, 跟 C
+00:14:58 <xcycl> suhorng: 因為我剛剛重複你的話 xD
+00:15:07 <suhorng> 阿阿 嚇到XD
+00:15:15 <xcycl> 三個獨立分開的證明
+00:16:52 <xcycl> sigma (x : List A) (A (x)) 想成 "存在 x 在 List A 滿足 A(x)" 雖然我覺得講 "在" 這的詞有 set theory 的味道 ...
+00:17:15 <CindyLinz> 嗯嗯嗯
+00:17:37 <CindyLinz> 就是 <_,_,_> 太 cheap 的意思 ^^|
+00:18:33 <hashcat> logic side的conjunction對應到programming side的product type
+00:19:03 <hashcat> https://github.com/liamoc/learn-you-an-agda/blob/master/pages/proofs.md
+00:19:29 <hashcat> 找 product type
+00:36:05 <xcycl> 其實寫成 Bool 然後再轉成 Unit type 跟 Empty type 也不是不行, 但是證明就被丟掉了 ...像是 Agda 的 Data.Bool 有一個 T 函數
+00:36:53 <hashcat> http://uf-ias-2012.wikispaces.com/file/view/agda.pdf/390147250/agda.pdf
+00:37:02 <hashcat> 好東西
+00:38:50 <xcycl> 把 P(x) 寫成 A -> Bool 的話，代表一個 decidable function, 我可以有限時間內算出 a : A 是 true 還是 false。那麼 T P = Unit 相當說 P 成立且有個證明但我丟掉了
+00:39:21 <xcycl> T P = Empty 的話 就是 P 成立 但證明丟掉了
+00:41:58 <hashcat> http://www1.eafit.edu.co/asicard/courses/automata-CB0081/slides/agda-introduction.pdf
+00:42:05 <CindyLinz> 嗯嗯, 你只能相信我它是對的, 但是請別問我過程...
+00:42:28 <hashcat> 那兩個是我能找到比較偏重兩者關係的
+00:49:50 <xcycl> 像是 in-set 我可以寫成這樣：
+00:49:51 <xcycl> dec-in-set : {n : ℕ} → ℕ → Vec ℕ (suc n) → Bool
+00:49:52 <xcycl> dec-in-set n (x ∷ []) = dec-eq n x
+00:49:53 <xcycl> dec-in-set n (x ∷ x₁ ∷ xs) = dec-eq n x ∨ dec-in-set n (x₁ ∷ xs)
+00:50:41 <xcycl> 那麼我可以直接用 Agda 的對 lambda term 的 normalisation, 直接算
+00:50:55 <xcycl> prop : T (dec-in-set 3 (3 ∷ 2 ∷ 1 ∷ []))
+00:50:56 <xcycl> prop = tt
+01:00:18 <hashcat> CindyLinz: 我是想說原則的問題要搞清楚, 不能只想著湊出解法
+01:03:50 <hashcat> 有些東西清楚了, 剩下都多說的, 不清楚則是多說無益
+01:15:31 <xcycl> 看一下 The HoTT Book 的第一章，已經寫很好了
+01:16:10 <xcycl> 第一章跟 HoTT 沒有直接關係，可以單獨看
+01:16:15 <hashcat> 關於對應到Agda的語法, 這篇的第24頁有個對照表 http://www1.eafit.edu.co/asicard/courses/automata-CB0081/slides/agda-introduction.pdf
+01:17:07 <xcycl> universe （Set, Set1, .. ) 也有討論
+01:21:05 <xcycl> decidable proposition 在第三章
+01:21:30 <xcycl> 哎，現在資源好多 QQ
+01:27:08 <hashcat> 為啥會又冒出一個HoTT
+01:28:22 <xcycl> http://homotopytypetheory.org/book/
+01:28:48 <hashcat> 想問下要是另外三個結構都一樣的話, 多這一個Homotopy有啥嚜用
+01:29:58 <xcycl> 我只是說 HoTT book 的第一章有解釋
+01:30:59 <hashcat> 我是想問那個
+01:31:10 <hashcat> 為啥他要多弄出HoTT
+01:33:48 <xcycl> 喔, 先說這我不是專家, 他們的說法是 uniqueness of identity proof (K rule) 不盡然成立, a = b 的證明不唯一 (?)
+01:34:07 <xcycl> a = b 的證明是從 a 到 b 的路徑
+01:35:15 <hashcat> 我知道怎處理了
+01:35:29 <hashcat> 暫且裝作沒看到
+01:37:14 <hashcat> 引用次數多了再看
+01:37:21 <xcycl> 不過這個還是很新的東西, 要怎麼計算上詮釋還沒解決
+01:37:46 <xcycl> 至於引用次數 ...這應該是這幾年來的當紅炸子雞了 @@
+01:41:20 <hashcat> 換個條件好了
+01:41:54 <hashcat> 在某些領域出現過n次再看
+19:42:04 <petercommand> agda裡的箭頭代表甚麼意義呀
+19:44:51 <petercommand> \->
+19:50:37 <suhorng1> "\->" ?
+19:51:36 <suhorng1> 大概是用 agda input mode 的意思
+19:51:46 <suhorng1> 像 LaTeX 很多東西都是 "\" 開頭
+19:51:55 <suhorng1> \-> 打出來變 →
+19:52:24 <suhorng1> 就跟 -> 一樣是 function
+19:52:33 <petercommand> 我是說那個箭頭的用處啦XD
+19:52:53 <petercommand> 像 _+_ : a → a → a
+19:53:12 <petercommand> 的那兩個箭頭
+19:53:51 <petercommand> a : Set
+19:55:15 <petercommand> 不太了解這些箭頭所代表的東西是甚麼
+19:55:35 <suhorng1> 跟 (+) :: a -> a -> a 一樣意思
+19:55:38 <suhorng1> function
+19:56:06 <suhorng1> a -> b 是 a 到 b 的函數
+19:58:17 <hashcat> 我昨天發的最後一個slide, 有解釋常遇到的符號
+20:00:01 <petercommand> "(+) ::" 和 "_+_ :" 是一樣的?
+20:04:31 <suhorng1> Haskell裡用 "::" 標 type, Agda照常用(?)的用 ":" 標 type
+20:05:11 <suhorng1> Haskell裡面把infix operator語法上變成函數用 ( _ ) 括起來, e.g. (+)
+20:05:19 <suhorng1> 而 Agda 是在參數的地方寫底線 "_"
+20:05:28 <suhorng1> 所以 _+_ 表示參數放在 + 的兩邊
+20:05:47 <petercommand> 喔喔
+20:10:39 <petercommand> 一個參數的時候是a -> b 兩個參數的時候可以寫a -> b嗎?
+20:11:47 <suhorng1> 不太懂@@
+20:12:12 <suhorng1> 那樣type不對吧?
+20:14:49 <petercommand> @@
+20:17:25 <hashcat> Agda可以用 if_then_else_ 來表示函數, 同時創造新語法, 底線處可以塞其他參數, 由左至右地對應函數要求的型別
+20:17:29 <hashcat> http://code.haskell.org/Agda/examples/Introduction/Operators.agda
+20:17:53 <hashcat> 裡面有 if_then_else_
+20:18:13 <hashcat> 這語法自由度犧牲了一點小方便
+20:19:09 <hashcat> 1+2 關鍵字跟其他東西連在一起的表達式是不允許的
+20:19:38 <hashcat> 1 + 2 運算符號跟數字間要有空白
+20:23:51 <petercommand> suhourng1: 像函數a(x,y)=x+y 給一組input x,y的話就會從x+y map 到 a(x+y)
+20:24:48 <petercommand> suhorng1: 和一個variable的時候從x map 到 a(x)
+20:25:41 <petercommand> suhorng1: 都是一個domain map 到一個codomain
+20:27:19 <petercommand> 所以兩個參數的時候我會覺得是寫a -> b @@
+20:33:35 <hashcat> 在說 ((( d -> e ) -> f ) -> g ) -> b 其實就是 a -> b ?
+20:36:43 <petercommand> 我的想法是 (d,e) -> b 和 a -> b 一樣
+20:37:31 <xcycl> 不一樣啊
+20:37:32 <suhorng1> 不一樣
+20:37:38 <hashcat> -> 符號是左結合的
+20:37:51 <suhorng1> 咦 右結合吧？
+20:38:00 <xcycl> a -> b 是給一個 a 送到 b
+20:38:02 <hashcat> 搞錯
+20:38:25 <suhorng1> a(x,y) = x + y 就是要給 x, y 才會map到x + y
+20:38:27 <hashcat> 右結合
+20:38:49 <suhorng1> 如果想要只給部份參數, a(x, _) 是另一個(不同的)函數
+20:39:17 <hashcat> 剛剛那個我也打錯了
+20:39:49 <petercommand> 右結合的意思是?
+20:40:15 <hashcat> a -> b -> c = a -> (b -> c)
+20:40:46 <petercommand> 喔喔
+20:40:55 <hashcat> 表示該函數吃了a型別的數值, 會返回另一個 b -> c 型別的函數
+20:41:13 <hashcat> 不知道你想表達啥
+20:42:29 <hashcat> a 若是個沒有任何限制的變數, 那他確實可以批配 (d,e)
+20:44:55 <xcycl> 兩個 type 一樣通常是兩者之間可以互相對應
+20:45:10 <xcycl> 例如 a -> (b -> c) 跟 (a, b) -> c
+20:45:42 <xcycl> 給 f : a -> (b -> c), 可以定義 f' (x, y) = f x y
+20:46:16 <xcycl> 反過來, f' : (a, b) -> c 可以定 f : a -> (b -> c)
+20:46:49 <xcycl> 但是 (d, e) -> b 是 a -> b 的特例
+20:47:54 <hashcat> 要不看吐嘈Haskell的影片
+20:48:33 <xcycl> 若 x, y : a , f (x, y) = x + y 的話, 型別是從一對 a 到 a, 在 Haskell 寫成 (a, a) -> a
+20:50:56 <petercommand> 我應該了解了
+20:51:55 <petercommand> 那像(a,a) -> a在agda裡怎麼寫呀
+20:52:19 <CindyLinz> 應該要先定義 (_,_) @@"
+20:52:43 <xcycl> 偷懶一點 import Data.Product
+20:52:47 <CindyLinz> QQ
+20:53:00 <xcycl> open import Data.Product
+20:53:22 <xcycl> 就可以寫成 A \times B,
+20:53:49 <xcycl> 在 Agde 設定好的 Emacs 中 \times 會被取代成 x
+20:54:11 <CindyLinz> \times 不是真的存在檔案裡面的字哄? 只是在 emacs 裡面可以這樣按, 然後會被 emacs 換成 × ?
+20:54:19 <xcycl> 嗯嗯
+20:54:26 <xcycl> 會被 emacs 換
+20:54:46 <CindyLinz> 這是對 vimmer 的歧視... (哭)
+20:56:05 <xcycl> http://wiki.portal.chalmers.se/agda/pmwiki.php?n=Main.VIMEditing
+20:56:11 <xcycl> 有給 Vim 的說明
+20:56:17 <CindyLinz> 喔喔 XD
+20:56:22 <xcycl> 哎 以前都沒有耶 可惡!!!!
+20:56:30 <xcycl> 害我學了一陣子 emacs
+20:56:47 <CindyLinz> imap <buffer> 這招真是簡單易懂 XD
+21:00:43 <CindyLinz> 寫寫看.... Haskell 的 f :: (a, a) -> a 在 Agda 應該是 f : {A : Set} -> ( A x A -> A ) ?
+21:01:32 <xcycl> 嗯嗯，不用最後的括號
+21:01:34 <CindyLinz> Data.Product 就是這個哄? http://www.cse.chalmers.se/~nad/repos/lib/src/Data/Product.agda
+21:01:48 <CindyLinz> 喔 剛剛好是最右邊 ^^
+21:01:52 <xcycl> Yes.
+21:03:10 <xcycl> Agda 的 A 可以小寫或大寫 沒限制
+21:03:58 <CindyLinz> 因為 Set N 有無窮多層, 大寫小寫只有兩種變化, 乾脆就不要規定了?
+21:04:32 <CindyLinz> 欸.. 整個 Unicode 都進來了, 好像也太多字(符號)沒分大小寫了 :p
+21:04:33 <xcycl> Set N  也是後來加入的
+21:05:28 <CindyLinz> hmm
+21:05:47 <xcycl> 在 Agda 的 variable 都要說是什麼型別 光寫 A x A -> A 不知道 A 是什麼東西
+21:06:17 <xcycl> 因為 A 也可以是 Int 的
+21:06:33 <xcycl> 所以 variable 一律寫出來
+21:06:36 <CindyLinz> 嗯嗯嗯
+21:07:02 <xcycl> Haskell 的話 variable 出現在 type 的可能性不多
+21:07:44 <xcycl> 去掉有的沒的 extensions, 用小寫字母代表 type variable 應該滿合理的
+21:08:36 <CindyLinz> mmm
+21:10:16 <xcycl> 不過另外一方面, 所以我覺得 Agda 比較好入門 ...xD
+21:10:41 <CindyLinz> @________@
+21:10:42 <lambdabot> Unknown command, try @list
+21:10:54 <CindyLinz> lambdabot: 謝謝..
+21:11:07 <xcycl> <--  數學系畢業的 xD
+21:11:36 <xcycl> Haskell 的一些小細節太多了
+21:11:58 <hashcat> https://github.com/idris-hackers
+21:12:42 <hashcat> idris實用前景貌似比較好
+21:13:26 <xcycl> 發展者只有一個人不看好 xD
+21:13:44 <hashcat> 一個人就有這麼多花樣所以很好
+21:14:44 <xcycl> iris 出現時間比 Agda 晚這麼多, 有這麼多 features 也是正常的, 但是 dependently-typed programming 還有一段路要走
+21:14:59 <xcycl> 光是 effects 要怎麼做還是很頭大
+21:16:02 <hashcat> 我是從設計上看, 兩個語言設計者的心態不一樣
+21:16:16 <xcycl> agda 一直都是實驗用的語言 xD
+21:16:16 <CindyLinz> hashcat: idris 的目的是想要實用的?
+21:16:50 <hashcat> Idris兼容Haskell比較多, 有種當初C++兼容C的態勢
+21:17:23 <hashcat> 另外是注重效率, Agda對這點隻字不提
+21:18:00 <xcycl> C++ 是有名的大怪獸 ...
+21:18:03 <CindyLinz> 對了講到效率....
+21:18:18 <CindyLinz> Agda 裡面可以這樣定義 if_then_else_
+21:18:22 <hashcat> 一開始C++沒這麼多東西
+21:18:27 <CindyLinz> 但其實兩個 branch 都會去執行對不對?
+21:18:38 <CindyLinz> 不管 if 後面的 condition 是哪一種
+21:18:47 <xcycl> 不會吧
+21:19:06 <hashcat> 惰性計算
+21:19:14 <CindyLinz> 咦 Agda 也是 lazy 的?
+21:19:26 <hashcat> Agda裡 if_then_else_ 只是另一個函數
+21:19:31 <CindyLinz> 不過是不是一開始 pattern match 那個 condition 以後, 就只剩一邊可以走了?
+21:20:14 <CindyLinz> 也算是 pattern match 到哪裡才執行到哪裡的作法了?
+21:21:44 <xcycl> 不清楚, 不過 Agda 裡面都是 total function, 除了效率上應該沒差
+21:21:58 <xcycl> 而且 Agda 也不是用來執行的 ... xD
+21:22:21 <CindyLinz> 所以是從這邊才開始講的啊.. XD # 21:18 < CindyLinz> 對了講到效率....
+21:22:48 <CindyLinz> 我原本也是用反正它不是用來執行的就塘塞過去了 XD
+21:23:44 <CindyLinz> 只是 Agda 還是要考慮效率啦, 不然遇到複雜的大定理, compile 階段跑不完, 變成另一種意義的無法構造的證明 XD
+21:23:52 <xcycl> 我記得可以讓他轉成 haskell 的程式
+21:23:53 <xcycl> 噢喔噢
+21:24:08 <xcycl> type check 的話題
+21:24:11 <xcycl> 目前無解
+21:24:35 <CindyLinz> ._.
+21:25:15 <xcycl> 不過要弄到那麼複雜的情況不多
+21:25:39 <CindyLinz> 嗯
+21:26:37 <xcycl> 証過的定理可以用 abstract 蓋住
+21:26:51 <xcycl> 比 postulate 好一點點
+21:27:46 <xcycl> 這樣 Agda 就不會再去展開了
+21:28:44 <CindyLinz> 把 abstract 想成是 hint Agda 哪一條定理值得把結果 cache 起來?
+21:29:55 <xcycl> 不是耶
+21:30:55 <xcycl> 在 mailing-list 上有討論過一次
+21:31:20 <xcycl> 我忘記做什麼了
+21:34:31 <xcycl> Abstract definitions are not unfolded when the type-checker decides
+21:34:32 <xcycl> definitional equality (except in bodies in their own abstract block).
+21:34:33 <xcycl> Compiler backends are free to inline abstract definitions.
+21:36:24 <hashcat> Twelf或許可以看看
+21:36:51 <hashcat> 我有陣子瘋蒐集定理證明器
+21:37:21 <petercommand> 蒐集?
+21:37:30 <CindyLinz> 動辭. XD
+21:37:35 <hashcat> http://twelf.org/wiki/Main_Page
+21:37:42 <CindyLinz> 瘋, 副辭
+21:38:05 <petercommand> XDD
+21:38:41 <hashcat> 也可以瘋是動詞, 蒐集定理證明器是子句
+21:41:30 <CindyLinz> XDD
+21:56:22 <petercommand> 使役動詞
+22:45:33 <petercommand> http://people.inf.elte.hu/divip/AgdaTutorial/Sets.Mutual.html#1
+22:45:49 <petercommand> mutual definition有甚作用呀
+22:46:05 <petercommand> s/甚/甚麼
+22:49:28 <petercommand> 看不懂他在做啥

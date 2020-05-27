@@ -1,0 +1,394 @@
+00:01:20 <b4283> back reference
+00:01:48 <godfat> ruby 也可以
+00:01:52 <b4283> regex 有好幾種，不只 posix 和 pcre，不過那應該是玩笑 XD
+00:01:52 <Yu_lin> leton: 的確沒幾個語言的 regex 可以比 perl 好用XD
+00:02:17 <CindyLinz> scala 是 perl8 的網路蟑螂嗎? orz
+00:02:25 <b4283> 以前有看過一張對照表..
+00:04:38 <CindyLinz> 然後我很喜歡這個... s(\d+){ '#' x $& }ge
+00:04:49 <b4283> http://www.greenend.org.uk/rjk/tech/regexp.html
+00:04:58 <CindyLinz> 想像 {...} 這一區比較長, 跨很多行的時候
+00:05:19 <CindyLinz> 這個 delimiter 我很喜歡, 還可以縮排什麼的 :p
+00:05:22 <godfat> 之前看過有人在講別再說 regular expression 不能 parse html
+00:05:23 <godfat> 因為.....等等等
+00:05:23 <godfat> 但我想說，既然你知道有些 "regular" expression 已經不是 regular grammar,
+00:05:23 <godfat> 那為什麼又要聲稱那是 "regular" expression, 且 regex 可以 parse context free grammar?
+00:05:33 <CindyLinz> 這我不知道 :Q
+00:05:57 <letoh> 那是一個叫做 "regular expression" 的 mini parsing language
+00:06:03 <godfat> 我是覺得用字還是精確一點比較好...
+00:06:07 <CindyLinz> 只不過... 如果只是 parsing 而已, 其實用處不太大.. 畢竟我們平常常要靠 side effect 做事情, 而不是直接丟出結果說 accept 或 reject
+00:06:55 <godfat> ruby 用 gsub 的話是可以拿到每一段 match 的部份，
+00:06:55 <godfat> 要以之建 parse tree 應該不是不行，雖然我沒試過 XD
+00:06:59 <CindyLinz> 所以另外可以配合 (?{ 程式碼 }), 這樣可以 regex 走到一半的時候跑去裡面跑
+00:07:12 <CindyLinz> 就可以建 parsing tree 了..  (贏!)
+00:07:13 <godfat> @@ 這個就厲害了... XD
+00:07:14 <lambdabot>  這個就厲害了... XD
+00:07:21 <CindyLinz> lambdabot: ...
+00:07:23 <godfat> 哇回音
+00:07:23 <letoh> XDXD
+00:07:35 <letoh> 應聲蟲 lambdabot
+00:08:07 <suhorng> XDDD
+00:08:11 <CindyLinz> 然後還有 (??{ 程式碼 }) 拿程式碼當場生出 regex 塞在這邊繼續用
+00:08:21 <godfat> .........
+00:08:38 <petercommand> 甚麼叫context free grammar呀?
+00:08:38 <letoh> godfat: 你快認輸，不然會一直跑出來 (誤
+00:08:54 <godfat> 輸了輸了，ruby 這些都做不到 XDDDDDD
+00:08:59 <Yu_lin> lambdaboy XDDDD
+00:09:26 <b4283> lambdaboy 好像大友克洋的什麼作品
+00:09:38 <CindyLinz> 驚! 回去重讀 man perlre, 多了好幾項東西, 標示是從 perl6 拿過來的
+00:10:10 <CindyLinz> 可以在 regex 裡面標什麼 (*ACCEPT) (*REJECT) 之類的.. 還沒細看它們要幹嘛...
+00:10:34 <letoh> 因為 perl6 一直沒辦法扶正，只好一點一點搬過去嗎? XD (怎麼感覺像什麼冬蟲夏草XD
+00:10:59 <godfat> petercommand, context free grammar 出自這
+00:11:00 <godfat> http://en.wikipedia.org/wiki/Chomsky_hierarchy
+00:11:00 <godfat> 簡單地說大部分程式語言都是 context free 的，
+00:11:00 <godfat> 只是 regular grammar 是沒辦法分析 context free
+00:11:15 <Yu_lin> letoh: 聽起來像 python3 對 python2.7 的策略XD
+00:11:21 <letoh> godfat: 你是指 formal 的定義吧
+00:11:37 <letoh> Yu_lin: py2.7 沒救了  很多東西弄不回去XD
+00:11:44 <CindyLinz> 快要死掉了, 趕快生一個小孩, 取他的臍帶血來用.... (抖)
+00:12:06 <letoh> Yu_lin: 連 future 都看不到
+00:13:00 <letoh> 忘了上次在哪看到一個討論串  有人問 regex 能不能弄出 html parser
+00:13:24 <godfat> letoh, 嗯，有民間定義嗎？ XD
+00:13:39 <godfat> CindyLinz, 這比喻.... XD
+00:13:48 <letoh> 有人就回說 "chuck norris can parse html" 之類的
+00:14:41 <letoh> godfat: 嗯  我是想說有些語言的 regex 根本就不是在講 regex grammer 那些理論了，只是為了方便好用而弄出來的東西
+00:14:48 <CindyLinz> godfat: 不就拆人家身上的器官來用 XD
+00:15:31 <letoh> http://stackoverflow.com/questions/590747/using-regular-expressions-to-parse-html-why-not
+00:15:40 <letoh> 忘了是不是這一串
+00:16:11 <CindyLinz> 這應該算是個... spec 後來被亂改的血淋淋例子 XD
+00:16:16 <CindyLinz> 想當年真的是 regex 啊 XD
+00:16:46 <godfat> letoh, 是那串沒錯。不過我是想說，還是改個名字，不要讓人誤會比較好.. 不然這個問題會變成每個人定義不同造成溝通麻煩..
+00:16:50 <CindyLinz> 上 compiler 課的時候教授一直提: 我說的是這個 regex, 你不要拿奇奇怪怪語言裡面的 regex 來講!
+00:17:15 <godfat> 啊啊，不過我記得好像還有其他幾篇
+00:17:35 <letoh> 相關的那幾篇我應該都有看過  就隨便挑一篇出來XD
+00:18:11 <godfat> 不過 perl6 真的這麼慘嗎？ ~.~
+00:18:11 <godfat> 是說慢慢 backport 回去好像也是不錯啦..
+00:20:31 <CindyLinz> 沒有人用, 開發團隊也叫大家別用, 然後 perl5 開發團隊的人也幾乎不在裡面... 這.....||
+00:21:23 <godfat> 叫大家別用是因為覺得還沒做好？可是這樣沒有做好的一天..
+00:21:28 <CindyLinz> 反正 perl5 也是器捐(pcre)行之有年了嘛 XD
+00:21:45 <letoh> 糟糕我也用過XD
+00:22:34 <godfat> 不知道 pcre encoding 支援如何？
+00:22:34 <godfat> ruby 是用個叫 oniguruma (鬼車) 的東西，
+00:22:34 <godfat> 用這個是因為裡面支援很多種 encoding
+00:23:12 <CindyLinz> man pcre 看是有 byte / UTF-8 / UTF-16
+00:23:18 <godfat> 不過我上次看，這好像沒怎麼在開發了
+00:23:18 <godfat> ruby 已經是 fork 自己的版本了..
+00:23:34 <godfat> 了解
+00:25:30 <CindyLinz> 好奇怪...
+00:25:42 <CindyLinz> 我在這篇裡面有看到 perl8 的介紹 http://www.soimort.org/posts/152/
+00:26:05 <CindyLinz> 可是它文末有個 link 是到 scala
+00:26:14 <CindyLinz> 噢, 有人留言說真的就是 scala...
+00:26:19 <suhorng> ....!?
+00:26:24 <suhorng> 哪招
+00:26:32 <CindyLinz> 我剛剛看了一點點介紹想說這邊 type 列一大堆, 跟 perl 中心思想差異也太大
+00:27:04 <CindyLinz> 還不知道是 scala 的時候就覺得這不知哪來的新語言, 根本只是想吃 perl 這名字的豆腐....zz
+00:28:13 <godfat> 哈？所以 scala 一開始就是故意取名成 perl8?
+00:28:32 <CindyLinz> 中間看到他 demo 怎麼作輾轉相除法.. 心中就在想, 怎麼寫得這麼冗啊...
+00:28:43 <CindyLinz> 覺得回到 C 的感覺 orz
+00:29:50 <godfat> 唔唔，看起來只是別人惡搞而已
+00:30:22 <CindyLinz> low!
+00:39:46 <CindyLinz> 來寫個 perl on jvm.. 你到我家來, 我到你家去!
+00:40:12 <CindyLinz> (設定於 schedule 置底..)
+00:40:13 <godfat> 對喔，perl 有其他實作嗎？
+00:40:24 <CindyLinz> 沒聽說.. (苦惱)
+00:40:32 <godfat> @@" 有點意外
+00:41:02 <CindyLinz> 完整的 perl 沒有能印出來的 bytecode @@"
+00:41:10 <CindyLinz> 只有 in-memory 的資料結構
+00:41:28 <CindyLinz> 可能當年沒有這種觀念 @@"
+00:42:29 <godfat> 有人想要做 perl 的另外實作嗎？
+00:42:57 <CindyLinz> 有 ActivePerl, Strawberry Perl
+00:43:21 <CindyLinz> 不知道他們是怎樣做的
+00:43:37 <godfat> 我以為 Active 系列就是搬到 windows 上而已？
+00:44:07 <CindyLinz> 可是它好像有怎樣特殊的 cpan..
+00:44:34 <godfat> 好像跟我想像的差很多...
+00:44:34 <godfat> http://en.wikipedia.org/wiki/ActivePerl
+00:46:48 <CindyLinz> jaiyalas 分享的: Haskell ASCII 3D wireframe animator
+00:46:53 <CindyLinz> https://www.youtube.com/watch?v=Cw4xtmMMbXc
+00:46:59 <godfat> 他說也能用在 jvm 上耶？
+00:47:00 <godfat> http://en.wikipedia.org/wiki/Rakudo_Perl_6
+00:47:00 <CindyLinz> 這什麼東西啦... XDDD
+00:47:23 <CindyLinz> > "Perl_6" == "Perl"
+00:47:24 <lambdabot>   False
+00:47:34 <godfat> XDDDDD
+00:47:37 <CindyLinz> @@ 你看你又查錯頁了
+00:47:38 <lambdabot>  你看你又查錯頁了
+00:48:00 <godfat> @@ 太慘了，眼盲
+00:48:00 <lambdabot>  太慘了，眼盲
+00:48:07 <godfat> @@ 真好用 XD
+00:48:07 <lambdabot>  真好用 XD
+00:48:29 <CindyLinz> 哎唷, 沒人用的 perl6 搬上 jvm... 還是沒人在 jvm 上面用啊 ._.
+00:50:07 <CindyLinz> 不過如果實作這 3D Animator, 適合拿到 Functional Meetup 講.. XD
+00:50:21 <CindyLinz> 不知為什麼就很有喜感 XD
+00:51:25 <godfat> ...XD 先要做 2d 投影，然後還要做 ascii 投影
+00:52:02 <CindyLinz> 不知道為什麼它的 term title 在執行的時候一直 Main 和 sh 對跳...
+00:52:15 <CindyLinz> 他是用 system "echo" 跑的嗎 @__@"
+00:52:27 <godfat> ......那不是慢死 = =
+00:52:46 <CindyLinz> 還有 sleep!
+00:52:58 <CindyLinz> 我開始相信我的懷疑了....wwww
+00:53:29 <godfat> 我想起來我小時候做的遊戲畫面會閃，因為我每次都洗掉重畫
+00:53:34 <CindyLinz> (Y)
+00:53:57 <CindyLinz> 啟動的時候還要用 sleep 作載入進度條..
+00:54:29 <godfat> ..................這...
+01:46:06 <CindyLinz> godfat: 啊想到一件事.. 你之前有問說 LR parser 是不是 bottom-up 做的.. (應該是你問的吧!?)
+01:46:21 <godfat> 對 XD
+01:46:25 <CindyLinz> 我現在又在練習寫 parser, 發現這是真的
+01:46:35 <CindyLinz> 不過不是在它實作的部分, 是寫語法的部分...
+01:46:36 <godfat> @_@ 是喔... XD
+01:46:36 <lambdabot>  是喔... XD
+01:46:41 <CindyLinz> 呃.....
+01:47:10 <CindyLinz> 就是在寫 .y 語法的時候如果由下往上寫, 覺得是順的, 沒有 ambiguity 解不開的
+01:47:11 <godfat> 是說語法要想成從後面開始解析嗎？
+01:47:22 <CindyLinz> 那麼 LR parser 生出來大概就不會有 conflict
+01:47:34 <CindyLinz> 而寫 LL parser 的時候, 要由上往下寫, 才不會有 conflict
+01:47:49 <godfat> 聽起來這樣的差別就只剩下左右相反了
+01:47:51 <CindyLinz> 如果由上往下寫, 丟給 LR parser, 常會跑出沒想到的 conflict
+01:48:21 <CindyLinz> 寫 LR parser 的時候, 要先想: 什麼是字元 -> 什麼是整數 -> 什麼是 expression
+01:48:22 <godfat> conflict 是指 ambiguous?
+01:48:25 <CindyLinz> 對
+01:49:06 <CindyLinz> LL 的話是: 程式可以拆成什麼組成 -> expression 可以拆成什麼 -> 數字可以拆成什麼 -> ...
+01:50:00 <CindyLinz> 因為 LR parser 在跑的時候是在決定什麼時候可以 reduce 起來, 也就是這一群小東西什麼時候要組成一個大東西
+01:50:25 <CindyLinz> 無法決定要現在就組, 還是再多收集一點小東西的時候就是 conflict
+01:50:51 <CindyLinz> LL 象是從語法樹去看: 可以切了嗎, 要往哪個 branch (切法) 走
+01:54:37 <godfat> 覺得還沒有很容易可以想像 XD
+01:54:37 <godfat> 不過根據我用 LL parser 的印象，
+01:54:37 <godfat> 大概就是想辦法把要遞迴的東西往後丟就是了
+01:54:58 <CindyLinz> QQ
+01:55:11 <CindyLinz> 往後丟是?
+01:55:43 <godfat> 我最早是用 boost spirit, 那是 c++ template 的 LL(k) parser
+01:55:44 <letoh> 避免 left recursion 吧
+01:55:44 <godfat> 後來在看別人介紹 ANTLR, 好像也是 LL(k)
+01:55:44 <godfat> 現在 parsec 好像也是
+01:56:14 <godfat> 例如這個，用 parsec:
+01:56:15 <godfat> pTerm :: Parser Double
+01:56:15 <godfat> pTerm = try (pFactor <&> (char '*' *> pTerm) `using` (*))
+01:56:15 <godfat>     <|> try (pFactor <&> (char '/' *> pTerm) `using` (/))
+01:56:15 <godfat>     <|> pFactor
+01:56:32 <godfat> pTerm := pFactor * pTerm
+01:56:45 <godfat> 實際上會想寫 pTerm * pTerm, 但不能那樣寫
+01:57:09 <CindyLinz> 喔喔
+01:57:11 <monochrom> 我愛用 LL :)
+01:58:28 <CindyLinz> left recursion 從 conflict 的角度看, 就是 parser 不知道要走遞迴的 branch 還是不遞迴的 branch
+01:58:50 <CindyLinz> parsec 作法是都 try 一次, 不過在作成自動機這種的作法就會直接是 conflict
+02:00:28 <CindyLinz> pTerm := pTerm * pTerm 的寫法是額外加 priority 可以作... 它就是跟 parser generator 說, 這邊遇到 conflict 的時候請依怎樣怎樣的順序
+02:00:44 <CindyLinz> 畢竟寫成 pTerm * pTerm 看起來比較對稱舒服? :p
+02:02:16 <godfat> 沒錯，不過寫成 priority 感覺就笨笨的 ><
+02:02:16 <godfat> 我也沒寫過 XD
+02:02:16 <godfat> 印象中在 parsec 中寫出 left recursion 就是直接得到無窮 recursion...
+02:03:01 <CindyLinz> 欸.. 那指數 operator 要怎麼定義? @@    a ^ b ^ c ^ d
+02:03:22 <CindyLinz> a ^ b ^ c ^ d = ((a^b)^c)^d
+02:03:54 <CindyLinz> 啊不對, parsec 直接就是程式了, 沒有這種考量 ._.
+02:04:15 <CindyLinz> 我在寫什麼 orz
+02:04:29 <CindyLinz> 把 ^ 改成 - 好了....||
+02:04:39 <CindyLinz> a-b-c-d = ((a-b)-c)-d
+02:04:51 <monochrom> 嘻嘻
+02:05:13 <CindyLinz> pTerm := pTerm - pFactor
+02:06:09 <CindyLinz> 這要怎麼寫啊 orz
+02:06:20 <godfat> + 和 - 是這樣，簡單地說就是全部都是不同 rule:
+02:06:20 <godfat> pExpression :: Parser Double
+02:06:20 <godfat> pExpression = try (pTerm <&> (char '+' *> pExpression) `using` (+))
+02:06:20 <godfat>           <|> try (pTerm <&> (char '-' *> pExpression) `using` (-))
+02:06:20 <godfat>           <|> pTerm
+02:06:41 <godfat> pFactor 則是：
+02:06:42 <godfat> pFactor :: Parser Double
+02:06:42 <godfat> pFactor = pGroup <|> pNum
+02:07:03 <godfat> 我不知道在 LR 是不是只要反過來就可以了..?
+02:07:21 <monochrom> 可參考 chainl
+02:07:30 <CindyLinz> 用 happy / yacc 就會直接用 %left 和 %right 定義 operator 組合的順序 ._.
+02:08:08 <godfat> 完整程式 https://github.com/godfat/sandbox/blob/master/haskell/parsing/calculator.lhs
+02:08:49 <godfat> 是這個嗎？
+02:08:49 <godfat> http://hackage.haskell.org/package/base-4.6.0.1/docs/Text-ParserCombinators-ReadP.html#v:chainl
+02:09:13 <CindyLinz> godfat: 你貼的這個「完整程式」怎麼好像 latex @@"
+02:09:36 <godfat> literal haskell, github 的顯示有點問題..
+02:09:41 <CindyLinz> 喔..
+02:10:11 <godfat> 看 raw 好了.. XD
+02:10:12 <godfat> https://raw.github.com/godfat/sandbox/master/haskell/parsing/calculator.lhs
+02:10:29 <monochrom> \begin{code} ... \end{code} 之內是給電腦看, 之外是給人看
+02:10:41 <godfat> 寫成這樣是因為不想加一堆 >>>>> 好累
+02:10:50 <CindyLinz> godfat: 欸你這個減號, 不會是 a - b - c 變成 a - ( b - c ) 嗎? @@"
+02:11:05 <monochrom> 以及獲得 latex 支援 :)
+02:12:33 <godfat> 好問題耶，我試試 orz
+02:14:11 <godfat> 真的耶 XD 居然現在才被你點出來 = =...
+02:14:11 <godfat> 這都不知道幾年前寫的了 XDDDD
+02:14:43 <CindyLinz> 嗯 因為剛剛在想... left assoc 看起來最自然的 tree 長得就是 left recursion @@"
+02:15:43 <godfat> 有理，糟糕 XD 我好多都這樣寫...
+02:15:44 <godfat> 錯了幾年 = =... 不過這樣一時還真不知道怎麼改
+02:16:01 <monochrom> 可參考 chainl
+02:16:02 <CindyLinz> chainl XD
+02:16:28 <CindyLinz> 看起來它還是用 right recursion
+02:17:07 <CindyLinz> 可是把左邊這項捏著, 然後從右邊拿出來的第一個東西跟它 bind
+02:17:10 <CindyLinz> bind op
+02:17:34 <CindyLinz> bind op 之後的結果, 再捏著, 交給下一層的遞迴
+02:20:55 <CindyLinz> LR parser 的話... left recursion 是天性, right recursion 的話, 會比較沒效率, 到最後一項以前都會先積著.. 有 look ahead 的話, 可以知道哪一個點是尾巴, 可以從這邊把整個 tree reduce 掉 
+02:21:48 <CindyLinz> 嗯, 兩個方向的 tree 都可以做
+02:28:54 <godfat> 大概想睡了，還沒看懂 chainr/chainl 想做啥... ~.~
+02:29:36 <CindyLinz> 等 MP 回滿了再來看 XD
+02:29:58 <godfat> 真的... orz
+02:29:58 <godfat> 睡啦，大家晚安 XD
+02:30:01 <CindyLinz> 晚安 ^^
+03:21:32 <CindyLinz> 耶~ 知道怎麼設定 cabal 讓它在 cabal build 的時候先去跑 happy 把 .y 生成 .hs 了 ^^
+03:22:43 <CindyLinz> 正在寫的 Haskell-Hass 裡面已經 git push 了這個, 還寫得很簡陋, 什麼錯誤檢查都沒去看, 不過以後有需要應該足夠當參考了 ^^
+04:05:20 <CindyLinz> 應用在 happy 的 %token 裡面... ViewPatterns 真是救星... QQ
+10:14:12 <MnO2> http://www.reddit.com/r/haskell/comments/1oj2u4/fsf_recognizing_an_inspiring_woman_for_ada/
+10:14:23 <MnO2> https://www.fsf.org/blogs/community/recognizing-an-inspiring-woman-for-ada-lovelace-day-audrey-tang
+10:17:00 <MnO2_> au 太厲害了，啟發了 edward kmett
+15:41:49 <Yu_lin> 看著 PL 的討論區，總覺得很多人很喜歡比喻，接下來就會有人說比喻不當趴拉趴拉的，結果這些人講的東西都跟原本的討論主題不太有關係.....
+15:42:52 <CindyLinz> orz
+16:10:37 <hashcat> http://en.wikipedia.org/wiki/False_analogy
+16:11:02 <hashcat> 要不把這個貼到公告或注意事項
+16:17:06 <Yu_lin> 我是在說 courses 的 PL 課討論區啦XD
+16:24:00 <hashcat> ??
+16:24:35 <hashcat> 貌似能討論的地方都能貼一下
+16:27:02 <CindyLinz> 覺得這邊人夠少, 還不需要這種規定, 討論起來比較沒有心理負擔
+16:30:45 <hashcat> 是某個人很少的地方
+16:33:42 <CindyLinz> 畢竟我們台灣人是比較依賴社會共識和群體和諧運作的社群啊 XD (large scale 的時候似乎是個缺點就是...||)
+16:34:38 <hashcat> 昨天才看個部落格說這是缺點
+16:35:58 <hashcat> 洋媒體記者寫controversial被當作是空話一句, 但台灣媒體說有爭議的時候卻像是很需要強調的點
+16:36:27 <CindyLinz> 我覺得群體人數少的時候是優點
+16:37:42 <CindyLinz> 日本應該更嚴重? 可是他們的巨型公司好像運作起來還是很厲害.... QQ
+16:37:52 <hashcat> 其實我覺得人少的時候更是缺點
+16:38:03 <CindyLinz> 一個人的時候呢?
+16:38:06 <hashcat> 因為人少的團隊通常更需要變動模式
+16:38:25 <hashcat> 一個人就自我批判吧
+16:38:29 <CindyLinz> 人少的團隊很容易大家都同意要一起變動呀~
+16:38:51 <hashcat> 變動之前總需要有人意見不同吧
+16:38:56 <CindyLinz> 這種模式的向心力很強的
+16:39:01 <CindyLinz> 人少不太會...
+16:39:31 <CindyLinz> 大約六到七個人以下, 不太會有這種現象.
+16:39:46 <hashcat> 啥嚜現象
+16:39:57 <CindyLinz> 意見不同互不溝通
+16:40:56 <hashcat> 我想的是, 意見不同加充分溝通, 最後行動一致
+16:41:13 <CindyLinz> 六到七這個數字是假設每一個人都很 active 的情況, 通常也是組成營利公司的情況
+16:41:25 <Yu_lin> 我先出門一趟，看看 F# 的書
+16:41:54 <CindyLinz> 如果有二三十人, 不過大家都不太有意見 (不是被禁聲那種, 是真的覺得怎樣都好), 那人可以多一點 :p
+16:41:55 <hashcat> 團隊少的時候客戶跟營利模式都不大會固定
+16:42:25 <CindyLinz> 意見不同加充分溝通, 最後行動一致 ← 這是群體和諧的運作方式呀
+16:42:42 <hashcat> 唉沒看過
+16:43:16 <CindyLinz> XD
+16:43:26 <CindyLinz> 我剛好正身處其中 ^^
+16:43:33 <CindyLinz> 所以感覺比較正面一點 :p
+16:43:41 <CindyLinz> 不過我相信這模式大不了....
+16:43:49 <CindyLinz> 但是可以用階層式地來作
+16:44:21 <CindyLinz> 我猜想日式巨型公司是這樣作出來的.. 但是反應速度隨著層數增加, 就越來越慢了
+16:44:44 <hashcat> 把人當actor選擇p2p或server-client
+16:44:55 <hashcat> 不當類比
+16:45:00 <CindyLinz> p2p 的公司應該不存在啊 ._.
+16:45:18 <CindyLinz> g0v 這種應該算是 p2p XD
+16:45:19 <hashcat> 混合的貌似生存最好
+16:45:38 <Yu_lin> p2p 的公司XD
+16:45:40 <hashcat> 瑞士最高階有聯邦7人委員會這樣
+16:46:01 <CindyLinz> 台式的就有點混合.. 美式和日式之間, 可是常常就沒有原則什麼時候依哪一系, 反而很慘
+16:46:14 <hashcat> 或者共匪說得多重領導
+16:46:32 <CindyLinz> 他們是把多重領導當成優點在講嗎? @@"
+16:46:35 <hashcat> 台灣不能參考
+16:47:03 <hashcat> 他們表面尊毛, 其實死都不想重蹈覆轍
+16:47:30 <hashcat> 才把某些人弄倒之後, 弄出一套多重領導
+16:48:00 <hashcat> 跟毛本身無關
+16:48:06 <CindyLinz> 台式就.. 又希望共識制的大家氣氛好, 又希望有制度制的反應速度快.. 有時候就偏成獨裁集權制, 來決定什麼時候走哪一邊 orz
+16:48:09 <hashcat> 單點錯誤
+16:48:32 <hashcat> 貌似扯遠了
+16:48:35 <CindyLinz> XD
+16:48:41 <CindyLinz> 反正現在沒別話題... :p
+16:48:48 <hashcat> 好吧
+16:48:52 <CindyLinz> 拉回來一點好了....
+16:49:17 <hashcat> 那些也不是我自己想到的類比法
+16:49:26 <hashcat> 有數個奇怪的研究中心專門在做這種
+16:50:00 <CindyLinz> data ManagerGroup = Individual | Group Int [ManagerGroup]
+16:50:08 <hashcat> 用actor model模擬小至細胞分子, 大至國家組織的集群
+16:50:22 <hashcat> Haskell在這裡沒啥優勢
+16:50:46 <CindyLinz> 我這兩天想到可以用 class / instance 來作 dependent type 耶
+16:50:51 <CindyLinz> weak dependent type XD
+16:50:59 <CindyLinz> 因為沒有 totality check
+16:51:18 <CindyLinz> 然後就可以限制那邊那個我寫成 Int 的數量要在 1~7 之間
+16:51:58 <hashcat> 我指的是擴展方面的問題
+16:52:28 <CindyLinz> 哪一個擴展呀?
+16:52:56 <hashcat> 像是java有jppf可以擴展成集群, 不同管理者不同網域都可以加入其計算資源管理
+16:53:22 <CindyLinz> (我想, 這 channel 的情況, 就是等到有人說: 厚, 你們都聊這個好煩喔~ 的時候開始作點收斂吧)
+16:54:36 <CindyLinz> 我沒有想到要去模擬到行為的部分 :|
+16:55:17 <hashcat> 通常actor規則只有數條就已經能充分描述社會行為
+16:55:48 <hashcat> 感覺已經有阿西莫夫虛構的心理史學樣子
+16:56:57 <CindyLinz> 不會 ^^|
+16:57:18 <hashcat> Haskell少了reflection的機制
+16:58:03 <hashcat> 要把一個計算任務遷移過去就多了很多工作
+16:58:40 <CindyLinz> 你不覺得摸 reflection 的部分有像另一層語言?
+16:59:13 <hashcat> 有函數能自我指涉
+16:59:25 <hashcat> 是有這感覺
+16:59:27 <CindyLinz> GHC parser 用 haskell 實作, 其實你寫程式的時候去跟 GHC 本身的程式 link 在一塊的話, 你就能摸到 reflection 了呀
+16:59:47 <CindyLinz> 就是, 把 GHC 當 library, 而不只是個 tool 來用
+16:59:51 <hashcat> 可以想成無窮層語言, 上層支配下層
+16:59:52 <CindyLinz> 你就可以寫 ghci
+17:00:23 <hashcat> 就是我說的多很多工作
+17:01:07 <hashcat> 作這個python跟java也就那樣而已
+17:01:50 <hashcat> 而且也找不到編輯器能具象Haskell的那種Reflection法
+17:03:27 <CindyLinz> 封裝得太嚴了, lib author 沒想讓你 inspect 你就不准摸 :Q
+17:03:54 <hashcat> 其實Haskell是假的通用語言
+17:06:12 <hashcat> 看template haskell有沒發展吧
+17:07:27 <hashcat> 這特性要是完備的話, 根本可以變出各種語言掩蓋各種東西
+17:08:26 <CindyLinz> 在 template 裡面呼叫 FFI 去 system()... XD
+17:08:47 <CindyLinz> 我是不知道 template 有沒有限制要 pure, 限制了就用 hack 的 XD
+17:09:29 <hashcat> template現在還是不安全特性
+17:09:49 <CindyLinz> 我覺得 template 這麼惡掉的東西, 就別假腥腥作什麼安全了 XD
+17:09:54 <CindyLinz> 惡搞的東西 :p
+17:10:06 <hashcat> 可以跨模組, 跨型別
+17:10:09 <hashcat> 執行不安全程序
+17:10:22 <hashcat> 根本是超級大漏洞
+17:10:35 <CindyLinz> 對啊, 後門都已經開了, 就不要再裝模作樣了 XD
+17:10:45 <hashcat> 用了Haskell全毀
+17:11:36 <hashcat> 但要是這些搞定, 還有語法看起來跟Haskell原本的樣子一致的話
+17:11:42 <CindyLinz> Haskell 原本就沒有保證安全啊~ 隨時都可以 halt
+17:12:16 <CindyLinz> 只是想搞安全的時候 compiler 做了很多事, 最後幾步還是人力眼睛去看
+17:13:12 <hashcat> 這也是很大的劣勢, 我想到的方法會有機會讓其他資源插入執行奇怪的代碼
+17:13:59 <CindyLinz> 它是安全和寫起來不要吐血之間的一個折衷點不是嗎? @@"
+17:14:33 <hashcat> 所以最近比較沒管haskell, 就當作是一個學習的過程
+17:14:42 <hashcat> 不實用
+17:15:21 <hashcat> 只能說這範式有潛質
+17:15:34 <CindyLinz> 我會改變這現象.. (立志中..)
+17:16:50 <hashcat> haskell的那種抽象法, 還是我最看好的
+17:17:10 <hashcat> 一個概念駕馭數種不同的東西
+17:17:26 <CindyLinz> 你指哪一個概念啊? @@"
+17:17:27 <hashcat> 被scala大量抄走
+17:17:54 <hashcat> 那些幾種比較常用的typeclass吧
+17:18:25 <CindyLinz> class 的部分喔?
+17:18:42 <hashcat> 在其他語言不一樣的東西, 到了haskell就變成各種同一個typeclass
+17:18:54 <hashcat> 雖說比較反直覺就是
+17:19:18 <hashcat> 就看monad就好了
+17:19:53 <CindyLinz> 我喜歡這樣.. 在功能一樣, 如果能不增加太多麻煩, idiom 越少越好
+17:20:02 <hashcat> backtrack, 例外處理什麼都是monad, 只要搞懂monad剩下都一樣
+17:20:28 <hashcat> 其他語言比較難想像這種狀況
+17:20:39 <hashcat> scala可以噗噗
+17:20:44 <CindyLinz> 只是搞懂了 monad 以後, 其實什麼都還沒懂.... (遠目)
+17:21:00 <CindyLinz> 不對, 表錯情.. 應該是 (淚目)
+17:21:15 <hashcat> 只是用scala不會被強迫用那種模式, 結果變成java
+17:22:06 <CindyLinz> haskell 可以有非常 reuse 的 reuse.. XD
+17:22:24 <hashcat> 光搞定函數的名稱和函數該滿足的規則,就很大件
+17:22:31 <hashcat> 你有沒用過scala
+17:22:47 <CindyLinz> 沒用過.. 只有昨天被 perl8 騙進去看介紹.....||
+17:23:01 <CindyLinz> 感覺很差.....||
+17:23:13 <hashcat> scala 的 trait 混合界面跟typeclass
+17:23:39 <hashcat> 那種語法貌似確實是不太會給人好印象
+17:24:40 <hashcat> 省略地說就是Haskell混合Java
+17:25:14 <hashcat> 函數式跟物件導向式可以結合的概念, 在scala就會混合在一起了
+17:26:07 <hashcat> typeclass & interface => trait
+17:27:18 <hashcat> 還有啥一時說不上來了
+17:27:51 <hashcat> 有人用這種類比把Haskell的東西一個一個移植過去
+17:29:10 <hashcat> 但那種彷java語法會讓高階函數等東西變難看
+17:29:10 <hashcat> tradeoff
+17:29:11 <hashcat> 先下了
+17:59:46 <Yu_lin> back
+18:00:06 <Yu_lin> 我就算能接受 ocaml 了，還是無法接受 F#
+18:20:51 <godfat> 我原本也有點想把 haskell 的東西搬到 scala 上
+18:20:51 <godfat> 看到也有不少人這樣做
+18:20:51 <godfat> 不過最後我還是只有這樣的結論：
+18:20:51 <godfat> 如果語言不夠像 haskell, 想模仿最終只會做出很難用的東西
+18:26:58 <CindyLinz> (Y)
+18:27:59 <CindyLinz> 不是只要拿了兩把劍就能一個人使出玉女素心劍的..
+18:28:10 <CindyLinz> (OS: 要本來夠笨才行)
+18:29:19 <godfat> XDDD 還要兩隻手
+18:32:49 <CindyLinz> 兩隻手? ^^|  我講本來夠笨指的是很多東西都沒有, 所以有些招使出來不會纏住自己..
+18:34:03 <godfat> 我以為在說要夠笨才能用左右互搏 XD
+18:34:04 <godfat> 所以想說斷臂人也是不能用的 XD
+18:35:55 <CindyLinz> 喔.. XD
+18:37:46 <Yu_lin> 剛剛也覺得是因為斷臂不能用的 +1 XD
+18:38:20 <CindyLinz> QQ
+18:51:17 <Yu_lin> https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-prn1/q71/s720x720/994617_10153371491790228_579794236_n.jpg   路跑月入 300k（m）
+18:52:51 <CindyLinz> XD
+18:54:48 <godfat> 正在順手把東西搬到 bitbucket 上
+18:54:49 <godfat> 感覺又比上次試還多了很多新東西

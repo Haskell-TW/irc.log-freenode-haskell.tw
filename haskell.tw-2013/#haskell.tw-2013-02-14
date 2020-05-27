@@ -1,0 +1,242 @@
+11:14:27 <suhorng> #1H6__2q6 (PLT) [ptt.cc] 「學校大一必修課不教C++就直接教haskell了。」WOW....
+11:17:15 <favonia> lol
+11:17:22 <favonia> /join #haskell.tw
+12:16:56 <CindyLinz> 唔.. 這是想加入「裡頻道」的意思嗎 XD
+13:21:52 <mno2> 該不會是 scm 開的吧 wwwwww
+13:24:42 <favonia> CindyLinz: 只是想說可以到這頻道啊（拉人）
+13:28:28 <suhorng> 大家去推文廣告（？）
+13:29:01 <suhorng> mno2: 感覺時間不太像台灣的大學XD
+13:45:37 <mno2> CindyLinz:  我可以問你們 deployment 的流程嗎?
+13:45:52 <mno2> 我這兩天正在嘗試 keter
+13:46:14 <mno2> 還有試用 puppet
+13:46:43 <mno2> 在思考 scripting language 跟 compiled language 在 deployment 上的差異
+13:49:44 <mno2> keter 的作法有一個有趣的點是，他是在 server 起一個 process, 會 listen on 某一個資料夾的 inotify
+13:50:48 <mno2> 然後你只要把 compile 出來的執行檔 , resource, config 包成一個 tarball, 複製到那邊他就自動幫你解開, setuid, monitor 並前面檔一個 reverse proxy
+13:51:44 <mno2> 有新版就自動複製過去，他會幫你做 provisioning, 但目前還沒有看到 rollback 的指令，但他資料夾有留著
+13:53:39 <mno2> 我在想一點是，不知道把那個資料夾設成 dropbox 的資料夾會怎樣 wwwwww
+13:54:07 <mno2> 複製到 local 資料夾，就 dropbox 到全部 server 一起 deploy, wwwwww
+14:49:01 <CindyLinz> mno2: 我們用 svn. 在 production 機器上面的 post commit trigger 會 svn up
+14:49:39 <CindyLinz> mno2: 然後, 執行中的 server 會進入 shutdown mode
+14:49:50 <CindyLinz> 也會啟動新的 server
+14:50:08 <CindyLinz> shutdown mode 是說執行中的 service 會繼續, 但不會接新的工作
+14:50:42 <mno2> 有這種 mode 喔 ? xD
+14:50:57 <CindyLinz> 程式自己寫, 要有什麼 mode 都可以有啊 XD
+14:51:06 <mno2> 喔喔，原來是自己寫的
+14:51:29 <CindyLinz> 只能自己寫啊.. 網路上又找不到麻將 server XD
+14:52:05 <mno2> 沒有，我以為是 http request 的層次 xD
+14:52:33 <CindyLinz> http php 的部分, svn up 就了事了..
+14:52:46 <CindyLinz> 會有那麼個瞬間, php 檔不同步
+14:52:57 <CindyLinz> 不過實際上不知道發生率多高
+14:54:03 <CindyLinz> 反正 php error 也就那個 page 在零點幾秒內壞掉, 不會有災難等級的事情 :p
+14:55:19 <mno2> 信用卡請款就請不到款了 xD
+14:57:04 <CindyLinz> 不會啊那種有 transaction 等級的東西不會 depend web request 不能失敗的 XD
+14:58:41 <mno2> 我大致看了 fabric 跟 capistrano 也都是從version control system 倒，不過我一直覺得這樣當系統不是只有 scripting 的部份時會有危險
+14:59:05 <CindyLinz> 這樣.. depend on web request 的 Agda 程式好像就非常好寫了...
+14:59:29 <CindyLinz> 前提: web request 會失敗.. 推論: 程式失敗.. QED.  (誤)
+14:59:55 <CindyLinz> mno2: 他們是不是都配 ruby 的啊?
+14:59:56 <mno2> 這樣就沒飯吃了 www
+15:00:10 <CindyLinz> mno2: 這的確符合現狀啊... wwww
+15:00:12 <mno2> fabric 是 python 抄 capistrano 的
+15:00:38 <CindyLinz> mno2: 想想.. 你是看它們找靈感, 而不是想直接用它們哄?
+15:00:39 <mno2> capistrano 主要是配 rails ，但其他不要差太多也可以用
+15:00:59 <CindyLinz> mno2: 如果要找非 scripting 的.. 可能可以找找 java 的?
+15:01:16 <CindyLinz> 可是 java servlet 用起來好像也很 script 的感覺..?
+15:01:22 <mno2> CindyLinz: 我只是在找想法啊，畢竟 deploy haskell 系統就跟 deploy 一個 web server 一樣
+15:01:27 <CindyLinz> 嗯嗯
+15:01:38 <mno2> Yesod <--- 一個執行檔
+15:01:40 <CindyLinz> .Net 也是要 compile.. 不過感覺沒有什麼看得到的東西 orz
+15:02:05 <CindyLinz> mno2: 把執行檔 commit 進 version control 就一樣了..
+15:02:13 <mno2> 所以理論上還蠻單純的 .. 只要丟上去起 monitor 就好了
+15:02:29 <CindyLinz> mno2: 但是那樣要要求 production environment 的一致性更高
+15:02:46 <mno2> 對啊，但 ghc cross compilation 好像還不是很方便
+15:03:35 <CindyLinz> 如果 deploy 機制設計為在 production 機器上面 compile
+15:03:51 <CindyLinz> 要考慮 ghc 在 link 階段的龐大記憶體用量...||
+15:04:06 <mno2> CindyLinz: 我是覺得那樣不太對  xD
+15:04:29 <CindyLinz> 至少要小心如果有連續 deploy 的話.. 要把這些 deploy process 排好隊, 第一個跑完第二個才可以開始跑....
+15:05:08 <mno2> 這應該是不會太難
+15:05:09 <CindyLinz> 以前我們有在線上轉圖的 service, 把上傳的圖檔轉成我們要求的大小
+15:05:16 <CindyLinz> 最開始就亂寫寫在 php 裡面
+15:05:30 <CindyLinz> 上線以後一堆人同時上傳, 記憶體就爆炸了.... zz
+15:06:05 <mno2> 這種東西就是要塞進 queue 中做啊，坐大的話也比較好 scale
+15:06:50 <CindyLinz> 嗯, 架構就突然變複雜了... 多出一個獨立的 server process, 然後再 send job... ^^|
+15:09:39 <mno2> 其實 haskell 的 deployment 我認為應該 deb 加 puppet 就夠了
+15:09:53 <CindyLinz> 這樣是 debian/ubuntu only?
+15:10:00 <mno2> 只是舉例啦
+15:10:47 <CindyLinz> portability 好一點的話, 應該還是在 production 上面 compile 哄?
+15:11:08 <mno2> production 用 gentoo (誤)
+15:11:21 <CindyLinz> 就管它對面是 bsd / linux / windows 都可以用
+15:11:54 <CindyLinz> 我們的 deploy 不包含自動安裝環
+15:11:56 <CindyLinz> 環境
+15:12:09 <mno2> 是有人有想要做 Haskell VM 的說，不過不知道還有沒有繼續 www
+15:12:11 <CindyLinz> 所以有用到什麼神祕 library 的話, 那要另外處理
+15:12:21 <CindyLinz> 不過實際上不常發生
+15:12:49 <CindyLinz> 而且因為要另外處理, 就會嫌麻煩, 所以都會盡可能自己繞過 XD
+15:13:14 <CindyLinz> 例如說.. 像 perl 的話, 可以把人家整個 lib copy 下來放到 local 目錄一起丟到 svn 裡面 XD
+15:13:48 <CindyLinz> 啊.. 一直說 svn, 可是我不太喜歡它, 不推荐 XD
+15:14:34 <mno2> 如果全部都是 perl 的話比較好處理啊， 就怕哪一個地方十分要求效率用 C 寫，然後要 update 那天就炸了
+15:15:00 <mno2> CindyLinz: 用 git svn ?
+15:15:21 <CindyLinz> mno2: 那用 perl 裡的 inline C XD
+15:15:29 <CindyLinz> mno2: 我們有在用.. ^^|
+15:15:41 <mno2> 太噁心了 wwww
+15:15:52 <CindyLinz> mno2: 沒用過 git svn.. 現在是得過且過狀態 ^^|
+15:16:15 <CindyLinz> mno2: inline C 的好處是它跟 perl 接得很順... :|
+15:17:06 <CindyLinz> 期待 haskell vm..
+15:17:24 <mno2> CindyLinz: git svn 還蠻不錯啊，缺點就是要透過他好像不太能做 svn branch merge
+15:18:05 <CindyLinz> mno2: git+svn 的用法, 我曾經有過直接在某個 svn 裡的目錄下 git init
+15:18:12 <CindyLinz> mno2: 然後自己 locally 用 git
+15:18:52 <CindyLinz> mno2: 反正我們家的 svn 其實本質就是 deploy 的 version control, deploy ready 的時候再 commit 到 svn
+15:19:09 <CindyLinz> mno2: 不過平常沒事就要 svn up 東西進來 merge 到 git
+15:20:06 <mno2> 所以是開發一個 branch ? deploy 一個 branch ?
+15:20:26 <CindyLinz> mno2: 只有 deploy branch
+15:21:11 <CindyLinz> mno2: 我們不常有大型複雜的開發, 出現的時候都是新遊戲, 所以剛好這樣用沒問題
+15:21:24 <CindyLinz> mno2: 因為開放以前, 隨便 deploy 垃圾不會怎樣 ^^|
+15:21:32 <mno2> 所以 code merge 也在 deploy branch 進行喔 @@?
+15:21:52 <CindyLinz> mno2: locally 是呀..
+15:22:43 <mno2> 好吧..  也許遊戲可以適應這種模式吧
+15:24:13 <CindyLinz> 有一種處境偶爾讓我很為難...
+15:24:46 <CindyLinz> 手上有個東西改一半, 突然殺出另一個 pm 要改另一個東西, 動到的程式碼和我正在改的程式碼有碰在一起
+15:24:58 <CindyLinz> 然後這第二個 task 要先上....
+15:25:28 <CindyLinz> 然後.. 第二個 task 弄到一半.... 哎呀, 說不對不對, 還是想要第一個 task 先上....
+15:25:39 <CindyLinz> 有時候會疊到第三個......||
+15:26:44 <mno2> 理論上是每次 deploy 完要切一個 branch 出去? 萬一有 emergency bug fix 的話
+15:27:11 <CindyLinz> svn merge branch 太歡樂了啊.. zz
+15:27:32 <CindyLinz> mno2: 我有時候會選擇重新 svn checkout 一份
+15:27:40 <CindyLinz> mno2: 在那一份上面作 bug fix
+15:28:00 <CindyLinz> 等於我有 N 份獨立的 svn 在用.. ^^|
+15:28:28 <mno2> 那這樣還是要 merge 啊，難不成你用 patch 嗎？
+15:28:45 <CindyLinz> 現在這樣搞是被 client 逼的.. ^^|  因為 client 有很多人, 我會對不同的 client 做不同的功能
+15:28:55 <CindyLinz> 每一個都是做到一半, 他們在邊試邊開發
+15:29:06 <CindyLinz> 所以我要有 N 個獨立都會動的半成品 :Q
+15:29:30 <CindyLinz> 在各 svn 裡面 svn up 的 merge 法, 比直接下 svn merge 簡單啊 @@"
+15:30:33 <CindyLinz> 直接 merge 的時候, 那種檔案多出來, 檔案少了, 或是 property 改過, 或是 sym link 都會卡出不知道怎麼解決的奇怪的 svn 狀態 @@"
+15:31:21 <mno2> 我可以理解
+15:35:46 <CindyLinz> mno2: 欸~ 那你弄的 deploy 系統會考慮搭配 darcs 嗎?
+15:36:50 <mno2> CindyLinz: 沒有吧，看起來 keter 還 OK， 應該只會修改他吧。我沒有想要搭配 version control system
+15:37:01 <CindyLinz> 喔
+15:37:25 <mno2> 我就是在思考 compiled language 搭 vcs 感覺意義不大
+15:37:43 <CindyLinz> google keter 出現一大堆東西 @@.. 你說的應該是 hackage 上面的?
+15:37:48 <CindyLinz> http://hackage.haskell.org/package/keter
+15:37:52 <mno2> 對啊
+15:37:56 <mno2> 就 michael 寫的
+15:39:05 <CindyLinz> 搭配 version control 是比較符合現在的常見用法 :p  不過搭配 rsync 這種東西應該也可以
+15:40:12 <mno2> 那是因為現在主流都是用 scripting language 寫 web 啊 (我是沒用過JVM langauge寫過)
+15:40:39 <mno2> 除非像 FB 一樣把 PHP 當 compiled language (誤)
+15:41:00 <CindyLinz> 非 script 應該還是會用到 version control 吧.. 只是 source -> binary 這邊會多一截就沒那麼方便了
+15:41:46 <mno2> 喔喔，我的分類中那一段不算在 deploy system 裏面
+15:41:57 <CindyLinz> 這邊把 script 定義為... develop 只要送出 source, .... 然後就會跑了 XD
+15:42:02 <CindyLinz> 這邊把 script 定義為... developer 只要送出 source, .... 然後就會跑了 XD
+15:42:31 <mno2> 可以這麼說吧
+15:42:40 <CindyLinz> 所以如果你的 deploy system 有把 compile 的過程自動化搞掉... 那連 C 都可以當 script 來用 :D
+15:43:39 <CindyLinz> 嗯, 那一段如果沒包進去.. 就不太一樣了 :|
+15:44:49 <mno2> 理論上是，不過稍大的系統通常都不會這麼單純只有一種語言 xD
+15:45:28 <mno2> 而且機器還會分角色, deploy dependency 就更複雜了
+15:46:09 <CindyLinz> 我們現在不同機器會自己揀不同的目錄去開.. XD
+15:46:48 <mno2> 那要先 deploy 那一種角色也是人來決定的吧？
+15:46:59 <CindyLinz> 我曾經想在 PostgreSQL 裡面用 stored procedure 寫網頁...
+15:47:29 <CindyLinz> 角色是人另外決定呀.. 可是有的機器只會 svn up 某幾個目錄
+15:47:41 <mno2> CindyLinz: restpg 是那種東西嗎？
+15:47:43 <CindyLinz> 寫一寫.. 覺得, 人活得好好的....
+15:47:57 <CindyLinz> 沒聽過 restpg...
+15:48:07 <mno2> clkao 寫的樣子
+15:48:39 <CindyLinz> 反正就是寫在 postgres 裡面的函數之類的, 希望可以 select html from page where uid=xxx; 就出現了 html XD
+15:48:47 <CindyLinz> no.. 我直接寫 PGSQL
+15:48:49 <mno2> 打反了, 是 pgrest
+15:49:06 <CindyLinz> 應該是在 clkao 寫那東東以前一年的事
+15:49:20 <mno2> 就把 json 換成 html, wwww
+15:49:38 <CindyLinz> 我那時是把整個 control logic 都寫在裡面..
+15:50:14 <CindyLinz> 體現 data 即程式.. (逃)
+15:51:19 <mno2> 嵌入 scheme (誤)
+15:51:38 <CindyLinz> 也是有收獲啦...
+15:51:54 <CindyLinz> 體會到前人把 data 和 code 分開, 真是很有道理啊.... QQ
+15:52:33 <CindyLinz> 後來參加 FLOLAC.. 發現有人在搞「函數即 data」....www
+15:54:03 <miaout17> 上面看到麻將server 有點好奇 XD
+15:56:09 <CindyLinz> 沒有賭錢, 是合法的, 是合法的 XD
+15:56:37 <miaout17> 遊戲公司嗎？
+15:56:41 <CindyLinz> 對啊
+15:57:04 <CindyLinz> http://www.gamesofa.com/
+15:57:06 <miaout17> 做賭代幣的好像也滿賺的 XD
+15:57:17 <CindyLinz> 不能換回錢的呀
+15:58:30 <miaout17> 萬華這邊網咖常看到有大哥買了星城online的點數在拉拉霸 XD
+15:59:46 <CindyLinz> 有的公司會做那種會送獎品, 然後再用別的公司跟你買回獎品的方式作白手套.. 不過實際上是哪些有這樣做的我就沒很注意了
+16:00:34 <CindyLinz> 我只比較關心開發方面的, 競者給別人傷腦筋就好 XD
+16:54:49 <letoh> mno2: 請問一下  有寫中文書名那張圖是你做的嗎? 還是 Fleurer ?
+16:56:08 <mno2> 哪張 ?
+16:56:20 <letoh> splash.png
+16:56:20 <mno2> letoh: 熊貓 ?
+16:56:51 <letoh> 還有一張是英文標題  上面畫有大象的
+16:57:10 <letoh> 喔  因為我會拿中文那張來改一下，想確定一下授權
+16:58:33 <letoh> 昨天發現 fdoc 好像會吃掉某些空白  難怪調半天都沒效果XD
+16:59:00 <mno2> 那一張喔， 不是我做的。但好像也不是 Fleurer 做的。 似乎是 Fleurer 連繫原作者說他正在翻譯，結果原作者心血來潮就幫他畫的
+16:59:25 <letoh> 連中文也是原作者寫上去的?
+16:59:29 <letoh> 真酷
+16:59:51 <mno2> 應該是吧
+17:00:03 <mno2> 這沒有經過考證
+17:00:34 <letoh> 嗯  我搞定 mobi 封面了，想拿那張來做成封面 (其實已經偷跑了XD
+17:01:01 <mno2> 是喔，你要拿那個做封面喔 xD
+17:01:14 <mno2> 私心覺得那張不太好看 wwwww
+17:01:25 <letoh> 就是 kindle 顯示封面畫面時會看到的
+17:02:00 <letoh> 喔喔喔  再研究看看  反正現在會做了  隨時都可以換
+17:02:05 <mno2> OK
+17:02:45 <letoh> 那張圖尺寸不合封面的規定  所以會稍微改一下  不過我是另外再弄一張就是，沒動到原圖
+17:04:00 <mno2> OK,  你是放在你 clone 的 repo 中嗎？
+17:04:09 <letoh> 我還沒放上去
+17:04:32 <letoh> 目前只先把修改內文的部份放上去而已  在 ebook 那個 branch
+17:04:47 <letoh> 程式碼的排版有點問題  還在想要怎麼處理
+17:05:09 <letoh> 設定 word wrap 的話會斷在奇怪的地方...XD
+17:05:37 <letoh> 昨天發現 lines 被切成 line 跟 s.... 看半天覺得莫名其妙
+17:05:40 <mno2> 程式碼的排版問題真的挺麻煩的, 像手機大小看的話應該是全部亂掉
+17:05:45 <mno2> 是喔@@
+17:06:27 <letoh> 可以另外整理  然後透過 css3 切換要顯示哪一種
+17:06:50 <letoh> 有些地方手動換行效果會好一點
+17:07:19 <mno2> I see
+17:08:58 <letoh> 其實都顯示同一份也沒問題  反正原本的網頁就已經限制寬度了@_@
+17:09:33 <letoh> 解除寬度限制的話  在 pc 上看到的排版會變得怪怪的@_@
+17:14:31 <letoh> mno2: 你知道 fdoc 吃掉空白的問題大概怎麼要改哪裡嗎? 我發現在原稿加空白完全無用... 沒空白的話斷行都不正確了@_@
+17:15:15 <letoh> 普通的空白好像會保留  但遇到空白前後剛好接 tag 的話，會被吃掉
+17:23:26 <mno2> letoh: 理論上應該是在這邊吧: https://github.com/learnyouahaskell-zh-tw/learnyouahaskell-zh-tw.github.com/blob/source/tools/fdoc/src/parser.rb
+17:36:12 <letoh> 我剛剛改了一下 parser，但那些 regex 好像本來就不會匹配到空白@_@
+17:36:38 <letoh> 「對於任何一個 functor F，下面這個式子應該要被遵守：fmap (f . g) F = fmap f (fmap g F)v」   最那個 v 是什麼意思呢 ?
+17:36:44 <letoh> http://learnyouahaskell-zh-tw.csie.org/zh-tw/functors-applicative-functors-and-monoids.html
+17:37:24 <letoh> 查了原文好像沒有那個 v... 該不會是手滑? XD
+17:39:52 <CindyLinz> 按空白鍵壓到了啦 XD
+17:40:56 <letoh> 那怎麼會跑出 v ?XD
+17:41:54 <CindyLinz> 在空白鍵旁邊啊
+17:42:43 <CindyLinz> 或是.. 作者習慣 dvorak 鍵盤.. 只是那時候 layout 跳回 qwerty
+17:43:24 <letoh> 好像蠻有可能的XD
+17:43:25 <CindyLinz> 啊反了.. 是作者習慣 qwerty, 可是那時跳為 dvorak
+17:43:38 <CindyLinz> qwerty . 是 dvorak v
+17:43:45 <letoh> v 好像是在 . 的位置
+17:44:09 <letoh> 嗯　直接拿掉了
+17:44:11 <CindyLinz> 我偶爾會發生這種事... @@"  像是打出 BH (XD)
+17:47:28 <letoh> https://github.com/learnyouahaskell-zh-tw/learnyouahaskell-zh-tw.github.com/blob/source/tools/fdoc/src/parser.rb#L57   ruby 的語法好神奇，這一行不會有問題嗎?
+17:47:34 <letoh> quote 沒有配對?
+17:47:57 <letoh> 還是跟 perl 一樣  $' 有特殊意義
+17:49:47 <CindyLinz> letoh: http://web.njit.edu/all_topics/Prog_Lang_Docs/html/ruby/variable.html
+17:50:29 <letoh> thanks, 我看到後面出現蠻多次的　　猜測是特殊用途
+17:50:48 <letoh> 還以為逃離 perl 以後就看不到這種東西了XD
+17:51:00 <CindyLinz> ruby 有從 perl 抄東西去啊.. 你怎麼逃啊 XD
+17:52:14 <letoh> 那只能認了XD  其實我對這種風格的接受度還蠻高的啦　但 ruby 還不太熟所以得花點時間
+17:54:38 <CindyLinz> ruby 的 quoting 也從 perl 抄去, 所以還蠻好用的...
+17:55:10 <CindyLinz> 不過 quoting 部分抄走了功能性.. 簡潔性反而打了折扣 @@"
+17:56:08 <CindyLinz> php 就只有抄個樣子, 讓人懷著夢想改天破滅.. (偷鞭)
+17:56:32 <letoh> XDXD
+17:58:18 <letoh> 以後 html5 + js 的組合，還用的上 php 這類語言嗎?
+17:58:53 <CindyLinz> js 要到那地步的路還很長, 變數很多呢...
+17:59:08 <CindyLinz> letoh: 你指的是純手工寫 js 吧? XD
+17:59:33 <CindyLinz> letoh: 如果出現 php2js 應該算是寫 php 對不對?
+17:59:50 <letoh> 唔... 不曉得，應該算吧XD
+18:00:30 <letoh> 這樣好像變得很怪... server page 變成在 browser 執行
+18:01:31 <CindyLinz> 啊? 幹嘛不用 node.js?
+18:01:49 <CindyLinz> letoh: 你是說... 拿 chrome book 架 server 的時代嗎? XD
+18:02:51 <letoh> 我本來在想，過去想從 php 可以拿到的好處，對現在來說好像變得不太重要了?
+18:03:02 <CindyLinz> letoh: 如果能同一份 code, 讓 framework 自己決定要在 server 或 client 上執行, 感覺好像很棒耶
+18:03:18 <letoh> 這樣好像還不錯
+18:03:32 <CindyLinz> 它會考慮 client 效能, server 忙碌程度, 還有頻寬運用情形
+18:03:49 <letoh> server 跑不完的就丟一半給 client 跑這樣?
+18:03:54 <CindyLinz> 或是某些 code 不可外露給 client 那是另一種情況
+18:03:58 <CindyLinz> 類似 :p
+18:04:18 <CindyLinz> 像是... 轉圖 convert 有時候 server 忙不過來就叫 client 擔待一點 XD
+23:15:54 <letoh> 改了 css 以後自動斷行的情況改善了
+23:19:55 <favonia> CindyLinz: 就是不要用 node.js (任性) 效能實在太差了 lol
+23:32:41 <CindyLinz> favonia: 照他講的這 context... 不用 node.js (也就是 v8) 的話, 那就是 Firefox 的 xxxMonkey 或是 IE 的查克拉耶... ._.
+23:51:50 <favonia> CindyLinz: 好吧我沒在注意 context xD

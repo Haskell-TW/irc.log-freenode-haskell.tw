@@ -1,0 +1,41 @@
+12:52:10 <petercommand> 問一下關於flolac 14的影片
+12:52:20 <petercommand> https://www.youtube.com/watch?v=g0zDRnO24c0 #FLOLAC'14 穆信成老師 依值型別編程 Part 4/x
+12:52:43 <petercommand> https://www.youtube.com/watch?v=-kPIWdWQ8o0 #FLOLAC'14 穆信成老師 依值型別編程 Part 5/x
+12:53:06 <petercommand> 這兩個是接在一起的嗎?
+13:33:29 <petercommand> 這兩個影片好像講的人不一樣了 還是是錯覺?XD
+20:23:52 <favonia> petercommand: lol 根本就不同人吧
+20:27:50 <petercommand> 對阿XD
+22:16:54 <suhorng> petercommand: 阿阿阿阿 感謝回報
+22:36:55 <miaoski> petercommand: 啊啊啊 那請問要改成什麼
+22:37:04 <miaoski> 我正在 CTF 腦汁沒了...T_T
+22:38:16 <petercommand> miaoski: 我剛好看到第5個，發覺人不一樣了XD
+22:38:29 <miaoski> XDDD
+22:39:31 <suhorng> miaoski: Josh Ko, Type Theory & Logic
+22:39:52 <miaoski> suhorng: thanks
+22:39:55 <suhorng> (柯向上)
+22:40:25 <suhorng> 應該是 TT day 2 的東西
+22:40:55 <suhorng> 恩...前半段是 TT day 1?
+22:41:05 <suhorng> 喔不是 好像都是 day II
+22:41:12 <miaoski> FLOLAC'14 柯向上老師 型別論與邏輯 Part 6/18 ?
+22:41:24 <miaoski> 呃 沒有 6/18 ...
+22:41:32 <suhorng> 還不知道是哪個 part Orz
+22:41:48 <miaoski> 7/2 的
+22:42:59 <miaoski> 改好了 ... part 幾先待查
+22:43:04 <miaoski> 對不起腦汁好不夠用 @@
+22:43:23 <suhorng> ><
+23:25:03 <suhorng> 在 GHC 7.8 如果有個東西是 Monad 但不是 Applicative 的話會噴 warning 耶
+23:25:45 <suhorng> 聽說在 GHC 7.10 的時候 Monad 會變成 class Applicative m => Monad m where
+23:25:54 <suhorng> 這樣 Functor 就會是 Monad 的 super class 了
+23:26:33 <petercommand> 這樣應該比較正常?
+23:27:30 <petercommand> 反正原本monad就應該是functor啦
+23:27:49 <suhorng> 現在終於要是了 :P
+23:28:00 <suhorng> 希望不會毀掉太多 code DX
+23:28:01 <suhorng> DX
+23:28:05 <suhorng> XD
+23:28:08 <petercommand> XD
+23:28:44 <suhorng> 不知道有沒有簡單的例子是 Applicative 的 <*> 比 Monad 的 ap 更有效率(或有更多特異功能)之類
+23:34:39 <miaoski> suhorng: 要不要來打 CTF ... 有 haskell 題哦
+23:35:13 <petercommand> miaoski: 不是已經開始了嗎XD
+23:35:41 <miaoski> petercommand: 是啊。因為打了一天半，所以我目前很腦殘...
+23:35:52 <miaoski> 然後和 Haskell 不熟，某一題還蠻痛苦的  xd
+23:36:08 <miaoski> (在 #haskell.tw 講和 haskell 不熟 .>////<.)

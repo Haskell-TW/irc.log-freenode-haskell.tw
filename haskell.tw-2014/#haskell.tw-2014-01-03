@@ -1,0 +1,89 @@
+00:01:04 <hashcat> 我是在說curry完全沒typeclass
+00:05:53 <hashcat> Num怎會不好
+00:07:05 <hashcat> 符號也是函數的話只能重載吧
+00:08:10 <hashcat> 不然整數+浮點數++有理數+++
+00:08:30 <hashcat> 看到會傻住
+00:14:54 <hashcat> 有dependent type就用不上那些擴展了
+01:16:21 <CindyLinz> 有了 dependent type 就是 undecidable by default, 不用 extension 了啊..
+01:28:43 <hashcat> 提高一致性
+02:04:05 <monochrom> 參考 OCaml 吧: 小整數 +  浮點數 +.  有理數 +/  大整數 add_big_int.  投降吧!
+02:16:13 <CindyLinz> 如果 Haskell 加個 extension, 開放用 symbol 來當 module name...
+02:18:19 <CindyLinz> import Integral as <#>    import Num as <O>    然後用 <#>.+ 和 <O>.+ 這樣? XD
+02:20:47 <CindyLinz> 好像沒很有趣... 囧
+03:21:52 <favonia> 好像會很亂...
+17:24:04 <hashcat> 像agda一樣搞隱參數
+17:24:48 <hashcat> idris的教程有變好看了
+17:57:44 <CindyLinz> recursive structure.. XD # http://dailypicksandflicks.com/wp-content/uploads/2013/02/a-ship-shipping-ship-shipping-shipping-ships.jpg
+18:13:15 <hashcat_> CindyLinz 讓我想到起重機
+18:14:34 <hashcat_> 起重機在拆解時, 是n大小的起重機, 把n-1大小的起重機釣上來
+18:15:41 <godfat1> 那要怎麼拆 n 大小的起重機？做一個 n+1 大的？ XD
+18:15:47 <hashcat_> 然後拆解n大小的起重機成組件, 組裝n-1大小的起重機, 再用n-1大小的起重機釣下去
+18:16:21 <hashcat_> 一直反覆到起重機小到可以用電梯載下來
+18:16:28 <godfat> 好辛苦...
+18:16:45 <godfat> 有種倉庫番的感覺
+18:17:10 <hashcat_> 最小的算成0 的話 n大約是2或3
+18:17:35 <hashcat_> 起重機拆解是人上去拆的
+18:17:40 <godfat> 這樣也不少
+18:17:47 <hashcat_> 月薪30萬
+18:17:55 <godfat> 光拆解？
+18:18:02 <hashcat_> 和維修
+18:18:23 <godfat> 看來還要了解各廠牌的
+18:18:39 <hashcat_> 有這技術和膽量的人全台貌似十幾個
+18:18:57 <godfat> 膽量？很有風險嗎？
+18:19:29 <hashcat_> 貌似還沒摔死過人, 但就沒啥人敢上去
+18:20:09 <hashcat_> 有失手掉東西砸死人
+18:20:14 <godfat> O_o
+18:20:22 <CindyLinz> 所以最安全的是上面那個.... ww
+18:21:03 <CindyLinz> 這是 n depend (n+1) 的 codata 嗎... XD
+18:21:28 <CindyLinz> 是說.... highlight.js 的 haskell syntax 把 sub 當關鍵字變色是什麼怪設定 @@"
+18:24:48 <b4283> 像是 Hanoi Tower 的謎題
+18:24:50 <hashcat_> 不要用好了
+18:28:04 <hashcat_> http://quickhighlighter.com/
+18:28:16 <hashcat_> 用這個起碼還可以自己改
+18:29:01 <godfat> 不過 highlight.js 是真的滿方便的
+18:29:26 <godfat> 我以前用 pygments
+18:29:41 <hashcat_> 或者用 highlight.js 但不要直接在網頁用, 只用輸出的結果
+18:30:11 <hashcat_> 起碼可以改
+18:30:47 <godfat> 也是一招，不過 highlight.js 我覺得最方便的地方就在於... 可以不用改
+18:30:47 <godfat> 以後更新版本也直接換程式就好
+18:31:59 <hashcat_> 沒在用網站啥的
+18:32:11 <hashcat_> 是有想用vps租windows主機玩模擬城市
+18:32:39 <godfat> 直接建在 local 太麻煩嗎？
+18:33:07 <hashcat_> vps快到不行, 但滑鼠反應有點慢
+18:33:55 <godfat> 租日本的？
+18:34:32 <hashcat_> 不如去樓下的網咖
+18:35:21 <godfat> XD
+18:36:02 <hashcat_> 之前有玩到cpu超標被無預警停掉帳戶
+18:36:32 <petercommand> vps?
+18:36:33 <hashcat_> 討不回來損失慘重
+18:36:42 <hashcat_> 嗯嗯
+18:36:58 <godfat> .....哪一家？好糟糕！
+18:37:05 <hashcat_> 租一年的第二個月就停掉
+18:37:17 <godfat> 太差勁了
+18:37:27 <petercommand> 好糟
+18:37:37 <godfat> 奇怪，我的輸入法打差勁優先選插進
+18:38:19 <hashcat_> 好糟糕的輸入法
+18:38:30 <godfat> 小麥輸入法
+18:39:12 <hashcat_> 好像是buyvm
+18:39:24 <hashcat_> 很久以前的事
+18:39:52 <petercommand> 這樣誰敢用阿XD
+18:40:09 <godfat> facebook 918 likes, 好少
+18:40:23 <godfat> 還比 digitalocean 貴
+18:40:52 <hashcat_> 那時候還沒有數位海
+18:44:34 <hashcat_> 數位海不知道有沒美國國防部贊助
+18:44:48 <hashcat_> 有點詭異的便宜
+18:45:26 <godfat> 忽然間才聽懂數位海 XD
+18:45:27 <godfat> 可能賠本賣？我覺得他們系統沒 linode 穩定就是了
+18:47:13 <hashcat_> 嗯先賠本再創造價值的套路
+18:48:02 <hashcat_> 有點老套, 但沒大錢就玩不起, 還是有門檻有搞頭的
+18:48:08 <hashcat_> 來去吃東西
+18:48:32 <godfat> 慢吃
+20:42:25 <CindyLinz> 我用 highlight.js 是用在 remark 寫投影片 ._.
+23:01:38 <favonia> hashcat: n 吊起 n-1, 然後把 n 變成 n-1, 這樣不就兩個 n-1 了？
+23:02:30 <hashcat> n-1把n釣下去
+23:04:30 <favonia> "然後拆解n大小的起重機成組件, 組裝 *A* 大小的起重機, 再用n-1大小的起重機釣下去" <-- A 應該是 n-2?
+23:04:47 <favonia> 我覺得我一定是哪裡沒看懂 xD
+23:53:56 <hashcat> n被拆的同時n-1被組裝起來
+23:54:20 <hashcat> n的組件就下去
+23:54:43 <hashcat> 換n-1在上面
+23:55:32 <hashcat> n <- n-1 遞歸

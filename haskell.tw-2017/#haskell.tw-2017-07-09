@@ -1,0 +1,12 @@
+03:48:09 <caasih> 我對 Cindy 的 HVG 印象很模糊了，只記得運作時，有些資訊後面才會知道，
+03:48:25 <caasih> 所以得停止繪圖，等拿到夠多資訊，才能繼續。
+03:49:07 <caasih> 今天讀這個 data Iterator i o r = Result r | Susp o (\i -> Iterator i o r)
+03:49:15 <caasih> 用起來的感覺是這樣的：
+03:50:14 <caasih> 一直去拿最外面（最前面？）的 Iterator ，如果是 Result r 就結束了
+03:50:39 <caasih> 如果沒結束，從 Susp o ki 可以拿到裡面傳給外面的 o
+03:51:14 <caasih> 但是下一個 Iterator 從哪裡來？得把什麼東西餵給 ki 才會得到。
+03:51:42 <caasih> 在 monochrom 的教學中，餵的是 Forward, Backward 。
+03:52:23 <caasih> 整個 Iterator 也是在等未知的資訊 i ，才能決定接下來要做什麼，故讓我聯想到 HVG 。
+03:53:12 <caasih> monochrom: 我注意到目錄了，感謝 XD
+03:54:26 <caasih> 好了，接下來可以看 Iteratee 了，要是看不懂就放棄然後看 XMonad XD zzz &
+04:16:48 <monochrom> Susp o (\i -> Iterator i o r) 容許互動. 如不需互動, 可用 i=() 或甚至退回 toList 例子即可.

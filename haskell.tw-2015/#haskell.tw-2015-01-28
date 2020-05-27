@@ -1,0 +1,92 @@
+00:01:21 <suhorng> > fix ((1:) . map (2*))
+00:01:23 <lambdabot>  [1,2,4,8,16,32,64,128,256,512,1024,2048,4096,8192,16384,32768,65536,131072,2...
+00:03:07 <CindyLinz> @pl fix $ \t -> 1 : map (2*) t
+00:03:08 <lambdabot> fix ((1 :) . map (2 *))
+00:03:23 <suhorng> @unpl fix ((1 :) . map (2 *))
+00:03:24 <lambdabot> fix (\ e -> 1 : (map (\ b -> 2 * b) e))
+00:03:39 <suhorng> 欸XD (2*) 展開了
+00:03:50 <CindyLinz> @pl fix (\ e -> 1 : (map (\ b -> 2 * b) e))
+00:03:51 <lambdabot> fix ((1 :) . map (2 *))
+00:06:04 <CindyLinz> 如果把 fix ((1 :) . map (2 *)) 這種程式練得很直覺.... 是不是會有好處..
+00:06:37 <suhorng> 為什麼?
+00:07:01 <CindyLinz> 也許.... 可以很快看出我們看不出來的東西..
+00:07:26 <CindyLinz> 看到更多可以 reuse 的元件, 更多證明正確性可以用的定理, 更能掌握程式的特性?
+00:07:58 <CindyLinz> 嗯.. 我指的不是寫出這樣的程式, 而是可以讀得很自然..
+00:09:31 <suhorng> 好像有可能XD 形式上可能會有一些更直覺的東西
+00:14:08 <CindyLinz> 啊.. 然後有個很簡單一定會有的好處: 可以少想很多變數名字 XD
+00:15:11 <CindyLinz> 想睡了.. 可是投影片還沒弄完 QQ
+00:15:42 <suhorng> QQ lens 加油
+00:53:13 <pkmx> 要少想變數的名子不就是--濫--善用@pl嗎@@
+00:57:42 <CindyLinz> 不是啦.. 不能自然讀的話不行啊 ^^|
+00:58:05 <CindyLinz> 要先能讀得很自然, 那才會是可接受的寫法..
+01:07:35 <pkmx> :t \x -> let go = fmap ($ go) x in go
+01:07:36 <lambdabot> Functor f => f (f b -> b) -> f b
+01:09:42 <pkmx> let loeb x = fmap ($ loeb x) x in loeb $ 1 : [(* 2) . (!! n) | n <- [0..]]
+01:09:44 <pkmx> > let loeb x = fmap ($ loeb x) x in loeb $ 1 : [(* 2) . (!! n) | n <- [0..]]
+01:09:46 <lambdabot>  No instance for (GHC.Show.Show b0)
+01:09:46 <lambdabot>    arising from a use of ‘M455089337128531840624850.show_M4550893371285318406...
+01:09:46 <lambdabot>  The type variable ‘b0’ is ambiguous
+01:10:26 <pkmx> > let loeb x = fmap ($ loeb x) x in loeb $ const 1 : [(* 2) . (!! n) | n <- [0..]]
+01:10:27 <lambdabot>  [1,2,4,8,16,32,64,128,256,512,1024,2048,4096,8192,16384,32768,65536,131072,2...
+01:10:49 <pkmx> \haskell spreadsheet/
+01:12:15 <pkmx> > let loeb x = fmap ($ loeb x) x in loeb $ const 1 : const 1 : [(+) <$> (!! n) <*> (!! succ n) | n <- [0..]]
+01:12:16 <lambdabot>  [1,1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181,6765,10946,17...
+01:16:55 <pkmx> 果然是從頭到尾一直在寫fib的haskell... :P
+01:17:04 <CindyLinz> XD
+01:22:05 <suhorng> @pl \x -> let go = fmap ($ go) x in go
+01:22:05 <lambdabot> fix . flip (fmap . flip id)
+01:22:12 <suhorng> fix XD
+01:24:46 <pkmx> > let loeb x = fmap ($ loeb x) x ; fix' g = loeb (\x f -> g $ f x) g in fix' (1 :)
+01:24:47 <lambdabot>  [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1...
+01:26:50 <pkmx> :t let moeb f x = f ($ moeb f x) x in moeb id
+01:26:52 <lambdabot> (a -> a) -> a
+01:26:55 <pkmx> :t let moeb f x = f ($ moeb f x) x in moeb traverse
+01:26:56 <lambdabot> (Traversable t, Applicative f) => t (f (t b) -> f b) -> f (t b)
+01:42:07 <monochrom> 其實呢, 我最喜歡的遞歸函數是 f 0 = 0; f x = f (x-1)
+01:44:27 <CindyLinz> 這樣為什麼要遞迴... 不解一下一般項呢 XD
+01:44:59 <CindyLinz> f n | n >= 0 = 0 | otherwise = undefined
+01:45:26 <monochrom> 簡單的測試遞歸功能
+01:47:39 <monochrom> 測試的最重要前題是 "我知道正確答案". 我很笨, 自己不知道 fib 的正確答案, 只知道 0 的正確答案 :)
+01:51:39 <pkmx> > let f 0 = 0 ; f x = f $ x - 1 in f 100000000
+01:51:43 <lambdabot>  mueval-core: Time limit exceeded
+01:51:46 <pkmx> www
+01:51:50 <monochrom> :)
+01:52:36 <monochrom> > let g 0 = 0; g 1 = 0; g n = g (n-1) + g (n-2) in g 100
+01:52:40 <lambdabot>  mueval-core: Time limit exceeded
+01:53:58 <monochrom> 這是測試 "幾何級數的遞歸" 時用 :)
+01:55:20 <monochrom> 測試電腦, 跟測試咪高峰一樣, 主旨都是叫機器做些廢動作, 講些廢話 XD
+01:57:14 <monochrom> 廣告: monochrom 的廢話很好笑喔! http://www.vex.net/~trebla/humour/tautologies.html
+01:58:51 <monochrom> 唔, 其實測試時用數字, 已經很不簡單了.
+01:59:08 <monochrom> u [] = (); u (x:xs) = u xs
+02:01:29 <monochrom> 還有: () ^^^ () = (); v [] = (); v [x] = (); v (x:xs@(y:ys)) = v xs ^^^ v ys
+02:02:39 <monochrom> 這是不是有點挑戰電腦的智慧呢? :)
+02:02:46 <pkmx> 你需要 data Nat = Zero | Succ Nat ...
+02:04:22 <monochrom> 是呀, 不過有現成的 list 用, 懶 :)
+15:17:11 <CindyLinz> cibs: 那個... Const a b 那樣用沒有問題..
+15:17:21 <CindyLinz> 它的影子就是..... 嘿嘿, 根本就沒有影子.... XD
+15:17:55 <CindyLinz> 所以 update 輸出的影子都會當場丟掉沒有人要理它
+15:45:27 <miaoski> allenlai: 嗯，看來成功了。賀。
+15:45:28 <monochrom> 影子? 可以丢失, 可以尋回, 可以重新縫合的影子? Peter Pan? :)
+15:46:08 <miaoski> CindyLinz: 我一直覺得他們根本是 platonist. 實體的投影 vs. 影子的實體化
+15:47:12 <monochrom> 啊, 原來是那種影子
+15:51:02 <CindyLinz> miaoski: 不行.. 我不知道 platonist 是怎樣的概念 ^^|
+15:51:19 <miaoski> CindyLinz: 只好開哲學課了 (大誤)
+15:51:23 <CindyLinz> monochrom: 我跟他們說.. Functor 裡的影子.. ^^
+15:51:39 <CindyLinz> allenlai: 嗨~~ ^^
+15:52:35 <CindyLinz> miaoski: 如果是 platonic love 我就懂了.. XD
+15:52:44 <miaoski> CindyLinz: =,=
+15:53:59 <allenlai> 已成功。感謝miaoski大大
+15:56:27 <allenlai> CindyLinz: 本日是自CindyLinz灌頂以來(自覺)吸收率最高的一次，感到開心~
+15:57:45 <mno2> 就跟 Jo Jo 冒險野郎一樣？ 替身死本體就會死？
+15:59:20 <CindyLinz> allen: :D
+15:59:35 <CindyLinz> 欸 丟錯人 XD
+16:00:09 <allen> 沒有錯，其實我開了兩個分身 XD 還不太熟
+16:08:38 <CindyLinz> 咦 X
+16:08:39 <CindyLinz> XD
+16:12:09 <cibs> CindyLinz: got it
+17:03:55 <cibs> CindyLinz: 對耶我看錯了 Const 要 b 的地方是 type 不是 data constructor, 我搞錯了
+17:06:31 <CindyLinz> 我那時想說.. 對喔.. b 沒有存下來那要怎麼 return 呢.. (苦惱
+17:07:07 <CindyLinz> 回來想想.. 啊就是 Nothing 呀.. :D
+17:09:24 <cibs> 感覺是拿來給別人用的 要是有人必須吃 * -> * -> * 的時候可以丟 Const 給它
+17:12:09 <CindyLinz> 嗯嗯嗯... 然後想吃的人就都會被冷凍跳過 XD
+17:13:06 <cibs> XD

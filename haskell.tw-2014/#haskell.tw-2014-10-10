@@ -1,0 +1,8 @@
+09:44:11 <mno2> https://skillsmatter.com/skillscasts/5466-bryan-o-sullivan
+09:44:23 <mno2> Performance Measurement and Optimization in Haskell
+10:08:48 <mno2> https://skillsmatter.com/skillscasts/5787-categories-for-the-working-haskeller [Categories for the Working Haskeller]
+22:16:07 <CindyLinz> au: 竟然用 unix epoch time 當版號.. XD http://search.cpan.org/~audreyt/Lingua-Sinica-PerlYuYan/
+22:16:27 <CindyLinz> 想說奇怪這數字怎麼這麼大.. XD
+22:18:13 <au> XD
+22:22:23 <miaoski> CindyLinz: 聽起來是個避免 conflict 的好辦法 (woot)
+22:24:52 <CindyLinz> 完全不透露任何有關穩定性的 hint....ww

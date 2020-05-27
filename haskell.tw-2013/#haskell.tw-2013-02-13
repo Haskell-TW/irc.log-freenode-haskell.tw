@@ -1,0 +1,121 @@
+00:23:44 <letoh> mobi 總算有封面了XD
+00:24:24 <letoh> (感謝 sicp)
+07:09:24 <favonia> 衝 GHC 7.6.2... xDDD
+15:25:09 <suhorng> http://ycombinator.blogspot.tw/2012/08/why-haskell-is-not-lazy-language.html
+15:30:51 <suhorng> Haskell想拿來寫真正要用的程式門檻好高, 有好多要弄清楚的地方
+16:06:20 <soiamso> suhorng: 只是 GHC 的扩展吧
+16:08:15 <suhorng> soiamso: 哪個部份?
+16:08:57 <favonia> suhorng: 我覺得當標準函式庫，常見的99%型態都是lazy時很難說他不是lazy...
+16:09:14 <favonia> 啊我應該說"non-strict"
+16:09:44 <suhorng> 剛剛才知道 non-strict 跟 lazy 不一樣...
+16:10:08 <favonia> suhorng: 嗯不過我最近都從懶如流
+16:10:10 <soiamso> suhorng: 由lazy转换为strict，如bangpattern, GHC.Prim 这些
+16:10:36 <favonia> soiamso: "!" 是 Haskell 語言的一部份
+16:10:50 <suhorng> 不是用在 constructor 上呢?
+16:11:36 <suhorng> 不太明白 Haskell 為什麼要求 non-strict 的語意
+16:11:49 <favonia> soiamso: 如果真的想要的話，是可以不靠這些東西寫出 strict 的東西
+16:12:02 <favonia> suhorng: 你的問題等於「為什麼要有 Haskell」
+16:12:32 <suhorng> 好像也是
+16:12:56 <favonia> soiamso: 只是寫起來可能很醜或很煩
+16:13:18 <favonia> 可以用 `seq` 來做到這件事情
+16:13:39 <favonia> > let f x = 1 in f undefined
+16:13:41 <lambdabot>   1
+16:13:47 <favonia> > let f !x = 1 in f undefined
+16:13:49 <lambdabot>   *Exception: Prelude.undefined
+16:13:56 <favonia> > let f x = x `seq` 1 in f undefined
+16:13:58 <lambdabot>   *Exception: Prelude.undefined
+16:14:03 <suhorng> 喔喔喔
+16:14:16 <favonia> 這個就是很醜但依然可以做到的寫法
+16:14:30 <favonia> seq 是標準的一部份
+16:14:44 <favonia> :)
+16:17:01 <favonia> suhorng: http://www.haskell.org/onlinereport/preface-jfp.html
+16:17:33 <favonia> suhorng: non-strict 是先決條件。按照歷史發展，Haskell 這種東西會出現，本來就會是 non-strict 的
+16:17:40 <soiamso> suhorng: non-strict, 跟不同实现的graph reduce方案有关吧
+16:19:37 <suhorng> 該來看 Haskell report 了!
+16:22:35 <suhorng> 對了, Haskell2010 使用的普及嗎?
+16:22:40 <soiamso> suhorng:  如果只用Prelude 写，写完的程序用 hlint 扫描一下，提示使用更高级的函数
+16:22:54 <favonia> suhorng: 基本上目前新程式碼都用 Haskell 2010
+16:23:06 <favonia> soiamso++
+16:23:08 <suhorng> wow, 好酷的 library
+16:23:21 <favonia> suhorng: Haskell 2010 只有改一點點標準
+16:23:29 <favonia> 根本沒有什麼影響
+16:23:33 <suhorng> 嗯
+16:23:54 <suhorng> 不像 C++11 就改變很大 XDDD
+16:24:02 <favonia> suhorng: http://www.haskell.org/haskellwiki/Haskell_2010
+16:25:04 <favonia> suhorng: 我舉例說明為什麼沒啥影響
+16:25:34 <soiamso> suhorng: haskell基本就只有ghc这一个实现，不会出现C++这种不同步的情况
+16:25:56 <letoh> hugs 完全變黑歷史了嗎? XD
+16:26:22 <favonia> suhorng: http://hackage.haskell.org/trac/haskell-prime/wiki/DoAndIfThenElse 這個早就是業界標準了 xDDD
+16:27:22 <suhorng> letoh: 我沒用過hugs QQ
+16:27:27 <letoh> 如果只算 ghc 的話，那這連結裡面那一堆 *hs 算是什麼呢?
+16:27:30 <letoh> *hc
+16:27:39 <letoh> 什麼 nhc / uhc / jhc / lhc ...
+16:27:41 <suhorng> if 跟 else 跟分號 XDD
+16:27:47 <favonia> suhorng: 還有像這個 http://hackage.haskell.org/trac/haskell-prime/wiki/FixityResolution
+16:28:18 <letoh> 分號看起來是 optional ?
+16:28:39 <favonia> letoh: 是，所以你可以縮排也可以不縮排
+16:29:50 <suhorng> \x -> x == x == True 好奇怪orz
+16:30:18 <favonia> letoh: Haskell 的基本原理（編譯器可以用完全不同方法實作！）是先把 layout 補上 ; 和 { 和 }
+16:30:19 <suhorng> letoh: 之前曾經想裝 jhc 來玩, 不過要用 ghc 7 來編的話要改一些 code...
+16:30:42 <favonia> 所以如果中間允許 ; 就代表不用縮排
+16:30:52 <letoh> 可以想成 preprocessing 嗎?
+16:30:57 <favonia> 因為同一排的會被加上 ;
+16:30:59 <favonia> 對
+16:31:11 <favonia> 雖然我猜聰明的 parser 一次就解決了
+16:31:16 <letoh> 嗯嗯
+16:32:06 <favonia> do
+16:32:06 <favonia>     if x then
+16:32:06 <favonia>         return 1
+16:32:06 <favonia>     else
+16:32:06 <favonia>         return 2
+16:32:37 <favonia> 會變成 do { if x then return 1 ; else return 2 }
+16:32:52 <favonia> 因為 else 和 if 對齊
+16:33:12 <suhorng> 嗯
+16:33:18 <favonia> er... 精準的規則有點複雜啦，不過概念上是「對齊」
+16:33:57 <letoh> 為了方便建 ast 嗎?
+16:33:57 <favonia> 允許中間的 optional ";" 就可以把這個 "當作" do { if x then return 1 else return 2 }
+16:34:06 <favonia> letoh: 什麼意思？
+16:34:34 <letoh> 我在猜那個對齊的概念  感覺像一堆 lisp code 在對齊括號那樣XD
+16:34:38 <favonia> >  do { if x then return 1 else return 2 } :: [nat]
+16:34:40 <lambdabot>   Couldn't match expected type `GHC.Types.Bool'
+16:34:40 <lambdabot>              with actual type...
+16:34:44 <favonia> >  do { if x then return 1 else return 2 } :: [Int]
+16:34:46 <lambdabot>   Couldn't match expected type `GHC.Types.Bool'
+16:34:47 <lambdabot>              with actual type...
+16:34:55 <favonia> >  do { if True then return 1 else return 2 } :: [Int]
+16:34:57 <lambdabot>   [1]
+16:34:59 <favonia> lol
+16:35:11 <favonia> >  do { if True ; then return 1 ; else return 2 } :: [Int]
+16:35:13 <lambdabot>   [1]
+16:35:27 <favonia> lambdabot 也遵守業界標準 xDDD
+16:35:47 <suhorng> 哈哈哈
+16:35:49 <favonia> letoh: xDDD 應該吧
+16:36:13 <letoh> lisp code 不是把括號整理完，ast 就出來了嗎? XD
+16:36:25 <suhorng> nat是 Agda 嗎w
+16:36:55 <favonia> suhorng: Agda 是 ℕ
+16:37:57 <favonia> Coq 是 nat
+16:37:58 <suhorng> 喔喔
+16:38:57 <suhorng> 天阿 \x -> x == x == True 這個例子好神奇
+16:39:16 <favonia> letoh: 嗯總之他是另外定 preprocessing
+16:39:32 <favonia> letoh: 其實 GHC 也有 relax 那邊的限制
+16:39:57 <favonia> 總之大家把比較難用但又沒什麼道理的地方改掉了...
+16:40:21 <favonia> 我個人覺得不影響基礎理論都無所謂
+16:40:45 <favonia> 畢竟很多只是 parsing 問題或是簡單的語法糖
+16:41:16 <favonia> suhorng: 總之 Haskell 2010 很多這種東西
+16:41:38 <favonia> suhorng: 如果說有什麼比較刺激的就是 FFI 列入附錄...
+16:41:44 <suhorng> 嗯 修比較奇怪的東西
+16:41:53 <suhorng> 喔喔!! Cool
+16:41:55 <favonia> 問題是這就算沒有列入
+16:41:59 <favonia> 還是要用啊
+16:42:07 <favonia> 又不是沒進標準就不用
+16:42:31 <favonia> 我想要強調的是這標準對於實際上寫 code 的影響很小
+16:42:56 <suhorng> 嗯
+16:43:44 <favonia> suhorng: 像這種看起來就比較夯的東西，自然要感潮流一下
+16:43:51 <favonia> 2010 看起來就比 98 酷
+16:44:04 <favonia> 光視覺上就有優越感
+16:44:24 <suhorng> 哈哈
+16:47:16 <favonia> suhorng: 啊不好意思，最後 FFI 不是附錄，而直接是標準的一部份。
+16:47:25 <favonia> 記錯
+16:49:20 <favonia> suhorng: The Haskell Prime effort was thus conceived as a relatively conservative extension of Haskell 98, taking on board new features only where they were well understood and widely agreed upon. It too was intended to be a “stable” language, yet reflecting the considerable progress in research on language design in recent years.
+16:49:23 <favonia> 官方說法
+16:53:53 <suhorng> 感覺很符合. GHC 的 extension 倒是非常多...

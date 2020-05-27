@@ -1,0 +1,3 @@
+23:09:28 <CindyLinz> 用 Fay.. import Control.Monad 就會 fail.... orz
+23:30:20 <CindyLinz> 所以原本想用 Fay 做的東西, 只好變成 ajax 傳回 server 做了 orz
+23:30:32 <CindyLinz> 然後手動寫一層薄薄的 javascript ^^|

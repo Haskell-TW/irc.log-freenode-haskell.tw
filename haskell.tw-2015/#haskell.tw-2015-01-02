@@ -1,0 +1,129 @@
+00:37:39 <jiang42> 好吧。。。大家新年快乐～
+08:49:04 <monochrom> 昨天還見到有人問: 用 GHC 7.4 裝 cabal 1.22. 真是: 那樣舊, 這樣新.
+08:53:10 <monochrom> 或者應該作: 這麼遠, 那麼近.
+20:33:06 <CindyLinz> yesod 網站爛一整天了.. 沒得看 QQ
+20:55:38 <petercommand> fromList :: [a] -> Vector a n ，將一個型別為 a 的 list 轉為 Vector a n ， n 是 list 的長度
+20:55:56 <petercommand> 這個 fromList 怎麼寫比較好呢...
+20:56:07 <petercommand> 左邊沒 n 呀...
+20:57:45 <petercommand> data Vector a n where Nil  :: Vector a Zero (:-) :: a -> Vector a n -> Vector a (Succ n)
+20:58:54 <petercommand> https://ideone.com/nywAwA # Vector 的定義
+21:00:40 <petercommand> 實在很苦惱....感覺這應該是簡單的東西，卻很難寫出來...XD
+21:15:51 <CindyLinz> n 得 compile time 給, 但是 [a] 的長度是 runtime 才拿得到... 我想會弄成一個很 partial 的 partial function 吧
+21:16:12 <CindyLinz> 長度剛好對的時候可以跑, 長度有一點誤差的時候 crash
+21:17:12 <CindyLinz> fromList [] = Nil
+21:17:38 <CindyLinz> fromList (a:as) = a :- fromList as
+21:17:46 <CindyLinz> 欸.. 不就這樣嗎? XD
+21:18:44 <petercommand> 這樣會 type check 嗎?
+21:19:23 <petercommand> type 裏的 n 得不到呀...
+21:19:58 <CindyLinz> 那幫他標一下吧 ^^|
+21:20:28 <CindyLinz> 不標也可以 check 吧?
+21:20:57 <CindyLinz> 會從呼叫端來呀..
+21:21:18 <petercommand> Not in scope: ‘n’...
+21:21:19 <CindyLinz> 呼叫的 code, 在還沒有執行的時候就能決定 n 是多大
+21:21:37 <petercommand> 喔喔
+21:22:04 <CindyLinz> 這邊只看 fromList 自己的話, 應該是所有的 n 都定義
+21:22:14 <CindyLinz> 不過幾乎都會導致 crash
+21:22:35 <petercommand> 就是 Int -> [a] -> Vector a n 這樣?
+21:22:39 <CindyLinz> 因為當 [] 發生的時候, n /= Zero 會 crash; 而如果 n == Zero 但不是 [] 的話也會 crash
+21:22:47 <CindyLinz> 應該沒有那個 Int
+21:23:10 <CindyLinz> 只是當你用 vec = fromList [1,2,3] 的時候, 會需要標 type
+21:23:28 <CindyLinz> (假設不能從 vec 的後續使用看出 vec 的 type 的話)
+21:26:17 <CindyLinz> 噢 所以 fromList (a:as) = a :- fromList as 這邊, 後面這個使用的 fromList 需要標一下...
+21:27:11 <CindyLinz> 欸不對, 不需要... 因為 (:-) 會提示到
+21:27:27 <CindyLinz> 如果 Haskell 這邊的完成度足夠高的話..... ^^|
+21:29:14 <petercommand> 出現 Couldn't match type ‘n’ with ‘'Zero’
+21:30:28 <CindyLinz> 喔你有標?   fromList [] = Nil 的 type 應該要標 fromList :: [a] -> Vector a Zero
+21:30:28 <petercommand> 如果 fromList 不加 type annotation 的話，會出現 Couldn't match type "'Zero" with "'Succ 'Zero"
+21:31:21 <petercommand> 兩個 type 不合呀..
+21:31:29 <CindyLinz> 哪兩個?
+21:31:44 <CindyLinz> Nil 和 Vector a Zero 不合?
+21:31:53 <petercommand> Zero 和 Succ n
+21:32:10 <petercommand> Couldn't match type ‘'Succ 'Zero’ with ‘'Zero’
+21:32:19 <CindyLinz> 另一條的 type 是 fromList :: [a] -> Vector a (Succ n)
+21:32:38 <petercommand> 這需要開 extension 嗎?
+21:32:45 <CindyLinz> 不知道, 沒有寫過 XD
+21:32:53 <petercommand> XD
+21:33:05 <CindyLinz> Haskell 的實作有多完整也不知道...
+21:33:11 <petercommand> 過不了呀... 兩個 type 好像要一樣..
+21:33:46 <CindyLinz> 你去讀 extension 的 spec 吧?
+21:33:54 <CindyLinz> 應該會有很多除外條款
+21:34:03 <petercommand> 好，等等去看看
+21:34:06 <CindyLinz> 也許其中一條就會是你在找的 @@"
+21:34:18 <petercommand> :p
+21:39:25 <CindyLinz> petercommand: 感覺是要啟用 type family 的時候了
+21:42:26 <petercommand> 有啟用呀...只是不太會用@@
+21:55:26 <CindyLinz> 用 class / instance 也是不行..
+21:56:09 <CindyLinz> 寫下 fromList (a:as) = a :- fromList as 以後, 它所有的 fromList as 都要用同一個函數, 不會在 (Succ Zero) 的時候改用另一個
+22:17:01 <suhorng> 得用 type class 吧?
+22:27:44 <suhorng> CindyLinz: petercommand: http://ideone.com/8grXoa
+22:30:25 <suhorng> ideone 的上色也太悲劇.....
+22:33:01 <CindyLinz> 啊 我就缺了第二條的 context
+22:33:24 <suhorng> CindyLinz: 是不是你沒標 type 的關係
+22:33:29 <CindyLinz> 所以它才不會去找 context 裡面的
+22:33:32 <CindyLinz> 不是.. 有標 XD
+22:33:55 <CindyLinz> instance VecFromList ('Suc n) 沒寫 context 的關係
+22:34:32 <CindyLinz> 喔喔 yesod 回來了!
+22:34:46 <CindyLinz> 原本想說今晚就有藉口打混不看 yesod.....
+22:36:43 <suhorng> 喔喔是前面的 context
+22:36:48 <suhorng> yesod OAOOO
+22:36:59 <petercommand> 原來用 type class 就可以做到了XD
+22:37:08 <suhorng> 好像只能用 typeclass 做到
+22:37:22 <suhorng> 還是比較喜歡 fromList : (xs : [a]) -> Vec a (length xs) 這種
+22:37:24 <CindyLinz> suhorng: 昨天看了一些....
+22:37:30 <CindyLinz> 發現好像看得懂 @_@"
+22:37:33 <suhorng> tutorial 要講的嗎XD?
+22:37:39 <CindyLinz> 沒有要講 XD
+22:37:48 <suhorng> XD"
+22:38:22 <petercommand> 很好奇 CindyLinz 的 tutorial 長什麼樣XD
+22:38:42 <CindyLinz> 回想上一次看的時候一直想吐...
+22:39:01 <CindyLinz> 好像是在我第一次去 Flolac 上課以前耶....
+22:39:10 <CindyLinz> 才剛讀完 Yet Another Haskell Tutorial...
+22:39:22 <CindyLinz> petercommand: 我 github 有呀~
+22:39:41 <petercommand> 喔喔XD
+22:39:59 <CindyLinz> 在學習經驗.. 看看第一次聽的人會有怎樣的反應, 哪邊會比較卡, 哪邊會比較有興趣..
+22:42:29 <petercommand> 現在在看 beginning haskell ，覺得他寫的蠻不錯的
+22:42:55 <CindyLinz> 推這本..
+22:43:02 <CindyLinz> 雖然只看到一半多 XD
+22:43:23 <petercommand> XDXD
+22:52:37 <CindyLinz> suhorng: 是說.. 本月尚無講者.......
+22:54:27 <suhorng> 介紹 CPS 跟 SSA 如何, 會不會很無聊XD
+22:54:33 <suhorng> CPS+ANF+SSA
+22:54:53 <suhorng> 好像有出現在 hackpad topics 上面過
+22:56:39 <petercommand> 下次 funth 幾號呀?
+22:56:46 <CindyLinz> ANF 和 SSA 是什麼? XD
+22:56:50 <CindyLinz> 在 1.15
+22:57:15 <petercommand> 好像是期末考的日期XD
+22:57:34 <CindyLinz> suhorng: 我下週在趨勢會介紹 lazy eval
+22:57:48 <suhorng> A-normal form, static single assignment form
+22:57:55 <suhorng> ANF 跟 CPS 比較像
+22:58:01 <CindyLinz> 嗯嗯嗯
+22:58:04 <CindyLinz> 可以幹嘛? XD
+22:58:13 <CindyLinz> 也是一種 compiler 在用的中介語言?
+22:59:02 <petercommand> ssa 好像也是中介語言
+23:04:22 <suhorng> 都可以是 compiler 的 IR, SSA 在 imperative 那邊比較常見, LLVM 用的語言就是一種
+23:04:47 <suhorng> 但是 SSA 基本跟 CPS/ANF 有不少共通想法
+23:04:48 <CindyLinz> 連帶介紹這幾種語言特別的用處?
+23:05:20 <suhorng> 比較XD
+23:05:35 <suhorng> 跟介紹他們是什麼
+23:06:01 <CindyLinz> yesod 又走了...... (拜)
+23:06:09 <suhorng> wwwwwwwwwwwwww
+23:06:10 <CindyLinz> "Your process has been terminated. Please relaunch to reconnect."
+23:06:38 <CindyLinz> 等下如果通了... 要趕快來 wget -m http://www.yesodweb.com/book/
+23:06:59 <CindyLinz> 又回來了......
+23:07:13 <petercommand> CindyLinz: 我連得上耶 XD
+23:07:35 <CindyLinz> 時好時壞...
+23:07:41 <petercommand> 這網站自己是不是用 yesod XD
+23:07:44 <CindyLinz> 咪弱最好..
+23:12:15 <mno2_> * Server Warp/3.0.1.1 is not blacklisted   看起來應該是
+23:15:13 <CindyLinz> 討厭.. mirror 下來的檔案... 因為附檔名不是 .html, 所以用起來不太方便w
+23:21:17 <CindyLinz> 太狠了... yesod 生出來的 link 直接用絕對網址....
+23:21:44 <CindyLinz> 只好自己看網址打進網址列 ^^|
+23:24:28 <CindyLinz> (附檔名沒差 XD)
+23:47:08 <miaoski> CPS 不是 continuation passing style 嗎？(誤)(逃)
+23:47:29 <CindyLinz> 就是啊..
+23:47:37 <petercommand> 沒錯呀?
+23:47:40 <CindyLinz> miaoski: 沒有誤, 不要逃!
+23:49:23 <mno2_> CPS 是 C9S 的裏人格？
+23:49:43 <mno2_> (大誤）
+23:50:06 <petercommand> 竟然不是 CQS
+23:50:19 <suhorng> XD......

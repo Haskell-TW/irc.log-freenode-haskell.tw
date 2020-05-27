@@ -1,0 +1,114 @@
+01:42:25 <CindyLinz> 拿 Haskell 寫了許多題 tioj 以後 (幾乎都簡單題XD), 越來越可以拿 Haskell 作那些以前要用迴圈寫才自然的東西了.. XD
+01:43:16 <letoh> 這聽起來像精神時光屋的東西是什麼啊? XD
+01:43:28 <CindyLinz> 雖然效能問題有時候還是沒什麼辦法...
+01:44:07 <CindyLinz> 那種題目提示說: 千萬不要用 cin/cout, 你一定會逾時. 的題目...
+01:44:20 <CindyLinz> 欸也不能說是沒辦法, 因為還有還沒試的辦法 ^^|
+01:44:37 <CindyLinz> 只是現在有點懶, 也許過幾天可以試成功 (?
+01:45:18 <CindyLinz> letoh: 這個寫題目的網站 http://tioj.ck.tp.edu.tw/
+01:45:21 <CindyLinz> 可以用 Haskell
+01:46:22 <CindyLinz> 而且配的 GHC 和 package 還蠻新的.. 是 GHC 7.8.3 + Haskell platform
+01:47:38 <letoh> 原來如此  研究看看
+01:47:43 <CindyLinz> 啊我不是說 tioj 幾乎都簡單題, 是說我解的幾乎都簡單題 XD
+01:48:15 <letoh> 還有排名... 想到好久沒動的 project euler XD
+01:48:58 <CindyLinz> 排名我就不看了... (遮臉)
+12:04:35 <CindyLinz> hmmm... 有時候會覺得 multi-way-if 比原本的 if 好看耶
+12:04:54 <CindyLinz> 因為 | 和 -> 這種符號比較不會擾亂重點
+12:05:08 <CindyLinz> then 和 else 稍微搶戲了點 XD
+12:10:12 <mno2> 如果多 branch 的確比較好看
+13:46:24 <mno2> haskell 感覺寫 memoize 比 botoom up 構造 DP array 要好寫
+13:54:16 <CindyLinz> mno2: 兩個方向都很好寫呀~~ bottom up 用 MArray 配合 forM_.. XD
+13:55:00 <CindyLinz> mno2: 欸... 我覺得我腦子有點糊了......
+13:55:45 <CindyLinz> 剛剛假想一下, 如果我要寫 bottom up... 想一下我可能會寫出來的 code, 有可能也長成 memoize 的模樣...ww
+14:12:01 <monochrom> https://wiki.haskell.org/Dynamic_programming_example
+14:14:23 <monochrom> 不一定要分清分明 bottom up 還是 top down.
+14:16:06 <CindyLinz> 嗯嗯嗯.. 不過 Boxed Array 比較浪費記憶體和效能, 然後 Unboxed Array 不能這樣子 lazy build... 這時候就要用 Unboxed Mutable Array 了...
+14:16:25 <monochrom> 要分清分明的是兩點: 是不是容易看出正確; 是不是快.
+14:18:22 <CindyLinz> 我這題.. 用 Boxed Array 作 Floyd Warshall 演算法逾時了.. QQ # http://tioj.ck.tp.edu.tw/problems/1096
+14:19:23 <CindyLinz> 耶... 可是 Warshall 應該可以 Unboxed 但不用 Mutable 的 Array 耶.....
+14:20:19 <CindyLinz> 啊.. 我用的已經是 Unboxed Array.... orz   那來試試 Mutable 好了, 省一下 allocate / free 用的時間 @@"
+14:21:24 <monochrom> 昨日才在堂上教漢米頓圈圈.
+14:23:41 <mno2> CindyLinz: 10^6 會跑一秒，感覺真的有點慢
+14:26:11 <CindyLinz> mno2: 沒有.. 我自己的筆電上面測.. 不超過 80ms
+14:26:19 <CindyLinz> 我不知道他們的機器有什麼古怪 orz
+14:27:14 <mno2> 該不會 online judge 跑在 r pi 上 lol
+14:28:04 <CindyLinz> 有可能是很舊的機器... 高中生應該還沒開始上班或打工賺錢?
+14:30:48 <monochrom> 但高中生有豐厚的零用錢. 豐厚得可以常常買新電話
+14:32:22 <CindyLinz> monochrom: 買電話是私產, 擺這的機器是公產... XDXD
+14:32:59 <monochrom> 因此得知: 高中生假公濟私? XD
+14:33:55 <CindyLinz> monochrom: 假公濟私是要有公家來的經費啊.. 我想的是說不一定有動機把自己的私產拿出來變公產 ^^|
+14:34:02 <CindyLinz> 不過全都是亂講的 XD
+14:34:13 <monochrom> 孫中山教我們要天下為公. 但我們都學袁世凱, 嗤之以鼻 :)
+14:35:25 <CindyLinz> 馬克斯才天下為公.. (咦
+14:35:58 <CindyLinz> suhorngM_: 欸... 你說過的 read :: Show a => ByteString -> a.. 真的有這個函數嗎? o.o
+14:36:35 <CindyLinz> 啊寫錯..
+14:36:40 <CindyLinz> Read a => ByteString -> a
+14:39:17 <mno2> 請他們 open source 出來，CindyLinz 贊助每個月 $5 的 digitaloceans。problem solved.
+14:40:10 <CindyLinz> mno2: 已經有 open source 了耶~ http://tioj.ck.tp.edu.tw/about
+14:40:13 <CindyLinz> ruby 寫的
+14:40:37 <mno2> 用舊機器還跑 ruby, lol
+14:40:53 <CindyLinz> judge 的部分應該跟 ruby 無關吧 @@?
+14:41:01 <CindyLinz> 喔 不過如果在同一台機器上面互搶資源?
+14:41:08 <mno2> 對啊
+14:41:16 <mno2> 除非裝在 docker 裡面？
+14:42:03 <CindyLinz> 他們用 lxc
+14:42:09 <CindyLinz> 聽說啦.. 我沒看 code
+14:42:21 <CindyLinz> 用 lxc 來限制權限和資源使用量
+14:42:48 <mno2> 恩恩
+15:59:23 <miaoski>  有趣...
+15:59:34 <miaoski> CindyLinz: 快 donate 機器吧!
+16:00:36 <petercommand> rails XD
+16:09:05 <CindyLinz> miaoski: 我自己只有租一台 10元的 linode.. XD
+16:11:31 <petercommand> 拿 linode 來架這種站好不好呢?
+16:12:12 <CindyLinz> linode 的硬碟很快, 是 SSD.. 不過跑 judge 的時候不准寫檔 XD
+16:12:25 <mno2> 贊助一台 rpi 2，lump sum $35
+21:23:00 <mno2> 做題沒有 a -> ByteString.Char8 或是 ByteString.Char8.Printf 感覺有點麻煩 xD
+21:24:13 <pkmx> pack . show 不就好了XDrz
+21:25:09 <mno2> 這樣會有 overhead ?
+21:26:14 <CindyLinz> 應該會有 QQ
+21:27:05 <pkmx> 用這個 XDrz ? https://hackage.haskell.org/package/bytestring-show
+21:27:31 <mno2> 有搜到，但不在 haskell platform 內
+21:27:53 <mno2> OJ 是用 7.8.3 + haskell platform
+21:29:11 <pkmx> 那就把 source 複製貼上 XD
+21:30:22 <CindyLinz> hmm... 可能弄個 per user 的空間, 放大家自己上傳的同語言的 library... XD
+21:40:04 <pkmx> 可以直接上傳整個cabal project不是更好=p
+21:40:41 <CindyLinz> 順便允許 FFI!
+21:40:58 <CindyLinz> 被逼瘋了就偷偷來一段 C.... XD
+21:43:42 <pkmx> 最後Haskell的部份就只剩下main = callCommand "my-c-program"
+21:44:21 <CindyLinz> 太差惹 XD
+21:44:37 <CindyLinz> 欸.. 還是要單一執行檔啦 XD
+21:45:10 <suhorng> 至少也又 main = runCppT $ do { int fib(int n) { if (n <= 1) return n; else return fib(n-1) + fib(n-2); } return fib(5);  }
+21:45:12 <suhorng> *也要
+21:48:17 <pkmx> main = __asm__ { ... }
+21:49:09 <suhorng> main = [shell| 0xe8 0xfe |]
+21:49:51 <pkmx> :D 搞不好真的可以寫出這個quasiquotation
+21:51:23 <suhorng> 有點可怕XD
+21:52:28 <CindyLinz> c 感覺還蠻容易的 o.o
+21:52:47 <CindyLinz> 可能有喔.. 來找一下 :p
+21:54:34 <CindyLinz> 有一點像? # https://hackage.haskell.org/package/language-c-inline
+21:54:43 <CindyLinz> 它的 github # https://github.com/mchakravarty/language-c-inline/
+21:54:46 <pkmx> 反正就是想辦法把shellcode存在連續的空間 然後用FFI call C用inline asm直接jmp過去XDrz ?
+21:55:50 <CindyLinz> pkmx: 應該沒到這麼髒的手法吧 XD
+21:56:28 <suhorng> XD....
+21:57:21 <CindyLinz> 是說... 上傳 cabal project 的話.. 可以把 Setup.hs 改掉, 用自己的方法產生執行檔.. 甚至不用 ghc, 改用 gcc 之類的, 或是很厲害直接噴出執行檔的 binary XD
+22:14:46 <suhorng> 豪可怕
+22:15:00 <suhorng> 不知道有沒有人嘗試 hack 過 Haskell, 用 GHC Runtime 的漏洞之類
+22:18:36 <CindyLinz> suhorng: 欸惡搞 cabal Setup.hs 沒有沾到 GHC Runtime 就是..
+22:19:12 <suhorng> 那個已經可以接觸到太多東西了 XDXD
+22:19:20 <suhorng> 雖然是好招
+22:21:07 <petercommand> 以後 haskell 要變成滿滿的 inline asm 了嗎XD
+22:21:50 <CindyLinz> portability 下降太多, 不會太常用的 :/
+23:27:39 <pkmx> λ:3> [shellQQ|0x48 0x31 0xd2 0x48 0xbb 0x2f 0x2f 0x62 0x69 0x6e 0x2f 0x73 0x68 0x48 0xc1 0xeb 0x08 0x53 0x48 0x89 0xe7 0x50 0x57 0x48 0x89 0xe6 0xb0 0x3b 0x0f 0x05|]
+23:27:45 <pkmx> sh-4.3$
+23:27:56 <pkmx> 寫出來了XDXDXD
+23:29:14 <suhorng> oh my.......
+23:29:29 <suhorng> 這太厲害了吧0.0 真的 FFI 丟給 C?
+23:29:43 <pkmx> 是的0.0
+23:29:48 <suhorng> #haskell.tw 真是個不得了的頻道orz
+23:29:54 <pkmx> 整理一下丟上hackage (?)
+23:30:11 <suhorng> 不錯耶XDDD
+23:31:18 <CindyLinz> 賀!
+23:45:40 <petercommand> 太神奇了XD
+23:49:33 <pkmx> https://github.com/PkmX/acme-shellcode
+23:49:54 <pkmx> 其實還蠻短的 加起來不到50行XD
+23:51:30 <suhorng> Y)
+23:51:41 <suhorng> 簡直可以轉到 #cschat.tw 去 /o/

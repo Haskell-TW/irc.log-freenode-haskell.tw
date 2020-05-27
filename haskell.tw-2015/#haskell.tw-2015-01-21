@@ -1,0 +1,64 @@
+00:28:59 <CindyLinz> miaoski, cibs: 這次沒有投影片, 只有 code.. o.o
+00:32:41 <miaoski> CindyLinz: orz
+00:32:49 <miaoski> 那我要去睡了 不然明天會聽不懂 QQ
+00:34:56 <CindyLinz> 這次應該沒有懂不懂的問題 ^^|
+00:35:26 <CindyLinz> 看一個會動的「真正的程式」, 不是講觀念 ^^
+01:49:33 <monochrom> 就好像 Feynman 講量子電動力學. "大自然就是這樣運作. 沒有人懂." :)
+03:21:42 <pkmx> > ZipList ]1 ^. Unwrapped
+03:21:43 <lambdabot>  <hint>:1:9: parse error on input ‘]’
+03:21:48 <pkmx> > ZipList [1] ^. Unwrapped . ix 1
+03:21:50 <lambdabot>  Not in scope: data constructor ‘Unwrapped’
+03:22:23 <pkmx> > ZipList [1] ^. _Unwrapped . ix 1
+03:22:26 <lambdabot>  Could not deduce (Control.Lens.At.IxValue t0
+03:22:26 <lambdabot>                    ~ Control.Lens.At.IxValue t)
+03:22:26 <lambdabot>  from the context (Control.Lens.At.Ixed t,
+03:27:44 <pkmx> > ZipWith [0..] ^? _Wrapped . ix 0
+03:27:45 <lambdabot>  Not in scope: data constructor ‘ZipWith’
+03:27:50 <pkmx> > ZipList [0..] ^? _Wrapped . ix 0
+03:27:52 <lambdabot>  Just 0
+03:28:53 <pkmx> 為什麼我要把newtype剝開是要用_Wrapped ... 崩潰rz
+03:30:37 <pkmx> > let unwrap = _Wrapped in ZipList [0..] ^? unwrap . ix 0
+03:30:39 <lambdabot>  Just 0
+03:31:44 <pkmx> > let wrappedwith = _Unwrapping in [0..] ^. wrappedWith ZipList
+03:31:45 <lambdabot>  Not in scope: ‘wrappedWith’
+03:31:46 <lambdabot>  Perhaps you meant ‘wrappedwith’ (line 1)
+03:31:50 <pkmx> > let wrappedWith = _Unwrapping in [0..] ^. wrappedWith ZipList
+03:31:52 <lambdabot>  ZipList {getZipList = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,...
+03:31:58 <pkmx> good now :)
+03:34:52 <pkmx> > let unwrap = _Wrapped in ZipList [0..] & unwrap . ix 0 %~ succ
+03:34:54 <lambdabot>  ZipList {getZipList = [1,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,...
+08:45:37 <miaoski> monochrom: 你真明白我的感受 XD
+08:45:54 <miaoski> (i.e. CindyLinz 覺得就是這樣自然，怎麼沒有人懂.... /me 不懂)
+19:40:15 <pkmx> @hoogle MonadParser
+19:40:16 <lambdabot> No results found
+19:40:20 <pkmx> @hoogle MonadParsec
+19:40:20 <lambdabot> No results found
+19:40:23 <pkmx> @hoogle MonadState
+19:40:24 <lambdabot> Control.Monad.State.Class class Monad m => MonadState s m | m -> s
+19:40:24 <lambdabot> Control.Monad.State.Lazy class Monad m => MonadState s m | m -> s
+19:40:24 <lambdabot> Control.Monad.State.Strict class Monad m => MonadState s m | m -> s
+21:02:34 <CindyLinz> 下次介紹 lens 好呢, 還是 parsec (monadic LL parser), 還是一堆 arrow 呢 (用各種長相的 arrow 拆解 monad)
+21:04:44 <pkmx> 我剛剛找到了這個東西 # http://hackage.haskell.org/package/parsers
+21:05:01 <pkmx> 利馬拋棄parsec
+21:05:18 <pkmx> 這個界面看起來好多了
+21:05:44 <pkmx> 而且重點是他有提供類似mtl裡面MonadState的type class
+21:05:56 <pkmx> 讓我不用到處一直lift
+21:06:05 <CindyLinz> pkmx: 咦 XD
+21:06:23 <CindyLinz> 又是 edwardk!
+21:06:28 <CindyLinz> 那一定很好用 XDXD
+21:06:58 <CindyLinz> 少數不是學院派出身的 Haskell 大大.. (咦
+21:10:17 <CindyLinz> 覺得他長期維護 lens, 然後有專門的 irc channel 一堆人餵食他意見, wishlist, 再討論整理成一大堆有很多數學定律的數學模型... 如果煉成很厲害的上乘功夫似乎很合理 :Q
+21:13:10 <pkmx> 現在我使用的library大概有一半都depend在他身上=.=
+21:13:48 <CindyLinz> import EdwardK
+21:14:39 <CindyLinz> pkmx: edwark 的佔比, 比 haskell standard library 還高這樣...?
+21:18:58 <pkmx> 如果加上dependency的遞移性 應該是肯定超過一半=p
+21:19:34 <pkmx> 隨便一個package depend到lens void semigroup distributive comonad就算了=p
+21:21:02 <CindyLinz> 不知道他有沒有考慮把 lens 拆開 XD
+21:21:51 <CindyLinz> 造成 hackage flooding.. (誤
+21:22:33 <pkmx> Action被移出去變成lens-action了
+21:23:20 <CindyLinz> 喔喔 :D
+23:05:48 <petercommand> https://www.youtube.com/channel/UC0pv4sIiJ404ubqUJ2e4WzA #Haskell Cast
+23:06:17 <petercommand> 剛剛在看 cast #1，講 lens 的
+23:10:01 <CindyLinz> 哇 是 edwardk 本尊講
+23:10:13 <CindyLinz> 認得他的臉了 XD
+23:11:59 <pkmx> http://cokmett.github.io/cokmett/

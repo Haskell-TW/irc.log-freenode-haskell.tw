@@ -1,0 +1,12 @@
+14:29:03 <pkmx> > runExcept $ guard False
+14:29:05 <lambdabot>  Left ()
+14:29:33 <pkmx> > runExcept $ guard False :: Either String ()
+14:29:35 <lambdabot>  Left ""
+14:30:10 <pkmx> > runExcept $ fail "ker" :: Either String ()
+14:30:11 <lambdabot>  *Exception: ker
+14:30:22 <pkmx> > runExcept $ throwE "ker" :: Either String ()
+14:30:24 <lambdabot>  error:
+14:30:25 <lambdabot>      • Variable not in scope: throwE :: [Char] -> Except String ()
+14:30:25 <lambdabot>      • Perhaps you meant one of these:
+14:33:57 <pkmx> > runExcept $ throwError "ker" :: Either String ()
+14:33:59 <lambdabot>  Left "ker"

@@ -1,0 +1,27 @@
+00:18:45 <SakiTW> 為什麼只有在 w3m 裡面才能正常顯示 = =
+00:18:56 <SakiTW> 這作者好詭異啊
+00:23:03 <SakiTW> **會想學 Haskell 的人我相信都是很聰明的** <------用石頭丟作者
+00:58:24 <CindyLinz> 因為 spam bot 又回來了亂了 :Q
+01:33:16 <monochrom> 想學Haskell的人都相信自己是很聰明的. ^_^
+01:33:55 <CindyLinz> 也有覬覦藉著學 Haskell 來讓自己變聰明的 XD
+01:34:57 <caasih> 也有學了發現自己很笨的...
+02:04:41 <SakiTW> ....... 我只在想這東西到底有沒有用
+02:05:46 <SakiTW> 是說 上面的書 是 Haskell 99 嗎（？
+02:09:02 <SakiTW> 對了要不要裝隻 BOT ... 我會重開不要看我：https://t.me/joinchat/Bz_LWw2I6YBzggByxOty9Q
+02:10:43 <SakiTW> 我從N小時前就在想haskell 能不能給我 zeta(-1) (-2) (-3) 的答案之類的 結果我只讓自己腦損
+02:18:28 <SakiTW> 先定義了對所有的>1 的 Gamma 函數(S)為其 (S-1)......*1 然後再自己讓 S=1 時 0!=1
+02:18:38 <SakiTW> 感覺是在重新發明數學
+02:19:15 <SakiTW> 結果0到底是不是正偶數還是沒辦法用軟體回應錯誤的賤招來解決
+02:19:43 <SakiTW> * cry
+02:33:42 <SakiTW> 如果我不定義他是 1 的話那他算不出來
+02:33:57 <SakiTW> 如果我定義他是 1 的話那我只是重做一次同樣的事情.....?
+02:34:31 <SakiTW> 腦袋有點打結 完全無法理解
+02:36:10 <SakiTW> 連自己到底該用什麼工具都不清楚
+03:29:31 <SakiTW> 結果 gamma = 1 = 0! = 1 的也沒有
+03:29:33 <SakiTW> http://hackage.haskell.org/packages/tag/math
+03:29:40 <SakiTW> 我看把我的改一改丟上去算了
+03:31:01 <SakiTW> 聽起來曾充滿曙光，結果實際拿來用才知道一切都是幻想的工具
+03:35:44 <SakiTW> 進去 packages 打 Gamma
+03:36:03 <SakiTW> https://thepasteb.in/p/O7h5jzgy204Uq
+03:36:04 <SakiTW> 恩
+03:37:08 <SakiTW> 我永遠都誤會太多東西太多太大了⋯⋯

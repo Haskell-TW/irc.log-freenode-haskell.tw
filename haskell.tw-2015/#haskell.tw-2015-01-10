@@ -1,0 +1,259 @@
+00:26:03 <CindyLinz> 問問... 大家覺得 class Monad 裡面的 fail 函數現在是什麼地位 o.o
+00:26:13 <CindyLinz> 就數學上的 monad 來說, 沒有 fail 這東東對不對?
+00:26:42 <CindyLinz> fail 和 mzero (如果有 MonadPlus 的話) 也不一定是同一個?
+00:27:27 <CindyLinz> 現在覺得.. 如果想要短路的效果, 就用 class ErrorT 這個 monad 的 throwError 來作 @@"
+00:27:40 <CindyLinz> fail 當作是個歷史的無奈這樣?
+00:28:21 <au> 是，歷史見 http://stackoverflow.com/a/8164015/1843590
+00:28:34 <suhorng> haha epic fail!
+00:28:45 <CindyLinz> 有的 Monad instance, 像是 Identity 根本沒有實作 fail..
+00:28:46 <au> Fail <- epic
+00:29:05 <au> (這個情況會 implicit fail)
+00:29:06 <CindyLinz> 喔.. 不過如果用到 fail, 也就不意外地爆炸 XD
+00:29:13 <CindyLinz> au: 謝謝 :D
+00:29:48 <au> 咸認為是稍微合理的用法 (就是不手動寫 fail)
+00:30:15 <CindyLinz> 不寫 fail.. XD
+00:30:30 <suhorng> > Fail <- epic
+00:30:31 <lambdabot>  not an expression: ‘Fail <- epic’
+00:31:28 <petercommand> > do { Fail <- epic; }
+00:31:29 <lambdabot>  The last statement in a 'do' block must be an expression
+00:31:29 <lambdabot>    Fail <- epicNot in scope: ‘epic’Not in scope: data constructor ‘Fail’
+00:31:39 <petercommand> > do { Fail <- epic; return () }
+00:31:39 <au> > do { True <- return False; return 1 } :: [Int]
+00:31:40 <lambdabot>  Not in scope: ‘epic’Not in scope: data constructor ‘Fail’
+00:31:40 <lambdabot>  can't find file: L.hs
+00:32:01 <au> > (do { True <- return False; return 1 } :: [Int])
+00:32:02 <lambdabot>  []
+00:32:08 <au> > (do { True <- return True; return 1 } :: [Int])
+00:32:09 <lambdabot>  [1]
+00:32:14 <au> 大致如此
+00:33:41 <CindyLinz> 自動變成 mzero?
+00:33:58 <au> 自動變成 fail (此處等於 mzero)
+00:34:07 <au> > (do { True <- return False; return 1 } :: IO Int)
+00:34:08 <lambdabot>  <IO Int>
+00:34:21 <CindyLinz> 喔.. [a] 的 mzero = fail = []
+00:34:39 <au> > (do { True <- return False; return 1 } :: Either String Int)
+00:34:40 <lambdabot>  *Exception: Pattern match failure in do expression at <interactive>:3:7-10
+00:34:46 <au> yeah
+00:35:15 <au> alright, Either String 不是好例子，但是大致是這樣
+00:35:16 <CindyLinz> 嗯嗯 你貼的這一則回答, 是說現在的 fail, 就當作是 do-notation 的 internal usage
+00:35:21 <au> 對
+00:35:34 <CindyLinz> mmmm
+00:35:59 <suhorng> > (runIdentity $ runErrorT (do { True <- return False; return "OK" }))
+00:36:00 <CindyLinz> 好吧.. do-notation 同時用在 monad 和 monadplus.. 會產生不愉快也是應該的 @@"
+00:36:01 <lambdabot>  No instance for (GHC.Show.Show e0)
+00:36:01 <lambdabot>    arising from a use of ‘M214700850185929892228897.show_M2147008501859298922...
+00:36:01 <lambdabot>  The type variable ‘e0’ is ambiguous
+00:36:14 <au> 接下來還有 ApplicativeDo~
+00:36:29 <CindyLinz> au: 新的 XX-notation?
+00:36:37 <suhorng> > (runIdentity $ runErrorT (do { True <- return False; return "OK" }) :: Either String String)
+00:36:38 <lambdabot>  Left "Pattern match failure in do expression at <interactive>:3:32-35"
+00:36:43 <suhorng> XD 抓到了
+00:36:43 <au> 就是 do
+00:36:49 <suhorng> applicative do @@!!
+00:36:49 <CindyLinz> 噢.. 就是以後可以不用寫 Ooo <$> xx <*> oo <*> ?
+00:36:53 <au> 對
+00:36:55 <au> https://ghc.haskell.org/trac/ghc/wiki/ApplicativeDo
+00:37:08 <CindyLinz> 我看介紹 applicative 的 paper 都很過份地用寬括號.. XD
+00:37:11 <au> do { x <- A; y <- B; return $ f x y }
+00:37:34 <suhorng> au: 喔喔這樣子 simon marlow 他們做的就可以直接寫 do, 不用另外過一個轉換程式了?
+00:37:35 <au> -- (\x y -> f x y) <$> A <*> B
+00:37:46 <petercommand> 我記得 monad fix 的文章也有提到 Applicativedo
+00:37:51 <au> suhorng: 對，這個 feature 就是 fb team 推的 XDD
+00:37:58 <suhorng> XDDDD 那篇 paper 有看到
+00:38:08 <CindyLinz> QQ 還是想要寬括號
+00:38:16 <suhorng> 話說剛剛 fail 那個...直接 :: Either String Int 會沒抓到
+00:38:22 <suhorng> 但是用 runIdentity $ runErrorT 就會抓到
+00:38:24 <suhorng> 有點妙
+00:38:29 <au> yeah
+00:38:58 <suhorng> > ((do { True <- return False; return 5 }) :: Either String Int)
+00:39:00 <lambdabot>  *Exception: Pattern match failure in do expression at <interactive>:3:8-11
+00:39:01 <CindyLinz> suhorng: 聽起來是套不同 class 的 method.. 雖然底下的 data structure 是同一個 @@"
+00:39:04 <suhorng> > (runIdentity $ runErrorT (do { True <- return False; return Int }) :: Either String Int)
+00:39:05 <lambdabot>  Not in scope: data constructor ‘Int’
+00:39:05 <lambdabot>  Perhaps you meant one of these:
+00:39:05 <lambdabot>    ‘In’ (imported from Lambdabot.Plugin.Haskell.Eval.Trusted),
+00:39:12 <suhorng> arr
+00:39:13 <suhorng> > (runIdentity $ runErrorT (do { True <- return False; return Int }) :: Either String 5)
+00:39:14 <lambdabot>  Not in scope: data constructor ‘Int’
+00:39:15 <lambdabot>  Perhaps you meant one of these:
+00:39:15 <lambdabot>    ‘In’ (imported from Lambdabot.Plugin.Haskell.Eval.Trusted),
+00:39:17 <suhorng> > (runIdentity $ runErrorT (do { True <- return False; return 5 }) :: Either String Int)
+00:39:19 <lambdabot>  Left "Pattern match failure in do expression at <interactive>:3:32-35"
+00:39:31 <suhorng> CindyLinz: 好像是 TT typeclass 真妙
+00:40:22 <CindyLinz> suhorng: 我都要一直提醒自己.. method 屬於 class, 不屬於 data type.. @_@"
+00:40:31 <CindyLinz> suhorng: OO 語言的 method 都會跟著 instance 走...
+00:40:37 <CindyLinz> 太習慣了就會錯 orz
+00:40:43 <suhorng> XDDD
+00:40:47 <CindyLinz> au: 大概懂意思了 @_@"
+00:41:38 <CindyLinz> au: 就是在只有 Applicative 沒有 monad 的時候也可以用 do..  不過我要再讀一讀, 覺得需要有些額外限制才對 @@"
+00:43:05 <CindyLinz> au: 喔~ 就是每一個 <- 的右邊, 要彼此獨立, 不能用到別人左邊的東西; 而 monad 的話, 後面的 <- 的右邊可以用到前面的 <- 的左邊
+00:44:17 <au> 是的，然後獨立的部份 desugar 成 applicative
+00:44:40 <au> 依照單子順序執行的部份留在 monad
+00:44:43 <CindyLinz> 嗯嗯 m(_._)m
+00:45:01 <au> (FLOLAC'14 有稍微講到一點點原理(但是當時 syntax 還沒確定))
+00:45:21 <CindyLinz> mmmm
+00:45:45 <suhorng> 好像有點印象XD
+00:46:03 <suhorng> 不過即使獨立, 要怎麼保證 effect 的順序沒問題?
+00:46:27 <au> 不保證! 所以是 opt-in
+00:46:28 <suhorng> 萬一該 `m` 的 Monad 跟 Applicative instance 不一樣@_@"
+00:46:32 <CindyLinz> 沒有拿 <- 左邊的東西來用, 就可以了啊?
+00:46:33 <au> {-# LANGUAGE ApplicativeDo #-}
+00:46:38 <suhorng> 原來如此
+00:47:03 <au> ( http://www.slideshare.net/autang/commercial-uses-of-functional-programming/130 )
+00:47:07 <CindyLinz> 嗯 順序是看底下的 applicative 想怎麼搞.. ^^|
+00:47:09 <suhorng> CindyLinz: 感覺底下的 monad, applicative instance 不一定一樣, 發生 effect 有可能不一樣
+00:47:36 <CindyLinz> suhorng: 對.. 它們彼此可以用 side-effect 來溝通.. 順序由 applicative 決定, 而不能用 do 
+00:47:36 <suhorng> 有在現場聽演講, YA!
+00:47:44 <CindyLinz> suhorng: 對.. 它們彼此可以用 side-effect 來溝通.. 順序由 applicative 決定, 而不能用 do 裡面的 binding 順序來定
+00:48:11 <CindyLinz> monad 的話.. 至少有一個 binding 順序一定是照 do-notation 裡面的寫法決定; 雖然也只有決定到這一個表層 :p
+00:48:50 <CindyLinz> au: 其實... [ado| ... |] 看起來也挺好的啊 XD
+00:49:21 <suhorng> 欸XDD [ado| ... |]
+00:49:30 <suhorng> 現在的手動轉XD
+00:49:54 <CindyLinz> 只是裡面就不能用到別的 quasi quote..
+00:50:09 <au> 然後現有的程式還要手動置換
+00:50:25 <CindyLinz> 哎~ quasi quote 應該要可以引用的時候自己加額外的 label, 巢狀啊 :p
+00:50:29 <au> 加個 {-# LANGUAGE ApplicativeDo #-} 比較好教
+00:50:36 <CindyLinz> 教.. XD
+00:51:16 <CindyLinz> QQ.. 7.8.3 還沒有得用
+00:51:51 <au> GHC 7.10 先做 AMP，確定大家的 Monad 都是 Applicative
+00:52:04 <au> GHC 7.12 才能推 ApplicativeDo, 不然一下全部編不過
+00:52:12 <CindyLinz> 對耶 還有這一關 XD
+00:52:32 <suhorng> 這www 啊哈哈哈
+00:52:42 <CindyLinz> 以後是 class Functor a => Applicative a 和 class Applicative m => Monad m 嗎?
+00:53:00 <au> 是，這是 Haskell 2014 的主要政見
+00:53:01 <au> https://github.com/quchen/articles/blob/master/applicative_monad.md
+00:53:07 <CindyLinz> Haskell 2014!
+00:53:19 <CindyLinz> 這是 2010 之後的下一個 spec 嗎?
+00:53:24 <suhorng> 要像 C++ 一樣固定幾年修一次了嗎XD
+00:54:18 <au> yeah
+00:54:32 <CindyLinz> C++ team: 糟糕, UB 快被大家追完了, 快來趕製新的 UB 上線..
+00:54:53 <au> 固定每年一版 https://www.haskell.org/pipermail/haskell-prime/2013-May/003825.html
+00:55:09 <suhorng> cool!!!!
+00:55:13 <CindyLinz> 好兇.. o.o
+00:56:30 <au> 說是這樣說，可是如果 2014 年沒有人提動議，Haskell 2015 和 Haskell 2014 就會一樣
+00:56:38 <CindyLinz> XDD
+00:56:54 <CindyLinz> 反正有很多博士想畢業... (眼睛轉來轉去
+00:56:58 <suhorng> 其實也還好呀XD 沒有什麼重大 bugfix 的話也還好
+00:57:35 <suhorng> 反正各種嶄新的 feature 應該不太可能進 standard XD?
+00:57:51 <CindyLinz> Haskell spec 鬧 topic 荒的話, 就會開始有人把 totality 和 N 層 Universe 加進去.........wwww
+00:58:56 <au> 我是一直慫恿 idris team 來 backport
+00:59:09 <au> 不過要先等 PoC 很穩定再說
+00:59:59 <suhorng> PoC 是什麼意思呢?
+01:00:06 <au> Proof of Concept
+01:00:36 <suhorng> 恩, 不過還是不太懂 PoC 很穩定是什麼意思@@
+01:00:39 <au> 像 GHC extension 就是 PoC，大部份是壞主意
+01:00:46 <au> 但是有少部份是好主意
+01:00:49 <au> 就可以進 spec
+01:02:23 <suhorng> 喔喔
+01:02:48 <au> 壞主意的例子，如 -XDatatypeContexts -XImpredicativeTypes -XRecursiveDo ...
+01:02:58 <CindyLinz> au: 這樣, 應該會先出現 idirs 風格的 extension?
+01:03:04 <au> yeah, via ghc plugin
+01:03:13 <au> (hopefully)
+01:03:14 <CindyLinz> RecursiveDo 是壞主意嗎? o.o
+01:03:46 <au> 後來似乎 -XDoRec 的語法比較乾淨
+01:04:39 <au> do rec { ... }
+01:04:48 <suhorng> 想想那 GHC 現在 type-level value 的做髮飾不是就要改了呢@_@...
+01:04:48 <CindyLinz> 噢.. 現在看起來 RecursiveDo 開起來的時候, do rec 和 mdo 都可以用的樣子
+01:05:02 <suhorng> 對耶! DoRec RecursiveDo 有改過害我困惑好久
+01:05:05 <CindyLinz> 不對不對 我看錯了
+01:05:18 <suhorng> 在 7.4, 7.6 中報 deprecated 的 extension 不一樣...
+01:06:22 <CindyLinz> 啊沒錯.. 7.8.3 的 RecursiveDo 是 mdo 和 do rec 都可用
+01:06:37 <CindyLinz> 剛翻到 7.0.. :p
+01:06:41 <au> 那... 就是和解了
+01:06:46 <CindyLinz> 和解 XD
+01:06:49 <suhorng> wwwww
+01:07:12 <CindyLinz> 其實我比較喜歡 mdo.. :p
+01:07:28 <CindyLinz> 只是名字怪怪
+01:07:39 <au> https://www.haskell.org/haskellwiki/MonadFix#Imperative_cyclic_linked_lists
+01:08:05 <au> 我其實只寫過 mdo
+01:08:15 <CindyLinz> XDDD
+01:08:23 <au> 可是 rec p <- ... 語法出來後忽然就覺得乾淨好多
+01:08:28 <au> (但是已經用不上了)
+01:08:33 <CindyLinz> 可是會多一層縮排 @@"
+01:08:58 <CindyLinz> 而且.. rec { } 就像是一個 a <- xxx 這種 statement, 不能放在一個 do 的最後面
+01:09:08 <CindyLinz> 要自己再 return 一下
+01:09:12 <au> 所以和解是對的，可以混合使用
+01:09:24 <godfat> 好期待喔
+01:09:25 <godfat> Functor a => Applicative a => Monad a
+01:09:25 <godfat> 唉這一陣子都太忙了連 irc 都很少看
+01:09:25 <godfat> 能找到地方用 haskell 就好了 ><
+01:09:26 <au> 我收回剛才關於壞主意的說法 XD
+01:09:52 <CindyLinz> rec 有比 mdo 乾淨嗎? @@"  是只用在單行的時候嗎?
+01:09:56 <suhorng> Y)
+01:10:01 <CindyLinz> 這邊這個混戰的例子裡面, 單行的 rec 看起來是不錯
+01:10:07 <CindyLinz> 因為單行, 也不需要縮排...
+01:10:15 <CindyLinz> godfat: :D
+01:10:24 <au> 然後可以有 nonrecursive normal binding
+01:10:39 <CindyLinz> 就是一般 do?
+01:10:42 <au> mdo 的話就所有 binding 都自動 rec
+01:11:01 <CindyLinz> 可以在一個 do 裡面塞 mdo, 然後就會比較像 rec? XD
+01:11:02 <au> mdo { x <- f; y <- z; ... } vs do { rec x <- f; y <- z; ... }
+01:11:16 <au> 嗯可是 scope 不一樣
+01:11:21 <au> mdo 只能 inner scope 作用
+01:11:27 <CindyLinz> 噢 不過可能 <- 這種不能放在 mdo 的最後一行 o.o
+01:11:29 <au> 不能用 outer do 的未來式
+01:11:35 <CindyLinz> 未來式 XD
+01:11:38 <suhorng> outer do @@!!! 完全沒想過這種用法
+01:12:00 <CindyLinz> 隱隱覺得我誤解 rec... 把 rec 想小了的感覺 @@"
+01:12:18 <CindyLinz> 以為 rec 只能自己裡面那一團互相用 @@"
+01:12:56 <CindyLinz> 噢.. rec 裡面生出來的.... <- 左邊的東西, 在 rec 外面可以用
+01:13:19 <au> yup
+01:13:25 <CindyLinz> mdo 要作一樣效果的話.. 就是從 mdo 裡面 return 出來.. 再在 mdo 的開頭用 <- 去接
+01:13:30 <au> 是的
+01:13:58 <suhorng> 真是太酷了
+01:14:07 <au> s/外面/外面的後面/
+01:14:19 <CindyLinz> 原來是我把 rec 當 mdo 用.. 所以只有覺得不方便, 沒有好處 orz
+01:15:37 <suhorng> 當成 label 來用的話好像這樣有點可以想像...
+01:16:30 <CindyLinz> (偷偷說: 其實我覺得應該把 Haskell 的 do 都變成 mdo.... Haskell 欸~~ 當然是不分時間前後全都 recursive bind 在一起啊, 如果在同一個 group 裡面用到同一個 symbol, 當然就要出 compile error 呀~~)
+01:22:49 <CindyLinz> 也許有一天.. ErrorT 會改名 EscapeT 之類的?
+01:23:05 <CindyLinz> 改中性一點.. 
+01:23:14 <suhorng> wwww
+01:23:22 <suhorng> 現在不是叫 ExceptT?
+01:23:33 <CindyLinz> 改嘍?
+01:23:42 <CindyLinz> 不過 ExceptT 不會想到 exception 嗎? @@"
+01:24:12 <suhorng> 確實是 exception...
+01:24:17 <suhorng> 中性的話就 EitherT 吧 :P
+01:24:21 <CindyLinz> 沒改到說明的感覺? XD # http://hackage.haskell.org/package/mtl-2.2.1/docs/Control-Monad-Except.html
+01:24:25 <godfat> 不是確實跟 exception 很像嗎？ XD
+01:24:28 <CindyLinz> 你看小標都是 ErrorT
+01:24:31 <suhorng> https://hackage.haskell.org/package/mtl-2.2.1/docs/Control-Monad-Error.html deprecated
+01:24:37 <CindyLinz> 喔.. 我指的中性是說.. 不要有「出錯」的意味在
+01:24:53 <suhorng> CindyLinz: 那感覺 EitherT 不錯XD
+01:25:11 <CindyLinz> "The ErrorT monad transformer" 下面寫 newtype ExceptT.. XD
+01:25:16 <godfat> 那我投 EscapeT 一票
+01:25:36 <CindyLinz> suhorng: 可是 mtl 在 .Class 那邊沒有改 @@"
+01:25:39 <CindyLinz> 還是 MonadError
+01:25:59 <suhorng> CindyLinz: 改這個好像只是因為配合 transformers 中 strMsg, noMsg 這個東西被不要了
+01:26:06 <godfat> error 跟 arrow 音有點像我也有點困擾
+01:26:09 <suhorng> 變成沒那個東西
+01:26:17 <CindyLinz> suhorng: Monad 的部分我覺得如果叫 MonadEither 不太好.. 因為太像一個實體了
+01:26:27 <suhorng> 所以以後改用 runExceptT 而不是 runErrorT
+01:26:27 <CindyLinz> EitherT 不是本來就有喔?
+01:26:29 <suhorng> XDDDD
+01:26:34 <suhorng> 好像在不同的 package?
+01:26:38 <CindyLinz> 喔..
+01:26:42 <suhorng> 是 pipes 作者弄的嗎XD 忘了
+01:26:57 <CindyLinz> godfat: 用中文講 XD
+01:27:13 <CindyLinz> 箭頭梯 與 錯誤梯
+01:27:27 <suhorng> 不對欸...是 ekmett
+01:27:37 <godfat> =_=... 上一梯，下一梯，小朋友下樓梯
+01:27:40 <CindyLinz> 又是 edwardk XD
+01:28:27 <au> MonadEKmetT (誤)
+01:28:47 <godfat> XDDDD
+01:28:49 <suhorng> XDDDDDDD
+01:29:27 <CindyLinz> XDXD
+01:34:19 <CindyLinz> 嘖.. 想說這樣子來弄一個 N 層 lift, 配合 throwError 跳出 N 層外... 失敗了..
+01:34:32 <CindyLinz> foldr1 (.) (replicate 10 lift)
+01:34:40 <CindyLinz> 因為每個 lift 的 type 都不一樣.....w
+01:35:12 <CindyLinz> foldr (.) id (replicate 10 lift)
+01:47:02 <CindyLinz> 自己設一個 class MonadEscape m 然後把 UndecidableInstances 開起來, 直接 instance MonadError m => MonadEscape m... XD
+03:34:19 <monochrom> 嘻嘻, https://www.haskell.org/haskellwiki/MonadFix 是我寫的
+03:35:41 <au> monochrom++
+03:42:06 <monochrom> 並非所有 Monad 都可以做 MonadFix, 例如 Cont 就做不到. 所以, 還不能把所有 do 都改為 mdo
+03:55:31 <au> Sabry 之前好像證過說 left-shrinking property 不管的話，可以定義出 instance MonadFix Cont
+03:56:43 <au> (An Abstract Monadic Semantics for Value Recursion, 有引 Carlsson 的 "Figure 3: mfix for the continuation-monad transformer")
+08:55:07 <CindyLinz> monochrom++
+08:55:43 <monochrom> :)
+17:40:10 <suhorng> monochrom: (Y)
+23:42:18 <CindyLinz> miaoski, cibs: 覺得接下來這次的 slide.. 會很不適合裸讀.. orz
+23:43:00 <miaoski> CindyLinz: 太棒惹，處罰不來的人 ← 就不要因為牙痛沒出席 QQ

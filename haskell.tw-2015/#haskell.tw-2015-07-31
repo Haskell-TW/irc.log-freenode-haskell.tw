@@ -1,0 +1,17 @@
+10:23:05 <mno2> http://begriffs.com/posts/2015-07-27-haskell-source-navigation.html
+10:23:13 <mno2> [Haskell Source Navigation]
+10:23:31 <mno2> http://www.reddit.com/r/haskell/comments/3f1fif/announce_ghc_version_7102/
+10:23:41 <mno2> [ANNOUNCE: GHC version 7.10.2]
+10:24:39 <mno2> https://github.com/billpmurphy/hask/
+10:24:48 <mno2> [Haskell language features and standard libraries in pure Python.]
+16:37:10 <CindyLinz> @hoogle Errno -> String
+16:37:11 <lambdabot> Network.BufferType buf_toStr :: BufferOp a -> a -> String
+16:37:12 <lambdabot> Prelude show :: Show a => a -> String
+16:37:12 <lambdabot> Text.Show show :: Show a => a -> String
+16:38:53 <CindyLinz> hayoo 上可以找到像 strerror 之類的函數, 可是都是 alsa-core 這種 package... 囧
+16:39:09 <CindyLinz> 為了印出 error 所以裝一下音效控制 package, 感覺不太對 XD
+17:58:09 <yen3> 問一個比較無關的話題，FT 是 08/06 嗎 XD?
+17:59:02 <yen3> 喔喔喔，有看到主題了，謝謝 CindyLinz 大大~
+18:06:09 <CindyLinz> 程式寫下去發現範圍太大 orz
+18:17:53 <yen3> 可以跟天橋底下的說書人一樣拆成十回來講 (誤)
+18:20:15 <CindyLinz> 那樣聽起來太悶了 /_\

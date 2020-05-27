@@ -1,0 +1,105 @@
+00:10:58 <CindyLinz> -ddump-simpl 生出來的東西好長啊.....
+00:11:03 <CindyLinz> ghc 真辛苦.. ww
+00:15:22 <godfat> 不太懂為什麼要 evaluate HEAD @@
+00:15:22 <godfat> (\x -> 1) ((fix (+1)) 看起來沒問題？
+00:16:30 <CindyLinz> 沒怎樣的問題? 為什麼不能就這樣擺著卻要算下去的問題?
+00:16:59 <godfat> 嗯，應該是 XD
+00:17:46 <CindyLinz> 嗚嗚我的 pure n-body 花的時間是上面比較快的那個 GHC #2 的 1.4 倍..
+00:18:10 <CindyLinz> godfat: 因為 \x -> 1 被餵了參數, 就是後面 fix 帶頭的那一坨, 所以它就不是 head 了
+00:18:30 <CindyLinz> 原來 peak poke 這麼快啊... QQ
+00:18:54 <godfat> 可是為什麼一定要是 head..?
+00:19:25 <CindyLinz> 總是要訂個規則啊..
+00:19:38 <godfat> 噗，這麼簡單的理由？ XD
+00:20:12 <CindyLinz> 我覺得理由可能會 trivial 到不太知道怎麼解釋 @@"
+00:20:29 <godfat> 我猜是不太懂那個 if 吧 @@"
+00:20:29 <godfat> https://docs.google.com/presentation/d/18ZdJoDGQr47wBfO-zEwW1hkc6tfiAdP7TYTKhki_IKk/edit#slide=id.g25c0969c4_080
+00:20:29 <godfat> : If we don’t open the outermost bag, maybe there would be infinite of hamburgers inside!
+00:20:32 <CindyLinz> 我不能接受一個吃了 1+1 的程式, 不是算出 2, 而是還給我 1+1 啊...
+00:20:53 <CindyLinz> 原本是要全都衝到 normal form 的..
+00:20:58 <godfat> 那不是在 print 時才會變成 2 就好了嗎？
+00:20:59 <godfat> 我能想到的只有記憶體上的理由 XD
+00:21:15 <CindyLinz> 現在的確是這樣啊
+00:22:03 <CindyLinz> 那個是說.. 要 eval 的時候, 目標訂在 head
+00:22:16 <CindyLinz> 而如果不打算 eval 的話, 那自然還是不會去算它
+00:27:20 <CindyLinz> QQ
+00:29:12 <godfat> Lin1? XD
+00:30:17 <CindyLinz> 網路不順 QQ
+00:35:53 <CindyLinz> 進步 5%..
+00:37:36 <CindyLinz> godfat: 剛剛有講話嗎? @@"
+00:38:26 <godfat> CindyLinz, 這段嗎？
+00:38:26 <godfat> 那不是在 print 時才會變成 2 就好了嗎？
+00:38:26 <godfat> 我能想到的只有記憶體上的理由 XD
+00:39:10 <CindyLinz> 那這段看過了 :D
+00:39:17 <CindyLinz> 剛剛網路不順.. QQ
+00:39:48 <letoh> 還有會被 1 附身
+00:40:04 <letoh> 不過我也用 irssi 啊，好像只是加個底線?
+00:40:44 <CindyLinz> 那是 irssi 重連上來, server 覺得舊的 connection 還在
+00:50:57 <CindyLinz> 呼.. 實驗這種東西常常不小心就吃一堆 swap, 電腦就不動了 orz
+00:55:00 <godfat> 我用 adium 是 append 1
+16:10:13 <CindyLinz> QQ.. GHC 看來不會把 EmptyDataDecls 的 field 直接 optimize 掉欸..
+16:13:31 <mno2> CindyLinz: 什麼意思？ EmptyDataDecls 不是沒有 value 嗎？
+16:14:20 <CindyLinz> 就假設有個 data Empty
+16:16:00 <CindyLinz> 我再試一下..
+16:19:03 <mno2> CindyLinz: core 印出來是什麼樣？
+16:20:38 <CindyLinz> 好誤會了 應該會 optimize 掉
+16:21:29 <CindyLinz> 有個 data Empty, 一個 data One = One. 然後是 data Data = Data { one :: {-# UNPACK #-} !One , empty :: Empty , n :: {-# UNPACK #-} !Int }                                                                    
+16:21:39 <CindyLinz> 生出來的 Data 是:
+16:23:41 <CindyLinz> http://lpaste.net/4267802525500964864
+16:24:10 <CindyLinz> 中間那個 empty 會直接不見
+16:30:41 <CindyLinz> 我在做 Augmented red black tree, 然後 augmented value 是 non-strict, lazy eval 的
+16:31:08 <CindyLinz> 這樣如果 augmented value 放的是 empty data 的話, 直接就可以縮成一般的 RB tree 耶 ^^
+16:33:34 <CindyLinz> 不過這不是設計讓它 non-strict 的原因啦.. 主要只是因為 RB tree 偶爾要旋轉.. 希望旋轉過程不要一直重算 augmented value
+16:34:33 <CindyLinz> 只是轉完以後要不要去 forced 它... 嗯, 如果允許用 empty 的話, 就不可以去 force 它了 :Q
+16:35:41 <CindyLinz> 但如果都不去 force 它的話, 其實是個 amortized lg N 
+16:35:55 <CindyLinz> 的 RB tree, 不是 worst case lg N 了
+16:53:12 <CindyLinz> 不過 user 可以每次加入或刪除資料之後, 去 seq 一下 root 的 augmented value
+17:05:41 <mno2> CindyLinz: 為什麼你會要 RB Tree 啊？
+17:06:41 <mno2> CindyLinz:  (模擬對白) : 硬派的 programmer 就是要寫 RB tree 不寫 skip list
+17:06:57 <CindyLinz> 重點是 Augmented 的部分啦
+17:07:09 <CindyLinz> 其實我想要的是 on-disk 的 btree 版本
+17:07:28 <CindyLinz> 只是 disk 要考慮的因素更多, 想先拿這種 memory 的版本試試看會遇到什麼問題
+17:07:48 <CindyLinz> 我想要做 real time 的 ranking, 把玩家的分數丟進去
+17:07:57 <CindyLinz> 隨時可以查指定玩家現在是第幾名
+17:07:58 <mno2> B-tree 也可以 memory 吧，反正 block 都放 memory 就好啦
+17:08:15 <mno2> 一般資料庫也是用一個 manager 去管理 page cache
+17:08:28 <CindyLinz> 可是 memory 版的 btree, 我考慮過 immutable 的情況下沒有實用價值 @@"
+17:08:41 <mno2> 還要 immutable 喔 @@
+17:08:57 <CindyLinz> 啊不然我應該直接用 C 寫吧... ^^|
+17:09:22 <CindyLinz> 那我覺得應該找得到現成的, 也不用寫了?
+17:09:40 <mno2> 喔喔，原來你是要做 immutable cache
+17:09:46 <CindyLinz> 不是 cache 啊
+17:09:51 <CindyLinz> 等等怎麼變成 cache 了 XD
+17:10:08 <mno2> 聽起來就是把玩家分數暫存啊，然後又不能變
+17:10:11 <CindyLinz> 我就只是要把一堆分數丟進去, 然後隨時看名次而已
+17:10:35 <CindyLinz> 可以變啊, 說用 immutable 是因為想用 Haskell 寫啦 ^^|
+17:11:19 <mno2> 喔喔
+17:12:48 <CindyLinz> 我沒有想過 skip list 怎麼作 augment 的應用
+17:13:36 <CindyLinz> 不過 skip list 要吃一個 random generator, 這樣在一開始 create 的時候要附一個進去
+17:13:48 <CindyLinz> 或是黏在 data type 的 class 裡面
+17:13:54 <mno2> http://www.stanford.edu/~joyku/proj_cs161/
+17:14:12 <CindyLinz> 喔喔! :D
+17:15:00 <mno2> 而且 Skip List 可以 concurrent 啊，RB tree 就…..
+17:15:25 <mno2> 沒辦法侷限旋轉範圍，只好一個大鎖
+17:16:35 <CindyLinz> immutable 實作不用 lock, 用 zipper 來存取它, 在 create zipper 的時候相當於作了 snapshot, 在這個 zipper 滅掉以前, 這棵 tree 就自動在 copy-on-write 的狀態
+17:19:51 <mno2> CindyLinz: 突然發覺好像 MVCC
+17:20:02 <CindyLinz> 嗯有像
+17:20:16 <mno2> 真有趣
+17:20:30 <CindyLinz> 可是又各自可以改, 會變成平行宇宙, MVCC 應該就沒有這個了?
+17:20:40 <CindyLinz> 因為 MVCC 最後是要 commit 合在一起的吧
+17:21:46 <CindyLinz> 如果是改在不同部位, MVCC 可以讓它們最後合在一起.. 而 immutable RB tree 這種. 如果在某 zipper 分到兩處去做, 最後一定是兩個不同的 tree
+17:28:08 <CindyLinz> 好吧我在 loading 來自很多 user 很多 task, 而不是一個 heavy job 的環境, 常常會忽略一次可以吃 N 個 CPU core 有什麼好處 ^^|
+17:44:25 <CindyLinz> 嗯, 沒有加 -O2 的 -ddump-simpl 讀起來友善多了 XD
+17:44:40 <CindyLinz> 那個 empty 也不意外地出現了 XD
+17:48:55 <mno2> 不過讀到的跟實際拿 -O2 跑的就差很多了
+17:52:02 <CindyLinz> 對 XD
+20:18:39 <mno2> http://tgceec.tumblr.com/post/70134083864/introducing-the-grand-c-error-explosion-competition
+20:18:55 <mno2> the Grand C++ Error Explosion Competition
+20:18:57 <mno2> LOL
+23:06:34 <godfat> 這種比賽想都沒想過... XD
+23:06:34 <godfat> 讓我想起 vc++ 6.0 少打一個分號可以跟你噴幾千個錯誤
+23:35:49 <CindyLinz> 補一個分號就可以解掉數千個錯誤, 有沒有感覺很棒? :D
+23:36:17 <godfat> 真是厲害的半杯水思考 XD
+23:42:44 <petercommand> 有人去參加嗎XD
+23:44:08 <CindyLinz> 好久沒碰這語言了 @@"
+23:44:50 <petercommand> CindyLinz: 趁不太熟的時候看能不能讓他多噴一些錯誤XD
+23:45:47 <CindyLinz> 累 XD

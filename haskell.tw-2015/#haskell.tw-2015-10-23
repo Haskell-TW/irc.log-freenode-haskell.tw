@@ -1,0 +1,21 @@
+16:16:55 <petercommand> http://staff.city.ac.uk/~ross/papers/notation.pdf
+16:18:27 <petercommand> 第 5 頁的 Command types θ ::= a\τ | τ -> θ 不太了解他的意思是什麼
+17:04:15 <petercommand> > mdo { x <- [1:1:zipWith (+) x (tail x)]; return x }
+17:04:16 <lambdabot>  <hint>:1:9:
+17:04:16 <lambdabot>      parse error on input ‘<-’
+17:04:16 <lambdabot>      Perhaps this statement should be within a 'do' block?
+17:04:46 <petercommand> 沒有 recursive do XD
+17:26:39 <CindyLinz> 可以用 mfix 和 ~ 試試?
+21:02:23 <petercommand> CindyLinz: 阿阿，斷線了沒看到你的回應..XD
+21:03:50 <petercommand> > mfix $ \x -> [1:1:zipWith (+) x (tail x)]
+21:03:51 <lambdabot>  [[1,1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181,6765,10946,1...
+21:46:09 <CindyLinz> petercommand: 這個好像只需要 fix 就好了啊?
+21:46:56 <petercommand> 恩恩，對阿XDD
+21:48:05 <petercommand> 單純拿不同的東西來玩:p
+21:48:21 <CindyLinz> 如果一次有好幾個變數要遞迴的話, 用 () 裝起來, 然後在 () 的前面要加 ~ 讓它不用馬上 destruct... 記得好像是需要這樣
+22:55:36 <suhorngT_> ~!
+22:57:00 <CindyLinz> suhorngT_: pattern 裡 data constructor 前面放 ! 無效啦 XD
+22:57:35 <CindyLinz> 唔.. 除非是一組 let 或 where 裡面一條 expression 整條的最前面.. (思
+22:57:43 <petercommand> ~! 是啥?XD
+22:58:27 <petercommand> ~ 是 lazy , ! 是 strict..
+23:05:43 <CindyLinz> Irrefutable Pattern.... 記名字好累 orz

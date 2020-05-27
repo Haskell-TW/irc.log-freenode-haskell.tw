@@ -1,0 +1,181 @@
+00:33:07 <CindyLinz> QQ..
+00:58:08 <hashcat> ??
+00:58:31 <hashcat> 分享下coursera的computer architecture
+00:59:47 <hashcat> 無聊的不分享, 分享的不無聊
+01:13:58 <hashcat> untype就是編譯或組譯直接過, 怎跑怎操作都不會意外中止直到人為停止
+01:17:10 <hashcat> 執行時會丟型別錯誤叫dynamic, 執行時會丟型別錯誤叫static, 兩者可並存
+01:26:44 <CindyLinz> 在弄 Happy + MonadFix, 剛剛卡了一下 :p
+01:28:08 <monochrom> 我想, 你的 MonadFix 將會很好玩 :)
+01:36:18 <CindyLinz> 謝謝 ^^|
+01:36:45 <CindyLinz> 嘗試 & 撞牆的花絮會穿插其中 XD
+09:30:58 <hashcat> http://www.pathwayslms.com/swipltuts/html/index.html
+09:31:05 <hashcat> swi-prolog做web app
+11:06:50 <MnO2_> https://twitter.com/search?q=%23CUFP&src=hash  CUFP 開始了，看起來有很多有趣的題目
+11:07:02 <MnO2_> http://cufp.org/conference/schedule/2013
+11:38:16 <MnO2_> FB 的 php static analyzer (in OCaml) 好像很厲害的樣子
+11:43:31 <CindyLinz> 是 hiphop 裡面的元件嗎?
+11:45:15 <MnO2_> 是同一個 team 生出來的東西。但要不要算同一包就不知道了
+11:45:32 <CindyLinz> 那就當是同一個人做的吧!
+11:45:42 <CindyLinz> XD
+11:49:52 <MnO2_> 話說 ruby creator 跟 ruby vm creator 結婚是可以拍成 ruby 情人夢了嗎?
+11:57:50 <CindyLinz> XDDDD
+20:08:36 <MnO2_> http://goo.gl/3OHJfi  CUFP 有的有投影片出來了
+21:12:19 <hashcat> 這是做啥的
+21:22:35 <suhorng> 沒想到申請 PLT 板板主有點麻煩 orz
+21:22:48 <suhorng> http://www.ptt.cc/bbs/Sub_CS/M.1379940251.A.EBF.html
+21:22:50 <godfat1> 加油 @_@...
+21:23:27 <suhorng> 要認識一些板的歷史 囧
+21:32:12 <suhorng> 看不懂 PSMonkey 說的是什麼意思, 有什麼建議嗎...?
+21:32:44 <godfat> 剛剛看過去的感覺是... 他的意思是要好好整理精華區 XD
+21:32:44 <godfat> 我的理解是這樣啦 ~.~
+21:33:04 <suhorng> 原來如此!
+21:33:39 <godfat> 這點我就真的是慚愧了，只有剛開始有在認真整理 orz
+21:33:40 <godfat> 後來就只有刪文和 m 文了...
+21:33:54 <suhorng> 這樣連接下一篇好像說得通了...
+21:34:10 <godfat> XDDDD
+21:34:33 <suhorng> 其實 Prob_Solve 板的精華區也是..XD
+21:34:45 <suhorng> 我剛剛是真的看不懂Q_Q
+21:35:32 <godfat> 我一開始總是會想熱血整理精華區，後來可能是覺得 ptt 精華區管理不是很方便
+21:35:32 <godfat> （以前玩 gamebase 的網頁介面是比較方便）
+21:35:32 <godfat> 覺得有點麻煩。後來就愈來愈懶... orz
+21:36:03 <godfat> 後來我就覺得，也許這種靠單人人力編輯的精華區，本來就不是很好的機制吧
+21:36:03 <godfat> 要有力氣弄的門檻不小
+21:36:31 <godfat> 我想他是希望精華區能保留原本的精神，在裡面留下許多歷史之類的
+21:37:08 <suhorng> 嗯哼
+21:37:22 <godfat> 也許可能就是多講一些關於精華區的編輯吧 @_@
+21:37:22 <godfat> 比方說怎麼樣的歷史資料應該放在哪裡之類的
+21:37:43 <suhorng> 嗯嗯
+21:38:12 <suhorng> 精華區真的不太方便 (其實很希望能有 tag... 不過 ptt BBS 沒這功能...)
+21:39:44 <letoh> 標題 tag XD
+21:39:45 <godfat> 我之前還曾經把一串討論全部串成一篇，想說這樣比較好閱讀
+21:39:46 <godfat> 後來又覺得可是這樣讀起來好長，也有點累，想割回去
+21:39:46 <godfat> 問小天使，小天使說沒這功能 @_@
+21:39:46 <godfat> 可是我也懶得回頭一篇一篇對照，到底是要收哪幾篇 orz
+21:39:46 <godfat> 不過這好像是 Ruby 板的事就是了... XD
+21:40:19 <letoh> 以前都是習慣串成一篇啊
+21:40:30 <letoh> 弄一堆要收藏不方便XD
+21:41:55 <godfat> 我忘記那時的理由是啥了 XD
+21:41:56 <godfat> 喔，可能是要告訴別人看哪篇時比較不方便？
+21:42:01 <suhorng> XDDD
+21:42:18 <suhorng> 串成一篇要找到哪裡有點麻煩
+21:42:46 <godfat> 而且一堆篇要串成一篇還可以，但不能反向操作 O_Q
+21:43:23 <petercommand> 可以編號嗎?
+21:43:53 <godfat> 串成一篇的話，就是一篇文章了（這樣有回答到嗎..?）
+21:44:25 <petercommand> 這樣就可以告訴別人看哪裡了@@
+21:44:46 <godfat> 那應該不行，只能說第幾行之類的
+21:44:50 <suhorng> 是可以說跳到哪一行
+21:45:17 <petercommand> 喔喔
+23:14:24 <hashcat> 亂入prolog
+23:14:46 <hashcat> http://sewiki.iai.uni-bonn.de/research/pdt/docs/v2.1/start
+23:15:35 <hashcat> 有沒其他地方貼這類東西
+23:16:43 <letoh> 咦
+23:16:59 <letoh> 要到綜合話題頻道貼嗎? XD
+23:18:54 <hashcat> 我都覺得像洗版
+23:19:11 <hashcat> clojure地盤貼prolog
+23:19:13 <letoh> 到 cschat.tw 看看吧XD
+23:19:24 <letoh> 應該可以隨便你洗XD
+23:19:55 <hashcat> cschat.tw直接被過濾掉
+23:20:07 <letoh> 喔喔喔  為什麼? XD
+23:20:26 <hashcat> 哦我以為是網址
+23:20:31 <letoh> XD
+23:21:04 <hashcat> 人超少
+23:21:39 <letoh> 唔  是不多，好像只有剛開的時候廣告一下而已
+23:24:12 <mno2> 沒差吧，後來我跟 favonia 都認為這版叫 haskell.tw 只是表面的名稱，反正就是討論 PL 的地方，只是名字也改不了了。
+23:24:46 <mno2> https://github.com/facebook/pfff/wiki/Main <-- 這應該就是稍早提到的 fb 的 static analyzer
+23:24:53 <mno2> 據說速度超快
+23:25:23 <letoh> 是沒錯啊  所以我大概只有內容差太多的才貼到那邊
+23:25:49 <hashcat> 怎樣算差太多
+23:26:07 <hashcat> python.tw那邊差滿多的
+23:26:34 <letoh> 是說我以前在 python.tw 離題離太遠了  現在不太敢在那邊出聲XD
+23:26:58 <godfat> 離到哪裡？ XD 我個人滿喜歡離題的（離題）
+23:27:13 <hashcat> prolog
+23:27:28 <hashcat> 邏輯編程其實可以算函數編程的推廣吧
+23:27:39 <hashcat> 因為函數是謂詞的特例
+23:27:40 <godfat> 是喔 XDDD
+23:28:23 <mno2> 我是覺得反正現在這頻道人也不多，覺得有趣的就可以亂聊吧。等出聲的人多到一定程度再說 xD
+23:28:29 <hashcat> 集合論公設說的
+23:28:32 <mno2> 小地方的好處就是當自己家
+23:28:55 <hashcat> 但覺得函數編程的人不一定這麼認為
+23:29:40 <letoh> hashcat: 聽說 the reasoned schemer 就是講邏輯編程
+23:30:45 <hashcat> clojure也塞進了個邏輯編程
+23:30:57 <mno2> 疑? clojure 有喔？
+23:31:13 <hashcat> 叫做core.logic
+23:31:33 <hashcat> 還有個nominal logic擴展, 不知道做啥的
+23:31:38 <letoh> 一般開頻道就是讓一堆有相同興趣的人聚在一起，話題我覺得是不必受限比較好  只是其他頻道的話題好像範圍比較小，聚集的人未必會一起聊其他東西，自己一個人離題很無聊啊XD
+23:31:54 <mno2> github page 第二段就提到 the reasoned schemer
+23:32:08 <letoh> 但這邊的人好像什麼都碰，就很好聊的感覺XD
+23:32:56 <hashcat> 使用介紹在wiki頁面
+23:32:56 <mno2> 雜食頻道
+23:33:51 <godfat> 雜食頻道++
+23:33:55 <hashcat> 語法不如prolog
+23:34:07 <hashcat> haskell已經山窮水盡了噗噗
+23:34:25 <hashcat> 聊不出東西
+23:35:19 <letoh> 我反而覺得這幾年聽到 haskell 的機會多出很多
+23:35:52 <petercommand> letoh: 我覺得#hime離最遠吧XD
+23:36:08 <hashcat> 這是迴光返照
+23:36:19 <petercommand> 閒聊頻道
+23:36:21 <CindyLinz> letoh: 什麼都碰的人才碰得到 Haskell.. (泣)
+23:36:23 <letoh> 我想講輸入法的東西啊  但應該沒人陪我XD
+23:36:39 <petercommand> XD
+23:36:54 <hashcat> 用講得輸入法
+23:37:03 <letoh> 不過我主要是想弄 win  的部份  那邊太反 win 了
+23:37:17 <CindyLinz> hashcat: 現實生活中沒有拿 Haskell 當飯吃的話, 平常都是自己讀讀書, 不太容易發現有問題的 :Q
+23:37:21 <mno2> CindyLinz: 要有強者推坑 xD
+23:37:41 <CindyLinz> 我覺得我是準備 talk 的時候會有進步... XD
+23:37:43 <hashcat> CIndyLinz:有有
+23:37:59 <hashcat> 萬惡資本家很愛用
+23:38:07 <mno2> 其實我覺得 #hime 講得東西也挺有趣的啊 xD
+23:38:12 <CindyLinz> 而且一邊準備的時候, 一邊就會自己暗嘆, 覺得好幾個地方聽眾一定無法體會... @@"
+23:38:48 <CindyLinz> 因為聽眾沒有一樣在這邊撞壁好幾個小時, 然後還有日期壓力, 讓自己感到絕望 XD
+23:39:06 <CindyLinz> 一邊在那邊掙扎一邊就在想要不要轍退改講題 XD
+23:39:17 <hashcat> 意外的用戶, 不少玩鈔票的人都搞haskell
+23:39:41 <CindyLinz> hashcat: 我沒什麼認識玩鈔票的人...
+23:39:48 <CindyLinz> 階級不同... orz
+23:39:56 <mno2> 因為玩鈔票的人不喜歡因為 bug 讓鈔票不見啊 :p
+23:40:19 <hashcat> 我覺得從幾個特例出發, 然後爆出這就是Functor , 這就是Monad這樣
+23:40:21 <CindyLinz> 他們明明就在製造 bug 讓鈔票多出來啊 XD
+23:40:41 <mno2> CindyLinz: 不衝突啊 xD
+23:40:55 <hashcat> 先從幾個特例引導出共同規律, 然後說數學有為這東西取名了這樣
+23:40:57 <mno2> 我也想要寫 bug 讓我多一點鈔票
+23:41:04 <CindyLinz> mno2: 好吧, 他們希望是能控制得了的 bug.. XD
+23:42:05 <CindyLinz> 結果 functional meetup 日期延後了, 害我頓時壓力又輕了 XD
+23:42:18 <mno2> 疑？沒注意到
+23:42:20 <CindyLinz> 然後進度就會空一週... 延後完全沒有幫助 XDrz
+23:42:57 <mno2> 我也覺得壓力減輕一點 xD
+23:42:58 <CindyLinz> mno2: jaiyalas 今天下午跟我確認 10.9 有沒有空
+23:42:58 <petercommand> letoh:
+23:42:59 <hashcat> 改成lpmeetup好了
+23:43:05 <hashcat> 邏輯編程meet up
+23:43:15 <hashcat> 給他亂改
+23:43:17 <CindyLinz> mno2: 然後我下班前他就公佈了日期是 10.8...
+23:43:37 <mno2> 為什麼問 10.9 卻是公布 10.8 ...
+23:43:59 <CindyLinz> mno2: 他一定是用心良苦, 確認我前一天有時間準備...||
+23:44:09 <CindyLinz> 欸不對 反了 XD
+23:44:32 <CindyLinz> 他一定是用心良苦, 確認我後一天有時間反省.....|||
+23:44:36 <hashcat> 其實也可以介紹Idris了
+23:44:45 <hashcat> Haskell有的他都有
+23:46:00 <mno2> 好奇問一下，real world logic programming 有哪些啊？不熟
+23:46:02 <hashcat> 製造bug賺錢貌似是win
+23:46:25 <petercommand> letoh: 你是想要再弄一個win的部份嗎?
+23:47:15 <CindyLinz> hashcat: Idris 要等你來介紹吧...  沒聽說有人提過啊... @_@"
+23:47:20 <petercommand> 原本win的部份全部被拿光了
+23:47:34 <CindyLinz> hashcat: 上次 Functional Meetup 講 dependent type
+23:47:44 <letoh> 我一直有留舊的部份啊  那時我是主張不要拿掉的  所以拿掉後的我就沒再碰了XD
+23:47:56 <petercommand> XD
+23:48:14 <hashcat> prolog比較難找但還是有
+23:48:22 <hashcat> http://www.pathwayslms.com/swipltuts/html/
+23:48:45 <hashcat> 往下卷會看到大規模股票交易系統
+23:48:52 <hashcat> 又是玩鈔票的
+23:50:26 <hashcat> stackoverflow也有說用prolog建模型芸芸
+23:51:52 <mno2> 喔？ stackoverflow 也有？
+23:52:41 <hashcat> 每個人聽到冷門又很吹的語言都會跑去問吧
+23:52:55 <hashcat> Is there any real world ......
+23:54:47 <hashcat> http://stackoverflow.com/questions/130097/real-world-prolog-usage
+23:57:40 <letoh> 我對 prolog 的印象就是需要 backtacking 的情況可能比較好用  除此之外不一定XD
+23:58:02 <CindyLinz> Idris 看起來好貪心啊 :p
+23:58:28 <CindyLinz> 啊, 可是沒有 default lazy evaluation 了
+23:58:50 <hashcat> 他偏重效率
+23:59:01 <hashcat> 也是可以用lazy
+23:59:17 <CindyLinz> 我看他官網寫說是 eager evaluation 啊
+23:59:32 <hashcat> letoh 邏輯是人類歷史上最古老的形式思維模型
+23:59:51 <hashcat> 有可以轉成lazy的符號

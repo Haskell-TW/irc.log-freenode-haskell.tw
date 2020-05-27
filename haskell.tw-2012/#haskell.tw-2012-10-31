@@ -1,0 +1,54 @@
+23:34:16 <MnO2> http://www.yesodweb.com/blog/2012/10/yesod-fay-js
+23:34:41 <MnO2> Michael 對 ghcjs, fay 的一些評論
+23:35:13 <MnO2> 好險在剩半小時的時候touch，要不然今天又要缺擋了xD
+23:35:25 <CindyLinz> 咦
+23:35:31 <CindyLinz> 可是早就缺過了啊 XD
+23:35:35 <CindyLinz> 唷!! 這個我一定要看!!
+23:35:51 <MnO2> 所以說「又」啊
+23:36:15 <CindyLinz> XD
+23:36:19 <MnO2> 他有提到 Elm
+23:36:20 <MnO2> http://elm-lang.org/
+23:36:24 <CindyLinz> 那... 我可以回頭去 touch 一下.. (逃)
+23:36:43 <MnO2> 說是實現 FRP ，如果真的話可能可以好好追一下
+23:37:04 <CindyLinz> FRP 是什麼的縮寫呀?
+23:37:21 <godfat> functional reactive programming?
+23:37:26 <CindyLinz> 喔喔
+23:38:06 <MnO2> 其實我覺得Angular Js那種reactive programming就已經蠻不錯了
+23:39:18 <MnO2> godfat: 如果要用粗糙的方式來描述，大概就是事件驅動的電路
+23:39:35 <CindyLinz> 嗯嗯嗯
+23:40:12 <CindyLinz> 以前看過一個叫作 flapjax 的.. 是 javascript 的
+23:40:26 <godfat> 快看到 AngularJS 那段了 XD
+23:40:44 <CindyLinz> http://www.flapjax-lang.org/tutorial/
+23:40:46 <MnO2> 其實所謂functional這形容詞，常常可以換成composable，或是聯想到電路組成的樣子
+23:41:07 <CindyLinz> 不過.. 沒有深入讀, 沒辦法感受怎樣叫作好怎樣叫作不好 QQ
+23:41:07 <MnO2> CindyLinz: flapjax我知道，但好像不是很積極在開發
+23:42:47 <MnO2> CindyLinz: 嗯...現在講FRP的部落格文大都講得有點模糊（其實我也不太懂），不過就是類似用declarative的方式來描述interactive的東西吧
+23:43:03 <MnO2> 可以請favonia來闡述一下
+23:43:14 <godfat> 我之前亂看一通只覺得好像只是在講介面，沒講實作
+23:43:36 <CindyLinz> 我是用 M$ Excel 的 =function 來理解 :Q
+23:43:42 <MnO2> haskell 中目前比較多人在研究的一套叫做 reactive-banana
+23:43:57 <MnO2> CindyLinz: 那樣應該只有reactive programming
+23:44:13 <CindyLinz> 咦! 不一樣嗎??
+23:44:47 <CindyLinz> 好像也可以不要 functional
+23:45:10 <CindyLinz> 不過 Excel 裡面的應該很 functional... 我都是寫什麼 SUM() IF( , , ) 之類的 ^^|
+23:47:44 <MnO2> CindyLinz: 我覺得可能不太一樣耶，就看你對functional跟composable兩個意思的理解一不一樣
+23:47:54 <MnO2> 還是要有請favonia
+23:48:09 <CindyLinz> 唉.. 我還是講不清楚怎樣叫作 functional....
+23:48:17 <CindyLinz> composable 的話就是根本不知道了
+23:49:17 <MnO2> 我覺得functional很容易被理解成普通的函數就可以算，但不包含高階函數
+23:49:30 <MnO2> composable比較隱含高階隨便亂組合都可以
+23:50:12 <CindyLinz> 但都是 pure 的?
+23:50:36 <MnO2> 沒有吧，不一定要pure
+23:51:43 <CindyLinz> favonia 落荒而逃了? XD
+23:52:01 <MnO2> 吃飯吧xD
+23:53:18 <godfat> 大略翻完了，Michael 真是多產呀 XD
+23:54:17 <MnO2> 其實我不知道他的工作是做什麼 xD
+23:54:29 <CindyLinz> MnO2: 也不用 pure 喔? 那我更困惑了 orz
+23:54:32 <MnO2> 如果是職業寫Haskell多產是應該的吧xD
+23:55:01 <godfat> 真好 XD
+23:55:18 <CindyLinz> 聽說.. 把興當作職業的結果
+23:55:28 <CindyLinz> 聽說.. 把興趣當作職業的結果
+23:55:39 <CindyLinz> 就會失去這個興趣... (遠目)
+23:56:39 <godfat> (掩耳)
+23:57:12 <godfat> 不過我覺得可能性很高是真的.. XD
+23:58:54 <godfat> 多培養一些興趣來糟蹋（誤

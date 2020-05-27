@@ -1,0 +1,16 @@
+00:37:04 <letoh> 我在看一篇我在 2008 寫的筆記，裡面有一句話：「但我有個需求是要同時送到多個地方備份用，這可要我命了…因為裡面一堆全域變數，從帳號設定對應到內部資料結構的部份又太複雜 (誰說用 functional language 不會有 side-effect…XD)」
+12:22:42 <_13h> > let 2 + 2 = 5 in 2 + 2
+12:22:43 <lambdabot>   5
+12:26:11 <_13h> http://www.yellosoft.us/evilgenius/  # Haskell for the Evil Genius
+12:28:16 <CindyLinz> 這什麼恐怖東西 @@"
+12:29:23 <_13h> 看到有人說 haskell 可以讓 2 + 2 變成 5，所以就找了一下網路上有沒有人提到這件事
+12:30:24 <_13h> 原來今天是 Thursday 了!!
+12:38:15 <_13h> 最近因為一直在整理 emacs 設定檔，又想起一個以前問過的問題
+12:39:56 <_13h> 我以前說過 elisp 的 dynamic scoping 對於客製化功能蠻有幫助的，使用者改改變數就可以調整很多行為，就算 emacs 在執行的時候改也沒問題
+12:41:07 <_13h> 但 favonia 說 static 也能辦到 (忘了原文了，意思好像是這樣)，有點好奇是怎麼設計的？需要多準備很多函式，讓使用者透過函式來調整行為嗎？
+12:50:29 <_13h> http://www.newsmth.net/nForum/#!article/FuncProgram/29315  # 「Functional 教真是引人向善啊！」XDXD
+12:59:21 <MnO2> 我還真沒看過 Haskell for the Evil Genius，沒想到有這種鬼招
+14:16:41 <miaout17> "需要多準備很多函式，讓使用者透過函式來調整行為嗎？" -> 我猜就是這樣吧？保留存取closure的能力，也不一定要是一堆函式
+14:17:03 <miaout17> import Prelude hiding ((+)); (+) x y = sum [1, x, y] -- 2+2=5 (逃)
+18:19:58 <miaout17> "\u03BB"
+21:02:04 <MnO2> test logbot

@@ -1,0 +1,5 @@
+01:43:52 <petercommand> xmonad 要在視窗脫離全螢幕/全螢幕視窗被關閉的時候加 Hook 怎麼寫比較好呀
+01:44:04 <petercommand> 直接加在 handleEventHook 嘛
+01:45:11 <petercommand> 沒有類似 manageHook 的東西可以直接加的樣子
+14:59:31 <CindyLinz> * 還沒經驗 QQ
+15:00:58 <petercommand> QQ

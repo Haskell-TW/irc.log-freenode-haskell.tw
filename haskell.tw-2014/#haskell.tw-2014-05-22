@@ -1,0 +1,206 @@
+00:22:59 <letoh> @bf >+.+<
+00:22:59 <lambdabot>  Done.
+00:23:31 <letoh> @bf help
+00:23:32 <lambdabot>  Done.
+00:24:42 <letoh> @help
+00:24:43 <lambdabot> help <command>. Ask for help for <command>. Try 'list' for all commands
+00:24:53 <letoh> @help bf
+00:24:53 <lambdabot> bf <expr>. Evaluate a brainf*ck expression
+00:25:18 <letoh> @help list
+00:25:19 <lambdabot> list [module|command]. Show commands for [module] or the module providing [command].
+00:28:06 <letoh> @bf >+++++++++[<++++++++++>-]<+++++++.
+00:28:06 <lambdabot>   a
+00:28:11 <letoh> 可以輸出啊...
+00:29:21 <letoh> @bf >++++++++[<+++++++++>-]<.>+++++[<+++++>-]<++++.+++++++..+++.>++++++++[<--------->-]<-------.>++++++[<++++++>-]<++++.>+++++[<+++++>-]<.>++++[<++++>-]<++.--------.------.+++++++..>++++++++[<--------->-]<---.>++++[<----->-]<---.
+00:29:21 <lambdabot>   Hello Haskell!
+00:29:54 <letoh> @bf >++++++++[<+++++++++>-]<.>+++++[<+++++>-]<++++.+++++++..+++.
+00:29:54 <lambdabot>   Hello
+00:30:31 <letoh> @bf >+++++++++++++++[<+++++++++++++++>-]<+++.>++++++[<------->-]<--.-----------.>+++++++[<++++++++>-]<+.>++++++++[<---------->-]<.---------------.
+00:30:31 <lambdabot>  Done.
+00:30:53 <letoh> @bf >+++++++++++++++[<+++++++++++++++>-]<+++.>++++++[<------->-]<--.-----------.
+00:30:53 <lambdabot>  Done.
+00:32:55 <letoh> @bf >++++++++[<+++++++++>-]<++++++.[-]<>>++++++[<+++++++>-]<+++.
+00:32:56 <lambdabot>   N-
+00:34:19 <letoh> @bf >++++++[<+++++++>-]<+++.>>>++++++++[<+++++++++>-]<++++++.
+00:34:20 <lambdabot>   -N
+00:38:02 <letoh> @let bf = let ev ctx i j prog=let f n=ev(let(x,y:z)=splitAt i ctx in x++[y+n]++z)i(j+1)prog in(case (drop j prog) of[]->[];p:rog->(case p of '>'->ev ctx(1+i)(j+1)prog;'<'->ev ctx(i-1)(j+1)prog;'+'->f 1;'-'->f (-1);'.'->(Char.chr(ctx!!i)):ev ctx i(j+1)prog;']'->ev ctx i(if((ctx!!i)==0)then j+1 else(\(Just x)->x)$List.elemIndex '['$(take j prog))prog;_->ev ctx i(j+1)prog))in ev(repeat 0)0 0
+00:38:04 <lambdabot>  .L.hs:159:44: Not in scope: ‘Char.chr’
+00:38:04 <lambdabot>  
+00:38:04 <lambdabot>  .L.hs:163:50:
+00:38:04 <lambdabot>      Not in scope: ‘List.elemIndex’
+00:38:04 <lambdabot>      Perhaps you meant one of these:
+00:38:24 <letoh> 唔  隨便貼結果不能用XD
+01:17:35 <c9sloud> Go 最近在日本好像很紅
+01:21:38 <letoh> 有什麼特別的新發展嗎?
+01:21:50 <c9sloud> https://github.com/c9s/r3/pull/34#merged-event 日本的 mattn 也來送 PR 了 XDD
+01:22:31 <c9sloud> letoh: 日本的 Perl 大咖 miyagawa 也開始寫 Go
+01:22:40 <letoh> 日本一直都很容易找到各種語言的使用者
+01:23:06 <letoh> 一些很冷門或在台灣不常聽到的語言都有人在玩
+01:23:27 <c9sloud> 還有一些十幾年的 Perl 死忠派也都改用當主要語言工作了 XDDDD
+01:23:37 <c9sloud> Go 不冷門阿
+01:26:12 <letoh> Go 的確是不冷門啦，有什麼特色可以吸引 Perl 的使用者嗎?
+01:27:25 <darkx> 很多日本的 Perl 死忠派不是都去寫 Ruby? QQ
+01:49:27 <c9sloud> miyagawa san 之前有去 cookpad 寫 rails
+01:49:43 <c9sloud> 不過後來好像又沒有了 (?) 來源請由 XD
+01:50:53 <c9sloud> 話說一年前跟 cookpad 的 IT team leader 聊過, 感覺他好像對 ruby rails 有點意見 XDDDD
+01:51:19 <c9sloud> 不過你知道日本人都很含蓄，所以是 "有那樣的感覺" XD
+01:52:57 <c9sloud> 想起來了...  當時的對話是這樣，我說 我覺得 ruby 語法上簡潔, 加上現在 rails 進展很多，應該開發蠻方便的。  他直接回說 I don't think so
+01:52:58 <c9sloud> XDDDD
+01:53:34 <letoh> 他們不就是用 ruby 在開發產品嗎? XD
+01:55:35 <c9sloud> 對阿
+01:56:04 <c9sloud> 不過後來 cookpad 一直沒賺錢，當時標榜說非傳統日本作風公司
+01:56:18 <letoh> 所以這說法蠻有參考價值XD
+01:56:24 <c9sloud> 結果 CEO 被解雇之後，變成傳統日本公司就賺錢了
+01:56:32 <c9sloud> 然後老外紛紛出走 XD
+01:56:34 <letoh> XDXD
+01:58:36 <c9sloud> cookpad 其實是出版社為主頁的公司
+01:59:16 <c9sloud> 主業
+02:06:28 <monochrom> 有趣啊, 要日本作風才賺錢?
+02:12:42 <c9sloud> 可能一直在修 rails 的雷吧 XD
+02:12:52 <c9sloud> 不知道 XD
+02:13:00 <c9sloud> 詳細情形我不清楚
+02:13:05 <c9sloud> 網路上找得到文章
+02:56:46 <c9sloud> https://gist.github.com/mattn/4947d66490b785401dd9 cc CindyLinz
+02:57:11 <c9sloud> https://twitter.com/mattn_jp/status/469001351180324864 cc CindyLinz
+03:05:55 <c9sloud> http://dlvr.it/5kZG4R 直接擊敗其他 perl router XDDD
+03:16:05 <c9sloud> CindyLinz: Makefile.PL 的 cflags 可以預設 -O2 嗎
+09:48:57 <c9sloud> CindyLinz: 我看了一下才知道原來 Router::Boom 的作者是 tokuhirom
+09:58:01 <mno2> ghc 7.8.x 在 OS X 10.9 上問題真多
+09:58:03 <mno2> https://github.com/haskell/cabal/issues/1740
+10:28:30 <c9sloud> mno2: 寫 binding 遇到的?
+10:33:52 <c9sloud> CindyLinz: 剛剛那個 tweet 的對話好像是這樣.... tok 說: 這個很快嗎？router::boom 速度可是相當快。  mat 說: 就跟我在 irc 上講的，速度很快還不錯。接著貼了 benchmark result gist。  tok: www
+10:38:28 <b4283> irc で言ってるけど、ここ早くしてもあんま意味なさそうですねえ
+10:38:57 <b4283> 雖然 irc 上說過了，快在這種地方好像沒什麼意義
+10:40:18 <b4283> なんかおとなしいなーと思ったらIRC切れてた
+10:40:44 <b4283> 有種得老實點 (工作) 的 fu 就把 irc 關了
+10:51:43 <c9sloud> ahhaha
+10:51:46 <c9sloud> 原來是這樣
+10:52:19 <c9sloud> b4283: 奇怪我女朋友讀的完全是另外一個意思 XD
+10:53:55 <c9sloud> b4283: "フェアかどうかは分からないけど、まぁまぁ速いっぽい。" 那這段呢?
+10:55:50 <c9sloud> b4283: 看起來是看了 benchmark 之後才說 "雖然 irc 上說過了，快在這種地方好像沒什麼意義" XD
+10:56:17 <b4283> 這段我看不懂，有請 letoh
+10:58:18 <b4283> 和 fair 看起來不相上下，還算快吧 <= 可能是這樣
+10:59:00 <b4283> フェア 不曉得是什麼
+11:01:52 <c9sloud> b4283: 看起來是 フェア fair 沒錯
+11:35:21 <c9sloud> CindyLinz: 原來 dankogai 有寫 Regexp::Trie
+11:35:47 <c9sloud> 跟 Regexp::Assemble 一樣看起來都蠻好用的
+11:37:12 <c9sloud> CindyLinz: Regexp::Assemble 看起來也蠻厲害的 # 增廣見聞
+11:57:15 <monochrom> 我們玩了個叫 Babylon 的遊戲. 有四種顏色的小塊, 每種顏色有3塊. 兩個對頭輪流把它們疊起來. 有限制. 欠行者輸.
+11:58:53 <monochrom> 限制: 可以把同高度的兩個疊, 疊起來. 或可以把兩個頂層同色的疊, 疊起來. 不可以把其他疊疊起來.
+11:59:51 <monochrom> 於是, 我們急就章寫了幾行程式, 試圖在 brute force search 中, 找真相 :)
+12:30:46 <_13h> 忘了進來也看不到前面的東西XD
+12:34:18 <b4284> c9sloud: letoh 表示那句應該是「"不曉得公不公平  但看起來很快"」
+12:35:34 <_13h> 有人提到 perl binding 的相依性怪怪的，沒必要相依到 5.18.2
+12:37:41 <_13h> 是指 use 5.018002; 這一行 ?
+12:39:32 <c9sloud> 可能要問 cindy :p
+12:39:34 <_13h> b4284: 你前面翻的應該沒錯，但沒有 irc 上的原對話所以不曉得為什麼會有這種結論
+12:39:59 <b4284> _13h: 感謝
+12:40:32 <c9sloud> _13h++
+12:40:34 <_13h> 可能是因為 Boom 的速度已經夠用
+12:42:24 <_13h> "這個很快嗎？Router::Boom 已經算是相當快的了"
+12:45:31 <_13h> "不曉得耶... 因為相依 5.16.3 的關係建不起來，還沒試過"  "不對，是(相依) 5.18.2 才對"  ``看起來不太想方便別人用啊'' (這裡是我對「実用させる」的解讀)
+12:47:23 <c9sloud> 因為是用 5.18 的 h2xs 生的 makefile.pl?
+12:50:26 <_13h> "看起來不太像是需要相依到這個版本啊?"  "是在 Makefile.PL 的開頭要求的嗎？在想會不會是手滑^H誤了"  (我流翻譯XD
+12:50:56 <b4284> XD
+12:51:15 <_13h> 整串大概是這種感覺，應該沒漏掉的了
+12:53:51 <c9sloud> _13h: 厲害
+12:55:48 <_13h> c9sloud: 剛好都是看得懂的對話啦，太難的就不行了
+13:09:43 <CindyLinz> 對 那個是 h2xs 它自己生的.. 我只有記得把 R3.pm 裡面的 use 5.0182 改成 5.006, 不知道別的地方也有被塞 XD
+13:12:49 <CindyLinz> c9sloud: 上傳了 v0.9.1..
+13:12:54 <CindyLinz> 可是忘記改 Changes....ww
+13:13:05 <CindyLinz> 來補 v0.9.2 好惹 ww
+13:43:16 <c9sloud> CindyLinz++
+13:43:46 <c9sloud> CindyLinz: 要上 twitter 回一下嗎 :p
+13:44:28 <c9sloud> ER alignment 的文章是 2013 年耶
+13:45:53 <c9sloud> On 64 bit x86 a cache line is 64 bytes beginning on a self aligned address
+13:46:04 <CindyLinz> 我沒在用 twitter 啊 ._.
+13:46:10 <CindyLinz> 因為搶不到 CindyLinz... ._.
+13:46:30 <c9sloud> 那 CLinz ? XDD
+13:47:55 <monochrom> 這個不用twiiter的理由倒新鮮 :)
+13:55:34 <c9sloud> clang 有 -Wpadded option 耶
+13:58:11 <monochrom> brute force search 有結果了! 先手會輸, 後手有必勝法.
+13:59:24 <c9sloud> 同場加映 a guide to undefined behavior in c and cxx
+13:59:56 <darkx> https://twitter.com/Cindy5566  <- 發現有人搶了這個wwww
+14:07:48 <c9sloud> 5566...xDDD
+14:09:08 <c9sloud> CindyLinz: nucleus os 一部分是 ada 寫的耶
+14:35:16 <CindyLinz> QQ
+14:35:24 <CindyLinz> c9sloud: 我沒聽過 nucleus os @@"
+14:57:36 <yllan__> https://twitter.com/wangyin 也被搶了……
+15:01:27 <CindyLinz> 這我不在意, 網路上沒在用這名 XD
+15:31:11 <_13h> CindyLinz: 有些手機有在用
+15:32:00 <_13h> 做 embedded 也算是常見的平台
+15:32:14 <c9sloud> MediaTek 有用耶
+15:32:28 <c9sloud> 還有很多 mobile device 有用 nucleus os
+15:33:09 <_13h> 對啊，還算是蠻常見的東西
+16:02:55 <CindyLinz> 難怪我沒聽過 :p
+16:15:25 <c9sloud> CindyLinz: https://twitter.com/mattn_jp/status/469390971910643712 # mattn 要用 r3 來寫 C 的 http server XD
+16:16:00 <b4284> nice
+16:16:29 <CindyLinz> 喔喔喔 XD
+18:03:53 <darkx> XDDD
+18:13:59 <au> 要 mongrel3 了嗎 XD
+18:18:36 <CindyLinz> 這是一束鮮花的故事嗎.. ._.
+18:22:17 <au> CindyLinz: 「從前有一個非常懶惰的網站框架，結構鬆散、效能緩慢，很多朋友拿 C10K 問題嘲笑他，他也絲毫不在意。有一天，c9s 送給他一束 C1000K 的 routing library...」
+18:22:38 <poga> XDDDD
+18:24:51 <CindyLinz> XDXD
+19:19:01 <c9sloud> au:  XDDD
+19:20:49 <c9sloud> 不然可以在 configure.ac 裡面加一個 HAVE_RAILS 的 check, 如果有就不給編 ahahhaha
+19:24:45 <au> 不用這樣吧 XD 要是真的能因此讓 rails 往 c1000k 的方向移動，那真是功德無量
+19:24:56 <c9sloud> hahaha 開玩笑的啦 :-p
+19:25:22 <c9sloud> 其實當初就是想寫一個 library 可以讓各種平台直接使用
+19:27:43 <CindyLinz> 當初是當初現在是現在, 現在明明就是要嗆爆 Journey.. XD
+19:28:09 <CindyLinz> 那給 rails 用也是有達到目的啦 :p
+19:28:34 <c9sloud> mattn 好像想要用 libuv 兜一個 http server 出來
+19:28:51 <c9sloud> XDDD
+19:29:02 <c9sloud> 不過我覺得他們不會用就是了 :-p
+19:29:49 <c9sloud> 不曉得 futex 跟 mutex 操作上介面是否類似
+19:43:51 <caasihuang> 意圖使人學寫 node extension...
+19:54:33 <au> 趁 nan 推出新版，現在學正是時候 XD
+19:56:11 <c9sloud> XDD caasihuang 衝
+19:58:03 <caasihuang> 昨天看了一下，還不明白怎麼跟 C++ 物件接在一起，也才剛剛發現 nan 的存在 XD
+19:58:56 <caasihuang> 本以為先跟 C function 連結起來就好，結果 r3 的 instance 傳不回 node 裡 0rz
+19:59:24 <caasihuang> 半夜（？）繼續看
+20:08:56 <CindyLinz> caasihuang: 那就寫檔, 然後再從 node 去讀檔接回來!?
+20:10:15 <CindyLinz> r3 應該是 C only 吧? 有用到 C++ 嗎?
+20:10:32 <caasihuang> CindyLinz: 靠 r3_tree_dump 嗎？
+20:11:27 <caasihuang> 是這樣的，想包得像你的 Perl binding 那樣，所以得找地方放 r3_tree_create 的結果。
+20:12:24 <CindyLinz> caasihuang: 喔喔.. 那應該是 js 自己有物件的介面就好啦, C 的部分可以不用呀?
+20:13:12 <CindyLinz> caasihuang: 我不知道你是要存這個啦.. ^^|  靠 r3_tree_dump 應該不是路, 因為 c9sloud 很懶(誤), 沒有實作 r3_tree_read.. (逃)
+20:13:45 <caasihuang> 我還不懂 V8::Value 什麼的怎麼運作，不然也想把 r3_create_tree 的結果傳回給 node.js 就好。
+20:13:57 <caasihuang> 原來沒有 r3_tree_read XDDD
+20:14:27 <CindyLinz> caasihuang: 我猜想 node 的 FFI 介面應該也會有個怎樣的方法讓東西繼續活在 C 的世界, 然後可以 pass 一個 pointer 之類的東西進 js 裡面存著
+20:15:09 <caasihuang> CindyLinz: 瞭解，我會往這個方向查看看
+20:17:08 <CindyLinz> Haskell 裡, C 生出來給 Haskell 用的是 Ptr a, 而如果想由 Haskell runtime 來決定什麼時候該 GC 的話, 是再把它升級(?)成 ForeignPtr a; 而反向的話, 從 Haskell 裡生出來的東西要給 C 用, 叫 Haskell runtime 暫時先別把它 GC, 叫作 StablePtr a
+20:17:14 <c9sloud> CindyLinz, caasihuang 因為有個以色列人說要做，所以我一直沒去碰那個部分
+20:17:39 <CindyLinz> c9sloud: tree_read 嗎!? 這方向真的有人要用喔? ._.
+20:18:23 <caasihuang> CindyLinz++ #學習了
+20:18:40 <c9sloud> 有哇 他煩說一定要用 redis 的 sds functions
+20:18:50 <c9sloud> 我就說好吧那你 tree_read 就用這個做 XD
+20:19:22 <c9sloud> 其實正確來說應該是 tree to string
+20:20:08 <CindyLinz> 突然覺得 FFI 這方面 perl 真是好方便 ._.   因為 internal 就是在描述 C 的 structure..
+20:21:00 <c9sloud> CindyLinz: FFI go 的話超好用的
+20:22:08 <c9sloud> https://github.com/thedrow/r3/commit/77643dbc1848a0bba2a4233fa6540cd2013a41ac
+20:22:23 <c9sloud> 好像才要開始弄 XD
+20:22:48 <CindyLinz> 咦, 就那個一直要你換 layout 的?
+20:22:57 <c9sloud> 對 XD
+20:23:13 <c9sloud> 喔對了，我們現在有 zmalloc -> memory management 可以抽換
+20:23:50 <caasihuang> CindyLinz: 太好了，v8 有個 External::Wrap() XD
+20:24:32 <CindyLinz> c9sloud: 我還在想說把原有的 malloc 都換成 perl 用的 Newx 的說 ^^|
+20:24:46 <CindyLinz> 我可以從 fill_source.pl 那邊下手就是
+20:24:50 <c9sloud> perl 的 Newx 是?
+20:25:26 <CindyLinz> c9sloud: 就 perl 自用的 malloc, 可以搭 perl portability 的順風車.. 而有沒有效能改善我就不知道了..
+20:25:36 <c9sloud> 哦哦哦~~~
+20:40:02 <c9sloud> 要用 va_list 傳 variables 的話，好像只能在 caller 的 arguments 最後面傳 NULL ?
+20:40:12 <c9sloud> 沒辦法取得 count 齁?
+20:42:09 <c9sloud> 不然就是要手動傳參數數量了 zz
+21:08:50 <mno2_> https://www.fpcomplete.com/blog/2014/05/stackage-server
+22:15:29 <CindyLinz> mno2__: 唔.. hackage snapshot :D
+22:22:32 <mno2__> 哇，cabal init 在 1.20 會自動抓 import 的東西加進 dependency 噎
+22:24:33 <CindyLinz> 嗚我都是先 cabal init 才開始寫... orz
+22:24:47 <CindyLinz> 我都把 source 放 src/ 的話, 他還抓得到嗎?
+22:24:58 <mno2__> 可以
+22:25:03 <CindyLinz> !
+22:25:28 <mno2__> 還會自動加  hs-source-dirs:      src
+22:26:09 <CindyLinz> 歐歐歐!
+22:26:52 <mno2__> 我平常也是先 cabal init，但因為我在 mavericks 上 cabal 爛掉了，搞好久。所以就先寫 code...
+22:38:44 <CindyLinz> 然後就發現這個隱藏功能了....(Y)
+22:39:17 <CindyLinz> 但我可能還是會先開 cabal @@"   可以在 cabal repl 裡面一直 :r 和摸來摸去很開心的啊 ._.

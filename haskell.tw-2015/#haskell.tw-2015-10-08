@@ -1,0 +1,2 @@
+03:12:28 <monochrom> 我終於想起了! 很久以前計過某數據結構應該佔用 64MB, 但度出來是 128MB, 不明為何差一倍. 剛想起是因為 garbage collector 故意用雙倍來做類似 double buffer
+17:00:17 <suhorngT> (ekmett: The most baroque tic-tac-toe engine ever and a comonad for exploring possible worlds) https://twitter.com/BartoszMilewski/status/651831171333025792

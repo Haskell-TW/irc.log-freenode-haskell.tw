@@ -1,0 +1,56 @@
+00:05:33 <mno2> CindyLinz: 突然發現 hpaste 還有 clone to IDE 的功能： http://lpaste.net/96372
+00:14:26 <suhorng> mno2: 好希望!!!
+00:15:01 <suhorng> mno2: 我想到 sourcegraph.com ...
+00:15:44 <mno2> suhorng: 去應徵啊~
+00:16:27 <mno2> 啊，是說你「聯想到」不是想去那邊工作
+00:17:23 <suhorng> 對XDD
+00:17:24 <favonia> CindyLinz: mno2: hexamplify?
+00:17:56 <mno2> favonia: 那是啥？
+00:18:03 <favonia> 名字 xD
+00:18:11 <mno2> 為什麼要用這個名字？
+00:18:21 <mno2> 是說你怎麼聯想到的？
+00:18:38 <mno2> haskell + exmplify?
+00:18:44 <favonia> 喔我好像拼錯了
+00:18:47 <favonia> hexemplify
+00:18:50 <favonia> anyway
+00:18:59 <favonia> exemplify 是舉例的意思啊
+00:19:03 <mno2> 我還是比較喜歡 lazy documentation  xD
+00:19:11 <mno2> 比較有梗
+00:19:36 <mno2> I are Haskeller, we don't like documentation. We only document it when it is needed.
+00:19:39 <mno2> We are
+00:20:28 <suhorng> "Should we use that document?" "Its strictness analyzer is broken." (改/轉錄)
+00:24:36 <Yu_lin> XD
+00:24:47 <Yu_lin> lazy 過頭啦
+00:25:56 <suhorng> 其實也可以取個monad結尾的字
+00:26:01 <suhorng> the document monad
+00:44:27 <CindyLinz> mno2: 欸.. 這樣是不是應該從 hackage 裡面 parse 拉出 usage sample 啊?
+00:44:48 <CindyLinz> mno2: 可是好難歐.. XD
+00:53:14 <mno2> CindyLinz: 第一版先不用管那麼多吧
+00:53:30 <mno2> CindyLinz: 之後加應該不會有衝突
+00:58:43 <CindyLinz> mno2: 是不一樣的路線啊.. parse 這種的就不給人編輯了, 就不會有修改介面, 也不用有後端了
+00:59:07 <CindyLinz> 它就只是一個程式, 像 hoogle 那樣的程式, 跑一遍以後會出一個 offline 的 data 檔
+00:59:30 <CindyLinz> 把這個 data 檔拉到 extension 裡面, 就可以顯示了.. 也就不用租機器了 XD
+01:02:30 <mno2> CindyLinz: 租後端機器，每筆 parse 塞成一筆 record 不就行了？
+01:03:20 <CindyLinz> 是可以啊~
+01:03:45 <CindyLinz> 只是有 parse 版, 好像就可以不用手動編輯的版本了
+01:04:49 <CindyLinz> 好吧 先把 parse 版忘掉好了.. XD
+01:05:18 <CindyLinz> 這是工人智慧 sourcegraph XD
+01:08:22 <CindyLinz> 哇, hpaste 上面最老的還有留到五年前的記錄耶
+02:14:36 <CindyLinz> XDDD
+02:15:01 <CindyLinz> 平常是個 thunk.. 一切秘密都在自己腦海裡
+19:13:49 <mno2> CindyLinz: 我做了一個假的前端，你可以 checkout 裝起來看看
+21:45:05 <mno2> https://docs.google.com/presentation/d/164YZt-A371ueTEpOQc-MtneprkDjVdMfdOrjH3xhflg/edit?pli=1#slide=id.g2968c6318_6_28   有人開始要把 rust 寫的東西弄到 production 了
+22:00:42 <hashcat> 有種蝦就這樣的感覺
+22:01:13 <hashcat> 開始撲滅C++
+22:01:54 <suhorng> C++應該不太可能退流行...
+22:08:48 <mno2> C++ 再戰十年
+22:09:38 <suhorng> 當然 十年之後的C++跟現在的C++還有多少相似度是另一回事
+22:10:19 <letoh> c++14....
+22:16:32 <mno2> 今天在寫 livescript 才在想，cascades 這種用法到底是哪來的？ 用 .. 看起來好像寫程式寫得很無言的感覺 xDD
+22:17:08 <mno2> ..style  ..color
+22:22:18 <suhorng> 比較有節奏感 (LOL)
+22:24:15 <letoh> 休止符的感覺? XD
+23:15:21 <suhorng> :t const id
+23:15:22 <lambdabot> b -> a -> a
+23:15:33 <suhorng> :t (const id) id
+23:15:34 <lambdabot> a -> a

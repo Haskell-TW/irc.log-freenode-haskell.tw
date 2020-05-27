@@ -1,0 +1,168 @@
+00:04:14 <hashcat> 一個是地名
+01:14:48 <CindyLinz> 用 llvm 寫的東西, 是不是通常可以跨 architecture, 但是不能跨 OS?
+01:15:09 <CindyLinz> machine code / assembly 層面的東西可以跨, 但是系統服務跨不了這樣?
+01:29:12 <hashcat> 是說直接寫ir嗎
+01:31:44 <godfat> 系統服務是指什麼？
+01:31:48 <CindyLinz> 對
+01:32:03 <CindyLinz> 像是 int 0x80 的 OS 系統呼叫
+01:32:06 <letoh> 類似呼叫 dos int 那種感覺?
+01:32:09 <CindyLinz> 對
+01:32:14 <CindyLinz> dos 是 21h, linux 是 80h
+01:32:41 <godfat> 我不知道這是啥..... XD
+01:32:41 <CindyLinz> 我在想如果我用 haskell (ghc) 寫了個東西
+01:32:53 <CindyLinz> 要給沒在用 haskell, 也沒有 ghc 環境的人用
+01:33:14 <CindyLinz> 如果直接給他 haskell source, 可能有點太粗暴...
+01:33:31 <CindyLinz> 所以想如果退而求其次, 給編出來的 llvm
+01:33:56 <CindyLinz> 有考慮過一下包 package, 不過我還不會包 package.. XD
+01:34:05 <CindyLinz> 我是說 .deb 或 .rpm 這種的
+01:35:05 <CindyLinz> 如果只是吃 stdin, 然後輸出 stdout 的程式.. 不知道是不是比較容易闖過 OS 不同這一關 :Q
+01:36:35 <hashcat> 通常來說llvm沒法直接跨平台
+01:37:33 <CindyLinz> 卡在哪邊啊?
+01:37:38 <hashcat> 看編譯器怎設計
+01:37:53 <hashcat> 有些編譯器會在ir嵌入組合語言
+01:39:37 <hashcat> 就算沒那個, 還有些IR是平台限定的
+01:40:06 <CindyLinz> 你說的平台是 OS 嗎?
+01:40:16 <CindyLinz> 還是硬體也限制?
+01:40:39 <hashcat> 硬體限制
+01:40:55 <hashcat> 光是能嵌入組合語言就很難搞了吧
+01:41:29 <CindyLinz> 看能不能運氣好點要求 compiler 不要塞特製的組語啊 ._.
+01:41:33 <hashcat> 像是會依照架構可能產生i32或者i64這種東西
+01:41:47 <hashcat> 完全避開也是可以
+01:41:59 <CindyLinz> 所以還是包 package 比較實際嗎? @@"
+01:42:00 <hashcat> 要看編譯器有沒這個心
+01:42:22 <hashcat> 推廣haskell比較實際
+01:42:43 <hashcat> 不要用haskell最實際哈哈
+01:43:01 <CindyLinz> 推廣了 haskell 還是 letoh 這種人會卡在 ghc 啊 XD
+01:43:31 <CindyLinz> letoh: 看看你 /_\
+01:43:37 <monochrom> 用 hugs 也不錯 XD
+01:43:52 <letoh> XDXD
+01:43:59 <CindyLinz> 如果整個程式從頭到尾都是自己刻出來的, 用 hugs 比較沒問題... 
+01:44:07 <CindyLinz> 可是想用別人的 library 啊.... /_\
+01:44:32 <letoh> 我在 rpi 上有裝比較舊的 ghc 啦，只是 ghc 在 arm 上使用起來實在很不好用XD
+01:44:37 <godfat> 趕快幫 hugs 加東西趕上 ghc 才是正解？ XD
+01:45:19 <CindyLinz> 我想做 language level 的 embedded haskell... ([非常]遠目)
+01:45:20 <hashcat> 如果沒用上ghc上的一堆擴展
+01:45:22 <hashcat> http://www.cs.uu.nl/wiki/UHC
+01:45:28 <hashcat> 看這個能不能編過
+01:45:31 <letoh> 連 interactive shell 都沒有
+01:46:00 <letoh> 然後編譯出來的程式又超級肥大
+01:46:01 <CindyLinz> 是還沒寫啦.. 所以不能試編 XD..   只是我沒去用不夠啊, 要底下的 library 都沒有去用... orz
+01:46:16 <CindyLinz> ghc 編出來真的大.... extreme inline....
+01:46:22 <hashcat> 能產生c
+01:46:26 <letoh> language level 是指像 livescript 那種語法?
+01:46:32 <hashcat> 支持cabal
+01:47:00 <hashcat> 說反了
+01:47:02 <CindyLinz> 我那次練習 compiler, 順便用 haskell 寫了一個 test script
+01:47:07 <hashcat> cabal支持
+01:47:07 <CindyLinz> 編出來的執行檔 12MB....
+01:47:50 <CindyLinz> letoh: 語法是 haskell.. 只是可以編成指定的目標語言, 然後把它塞在目標語言寫的程式裡面
+01:48:18 <CindyLinz> hashcat: 給別人 ghc 生出來的 c 程式碼, 然後讓使用的人自行 gcc?
+01:48:27 <letoh> 就像上次有人提到可以用在 cortex m4 的 haskell compiler ?
+01:48:44 <CindyLinz> letoh: 那個是 ajhc 生出 c 程式
+01:49:02 <hashcat> 是UHC
+01:49:21 <letoh> 是啊  c 不就是目標語言的一種嗎?  我是指類似那種用法?
+01:50:05 <hashcat> 用ghc產生的c貌似很麻煩
+01:50:18 <letoh> 像 vala 也是產生 c
+01:50:31 <hashcat> 要把ghc重新編譯
+01:50:57 <hashcat> chapel也是生成c
+01:51:06 <CindyLinz> letoh: 其實我最想要的是在 perl 和 javascript 裡面用 XD
+01:51:27 <hashcat> uhc可以產生javascript
+01:51:28 <CindyLinz> 平常 perl 用比較多, 所以二擇一的話選 perl XD
+01:52:08 <CindyLinz> 不過.. embedded haskell 再說啦, 覺得好遙遠.. orz
+01:52:13 <hashcat> 推廣chapel
+01:53:15 <hashcat> chapel chapel
+01:53:34 <hashcat> 離題..
+01:54:19 <CindyLinz> XD
+01:54:34 <CindyLinz> chapel google 第一筆看起來像什麼地名景點 XD
+01:54:45 <hashcat> 如果要跨平台加小巧貌似uhc比ghc容易多了
+01:54:56 <hashcat> http://chapel.cray.com/
+01:55:21 <CindyLinz> 離了 ghc 這舒適圈, 就放棄一堆 library 的感覺 orz
+01:55:35 <CindyLinz> 可以看一下是不是剛好可以避開
+01:55:37 <hashcat> cabal有支持uhc
+01:56:10 <hashcat> chapel 感覺就是強大加簡潔
+01:56:11 <CindyLinz> uhc 另有一個類似 hackage 的地方?
+01:56:19 <hashcat> 沒有
+01:56:37 <CindyLinz> 直接用 hackage 裡面的東西, 然後, 運氣好就能動這樣?
+01:56:37 <hashcat> 只是可以賭賭看hackage上的包能不編譯過
+01:56:54 <letoh> 有龐大 package 支援真是惡魔，像我就很難丟掉 python XD
+01:56:59 <hashcat> HLearn就不行了
+01:57:49 <hashcat> 本來有貢獻那專案 跟作者抗議ghc擴展用太多無效後就不鳥了
+01:58:36 <hashcat> uhc也是支持不少擴展, 編譯過得機會應該不低
+01:59:14 <hashcat> HLearn那狀況是ghc少一個版本號就編不過
+02:02:25 <hashcat> letoh: hackage是唬爛的
+02:02:41 <hashcat> 就算是用ghc也是一堆編不過
+02:02:58 <letoh> 聽起來很慘XD
+02:05:38 <hashcat> 有很多看起來很厲害的
+02:05:44 <hashcat> 都是當年勇
+02:11:16 <CindyLinz> 需要一個 hackage-worked 列表 XD
+02:12:32 <hashcat> stackage
+02:13:23 <hashcat> 還有hackage二代
+02:13:45 <CindyLinz> stackage? XD
+02:14:24 <hashcat> 額剛剛看了hackage發現已經換成2代了
+02:16:47 <hashcat> 找不到stackage
+02:18:23 <CindyLinz> stackage 是 2代的開發代號?
+02:18:37 <hashcat> 以前明明看過有列表, 現在莫名其妙變成沒發布過
+02:18:42 <hashcat> 不同的東西
+02:18:54 <hashcat> stackage是fpcomplete把關
+02:19:02 <CindyLinz> 喔, stackage 就是確認能用的白名單?
+02:19:04 <CindyLinz> 嗯嗯嗯
+02:19:10 <hashcat> hackage 2是正牌
+02:19:21 <hashcat> 嫡系
+02:19:24 <CindyLinz> 嗯嗯
+02:23:04 <hashcat> 結果是stackage還沒發布
+02:23:24 <hashcat> 很久以前我好像還有看到列表
+02:30:01 <hashcat> 台灣有沒人買過cray
+02:30:42 <hashcat> 在台灣有分公司噗噗
+11:43:25 <CindyLinz> 原來 Happy 就 Simon Marlow 做的喔.... ._.
+11:43:53 <CindyLinz> 那, notHappyAtAll 就是他的梗嘍 XD
+15:00:20 <mno2> https://www.youtube.com/watch?v=_gZK0tW8EhQ
+16:17:00 <CindyLinz> 這個我能怎麼寫, 讓它看起來更「順眼」呢? \x -> isAlpha x || isDigit x || '-' == x
+16:17:43 <CindyLinz> 希望能寫成類似: (isAlpha || isDigit || ('-'==)) 的感覺的東西
+16:18:14 <CindyLinz> 看起來有一點點像某種 Applicative?
+16:23:53 <CindyLinz> Applicative ((->) a)
+16:30:16 <mno2> CindyLinz: liftA3 ?  可是好像沒有內建的三元 or ?
+16:31:03 <mno2> 要不然 sequence 然後 fold 好了 xD
+16:31:39 <CindyLinz> 在想 N 元的 XD
+16:32:07 <CindyLinz> 再配一個 traversable?
+16:35:09 <mno2> 用 sequence 應該就假設 Traversable 了吧？
+16:38:50 <CindyLinz> data Seq a ?
+16:43:06 <CindyLinz> 這問題先暫時丟一邊 ._.
+18:48:36 <CindyLinz> 為什麼 Haskell 的 if..then..else 的設計需要去對 indent 啊? @@"
+19:04:40 <hashcat> \x -> or $ map (\f -> f x) [isAlpha, isDigit, ('-' ==)]
+19:09:32 <hashcat> 貌似catamorphism也可以
+19:09:40 <hashcat> 只不過反而更長
+19:19:51 <hashcat> \x -> foldl (||) False $ map (\f -> f x) [isAlpha, isDigit, ('-' ==)]
+19:20:01 <hashcat> 差不多難看
+19:23:52 <hashcat> 如果是想要抽象歡樂世界的話就我來說catamorphism最順眼
+20:41:02 <CindyLinz> 咦, or 有吃 [Bool] 的版本?
+20:41:15 <CindyLinz> 真的耶 :p
+20:42:18 <CindyLinz> 以前聽 perl6 可以把一堆函數作 disjunction 變成另一個函數, 會把參數 apply 到它裡面的各函數, 然後結果 or 起來
+20:45:32 <suhorng> 縮code乾脆把 \f -> f x 換成 ($ x) XD (誤
+20:47:08 <favonia> @pl \x -> or $ map (\f -> f x) [isAlpha, isDigit, ('-' ==)]
+20:47:11 <lambdabot> (or $) . flip (map . flip id) [isAlpha, isDigit, ('-' ==)]
+20:47:11 <lambdabot> optimization suspended, use @pl-resume to continue.
+20:47:53 <favonia> CindyLinz: 因為很多人把 else 和 if 寫到同一行....
+20:48:01 <suhorng> :t or . flip map [('-' ==)] . flip ($)
+20:48:02 <lambdabot> Char -> Bool
+20:48:11 <suhorng> :&
+20:48:45 <suhorng> > or . flip map [isAlpha, isDigit, ('-' ==)] . flip ($)
+20:48:46 <lambdabot>   <Char -> Bool>
+20:49:02 <suhorng> 大驚 XDDD 竟然不會噴出 no instance for (Show ....)
+20:53:50 <CindyLinz> favonia: 同一... column?
+20:54:18 <CindyLinz> favonia: 我是想說, if..then..else 好像不需要靠 layout 來決定 parsing 才對 @@"
+20:54:54 <favonia> layout 是在那種 parsing 之前的
+20:55:49 <CindyLinz> 咦, 其實是只有在 do-notation 裡面才會有差是不是?
+20:56:27 <CindyLinz> 因為 do-notation 需要靠裡面的縮排來決定各獨立的 action 在哪裡?
+21:09:02 <favonia> 應該吧（沒有仔細想
+21:15:43 <CindyLinz> mmm..
+22:28:11 <hashcat> haskellwiki滿詳盡的
+22:28:18 <hashcat> 這裡面也有講
+22:43:13 <hashcat> http://en.wikibooks.org/wiki/Haskell/Indentation#The_golden_rule_of_indentation
+22:43:23 <hashcat> 黃金規則
+22:44:07 <CindyLinz> gold..golden rule... o_O
+22:44:25 <CindyLinz> 不過.. 這頁真是謝謝了 ^^
+22:48:13 <hashcat> 我知道有人看到這個會想到大便規則
+22:48:42 <hashcat> 因為我已經想到了
+22:49:31 <hashcat> 記得haskellwiki有套規則
+22:49:43 <hashcat> 這會找不到只找到那個
+22:49:52 <CindyLinz> hashcat ← witness

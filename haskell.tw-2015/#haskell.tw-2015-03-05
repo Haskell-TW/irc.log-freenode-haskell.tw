@@ -1,0 +1,8 @@
+00:43:21 <suhorng> @pl  \x -> let go = fmap ($ go) x in go
+00:43:22 <lambdabot> fix . flip (fmap . flip id)
+00:43:27 <suhorng> xDDDDD
+00:44:56 <CindyLinz> 沒有增加閱讀難度耶.... (嘆
+18:10:27 <petercommand> 一般 cabal 是直接使用在 PATH 裡的 ghc 嗎?
+22:53:45 <miaoski> 敲敲。 *sigh* 自從改用 slack 就很少來看這裡了 >_<
+22:54:56 <miaoski> CindyLinz: sorry 晚上臨時有事就沒去 FT
+23:01:08 <petercommand> hi ^^

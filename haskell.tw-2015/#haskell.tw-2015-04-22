@@ -1,0 +1,29 @@
+00:02:22 <suhorngM_> * 默默中槍
+00:03:44 <suhorngM_> mno2: 偷回一下前面的文, 我覺得 "有了 System F 為何不把 let 拿掉" 這個問句有點怪
+00:05:38 <suhorngM_> System F 的型別推導是 undecidable 吧
+00:06:49 <CindyLinz> decided by luck
+00:06:51 <suhorngM_> 另, constructor 那些的是 System Fω?
+00:06:57 <suhorngM_> CindyLinz: lol
+00:07:24 <suhorngM_> mno2: higher-rank 那篇我也還沒看完 前面的 rule 看得好暈, 應該也會跳過後面的實作描述...
+00:13:02 <suhorngM_> 話說之前的討論我覺得有些東西被混在一起了 @@ side effect, kind, constructors 之類
+00:13:15 <suhorngM_> ML 因為有 value restriction 所以即使有 let, 仍然是 sound 的
+01:06:53 <monochrom> mno2: 我是讀 Milner 原文的. let-polymorphism 應該最先在那裏出現. 我現在偷運它出來: http://www.vex.net/~trebla/tmp/Milner%20polymorphism.pdf
+08:49:46 <mno2> monochrom: 是從學校內部下載的嗎？ lol   謝謝 :)
+08:58:17 <monochrom> 是
+08:59:57 <mno2> suhorngM_: 剛剛我認真想了一下之前的討論的確是混在一起了
+09:00:40 <mno2> constructor 跟 kind 應該只是語言（像是 haskell）的 type 描述建構機制，來建立 HM 推論的基礎
+09:02:58 <mno2> 沒想錯的話應該沒修改過的 HM 就可以推 * -> * 的 type 了，只是 compiler 做了生成的動作，理論上推論系統看到的應該都是 Maybe Int 而不是 Maybe a，不過看到的話好像根據 type constructor 修改 subsumption 應該也不會有問題
+09:04:46 <mno2> 不過 reference 會打破 soundness 跟 side effect 有沒有絕對關係我不確定。不過用 side effect 來建構的確是比較容易
+09:06:36 <mno2> suhorngM_: 我大概心中想的是 System F omega 吧
+09:07:26 <mno2> System Fω 每次看到都覺得他在裝可愛
+09:08:01 <mno2> System -ω-
+09:16:09 <monochrom> :)
+09:16:24 <monochrom> System F Kawaii
+09:40:53 <mno2> http://www.reddit.com/r/haskell/comments/334x2v/cartesian_closed_comic_26_ide/  有點酸 xD
+10:34:26 <CindyLinz> 裝可愛 XD
+10:44:37 <monochrom> 哈哈
+10:44:59 <mno2> 來建立一個 type system 叫 System ˊ_>ˋ
+11:21:57 <suhorngM_> System -ω- >//<
+11:22:14 <suhorngM_> 喔喔 CCC 出新篇了!
+12:12:05 <pkmx> System 0ω0
+20:52:34 <b4283> mno2: 互看之後又說 we need ide 是 web-based ide 被無視的意思嗎？

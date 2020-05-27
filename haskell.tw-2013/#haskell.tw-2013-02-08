@@ -1,0 +1,178 @@
+10:24:52 <favonia> letoh: 後來我有一點點想要放棄 Yesod xDDD
+10:28:40 <_13h> favonia: 為什麼?
+10:29:09 <favonia> _13h: 因為架構好像有點怪怪的 xD
+10:30:04 <_13h> 我是很好奇用 yesod ，還有 Haskell / type system 在這種應用上有什麼優勢
+10:30:18 <_13h> hychen: midterm 來了
+10:30:28 <favonia> 優勢喔
+10:30:35 <favonia> Haskell 就比較快啊
+10:32:34 <_13h> 是沒錯啦，但我以為現在網站速度主要的瓶頸應該是 template engine 跟 javascript 的速度？
+10:34:04 <_13h> 沒在搞網站開發，不曉得還有啥問題適合讓 haskell 處理
+10:36:12 <favonia> _13h: 不知道耶 lol
+10:37:55 <hychen> ???????
+10:38:45 <_13h> hychen: 考試的方法
+10:39:05 <hychen> _13h, 喔
+10:39:14 <hychen> _13h, 我作業三都還沒寫...
+10:41:48 <_13h> 我也還沒寫啊，昨天有稍微看了一下 lecture note
+10:50:44 <MnO2> 有 type system 至少你能表達有濾過的外來 content 跟沒有濾過的
+10:51:30 <MnO2> 型態系統寫出來系統就會幫你檢查，不會不小心用到沒濾過的
+10:52:38 <MnO2> Yesod 有一個好處是會幫你檢查組出來的 url 是不是合法，但他用到 template haskell
+10:57:53 <_13h> 那麼... RoR 之類的沒辦法檢查組出來的 url 是不是合法嗎？
+10:58:17 <MnO2> Ruby 沒有 compile time 吧?
+10:59:25 <_13h> 我可能誤解 "組出來的 url" 這件事，這是在什麼時候發生的動作？
+10:59:36 <MnO2> 我沒看過 Rails, 我不知道有沒有 pre-processing
+11:00:45 <MnO2> 就是程式中可能要靠 config, 組 domain, uri, query 等等，他透過類似 macro 的系統在 compile time 檢查這件事
+11:01:41 <_13h> 唔，我還以為是 request 進來時的檢查@_@
+11:02:34 <MnO2> 如果 user input 也能保證 type 正確的話， 理論上組起來就是正確的
+12:52:48 <_13h> http://www.mersenne.org/various/57885161.htm  # 已知最大質數
+13:16:11 <CindyLinz> _13h: yesod 的「url正確」指的是在上線前就知道有沒有指到不存在的網頁
+13:16:42 <CindyLinz> _13h: 可以事先就確知, 除非使用者自己在網址列亂打, 不然一定不會有 404
+13:18:29 <CindyLinz> 欸.. 如果是 id=xxx 的這個 xxx 不存在, 那還是會有 404 XD
+13:32:51 <cataska> SML 跟 haskell 的 foldl 中的 init 在 lambda 裡參數位置是不一樣的喔
+13:34:28 <cataska> 我太嫩了...
+13:35:55 <cataska> SML: foldl (fn (x,y) => x-y) 1 [10] 是 9
+13:36:23 <cataska> Haskell: foldl (\x y -> x - y) 1 [10] 是 -9
+13:46:37 <favonia> cataska: lol
+13:46:55 <hychen> lol
+13:46:59 <favonia> cataska: 然後 SML 喜歡 uncurried~
+13:47:41 <cataska> 然後我以為在 SML 可以寫成 foldl (-) 1 [10], orz
+13:49:09 <hychen> cataska, 他foldl 應該是uncurried function吧
+13:54:00 <cataska> 可以寫成 foldl (fn (x,y) => x-y) 1 [10] 不就表示 foldl 是 curry function ?
+13:54:21 <_13h> CindyLinz: 像網址有參數的 ...?user=AAA&action=BBB  這樣也可以檢查嗎?
+13:56:34 <CindyLinz> _13h: 隨資料而變的, 像是 user=AAA 不行, 但是隨程式結構而定的, action=BBB 可以
+13:57:18 <CindyLinz> compile time 不能幫助你確定 AAA user 有沒有存在, 但可以確定 BBB action 有沒有定義
+13:58:00 <_13h> 嗯嗯，那 action BBB 有沒有定義這件事，在 runtime 檢查會有缺點嗎？
+13:58:19 <favonia> _13h: 會心情不好
+13:58:33 <CindyLinz> _13h: 能在 compile time 檢查的事情留到 runtime 才檢查的話, 意思就是會讓使用者感覺到
+13:58:40 <CindyLinz> _13h: 然後等他回報... ^^|
+13:58:56 <_13h> 但使用者有可能自己亂輸入吧?
+13:59:30 <_13h> 例如 paste 時不小心按到驚嘆號，就變成 action=BBB! 了XD
+13:59:48 <CindyLinz> _13h: 自己亂輸入而看到 404, 和點了網站提供的按鈕連結出現 404, 差異很大耶
+14:00:26 <_13h> 我是想說，不管怎樣，最終還是得在執行期間檢查所有輸入合不合法吧？
+14:01:50 <CindyLinz> _13h: haskell yesod 讓你有不太麻煩的方式把很多 compile 就能檢查的事情從 runtime 移到 compile
+14:02:03 <_13h> 嗯嗯，我要想一下，目前還是沒有什麼非用不可的感覺... 因為 404 是 server 回的，就算網址寫對了，但資源不存在，一樣會有 404 (頁面資料被移除之類的情況)
+14:02:33 <favonia> _13h: 這樣講好了
+14:02:36 <CindyLinz> _13h: 如果你在意的點是「非用不可」的話, yesod 的確不是非用不可....
+14:02:37 <favonia> 有一些失敗是你的錯
+14:02:45 <favonia> 有些失敗是使用者的錯
+14:02:52 <favonia> yesod 主要是檢查你的錯
+14:02:59 <favonia> 使用者的錯是使用者的錯
+14:04:26 <CindyLinz> _13h: 畢竟也存在某個年代.. 大家都用 C 在寫 cgi, 這驗證了只要有 C, 就能夠寫網站.... 所以只要 C 還存在, 沒有任何一個別的語言或 framework 是非用不可的...||
+14:06:25 <_13h> 應該是我的用詞不對，我想瞭解的是這件事 (compile-time 的檢查) 帶來的效益足不足以吸引人改用 yesod
+14:07:18 <CindyLinz> 我對 URL compile time check 的興趣也沒有非常大.. :p
+14:07:35 <CindyLinz> 不過我對 SQL 不會寫錯的興趣就大一些了...
+14:07:59 <CindyLinz> 然後對 server logic 的小片段可以輕易組合起來的興趣就更大了
+14:08:07 <_13h> 不過說到這個，其實我也很好奇當初為什麼會一窩蜂跑出一堆 RoR site，有什麼特性或功能對 web programmer 相當重要嗎?
+14:08:18 <CindyLinz> 寫起來很快啊
+14:08:26 <favonia> _13h: 因為念起來很像 LoL
+14:08:37 <CindyLinz> 我猜.. .Net ASP 也是很快
+14:08:41 <favonia> _13h: *看
+14:08:44 <_13h> 嗯 檢查 sql 語法的確是可以先做好
+14:08:53 <_13h> LoL XD
+14:09:24 <CindyLinz> 然後... haskell 系的 html 產生器你也可以考慮一下
+14:09:28 <CindyLinz> 有好幾套
+14:09:40 <CindyLinz> yesod 和 snap 都可以混
+14:09:42 <CindyLinz> 混搭
+14:11:05 <CindyLinz> 我覺得 blaze html 這套蠻酷的.. # http://jaspervdj.be/blaze/tutorial.html
+14:11:37 <CindyLinz> hamlet 的話, 是會寫 html 的人就能寫
+14:11:41 <CindyLinz> 而且還 type safe..
+14:11:55 <CindyLinz> 這會確保你的 <div> 一定都有對應的 </div>
+14:12:12 <CindyLinz> 我有遇遇 php include 的小片段裡面 div 沒有成對的..
+14:12:18 <_13h> 大家都覺得 < > 很討厭? XD
+14:12:30 <CindyLinz> 所以引用它的, 都要在前面(還是後面) 幫他補齊 @@"
+14:12:48 <CindyLinz> _13h: hamlet 是用 < > 的呀, 長得根本就跟 html 一樣
+14:12:49 <_13h> 記得 perl 很多這種產生 html 的 dsl
+14:12:56 <CindyLinz> 語法是 html 延伸吧
+14:13:19 <CindyLinz> 可是應該除了 haskell 以外, 那些 template 用越兇越慢吧
+14:13:24 <_13h> 唔  是你剛剛貼的網址嗎？我沒看到有< >
+14:13:25 <favonia> _13h: 不不他比較變態
+14:13:33 <CindyLinz> _13h: 不是 我貼的是 blaze
+14:13:35 <favonia> 我舉個例子
+14:13:36 <CindyLinz> hamlet 是另一個
+14:13:44 <_13h> 喔喔
+14:13:53 <favonia> 例如你用 jQuery 寫個很酷的表格
+14:13:54 <_13h> H.head $ do  H.title "Some page."  這樣還不錯XD
+14:13:59 <_13h> 嗯
+14:14:08 <CindyLinz> _13h: 像 blaze 這種用法.. 如果是別的語言, 就會真的一堆函數呼叫接來接去
+14:14:10 <favonia> yesod 的包法是...
+14:14:27 <CindyLinz> _13h: haskell 的話, 會全部 inline 掉, 在 compile time 就變成最後的結果...
+14:14:41 <favonia> 他會維持 "外部script" "body" 等等部份分開
+14:14:54 <favonia> 所以你可以直接把兩個包好的 widget 接起來
+14:15:05 <favonia> header 自己合併
+14:15:08 <CindyLinz> yesod widget 這概念真的超棒的
+14:15:17 <_13h> 聽起來很棒!
+14:15:21 <favonia> body 自己合併
+14:15:37 <CindyLinz> 我覺得這跟 haskell 的程式碼的順序和執行順序可以不一樣(通常也不一樣)有很大關係
+14:15:38 <favonia> 不會出現詭異的狀況
+14:16:36 <_13h> CindyLinz: https://gist.github.com/letoh/2896412  一堆函式呼叫真的很討厭...
+14:17:32 <_13h> 我以前的做法有一點改善，但我還是沒想到很好的做法... 真的寫起來還是很煩
+14:18:13 <CindyLinz> _13h: 如果你是討厭函數呼叫的「寫法」的話, 那就根本上不合你味口了 XD  如果是效能考量的話, 可以用 haskell..
+14:18:29 <CindyLinz> _13h: C template! XD
+14:18:56 <_13h> 就弄的很像函數呼叫，而且一樣會 close tag
+14:19:05 <CindyLinz> _13h: 那個 js() 是什麼奇怪的巫術.... @@!
+14:19:30 <CindyLinz> 為什麼參數可以寫 <script... > <@@>
+14:19:37 <_13h> 我有點忘了，這邊貼的其實不太完整，我後來有比較完整的不曉得跑哪去了
+14:19:49 <_13h> 找一下..
+14:20:15 <CindyLinz> _13h: 括號寫這麼多... 有些地方看起來像 lisp XD
+14:20:16 <_13h> 去年還是前年上課時，為了交作業弄出來的東西
+14:20:27 <CindyLinz> 喔.. 原來是一堆 macro
+14:20:44 <_13h> CindyLinz: c 沒辦法，只能括號了...而且我也不排斥 lisp XD
+14:23:01 <CindyLinz> _13h: 其實.. macro 用這麼兇的話... 用 haskell 寫一個 preprocessor, 把寫的 code 轉成 C 不是也很好嗎?
+14:23:40 <CindyLinz> _13h: 這個 turing complete 的 preprocessor, 可以盡可能把沒必要的呼叫 inline 掉
+14:24:14 <_13h> 另外弄個 generator 是可以啦，當時只是想玩一下在 c 裡面設計 edsl
+14:24:25 <CindyLinz> _13h: 魔道....
+14:24:29 <CindyLinz> (逃)
+14:24:36 <_13h> XD
+14:25:35 <_13h> c macro 都可以拿來寫 alu simulator 或 brainfuck interpreter 了，我相信應該可以做到XD
+14:26:25 <_13h> 不過卡在我對 c 的熟悉度，所以能做到的完成度有限XD
+14:46:02 <_13h> 找到一個比較新的版本先更新了
+14:46:49 <CindyLinz> hackage 的 dependency 好難過啊 QQ
+14:47:03 <CindyLinz> 我覺得 haskell 有個特性, 讓它的 dependency 比 perl 慘
+14:47:39 <CindyLinz> 在 perl 比較容易做相容更新, 我如果沒有動到舊功能, 只有加上新功能的話, 差不多都會相容
+14:47:51 <CindyLinz> 而在 haskell, 如果我在一個 class 裡面加上新的函數
+14:48:05 <CindyLinz> 這對「使用」 instance 的人來說會相容
+14:48:12 <CindyLinz> 但是對「實作」instance 的人就會壞掉..
+14:48:21 <CindyLinz> 因為他變成有該定義的函數沒定義..
+14:48:44 <CindyLinz> 所以如果這個 class 是允許別人實作 instance 的, 它無論加或減函數, 都是不相容更新
+14:49:07 <hychen> 最近我們公司很多人迷上Go,  話說go有什麼東西是殺手級特性?
+14:51:01 <_13h> 語法比 c 好看? goroutine ?
+14:51:32 <CindyLinz> 聽說跑很快...
+14:51:39 <CindyLinz> 比起其他 script language
+14:51:58 <_13h> bitbucket 老鼠會 "Invite your friends to Bitbucket and we'll give you up to 3 additional users free."
+14:56:49 <b4283> go 不是 scripting lang 吧
+14:57:13 <CindyLinz> b4283: 管他的 XD
+14:57:25 <b4283> 好！XD
+14:58:28 <CindyLinz> b4283: 我意思是說.. 他可能可以用在原本 script 想用的地方, 而執行起來很快這樣
+14:59:27 <b4283> 喔喔...
+14:59:28 <_13h> 可以產生 native binary
+15:00:05 <CindyLinz> 因為我偶爾就會聽到有誰又在喊說 哇 go 超快
+16:12:19 <_13h> hychen: 那你覺得 c 的語法如何呢？
+16:12:40 <hychen> 好累墜....
+16:13:06 <_13h> 唔，不太懂，可以舉例嗎？
+16:13:20 <_13h> 因為很多括號?
+16:13:31 <hychen> 因為{}, ;, ()
+16:13:44 <b4283> lisp 表示:
+16:14:04 <b4283> 我也很多括號
+16:14:45 <_13h> lisp 表示: 我只剩括號了  (誤
+16:22:01 <cataska> batman 表示：我沒有 parens..
+16:31:49 <MnO2> CindyLinz: 因為 ghc 會做 cross module compilation, 沒有 ABI, 才會有現在一動就爛掉的情形
+16:33:58 <MnO2> 我覺得與其說 go 有什麼殺手級特性，應該說現在主流科技都太爛了，而更強的可能入門門檻比較高或是根本沒心做推廣到 real world 的動作
+16:36:49 <CindyLinz> MnO2: class 同時開放給外面 implement instance 或使用的話, ABI 能幫得上什麼忙嗎? @@"
+16:40:10 <MnO2> CindyLinz: 沒有，我想錯了。
+16:43:58 <CindyLinz> hmm.. 欸! 如果是 class 加函數的話.. 可以用加上 default 實作的方式來相容
+16:44:03 <CindyLinz> 如果有 default 實作的話...
+23:14:20 <suhorng> 看到之前在聊fold
+23:14:41 <suhorng> 在SML中可以用 op+, 跟 Haskell 中的 (+) 一樣意思XD
+23:15:08 <letoh> 原來是 op+
+23:15:17 <letoh> 我試過 + 不能用XD
+23:15:33 <suhorng> 對
+23:15:42 <suhorng> 不過要 section 的話得自己定 operator
+23:16:27 <suhorng> 不過真的不習慣 SML 的順序, foldl 跟 foldr 的 type 都一樣XD
+23:17:06 <suhorng> 自訂 operator 例子像：
+23:17:15 <suhorng> - infixr 0 $  fun f $ x = f x
+23:17:25 <suhorng> val $ = fn : ('a -> 'b) * 'a -> 'b
+23:18:59 <letoh> sml 真厲害  我以前以為是研究導向的語言，所以一直沒特別留意XD
+23:47:32 <favonia> letoh: 這兩句話在我看來超矛盾 xDDD
+23:49:46 <favonia> letoh: 沒有稍微一點"研究導向"的語言我覺得都很無聊 xD
+23:57:17 <suhorng> 如果說 我要在檔案中存數字 但是是用16進位
+23:57:55 <suhorng> 除了用 Numeric 的 readHex/showHex，有比較有效率的方法嗎？
+23:58:28 <suhorng> 查到 ByteString 好像是直接存 binary data 的@@

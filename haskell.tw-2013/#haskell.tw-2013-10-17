@@ -1,0 +1,116 @@
+11:04:32 <favonia> @@ 該不會 lambda bot 認這個...
+11:04:33 <lambdabot>  該不會 lambda bot 認這個...
+11:29:28 <kanru> @@ XD
+11:29:28 <lambdabot>  XD
+11:30:37 <b4283> @@
+16:00:23 <godfat> perl11...
+16:00:23 <godfat> http://perl11.org/
+16:03:15 <CindyLinz> 未看先猜又是騙人的 ._.
+16:04:01 <CindyLinz> 怎麼好像猜錯了... ._.
+16:04:03 <godfat> 一半吧.... -_-
+16:05:06 <godfat> 對了，參考 chainl 後寫成這樣... 好像不是很好懂 orz
+16:05:06 <godfat> pTerm :: Parser Double
+16:05:06 <godfat> pTerm = pFactor >>= rest
+16:05:06 <godfat>   where rest x = (op <*> pure x <*> pFactor >>= rest) <|> pure x
+16:05:06 <godfat>         op     = char '*' *> pure (*) <|> char '/' *> pure (/)
+16:11:06 <CindyLinz> 嗯嗯嗯
+16:11:50 <CindyLinz> 不過看過 chainl 了, 就沒那麼難懂了 :p
+16:12:48 <godfat> 然後我發覺雖然很多人會說用 applicative 比較好，
+16:12:48 <godfat> 但這邊似乎不用 >>= 就沒辦法在有錯誤發生時終止
+16:12:48 <godfat> 單用 applicative 會無窮遞迴 @@
+16:12:48 <godfat> 是喔，那就好 XD
+16:15:25 <CindyLinz> 單用 applicative 應該是就失去了 short circuit 的效果, 每個 branch 都一定要去試一遍?
+16:16:23 <godfat> 根據運作效果，我是這樣猜的，只是我暫時沒有細看底層實作確認原因 @@
+16:16:51 <godfat> 概念不好，只能看 source 理解具體狀況，哭哭
+16:22:57 <CindyLinz> 欸.....
+16:23:08 <CindyLinz> 在想如果你依然是寫成 left recursion
+16:23:24 <CindyLinz> 只是先試沒有 recursion 的 branch
+16:23:59 <CindyLinz> 用 MonadPlus 而不是 Alternative
+16:24:30 <CindyLinz> 而且最後不能是 [] 這種 Monad.. :p
+16:25:02 <CindyLinz> 這樣如果輸入是正確的 expression, 就應該還是可以用
+16:25:17 <CindyLinz> 但如果輸入是壞的, 那就會無窮遞迴這樣
+16:29:46 <godfat> 你的意思是如果是寫成
+16:29:47 <godfat> pTerm := pTerm * pFactor `mplus` pTerm / pFactor 這樣嗎？
+16:31:24 <CindyLinz> 不是
+16:32:14 <CindyLinz> pTerm := pFactor `mplus` pTerm * pFactor `mplus` pTerm / pFactor
+16:32:27 <CindyLinz> 最前面一定要先放只有 pFactor, 沒有遞迴的版本
+16:32:42 <CindyLinz> 讓它先試不遞迴的作法, 如果不遞迴的會成功, 那就不要再去試遞迴的
+16:33:48 <godfat> 這樣不算 right recursion 嗎？
+16:39:07 <CindyLinz> 這不是啊
+16:39:23 <CindyLinz> right recursion 是把 pTerm * pFactor 換成 pFactor * pTerm 吧
+16:39:59 <CindyLinz> chainl 就是 right recursion
+16:40:17 <CindyLinz> 它一定讓 pFactor 去 match 左邊, 然後再用 rest 去 match 右邊
+16:40:45 <CindyLinz> 只是自己再去重組 match 出來的結果, 使得 chainl return 回去的結果看起來是 left recursion
+16:45:09 <godfat> 嗯嗯，不過這句話：
+16:45:09 <godfat> : 在想如果你依然是寫成 left recursion
+16:45:09 <godfat> : 只是先試沒有 recursion 的 branch
+16:45:09 <godfat> 那什麼情況下是 left recursion 但是先試 pFactor? @@
+16:45:37 <CindyLinz> 就 `mplus` 的實作呀
+16:45:54 <CindyLinz> 我想應該都會先試 `mplus` 左邊的吧
+16:46:11 <CindyLinz> 只是像 [] 這種 MonadPlus 應該試完左邊以後無論成功與否, 都還是會去試右邊的
+16:46:22 <godfat> 喔喔，所以是上面這行：
+16:46:22 <godfat> : pTerm := pFactor `mplus` pTerm * pFactor `mplus` pTerm / pFactor
+16:46:24 <CindyLinz> Maybe 的話應該只要遇到成功就停了
+16:48:43 <godfat> 我試試看好了 XD
+16:51:37 <godfat> 看了一下 Alternative
+16:51:38 <godfat> 不過我程式裡的 <|> 不是 applicative functor 的 Alternative,
+16:51:38 <godfat> 是 parsec 提供的，可能是 monadic 的
+17:13:12 <godfat> 試來試去，覺得最終其實還是看實作 :o
+17:13:13 <godfat> parsec 的 mplus 好像就是 <|> 嘛...
+17:13:13 <godfat> 這樣右邊對了，左邊就不會做了...
+17:14:26 <CindyLinz> 最終的確是看實作
+17:14:47 <CindyLinz> class 有提供一點點限制, 讓你可以去稍微預期一下可能的實作
+17:15:38 <godfat> 我左右講反... orz
+17:15:38 <godfat> 左邊對了，右邊就不會做了
+17:15:49 <CindyLinz> 例如說它是 Alternative 的話, 這 class 的限制會讓它右半沒辦法等拿到左半的結果來決定 binding 的形狀
+17:16:12 <CindyLinz> 因為左半的結果不會在它決定 binding 前就給他
+17:16:29 <CindyLinz> monad 的話就可以, 但是他還是可能會選擇不用..
+17:16:54 <godfat> 嗯嗯.... 結果還是讀 source 才是王道（咦
+17:20:22 <CindyLinz> godfat: 等等.. 我覺得我剛剛講的可能是錯的
+17:20:30 <CindyLinz> 先不要記住好了...
+17:20:52 <godfat> XDDDDD ok
+17:20:55 <CindyLinz> 在 MonadPlus 和 Alternative, 還有 short circuit 與否的部分
+17:21:15 <CindyLinz> 我心中想的模型可能是在講 Arrow...
+17:22:27 <CindyLinz> Alternative 的各 branch 之間應該可以透過 side-effect 溝通, 所以還是可以 short circuit.. (思考中..)
+17:22:29 <godfat> 老實說我現在想忘記 arrow XD
+17:22:29 <godfat> 或是僅僅把他當成裡面有一些方便的 function...
+17:22:29 <godfat> 像是我有時候會想要這種東西：
+17:22:29 <godfat> <f, g> a b = (f a, f b)
+17:22:29 <godfat> 感覺 arrow 裡會有類似的東西
+17:23:02 <godfat> Alternative 不是 applicative functor 的東西？還沒到 monad?
+17:23:02 <CindyLinz> 想忘記 Arrow 是怎樣... 很不好的回憶嗎 orz
+17:23:17 <godfat> 也不是，覺得那是一個平行世界的感覺 @@
+17:23:23 <CindyLinz> 對, Applicative-Alternative / Modad-MonadPlus
+17:23:56 <godfat> 這樣 Alt 會有 side-effect?
+17:24:00 <CindyLinz> 到底能不能用 side-effect 溝通呢... (混亂了)
+17:24:35 <CindyLinz> 應該是這樣:
+17:24:48 <CindyLinz> 看底下實作的人怎麼給你, 它想給你你就可以有
+17:25:04 <CindyLinz> 可以這樣想: MonadPlus 都可以拿來當 Alternative 用
+17:26:00 <CindyLinz> 呃.. 好像也不用先看 MonadPlus XD
+17:26:20 <CindyLinz> 這樣說好了, 底下的實作者可以拿到你每一串 branch 的結果
+17:26:30 <CindyLinz> 他可以依此決定要不要去別的 branch 跑
+17:26:36 <CindyLinz> 而如果是 Monad 的話
+17:26:47 <CindyLinz> 就算他沒有拿 branch 的結果來作決定
+17:27:17 <CindyLinz> 你總是可以用 Monad action 天生就有的 a -> m b 的這個 a 作為內線溝通的手段
+17:27:54 <CindyLinz> 而如果是 Alternative 的話, 你就只能全依賴底層了
+17:28:48 <godfat> 聽起來就是自己實作 MonadPlus 跟 Alternative 的差別
+17:28:48 <godfat> 玩 MonadPlus 因為本身就保證有 Monad 了，所以可以惡搞
+17:28:48 <godfat> 但 Alternative 只保證 Applicative, 所以能惡搞的程度就有限了
+17:29:15 <CindyLinz> 對, Alternative 給實作者的自由度比較大, 給使用者的限制比較大
+17:30:06 <godfat> 感覺最後還是實作者要自由心證..... XD
+17:30:44 <godfat> 我之前有寫個 monad, 用 quickcheck 檢查 monad law 和 functor law
+17:30:44 <godfat> 都有過，不過檢查很慢... XD
+17:30:51 <CindyLinz> 那前面講 left recursion 那些, 其實不用強調要是 MonadPlus 而不是 Alternative, 因為我們其實沒有拿那個 \a 作判斷, 所以其實也只有用到 alternative 的部分
+17:31:09 <CindyLinz> quickcheck... 那不是 test case 給少一點就快了 :p
+17:32:23 <CindyLinz> 利用 MonadPlus 的作法應該是, 先拿出左半的結果, 然後發現它已經成功了, 就讓右半直接 pass.. ^^
+17:33:48 <godfat> 不過名字上有 Plus 卻可能忽略右邊的效果，感覺好怪呀 @_@
+17:33:48 <godfat> 我的想像會是假設 a `mplus` b $ c 的話，
+17:33:48 <godfat> 應該給我 [c >>= a, c >>= b]
+17:33:58 <godfat> test case 給少...... XD
+17:35:00 <godfat> 嘛，不過也有用 + 表示 sum 表示 |
+17:35:00 <godfat> 好像也不用那麼在意名字|||
+17:36:17 <CindyLinz> 如果是 MonadPlus Maybe, 最後也只能有一個結果啊
+17:36:46 <godfat> 啊啊，說得也是，我想錯層次了
+17:37:11 <CindyLinz> 然後它根本就是 pure 的, 右半執行過以後的結果如果不給出來... side effect 也不會有, 好空虛的一生 XD
+17:37:34 <godfat> XD
+19:58:50 <mno2> 看了 godfat 的新文章，突然覺得會在意 PL 好像跟在意耳機有點像 xD

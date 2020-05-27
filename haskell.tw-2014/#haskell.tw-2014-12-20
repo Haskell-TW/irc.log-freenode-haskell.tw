@@ -1,0 +1,56 @@
+09:47:49 <suhorng> Monad tutorial 的數量XD 超有趣 https://www.haskell.org/haskellwiki/Monad_tutorials_timeline
+20:12:28 <petercommand> @check (\x -> 1/0 > x)
+20:12:30 <lambdabot>  +++ OK, passed 100 tests.
+20:13:32 <petercommand> @check (\x -> 10000 > x)
+20:13:34 <lambdabot>  +++ OK, passed 100 tests.
+20:14:03 <petercommand> @check (\x -> 1000 > x)
+20:14:04 <lambdabot>  +++ OK, passed 100 tests.
+20:14:08 <petercommand> @check (\x -> 100 > x)
+20:14:10 <lambdabot>  +++ OK, passed 100 tests.
+20:14:13 <petercommand> @check (\x -> 10 > x)
+20:14:15 <lambdabot>  *** Failed! Falsifiable (after 15 tests and 1 shrink):
+20:14:15 <lambdabot>  10
+20:15:26 <petercommand> @check (\x -> 10.0 > x)
+20:15:27 <lambdabot>  *** Failed! Falsifiable (after 11 tests and 8 shrinks):
+20:15:28 <lambdabot>  10.000002433387277
+20:25:39 <pkmx> @check (< 1/0)
+20:25:40 <lambdabot>  +++ OK, passed 100 tests.
+20:30:15 <pkmx> 怎麼感覺弱弱der 不會生出infinity去測試@@
+21:00:07 <petercommand> > instance Arbitrary Fractional where :{arbitrary = do :{  n <- choose (1/1,1/0) :: Gen Fractional;return n :} :} ; quickCheck (< 1/0)
+21:00:09 <lambdabot>  <hint>:1:1: parse error on input ‘instance’
+21:01:00 <petercommand> :t 1/0
+21:01:01 <lambdabot> Fractional a => a
+21:06:27 <petercommand> > generate 10 (System.Random.mkStdGen 2) arbitrary :: [Fractional]
+21:06:28 <lambdabot>  Expecting one more argument to ‘GHC.Real.Fractional’
+21:06:28 <lambdabot>  Expected kind ‘*’,
+21:06:28 <lambdabot>    but ‘GHC.Real.Fractional’ has kind ‘* -> Constraint’
+21:06:43 <petercommand> > generate 10 (System.Random.mkStdGen 2) arbitrary :: [Fractional Int]
+21:06:45 <lambdabot>  Expected kind ‘*’,
+21:06:45 <lambdabot>    but ‘GHC.Real.Fractional GHC.Types.Int’ has kind ‘Constraint’
+21:07:29 <petercommand> > generate 10 (System.Random.mkStdGen 2) arbitrary :: [Int]
+21:07:30 <lambdabot>  Couldn't match expected type ‘System.Random.StdGen
+21:07:31 <lambdabot>                                -> Test.QuickCheck.Gen.Gen a1 -> [GHC.Types.Int]’
+21:07:31 <lambdabot>              with actual type ‘GHC.Types.IO a0’
+21:08:48 <petercommand> @@
+21:09:00 <petercommand> :t generate
+21:09:01 <lambdabot> Gen a -> IO a
+21:10:30 <petercommand> > choose (1,3) :: Gen Int
+21:10:31 <lambdabot>  No instance for (GHC.Show.Show
+21:10:32 <lambdabot>                     (Test.QuickCheck.Gen.Gen GHC.Types.Int))
+21:10:32 <lambdabot>    arising from a use of ‘M318426888511760490914792.show_M3184268885117604909...
+21:14:14 <petercommand> > generate $ choose (1,3)
+21:14:16 <lambdabot>  <IO Integer>
+23:47:13 <suhorng> > 1/0
+23:47:15 <lambdabot>  Infinity
+23:47:20 <suhorng> :doc Infinity
+23:47:24 <suhorng> :t Infinity
+23:47:25 <lambdabot> Not in scope: data constructor ‘Infinity’
+23:54:27 <CindyLinz> > 1/0 :: Double
+23:54:29 <lambdabot>  Infinity
+23:54:35 <CindyLinz> > 1/0 :: Integer
+23:54:37 <lambdabot>  No instance for (GHC.Real.Fractional GHC.Integer.Type.Integer)
+23:54:37 <lambdabot>    arising from a use of ‘GHC.Real./’
+23:54:54 <CindyLinz> 不能除 XD
+23:55:43 <suhorng> > 1 `div` 0
+23:55:44 <lambdabot>  *Exception: divide by zero
+23:55:48 <suhorng> hmm

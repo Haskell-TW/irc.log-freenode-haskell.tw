@@ -1,0 +1,16 @@
+02:02:01 <monochrom> 哲理: 永動就是不動 XD
+02:05:08 <monochrom> 以前香港某電視劇主題曲曰: 知否世事常變, 變幻原是永恆
+03:04:45 <favonia> hashcat: 不動點可以有很多個。
+09:38:29 <MnO2> https://plus.google.com/101555949501667191720/posts/Armn9rcrK8g  看到 unsafePerformIO 整個大笑 xD
+09:41:00 <MnO2> http://stackoverflow.com/questions/6364409/why-does-haskells-head-crash-on-an-empty-list-or-why-doesnt-it-return-an/6364990#6364990
+09:43:17 <monochrom> hahahaha
+09:58:15 <MnO2> http://www.wall.org/~lewis/2013/10/15/asm-monad.html ASM Monad
+18:55:57 <letoh> asm monad 好像蠻有趣的
+21:45:23 <suhorng> 新更新 http://ro-che.info/ccc/23
+21:45:27 <suhorng> http://this-plt-life.tumblr.com/post/64150676855/when-i-try-to-find-out-something-about-urbit
+21:48:20 <suhorng> ASM monad中 MonadFix 很自然的出現了耶 XDD
+21:48:56 <suhorng> 語法真有趣
+21:49:16 <letoh> 我好像比較能接受這個  跟 forth 一樣的XD
+21:50:51 <suhorng> Urbit? 奇怪的stack..語言?
+21:53:33 <letoh> 唔  好像是個奇怪的東西
+21:59:27 <Yu_LIN> 好神奇的 asm monad

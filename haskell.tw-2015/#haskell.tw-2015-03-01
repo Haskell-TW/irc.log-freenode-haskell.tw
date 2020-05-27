@@ -1,0 +1,8 @@
+20:20:49 <CindyLinz> MichaelSnoyman 的 prelude.. # http://hackage.haskell.org/package/classy-prelude-0.10.5/docs/ClassyPrelude.html
+20:22:02 <CindyLinz> 以後就 import Edwardk 和 import MichaelSnoyman 就好了... (誤
+20:29:03 <CindyLinz> 覺得可以把 Haskell 的 Prelude 歸類教學型 prelude; 把 MichaelSnoyman 的 ClassyPrelude 歸類工程型 prelude.. XD
+20:54:04 <pkmx> ClassyPrelude最大的缺點就是他用MonoTraversable
+21:07:02 <pkmx> lens幾乎就已經cover所有monotraversable的use cases了
+21:13:59 <CindyLinz> 通通 hiding 起來 XD
+21:17:20 <pkmx> 對啊 後來我都hiding起來然後重新export Data.Foldable/Traversable =.=
+22:01:37 <CindyLinz> 喔~ 你已經在用 ClassyPrelude 啦?

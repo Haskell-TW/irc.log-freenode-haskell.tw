@@ -1,0 +1,29 @@
+01:33:09 <monochrom> SECD非常stack-based, 它有兩個stack
+01:57:21 <letoh> 只有一個 stack 好像不太好用
+01:59:31 <monochrom> 其實SECD的兩個stack可以輕易合為一個
+02:00:36 <letoh> 是因為通常用 linked list 實作的關係嗎?
+02:02:07 <letoh> 唔  這說法好像也不太對
+02:04:57 <letoh> 我覺得它描述的是操作的行為是 stack 而已
+02:05:05 <monochrom> 我這讓說吧. 試想像我也設計一個machine, 我又用兩個stack, 第一個stack叫 push1, pop1; 第二個stack叫 push2, pop2.
+02:06:50 <monochrom> 然後你細心觀察我的machine怎樣用這兩個stack, 就發現永遠都是這個次序: push1, push2, 稍後 pop2, pop1.
+02:07:20 <letoh> 不能交錯
+02:07:41 <CindyLinz> 記得... 兩個 stack 的 push down automata === Turing machine?
+02:07:43 <monochrom> 那麼, 你就會說, 其實是一個stack
+02:08:52 <monochrom> 照我記得, SECD也是同樣情況, 因為沒有交錯, 所以其實是一個stack
+02:10:12 <monochrom> 我想當初Landin認為因為有兩種不同東西要放在stack上, 所以分開兩個stack對讀者來說清楚些.
+02:10:14 <CindyLinz> 唔.. 如果要這樣子用.. 不是限制自己只用 1 號 stack 就好了嗎?  還是說硬是兩個混用, 效能會比較好?
+02:23:26 <letoh> 我看了一下...
+02:23:44 <letoh> SECD 的 dump 應該可以說是 return stack 吧?
+02:24:58 <monochrom> oops, s/landin/plotkin/
+02:36:57 <letoh> SECD 定義了 closure 蠻有趣的
+02:42:32 <letoh> http://www.cs.utexas.edu/~boyer/ftp/nqthm/trsecd/trsecd.html  這個好像是變型
+02:50:50 <letoh> http://gallium.inria.fr/~xleroy/mpri/2-4/machines.2up.pdf  找到一篇介紹 abstract machine 的文章
+17:27:20 <JuanitoFatas> 分享一本書：http://bit.ly/10Z6z5f
+17:27:46 <JuanitoFatas> 這本書 http://www.cs.kent.ac.uk/people/staff/sjt/craft2e/ 的中文版
+22:01:57 <letoh> 阿阿  看到 stackoverflow 上 untyped 那篇提到 forth/asm 很少人用就覺得這人是不是搞不清楚狀況想戰XD
+22:03:49 <letoh> "To original poster: when it comes to programming languages, and especially type systems, the information on Wikipedia is of poor quality. Don't trust it." XDXD
+22:04:26 <letoh> 一般單純做軟體開發的人很少會用 untyped 這個詞吧?
+22:06:01 <letoh> 昨天找 SECD 資料，好像有人用 fpga 做實際能跑的機器
+22:10:29 <letoh> https://github.com/hanshuebner/secd
+22:29:27 <letoh> 找了一下，果然有人想做 fpga-based lisp machine
+22:30:31 <letoh> http://www.aviduratas.de/lisp/lispmfpga/  # LispmFPGA

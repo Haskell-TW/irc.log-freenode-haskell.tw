@@ -1,0 +1,38 @@
+09:29:13 <mno2> 看完 simon marlow 的 parallel and concurrent programming in Haskell 了，非常推薦。（趁還沒過時前趕快讀一下 xD)
+10:49:22 <suhorng> 說到這, 之前聽這段訪問提到他用 Applicative 做平行化、強迫資料不能相依 # <mno2> http://www.haskellcast.com/episode/004-simon-marlow-on-parallelism-and-concurrency/
+10:50:13 <suhorng> 然後終於在他的 paper 中看到他怎麼做了XD  {- au 把那份 paper 放在 FLOLAC 講義中 -}
+10:52:21 <suhorng> 他做一個 data type, 某種程度上類似   data Fetch a = Done a | forall r. Blocked (Request r) (r -> Fetch a)
+10:53:21 <suhorng> 然後遇到 Applicative 時, (Block r1 k1) <*> (Block r2 k2) = ... 會把兩個 request 併起來, 最後把資料查詢的 request 一起發出去（平行）
+10:55:45 <mno2> suhorng: poor man's concurrency monad, lol
+10:57:34 <suhorng> mno2: 對呀, 而且他這次下的標題更有趣, There is **no fork**, 只要你用 Applicative 寫程式就自動幫你平行化XD
+10:58:54 <mno2> 我覺得我還是沒有通透 applicative 跟 monad 還有 arrow 的常用應用場景。特別是看到 Shake build system 的討論
+10:58:55 <mno2> http://neilmitchell.blogspot.sg/2014/07/applicative-vs-monadic-build-systems.html
+10:59:07 <mno2> Hakyll 也有討論過
+11:00:45 <suhorng>  真的沒用過 Arrow...（看看 proc x -> ...    a    <- f -<   b   那個語法 Orz）
+11:21:28 <mno2> http://horningtales.blogspot.sg/2006/07/recursion.html    前 Recursion 時代的懿事 lol
+11:24:48 <godfat> lol... black magic, black magic... (mumble)
+11:31:25 <suhorng> Impossible! Impossible!
+11:32:29 <suhorng> 幸運的是，現在我們可以把一個 procedure 丟給它自己 (逃)
+11:36:36 <mno2> 1960 是將近50 年前，想像 2060 年時候，我們也可以寫一篇跟人家說 2014 年邪教的現況 lol
+11:36:53 <godfat> XDDDDDD ++
+13:11:50 <favonia> mno2: 可是現在誰在說 impossible?
+13:14:01 <favonia> mno2: suhorng: 好像一時想不出有什麼震憾的功能啊！！！（還是我被邪教洗腦洗得太深了？）
+13:46:25 <mno2> http://vanemden.wordpress.com/2014/06/18/how-recursion-got-into-programming-a-comedy-of-errors-3/   Recursion 被塞到 spec 的過程是這麼政治不正確 lol
+14:13:13 <suhorng> 把函數存起來隨手帶著走算不算XD?
+14:14:09 <suhorng> first-class function 感覺有點遇強則強遇若則若, 我就想不到它可以怎麼用, 都是看別人的用法..
+14:14:15 <suhorng> *弱
+22:35:12 <suhorng> http://projects.haskell.org/pipermail/haskell-platform/2014-July/002964.html  # Mark Lentczner:   At long last: 2014.2.0.0 Release Candidate 1
+22:35:15 <suhorng> Whoa!
+23:28:40 <suhorng> 轉移一下, 好像有點太偏 Haskell 了 XD
+23:30:41 <CindyLinz> 你們傳福音去吧~~ (?
+23:30:54 <suhorng> 配合這件衣服 http://haskell.spreadshirt.com/oleg-already-did-it-A6499531 , 剛剛找到了一個 http://okmij.org/ftp/Streams.html#xml
+23:31:12 <suhorng> "Incremental XML parser and the XML parsing framework"
+23:32:05 <suhorng> 然後也有讓 attoparsec 吃 iteratee- 類的 package :P http://hackage.haskell.org/package/attoparsec-enumerator
+23:33:48 <mno2> pipes-aeson ?
+23:33:49 <suhorng> 當然也有 https://hackage.haskell.org/package/pipes-attoparsec , 真好 XD
+23:33:59 <suhorng> mno2: 喔喔喔!
+23:34:24 <mno2> or http://hackage.haskell.org/package/yajl-enumerator ?
+23:36:07 <mno2> 寫 Haskell 就是當你想到什麼覺得很不錯，就發現人家幾百年前就寫過了 lol  （雖然可能不 stable, 因為 paper 寫完了 xD）
+23:36:50 <CindyLinz> 我沒有把它做出來, 但我證明過了 (?
+23:37:20 <mno2> 應該是 trivial ，懶得寫 xD
+23:40:10 <suhorng> The LISP Curse 嗎..

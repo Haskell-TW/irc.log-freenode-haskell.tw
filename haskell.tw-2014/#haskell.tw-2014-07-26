@@ -1,0 +1,49 @@
+21:30:15 <suhorng> ICFP contest 規則更新了！因為 lignt'ning round 結束了XD
+21:30:58 <suhorng> 原本只要用 LISP Machine 寫小精靈 AI，現在也要用某種正常 8-bit CPU 寫鬼的 AI XD
+21:31:22 <suhorng> 等於是原本是跟主辦方的鬼 AI 打，現在是跟參賽者 PK XD
+21:31:31 <CindyLinz> 比賽結束, 開放給大家玩嘍?
+21:32:13 <suhorng> 還沒，結束的是第一輪，第二輪還有兩天
+21:32:40 <CindyLinz> 大家加油~~ (咦)
+21:32:48 <suhorng> 我都沒寫 qq
+22:30:41 <CindyLinz> 討厭... XD
+22:30:58 <CindyLinz> 我寫了一個 case of, 裡面的分項是 1~10
+22:31:14 <CindyLinz> 我想讓這些數字的個位數對齊
+22:31:22 <CindyLinz> 在 10 那邊就 indentation error 了 XD
+22:31:29 <suhorng> xDDDDD
+22:31:54 <suhorng> 01, 02, 03, ... 如何
+22:32:05 <CindyLinz> 這樣 08 不會出事嗎? @@"
+22:32:25 <CindyLinz> 可以過耶
+22:32:39 <petercommand> 不會變8進位吧XD
+22:32:43 <CindyLinz> 咦 017 也不是8進位
+22:33:08 <suhorng> XD
+22:33:14 <suhorng> 我剛剛也意外了一下
+22:33:49 <au> 0o17 才是八進位 #非常科學的
+22:34:41 <petercommand> 這...
+22:35:16 <suhorng> au: 那沒有 0b 跟 0d 耶 @@
+22:35:31 <suhorng> 所以 Haskell 可以有 0o0 表情
+22:36:51 <au> 可以自己加... https://hackage.haskell.org/package/binary-literal-qq-1.0/docs/Language-Literals-Binary.html
+22:37:11 <au> [b| 1001101 |] 要打比較多字就是了
+22:37:40 <au> > 0XD0
+22:37:41 <lambdabot>  208
+22:37:46 <au> > 0XDDD0
+22:37:47 <lambdabot>  56784
+22:38:09 <au> > 0XD -- 有光環的 XD ?
+22:38:11 <lambdabot>  13
+22:38:27 <petercommand> > 0x0
+22:38:28 <lambdabot>  0
+22:38:34 <suhorng> XDDDDD
+22:38:38 <suhorng> {b| ... |] ... xD
+22:39:39 <petercommand> > [b| 01010101 |]
+22:39:41 <lambdabot>  <hint>:1:15: parse error on input ‘]’
+22:39:52 <petercommand> > [b| 0 |]
+22:39:53 <lambdabot>  <hint>:1:8: parse error on input ‘]’
+22:40:13 <au> (macro 要先 import 才能用)
+22:41:10 <petercommand> > import Language.Haskell.TH.Quote; > import Language.Haskell.TH.Syntax; > [b| 010|]
+22:41:11 <lambdabot>  <hint>:1:1: parse error on input ‘import’
+22:41:25 <petercommand> 不能import嗎XD
+22:41:45 <petercommand> @import
+22:41:45 <lambdabot> Unknown command, try @list
+22:41:48 <petercommand> @list
+22:41:49 <lambdabot> What module?  Try @listmodules for some ideas.
+22:41:52 <petercommand> @listmodules
+22:41:52 <lambdabot> activity base bf check compose dice dict djinn dummy elite eval filter free fresh haddock help hoogle instances irc karma localtime more oeis offlineRC pl pointful poll pretty quote search slap source spell system tell ticker todo topic type undo unlambda unmtl version where

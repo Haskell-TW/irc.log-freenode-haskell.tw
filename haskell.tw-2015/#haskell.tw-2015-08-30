@@ -1,0 +1,16 @@
+19:37:59 <mno2> Haskell 只要碰到 tuple 之類的結構就瞬間變超難用的..
+19:38:22 <mno2> mysql-simple 就是一個很難用的 lib..
+19:39:17 <mno2> 而且 prepare 有 bug ..  不能用 insert into test (a, b, c) values (uuid(), ?. ?);
+20:00:42 <CindyLinz> mno2: 因為從 tuple constructor 無法 infer component 的 type 的關係嗎? # 19:37 < mno2> Haskell 只要碰到 tuple 之類的結構就瞬間變超難用的..
+20:00:52 <CindyLinz> 使得我們要一個一個手動標 type 這樣?
+22:33:38 <mno2> Yup
+22:34:34 <mno2> 然後也不好修補
+22:34:53 <mno2> 加一列減一列的
+22:45:18 <CindyLinz> 有體會過..... ._.
+23:11:44 <mno2> 當處理一個 legacy table 有 38 個 fields 的時候簡直想死
+23:24:11 <CindyLinz> 一次就使用 38 個 fields.. 覺得不管是什麼語言, 要改都會想死啊 @@"
+23:24:29 <CindyLinz> 通常是一次只拿其中少數幾個用吧 ^^|
+23:29:59 <mno2>  204
+23:30:07 <mno2> 但 haskell 特別想死 xD
+23:30:19 <mno2> 應該說平常小小的不便會突然被放大很多
+23:34:25 <CindyLinz> compile 階段就噴 error, 就好像我一句話都沒講完就被指正一樣難過 (?

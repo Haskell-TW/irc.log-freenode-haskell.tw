@@ -1,0 +1,32 @@
+01:54:42 <CindyLinz> 這是怎樣 XD "You generally use continuations when you are programming something, but you want somebody else to complete it. Common reasons include:"
+01:54:52 <CindyLinz> "You are programming a framework with callbacks that users supply"
+01:55:01 <CindyLinz> "You are defining a custom map engine for game players to program"
+01:55:09 <CindyLinz> "You are lazy"
+01:55:17 <CindyLinz> wwwwww # http://www.haskellforall.com/2012/12/the-continuation-monad.html
+01:56:23 <CindyLinz> "Like all good programming, the best solution is the laziest one."
+02:27:28 <monochrom> 那是不是心理測驗? XD
+12:00:04 <CindyLinz> au: 問問~ PerlYuYan 這個 module 前面的 Lingua::Sinica:: 是指什麼呀?
+12:04:01 <monochrom> Sinica = 中國, 中文.
+12:06:32 <monochrom> 舉例: 某學報跟隨國際學界風氣, 名字採用拉丁文, 因此叫 Academia Sinica, 意即 中國學院
+12:09:07 <monochrom> 又舉例: 官式英文也有時愛混些拉丁, 扮高深. 因此, 中英關於香港的聯合聲明, 英文名用 Sino-British
+12:09:59 <monochrom> 同理, 甲午戰爭就叫 Sino-Japanese War
+13:09:41 <CindyLinz> 喔喔..
+14:34:26 <miaoski> Lingua = 語言
+14:46:30 <CindyLinz> monochrom: 好奇... 你怎麼想出來 setjmp 這種用法的呀? @@" # http://www.vex.net/~trebla/haskell/cont-monad.xhtml
+22:28:10 <CindyLinz> monochrom: Generator and Yield 的例子好棒~~
+22:29:16 <CindyLinz> 嗯.. 但如果硬讀的話, 可能會吐血三升......ww
+22:52:15 <miaoski> CindyLinz: cont-monad 還是看不懂啦 >_< ~~~ 不過 CPS 做 generator / yield 不是本業嗎？
+22:52:46 <CindyLinz> miaoski: monochrom 的太難了.. 可以先看這一個 http://www.haskellforall.com/2012/12/the-continuation-monad.html
+22:52:52 <mno2> 人大概也總共四到五公升的血液 xD
+22:53:03 <miaoski> mno2: 別擔心，一升 = 0.5L
+22:53:15 <CindyLinz> 可是這一份完全沒有提到 exception, setjmp/longjmp, generator/yield 的用法
+22:54:16 <CindyLinz> FYI~~~ https://tw.knowledge.yahoo.com/question/question?qid=1405102113981
+22:56:01 <favonia> 如果一天吐 0.5L, 一個禮拜就三升了。
+22:56:51 <miaoski> mno2: 嗯，這樣講也不準確。新中國一升 = 一公升 XD ...
+22:59:59 <CindyLinz> miaoski: 如果 monochrom 只看最後一個 block, 純 demo generator/yield 的「用法」.. 應該是還好... 跟你看 python coroutine 或 go 的 goroutine 應該也不會差多少
+23:00:09 <miaoski> 舊制一升可以等於 200 ml, 日制可以是 1.8L (明治維新後) 要看 CindyLinz 想吐哪一種
+23:00:10 <CindyLinz> 只是把迴圈換成尾遞迴而已
+23:00:19 <CindyLinz> 可是只看這個就沒意思了 (? XD
+23:00:55 <CindyLinz> 倒數第二個 block 是 generator/yield 的「實作」... 這邊比較兇險
+23:01:16 <CindyLinz> 可是這邊就有意思了 (眼睛發亮)
+23:01:54 <CindyLinz> 是說我覺得也沒幾個人讀過 python 或 go 的 coroutine/goroutine 的實作對吧 XD

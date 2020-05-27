@@ -1,0 +1,74 @@
+00:36:19 <caasih> CindyLinz: code 讀是讀了， desugar 不會做，所以在寫 Syntax 的 pretty ，希望來得及派上用場
+00:36:47 <caasih> 今天遇到 pm5 ，聽他說之後不忙會繼續參加 :D
+00:37:19 <caasih> * 繼續用肌肉學 Haskell /_\
+00:51:59 <CindyLinz> 他之後... 要開辦 HoTT 讀書會, 怎麼可能不忙 XD
+00:54:58 <caasih> 大大們好可怕（發抖
+02:13:34 <Phonique> Hello, can anyone translate some chinese into english for me please?
+02:24:40 <Phonique> Anyone?
+02:27:23 <caasih> what kind of chinese?
+02:28:36 <Phonique> Mandarin traditional
+02:31:12 <caasih> Phonique: can you show some example? my English is not very good.
+02:31:20 <Phonique> 活着不多不少 幸福刚好够用
+02:31:21 <Phonique> 活着其实很好 再吃一颗苹果
+02:31:42 <CindyLinz> They're not traditional...
+02:31:59 <Phonique> AH, I was mistaken. My bad
+02:32:23 <CindyLinz> 不會翻 :(
+02:32:43 <CindyLinz> 其實第一句看中文我就有理解困難了 orz
+02:33:32 <caasih> 02:32 <CindyLinz> I don't know how to translate them :(
+02:33:42 <CindyLinz> The second line:  It's good to be alive.  I'll eat one more apple..
+02:34:16 <CindyLinz> I can't understand what the author want to say.... :(
+02:34:17 <caasih> the first line is hard to understand even in Chinese...
+02:34:52 <Phonique> Ah ok, but thanks!
+02:35:05 <Phonique> Is it because you dont know the context in which the author writes?
+02:36:03 <caasih> how about: to be alive more or less; happiness is just enough
+02:36:36 <caasih> * is not sure what he is talking about....
+02:37:47 <CindyLinz> I imagine a person who stop dreaming, and lives like winds...
+02:39:24 <Phonique> Hmm. I think I understand
+02:40:28 <Phonique> Could you translates one more for me CindyLinz?
+02:40:35 <Phonique> It's a longer one
+02:41:04 <Phonique> 他不记得自己手机号却记得每天给我烧热水，我本是个患得患失易作易躁的矫情逼却和他在一起的时间无比心安踏实，我们有那么多看上去的不同，可这些并没什么，因为隐形却又深谙的思想鸿沟更可怕吧。我不知道什么叫合适，我只知道我在他的眼睛里看到了更好的自己，看见了难得纯粹的快乐
+02:41:05 <Phonique> 。知福惜福
+02:46:46 <caasih> ZOMG
+02:57:30 <monochrom> 看來是 Markov chain 隨機生成. 都算先進喎, Markov chain 生中文一點不易
+03:05:06 <caasih> CindyLinz: 土法煉鋼，早上繼續... https://gist.github.com/caasi/dd4aad9765671eca7004
+03:05:36 <monochrom> 新出 Haskell Platform \∩/
+03:07:31 <caasih> 跟著喊 Haskell Platform 以免被發現不懂 \∩/
+07:17:40 <lancetw> 請教一下，趣學指南模組篇裡的 `import Data.List (nub，sort)` 逗號應該有錯吧 XD?
+07:20:32 <monochrom> 逗號沒錯
+07:22:38 <lancetw> 要用全形的？
+07:24:37 <monochrom> 咦, 讀錯了. 要用半型逗號, 即 ASCII 逗號
+07:25:37 <lancetw> 這邊是 typo 吧 XD，我讀書少不要騙我 (淚奔
+07:27:39 <monochrom> 李小龍才讀書不少呢, 哲學系畢業的, 分分鐘多過我讀電腦的
+07:32:11 <lancetw> “我們若執行 mulThree 3 5 9 或 ((mulThree 3) 5) 9，它背後是如何運作呢？ 首先，按照空格分隔，把 3 交給 mulThree。"
+07:32:23 <lancetw> 高階函數篇這邊也有 typo
+07:32:34 <lancetw> mulThree 未定義
+07:33:05 <lancetw> code 裡是 multThree
+07:34:53 <monochrom> 你願不願讀英文書?
+07:36:12 <monochrom> <-- 非常幸運生在香港, 然後又入讀英文名校
+07:38:39 <monochrom> <-- 又有興趣讀三國演義, 於是中文也不差 ^_^
+07:47:44 <lancetw> …..
+22:01:07 <mno2> http://www.info.kochi-tech.ac.jp/FLOPS2016/  Oleg 一直強力推銷 xD
+22:12:46 <caasih> CindyLinz: 想問問你今天提到做 HasPerl ，用到 Perl FFI 時，他的結構是？
+22:12:58 <caasih> 是 Perl 的樣子？還是 C 的樣子？
+22:13:19 <letoh> 竟然在高知!!!
+22:16:24 <mno2> letoh: 對啊，其實我因為地點有點想去
+22:16:38 <mno2> 不是去聽 paper 的，而是去觀光 xDD
+22:27:14 <letoh> 有道地土佐腔可以聽XD
+22:31:28 <mno2> 看篤姬的時候沒注意聽，只知道薩摩腔很怪 xD
+22:41:58 <CindyLinz> caasih: 是 C 寫的 perl 內部資料結構
+22:42:09 <CindyLinz> caasih: 定義也是用 C 寫的, struct 的長相之類的..
+22:42:39 <caasih> CindyLinz: 在 Perl 裡看起來是什麼樣子？
+22:43:00 <CindyLinz> 你問的是開發 HasPerl 的時候, 還是使用 HasPerl 的時候?
+22:43:13 <CindyLinz> 開發 HasPerl 的時候沒有寫 Perl; 使用 HasPerl 的時候只有寫 Perl..
+22:47:19 <caasih> 喔喔，那我先寫是 C 的形狀，你覺得不妥再改。
+22:47:40 <caasih> CindyLinz: 這行加 fmap 是為了把 Dec 變成 [Dec] 嗎？
+22:47:41 <caasih> https://github.com/CindyLinz/Haskell.js/blob/cca5df022a096f1bc0c5bb3cec202821e4d0908d/trans/desugar-template-src/DeriveTemplate.hs#L81
+22:51:18 <letoh> mno2: 薩摩跟高知是不一樣的  薩摩好像硫球王國，方言分布聽說蠻混亂的
+22:54:06 <CindyLinz> caasih: 對
+22:54:15 <CindyLinz> caasih: 把 a 變成 [a]
+22:54:57 <letoh> mno2: 高知其實還是相對鄉下的地方  在這種地方辦活動很不錯XD
+22:55:25 <letoh> mno2: 風景很棒  有去的話可以考慮四萬十川
+23:10:45 <caasih> CindyLinz: 好惹 https://github.com/CindyLinz/BYOHC-Workshop/blob/master/workshop-2015.12.10.md
+23:19:31 <CindyLinz> (Y)
+23:28:54 <petercommand> ghc 是甚麼原因 deprecate -fext-core 的呀?
+23:29:20 <petercommand> "it has no effect, and will be removed in GHC 7.12"

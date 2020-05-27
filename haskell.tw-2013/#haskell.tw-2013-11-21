@@ -1,0 +1,67 @@
+13:02:10 <Yu_lin> http://learnyousomeerlang.com/static/img/worm.png
+13:02:30 <Yu_lin> learn you some erlang 教 patterm match 時放的圖
+14:09:33 <CindyLinz> 還 蠻 噁 的 .....||
+14:34:24 <suhorng> functional thursday this month XD https://kktix.com/events/bef47a (@taipei)
+14:39:57 <CindyLinz> 這次走冰冷風?
+14:40:40 <suhorng> 這樣很冰冷 :-o?
+14:43:45 <CindyLinz> 對照一下... https://www.google.com.tw/search?q=%E5%86%B7%E8%89%B2%E7%B3%BB&client=ubuntu&hs=Ou4&channel=cs&tbm=isch&tbo=u&source=univ&sa=X&ei=j6uNUobIDoakkgXrroCwAg&ved=0CDgQsAQ&biw=1280&bih=669
+14:43:52 <CindyLinz> 嗯, 相似度 90%.. (逃)
+14:46:09 <suhorng> 馬上加熱
+14:46:15 <suhorng> 應該比較溫暖了(咦)
+14:57:42 <CindyLinz> 好啦.. 雖然怎樣還是輸上上次中式喜宴風.... XD
+15:54:40 <kanru> ommmmmmmm~
+18:10:35 <godfat> 所以 list 其實是一種 medusa, 砍掉一個頭會再長一個出來 XD
+18:11:15 <CindyLinz> infinite list 才有啊.. 不然砍一砍就砍光了 XD
+18:11:33 <godfat> XDDDD medusa 也是會死的 (?)
+18:23:50 <hashcat> 要不砍讓他一直長才會死
+18:26:20 <godfat> length . cycle
+18:46:35 <caasih> hashcat: http://www.giantitp.com/comics/oots0326.html XDDDDD
+18:48:35 <godfat> XDDD
+19:14:57 <hashcat> http://www.youtube.com/watch?v=DlkMs4ZHHr8
+19:44:34 <hashcat> cassih: 拿來當創業教材
+21:14:40 <letoh> CindyLinz: 個人認為 learn you some erlang 從頭到尾就是本噁書... 你看那封面...
+21:16:08 <letoh> 然後裡面那些插圖  不曉得為什麼就是給人可怕的感覺
+21:20:08 <letoh> http://learnyousomeerlang.com/static/img/tail-recursion.png  看這是什麼詛咒人偶嗎
+22:52:55 <petercommand> letoh: 小豬耶^^
+22:53:52 <petercommand> letoh: 用動物插圖來描述語言很棒呀XD
+22:54:27 <letoh> 唔  其實你自己翻一下就知道了  裡面奇怪的圖很多
+22:55:43 <letoh> http://learnyousomeerlang.com/static/img/black-knight.png  # 18x 自重
+23:04:19 <petercommand> XDD
+23:09:46 <jiajunwong> 请问为什么模式匹配函数时ca :: String -> String 不能写成 ca :: (String a) => a -> a 呢？
+23:11:01 <letoh> 可以用 [a] -> [a] 嗎?
+23:15:01 <hashcat> 正牌匪區人民
+23:15:14 <jiajunwong> 可以吧。。我定义了一个验证一下成功导入了
+23:15:33 <hashcat> jiajunwong: String是型別不是typeclass
+23:16:12 <hashcat> => 左邊是用來限制型別變數所屬的typeclass
+23:16:38 <hashcat> 我是冒牌的
+23:17:58 <jiajunwong> 哦，谢谢 :-)
+23:17:58 <hashcat> 你只能說一個型別變數應該屬於某個typeclass, 而不能說一個型別變數屬於某個型別
+23:19:13 <hashcat> typeclass 的意義是type的class, 包含一票type的class
+23:19:21 <hashcat> 我廢話真多
+23:19:56 <jiajunwong> 不会啦～ ;-)
+23:20:30 <hashcat> 這東西跟模式批配沒關係
+23:20:32 <jiajunwong> 我一直在看，只是不知道怎么回答，因为我初学haskell :)
+23:21:23 <hashcat> 類比集合論, 把型別當集合, 型別類就是集合的集合
+23:22:13 <jiajunwong> :-) get it~
+23:25:05 <hashcat> 讓我想到有一個haskell-cn本來還有兩個人, 後來剩一個
+23:26:20 <jiajunwong> →_→那我岂不是稀有品种
+23:26:51 <jiajunwong> 对了，我输入简体中文你看起来有困难吗？
+23:27:47 <letoh> 一般都猜得到吧  遇到不懂的再問一下就好
+23:27:47 <hashcat> 沒有
+23:28:42 <jiajunwong> (⊙o⊙)哦，我以为看惯了繁体字看简体字会很不习惯呢
+23:28:46 <jiajunwong> ;)
+23:28:55 <hashcat> haskell-cn那一個獨守空閨很久, 想佩服一下噗噗
+23:29:21 <jiajunwong> 我去拜访一下→_→
+23:33:39 <jiajunwong> 在频道列表里没有看到。。。
+23:34:03 <hashcat> 很多軟件預設少於5人不會顯示
+23:35:26 <jiajunwong> 原来如此。。。
+23:36:22 <jiajunwong> 在大陆高校知道xchatIRC的人很少，所以应该比较正常的。。大陆一般都用QQ。。
+23:36:57 <hashcat> 在qq你聽過hellcat嗎
+23:38:02 <jiajunwong> 没有╮(╯_╰)╭
+23:38:30 <hashcat> 那沒事 :)
+23:40:35 <jiajunwong> 额。。
+23:42:12 <jiajunwong> 我们马上断网了，睡觉去了(～﹃～)~zZ  再见～
+23:46:44 <hashcat> jiajunwong: byebye
+23:53:08 <suhorng> 應該以前有出現過, 不過還是看一次笑一次 http://james-iry.blogspot.tw/2009/05/brief-incomplete-and-mostly-wrong.html
+23:53:29 <suhorng> 「1990 - A committee formed by Simon Peyton-Jones, Paul Hudak, Philip Wadler, Ashton Kutcher, and People for the Ethical Treatment of Animals creates Haskell, a pure, non-strict, functional language. Haskell gets some resistance due to the complexity of using monads to control side effects. Wadler tries to appease critics by explaining that "a monad is a monoid in the category of endofunctors, what's the problem?"」
+23:54:38 <suhorng> 「1936 - Alonzo Church also invents every language that will ever be but does it better. His lambda calculus is ignored because it is insufficiently C-like. This criticism occurs in spite of the fact that C has not yet been invented.」

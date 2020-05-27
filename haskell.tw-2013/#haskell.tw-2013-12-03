@@ -1,0 +1,123 @@
+00:32:56 <CindyLinz> mno2: 那個.. fully_qualified_funcs 裡面各項, 它們的 fqn share 了同一個 obj 所以內容完全一樣... QQ
+00:33:32 <CindyLinz> mno2: 然後.. fetchExamples 要改成 async 的, 不然不方便 fetch remote 的東西..
+00:33:34 <mno2> CindyLinz: func-name 也一樣嗎？
+00:33:41 <CindyLinz> mno2: 對, 全部一樣
+00:34:00 <CindyLinz> 只是剛好我看的 module  Network.Socket 只有 func-name 有必要不一樣
+00:34:10 <CindyLinz> 所以一開始我在想為什麼這一欄會 share
+00:34:18 <CindyLinz> 研究研究發現其實整個 obj 都 share
+00:34:20 <mno2> O嗯嗯
+00:34:28 <mno2> 寫錯了
+00:35:14 <mno2> async 不是可以用 back call ? 不能直接包在 function 裡面嗎？
+00:35:38 <CindyLinz> 我是讀 .js 版 XD
+00:35:50 <CindyLinz> 但我想應該不能包在 function 裡吧
+00:36:01 <CindyLinz> 如果外面是要這個 function 的 return
+00:36:12 <CindyLinz> 裡面 async 了, 外面就拿不到結果了才對...
+00:36:27 <CindyLinz> 這是底層機器語言 (javascript) 說的... XDDD
+00:37:59 <mno2> backcall 不就是把 async 寫成 sync 的樣子
+00:38:15 <CindyLinz> 那 compile 出來的 javascript 長怎樣? @@"
+00:38:38 <mno2> 我不知道耶，我還沒寫 server 所以就還沒寫 backcall
+00:38:46 <mno2> 你可以去 livescript 網站看看
+00:38:54 <CindyLinz> 我以為呼叫 fetchExamples 的地方就要用 backcall 的方式寫吧
+00:39:12 <CindyLinz> 不要逼我學 livescript... QQ
+00:40:35 <mno2> 用到 async 的 lib 再寫不就好了？
+00:40:56 <CindyLinz> 我可以直接改 hackage.js 嗎? QQ
+00:41:25 <mno2> 那這樣 livescript 不就白寫了 xD
+00:41:41 <CindyLinz> 所以.. 所以我才丟 issue 給你嘛.. QQ
+00:41:44 <CindyLinz> 我的如意算盤是
+00:41:57 <mno2> live script 對我最大的價值就是 back call  xD
+00:42:08 <CindyLinz> 如果你把這邊 livescript 改好了, 我就寫一個 什麼什麼.js 把 fetchExamples 函數換掉
+00:42:26 <CindyLinz> 那就不會破壞掉你 ls 的結構呀
+00:43:28 <mno2> 喔喔，也可以啊，不過我不確定你要寫什麼功能
+00:43:39 <CindyLinz> 寫後端, 用 hpaste
+00:44:04 <CindyLinz> 在 author 的地方 encode package 和 method
+00:44:08 <mno2> 後端你要用什麼寫？
+00:44:28 <CindyLinz> 版號就存在 content 裡面, 因為我想跨版本還是很有參考價值的
+00:44:48 <CindyLinz> 後端... 後端是 hpaste 寫的, 我不寫 XD
+00:45:16 <CindyLinz> 原本想用 HaskellWiki, 剛剛找找發現不給創帳號了..
+00:45:25 <CindyLinz> 然後 HaskellWiki 又有擔心被 spam 的問題
+00:45:30 <mno2> 不太懂.. 你是要寫「寫後端」的動作嗎？
+00:46:01 <CindyLinz> 就是跳一個 textarea 給 user 貼 example, 還有把貼入的 example fetch 出來的功能啊
+00:46:19 <CindyLinz> 寫後端, 還有讀後端 XD
+00:48:18 <mno2> 後半段跟我想得有點不太一樣
+00:48:24 <CindyLinz> XDDD
+00:48:46 <CindyLinz> 我連 index 都想好了 XD
+00:49:09 <mno2> 我覺得最後顯示的 example 是投票的，不是想加就加。畢竟到時候有人貼錯了還要砍
+00:49:45 <mno2> 有點像是 recaptcha 的感覺
+00:49:50 <CindyLinz> 沒有署名, 大家都可以改啊
+00:50:37 <mno2> 那這樣就要定期 snapshot  xD
+00:50:43 <mno2> 也是可以啦
+00:50:50 <mno2> 這樣做反而簡單
+00:51:18 <CindyLinz> hpaste 可以 browse
+00:51:27 <CindyLinz> 不過我原本想用 private 就會不能 browse
+00:51:42 <CindyLinz> 可以開一個 hpaste 來放更新列表.. 那就有 browse 了 XD
+00:52:06 <mno2> NoSQL ...
+00:52:16 <CindyLinz> 我們這的確是 document base 的應用呀
+00:53:09 <CindyLinz> snapshot 什麼的, 要有自己的 backend 才做 ^^|
+00:53:18 <CindyLinz> 才開始跑 :p
+00:53:43 <CindyLinz> 但還是不需要 storage.. 偶爾想到筆電開起來跑一下也就行了 :p
+00:54:12 <CindyLinz> 先去睡覺 ^^|
+00:54:21 <mno2> 就是要相信不會有人來亂就是
+00:55:51 <CindyLinz> 紅了才會有人亂呀 ^^
+00:56:48 <CindyLinz> hackage 這麼冷僻嚴峻的地方, 還好啦 :p
+18:56:49 <CindyLinz> 覺得 Neo4j 的 query language 蠻有趣的.
+18:57:16 <CindyLinz> 用 pattern matching 的方式來下.. 類比於 SQL 的 where
+18:57:32 <CindyLinz> 才看一點點而已 :p
+18:57:59 <CindyLinz> 好像覺得... 一個這樣的 DB 「好用不好用」, 主要就是看 query language 設計得方便不方便了?
+22:18:24 <godfat1> 然後就接到王垠的一切都是程式語言，所以都應該用 scheme? XD
+22:19:34 <CindyLinz> scheme / lisp 應該要當中介語言吧... QQ
+22:20:11 <CindyLinz> 啊然後我說的是 Neo4j 裡一個叫作 Cypher 的語言.. 可能不是初代 Neo4j 就有的東西....
+22:20:22 <godfat> 說實在我也還是沒辦法接受 lisp 語法...
+22:23:52 <CindyLinz> 境界不足.. (逃)
+22:24:15 <godfat> 這個境界的定義是 lisp 境界的話我同意 XDD
+22:24:57 <godfat> 話說原來 netcat 種類這麼多... 不知道哪個好 @@
+22:24:57 <godfat> http://d.hatena.ne.jp/EijiYoshida/20111109/1320800716
+22:25:06 <suhorng> 肉眼parse多層括號速度的境界(誤)
+22:26:01 <godfat> 很多人的說法都是要編輯器輔助，可是我還是覺得好的語言不應該靠外在的輔助
+22:26:01 <godfat> 我的意思是如果夠好的話，何必需要額外的輔助..?
+22:26:02 <godfat> 當然很多其實變成「環境」而非只是語言了..
+22:27:08 <suhorng> 語法可能是一回事
+22:27:27 <suhorng> 不過覺得若有 IDE 的眾多功能應該很方便?
+22:28:09 <godfat> 我剛剛心裡想的是，例如 lisp 有括號顏色對齊的功能之類的..
+22:28:32 <CindyLinz> 王垠的想法是靠 IDE 輔助吧
+22:28:37 <godfat> 不過說來這也滿有趣的，或許我們可以把顏色做到語法上 XD
+22:28:47 <CindyLinz> 應該不是直接肉眼看純文字
+22:28:48 <godfat> 我就很不喜歡靠 IDE 輔助這種想法 :(
+22:29:12 <suhorng> 這個..沒有括號顏色對齊幾乎不可寫阿...
+22:29:13 <godfat> 這樣在紙上寫程式時，還不能用鉛筆，要用色鉛筆或蠟筆 (?)
+22:29:15 <CindyLinz> 但語法如 scheme 這麼簡單的.. IDE 輔助可能就沒那麼討厭了?
+22:29:24 <suhorng> 真的XD 連粗體都不能
+22:29:47 <suhorng> 話說他提過的 ParEdit mode (某 emacs mode)是真的對 lisp 那種括號操作很好用...
+22:29:49 <CindyLinz> godfat: netcat... 不就系統預載哪個就用哪個嗎, 挑什麼!? XD
+22:29:51 <godfat> 做起來是一回事，我只是覺得這樣感覺沒有 self-conatined 之類的感覺
+22:30:51 <godfat> 有機會我要重拾 lisp 時，可能先找找編輯器好了 ><
+22:30:52 <godfat> ParEdit 先記著... XD
+22:30:52 <godfat> CindyLinz, 可是用法不太一樣，我只想記得一種用法 orz
+22:30:58 <CindyLinz> 的確是不太一樣.. orz
+22:31:25 <CindyLinz> listen tcp 的時候, BSD 版的不用 -l, linux 的要 -l...
+22:32:08 <godfat> 害我現在超怪的，在 mac 上丟到 linux 上參數要不一樣 = =...
+22:32:08 <godfat> 有時候換來換去會打結... 我現在想統一灌一種了
+22:36:36 <suhorng> http://www.haskell.org/pipermail/haskell-cafe/2013-November/111210.html Galois在招internship耶XD 可是在波蘭..
+22:36:44 <suhorng> 婀不是
+22:36:58 <suhorng> 是波特蘭orz
+22:37:28 <godfat> 我也把波特蘭搞成波蘭過 XD
+22:37:46 <suhorng> 地理上好像有段距離QQ
+22:38:11 <godfat> New York 和 York 也差滿遠的 XD
+22:38:28 <suhorng> XDDDDD
+22:58:47 <godfat> 我決定改用 socat, 這樣我不用判斷 netcat 是啥版本
+23:02:06 <letoh> socat 是接水管用的那個工具嗎?
+23:02:32 <godfat> 嗯，看起來好強大
+23:02:33 <godfat> http://stuff.mit.edu/afs/sipb/machine/penguin-lust/src/socat-1.7.1.2/EXAMPLES
+23:02:56 <letoh> 很久以前有用過 socat，還不錯用
+23:03:28 <godfat> 不過我也希望 tcp 可以省略不打，因為我應該也只會用 tcp
+23:41:55 <CindyLinz> sonet 好像有點強大... 囧
+23:42:31 <godfat> sonet 聽起來好像以前的 isp
+23:42:51 <letoh> sonet XD
+23:43:04 <letoh> 那是 so-net
+23:43:09 <petercommand> 現在不存在了?
+23:43:16 <letoh> 還在啊
+23:43:31 <godfat> 我很久沒聽到了 XD
+23:43:35 <petercommand> XD
+23:44:10 <petercommand> so-net沒甚麼存在感XD
+23:44:54 <CindyLinz> socat XD
+23:56:31 <mno2> http://www.reddit.com/r/haskell/comments/1rx7mk/whats_the_deal_with_erik_meijer/    王垠翻版？ xD
+23:57:27 <mno2> 我想要 nyancat

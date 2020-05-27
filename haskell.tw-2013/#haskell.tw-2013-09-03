@@ -1,0 +1,49 @@
+01:03:18 <monochrom> CindyLinz: 可考慮 http://hackage.haskell.org/package/haskell-src-exts , 算是中間落墨
+01:09:44 <CindyLinz> monochrom: 你是說 parse Haskell 的?
+01:53:22 <monochrom> 是
+10:06:45 <CindyLinz> 嗯嗯.. 也來讀一讀 @@"
+12:43:33 <Yu-Lin> 本來想說看一點 ocaml 的資料，因為 types 那本用的是 ocaml
+12:43:58 <Yu-Lin> 結果看到網路上一篇寫「想跟女友 ml，結果女友說....」Orz|||
+12:44:08 <_13h> ocaml 還不錯  不過你之前不是說要看 sml ?
+12:44:27 <_13h> 那個 ml 是什麼意思?
+12:45:14 <Yu-Lin> make love
+12:45:41 <Yu-Lin> 對，其實我上次去天攏是想找找 sml 的資料，結果就看到 types 那本
+12:49:29 <_13h> sml 實體書不太好找  我都先看電子書
+12:49:51 <_13h> 免費的電子版資料應該有好幾本 (sml / ocaml)
+12:53:55 <Yu-Lin> 我目前預計先把 types 那本買下來
+12:54:03 <Yu-Lin> sml 可能要稍微延後一下
+12:54:10 <Yu-Lin> 手上還有好幾本沒看完的
+14:35:06 <mno2> CindyLinz: 也許這對你有幫助？ http://www.reddit.com/r/haskell/comments/1lkboo/control_text_lcd_with_haskell_code_the_code_runs/
+14:35:12 <mno2> 看起來蠻小的
+14:35:18 <mno2> http://ajhc.metasepi.org/
+14:45:06 <CindyLinz> hmm... 標準 Haskell 的部分, JHC, GHC 支援的 syntax 應該是一樣的?
+14:46:54 <mno2> 不確定 JGC 有沒有到 Haskell 2010 耶
+14:47:00 <mno2> JHC
+14:48:33 <CindyLinz> 糟糕我甚至不知道 2010 和 98 的差異在哪 XD
+14:49:29 <mno2> scm 有寫過文章介紹過的樣子？
+14:50:31 <CindyLinz> http://www.iis.sinica.edu.tw/~scm/ncs/2010/07/haskell-2010-report/
+14:50:55 <CindyLinz> 太好了, 好像不太重要... (逃)
+15:10:45 <Yu-Lin> 沒有 pattern guards 我會很想哭XD
+15:14:46 <CindyLinz> 這是程度問題.. 如果在 type inference 都沒有的環境, 你不會為了缺少 pattern guards 而哭... 有很多別的東西可以哭 XD
+15:14:59 <Yu-Lin> XDD
+16:41:49 <Yu-Lin> 呼叫 letoh
+16:52:01 <_13h> 怎麼了?
+16:53:33 <Yu-Lin> 想問他 forth 的問題
+16:53:40 <Yu-Lin> 看來好像不再
+16:53:48 <Yu-Lin> s/再/在/g
+16:53:59 <_13h> 我可以幫忙轉達XD
+16:54:04 <Yu-Lin> XD
+16:54:35 <Yu-Lin> 我想知道 user define word 是怎麼被處理的、compile 的
+17:00:26 <b4283> XD
+17:00:46 <_13h> 其實原理跟 c runtime 做的事很像
+17:01:38 <_13h> 如果你會寫 asm 的話，compile 完的結果其實就是跟 asm + c calling convention 一樣
+17:04:06 <_13h> Yu-Lin: forth 誕生於 1958，當時的背景是 c 可能還沒誕生，cpu 又沒有 call / ret 指令的時代
+17:05:10 <Yu-Lin> 阿阿，這樣有點理解了XD
+17:06:16 <_13h> 所以 forth 本身就模擬了 c runtime 處理 function call 以及 runtime stack frame 的管理機制... 說模擬也很怪，那時根本就還沒有 c，應該是反過來才對XD
+17:21:13 <_13h> 我看了一下那篇 jhc + mbed 的 reddit thread
+17:26:50 <_13h> jhc 看起來好像蠻神奇的，不過 3000 行 c code 還是有點可怕...
+18:38:46 <cataska> Yu-Lin: 其實 letoh 跟 _13h 如同是光與影的存在...
+18:54:00 <b4283> 又如同汪達和巨人 ...
+21:27:05 <letoh> 印象中 Yu-Lin 有跑 python.tw，我還以為他知道XD
+22:00:46 <yulin> 我只偶爾在 python.tw 閃現一下，基本還是泡在 haskell.tw
+22:01:14 <yulin> :$

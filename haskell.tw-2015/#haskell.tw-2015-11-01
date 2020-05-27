@@ -1,0 +1,4 @@
+00:43:03 <monochrom> 我用 hxt, 算不算?
+21:36:29 <mno2> https://www.reddit.com/r/haskell/comments/3qix1e/how_does_ghcs_garbage_collection_work_on_llvm/
+21:36:36 <mno2> 原來 llvm 還有 gc
+21:41:40 <suhorngT> 我記得是有 GC 的介面, 可以自己做插件去產生 code

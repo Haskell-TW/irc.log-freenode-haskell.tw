@@ -1,0 +1,36 @@
+00:47:08 <suhorngT> mno2: 非常有趣~ 之前看 paper 本來以為 tagless-final 只是當寫 interpreter 時 (1)避開使用 GADT  (2)不必定義 data Value = I Int | F (Value -> Value) 這種東西並在 eval 裡對它做 pattern matching (runtime class checking)   (3)用 host-language 做 type checking
+00:48:46 <suhorngT> 不過當 interpreter transformer (型別上看起來很像 monad transformer)出現後一切都變了 變成可以寫一堆 interpreter transformer (例如建立靜態資訊並做一些最佳化), 它們可以 compose, etc. 整個看起來非常 systematic & modular
+00:49:44 <suhorngT> Finally Tagless, Partially Evaluated 也是滿老的東西了(2009), 不過沒想到到現代演進這麼多XD
+00:51:14 <suhorngT> 嗯...其實是 prior 2009
+00:52:20 <suhorngT> 然後每聽一個段落想說 "嗯...那我想要做 xxx 的話可以 yyy, 不過會遇到 zzz 的問題" 然後下一段 Oleg 就演示怎麼解 zzz....
+00:52:53 <CindyLinz> 他明明也好幾次說 "嗯... Generally, you don't!"
+00:53:15 <CindyLinz> XD
+00:54:15 <suhorngT> 不是耶~ 不是那種問題... 而是像 neg-neg elimination 跟 forall repr. Semantics repr => ...
+00:54:38 <CindyLinz> suhorngT: 因為你被 Oleg 摸透了 XD
+00:56:04 <suhorngT> CindyLinz: O_____O 不是吧 明明就是 → http://this-plt-life.tumblr.com/post/41439555366/when-oleg-shows-a-newbie-how-to-solve-a-problem ← 的關係...
+00:56:55 <CindyLinz> suhorngT: 我有在聽別人的提問啊~~~ 你沒有, 因為你只.... (ry
+00:57:29 <suhorngT> @@ 我有聽呀
+00:57:30 <lambdabot>  我有聽呀
+00:58:01 <CindyLinz> XD
+00:59:17 <suhorngT> 不過 generally 的那些問題 generally 跟 tagless-final 本身無關
+01:02:34 <CindyLinz> repr a 好邪惡..
+01:04:40 <suhorngT> "One may think that only those DSL can be embedded in Haskell whose type system is a subset of that of Haskell. To counter that impression we show how to ...." 哇又是另一個 zzz xDDD http://okmij.org/ftp/tagless-final/course/index.html
+01:05:19 <CindyLinz> 他從某一頁開始突然變超難..
+01:05:35 <CindyLinz> 啊, 就是那個 RR
+01:05:55 <CindyLinz> bwd, fwd
+01:06:15 <CindyLinz> map1, map2
+01:06:27 <CindyLinz> 竟然開始用序號在命名了 orz
+01:07:12 <suhorngT> map1 map2 倒是還跟 liftM liftM2 差不多等級  那裡跟 monad transformer 語法上相當像
+01:07:37 <CindyLinz> 形狀有既視感..
+01:08:14 <suhorngT> 不過現有標準的 monad transformer 只有 lift, 沒有 (m a -> m b) -> t m a -> t m b 之類的東西有些地方好像會不方便XD
+01:09:01 <suhorngT> CindyLinz: 這種可以 bwd, fsd (對應的話... runXxxT, lift)的感覺跟以前要串 exception 遇到的困難感覺好像XD
+01:11:27 <CindyLinz> monad peel
+01:11:41 <CindyLinz> 還有 monad control (hackage)
+01:11:48 <suhorngT> tagless final peel (X)
+01:12:50 <CindyLinz> 覺得.. monad peel 比較漂亮. 而 monad control 用了一些 GHC extension, 然後雜魚角色看起來比較多, 一時不知道誰的責任是什麼 @@"
+01:13:00 <CindyLinz> 但聽說效率好很多... (作者說
+01:16:44 <suhorngT> 做得快就要做的醜(筆記
+01:18:48 <CindyLinz> yinwang 說, 漂亮的程式效率低, 是 compiler 的錯. 應該要改善 compiler
+22:49:19 <suhorngT> https://www.facebook.com/groups/functioanl.thursday/permalink/1500548110260211/
+22:49:28 <suhorngT> Foldable xDDD
+22:49:36 <CindyLinz> XDD

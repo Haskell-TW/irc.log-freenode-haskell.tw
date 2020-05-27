@@ -1,0 +1,7 @@
+23:11:28 <chao-hongmeng> http://www.haskell.org/pipermail/haskell/2014-April/024137.html
+23:13:11 <chao-hongmeng> 就在 Heartbleed 慘烈的一天，GHC 7.8.1 release 了。  (我是 mno2)
+23:14:11 <b4283> nice
+23:25:42 <CindyLinz> Role checking!
+23:26:03 <CindyLinz> Full iOS support 是什麼意思!
+23:32:00 <chao-hongmeng> 不知道，可能是背後 code gen 生的 code 比較符合 iOS 架構吧
+23:33:09 <chao-hongmeng> https://ghc.haskell.org/trac/ghc/wiki/Building/CrossCompiling/iOS

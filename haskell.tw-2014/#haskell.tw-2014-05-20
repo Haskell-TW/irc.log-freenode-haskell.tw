@@ -1,0 +1,360 @@
+00:04:29 <CindyLinz> 原來 cache line 這麼小.. 64bytes 或 32bytes
+00:07:20 <petercommand> CindyLinz: 剛個那個試藥的，oom不一定是他被殺死呀XD
+00:07:29 <petercommand> 可能是別的process XD
+00:08:42 <CindyLinz> petercommand: 對, 所以不能死的都要事先試完藥 XD # 23:48 < CindyLinz> 不過這前提是不能死的 process 都已經把自己用的記憶體洗過一遍, 不然他在那邊試藥的時候, 可能是別人死....ww
+00:09:58 <petercommand> 嗯嗯
+00:28:16 <CindyLinz> c9sloud: 好文....
+00:29:27 <c9sloud> CindyLinz: which one?
+00:33:50 <CindyLinz> 長的 XD
+01:12:44 <c9sloud> CindyLinz: 剛剛講試毒的問題 XD 應該可以用 memory pool 來做呀，一開始 runtime 就去要好幾塊記憶體，先佔地為王 XD
+01:13:13 <c9sloud> RTOS 裡面每個 process 應該都有 priority, priority 高的話，應該不會被砍
+01:13:25 <CindyLinz> c9sloud: 可是只要一個 byte 有毒, 那個 process 就會馬上死欸
+01:14:13 <c9sloud> 噢
+01:14:21 <c9sloud> 你是說 addr line 的問題
+01:15:04 <CindyLinz> 欸沒有, 那個 OOM killer 砍的依據是用到最後一塊記憶體+1 的 process 死, 不是砍最低 priority 的來清出記憶體給高 priority 的 process 用 @@"
+01:15:24 <CindyLinz> addr line 是講到 alignment 的話題
+01:15:59 <c9sloud> 哦哦
+01:16:06 <CindyLinz> 不過, 有這正規的關掉快樂 malloc 的方法, 應該還是選這個來用了 ^^| # 23:52 < CindyLinz> 嗯 echo 一個 2 pipe 給 /proc/sys/vm/overcommit_memory 就可以把這個假成功現象關掉 (by proc (5))
+01:17:24 <CindyLinz> (by monochrom)
+01:18:22 <c9sloud> http://www.freertos.org/a00111.html # freeRTOS 有提到 malloc 不可靠的問題
+01:18:46 <c9sloud> CindyLinz: overcommit_memory?
+01:19:27 <monochrom> "快樂malloc" XD
+01:20:54 <c9sloud> 你們之前都有研究過 kernel 喔 @@? XDD
+01:21:11 <CindyLinz> 就像快樂體重計, 顯示的體重會隨機減個五公斤之類的... ww
+01:21:26 <CindyLinz> c9sloud: 嗯嗯 overcommit 就是不管有沒有也跟你說有
+01:22:17 <CindyLinz> c9sloud: 我也是偶爾要把硬硬的 C 寫在軟軟的 Perl 裡面啊.. OAO
+01:23:03 <c9sloud> 哦哦哦!
+01:24:02 <CindyLinz> c9sloud: 那個 JSON::XS 的 utf8 處理方式不合我們的用法, 而另外它有時候會出 "2" 有時候會出 2 會讓 object-c 的 client 很麻煩, 所以我們在它的前後自己包了一層處理, 把資料 normalize
+01:24:32 <CindyLinz> 結果 JSON::XS 超快, 我們包的那一層花了 33 倍時間.....ww
+01:25:21 <CindyLinz> 然後工程師又喜歡亂包東西進 JSON, 反正多包不會爆, 少包才會爆, 所以就好大一包...ww
+01:26:11 <CindyLinz> 只好用 C 重包了...
+01:32:36 <monochrom> 為甚麼我次次寫 binary search 都犯這錯誤呢? 把 (hi+lo)/2 寫錯成 (hi-lo)/2
+01:33:09 <c9sloud> objective-c? :-p
+01:34:28 <c9sloud> CindyLinz: overcommit_memory 是在主機爆掉的時候學到的? :-p
+01:40:02 <CindyLinz> c9sloud: 有 ios client 啊
+01:40:27 <monochrom> 我的實驗發現 sbrk 也是快樂的. 我有部機只有 2G RAM, 1.5G swap, 但我拿到了 12G.
+01:40:41 <CindyLinz> 太快樂了!
+01:41:08 <CindyLinz> 啊.. document 沒有說的事.... Q_Q
+01:41:11 <monochrom> mem到用是方恨少
+01:41:23 <monochrom> 打錯字
+01:41:27 <monochrom> mem到用時方恨少
+01:42:05 <CindyLinz> XD
+01:45:01 <monochrom> 兒時見過解釋"書到用時方恨少"的漫畫. 有個小朋友想拿到被父母藏到櫃頂的糖果, 就叠起很多書來墊高自己, 可惜書不夠多.
+01:45:12 <CindyLinz> ................||
+01:45:58 <letoh> 最好是精裝本  平裝本疊起來很容易倒XD
+01:48:57 <monochrom> 不過sbrk很奇怪. 我拿 4000000000 它不准. 但我每次拿 3000000000, 拿很多次, 它就每次都准. 然後呢, 嘗試用 binary search 找出準確限額, 又發現次次限額都有點不同
+01:50:51 <CindyLinz> 應該是容易判斷為不可行的就馬上跟你說, 不然就亂說可行的設計? @@"
+01:51:24 <CindyLinz> 4G 明顯超過 2G + 1.5G 了就很好判斷這樣?
+01:51:44 <monochrom> 唔, 這個限額會不會剛巧是未用的 RAM+swap? 讓我開動一部真的有 12G RAM 的機試試
+01:54:07 <CindyLinz> 我猜一種可能是實際上剩下的記憶體量 (mem+swap)... 那些 3G 3G 要走的部分因為沒有開始用所以沒有耗掉剩下的記憶體量
+01:55:15 <CindyLinz> 欸不對 不該這麼絕, 也許要用到的時候那些被佔走的剛好被空出來了
+02:02:26 <c9sloud> https://github.com/google/gumbo-parser # A pure-C HTML5 parser by Google
+02:02:30 <c9sloud> 這太猛了
+02:02:58 <c9sloud> 為了寫爬蟲已經開發到一個極致的程度 XD
+02:03:19 <CindyLinz> 好吧 google 的確用得著 XD
+02:04:50 <c9sloud> CindyLinz: 我才知道 re2 是 Russ Cox 寫的 XD.. 應該有一票做 regexp 的人都被 Google 挖去了吧 XD
+02:05:18 <c9sloud> rob pike 跟 russ cox 以前都寫過 plan9 的 re engine
+02:08:05 <CindyLinz> hmm  optimize google search 打的搜尋條件做的自動機?
+02:10:01 <monochrom> 在 12G 的機上試, 果然每次限額大約 11G, 接近未用的記憶量. 結論是: 每次有限制, 但次數不限, 可以螞蟻搬家
+02:12:56 <CindyLinz> 都沒真用嘛 :p
+04:28:50 <favonia> c9sloud: 應該的啊，這就是 Google 實力 xDDD
+04:31:58 <favonia> c9sloud: 不過他說 Execution speed. Gumbo gains some of this by virtue of being written in C, but it is not an important consideration for the intended use-case, and was not a major design factor.
+09:20:50 <mno2> http://cs.stackexchange.com/questions/3028/is-category-theory-useful-for-learning-functional-programming
+09:21:01 <mno2> [Is Category Theory useful for learning functional programming?]
+14:46:06 <CindyLinz> 啊我想到要丟複數個 exception 可以怎麼做了..
+14:46:46 <CindyLinz> 嗯, 就是之前想到, 在 finally 或 onException 這種 clean up 的 code 裡面, 因為它們 clean up 完以後會重丟原本發生的 exception
+14:50:15 <CindyLinz> 所以如果 clean up 的時候不幸也發生了 exception, 就.. 只能選擇蓋掉原有的 exception, 或是這個 exception 就當沒發生過..
+14:53:05 <CindyLinz> 嗯, 可以自己新加一個 exception 叫作 MultipleException, 然後把所有的新舊 exception 都裝進去 XD
+14:53:21 <CindyLinz> 但是原有的 handler 不會認得它.. XD
+16:08:27 <CindyLinz> c9sloud: 唉唉, 我們家作 git gc 如果沒作設定的話都會有 out of memory 的問題...ww
+16:14:35 <darkx> CindyLinz: 你們不是 svn (咦
+16:14:51 <CindyLinz> darkx: 都有啊
+16:15:14 <CindyLinz> darkx: There Is More Than One Way To Do It (Y)
+16:16:02 <darkx> wwwwwwwwwwwwww
+16:19:00 <mno2> git-svn
+16:21:08 <CindyLinz> darkx: perl 版本也好幾個, 所以我寫東西有時候還要考慮版本相容問題, 如果要用在舊配置的機器上不能用到新功能, 或是會有自動 fallback 的寫法 @_@"
+16:21:59 <c9sloud> CindyLinz: 為什麼會有 out of memory .. XD 你們是把 binary 塞進去嗎 XDDD
+16:22:19 <c9sloud> CindyLinz: 沒有用 use 5.12.0; 之類的宣告嗎?
+16:23:27 <c9sloud> https://travis-ci.org/c9s/r3/builds/25582512 Travis CI 終於 build 成功了 XD
+16:23:33 <c9sloud> CindyLinz: r3 有 bug fixes
+16:23:48 <c9sloud> memory allocation 的修正 XD
+16:24:21 <CindyLinz> c9sloud: 用了 use 5.12.0; 之類的宣告就馬上炸了啊 XD
+16:24:40 <CindyLinz> 在 5.8 的機器上第一行就決定不能用了 XD
+16:24:50 <c9sloud> 你們用 5.8 !
+16:24:51 <c9sloud> XD
+16:25:07 <c9sloud> 5.10 比 5.8 快很多耶
+16:25:11 <c9sloud> 5.12 也是
+16:25:15 <CindyLinz> 5.8 ~ 5.18 都有喔~ XD  現在大宗是 5.14 就是了
+16:25:21 <c9sloud> XD
+16:25:27 <c9sloud> 究竟 XD
+16:25:35 <c9sloud> 你們 server 沒有統一版本喔?
+16:25:47 <c9sloud> 還是說比較早期的機器就不想去動
+16:25:49 <c9sloud> 怕爆炸
+16:25:49 <c9sloud> XD
+16:25:59 <CindyLinz> 對啊.. 升 OS 也很抖..
+16:26:10 <c9sloud> 也對，這點我也很怕 XD
+16:26:22 <c9sloud> 怕又有什麼 API 爛掉了
+16:28:48 <darkx> CindyLinz: 你們用 5.8 XDDDDD
+16:29:04 <darkx> 是說今天 5.20 的 rc 剛出來
+16:31:04 <darkx> CindyLinz: 羞燙燙 # http://www.nntp.perl.org/group/perl.perl5.porters/2014/05/msg215479.html
+16:31:32 <CindyLinz> darkx: 我昨天有轉貼 FB 啊~ XD
+16:32:04 <darkx> XD
+16:32:07 <darkx> 我沒看到
+16:41:49 <CindyLinz> 嗯, 不過昨天那篇看不到太多資訊, 還是看完整 delta 才行.. # https://metacpan.org/pod/release/RJBS/perl-5.20.0-RC1/pod/perldelta.pod
+16:44:15 <darkx> 我自己是覺得  %array[...] 這個 syntax 很不科學...
+16:44:46 <darkx> Postfix Dereferencing 那邊也是 www 到底是誰想的www
+16:45:17 <c9sloud> 哇... XD
+16:45:21 <c9sloud> 我也是在看那邊 XD
+16:45:26 <CindyLinz> 這本來就不是科學, 是語言文化學 (?
+16:45:31 <c9sloud> $href->%*;  # what the XDD
+16:45:40 <darkx> 就超奇怪的啊www
+16:46:04 <CindyLinz> perl 5.20 開始, 用 perl 罵髒話更順暢了~~~
+16:46:10 <c9sloud> $aref->%[ ... ]; 比較 better XD
+16:46:29 <darkx> 賀
+16:46:54 <c9sloud> darkx: 其實不會阿 %array[.. ]
+16:47:05 <c9sloud> darkx: 因為本來就有 @days[1,3,5]
+16:47:14 <au> 實務上是因為 $foo->bar->baz->%* 比 %{ $foo->bar->baz } 好讀吧
+16:47:20 <c9sloud> 是回傳 value list
+16:47:43 <c9sloud> darkx: 所以 %names[ ... ] 回傳 key => value 還蠻 make sense 的
+16:48:09 <CindyLinz> 嗯嗯嗯 開頭的 % 或 @ 是在描述 context, 描述想拿到的東西, 而不是描述被操作的對象
+16:48:16 <darkx> c9sloud: 因為 @days[1,3,5] 看習慣了，改成 % 感覺不太舒服
+16:48:20 <c9sloud> au: 也是，以前要 deref 要包很多層，至少不用包來包去了 XD
+16:48:33 <c9sloud> darkx: 沒有改耶，那是另外一種 context
+16:48:49 <darkx> 我知道是另一種 context ，但就覺得怪怪的 XD
+16:49:01 <c9sloud> my @list = @days[1,2,3];  my %hash = %names[....];
+16:49:10 <c9sloud> 這樣看起來還蠻一致的
+16:49:17 <CindyLinz> darkx: 欸 拿出來的東西不一樣, 當然要用不一樣的符號啊? @@"
+16:49:18 <darkx> 可是 %hash 本來就能用 list 初始化啊 XD
+16:49:31 <c9sloud> CindyLinz: yeah
+16:49:40 <darkx> 當然現在這邊會變成比較好寫啦
+16:49:41 <CindyLinz> darkx: 重點是 array 版啊 XD
+16:49:55 <c9sloud> darkx: 那個符號的意義主要是表示拿出來的東西是什麼
+16:50:29 <CindyLinz> 那現在這樣 array 轉 hash 變順了 XDXD    @a = (一些東西); %a = %a[0..3]; XD
+16:50:54 <c9sloud> 還不賴
+16:51:17 <darkx> XD
+16:51:25 <c9sloud> 不知道 perl 未來會不會往 autobox 的方向走 XD
+16:52:02 <c9sloud> 那就可以寫 @paths  = @arr.permutation(3).map sub { "/#{@_.join '/'}" }; XD
+16:52:22 <CindyLinz> 欸這個 array 轉 hash 以前有人在 ptt perl 板問要怎麼寫欸~ 那以後那篇要標為 deprecated 作法了.. (誤)
+16:52:55 <au> c9sloud: autobox::Core 用好一陣子了
+16:52:58 <CindyLinz> c9sloud: 等等... perl 的 . 用在這邊是怎樣啊? @@"
+16:53:18 <c9sloud> CindyLinz:  http://search.cpan.org/~chocolate/autobox-2.82/lib/autobox.pod XD
+16:53:36 <c9sloud> au: 用在 production 嗎？我還沒真的用過 XD
+16:53:56 <CindyLinz> c9sloud: 人家明明是用箭頭啊 ._.
+16:54:16 <c9sloud> 阿 我從 ruby 改過來的，忘了改箭頭   ._.
+16:55:01 <CindyLinz> 還這個咧 XD # "/#{@_.join '/'}"
+16:55:04 <au> c9sloud: production 用 Moose::Autobox
+16:56:11 <c9sloud> au: socialtext 用的嗎
+16:56:34 <c9sloud> CindyLinz: XDD
+16:57:03 <au> c9sloud: 不是耶，a 社用的，已經三年了
+16:57:12 <c9sloud> !!
+16:58:08 <au> 在 a 社對 FP 的適應度很高 (FLOLAC 會講一些)... socialtext 是一直到 livescript+node 出現才開始轉向
+16:58:16 <CindyLinz> a 社?
+16:58:28 <au> 蘋果
+16:58:33 <c9sloud> CindyLinz: AAPL
+16:58:34 <CindyLinz> 噢
+16:59:29 <c9sloud> 偷偷問.. 算是 siri 的某個部分嗎 :-p
+17:00:18 <au> 算吧，但 cloud service localization 包山包海，文件、軟體、對話框都是同一套在管
+17:01:07 <c9sloud> 哇
+18:08:34 <c9sloud> 最近做 UI/UX 有點做到小煩....
+18:41:09 <hychen> c9sloud: 你上次是說要包哪個deb?
+18:41:27 <c9sloud> hychen: http://github.com/c9s/r3 這個 :-p
+18:41:49 <c9sloud> 哇剛剛看才發現 stars 快破 300 了
+18:42:15 <CindyLinz> 賀!
+18:42:18 <hychen> c9sloud: 我需要重新弄一下我的ubuntu env
+18:42:24 <CindyLinz> referer 不知道有多少來自 xdite... XD
+18:42:32 <hychen> c9sloud: 最近都在用mac XD
+18:42:32 <c9sloud> 咦 有嗎?
+18:42:46 <c9sloud> hychen: !! 沒在 C 社了?
+18:43:02 <c9sloud> CindyLinz: 我好像沒去那邊貼
+18:43:17 <hychen> c9sloud: 對ㄚ,你不曉得?
+18:43:20 <CindyLinz> c9sloud: 可是這 rep 的起源就是你們那篇戰串吧? XD
+18:43:25 <CindyLinz> 反正高度相關 XD
+18:43:33 <c9sloud> XDDD
+18:44:10 <CindyLinz> P3P revenge...ww
+18:44:36 <CindyLinz> 然後整個世界就進步了.. (Y)
+18:44:53 <c9sloud> CindyLinz: XDDDD
+18:45:53 <c9sloud> 其實本來只是有想法而已，兩年前有跟你講過想用 DFA 做 router 的想法.. 但一直沒有動機，而且 parse regular expression 實在太累了 XD
+18:46:23 <c9sloud> 後來發現可以用 prefix tree 組合 pcre 做 partial match ，就發現咦這樣很快就可以搞定了
+18:46:39 <c9sloud> 而且也不用寫 re engine
+18:46:44 <CindyLinz> :D
+18:49:51 <hychen> c9sloud: 強!
+18:51:12 <c9sloud> hychen: 不算強啦 XD
+18:51:35 <c9sloud> prefix tree 真的不是 rocket science
+19:12:11 <c9sloud> CindyLinz: 我把你的 module 拿來廣告一下喔 ? :p
+19:18:30 <letoh> 不用寫 re engine 不是因為已經交給 pcre 了嗎?
+19:22:19 <c9sloud> letoh 是部分交給 pcre :-p
+19:23:04 <c9sloud> 譬如說 /foo/bar/{id:\d+} 如果前面都沒有 match，就不會丟給 pcre 做
+19:23:12 <letoh> 所以應該是部份交給 prefix tree，部份交給 pcre  這樣?
+19:23:21 <letoh> 嗯嗯嗯
+19:23:24 <c9sloud> 因為 pcre 其實不算快
+19:23:44 <c9sloud> 應該說跟其他 re engine 比起來 pcre 算在中間
+19:23:55 <c9sloud> re2 在某些 case 是比 pcre 快
+19:23:57 <godfat> 不知道有沒有 re engine 可以自動把例如 (abc|abd) 轉成 (ab(c|d)) ? 還是現在已經會了？
+19:24:16 <c9sloud> Russ Cox 的文章還沒毒
+19:24:18 <c9sloud> 讀
+19:24:26 <c9sloud> 不過看 pcre_* 是沒有這樣做
+19:24:27 <godfat> XD
+19:31:41 <c9sloud> godfat: 如果是 non-capturing 的話，應該在 DFA 的時候就會被 reduce 了?
+19:32:49 <godfat> 有 regexp 可以用括號但是不要 capture 嗎？之前也是滿困惑的
+19:33:39 <godfat> 上例似乎是可以 (ab[cd])
+19:33:40 <godfat> 可是超過一個字母不知道要怎麼寫？
+19:36:13 <c9sloud> (?:ab[cd)
+19:36:20 <c9sloud> (?:ab|cd)
+19:36:23 <c9sloud> 這樣就不會 capture
+19:36:33 <c9sloud> 不過這個是 pcre only
+19:37:14 <godfat> 兩者意思一樣嗎？好特別.. XD
+19:38:25 <c9sloud> 咦 不一樣
+19:39:07 <c9sloud> 我只是寫個 non-capturing 的 sample 而已
+19:39:09 <c9sloud> XD
+19:40:31 <c9sloud> http://man7.org/linux/man-pages/man3/pcreperform.3.html
+19:42:09 <godfat> 沒看到 ?: 的意思是？
+19:53:20 <c9sloud> 剛剛那則是 pcre performance :-p
+19:53:29 <c9sloud> godfat: 你要看 (?:  )  的話是在這邊 http://perldoc.perl.org/perlre.html#Extended-Patterns
+19:58:35 <godfat> c9sloud, 感謝。喔喔，所以 (?:) 就是說不要 group, 然後我剛剛發現 ruby 也可以這樣寫|||b
+19:58:45 <godfat> 不要 *capture
+19:59:01 <letoh> python 也是  蠻好用的，不然 groups() 會很難算
+19:59:01 <c9sloud> 哦哦 因為 ruby 也是用 pcre :-p
+19:59:14 <c9sloud> python 好像也是 libpcre
+19:59:19 <c9sloud> perl 簡直是始祖 XD
+19:59:25 <godfat> ruby 應該是用鬼車 oniguruma
+19:59:39 <c9sloud> 咦 後來換了嗎?
+19:59:55 <godfat> 不確定有沒有用過 pcre, 不過 1.9+ 都是 oniguruma
+20:00:34 <godfat> 上次看選這個的原因是 encoding 的關係，鬼車支援的 encoding 很多樣化。後來由於改太多了，所以就整個 fork 出去，原本鬼車就沒在用了
+20:00:40 <c9sloud> wiki 上說 ruby 2.0 switch to oniguruma
+20:01:16 <b4283> 還不夠毒
+20:01:35 <letoh> 印象中 python 的 re 好像也不是 pcre... 要確認一下
+20:01:36 <c9sloud> 阿對 1.9 也有
+20:02:20 <c9sloud> letoh: 是喔，我五六年前讀 python 的書，上面說是用 pcre
+20:03:54 <b4283> 發現不掛 irc 也可以掛 irc
+20:04:22 <b4283> curl http://cindy.csie.org/irc.log/%23haskell.tw-2014-05-20 |tail 突發奇想，哈哈
+20:04:28 <c9sloud> letoh: 太難查了我自己也不確定 XD
+20:04:39 <godfat> b4283, 不能講話就是了 XD
+20:04:52 <godfat> c9sloud, 看 source 比較快 XD
+20:04:53 <c9sloud> b4283: XD
+20:06:11 <letoh> c9sloud: 查了一下  Secret Labs' Regular Expression Engine
+20:06:47 <c9sloud> letoh: 那應該是我寄錯了 XD
+20:07:54 <letoh> 剛剛找了一下發現整個 re module 是直接在 python 實作出來的
+20:08:08 <letoh> re.py sre_parse.py sre_compile.py
+20:08:40 <godfat> 真好奇這樣做的用意是？
+20:09:00 <c9sloud> Secret Labs AB 真是歷史悠久
+20:09:11 <letoh> 看來有一部份在 c 裡面完成  有個 _sre.c
+20:09:31 <letoh> https://github.com/python/cpython/blob/master/Modules/_sre.c
+20:09:55 <c9sloud> 可能以前是讀了類似 "This module provides regular expression matching operations similar to those found in Perl." 之類的就搞混了 XD
+20:10:46 <letoh> 不過 pcre 的確流傳甚廣，寫成 lib 大家方便用
+20:12:30 <letoh> 看了一下 wikipedia 的介紹，後來的 pcre 有從 python 和 oniguruma 參考語法
+20:12:40 <c9sloud> pcre 後來還做到 JIT XD
+20:12:42 <letoh> named subpattern 和 subroutine
+20:13:06 <b4283> c9sloud: 啊啊，有個 s 開頭的 jit project
+20:13:12 <b4283> sljit 嗎
+20:13:22 <c9sloud> pcre_study 可以回傳一個 jit code reference
+20:13:29 <b4283> c9sloud: 好像就是你貼的嘛
+20:13:31 <c9sloud> b4283: yeah 我也有看到那個
+20:13:34 <c9sloud> 對 XD
+20:13:48 <c9sloud> 不過不知道跟 pcre_study() 的 JIT 有什麼差異
+20:15:45 <b4283> 有 performance 比拼的數字可看嗎
+20:16:06 <b4283> https://stackoverflow.com/questions/11996988/how-good-is-oniguruma-compared-to-other-cross-platform-regexp-libraries
+20:18:45 <b4283> http://blog.remu.biz/2013/04/boostregex-re2-pcre-oniguruma4regex.html
+20:18:50 <godfat> 看起來鬼車好像真的很強
+20:19:16 <godfat> ...
+20:19:17 <godfat> Please disable your ad blocker!
+20:19:17 <godfat> http://antiblock.org/?d=2.2.2___%23MPUAdSpace v2.2.2
+20:20:10 <c9sloud> 果然是鬼車 XD
+20:22:01 <c9sloud> godfat: 那個 n 是什麼? string length 嗎?
+20:22:48 <godfat> 哪裡的 n? @@
+20:23:05 <c9sloud> godfat: http://blog.remu.biz/2013/04/boostregex-re2-pcre-oniguruma4regex.html 這篇
+20:23:27 <godfat> 我看不到... XD 被他 script 擋住了
+20:24:01 <c9sloud> godfat: http://4.bp.blogspot.com/-fZhX0uGMXzs/UXyOC2vfSfI/AAAAAAAAF2o/BSHl1vK13mc/s1600/dsfafe.png
+20:24:07 <c9sloud> 直接看圖好了 XD
+20:24:10 <letoh> https://github.com/tkuro11/RegProf  那人用的程式碼
+20:24:31 <b4283> 單位是什麼都沒寫 ._.
+20:25:00 <godfat> n 說是字串長度好像也怪怪的...
+20:25:14 <c9sloud> 對阿所以 n 到底是什麼 XD
+20:25:19 <b4283> n 應該是「要素数」
+20:25:32 <b4283> 不過 source code 裡沒寫到 n
+20:25:32 <c9sloud> 阿 pattern length ?
+20:26:33 <godfat> https://github.com/tkuro11/RegProf/blob/master/_Prof.cpp#L17
+20:26:45 <c9sloud> http://sljit.sourceforge.net/pcre.html # 不過我覺得還是要像這樣列出來比較清楚，因為畢竟不同 pattern 效果也不同
+20:26:50 <b4283> a?a?a?a?a?a?a?a?a?.... 的樣子
+20:27:06 <b4283> for (int i = 0; i< n; i++) pat += string("a?");
+20:27:18 <c9sloud> XD
+20:27:32 <godfat> 這樣好爛喔... 不知道在測什麼 = =...
+20:27:42 <c9sloud> 有人實際上會用這種 pattern 嗎 XDD
+20:28:01 <godfat> 誰寫出來打一巴掌 XD
+20:28:48 <b4283> 不過這其實和 Russ Cox 測的方法有同工異曲之妙
+20:29:34 <godfat> 另外是之前 ruby 有一些 CVE 跟 regexp 有關，給特定的 pattern 會暴走
+20:30:09 <c9sloud> godfat: benchmark source code 根本是爛掉的 XD 沒辦法跑 XD
+20:30:26 <godfat> 可能過期了吧... XD
+20:30:43 <c9sloud> C++ syntax 都有問題，build 不過
+20:31:10 <godfat> 錯誤訊息？看看我 c++ 功力還在不在 XD
+20:31:56 <c9sloud> 我已經砍了 XD
+20:32:11 <godfat> XDDD 好，隨便 (聳肩 XD)
+20:32:19 <c9sloud> XDDDDDD
+20:32:41 <letoh> 我可以過耶XD
+20:32:49 <c9sloud> letoh: 你是 linux ?
+20:32:53 <letoh> 對啊
+20:32:54 <c9sloud> 可能 mac 過不了
+20:33:14 <godfat> 也許是 clang/g++ 差異？
+20:33:36 <letoh> boost 好快
+20:34:07 <b4283> 都說是 boost 了
+20:34:11 <b4283> (誤)
+20:34:13 <letoh> XD
+20:34:48 <letoh> 來試試 clang
+20:35:08 <b4283> 台灣2017又要辦世運喔
+20:35:32 <b4283> 抱歉，把這當 #hime 了
+20:36:47 <letoh> clang 沒有 -O5 XD
+20:37:11 <c9sloud> http://www.kimonolabs.com/ # 這好威
+20:38:09 <b4283> c9sloud: 現在流行用日語當專案名喔 XD
+20:38:11 <godfat> -O5 第一次聽說 = =... 七星級飯店 XD
+20:38:24 <c9sloud> XDDD
+20:38:32 <c9sloud> b4283: 應該是日本公司 I guess :-p
+20:38:35 <letoh> 這人的 c++ 有點神奇XD
+20:39:41 <letoh> if (!this->RE(s, pat)){...}   但是 RE 卻沒有傳回值....
+20:41:39 <letoh> 然後我的 clang++ 好像也有問題... -O4 編譯出來的 pcre.o 不能用
+20:41:40 <godfat> 這樣 compile 能過喔？
+20:41:58 <letoh> pcre.o: file not recognized: File format not recognized
+20:42:07 <letoh> 改成 -O3 就過了
+20:44:30 <whitglint> 剛 man clang 說 -O4 的 object file 是 LLVM bitcode format
+20:45:00 <letoh> 原來如此  我也沒用過 -O4 XD
+20:45:36 <whitglint> 記得以前有人說 -O3 編出來可能會有問題？
+20:45:43 <whitglint> 好幾年前了
+20:45:57 <godfat> 我也聽過，說是 g++ -O3 有時候會有 bug
+20:46:32 <letoh> https://gist.github.com/letoh/c063eca46c83db4f8c46  簡單改一下
+20:48:15 <whitglint> 為什麼他不寫成 BoostRegexProf().Prof();
+20:48:28 <whitglint> 又不是 java 什麼都要 new
+20:49:13 <letoh> 我剛剛就說這人的 c++ 有點神奇XD
+20:49:20 <whitglint> 還是說這個物件一生成就 stack overflow XD
+20:58:14 <c9sloud> godfat: -O3 會有 bug 有沒有可能是因為沒有寫 violate ?
+20:58:20 <c9sloud> 而不是因為 compiler ? :-p
+20:59:34 <godfat> volatile XD 不確定，但我是聽過幾次這種說法，不一定有 thread (所以有沒有 volatile 無所謂？)
+21:00:05 <letoh> volatile 跟 thread 的關係是?
+21:00:45 <godfat> 就我所知，沒有 volatile 的話可能會被 cache 在 register, 因此不同 thread 可能看到不同值？
+21:02:15 <godfat> 不過之前也有看到關於 overflow/underflow 跟 optimization 有關的東西，看起來嚴格來說不是 bug, 只是有點預期之外
+21:03:07 <godfat> 所以或許也是寫得不夠嚴謹的，在 -O3 下會死得比較慘，確實
+21:03:44 <c9sloud> godfat: yeah, 不過有時候不一定會在 register, gcc 有時候會先 prefetch pointer 裡面的 value
+21:03:56 <c9sloud> 所以後續存取同一個 pointer 的時候都拿到一樣的值
+21:04:30 <godfat> 嗯嗯
+21:14:29 <CindyLinz> 呼 剛到家
+21:14:42 <CindyLinz> c9sloud: 這是 push request 啊 ._.
+21:14:56 <c9sloud> CindyLinz: XDDDD
+21:15:00 <c9sloud> 還是我先拿掉?
+21:15:05 <c9sloud> :p
+21:15:08 <CindyLinz> 沒關係 等一下就弄好了!
+21:15:13 <c9sloud> !!
+21:17:37 <CindyLinz> c9sloud: 欸那個 /post4/{idx:\d{3}}/{idy} 還沒有好哄?
+21:17:50 <c9sloud> 對阿
+21:17:52 <c9sloud> 還沒修 :3
+21:18:03 <CindyLinz> 這樣好嗎 ._.
+21:18:47 <c9sloud> 我來修一下好了 XD
+21:39:25 <c9sloud> CindyLinz 更新囉~
+21:40:54 <CindyLinz> 好~~~ :D
+21:42:37 <CindyLinz> 喔喔 會 match 了!
+22:41:33 <c9sloud> CindyLinz: coooool~
+23:01:54 <CindyLinz> c9sloud: obj 式的介面好了, 現在在加 [] 或 {} 當 new 參數的.. 嗯, 我覺得 {} 應該會是最常用的用法..  雖然 [] 應該是最兼具實用與經濟的
+23:03:47 <c9sloud> CindyLinz++ # 好快
+23:04:10 <c9sloud> 你是說 ->new([  'path/to' => ... , '.... ]); 這樣嗎?
+23:04:31 <c9sloud> CindyLinz: 那我這個 close 囉 https://github.com/c9s/r3/issues/10 ?
+23:05:32 <CindyLinz> c9sloud: 對呀, 以及 { 'path/to' => ..., }
+23:05:40 <CindyLinz> c9sloud: 嗯嗯 close 吧 ^^
+23:08:53 <c9sloud> closed~
+23:11:53 <CindyLinz> arrayref/hashref 好了.. 剩下該死的說明和打包了, 離開一下.. 晚點再來弄
+23:15:51 <c9sloud> CindyLinz: 沒關係啦，明天再弄 XD

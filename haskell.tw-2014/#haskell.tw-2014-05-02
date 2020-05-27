@@ -1,0 +1,161 @@
+00:21:05 <monochrom> 每天都錯過 gansteed. 這已成數學定理.
+00:21:28 <monochrom> 他/她的問題我全都識答呀!...
+00:21:45 <godfat> 可能正好是時區問題吧.. XD..
+00:23:07 <CindyLinz> 是有不一樣嗎... ww
+00:23:23 <CindyLinz> 如果依經度看的話, monochrom 和他的經度還比較近吧 XDD
+00:23:41 <monochrom> 答案是 withFile 使用 openFile, 所以 Handle 是由 openFile 來的, 而當然 openFile 會參照你給的 FilePath, IOMode.
+00:23:59 <CindyLinz> 不知道 gansteed 有沒有習慣往回翻 log..
+00:25:57 <monochrom> withFile 比起 openFile, 好處是遇到 exception 時, 會自動 close, 你不用費心.
+00:26:35 <CindyLinz> 如果用 withFile, 然後再在裡面用 lazy 的 IO, 像是 hGetContents... 應該會悲劇?
+00:26:58 <monochrom> 是呀. 所以別用 hGetContents :)
+00:27:01 <CindyLinz> XD
+00:27:41 <monochrom> hGetContents 的悲劇還多著呢!
+00:27:55 <godfat> 仔細想想，lazy IO 可能不是很合理？
+00:28:50 <CindyLinz> 什麼意思??
+00:29:50 <monochrom> Oleg 乾脆說不合理. 我還未那麼決絕, 我只說要懂流暢 lazy evaluation 才玩得起 lazy I/O
+00:30:17 <CindyLinz> 嗯嗯嗯
+00:31:00 <CindyLinz> 我後來去翻 code.. 懷疑 lazy IO 根本不是正常寫得出來的, 一定要動用黑魔法 @@"
+00:31:03 <godfat> 先確認一下，hGetContents 會出事是因為他會在 withFile 之外進行真正的 IO, 以致於沒正確使用 handle 嗎？
+00:31:11 <CindyLinz> godfat: 對
+00:31:34 <godfat> 那我說的不合理大概就是，那好像跟 IO monad 的定義有點衝突？
+00:33:20 <CindyLinz> withFile "file.txt" ReadMode hGetContents >>= putStrLn
+00:33:58 <monochrom> 我也明白「lazy I/O 不合理」的原因. 有兩方面跟整體格格不入.
+00:36:35 <monochrom> 第一方面: 一般見到 action1 >>= \x -> more, 當你到達 more 的地步時, action1 早已做完. 但 lazy I/O 並不這樣. 這會造成驚喜和困惑.
+00:36:49 <CindyLinz> 如果那個 hGetContents 配合一下 ST monad 那種 trick, 使得拿到的 String 一定只能在這個 withFile 加掛的函數裡面用, 應該就好了?
+00:37:50 <monochrom> 第二方面: lazy I/O 是由 pure evaluation 驅動 I/O, 這跟一般是由 I/O 驅動 pure evaluation 相反.
+00:39:18 <godfat> CindyLinz, 黑魔法加黑魔法，黑上加黑，黑到發亮...
+00:39:28 <monochrom> 哈哈, 話是這麼說, 但怎樣在 type level 把不同來源的 String 這樣鑑別呢?
+00:39:32 <CindyLinz> godfat: ST monad trick 不是黑魔法啊 XD
+00:39:42 <CindyLinz> godfat: 是黑技巧.. XD
+00:39:56 <godfat> 好吧.... XD
+00:40:20 <godfat> monochrom, 確實...
+00:40:27 <CindyLinz> 我心中的分界線是: 黑魔法是用 Haskell 寫不出來的 XD
+00:41:34 <CindyLinz> monochrom: 當產出要從那個 withFile 出來的時候, 就會強迫加掛函數裡面從 hGetContents 得到的 String 全部抽光啊
+00:41:59 <monochrom> 我愛玩黑魔法: http://lpaste.net/77374
+00:42:00 <godfat> 感覺是如果不明白 ghc 的 lazy evaluation 怎麼驅動的話，很難寫出安全的 lazy IO. 不過我總覺得這是實作細節
+00:42:34 <CindyLinz> 所以加掛函數的 type 可能就從原本的 Handle -> IO r 變成 Handle -> LazyIO r, 然後有 MonadIO LazyIO
+00:42:43 <CindyLinz> 可能要 LazyIO s r.. XD
+00:42:47 <godfat> 好個 LazyIO...
+00:43:23 <CindyLinz> 對黑魔法就這東東.. XD
+00:43:36 <CindyLinz> unsafeInterleaveIO
+00:44:52 <monochrom> 黑魔法 Mordor 自由行, 行到哪裏就留名哪裏 XD
+00:45:35 <CindyLinz> hmmm... 讓初學者一上來就玩 getContents 可能不是好事? 因為他很可能過一下子就發現程式有時候會炸.. 然後自己說不出原因, 問人嘛, 解釋又好大一串...
+00:45:48 <monochrom> 是呀!
+00:45:50 <CindyLinz> 然後就留下一個: haskell 程式好危險 的印象?
+00:46:11 <CindyLinz> 但, 我覺得 getContents 可能是沒關係的
+00:46:17 <CindyLinz> 反正正常人不會去關 stdin... XD
+00:47:04 <monochrom> 呀, 你說得對, 其實 getContents 問題不大, 不及 hGetContents
+00:47:29 <CindyLinz> 可是只要提供了 getContents, 人家就會問你為什麼沒有 hGetContents? ^^|
+00:47:56 <monochrom> 不不, 問題很大, 給人錯誤的印象: laziness 伸延到 I/O
+00:48:05 <CindyLinz> 這真的有點糟.....
+00:48:36 <godfat> 這樣呢？
+00:48:36 <godfat> hGetContents :: NeverClosingHandle -> IO String
+00:48:38 <CindyLinz> 會延後他搞懂 lazy evaluation 的時間 @@"
+00:49:10 <CindyLinz> godfat: 我覺得這個應該可以...
+00:49:24 <monochrom> lazy I/O 是少數, 是例外. 一開始就教少數, 丫環大過主人了
+00:49:27 <CindyLinz> 當然這個就不能配合 withFile 用了
+00:49:46 <CindyLinz> 配合也沒什麼意義就是, 反正不關 ^^|
+00:50:26 <godfat> 話說真的有種 haskell 裡其實有很多未解的難題的感覺 XDDD
+00:50:39 <CindyLinz> godfat: 啊不是 paper 一直出?
+00:50:52 <monochrom> 哈哈哈
+00:51:02 <godfat> 可是好像其他語言就似乎視而不見？ XD
+00:51:15 <monochrom> 話說 IO 還未有 denotational semantics 哩!
+00:51:34 <CindyLinz> godfat: 其他語言沒有「對」的定義, 所以就.... 不會錯 XD
+00:52:01 <godfat> monochrom, haskell 其他部分有嗎..?
+00:52:29 <godfat> CindyLinz, ~.~ 或是說... 總是很快下定論..?
+00:52:34 <CindyLinz> monochrom: IO 算是什麼 semantics?
+00:53:00 <monochrom> 有, pure 部份是有型別的 lambda calculus, 這有了 denotational semantics 很久了
+00:53:24 <CindyLinz> godfat: 我在想, 以前說... 想要多利用幾個 CPU, 所以就加了 multithread, 看起來好像寫起來很自然..
+00:53:32 <monochrom> 現時只懂為 IO 給 operational semantics
+00:53:40 <CindyLinz> godfat: 後來發現會同時搶改同一個變數炸掉, 所以就加了 lock
+00:53:48 <CindyLinz> godfat: 又發現有 lock 以後會 deadlock...
+00:54:48 <CindyLinz> godfat: 但是不管 deadlock 的話, 日子還是可以過? (看看 Linux..)
+00:55:26 <godfat> monochrom, 是喔！這麼厲害！這麼說來只欠 IO? 不過這說來是不是因為 IO 太多黑魔法呀...
+00:56:04 <CindyLinz> monochrom: 偷偷從你這問出點關鍵字, 然後再去開始讀書... ^^|
+00:56:11 <monochrom> 是呀
+00:56:52 <godfat> CindyLinz, 唔唔。linux 有什麼 deadlock 的問題？ XD
+00:57:11 <monochrom> 也不全是. 從來任何 I/O 或對外通訊, 都很難給 denotational semantics
+00:57:19 <CindyLinz> godfat: resource 之間的, process 會 allocate resource, 像是 device 那些
+00:57:36 <CindyLinz> godfat: 所以可能造成 deadlock..
+00:58:05 <godfat> monochrom, 我可以假定 IO 就是某種未知的 side-effect 嗎？畢竟不可能定義所有行為吧？
+00:58:41 <CindyLinz> haskell 是一片淨土, 由黑魔法作為基礎.......ww
+00:58:48 <godfat> CindyLinz, 什麼意思？我插 usb device 進去可能會 deadlock 或 kernel panic 之類的？
+00:59:47 <CindyLinz> godfat: 呃, 他們會決定不處理, 就是因為發生率太低啦, 去作 avoidance 之類的產生的效能損失不划算 ^^|
+01:00:02 <CindyLinz> godfat: 我試一下 filelock.. :p
+01:00:57 <monochrom> 我只見過一個方法, Hoare 想出來的, set of traces. 每條 trace 就是通訊記錄. 然後把你的程式的所有有可能的通訊記錄集成一個 set, 這就是你的程式的 denotational semantics 了.
+01:02:19 <godfat> CindyLinz, 說來我最近寫 mt 程式也是寫到覺得要完全對太難了，差不多可用即可 orz...
+01:02:28 <CindyLinz> 呼, 動手寫 unix 程式每次都要先打一大排 #include.. orz
+01:02:29 <monochrom> 舉例! 程式是 getChar >>= putChar, 那麼它的 set of traces 就是 { [in 'x', out 'x'], [in 'a', out 'a'], ... } = { [in c, out c] | c 是單字 }
+01:03:17 <godfat> 嗯，所以就是窮舉所有可能了..
+01:04:12 <monochrom> 不一定窮舉, { [in c, out c] | c 是單字 } 就不是窮舉. 我只是先用窮舉作例.
+01:06:59 <monochrom> 這個 set of traces 主意, Hoare 很久以前就已想出來了, 最先是為他的 communicating sequential processes 想出來的. 不過, 在 PLT 界, 不知為甚麼, 這個主意沒有流行起來.
+01:07:48 <monochrom> (我是認為我知道為甚麼的. 因為這個主意使用太少高深數學.)
+01:07:52 <CindyLinz> 好了, 測出 deadlock 了... http://lpaste.net/5964548124792848384
+01:07:53 <godfat> 因為很瑣碎..? 不過也許也是唯一方法了？
+01:07:57 <godfat> XDDDDD
+01:08:10 <CindyLinz> 短時間內開始執行 ./lockfile b c 和 ./lockfile c b
+01:08:12 <CindyLinz> 就卡住了
+01:08:23 <CindyLinz> 要先 touch 好 b 和 c 兩個檔案 :p
+01:08:41 <monochrom> 對 PLT 人士來說, 如果不使用 CPO, 就不像 denotational semantics
+01:08:47 <godfat> 好厲害，不過我好累了，今天先休息，明天再試 XDD
+01:09:02 <CindyLinz> 1/3 是 #include.....ww
+01:09:15 <CindyLinz> 1/2 是 error checking..
+01:09:31 <CindyLinz> This is C code...... Q___Q
+03:53:25 <CindyLinz> ghc 的 implicit parameter... http://www.haskell.org/ghc/docs/latest/html/users_guide/other-type-extensions.html#implicit-parameters
+03:53:34 <CindyLinz> 看起來 髒 髒 der ....ww
+12:41:45 <miaout17> 黑魔法加 黑魔法，負負得正，黑黑應該會得白啊
+13:11:50 <mno2> 黑魔法不一定跟 mod 2 同構啊，搞不好變成  黑黑魔法
+13:28:28 <CindyLinz> 我想要找比黑色還黑的顏色... QQ
+13:33:11 <miaout17> 黑洞或暗物質嗎？
+15:48:28 <monochrom> 黑到發亮, 就是black body radiation 了!
+15:56:03 <mno2> <body bgcolor=“#000000”>   <—  black body (冷)
+15:59:05 <darkx> :O
+17:39:31 <mno2> yinwang 貼久了來換換口味好了（最近都沒有精進 PL 理論，心虛）。應該不少人都知道他: http://michaelochurch.wordpress.com/2014/04/11/meritocracy-is-the-software-engineers-prince-charming-and-why-thats-harmful/
+17:40:21 <mno2> 跟 Zed Shaw 一樣都是地圖炮等級的
+17:41:02 <b4283> Meritocracy 這個字怎麼解讀
+17:41:37 <b4283> 贏家全拿
+17:42:06 <mno2> 就是開明，聰明的管理之類的。屬於古典用語，以前是用在統治。
+17:42:38 <godfat> Prince Charming @@
+17:43:51 <mno2> 如果在 start-up 做事的話，建議可以把 Michale O’Church 的文章都讀讀，非常有幫助。大部分文章都十分中肯，雖然有時候也是狂開地圖炮
+17:44:46 <mno2> 他文章都非常長，用字也比較挑過。長久看下來英文可以進步不少 lol
+17:45:31 <mno2> 他最喜歡的語言是 Clojure 的樣子
+17:45:53 <godfat> 晚點讀~~
+17:45:58 <mno2> 大部分文章都是講矽谷生態，但有時候也會有 PL 類的文章
+17:47:03 <mno2> 他是 Google 早期的 ex-employee 的樣子
+17:51:45 <cataska> 學習了
+17:53:08 <b4283> mno2 好像就是在 haskell startup ?
+17:54:46 <mno2> 之前是，但因為一些因素又換過了 lol。現在主要是寫 python
+17:54:59 <b4283> nice
+18:00:56 <godfat> 啊啊，真可惜 @@
+18:02:08 <CindyLinz> 啊啊, 真可惜 @@
+18:25:59 <mno2> 應該也來翻翻 Dijkstra 的語錄 xD   Dijkstra 印象中也是自走地圖炮一枚
+18:27:23 <mno2> 馬上就翻到一個 “You probably know that arrogance, in computer science, is measured in nanodijkstras.” by Alan Kay, keynote speech at OOPSLA 1997 [2]
+18:27:51 <mno2> dijkstra 變成單位了
+23:05:10 <mno2> 我在考慮把 G+ community 搬到 Facebook Group，大家有意見或更好的選擇嗎？或是乾脆 IRC 這樣也很好？給過 G+ 機會，看來也是放棄的時候了 lol
+23:06:23 <mno2> Facebook 就會造成雜音狀況比較多就是了..
+23:17:39 <favonia> mno2: 為什麼不能兩邊都有？
+23:19:37 <mno2> favonia: 啊，我的意思是說 G+ 也不會關掉，只是 G+ 也只是就安安靜靜
+23:20:51 <mno2> 原本只是想說擺在一個地方不要開太多條線
+23:21:14 <mno2> 我的意思是說有想要再開一條線嗎
+23:21:26 <mno2> 但這條線雜音會比較多
+23:29:49 <godfat> 我得說我不喜歡 facebook, 但 g+ 因為總總理由我也不看了.. 唉，次世代 open/distributed sns 在哪裡呀
+23:33:12 <mno2> 我也不喜歡 facebook，但好像也只能屈就 Orz，我考慮 facebook 的原因是因為畢竟 scm 在用就是了...
+23:34:11 <b4283> i have got to say i didn't liked facebook, sigh, where's the 2nd generation sns
+23:37:09 <godfat> 這是什麼英文翻譯 XDDDDD
+23:38:38 <b4283> 翻譯廚 XD
+23:40:14 <godfat> XDDD btw, 忽然注意到頻道裡有 logfat... 怎麼好像是我會取的名字，我應該沒不小心留下 bot 吧 XD
+23:40:36 <poga> XDDD
+23:41:42 <mno2> godfat: 那隻 bot 的確是你改的啊
+23:42:00 <mno2> 為了感謝你所以命名成 logfat
+23:42:14 <mno2> 原本是 g0v 那隻 bot
+23:42:40 <godfat> XDDDDD 好像有這個印象... 囧 是說 g0v 那隻前一陣子我的改變 merge 回去了，我後續有改不少
+23:43:38 <mno2> 恩，要不然原本太不穩了
+23:44:01 <godfat> 我現在覺得其實 irc 也是不錯，不過上次 g0v 那邊好像發生過 netsplit, 才知道 freenode 有這個問題？這樣好像也不是很能 scale..
+23:44:05 <mno2> 改過之後跑了半年多了沒掛過
+23:44:27 <godfat> mno2, 喔喔喔！太好了，真高興 XD 真實數據支持 XD
+23:44:28 <mno2> http://talk.codefortomorrow.org/channel/haskell.tw/today
+23:45:11 <mno2> 原本是幫忙 schee 做 log，所以就別在意 domain, lol
+23:46:21 <godfat> XDD 我好像也應該開一下，預設沒有 http://logbot.godfat.org/channel/haskell.tw/today
+23:46:36 <mno2> 我蠻喜歡 irc 的，只是有時候會漏話題
+23:46:46 <mno2> 或是說沒跟到話題就過去了
+23:47:07 <godfat> 有 log 的話我是覺得可以看過之後重提，大家有印象可以繼續討論。不過人多可能就亂了..

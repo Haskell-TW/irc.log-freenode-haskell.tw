@@ -1,0 +1,147 @@
+18:48:13 <CindyLinz> let fmod a b = a - fromIntegral (floor (a / b) * b) 這樣的東西有沒有通用的呢?
+18:48:37 <CindyLinz> @type \a b -> a - fromIntegral (floor (a / b) * b)
+18:48:38 <lambdabot> (RealFrac a, Integral a) => a -> a -> a
+18:49:32 <CindyLinz> 就是取 a / b 的餘數.. 但是是非整數的推廣型
+19:52:25 <hashcat> CindyLinz: ??
+19:56:36 <hashcat> @type floor
+19:56:37 <lambdabot> (RealFrac a, Integral b) => a -> b
+19:57:33 <hashcat> @type fromIntegral
+19:57:35 <lambdabot> (Num b, Integral a) => a -> b
+19:57:57 <hashcat> @toDouble
+19:57:58 <lambdabot> Unknown command, try @list
+19:58:09 <hashcat> @type toDouble
+19:58:11 <lambdabot> Not in scope: ‘toDouble’
+19:59:04 <hashcat> @type \a b -> a - toRational $ fromIntegral (floor (a / b) * b)
+19:59:05 <lambdabot> (RealFrac (s -> Rational), Real s, Integral (s -> Rational)) => (s -> Rational) -> (s -> Rational) -> Rational
+20:00:02 <CindyLinz> 就.. standard library 裡面有沒有這樣一個函數呀~ ^^|  或是常用的知名 lib 有沒有
+20:01:00 <hashcat> 不知道我在做啥
+20:01:06 <CindyLinz> C/C++ 的 math.h/cmath 裡面就叫作 fmod # http://www.cplusplus.com/reference/cmath/fmod/
+20:02:28 <hashcat> @list
+20:02:28 <lambdabot> What module?  Try @listmodules for some ideas.
+20:03:25 <hashcat> http://hackage.haskell.org/package/base-4.7.0.1/docs/Data-Fixed.html#v:mod-39-
+20:03:42 <hashcat> 忘記hoogle了~
+20:04:14 <CindyLinz> 對耶 XD
+20:04:28 <CindyLinz> 有一陣子一直覺得 hoogle 都查不到我要的東西, 後來就忘記它了 XD
+20:05:22 <hashcat> 其實這樣就好了吧(\a b -> a - a / b)
+20:05:40 <hashcat> 我好久沒理Haskell怎沒忘記
+20:06:08 <hashcat> 寫錯
+20:09:21 <hashcat> @type  (\a b -> a - (fromIntegral (floor $ a / b)) * b)
+20:09:24 <lambdabot> RealFrac s => s -> s -> s
+20:09:36 <hashcat> 恩生疏了
+20:10:29 <hashcat> ghc 700多MB真是..
+20:19:07 <hashcat>  CindyLinz:  F#好玩
+20:23:12 <hashcat> F# + Mono 大概240MB
+20:23:20 <hashcat> ghc不知道是在大什麼
+20:24:14 <YuLin> F# 現在在 Linux 能夠輕鬆安裝了？
+20:24:16 <letoh> 現在 ghc 多大啊?
+20:24:25 <letoh> 可以啊  安裝會有什麼問題?
+20:24:51 <letoh> hashcat: ocaml 也是 200MB 左右
+20:28:14 <hashcat> 剛剛在archlinux只裝ghc沒其他東西
+20:28:24 <hashcat> 78x MB
+20:28:47 <hashcat> F# 還能用 vim 寫
+20:29:09 <hashcat> 都用command line就可以了
+20:30:07 <hashcat> 看錯了, F# + mono 才 98MB
+20:30:40 <hashcat> 剛剛看成F#的原始碼大小, 編譯後又小很多
+20:31:20 <hashcat> ghc就真的是沒原始碼也快800MB
+20:31:38 <letoh> 我壓縮完的 mono+f# 大概 60MB
+20:34:22 <hashcat> 各平台都能用, 不依賴visual studio的 http://fsharp.org/guides/mac-linux-cross-platform/
+20:34:51 <hashcat> 恩完勝ghc
+20:35:44 <hashcat> F#有R跟Python的type provider
+20:36:16 <hashcat> 也有SQL的type provider, 整個很實用
+20:52:38 <letoh> hashcat: 只差在 gui 部份
+21:09:18 <hashcat> monodevelop很難用
+21:12:33 <letoh> 沒裝那個  我基本上用 emacs XD
+22:23:27 <CindyLinz> ghc 應該只有 50MB 左右啦..
+22:23:58 <CindyLinz> 800MB 應該是 haskell platform, 裝了一大堆從 cabal 上面選錄的 module
+22:24:18 <CindyLinz> hashcat: 你上線了.. 那重講一遍 XD
+22:24:21 <CindyLinz> 22:23 < CindyLinz> ghc 應該只有 50MB 左右啦..
+22:24:21 <CindyLinz> 22:23 < CindyLinz> 800MB 應該是 haskell platform, 裝了一大堆從 cabal 上面選錄的 module
+22:25:11 <CindyLinz> 只不過.. 只有 standard library 的 haskell 到底堪不堪用呢? ^^|
+22:25:28 <CindyLinz> 唯一的 Random 還被標為 deprecated XD
+22:26:46 <hashcat> 哦好像是
+22:27:22 <hashcat> 看archlinux的目錄ghc順便裝了一堆東西
+22:27:30 <hashcat> 但只顯示ghc
+22:28:01 <hashcat> 但還是沒mono+F#堪用
+22:28:41 <CindyLinz> 如果不要裝整個 haskell platform.. 先裝只有 base 的 ghc
+22:29:19 <CindyLinz> 然後再自己選裝要用到的.. 例如說, 沒有被標為 deprecated 的 random.. XD  應該還是實際啦 ^^|
+22:29:38 <CindyLinz> ghc + cabal + 由 cabal 裝 mod
+22:30:24 <hashcat> mono + F#感覺還是比巨大的haskell platform能用
+22:30:43 <CindyLinz> haskell 的確不是從實用出發的設計 :Q
+22:30:53 <CindyLinz> .Net 就整個是從實用出發的..
+22:31:23 <au> hashcat: 對 rise4fun 的 fstar 有興趣嗎？
+22:31:37 <CindyLinz> 4fun 聽起來就很好玩的樣子 XD
+22:31:47 <au> GHC 下一版要用 SMT solver 做 type engine，但是 fstar 他們先用了
+22:31:52 <CindyLinz> 可能也很髒的樣子... (看看 -Ofun )
+22:32:49 <hashcat> Fstar有沒編輯器支持
+22:33:16 <CindyLinz> au: 下一版是 7.10?
+22:34:17 <au> CindyLinz: yeah
+22:34:30 <CindyLinz> 7.8 都還沒用過 ._.
+22:35:06 <hashcat> au:說不定F# 4.0就會加進去了
+22:35:12 <au> hashcat: 太新了，好像還沒有... 等有再跟你說好了 XD
+22:35:14 <au> dependent typing?
+22:35:40 <au> 也許可以一次加一點點進去
+22:36:07 <au> 加太快會很不適應吧 (就像要寫 Haskell 的人去用 Idris 那樣)
+22:37:13 <hashcat> au: 那個F*我等很久了, 應該就是打算看能不加進F#的
+22:37:45 <hashcat> 不然編輯器跟建構工具都沒有, 不像要自立門戶的樣子
+22:38:53 <hashcat> 只要對不使用dependent type的人來說用法沒不一樣
+22:39:00 <hashcat> 加進去也沒差別
+22:39:06 <CindyLinz> type engine 有 export 成 library 嗎? 有的話就可以加進 atom.io editor 了 ^^
+22:39:14 <au> 是。我想 Z3/SMT (就是我上次在 FLOLAC 講的解縱橫字謎的引) 要變成建構工具的一環 + production quality 還要一陣子
+22:39:33 <au> *引擎
+22:40:22 <CindyLinz> 嗯嗯嗯
+22:40:31 <au> CindyLinz: 有 http://brianmckenna.org/blog/idris_library 在 hackage 上
+22:41:50 <au> CindyLinz: GHC 的話，接口在這邊，正在開發... https://ghc.haskell.org/trac/ghc/wiki/Plugins/TypeChecker
+22:42:26 <au> idris 的話，內建 interactive theorem prover ... 不確定要怎麼整合進 atom.io
+22:42:36 <CindyLinz> :D
+22:43:21 <CindyLinz> 來當女兒賊, 偷偷拿去設計新語言 (逃
+22:43:47 <au> CindyLinz++ # 最好的設計師都是用偷的
+22:44:06 <CindyLinz> XD
+22:45:31 <hashcat> 有語言是能在語言裡設計語言
+22:46:30 <hashcat> 但在linux支持比較不好
+22:46:33 <hashcat> nemerle
+22:50:55 <hashcat> F#感覺能做掉julia
+22:52:05 <CindyLinz> F# 效能行嗎? 雖然它類似 OCaml.. 可是跑在 .Net 上應該就先輸一半了? @@"
+22:55:20 <hashcat> http://benchmarksgame.alioth.debian.org/u64q/fsharp.php
+22:55:26 <hashcat> 感覺還可以
+22:57:14 <CindyLinz> 執行時間平均大約是... OCaml 的 2 倍?
+22:58:22 <hashcat> 這是粗糙的比較
+22:58:37 <hashcat> 通常JIT一開始的步驟就會把時間拖長
+22:58:50 <CindyLinz> 是蠻粗糙的 ^^|
+22:59:17 <CindyLinz> 比會跑比較久的程式就可以減輕啟動的影響了..
+22:59:20 <hashcat> F#要編譯時OCaml已經先偷跑了
+22:59:33 <hashcat> 嗯嗯
+22:59:33 <CindyLinz> 不是編譯吧.... XDXD
+22:59:42 <CindyLinz> OCaml 應該也要編譯啊 ^^|
+23:00:04 <hashcat> 就是那表有計入JIT的編譯時間
+23:00:06 <CindyLinz> .Net VM 啟動的確是另一段 overhead.. 不過如果在 Windows 上面讓 .Ne 開著常駐.... (ry
+23:00:20 <hashcat> 但OCaml早就先編譯完了, 就沒計到
+23:00:22 <CindyLinz> F# 不是事先 compile 好的用法嗎? @@"
+23:00:45 <hashcat> 編譯到bytecode阿
+23:00:57 <hashcat> JIT才編譯到binary
+23:01:17 <hashcat> OCaml不是就直接binary執行擋了
+23:01:27 <CindyLinz> 那個你也當它算 compile 喔.....ww
+23:01:42 <letoh> ocaml 有 bytecode 跟 native
+23:02:02 <CindyLinz> 我覺得那個只有 assembly 的複雜度, 怎樣也比「那種 compile」快很多了啊.
+23:03:42 <hashcat> 什麼複雜度
+23:04:32 <CindyLinz> 就.. bytecode -> native 的部分啊
+23:04:53 <hashcat> 沒簡單到assembly吧
+23:05:46 <CindyLinz> Java 的是啦.. .Net 我沒看過 @@"
+23:08:15 <hashcat> 沒試過AOT說不定會更快
+23:09:37 <hashcat> 我是不怎計較速度, 不要差太多就好
+23:10:22 <hashcat> 又不是窮到沒錢買好點的
+23:12:52 <hashcat> F#特性大好
+23:13:41 <mno2> .Net 有 ahead of time compile to binary 喔 @@？
+23:14:15 <mno2> 有錢不是直接買 Mathematica, lol
+23:16:31 <hashcat> 買那個就軟體比硬體貴
+23:22:49 <CindyLinz> hashcat: 我以為你那時很 hot julia 就是因為速度的說...
+23:26:09 <hashcat> 不是欸是看起來很英文
+23:26:21 <hashcat> F#看起來很函數
+23:27:41 <CindyLinz> 喔..
+23:28:40 <hashcat> CindyLinz: julia看起來很英文又很lisp
+23:29:03 <hashcat> 顯然不是指括號
+23:29:29 <CindyLinz> 哎.. 英文對我沒什麼吸引力, 不比符號好讀.. ._.
+23:29:39 <CindyLinz> 個人問題 orz
+23:29:51 <hashcat> 比一堆括號好讀吧
+23:30:32 <hashcat> lisp排縮也沒變比較好讀
+23:31:13 <hashcat> julia一開始就好讀了
+23:32:44 <hashcat> 再說Python怎樣都沒速度阿

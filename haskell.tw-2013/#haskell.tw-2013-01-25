@@ -1,0 +1,215 @@
+01:22:42 <MnO2> http://sebastiaanvisser.github.com/clay/
+01:22:57 <MnO2> Haskell 寫的類似 LESS 的東西
+01:24:46 <CindyLinz> 原來是不一樣的 less.... ^^|
+01:24:59 <letoh> 我每次看到一些符號就覺得  我都逃離 perl 那麼多年了，怎麼在另外的坑又遇到奇怪的東西XD
+01:26:36 <MnO2> 我只是覺得，這種東西都開始冒出來了，就表示這語言真的有點動能
+01:30:43 <CindyLinz> perl 有句諺語: There's more than one way to do it # http://en.wikipedia.org/wiki/There's_more_than_one_way_to_do_it
+01:31:00 <CindyLinz> 我覺得在 haskell 這情況是更嚴重的呀...
+01:31:42 <letoh> 剛好跟 python 相反  "There should be one-- and preferably only one --obvious way to do it."
+01:33:00 <CindyLinz> 可是 python 本身就 functional / imperative / object oriented 三種都有了.....
+01:34:12 <letoh> 對呀  雖說 py3 好像會離 functional 越來越遠
+01:35:00 <letoh> 那句出自 "The Zen of Python"   有些還不錯啦
+01:35:33 <letoh> 像 Beautiful is better than ugly.
+01:35:44 <letoh> 不過好像常常會打到自己的臉XD
+01:36:12 <CindyLinz> 就「蛇」的 context 來說.. beautiful is toxic... XD
+01:42:43 <MnO2> CindyLinz: Python 不是源自於蛇唷
+01:43:58 <MnO2> Haskell 連 Perl 不能自訂的東西都能自訂了，所以超多種 wwww
+01:45:10 <CindyLinz> MnO2: 我前幾天有看到.. python 之父說他是堅持反對.. 一直到 O'reilly 出的書印蛇當封面... 他就放棄了 XD
+01:45:36 <MnO2> CindyLinz: 所以 Haskell 就是獨角仙了
+01:45:53 <MnO2> 沒救了
+01:45:58 <CindyLinz> 而且 haskell 社群的人好喜歡去定義好基本的東西, 從不一樣的數學模型去定義... 用起來就完全不一樣了 orz
+01:46:38 <CindyLinz> Lens 就一大堆 XD
+01:47:31 <MnO2> CindyLinz: 之後就會以 Edward Kmett 的為尊吧 xD
+01:47:53 <CindyLinz> 嗯
+01:48:13 <CindyLinz> 這其實是很困擾的啊... QQ
+01:51:07 <MnO2> 所以需要 24 days of hackage
+01:53:21 <CindyLinz> 哎呀.. 還沒看 orz
+01:55:00 <CindyLinz> 最近上班太刺激了... 回來都好累只想混.. zz
+09:16:07 <mgccl> 我真的不想每次写足够高效率的dynamic programming都要手动玩STArray, 写和C看起来差不多的代码....
+09:29:05 <drbean> From http://unix.stackexchange.com/a/40787 : "ghc -e '20 + 5/2'" returns "22.5"
+09:55:44 <b4283> :t concat . concat
+09:55:46 <lambdabot> [[[a]]] -> [a]
+09:59:10 <MnO2> mgccl: 2012-12-21 的 log 有針對你上次提的做一些討論
+09:59:22 <MnO2> favonia 有改一個版本 https://gist.github.com/4352742
+10:04:05 <mgccl> 哇塞... 我竟然没有看到她给我gist留的消息
+12:22:35 <mgccl> CindyLinz: 我看到你在code forces上刷Haskell的題目. 有沒有考慮刷刷Rosalind.info too...
+12:23:13 <CindyLinz> mgccl: 嗯嗯, 我只是沒有聽過 Rosalind.info ^^|
+12:24:40 <CindyLinz> mgccl: 然後 Codeforces 上面的 GHC 版本只到 6.x, 另外, 它不能拆寫 module... 我覺得這太傷了
+12:24:53 <CindyLinz> 就是... 只能上傳一個檔案...
+12:25:23 <mgccl> CindyLinz: 嗯. rosalind的好处就是类似google code jam, 所以用本地的机子跑就可以了...
+12:27:06 <CindyLinz> 我來看一下 ^^
+12:27:21 <CindyLinz> 嗯, 我很久沒碰 CodeForces 了 :p
+12:36:28 <mgccl> MnO2: 我测试了一下 favonia 的版本. 速度大概是用STArray的1/2. 内存耗用稍微多一点. 看来普通的东西用那样的写法是可以的.
+12:36:51 <mgccl> MnO2: 所以favonia是这个channel里的么
+12:38:12 <CindyLinz> 對 他常常來 ^^
+12:38:16 <MnO2> mgccl: 對，只是他現在不在 channel 上
+12:43:54 <mgccl> MnO2: cool~
+12:45:54 <mgccl> CindyLinz: 我以前做算法竞赛的. 感觉用的语言(Java)好难受所以转到Haskell, 感觉很多题因为都差不多可能能抽象出一系列的library然后所有的题目都5行做出. 但是感觉某些类型的题目要写出高效率的Haskell代码好难.
+12:47:15 <mgccl> 好长的type signature... http://i.imgur.com/Zv9JH9A.png
+12:49:59 <_13h> 好可怕... 好像在 c 裡看到一堆 ***[[]]()
+12:52:32 <b4283> 這個月怎麼沒有 humble bundle
+12:56:29 <_13h> http://blogs.gnome.org/hughsie/2013/01/24/color-management-in-gnome-3-8/
+13:00:30 <mgccl> 把哇, Cave Story+
+13:00:43 <mgccl> b4283: thx, 让我发现了cave story+
+13:03:56 <_13h> 疑  我又貼錯地方了XD
+13:10:29 <b4283> :p
+13:38:06 <CindyLinz> mgccl: 演算法競賽.. 那都是專為 C / C++ / Pascal 設計的題目吧? :p
+13:41:55 <_13h> 小時候在 bbs 的 programming 板看討論，說有些比賽會禁用 lisp 或 prolog 這些神器，有這種事嗎?
+13:44:11 <MnO2> _13h: Judging system 只能通常上傳 C / C++ / Java / Pascal 啊
+13:46:27 <_13h> 比賽用的 judge system 跟一般看到的 online judge system 限制一樣嗎？之前好像看到有接受很多語言的站
+13:48:21 <_13h> http://www.spoj.com/
+13:49:09 <b4283> 疑，我也貼錯地方了 XDD
+13:50:49 <_13h> b4283: 我就是看到你才貼的啊orz
+13:51:17 <_13h> http://www.spoj.com/ranks/languages/
+13:51:46 <_13h> 第 12 位是 BF ..
+13:57:43 <favonia> b4283: 現在 online judge 真多... xD
+13:58:58 <favonia> _13h: 輸給 brainfuck... (哭)
+13:59:14 <b4283> 是 _13h 貼的 @@
+13:59:36 <_13h> favonia: 快去衝高名次XD
+13:59:45 <CindyLinz> 輸給 brainf**k XDD
+13:59:55 <MnO2> _13: 這兩三年才多了不少接受很多語言的吧。傳統大站應該還是那四種語言
+14:00:05 <_13h> 嗯嗯
+14:00:21 <b4283> pascal 意外的很多
+14:00:50 <CindyLinz> brainf**k 的題數超少的啊, 一直灌同一題是怎樣 XD
+14:00:57 <_13h> 如果沒有 delphi，pascal 還可以活那麼久嗎?
+14:01:29 <CindyLinz> GHC 6.10.4 @@"
+14:02:00 <favonia> mgccl: hi~
+14:02:43 <favonia> mgccl: 你說速度 1/2 是比較快還是比較慢啊（我猜我的版本應該要比較慢？）
+14:03:14 <favonia> _13h: _13h 就交給你了！（順便你可以練 Haskell xD）
+14:04:05 <_13h> 先拿 projecteuler 練習一下好了XD
+14:05:02 <favonia> _13h: 那個又不能衝高名次
+14:05:17 <favonia> 都是自己電腦上算好玩而已
+14:05:30 <_13h> 題目比較簡單啊，不然我寫一題要想好久XD
+14:05:45 <favonia> _13h: 那個題目不一定比較簡單吧。。。。
+14:06:06 <_13h> 我現在還抓不太到 pattern matching 的語法，寫一寫常常卡住XD
+14:07:07 <_13h> 是不能說簡單啦，不過因為我已經用 python 寫了一些題目，那邊的題目感覺比較親切XD
+14:07:50 <cataska> _13h: 沒有 Anders Hejlsberg, pascal 還可以活那麼久嗎? XD
+14:12:40 <_13h> 很難說... 神人歸神人，我覺得影響比較大的應該還是 delphi
+14:13:29 <_13h> 不過我對 tp 時期的市場分布情況不太清楚就是，是 tp 獨大嗎？還是有其他產品?
+14:14:31 <cataska> 只用過 Turbo C...
+14:14:45 <mgccl> favonia: 比较慢
+14:17:11 <mgccl> CindyLinz: 的确是设计给那种语言的... 但是也就是说写Haskell不出那么好性能的算法啊...
+14:25:21 <MnO2> 主要是那些 online judge 題目的演算法本身就是 stateful 的吧
+14:26:52 <MnO2> 描述那些演算法的 paper 都是用類似 現有的機器架構去寫的， 要用 purely functional 的方式描述的確是比較吃虧
+14:29:46 <MnO2> brainf**k 應該是有人寫教學所以一直被灌同一題吧
+14:35:11 <mgccl> MnO2: haskell在oj上面做不了的题估计只是DP以及图有关的问题.
+14:38:04 <CindyLinz> mgccl: 我覺得不是這樣說...
+14:38:33 <CindyLinz> mgccl: 我們現在講 Haskell 寫不出.. 是因為我們只接受寫起來看起來很 Haskell 的寫法
+14:38:55 <CindyLinz> mgccl: Haskell 也可以寫看起來很不 Haskell 的程式
+14:38:56 <mgccl> 如果Haskell有个extension可以要求memorize每一次evaluation到look up table...然后就自动的DP了呢...
+14:39:16 <mgccl> CindyLinz: I see.
+14:39:41 <CindyLinz> 當然, 如果用 Haskell 寫很不 Haskell 的程式.. 那就沒意思了所以我們不接受
+14:40:03 <CindyLinz> 但其實 C 的確是常常拿來寫很不 C 的程式呀
+14:40:24 <CindyLinz> 例如說.... binary search tree, 就應該用 Haskell 來寫, 不適合 C 寫呀~ XD
+14:40:42 <MnO2> mgccl: 是沒有這樣的 extension ，但有這樣的套件
+14:40:43 <mgccl> CindyLinz: e... 红黑树...
+14:40:47 <MnO2> mgccl: http://hackage.haskell.org/package/data-memocombinators
+14:40:53 <MnO2> mgccl: http://hackage.haskell.org/package/MemoTrie
+14:41:43 <MnO2> mgccl: http://blog-mno2.csie.org/blog/2011/11/28/writing-dynamic-programming-in-haskell/
+14:42:12 <favonia> mgccl: 紅黑樹用 Haskell 寫很漂亮，你可以試試看 xD
+14:43:02 <favonia> 那一堆判斷基本上就變成一行一行的 pattern matchings
+14:43:18 <mgccl> MnO2: nice. 我的去看
+14:45:34 <mgccl> favonia: 感觉我的todo list越来越长了...
+14:46:27 <mgccl> 有没有专门研究fp里的算法这样的领域...
+14:47:40 <favonia> er
+14:47:43 <favonia> mgccl: http://www.cs.cmu.edu/~rwh/theses/okasaki.pdf
+14:47:51 <favonia> mgccl: 也許你可以看一下這個？
+14:47:56 <MnO2> mgccl: 有， http://www.cs.cmu.edu/~rwh/theses/okasaki.pdf
+14:48:04 <CindyLinz> 如果 C 不准用紅黑樹的話.. 能用 C 實作的高效率演算法應該也會被砍掉一大截 :p
+14:48:08 <MnO2> 我慢了一步 xD
+14:48:40 <CindyLinz> 我覺得 okasaki 有一大半是用 Haskell 去寫 C 的資料結構說
+14:48:46 <CindyLinz> 他真的很變態.... O__O
+14:49:08 <mgccl> 嗯看过这书... 唯一的感觉是特别基础的数据结构要用fp写并且证明正确好难啊... - -
+14:49:54 <CindyLinz> mgccl: 應該是效能的部分才不好證明, 正確性應該都會比 C 簡單
+14:50:15 <favonia> mgccl: 不過這是 Standard ML 寫的... SML 和 Haskell 很多地方不一樣...... 不過我想這邊最重要的就是實作上 eager/lazy 的差別
+14:50:18 <mgccl> 啊是的, 我是那个意思.
+14:51:19 <favonia> CindyLinz, mgccl: 效能也還好吧，只要你忽略 gc 還有一些有的沒的... xDDD
+14:52:11 <CindyLinz> favonia: okasaki 那本裡面要去對 lazy/persistent 資料結構證明 worst case 的時候花的時間
+14:52:45 <favonia> CindyLinz: amortized 隨便用一用就好啦～～
+14:53:10 <CindyLinz> 像是有 worst case O(1) 的 queue
+14:53:29 <CindyLinz> favonia: 我們不是在討論這本書嗎? ^^|
+14:53:30 <mgccl> MnO2: 通过你我才知道有个+RTS -sstderr可以输出各种我关心的数据...
+14:54:17 <mgccl> 研究如何fp化一个算法有没有paper可以发. 嘛, 读phd的时候应该就有时间思考了...
+14:54:55 <MnO2> mgccl: 其實還可以弄出更詳細的資料，可以參考 Real world haskell optimization 章節
+14:57:43 <favonia> mgccl: 不太懂你的意思。如果你是說怎麼改用 Haskell 寫... 全部用 IO 包起來就好啦
+14:59:03 <mgccl> 可以purely functional style. 没什么mutation的.
+15:00:01 <favonia> mgccl: 如果你是說同一個問題有什麼非常 "fp" 的解法，那你看看你怎麼證明算法正確的；可以從證明直接產生程式碼。
+15:00:38 <favonia> 例如 DP 的正確性證明就是歸納。基本上你把你的數學歸納都寫下來，稍微改一下就變成很 "fp" 的寫法。
+15:01:49 <favonia> 把嚴謹的數學證明拿來，去掉不會影響最終結果的部份，就可以變成程式 xD
+15:02:41 <favonia> 這樣好處是你也不用再證明你的程式是對的了...
+15:05:47 <mgccl> 这个说法好像的确适用...
+15:06:51 <favonia> mgccl: 像之前有人說什麼 binary search 其實不只用在「排序好的陣列」這個問題上...
+15:07:51 <favonia> mgccl: 你把之所以正確的數學證明寫下來，會發現到他根本跟排序不排序無關，只要遞規的條件永遠滿足就行
+15:08:36 <mgccl> 嗯
+15:08:37 <favonia> 不知道耶，我覺得花點時間證明（+想原理）可能還會有新發現？
+15:10:42 <mgccl> hmm
+15:11:17 <mgccl> 这样要implement书上的算法还要花不少时间呢...
+15:12:06 <favonia> mgccl: 反正大概常見的都實作完了吧...
+15:13:42 <mgccl> 的确... 应该要好好看现有的代码...
+15:14:12 <mgccl> - - 到现在都没怎么理解fgl那library...
+15:14:40 <mgccl> http://hackage.haskell.org/packages/archive/fgl/latest/doc/html/src/Data-Graph-Inductive-Query-MaxFlow.html max flow 写的好短
+15:15:34 <mgccl> 啊我该睡觉了.
+15:15:37 <mgccl> 晚安
+15:16:54 <favonia> mgccl: 晚安
+16:14:16 <MnO2> soiamso: hi
+16:14:23 <soiamso> hi
+16:15:11 <MnO2> soiamso: 歡迎，有在學 Haskell ?
+16:15:57 <soiamso> MnO2: 有时使用
+16:16:55 <MnO2> soiamso: I see, 可以先看一下 irc 的 log ，如果有 Haskell 的問題都可以在 channel 提出
+16:17:13 <soiamso> MnO2: 好热情啊，去vala频道就不会用人打招呼
+16:20:45 <MnO2> soiamso: ha, 我想這個社群還小，我希望可以對每個人都盡可能友善 :)
+16:27:52 <soiamso> MnO2: GHC 有没有警告  uncaught exception 的功能？
+16:32:48 <MnO2> soiamso: 看你是指哪種 exception,  你是希望可以 compile time 就可以檢查出來嗎？
+16:34:51 <soiamso> MnO2: 是的通过 Control.Exception.throwIO， 抛出的，是底下的库抛出的。
+16:40:35 <MnO2> soiamso: 如果是 throwIO 的話應該是沒辦法，Type 中沒有資訊
+16:53:44 <soiamso> MnO2: thanks
+16:57:03 <MnO2> soiamso: no problem
+17:11:38 <CindyLinz> 我覺得可以說.. haskell language 裡面沒有 exception 這種東西, 它只是 user lib 的一種
+22:30:29 <MnO2> http://lugod.org/presentations/Haskell_LLVM.pdf
+22:31:39 <letoh> http://erlang.org/pipermail/erlang-questions/2013-January/071949.html  今天看到有人在傳這一封信
+22:32:09 <letoh> 好多 fortran... fortran 不死XD
+22:42:07 <MnO2> http://stackoverflow.com/questions/14283270/how-to-determine-whether-my-calculation-of-pi-is-accurate
+22:42:16 <MnO2> 最佳答案真是有氣勢 xDDDD
+22:43:37 <letoh> 這人對 pi 好執著啊...
+22:59:13 <favonia> 最佳答案第一句就贏了
+23:04:54 <MnO2> http://stackoverflow.com/users/922184/mysticial?tab=answers&sort=votes
+23:05:08 <MnO2> 原來他也是 sorted array 那篇的最佳答案
+23:06:13 <letoh> 好厲害...
+23:08:06 <letoh> haskell 的入門範例是 fibonacci 嗎XD
+23:08:44 <MnO2> 不知道耶，也蠻常看到 quick sort 的，雖然嚴格來說他不是 quick sort
+23:09:11 <letoh> 唔  你是說 wikipedia 上給的範例嗎?
+23:11:22 <MnO2> 我不知道耶，我懶得開 wikipedia 了 xD
+23:11:45 <favonia> MnO2: slowsort lol
+23:13:09 <favonia> MnO2: 唉我是覺得不要再拿那個當例子了，免得別人比較懂以後反過來罵「啊 quicksort 不是要 in-place... 現在根本沒有 Haskell 實作會把那段程式碼編譯成 in-place 的操作 lol」
+23:13:45 <MnO2> 嗯
+23:14:15 <letoh> 看起來蠻酷的啊
+23:14:58 <letoh> 連 c++ template metaprogramming 也都是用 fibonacci 當範例
+23:15:46 <favonia> letoh: C++ template 符合「看起來很強大但沒有人完全懂」的標準
+23:16:08 <letoh> 這已經是公認的了XD
+23:16:50 <favonia> 結果就是沒什麼人會用。擁護者說「喔這個可以寫出來」但嚴格來說（從理論上來說）如果你根本不知道 C++ template 在幹嘛，你怎麼知道你的用法真的是對的呢？
+23:17:01 <favonia> 大概就是這樣（聳肩）
+23:17:19 <letoh> 只剩嚇人很好用?
+23:17:21 <favonia> （小抱怨 xD）
+23:17:25 <favonia> 可能吧
+23:18:33 <favonia> 不要說 template 了，我覺得就算沒 template 也沒什麼人懂 C++
+23:19:17 <letoh> 就會寫一點 c，會用 vc++ 編譯出 exe，就可以說懂 c++ 了 (誤
+23:19:25 <favonia> letoh: lol
+23:19:55 <letoh> 補充一下  還要記得 s/struct/class/
+23:20:13 <letoh> 不然看起來太像 c XD
+23:22:00 <MnO2> letoh: 要記得加上 public
+23:23:04 <letoh> 哈  我們家好多程式都這樣  我看了半天不曉得為啥需要用 c++
+23:29:00 <b4283> 難怪我寫起來也是覺得怪怪的.. 不斷使用新空間的 (quick) sort 真的會 quick 嗎
+23:29:18 <favonia> b4283: 常數時間內嘛...（逃）
+23:29:21 <b4283> 原來是要求必須 in-place
+23:29:38 <favonia> b4283: gc 當作不存在（耶)
+23:29:44 <b4283> @@
+23:33:05 <b4283> > sort "ebcda"
+23:33:07 <lambdabot>   "abcde"
+23:33:39 <b4283> > sort "e你b好c嗎da"
+23:33:39 <lambdabot>   mueval: recoverEncode: invalid argument (invalid character)
+23:40:48 <favonia> b4283: 竟然不是 Unicode lol
+23:40:58 <favonia> > "我"
+23:40:58 <lambdabot>   mueval: recoverEncode: invalid argument (invalid character)
+23:52:08 <favonia> 我來問問看
+23:56:08 <favonia> 結果是 bug
+23:56:10 <favonia> xDDDD

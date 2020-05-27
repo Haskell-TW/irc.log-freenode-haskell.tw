@@ -1,0 +1,10 @@
+01:34:00 <monochrom> 你有沒有 save ? 究竟 baby.hs 在甚麼 directory? 究竟 ghci 知不知道?
+01:44:45 <FedererChien> 感謝回應。1.有save 2.我知道directory檔案在哪3.ghci 不知道
+01:45:15 <FedererChien> 我想要讓ghci知道，如何讓他知道
+02:01:09 <caasih> 假設我在路徑 /home/foo/foobar ， baby.hs 在 /home/foo 下，
+02:01:29 <caasih> 那在 ghci 內我要打 :l ../baby.hs 才行
+02:02:44 <caasih> 或者打絕對路徑 :l /home/foo/baby.hs
+02:23:30 <FedererChien> federerchien:感謝caasih和monochrom，解決我搞了6個鐘頭的問題。
+02:23:35 <FedererChien> <3 <3 <3
+03:29:52 <monochrom> 正路應該先 cd 到源碼的 directory 在那裏行 ghci
+03:30:40 <monochrom> ghci 裏亦有 :cd

@@ -1,0 +1,365 @@
+00:41:20 <yllan> http://files.yllan.org/FLOLAC14/ 結果今天 copy 到的好像只有 7/3, 7/4 兩天的影片
+00:42:12 <yllan> 2014_07_04 還在傳，可能再一兩個小時吧。 miaoski 如果你懶得跑一趟也可以直接從這邊拉檔
+03:16:57 <miaoski> yllan: 收到~
+03:18:11 <miaoski> yllan: 在日期目錄裡的和在外面的有什麼不同啊? size 不一樣說
+07:02:25 <yllan> miaoski: 我拿到就是這樣了  7_03 裡的好像是 CindyLinz 的 talk? 真正 703 的課程是散的那些
+08:30:47 <petercommand> 果然甚麼語言都可以變成js XD
+09:09:40 <miaoski> yllan: OK ~~ 那我通通 mirror 下來好了 XD
+09:09:58 <miaoski> yllan: 這樣就不用和你約了~~ 感謝 ^^
+09:12:40 <miaoski> CindyLinz: 星期四講的 fibonacci 是這個 : fib 0 1 rot 0 ?DO tuck + dup . LOOP nip ;
+09:12:51 <petercommand> atom的open in github要怎麼用呀，按了似乎沒反應
+09:14:03 <miaoski> CindyLinz: 如果把 LOOP 放在妳 hard code 好的位置的話，其實就不需要第二個堆疊這樣
+09:44:42 <yllan> miaoski: 這是 forth?
+09:45:57 <miaoski> yllan: 對啊，那天 CindyLinz 寫的 unsafeCoerce 範例讓我很直接想到 forth
+09:55:15 <aksatac_> Forth!!
+10:16:46 <miaoski> yllan: 對耶，忘了問你為什麼只有 7 月 3 / 4 日
+10:17:19 <miaoski> yllan: au 的是不是聽他放在網路上的音檔就好 xd
+10:23:30 <yllan> miaoski: 助教 copy 給我的只有這些，我也沒檢查 Orz
+10:23:50 <miaoski> 噗... 星期一再麻煩你追殺他們 XD
+10:26:38 <miaoski> yllan: 有一種我直接去 copy 比較快的 fu 哈哈。下載 ~1.3MB/s 其實不慢了，可是每個錄影檔都有 4GB
+10:29:58 <yllan> 我已經在路上了 Orz 沒帶 hd
+10:30:47 <yllan> 我看能不能弄成 torrent 加速
+10:34:54 <miaoski> yllan: 哈，不用啦... 那你專心比賽吧，我慢慢抓
+11:24:09 <Sid666> 請問 data _≡_ {a} {A : Set a} (x : A) : A → Set a where refl : x ≡ x
+11:24:25 <Sid666> 是data _≡_ {A : Set} : A → A → Set where refl : ∀ {x} → x ≡ x
+11:25:01 <Sid666> 的general definition 是因為前者是Universe hierarchy 的表示方式嗎
+12:45:31 <CindyLinz> miaoski: 啊我那時沒有想到可以加上 rot, tuck, dup 這些操作 stack 的指令 XD
+16:20:39 <petercommand> :t Left a
+16:20:40 <lambdabot> Either Expr b
+16:20:47 <petercommand> :t Right a
+16:20:48 <lambdabot> Either a Expr
+16:21:09 <petercommand> :t Left
+16:21:09 <lambdabot> a -> Either a b
+16:21:18 <petercommand> :t Left Right
+16:21:19 <lambdabot> Either (b1 -> Either a b1) b
+16:26:45 <CindyLinz> petercommand: 想要跟 ghci 像一點的話, 對 lambda bot 避免使用單個字母, 那些都被動過手腳了 ^^|
+16:26:56 <CindyLinz> :t Left aa
+16:26:58 <lambdabot>     Not in scope: ‘aa’
+16:26:58 <lambdabot>     Perhaps you meant one of these:
+16:26:58 <lambdabot>       ‘a’ (imported from Debug.SimpleReflect),
+16:27:05 <CindyLinz> 好吧　根本不能用 XD
+16:27:21 <CindyLinz> 不能用比較像 ghci XDDD
+16:28:23 <au> > ( '無': ) <$> pure <$> "誠品"
+16:28:24 <lambdabot>  ["\28961\35488","\28961\21697"]
+16:28:36 <petercommand> CindyLinz: XD
+16:29:17 <petercommand> au: 這是啥呀XD
+16:29:47 <au> petercommand: 練習 <$> (fmap) XD
+16:30:05 <au> > ('x:') <$> pure <$> "yz"
+16:30:06 <lambdabot>  <hint>:1:6: parse error on input ‘)’
+16:30:08 <au> > ('x':) <$> pure <$> "yz"
+16:30:09 <lambdabot>  ["xy","xz"]
+16:32:48 <petercommand> 喔喔
+16:44:15 <petercommand> au: 那本types and programming language主要是講type theory嗎?
+16:45:31 <au> 可以這樣說，然後講如何實作程式語言。
+16:46:17 <petercommand> 嗯
+16:46:39 <letoh> 印象中這本好像還有續集?
+16:46:47 <aksatac_> 使用哪種語言實做？ML ?
+16:47:02 <letoh> aksatac_: 你沒買這本啊?
+16:47:49 <aksatac_> letoh: 太厚了，扛不動
+16:47:58 <au> 有，續集是 advanced topics in types and programming language
+16:48:32 <letoh> 內容也是一樣性質嗎? 講實作程式語言方面的?
+16:48:41 <au> aksatac_: 沒有挑語言，但是習作有 OCaml 版
+16:49:31 <aksatac_> au: thanks
+16:49:56 <petercommand> 感覺可以來看看XD
+16:49:56 <au> letoh: 是，但講的是比較有趣的 substructural typing, dependent typing, effect/region typing, typed assembly, proof-carrying code, etc
+16:50:12 <au> 建立在 TaPL 的科普基礎上
+16:50:27 <aksatac_> 曾經在天龍把它拿起來又放回去
+16:52:39 <letoh> 瞭解  一直很想看這系列的書  但又怕得先看 category theory   結果拖到現在還沒看XD
+16:54:03 <petercommand> 沒記錯的話，我記得au的演講說只需要set theory的背景
+16:54:15 <au> 是的 TaPL 只需要入門級的集合論
+16:54:51 <letoh> 感謝!
+16:56:00 <aksatac_> 團購嗎？
+16:56:29 <letoh> 哪邊買比較便宜?
+16:56:44 <CindyLinz> set theory 背景指的是, 要知道 (a, b) 要 encode 成 {a, {a, b}} 嗎.. OAO
+16:56:44 <letoh> 第一本是有 kindle 版啦...
+16:57:03 <letoh> 不過我的 kindle 大概沒辦法看... 那個 layout 聽說沒改
+16:57:06 <aksatac_> 不知道哪裡比較便宜...
+16:57:29 <petercommand> CindyLinz: 不是{a, b, {a, b}}嗎?
+16:58:08 <au> 有 pdf 版 XD http://ropas.snu.ac.kr/~kwang/520/pierce_book.pdf
+16:58:25 <CindyLinz> petercommand: 這樣就分不出 (a, b) 和 (b, a) 了耶?
+16:58:59 <letoh> working draft!
+16:59:45 <au> 是草稿
+17:01:12 <aksatac_> 買書來不看還可以運動強身打蟑螂
+17:01:15 <petercommand> CindyLinz: 先問一下那個符號的意義好了XD ( )代表的是?
+17:01:44 <CindyLinz> aksatac_: 打蟑螂適合輕便的, 可以瞬間加速的東西吧 XD
+17:01:54 <letoh> 我都用羽球拍
+17:02:03 <CindyLinz> 拿 2kg 的東西打蟑螂真的打得到嗎... O___O
+17:02:23 <letoh> aksatac_: 你已經練到舉重若輕的境界了? XD
+17:02:34 <CindyLinz> aksatac_: 太強惹....
+17:02:42 <CindyLinz> petercommand: 就 pair 啊
+17:03:24 <aksatac_> TaPL 有兩公斤喔？
+17:06:03 <letoh> 說到這本書  去年竟然出現日文版...真是神奇
+17:08:00 <CindyLinz> aksatac_: 亂猜的.. 因為剛聽你說很厚 XD # 16:47 < aksatac_> letoh: 太厚了，扛不動
+17:08:09 <letoh> http://code.google.com/p/tapl-haskell/  haskell 版的練習
+17:08:43 <aksatac_> CindyLinz: XXD
+17:10:03 <petercommand> letoh: ++ XD
+17:11:21 <petercommand> 不過書單愈來愈長了...XD
+17:13:37 <petercommand> CindyLinz: 甚麼是pair? 他怎麼轉換到set的? (後面{ }的是set，對吧?)
+17:25:42 <petercommand> > map (('無' . pure) "誠品"
+17:25:43 <lambdabot>  <hint>:1:23:
+17:25:43 <lambdabot>      parse error (possibly incorrect indentation or mismatched brackets)
+17:25:52 <petercommand> > map (('無' . pure) "誠品")
+17:25:53 <lambdabot>  Couldn't match expected type ‘f0 [GHC.Types.Char] -> a -> b’
+17:25:54 <lambdabot>              with actual type ‘GHC.Types.Char’
+17:26:08 <petercommand> > map (("無" . pure) "誠品")
+17:26:09 <lambdabot>  Couldn't match expected type ‘f0 [GHC.Types.Char] -> a -> b’
+17:26:10 <lambdabot>              with actual type ‘[GHC.Types.Char]’
+17:26:35 <petercommand> > map (("a" . pure) "bc")
+17:26:36 <lambdabot>  Couldn't match expected type ‘f0 [GHC.Types.Char] -> a -> b’
+17:26:36 <lambdabot>              with actual type ‘[GHC.Types.Char]’
+17:30:38 <petercommand> 問一下，這個.後面加的pure或是return的意思是甚麼呀?
+17:35:26 <au> petercommand: 「把單個元素打包起來」的意思
+17:35:38 <au> 在 list 裡的作用和 (:[]) 一樣
+17:36:07 <petercommand> 是pure還是return?
+17:36:15 <petercommand> > map ("a" . pure) "bc"
+17:36:16 <lambdabot>  Couldn't match expected type ‘f0 GHC.Types.Char -> b’
+17:36:16 <lambdabot>              with actual type ‘[GHC.Types.Char]’
+17:36:20 <au> :t pure
+17:36:21 <lambdabot> Applicative f => a -> f a
+17:36:22 <au> :t return
+17:36:23 <lambdabot> Monad m => a -> m a
+17:36:40 <au> 兩個都是，pure 能適用的包包比較多
+17:37:17 <au> 理論上 return 能用的地方 pure 也都能用 (這就是我簡報裡 #haskell 上那句外星話的意思)
+17:37:35 <petercommand> XD
+17:41:01 <CindyLinz> petercommand: 你想要的是這樣的定義哄? # http://en.wikipedia.org/wiki/Axiom_of_pairing
+17:42:25 <petercommand> CindyLinz: 來看看
+17:42:46 <petercommand> 對，就是要這個XD
+17:43:31 <CindyLinz> au: 為什麼 Haskell 的 tuple 不定義成 pair of pair of pair... 呢?
+17:43:47 <CindyLinz> 效能的部分再在 compile 的時候 optimize 掉就好啦 :p
+17:44:04 <CindyLinz> 把 ( , , , ) 視為 syntax sugar
+17:44:48 <au> 這樣的話，現在的 (1,(2,3)) 要如何表示?
+17:45:41 <CindyLinz> 就視為一樣呀~ 其實就是不要現在的 ( , , ), 然後把這語法拿來當 ( , ( , )) 的 sugar
+17:46:06 <CindyLinz> 這樣應該可以省一些 template... :p
+17:46:35 <caasih_> 這樣是不是連 list 也包辦了？
+17:46:37 <CindyLinz> 還有那種一大堆手刻 (a1, a2), (a1,a2,a3), (a1,a2,a3,a4), ... 的 instance ^^|
+17:46:52 <au> caasih_: yeah，這就是 HList 的意思
+17:46:57 <CindyLinz> caasih_: 不一樣, list 的 element type 一樣
+17:47:27 <xcycl> types and programming language ... 現在有 Robert Harper 寫的 Practical Foundations for Programming Languages
+17:48:09 <xcycl> 他網站上有放完整 preview 版，個人偏好他寫的，寫得滿乾淨的
+17:48:32 <au> xcycl++
+17:49:02 <caasih_> CindyLinz: 對耶，忘記 type 了。這樣 List 就是你說的 pair of pair of pair... 指定 type 都一樣的特例了。
+17:49:12 <caasih_> au: 來查一下你說的 HList XD
+17:49:45 <au> CindyLinz: 實務上 (a,b,c) 和 (a,b) 但碰巧 b 的型別是 (b1, b2) 好像還是有不同的用途
+17:50:08 <CindyLinz> caasih_: 只是我不知道這要怎麼寫... 就是, 像是現在的 tail :: [a] -> [a] 如果用那個一串 pair 的, 我不知道 type 要怎麼寫 orz
+17:50:11 <au> 手刻 instance 的問題用 PolyKind Typeable 解決了 (GHC 7.8)
+17:50:23 <CindyLinz> hTail :: (a, b) -> b ? XD
+17:50:27 <CindyLinz> 就是 snd 嘛...ww
+17:50:47 <CindyLinz> au: 我星期四的投影片裡面有寫到 PolyKind 喔~~
+17:50:56 <CindyLinz> au: 那一句的最右邊是 (我不會)... XD
+17:51:29 <au> hTail :: HList (e : l) -> HList l
+17:51:44 <au> 建構式用 GADT 寫作 HCons :: e -> HList l -> HList (e : l)
+17:51:49 <au> (詳見 https://hackage.haskell.org/package/HList-0.3.4.1/docs/Data-HList-HList.html )
+17:52:10 <CindyLinz> 好 :D
+17:52:51 <CindyLinz> au: 那問你一個意見.... 如果教初學 Haskell 的人, 定義 data 的時候就直接講 GADT 語法當基本款好不好?
+17:53:01 <CindyLinz> 然後把 data Bool = True | False 當成 syntax sugar
+17:53:07 <au> 你問我我一定說好啊 XD
+17:53:26 <CindyLinz> 我今天在想這事, 心中開始往 GADT 偏..
+17:53:48 <petercommand> au: multi-stage programming 一般有甚麼應用呀?
+17:54:13 <au> petercommand: 簡單的應用如 DSL (inline XML 什麼的)
+17:55:20 <xcycl> CindyLinz: 我當初覺得 Agda 比 Haskell 的語法更自然一點 ...
+17:55:46 <caasih_> 不會是這麼可愛的不會嗎？ http://i.imgur.com/XWLiWwi.jpg
+17:56:11 <xcycl> 看到 data T = ...  等號兩邊的東西是不同的感到很不舒服
+17:56:27 <au> petercommand: 複雜的如對函數的特定參數做最佳化 http://okmij.org/ftp/ML/MetaOCaml.html ("Introduction to staging and MetaOCaml")
+17:57:19 <petercommand> 喔喔...
+17:57:54 <petercommand> 甚麼時候會需要inline XML呀?
+17:58:23 <au> https://facebook.github.io/react/ 有一些好例子 (JSX)
+17:58:51 <au> 也就是把 return <div>Hello {this.props.name}</div> 展開成 return React.DOM.div(null, "Hello ", this.props.name);
+17:59:31 <petercommand> 喔喔
+18:00:04 <au> GHC 裡也許可以寫作 [x|<div>Hello {this.props.name}</div>|] ，JavaScript ES6 裡寫作 x`<div>...</div>`
+18:00:24 <au> (但後者如果要編譯期間展開則要用 Sweet.js)
+18:01:57 <CindyLinz> au 的 perl 跟別人不一樣; au 的 haskell 也跟別人不一樣... <囧>
+18:02:23 <au> 對啊，我的 perl 寫作 return <<div>...</div>>
+18:02:28 <au> # https://metacpan.org/pod/XML::Literal
+18:02:39 <petercommand> XDD
+18:02:51 <CindyLinz> 用警兮用嚴 # au 的 perl.....
+18:03:00 <au> XDD
+18:03:24 <CindyLinz> 玩 minecraft 的時候之前有網友說學程式要用英文好難..
+18:03:36 <petercommand> au: title有typo XD
+18:03:46 <petercommand> au: cpan那個
+18:03:49 <CindyLinz> 我就把你寫的中文找質數程式丟給他
+18:03:57 <au> petercommand: 真的耶 XD
+18:04:00 <CindyLinz> 其他網友也看到了, 說.... 覺得英文比較簡單.. XD
+18:04:55 <au> CindyLinz: 可以請網友學 APL 就不用學英文了
+18:05:06 <au> 質數篩子寫作 (~v∊v∘.×v)/v←1↓⍳100
+18:05:20 <petercommand> au: 還是英文好...
+18:05:22 <CindyLinz> 就更強化學英文的動機了這樣....ww
+18:05:22 <petercommand> XDD
+18:06:38 <CindyLinz> xcycl: 內容差異那麼大的東西就別計較語法差異了啦 XDD Agda vs Haskell
+18:17:14 <CindyLinz> ...
+18:17:35 <CindyLinz> au: 你 XML::Literal 就這樣把 CORE::GLOBAL::global 換掉....!
+18:18:19 <CindyLinz> 原本預期看到 Filter 或是什麼 XS 的東西 XD
+18:22:40 <au> CindyLinz: 何必用牛刀什麼的 XD
+18:23:38 <CindyLinz> au: 因為我想找 Filter 的替代品, 找一個 syntax aware 的東東 ^^|
+18:23:57 <au> 一般是用 Devel::Declare
+18:23:58 <CindyLinz> 想說太好了 來偷學一下! 結果撲了個空 QQ
+19:24:01 <petercommand> au: 要來 #cschat.tw 嗎^^
+19:24:21 <petercommand> 雖然人口組成好像蠻像的XD
+19:24:36 <petercommand> 雖然兩個頻道的人口組成好像蠻像的XD
+19:24:50 <au> XD
+19:26:03 <au> 還在趕明天截稿的書... 也許交稿後再加入
+19:26:07 <au> # https://github.com/audreyt/500lines/blob/master/spreadsheet/chapter.md
+19:26:32 <petercommand> XD
+19:32:15 <petercommand> 開了那個spreadsheet，結果好像玩壞了....XD
+19:33:27 <au> 按左上角的 ↻ 按鈕應該會 reset...
+19:33:34 <petercommand> 重新整理變成空白的，但是按了裏面原本有值的cell後，值會出現在cell裡
+19:34:02 <au> 再 refresh 一次看看
+19:34:14 <petercommand> 一樣...
+19:34:24 <petercommand> 按了按鈕沒用...
+19:34:35 <au> 瀏覽器是...?
+19:34:44 <petercommand> firefox
+19:35:10 <petercommand> 我輸入了=for(;;){} XD
+19:35:28 <au> 輸入 =for(;;){} 它應該會幫你刪掉耶 XD
+19:35:35 <petercommand> 然後一直按著}
+19:35:50 <petercommand> 最後有一個}剩下來XD
+19:36:02 <au> 你... 贏了 XD
+19:36:07 <au> 我想想怎麼修
+19:36:09 <CindyLinz> petercommand: 你是惡意使用者對吧?
+19:36:13 <petercommand> XDD
+19:36:58 <petercommand> CindyLinz: 他書裡寫的使用方法^^
+19:37:07 <petercommand> XDD
+19:37:21 <petercommand> CindyLinz: 上面那個chapter.md
+19:37:38 <CindyLinz> petercommand: 書裡怎麼會有「然後一直按著}」的用法啊, 我才不信!
+19:38:27 <petercommand> 是沒有"一直按著}"啦，但是前面的=(;;){}有阿XDD
+19:38:46 <au> petercommand: 要開 web console 打 localStorage.removeItem('') 就會修好
+19:38:55 <au> 但是我想想怎麼避開 race condition...
+19:39:09 <petercommand> 恩恩
+19:39:38 <petercommand> au: 後來我要把那個}拿掉他還會幫我加回去XD
+19:39:48 <au> wwwww
+19:40:31 <CindyLinz> petercommand: 你現在要按著 backspace 不放了....ww
+19:40:36 <petercommand> www
+19:40:52 <petercommand> CindyLinz: 沒用耶XDD
+19:41:02 <CindyLinz> 還記得你 } 按多久嗎? 就是那麼久 XD
+19:41:24 <au> 不良的修正方式: 把 timeout 調成 14ms (按鍵重複最快 15ms)
+19:41:35 <au> 良好的修正方式: 順便教 FIFO queue
+19:43:26 <CindyLinz> detect 有人壓著 } 不放的時候, 就 alert 一個訊息罵他?
+19:43:48 <CindyLinz> 「這樣很好玩逆?」
+19:43:55 <au> XDD
+19:48:45 <letoh> CindyLinz: 你們家的遊戲也會這樣嗎? XD
+19:49:42 <CindyLinz> 應該沒有
+19:49:58 <CindyLinz> 我有寫過「你看不到我～ 你看不到我～」
+19:50:02 <letoh> XD
+19:50:13 <CindyLinz> 後來被罵了.. XD
+19:50:15 <letoh> 一般會在前端擋掉惡意操作?
+19:50:44 <au> 修好了... https://github.com/audreyt/500lines/commit/c071de03#diff-54f05eeec19ffd15b8f618b8cc18190cL15
+19:50:45 <CindyLinz> 因為不知道為什麼有玩家看到了, 然後回報說是不是中毒還是被入侵了...ww
+19:50:46 <letoh> CindyLinz: 那種東西當彩蛋好像不錯
+19:50:53 <letoh> XDXD
+19:51:14 <au> petercommand: shift-reload 看看，應該沒事了 (但是還是要手動清掉 localStorage 先)
+19:51:22 <petercommand> 喔喔
+19:51:36 <petercommand> 來試試
+19:54:44 <petercommand> au: 他是怎麼判斷無窮迴圈的呀?
+19:55:09 <CindyLinz> 解出 halting problem 了..
+19:55:30 <au> petercommand: 99ms 之內沒有算完的就當作 diverge
+19:55:38 <petercommand> 喔喔
+19:55:39 <au> 然後 model update 設成 100ms
+19:55:43 <au> 所以就解決了
+19:58:18 <petercommand> au: 怎麼知道使用者輸入完了沒有呀? 輸入完了才會算吧?
+19:58:35 <au> 隨時計算
+19:58:41 <petercommand> au: 我又成功了...
+19:58:44 <au> wwwww
+19:58:49 <au> 怎麼做到的
+19:59:13 <petercommand> 我看一下怎麼reproduce...
+20:01:35 <petercommand> 有點難reproduce...
+20:01:58 <petercommand> 我猜跟視窗切換有關
+20:02:14 <au> 可能 1ms 被吃掉了
+20:12:41 <au> > let (<〠>) = (+) in 1<〠>1
+20:12:42 <lambdabot>  2
+20:14:50 <petercommand> 還是reproduce不出來XD
+20:15:10 <au> 那先這樣好了 XD 感謝測試
+20:16:06 <caasih_> CindyLinz: 想起 accu****y 的網站也藏了奇怪的 alert
+20:16:30 <caasih_> 只要改變視窗大小 130 次以上就會跳出來
+20:17:48 <petercommand> au: 有其他bug...
+20:17:50 <petercommand> XD
+20:18:17 <petercommand> 現在他把我的cpu吃滿了...
+20:19:31 <au> wwwww怎麼做到的
+20:23:02 <petercommand> https://dl.dropboxusercontent.com/u/15321312/out-3.ogv 弄了影片XD
+20:23:17 <petercommand> 錄螢幕的
+20:24:23 <petercommand> au: 就是刪都刪不掉...
+20:24:29 <petercommand> XD
+20:24:36 <petercommand> 還是要手動清掉 localStorage
+20:25:00 <au> OK 我試試
+20:25:59 <au> 看到了，真是奧妙
+20:31:23 <au> 修好了
+20:32:05 <au> 大約兩分鐘後 shift-refresh 就會生效... (1ms => 101ms)
+20:40:34 <caasih_> 原來 FLOLAC 有教學回饋問卷： http://goo.gl/BEoGaN
+20:45:52 <petercommand> 看到了for pre-2015 browsers with no ES6 support 現在根本還沒2015呀XDD
+20:46:42 <au> petercommand: 對啊，所以就是所有的 browser XD
+20:46:57 <petercommand> XDD
+20:51:52 <CindyLinz> petercommand: au 有時光機, 演講前就有逐字稿 XD
+20:52:51 <au> 真實世界都是參數了，年份當然也只是函數裡的參數而已...
+21:00:32 <suhorng> 其實是預先 call/cc 好了！(誤)
+21:01:06 <au> 我都是用 shift/reset 的，這樣可以 shift 好幾次 (大誤
+21:01:41 <suhorng> xDDD
+21:02:05 <suhorng> 這叫做 scoped time machine！感覺很厲害
+21:03:07 <mno2_> suhorng: 可以寫一篇「用 call/cc 來解釋 The Edge of tomorrow」 (梗來源：http://hashrocket.com/blog/posts/edge-of-tomorrow-explained-in-git ）
+21:03:24 <CindyLinz> 好像很難懂 /_\
+21:04:45 <suhorng> 阿阿, 沒看過這部電影
+21:04:47 <au> 據說 ccshan 的「說明書」就是在說每個用自然語言的人腦裡都內建 scoped delimited control #真的很厲害
+21:04:52 <au> # http://www.cs.rutgers.edu/~ccshan/dissertation/book.pdf
+21:06:47 <mno2_> ccshan 是用 PL 的研究方法來做自然語言研究嗎？
+21:06:55 <au> 是的
+21:08:39 <suhorng> 好難以想像的關聯
+21:10:47 <c9sloud> ccshan!!
+21:11:38 <c9sloud> 傳說中的單中節
+21:12:12 <CindyLinz> 杰
+21:12:21 <CindyLinz> 記得每一個字都左右對稱 XD
+21:15:42 <c9sloud> 杰 sorry
+21:15:44 <c9sloud> XD
+21:18:41 <mno2_> 論文好長... 看了摘要
+21:19:07 <mno2_> 感覺好像還是比較多是回饋 PL 研究。有點仿生學的感覺
+21:20:08 <mno2_> 不過這也表示人腦機制的建模可以透過環境文化不同來 train 出不同的 scoped delimited control ?
+21:21:26 <au> 是吧。這畢竟是 CS PhD 論文，用仿生學來比喻還滿恰當的
+21:23:15 <hashcat> 人腦啥東東
+21:24:03 <mno2_> hashcat: 就是其實人們不是 Haskell 腦，是 scoped delimited control 腦 (誤
+21:24:44 <hashcat> 什麼跟什麼
+21:24:49 <hashcat> 文在哪裡
+21:25:08 <mno2_> http://www.cs.rutgers.edu/~ccshan/dissertation/book.pdf  <- ccshan 的論文
+21:26:21 <hashcat> 計算機科學哲學..
+21:27:50 <hashcat> 先看結論, 再從結論追前文
+21:30:19 <caasih_> 為什麼稱為「說明書」呢？
+21:31:27 <au> caasih_: 這是接著「別種語言的說明書，在 Haskell 裡就是博士論文」梗
+21:32:00 <caasih_> 原來如此，沒轉過來 XD
+21:33:06 <caasih_> 還以為 ccshan 寫了小說名為「說明書」，內容跟博士論文講的概念相同
+21:34:21 <au> 如果是那樣的話，就要寫成《說明書》，來和「說明書」作區別 (誤
+21:39:55 <caasih_> 的確，我的錯 XD
+22:38:28 <yhsiang> 使用《使用說明書》使用《說明書》
+22:39:50 <CindyLinz> 不要再點火了......XD
+22:40:39 <yhsiang> CindyLinz: 點起來了?
+22:40:50 <yhsiang> 燃起了~
+22:40:52 <CindyLinz> 我又不是 au.. XD
+22:41:36 <yhsiang> 好吧你不算 :p
+23:13:33 <miaoski> suhorng: 支持 call/cc 這樣可以跳來跳去 #  然後被警察抓?
+23:20:27 <CindyLinz> ..........XD
+23:20:43 <CindyLinz> 就被 GC 了.. OAO
+23:24:06 <petercommand> @src (==)
+23:24:06 <lambdabot> x == y = not (x /= y)
+23:24:21 <petercommand> @src (/=)
+23:24:21 <lambdabot> x /= y = not (x == y)
+23:28:48 <CindyLinz> XD
+23:29:02 <CindyLinz> 所以至少要實作一個, 不然就跑不完了..
+23:34:56 <petercommand> 這怎麼做的呀....
+23:35:51 <petercommand> 看起來是無窮迴圈....
+23:40:37 <monochrom> 電影 Edge of Tomorrow 不就是在一個 reset 裏 shift 很多次嗎? :)
+23:41:37 <monochrom> 啊, 你們已經說過了
+23:47:35 <monochrom> 假設你寫下: instance Eq Mine where { M == M = True }
+23:48:12 <monochrom> 因為你沒寫 /=, 所以自動抄 x /= y = not (x == y)
+23:48:40 <monochrom> 就變成 instance Eq Mine where { M == M = True; x /= y = not (x==y) }
+23:48:51 <monochrom> 這不就完成了嗎?
+23:51:46 <CindyLinz> 嗯嗯, 至少要自己實作一個.. XD
+23:52:10 <CindyLinz> petercommand: 你查到的是 Eq 的 default 實作, 是全都沒寫的時候才採用的版本
+23:52:20 <CindyLinz> 有實作的話會用實作版
+23:53:21 <petercommand> monochrom: 恩
+23:53:35 <petercommand> CindyLinz: 實作版的意思是甚麼呀?
+23:54:13 <monochrom> 例如手寫的 M == M = True
+23:54:30 <petercommand> 喔喔
+23:54:37 <CindyLinz> 嗯嗯, 因為畢竟不同 type 的 (==) 其方法應該是不一樣的..
+23:54:45 <b4283> petercommand: 這有點像你剛問的 prototype 喔
+23:54:53 <CindyLinz> 但 (
+23:55:14 <CindyLinz> 但 (==) 或 (/=) 只要定義了其中一個, 另一個就可以利用對方來定義
+23:55:21 <petercommand> b4283: @@
+23:55:27 <CindyLinz> 所以 default 就各寫了一組互相利用的版本
+23:55:37 <petercommand> CindyLinz: 恩恩
+23:55:59 <CindyLinz> 但不能真的兩者都互相利用, 那就完了 XD
+23:56:04 <monochrom> 在唯物程式裏也可以這樣做 :)
+23:56:31 <petercommand> 有沒有fallback呀?XD
+23:59:41 <monochrom> 在理論裏, 母體開出 open recursion, 等候子體來 close, 得出 fixed point. 唯物程式法的理論, 並不淺過函數程式法的理論.

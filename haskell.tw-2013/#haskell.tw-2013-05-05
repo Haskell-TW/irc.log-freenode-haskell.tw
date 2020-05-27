@@ -1,0 +1,68 @@
+20:38:16 <letoh> arrow 會用在什麼時候呢? 搞不太懂為什麼需要把程式反過來寫@_@
+20:58:25 <letoh> 看那個 circular programming 頭好暈XD
+21:08:28 <MnO2> monad 表達力不夠的時候
+21:08:47 <MnO2> 最初應該是表達 parser 用的
+21:09:47 <MnO2> 要一個簡單有說服力的例子一下想不到 xD
+21:10:06 <MnO2> 總之就是沒辦法一條線，要多條線分分合合
+21:15:07 <letoh> 我也覺得 parser 很適合   但一時也想不到什麼時會需要用到
+21:15:35 <letoh> 嗯.. 主要是... 我看例子出現好幾次 xx <- foo -< yy
+21:16:02 <letoh> 雖然蠻炫的  但不曉得為什麼會需要這樣的東西
+21:24:05 <letoh> MnO2: 昨天 hychen 丟了一個 python 實作給我看，看了頭有點暈XD
+21:24:52 <favonia> letoh: 因為 Python 的 lambda 怪怪的，我都不太相信這種 higher-order 的東西在 Python 中的實作 lol
+21:25:26 <letoh> 嗯  實作就算了  反正就看手法跟技巧，要模擬總會找到辦法
+21:26:46 <letoh> 我只是覺得有點怪，像 python (或其他語言) 很多都已經是 imperative，再包個 arrow 看起來感覺好怪
+21:27:11 <letoh> 如果只是弄個 function composition，這倒是蠻需要的
+21:27:47 <letoh> arrow 給我的感覺是在 function composition 的基礎上又定義了不同的組合方式
+21:31:02 <letoh> 但像 &&& 這些東西，好像沒有比較直覺
+21:31:45 <letoh> >>> 這類基礎工具，好像又可以直接用 composition 就做出來
+21:32:57 <letoh> hychen 那個 arrow 有狀態，我一直覺得怪怪的....
+21:34:26 <letoh> https://github.com/hychen/harrow
+23:17:22 <miaout17> favonia: 因為 Python 的 lambda 怪怪的 -> 願聞其詳？
+23:19:26 <miaout17> https://github.com/hychen/harrow I used to be an adventurer like you but then i took an arrow to the knee....
+23:19:38 <miaout17> 看到readme笑了...(電玩梗)
+23:22:07 <letoh> 看到會笑的人就知道是同一國的了XD
+23:25:38 <favonia> miaout17: dynamic scoping
+23:26:33 <letoh> 所以那真的是 dynamic scoping? 我以為是我的錯覺...
+23:26:41 <letoh> 每次只好手動造 closure XD
+23:27:08 <favonia> 對啊手動造 closure. 其實我不確定 dynamic scoping 是不是最精準的字------我根本懶得想 xD
+23:27:22 <letoh> lambda x, y, var_a = var_a, var_b = var_b: ...
+23:27:28 <letoh> 每次寫都覺得很蠢XD
+23:28:31 <letoh> 根據我查到的資料  那個好像是 dynamic name resolution  不曉得哪來的專有名詞XD
+23:28:31 <miaout17> 我以為那還是lexical耶....
+23:28:47 <letoh> 其實都不是.. python 的行為有點亂@_@
+23:28:55 <favonia> 好吧可能不是 dynamic scoping~ 我不知道（懶）
+23:29:14 <letoh> 有些情況可以弄成 lexical
+23:29:34 <favonia> 啊可能可以說 reference/value 混亂
+23:29:50 <letoh> favonia: 別太在意  我也覺得辨別這些東西很累XD
+23:30:39 <favonia> letoh: 反正我設計/我用的東西都是"正常'的～ 我又不是醫生幹嘛要替每種病命名 lol
+23:30:50 <letoh> 有時候會自動產生新變數  有時候又說 ref before assignment
+23:30:58 <letoh> 哈
+23:31:25 <letoh> 第一個發現的可以以命名權XD
+23:31:39 <letoh> 可以有
+23:31:55 <miaout17> 還是有點不懂點在哪，在想我對closure的認知是不是「錯誤」的
+23:32:36 <favonia> fs = [(lambda n: i + n) for i in range(10)]
+23:32:59 <favonia> fs[1][1] 答案是...
+23:33:19 <MnO2> http://math.andrej.com/2009/04/09/pythons-lambda-is-broken/
+23:33:30 <favonia> 我剛亂複製的 xD
+23:33:42 <miaout17> 10吧 XD
+23:33:45 <MnO2> 複製被抓包 xD
+23:33:49 <letoh> XDXD
+23:34:11 <favonia> 而且我還打錯
+23:34:14 <letoh> 是說這件事很多討論吧... 隨便 google 都有
+23:34:15 <favonia> anyway
+23:35:26 <favonia> > let fs = map (+) [0..] in (fs !! 1) 1
+23:35:27 <MnO2> 剛剛那篇還有後續：http://math.andrej.com/2009/04/11/on-programming-language-design/
+23:35:28 <lambdabot>   2
+23:36:41 <letoh> pythonista 會跟回擊說，你們不懂 python，不能這樣寫XD
+23:36:58 <letoh> 要手動造 closure
+23:37:18 <MnO2> 原來 py 粉還有正式名稱
+23:38:10 <favonia> letoh: 「我懂，而且我懂了以後覺得很爛。」
+23:38:16 <favonia> 正確回應 xD
+23:39:13 <miaout17> 得AFK了，有機會再跟各位請益。
+23:41:21 <letoh> http://ideone.com/iDUvv6  # pythonista 的解法XD
+23:41:45 <letoh> MnO2: 有耶 去年大拜拜時學到的XD
+23:42:40 <MnO2> letoh: 我 google 好像 pythonista 沒有特別是指死忠 py 粉
+23:43:11 <letoh> 其實沒有強調粉啦  就是 user  但我不曉得有沒有程度的分別
+23:44:19 <letoh> 好像也有人用 pythoneer
+23:44:34 <MnO2> 喔喔
+23:58:52 <letoh> haskell 好像就單純只用 haskeller，沒發明什麼奇怪的字?

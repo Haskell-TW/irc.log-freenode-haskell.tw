@@ -1,0 +1,17 @@
+12:48:57 <kcwu> au: 我昨天聽了你去年 FLOLAC 的演講 "函數程式設計的商業應用" :)
+12:52:05 <kcwu> au: 我有個問題, 當時你在開發 AFP 程式的時候, 嘗試了各種 optmization 仍不理想之後, 是什麼原因想試 haskell 呢?
+12:55:49 <kcwu> 在還不夠熟悉一個語言/開發環境, 許多東西都未明時, 是不是有什麼理由讓你有信心, haskell 可以完成任務?
+13:00:10 <kcwu> (以後見之明) 若當時已知 lazy eval 是關鍵, 怎麼不是譬如用 perl 改寫成 xxx on demand, 手動作 lazy eval
+13:02:39 <kcwu> 或是說, 那其實是備案? ;)
+14:44:18 <au> kcwu: 那是備案沒錯... 其實 Perl 的 Parse::AFP 當時已經支援 selector (手動 lazy eval)
+14:44:23 <au> http://cpansearch.perl.org/src/AUDREYT/Parse-AFP-0.25/script/udc4pca.pl 的 callback_members
+14:47:59 <au> （但還是不夠快。）信心還好耶，在試 haskell 之前已經試了一堆其他語言，所以試到 ghc 時， microbenchmark 會動就覺得應該沒錯。
+15:24:28 <kcwu> 那在還沒 ghc microbenchmark 之前呢, 怎麼會想到要試 haskell? 是因為想要試 native support lazy eval 的語言嗎? 還是其他原因
+15:35:01 <au> 好像是先試了 D 和 OCaml 和 Scheme，然後輾轉看到 Haskell
+15:35:42 <au> 如果 haskell 不行的話應該會接著試 Erlang
+15:37:00 <au> 是一個寬度優先搜索的概念 XD
+15:45:50 <kcwu> 為什麼想試這些語言? (為什麼會覺得換語言會有幫助) 是因為想借助那些語言的什麼特性嗎? 會這樣問是因為你也試過用 C++, 在效能不夠的情況下改用通常更慢(或頂多差不多)的語言, 好像有點怪
+15:56:37 <au> C++ 的問題不是效能不足，而是我的功力不足，沒有 lambda 的情況下，寫不出良好的 on-demand computation 引擎
+15:57:26 <au> 所以是想找 lazy eval 比較好寫 (語言內建，或至少有接近的 library) 的語言
+16:38:13 <kcwu> i see. thanks
+16:42:45 <mno2> 講到商業應用，希望五月能請到在用 Haskell 做 startup 的朋友給 talk。https://speakerdeck.com/abailly/haskell-all-the-way-down

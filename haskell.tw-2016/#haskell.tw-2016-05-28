@@ -1,0 +1,60 @@
+00:45:45 <c9s> petercommand: rust?
+00:46:10 <c9s> petercommand: haskell compiler in rust ?
+00:49:01 <petercommand> c9s: 我想在 rust 裏頭直接操作 ghc 產生的資料結構，讓 haskell data type 直接變成 rust data type
+00:49:20 <petercommand> 而不用經過一層 C 的資料結構
+00:52:10 <petercommand> 然後我直接呼叫 ghc 提供的 rts function/macro: GET_CON_DESC(((StgConInfoTable *)deRefStablePtr(stablePtr))) ，嘗試存取 StgConInfoTable 中的 con_desc 欄位，結果失敗了
+02:58:19 <petercommand> 成功了..GET_CON_DESC(CON_INFO_PTR_TO_STRUCT(GET_INFO(UNTAG_CLOSURE((StgClosure *)deRefStablePtr(stablePtr)))))
+12:04:25 <c9s> XDD
+12:04:28 <c9s> petercommand++
+12:05:16 <c9s> CindyLinz: lamba function 雖然方便，不過是不是較不建議使用？因為沒有 type signature, 錯誤只會在 runtime 發生?
+12:15:26 <petercommand> c9s: haskell 會做 type inference 推出一個 type signature 呀
+12:15:54 <petercommand> haskell 是 static typed language
+12:20:18 <petercommand> c9s: 會不會有 runtime error 和是不是 lambda function 無關，是 lambda function 也有可能有 runtime error，不是 lambda function 也有可能有 runtime error
+12:23:57 <petercommand> c9s: 語意上來說，是不是 named function 都是一樣的
+12:24:28 <petercommand> f :: Int -> Int ; f x = x 和 g :: Int -> Int ; f = \x -> x
+12:37:00 <c9s> 喔 那我可能我記錯了
+12:37:04 <c9s> 我剛剛回頭去看
+12:37:06 <c9s> " If a pattern matching fails in a lambda, a runtime error occurs, so be careful when pattern matching in lambdas!"
+12:37:20 <c9s> it's patter matching in lambdas! :p
+12:37:32 <c9s>   s/pattern
+12:43:05 <c9s> 不過大多數的 pattern matching 遺漏或錯誤 應該都能在編譯期間找出?
+13:22:30 <CindyLinz> lambda 函數可以標 type 呀
+13:22:41 <CindyLinz> 有名字的函數也可以不標 type
+13:23:05 <CindyLinz> 然後 lambda 函數也可以 bind 到一個變數上, 就變成有名字的函數了?
+13:23:48 <CindyLinz> 像.... javascript 的 var f = function(a, b){ return a + b; }; 的感覺... 實際作用來說... 也算是有名字了 ^^|
+13:29:41 <CindyLinz> c9s: 你貼的那串英文是因為你的 lambda 函數沒有寫完所有的 pattern
+13:29:55 <CindyLinz> 如果你定義一般函數沒有寫完所有 pattern 也會發生
+13:33:01 <caasih> let f = a => b => a + b // ES2015
+21:26:45 <c9s> CindyLinz: 恩恩恩 所以 compiler 沒辦法在編譯的時候告訴我少寫哪個 pattern 對嗎
+21:27:05 <c9s> 這是否是和一般寫 function 的 pattern matching 的差異?
+21:30:04 <petercommand> > let t = Nothing in (\(Just m) -> m) t
+21:30:07 <lambdabot>  *Exception: <interactive>:3:21-34: Non-exhaustive patterns in lambda
+21:32:11 <CindyLinz> c9s: 可以開 warning..
+21:32:24 <CindyLinz> c9s: GHC 知道, 但 GHC 不說... (X
+21:32:55 <CindyLinz> c9s: 沒事的親, GHC 怕你覺得吵..
+21:36:29 <petercommand> CindyLinz: 我開了 -fwarn-incomplete-patterns 沒有用耶
+21:36:51 <petercommand> main = putStrLn $ show $ (let t = Nothing :: Maybe Int in (\(Just m) -> m) t)
+21:40:31 <CindyLinz> petercommand: 看起來有個 lambda 專用的 The flag -fwarn-incomplete-uni-patterns is similar, except that it applies only to lambda-expressions and pattern bindings, constructs that only allow a single pattern:
+21:41:54 <petercommand> XDD
+21:42:12 <CindyLinz> petercommand: 我是直接開 -Wall 有出來 warning
+21:42:27 <petercommand> 我開 -Wall 沒有出來@@
+21:43:13 <petercommand> 但可以開 -fwarn-incomplete-uni-patterns
+21:43:24 <petercommand> ghc 7.10.2
+21:43:30 <CindyLinz> petercommand: 啊我看錯了
+21:43:54 <CindyLinz> 開 -fwarn-incomplete-uni-patterns 才有
+21:43:57 <CindyLinz> -Wall 沒有
+21:44:03 <petercommand> 嗯嗯
+22:04:18 <c9s> ohohoh
+22:04:25 <c9s> learned something :p
+22:04:50 <petercommand> 昨天成功的方法換了一個 data type 就壞掉了..wwwwwww
+22:04:54 <c9s> #lessonlearned
+22:26:13 <petercommand> 阿阿，忘記 eval 到 head normal form 了...XD
+23:51:09 <c9s> 有推薦的 getopt parser 嗎?
+23:51:34 <c9s> 目前是使用最底層的 System.Control.GetOpt XD
+23:52:00 <c9s> 另外，原來 haskell 前身是 miranda
+23:52:17 <c9s> XD
+23:52:38 <c9s> 而且還是 proprietary software ... 感覺在那個時代真的蠻先進的
+23:53:21 <c9s> 其實就算到現在，還是覺得 haskell 的設計很簡潔.. 巧斧神工
+23:55:21 <CindyLinz> c9s: 可以用 System.Environment 的 getArgs 手工打造 XD
+23:55:45 <CindyLinz> 高階一點我現在也只用過 standard lib 的 System.Control.GetOpt
+23:58:28 <monochrom> options (較小) 或 optparse-applicative (較大)

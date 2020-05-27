@@ -1,0 +1,5 @@
+23:08:14 <caasih> petercommand: 邊騎車邊想為什麼覺得哪天 scm 老師說的 left factor 做不出來⋯
+23:09:21 <caasih> left factor 的 type 是 (a -> m b) -> (a -> m c) -> (b -> m c)
+23:10:21 <caasih> 手上只有 b 時，靠 a -> m b 和 b -> m c 是生不出 m c 的，
+23:11:16 <caasih> 更正，後面是 a -> m c
+23:11:49 <caasih> 除非我有 m b -> m a ，再配上一個 join

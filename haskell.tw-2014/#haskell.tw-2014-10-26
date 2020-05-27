@@ -1,0 +1,16 @@
+10:03:02 <mno2> 有時候在寫 Haskell 的時候心中都會浮現骨牌的圖像。一且都接好，然後就等 IO 輕輕一推。
+10:03:29 <mno2> 推下去的時候會有一種莫名的快感 lol
+11:15:50 <CindyLinz> (Y)
+21:51:27 <miaoski> 一不小心看到這幾本
+21:51:28 <miaoski> https://www.packtpub.com/big-data-and-business-intelligence/mastering-clojure-data-analysis
+21:52:47 <miaoski> https://www.packtpub.com/big-data-and-business-intelligence/haskell-data-analysis-cookbook?utm_source=Sentori&utm_medium=Email&utm_campaign=DotD+20th+Oct+2014
+21:54:20 <miaoski> 然後終於有寫 Cascalog 的書了 (我還以為這個套件死掉了呢) https://www.packtpub.com/big-data-and-business-intelligence/clojure-data-analysis-cookbook
+21:56:30 <hashcat> As you mentioned data analysis
+21:57:08 <hashcat> http://www.vertica.com/distributedr/distributedrexamples/
+21:58:56 <hashcat> R is much more lisp-like and functional than first impression
+22:07:17 <miaoski> hashcat: RHadoop 目前還不太好用...
+22:07:17 <miaoski> (雖然我不會用，只是看我同事後來決定放棄了這樣)
+22:08:25 <hashcat> tech advanced, Hadoop becomes a piece of shit now
+22:10:38 <hashcat> distributedr can run on any db with ODBC
+22:11:12 <hashcat> As cassandra has odbc driver, it may be a good solution
+22:13:24 <hashcat> No matter what, It doesn't matter me. I don't have big data.

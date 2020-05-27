@@ -1,0 +1,26 @@
+11:22:18 <darkx> http://www.scs.stanford.edu/14sp-cs240h/slides/ghc-rts.pdf
+13:19:26 <mno2_> 原來 CS 240 有 2014 版
+13:19:41 <c9sloud> googletest 看起來不錯
+13:19:53 <c9sloud> 咦 錯頻了
+13:20:02 <c9sloud> XD
+18:10:04 <mno2> http://stackoverflow.com/questions/900055/is-sql-or-even-tsql-turing-complete/7580013#7580013
+18:10:12 <mno2> with 其實就是 let rec 吧 xD
+18:10:24 <mno2> 加進去 formal language 瞬間就 Turing Complete 了
+18:11:15 <mno2> 所以上次 yinwang 的問題只要用 recursion 表達 dijkstra path finding 就好了
+18:13:26 <mno2> 這就是說，只要你的心智具備 recursion model 的能力。任何開了 let rec 洞的都可被你玩出 dijkstra
+18:26:55 <monochrom> 什麼? 在 SQL 裏玩 dijkstra? 不免玩很大吧? XD
+18:31:31 <monochrom> 有一部份 test cases 的答案是我靠 haskell 算出來的 :)
+18:32:43 <monochrom> 寫 haskell 真爽, 半夢半醒都不會寫錯.
+18:33:07 <monochrom> 現在要睡了!
+18:35:53 <c9sloud> jserv 表示: 我喝高粱寫 C 也不會寫錯  XDDD
+18:39:38 <hashcat> 我鍵盤全塗黑寫prolog不會寫錯
+18:40:00 <mno2> 我閉眼睛寫 whitespace 也不會寫錯
+18:41:07 <hashcat> 我鍵盤全拔掉只留空白鍵也能寫whitespace
+18:41:23 <hashcat> 滑鼠要留著
+18:42:42 <mno2> 可能睡夢中也可以寫 whitespace, lol
+18:43:01 <mno2> 或是給家裡的貓寫 whitespace
+18:43:37 <mno2> *Infinite monkey theorem* 誤）
+18:44:23 <hashcat> 如果符號是魚的話貓咪可能有興趣
+18:44:50 <hashcat> 想募捐做貓咪用圖靈機
+18:45:13 <hashcat> 正確的獎賞是高級飼料
+18:46:27 <hashcat> 加60分鐘遙控電子老鼠

@@ -1,0 +1,130 @@
+10:12:16 <petercommand> :t (***)
+10:12:17 <lambdabot> Arrow a => a b c -> a b' c' -> a (b, b') (c, c')
+10:12:36 <petercommand> :t fmap fmap fmap
+10:12:37 <lambdabot> (Functor f1, Functor f) => (a -> b) -> f (f1 a) -> f (f1 b)
+10:58:13 <pkmx> :t fmap fmap $ fmap fmap fmap
+10:58:14 <lambdabot> (Functor f2, Functor f1, Functor f) => (a -> b) -> f (f1 (f2 a)) -> f (f1 (f2 b))
+10:58:19 <pkmx> :t fmap fmap $ fmap fmap $ fmap fmap fmap
+10:58:20 <lambdabot> (Functor f3, Functor f2, Functor f1, Functor f) => (a -> b) -> f (f1 (f2 (f3 a))) -> f (f1 (f2 (f3 b)))
+10:58:59 <petercommand> :t fmap fmap $ fmap fmap $ fmap fmap $ fmap fmap fmap
+10:59:01 <lambdabot> (Functor f4, Functor f3, Functor f2, Functor f1, Functor f) => (a -> b) -> f (f1 (f2 (f3 (f4 a)))) -> f (f1 (f2 (f3 (f4 b))))
+13:07:03 <pkmx> :t (.) . ((.) . ((.) . ((.) . (.))))
+13:07:05 <lambdabot> (b -> c) -> (a -> a1 -> a2 -> a3 -> a4 -> b) -> a -> a1 -> a2 -> a3 -> a4 -> c
+13:08:31 <pkmx> :t ((.) .) . ((.) .) . ((.) .) $ (.)
+13:08:32 <lambdabot> (b -> c) -> (a -> a1 -> a2 -> a3 -> b) -> a -> a1 -> a2 -> a3 -> c
+13:08:39 <pkmx> :t ((.) .) . ((.) .) . ((.) .) . ((.) .) $ (.)
+13:08:40 <lambdabot> (b -> c) -> (a -> a1 -> a2 -> a3 -> a4 -> b) -> a -> a1 -> a2 -> a3 -> a4 -> c
+13:08:44 <pkmx> \o/
+15:11:39 <CindyLinz> :t on
+15:11:41 <lambdabot> (b -> b -> c) -> (a -> b) -> a -> a -> c
+15:12:47 <CindyLinz> > (*) (+1) 2 3
+15:12:49 <lambdabot>  No instance for (GHC.Show.Show a0)
+15:12:49 <lambdabot>    arising from a use of ‘M80949415754304290299976.show_M80949415754304290299...
+15:12:49 <lambdabot>  The type variable ‘a0’ is ambiguous
+15:13:10 <CindyLinz> > (*) (+1) 2 3 :: Int
+15:13:12 <lambdabot>  No instance for (GHC.Num.Num (GHC.Types.Int -> GHC.Types.Int))
+15:13:12 <lambdabot>    arising from a use of ‘GHC.Num.*’
+15:13:58 <CindyLinz> > (*) (+ 1) 2 3 :: Int
+15:14:00 <lambdabot>  No instance for (GHC.Num.Num (GHC.Types.Int -> GHC.Types.Int))
+15:14:00 <lambdabot>    arising from a use of ‘GHC.Num.*’
+15:14:14 <CindyLinz> > (*) `on` (+ 1) 2 3 :: Int
+15:14:16 <CindyLinz> XD
+15:14:16 <lambdabot>  Couldn't match expected type ‘GHC.Types.Int’
+15:14:16 <lambdabot>              with actual type ‘a0 -> a0 -> c0’
+15:14:28 <CindyLinz> :t (*) `on` (+ 1)
+15:14:30 <lambdabot> Num c => c -> c -> c
+15:14:34 <CindyLinz> :t (*) `on` (+ 1) 2 3
+15:14:35 <lambdabot> (Num (a1 -> a -> c), Num a1, Num c) => a -> a -> c
+15:14:44 <CindyLinz> :t ((*) `on` (+ 1)) 2 3
+15:14:46 <lambdabot> Num c => c
+15:14:54 <CindyLinz> > ((*) `on` (+ 1)) 2 3
+15:14:55 <lambdabot>  12
+15:14:59 <CindyLinz> QQ
+15:15:56 <CindyLinz> let compareByLen = (<) `on` length in compareByLen "abcd" "ef"
+15:15:59 <CindyLinz> > let compareByLen = (<) `on` length in compareByLen "abcd" "ef"
+15:16:01 <lambdabot>  False
+15:16:05 <CindyLinz> > let compareByLen = (<) `on` length in compareByLen "abcd" "efghi"
+15:16:07 <lambdabot>  True
+15:16:32 <CindyLinz> 這個 on 有很實用嗎? @@"
+17:00:03 <pkmx> > nubBy ((==) `on` length) ["ker", "kerker", "lol"]
+17:00:05 <lambdabot>  ["ker","kerker"]
+17:10:48 <CindyLinz> > (ruby `on` rails) 0 1 where { ruby = (*) ; rails = succ }
+17:10:50 <lambdabot>  <hint>:1:23: parse error on input ‘where’
+17:11:04 <CindyLinz> 討厭 XD
+17:11:17 <CindyLinz> > let { ruby = (*) ; rails = succ } in (ruby `on` rails) 0 1
+17:11:19 <lambdabot>  2
+17:15:07 <pkmx> ...
+17:15:10 <pkmx> 爛透了
+17:16:44 <CindyLinz> 幹嘛這樣 XD
+21:51:30 <petercommand> 如果我定義了一個 monad 的 instance，是不是要手動寫 applicative 和 functor 的 instance?
+21:53:56 <petercommand> 阿，果然我忘了寫 Applicative m 就好了XD
+21:56:02 <petercommand> 咦，寫 instance Applicative m 不行耶..
+21:57:13 <petercommand> 似乎一定要是 distinct type variable
+21:58:09 <suhorng> 可以 instance Applicative m 吧?
+21:58:49 <suhorng> 類似 instance Monad m => instance Applicative m, 不過要一些 GHC extension
+21:59:40 <petercommand> https://gist.github.com/petercommand/b0b44b2ba5857a828298 #錯誤
+22:00:14 <suhorng> 開 FlexibleInstances
+22:00:30 <petercommand> 恩恩
+22:00:35 <suhorng> 這不在 Haskell 98 中. 然後我不確定要不要 UndecidableInstances
+22:03:06 <petercommand> 我怕開一堆 extension 會很可怕XD
+22:03:25 <petercommand> 要 UndecidableInstances
+22:04:01 <suhorng> 那就只能手動寫 instance Functor MyType where fmap = liftM 還有 instance Applicative MyType where pure = return; (<*>) = ap
+22:04:18 <suhorng> 不能是 type variable, 要是個實在的 type
+22:06:03 <petercommand> 甚麼叫 constraint is no smaller than instance head 呀?
+22:08:09 <suhorng> 恩... 它是說像 "instance (Functor m, Monad m) => Applicative m" 這樣前面的 Functor m, Monad m 這兩個constraint, 並沒有比 Applicative m 來得 *小*
+22:09:06 <petercommand> 小的意思是?
+22:09:11 <suhorng> 舉個例子, 假如我們寫 instance (Functor f) => Monad (Free f) 這樣前面的東西就比後面的小
+22:09:16 <suhorng> 後面是 "Free f", 前面是 "f"
+22:09:31 <suhorng> 它要確定 typeclass inference algorithm 會停下來
+22:09:47 <petercommand> 喔喔
+22:11:22 <suhorng> 好像有個常用方法是像 instance (Show a, Show b) => Show (a,b) where 這種東西
+22:11:30 <petercommand> 可以舉個會loop的情況嗎?
+22:11:42 <petercommand> 可以舉個typeclass inference algorithm會loop的情況嗎?
+22:13:17 <petercommand> instance (A m) => (B m); instance (B m) => (A m);
+22:13:39 <petercommand> 是像這樣的東西嗎?
+22:14:17 <suhorng> 恩...可能吧 好難唷XD
+22:14:39 <suhorng> GHC document 有給兩個例子 https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/type-class-extensions.html#undecidable-instances
+22:16:39 <suhorng> 雖然它那個 instance (D c, F a c) => D [a] where 我看不出來要怎麼 loop..
+22:16:59 <petercommand> suhorng: 剛剛你是說instance (Show a, Show b) => Show (a,b) where 這個會loop嗎?
+22:17:09 <petercommand> suhorng: 那一個我也看不出來...
+22:17:46 <suhorng> petercommand: Show 不會, D [a] 這個是 docs 給的
+22:19:11 <petercommand> D [a]那個是因為用了自己當constraint嗎?
+22:19:30 <petercommand> (D c) => D [a]
+22:19:47 <suhorng> 喔 有可能耶
+22:20:17 <suhorng> 不過本來想說有 F a c 又而且 class F a b | a -> b 又表明 a 已經決定了 b 的說@@
+22:20:23 <suhorng> 看來順序有差 它沒這麼聰明
+22:21:38 <petercommand> instance (D c, F a c) => D [a] where 這裡的instance head 沒有提到 c 耶....
+22:22:00 <petercommand> 剛剛才知道這個叫作instance head XD
+22:24:34 <suhorng> 我也是看報紙才知道的
+22:25:02 <suhorng> 對...不過先解 F 的話 F 只有 instance F [a] [[a]] 總覺得某種約束還是有機會
+22:28:28 <petercommand> 報紙是?
+22:28:30 <CindyLinz> 我覺得 Undecidable 還是放心開啦.. 反正 compile 太久沒耐性了再咔就好 XD
+22:28:38 <suhorng> 報紙是亂講的啦 XDD
+22:28:42 <CindyLinz> petercommand: 他是總統..
+22:28:52 <CindyLinz> petercommand: 9.2 的 XD
+22:29:02 <suhorng> 無限期支持希平選總統
+22:29:06 <petercommand> XD
+22:29:32 <petercommand> 剛剛在想報紙是不是haskell report XD
+22:31:18 <suhorng> 我有固定關注 Haskell Weekly News 的 Quotes of the Week XD
+22:31:35 <suhorng> monochrom 常常上榜
+22:31:54 <petercommand> XDD
+22:33:14 <suhorng> oh my 發現這個wwwwww https://ocharles.org.uk/blog/posts/2014-12-01-24-days-of-ghc-extensions.html
+22:33:24 <suhorng> 不知道以後會有 24 Days of 什麼
+22:34:08 <CindyLinz> Undecidable GHC extensions
+22:35:52 <petercommand> 開 Undecidable 有辦法知道是因為 Undecidable 而編譯卡住嗎?
+22:36:12 <petercommand> 或是他的編譯很久
+22:36:19 <suhorng> 應該不會卡住吧, 它是隨便選個搜尋深度
+22:36:35 <suhorng> 不是隨便選個orz 是固定一個
+22:36:52 <petercommand> 不是會loop嗎?
+22:37:22 <suhorng> UndecidableInstance 有限制深度, 超過就 fail, 深度可以下參數調整
+22:37:35 <petercommand> 喔喔，了解
+22:41:46 <suhorng> Issue 307... "* Qfwfq: I seq what you mean." xDDD
+22:44:17 <petercommand> suhorng: 看不懂QQ
+22:57:12 <suhorng> seq 是 Haskell 某個強制它 evaluate 一層的東西XD (粗略的說...)
+22:58:15 <petercommand> 我知道呀...
+22:59:08 <petercommand> 雖然不了解deep seq 和 seq 的差異XD
+22:59:35 <petercommand> 再找個時間去看看XD
+23:04:35 <petercommand> suhorng: 不過我還是不了解這句話的意思...
+23:05:35 <suhorng> 可能我笑點比較低 XDDDD
+23:05:44 <suhorng> 我是理解成 "我是真的懂了 不是敷衍你"
+23:07:01 <petercommand> XD

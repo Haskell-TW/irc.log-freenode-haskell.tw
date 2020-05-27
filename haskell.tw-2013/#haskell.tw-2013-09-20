@@ -1,0 +1,5 @@
+01:10:32 <suhorng> :t \k -> k (Right (\a -> k (Left a)))
+01:10:33 <lambdabot> (Either a (a -> t) -> t) -> t
+01:13:23 <suhorng> http://ncatlab.org/nlab/show/equality 之前頻道上有討論到"相等", 這裡簡介了很多不同的"相等"
+07:31:24 <b4283> nice
+23:33:16 <suhorng> http://registrano.com/events/5e35ff 時間還沒有很確定的樣子。題目都超有趣！

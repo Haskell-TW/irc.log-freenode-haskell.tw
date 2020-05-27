@@ -1,0 +1,13 @@
+01:31:32 <hychen> https://www.youtube.com/watch?v=6ciJv9Bb928#t=16
+01:31:43 <hychen> 新聞公司有用haskell誒 XD
+01:32:13 <CindyLinz> QQ
+01:32:25 <hychen> 嫌棄Ruby很慢 haha
+01:54:44 <CindyLinz> scala 的 macro 真是有點厲害? @@"
+03:37:55 <godfat> frege 前幾天我有試著接 jruby XD
+04:49:24 <miaoski> CindyLinz: scala 的巨集寫起來真不直觀…lisp 系的好多了 (喂）
+05:15:24 <monochrom> lisp 的巨集最似巨集.
+05:16:18 <monochrom> 這是一種 "簡單就是美"
+05:16:36 <monochrom> @quote monochrom syntax.rules
+05:16:37 <lambdabot> monochrom says: Time flies like an arrow.  Fruit flies like a banana.  Syntax rules like a macro.
+05:16:41 <monochrom> :)
+09:41:11 <miaoski> lambdabot: :D

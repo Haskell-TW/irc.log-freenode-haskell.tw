@@ -1,0 +1,29 @@
+00:20:07 <hashcat> 有沒ghc分佈式或SIMD的八卦
+00:47:17 <monochrom> 我才是黑白的. 有名你叫, monochrom :)
+11:45:35 <Yu-Lin> 我第一次接觸電腦.....似乎是國小同學家的 Win95？
+13:07:41 <miaout17> Apple II (非常小的時候，我爸會開遊戲給我玩) -> MS-DOS (國小，為了玩遊戲學自己tune autoexec.bat, emm386之類的)
+13:08:12 <miaout17> 現在想起來，玩遊戲的執念真是可怕
+16:50:00 <Yu-Lin> 其實我參加聚會時都想問，但因為要回去住處，就一直沒問
+16:50:39 <Yu-Lin> 為什麼 FP 社群總是以怎麼寫直譯器做教學
+16:50:42 <Yu-Lin> XD
+17:19:09 <_13h> forth 也是啊  因為 forth 也只能一直寫直譯器XD
+17:19:37 <kanru> XDDDD
+17:20:00 <kanru> hello world 是 interpreter
+17:24:11 <_13h> hello world 比較像是單純語法的部份
+17:24:55 <b4283> "hello world" .
+17:25:05 <_13h> 如果要從語法練習來看的話，應該都是 hello world 了吧XD
+17:25:22 <_13h> b4283: 那是什麼?
+17:25:49 <b4283> _13h:  我忘記 forth 的字串怎麼表示了 XD
+17:26:19 <mno2> 因為寫 LL1 很適合 recursion 吧
+17:26:50 <_13h> b4283: 單純要輸出就 .( Hello World)
+17:27:40 <_13h> 就直接寫個 recursive descent parser
+17:27:42 <mno2> 而且 evaluate 也不過就是 recursion 來走一棵樹
+17:29:06 <mno2> recursive descent 就到 LL(k) 了 xD
+17:31:33 <b4283> s" 是一個 word 呀，我試了半天才發現 manual 有寫
+17:50:42 <Yu-Lin> 诶？為什麼會突然提到 forth XD
+17:57:39 <CindyLinz> Yu-Lin: 我上次是教(?)寫 memcached server 啊 XD
+18:01:23 <Yu-Lin> 妳的上次，我應該沒參加XD
+18:01:35 <mno2> CindyLinz: 趕快教我寫 tmonad server
+19:39:18 <mno2> haskell.tw 的 domain 居然被註冊走了
+22:53:28 <mno2> CindyLinz: https://dl.dropboxusercontent.com/u/405197/tmonad-logo.png  我 logo 設計好了 xD
+23:40:08 <CindyLinz> wwwwwww

@@ -1,0 +1,13 @@
+00:59:09 <caasihuang> c9sloud: 嘎， match_entry.request_method 沒有初值。我該給它 GET 嗎？
+01:04:25 <whitglint> 應該是 match_entry_createl() 的實作要設初值？
+01:07:18 <caasihuang> whitglint: 同意，但是今天懶得 clone 下來發 PR 了 0rz
+01:51:40 <c9sloud> match entry request method 要另外設定
+01:52:15 <c9sloud> 因為 plain string path 是沒有 request method 的
+01:52:34 <c9sloud> （不用 route 的時候
+01:53:19 <c9sloud> 可考慮另外寫一支 function
+01:54:26 <c9sloud> match_entry_createl_m(GET, "path", ....); 之類的
+07:15:33 <caasihuang> c9sloud: 目前打算把 JS 上的 MatchEntry 像 Object 一樣用，那麼初值我先自己設。
+10:39:19 <c9sloud> ok~~~~~
+10:39:56 <c9sloud> 突然想到像一些 message dispatching component 都會有 message type dispatch .. 用 r3 來註冊 message routing 好像還蠻適合的
+10:40:36 <c9sloud> "message.public" => ..., "message.private" => ...., "message.{userId}" => ....
+10:41:01 <c9sloud> 應該要重新包裝 r3 一下 XDD

@@ -1,0 +1,6 @@
+10:33:59 <chchen> f1 : Bool -> *
+10:34:01 <chchen> f2 : (b: Bool) -> f1 b
+10:35:03 <chchen> haskell能寫這種function嗎?
+12:23:59 <pkmx> type family f1 (b :: Bool) :: * where f1 'True = Int ; f1 'False = Bool
+13:22:18 <chchen> f2?
+13:27:47 <pkmx> type family f2 (b :: Bool) :: * where f2 b = f1 b ?

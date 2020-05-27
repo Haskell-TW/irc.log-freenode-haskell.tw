@@ -1,0 +1,46 @@
+16:08:43 <petercommand> @src (.&.)
+16:08:44 <lambdabot> Source not found. Take a stress pill and think things over.
+16:09:14 <petercommand> 剛剛在這篇文章http://lambda.jstolarek.com/2013/04/haskell-as-fast-as-c-a-case-study/
+16:09:21 <petercommand> 看到了sumSqrB = U.sum . U.map (\x -> (x .&. 1) * x * x)
+16:09:37 <CindyLinz> 我覺得學 Haskell 不要太早開始 tune 速度..
+16:09:45 <petercommand> 不曉得那個.&.是甚麼意思
+16:09:50 <petercommand> XDXD
+16:10:10 <CindyLinz> 不然只是語法像 Haskell, 心裡想的還是 CPU, memory 那些 model...
+16:10:22 <CindyLinz> 這通常不是學 Haskell 的初衷 :p
+16:10:31 <petercommand> :p
+16:10:50 <CindyLinz> petercommand: .&. 應該是 bit 運算的 &
+16:11:05 <petercommand> 喔喔
+16:11:07 <CindyLinz> 不過我還沒看文章
+16:11:15 <CindyLinz> 只是... 通常是啦 :p
+16:12:00 <petercommand> CindyLinz: 心血來潮，去google找haskell performance，找到這篇的XD
+16:12:09 <CindyLinz> 我現在依 Control.Lens 的習慣, 把 & 當成反向的 $ 用
+16:12:16 <CindyLinz> (&) = flip ($) 這樣
+16:12:38 <CindyLinz> @type ($)
+16:12:40 <lambdabot> (a -> b) -> a -> b
+16:12:43 <CindyLinz> @type flip ($)
+16:12:44 <lambdabot> b -> (b -> c) -> c
+16:13:06 <petercommand> @type (&)
+16:13:07 <lambdabot> a -> (a -> b) -> b
+16:14:17 <CindyLinz> 原來 lambdabot 也有 XD
+16:15:19 <petercommand> 我猜猜，應該也有.|.對吧?
+16:16:32 <petercommand> 恩，有看到了..
+17:14:50 <petercommand> @type (.&.)
+17:14:52 <lambdabot>     Ambiguous occurrence ‘.&.’
+17:14:52 <lambdabot>     It could refer to either ‘Data.Bits..&.’,
+17:14:52 <lambdabot>                              imported from ‘Data.Bits’ at /home/lambda/.lambdabot/State/L.hs:57:1-16
+17:15:10 <petercommand> @type Data.Bits.(.&.)
+17:15:11 <lambdabot> Not in scope: data constructor ‘Data.Bits’
+17:15:11 <lambdabot>     Ambiguous occurrence ‘.&.’
+17:15:11 <lambdabot>     It could refer to either ‘Data.Bits..&.’,
+17:15:16 <petercommand> @type Data.Bits..&.
+17:15:17 <lambdabot> parse error on input ‘Data.Bits..&.’
+17:15:23 <petercommand> @type (Data.Bits..&.)
+17:15:24 <lambdabot> Bits a => a -> a -> a
+23:29:08 <hashcat> 問一下有沒人用過Frege
+23:29:18 <hashcat> 還附有IDE
+23:29:32 <hashcat> 想知道怎跟java串接
+23:30:20 <CindyLinz> 沒有聽過 :p
+23:31:36 <hashcat> 看能不集滿43個沒有聽過
+23:31:54 <hashcat> Haskell-like on jvm
+23:34:31 <hashcat> http://mmhelloworld.github.io/blog/2013/07/10/frege-hello-java/
+23:34:40 <hashcat> 比想像中稍微難看一點

@@ -1,0 +1,61 @@
+00:12:06 <MnO2> 應該就是833吧~ 不愧是CindyLinz
+00:15:32 <CindyLinz> 可惜離一分鐘很久 ^^|
+10:37:47 <favonia> 啊看起來錯過好玩的題目了～
+14:38:06 <CindyLinz> favonia: 用 Agda 再解一遍, 就連證明都有了?
+17:29:39 <CindyLinz> ^^
+21:04:47 <MnO2> http://hackage.haskell.org/package/fb-0.12.3.4
+21:04:51 <MnO2> facebook api binding
+23:06:11 <b4283> 我有問
+23:06:16 <b4283> 題
+23:07:43 <b4283> 請看 http://learnyouahaskell.com/recursion 的 zip'，我發現除去定義的 edge condition (2,3行) 也會有 truncate longer list 的效果，但為什麼呢
+23:09:36 <CindyLinz> 應該要 crash 啊 @@"
+23:10:34 <b4283> CindyLinz: 可是我的 ghci 很高興的跑完了..
+23:11:01 <CindyLinz> 我也是耶 XD
+23:11:14 <letoh> 不會跑出奇怪結果嗎
+23:11:32 <b4283> 和網頁上的結果一樣
+23:12:02 <CindyLinz> 用 runghc 跑程式的話就爆了
+23:13:03 <CindyLinz> 和 ghci 不夠熟, 只會用.. 回答不了這個問題 ^^|
+23:15:10 <b4283> 喔喔，thanks
+23:16:27 <letoh> CindyLinz: 跑出奇怪的結果  不會覺得很可怕嗎
+23:17:35 <CindyLinz> letoh: 什麼意思? 該爆沒爆的確有點可怕.. 不過還好不會拿 ghci 作正經使用 ^^|
+23:18:12 <CindyLinz> b4283: 等久一點待能人回答 XD
+23:18:46 <b4283> :p
+23:22:59 <letoh> CindyLinz: 是這樣的  今天聽到有趣的東西
+23:23:06 <CindyLinz> 有趣的東西!
+23:23:14 <letoh> 對你來講可能不有趣啦
+23:23:32 <CindyLinz> 說說看啊, 幹嘛只說開頭... www
+23:23:52 <letoh> 就是有人提到 python 用 len 算一個 unicode literal 的長度  不是只有一種結果
+23:24:42 <letoh> 所以一堆人拿 python 做 fast prototyping 很怪  連 len 都會算出兩種結果的語言可以信任嗎XD
+23:25:04 <letoh> 然後號稱有解決  但實際上到現在都沒解決  根本在騙人XD
+23:25:10 <CindyLinz> o.o
+23:25:28 <CindyLinz> expert python 使用者至少會知道每一次 return 的會是哪一種吧?
+23:25:34 <letoh> 不知道
+23:25:43 <letoh> 他舉的那個例子很必殺
+23:26:00 <CindyLinz> 你是說有時候會把一個寬字元當一個字, 有時候是一個 byte 當一個字嗎?
+23:26:29 <letoh> python 的 unicode literal 不是 byte array  所以是另外處理的
+23:26:45 <letoh> 如果在編譯 python 指定 ucs2 跟 ucs4  會出現不同結果
+23:27:36 <CindyLinz> 編譯選項固定選同一種的時候, 出來的結果就可預期了?
+23:27:41 <letoh> 我只能講個大概  因為日文聽力還不夠強  漏掉不少笑話XD
+23:27:55 <letoh> 嗯  但 script 丟出去不曉得在什麼環境執行呀
+23:28:28 <letoh> 大概是這樣啦  我只是突然想到  如果慣用的工具突然跑出一個預期外的行為  感覺有點可怕XD
+23:29:25 <CindyLinz> 對...
+23:30:23 <CindyLinz> 不過把眼睛閉起來不要介意就好了.. (咦)
+23:30:55 <CindyLinz> javascript 超常用, 地雷超多的.... http://wtfjs.com/
+23:31:39 <letoh> 哈
+23:37:30 <b4283> quicksort 放一個 quickmak 還蠻驚喜的 XD
+23:37:35 <b4283> *quickman*
+23:46:19 <MnO2> b4283: 你的ghc版號是多少啊?  我在7.4.1會丟Exception
+23:47:53 <b4283> 7.4.2
+23:48:06 <CindyLinz> MnO2: 不會爆的是 ghci 吧
+23:48:33 <CindyLinz> 我是用 7.4.1
+23:49:55 <MnO2> 真怪
+23:53:52 <CindyLinz> MnO2: 你 ghci 會爆喔?
+23:55:01 <MnO2> 會跑，但跑到最後會丟Exception說Non-exhaustive patterns
+23:55:47 <b4283> MnO2: 那丟的 argument 是？
+23:55:59 <CindyLinz> 我是丟 [1,2,3] [4,5,6,7]
+23:56:16 <b4283> 我是丟 [1,2,3] [2,3]
+23:56:28 <CindyLinz> MnO2: 你是不是丟一樣長的?
+23:56:59 <b4283> CindyLinz: 耶，真的耶，一樣長出錯
+23:57:09 <MnO2> 我丟這兩個也都會丟Exception啊
+23:57:21 <CindyLinz> @@"
+23:57:34 <b4283> "@@

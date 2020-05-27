@@ -1,0 +1,116 @@
+00:14:15 <suhorngM1> https://plus.google.com/115504368969270249241/posts/URzeDWd7qMp
+00:14:30 <suhorngM1> 總覺得... 7.10 會有很多哀號聲
+00:15:50 <suhorngM1> 還不知道會怎麼搬到 Prelude 的 Foldable 跟 Traversable; 變成 Monad 上級的 Applicative
+00:16:39 <suhorngM1> 然後其實 Monoid, Applicative 也有一些要移到 Prelude 裡面了, 但是 (<$>) 不會進 Prelude?
+00:17:40 <petercommand> conditional compilation...
+00:21:00 <CindyLinz> 今天不進 Prelude, 將來一定會後悔 (?
+00:21:22 <CindyLinz> 喔喔.. Haskell 自己語法的 conditional compilation 嗎? (Y)
+00:22:48 <suhorngM1> CindyLinz: 這個應該一直都有吧, CPP
+00:22:55 <suhorngM1> 版本問題目前好像都這樣解的?
+00:22:59 <CindyLinz> petercommand: 呃... 只是建議的 workaround 手法喔? orz
+00:23:05 <suhorngM1> 所以 Mac 上直接用 clang 才會炸裂
+00:23:28 <CindyLinz> suhorngM1: 我剛以為 petercommand 的意思是會出一個比較 Haskell 風格語法的 conditional compilation... orz
+00:23:32 <suhorngM1> 喔喔~
+00:23:33 <petercommand> 咦? clang 有甚麼問題呀?
+00:23:57 <petercommand> CindyLinz: 我是說個網址裡的 CPP congitional compilation XD
+00:24:03 <CindyLinz> QQ
+00:24:14 <suhorngM1> clang 遇到 {-# #-} 之類的會炸裂的樣子, gcc 比較有包容力
+00:24:34 <petercommand> haskell 風格的 conditional compilation 會比較好嗎?
+00:24:56 <suhorngM1> CindyLinz: 雖然該進去的總是會進去, 不過這樣 GHC 是不是就跟 Haskell 2010 分道揚鑣了阿?
+00:25:01 <CindyLinz> #case VERSION of
+00:25:02 <suhorngM1> 連 Prelude 都差這麼多的話
+00:25:27 <suhorngM1> XDDD    #case VERSION of { ... -> return (); }
+00:25:31 <CindyLinz> suhorngM1: 反正 Haskell refactor 很簡單.....
+00:25:37 <CindyLinz> 不需要測試!
+00:25:49 <suhorngM1> www
+00:26:05 <suhorngM1> 哎, 這種大規模的修改有沒有比較溫和的方式阿
+00:26:06 <petercommand> 有沒有進 Prelude 的差別主要是甚麼?
+00:26:10 <CindyLinz> suhorngM1: 我覺得 Haskell 2015 會追 GHC....
+00:26:20 <CindyLinz> 應該根本就同一掛人吧?
+00:26:30 <suhorngM1> XD
+00:26:43 <CindyLinz> suhorngM1: 趁 Haskell 程式還沒有很多的時候趕快 port 啊!!
+00:27:05 <CindyLinz> 等到飛機上面都跑 Haskell 的時候就沒機會了!!
+00:27:15 <petercommand> 不需要測試代表 ghc 一個版本需要支援不同版本的東西耶...
+00:27:38 <suhorngM1> 等到飛機上跑 Haskell, 那飛機用的 GHC version 應該五六年內都不會更新吧...
+00:27:52 <CindyLinz> petercommand: 我是說 upgrade GHC 的時候舊 package 壞掉可以閉著眼睛亂改讓它升上來相容啦 ^^|
+00:28:10 <petercommand> XDXD
+00:28:21 <petercommand> 這樣很麻煩阿...
+00:28:42 <CindyLinz> suhorngM1: 大家都摸清楚什麼時候會 the impossible happend!
+00:29:42 <CindyLinz> petercommand: 欸.. 我就幫 yesod-auth-bcrypt 亂改升級過.. 讓它從 yesod 1.2 改成跟 yesod 1.4 相容.. 而且 uploader 還收了我的 pull request.. XD
+00:30:03 <petercommand> XDDD
+00:30:03 <CindyLinz> 完全就是看著 compile 的 error message 改....
+00:30:15 <suhorngM1> Orz......
+00:30:40 <CindyLinz> 我覺得改動幅度還不算小? https://github.com/CindyLinz/yesod-auth-bcrypt/commit/aaf63b92608db35d6eeb59c81cfa7694121b9c6e
+00:30:55 <CindyLinz> 我發誓.. 我改的時候完全不知道我改的東西是什麼.......ww
+00:31:30 <suhorngM1> xd
+00:33:35 <CindyLinz> pull request 的留言還蠻好笑的 :p # https://github.com/TobyGoodwin/yesod-auth-bcrypt/pull/1
+00:34:42 <suhorngM1> www
+11:48:00 <CindyLinz> > let fib = 1 : 1 : [(a+b) | a <- fib | b <- tail fib] in take 10 fib
+11:48:02 <lambdabot>  [1,1,2,3,5,8,13,21,34,55]
+11:48:16 <CindyLinz> 有開耶... Parallel Comprehensive
+12:20:19 <pkmx> 我也覺得自己最近越來越喜歡用list comprehension了(遮臉
+12:21:18 <CindyLinz> 我還是只有在 demo 炫技的時候用 ^^|
+12:21:18 <pkmx> > [ x + y | x <- Just 1 | y <- Just 2 ]
+12:21:20 <lambdabot>  Couldn't match expected type ‘[t]’
+12:21:20 <lambdabot>              with actual type ‘Data.Maybe.Maybe a0’Couldn't match expected ty...
+12:21:20 <lambdabot>              with actual type ‘Data.Maybe.Maybe a1’
+12:21:33 <CindyLinz> 平常只有用到簡單的像是 [(1,2), (3,4)] 這種.... (這種算嗎?
+12:21:40 <CindyLinz> 或是 [1..n]
+12:22:13 <pkmx> > [ x | x <- Just 1 ]
+12:22:15 <lambdabot>  Couldn't match expected type ‘[t]’
+12:22:15 <lambdabot>              with actual type ‘Data.Maybe.Maybe a0’
+12:22:32 <CindyLinz> 我以為寫在右邊的 <- 右邊的, 一定要是 list?
+12:22:33 <pkmx> 為什麼沒有開MonadComprehension =.=
+12:22:44 <CindyLinz> 喔喔~
+12:23:04 <CindyLinz> 可是... 不是應該是 ListMonad 嗎?
+12:23:11 <CindyLinz> 能混搭不同的 monad 喔?
+12:23:25 <pkmx> 可以
+12:24:06 <pkmx> 原來有MonadZip這個class...
+12:24:25 <pkmx> 如果用MonadComprehesion + ParallelListComp就會用到
+12:24:35 <pkmx> 之前從來沒有想過這個問題XDrz
+12:25:53 <CindyLinz> 只有 [] 一個 instance 耶
+12:27:00 <pkmx> 感覺應該是可以寫Maybe的instance?
+12:27:16 <pkmx> 就把Maybe當作是0或1個元素的list不就好了=p
+12:28:06 <pkmx> mzip = liftA2 (,) ?
+12:28:40 <pkmx> > let mzip = liftA2 (,) in mzip (Just 1) Nothing
+12:28:42 <lambdabot>  Nothing
+12:28:46 <pkmx> > let mzip = liftA2 (,) in mzip (Just 1) (Just 2)
+12:28:48 <lambdabot>  Just (1,2)
+12:55:55 <petercommand> > (,) <$> snd <*> fst $ (1,2)
+12:55:57 <lambdabot>  (2,1)
+12:56:23 <petercommand> 這個怎麼運作的有點不太了解..
+12:56:59 <petercommand> 我覺得 monad 版的比較好了解..XD
+12:57:40 <petercommand> > (do { x <- snd; y <- fst; return (x,y) }) (1,2)
+12:57:42 <lambdabot>  (2,1)
+12:58:31 <petercommand> applicative 的版本是上次看到 CindyLinz 提到的
+13:00:39 <pkmx> 就是 (->) r 的 instance
+13:03:59 <petercommand> 恩...來查一下這個 instance 好了..不太熟
+13:20:30 <petercommand> 就是覺得不太直觀吧XDD
+13:21:29 <petercommand> 不直觀的東西用久了也變直觀了ww
+13:43:58 <CindyLinz> 對.. # 不直觀的東西用久了也變直觀了ww
+13:44:25 <CindyLinz> 我覺得要跟周圍別的東西合在一起看, 看共通的原則性強烈與否
+13:44:39 <CindyLinz> 共通的原則性強就可以把它們列為直觀
+15:11:20 <monochrom> 孫子兵法說: 要化迂為直
+15:20:44 <CindyLinz> 哇~ top-level declare 也可以用 pattern matching 寫喔 XD
+15:20:59 <CindyLinz> (a, b) = (2,3) 這樣
+20:16:33 <pkmx> top-level declaration還可以用ViewPatterns咧XD
+20:17:20 <pkmx> http://ideone.com/4APJ3K
+20:19:52 <pkmx> 還可以用guard 0.0
+20:20:15 <pkmx> > let (succ -> x) | False = 1 in x
+20:20:17 <lambdabot>  *Exception: <interactive>:3:5-27: Non-exhaustive guards in
+20:20:42 <petercommand> 一般 top level 有甚麼限制嗎?
+20:22:10 <pkmx> 看起來好像let裡面支援的都可以@@
+20:28:51 <pkmx> 所以說fix可以寫成fix f = \(f -> x) -> x ?
+20:29:07 <pkmx> > let fix f = \(f -> x) -> x in fix (1 :)
+20:29:09 <lambdabot>  <[Integer] -> [Integer]>
+20:29:26 <pkmx> :t fix f = \(f -> x) -> x
+20:29:27 <lambdabot> parse error on input ‘=’
+20:29:43 <pkmx> 好像不對 =.=
+20:31:58 <pkmx> fix f = let (f -> x) = x in x
+20:32:03 <pkmx> 好像沒有比較厲害=.=
+20:36:31 <CindyLinz> pkmx: 你那個 fix 的 view pattern 也不是放在 top-level 啊.. XD
+20:36:51 <pkmx> 那個fix跟上面top-level view pattern沒有關係=p
+20:38:23 <CindyLinz> 喔 XD
+20:40:13 <pkmx> GHC 7.10多了-fdefer-typed-holes
+20:40:26 <pkmx> 可以和undefined說再見了!
+20:42:40 <CindyLinz> ! (Y)

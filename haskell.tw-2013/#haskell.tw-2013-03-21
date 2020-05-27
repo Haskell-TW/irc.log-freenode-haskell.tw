@@ -1,0 +1,22 @@
+00:06:34 <monochrom> mzero 都是 Nothing
+00:07:10 <monochrom> > do { mzero; return True } :: Maybe Bool
+00:07:12 <lambdabot>   Nothing
+12:40:13 <CindyLinz> > do { fail } :: Maybe Int
+12:40:15 <lambdabot>   Couldn't match expected type `Data.Maybe.Maybe GHC.Types.Int'
+12:40:16 <lambdabot>              ...
+12:40:23 <CindyLinz> > do { fail "3" } :: Maybe Int
+12:40:25 <lambdabot>   Nothing
+12:40:41 <CindyLinz> monochrom: fail 也是 Nothing 呀 ^^
+12:40:56 <CindyLinz> > do { fail "3" } :: Either String Int
+12:40:58 <lambdabot>   *Exception: 3
+12:41:25 <CindyLinz> > do { fail "3" } :: [Int]
+12:41:27 <lambdabot>   []
+12:41:56 <CindyLinz> > do { mzero } :: Either String Int
+12:41:58 <lambdabot>   Left ""
+12:42:12 <CindyLinz> 為什麼 Either 的 fail 沒有定成 Left 呢 @@"
+12:43:09 <CindyLinz> 噢.. 我從 ghci 裡面看, 是沒有定義 Monad (Either String)
+12:43:16 <monochrom> 因為 fail 和 mzero 的原意不同
+12:44:12 <CindyLinz> 是不同呀.. 不過 Monad (Either String) 可以實作為一旦 Left 了, 就會一直 Left 下去
+12:45:04 <monochrom> 呀, 或者一樣, 我不深究了.
+12:45:41 <CindyLinz> 嗯.. o.o  不一樣的可能是 <|> ^^|
+12:46:10 <CindyLinz> 只要有 <|> 就還有得救...

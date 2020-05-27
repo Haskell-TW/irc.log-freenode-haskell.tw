@@ -1,0 +1,50 @@
+10:07:41 <favonia> zwiebel: Hello!
+10:18:22 <MnO2> https://twitter.com/kmett/statuses/318633063691214848?utm_source=feedly    kmett 現身說法，其實他比較常寫 Haskell
+10:40:56 <_13h> MnO2: 我發現有幾個檔案本來就有 CRLF 了，要一起修掉嗎?
+10:41:19 <MnO2> 好啊，拜託你了
+10:41:37 <_13h> 不曉得是哪個程式搞鬼，我全部都在 linux 下編輯竟然也會跑出 CRLF...XD
+10:41:50 <MnO2> 不知道 xD
+10:42:58 <_13h> jquery 那幾個檔案也是 CRLF
+10:43:35 <_13h> recipes.js: ASCII C program text, with very long lines, with CRLF, LF line terminators
+10:46:26 <_13h> js 跟 fdoc 裡的檔案先不動好了@_@
+10:53:51 <favonia> _13h: 原來還會顯示「with very long lines」xD
+10:54:30 <favonia> _13h: 應該就是 emacs 搞鬼！（逃）
+10:56:20 <_13h> XDXD
+10:57:09 <_13h> 因為是在 rpi 上處理的，其實大部份檔案都是用 vi 編輯XD
+10:59:20 <_13h> git diff 的結果好亂，認不出 line break 變化嗎@_@  不曉得 ydiff 會不會好一點XD
+11:03:38 <favonia> 只是換行的問題的話
+11:03:42 <favonia> diff 應該有選項吧
+11:13:59 <_13h> https://github.com/letoh/learnyouahaskell-zh-tw.github.com/commit/a0905099a9a6c1bf88b277fac2a9ed1891670df3  像這個 diff 結果根本沒幫助XD
+11:15:15 <_13h> git 可以做 eol normalization XD  http://git-scm.com/docs/gitattributes
+11:30:17 <b4283> ydiff 原來是用 racket 寫的
+11:30:39 <b4283> 看到 "raco" 還覺得是哪種奇怪的 compiler
+12:03:20 <b4283> Racoon City (誤)
+15:08:12 <MnO2> http://blog.gslin.org/archives/2013/04/25/3308/memkeys%EF%BC%9A%E7%94%A8-c-%E5%AF%AB%E7%9A%84-mctop-memcache-top/   CindyLinz 快用 Haskell 寫一個
+15:24:20 <MnO2> http://www.cis.upenn.edu/~cis194/lectures.html 另一門課
+15:48:10 <CindyLinz> 想想覺得這不是一個適合 Haskell 發揮的類型 ^^|
+15:48:36 <CindyLinz> 我之前寫的 Memcached Server Protocol 就更不適合了
+15:49:28 <CindyLinz> top 可能好一點點..
+15:49:59 <CindyLinz> 程式裡面不同的 type 越多, 不同的組件越多種, 就越適合
+15:50:15 <CindyLinz> 而如果 bytes 搬來搬去越多就越不適合
+16:51:47 <MnO2> 只是聯想到你在寫 memcached 相關的東西 xD
+16:52:03 <MnO2> http://www.yinwang.org/blog-cn/2013/04/24/go-language/    輪到 go 了 xD
+16:52:31 <MnO2> 他不說我之前還沒聯想到 go 是 google 的 prefix
+16:53:36 <MnO2> 細節要點進心智圖看，文章只是在純幹醮
+16:59:07 <CindyLinz> 他說 Go 裡面有很多新的和好的設計.. (一句話的前半) :p
+17:21:36 <_13h> 為什麼他的文章版面要在兩邊留白@_@
+17:22:23 <CindyLinz> 怎麼了嗎? 你螢幕太寬了? ^^|
+17:23:57 <_13h> 是寬螢幕沒錯呀
+17:33:47 <hychen> CindyLinz, 滿多論述沒啥證明
+17:34:04 <CindyLinz> ??
+17:34:52 <Yu-Lin> 好久沒出現在這邊啦
+17:35:22 <hychen> CindyLinz, 講gorotine , 它沒說為什channel 不是好的溝通方式
+17:36:00 <CindyLinz> 他外面這篇有說啊, 他懶得跟人說了 XD
+17:37:53 <hychen> 這樣戰力不強啊
+17:40:54 <kanru> 用了才知道
+17:45:53 <_13h> 不過我覺得他想寫這種勸世文，應該把細節也講清楚才好
+17:50:50 <hychen> _l13h, 這樣很容易被鞭
+17:53:31 <_13h> 在心智圖發現他也有看 ikarus scheme 耶...
+17:53:54 <_13h> 他寫的這篇應該不會好多少吧XD
+17:55:06 <_13h> 原來 ikarus 的作者根本也是 Kent 的學生.... 我想說神人怎麼那麼多...
+23:01:18 <suhorng> https://www.youtube.com/watch?v=iSmkqocn0oQ 「Haskell is "useless"」你有個黑盒子, 按下按鈕就開始跑, 發燙, 然後什麼也沒有發生 (指沒 I/O 沒結果輸出) XDDD
+23:03:14 <suhorng> 下一個影片相關的好像是 YOW 2011 Simon Peyton Jones - Closer to Nirvana ? 不過好長

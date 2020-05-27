@@ -1,0 +1,77 @@
+07:14:42 <favonia> Snap 開發模式不能用 Path_xxxx 的問題在 Snap 開發者的幫助下解決了
+07:37:45 <favonia> 而且已經 merge 了 xD
+14:04:53 <letoh> 我拿到的前一次作業評語中，有人提到 "Dan mentioned that using directly case expression instead of function argument list is bad style."   所以用一堆 case <exp> of 的寫法會有什麼缺點嗎? 我以為只是多寫一行而已
+19:40:53 <favonia> letoh: 很有可能你寫了什麼比較醜的東西 xD 不過追根究底...萬法存乎一心（等熟悉了以後）
+19:47:00 <letoh> 大概吧  那是 peer review 的評語  其他人給的
+19:53:15 <letoh> 不過重新看了一下，我的確寫了累贅的東西XD
+19:54:04 <CindyLinz> 可是他那樣描述, 會覺得關鍵問題是 case expression 本身, 而不是裡面寫了什麼呀
+19:55:52 <letoh> 唔，我寫作業時還沒學到 case 語法，所以我只會在函式的參數裡做 pattern matching
+19:58:12 <letoh> http://pastebin.com/rw5UV2X3  我的答案大概都長這個樣子，但那個 comment 是總評，所以不曉得在講哪一題@_@
+19:59:07 <letoh> 我想是跟使用的語法風格有關吧
+20:01:13 <letoh> 還有一個評語是說我用太多 local function，不過不定義 local function 的話好像不好寫成 tail call @_@
+21:28:11 <favonia> letoh: 到底題目是啥 囧
+21:28:18 <favonia> 現在可以講了嗎
+21:28:29 <letoh> 可以啊  我找一下
+21:29:14 <letoh> 評分都結束了  也早就沒機會修改  應該沒關係
+21:31:53 <favonia> 我不知道，看規定 xD
+21:32:54 <letoh> http://tinyurl.com/beem4rv
+21:34:01 <letoh> 嗯  大概就語法練習的題目  不過我語法還不熟，都先用已經學到的語法湊出答案
+21:39:50 <favonia> fun similar_names l x = x : map (fn f => {name=f,middle=#middle x,last=#last l}) (get_substitutions2 l #first)
+21:40:22 <favonia> 可惡我現在太多語言一起寫都搞混了
+21:40:34 <favonia> 很有可能要改一下不過你知道我的意思 xD
+21:41:21 <letoh> 原來這麼簡單XD
+21:41:32 <letoh> 不過那時我還不曉得有 map 可以用XD
+21:41:47 <favonia> fun similar_names s (x@{first=f,middle=m,last=l}) = x : map (fn f' => {name=f',middle=m,last=l}) (get_substitutions2 s f)
+21:42:02 <favonia> Haskell...
+21:42:27 <letoh> 只用基本語法的話兩個語言還蠻像的  可以換來換去
+21:42:56 <letoh> 我每次都卡在寫了 x:xs 以後執行出錯，找半天XD
+21:43:01 <favonia> similar_names s x = x : map (\f => x{first=f}) (get_substitutions2 s $ first x)
+21:43:23 <favonia> 最近在寫 Haskell 所以 Haskell 語法應該沒問題
+21:43:49 <favonia> 喔天啊他用 curried
+21:43:58 <favonia> 不過這種錯誤編譯器都會告訴你 xD
+21:44:18 <favonia> 到底 10 行是怎麼出來的？！
+21:44:27 <letoh> 喔對啊  其實錯誤訊息還蠻多的，只是一開始不習慣要猜一下
+21:44:32 <letoh> sample solution 嗎?
+21:44:35 <favonia> 對啊
+21:45:00 <favonia> 我看著我的程式碼，不知道如何改成十行 lol
+21:45:16 <letoh> 遇到 token 就一直斷行?
+21:45:39 <favonia> @pl similar_names s x = x : map (\f => x{first=f}) (get_substitutions2 s $ first x)
+21:45:39 <lambdabot> (line 1, column 20):
+21:45:40 <lambdabot> unexpected " "
+21:45:40 <lambdabot> expecting operator
+21:45:49 <favonia> @pl similar_names s x = x : map (\f => x {first=f}) (get_substitutions2 s $ first x)
+21:45:50 <lambdabot> (line 1, column 20):
+21:45:50 <lambdabot> unexpected " "
+21:45:50 <lambdabot> expecting operator
+21:45:59 <letoh> http://pastebin.com/GZrKadpX  sample solution 來了
+21:46:37 <favonia> er...
+21:46:41 <favonia> 不能用 map?
+21:47:06 <letoh> 那一週還沒教到，重點好像在 pattern matching
+21:47:10 <favonia> 那個 make_name 只是 map (\f => x {first=f}) 啊 lol lol
+21:47:11 <favonia> 喔喔
+21:47:13 <letoh> 不太清楚  因為我沒上課XD
+21:48:24 <letoh> 評分準則有說沒看到一些要件就要扣分
+21:48:38 <letoh> 例如強迫使用 local function 卻沒用，扣分
+21:50:09 <favonia> （Hakell 可以用 x {first=f} 更新一個欄位，SML 好像不行）
+21:50:14 <favonia> 喔喔
+21:51:01 <favonia> let fun id x = x in id x : map (\f => x {first=f}) (get_substitutions2 s $ first x)
+21:51:19 <favonia> 這樣就好啦
+21:51:28 <letoh> 好像要重新產生一個完整的?
+21:51:46 <favonia> 我覺得你沒看懂我在寫什麼 xD
+21:51:59 <letoh> 我是說那個部份更新的
+21:52:20 <favonia> 喔你是說產生新名字嗎
+21:52:29 <letoh> 我沒找到怎麼在 sml 中只更新一個欄位
+21:52:50 <favonia> ocaml 可以寫 { x with lala = yo }
+21:52:59 <favonia> Haskell 寫 x {lala = yo}
+21:54:17 <favonia> SML 我記得沒有～
+21:54:57 <favonia> 雖然我覺得這都不是很核心的問題，但用起來的確有差 lol
+21:55:07 <letoh> 嗯  萬一資料比較複雜，操作起來好像有點麻煩
+21:56:14 <favonia> 可能有比較務實的編譯器有加 extension
+22:01:51 <favonia> letoh: 這方面最近 Haskell 有很噁心的 library xD
+22:05:59 <letoh> fun similar_names (s, {first=f, middle=m, last=l}) = map (fn f' => {first=f', middle=m, last=l}) (f :: get_substitutions2 (s, f))
+22:06:07 <letoh> 用 map 變這樣
+22:06:34 <letoh> 什麼 library ?
+22:07:02 <letoh> 突然想到很有趣  可以取  f' 這種變數名
+22:11:55 <favonia> letoh: lens orz
+22:12:23 <favonia> 我已經警告過囉，最新版本已經發展到超變態的狀態
+22:12:28 <letoh> 久仰大名XD

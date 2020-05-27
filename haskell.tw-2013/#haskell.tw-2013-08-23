@@ -1,0 +1,102 @@
+12:35:41 <mno2> 幫 ghc 開發弄 vagrant 環境，VM memory 開了 1G 都不夠...
+12:35:54 <mno2> cabal linking 的時候 ld 就吃爆 memory 了
+12:36:04 <mno2> 這點實在很討厭
+13:41:29 <CindyLinz> ghc 超肥 ._.
+13:43:46 <Yu-Lin> 沒辦法替 ghc 減肥嗎？
+13:44:12 <CindyLinz> codebase 也很肥.... QQ
+13:50:53 <mno2> 有人用 gold 好像可以小一點
+13:51:00 <mno2> 據說主要是 ld 本身的問題
+13:51:21 <mno2> symbol 太大量了..
+13:58:08 <_13h> symbol 太多 strip 掉就好啦不是嗎?
+13:58:21 <_13h> 但我 strip 掉還是差不多
+13:59:50 <_13h> btw, gold 現在可以正式使用了嗎？我系統都會弄一份，但實際用時還是 ld... XD
+14:00:59 <mno2> 我不是指最後的 size,  是 linking 過程查找 symbol
+14:01:22 <mno2> gold 要等 7.8.x 會比較容易使用，直接開一個 option 就可以用了。
+14:01:33 <mno2> 7.6 的話好像還要動一點手腳
+14:02:56 <_13h> 那個 symbol 的數量是 linker 決定的嗎? 我以為是 compiler ?
+14:03:28 <CindyLinz> gold... 這名字真棒... wwwwww
+14:03:34 <CindyLinz> 看起來就很值錢
+14:04:15 <cataska> 第一次聽到 gold
+14:04:55 <_13h> gold 應該出來蠻多年了，以前曾幫 gcin 調整成能用 gold XD
+14:06:21 <CindyLinz> 咦.. gold 跟 go 沒關係?
+14:06:35 <cataska> 為什麼還不能取代 GNU linker ?
+14:07:10 <_13h> 印象中 gold 好像是 linking 速度快一點?
+14:07:36 <mno2> _13h: 對啊，是 compiler 決定。所以說 symbol 太多。只是 ld 好像也沒有特別處理，就會很吃 memory
+14:08:13 <mno2> 有一些 linker option 不支援吧
+14:08:26 <_13h> 以前是還不穩定，但這幾年沒有追開發狀況，只是每次更新 binutils 都會另外弄一份 gold  (我自己用的 toolchain 都是手動更新
+14:09:24 <cataska> _13h: 好費工啊
+14:09:25 <_13h> mno2: 原來是這個影響，只是這樣的話換 gold 應該對最後的 binary size 沒太大幫助@_@
+14:09:32 <mno2> MTK 有開發 mclinker，一般情況似乎比 gold 更快的樣子。可能省去掉某些功能達到更快
+14:09:57 <mno2> _13h: 我主要考量是不要吃爆 memory, 最後 binary size 大小還好
+14:10:07 <_13h> cataska: 應該說我的系統除了 x11, kernel, libc 和幾個基本套件以外，幾乎都是自己 build from source XD
+14:10:43 <_13h> mclinker 好像上次 osdc.tw (?) 大熱門?
+14:11:25 <mno2> 應該也好一陣子了吧
+14:11:49 <_13h> 所以熱門的其實是講者? (應該沒記錯吧XD
+14:11:49 <mno2> 但也不知道有沒有人真的拿來用
+14:12:03 <mno2> 不清楚 xD
+14:13:02 <cataska> _13h: 現在已經懶得折騰了 XD
+14:13:40 <_13h> 印象中好像找了個正妹來介紹，結果當天開始就一堆照片分享
+14:14:47 <_13h> cataska: 我是習慣了所有套件自己管，當然是只限自用的開發機，工作用的就都跑 debian 和 arch 了
+14:16:27 <cataska> _13h: 所以連 Gnome (or others) 都是自己 build 呀
+14:17:29 <_13h> 我不用 DE，但 wm 的確也都是自己來，從 distro 裝的只有 xserver 跟 x11 driver 而已
+14:18:20 <cataska> _13h: 那你用什麼 wm 呢
+14:20:30 <CindyLinz> 「自己來wm」?
+14:21:12 <cataska> 太帥了吧 XD
+14:22:06 <b4283> fvwm
+14:25:10 <Yu-Lin> 看到 lfs 只能 (worship) 了
+14:34:32 <cataska> 在此頻道應該要說 xmonad
+14:34:55 <CindyLinz> 我用 xmonad.. (挺)
+14:35:37 <CindyLinz> 而且沒開工作列 / system tray, 所以用某些軟體會有點問題 XD
+14:35:45 <CindyLinz> 如果是預設啟動就最小化的.....
+14:37:39 <CindyLinz> 就因為這樣, 把 pidgin 丟了....||
+14:40:40 <b4283> tiling wm 用到後來我還是覺得一般的視窗操作模型比較好用 ;P
+14:41:42 <Yu-Lin> 我這邊 xmonad 用不起來，只好先用 awesome 擋一下
+14:45:00 <CindyLinz> 可能你比較喜歡用滑鼠...
+14:45:38 <CindyLinz> 長時間工作我真的很討厭必須用滑鼠的設計
+14:49:00 <Yu-Lin> incr
+14:49:28 <_13h> cataska: fvwm2
+14:49:45 <_13h> 喔喔喔  有人幫我回了
+14:49:56 <_13h> xmonad 很麻煩，好像一定要 ghc XD
+14:50:02 <cataska> b4283 好瞭解 XD
+14:50:39 <b4283> XD~
+14:50:45 <_13h> 我 fvwm2 用了非常多年了，基本上沒換過 (偶爾會試一下其他的，但用沒多久就會換回來)
+14:51:30 <_13h> 我覺得用 fvwm2 或用 twm 對我來講根本差不多XD
+14:52:30 <_13h> 反正開個 terminal 就可以滿足大部份需求了，少數像 gimp / blender / mplayer 這些 emacs 還沒辦法處理的就只好另外跑XD
+14:55:34 <CindyLinz> 你竟然沒列 browser.... @@"
+14:56:52 <cataska> CindyLinz: emacs 這個可以處理 XD
+14:56:53 <_13h> 大部份可以處理  不只那幾個程式啦  列幾個我最近比較常用的而已
+14:57:01 <_13h> 不過我開 chrome 主要只是為了 gmail youtube 和 niconico 而已  看文字都用 w3m (emacs)
+15:02:02 <CindyLinz> cataska: 用 emacs 代替 chromium 使用這樣? @@"
+15:03:53 <cataska> CindyLinz: 如果只有文字網頁，emacs + w3m 可以 :P
+15:15:18 <_13h> cataska: 圖其實也可以
+15:15:31 <_13h> 我 rss 已經搬進去了，看圖還 ok
+15:15:39 <cataska> 喔喔
+15:16:07 <_13h> 而且沒有一堆廣告來亂:p
+15:17:07 <cataska> 因為沒有 js ?
+15:18:07 <_13h> 對.. 舊版的有 js patch，不過我沒用過就是... 沒有 js 的世界挺好的:p
+15:25:19 <CindyLinz> 真是太強惹.... ._.
+15:32:40 <_13h> 還好大部份資料不需要 js 就能看，例如查 api 或 tutorial 之類的
+15:33:24 <_13h> 大部份 blog 少了 js 和 css 其實也沒什麼影響，頂多選單跑到下面去而已
+15:36:12 <CindyLinz> 現在可能 youtube 和 facebook 是大部分人的大部分使用時間..... XD
+15:36:55 <_13h> 嗯，我是完全不用 facebook，youtube 其實也不常，主要是卡在 niconico XD
+16:44:37 <mno2> ghc trac …………  超難用，我覺得根本就故障了..
+16:45:15 <mno2> 想 comment 一個 bug 弄了我十幾分鐘不得其門而入..
+16:55:21 <mno2> 看起來不是只有我一個人發生過這種問題 xD
+17:13:56 <mno2> 總算搞定...
+17:14:06 <mno2> trac 太可怕了..
+22:39:24 <godfat1> 滿有趣的討論 http://stackoverflow.com/questions/137550/is-programming-a-subset-of-math
+22:56:30 <mno2> 我想數學家對於數學是什麼，都沒有一個共識 xD
+22:57:07 <godfat> XD 確定性的失落拿到了，期待能看完 XD
+22:57:42 <mno2> 看完會有種淡淡的哀傷 xD
+22:59:22 <godfat> 這樣會不會更期待未來？ XD
+23:01:12 <mno2> 看你自己抱持的哲學觀吧 :p
+23:02:19 <hashcat> 數學不是有同構這玩意
+23:03:10 <hashcat> 看數學跟什麼同構, 其他沒啥好問的
+23:04:07 <hashcat> 量子力學的閉嘴計算詮釋
+23:05:23 <hashcat> 像是有些有聯覺的人聽到音樂會覺得空氣中有甜味或酸味, 於是就覺得音樂就是味道
+23:09:58 <hashcat> 算數學的人貌似也有人有類似的聯覺, 進而想出一些我這沒有聯覺的人會覺得很奇怪的詮釋說詞
+23:11:35 <hashcat> 數學是文學, 數學是藝術, 數學帶有色彩芸芸, 不少問題就算是完全沒感覺的計算機也能做, 唯一的共通點就是寫出來的符號變來變去
+23:16:16 <mno2> 我很希望我有 lottery 中獎數字號碼跟顏色的聯覺 :p
+23:17:08 <monochrom> 那豈不成為名符其實的 彩票
+23:17:33 <mno2> 的確是 xD
+23:19:41 <monochrom> "洗衣前忘了把袋內彩票掏出, 現在彩票給彩漂了"

@@ -1,0 +1,3 @@
+00:16:20 <caasih> \b -> ((h :: m b -> m a) (pure b)) >>= (g :: a -> m c)
+00:17:08 <caasih> 這樣子？可是這樣完全沒用到 a -> m b 0rz
+00:18:02 <caasih> 不用 join ，我真傻

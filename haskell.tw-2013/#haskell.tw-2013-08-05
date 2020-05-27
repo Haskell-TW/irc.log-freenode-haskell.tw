@@ -1,0 +1,295 @@
+10:49:51 <suhorng> 有沒有人用 Golang? 有什麼感想嗎XD
+10:55:58 <suhorng> 聽到這個跟程式語言比較相關 http://weijr-note.blogspot.tw/2013/08/coscup2013-python-f-golang-and-friends.html
+10:56:19 <suhorng> #coscup
+11:02:11 <_13h> Rob Pike 那段話有什麼意思呢? golang 能吸引 python/ruby programmer, 卻吸引不了 c++ programmer
+11:03:42 <suhorng> 我不知道那段話本意在說什麼, 講者說放這段話是想表達 golang 某方面比 python, ruby 好
+11:03:52 <suhorng> 印象中聽到是這個意思XD
+11:05:45 <_13h> 唔，講者有提到哪些方面比 python/ruby 好嗎？
+11:07:58 <suhorng> 沒印象 後面是一些例子demo.
+11:10:23 <suhorng> _l13h: 11:03:40這句還是先聽聽就好XD 實在不太有印象了
+11:21:06 <b4283> Page 23 ... 和王垠完全相反的意見，有意思
+11:23:51 <suhorng> Lessons Learned嗎? 我覺得沒有衝突, 王垠是說 "layout syntax considered harmful"
+11:34:31 <b4283> 王的論點我記得是兩個，一是 block syntax 比 indented syntax 好，另一個是 indented syntax 反而造成 debug 麻煩
+11:34:45 <b4283> 就我來看兩者是剛好完全相反
+11:39:02 <suhorng> 噢 我把這份投影片「排版有幫助」解讀成程式碼好好排版有幫助…XD
+11:40:23 <_13h> 我對於 「F# 是 Caml+.Net 的小孩裝成 Python 的樣子」 這看法很有意見XD
+11:41:28 <_13h> javascript 的話，一般是說偽裝成 c 的 scheme，不過這點也很有爭議就是
+11:41:59 <b4283> 上次不是才貼一個 "Javascript Is Not Scheme" ? XD
+11:42:08 <_13h> http://javascript.crockford.com/little.html  # The Little JavaScripter
+11:42:27 <_13h> 對啊  所以我說蠻有爭議的，很多人打臉XD
+11:42:37 <suhorng> CindyLinz: 你的投影片在哪裡可以看嗎?
+11:42:50 <suhorng> 那一頁我也滿有意見的ww
+11:42:50 <CindyLinz> 還沒放 ._.
+11:43:10 <suhorng> 噢XD
+11:43:32 <suhorng> http://www.plurk.com/p/izriou ¥4~: COSCUP 2013 投影片收集中，歡迎幫忙。  #coscup
+11:43:56 <CindyLinz> 我在猶豫要怎麼補充... 因為我講的方式, 重點很多是放在講的部分, 只放原始投影片的話, 可能會不知道要說什麼, 或是誤解 @@"
+11:44:17 <suhorng> _13h: 裝成 Python 這個實在太無法接受了XD
+11:44:22 <CindyLinz> 以後可能就乾脆事先把備忘寫好才對 @@"
+11:44:26 <suhorng> 喔~!
+11:44:50 <CindyLinz> 我有聽那一場魏澤人老師的 talk
+11:45:04 <suhorng> 總覺得是不是因為 javascript 有 functional 的特點就有人把他說成其他 functional language...
+11:45:37 <CindyLinz> 當他講到 F# = Caml + .Net 然後假裝成 Python 時.. 我心中想: 哦~ 原來是這麼回事啊...
+11:46:06 <CindyLinz> 講到 javascript = C 追裝成 lisp 時.. 我心中想: 咦? 原來有這樣的看法...
+11:46:37 <CindyLinz> 講到 coffeescript = javascript 偽裝成 Haskell 時.. 我突然開始懷疑前面的兩個比喻..... orz
+11:46:38 <b4283> asm.js 表示：有什麼問題嗎？
+11:47:09 <CindyLinz> 因為只有第三則, 他提到的語言我都有在用... 感覺不對啊.. ^^|
+11:47:22 <suhorng> XD
+11:47:38 <_13h> 跟 haskell 其實差蠻多的，不管是語法或其他設計，根本談不上裝成 haskell 吧XD
+11:47:47 <suhorng> 「F# = Caml + .Net 然後假裝成 Python」 這一句我想比較針對他一開始舉的 Python/F# 兩個比較
+11:47:53 <suhorng> 不過 F# 正常用應該不會那樣寫...
+11:47:55 <CindyLinz> coffeescript 和 Haskell 像的地方.. 我覺得只有 layout format... 而且而且, 我曾經用 Haskell 的方式去 layout coffeescript, 就 compile error 了...
+11:48:06 <CindyLinz> 表示他們的 layout 也很不一樣 orz
+11:48:27 <suhorng> www
+11:48:28 <_13h> suhorng: 我看到他貼的那段 F# code... 只是把 python code 翻譯過去而已XD
+11:48:34 <CindyLinz> 這個他有說
+11:49:08 <CindyLinz> 他有說 F# 有別的寫法, 但他故意先寫好 python 再直接翻譯過去, 表示如果習慣的是 python, 用 F# 應該可以很快上手
+11:49:16 <_13h> 跟我對 F#/Ocaml code 的印象差蠻多XD
+11:49:32 <CindyLinz> 而且他有故意在 F# 定出 sum 之類跟 python 同名的函數
+11:49:51 <CindyLinz> 我覺得他的演講也是那種只看投影片可能會不知道在說什麼或誤解的類型
+11:49:53 <suhorng> 恩
+11:49:58 <_13h> 嗯嗯，原來如此
+11:50:21 <suhorng> 不過 F# 原來是 open source 的, 有點訝異..
+11:50:36 <_13h> 到時錄影出來再補一下好了，光看 slide 會漏掉蠻多東西
+11:50:56 <CindyLinz> golang 吸引 python/ruby 的部分, 他說有兩種看法:
+11:50:57 <suhorng> 真的
+11:51:03 <_13h> 對啊，可以抓下來自己編譯
+11:51:13 <CindyLinz> 1.java 和 .Net 的 programmer 被綁死了不能隨便換
+11:51:34 <CindyLinz> 2.python / ruby 的 programmer 比較有熱情去找尋新的,可能更好的 language
+11:51:52 <CindyLinz> 1. 應該還有 c :p
+11:53:20 <_13h> 可是我覺得 java 和 .net 平台的 programmer 有個好處，上面的語言選擇非常多
+11:53:31 <_13h> 平台可以被綁著，但語言不必啊
+11:53:46 <suhorng> 所以Java user可能會去學Scala?
+11:53:54 <suhorng> .Net就有F#
+11:54:02 <_13h> msdn 上的 .net 範例都是至少會給 c#, vb.net 兩種語言
+11:54:13 <CindyLinz> 對
+11:54:22 <suhorng> 欸, Closure是不是也是 JVM..
+11:54:32 <b4283> 正要說 clojure
+11:54:34 <CindyLinz> 1.的觀點是外在環境的限制 2.的觀點是人的屬性不同
+11:54:42 <suhorng> 嗯嗯
+11:55:22 <_13h> 同樣都用 .net 平台，除了語法外，針對 .net system call 使用的部份看起來差不多，就算你學 c#，找到 vb.net code 也不難看懂
+11:55:30 <CindyLinz> 現在聽到 golang 都會想到王垠說: golang 有很多新的和好的設計, 但新的都不是好的, 好的都不是新的......wwww
+11:56:01 <suhorng> CindyLinz: +1 XD
+11:56:48 <_13h> 2 的觀點既然是從人的屬性來看，應該就跟語言無關了吧XD
+11:57:18 <CindyLinz> 有啊, 把語言的選擇視為一種性向測驗 XD
+11:57:22 <_13h> 還是說喜歡追求新東西的人比較容易用 pytho/ruby
+11:57:37 <CindyLinz> 比較無趣的人比較不會選 python / ruby
+11:57:48 <suhorng> 為什麼呀@_@
+11:57:55 <_13h> 喔喔，好像有道理.. 那使用 java 的人..?
+11:57:59 <CindyLinz> c++ java .net 的工作比較多
+11:58:02 <suhorng> 有人想學程式設計時我都想推薦給他python XDD
+11:58:07 <suhorng> 噢....
+11:58:17 <CindyLinz> 如果沒什麼熱情, 應該不會考慮有不有趣, 只考慮有沒有工作
+11:58:44 <CindyLinz> suhorng: 這種人其實不想學程式設計, 只是想賺點錢.. XD
+11:58:44 <_13h> 我也是都推 python，有幾位同事看我在用就跟著用了
+11:59:22 <suhorng> QQ
+11:59:41 <b4283> ruby 因為 rails 工作應該也不少?
+12:00:42 <b4283> 推 php (跳火炕貌)
+12:01:05 <CindyLinz> 要跟 C++ Java .Net 比應該還是少很多吧....
+12:01:13 <CindyLinz> 拿 php 寫 driver 嗎? XD
+12:01:14 <_13h> slide 提到 「F# 傾向重新定義語意來客製化」  是什麼意思啊？
+12:01:32 <CindyLinz> 可以自定 syntax sugar 的感覺
+12:01:42 <CindyLinz> 像是 [x | x <- a when x < 5 ]
+12:01:48 <suhorng> 那邊聽不懂`
+12:01:48 <CindyLinz> 這邊的 when 可以自定之類的
+12:02:42 <_13h> 唔，不過 ocaml 的確很多功能都透過 syntax extension 來做到... F# 的話不太確定，印象中沒看到相關工具
+12:03:25 <CindyLinz> 如果他講的 F# = Caml + .Net 裝成 Python 的話... 我覺得蠻滅火的啊.. orz
+12:03:54 <_13h> ww 期待錄影XD
+12:05:12 <suhorng> https://gist.github.com/suhorng/6120923 試著寫了陽春 HM type inference 程式XD
+12:07:59 <CindyLinz> 覺得 Haskell 裡面手寫出一個 data structure 的 value 的時候, 感覺有像 lisp
+12:08:12 <suhorng> xD
+12:13:16 <suhorng> 加一些 syntatic sugar 也許會好一點...例如 let ($$) = Ap, let (-->) = Lambda 之類
+12:13:50 <CindyLinz> hmm
+12:17:39 <_13h> 那個 slide 結論好怪.. 這篇是發表在 pycon.tw 上的吧XD
+12:18:38 <suhorng> 是這樣ww 他說不過被reject了所以來COSCUP講
+12:19:20 <_13h> 看到最後說 python 都辦得到那一頁就笑出來了XD
+12:21:56 <_13h> 老實說我還蠻討厭 indent-based layout，不過可能 python 寫久了，討厭歸討厭  還是可以寫得下去XD
+13:03:55 <Yu-Lin> 看你比較討厭 { 還是 MS
+13:03:56 <Yu-Lin> XD
+13:23:35 <CindyLinz> 他說可能因為他這篇在鼓勵大家用 python 之外的語言...
+13:23:51 <CindyLinz> 我想.. 這種異教言論被禁不意外啊 XDD
+13:29:17 <_13h> XDXD
+13:29:53 <_13h> 我剛剛在看 javascript 的文章，發現有程式的開頭是 ;(
+13:30:52 <_13h> 那個分號是怎麼回事，怕跟前一個檔案直接串起來解讀嗎? XD
+13:31:34 <_13h> 我目前只遇過 c 會有這問題，沒想到在 js 也看到類似的東西XD
+13:33:55 <_13h> CindyLinz: 雖說前面都是異教言論，但最後也補了 Python 文成武德，沒想到還是救不回來XD
+13:41:44 <c9s> CindyLinz: 厲害 XDDD 我的場大概只有 3/2 XDD
+13:41:51 <c9s> 喔錯了 2/3
+13:42:03 <c9s> 不過不知道為什麼最後 10 分鐘湧入很多人
+13:43:19 <CindyLinz> c9s: 我很緊張, 所以其實沒有去看全部有多滿..
+13:43:41 <CindyLinz> 我那間.. 103 場地蠻深的, 頭不抬起來看不到全部..
+13:43:51 <CindyLinz> _13h: XDDD
+13:44:24 <CindyLinz> _13h: 為什麼會有跟前一個檔案直接串起來的情況發生啊 orz
+13:44:50 <CindyLinz> c9s: 只是只要前半一小區就超出我預期了 XD
+13:45:00 <_13h> 你是說 c 還是 js?  js 的情況我不清楚，但 c 只要有 include 就可能會出現奇怪狀況
+13:45:07 <CindyLinz> _13h: include.. hmm
+13:45:48 <_13h> 例如前一個檔案沒有正確 eol，一 include 就有可能跟後面接在一起 (不過現在的工具好像都會自動修正?
+13:47:15 <CindyLinz> 好無奈的自力救濟 orz
+13:47:21 <_13h> 我很久以前有遇過，但後來都習慣補好最後一行的 eol，也不會出現最後一個字元是 \ 的情況... 很久沒有想起這件事了XD
+13:49:33 <b4283> 檔案最後沒有 eol
+13:49:49 <b4283> emacs 會自已修 \o/
+13:50:01 <CindyLinz> Windows 系的 editor 才會有這問題吧?
+13:50:24 <CindyLinz> 好像 dos 文字檔的定義最後一行是沒有 EOL 的?
+13:50:31 <_13h> 我的印象是 vim 才會自己修，emacs 預設不修
+13:50:40 <CindyLinz> vim 是不會「修」
+13:50:53 <CindyLinz> 但是如果這檔案一開始就是用 vim 建立, 從 vim 編輯的話.. 會有 EOL
+13:51:08 <_13h> 所以我常用 emacs 編輯 ascii/binary 混合檔，這種東西一用 vim 編輯就爛掉了，懶得去追原因XD
+13:51:17 <CindyLinz> 然後如果沒有 EOL 的檔案用 vim 開, 最下面狀態列會有 [no eol] 之類的提示
+13:51:44 <b4283> 喔喔，沒錯 試了一下就如 CindyLinz 說的那樣
+13:51:45 <_13h> vim 開起來不會自動修，但好像一存檔就會自動加上去了？
+13:52:55 <_13h> 只是看的話好像沒問題... 但我常常遇到 vim 自動加上最後的 eol，只好再用 emacs 打開砍掉 (有些時候我是故意不要 eol 的)
+13:55:42 <_13h> 剛剛試了一下  例如 echo -n abc > abc  可以弄出沒有 eol 的檔案，用 vim -c ":wq" abc  可以自動加上 eol XD
+13:57:04 <CindyLinz> 好累 orz
+14:02:04 <c9s> vim 可以用 fileformat option
+14:02:29 <c9s> set fileformat=unix 或 set fileformat=dos
+14:02:42 <_13h> emacs 的話，打開後可以亂編輯再存檔都不會自動加 eol，例如 pgm 這類影像，我常常打開自己亂改，就會遇到這種問題了@_@
+14:02:56 <c9s> _13h: 你是用 windows?
+14:02:58 <_13h> c9s: 那個不是 linebreak format 嗎?
+14:03:11 <_13h> 我不是在講 linebreak format，是說最後一行 eol
+14:03:34 <c9s> 對阿 end of line
+14:03:37 <_13h> set ff=unix/dos 只是會修正 crlf 跟 lf 吧？
+14:03:53 <c9s> 最後一行應該是 end of file 吧
+14:04:02 <_13h> 好像跟 noeol 是不同問題@_@
+14:04:54 <_13h> vim 的確是寫 noeol 呀，end of file 一般應該是 ^d 或 ^z ?
+14:04:55 <c9s> vim 用這麼久了沒遇過這種問題
+14:05:20 <_13h> 就是 vim 的 status liine 會顯是 [noeol]
+14:05:23 <CindyLinz> end of file 一般應該不會存在檔案裡吧? @________@
+14:05:26 <_13h> 顯示
+14:05:30 <c9s> vim 就是你寫什麼就是什麼，他不會給你亂加
+14:05:38 <c9s> CindyLinz: 喔對啦
+14:05:39 <c9s> XD
+14:06:27 <c9s> _13h: 你用 set noendofline
+14:06:41 <_13h> 好吧  我研究看看好了，我這邊的情況是要 vim 別自動亂加，得在啟動時加上 -b
+14:06:43 <c9s> 這個 option 是 default on
+14:06:56 <c9s> 所以你在 vimrc 裡面加上 set noendofline 就可以了
+14:07:13 <c9s> 這個是 depends on "binary" option
+14:07:31 <_13h> thanks... 我知道應該可以調，只是後來沒用 vim 就懶得找了XD
+14:08:04 <_13h> 以前是都用 -b 來解決，因為我直接編輯 binary 的情況比較多
+14:08:22 <CindyLinz> c9s 專長之一是玩弄 vim.. (筆記)
+14:08:32 <c9s> XDDDD
+14:09:18 <c9s> _13h: 所以你講的其實是 last line 的 end of line
+14:10:09 <c9s> 的確是 fileformat 會影響，不過去 toggle fileformat 的 option 是用 set endofline 或 set noendofline 來做
+14:10:11 <_13h> 對啊  我一開始好像有講到最後一行，不過後來講太多次就自動省掉了XD
+14:11:16 <c9s> XD
+14:11:22 <_13h> 看來應該要把一些太雞婆的功能找出來關掉XD 有些功能太自動對我來說反而是困擾XD
+14:11:41 <c9s> 應該還好啦 ahaa
+14:11:55 <c9s> CindyLinz: 什麼時候要 release slides (戳戳)
+14:12:00 <_13h> 我現在還有幾台電腦沒有 emacs 化，還是得找時間來研究一下XD
+14:19:47 <c9s> CindyLinz: https://speakerdeck.com/c9s/go-and-orm # 剛上傳
+14:22:57 <_13h> CindyLinz: http://en.wikipedia.org/wiki/End-of-file   eof 存進檔案好像是某些軟體為了特別理由才允許的行為
+14:27:09 <cataska> 除了 OSDC.tw 之外，已經沒有 conf 講 perl，除了今年 COSCUP (聳肩)
+14:56:51 <Yu-Lin> 我自學的第一個 language 就是 Perl 阿
+14:57:23 <Yu-Lin> 原本是想拿來弄 bioinformatics
+14:57:30 <Yu-Lin> 不過還是算了
+14:57:30 <Yu-Lin> XD
+19:34:17 <suhorng> 原來換行會出事喔@_@? 標準規定沒換行要補換行的說
+19:34:24 <suhorng> (編譯器應該要補換行)
+19:34:50 <suhorng> 而且檔案 parse 是在不同的 phase 做, 那時候應該已經 parse 成 preprocessing token 了
+19:54:22 <favonia> suhorng: 本頻道的主流語言應該都不會出事吧
+19:56:56 <suhorng> 咦XD  Haskell不是換行很重要嗎? (不過沒有 #include 那麼笨...XDD)
+20:07:16 <letoh> 其實我也很久沒遇過了  但古早時的確發生過
+20:07:29 <letoh> 還有更瞎的...big5 的許功蓋
+20:07:37 <letoh> 最後一個字元剛好是 \
+20:07:47 <letoh> 結果一直 compile 失敗....
+20:08:08 <letoh> 好像就是「功」吧
+20:09:03 <letoh> 然後那個字是在註解裡  所以一直沒想到XD
+20:16:02 <suhorng> 許功蓋餐XDDD
+21:09:03 <mno2> CindyLinz: 有興趣用 Haskell 寫 reverse proxy + cache server 嗎？就是寫一個 varnish / ATS
+22:44:42 <CindyLinz> mno2: 有興趣欸..
+22:45:43 <mno2> CindyLinz: 我最近有時間了，想要來寫。這兩天在研究 mighttpd2 的 code
+22:46:50 <favonia> suhorng: 喔我是說檔尾換行
+22:46:58 <mno2> 我覺得現階段這個 project 是適合 ghc，又有很多現成寫好的元件，還有許多相關前例可以參考的絕佳方向。
+22:48:26 <mno2> 雖然大概要花點時間，不過我相信可以用比較少的 code size，寫出一個可以 PK  nginx 的 cache server
+22:48:53 <CindyLinz> 這...
+22:49:05 <CindyLinz> 一定要加這最後一句嗎? XD
+22:49:10 <mno2> 但猜測要幹掉 ATS 可能還是比較難
+22:49:32 <CindyLinz> 追求極緻效能的 Haskell 應該很醜吧 @@
+22:49:44 <mno2> 沒有耶
+22:50:07 <mno2> mighttpd2 code 超少，不會難看。但可以跑得跟 nginx 差不多快
+22:50:20 <mno2> 而且多核的時候 benchmark 比 nginx 要強一些
+22:50:50 <CindyLinz> hmm
+22:51:04 <CindyLinz> 這不科學啊~~~~~
+22:51:26 <CindyLinz> 所以.. 應該先讀過 mighttpd2 的 code 然後再來想怎麼做?
+22:52:23 <mno2> 大概髒的部份都在 warp 裡面吧
+22:52:36 <mno2> mighttpd2 就 warp call 一下就結束了
+22:53:08 <CindyLinz> 喔 XD
+22:54:18 <mno2> 不過 cache server 的話，第一個 milestone 應該是 ram cache,  persistent cache 的話就要參考 ATS 的 File Cache 結構
+22:55:25 <mno2> 我是希望能夠設計成像是 xmonad 一樣，可以安插 plugin
+22:55:34 <mno2> 然後用 haskell 來調 plugin
+22:55:45 <CindyLinz> 嗯嗯
+22:55:48 <mno2> 跟 varnish 用 VCL 一樣
+22:56:14 <mno2> 插 plugin 的架構也有 xmonad 可以參考
+22:56:42 <mno2> project 名稱我都想好了
+22:56:58 <mno2> 就叫 TMonad
+22:57:07 <mno2> T stands for Traffic
+22:57:26 <CindyLinz> haskell 的 packages 有名稱辨識度很低的特點..... wwwww
+22:57:48 <hashcat> CindyLinz: haskell其實很低階, 只是說型別系統特別硬
+22:57:49 <mno2> 我也有想過用 Traffic Combinator
+22:57:59 <CindyLinz> ATS 是什麼?
+22:58:04 <mno2> 不過感覺 monad 比較貼切
+22:58:10 <mno2> Apache Traffic Server
+22:58:28 <mno2> ATS 很威，但 code 很髒
+22:58:29 <hashcat> 我還以為是Advanced Type System
+22:58:38 <CindyLinz> 聽起來不適合閱讀 @@"
+22:59:00 <mno2> 不太適合吧。也是長年的 project
+22:59:07 <mno2> 一大堆 legacy
+22:59:31 <CindyLinz> 那你說的 File Cache 結構有獨立的說明嗎?
+22:59:36 <mno2> 是 Yahoo 把 Inktomi 買下來之後不知道從哪個垃圾堆翻出來的寶物
+23:00:17 <mno2> http://blog.chinaunix.net/uid/23242010/cid-6296-list-3.html
+23:00:22 <b4283> 第一次知道有 apache traffic server 這個東西
+23:00:24 <mno2> 官方的反而比較不全的感覺
+23:00:47 <mno2> b4283: 很不知名，但其實不少人默默在用
+23:00:56 <mno2> http://www.slideshare.net/thenickberry/reflecting-a-year-after-migrating-to-apache-traffic-server
+23:00:59 <CindyLinz> 嗄.. Yahoo 的? Apache 開頭, 以為是 Apache 協會的
+23:01:10 <mno2> Linked-in 的 migration 經驗
+23:01:24 <b4283> CindyLinz: 看了官網是說 yahoo 送給 apache 的
+23:01:27 <mno2> Yahoo 2009 年放出來給 Apache 的
+23:01:42 <mno2> 然後放出來後，主要的貢獻者就跳槽了 xD
+23:01:43 <b4283> 好像聖誕老人那樣
+23:01:46 <b4283> XD
+23:02:10 <CindyLinz> 嗯嗯
+23:02:43 <mno2> Linked-in 核心群有一大堆 Yahoo 過去的，所以技術上有 Yahoo 的影子
+23:02:57 <mno2> 淘寶, Akamai 都有用
+23:03:23 <b4283> 淘寶不是用自已 fork 的 nginx 嗎
+23:03:33 <b4283> 叫什麼來著，tengine
+23:04:15 <mno2> 我不太確定他們 nginx 是拿來當 web server 還是當 cache server 用
+23:04:31 <mno2> ATS 是專職的 cache server,  甚至可以當 L7 switch
+23:05:59 <mno2> CindyLinz: 我看 yamamoto 跟 michael 都在用 hspec 做測試，所以也許也可以看看
+23:08:00 <CindyLinz> 嗯嗯
+23:09:46 <mno2> 啊，剛剛想到 TMonad 這個名字不錯的地方是
+23:09:52 <mno2> 他的縮寫可以寫成 TMD
+23:09:53 <CindyLinz> Taiwan?
+23:09:55 <CindyLinz> ....
+23:10:07 <CindyLinz> Tengine 有個 mod 就叫 TMD..
+23:10:17 <b4283> TMD 好像不太雅..
+23:10:18 <CindyLinz> 用來處理攻擊的...
+23:10:37 <CindyLinz> 一看就知道 Tengine 是大陸人寫的啊 XD
+23:10:47 <petercommand> 天津?
+23:10:56 <CindyLinz> 阿里巴巴集團的
+23:11:03 <mno2> TMD 應該只有台灣人在用？
+23:11:19 <CindyLinz> 大陸先開始吧.. 他們習慣用拼音
+23:11:35 <mno2> 好吧 xD
+23:11:46 <CindyLinz> 台灣應該是 ㄊㄇㄉ XD
+23:11:53 <petercommand> XD
+23:12:25 <CindyLinz> Hspec 的 sample 跑去 catch bottom 真是不太舒服....
+23:14:52 <CindyLinz> 有種... 名稱冠上 Apache 的 project 就比較古老, 比較髒, 但還算穩定.. 的感覺?
+23:15:51 <mno2> 也是有最近才捐的 xD
+23:17:15 <CindyLinz> 唔.. 這份 ATS 投影片不是講結構的 XD
+23:17:58 <petercommand> CindyLinz: apache web server會給人這種感覺嗎?
+23:18:36 <CindyLinz> petercommand: 有喔~ 主要來源 XD
+23:19:02 <CindyLinz> petercommand: 看看 apache 的設定檔.... XD
+23:20:06 <petercommand> XD
+23:23:18 <CindyLinz> 我現在推荐給新手架 web server 的會推 nginx, 不推 apache 了
+23:23:34 <CindyLinz> 考量點不是 nginx 的效能, 而是上手難度 @@"
+23:23:43 <petercommand> XD
+23:24:05 <letoh> lighttpd 呢?
+23:24:10 <petercommand> apache的documentation是蠻多的
+23:24:26 <mno2> CindyLinz: 你上次不是說 nginx 預設的設定跟 php 配會有安全問題？
+23:24:55 <CindyLinz> mno2: 可是網路上亂找的設定會教這一段啊
+23:27:12 <petercommand> CindyLinz: apache會不好上手嗎?
+23:27:28 <mno2> http://news.netcraft.com/archives/2013/04/02/april-2013-web-server-survey.html   apache 市佔率真是掉不下來...
+23:28:46 <CindyLinz> petercommand: 文件很多, 但是會互相重疊複蓋
+23:30:09 <mno2> CindyLinz: 啊，而且做好後，我覺得有現成的 demo app
+23:30:17 <mno2> 就是 cache hack age package  xD
+23:30:23 <mno2> hackage
+23:30:26 <CindyLinz> mno2: 這會不會有點遠啊.. 囧
+23:31:10 <mno2> roadmap 咩

@@ -1,0 +1,29 @@
+22:08:25 <caasih> letoh: 你讀過這篇嗎？ https://mail.haskell.org/pipermail/haskell-cafe/2010-December/087788.html
+22:08:56 <letoh> 沒有耶  來看看
+22:10:51 <caasih> 看到這句：
+22:11:04 <caasih> > Semi-colon can be thought of as a state transforming operator that threads the state of the machine throughout a program.
+22:11:06 <lambdabot>  <hint>:1:27: parse error on input ‘of’
+22:12:03 <letoh> 唔  當初的設計者應該沒這麼想過XD
+22:15:44 <letoh> caasih: 蠻有趣的  感謝分享
+22:16:05 <caasih> 嘿嘿 :D
+22:18:01 <letoh> 所以歷史就是不斷重新發明輪子嗎? XD
+22:18:55 <letoh> caasih: 難怪覺得這名字很眼熟，查了一下發現跟 SECD 有關
+22:19:52 <caasih> Peter Landin? Oleg?
+22:20:17 <letoh> Peter Landin
+22:20:29 <caasih> 喔喔，來讀讀他的事蹟...
+22:32:50 <suhorngT> Petr Landin! The Next 700 Programming Languages!
+22:33:42 <suhorngT> 提出 ISWIM (當時根本是程式語言的史前時代), 然後 SECD, 然後證明了 CBV CBN 之間如何互相模擬(=> 其中一邊是 CPS conversion)
+22:35:35 <caasih> 跟 yinwang 解釋 Y 的時候用到的那個 eta-expansion 有關嗎？ #CBV #CBN
+22:38:47 <caasih> suhorngT: 第十八頁 http://www.slideshare.net/yinwang0/reinventing-the-ycombinator
+22:45:37 <caasih> 看了一下 letoh 提到的 SECD machine 介紹，
+22:47:04 <caasih> CindyLinz: 如果把 lambda calculus 用 RPN 寫的話，是不是就可以從深處用你說的 system stack 來 interpret ？
+22:56:53 <cataska> yinwang 竟然有 slide !
+22:57:40 <caasih> cataska: 這篇裡面的啊 https://yinwang0.wordpress.com/2012/04/09/reinvent-y/
+22:58:44 <cataska> caasih: 都看中文的 (facepalm
+22:59:12 <caasih> 要不是 wildjcrt 找到，我還不知道有英文的
+23:55:43 <suhorngT> 嗯... Haskell 裡面到底有沒有 std::clock 之類的東西呀Q_Q
+23:56:31 <suhorngT> cassih: 嗯...是同一個 CBV, CBN 名詞, 但是探討的內容沒有關聯.
+23:57:11 <suhorngT> cassih: 原來 yinwang 的 wordpress 又開了...之前鎖了好長一段時間哪
+23:57:30 <suhorngT> 嗯? 不對這個是舊版的XD 新版的還是沒開
+23:57:57 <caasih> suhorngT: 原來是遺跡
+23:58:12 <caasih> 謝解答

@@ -1,0 +1,30 @@
+00:02:37 <petercommand> miaoski: 喔喔喔..
+11:17:21 <miaoski> Basic data types: https://www.youtube.com/watch?v=pzp7oqCp5rA
+11:17:32 <miaoski> 好噁心啊 @@
+11:19:45 <miaoski> 42+;; 回傳的竟然不是 partial function (大誤)
+11:21:16 <miaoski> true or false;; ==> True
+11:21:32 <miaoski> true and false;; ==> Syntax error
+11:21:56 <miaoski> true & false;; ==> False
+11:22:10 <miaoski> true | false;; ==> Syntax error
+11:22:27 <miaoski> 一瞬間我以為我回到 JavaScript 的世界 (逃)
+11:31:15 <letoh> miaoski: reason 修改的 syntax 也許會比較一致
+11:38:30 <letoh> miaoski: http://caml.inria.fr/pub/docs/manual-camlp4/manual007.html  另外也是有這個...不過我不確定用的人多不多
+11:50:50 <miaoski> More
+11:51:02 <miaoski> More data types: https://www.youtube.com/watch?v=H5msR_FzK-k
+11:56:48 <miaoski> 為了類型推導禁止隱式轉型... 咦? letoh 你今天也放颱風假?
+12:01:58 <miaoski> <= 可以做 a -> a -> bool 但是 + 只能 int -> int -> int (思)
+12:27:03 <miaoski> + 的優先權比 int_of_string 還低，這.... @@
+13:04:22 <jyyou> fp 的 function application 優先權不是都比較高嗎?
+13:09:01 <letoh> miaoski: 放假啊  風雨超大的怎麼可以出門XD
+13:09:13 <CindyLinz> miaoski: 你在看什麼邪魔歪道... XD
+13:11:45 <miaoski> CindyLinz: 對不起我錯了 QQ ... 難怪我之前好幾次想學 OCaml 看幾頁就放棄
+13:12:14 <miaoski> letoh: 我還以為你的工作不在國內
+13:12:24 <letoh> XDXD
+13:14:02 <letoh> miaoski: 語法真的很鳥  所以才會有一直有人想改
+13:14:46 <CindyLinz> miaoski: 那是 OCaml 喔? XD
+13:22:13 <miaoski> CindyLinz: 對啊
+17:07:23 <petercommand> CindyLinz: ocaml 最有名的就是那個 ;;
+17:07:25 <petercommand> XD
+17:13:57 <miaoski> 剛剛做練習一直被運算的優先順序害到...
+17:54:51 <letoh> 加括號就好啦
+18:07:44 <miaoski> letoh: 也是啦...

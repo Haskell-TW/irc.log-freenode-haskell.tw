@@ -1,0 +1,78 @@
+00:06:35 <monochrom> 咦? 原來我讀的是 3 不是 4.
+13:08:07 <Yu-Lin> 公司大概不會同意用 django + elm 吧XD
+13:09:14 <Yu-Lin> 雖然公司方面說要學 django
+13:09:28 <Yu-Lin> 不過對 py3 跟 js 的熟練度還是太低了XD
+13:12:35 <Yu-Lin> 不過我對 py3 跟 js 的熟練度還是太低了XD
+14:23:26 <Yu-Lin> 對了，台灣有 lisp 社群嗎？
+17:31:54 <hashcat> >let primeList = 2:  let oddList = [3,5..] in filter (\n-> and $ map (\x-> rem n x /= 0) $ takeWhile (\x -> x <= floor (fromIntegral n**(0.5))) primeList) oddList in primeList
+17:32:07 <hashcat> > let primeList = 2:  let oddList = [3,5..] in filter (\n-> and $ map (\x-> rem n x /= 0) $ takeWhile (\x -> x <= floor (fromIntegral n**(0.5))) primeList) oddList in primeList
+17:32:08 <lambdabot>   [2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97,101...
+22:06:42 <favonia> monochrom: （拜) 我自己讀不太完
+22:07:51 <favonia> let (|>) = flip ($) in (([1 2 3] |> map (* 2)) |> filter (> 3)) |> fold1 (+)
+22:07:55 <favonia> > let (|>) = flip ($) in (([1 2 3] |> map (* 2)) |> filter (> 3)) |> fold1 (+)
+22:07:56 <lambdabot>   Not in scope: `fold1'
+22:07:57 <lambdabot>  Perhaps you meant one of these:
+22:07:57 <lambdabot>    `foldl1' (importe...
+22:08:06 <favonia> > let (|>) = flip ($) in ([1 2 3] |> map (* 2)) |> filter (> 3)
+22:08:07 <lambdabot>   Could not deduce (GHC.Num.Num
+22:08:08 <lambdabot>                      (GHC.Integer.Type.Intege...
+22:08:49 <favonia> let (|>) = flip ($) in (([1, 2, 3] |> map (* 2)) |> filter (> 3)) |> foldl1 (+)
+22:08:56 <favonia> > let (|>) = flip ($) in (([1, 2, 3] |> map (* 2)) |> filter (> 3)) |> foldl1 (+)
+22:08:57 <lambdabot>   10
+22:09:11 <favonia> _13h: 這是你要的嗎 xD
+22:09:18 <favonia> |> 就是 flip ($)
+22:09:31 <CindyLinz> :D
+22:09:36 <CindyLinz> 看起來應該是吧 :p
+22:10:16 <letoh> 嗯嗯  我忘了有 $
+22:10:42 <letoh> haskell 有這麼多符號比 perl 還難記XD
+22:11:17 <favonia> @let (|>) = flip ($)
+22:11:18 <lambdabot>  Defined.
+22:11:30 <favonia> > [1, 2, 3] |> map (* 2) |> filter (> 3) |> foldl1 (+)
+22:11:34 <lambdabot>   mueval-core: Time limit exceeded
+22:11:54 <favonia> 為什麼會 TLE...
+22:12:18 <favonia> > let (|>) = flip ($) in [1, 2, 3] |> map (* 2) |> filter (> 3) |> foldl1 (+)
+22:12:19 <lambdabot>   10
+22:12:29 <favonia> 總之就這樣了
+22:13:44 <favonia> letoh: 你也可以不用 $ 啊
+22:14:12 <favonia> > let x |> f = f x in [1, 2, 3] |> map (* 2) |> filter (> 3) |> foldl1 (+)
+22:14:13 <lambdabot>   10
+22:14:32 <favonia> letoh: x |> f 就是 f x
+22:14:46 <CindyLinz> letoh: haskell 的符號比較多是 user defined, perl 是官方的 XD
+22:15:02 <godfat> 我一直不太喜歡用 $ 當 application...
+22:15:19 <CindyLinz> 很多錢的感覺? 很好啊 XD
+22:15:45 <favonia> CindyLinz: 你可以用 LaTeX 的 $$x = 1$$
+22:15:47 <CindyLinz> godfat: 不過, 為什麼啊?
+22:16:00 <letoh> 這個我知道啊
+22:16:24 <godfat> 單純覺得不好看 XD
+22:17:00 <favonia> godfat: 我想用 :'( 可是好像不能有括號
+22:17:02 <letoh> 用 , 呢?
+22:17:26 <CindyLinz> favonia: 那用全型括號?
+22:17:28 <godfat> 為啥是 :'( XDDDD
+22:17:28 <godfat> 我試試
+22:18:53 <godfat> 好像不行，吐 parse error (不過我可能寫錯)
+22:18:54 <godfat> > (,) = ($)
+22:18:55 <lambdabot>   <hint>:1:5: parse error on input `='
+22:19:49 <CindyLinz> > let (,) = ($)
+22:19:50 <lambdabot>   not an expression: `let (,) = ($)'
+22:20:01 <CindyLinz> > let (,) = ($) in id , 8
+22:20:03 <lambdabot>   <hint>:1:21: parse error on input `,'
+22:20:11 <CindyLinz> > let (,) = ($) in (,) id 8
+22:20:13 <lambdabot>   Constructor `(,)' should have 2 arguments, but has been given none
+22:20:19 <letoh> (,) 會被當作 tuple ?
+22:20:20 <CindyLinz> default 的 pair..
+22:20:27 <letoh> 喔喔
+22:20:31 <favonia> (,) 是 tuple 啊...
+22:20:40 <favonia> > (,,,,) 1 2 3 4 5
+22:20:41 <lambdabot>   (1,2,3,4,5)
+22:21:06 <letoh> (,,,,) 感覺很有喜感XD
+22:21:49 <CindyLinz> QQ # lexical error at character '\65288'
+22:22:57 <godfat> 說到這，我一直查不到 haskell 到底允許哪些符號當作 infix operator
+22:22:57 <godfat> 有文件嗎？
+22:24:55 <favonia> 標準好像有（懶）
+22:25:06 <favonia> 我知道 :'( 不行
+22:26:20 <letoh> >"<
+22:28:17 <godfat> 好像勉強算 http://www.haskell.org/onlinereport/lexemes.html
+22:33:15 <godfat> 看來 # 跟 % 大概是比較好的替代選擇
+22:34:01 <hashcat> 用unicode擴展全部都可以當符號
+22:35:31 <godfat> 怕打起來不方便（給人或自己）
+22:37:45 <hashcat> uniSymbol 	-> 	any Unicode symbol or punctuation

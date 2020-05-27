@@ -1,0 +1,7 @@
+03:01:56 <CindyLinz> Maybe 不是 MaybeT Identity 有點討厭....
+03:02:07 <CindyLinz> 不能寫這樣的東西:
+03:03:07 <CindyLinz> runMaybeT $ do { a <- join $ liftIO $ 某個會出 Maybe 的 action; b <- join $ liftIO $ 另一個會出 Maybe 的 action; ... }
+03:41:17 <monochrom> 純粹碰面一起喝酒的 hackathon = 一壼濁酒喜相逢, 古今多少程式, 都付笑談中. 陳貫中++
+14:41:10 <CindyLinz> 於是.. 土砲一個 joinMaybe.. XD
+14:41:24 <CindyLinz> joinMaybe :: Monad m => MaybeT m (Maybe a) -> MaybeT m a
+14:41:33 <CindyLinz> joinMaybe = (>>= MaybeT . return)

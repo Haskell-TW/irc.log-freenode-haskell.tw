@@ -1,0 +1,31 @@
+15:24:02 <CindyLinz> Haskell 想 import 一整個目錄的所有 hs 檔可以怎麼作?
+15:24:12 <CindyLinz> template haskell 裡有這樣功能的東西嗎?
+15:52:08 <CindyLinz> template haskell 好像不能生出 import 的功能?
+15:55:52 <au> 不能。試看看 CPP ?
+15:56:07 <CindyLinz> CPP..? OAO
+15:58:59 <au> 就 ghc -pgmF 或 LANGUAGE CPP 再 #include 一個整目錄的 import header
+16:20:11 <CindyLinz> 好惡搞的感覺 XDXD
+16:21:18 <CindyLinz> 先用 template haskell 寫程式去爬目錄, 產生那個 import header, 然後再讓 CPP #include 進來? XD
+16:43:52 <au> 正是
+16:44:23 <au> 之前 openafp 有一陣子就是這樣 (dynamic invoke perl to generate .hs include)
+16:44:29 <au> pugs-DriFT 也是
+16:45:43 <CindyLinz> invoke perl to..... .hs include (by LANGUAGE CPP) # 聯合國....
+16:46:26 <CindyLinz> 啊那我再問個.. 因為我用 cabal build / cabal install 來 compile project, 它會依 import 來檢查檔案有否更新
+16:47:00 <CindyLinz> 如果更動部分不是直接被 import, 而是 template haskell 要讀的 input..
+16:47:20 <CindyLinz> 這樣要怎麼告訴 cabal 說, 這些 input 有動到了, 請幫我重新跑 template haskell?
+16:47:57 <au> 不確定，要測了才知道... 也許每次 dynamic include 的時候如果有動到，順便 touch #include 的原始檔
+16:48:15 <au> 或是寫個 timestamp comment 回去 (self-modifying code!)
+16:48:30 <CindyLinz> 好 ^^|
+16:49:23 <CindyLinz> 欸.. 可以在 cabal 的 Setup.hs 裡面作這個事 :p
+16:49:55 <au> ++
+19:15:16 <miaoski> Majefile
+19:15:21 <miaoski> Makefile
+20:01:47 <CindyLinz> au: 發現.. #include 的檔案, 也會被列入 cabal (可能應該是 ghc) 的 mtime 檢查.. 如果動到了, include 它的檔案就會自動重編
+20:02:21 <CindyLinz> 然後.. 由 #include 進來的檔案裡面 import 到的檔案, 也會被列入 mtime 檢查, 如果動到了, 也會重編
+20:02:47 <CindyLinz> 所 Setup.hs 只要去產生這個 import header 檔就好, 不用自己再檢查 mtime 和手動 touch
+20:03:05 <CindyLinz> 比較悲情的是, 我把 touch 這些都寫好了才發現這件事....||
+20:03:26 <au> 那 cabal 真的進步了...
+20:03:38 <au> good to know XD
+20:05:26 <CindyLinz> 但是生 header 的還是要先在 Setup.hs 裡面做.. 不然後面那些 mtime 什麼的機制還是不會啟動.. (目錄中出現新的檔案的時候)
+20:05:44 <au> ok
+20:06:04 <CindyLinz> 如果只是 touch header, 不過 header 裡的 import 檔案都沒動, 那就不會重編.. 這樣不錯 :p

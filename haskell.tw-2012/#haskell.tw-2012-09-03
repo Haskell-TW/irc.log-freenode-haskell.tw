@@ -1,0 +1,378 @@
+00:23:36 <MnO2> https://github.com/faylang/fay-jquery
+00:23:42 <MnO2> fay-jquery
+00:24:00 <MnO2> 這樣應該可以解決掉部份dom api的問題
+00:47:45 <CindyLinz> fay :D
+00:47:53 <CindyLinz> 好 fay 好 fay.. (逃)
+09:43:24 <yen3_> :q
+11:33:17 <MnO2> http://resume.github.com/
+11:33:43 <MnO2> github也要插一腳linked-in的市場嗎? xD
+11:34:25 <_13h> linked in 上面很多不做開發的吧?
+11:34:39 <MnO2> 所以才說插一腳啊 xD
+11:35:54 <_13h> 不過如果把開發的部份分出去，或者兩者結合好像還不錯，順便連 stackoverflow 也拉進來好了XD
+11:37:13 <hychen> 我很好奇resume s/6e04a87
+11:37:30 <hychen> s/s/6e04a87/能幹嗎
+11:37:44 <_13h> 廣告?
+11:40:59 <hychen> _13h, 好像沒啥用?
+11:41:27 <hychen> _13h, 不過linkedin的resume參考價值滿高的
+11:42:53 <_13h> 所以你剛剛指的是 github 的 resume 沒用嗎？
+11:43:48 <hychen> 嗯, 資訊太少
+11:44:01 <CindyLinz> 強者不需要 resume 的意思? XD
+11:44:28 <hychen> connection 參考價值滿高的
+11:44:38 <hychen> 強者的朋友通常也是強者 XD
+11:45:06 <MnO2> xD
+11:45:55 <_13h> linkedin 不是常發信問說認不認識某人嗎... 常收到這種信
+11:46:10 <hychen> _13h, 那是高招啊
+11:46:22 <CindyLinz> 都被我刪掉了 o.o
+11:46:39 <_13h> 我覺得這種信跟 facebook 一樣很可怕XD
+11:50:28 <_13h> github 沒用會不會是因為台灣主管找人不一定會看對方的程式? XD
+11:52:47 <hychen> 看工作吧
+11:53:00 <hychen> 有source code可以看還是很重要
+11:53:01 <CindyLinz> 某篇勸世文, 呼喻大家不要再用 github :p # http://bytbox.net/blog/2012/08/leaving-github.html
+11:53:41 <_13h> 勸世文XD
+11:54:23 <hychen> CindyLinz, 我有讀過 XD
+11:54:27 <_13h> 遠離 github，投入 bitbucket 懷抱 (誤
+11:54:50 <CindyLinz> 不是啦, 他還是說要用 git
+11:55:17 <hychen> 他應該是說不要被github 綁住開發flow?
+11:55:23 <CindyLinz> 他的 point 應該是 github 把 git 標準搞壞.. 然後教育大家 github 就是 git
+11:55:42 <CindyLinz> 但是 github 和 git 有些微不相容
+11:56:02 <CindyLinz> 然後 github 好像也沒 open source
+11:56:32 <_13h> 我都把 github 當倉庫用XD
+11:56:33 <CindyLinz> 這樣等於就是以後 "git"(github) 就被 close source 了
+11:58:24 <CindyLinz> 這樣的描述, 感覺和 IE 蠻像的 :p
+11:58:36 <CindyLinz> 但我還是在用... zz
+11:58:55 <b4283> 從來不覺得 github 好用耶
+11:59:05 <CindyLinz> 總是需要一個 hosting 的地方啊 o.o
+11:59:33 <CindyLinz> 那... 有人在用 darcs 嗎?
+11:59:48 <_13h> 所以說當倉庫用呀，我只有 watch project 時才會開網頁XD
+12:00:11 <b4283> github 的 fork graph 實在不容易看
+12:00:21 <CindyLinz> 我覺得 github 可以用 README.md 直接寫 document 給別人看很方便 :Q
+12:00:50 <_13h> b4283: 我覺得 fork graph 算直覺了吧? 你覺得哪些資訊不好看?
+12:00:54 <CindyLinz> 可是它的 md 也是被改過的 markdown.. orz
+12:01:17 <_13h> 說到這個... github 竟然支援 org-mode
+12:01:39 <CindyLinz> 叫作 GitHub Flavored Markdown.... zz
+12:01:49 <CindyLinz> _13h: 為什麼呀?
+12:02:59 <_13h> 其實也沒什麼複雜原因，就支援的排版語法不多，再加上 emacs 裡操作不方便 && 懶得多學一套 markup
+12:03:10 <hychen> CindyLinz, 你都跟得上現在上的東西喔. 我已經昏頭了....
+12:03:28 <CindyLinz> hychen: 現在還好啊, 一直在做例題 :p
+12:04:42 <b4283> _13h: 時間跨幅太廣的時候不容易掌握資料
+12:05:35 <b4283> 有時候只看到一條線，要不斷用滑鼠上下左右拖才看到其他人
+12:05:55 <CindyLinz> _13h: 我喜歡 markdown (非 multi markdown) 的理念耶~  就是 source 本身就很容易讀, 沒有瀏覽器的時候可以直接看 source 就好.
+12:06:27 <CindyLinz> _13h: 不過加到 multi markdown 的時候就不倫不類了起來... 只是有些東西要在 multi-markdown 才有, 而且好像也是必要用的
+12:06:54 <CindyLinz> 那就斟酌著用, 小心不要濫用 :Q
+12:07:18 <CindyLinz> 如果要 rich format 的話, 可能就直接寫 html ^^|
+12:11:03 <CindyLinz> _13h: 那你通常用什麼工具呢?
+12:11:30 <CindyLinz> _13h: 寫 github 上面的 README 的時候? 和平常自己寫的時候?
+12:13:19 <b4283> CindyLinz: xml+xslt (噁)
+12:16:10 <favonia> CindyLinz: https://gitorious.org/
+12:21:37 <favonia> CindyLinz: 是說可以的話我想把我的 project 全轉到 gitorious/darcsen 甚至自己架 GitLab 之類的 xDDDDDD
+12:30:28 <_13h> 基本上只有在 github 上才會用到 markdown，不過後來發現支援 org-mode 後打算全部換掉
+12:32:00 <_13h> CindyLinz: 有 markdown 理念的 markup 太多了，我很多年前就用這種方式在寫筆記，不曉得為啥在這幾年突然冒出 markdown 這個東西@_@
+12:34:03 <_13h> 「source 本身易讀」對我來說很重要，尤其是 source 是純文字格式時，因為我幾乎都在 terminal 裡看文件，不得已才開 pdf 或 browser
+12:36:10 <_13h> b4283: 版圖太大了XD
+12:36:45 <_13h> b4283: 所以應該要像 google map 那樣可以縮放倍率
+12:37:04 <_13h> b4283: street view 就是開 source browser
+12:39:28 <_13h> CindyLinz: 我平常寫筆記時用 muse，或者 org-mode
+12:40:27 <_13h> 不過因為 bitbucket 的關係，也寫一點 creole (這個 github 也支援)
+12:47:33 <favonia> _13h: 你不覺得 Google map 應該要有 matrix 模式... 然後就看到一堆程式碼（誤）
+12:48:13 <_13h> matrix 模式XD
+12:53:33 <MnO2> favonia: 所以你要搬pulse嗎? xD
+12:53:58 <favonia> MnO2: 有想啊。你看 issues 那些東西都有點難搬
+13:11:32 <CindyLinz> b4283: orz # xml+xslt
+13:12:02 <CindyLinz> favonia: !!
+13:12:24 <CindyLinz> favonia: 果然在 channel 上多講垃圾話, 就有機會收集到新資訊 :p
+13:12:58 <MnO2> CindyLinz: 什麼資訊?
+13:13:10 <CindyLinz> MnO2: https://gitorious.org/
+13:13:14 <MnO2> 喔喔
+13:13:21 <CindyLinz> MnO2: 我之前不知道有這個也可以放東西..
+13:13:43 <_13h> 放 git repo 嗎?
+13:13:53 <CindyLinz> _13h: 我是因為 github 所以知道 markdown 的, 因為看在 github 上面用 .md 的好像比較多
+13:14:18 <CindyLinz> _13h: muse 和 org-mode 我以前沒聽過.. ^^|
+13:14:25 <_13h> 對呀，我也是因為 github 才知道
+13:15:19 <CindyLinz> _13h: 以前都是跟著公司用 doku wiki
+13:15:28 <CindyLinz> (用得挺生氣的... orz)
+13:17:33 <_13h> doku wiki 架好後覺得不太好用，我比較喜歡 pukiwiki 或 boltwire，不過後來都沒用就是了
+13:24:28 <CindyLinz> gitorious 的 project description 那邊支援 html 和 markdown..  又是 markdown XD
+13:25:32 <MnO2> 要吸引人跳槽應該要支援?
+13:26:40 <CindyLinz> scm: "資工系的學生... 如果要好好認真學 programming 的話, 我覺得你們就不要一直再用 Windows 了" XD
+13:27:22 <favonia> CindyLinz: xD
+13:27:47 <_13h> gitorious 也好幾年囉@_@  我先知道這個站，才知道 github 的XD
+13:27:56 <_13h> scm++ XD
+13:28:25 <_13h> 不過我覺得其實沒什麼關係，那用 mac 會比較好嗎？
+13:29:15 <CindyLinz> 買一台 mac, 但只用 mac 下面的 darwin 應該就厲害了? :p
+13:29:51 <CindyLinz> _13h: 還有 Linux 和 BSD 可以選呀 :p
+13:30:45 <_13h> 我只是挑一個看起來比較像的XD 我比較想知道不推薦 windows 的理由是什麼？
+13:31:04 <hychen> 安裝東西比較麻煩
+13:31:54 <_13h> hychen: https://addons.mozilla.org/en-US/firefox/addon/firemacs/  有試過這個嗎? XD
+13:35:11 <CindyLinz> 假設不在 Windows 裡面裝 cygwin 或用 virtualbox 之類的裡面裝 linux 的話 (不然根本就是在用一個比較不方便的 linux 環境)
+13:35:30 <CindyLinz> 微軟提供的環境的確比較不適合學習寫程式... :Q
+13:36:00 <_13h> 我現在是在 windows 裡跑一個 colinux，我覺得用起來比 cygwin/virtualbox 順多了
+13:36:53 <CindyLinz> 微軟提供的環境裡面花花綠綠跟程式無關的東西很多, 像是拉 layout 等等..  然後各版間的變化差異大, 但不是在功能的延伸, 而是位置改了, 讓你找不到
+13:37:33 <CindyLinz> 然後他喜歡發明很多短命名詞, 讓你不能跟微軟以外的世界溝通, 也不能跟前後版的微軟環境開發者溝通
+13:38:10 <_13h> 短命名詞XD
+13:38:21 <CindyLinz> 像 TCP/IP 就是長命名詞...
+13:39:55 <CindyLinz> _13h: 你用 colinux 也應該被排除 XD
+13:40:41 <_13h> 因為我要寫 driver，host 用 windws 比較方便...
+13:41:04 <CindyLinz> _13h: 那你又不是在學習寫程式 XD
+13:41:11 <_13h> 私人用途當然不用搞成這樣，windows 根本是不該存在的東西XD
+13:41:36 <CindyLinz> _13h: 為現實低頭, 永遠都是可被包容的啊 :p
+14:01:52 <hychen> CindyLinz, http://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&ved=0CCcQFjAA&url=http%3A%2F%2Fldtp.freedesktop.org%2F&ei=ykdEUMCTEojzmAXi74HoDQ&usg=AFQjCNHg-nO0apdenUmA7UThwrYcuH9vrw&sig2=g80N7Bs2ToIl0Z812-Xtkw
+14:02:05 <hychen> CindyLinz, LDTP - Linux Desktop Testing Project
+14:12:19 <CindyLinz> hychen: 我好討厭縮寫啊.. XD
+14:14:11 <_13h> I18N/L10N 算縮寫嗎？
+14:14:39 <_13h> 還有一個 M17N XD
+14:16:44 <CindyLinz> LDTP 跟 LDAP 很像呀
+14:16:58 <CindyLinz> 用中文多好... 國際化!
+14:17:16 <CindyLinz> 在地化!
+14:24:21 <CindyLinz> 樹上的函數 :p
+14:27:47 <yen3> http://www.haskell.org/haskellwiki/H-99:_Ninety-Nine_Haskell_Problems <- 有人有興趣嗎 XD?
+14:29:56 <b4283> 發現人好多
+14:32:07 <_13h> 竟然也有 haskell 版的:p
+14:32:38 <_13h> 嗯，沒有的話比較奇怪XD
+14:33:15 <yen3> XD 原本是從 Lisp 來的。
+14:36:32 <CindyLinz> favonia: gitorious 的結構在 repository 上面還有一層 project
+14:36:43 <CindyLinz> favonia: 你是怎樣運用這一層關係呀?
+14:36:44 <_13h> yen3: 我是先看到 Lisp 版，但不確定是 Lisp 先開始還是 Prolog 先開始
+14:38:22 <yen3> _13h: 我是一開始先看到 Haskell 版，看了上面的說明才知道歷史故事 XD。
+14:40:32 <yen3> 不過我自己有寫幾題就是了，完全不在乎速度只在乎寫出來這件事 XD。
+14:47:05 <_13h> 有空順便看一下 H99 好了，我看的程式碼還太少，對那些 typeclass 的宣告還是掌握不好@_@
+14:50:15 <yen3> 前面好像還好，大部分跟語言的特性比較沒有關係。
+15:45:57 <_13h> > print [1,2,3]
+15:45:58 <lambdabot>   <IO ()>
+15:46:04 <_13h> ...
+15:46:07 <CindyLinz> XD
+15:46:17 <hychen> ?
+15:46:18 <CindyLinz> > show [1,2,3]
+15:46:20 <lambdabot>   "[1,2,3]"
+15:46:26 <CindyLinz> _13h: 用 show 吧 :p
+15:46:49 <_13h> 原來是這樣
+15:47:04 <hychen> print
+15:47:08 <hychen> > print
+15:47:09 <lambdabot>   Overlapping instances for GHC.Show.Show (a -> GHC.Types.IO ())
+15:47:10 <lambdabot>    arising f...
+15:47:12 <CindyLinz> show 是 class Show a 的函數, 會 return String
+15:47:34 <_13h> 我想在 main 裡面用，好像只能用 print 了
+15:48:38 <_13h> main = let a = [] in print a   -- 這樣會失敗
+15:48:46 <_13h> main = let a = [1,2,3] in print a   -- 這樣會成功
+15:49:34 <CindyLinz> _13h: 你要幫 [] 加一下 type  不然它是 [a], 不夠「具體」 ^^|
+15:50:40 <_13h> CindyLinz: 感謝!! 成功了
+15:51:00 <CindyLinz> ^^
+15:51:28 <_13h> 不過感覺不太方便，太習慣 python 那樣可以亂用 list XD
+15:53:53 <CindyLinz> _13h: 你想要... 任給 index 可以取值, 然後可以隨意在任何部分插入或移除元素?
+15:54:21 <CindyLinz> _13h: 效能要求如何?
+15:58:14 <_13h> 也不是這樣，應該是說，我原本以為 list 在沒東西的時候，根本不需要管 type
+15:58:48 <CindyLinz> _13h: 可是 [] :: [Char] 和 [] :: [Int] 印出來不一樣喔
+15:59:01 <_13h> 放入第一筆資料自然會知道 [a] 裡面的 a 該長什麼樣子
+15:59:01 <CindyLinz> > show [] :: [Char]
+15:59:02 <lambdabot>   "[]"
+15:59:08 <CindyLinz> > show ( [] :: [Char] )
+15:59:10 <lambdabot>   "\"\""
+15:59:14 <CindyLinz> > show ( [] :: [Int] )
+15:59:15 <lambdabot>   "[]"
+15:59:31 <_13h> 喔喔，haskell 把字串當成 list
+15:59:46 <CindyLinz> Type String = [Char]
+16:00:19 <_13h> 覺得有點怪，字串有沒有可能是用奇怪的型式構成的?
+16:00:25 <CindyLinz> 不過為什麼 lambdabot 這邊會對... ^^|
+16:00:51 <_13h> 例如古早的 counted string，開頭要放一個數字
+16:01:34 <CindyLinz> _13h: 心中想的「字串」有可能很多種, 但是就不是 ghc 裡面的這一款 String 而已
+16:01:45 <_13h> 瞭解
+16:02:12 <CindyLinz> _13h: 如果要寫高效能一點的程式, 這個 String 不太適合用... 因為它是 link-list... ^^|
+16:02:39 <CindyLinz> 可能會用 http://www.haskell.org/ghc/docs/7.4.1/html/libraries/bytestring-0.9.2.1/Data-ByteString.html
+16:03:00 <CindyLinz> 這邊有好幾個可以用
+16:03:01 <b4283> > "9879" . "eiie"
+16:03:02 <lambdabot>   Couldn't match expected type `a -> b'
+16:03:02 <lambdabot>         against inferred type `[GHC.T...
+16:03:17 <CindyLinz> b4283: 要用 ++
+16:03:40 <b4283> > "098" ++ "oen"
+16:03:42 <lambdabot>   "098oen"
+16:04:19 <b4283> > [1,2,3] ++ [4,5,6]
+16:04:21 <lambdabot>   [1,2,3,4,5,6]
+16:05:44 <_13h> CindyLinz: 感謝，我來看一下這個
+16:05:57 <CindyLinz> ^^
+16:06:36 <CindyLinz> favonia: gitorious 開 repository 好像很龜速.. 不過開 rep 慢比較沒關係 :Q
+16:06:48 <_13h> 我還不到要求速度的程度，先把熟練幾個常用工具再說，不然連個小程式都很難寫XD
+16:07:32 <CindyLinz> 那應該用 String 就很自然很方便了 ^^
+16:08:36 <_13h> 對呀，還在熟練一下字串，我還蠻常用的
+16:09:15 <CindyLinz> > length "字串"
+16:09:16 <lambdabot>   2
+16:09:27 <CindyLinz> > "字串"
+16:09:28 <b4283> > length "字串3"
+16:09:29 <lambdabot>   3
+16:09:29 <lambdabot>   can't find file: L.hs
+16:09:45 <CindyLinz> L.hs 是啥 囧
+16:09:57 <b4283> > length "字串3"
+16:09:58 <lambdabot>   3
+16:13:20 <CindyLinz> 印象中 Char 是 2bytes 不確定.. 不過中文好像大部分是 UTF-8 3bytes, 那是 unicode 65535 以內..  不知道有沒有什麼常用的, 超過 65535 的中文字
+17:51:54 <MnO2> http://felsin9.de/nnis/ghc-vis/
+17:52:55 <MnO2> 畫出thunk的package,  對於學習可能會有些幫助
+17:54:18 <_13h> 感覺像看到 ddd，但應該比較強大吧
+17:56:50 <MnO2> 我想兩個是完全不能比較的東西。thunk沒有保證什麼時候evaluate。
+17:57:52 <_13h> 嗯嗯，剛剛也在想萬一沒有 eval 該怎麼辦@_@
+17:58:10 <_13h> > let f (x:_) = _ ++ [x] in f [1,2,3]
+17:58:11 <lambdabot>   Pattern syntax in expression context: _
+17:58:18 <_13h> 嗯  好像不能這樣用
+17:58:24 <_13h> > let f (x:xs) = xs ++ [x] in f [1,2,3]
+17:58:26 <lambdabot>   [2,3,1]
+18:11:23 <kanru> i
+18:12:16 <b4283> hear, hear!
+18:13:03 <_13h> (let ((f (lambda (xxs) (append (cdr xxs) (list (car xxs)))))) (f '(1 2 3)))   直接翻譯感覺好噁心...
+18:14:38 <_13h> kanru: i ?
+18:14:49 <kanru> _13h: wrong window
+18:15:03 <_13h> w
+18:23:44 <MnO2> 今天稍早yen3也有打:q    xD
+18:36:56 <_13h> 用 vim 連上 irc ?
+18:44:01 <CindyLinz> ghc-vis 生出來的圖好可愛啊 >w<
+18:45:45 <MnO2> CindyLinz: 後端應該是graphviz
+18:58:43 <CindyLinz> favonia: 以前聽你說過.. design pattern 是補救程式語言的缺陷, 所以在 functional language 裡面通常用不到
+18:59:26 <CindyLinz> favonia: 大致上同意啦.. 不過我覺得 func lang 還是需要一些 design pattern 呀~  而且有些還是 func lang 才需要的 pattern :p
+18:59:53 <CindyLinz> favonia: 像今天 scm 上課講到的 accumulator 的寫法
+19:01:19 <CindyLinz> favonia: 還有之前看 http://www.cs.cmu.edu/~rwh/theses/okasaki.pdf 這本 (Purely Functional Data Structures) 裡面有用到一個叫 scheduling 的方法
+19:01:55 <CindyLinz> 把 amortize complexity 轉成 worst case complexity, 感覺非常精妙 @@"
+19:06:14 <MnO2> CindyLinz: 我覺得design pattern的定義太模糊了，所以在講的時候常常每個人指的就有些微不一樣
+19:06:43 <MnO2> CindyLinz: 某些context下說 design pattern 其實應該 OOP design pattern
+19:07:06 <MnO2> CindyLinz: 有些時候又是 大多數人同意的design pattern
+19:07:47 <MnO2> CindyLinz: 有時候又是拓展到 我爽就好，我常用就好 就叫做 design pattern
+19:08:56 <MnO2> 所以 favonia 可能指的是: 修正那些明顯錯誤，常在OOP中可見的design pattern
+19:09:11 <CindyLinz> MnO2: 我好希望這些東西可以整理起來.. 實戰的時候就可以翻翻火藥庫, 掏出來用 :p
+19:09:32 <MnO2> 但你指的是 常見FP中可能可以歸納起來的pattern
+19:10:08 <CindyLinz> MnO2: 嗯嗯, 我同意 favonia 講的那部分... 但是這邊應該也要有一些呀 ^^
+19:10:09 <MnO2> 甚至還有人認為 monad 是一種 design pattern
+19:10:35 <CindyLinz> 是喔  :Q
+19:10:55 <CindyLinz> 我覺得如果它還沒有成型為一個叫作 class Monad 的東西的話, 比較像 pattern ^^|
+19:11:23 <CindyLinz> 還是你是說在別的 func lang 裡面呀.. 這幾天才聽說 monad 是 Haskell 特色 :Q
+19:11:38 <MnO2> 基本上我認同Haskell也有些地方可能會需要有常見的pattern，只是可能要先說明清楚討論前提 xD
+19:11:57 <MnO2> 基本上現在被框在FP裡面的語言根本就雜到不行
+19:12:48 <CindyLinz> 有道理... 我們是因為用 func lang 的人相對來說太少, 所以把整個 func lang 講成「一類」
+19:12:55 <MnO2> 現在一般文章說FP的時候，常常是說 非OOP, 非C, 非奇怪實驗性語言後那些剩下來的
+19:13:21 <MnO2> 所以我上面就直接打Haskell，而不打FP
+19:13:24 <CindyLinz> 但是 func lang 內的歧異性應該跟 imperitive lang 一樣也是歧異性很大的....
+19:13:36 <MnO2> 因為Haskell有問題就直接指稱Haskell
+19:13:44 <CindyLinz> 嗯嗯嗯
+19:14:44 <letoh> design pattern 的初衷不是為了補救程式語言的缺陷吧
+19:15:05 <CindyLinz> favonia: 那, 請把我上面對你丟的那串話作一個 [Haskell/func lang] 的取代 XD
+19:15:41 <letoh> 一些慣用的解決設計問題的手法都有機會當作 pattern 傳承下去啊
+19:15:57 <CindyLinz> letoh: 初衷應該是把常見的程式碼寫法收集起來, 但是會需要這種「怪異寫法」有很多是語法缺陷呀
+19:15:59 <letoh> 不管哪個語言都有 pattern
+19:16:08 <letoh> 不是吧
+19:16:24 <CindyLinz> letoh: 我覺得 C++/Java 的 singleton 這例子就很精典 :p
+19:16:41 <CindyLinz> 把 constructor 設為 private 藏起來... 然後再... blabla
+19:17:24 <letoh> 如果你是看 gof pattern，你看一下每一章前面都會有「目的」
+19:17:57 <letoh> 印象中沒看到哪一個 pattern 的目的是補救語言缺陷
+19:18:08 <letoh> 不過的確有一個 visitor pattern
+19:18:33 <letoh> 裡面提到有些語言支援 multimethod，可以不用寫得那麼複雜
+19:18:35 <CindyLinz> 他不會寫說是語言缺陷啊... 把所用的語言當作 baseline 的話, 語言不會有缺陷的 @@"
+19:18:59 <CindyLinz> 呃, 這樣說可能又不太精確.... 我想到不完備定理.. orz
+19:19:03 <letoh> 我是解讀成，基本上這些設計手法都還是可以使用，只是不同語言的實作可能會不一樣
+19:19:40 <letoh> 你說 constructor 改成 private 藏起來，也許只是某一種語言的實作吧?
+19:20:33 <letoh> 另外就是，design patterns 這本書基本上是為了物件導向的系統寫的，所以提供的實作範例都是一堆 class 啊
+19:21:17 <letoh> 我想在 FP 裡應該也會遇到書上提到的那些問題，只是實作的手法可能會不同吧
+19:22:58 <CindyLinz> letoh: 我覺得 design patterns 的重點是手法耶 @@"  所以的確是要針對特定 language 的
+19:23:59 <CindyLinz> letoh: 目的好像大部分都是低耦合高內聚(容易理解和修改)和一些是提高效能.. 一下就講完了 ^^|
+19:24:04 <letoh> 你也可以把重點放在手法呀，每一種語言的實作手法的確是值得探討
+19:24:32 <letoh> 但我只是想說，那些 pattern 其實是想解決軟體開發時遇到的某些問題
+19:24:59 <CindyLinz> letoh: 只是剛好 OO 實作的時候, 很多語言都會有長得很像的樣子, 所以就可以混在一起講了
+19:25:14 <letoh> 可能你用某些語言一行就解決了，或者改用什麼神奇的抽象模型處理掉，但不代表這些問題就消失啦
+19:26:07 <letoh> 書名都告訴你是針對物件導向啦  看有沒有人要整理一下其他領域 pattern 吧@_@
+19:27:12 <CindyLinz> letoh: 我在想這可能也是 Haskell (我決定講小範圍一點了:p) 的困境....  長期來說用它的人太少了, 所以實務中遇到的問題整理起來的心得也少得多 o.o
+19:27:20 <CindyLinz> 雖然有一個很漂亮的 base theory
+19:31:27 <CindyLinz> (所以要開始作筆記, 久了以後就變成一組 design pattern 了嗎 ^^|)
+19:32:17 <favonia> letoh: 最根本的問題是大家讀 gof 都會自動忽略 "OO" 兩字
+19:35:31 <favonia> CindyLinz: gof 的敘述不是每個語言都適用
+19:36:21 <favonia> CindyLinz: 像是 "But if Proxies are going to instantiate RealSubjects (such as in a virtual proxy), then they have to know the concrete class." (p.239) 我覺得是目前常見語言做不到而已
+19:37:42 <favonia> CindyLinz: 還有「介面」和「實作」只能用兩個 class 中間繼承之類的
+19:41:47 <CindyLinz> 嗯嗯
+19:42:13 <favonia> CindyLinz: 我可能不會說（或是強調）補救缺陷什麼的啦
+19:42:47 <favonia> CindyLinz: 我比較想要做的事情可能是強調他收集的 OODP 有很多地方反映出主流 OOP 的侷限 lol
+19:44:02 <CindyLinz> 我聽起來意思差不多啦.. (逃)
+19:44:46 <favonia> CindyLinz: 啊剛才有句話不太精準... 不一定要繼承。實際上 gof 還特別花時間講除了繼承以外可以怎麼寫
+19:46:30 <CindyLinz> 好像有 template?
+19:46:32 <favonia> CindyLinz: 不一樣啊，一個好像是說 OOP 有缺陷，加上 DP 就沒有缺陷。我的意思是說 DP 比較像是常用寫法，可以從中看出語言限制... 用了常用寫法語言限制還是在那裡。
+19:47:11 <favonia> CindyLinz: gof 沒有狂用（？）template 吧
+19:47:25 <CindyLinz> 忘了, 很久以前看的 o.o
+19:47:36 <CindyLinz> 沒有狂用啦.. 我是說, 有時候有提到?
+19:47:54 <CindyLinz> 你這是說.. 救不活的意思嘛
+19:47:59 <favonia> CindyLinz: 有點忘了
+19:53:41 <b4283> CindyLinz: thanks for the ++ tip
+19:54:24 <b4283> gof?
+19:55:36 <CindyLinz> 這篇看起來是拿 OO design pattern 到 Haskell 裡面對應 # http://blog.ezyang.com/2010/05/design-patterns-in-haskel/
+19:57:05 <CindyLinz> b4283: Gang Of Four  (GOF) 寫的 design pattern
+19:57:56 <letoh> gof patterns 書中舉例用的語言當然是因為不夠強大，所以範例才會寫成那樣:p  要說透過它來反映 oop 的侷限，這點我也認同
+19:59:01 <letoh> 不過我還是覺得 pattern 的存在是來自於開發時遇到問題，如果 haskell 慣用的手法可以避免這些問題出現，那 gof patterns 根本就不重要啦
+19:59:20 <CindyLinz> 應該會遇到別的問題.. (思)
+19:59:49 <letoh> 一樣呀  那就會有新的 pattern 出現，如果找到的解決方法巧妙到值得一用再用的話
+20:00:23 <CindyLinz> 嗯
+20:01:11 <letoh> 因為我沒什麼 haskell 實務經驗，不曉得真正用 haskell 開發時，是不是都不會遇到 gof 想解決的那些問題
+20:02:06 <letoh> 例如搞了一堆模組都不會有藕合問題之類的神奇天性，讓 haskell 先天適合開發大型系統之類的
+20:03:20 <CindyLinz> letoh: 我剛剛貼的那個 url 應該就是在講你說的這個
+20:03:28 <CindyLinz> 不過還沒看 :Q
+20:03:57 <letoh> 我翻一下 log @_@  說到這個，我覺得 design pattens 這本書把介紹到的 pattern 分成三類  蠻不錯的
+20:04:49 <letoh> 遇到問題的時候應該先思考一下是哪一類的問題，而不是直接想辦法套 pattern
+20:05:17 <CindyLinz> 唉, 太久沒碰.. 看到 pattern 的名字一點 fu 都沒有 :(
+20:05:53 <letoh> 如果實務上的問題都能解決  我覺得也還好吧
+20:06:34 <letoh> 不過我們這有人走火入魔到認為全世界就只有 23 種 pattern (以為在看獨孤九劍的劍訣嗎...)
+20:06:38 <CindyLinz> letoh: 是啊, 只是就不知道會不會常常花了大把的時間想出一個隨便一翻就可以找到的解法 ^^|
+20:07:22 <letoh> 這也是有可能的，所以建議你解完最好記錄一下，可以造福其他人隨邊翻一翻就找到解法:p
+20:07:31 <CindyLinz> letoh: 以前修 OOAD 的考試, 題目還會畫出一個結構, 然後問你這是什麼 pattern @@!
+20:07:46 <CindyLinz> letoh: 問題是有些結構上面看起來就不只一種解讀法啊 (抱頭)
+20:07:54 <letoh> 我覺得這是最無聊的考法XD
+20:09:24 <letoh> 有的實作起來結構看起來的確很像呀，所以我才會覺得重點在於分析的面向和想解決的問題 (目的)
+20:09:41 <letoh> 反過來猜 pattern 根本很奇怪XD
+20:10:55 <CindyLinz> 好像直接看 wikipedia 就很方便了 :p # http://en.wikipedia.org/wiki/Design_Patterns_(book)
+20:11:27 <CindyLinz> letoh: 不是資訊系的課喔, 是土木系開的 @@!  我那時還特別跑去土木系修 o.o
+20:11:41 <letoh> 土木開的會比較厲害嗎?
+20:12:45 <letoh> 我認識的土木系朋友都寫 fortran 耶，你不怕學到 fortran 專用的 design pattern 嗎? XD
+20:17:00 <favonia> letoh: 你看他們蓋的房子都不會倒，跟軟體一直當掉不一樣（誤）
+20:17:04 <CindyLinz> letoh: 不是厲不厲害的問題, 是只有土木系開的問題 orz
+20:17:17 <CindyLinz> letoh: 資工資管都沒有....
+20:17:20 <letoh> favonia: XDXD
+20:17:30 <CindyLinz> letoh: 不過那教授是在寫 CAD system 的樣子...
+20:17:41 <CindyLinz> letoh: 上課舉的例子全都是 CAD
+20:17:45 <letoh> favonia: 萬一他們用 OOP 來蓋...
+20:18:13 <letoh> 的確也有做 CAD 的
+20:18:42 <letoh> 為什麼資工資管不開這種課呀? 因為太實務了嗎?
+20:19:05 <CindyLinz> 不知道 o.o
+20:19:46 <CindyLinz> 我們就一堆同學學長學弟通通跑去修.... zz
+20:20:37 <letoh> 還真怪@_@ 不過做 CAD system 應該有機會用到不少 pattern 吧，比單純念書好多了
+20:21:33 <CindyLinz> 可是我們對 CAD 沒啥感覺 orz
+20:23:15 <letoh> 就算會用大概也沒啥特別感覺 (是說我啦XD)
+20:24:16 <CindyLinz> 我幾年以後才知道原來他們業界真的有所謂的物件資料庫
+20:24:42 <CindyLinz> 所有的具體零件都會做一個電子的模型, 讓工程式可以先在軟體裡面試用
+20:24:49 <letoh> 喔  對呀
+20:25:00 <letoh> 尺寸規格什麼都有
+20:25:05 <CindyLinz> 那時候不知道, 以為只是自己做了玩玩...
+20:25:12 <letoh> 有的還可以模擬  會動的
+20:25:21 <CindyLinz> 會動!
+20:25:32 <CindyLinz> 好累 XD
+20:26:22 <letoh> 反正就輔助設計囉  看你設計時需要什麼，系統就要設計出來
+20:26:29 <CindyLinz> 嗯嗯
+20:27:25 <letoh> 我以前的製圖課  畫一畫還要變展開圖  然後用紙先折模型  再送 cnc
+20:27:50 <letoh> 不過其實軟體都可以做  還 3d 模擬出最後結果
+20:31:09 <CindyLinz> letoh: 咦, 所以你是學土木的唷?
+20:31:17 <letoh> 不是
+20:31:26 <CindyLinz> cnc 是自動雕刻機?
+20:31:32 <letoh> 土木的不會用紙折XD
+20:31:47 <letoh> 算是吧  我以前念機械
+20:31:56 <letoh> cnc 有很多種@_@
+20:32:11 <CindyLinz> 用紙折模型是為了幫助自己思考?
+20:32:22 <CindyLinz> 應該不是拿紙折模型餵給 cnc 當 input 吧 @@"
+20:32:28 <letoh> 只是為了證明畫出來的展開圖是對的XD
+20:32:51 <CindyLinz> 喔喔, 所以如果能用 3D 軟體模擬出來應該也算過關?
+20:33:02 <letoh> 都要做呀，都是作業
+20:33:06 <CindyLinz> 作業 XD
+20:33:53 <letoh> 對呀  很無聊，以前都覺得軟體可以做就好 (完全沒想過軟體會有 bug 之類的XD
+20:34:43 <CindyLinz> 哈哈..  我以前偶爾就會聽到一些辦事員的對話: 這是電腦算的, 一定不會錯!
+20:34:50 <CindyLinz> 我心理就會有怪怪的感覺 XD
+20:36:12 <letoh> 哈  很多人對電腦的認知就是這樣呀
+21:36:30 <MnO2> hmm... 其實我很想問，有人聽過assembly design pattern嗎?
+21:38:07 <MnO2> 我猜測在古早的時候也許就是指function
+21:38:31 <MnO2> 但到現在可能不會有人認為function是一種design pattern吧
+21:39:17 <MnO2> "assembly design pattern"是我亂說的，只是說古早的一種歸納方式
+21:39:23 <MnO2> 就是後來的function
+21:39:47 <CindyLinz> 聽起來不錯... :Q
+21:39:55 <MnO2> 當提供的抽象界面語言本身有提供，習慣成自然的時候
+21:40:06 <MnO2> design pattern的定義就會變化
+21:40:19 <MnO2> 所以我才會強調context
+21:40:21 <CindyLinz> 更抽象的叫 pattern XD
+21:40:45 <MnO2> 因為名詞太不精準，每個人其實說的東西都有一點不一樣
+21:41:10 <CindyLinz> 嗯嗯
+21:43:50 <MnO2> 如果買家具可以 call IKEA，那我想很少人會想要自己打一張椅子
+21:44:28 <MnO2> 想想這個類比好像有點爛xD 算了

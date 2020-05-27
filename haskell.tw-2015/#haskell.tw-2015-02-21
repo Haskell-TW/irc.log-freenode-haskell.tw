@@ -1,0 +1,52 @@
+00:28:38 <CindyLinz> @hoogle (<^^>)
+00:28:39 <lambdabot> No results found
+00:28:42 <CindyLinz> @hoogle (^^)
+00:28:43 <lambdabot> Prelude (^^) :: (Fractional a, Integral b) => a -> b -> a
+01:13:33 <pkmx> :t (^^=)
+01:13:34 <lambdabot> (MonadState s m, Integral e, Fractional a) => ASetter' s a -> e -> m ()
+01:13:40 <pkmx> :t (^^~)
+01:13:41 <lambdabot> (Integral e, Fractional a) => ASetter s t a a -> e -> s -> t
+01:13:51 <pkmx> :t (<^^~)
+01:13:51 <lambdabot> (Integral e, Fractional a) => Optical (->) q ((,) a) s t a a -> e -> q s (a, t)
+01:13:55 <pkmx> :t (<**~)
+01:13:56 <lambdabot> Floating a => Optical (->) q ((,) a) s t a a -> a -> q s (a, t)
+01:16:08 <CindyLinz> *_*
+01:18:49 <pkmx> 那是我現在寫scala的表情 *_*
+01:19:10 <pkmx> 有沒有scala warning位置亂標的八卦...
+01:19:48 <CindyLinz> ._.
+01:22:09 <pkmx> 根本就整人嘛 ._.
+01:23:10 <pkmx> def foo(): Unit = { bar match { case Ker => { (...) } } }
+01:23:16 <CindyLinz> 只有聽過一點點 scala 介紹.. 印象中是個很難很複雜的東西 orz
+01:23:19 <pkmx> 假設 (...) 裡面有錯
+01:23:33 <pkmx> def foo(): Unit = ^{ bar match { ^case ^Ker => ^{ (...) } } }
+01:23:40 <CindyLinz> 長角了..
+01:23:51 <pkmx> 這幾個有^的地方都有可能會被標錯 但是絕對不會標在(...)裡面
+01:24:22 <CindyLinz> 都有可能是..... 每次都不一樣嗎 OAO
+01:25:19 <pkmx> 每次都一樣 但不同段code相同的問題會被標在不一樣的地方XD
+01:26:07 <pkmx> 然後那個錯誤訊息是他infer某個expression的type是Any
+01:26:32 <pkmx> 然後他指的位置全部都不是type是Any的expression XDrz
+01:27:20 <CindyLinz> orz
+01:33:07 <pkmx> 話說
+01:33:23 <pkmx> GHC有把整個infer出來的type dump出來的功能嗎=p
+01:34:15 <CindyLinz> 我是用 ghci 開起來看 @@"
+01:35:07 <CindyLinz> 然後... ghc 7.8 有 typed hole, 我還沒有用過... https://downloads.haskell.org/~ghc/7.8.3/docs/html/users_guide/typed-holes.html
+01:35:44 <pkmx> 恩 type hole 應該可以做到這個功能 =p
+01:35:51 <CindyLinz> 嗯嗯嗯
+01:35:59 <pkmx> 只是想說有沒有flag幫你把所有的term的type都標出來
+01:36:23 <pkmx> 例如input: f x = x + x
+01:37:06 <CindyLinz> 所有 嗎... XD
+01:37:09 <CindyLinz> 那很多耶 XD
+01:37:46 <pkmx> output: (f :: forall a. Num a => a -> a) (x :: forall a. Num a => a) = ((((+) :: forall a. Num a => a -> a -> a) (x :: forall a. Num a => a) :: forall a. Num a => a -> a) (x :: forall a. Num a => a) :: forall a. Num a => a)
+01:37:48 <monochrom> 或者某個 -fdump-* 會
+01:38:10 <CindyLinz> 我還沒有想過要把所有的都印出來 XD
+01:40:18 <CindyLinz> ghc 的 -ddump-* 好多啊.. OAO
+01:43:53 <monochrom> 最接近的是 -ddump-simpl
+01:46:01 <pkmx> ddump-simpl 生出來的是已經是 Core 了吧 @@
+03:26:40 <monochrom> -ddump-tc-trace
+08:54:00 <monochrom> 初三赤口快樂! 大家有沒有甚麼要辯論的呢? :)
+09:05:43 <mno2> ptt 上已經有一堆戰文了 lol
+09:08:12 <monochrom> 太應節了!
+11:32:50 <CindyLinz> wwww
+12:00:53 <CindyLinz> 對了.. 這邊也轉貼一下.. 2001 年的 paper, 用 lazy eval 特性作的 permutation parser http://www.cs.ox.ac.uk/jeremy.gibbons/wg21/meeting56/loeh-slides.pdf
+12:03:27 <CindyLinz> 來戰一下(? 我覺得 paper 裡面寫的 code 都超難讀.. 字體大大小小歪歪斜斜還長毛...... QQ
+18:06:36 <pkmx> procedure ... erudecorp # http://www.bowdoin.edu/~ltoma/teaching/cs231/spring15/Material/broder86pessimal.pdf

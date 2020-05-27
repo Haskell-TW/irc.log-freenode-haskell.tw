@@ -1,0 +1,32 @@
+01:30:56 <CindyLinz> au: 陣青羊白豬~ (測試一下 :p)
+01:33:48 <au> @ARGV~ (這是圖靈測試嗎)
+01:33:49 <lambdabot> Unknown command, try @list
+01:37:12 <CindyLinz> au: 竟然真的有可讀性耶!!!
+02:01:57 <CindyLinz> 剛剛拿來寫了費式數列 XD # https://gist.github.com/CindyLinz/ad2b908ce56bed80af2c
+02:04:13 <au> ++
+02:05:24 <monochrom> 青羊白豬, 牛屎謝迅
+02:06:02 <CindyLinz> 這後半句解讀不出來了 XD
+02:07:35 <monochrom> 無無明, 亦無無無明, 以至無無無無明, 如此類推兮
+02:08:34 <au> 即說咒曰: sync; sync; sudo sync
+02:09:07 <CindyLinz> au: 太恐怖惹~ 你那時有寫多少副作品出來啊 ^^|
+02:09:30 <au> XD
+02:12:05 <au> 是一種副現象 #Epiphenomenalism 的現念
+02:12:11 <au> *概念
+02:17:08 <CindyLinz> 那對這東東保持點距離好惹 ._.
+02:21:38 <au> 有碰過副現象病毒以後就免疫了... XD ref https://gist.github.com/audreyt/5950835
+02:23:58 <CindyLinz> 沒有看過這東東 @@"
+02:25:19 <CindyLinz> 這你寫的劇本? @_@"
+02:25:30 <au> 我翻譯的... 原網址在標題列有
+02:25:43 <CindyLinz> 喔喔...
+02:29:49 <CindyLinz> "將軍：很好。道家人士呢？
+02:29:50 <CindyLinz> 科學家：他們拒絕採取任何行動！"
+02:29:51 <CindyLinz> XD
+02:59:01 <CindyLinz> 喔喔 可以用中文的 keyword 更多了 XD
+15:49:38 <cibs> 將軍：那我們或許還有救。
+16:30:10 <miaoski> somewhat matrix
+20:40:47 <caasihuang> 處理 JSON 時，有類似 HXT 這樣的工具嗎？
+21:28:52 <CindyLinz> 目前只稍微熟一點 Data.Aeson
+21:28:59 <CindyLinz> 用起來..... 有點生氣 XD
+21:51:34 <caasihuang> 來看一下，其實我也不清楚我要找的是什麼。
+21:52:02 <caasihuang> 只是 HXL 教學中的 deep 還有 multi 好像很棒
+23:51:04 <pkmx> 用Control.Lens.Plated想辦法搞出來XD?

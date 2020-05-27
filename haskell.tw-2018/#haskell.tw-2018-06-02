@@ -1,0 +1,27 @@
+01:42:26 <jaiyalas> 這裡有限制話題範圍嗎? XD
+01:45:18 <jaiyalas> 還是初來乍到應該先自介一下? XD
+01:52:37 <caasih> XD
+01:53:27 <caasih> 如果不限話題的話，想問有適合描述 language module system 的 type 嗎？
+02:23:42 <jaiyalas> 我比較想先問什麼是 language module system
+02:23:48 <jaiyalas> (歪頭)
+02:29:04 <monochrom> 自𠝹
+02:30:22 <monochrom> 或者 Backpack 的論文有 module system 的 type system.
+02:40:04 <monochrom> 真不限話題的話, 我就要描述有一天在多倫多市中心遇到豪大大雞排分店, 然後行兩步又有赤炸, 於是問「今天撞甚麼邪了...」
+06:42:47 <caasih> jaiyalas: 最近 js 在吵這個 https://gist.github.com/Rich-Harris/0b6f317657f5167663b493c722647221 # module system
+06:43:53 <caasih> monochrom: 來查一下 Backpack ，感謝
+06:44:35 <caasih> 竟然開到多倫多 XD
+11:00:55 <jaiyalas> 有 module system 的 type system.. 是指在 type 上描述 module 嗎?
+11:01:13 <jaiyalas> 終於開始要染指 module 了嗎? 有直上 dependent type 嗎? XD
+11:07:23 <caa51h> js 還在吵 module 要是 a 還是 Promise<a> ，有什麼好壞之類的問題 XD
+13:59:32 <jaiyalas> 根本不知道那是什麼 :p
+14:09:54 <caasih> 我猜大概像在討論 module 是要 a 還是 IO a
+14:10:08 <caasih> 算了 js 不重要
+15:05:12 <jaiyalas> 要是是 `a` vs `IO a` 這種比較，一定 `a` 比較討喜一點 XD
+15:05:15 <jaiyalas> IO 髒髒
+15:05:17 <jaiyalas> :P
+15:06:15 <jaiyalas> 對了，有可以推薦用 haskell 實作 free monad (諸如此類) 的教學文或是 hackage 嗎?
+17:18:04 <petercommand> 問問，為什麼 type preservation 叫做 subject reduction ，然後 t -> t' and t' : T then t : T 叫做 subject expansion 呀..
+17:27:52 <petercommand> jaiyalas: http://okmij.org/ftp/Computation/free-monad.html 像是這種?
+17:35:40 <petercommand> https://stackoverflow.com/questions/13352205/what-are-free-monads
+18:29:10 <jaiyalas> Oleg 是我對 free monad 的起點沒錯，但是他那個實在是很難說是容易上手的入門教學 XD
+23:38:28 <monochrom> 習慣了 python, racket 之類的, 一個 module 可以有一段 arbitrary code, 一 load 即 run, 所以覺得有 IO 或 Promise.

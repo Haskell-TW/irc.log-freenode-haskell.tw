@@ -1,0 +1,5 @@
+00:44:09 <monochrom> 學習基礎 != 理論基礎
+00:54:24 <monochrom> "TAOCP 其实不是算法的巅峰", 嘻嘻, 因為是癲峰才真
+00:55:35 <suhorng> 他指的其實就是字面意義上的foundation吧, 數學的根基
+00:57:26 <monochrom> 不過, 它的算法表達的確太低階, 明明 while loop 都要用 goto, 難讀得很. 又因為不明寫 loop 而不能用 loop invariant, 難明得很
+00:58:56 <letoh> 裡面不是都寫 MIX code 嗎XD

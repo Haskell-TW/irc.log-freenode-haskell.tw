@@ -1,0 +1,28 @@
+01:13:58 <MnO2> letoh: OK
+12:08:25 <_13h> 昨天還在想說 Bartosz Milewski 到底是誰，怎麼查個 c++ 資料跑出一堆怪東西....
+12:08:40 <_13h> 剛剛發現這一封信 http://www.haskell.org/pipermail/haskell-cafe/2012-June/101632.html
+12:10:44 <_13h> 其他地方看到的介紹："Currently Bartosz is a Software Architect at FP Complete, a company whose goal is to commercialize Haskell."
+12:44:42 <MnO2> _13h: 他早年好像原本是做Visual Studio的，後來就從微軟退休了。退休後好像就零星弄了一些start-up，最近由於看好Haskell就弄了FP Complete
+12:46:09 <_13h> 原來是這樣，看他以前都寫 c++ 的文章，這幾天才發現好幾篇 functional programming in c++ 的文章都是他寫的
+12:51:22 <MnO2> _13h: http://www.linkedin.com/in/drbartosz
+12:51:31 <MnO2> _13h: 好像不完全是Visual Studio
+12:52:22 <MnO2> 以前還是物理系教授xD
+12:53:28 <_13h> Quantum Physics
+12:54:04 <MnO2> _13h: 太強了
+14:13:13 <b4283> 豆豆博士
+14:22:51 <favonia> MnO2: 簡單來說就是超展開...
+14:40:50 <hychen> 強者總是多方面發展
+14:41:37 <MnO2> favonia: 其實也還好，70, 80年代很多都這樣的，你去看CS department很多的大頭都是物理系的
+14:41:56 <MnO2> CS department是指米國
+14:42:45 <MnO2> 那個之前是物理超盛行年代，但教職越來越少。後來政府又砍預算，所以很多學物理的就失業。跑到計算機跟金融領域
+14:43:01 <MnO2> 當然上面的強者找到教職了不算數
+14:50:33 <MnO2> drbean: hi
+15:29:11 <_13h> 想問一個問題，為什麼 lift 需要特別抽象出來？有什麼好處嗎？
+15:31:49 <drbean> :-)
+17:15:42 <MnO2> _13h: 要不然每個會多拉一層Type的函數都要自己包 constructor
+17:16:25 <MnO2> drbean: 正在學 Haskell ?
+17:41:01 <MnO2> https://www.youtube.com/watch?v=y97rBdSYbkg
+17:41:07 <MnO2> exponential domino
+23:33:50 <MnO2> 話說FP Complete這名字應該是從NP Complete來的吧
+23:34:15 <MnO2> 意思是只要搞定這家公司，FP就沒問題了xD
+23:46:06 <favonia> MnO2: Haskell-hard (誤）

@@ -1,0 +1,53 @@
+00:26:56 <caasih> return :: a -> IO a 裡面的 RealWorld 是怎麼來的？
+00:27:44 <caasih> (>>=) 會把前一個 IO 裡的 RealWorld 傳下去； return 的是憑空變出來的？
+00:40:13 <alex_lu> 如果是當成 state monad 來看，應該是來自於 s -> (a, s) 的 s 吧?
+00:47:19 <caasih> alex_lu: 但是在 (>>=) :: IO a -> (a -> IO b) -> IO b 的 (a -> IO b) 中，我看不到 s 或 RealWorld
+01:01:26 <petercommand> :t GHC.Base.unIO
+01:01:28 <lambdabot> IO a -> GHC.Prim.State# RealWorld -> (# GHC.Prim.State# RealWorld, a #)
+01:02:04 <petercommand> 就是這裡來的吧
+01:04:32 <petercommand> http://stackoverflow.com/questions/9244538/what-are-the-definitions-for-and-return-for-the-io-monad
+01:06:27 <monochrom> RealWorld 是假的. 無錯, 真即是假...
+01:09:05 <monochrom> 使用 state monad, 而 state 是假, 這是叫 code generator 以為真有 data dependency, 而依照先後次序出 code
+01:10:22 <monochrom> 只此而已, 勿想太多. IO 從來不是真的 state monad
+01:11:35 <petercommand> 就是個看起來很像 state monad 的東西
+01:12:40 <monochrom> 「謊言對 algorithm 說一百次, 就會被人類當成真話」 XD
+01:12:43 <caasih> 不知道 code generator 做了什麼...
+01:24:56 <petercommand> https://github.com/ghc/ghc/blob/351de169e14ad9277aaca653df4a3753c151f7bb/compiler/basicTypes/MkId.hs#L1340
+01:25:09 <petercommand> runRW magic
+01:26:52 <caasih> 謝謝大家，我先做到一個段落再一篇篇看...
+13:51:42 <CindyLinz> "謊言對 algorithm 說一百次，就會被人類當成真話"
+13:54:22 <monochrom> :)
+15:41:58 <petercommand> :p
+18:15:14 <suhorngT> caasih: 不知為何, 看到這句有 "不要問 code gen 為你作了什麼, 要問你為 code gen 做了什麼" 的感覺 XDDD
+18:16:29 <suhorngT> caasih: return 裡面其實還是有, 主要是要把 IO a 看成 RealWorld -> (RealWorld, a), 所以 a -> IO a 裡面的 IO a 要展開, IO a -> (a -> IO b) -> IO b 裡面的 IO a, IO b 都要展開
+18:18:57 <suhorngT> 所以 "IO a" 本身就要看成一個 "把 RealWorld 傳下去" 的東西, 而 (>>=) 是把前面傳的 跟後面傳的接起來
+18:36:20 <CindyLinz> 我覺得 IO :: (RealWorld -> (RealWorld, a)) -> IO a 與 unIO :: IO a -> RealWorld -> (RealWorld, a)
+18:36:40 <CindyLinz> 就像是台灣的 3轉2 與 2轉3 的插頭轉接頭....... XD
+18:37:09 <CindyLinz> 附圖, 非廣告 # http://24h.pchome.com.tw/prod/DCACMA-A9006K32N?q=/S/DCAR0Q
+22:41:30 <caasih> suhorngT: 沒有 type class ，所以亂改 bind 的 type ，把 return 偷傳進去...
+22:41:33 <caasih> `bind :: IO a -> ((b -> IO b) -> a -> IO b) -> IO b`
+22:42:06 <CindyLinz> 怎麼有點好複雜 OAO
+22:42:06 <caasih> 這樣我才能確定傳的是同一個 RealWorld 0rz
+22:42:37 <CindyLinz> 為什麼要中間那個 (b -> IO b) 啊?
+22:43:20 <caasih> 那個就是 return 啊，這樣他看得到 bind 裡才看到的 RealWorld ，又不用暴露 RealWorld 給 (a -> IO b)
+22:43:33 <caasih> * 真的是在亂搞...
+22:43:51 <CindyLinz> 喔喔... 每個 bind 可以用不一樣的 return... XD
+22:44:16 <CindyLinz> bind 應該可以自己看 RealWorld, 不給 (a -> IO b) 看
+22:44:23 <CindyLinz> 然後也不用透過 return 來看
+22:45:14 <caasih> 嗯嗯， bind 看得到， (a -> IO b) 看不到，但是 (a -> IO b) 用的 return 應該要看得到？
+22:46:17 <CindyLinz> 嗯, 其實輸出 type 為 IO a 長相的函數, 只要有心都看得到....
+22:47:13 <CindyLinz> 只有 generic 的  Monad m => m a 會看不到
+22:47:40 <CindyLinz> 因為不同的 Monad m 的形狀不一樣, 有的根本不是 state monad 這種的.. 所以廣用型的函數才沒辦法看
+22:48:14 <CindyLinz> 越抽象的廣用函數, 它的實作能拿到的資訊就越少... 這就是封裝 ^^
+22:50:09 <caasih> 很不習慣這種 polymorphism ，從 lambda 開始反而有助於幫我忘記 OO 的一切
+22:50:42 <CindyLinz> 對了... 問問, 像一個 type 為 :: a -> b 的函數, 這個 b 有名字嗎?  在 C, Java 我們說是 return type, 可是在 Haskell 講 return type 感覺有點怪?
+22:51:08 <CindyLinz> caasih: 這個 polymorphism 和 OO 的不一樣.. 硬要類比的話, 和 C++ 的 template 比較像
+22:51:32 <CindyLinz> 嗯... 覺得怪是因為 Haskell 的「return」有別的意思啊 @@"
+22:56:10 <caasih> 現在都提醒自己那個 return 不是別的語言的 return 了，只記著 a -> m a 這件事
+23:01:00 <caasih> 這不是 ad hoc polymorphism 嗎？
+23:04:03 <petercommand> class 就是 ad hoc polymorphism，可以定義自己的 instance
+23:17:08 <CindyLinz> caasih: ad hoc polymorphism 的定義.... 也是很 ad hoc 的啊... orz
+23:18:03 <CindyLinz> 手動置底下... 在 C 語言叫作 return type 的東西, 在 Haskell 要叫什麼 type... ^^|
+23:21:25 <caasih> 那 a -> b -> c -> d 的 return type 到底是 b -> c -> d 還是 c -> d 還是 d XD
+23:21:53 <CindyLinz> d
+23:22:03 <CindyLinz> 括號 matters... XD

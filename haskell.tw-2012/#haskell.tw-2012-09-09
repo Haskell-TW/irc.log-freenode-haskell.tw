@@ -1,0 +1,85 @@
+00:02:13 <MnO2> levi-g: hi
+00:03:55 <letoh> http://hackage.haskell.org/packages/archive/llvm/0.9.1.2/doc/html/src/LLVM-Target-MSP430.html  # 看到 IO 會怕XD
+00:07:13 <MnO2> letoh: 等到心中充滿monad的時候就不怕了xDD
+00:07:26 <letoh> 好吧  繼續努力XD
+00:08:30 <letoh> 跟寫 scheme 比起來真是差很多XD
+00:10:37 <MnO2> 的確是差蠻多的，不過有scheme的基礎學起來還是比較快啦。
+00:10:47 <MnO2> 我是從零開始學Haskell
+00:10:56 <MnO2> 一開始真的會很想撞牆
+00:11:34 <letoh> 最近這樣重新跑一下，語法很多都想起來了  但印象中以前沒在 type 卡那麼久的啊XD
+00:12:40 <MnO2> type喔，學更深入後會卡更久xDD
+00:13:37 <letoh> 如果沒有 IO，只是單純計算的話好像輕鬆一點  以前還有拿來解過 project euler 的題目
+00:13:49 <letoh> 但要實用一點的程式好像都會有一堆 IO ?
+00:16:19 <MnO2> 這就是討厭的地方，因為卡IO的問題通常都是卡monad + lazy
+00:16:30 <MnO2> 不過一般是先被monad的性質卡到
+00:16:59 <mgccl> 啊，我寫某些題目解答只有一行。IO寫了十幾行。。。
+00:17:02 <letoh> 唔  看來還是乖乖把 monad 搞懂再來想其他的吧XD
+00:18:21 <MnO2> 所以我猜測這兩年一大堆人教functional programming採用ocaml或sml的原因也有一部份是Haskell這些性質吧
+00:18:30 <mgccl> 如果有個Haskell的oj，弄的類似topcoder一樣就好了，只用寫pure的函數。
+00:18:40 <letoh> ml 的門檻比較低嗎?
+00:19:31 <MnO2> mgccl: codeforce跟spoj都有，只是應該還沒有純粹寫pure的函數
+00:20:00 <MnO2> letoh: ml我不是很熟耶，但至少預設是strict的
+00:20:38 <MnO2> letoh: ocaml 記得也有 stateful 的性質?
+00:21:02 <MnO2> letoh: 所以可能相對於習慣imperative style的人會比較容易上手
+00:21:39 <mgccl_> https://www.interviewstreet.com/challenges/dashboard/#problem/4f7272a8b9d15 這題我haskell代碼過不了，java毫無問題。
+00:21:57 <letoh> 唔  ml 系的我都沒接觸過，不過 strict 和 stateful 就很符合大部份人的習慣啦
+00:23:25 <MnO2> letoh: spj 好像也有說過，如果還有下個語言，他可能會弄成strict的。不過我找不到原文，所以請暫時當作八卦。
+00:23:49 <letoh> 你手上的八卦真多:p
+00:24:58 <MnO2> 原來interviewstreet也有支援Haskell，第一次知道。
+00:26:08 <MnO2> letoh: 就到處亂逛逛，總會有多知道些東西  :p
+00:29:46 <CindyLinz> Flolac 教 Coq 的法國老師提到 OCaml 的時候就說: 我們拿 OCaml 作例子, 這是一個 imperative language.....
+00:30:01 <CindyLinz> (用英文講啦 :p)
+00:30:41 <CindyLinz> OCaml 可以用 let a = ref 3 in ... 相當於 C
+00:31:03 <CindyLinz> OCaml 可以用 let a = ref 3 in ... 相當於 C++ 的 int * a = new int; *a = 3;
+00:31:34 <CindyLinz> 然後用 get a 和 set a 5 這樣用
+00:33:51 <MnO2> 只要有心，Haskell也可以是imperative lang, 不過至少是強迫你想清楚的imperative lang
+10:17:30 <Yen3> 很感謝 CindyLinz ，現在每天早上醒來就是看昨天的 irc log XD
+10:20:05 <CindyLinz> :D
+10:21:11 <Yen3> 然後就會很後悔昨天又錯過了學習(聊天)的機會 XD
+10:30:42 <CindyLinz> Yen3: 你可以從昨天的話題接著講啊 :p
+10:30:59 <Yen3> CindyLinz: 現在都不知道大家醒來了沒 XD
+10:31:31 <Yen3> CindyLinz: 而且我現在心中還沒有都是 Monad，都是 Functor 倒是真的 (笑)
+10:31:36 <CindyLinz> 只是如果當時的人現在不在 channel 裡, 你丟他他也不會亮起來 ^^|
+10:32:09 <Yen3> 喔喔喔~!
+10:32:13 <Yen3> 記起來
+10:32:24 <CindyLinz> Yen3: 我覺得那些東西在 category 裡面的數學定義, 和能夠怎麼應用... 距離很大 :|
+10:32:40 <Yen3> 看 Algebra of Programming 就知道了 XD
+10:32:47 <Yen3> 我稍微掃了三十秒 XD
+10:33:10 <CindyLinz> 真快!
+10:33:15 <Yen3> 我在猜想，會不會是工業上用的模型本來就不完美
+10:33:23 <Yen3> 這代表我其實根本看不懂 XDXDXD
+10:33:44 <CindyLinz> The Algebra of Programming in Haskell?
+10:34:12 <Yen3> No，書名就是 Algebra of Programming
+10:34:40 <Yen3> http://www.amazon.com/Algebra-Programming-Prentice-Hall-International-Computer/dp/013507245X/ref=sr_1_1?ie=UTF8&qid=1347158071&sr=8-1&keywords=algebra+of+programming
+10:35:45 <Yen3> 前幾天 jaiyalas 說有考慮要辦團購 XD
+10:36:44 <Yen3> 我對於 haskell 的思考，也只有很粗淺的認知 ...
+10:37:07 <CindyLinz> 團購.. 有電子版的嗎... 實體版的不好帶 ^^|
+10:37:37 <Yen3> 其實我有(逼)版
+10:37:47 <CindyLinz> 喔喔!
+10:38:24 <Yen3> 教主是作者的弟子 XD
+10:38:34 <Yen3> 所以有問題可以問教主 XD
+10:38:39 <CindyLinz> XD
+10:39:23 <CindyLinz> 前幾天跟教主聊天, 結論是.. 想學好 Haskell 的話, 可以不要碰 Category Theory
+10:40:19 <CindyLinz> 讀 Haskell 的東西雖然常常會看到寫著 這是 category 裡面的什麼
+10:40:38 <CindyLinz> 不過那個性質應該比較像是.. 扯一下 category 可以顯得比較有學問
+10:41:01 <Yen3> 那麼就看要不要扯了 XD 我猜也是很多人沒有扯，善用很多特性 XD
+10:41:03 <CindyLinz> 但是其實它跟 category 裡面的那個東西, 還是不一樣.. 他們講著 category, 心中想的是 haskell 的變形版
+10:41:41 <Yen3> 嗯嗯，我聽到的是不一樣的 ...
+10:42:19 <Yen3> haskell 應該是做出假的 category
+13:11:34 <c9s> hola~
+13:11:47 <c9s> a2n: 你也有去 floac ?
+13:52:56 <c9s> lambdabot: map (+1) [1..10]
+13:53:09 <c9s> 咦.. XD
+13:53:15 <c9s> lambdabot:
+13:53:38 <c9s> lambdabot: @help
+13:53:38 <lambdabot> help <command>. Ask for help for <command>. Try 'list' for all commands
+13:53:51 <c9s> lambdabot: @run map (+1) [1..10]
+13:53:52 <lambdabot>   [2,3,4,5,6,7,8,9,10,11]
+15:53:59 <letoh> 在 google group 發現有人在把 erlang 改裝到單板系統
+15:54:07 <letoh> https://groups.google.com/forum/?fromgroups=#!forum/erlang-embedded
+15:54:31 <letoh> erlang runtime 實在是有點肥@_@
+16:30:14 <c9s> erlang 蠻肥的... XD
+20:59:17 <Yen3> 沒想到 c9s 來了 XD~!
+23:56:37 <CindyLinz> favonia: Haskell 的 Monoid Int 只能定 (+) 不能同時又定 (*)
+23:56:57 <CindyLinz> favonia: 這在 Agda 裡面是不是就是把 (+) 或 (*) 變成 type 的一部分的方式解決?
+23:57:17 <CindyLinz> Haskell 裡面不能這樣做, 是因為 Haskell 的 type 沒有 value 的部分

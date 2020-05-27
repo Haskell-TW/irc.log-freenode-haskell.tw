@@ -1,0 +1,140 @@
+00:30:15 <mno2> 最近都沒空聊天。
+00:30:37 <mno2> 來更新一則消息好了
+00:30:48 <mno2> 我同事最近訪問 Simon Marlow
+00:31:07 <mno2> 聽說他們 team 都沒空測試的 xD
+00:31:11 <mno2> 都只靠 type system
+00:31:27 <mno2> 因為一天要 push 超多次
+00:31:42 <mno2> 那個專案就是要不斷更新規則
+00:31:48 <mno2> 根本沒時間測試
+00:31:52 <mno2> 就是寫了就上
+00:33:24 <mno2> 還有 Simon Marlow 最近在著手 ghc runtime 的 stack trace 了
+00:33:31 <mno2> 也許過不久會更好 debug
+00:38:40 <suhorng> 靠 type system 是哪招啦XDDDD
+00:52:53 <favonia> xDDDDD
+00:53:38 <letoh> 這可以當作不想做測試的藉口嗎? XD
+19:04:30 <suhorng> 我在想, 把 state monad 定成 s -> (a, s) 好像不是必須的
+19:06:55 <suhorng> 最近在看這個 http://okmij.org/ftp/Haskell/extensible/ 他選擇用不同於 monad transformers 的方式來結合不同副作用
+19:08:50 <suhorng> 但是他最後的選擇我也是不太懂為什麼結尾要用 (w, s) 這種 type... runState :: Typeable s => Eff (State s :> r) w -> s -> Eff r (w,s)
+19:11:01 <suhorng> 若我們有個mutable state, 則把包裝拆掉後能獲得執行完的最終state v.s. 包裝拆掉後最終state會被丟掉, 不知道哪個比較好
+19:11:09 <suhorng> 雖然前者涵蓋後者啦..
+19:13:56 <hashcat> 那當然是保留
+19:14:19 <hashcat> 後者就等同前者, 加一個捨棄動作
+19:14:52 <suhorng> 對
+19:14:57 <hashcat> 前者可以轉變成後者, 後者沒辦法轉回來
+19:15:47 <suhorng> 只是在想說, 把 state 包在裡面的話, 拆掉包裝把 state 丟掉(隱藏起來), 不讓使用者看到好像也沒錯...
+19:15:52 <hashcat> 假如想到要接下去的話, 直接丟棄的哪個還得改代碼
+19:15:58 <suhorng> 嗯..
+19:16:15 <hashcat> 保留的話就能保持程序的可擴展性
+19:18:33 <suhorng> 可擴展性好像還不是那麼有必要的感覺
+19:19:55 <hashcat> 這要看是開放還是封閉風格吧
+19:20:36 <hashcat> 開放, 用不到等同於以後可能用到. 封閉, 用不到等同永遠用不到
+19:22:13 <hashcat> 前者是可能會累積一堆無用之學, 後者是會書到用時方恨少
+19:22:20 <suhorng> XDDDD
+19:23:50 <suhorng> :r
+19:23:57 <suhorng> 弄錯視窗orzzz
+19:24:12 <hashcat> :D
+19:29:21 <hashcat> 這兩難的決策方式是機會成本. 保持開放在這狀況不耗任何成本, 也沒放棄掉什麼可能的機會, 而封閉則放棄了擴展的機會, 所以保持開放比較好
+19:29:41 <hashcat> 再說他的論題也有用到extensible這字眼
+19:31:18 <suhorng> 那個extensible不是指這個 XDDD
+19:31:37 <suhorng> 會想到這問題就是因為在他的實作中, 選 (a, s) 跟選 s 沒有差別
+19:31:48 <suhorng> 不像原本 State 跟 StateT 中很自然就會是 (a, s)
+19:32:37 <suhorng> 當然一個最簡單的方法是 (a, s) 跟 s 兩個都順便提供啦..反正後者只是多個丟掉
+19:32:45 <hashcat> 我說的是他風格是開放的
+19:33:16 <hashcat> 嗯嗯
+19:33:27 <suhorng> 應該說 那個開放不是只風格
+19:33:40 <suhorng> 是很專門針對他的 monad 的
+19:33:51 <hashcat> 省得使用者打電話進來抱怨要求改代碼
+19:34:36 <suhorng> XDD
+19:35:00 <suhorng> 請使用者自己送 pull request
+19:35:28 <hashcat> 不知道你對我的話是不有啥誤解
+19:36:25 <suhorng> 唔 不知道 ._.
+19:37:38 <hashcat> 他提到要支持更多特性, 可擴展的作用啥的, 保留最終狀態也就不奇怪了
+19:41:00 <hashcat> 再說他是要開放給未知使用者用的
+19:42:22 <suhorng> 喔~
+19:43:44 <hashcat> 想到醫生不能擅自割盲腸的狀況
+19:44:13 <suhorng> XD
+19:47:30 <suhorng> 其實仔細想想就算丟掉了 要拿回來也不難
+19:47:45 <suhorng> 可以寫個 preserve :: Eff s a -> Eff s (a, s)
+19:48:00 <suhorng> 就回來了
+19:48:28 <hashcat> 結果代碼多兩步驟這樣
+19:48:45 <suhorng> 丟掉也一樣呀XD
+19:55:26 <hashcat> 我腦袋轉不過來
+19:55:32 <hashcat> 為啥可以找回來
+19:56:58 <suhorng> 假使原本 runState 是 m a -> s -> m (a, s)，那麼從保有的來丟掉是 fmap fst (runState m s)
+19:56:59 <suhorng> 另一方面 假使原本是 runState' :: m a -> s -> a，那麼若要保有就是 runState' (m >>= preserve)
+19:59:12 <suhorng> 其中 preserve :: MonadState s m => m a -> m (a, s)
+20:01:12 <suhorng> 打錯了... runState 應該是 m a -> s -> (a, s) 才對
+20:02:57 <hashcat> runState :: Typeable s => Eff (State s :> r) w -> s -> Eff r (w,s)
+20:03:20 <suhorng> 嗯嗯
+20:03:57 <hashcat> 若只是 Eff r w 的話怎能知道s
+20:08:31 <hashcat> 我看型別是只有限定 s 得是 Typeable, 剩下r和w變數都沒限制, 也就是沒有說一定有函數或界面能還原出s
+20:10:44 <suhorng> 那是在 runState 之前. 假設限在 runState' :: Typeable s => Eff (State s :> r) w -> s -> Eff r w
+20:10:52 <suhorng> 也就是 runState' 是丟掉狀態的
+20:11:21 <suhorng> 那麼就有 runState' m s = fmap fst (runState m s)
+20:12:06 <suhorng> 反過來說, 也可以有 runState m s = runState' (do { a <- m; s' <- get; return (a, s) }) s
+20:12:35 <suhorng> 一個是在拆掉後 再丟掉, 一個是在拆開前 先保留
+20:14:11 <hashcat> 那個get為啥一定會是原來的s
+20:14:50 <suhorng> 喔 又打錯了 裡面應該是 a <- m; s' <- get; return (a, s')
+20:15:01 <suhorng> 這樣就是保存最終狀態了
+20:16:07 <hashcat> get 得到的結果跟 runState 的輸出有啥關聯
+20:16:35 <suhorng> get就是去得到 State monad 的 state
+20:16:57 <hashcat> ???
+20:17:00 <suhorng> 這裡的 get :: (Typeable s, Member s r) => Eff r s
+20:17:05 <suhorng> 就是去獲得那個 mutable state
+20:17:47 <suhorng> 也就是說 在 m 跑完後, 先把最終狀態用 get 保存下來, 然後跟 m 的結果一起輸出
+20:18:21 <suhorng> 這樣把那一層 State s 拆掉之後也就會留著 m 跑完的最終狀態了, 跟 runState 一樣
+20:21:52 <hashcat> 我在想是啥保證 get :: (Typeable s, Member s r) => Eff r s 跟 runState :: Typeable s => Eff (State s :> r) w -> s -> Eff r (w,s) 的最後輸出的s型別的值會是一樣的東西
+20:22:31 <suhorng> 喔 這算是不一樣的問題
+20:23:01 <hashcat> 怎能原來找回丟棄的數值
+20:23:12 <suhorng> 以這個 framework 要注記好 get 的型別
+20:23:25 <suhorng> 這樣就可以確定找到的是 runState 的那個 s
+20:24:30 <hashcat> 有型別就有值了?
+20:26:05 <suhorng> 唔
+20:26:12 <suhorng> 因為那是 runState 的意思呀?
+20:26:44 <suhorng> runState 最後跑出來的 (a,s) 的 s 就是 m 跑完後的那個狀態
+20:27:06 <suhorng> get依照型別找到對的那一個 State s，回傳那個狀態
+20:30:03 <hashcat> 理解不能
+20:30:41 <suhorng> QQ
+20:32:24 <suhorng> 最原始的 State monad 只是一個 s -> (a, s) 型別的函數
+20:32:35 <hashcat> 嗯嗯
+20:33:52 <hashcat> (fst . f )的話就是 s -> a
+20:34:24 <suhorng> 然後, 假如有兩個函數都會共用到某一個 mutable state, 我們想把他們串起來變成單一一個函數的話, 就是 let (a, s') = f s in g a s'
+20:34:25 <suhorng> 嗯
+20:34:45 <hashcat> 我想到的是(snd . f)的資訊就消失了
+20:35:00 <suhorng> 對 不過不是那樣呀
+20:35:07 <suhorng> get 就只是 \s -> (s, s)
+20:35:14 <suhorng> 不去改變狀態, 把狀態回傳
+20:38:00 <hashcat> 怎想都是找回的狀態不會是原來那個
+20:38:27 <suhorng> 跟原來那個沒有關係呀
+20:38:38 <suhorng> State monad 是 s -> (a, s)
+20:38:49 <suhorng> 最後輸出的本來就是跑完後的最終狀態
+20:39:17 <hashcat> 最終狀態只有一個?
+20:39:44 <suhorng> 要原來那個狀態, 在 runState 時直接加回去就好了...還更簡單： runState m s = runState' m s >>= \a -> return (a, s)
+20:39:55 <suhorng> 因為 state 原本就是 s -> (a, s)
+20:40:03 <suhorng> 給一個初始狀態, 輸出計算結果跟最終狀態
+20:40:14 <suhorng> 有最終狀態才能再串起下一個要用狀態的函數
+20:42:51 <hashcat> 想不出為啥get能找回最終狀態值
+20:43:45 <suhorng> 我們是把 get 接在 m 後面
+20:44:39 <suhorng> 跑完 m 之後跑 get, 然後傳回去： do { a <- m; s <- get; return (a, s) }
+20:58:08 <hashcat> 意思是在同一個monad下狀態沒變過這樣?
+21:05:02 <hashcat> 我貌似想通了
+21:16:01 <hashcat> 我知道點在哪了唉
+21:16:34 <hashcat> 我跳脫monad了
+21:40:14 <hashcat> suhorng: 你說的是在runState之前狀態還在可以補上去, 我想的是要是runState之後沒保留的資訊是要怎樣找回來
+21:47:10 <CindyLinz> 好長的討論串!
+21:47:13 <CindyLinz> 來讀.... ._.
+21:48:28 <hashcat> 別讀了
+21:48:50 <hashcat> 讀到我發言就可以停了
+21:49:41 <CindyLinz> 那才看到前五行怎麼行.. XD
+21:49:56 <CindyLinz> 至少讀完你的最後一句 XD
+21:58:48 <hashcat> 我一直想成他在講state monad跑完之後, 怎麼樣才可以得到原來的狀態, 然後開始胡言亂語
+22:00:11 <CindyLinz> 我的進度還在 prerequisite -- 讀 http://okmij.org/ftp/Haskell/extensible/
+22:02:31 <hashcat> 討論串跟那個沒啥關係 XD
+22:04:55 <CindyLinz> 呃.. ^^|
+22:08:24 <hashcat> 結論就是 runState :: Typeable s => Eff (State s :> r) w -> s -> Eff r (w,s) 有三個部分, 我想的是 Eff r (w,s) 要是不保留s的值只剩下 Eff r w怎會知道原來的 s 是啥, 他說的是在那種狀況下可以從  Eff (State s :> r) w  找到最終狀態, 型別中的 w 變成是原來的 (w,s)
+22:09:19 <suhorng> hashcat: 對XDD
+22:09:25 <suhorng> 原來有如此誤會orz
+22:09:46 <hashcat> 我想run完monad後, 原來的狀態還是用得上這樣
+22:09:48 <suhorng> 他這個實作不好懂..
+22:09:52 <hashcat> 可能用得上
+22:10:01 <hashcat> 我想好久暈

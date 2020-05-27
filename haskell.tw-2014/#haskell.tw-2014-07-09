@@ -1,0 +1,166 @@
+00:00:17 <caasih_> 這個嗎？ http://repository.readscheme.org/ftp/papers/ai-lab-pubs/AIM-514.pdf
+00:00:43 <caasih_> 來源： http://library.readscheme.org/page1.html
+00:01:41 <petercommand> 喔喔，看起來是耶，感謝!
+00:01:56 <petercommand> 竟然沒有想要用opcode去找= =
+00:17:46 <caasih_> 也沒想到，一個個看才發現
+00:21:00 <au> caasih++
+09:03:39 <alexlu> 今天的slide: http://goo.gl/HLeaEy
+09:27:08 <miaoski> alexlu: ++
+09:28:33 <nick____> 請問一下今天和明天 DSL 課程老師同意有錄影嗎？
+09:28:50 <yllan> 今天 Jeremy Gibbons 的課，講到 Standalone / Embedded DSL ，我比較常聽見的說法是 Internal / External DSL
+09:35:57 <mno2_> 那個「宜學藝」有梗 www
+09:36:55 <qlife> 請問那個 lighting 是指舞台燈光的意思嗎
+09:38:23 <CindyLinz> 應該是要說輕省吧
+09:39:51 <xcycl> lightweight ?
+09:40:29 <yllan> 他剛剛舉了一個舞台燈光 DSL 啊 :-P
+09:40:35 <CindyLinz> 這樣喔..
+09:40:49 <yllan> 十分鐘前…
+09:41:02 <CindyLinz> 表示我都聽不懂 ><
+09:41:56 <aay> 覺得應該是舞台燈光
+09:43:18 <CindyLinz> GADT 出現了
+09:44:30 <yllan> 上禮拜 Josh 老師的 Curry-Howard Isomorphism 作業就是個 deeply embedded DSL?
+09:45:31 <CindyLinz> Josh 出的是在 Agda 裡欸
+09:46:10 <CindyLinz> 看起來長得是有點像啦.. XD  這個是 scm 說的, haskell 開始有一點 dependent type 跡象的東西之一
+09:47:04 <CindyLinz> 真的形狀看起來跟 Agda 超像的.. XD
+09:50:39 <alexlu> 問一下： data Expr where … 跟 data Expr :: * where …有什麼差別？
+09:51:10 <CindyLinz> 前者是後者的省略寫法, 沒有手動指定 type constructor Expr 的 kind
+09:51:31 <CindyLinz> 例如說 Int 的 kind 是 *, Maybe 是 * -> *, Either 是 * -> * -> *
+09:52:33 <CindyLinz> kind 可以想成是 type constructor 的..... type.
+09:54:14 <alexlu> 所以 data Expr a where … 也可以寫成 data Expr :: * -> * where …  這樣？
+09:54:36 <CindyLinz> 黑板戡誤: page 11, 2.3. Another semantics 把 print (Add x y) = paran (print x ++ print y) 改成 print (Add x y) = paran (print x ++ "+" ++ print y)
+09:55:33 <CindyLinz> alexlu: 對. 沒有開 GHC 7.8 的 poly kind extension 的時候, 這兩個是完全一樣
+09:56:47 <CindyLinz> 這種定 EDSL 的方法, 長得好像 lisp..
+10:05:53 <CindyLinz> lazy evaluation 真好用啊 XD
+10:11:26 <mno2_> http://new-www.haskell.org/  新首頁 expression 不是 lambdabot, lol
+10:12:45 <mno2_> 發覺 ny-haskell 幾乎都有錄影耶。之前 Michael O'Church 也有說要去參加的樣子。他好像開始認真學 Haskell 了
+10:12:58 <mno2_> *真羨慕住紐約*
+10:20:36 <CindyLinz> 有點噁.. XD
+10:20:52 <CindyLinz> (稱讚意味 XD)
+10:22:20 <CindyLinz> 這才是封裝啊~~  那什麼物件導向/design pattern 的人工刻鑿痕跡太重了..
+10:26:55 <CindyLinz> 竟然出現 Church encoding...ww
+10:28:44 <CindyLinz> 他 :: 的寫法是畫四個空心圈耶 :p
+10:31:08 <superbil> 只要是點的他都是畫空心圓
+10:32:01 <CindyLinz> 終於找到黑板上的點了.... 那個檔名裡面 .pdf XD
+10:32:16 <CindyLinz> flolac1。pdf
+10:36:37 <CindyLinz> 覺得這種從具體往抽象學的方向也是很不錯的.. 適合工程師 XD
+10:42:19 <yllan> http://www.cs.ox.ac.uk/jeremy.gibbons/publications/embedding.pdf
+10:42:58 <c9sloud> 請教一下... https://www.haskell.org/ghc/docs/7.0.1/html/users_guide/using-shared-libs.html#id3091206 export 了 C API 之後
+10:43:26 <c9sloud> https://www.haskell.org/ghc/docs/7.0.1/html/users_guide/ffi-ghc.html#ffi-library 然後這邊 init hs runtime
+10:43:47 <c9sloud> 之後在 C space 怎麼 call ?
+10:43:59 <c9sloud> 還是可以自動幫我生 header files 之類的?
+10:45:05 <CindyLinz> c9sloud: 我之前試過的, http://lpaste.net/8703593475490185216
+10:45:38 <CindyLinz> c9sloud: 你前面那段是用 shared library 欸, 那應該不用 header file 吧
+10:45:44 <c9sloud> 直接用 dlsym 唷?
+10:45:50 <c9sloud> 那如果是 .a 呢?
+10:45:57 <c9sloud> 或是 static linking
+10:47:38 <CindyLinz> 我用 EXTERN_C void xs_init (pTHX);
+10:47:51 <c9sloud> 哦哦哦
+10:48:03 <CindyLinz> https://github.com/CindyLinz/Haskell-Perl/blob/master/c-src/perl-glue.c
+10:48:21 <c9sloud> 姨姨
+10:48:23 <c9sloud> 有這個耶 https://www.haskell.org/ghc/docs/7.4.1/html/users_guide/hsc2hs.html
+10:48:29 <c9sloud> 你有用過嗎?
+10:48:31 <CindyLinz> c9sloud: 嗯, 如果 export 函數太多的話, 有 c2hs package
+10:48:34 <CindyLinz> 沒用過
+10:48:47 <CindyLinz> c9sloud: 你貼的這個方向相反啊
+10:48:55 <CindyLinz> hs2c
+10:48:58 <CindyLinz> 咦 算了 XD
+10:49:15 <CindyLinz> 我貼的也是反的 XD
+10:50:01 <c9sloud> 看起來好像是可以 XD
+10:50:17 <c9sloud> 這樣我就可以用 haskell 寫 library 然後用 C 去 call
+10:50:33 <c9sloud> 或是 PHP 去 call haskell XD
+11:13:44 <banacorn> [Functional Thursday 16]  誠徵講者！！！！！！！！！！
+11:40:35 <CindyLinz> banacorn: 留一下聯絡方式啊~ XD
+12:09:23 <miaoski> yllan: 我過去囉~~
+13:28:36 <petercommand> @hoogle
+13:28:36 <lambdabot> No query entered
+13:28:36 <lambdabot> Try --help for command line options
+13:28:41 <petercommand> @hoogle --help
+13:28:41 <lambdabot> Hoogle v4.2.32, (C) Neil Mitchell 2004-2012
+13:28:41 <lambdabot> http://haskell.org/hoogle
+13:41:44 <miaoski> yllan: ++
+13:42:54 <petercommand> > [(+),(*)] <*> [12,13] <*> [14,15]
+13:42:56 <lambdabot>  [26,27,27,28,168,180,182,195]
+13:44:52 <yllan> 現在有上課嗎？記得昨天老師說已經上完了⋯⋯
+13:46:08 <miaoski> CindyLinz: 我剛說的完全想不到的寫法是這個 ... http://rosettacode.org/wiki/Maximum_subarray#Clojure
+13:49:26 <CindyLinz> yllan: 昨天的上完了 XD
+13:50:00 <CindyLinz> Translation of Haskell.. XD
+15:57:38 <petercommand> >  0.000000000000000000000000001 * (10 ** 27) == 1.00000000000000002
+15:57:40 <lambdabot>  True
+15:57:42 <petercommand> >  0.000000000000000000000000001 * (10 ** 27) == 1.0000000000000002
+15:57:44 <lambdabot>  False
+15:58:37 <petercommand> = =
+19:59:57 <miaoski> Evast: 今天的傳好囉
+20:56:47 <CindyLinz> au: 問問~ GADT 以後有打算(或是有無可能)加上「open」的特性? 就是如果在不同的 module 裡面經由 (non-qualified) import 之後, 有撞名的 data type, 而且它們的 kind, arity 什麼的都一樣, 那麼就把 where 後面的 data constructor 們 union 起來
+20:57:11 <CindyLinz> 這樣可以把 type family 一致地寫進來?
+21:00:35 <petercommand> qualified import可以撞名嗎?
+21:01:54 <CindyLinz> petercommand: 可以
+21:02:27 <CindyLinz> 這我就沒有想很清楚了.. 我只是不太嚴謹地想了一個可以在不同的 module 裡面同時指定同一個 data type 的方式 ^^|
+21:03:12 <CindyLinz> 是有幾個問題要考慮, 像是.. where 後面的 data constructor 要算是在哪一個 module
+21:03:29 <CindyLinz> 也許就留在 define 該 data constructor 所在的 module
+21:09:23 <petercommand> 一般qualified import撞名怎麼處理的呀?
+21:09:59 <petercommand> ghci是discard掉後面import撞名的東西嗎?
+21:10:01 <CindyLinz> petercommand: 沒用到就不處理, 用到就 error
+21:10:12 <petercommand> 喔喔
+23:15:52 <petercommand> > Just 9 >>= \x -> return (x*10)
+23:15:54 <lambdabot>  Just 90
+23:16:07 <suhorng> > Nothing >>= \x -> return (x * 10)
+23:16:09 <lambdabot>  Nothing
+23:16:11 <petercommand> 為甚麼在這裡他會被包成Maybe呀
+23:16:25 <petercommand> > Just 9 >>= \x -> return (x*10) :: IO Int
+23:16:27 <lambdabot>  Couldn't match type ‘GHC.Types.IO’ with ‘Data.Maybe.Maybe’
+23:16:27 <lambdabot>  Expected type: Data.Maybe.Maybe GHC.Types.Int
+23:16:27 <lambdabot>    Actual type: GHC.Types.IO GHC.Types.Int
+23:17:16 <suhorng> 因為 Just 9 :: Maybe Int 然後 (>>=) :: m a -> (a -> m b) -> m b
+23:17:36 <suhorng> Maybe Int = m a   =>    m = Maybe, a = Int
+23:17:48 <petercommand> 喔喔，了解了
+23:18:17 <suhorng> 所以實際上 Just 9 這一整個東西是 Maybe monad 的一個 value（可以這樣說嗎）
+23:21:22 <CindyLinz> Maybe Int 的一個 value
+23:21:40 <CindyLinz> 覺得 Monad 是用來形容 Maybe 的形容辭
+23:21:59 <CindyLinz> Maybe (type constructor) 是 Monad 的一個 instance
+23:22:25 <petercommand> Monad是Maybe的typeclass
+23:22:48 <CindyLinz> 今天在默想這個.... Java 的 class 是 object 的 class, 拿來把 object (or instance) 分類; Haskell 的 class 是 type 的 class, 用來把 type 分類
+23:23:34 <CindyLinz> 然後這一個角度來看, Haskell 的 value 像 Java 的 object / Haskell 的 type 像 Java 的 class
+23:24:00 <CindyLinz> Haskell 的 class 像..... 哼, 凡間才沒有這麼高尚的東西可以對應呢!
+23:24:11 <CindyLinz> (快溜)
+23:24:46 <suhorng> C++ template! (?)
+23:25:37 <CindyLinz> 我 C++ 不夠熟, 不知道 C++ template 有類似 class 這樣的形容辭可以用 o.o
+23:26:04 <CindyLinz> 我所會的部分 template 像是沒有加 class 的 Haskell, 就 (a, b) -> a 這部分
+23:37:17 <CindyLinz> whitglint: 問你好了?
+23:43:00 <whitglint> CindyLinz: 我不懂 haskell 呀?
+23:43:21 <CindyLinz> whitglint: 想問的是 C++ O__O
+23:43:44 <CindyLinz> 想一下.....
+23:44:54 <CindyLinz> 如果我寫了一個 template 函數長得像這樣: template <class T> sort(T* begin, T* end);
+23:45:11 <CindyLinz> 我有沒有辦法限制這個 T 一定有定義 < operator?
+23:46:27 <mno2_> CindyLinz: type_traits ?
+23:46:39 <CindyLinz> 我來查查看.. 謝謝 ^^
+23:47:25 <CindyLinz> c++11 的? 那好, 表示不是我以前不認真 XD
+23:47:37 <whitglint> c++11 之前應該是不行?
+23:47:41 <hashcat> 額有需要這樣?
+23:48:09 <suhorng> 我不能直接用 < 然後沒有的話自然會 compile error @@?
+23:48:19 <whitglint> 一般是在 sort() 裡面直接使用 < 讓它編譯錯誤
+23:48:36 <CindyLinz> 我以前知道的也只有那樣~
+23:48:43 <suhorng> 我以為就是這樣XD
+23:49:10 <CindyLinz> 只是 Haskell class 的功用不只是給 compiler 看啊~ 也讓我們了解這函數在做什麼這樣.. 埋在 code body 裡面就沒這效果了
+23:49:41 <suhorng> 恩...
+23:50:02 <mno2_> suhorng: static_assert + type_traits ?
+23:50:20 <suhorng> 有道理，有 static_assert
+23:50:35 <mno2_> static_assert 還蠻好用的
+23:51:07 <whitglint> 但 operator< 有可能是 T 的 member function, 也有可能是 non-member function
+23:51:31 <mno2_> whitglint: 坑太多了，這大概是最淺的坑了吧 xD
+23:52:02 <mno2_> *期待 rust*  xD
+23:52:09 <suhorng> 阿阿, 不過剛剛 CindyLinz 的意思應該是表達出「這份 code 需要支援某某 interface」的感覺？那這樣 static_assert 也不太一樣意思
+23:52:10 <CindyLinz> 那 x^=y^=x^=y 算是深的還是淺的? XD
+23:52:20 <suhorng> 算是未定義的XD
+23:52:24 <mno2_> CindyLinz: 那 C 就有了吧
+23:52:24 <suhorng> 嗎..
+23:52:28 <whitglint> mno2_: 期待 rust++
+23:52:43 <CindyLinz> 的確是 C 就有... 可惡被 mno2_ 完美地迴避了問題... QQ
+23:52:53 <suhorng> #define swap(x,y) x^=y^=x^=y;\nint x=10;\nswap(x,x);\n
+23:53:21 <CindyLinz> suhorng: 你這是強加 x,y 在一起啊... XD   可是就算 x,y 不在一起還是會掛啊
+23:53:38 <suhorng> XD
+23:54:13 <CindyLinz> 如果 x,y 在一起一定會清成 0 這部分, 還算有定義啦 ._.
+23:54:22 <CindyLinz> 如果有定義的話 ._.
+23:55:39 <hashcat> http://www.stroustrup.com/bs_faq2.html#constraints
+23:56:13 <hashcat> 這裡有一票C++ template作的編譯時期測試
+23:57:27 <hashcat> 有限制template的類一定要繼承某類的測試
+23:57:49 <CindyLinz> 嗯嗯嗯

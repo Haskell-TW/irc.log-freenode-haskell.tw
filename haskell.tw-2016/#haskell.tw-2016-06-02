@@ -1,0 +1,25 @@
+00:22:48 <pkmx> @@ semigroup 進 base 了!
+00:22:48 <lambdabot>  semigroup 進 base 了!
+00:23:08 <pkmx> lambdabot: 尼奏凱
+00:26:49 <CindyLinz> XD
+02:20:16 <petercommand> NonEmpty....ww
+02:20:32 <petercommand> 沒看到 Option @@
+02:20:42 <CindyLinz> 把 scanl1 之類的函數都變成吃 NonEmpty 呀
+02:21:25 <CindyLinz> petercommand: https://hackage.haskell.org/package/semigroups-0.18.1/docs/Data-Semigroup.html#t:Option
+02:21:42 <CindyLinz> "Option is effectively Maybe with a better instance of Monoid, built off of an underlying Semigroup instead of an underlying Monoid.
+02:21:43 <CindyLinz> Ideally, this type would not exist at all and we would just fix the Monoid instance of Maybe"
+02:26:11 <petercommand> 原本 Maybe 的 Monid instance 的問題是甚麼呀?
+02:26:20 <petercommand> *Monoid
+02:28:48 <petercommand> 完全沒用過 scanl1..XD
+02:29:42 <petercommand> 看起來就是不用給 identity
+02:30:03 <petercommand> Semigroup a => Monoid (Option a)
+02:30:19 <CindyLinz> petercommand: 應該就只是沒有 Semigroup 可用...
+02:30:44 <CindyLinz> Semigroup 就是不用保證有 identity 的東西
+02:31:08 <CindyLinz> 所以 Maybe a 只有 Monoid a => Monoid (Maybe a)
+02:31:21 <CindyLinz> 他覺得這樣要強求有 Monoid a, 就不夠好 XD
+02:31:33 <petercommand> XDD
+02:37:56 <petercommand> CindyLinz: 之前我講錯了，stack 的 ghc 也是有 header 可以用的
+02:38:05 <petercommand> 找錯地方了w
+02:38:18 <petercommand> 才沒找到XD
+13:31:54 <CindyLinz> 嗯嗯嗯
+23:32:37 <CindyLinz> Servant 好讚喔 :p

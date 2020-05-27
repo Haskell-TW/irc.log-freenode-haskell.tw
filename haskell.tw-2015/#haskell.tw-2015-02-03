@@ -1,0 +1,43 @@
+00:14:14 <CindyLinz> petercommand: 這問題太難了.. 應該是靠經驗吧 XD
+00:15:32 <CindyLinz> 憑經驗判斷哪些 package 該列為常用, 憑經驗判斷用自己這個 library 實用的時候不會跟哪些 package 共用... @@"
+01:01:35 <CindyLinz> 好像應該先讀讀 monad-tf, layers, monad-classes 這幾個 package, 才能了解這 monad-levels 的作者在不爽什麼哄.. :Q
+15:11:07 <CindyLinz> 在隔壁 channel 看到..
+15:11:48 <CindyLinz> > loop (\(a, b) -> (a:b, a:b)) 3
+15:11:50 <lambdabot>  [3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3...
+15:12:31 <petercommand> :t loop
+15:12:32 <lambdabot> ArrowLoop a => a (b, d) (c, d) -> a b c
+15:12:43 <CindyLinz> 覺得 Arrow 也值得好好練練直覺 @@"
+15:17:38 <CindyLinz> > loop (\(a, b) -> (a:b, map (*2) (a:b)) 1
+15:17:40 <lambdabot>  <hint>:1:41:
+15:17:40 <lambdabot>      parse error (possibly incorrect indentation or mismatched brackets)
+15:17:46 <CindyLinz> > loop (\(a, b) -> (a:b, map (*2) (a:b))) 1
+15:17:48 <lambdabot>  [1,2,4,8,16,32,64,128,256,512,1024,2048,4096,8192,16384,32768,65536,131072,2...
+15:19:24 <CindyLinz> > loop (\(a, b) -> (a:b, a:zipWith (+) (a:b) b)) 1
+15:19:26 <lambdabot>  [1,1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181,6765,10946,17...
+15:35:01 <petercommand> @hoogle fork
+15:35:05 <lambdabot> Control.Concurrent forkIO :: IO () -> IO ThreadId
+15:35:05 <lambdabot> GHC.Conc.Sync forkIO :: IO () -> IO ThreadId
+15:35:05 <lambdabot> GHC.Conc forkIO :: IO () -> IO ThreadId
+21:28:02 <petercommand> > (toDyn "a")
+21:28:03 <lambdabot>  <<[Char]>>
+21:28:11 <petercommand> > fromDynamic (toDyn "a")
+21:28:12 <lambdabot>  Nothing
+21:28:24 <petercommand> > fromDynamic (toDyn "a") :: [Char]
+21:28:25 <lambdabot>  Couldn't match expected type ‘[GHC.Types.Char]’
+21:28:25 <lambdabot>              with actual type ‘Data.Maybe.Maybe a0’
+21:28:30 <petercommand> > fromDynamic (toDyn "a") :: Maybe [Char]
+21:28:32 <lambdabot>  Just "a"
+21:29:25 <petercommand> 本來以為 toDyn 會加一個 tag ，讓他能夠變回來XD
+21:29:31 <petercommand> > fromDynamic (toDyn "a") :: Maybe [Int]
+21:29:32 <lambdabot>  Nothing
+21:30:06 <petercommand> > fromDynamic (toDyn 1) :: Maybe Int
+21:30:08 <lambdabot>  Nothing
+21:30:10 <petercommand> > fromDynamic (toDyn 1) :: Maybe Integer
+21:30:12 <lambdabot>  Just 1
+21:30:30 <petercommand> > fromDynamic (toDyn 1) :: Integral a => Maybe a
+21:30:32 <lambdabot>  Could not deduce (Data.Typeable.Internal.Typeable a1)
+21:30:32 <lambdabot>    arising from a use of ‘Data.Dynamic.fromDynamic’
+21:30:32 <lambdabot>  from the context (GHC.Real.Integral a)
+21:31:08 <au> > fromDynamic (toDyn 1) :: (Integral a, Typeable a) => Maybe a
+21:31:10 <lambdabot>  Just 1
+21:32:24 <petercommand> ++

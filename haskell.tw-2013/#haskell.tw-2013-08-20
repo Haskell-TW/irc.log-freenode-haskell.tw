@@ -1,0 +1,64 @@
+00:00:22 <favonia> 喔喔
+00:01:05 <hashcat> 完全是不同的世界去
+00:01:21 <hashcat> 在這裡開始誤導
+12:44:03 <cataska> The Haskell School of Music http://www.cs.yale.edu/homes/hudak/Papers/HSoM.pdf
+16:36:42 <mno2> Typed Lamda Calculus 據說是為了避免羅素悖論而弄出來的。不過我看不出 Lambda Calculus 為什麼有自我指涉的問題..  還是說只是保險起見？
+16:54:00 <Yu-Lin> type theory 是受到羅素悖論影響而出現的，typed lambda calculus 最初也許是為了研究 type theory 才創造的？
+16:55:22 <suhorng> mno2: 把東西encode進去然後可以弄出矛盾 (Y combinator)
+16:56:13 <CindyLinz> 應該是那個 「QQ」?
+16:56:28 <mno2> QQ 是啥？
+16:56:30 <CindyLinz> 會 apply 不停
+16:56:53 <CindyLinz> 找找..
+16:57:03 <Yu-Lin> 不動點？
+16:57:37 <suhorng> 假設把boolean給encode進去, 有個 `not` function, 丟到Y裡面可以得到 (Y not) = not (Y not)？ (FLOLAC 講義有, 好像不是我講得這樣...)
+16:57:52 <CindyLinz> Q = \x -> x x
+16:57:56 <CindyLinz> 然後.. Q Q
+16:58:02 <mno2> 喔喔
+16:58:31 <CindyLinz> 然後說 typed lambda calculus 直接讓這個 Q Q type fail
+16:58:42 <CindyLinz> (簡單說就是迴避問題? XD)
+16:58:50 <suhorng> strong normalization XD
+16:59:28 <suhorng> (好奇一個語言的 Turing completeness 跟他的 type system 作為邏輯系統的 consistency 有沒有關係...)
+16:59:58 <suhorng> Turing complete 會讓該語言的 type system 作為邏輯系統 inconsistent 嗎?
+17:01:22 <CindyLinz> 如果它的 type system 的描述性夠差, 應該就沒問題
+17:01:43 <CindyLinz> 無法得到不完備定理的認證.. (蓋章)
+17:02:59 <mno2> Turing Machine 不是跟 lambda calculus 具備同樣的能力？
+17:03:31 <mno2> 那這樣沒限制的 lambda calculus 會造成 bottom
+17:03:42 <mno2> 那 Turing Machine 不是也會嗎？
+17:04:35 <suhorng> mno2: The Paradoxical combinator (Y combinator?) http://en.wikipedia.org/wiki/Curry%27s_paradox#Lambda_calculus XD FLOLAC講義萬能!
+17:05:16 <Yu-Lin> FLOLAC 該賣講義了！XD
+17:05:23 <Yu-Lin> 我要一本阿阿阿阿T_T
+17:05:34 <mno2> 那 Turing Complete 的語言的 type system 要描述 Turing Machine 會 bottom 的狀況，他的 type 不是就會有 bottom 的情況？
+17:05:48 <CindyLinz> 這就是 halting problem?
+17:06:01 <suhorng> FLOLAC講義上是說, Church把 M \in N 編碼程 N(M) {- N applies to M, 看出來是 true 還是 false -}. 這樣 {x | P} 就是 \x -> P;
+17:06:44 <suhorng> 然後呼叫 Russell's paradox: \x -> not (x x) 就爆炸了： R R = not (R R)
+17:07:18 <mno2> 喔喔
+17:07:23 <mno2> 簡單明瞭
+17:07:24 <suhorng> 把 not 變成任意的 term F 的話會得到 Y combinator 那個形式, 所以也稱 Y combinator 為 the Paradoxical Combinator
+17:07:52 <suhorng> CindyLinz: halting problem (woot) Agda之類的都是 total 會不會也跟這些有關?
+17:10:19 <CindyLinz> 我覺得是實作考量 :p
+17:12:43 <CindyLinz> 不然做不出來 XD
+17:14:32 <suhorng> 不太能理解實作考量
+17:15:02 <suhorng> 我現在想的是說, halting problem 是 undecidable, 乾脆直接要求 programmer 附上會終止的證明
+17:19:19 <CindyLinz> 這樣也是不錯啦 XD
+17:19:37 <CindyLinz> 可是 Agda 要求的證明是每一步都會縮小.. 我是覺得有點太嚴苛啊
+17:22:21 <suhorng> 檢查比較簡單嗎...
+17:23:26 <CindyLinz> 對啊, 就只要看一步就好
+18:25:49 <suhorng> 納悶很久為什麼 Haskell 的 constructor 要大寫, 而且 infix constructor 要用 ':' 開頭
+18:26:28 <suhorng> 結果竟然找到 http://www.haskell.org/pipermail/haskell-cafe/2006-August/015857.html
+18:26:45 <suhorng> 翻了一下才發現我完全忘記有 pattern matching 這回事
+18:40:19 <favonia> suhorng: 實作過類似的 compiler 就知道問題在哪裡 orz
+18:42:06 <favonia> 「不會結束」不代表「type 有 bottom」啊
+18:42:32 <favonia> 在很多系統裡面那只是代表是 partial function 而已
+18:44:13 <favonia> 「通常」 type 裡面的東西是以 value 為準... 也就是「如果結束時會傳回的東西」
+18:44:29 <suhorng> favonia: 是寫像 Agda 那種定理證明用的語言的 compiler 嗎?
+18:44:44 <favonia> Haskell 是因為有可能明明硬要算算不完，卻還是把整個敘述「傳回」，那到底傳回什麼呢？ bottom.
+18:45:15 <CindyLinz> 等到杜鵑築巢的時候傳回...
+18:45:48 <favonia> suhorng: ML/Haskell 的 compiler
+18:46:05 <suhorng> 兩個不一定要有關係?? 真好奇 "不通常" 的 type 是怎樣XD
+18:46:07 <suhorng> 喔喔
+18:46:32 <suhorng> constructor那個
+18:46:34 <favonia> suhorng: 這些都只是習慣。你自己愛定奇怪的系統沒人阻止你
+18:50:31 <suhorng> 雖然是自己可以亂定, 不過還是會希望不是自己在自嗨 XD
+18:54:57 <CindyLinz> 如果嗨到像王垠那樣也是不錯..
+18:55:26 <favonia> suhorng: 像 type theory 的 research 某種程度上就是有節制的自嗨 大概就這樣
+18:55:51 <suhorng> 有節制的自嗨XDD

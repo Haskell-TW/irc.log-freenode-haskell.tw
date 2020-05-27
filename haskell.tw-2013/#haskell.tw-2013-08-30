@@ -1,0 +1,31 @@
+21:24:56 <MnO2> https://github.com/meiersi/HaskellerZ/blob/master/meetups/20130829-FPAfternoon_The_Haxl_Project_at_Facebook/The%20Haxl%20Project%20at%20Facebook.pdf?raw=true
+21:25:12 <MnO2> The Haxl Project at Facebook (slides from my talk at ZuriHac)
+21:31:54 <favonia> MnO2: 入侵 FB xD
+21:32:25 <MnO2> 有內鬼 wwwwww
+21:32:41 <CindyLinz> 我昨天把這消息跟咱們家技術長說了.. :D
+21:32:55 <MnO2> 這樣後人要維護就不得不學 Haskell
+21:33:06 <CindyLinz> 我有事沒事偶爾就會跟他洗腦一點.. :p
+21:33:15 <CindyLinz> 希望能達到潛移默化之效....
+21:33:31 <MnO2> 我有看到 in2 po 說 CindyLinz 講了一個好難的東西 xD
+21:34:03 <CindyLinz> 那一個是 perl 啦.. ^^|
+21:34:38 <CindyLinz> Haskell 我怎麼會去講好難的東西... 當然要讓人覺得又簡單又方便又短又快又安全啊~~~ :p
+21:35:10 <MnO2> 那你 perl 到底講了什麼?
+21:36:23 <CindyLinz> http://search.cpan.org/~cindy/Combinator-0.04.01/lib/Combinator.pm
+21:36:57 <CindyLinz> 可是難點只是有一點遞迴定義而已.. :Q
+21:39:50 <MnO2> 原來 perl 界沒人寫過喔?
+21:44:28 <CindyLinz> 寫過啥??
+21:48:27 <MnO2> 就是這種避免 callback 的 library
+21:48:46 <MnO2> ruby 的 eventmachine 是不是也是類似這樣?
+21:49:49 <CindyLinz> perl... 大家都 callback 得很開心(?)
+21:50:13 <CindyLinz> 有一個 coro 的 lib 是同時啟動 N 個 perl interpreter, 算是 green thread approch
+21:51:36 <CindyLinz> MnO2: 可是 perl 天生算是沒有 thread 的, 我不知道有什麼不惡搞的方法避免耶 @@"
+21:51:54 <CindyLinz> 我寫的這個有利用改變 perl syntax 的作法
+21:52:02 <CindyLinz> 這部分手法也算是惡搞吧...
+21:54:04 <MnO2> 一個 process 起 N 個 perl interpreter，所以是 single OS thread 跑這 N 個 interpreter ? 還是說可以多個 OS thread 跑?
+21:54:27 <CindyLinz> 一個
+21:54:32 <CindyLinz> 它們同一時間只有一個會動 XD
+21:54:46 <CindyLinz> 只是拿來存放 context 而已 XD
+21:54:53 <MnO2> 恩，那看起來就是標準招式
+21:55:51 <MnO2> Linux 3.9 那個重複 bind 同一個 port 出來之後不知道又會有甚麼變化
+21:58:19 <favonia> MnO2: 那個是不是 BSD 還是啥的以前就有了啊？
+22:01:18 <MnO2> 喔? 我沒看到那一段

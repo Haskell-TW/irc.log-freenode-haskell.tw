@@ -1,0 +1,204 @@
+00:56:06 <Jhe__> 有人咩@@?
+00:57:28 <MnO2> Jhe__: yes?
+00:57:50 <Jhe__> 我看了一圈 中文教程 還是不太懂=@=
+00:58:02 <Jhe__> functional programming
+00:58:44 <MnO2> 你想要了解的是？functional programming 寫起來的感覺？
+00:58:53 <MnO2> haskell 寫起來的感覺？
+00:58:57 <monochrom> 別單看, 記住要練習, 實驗
+00:59:26 <Jhe__> 跟以往 寫OOP 的感覺不同
+00:59:30 <Jhe__> 不過說不上來
+00:59:41 <monochrom> 游水下棋不是讀書懂的
+01:00:56 <MnO2> Jhe__: 具體來說你現在挑的語言是？
+01:01:13 <Jhe__> MnO2: haskell
+01:01:18 <monochrom> (所以我更不明白為何人們不明白程式就找更多書讀, 而不是做更多實驗)
+01:01:59 <Jhe__> monochrom:  當然 練習是一定要的
+01:02:13 <MnO2> Jhe__: 那你看了哪些教程?
+01:02:37 <Jhe__> MnO2:  從推薦的 Real World Haskell
+01:02:52 <Jhe__> MnO2:  跟 中文版的
+01:03:11 <Jhe__> MnO2:  上面推薦的那個
+01:03:37 <monochrom> Real World Haskell 差不多假設讀者懂基本Haskell
+01:04:02 <MnO2> 我不推薦從 Real World Haskell 開始，他對初學者太難了
+01:04:21 <MnO2> Learn you a Haskell for great good 看過了嗎？
+01:05:04 <Jhe__> MnO2:  還沒 我竟然 miss 掉這個連結@@
+01:05:16 <MnO2> 甚至如果只是想體會 "Functional" 的話，我會建議從 Racket 開始寫
+01:05:28 <Jhe__> MnO2:  等等 ..
+01:05:35 <Jhe__> MnO2:  我看過 不過是中文版的
+01:06:00 <MnO2> 所以 14 章都看完了？
+01:06:33 <Jhe__> 看到高階函數 玩
+01:06:36 <Jhe__> 完
+01:08:20 <Jhe__> 雖然我在 看 introduction 就有點疑惑 ...
+01:08:33 <MnO2> OK, 那應該可以練習一些東西。可以找 Project Euler 題目來寫
+01:08:50 <monochrom> 那麼, 你只算練到第6層, 還未練足14層 :)
+01:09:15 <MnO2> 你可以試著描述看看你的疑惑
+01:09:53 <monochrom> 不過, 照計有這6層已可以讀部份RWH了
+01:10:30 <Jhe__> 像這句
+01:10:30 <Jhe__> 在純粹函數式程式語言中，你不是像命令式語言那樣命令電腦“要做什麼”，而是通過用函數來描述出問題“是什麼”，如“階乘是指從1到某個數的乘積”，"一個串列中數字的和"是指把第一個數字跟剩餘數字的和相加。
+01:10:40 <Jhe__> 從 裡面截出來的
+01:11:04 <Jhe__> 定意函數的時候 不是也是要告訴他 how to 嗎@@?
+01:11:08 <Jhe__> 定義*
+01:11:30 <Jhe__> 不懂他所謂 "在純粹函數式程式語言中，你不是像命令式語言那樣命令電腦“要做什麼”，而是通過用函數來描述出問題“是什麼”，如“階乘是指從1到某個數的乘積”，"一個串列中數字的和"是指把第一個數字跟剩餘數字的和相加。"
+01:11:44 <Jhe__> 不懂他所謂 "而是通過用函數來描述出問題“是什麼”"
+01:11:45 <monochrom> 我通常不會著意這個區分
+01:12:37 <letoh> 過去的背景和經驗對於學習程式語言有影響嗎?
+01:12:49 <Jhe__> letoh: 我嗎@@?
+01:12:52 <letoh> 嗯
+01:13:27 <Jhe__> VB6,python,c++
+01:14:06 <Jhe__> 往夜語言不計的話 這三個用最九
+01:14:09 <Jhe__> 網頁*
+01:14:16 <letoh> 嗯  那你知道所謂的「命令式語言」大概是什麼感覺嗎?
+01:14:18 <monochrom> 不過我倒會說: 假設定義了 f x = product [1..x], 我說 f 4 就是 [1..4], 或者 f 4 的答案是 [1..4], 我不說 f 4 回歸 (returns) [1..4].
+01:14:21 <MnO2> 那主要只是要強調，跟電腦說 "how to" 的時候，不是一個命令一個命令做
+01:14:47 <MnO2> "how to" 有許多種表達方式，語言就是在摸索這件事
+01:15:05 <letoh> 有點像 how to do 跟 what to do 的差別? 不過這個分類可能不是那麼精確就是@_@
+01:15:48 <MnO2> 所謂 functional programming 就是另外一種表達方式
+01:16:49 <MnO2> 我看一下我有沒有翻爛 xD
+01:17:09 <monochrom> 對, 例如每一條Project Euler題目都是what to do, 直譯到Haskell就死得人多了! 你一定要想個快的算法, 所以結果還是how to do
+01:18:01 <letoh> MnO2: 我的感覺：倒不是翻譯的問題  我覺得那句話想表達的東西，反而因為扯到「通過用函數來描述」，讓焦點被模糊掉了
+01:18:30 <letoh> 因為對剛入門的人來說，其他語言也有 function 呀
+01:18:51 <Jhe__> 喔~
+01:18:52 <Jhe__> 對了
+01:19:09 <Jhe__> 翻譯本裡有幾個地方英文打錯了
+01:19:20 <Jhe__> 不過無傷大雅@@
+01:19:29 <monochrom> 不過我覺得 "就是" (或說"等於") 和 "回歸" 還是有用的區分. 因為是我想出來的! :)
+01:19:53 <Jhe__> monochrom: 願聞其詳
+01:20:08 <Jhe__> 詭異 我的 scroll 不會自動捲下來了 ...
+01:20:31 <MnO2> 原句是：In purely functional programming you don't tell the computer what to do as such but rather you tell it what stuff is.  「通過函數」是我偷加的 xD
+01:20:48 <letoh> XD 我沒有對照原文XD
+01:21:04 <monochrom> f x = product [1..x].  我說 "f 4 就是 [1..4]", 或 "f 4 等於 [1..4]". 我不說 "f 4 回歸 [1..4]"
+01:21:10 <Jhe__> MnO2:  了解
+01:22:02 <Jhe__> 讓我感覺像是 一種 alternative
+01:22:15 <monochrom> "回歸"明顯是imperative的說法, 不是functional的說法.
+01:22:29 <Jhe__> 原文說 告訴他 那是什麼 而不是該如何做
+01:24:13 <letoh> 其實我剛剛提到經驗/背景，只是覺得在傳達新概念給對方時，如果遇到困難，可能要改成協助對方在原本熟悉的世界裡找到類比或關聯 (好繞口..)，可能會更容易讓對方進入狀況
+01:24:45 <monochrom> 呀, 打錯字. 顯然, f 4 等於 product [1..4] 哈哈
+01:25:00 <Jhe__> monochrom: 還是能懂 XD
+01:25:18 <letoh> 以前我在學 monad 的時候，找到的文章都說 monad 很簡單，舉了很多怪例子，但我就是一直鬼打牆搞不懂XD
+01:26:18 <Jhe__> 問一個問題 雖然我覺得應該很聽很膩了 ...
+01:26:50 <Jhe__> 要有怎樣的程設能力才能到中小型公司上班?
+01:28:01 <letoh> 我覺得對大部份的公司來說，可能面對問題、解決問題的能力比較重要，特定程式能力不太好說，也不容易量化
+01:28:53 <Jhe__> letoh: 想吃這行飯 卻感覺外面的世界很恐怖 ...
+01:29:17 <monochrom> "等於"的重要處: f 4 等於 24. 假設有另一個函數g, 而 g 3 等於 24. 那麼 f 4 等於 g 3. 但"f 4 回歸 g 3"就不通了.
+01:30:02 <letoh> 大部份的狀況，程式語言是用來解決真實世界問題的工具之一
+01:32:09 <letoh> 我對「回歸」二字沒有那麼多想法XD
+01:32:57 <monochrom> "回歸"容許下次回歸另一個值
+01:33:40 <monochrom> "等於"就不准你今日等於24, 明日等於23了
+01:36:39 <letoh> 嗯嗯
+01:37:15 <letoh> 所以回歸指的是經過特定演算後的結果嗎?
+01:37:26 <Jhe__> 在 ghci 裡要怎麼定義函數型別@@?
+01:37:58 <Jhe__> 用 let 他說少一個 accompanying binding
+01:39:17 <letoh> 你怎麼寫的呢?
+01:40:10 <Jhe__> 例如 let fac :: Int -> Int
+01:40:27 <letoh> 嗯  let 是指定 bindint 用的
+01:40:48 <Jhe__> 直接這樣 fac :: Int -> Int
+01:40:56 <Jhe__> 他會說 not in scope
+01:42:11 <MnO2> 因為 fac 沒定義
+01:42:24 <MnO2> let fac = (+1) :: Int -> Int
+01:43:25 <monochrom> "回歸"最適用於例如I/O, 你讀取鍵盤, 次次都可能得到不同的值. 用於 product [1..4] 當然也可以, 但明知次次都回歸同一個值, 那麼還說"回歸"就忽略重點了.
+01:45:11 <Jhe__> 原來可以這麼寫@@
+01:47:10 <monochrom> let { fac :: Int -> Int; fac = (+ 1) }
+01:47:38 <monochrom> (不過, fac 怎會只是加一呢? :) )
+01:47:52 <letoh> 舉例而已?
+01:48:01 <Jhe__> monochrom: 用什麼是用 大括弧@@?
+01:48:28 <monochrom> 另外還有方法叫ghci讓你一次輸入數行, 不過我少用, 不記得
+01:49:15 <monochrom> 我猜 { 算是大括號吧. 好像在小學是這麼叫的, 哈哈
+01:49:44 <Jhe__> 他是呀@@
+01:49:49 <Jhe__> 我還聽過 花括號
+01:50:01 <Jhe__> 不懂為何是"花括號"
+01:51:01 <monochrom> 可能打横看像簡單的花或花托
+01:52:16 <monochrom> --{c 怪俠一枝玫
+02:25:57 <Jhe__> let {fac::(Int a) => a -> a;fac n = if n == 0 then 1 else n * fac (n-1)}
+02:26:09 <Jhe__> 這樣是錯的 ...
+02:26:17 <Jhe__> why ~
+02:27:38 <Jhe__> 回應是 too many type argument @2
+09:41:15 <b4283> 梅
+09:46:57 <monochrom> 我喜歡玫！
+09:49:16 <b4283> 呵呵
+10:36:03 <MnO2> http://www.haskell.org/pipermail/haskell-cafe/2010-April/075647.html  用 Atom 寫汽車軟體的心得分享
+11:03:16 <b4283> garbage truck ...
+11:11:12 <MnO2> 用有 garbage collector 的語言寫 garbage truck  :p
+11:13:22 <MnO2> http://www.cool3c.com/article/67286 摺紙的空間結構可以用代數表達嗎？
+15:46:49 <letoh> 這不是 TED 上的影片嗎... 出來很久了
+20:32:17 <MnO2> 有感而發：寫 Haskell 最討厭的就是 memory leak 了 <---- 處理一個不確定是哪裡 leak 的程式
+20:32:58 <letoh> haskell 也需要擔心這個?
+20:35:04 <MnO2> letoh: 恩，我這邊的 memory leak 跟 C 那種 memory leak 不一樣。 語境是 Haskell 的時候，memory leak 是指某個地方不過 strict 所以 thunk 一直堆
+20:35:45 <letoh> 原來如此
+20:36:39 <letoh> 這樣會惡化到 memory exhausted 嗎?
+20:37:19 <letoh> 如果有一堆 thunk 沒辦法處理的話
+20:38:28 <MnO2> 會啊，如果輸入夠大的話就會爆
+20:38:59 <suhorng> 而且記憶體爆掉之前, evaluate可能會先stack overflow...XD
+20:39:20 <letoh> 唔，好像蠻可怕的，這算是 lazy 的缺點嗎@_@
+20:39:58 <MnO2> 是啊，這是最被人詬病的地方。
+20:40:37 <MnO2> 不過好一點的是，通常找到問題只要加一點東西馬上就會 work
+20:40:50 <letoh> 嗯嗯
+20:41:35 <letoh> 我覺得比較可怕的是  工具幫忙做太多事了，結果使用者變得完全沒有危險意識XD
+20:41:43 <letoh> 危機意識XD
+20:42:51 <letoh> 寫 c 的時候還會小心翼翼處理所有用到的資源，編譯完一定得跑一下 memory profiler
+20:43:41 <favonia> MnO2: 加上 +RTS -K64G -RTS (誤)
+20:46:56 <favonia> MnO2: stack overflow => 把 stack 變大就好了 xDDD
+20:49:20 <MnO2> yeah,  安裝 ghc 的時候要填信用卡。stackoverflow 就自動幫你買 RAM
+20:49:31 <suhorng> XDDD
+20:50:31 <Jhe__> 對函數型態的定義好疑惑@@
+20:50:46 <letoh> 不是分散一些計算量到雲端嗎XD
+20:52:01 <Jhe__> 重覆翻了幾遍 好像沒有對這個地方獨立解釋
+20:52:57 <suhorng> Jhe__: 像是什麼？可以舉例一下嗎
+20:53:38 <suhorng> 類似函數的定義域跟值域..XD?
+20:53:48 <Jhe__> suhorng: 像是這個函數 fac n =  if n == 0 then 1 else n * fac(n-1)
+20:54:05 <Jhe__> 很普通的階層計算
+20:54:42 <suhorng> 嗯？
+20:54:55 <Jhe__> 如果我將形態定義為 fac::(Int a) => a -> a
+20:54:58 <Jhe__> 錯誤~
+20:55:24 <suhorng> 沒有 Int 這個 "typeclass" 喔
+20:55:27 <Jhe__> 但是 直接用:t 測試的話 也是 Int -> Int
+20:55:33 <suhorng> 但是有 "Integral"
+20:55:58 <suhorng> 所以可以寫 fac :: Integral a => a -> a。直接標 fac :: Int -> Int 也可以
+20:56:16 <Jhe__> suhorng: 懂了 ...
+20:56:26 <suhorng> XD
+20:56:44 <Jhe__> 所以型別綁定是 用在 Typeclass
+20:57:03 <Jhe__> 難怪我一直分不出差異
+20:58:39 <suhorng> 嗯, "=>" 前面是在說 typeclass
+20:59:45 <Jhe__> suhorng: 你一講 沒有這個 Typeclasses 我就恍然大悟@@
+21:17:34 <suhorng> 是說對於 Monad m 而言， a -> m b 這種函數有沒有什麼特別(或常見)的稱呼？
+21:29:02 <MnO2> 沒看過耶，可以自己取 xD
+21:37:23 <suhorng> 嗯XD
+23:08:02 <MnO2> CindyLinz 投影片準備好了嗎？ xD
+23:08:41 <CindyLinz> 還沒欸
+23:08:58 <CindyLinz> 有沒有知道什麼用 html 方便做投影片的東西壓?
+23:09:49 <CindyLinz> 內容準備好了, 只是還沒弄成投影片的型式 :Q
+23:10:50 <letoh> 有陣子很流行 xul ? 現在大概退流行了
+23:11:05 <MnO2> pandoc ?
+23:11:16 <CindyLinz> 好我來看看 ._.
+23:11:35 <letoh> pandoc 有現成的 template 可以做 slide 嗎?
+23:11:41 <letoh> 我以為只是轉成 html 而已
+23:11:58 <CindyLinz> 我想直接寫 html
+23:12:13 <CindyLinz> 然後它可以變成投影片的用法
+23:12:26 <MnO2> http://www.scs.stanford.edu/11au-cs240h/notes/
+23:12:40 <MnO2> 直接喔，那我就不知道了
+23:12:55 <letoh> 這個不錯
+23:13:15 <CindyLinz> 打文字檔的也可以接受啦 ^^
+23:13:38 <favonia> CindyLinz: 直接做成 svg 然後嵌入就好啦
+23:13:45 <CindyLinz> 用「接受」好像太嚴重了.. 至不濟.. libreoffice 還是開出來用 orz
+23:13:58 <favonia> CindyLinz: 或是先算好時間用很大的 gif 檔也可以
+23:14:22 <CindyLinz> favonia: 那樣就不方便了啊.. 只是幾個 bullet dot 而已 ^^|
+23:14:22 <MnO2> 這樣無法回上一頁耶
+23:14:34 <favonia> MnO2: 可以...
+23:15:06 <favonia> CindyLinz: 喔～
+23:15:08 <MnO2> 倒序播放嗎？
+23:15:32 <favonia> MnO2: svg 可以直接把 javascript 塞進去啊
+23:15:42 <favonia> 然後就什麼都做得到啦
+23:16:05 <MnO2> 我是說 gif 耶
+23:16:12 <favonia> 喔
+23:16:34 <favonia> gif 本來就是算好時間 就像放電影一樣 只是聲音現場配
+23:17:13 <favonia> 雖然難度很高但我相信 CindyLinz 一定可以克服的（逃）
+23:18:24 <letoh> gif 萬一沒對好就會亂掉吧?
+23:18:32 <letoh> 也不能倒帶XD
+23:18:37 <CindyLinz> 這樣好像準備一個 youtube 短片, 人也不用去... 把網址寄給主辦人就了事了...
+23:19:01 <MnO2> Never live demo 變成 Never live talk
+23:19:50 <CindyLinz> dead talk... orz
+23:27:36 <favonia> letoh: 這是技術問題
+23:28:36 <letoh> 倒帶的確是技術問題... 只好先弄個 gif player ? XD
+23:34:33 <CindyLinz> 又不是 Ingy do"t Net ._.
+23:40:57 <CindyLinz> MnO2: pandoc 好像不錯耶 ^^ # http://johnmacfarlane.net/pandoc/demo/example9/producing-slide-shows-with-pandoc.html
+23:41:29 <letoh> 可以接到 beamer!!!
+23:41:46 <letoh> (這東西該不會需要 ghc 吧...)
+23:46:20 <CindyLinz> 裝 pandoc 我是用 cabal 裝.. so
+23:46:27 <MnO2> 看起來不錯

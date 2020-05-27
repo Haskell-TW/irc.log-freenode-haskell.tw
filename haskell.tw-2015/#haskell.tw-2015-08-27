@@ -1,0 +1,14 @@
+00:58:29 <CindyLinz> 我之前教 Lambda Calculus 的朋友買了.....
+00:58:49 <CindyLinz> 說筆電開不起來, 桌機才能開.. (都是 mac)
+01:06:42 <cataska> 我可以開耶
+01:07:24 <cataska> 我用 MBA
+01:07:43 <CindyLinz> 這表示.. 就算是 mac book 都會有硬體相容性的問題......
+01:10:02 <cataska> 軟體還要調吧
+01:11:28 <CindyLinz> 要調, 就是有相容性問題啊...
+09:49:16 <mno2> https://www.fpcomplete.com/blog/2015/08/stack-docker
+09:49:30 <mno2> https://www.reddit.com/r/haskell/comments/3igird/frege_faster_than_haskell_ghc/
+11:08:18 <cibs> CindyLinz: 開不起來會不會是 memory limit 的問題?
+13:58:57 <CindyLinz> cibs: 他是這邊一樓 https://www.facebook.com/cindylinz/posts/10207445204869451 , 你可以告訴他要怎麼看 ^^|
+17:27:55 <cibs> CindyLinz: 我也只是猜測 XD 畢竟不知道是怎樣的開不起來
+17:28:05 <cibs> * 用 mac 但是連到 linux 寫 haskell..
+17:33:36 <CindyLinz> wwwww XD

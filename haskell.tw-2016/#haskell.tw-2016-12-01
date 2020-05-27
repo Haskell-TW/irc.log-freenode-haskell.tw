@@ -1,0 +1,5 @@
+02:06:52 <IN_AL_60H_> 原來 GHC 有 Stack trace 相關的 API 呀. withFrozenCallStack 名字好酷XD
+02:06:57 <IN_AL_60H_> https://github.com/lexi-lambda/type-assertions/blob/master/library/Test/TypeAssertions.hs
+02:08:02 <IN_AL_60H_> 話說原來 Type class 可以不用有 type variable 的嗎...
+02:09:32 <IN_AL_60H_> 居然寫得出這種 assertion for types
+13:29:41 <CindyLinz> 沒有用過 XD

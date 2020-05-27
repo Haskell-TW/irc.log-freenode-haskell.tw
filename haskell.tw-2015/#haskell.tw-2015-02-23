@@ -1,0 +1,7 @@
+09:53:46 <monochrom> 你們新年假期有幾多? 幾時完?
+09:54:24 <CindyLinz> 今天最後一天
+09:54:36 <CindyLinz> 明天開學/上班
+12:27:17 <suhorngM1> @hoogle Monoid w => Monoid (Either e w)
+12:27:19 <lambdabot> Warning: Unknown type Monoid
+12:27:19 <lambdabot> Control.Monad.Trans.Error runErrorT :: ErrorT e m a -> m (Either e a)
+12:27:19 <lambdabot> Control.Monad.Error runErrorT :: ErrorT e a -> m (Either e a)

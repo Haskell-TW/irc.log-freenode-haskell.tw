@@ -1,0 +1,194 @@
+16:03:34 <CindyLinz> 昨天聽了 scm 講 prolog 的八卦.. 常常在這 channel 聽到 prolog, 卻不知道它在 198x~ 199x 年代是這麼腥風血雨.... o__o
+16:04:05 <godfat> 沒有聽到 ><
+16:05:13 <CindyLinz> 第五代電腦 https://zh.wikipedia.org/wiki/%E7%AC%AC%E4%BA%94%E4%BB%A3%E9%9B%BB%E8%85%A6
+16:05:55 <gko_> The name Prolog was chosen by Philippe Roussel as an abbreviation for programmation en logique (French for programming in logic). It was created around 1972 by Alain Colmerauer with Philippe Roussel.
+16:06:52 <CindyLinz> prolog 是它的軟體部分, 而且因為實作面它是從軟體往硬體推, 所以幾乎就是硬體發展的核心的感覺...
+16:10:23 <godfat> 嗯嗯，因為野心很大？
+16:10:23 <godfat> 想到這個
+16:10:24 <godfat> http://www.gksoft.com/a/fun/hal-ibm.html
+16:10:25 <CindyLinz> 日本起頭要搞這東西, 引起歐洲, 英國(好像不算歐洲的一部分一樣XD), 美國恐慌, 分別都用國家的力量弄了幾個組織起來搞 (美國部分是鬆動反托辣斯法, 開後門為作跨企業整合), 大家砸超多錢進去, 就像軍備競賽一樣
+16:10:52 <godfat> @@" 這麼有趣...
+16:11:00 <CindyLinz> 然後在 199x 年的時候全部消失, 砸進去的錢全都蒸發掉....
+16:11:19 <b4283> 9x 年 x86 起飛
+16:11:41 <CindyLinz> 台灣真是國力好弱啊, 這種事情都不會有我們的份的... ._.
+16:11:42 <godfat> 我一直以為 prolog 是美國 dod 搞的，最後認賠放棄
+16:11:47 <godfat> ...XD
+16:11:58 <b4283> dod 搞的是 Ada
+16:12:46 <CindyLinz> 這一段故事不是在講 prolog 的興衰, 只是 prolog 參與度蠻大的....
+16:13:05 <godfat> 是喔
+16:14:12 <CindyLinz> scm 一開始問大家有沒有聽過第五代電腦... 然後幽幽地說第五代電腦整個消聲匿跡了, 沒再聽到有人提, 好像也沒什麼人記得了, 可是當年是非常紅的議題, 大家都在講....
+16:15:06 <godfat> XDDD 我好像有聽過第四代，不過也可能是第五代... 這種後來沒提的數字，後來到底是幾都忘了
+16:15:47 <b4283> 我連現在用的是幾代也不曉得
+16:16:22 <CindyLinz> scm 問說現在學校還有沒有教第N代電腦, 大家說好像沒有, 他說, 這樣才是對的!
+16:16:36 <godfat> 一開始都很喜歡喊數字，後來數字多了，大家都搞不清楚了，乾脆另闢名詞
+16:17:00 <CindyLinz> 第一代是真空管, 第二代是電晶體, 第三代是積體電路, 第四代是 IBM-360 (空前絕後就僅此一台)
+16:17:08 <godfat> XDDDD
+16:17:19 <CindyLinz> 他懷疑是 IBM 為行銷目的編出來的分類法.....
+16:17:51 <CindyLinz> 第五代就是剛剛講的那十多年
+16:17:58 <godfat> 我覺得大多這些數字都是為了行銷發明的..
+16:18:22 <CindyLinz> ESPRIT 這個是歐洲那時的跨國組織 https://en.wikipedia.org/wiki/European_Strategic_Program_on_Research_in_Information_Technology
+16:18:38 <CindyLinz> 現在這個字好像是服飾品牌.. XD
+16:18:52 <godfat> XDDDDDDD
+16:18:56 <CindyLinz> 蠻有趣的, 英國都不喜歡跟歐洲一起玩....
+16:19:10 <godfat> 好有深意的品牌名，下次可以考慮
+16:19:33 <CindyLinz> 只是隔了個海峽(英吉利)就差這麼多... 我完全可以體會 (咦)
+16:19:40 <godfat> XDDDDDDDDDD
+16:19:49 <godfat> 有理！
+16:21:53 <CindyLinz> hmm... 魔鬼終結者 1984, 第二集 1991  就剛好在那個年代裡面....
+16:22:12 <CindyLinz> 大概瘋狂的研究嚇到人了....
+16:22:34 <b4283> 第二集應該是 1992
+16:22:57 <CindyLinz> 為什麼你會記住這麼精準的年份.....ww
+16:23:00 <b4283> 咦，奇怪，記錯了嗎
+16:23:07 <CindyLinz> 我是照 wiki 打的, 我自己沒答案 ^^|
+16:23:22 <b4283> 以前還會下載影片時會做一份 excel index  XD
+16:23:46 <CindyLinz> 喔 XD
+16:27:02 <CindyLinz> x86... A.K.A intel 是滅掉第五代電腦的其中一綑稻草... 因為 von Neumann 模型的電腦效能進展太快, 淹掉第五代電腦硬體部分的發展成果
+16:28:20 <CindyLinz> 人們就會開始講說: 我買新的 PC 就好了, 為什麼要用你們這麼複雜又不見得比較快的高度平行化的 prolog 電腦
+16:30:58 <CindyLinz> 覺得.. 一直都有這種因素使得新生的研究方向夭折好可惜喔.. 像是之前 intel 的 Itanium CPU..
+16:31:39 <godfat> 讓我想到 NASA... XD
+16:31:59 <CindyLinz> 或是很早以前曾經有過 asynchrous hardware (就是裡面不需要 clock 的)
+16:32:19 <godfat> 我對硬體一竅不通.. ~.~
+16:32:21 <CindyLinz> NASA 有什麼故事嗎?
+16:32:54 <godfat> 現在想到的是前一陣子看到有人在質疑 nasa 花了很多錢，但對大部分的人沒有幫助
+16:33:08 <CindyLinz> 喔喔 那篇文回得真厲害 XD
+16:33:12 <godfat> 然後就要想一套說詞出來 (?)
+16:33:35 <CindyLinz> 前幾天電視上看到台灣軍工業的研究, 也讓我想到那篇文章.... 「沒有太空研究的時候, 科技推手是軍工業」
+16:33:59 <godfat> 真是非常現實的結果呀（聳肩）
+16:34:52 <CindyLinz> 那我知道為什麼 NASA 一直不承認有外星人的事...
+16:35:02 <godfat> 話說之前在打 TTA (Through The Age, board game),
+16:35:02 <godfat> 個人不太喜歡打軍事，都在建設，結果其他三人軍備競爭，
+16:35:03 <godfat> 把我當 ATM 領錢 orz
+16:35:03 <godfat> 好慘，中間之後基本上是完全動不了，想跟上也沒辦法
+16:35:33 <CindyLinz> 你根本就是清朝末年嘛...
+16:36:08 <CindyLinz> NASA 這是一張王牌, 等到經費不足的時候, 就會宣稱發現外星人, 而且侵略性很強, 需要開發星際武器........
+16:36:11 <godfat> XDDDDDDD 不會呀，我原本一直是文化最強的，後來都被搶走文物了...
+16:36:23 <CindyLinz> 的確是清末沒錯啊....... wwww
+16:36:39 <godfat> 清末也沒讓我感受到文化最強 XD
+16:36:57 <CindyLinz> 你看文物都被搶到台灣了... (咦)
+16:37:29 <godfat> 說到宣稱發現外星人，就想到《三體》
+16:37:29 <godfat> XDDDDD
+16:37:54 <CindyLinz> 文化就是.... 一大堆沒道理的 rule set, 而且大家都心悅誠服地遵守啊 @_@"
+16:38:31 <godfat> ...O_o 太現實了，遊戲裡的文化就直接是數字上的分數了 XD
+16:38:41 <CindyLinz> 大家都遵守, 而且接受這文化裡內建的價值觀的話, 倒是過得蠻舒服的啦 :p
+16:38:59 <godfat> 是沒錯，反正就是開心就好... XD
+16:41:37 <CindyLinz> 現在的複雜硬體通常都是 sync 的. 最基本的元件邏輯閘通常都是 input 一有變化, output 就會跟著變化, 然後附帶一些些充壓放電之類的物理延遲
+16:42:49 <CindyLinz> 所以 output 要等 ready 以後才可以去讀. 而 sync 的硬體就是有 global 的 clock, 大家約好延遲都一定會在約好 clock 數以內完成, 複雜的 gate 會用比較多 clock, 簡單的可以比較少
+16:43:07 <CindyLinz> 然後要讀結果的元件就是看 clock 到了才讀.
+16:43:20 <godfat> 聽起來缺點就是要一直等？優點是很好設計？
+16:43:26 <CindyLinz> async 的話就是元件各自通知下游
+16:43:34 <CindyLinz> 優點的確就是好設計, 便宜..
+16:43:45 <CindyLinz> 嗯會有 fragmentation 的問題
+16:43:50 <CindyLinz> time slot 上的
+16:44:11 <CindyLinz> clock 間距趨近 0 的話可以縮小這個浪費
+16:44:25 <godfat> 便宜是因為可以用便宜素材嗎？矽？
+16:44:53 <CindyLinz> 可是 clock 在一個 clock signal 傳遞到整個電路的每個角落以前不能跳下一個, 不然會出事
+16:45:09 <CindyLinz> 而且 clock 越頻繁越燙越耗電
+16:45:25 <godfat> 唔唔，聽起來這裡有不少物理限制
+16:45:25 <CindyLinz> 跟材料沒有關係, 就只是設計簡單, bug 就比較少
+16:46:16 <CindyLinz> clock 自己 on off 也是會有物理延遲, 不過比起別的真的在計算的元件還算小
+16:46:41 <CindyLinz> 然後... async 的設計就出局了.. QQ
+16:49:47 <godfat> 這個嗎？
+16:49:48 <godfat> http://en.wikipedia.org/wiki/Asynchronous_circuit
+16:49:48 <godfat> 多核心會接近這種作法嗎？還是說層級差太多了？
+16:55:40 <CindyLinz> 應該是這個沒錯
+16:57:24 <CindyLinz> 覺得多核心可以視為 hybrid 吧, 或是整個晶片裡面有「子晶片」, 而且「子晶片」自帶 clock 的話, 而且會獨立用額外 signal 來通知外部什麼時候跟它溝通, 就有這個 async 的味道在
+16:57:51 <CindyLinz> 只是 async 設計的原始是全面性都這樣做, 現在這些「子晶片」裡面還是用 clock 在做
+16:58:10 <CindyLinz> async 接觸面出現的地方比例很低
+17:01:19 <godfat> 聽起來就是整個電子電路都要重新設計了..? 好像滿難的？ XD
+17:01:19 <godfat> 讓我想起之前看量子電腦的東西... 其實看不太懂，
+17:01:20 <godfat> 我的理解是要在量子電腦上快，整個演算法要重新設計，不然是一樣的
+17:01:42 <CindyLinz> (就像 Haskell monad do-notation 裡面每一行都是 callback, 和我們寫 js / perl 只是偶爾 callback 一下的差別 XD)
+17:01:59 <godfat> ...XD
+17:02:10 <CindyLinz> 對啊, 就是別支發展越完整越成熟, 就會壓迫到這個旁支 QQ
+17:02:33 <godfat> 百年投資！
+17:03:26 <godfat> 人命*2 之後大概比較容易提昌這個..
+17:16:20 <CindyLinz> 人命*2 是什麼東東 @_@"
+17:17:19 <CindyLinz> 我隱約覺得.. Haskell 可以把連鎖 callback 玩成這樣, 應該也有辦法做出一些硬體描述語言, 用來設計 pure async logic.... @@"
+17:17:49 <godfat> 就是平均壽命變兩倍
+17:17:54 <CindyLinz> 喔喔....
+17:18:32 <CindyLinz> 只是現有的硬體又快又好, 剛實作的新作法一定打不過, 就不知能不能撐到長大 orz
+17:19:01 <godfat> 以我粗淺的知識而言，覺得滿難的 XD
+17:19:43 <CindyLinz> Q__Q
+21:45:00 <suhorng1> 昨天的頭影片有放出來嗎?
+21:47:39 <CindyLinz> 沒看到....
+21:47:53 <CindyLinz> 老師最後一張有列出他用到的 ref
+21:48:02 <CindyLinz> 不過投影片沒看到就.... XDrz
+21:48:08 <suhorng1> 瞭解~
+21:48:22 <cataska_> http://amzn.com/B00HG2CQ1Q
+21:48:45 <CindyLinz> 嚇一跳, 想說投影片集成書了......ww
+21:48:55 <cataska_> 不過這裡的長輩應該不需要這本書了吧 XD
+21:49:25 <suhorng1> 這個標題我喜歡!
+21:49:50 <CindyLinz> A Project based approach!
+21:50:00 <suhorng1> http://www.apress.com/9781430262503 這裡有目錄 :D
+21:50:56 <CindyLinz> 如果這裡都長輩的話, 話題就不會這麼多了.....XD
+21:53:21 <suhorng1> Part II: Data Mining\n　　6. Knowing Your Clients Using Monads\n　　7. More Monads: Now for Recommendations\n　　...
+21:53:25 <suhorng1> 也太有趣www
+21:53:54 <letoh> 新書耶
+21:54:17 <CindyLinz> Kindle edition 有 PDF 嗎? @@"
+21:54:23 <CindyLinz> 或是, 轉這個是容易的嗎?
+21:55:34 <cataska_> 直接到 Apress 買，PDF, MOBI,EPUB 都有
+21:55:34 <letoh> kindle 有自己的格式 azw/kf8
+21:56:09 <letoh> 用 kindle 的話可以看 mobi.. 不建議 pdf
+21:56:52 <CindyLinz> cataska_: 價錢差很多... ^^|
+21:57:01 <CindyLinz> 25USD vs 35USD
+21:58:43 <letoh> 喔你是說直接在 amazon 買 kindle edition ?
+21:59:15 <letoh> 50% off
+22:00:48 <CindyLinz> 會寄到 Kindle Cloud Reader.. 不知道是什麼東西 ._.
+22:01:12 <letoh> amazon.co.jp 買的是 2346  換算成台幣便宜 50 XD
+22:01:48 <letoh> 雲端會有一個儲存的地方  有 android 機器可以裝 kindle app 下載買好的那些書
+22:02:29 <letoh> apress 買的電子版該不會是 drm-free 吧?
+22:03:27 <CindyLinz> Apress 的 Billing 要填美國地址... OAO
+22:03:41 <letoh> 基本上 amazon 也是
+22:03:48 <CindyLinz> 要選美國的 state.. orz
+22:06:40 <letoh> Parallel and Concurrent Programming in Haskell: Techniques for Multicore and Multithreaded Programming [Kindle版]  ￥ 1,762
+22:07:21 <CindyLinz> 咦 可以選 Country, 有 Taiwan
+22:07:36 <CindyLinz> 厚, 這一個選項放這麼下面....
+22:07:38 <letoh> amazon ?
+22:09:33 <suhorng1> data WhereIsT a where HideT :: t a -> WhereIsT a　這個 GADT 好奇怪喔..這樣使用他的函數該怎麼寫 @@？
+22:10:58 <CindyLinz> apress
+22:11:42 <CindyLinz> 已購入..
+22:11:47 <CindyLinz> cataska_: 謝謝 ^^
+22:14:42 <CindyLinz> suhorng: three :: WhereIsT a -> Int   three _ = 3
+22:16:04 <CindyLinz> 我覺得這裡被藏起來的 t 就像是被 forall t. 藏起來一樣, 因為沒有放額外的 class constraint, 所以除了 undefined 的用法以外沒有別的用處 @@"
+22:16:36 <cataska_> CindyLinz: :)
+22:16:58 <suhorng> 根本不用他的type www
+22:17:03 <suhorng> 的確是一招
+22:17:21 <CindyLinz> 我覺得要作正常的應用應該會放 class 吧...
+22:17:48 <suhorng> 老實說，我看到這個 GADT 的宣告原作是用在 Typeable + 使用 gcast1
+22:17:48 <CindyLinz> 或是像 ST monad 那樣想讓你不准自己用
+22:17:55 <suhorng> 嗯, 隱藏起來那樣
+22:19:27 <suhorng> 有道理耶, 直接看成 forall t. 起來..雖然實在不知道他的 type 會被怎樣弄
+22:20:53 <suhorng> 突然意識到那這樣是不是就不需要 ExistentialQuantification 了？
+22:21:42 <CindyLinz> 如果你想寫一個函數, 它會吃一個能對那個 type 作處理的函數當參數的話, 就還是要呀
+22:21:47 <suhorng> Prelude> data Exists = E (forall a. Show a => a)
+22:21:47 <suhorng> Prelude> data Exists' where E :: Show a => a -> Exists'
+22:21:49 <suhorng> 唔
+22:22:55 <suhorng> 可以說詳細一點嗎？
+22:23:17 <CindyLinz> 就.. 假設剛剛那個我亂寫的 three
+22:23:31 <CindyLinz> 如果想要寫一個能吃 three 當參數的函數
+22:23:39 <CindyLinz> 這個函數的 type 應該會長這樣:
+22:24:18 <CindyLinz> 我卡住了 XD
+22:25:10 <suhorng> (WhereIsT a -> Int) -> Int
+22:25:30 <CindyLinz> 沒在等號左邊出現的好像不用寫
+22:25:41 <suhorng> 這樣好像也沒有用到 ExistentialQuantification
+22:25:43 <suhorng> 嗯
+22:27:05 <suhorng> 喔..2009年好像有人討論過這個, "Proposal: Deprecate ExistentialQuantification"
+22:28:41 <CindyLinz> 這樣 ST monad 要改一下介面?
+22:28:58 <CindyLinz> 這串? Proposal: Deprecate ExistentialQuantification
+22:30:14 <suhorng> 對
+22:30:53 <suhorng> 咦, ExistentialQuantification 不是說 ST monad 那種吧
+22:31:45 <CindyLinz> ST monad 的 runST :: forall a. (forall s. ST s a) -> a 會用到啊
+22:31:57 <CindyLinz> 最外面的 forall a. 可以不寫
+22:32:19 <CindyLinz> 等等, 這是 Rank2 哄 @_@"
+22:32:37 <CindyLinz> 搞混了 @_@"
+22:32:48 <suhorng> 不是不是 也不是 Rank2
+22:33:05 <CindyLinz> 這裡寫它是 Rank 2 Type 呀 http://www.vidarholen.net/contents/junk/catbag.html
+22:33:06 <suhorng> http://www.haskell.org/ghc/docs/7.0.1/html/users_guide/data-type-extensions.html 是說 7.4.5 那個 extension
+22:33:16 <suhorng> -XExistentialQuantification
+22:34:18 <CindyLinz> 嗯 existential quantification 是用在 data 的等號左邊有缺變數的
+22:34:46 <suhorng> 對
+22:35:04 <suhorng> 不是說直接像 ST Monad 那樣直接用 forall 去編碼
+22:35:31 <CindyLinz> ST monad 是反的.. XD
+22:36:08 <CindyLinz> ST 是左邊多了變數
+22:36:19 <suhorng> 類似 (forall x. φ(x) -> y) -> y XD
+22:37:47 <CindyLinz> 嗯嗯

@@ -1,0 +1,15 @@
+01:48:46 <monochrom> 永遠 La 不完...
+01:49:50 <CindyLinz> XD
+12:40:50 <miaoski> 看到啦啦啦噗茨
+20:26:20 <suhorng> 原來之前 @CindyLinz 講的 partial type signature 竟然是研究, 而且有 publication 的.....OAO
+20:26:22 <suhorng> http://people.cs.kuleuven.be/~tom.schrijvers/Research/papers/padl2014.pdf
+20:26:27 <suhorng> 貼錯... http://people.cs.kuleuven.be/~tom.schrijvers/portfolio/padl2014.html
+20:29:56 <suhorng> 喔~ 原來是我誤會了, 那個 partial type signature 是 Oleg 提出的
+20:30:29 <suhorng> 這篇是討論在 context 的位置  ( foo :: _ => ...) 放底線和其他延伸的可能性
+20:30:50 <suhorng> http://okmij.org/ftp/Haskell/types.html#partial-sigs
+20:36:07 <CindyLinz> 不過... GHC 有哪個東西不是研究, 沒有 publication 嗎? XD
+20:38:03 <suhorng> XD......
+20:39:39 <petercommand> 連官網faq都會出現論文的語言XD
+20:40:43 <jiang42> 跪了
+20:42:13 <suhorng> 然後 doc 都叫你去讀 paper...
+20:42:53 <jiang42> 只能说真的是deep language

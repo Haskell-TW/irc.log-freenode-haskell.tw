@@ -1,0 +1,46 @@
+03:21:51 <monochrom> 上班偷寫Haskell, 還要是娛樂 XD
+03:23:25 <monochrom> 建議修練更高境界: 開會偷寫Haskell
+03:24:20 <monochrom> (不過我的功力只達到: 開會偷玩 Tower of Hanoi)
+03:27:16 <monochrom> 我還知道 Tony Hoare 開會偷玩甚麼!
+03:29:27 <monochrom> 他會在文件的左上角那一字型的釘周圍, 畫很多幾何花紋圖案.
+03:30:13 <monochrom> 最奇的是一定是沿著釘的周圍畫, 絕不在文件上其他位置.
+14:07:03 <cibs> 我真的有開會偷寫 haskell 耶 XD 不過明明很多開會就更浪費上班時間啊 XD
+15:41:19 <cibs> 那 <- 在 livescript 和 Haskell 呢 XD # 22:01 < CindyLinz> 那 livescript 和 F# 已經在 |> 熱戰了 :p
+15:42:48 <CindyLinz> 我不考慮不同語言使用同一符號不同意義的問題啊 ～
+15:43:35 <cibs> 咦那 Livescript 和 F# 不是也一樣
+15:44:09 <cibs> oh~ I got your point
+16:09:28 <suhorng> 天阿XD trifecta 真的好厲害
+16:10:39 <CindyLinz> suhorng: 好像又到要準備 FT topic 的季節了?
+16:10:48 <suhorng> 即使沒有用其他各式各樣功能, 純粹用 parsec-style 寫程式的話, 隨便都有很好的報錯 http://i.imgur.com/FIONGXS.png
+16:10:56 <suhorng> 阿嗚嗚 是耶
+17:49:25 <hychen1> monochrom: 我也會在開會時畫幾何花紋圖案 orz
+17:51:42 <hychen1> 陳恭老師在FLOLAC14演講的時候，有強烈感受到他當年讀書的心酸 XD
+17:54:02 <suhorng> 怎麼個辛酸?
+17:55:30 <hychen1> suhorng: 學了haskell好像不太有用
+17:55:44 <hychen1> suhorng: 被戲稱PHD Language
+17:55:49 <suhorng> 嘛....XD
+17:56:35 <hychen1> suhorng: 在台灣講了haskell沒有人知道，後來就不講了...
+17:57:38 <hychen1> suhorng: 還曾經有段迷惑，做 language design, 要怎麼aurgue自己的language design 是好的
+18:05:56 <hychen1> ls2會有type inference喔 @@
+18:06:48 <hychen1> 靠腰, branch 裡面沒有code XD
+18:10:46 <suhorng> so sad
+18:11:08 <suhorng> 現在 Haskell 應該也滿多人知道的了 上次我同學系友訪談 (在公司的學長)
+18:11:18 <suhorng> 其中一個說, Haskell 很不一樣, 有時間的話可以看看 之類的XD
+18:24:52 <southp0105> 咦? FT = Functional Thursday?
+18:25:23 <suhorng> yes yes
+18:25:40 <suhorng> 誠徵講者 (again, XD)
+18:26:09 <southp0105> 哦哦，原來我可能有和幾位有一面之緣 XD 我是很久以前在奇群介紹Thor的那位
+18:30:25 <suhorng> 那次我剛好沒去 Q____Q" 後悔不已
+18:32:41 <southp0105> 哈哈，以後隨時歡迎來認識一下 XD
+18:32:50 <suhorng> 好喔XD
+18:34:03 <suhorng> 也是 freak 大跟 sid666 在的公司XD?
+18:34:11 <southp0105> 沒錯
+18:34:36 <southp0105> 原來sid666你也認識
+18:35:36 <suhorng> XD 噗浪上認識的 然後好像 FLOLAC 有碰到他
+18:36:03 <southp0105> 哦哦，沒錯～他剛進來就請了長假去上FLOLAC，相當可惡
+18:36:10 <southp0105> (因為我也想去上 T_____T)
+18:36:38 <suhorng> XDDDDDD
+18:37:11 <southp0105> 現在銳意學習Haskell中~等下搭火車回家路上要來寫下一個作業 XD
+18:40:14 <suhorng> http://www.quora.com/Haskell/What-makes-Attoparsec-more-than-an-order-of-magnitude-faster-than-Parsec-3 原來 attoparsec 的效能這麼威猛呀
+23:58:27 <suhorngM_> http://csiecomm.blogspot.tw/2013/07/b92-b91-b92.html
+23:58:36 <suhorngM_> 在這裡面看到 Haskell 出現還滿意外的 XDD

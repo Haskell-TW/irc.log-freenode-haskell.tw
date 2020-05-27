@@ -1,0 +1,107 @@
+02:55:06 <CindyLinz> remark.js 的序數 OL 跨頁的時候會被重新歸1.. QQ
+02:55:24 <CindyLinz> 雖然不意外.. 但還是 QQ
+03:11:18 <letoh> 一般要提供設定初始計數值的功能? word 好像就是這樣
+03:37:49 <CindyLinz> markdown 不管你寫多少, 它看起來是數字的話, 就從 1 開始編... XD
+05:21:30 <godfat1> test
+05:21:58 <godfat> 所以我後來覺得 markdown 可以寫
+05:21:58 <godfat> 1.
+05:21:58 <godfat> 1.
+05:21:58 <godfat> 1.
+05:21:58 <godfat> 這樣調整位置也比較方便...
+10:39:01 <CindyLinz> 我寫 0. 0. 0. 0. XD
+10:43:56 <miaoski> CindyLinz: 等會見哦。Miki 也會來。
+14:18:24 <godfat> 輸了，我也應該寫 0 的 XD
+14:52:47 <pkmx> ghc-7.10.1-rc1: https://downloads.haskell.org/~ghc/7.10.1-rc1/docs/html/users_guide/release-7-10-1.html
+16:16:27 <CindyLinz> 7.10!!
+17:11:18 <petercommand> 話說 haskell 的 lens 看起來好 imperative XD
+17:11:48 <CindyLinz> 那是一個面向沒錯.. :Q
+17:13:05 <petercommand> 還有什麼面向呀?
+17:14:37 <CindyLinz> 像 jQuery 那樣一路 zoom in
+17:14:43 <suhorng> 偽裝成 imperative 的面相?
+17:15:05 <suhorng> pkmx: 竟然要出 7.10 了 ... 7.8 才剛換半年多耶XD
+17:15:12 <CindyLinz> 也有 SIMD 的用法
+17:15:21 <suhorng> 是 Monad 但不是 Applicative 的東西要 compile error 了嗎?
+17:15:39 <CindyLinz> The highlights, since the 7.8 branch, are: 
+17:15:46 <CindyLinz>         TODO FIXME 
+17:15:48 <CindyLinz> ................
+17:16:04 <suhorng> lol
+17:17:22 <petercommand> XDD
+17:18:35 <petercommand> CindyLinz: SIMD 就是 parallelism 嗎?
+17:19:29 <CindyLinz> petercommand: 是 parallel 的一種作法.. 但是這邊只是一個動作操作好幾個資料, 倒不一定會平行著作
+17:19:50 <CindyLinz> 會怎麼作當然還是看底下的 Monad 或 Applicative 是誰 XD
+17:19:51 <petercommand> 喔喔
+17:47:10 <pkmx> 7.8 不是出一年了嗎@@
+17:47:45 <pkmx> 喔 原來是今年四月才7.8.1...
+17:48:10 <pkmx> 我都用HEAD所以無感XDrz
+17:49:47 <suhorng> pkmx: 竟然用 HEAD!!
+17:50:05 <suhorng> pkmx: 我還等 Haskell Platform 更新....XD
+17:58:57 <pkmx> 不過7.10我還沒看到什麼讓我特別有興趣的新功能
+17:59:08 <pkmx> 聽說連OverloadedRecordFields也沒有@@
+18:01:58 <CindyLinz> 難怪 highlights 是 TODO FIXME... (大誤
+18:03:27 <pkmx> 我現在只對這個有興趣XD
+18:03:31 <pkmx> "When this work is complete, all types will be promotable to kinds, and all data constructors will be promotable to types."
+18:03:55 <CindyLinz> yet another agda....
+18:05:12 <suhorng> 好驚人 @@
+18:05:27 <suhorng> 比現在的 -XDataKinds 更多嗎?
+18:06:38 <suhorng> *all* 哦.....
+18:17:49 <CindyLinz> 對啊.. 現在 DataKind 是... 用到 DataKind 的 type 不行, higher kind 像 data Fix f = In (f (Fix f)) 的也不行.. 然後 type family 也不行, 有 constraint 的也不行 (不過反正加 constraint 是 deprecated? :p)
+18:20:05 <pkmx> 現在只能 promote * -> * -> * 這種最基本的 ...
+18:20:10 <CindyLinz> 唔.. 所以這是在明年的計劃喔? # https://ghc.haskell.org/trac/ghc/wiki/Status/Oct14
+18:22:13 <pkmx> 不知道耶 希望可以趕上7.12 =p
+18:23:02 <CindyLinz> 不能 7.10.6 之類的嗎 XD
+18:23:27 <pkmx> 7.10.6出來7.12也要出來了吧@@
+18:23:37 <pkmx> 你看現在都年底了才出到7.8.4
+18:23:41 <CindyLinz> 咦 會平行出喔? XD
+18:24:01 <CindyLinz> 結果明年出的是 GHC 2015.. (咦
+18:24:05 <pkmx> 如果外插一下 7.10.6和7.12的schedule應該差不多
+18:24:15 <pkmx> ghc-ng
+18:25:06 <CindyLinz> debian experimental 的 GHC 是 7.8.20141223.. 這個版號第3位好大.. XD https://packages.debian.org/experimental/ghc
+19:01:14 <CindyLinz> 怎麼才又過了幾天, 談笑間... remark.js 已經 9.x 了...........
+19:03:21 <CindyLinz> 0.9.1..
+19:04:05 <CindyLinz> 22 hours ago.. XD
+19:04:21 <CindyLinz> 0.8.0 是 4 days ago..
+19:04:27 <CindyLinz> 好急啊.... o.o
+19:06:49 <suhorng> 9.x????
+19:06:54 <suhorng> 喔喔 0.9.1
+19:07:09 <suhorng> 不知道 Chrome 列印的 bug 修正沒....
+22:34:03 <petercommand> https://hackage.haskell.org/package/data-fix-0.0.1/docs/Data-Fix.html
+22:34:25 <petercommand> 最上面那一行Fix f = f (Fix f)
+22:34:37 <CindyLinz> 這個很難..
+22:34:42 <petercommand> 右邊沒有data constructor耶...這是ok的嗎?
+22:35:13 <CindyLinz> higher order function 已經難了, 這是 higher order type... XD
+22:35:27 <petercommand> CindyLinz: 看了很久XD
+22:36:05 <petercommand> CindyLinz: 之前那個啥 loeb 更難吧XD (還是差不多?
+22:36:43 <CindyLinz> 我覺得這個比較難.. XD
+22:36:56 <petercommand> XD
+22:37:27 <suhorng> 實際給他一個東西試試看~?
+22:37:30 <CindyLinz> 這個不是在 define 一個 type, 是說 Fix f 和 f (Fix f) 一樣..
+22:37:46 <petercommand> 喔喔
+22:37:54 <petercommand> @@
+22:38:29 <CindyLinz> 就.. 用 = 左邊的部分.. 下面的 example 裡面是用 Fix (L a)
+22:40:56 <petercommand> 有一堆 XXX morphism XD
+22:41:11 <CindyLinz> petercommand: UCCU~
+22:42:24 <petercommand> 怎麼了XD
+22:43:04 <CindyLinz> petercommand: 愛跳坑.. XD
+22:43:56 <petercommand> haskell 滿滿的坑阿....XD
+22:46:45 <petercommand> type List a = Fix (L a) 這裡的 (L a) 是拿去和 f (Fix f) 做 pattern matching?
+22:47:28 <suhorng> 沒有做 pattern matching, 是把 "f" 整個東西代換成 "L a"
+22:48:06 <CindyLinz> Fix (L a) = L a (Fix (L a)) = L a (L a (Fix (L a))) = ...
+22:48:33 <CindyLinz> 你就看著它唱: La La La La La ..... Fix La    UCCU~
+22:48:46 <petercommand> XDDD
+22:48:52 <CindyLinz> 像一個永遠拉不完的捲尺...
+22:49:44 <suhorng> 他是 newtype Fix f = Fix { unFix :: f (Fix f) }, 所以 Fix 就是見證 Fix (L a) = L a (Fix (L a)) 的公證人
+22:50:02 <CindyLinz> 見證.... OAO
+22:50:29 <suhorng> 有兩個東西(isomorphism) Fix :: L a (Fix (L a)) -> Fix (L a) 以及 unFix :: Fix (L a) -> L a (Fix (L a))
+22:53:34 <petercommand> 恩...
+22:54:47 <CindyLinz> 覺得 type List a = Fix (L a) ; data L a b = Nil | Cons a b 是 type level 的 @pl.....
+22:55:26 <petercommand> 把 b 換成自己...
+22:55:38 <suhorng> http://www.ptt.cc/bbs/PLT/M.1275569830.A.B36.html
+22:55:38 <suhorng> http://www.ptt.cc/bbs/PLT/M.1275626981.A.F6F.html
+22:55:45 <suhorng> 以前看過的我覺得挺好的解釋XD
+22:56:25 <suhorng> data 類比於加入 axiom
+22:57:16 <CindyLinz> suhorng 召喚煉獄怪物餵食 petercommand...
+22:59:07 <petercommand> XD
+22:59:22 <suhorng> (′・ω・`)
+23:00:25 <CindyLinz> suhorng 召喚煉獄怪物餵食以 petercommand...
+23:00:45 <suhorng> ヽ(;′Д)ノ ˊ(′д‵)╮
+23:02:49 <petercommand> CindyLinz: 剛剛看到這句笑出來了XD

@@ -1,0 +1,25 @@
+00:00:43 <monochrom> 不明白
+00:00:44 <petercommand> monoid 左結合右結合應該要是一樣的..
+00:01:23 <CindyLinz> petercommand: 我是說 a <> b 與 b <> a 的差別..
+00:01:33 <CindyLinz> 不是 (a <> b) <> c 與 a <> (b <> c) 的差別 ^^|
+00:01:48 <CindyLinz> 該叫什麼? 左交換與右交換? ^^|
+00:02:30 <monochrom> 你想 a<>b 先做b, 然後做a?
+00:03:25 <monochrom> 你認為應讓用家選?
+00:04:20 <monochrom> 忽發奇想, 不再叫用家, 叫玩家或閒家 XD
+00:04:56 <CindyLinz> XD
+00:05:29 <CindyLinz> 對啊.. >> 左邊的計算結果不一定想放在 <> 的左邊呀
+00:06:29 <monochrom> 讓我找找, 好像已有凖備
+00:06:54 <CindyLinz> 等等.. 已有準備是怎樣......w
+00:07:04 <CindyLinz> 要送給 GHC 的 pull request 嗎? XD
+00:07:16 <monochrom> 就是 Data.Monoid 裏的 newtype Dual 了.
+00:07:25 <CindyLinz> 喔喔.. 好吧 ^^|
+00:07:29 <CindyLinz> 套一層
+00:07:51 <CindyLinz> 默默收下 ._.
+00:09:36 <monochrom> 無法啦, instance 迫莊家二選一, 總有閒家不開心的. (所以有時乾脆不提供.)
+00:12:27 <monochrom> 是不是覺得像留歐定脫歐呢? XD
+00:39:18 <CindyLinz> 英國可以分成兩國就解決了 XD
+00:40:32 <pkmx> 原來 instance 也有分左派和右派 (咦?
+00:41:04 <CindyLinz> 我想到 
+00:41:19 <CindyLinz> Monoid 那個 module 裡定義的 First, Last
+12:54:30 <caasih> CindyLinz: 正在重看 Inventing on Principle ，如果像 HVG 那樣記錄了何時畫什麼，那也做得到影片中那樣，從畫出來的結果，反查是哪些 code 畫出它來的了吧？
+12:54:32 <caasih> https://youtu.be/PUv66718DII?t=439

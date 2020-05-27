@@ -1,0 +1,25 @@
+05:19:25 <monochrom> 其實即使在 Java 裏, 我也從沒真用過 Container 介面. 我只用過 List 介面, Map 介面, Queue 介面, 等等
+05:21:48 <monochrom> 而去到 Haskell, 就算有類似介面, 其實最後都只得一個選擇, 所以介面成為多餘
+05:22:39 <monochrom> 即使 Java, List 都只是兩個選擇而已
+05:23:58 <monochrom> Okasaki 曾經推過 Edison library, 有齊你想見到的 type classes, 結果還是無人用.
+05:27:00 <monochrom> 人生能有幾多 Map? 人生能有幾多 Queue? 人生能有幾多愁? 恰似一江春水向東流
+05:28:07 <monochrom> 不過你還有 Functor, Foldable, 和 Traversable.
+14:04:50 <CindyLinz> 我想 suhorngM_ 應該是為了自己嘗試不同的實作, 抽換方便
+14:14:42 <petercommand> > "人生能有幾多 Map? 人生能有幾多 Queue? 人生能有幾多愁? 恰似一江春水向東流" #太強大了..XD
+14:14:44 <lambdabot>  <hint>:1:53: parse error on input ‘..’
+14:17:36 <CindyLinz> 昨日向那東流水.. (被打飛
+16:52:00 <suhorngM_> 嗯, 直接用實際的資料結構下去也是...
+16:53:50 <suhorngM_> monochrom: 不過 Haskell 有 Haskell 自己的問題QQ  我用 [(a,b)] 時只要求 Eq a, 但是用 Data.Map 就需要 Ord a, 除非一開始叫用 Data.Map 不然 type signature 都要改
+16:56:50 <CindyLinz> suhorngM_: 要善用 type inference (咦
+16:56:57 <CindyLinz> 通通擦掉就好了 XDD
+17:03:15 <suhorngM_> CindyLinz: 有的時候會壞掉...還得開 NoMonomorphicRestriction
+17:03:41 <CindyLinz> 開 extension 事小.... QQ
+17:05:24 <suhorngM_> CindyLinz: 不寫 type signature 事大...不寫會昏頭的
+17:06:17 <CindyLinz> suhorngM_: 前面加 -- 就可以兼顧不昏頭了
+17:15:25 <suhorngM_> 妥協...XD
+17:17:17 <CindyLinz> 希望 context 的地方也可以寫 wildcard
+17:21:20 <suhorngM_> 咦? 這麼一說 搞不好會可以
+17:23:34 <suhorngM_> 啊...不過是不是 infer 後還是得自己填進去
+17:24:49 <suhorngM_> CindyLinz: https://ghc.haskell.org/trac/ghc/wiki/PartialTypeSignatures 微妙耶
+17:35:14 <CindyLinz> 我覺得(希望)要填不填是 programmer 可以自由決定
+17:37:05 <CindyLinz> 這個應該還沒有進 ghc 的 release?

@@ -1,0 +1,101 @@
+14:22:51 <hychen> http://girlloveshaskell.com/
+14:22:55 <hychen> 日本人?
+14:35:18 <_13h> 之前好像有人貼過...
+17:57:24 <CindyLinz> 實作 instance method 的時候, 可以怎樣加上 method type 嗎?
+22:24:51 <suhorng> 之前一直在想 Haskell 這類有 first-class functions (& closures) 的語言如何轉成夠低階方便執行的程式 (或 byte code)
+22:25:27 <suhorng> 後來查到原來會透過 CPS transformation、closure conversion、defunctionalization 來做XD
+22:25:50 <suhorng> 最後一個概念上(?)也滿直接的 http://en.wikipedia.org/wiki/Defunctionalization#Example (example是Haskell code)
+22:26:40 <suhorng> 也有人在研究這個東西在 denotational semantics 中怎麼處理的樣子
+22:27:30 <letoh> 只聽過前兩個XD
+22:28:19 <letoh> functional language 的 compiler 好像很多神奇的東西都跟別人不太一樣@_@
+22:28:55 <suhorng> 最後一個簡單來說就是對於 higher order functions, 我們把他作標記, 記說他要接幾個參數
+22:30:15 <letoh> http://en.wikipedia.org/wiki/Defunctionalization
+22:30:15 <suhorng> 以後處理時就只處理那個標記 (用個 datatype 來代表), 需要 function application 時再統一由一個函式 "apply" 作處理
+22:30:31 <letoh> 嗯嗯  沒想到是這種做法
+22:30:54 <suhorng> 嗯XD functional language 的執行模型畢竟與現在 PC 架構差比較多 所以才有比較多東西XD"
+22:32:13 <suhorng> 不過像 Python, Ruby 這類 scripting language 應該不會有這種困擾吧w
+22:32:50 <letoh> 我是這樣想的啦  就算表達的方式不同，應該還是有辦法對應到現在的 PC 架構吧?
+22:33:51 <suhorng> letoh: 是指表達 "計算" 這件事情嗎 :P
+22:34:26 <letoh> 大概吧，我還不確定怎麼表達比較貼切
+22:34:59 <suhorng> 是有滿多為了 functional languages 而設計的 abstract machine (還是 virtual machine XD?)
+22:35:06 <suhorng> 像是 SECD machine 的樣子 http://en.wikipedia.org/wiki/SECD_machine
+22:35:30 <letoh> 嗯  這個倒是知道
+22:35:36 <suhorng> 也許就可以很好的對應到 PC？
+22:35:48 <MnO2_> http://blog.sina.com.cn/s/blog_5d90e82f0101j529.html
+22:36:10 <suhorng> 新文章耶, 驚訝 (還是系列文!?)
+22:36:11 <letoh> 賀!
+22:36:30 <MnO2_> 看來他對他的程式碼被動怨念超深的 xD
+22:37:55 <suhorng> 就是說在 google 實習後, code被加了一堆 design patterns 那件事嗎XDD
+22:38:44 <MnO2_> 對啊，從思考題可以看出來
+22:40:20 <MnO2_> 他想用其人之道，打其人之臉
+22:41:54 <MnO2_> 突然頻道有幾個新面孔耶，monochrom,  zwiebel
+22:42:13 <MnO2_> 自介一下？ xDD
+22:47:12 <suhorng> 是說王垠文章中提到 ++i 跟 i++, 我想到 iterator 的 ++.. 放前面跟放後面的效率還會不一樣XDrz
+22:48:04 <MnO2_> 所以 C++ 應該要取名 ++C,  wwwwwwwwwww
+22:54:56 <suhorng> 第三題傳統圖靈機...XD 對呀 當初為什麼會想要一步讀、寫、並移動讀寫頭呢...
+23:12:31 <letoh> ++ -- 感覺只是對應到 inc / dec 而已
+23:13:48 <letoh> 以現在 compiler 來說可能差別不是那麼大了
+23:14:25 <letoh> 不過寫的時候出現 *i++ 之類的東西，感覺還是有點帥XD
+23:17:38 <CindyLinz> Go lang 裡面只有 i++ 了.. 不過應該其實是 ++i 吧?
+23:20:52 <letoh> 說 i + 1 的 i 跟前面的 i 相同，我實在不曉得怎麼向 c 世界的住民解釋@_@
+23:25:08 <suhorng> 或許問題是出在 inc 的時候並沒有同時讀值?
+23:25:48 <suhorng> 如果 i++/++i 算完的型態都是void..算了 不敢想像 太奇怪了XD
+23:26:32 <letoh> 我在寫 c 的時候，當我寫下 ++i，腦中想的其實是 inc eax 之類的東西
+23:26:43 <letoh> 那個 i 其實是不存在的
+23:27:25 <suhorng> 嗯!
+23:28:05 <letoh> 就是說  寫下這個東西的當下，其實不是因為什麼很漂亮的模型，就是希望某個暫存器的值可以改一下  這樣而已
+23:28:57 <letoh> 不過在寫其他語言時，我就會想到這個 assignment 過後就變成不同東西了
+23:29:06 <letoh> 轉來轉去自己都有點暈XD
+23:34:49 <CindyLinz> 以前寫 MASM 就是直接用 inc AX 呀
+23:35:09 <CindyLinz> 不過它只有 assign, 沒有取值, 所以也不會混淆 :p
+23:40:35 <letoh> 是說我很喜歡第 2 點的改法耶
+23:40:50 <letoh> 而且我是覺得有不少好處
+23:41:02 <letoh> 不過那個 condition 有點限制就是
+23:42:37 <CindyLinz> 第2點的改法, 我覺得是在兩個 branch 的 body 內容量比較懸殊的時候才會喜歡這樣改
+23:43:07 <CindyLinz> 也就是讓偏向例外處理的放前面趕快跳出去, 剩下的是主線..
+23:43:10 <letoh> 嗯  只有一兩行其實沒什麼好改的@_@
+23:43:23 <CindyLinz> 而像例子裡面這樣兩個都長得一樣, 或是兩邊蠻對稱的時候, 我覺得留著 else 比較好
+23:43:26 <letoh> 嗯  我說的限制就是這個  大多處理例外狀況
+23:43:53 <CindyLinz> 不過他文中的例子應該算是平衡對稱的那種 :p
+23:44:10 <suhorng> 或著說, 就是我們想表達的是 value = if expr then e1 else e2 這種想法吧?
+23:44:10 <letoh> 對啊  亂套格式的話  一看就會覺得程式碼歪一邊  超醜的
+23:44:14 <CindyLinz> 如果公司裡有人很愛改這個, 我會覺得他很幼稚..... zz
+23:45:04 <letoh> 如果縮排太多層  我可能會想辦法調一下就是
+23:45:13 <suhorng> 或是改結構？
+23:45:14 <letoh> 我喜歡扁一點的
+23:45:49 <CindyLinz> letoh: 想要讓縮排少一點的方法, 應該是兩邊都呼叫一個函數, 就會「挪抬」了 :p
+23:45:51 <suhorng> 第一點我覺得可以接受，至少可以避免 if/for something;\n\tdo something這種誤輸入分號的 bug
+23:46:05 <CindyLinz> 因為 C 函數會從 0 縮排開始 :p
+23:46:16 <letoh> 對呀  這方法我也常用
+23:46:50 <CindyLinz> 第1點我是沒什麼意見, 我覺得兩邊都不錯.. 也是會覺得堅持改成其中一邊的人很幼稚 XD
+23:47:40 <CindyLinz> Haskell 裡面縮排一直進也是有點困擾 o.o
+23:47:48 <letoh> 那個其實是看團隊規範  不能講道理的
+23:48:19 <letoh> 原則上是大家決定好風格，只要沒太大問題就可以
+23:48:34 <suhorng> 如果 Haskell 不用靠縮排該有多好 XDD
+23:49:08 <CindyLinz> letoh: 如果不能質疑規範, 當然也就這樣了.. 就像夏令營一樣: 輔導員永遠不會錯! 如果有錯, 那就是你的錯!
+23:49:09 <letoh> haskell 可以把所有東西都寫在同一行嗎?
+23:49:22 <CindyLinz> letoh: 可以.. 換行都可以改成分號
+23:49:47 <CindyLinz> 不過他這篇就是在質疑規範.. 規範也是可以討論訂得好或訂得不好的 :p
+23:49:53 <letoh> CindyLinz: 其實不是說不能質疑啦，而是一直吵這種事的話事情都做不了了
+23:49:57 <CindyLinz> suhorng: 可以啊, 用 {} 和 ;
+23:50:22 <suhorng> CindyLinz: 可是有不同行的話, 還是會被多加其他東西吧@@
+23:50:23 <letoh> 像我就吵過，然後被打槍了XD
+23:51:04 <letoh> 不過上面的人也沒說什麼，只說影響不大的話不會亂改
+23:51:10 <CindyLinz> suhorng: 就分號啊... 從檔案 size 來看.. \n -> ; 其實沒有變大啦.. 甚至還省了很多為了縮排而加的空格呢 :p
+23:51:26 <CindyLinz> letoh: 如果已經定死了, 就只好認命了..
+23:52:03 <CindyLinz> letoh: 只是, 影響不大的東西幹嘛要訂進去呢... 新手怕沒功績所以只好多做點沒必要的事這樣 ^^|
+23:52:14 <letoh> 是可以改，只是需要強力的理由，因為大家都遵守了卻要改很麻煩
+23:52:44 <letoh> 訂規則的其實是老大  不過我覺得團隊中統一風格很重要啊
+23:53:02 <CindyLinz> 反正 Google 那麼大一隻, 也輪不到那個位子...
+23:53:07 <suhorng> CindyLinz: 什麼意思呀@@ 如果我手動換行手動縮排 即使有用 {} ; 還是可能會因為縮排而有不同的 parse 即果不是嗎?
+23:53:27 <CindyLinz> suhorng: 用了 {} ; 就會無視縮排了呀... 我記得是這樣
+23:53:41 <CindyLinz> suhorng: ghc parse 的第一步就是把縮排換成 {} ;
+23:53:55 <letoh> 那為什麼還要用縮排?
+23:53:55 <suhorng> 是啊
+23:54:03 <suhorng> 可是我之前測的結果就算已經有 {} ;
+23:54:08 <suhorng> ghc 還是會自己插入 {} ;..
+23:54:11 <CindyLinz> letoh: 是個軟性建議 XD
+23:54:39 <CindyLinz> letoh: 照著這樣寫, 看起來就會很 haskell, 好像很有學問的樣子 :p
+23:54:44 <letoh> 唔，好吧  我覺得縮排真的超麻煩... 寫了那麼多年 python 最討厭的就是這一點
+23:55:10 <CindyLinz> letoh: 用 lambdabot 就一定不能用縮排了..
+23:55:38 <letoh> 聽起來安心XD

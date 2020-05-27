@@ -1,0 +1,11 @@
+01:00:23 <petercommand> caasih: 喔喔!
+01:01:25 <CindyLinz> petercommand: 東西可以印出來了嗎?
+01:01:49 <petercommand> 還沒..
+01:02:52 <petercommand> CindyLinz: 剛剛 build 失敗是因為我多 import 了一個 haskell module..XD
+01:03:06 <petercommand> Control.DeeqSeq
+01:04:12 <petercommand> CindyLinz: 拿掉 *8 也是不行的
+01:06:20 <petercommand> CindyLinz: 然後因為 rust 模組沒有變，cargo 就認為不用重新編，直到我改了他..XD
+01:14:41 <CindyLinz> 好吧 QQ
+19:44:22 <c9sould__> 請教一下 record syntax 和 一般的 value constructor
+19:44:42 <c9sould__> ghc 底層結構一樣嗎
+20:18:56 <CindyLinz> 一樣

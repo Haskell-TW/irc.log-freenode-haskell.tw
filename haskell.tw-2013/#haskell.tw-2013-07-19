@@ -1,0 +1,20 @@
+08:49:02 <Yu-Lin> 你們昨天連三發yinwang，三個都點開，我才發現是一樣的XDDD
+08:54:00 <favonia> Yu-Lin: 我只是想確認有沒有彩蛋
+08:55:18 <Yu-Lin> favonia: 看起來好像沒有？XD
+08:55:32 <favonia> Yu-Lin: 我很失望啊 :(
+08:57:21 <Yu-Lin> 話說， scheme 這個到底要怎麼發音，之前來公司面試的時候有被問過XD
+09:05:31 <favonia> Yu-Lin: sgeem 不是嗎
+09:07:47 <Yu-Lin> 因為我也不知道發音阿XD
+11:52:58 <CindyLinz> 就... schema 的陰性名辭? (誤)
+15:23:47 <Yu-Lin> orz
+15:24:13 <Yu-Lin> 突然發現人在台北可以旁聽 FLOLAC，卻沒有時間
+16:05:15 <hashcat> 那什麼
+16:06:48 <hashcat> 有沒講 Agda 的旁聽~
+17:01:46 <hashcat> @hoogle runF
+17:01:46 <lambdabot> No results found
+17:30:15 <hashcat> @hoogle Control.Category
+17:30:15 <lambdabot> Control.Category class Category cat
+17:30:16 <lambdabot> Control.Category module Control.Category
+17:30:16 <lambdabot> package category-extras
+19:46:26 <hashcat> 有人知道Haskell 怎生成一個維持多態的動態函數或類似效果嘛
+20:37:45 <Yu-Lin> cd home

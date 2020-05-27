@@ -1,0 +1,22 @@
+00:00:10 <letoh> 不過不是這個原因
+00:00:13 <suhorng> 嗯@@
+00:02:32 <letoh> python 好像都是 callable，連 def 定義出來的函式也都可以塞一堆資料...
+00:02:53 <letoh> 我不曉得怎樣才算真的匿名函式@_@
+00:06:00 <suhorng> letoh: http://stackoverflow.com/questions/6629876/how-to-make-an-anonymous-function-in-python-without-christening-it/6630179#6630179
+00:06:45 <suhorng> 向這個問題要的？
+00:07:58 <suhorng> hmm, 好像真的沒有
+00:08:01 <letoh> 唔，這應該也是 callable ?
+00:09:12 <suhorng> python就都是用callable吧？
+00:09:25 <suhorng> 像 Ruby 是用 Proc class?
+00:11:51 <letoh> 看了一下 python 的 type, lambda 做出來的是 function，跟 def 做出來的一樣
+16:01:28 <_13h> MnO2: hi
+16:01:43 <MnO2> _13h: hi
+16:02:01 <_13h> 昨天才知道 「すごいH本」是哪一本XD
+16:03:22 <_13h> http://www.amazon.co.jp/dp/4274068854
+16:04:20 <MnO2> _13h: 其實我就是看到這本覺得不想輸人才開始著手工作的
+16:07:10 <_13h> 喔喔喔，日文譯本好像很早就出現了
+16:07:44 <_13h> http://hiroki.jp/2012/05/22/4063/  # 這標題一點都看不出是在講 Haskell XD
+16:12:31 <cataska> 好吸引人的書名 XD
+16:17:22 <MnO2> 我們也可以叫「H 趣學指南」
+17:03:34 <cataska> 「我們這裡有暖暖毛毛的東西喔」XD
+19:10:49 <miaout17> ls -al

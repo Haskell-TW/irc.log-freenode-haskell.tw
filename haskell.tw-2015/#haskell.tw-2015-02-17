@@ -1,0 +1,168 @@
+09:24:14 <mno2> 看 luajit 的時候喵到的 http://files.catwell.info/misc/mirror/tracing-jit-haskell-schilling.pdf
+09:24:24 <mno2> tracing-jit for haskell
+09:24:55 <mno2> 跟 ghc 用 fusion 走不同路線？
+09:26:13 <mno2> https://github.com/nominolo/lambdachine  <= code
+12:13:24 <suhorng> https://twitter.com/Codecutterman/status/566029374718476288 XDDD
+12:13:43 <suhorng> 再來個 'a Cup, 還有 Cup a
+14:23:09 <miaoski> (Cup '(t))
+15:20:09 <suhorng> orz
+16:38:15 <petercommand> 在一個 tree 裏面，有辦法把某個 child element 的位置儲存起來，方便以後來更新他嗎? (這樣就不用 traverse 這個 tree 了)
+16:39:22 <petercommand> 像 pointer 這樣的東西
+16:39:24 <CindyLinz> petercommand: 你那個 child element 就放一個 IORef a 或是 Ptr a 吧
+16:39:37 <CindyLinz> 不用像 pointer 了, 直接就是 pointer 了 XD
+16:39:49 <petercommand> XD
+16:39:54 <CindyLinz> 如果在 ST monad 裡面可以用 STRef a
+16:40:07 <CindyLinz> runST 之後, 從外面看仍是 pure
+16:41:15 <CindyLinz> petercommand: 或是你把會變動的資料擺在一個 MVector 或 MArray 裡面; 然後 tree 裡面存 index
+16:41:29 <CindyLinz> 這樣可以整批 allocate / free
+16:41:53 <petercommand> 恩恩，來試試 IORef / Ptf 好了:p
+16:42:01 <petercommand> Ptr
+16:42:06 <CindyLinz> IORef 比較安全.. type 還能保護你....
+16:43:21 <petercommand> 恩..
+16:43:44 <CindyLinz> 欸不過如果你沒有去用 castPtr 和 plusPtr 之類的東西的話, Ptr a 的那個 a 還是會保護你 ^^
+16:44:11 <CindyLinz> 但是 use after free 就要自己小心了..
+16:44:32 <petercommand> Ptr 會出現 use after free?
+16:44:52 <CindyLinz> 用 malloc 拿來的 Ptr, 要自己 free
+16:45:02 <CindyLinz> free 完還用是擋不住的 ^^|
+16:45:07 <petercommand> 喔喔...
+16:45:32 <petercommand> 不是用 malloc 來的呢?
+16:45:39 <CindyLinz> 或是 malloc 拿到 Ptr a 以後, 把它綁上 free handler 包在 ForeignPtr a 裡面..
+16:45:51 <CindyLinz> 然後從此只用 ForeignPtr a 而不用 Ptr a
+16:46:18 <CindyLinz> 如果你隨便指定一個整數生成的 Ptr a, 那.... 應該就更危險惹 :Q
+16:46:43 <petercommand> 如果是指向某個 haskell object 呢?
+16:46:54 <petercommand> 他會被 ghc free 掉嗎?
+16:46:58 <CindyLinz> 會..
+16:47:11 <CindyLinz> 但可以先把它弄成 StablePtr
+16:47:25 <CindyLinz> petercommand: http://hackage.haskell.org/package/base-4.7.0.2/docs/Foreign-StablePtr.html
+16:47:39 <petercommand> 恩了解..
+16:47:59 <CindyLinz> 不只是 ghc free 掉它的危險, 即使它還是在使用中.. ghc 也會去搬動它, 改它的 addr
+16:48:13 <CindyLinz> 沒有 stable 下來的 addr 理論上不可以用 :Q
+16:50:55 <petercommand> :D
+16:51:16 <CindyLinz> petercommand: 好可怕的反應 OAO
+16:51:32 <petercommand> XD
+16:52:27 <petercommand> CindyLinz: 所以 StablePtr 在呼叫 freeStablePtr 前都可以用，對嗎?
+16:52:32 <CindyLinz> 對
+16:53:06 <petercommand> castStablePtrToPtr 這個用途是甚麼呢?
+16:53:24 <CindyLinz> 就... 當成 Ptr a 用啊?
+16:53:42 <petercommand> 恩..
+16:53:54 <CindyLinz> @type castStablePtrToPtr
+16:53:55 <lambdabot> Not in scope: ‘castStablePtrToPtr’
+16:54:02 <CindyLinz> 對哄 這邊不會有 XD
+16:54:08 <petercommand> castStablePtrToPtr :: StablePtr a -> Ptr ()
+16:54:36 <CindyLinz> 咦.. 為什麼是 Ptr ()
+16:55:08 <CindyLinz> 噢, 只有取 addr
+16:55:26 <CindyLinz> 但不一定能用.....
+16:55:40 <CindyLinz> 是個 (void*)ptr 的概念....
+16:55:53 <petercommand> 好可怕..ww
+16:56:19 <petercommand> 沒有改變位置之前，應該還是能用?
+16:56:21 <CindyLinz> 但是可以再 castPtrToStablePtr :: Ptr () -> StablePtr a 回去
+16:56:35 <CindyLinz> 可以不要用這一個 Ptr (), 它只是給你「看一下」addr
+16:56:52 <CindyLinz> 用這個吧? # deRefStablePtr :: StablePtr a -> IO a 
+16:56:52 <petercommand> 恩
+16:57:27 <CindyLinz> StablePtr 還是要小心 use after free...
+16:57:46 <petercommand> 恩..
+16:59:09 <petercommand> plusPtr :: Ptr a -> Int -> Ptr b
+16:59:35 <CindyLinz> petercommand 開始玩火了....
+16:59:42 <CindyLinz> LTS haskell~~~ http://www.stackage.org/snapshot/lts-1.8
+17:00:19 <CindyLinz> 算是另一個 HaskellPlatform 嗎?
+17:00:22 <petercommand> 這個 Int 有保證比 Ptr 可涵蓋的範圍大或相等嗎?
+17:00:50 <CindyLinz> petercommand: 沒聽說..
+17:01:11 <petercommand> 所以可能要加好幾次的意思嗎XD
+17:01:14 <CindyLinz> 等到你想一次 jump 超過 2^63-1 的時候再來哭哭好了?
+17:01:49 <petercommand> http://hackage.haskell.org/package/base-4.7.0.2/docs/Data-Int.html
+17:01:53 <CindyLinz> > maxBound :: Int
+17:01:55 <lambdabot>  9223372036854775807
+17:01:56 <petercommand> A fixed-precision integer type with at least the range [-2^29 .. 2^29-1]
+17:02:13 <CindyLinz> petercommand: 對.. 可是 64bits 的 GHC 的 Int 是 64bits 的 XD
+17:02:29 <petercommand> XD
+17:03:13 <petercommand> > log (fromIntegral (maxBound :: Int))
+17:03:15 <lambdabot>  43.66827237527655
+17:03:37 <CindyLinz> petercommand: 要除一下 log 10 吧?
+17:03:52 <CindyLinz> > log 10
+17:03:54 <lambdabot>  2.302585092994046
+17:04:19 <CindyLinz> 怪怪?
+17:04:25 <petercommand> > log (fromIntegral (maxBound :: Int)) / log 2
+17:04:26 <lambdabot>  63.0
+17:04:35 <CindyLinz> 對哄 是除 log 2
+17:04:38 <petercommand> 是 log 2  啦XD
+17:04:51 <CindyLinz> 不是想要看幾位數 XD
+17:05:04 <petercommand> XD
+18:26:18 <pkmx> > finiteBitSize (undefined :: Int)
+18:26:19 <lambdabot>  64
+18:28:07 <b4283> 42
+18:30:42 <petercommand> :t finiteBitSize
+18:30:43 <lambdabot> FiniteBits b => b -> Int
+18:31:19 <petercommand> > finiteBitSize (undefined :: Integer)
+18:31:20 <lambdabot>  No instance for (Data.Bits.FiniteBits GHC.Integer.Type.Integer)
+18:31:21 <lambdabot>    arising from a use of ‘Data.Bits.finiteBitSize’
+18:31:35 <petercommand> > finiteBitSize (undefined :: Char8)
+18:31:36 <lambdabot>  Not in scope: type constructor or class ‘Char8’
+18:31:37 <lambdabot>  Perhaps you meant ‘Char’ (imported from Data.Char)
+18:31:43 <petercommand> > finiteBitSize (undefined :: Char)
+18:31:44 <lambdabot>  No instance for (Data.Bits.FiniteBits GHC.Types.Char)
+18:31:44 <lambdabot>    arising from a use of ‘Data.Bits.finiteBitSize’
+18:31:50 <petercommand> > finiteBitSize (undefined :: Floating)
+18:31:51 <lambdabot>  Expecting one more argument to ‘GHC.Float.Floating’
+18:31:52 <lambdabot>  Expected a type,
+18:31:52 <lambdabot>    but ‘GHC.Float.Floating’ has kind ‘* -> Constraint’
+18:32:05 <petercommand> > finiteBitSize 1.0
+18:32:07 <lambdabot>  No instance for (Data.Bits.FiniteBits b0)
+18:32:07 <lambdabot>    arising from a use of ‘Data.Bits.finiteBitSize’
+18:32:07 <lambdabot>  The type variable ‘b0’ is ambiguous
+18:32:20 <petercommand> > finiteBitSize (1.0 :: Floating)
+18:32:22 <lambdabot>  Expecting one more argument to ‘GHC.Float.Floating’
+18:32:22 <lambdabot>  Expected a type,
+18:32:22 <lambdabot>    but ‘GHC.Float.Floating’ has kind ‘* -> Constraint’
+18:40:41 <petercommand> > finiteBitSize (1.0 :: Floating a -> a)
+18:40:42 <lambdabot>  Expected a type, but ‘GHC.Float.Floating a’ has kind ‘Constraint’
+18:41:14 <pkmx> > finiteBitSize (undefined :: Float)
+18:41:15 <lambdabot>  No instance for (Data.Bits.FiniteBits GHC.Types.Float)
+18:41:16 <lambdabot>    arising from a use of ‘Data.Bits.finiteBitSize’
+18:41:38 <pkmx> :<
+18:41:57 <pkmx> > finiteBitSize (undefined :: CUIntPtr)
+18:41:58 <lambdabot>  Not in scope: type constructor or class ‘CUIntPtr’
+18:53:49 <petercommand> > finiteBitSize (1.0 :: Floating a => a)
+18:53:50 <lambdabot>  No instance for (Data.Bits.FiniteBits b0)
+18:53:50 <lambdabot>    arising from a use of ‘Data.Bits.finiteBitSize’
+18:53:50 <lambdabot>  The type variable ‘b0’ is ambiguous
+20:35:53 <petercommand> 在執行 newIORef 的時候，竟然不能塞入自己，只能用 modifyIORef' 去改掉..
+20:36:14 <petercommand> data A = A (IORef a)
+20:36:46 <petercommand> 打錯 ，應該是 data A = A (IORef A)
+20:37:12 <petercommand> 類似這樣的東西
+20:39:00 <petercommand> 因此我寫成了像 data A = A (IORef a) | Nil 這樣...
+20:39:20 <petercommand> s/a/A
+21:03:06 <CindyLinz> 有 data Fix 的味道... (不舒服 ><
+21:11:56 <CindyLinz> petercommand: 可以塞入自己啦... 你需要 MonadFix.. ^^
+21:13:14 <CindyLinz> 然後如果用你原本的 approach... 嗯, 考慮用 IORef (Maybe a) 嗎?
+21:14:09 <CindyLinz> newtype A = A (IORef (Maybe A))     (我不知道哪個比較好, 只是想想 :p)
+21:20:16 <pkmx> data A = A (IORef A) 不就和 data Void = Void Void 是一樣道理嗎 XDrz
+21:51:16 <CindyLinz> 我剛第一眼以為他想要弄出一整串東西, 像 Fix 那樣 ^^|
+21:57:37 <petercommand> 我是有其他項啦...應該像 data A = (IORef a) Int Int 之類的
+21:57:43 <petercommand> 我是有其他項啦...應該像 data A = A (IORef a) Int Int 之類的
+21:57:50 <petercommand> 我是有其他項啦...應該像 data A = A (IORef A) Int Int 之類的
+21:57:56 <petercommand> 一直打錯@@
+21:59:19 <CindyLinz> petercommand: 用用 MonadFix.. 推荐 :D
+22:00:07 <petercommand> 來看看^^
+22:01:31 <CindyLinz> petercommand: https://wiki.haskell.org/MonadFix
+22:02:08 <CindyLinz> Sample 根本就是你要的 XD
+22:02:12 <petercommand> 恩恩，正在看XD
+22:26:32 <suhorng> 16:38:15 <petercommand> 在一個 tree 裏面，有辦法把某個 child element 的位置儲存起來，方便以後來更新他嗎? (這樣就不用 traverse 這個 tree 了)
+22:26:36 <suhorng> Zipper?
+22:28:07 <petercommand> zipper 還是要走下去呀?
+22:28:25 <petercommand> 我希望直接更改XD
+22:29:01 <suhorng> 原來是直接更改@@
+22:37:48 <CindyLinz> Zipper 更大的問題是只能有一個修改點 @@"
+22:38:10 <CindyLinz> 我不能跳著更新, 也不能 fork 成好幾個 thread 去更新..
+22:38:41 <suhorng> 對
+22:38:45 <suhorng> 真糟糕
+22:38:54 <CindyLinz> 想到.. Zipper 也是一個應該拿到 Funth 介紹的東東
+22:39:09 <CindyLinz> 算是一個 Pure Functional Language 的 design pattern 吧
+22:39:09 <suhorng> 這樣 fork 好幾個 thread 更新後可能要使用 three-way merge (誤)
+22:39:31 <CindyLinz> 有幾個 thread 就要幾個 way.....wwww
+22:42:14 <petercommand> 只能 way >= thread
+22:42:53 <petercommand> 所以應該弄個 n-way merge 出來XD
+22:50:11 <suhorng> Elm 簡介 https://github.com/evancz/elm-architecture-tutorial#the-elm-architecture
+22:51:11 <suhorng> https://www.fpcomplete.com/blog/2015/02/primitive-haskell 髒髒的東西的簡介....XD
+23:33:11 <CindyLinz> suhorng: 學完 Elm, 來玩 helm? XD
+23:36:36 <suhorng> /o/
+23:36:47 <suhorng> 用完 bash, 來用 scsh (X

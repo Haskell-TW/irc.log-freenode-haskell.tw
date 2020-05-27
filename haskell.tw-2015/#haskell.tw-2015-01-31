@@ -1,0 +1,66 @@
+00:24:10 <monochrom> CindyLinz: 我是單純地, 無聊地想"可不可以在外面用, 最小型的例子是甚麼"
+00:25:50 <CindyLinz> monochrom: 原本就知道一定作得出來嗎?
+00:26:06 <monochrom> 不, 但一試就知
+00:28:00 <CindyLinz> 有點神 ._.
+01:03:58 <monochrom> 有兩點. 第一, 會去問 "可不可以這樣做?", 這需要天才, 異想天開. 第二, 見到這問題後(不論是自己問還是別人問), 去探討它, 這就不需要天才, 需要的是努力和鍥而不捨.
+01:05:01 <monochrom> 所以名人說, 成功要些少天才, 多多努力.
+01:05:44 <monochrom> 具備這樣條件的人, 是非常危險的 XD
+01:09:35 <CindyLinz> monochrom: 嗨~ 恐怖份子~~ (逃
+01:11:56 <monochrom> 其實在 Setjmp 一節(section) 裏的兩段文字, 也是反映這兩點. 第一段, "可不可以呢?", 這是不知哪裏來的問題, 實在是無聊地問的. 第二段是決定了探究這問題後, 就只是很邏輯很機械地推理, 不需要異想天開, 儘管結局 x = c x 看來出人意表.
+01:12:53 <CindyLinz> 把 longjmp 所需要的遞迴 (or 迴圈) 藏在那個 fix 裡面!
+01:15:39 <monochrom> 第二段包含了整個推理過程, 完全是我當年的思想過程, 亦完全順理成章, 不用再發明甚麼.
+01:17:14 <CindyLinz> mmmm
+01:19:39 <monochrom> "拿甚麼參數給 c 呢? 不知道. 不如管它叫 x, 遲些有資料, 再回頭寫下方程式, 然後解方程式" 這是數學課常做的事. in fact, 為未知數起名, 才更方便找資料及寫方程式.
+01:21:03 <CindyLinz> 那時候心中的感覺比較像是在湊 type, 還是先去想「意義」, 然後去找出那個意義的東西來放?
+01:21:22 <monochrom> 是呀.
+01:22:42 <monochrom> fix c 是計算出來的, 不是發明出來的. 只有 "不如問這問題", 才是發明, think outside the box
+01:22:46 <CindyLinz> 是偏湊 type 還是偏想意義呀?
+01:23:59 <monochrom> 在這裏是先想意義. 並把意義寫成方程式, x = c x.
+01:24:34 <monochrom> 初時也未知型別有沒有問題的. 要問電腦才知.
+01:24:40 <CindyLinz> 嗯嗯嗯嗯....
+01:26:51 <monochrom> 在這情形, 我是不多想型別問題, 因為電腦會答. 電腦會做的事, 何必我費心, 它說型別有錯再算吧! 但寫方程式和解方程式, 就捨我其誰.
+01:28:47 <CindyLinz> 喔.. 只是有時候用湊的也會出現答案, 只是令人不太服氣這樣 ^^|
+01:30:14 <monochrom> 啊, 基本上, 有甚麼資料, 就用甚麼資料. 在這情形, 意義方面提供較多資料, 所以做意義先
+01:31:05 <CindyLinz> 嗯嗯嗯 ^^
+01:36:04 <monochrom> 有兩件 lego 磚, 緊緊合在一起, 而你想分開它們. 碰巧又發覺, 在它們之間的縫, 左邊開了一點, 右邊較緊貼. 你會由左邊的缺口著手呢, 還是由右邊的"無從入手"處著手呢?
+01:37:53 <monochrom> 而另一個人看到你所做的, 他學到的是 "啊, 原來要由左邊做起"呢, 還是 "啊, 原來要由缺口做起"呢? :)
+01:38:22 <CindyLinz> 我覺得「想意義」這種事... 需要精神狀態比較好的時候才有辦法作 @@"
+01:38:38 <CindyLinz> 湊 type 的話... 就算喝醉酒, 只要眼睛還看得到東西就行 XD
+01:40:25 <petercommand> CindyLinz: 我覺得寫 haskell 有時會有這種情形，覺得精神狀態比較好的時候再來寫XD 尤其是在看看不懂的 code 的時候..
+01:43:38 <CindyLinz> 不不.. Haskell 和別的語言不一樣的地方是, 有時精神狀態不好的時候也可以寫啊.. 這才厲害啊 XDXD
+01:44:32 <monochrom> 原來, 拆 lego 磚是我小時候常做的事. 真是三歲定八十矣!
+01:45:09 <petercommand> CindyLinz: 寫的話，精神不好可能就會退縮到自己比較熟悉的寫法來做，即使可能有著更好的方法來寫..
+01:46:03 <monochrom> 湊型另實在是較易, 有機會的話不要放過
+01:46:04 <petercommand> lego 磚好久沒碰了，該是時候來回味一下了XD
+01:46:18 <monochrom> s/另/別/
+01:46:37 <CindyLinz> petercommand: 那時候不算... 但是已經被 type 釘好, 填肉的時候不需要精神 XD
+01:46:45 <CindyLinz> monochrom: XD
+01:47:02 <petercommand> CindyLinz: 真的XD
+01:48:01 <petercommand> 可是肉可能就甜的比較歪一些就是了XD
+01:48:12 <petercommand> s/甜/填
+01:54:04 <monochrom> 想來, Lego 真是偉大啊! 小時候砌及拆, 長大後發覺: 寫程式像砌, 把已有的組合成未有的; 解難題像拆, 把一處缺口擴大到別處都出現缺口
+01:56:24 <monochrom> 下回話題: 填鴨的肉是否較甜? XD
+01:57:01 <CindyLinz> XDDD
+02:00:55 <petercommand> XD
+02:09:27 <favonia> monochrom: 從 101 丟下去看看會怎樣裂開
+03:17:44 <monochrom> 哈哈, 也太殘暴了吧
+03:18:15 <monochrom> 亞歷山大再生, 可能也用這方法 XD
+15:11:26 <petercommand> 拿了 State monad 來寫 factorial
+15:11:28 <petercommand> https://ideone.com/ptQglX
+15:11:58 <petercommand> 可是會停不下來..不曉得哪裡寫錯了XD
+15:17:11 <CindyLinz> petercommand: 你是不是在幻想那個 remain 一呼叫, 函數就會結束?
+15:19:16 <petercommand> 喔喔，曉得哪裡寫錯了XD
+15:19:49 <petercommand> 對，就是以為那裡就結束了
+15:20:01 <CindyLinz> mmm ^^
+20:38:37 <petercommand> (MonadReader Int m, MonadWriter String m) => m Int
+20:39:22 <petercommand> 如果我要兩層一樣的 monad ，是不是不能這樣寫呢?
+20:45:48 <petercommand> 例如我要 StateT Integer (State
+20:45:50 <petercommand> Integer)
+20:55:58 <pkmx> MonadState (Integer, Integer) m => m ()
+20:56:02 <pkmx> 只能這樣
+20:58:25 <pkmx> ghc-7.10 要延期了...QQ
+20:59:37 <petercommand> 發生甚麼事了? QQ
+21:00:33 <pkmx> 有人發現可以用DataKinds + Typable做出unsafeCoerce
+21:01:21 <petercommand> https://ghc.haskell.org/trac/ghc/ticket/9858 #這個嗎?
+21:01:50 <pkmx> 是der
+21:59:50 <CindyLinz> 反正 7.8 的 extension 還沒吃完... 不在意.. (逃

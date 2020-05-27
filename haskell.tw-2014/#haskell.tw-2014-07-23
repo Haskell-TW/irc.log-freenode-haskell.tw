@@ -1,0 +1,15 @@
+00:34:17 <monochrom> 自己掌控沙盒: http://www.vex.net/~trebla/haskell/sicp.xhtml#sandbox
+00:47:24 <CindyLinz> 實用~~ ♡
+07:54:38 <favonia> FT 網址是不是換成 https://funth.hackpad.com/Hf9mWf25eaG 更好？
+07:54:45 <favonia> 把 hackpad 當網站在用 www
+09:18:47 <mno2> 咦？有把網址註冊下來嗎？
+12:34:27 <CindyLinz> 那一頁是昨天才多出來的吧? XD
+17:44:16 <CindyLinz> suhorng: 對了.. GHC 被說很恐怖的 IncoherentInstances, 比之 C++ 的 overload resolution 我覺得差不多啊 XD
+17:44:48 <CindyLinz> 所以如果原本常用 C++ 的人跳過來用的話, 應該可以隨意開, 反正很習慣 :p
+17:47:02 <suhorng> 是這樣嘛 XDDD
+17:47:33 <suhorng> 欸，應該還是不一樣， C++ 印象中有定義一個「最恰當」順序，如果比不出來的話會報錯？（還是總之會訂出一個順序來…）
+17:47:44 <suhorng> 不像 IncoherentInstances 隨便選一個的樣子
+17:51:34 <CindyLinz> 來讀.. XD
+21:24:39 <mno2> https://ghc.haskell.org/trac/ghc/ticket/4359  看到 Edward Kmett 用才知道有這個 extension:  LambdaCase
+21:28:56 <CindyLinz> 那個好用 :p
+23:06:45 <monochrom> LambdaCase 是項德政 :)

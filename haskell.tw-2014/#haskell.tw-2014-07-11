@@ -1,0 +1,188 @@
+00:05:57 <xcycl> @djinn (a -> a) -> a
+00:05:59 <lambdabot> -- f cannot be realized.
+00:06:44 <xcycl> @djinn (a, b) -> Either a b
+00:06:45 <lambdabot> f (a, _) = Left a
+00:07:14 <xcycl> @djinn Either a b -> Either b a
+00:07:15 <lambdabot> f a =
+00:07:15 <lambdabot>     case a of
+00:07:15 <lambdabot>     Left b -> Right b
+00:07:15 <lambdabot>     Right c -> Left c
+00:07:29 <au> @djinn-add Continuation a = (a -> r) -> r
+00:07:29 <lambdabot> Cannot parse command
+00:07:34 <au> @djinn-add type Continuation a = (a -> r) -> r
+00:07:35 <lambdabot> Error: Undefined type variable r
+00:07:57 <au> @djinn-add type Continuation a = forall r. (a -> r) -> r
+00:07:57 <lambdabot> Error: Undefined type variable forall
+00:08:00 <au> oh well :p
+00:08:07 <xcycl> QQ
+00:08:55 <au> @djinn ((a -> ((b -> r) -> r)) -> ((a -> r) -> r)) -> ((a -> r) -> r)
+00:08:55 <lambdabot> f a b = a (\ c _ -> b c) b
+00:09:06 <au> 不錯的 callCC
+00:10:03 <xcycl> @djinn [[a]] -> [a]
+00:10:03 <lambdabot> Error: Undefined type []
+00:10:16 <xcycl> 沒有 list ..
+00:11:15 <au> @djinn-add data List a = Nil | Cons a (List a)
+00:11:16 <lambdabot> Error: Recursive types are not allowed: List
+10:48:54 <banacorn> @djinn hi :D
+10:48:54 <lambdabot> Cannot parse command
+10:49:17 <banacorn> @djinn :D
+10:49:18 <lambdabot> Invalid command
+10:49:27 <banacorn> @djinn :(
+10:49:27 <lambdabot> Invalid command
+12:12:42 <miaoski> yllan & CindyLinz : I'm going ~~
+12:22:40 <b4283> monochrom 怎麼消失了 ...
+17:18:41 <CindyLinz> b4283: 時區不合啊
+18:55:53 <CindyLinz> @pl (>>= return . f)
+18:55:53 <lambdabot> (f `fmap`)
+18:56:17 <CindyLinz> 就是想要用 (>>=) 實作 fmap 啊.. 囧
+18:56:34 <CindyLinz> @pl (+ return . f)
+18:56:35 <lambdabot> (return . f +)
+18:56:41 <CindyLinz> @pl \f -> (+ return . f)
+18:56:42 <lambdabot> (+) . (return .)
+18:56:48 <CindyLinz> @pl \f -> (>>= return . f)
+18:56:49 <lambdabot> fmap
+18:57:07 <CindyLinz> @type (>>=) . (return .)
+18:57:08 <lambdabot> Monad m => (a -> b1) -> (m b1 -> a -> b) -> a -> b
+18:57:44 <CindyLinz> 算了.. QQ
+19:15:54 <darkx> @src >>=
+19:15:54 <lambdabot> Source not found. My mind is going. I can feel it.
+19:20:14 <CindyLinz> @src (>>=)
+19:20:15 <lambdabot> Source not found. Where did you learn to type?
+19:31:30 <caasih_> @src insult
+19:31:30 <lambdabot> Source not found. Are you typing with your feet?
+19:33:34 <CindyLinz> lambdabot 火氣很大..ww
+19:41:38 <caasih_> XD 怪事：
+19:41:45 <caasih_> @srz (+)
+19:41:46 <lambdabot> Source not found. Abort, Retry, Panic?
+19:41:52 <caasih_> @srz (.)
+19:41:52 <lambdabot> (f . g) x = f (g x)
+19:41:52 <lambdabot> NB: In lambdabot,  (.) = fmap
+19:43:19 <CindyLinz> @src (==)
+19:43:19 <lambdabot> x == y = not (x /= y)
+19:43:36 <CindyLinz> caasih_: 我想, 應該是沒有 default 實作的就查不到 src 了
+19:44:25 <caasih_> CindyLinz: 我覺得怪的是，  command 最後一個字可以亂打
+19:44:31 <CindyLinz> 呃.. XD
+19:44:55 <caasih_> @helb listmodules
+19:44:55 <lambdabot> listmodules. Show available plugins
+19:44:57 <CindyLinz> @s (.)
+19:44:57 <lambdabot> Maybe you meant: sequence set-topic shift-topic shootout show slap smack spell spell-all src v @ ? .
+19:45:02 <CindyLinz> @srooooooooo (.)
+19:45:02 <lambdabot> Unknown command, try @list
+19:45:07 <CindyLinz> @sro (.)
+19:45:08 <lambdabot> (f . g) x = f (g x)
+19:45:08 <lambdabot> NB: In lambdabot,  (.) = fmap
+19:45:12 <CindyLinz> @sroo (.)
+19:45:13 <lambdabot> Maybe you meant: src show
+19:45:19 <CindyLinz> @soo (.)
+19:45:20 <lambdabot> Maybe you meant: yow todo src show do
+19:45:28 <caasih_> 不知道有沒有哏
+19:46:02 <CindyLinz> @srx (.)
+19:46:02 <lambdabot> (f . g) x = f (g x)
+19:46:03 <lambdabot> NB: In lambdabot,  (.) = fmap
+21:24:20 <petercommand> 昨天這個呀http://pastebin.com/ZMm15evq
+21:24:34 <petercommand> 為甚麼不能回傳State g呢?
+21:25:41 <petercommand> (>>=) :: ma -> (a -> mb ) -> mb
+21:25:55 <petercommand> 他吃的是State h
+21:26:15 <petercommand> 怎麼會回傳tuple呢?
+21:45:34 <CindyLinz> 那整坨都在 State $ 的後面
+21:46:01 <CindyLinz> State 的唯一個參數就是那個 runState 欄位, 也就是一個 s -> (s, a) 的函數
+21:48:06 <petercommand> 所以變成(State h) >>= f = State g newState這樣嗎?
+21:48:15 <CindyLinz> 不考慮效率提升的部分, 只考慮功能的話, 可以把 newtype 視為一個只有一個欄位, 而且那個欄位是 strict 的 data
+21:48:28 <CindyLinz> petercommand: g newState 要括起來
+21:48:46 <CindyLinz> 你中間一堆步驟省掉只是示意吧?
+21:48:51 <petercommand> 恩恩
+21:49:02 <petercommand> 示意而已
+21:49:10 <CindyLinz> State (g newState) 或 State $ g newState
+21:49:18 <CindyLinz> 不對不對
+21:49:31 <CindyLinz> State (\s -> g newState) 或 State $ \s -> g newState 這樣才對
+21:51:09 <petercommand> g newState會產生(a, s)這個tuple這樣對嗎?
+21:51:28 <CindyLinz> 對..
+21:51:42 <CindyLinz> 原來我剛剛 tuple type 寫反了 :p
+21:52:07 <petercommand> 然後放到State，變成State (a,s)
+21:52:31 <petercommand> 這個怎麼apply的呀?
+21:53:36 <CindyLinz> 沒有把 tuple 放到 State 裡
+21:53:55 <CindyLinz> 是把 (\s -> ...一團會生 (a,s) 的程式...) 放到 State 裡
+21:54:02 <CindyLinz> 放了 tuple 就不能 apply 了
+21:54:07 <petercommand> 喔喔....
+21:54:30 <petercommand> 原來如此...
+21:58:15 <petercommand> letoh: newtype好像是不會產生執行時期的開銷
+21:59:16 <letoh> 我以前是當作類似 macro 的東西來理解@_@
+22:00:37 <CindyLinz> 髒髒der..
+22:00:51 <CindyLinz> (揮開) (揮開)
+22:00:57 <letoh> XDXD
+22:01:16 <letoh> 還好沒撒鹽XD
+22:01:37 <CindyLinz> 撒鹽是什麼梗? XD
+22:01:56 <letoh> 日本人驅邪的時候會撒鹽XD
+22:02:26 <petercommand> 橄欖油...
+22:02:56 <CindyLinz> 喔 :p
+22:02:57 <letoh> CindyLinz: 明明 haskell 也有 template 啊
+22:03:14 <CindyLinz> letoh: 那是 haskell 髒的部分啊
+22:03:15 <letoh> th 會乾淨一點嗎?
+22:03:18 <letoh> 喔XDXD
+22:03:30 <CindyLinz> letoh: 呃, 跟 C 的 macro 比的話, 那乾淨很多點 XD
+22:04:01 <letoh> 好吧  含金湯匙出生的就是不太一樣XD
+22:04:34 <CindyLinz> C 那種純文字剪貼超級髒好不好 XD
+22:04:51 <letoh> 有 # 和 ## 可以用喔XD
+22:05:13 <CindyLinz> 我都有在用.... !@#$%@
+22:05:24 <letoh> XDXD
+22:06:38 <whitglint> 有的人就喜歡 C 純純的 XD
+22:07:52 <whitglint> (純)
+22:08:23 <whitglint> 咦~ Haskell 也是(純)的
+22:08:40 <whitglint> pure functional
+22:09:15 <c9sloud> XDDDD
+22:10:37 <whitglint> 寫歡 XD
+22:22:34 <CindyLinz> Functional Thursday 講「題」募集中~~~ # https://funth.hackpad.com/Functional-Thursday--sGic3s4ncNn
+22:39:52 <petercommand> functional thursday有錄影嗎?
+22:40:10 <petercommand> 這樣可以聽以前的演講XD
+22:42:36 <CindyLinz> no XD
+22:44:08 <petercommand> 好吧XD
+22:44:45 <petercommand> 我看完state monad的感想: 明明就是簡單的東西弄的這麼複雜....
+22:45:04 <letoh> petercommand++ XD
+22:46:29 <CindyLinz> petercommand: 以類比來說你是在看某種 OS 的 memory management 啊
+22:46:40 <CindyLinz> 用的時候沒在管它的
+22:46:43 <petercommand> CindyLinz: 怎麼說?
+22:46:55 <petercommand> 喔...
+22:46:59 <petercommand> XD
+22:47:29 <petercommand> 就像malloc和free這樣嗎?XD
+22:48:39 <CindyLinz> 嗯 雖然方向不一樣, 反正都是寫程式的時候不會關心的部分
+22:50:02 <petercommand> CindyLinz: 問題是一般程式不會去寫memory managementｍ但是有可能要寫monad?
+22:50:35 <CindyLinz> petercommand: 一般程式你可能會寫很複雜的 object?
+22:51:05 <petercommand> 複雜的 object?
+22:51:46 <au> 一般程式不太會寫 monad
+22:51:57 <CindyLinz> monad 可以拿來處理很複雜的東西啊
+22:51:59 <au> 都是用寫好的，最多 monad transformer 疊起來
+22:52:11 <CindyLinz> 不過是說.. state monad 這種一行就能寫完的東西為什麼你也怪它複雜啊 OAO
+22:52:34 <petercommand> CindyLinz: 因為以前沒看過吧XDD
+22:52:40 <CindyLinz> 不是就一行嗎!? 不是就一行而已嗎!? 還是你要 7k 行以上的東西才叫作簡單!?
+22:52:43 <letoh> 一般複雜不會是因為只有一行
+22:52:54 <letoh> 尤其 haskell 一行可能可以講很久XD
+22:52:57 <petercommand> letoh++
+22:53:14 <CindyLinz> 我最近在改的 120k 行的 php project 就不複雜了嗎 orz
+22:53:19 <letoh> 概念上不熟悉才會是複雜的原因
+22:53:24 <petercommand> 對!
+22:54:09 <petercommand> letoh: 不能在同意你更多了XD
+22:54:11 <letoh> 行數多我個人是覺得還好
+22:54:31 <letoh> CindyLinz: 我用一堆 macro 封裝起來後，主程式看起來也是只有少少行啊XD
+22:54:51 <CindyLinz> 現在看 state monad 那樣長相的東西很快了啦 :p
+22:55:23 <petercommand> au: 我先看完monad transformer再回來想^^
+22:55:40 <CindyLinz> 愛嫌還愛看 XD
+22:56:15 <petercommand> letoh: 行數多有可能亂七八糟，非常恐怖...
+22:56:34 <petercommand>  甚麼spaghetti code的...
+22:56:38 <letoh> 當然有可能啦  但總是有機會看懂
+22:56:55 <letoh> 畢竟是同一個星球的思考方式寫出來的XD
+23:29:57 <whitglint> CindyLinz: 120k php -> 120 haskell 就好了
+23:30:40 <CindyLinz> whitglint: 那前提是把原本的 project 讀完, 熟知所有的 feature 和 bug as feature 欸 orz
+23:30:45 <whitglint> 改寫開始!!!
+23:30:53 <CindyLinz> 第一步就縮了 ._.
+23:31:03 <whitglint> bug 也要完美重現 XD
+23:31:09 <CindyLinz> 對啊 太恐怖了.....ww
+23:31:25 <CindyLinz> 你知道用 Haskell 寫不出有 bug 的程式嗎!?  (大誤)
+23:32:11 <whitglint> hashcat 表示:
+23:32:19 <CindyLinz> (噓)
+23:32:27 <CindyLinz> 咦 他不在嘛...ww
+23:41:16 <au> 你知道別的語言都是排除會出錯的程式，但是 Haskell 卻是排除會出錯的程式員嗎? (誤)
+23:42:39 <CindyLinz> 的程式..員嗎.. orz
+23:44:41 <petercommand> XDD
+23:46:43 <yllan> 被排除了！
+23:48:41 <whitglint> 的碼農...
+23:48:46 <ucfan> 被排除了 ><

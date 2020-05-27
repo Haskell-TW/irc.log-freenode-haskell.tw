@@ -1,0 +1,30 @@
+10:28:55 <MnO2> mgccl: hi
+10:29:04 <mgccl> hi
+10:29:08 <MnO2> mgccl: 好久不見
+10:29:16 <mgccl> 嗯哼...
+10:29:24 <mgccl> 还是学生恩恩...
+10:29:31 <mgccl> 不常上IRC
+10:30:21 <MnO2> mgccl: 哈，可以先看一下log
+10:32:20 <mgccl> 看log发现也是没有几个人上...
+10:34:43 <MnO2> 對啊，本來人就不多 :)
+10:34:49 <mgccl> 我现在在用Haskell刷Rosalind.info上面的题....
+10:36:41 <MnO2> 之前沒聽過，蠻有趣的
+10:37:42 <mgccl> 恩恩. 如果有人创建一个combinatorial optimzation的版本的rosalind就好了...
+10:40:04 <MnO2> 用 snap framework 寫一個 ?
+10:41:34 <mgccl> hmm... 可能... 不过我玩这些东西的时间也不多了... 很快就要毕业工作了>.<
+10:42:13 <MnO2> 找寫 functional language 的工作？
+10:44:19 <mgccl> - - 未来吧... 似乎Simon Marlow去了FB
+10:44:39 <MnO2> 是的
+10:45:00 <MnO2> 少了一位全職開發 ghc 的人
+12:18:48 <MnO2> https://twitter.com/donsbot/status/269586201785278464
+12:18:58 <MnO2> donsbot 很幽默...
+12:20:01 <MnO2> https://twitter.com/rickasaurus/status/268469567318261760
+12:20:09 <MnO2> 這也蠻有趣的
+12:20:56 <MnO2> https://www.youtube.com/watch?v=BiHH3LzKV04&t=55:40
+12:26:47 <MnO2> http://richardminerich.com/2012/12/my-education-in-machine-learning-via-cousera/
+12:26:56 <MnO2> 有人要弄個PL版的嗎？
+15:43:45 <favonia> http://hackermonthly.com/issue-31.html 這個好好玩喔
+15:49:12 <MnO2> http://embed.cs.utah.edu/csmith/
+15:49:14 <MnO2> 惡搞專用
+15:50:05 <MnO2> favonia: cool
+16:18:59 <_13h> csmith 好像不錯

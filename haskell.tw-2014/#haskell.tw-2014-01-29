@@ -1,0 +1,113 @@
+12:52:02 <CindyLinz> XDite 牆上又出現一批 rails upgrade 髒話文了... XD
+13:16:55 <godfat1> rails 3 的 assets 我也覺得是爛賬... 立意不錯，實作是大便
+13:21:45 <CindyLinz> 但他罵的應該是 3 -> 4 不相容..
+13:22:02 <godfat> 我是看這篇 http://blog.xdite.net/posts/2014/01/29/rails4-asset-mess
+13:22:38 <godfat> 不相容的話 2 -> 3 差更多 XD
+13:22:39 <CindyLinz> 所以是從爛帳3, 改成爛帳4嗎.....ww
+13:22:51 <godfat> 我是這樣覺得啦...
+13:23:30 <godfat> 我有一度真的很想關掉 assets
+13:23:31 <godfat> 不過他確實是有好處，所以一直容忍到現在...
+13:23:56 <CindyLinz> 這種最可怕了..?
+13:24:15 <godfat> 也許，擺脫不掉 XD
+13:26:19 <CindyLinz> XDite 的解法.... XD
+13:30:30 <godfat> 我最不滿意的地方是速度實在太慢了，動不動就要好幾分鐘...
+13:30:30 <godfat> 有些東西根本永遠不會去動，每次 deploy 還要好幾分鐘
+13:30:30 <godfat> 這不對呀...
+13:31:01 <godfat> 一不小心還會 crash production 也不對，應該不顯示圖片就好了，噴 exception 有點莫名
+13:33:19 <CindyLinz> 用 C 寫 extension 的風氣盛不盛啊?
+13:33:54 <CindyLinz> 不過 ruby / rails 改版劇烈, 可能用 C 寫每版都要重來.. @@"
+13:33:57 <godfat> 應該不，不過我覺得是他們寫不好，還不見得需要到 c
+13:34:18 <CindyLinz> 嗯, 不過偶爾看 XDite 的抱怨文, 覺得就算用 ruby 寫也是每版重來 orz
+13:34:29 <CindyLinz> 喔
+13:34:37 <godfat> ruby 其實一直沒啥改啦，我 07 年寫的東西現在也會動，最多改一點點而已
+13:34:57 <godfat> rails 就等著一直改...
+13:36:36 <godfat> 我之前用 fiber 也很好笑，assets 動不動就 stack overflow...
+13:36:36 <godfat> 我原本一直以為是哪裡有遞迴，後來才發現是 assets 那邊的 callstack 太大，是真的用到完
+13:36:36 <godfat> 扯
+13:37:36 <CindyLinz> 好酷喔 XD
+13:38:32 <godfat> 所以我覺得他們程式一定寫得很噁心
+13:38:33 <godfat> 我曾經有花時間看過，一時三刻看不懂，後來就沒看了
+13:38:34 <CindyLinz> 可能每一層的區域變數也太多?
+13:38:49 <godfat> 這我就不確定了
+13:39:12 <CindyLinz> 2000 年的時候用 C, 每一層一個 int (參數) 可以 26萬層..
+13:39:43 <CindyLinz> 那時試一個 int 是因為我可以在 heap 裡面開一個大陣列, 然後這個參數就是大陣列裡的 index
+13:40:12 <CindyLinz> 把所有原本要放在區域變數的東西都寄存到那個大陣列裡, 每遞迴一層就用一格 :p
+13:40:27 <petercommand> godfat: 把stack改大一點?
+13:40:45 <CindyLinz> 不過 perl 的 stack 是另外開在 heap 裡自己模擬的, 我猜 ruby 也是..
+13:41:13 <petercommand> XD
+13:42:19 <godfat> fiber stack 是 compile time 決定的，沒辦法改
+13:42:19 <godfat> ruby 的 stack 倒是是用 c 的 stack
+13:42:19 <godfat> fiber stack 我倒是不確定是不是用 c 的 stack, 大概不是？
+13:43:00 <petercommand> recompile吧....
+13:43:28 <godfat> 用 heroku 的話不能自己 compile
+13:44:01 <CindyLinz> 哇, 直接用 C 的 stack 耶... @@"
+13:44:40 <CindyLinz> 只能寫 app.... ^^|
+13:45:39 <godfat> 我不知道用 c 的 stack 有什麼壞處嗎？ XD
+13:45:40 <godfat> 彈性不好？
+13:46:21 <godfat> 不過我還真沒想過區域變數可以多到會炸掉 stack... (除非需要陣列)
+13:46:56 <petercommand> 太強大了...
+13:49:47 <CindyLinz> 惡搞的時候多一層顧忌嘍
+13:50:29 <CindyLinz> 例如說...  a 函數裡面呼叫 b 函數
+13:50:52 <CindyLinz> 然後想在 b 函數裡面幫 a 函數多宣告一個區域變數, 待 b return 以後 a 的後半程式碼可以用到?
+13:52:53 <CindyLinz> 除了這個以外, 因為 C runtime (對, 我最近才知道 C 也有 runtime....ww) 自己也會依各自的實作去隨便使用 system stack
+13:53:44 <CindyLinz> ruby 函數的 call frame 之間會被 C 塞多少額外的東西不知道.. @@"
+13:54:58 <CindyLinz> 因為 a 函數裡面, 在呼叫 b 函數之前, 除了 ruby 會去 system stack 使用區域變數的空間 (這個應該會在 ruby spec 裡面定義清楚), C 要跑(模擬) ruby runtime 的時候也會用一些, 但我想這個大概很難定義清楚了
+13:55:23 <godfat> 如果用 c extension 的話，說不定可以吧..... XD
+13:57:32 <CindyLinz> 但是不知道 C 會怎麼去用 system stack, 寫 extension 的人就不敢去動啊 ._.
+13:57:57 <CindyLinz> 到時候寫出來的 extension 要綁定 gcc, 而且規定要用某一個版本很慘吧 XD
+13:59:24 <CindyLinz> b 幫 a 加 local variable 的時候, 要把 a 的 call frame 變大, 所以要把 stack 上面整個 b 的 callframe 往後移, 也要把暫存器裡面正拿來當作 stack offset 的作對應地往後加
+13:59:42 <godfat> 我不知道耶，這跟 crt 會有關喔？我以為只要看好 ruby 怎麼用 c 即可
+13:59:46 <CindyLinz> 可是不知道哪些暫存器被拿來當 stack offset, 哪些是一般的值, 也不知道有沒有哪些是被存到 heap 裡面...
+14:00:00 <CindyLinz> 也許有人 allocate 了一塊小記憶體來存 stack offset..
+14:00:23 <godfat> 原來這麼麻煩... 那算了 XD
+14:00:33 <CindyLinz> { int x; ... { int x; ... } b(); }
+14:00:45 <CindyLinz> 我不知道呼叫 b 的時候第二個 int x 所佔的空間會不會放掉
+14:04:30 <petercommand> 已經出去第2個x定義的函數的話，應該會?
+14:04:41 <CindyLinz> 是不能用, 但不一定有放掉啊
+14:04:54 <CindyLinz> 或是...
+14:05:19 <CindyLinz> { int x = b(), y = 2; } 在呼叫 b 的時候, y 的空間有沒有已經先空出來了?
+14:05:23 <petercommand> 不是放stack嗎?
+14:05:35 <godfat> 可能跟最佳化有關？我想 c 可能沒定義有沒有放掉？
+14:05:35 <godfat> 倒是 c++ 因為 destrutor 可能會放掉？
+14:05:50 <CindyLinz> 是 stack 沒錯呀, 但就不知道 sp 有沒有即時在 } 的時候就往回減
+14:06:11 <CindyLinz> destructor 應該只是會呼叫...
+14:07:46 <CindyLinz> destructor 裡面的 free 或 delete 會執行.. 不過 obj 本身就不是 destructor 能控制的了
+14:08:44 <CindyLinz> 嗯, 因為及時往回減可能有時也蠻浪費的...
+14:09:51 <petercommand> 沒放掉的話不就不能用ret了嗎....
+14:09:55 <godfat> { int x=0; printf("%d", x); }
+14:09:55 <godfat> { int x=0; printf("%d", x); }
+14:09:55 <godfat> { int x=0; printf("%d", x); }
+14:09:55 <godfat> { int x=0; printf("%d", x); }
+14:10:01 <godfat> 惡整 XD
+14:10:31 <CindyLinz> petercommand: 函數 return 的時候當然會放啦, 只是一組 block 結束的時候還沒有 return 呀 @@"
+14:10:46 <CindyLinz> 這啥? @@"
+14:11:00 <CindyLinz> 我以為你想要 printf("%p\n", (void*)&x); ?
+14:12:30 <CindyLinz> 我用 gcc 4.8.1, 剛這個連 4 段 x block 的, 印出來的 address 都一樣
+14:12:48 <godfat> 想說如果要改變 stack 大小的話，這樣會很痛 XD
+14:12:48 <godfat> @@" 不過也可能是重複利用 address?
+14:13:04 <CindyLinz> stack 改大小不太痛啦, 就 sub sp, (一個數字)
+14:13:26 <CindyLinz> 可是如果可以把連 5 個 sub sp, 合到最後一起只放一個 sub sp, 也可能有賺呀 :p
+14:16:01 <CindyLinz> 我沒開 -O 之類的時候是一樣, 開 -O2 就不一樣了
+14:16:13 <godfat> 喔喔
+14:16:15 <CindyLinz> 看 addr 剛好都是差 4
+14:17:11 <petercommand> http://codepad.org/5xhF20qc
+14:20:08 <CindyLinz> petercommand: favonia 有份... 嗯, 列出一堆 C spec 未定義行為的文件, 裡面說要用 %p 印 addr 的時候, 一定要先轉成 (void*) 不然它可能會發射核彈.. XD
+14:20:17 <petercommand> XDD
+14:20:34 <CindyLinz> 嗯你這個結果出來是有提早放的版本
+14:21:13 <CindyLinz> 我開 -O2 也是有提早放
+14:22:00 <CindyLinz> 欸不對啊...
+14:22:12 <CindyLinz> 你這第三個 printf 是印第一個變數, 當然不能變啊 ^^|
+14:26:00 <petercommand> 嗯....
+14:38:47 <petercommand> http://codepad.org/4X3XttmD
+14:38:55 <petercommand> 這樣不知道對不對...
+14:43:25 <petercommand> 怪怪的orz...
+14:48:31 <CindyLinz> __asm__!
+14:49:08 <CindyLinz> 也是有可能它兩個 int i 是一進 main() 的時候就一起 allocate 好了呀
+15:57:22 <petercommand> 應該是兩個一起allocate....
+16:00:43 <petercommand> 只sub了一次sp
+16:24:55 <CindyLinz> (Y)
+19:07:59 <letoh> 為什麼會出現 asm 的討論XD
+21:24:52 <hashcat> http://www.gnu.org/software/epsilon/
+21:25:12 <hashcat> 有動態型別的純函數式
+21:27:04 <hashcat> gnu好多東西
+21:27:12 <hashcat> http://directory.fsf.org/wiki/GNU

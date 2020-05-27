@@ -1,0 +1,23 @@
+10:57:56 <_13h> http://d.hatena.ne.jp/hzkr/20101012  # Coqの入門記事を書く会
+11:00:27 <_13h> 找其他資料時看到的
+11:01:03 <MnO2> good
+11:01:59 <_13h> reference 裡提到某個人的 blog   http://d.hatena.ne.jp/yoshihiro503/
+11:02:22 <_13h> 看了一下文章分類，感覺蠻豐富的
+11:05:05 <_13h> Proof 跟 Qed 都是 Coq 定義的 keyword 嗎?
+11:06:43 <MnO2> 我不知道，要問會寫Coq的人
+11:07:38 <_13h> 嗯嗯  看一下 blog 上貼的範例感覺蠻有趣的
+11:14:38 <hychen> _13h, yes
+11:16:08 <_13h> 有寫證明的感覺
+11:52:32 <favonia> _13h: 是寫證明沒錯啊
+12:00:41 <_13h> 喔喔喔  寫證明用的 DSL
+12:05:51 <favonia> _13h: 其實你可以完全不用那些 script...
+12:38:48 <CindyLinz> MnO2: 昨天那篇 Python / Go 的文章.. 我想, 用歸納結論為: 雖然所有的 synchronous exception 都可以當成 asynchronous exception 來處理, 不過, 最好還是盡量把能作為 synchronous 
+12:39:54 <CindyLinz> 的都設計為 synchronous.. 這樣雖然程式碼比較繁複, 可是程式巨大複雜的時候處理動線比較不會亂掉而難以維護
+14:18:03 <MnO2> CindyLinz: 沒有吧，他提到的應該都是synchronous exception
+14:19:10 <MnO2> 只是他認為exception形式的control structure在程式龐大的時候不好維護
+14:20:23 <MnO2> 主流語言的exception應該都是synchronous
+14:20:59 <godfat> asynchronous exception 好難搞 @@
+14:23:38 <MnO2> https://plus.google.com/101960720994009339267/posts/Rz1udTvtiMg
+14:23:43 <MnO2> UTF-8的小故事
+14:35:49 <b4283> X/Open: I'm making a offer you can't refuse (troll face)
+14:37:12 <MnO2> 這告訴我們選餐館要挑有方紙巾的 (誤)

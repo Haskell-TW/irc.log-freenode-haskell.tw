@@ -1,0 +1,5 @@
+01:04:33 <monochrom> 基本上, freenode 正在大病復原中 XD
+01:59:32 <CindyLinz> letoh: 對 type safe 的
+01:59:54 <CindyLinz> 用 class PrintType a 之類的接起來
+21:30:27 <suhorng> 傳說中用了會變快的東西？http://hackage.haskell.org/package/monad-ran
+21:30:33 <suhorng> (依據 http://www.haskell.org/haskellwiki/Performance/Monads 的解釋)

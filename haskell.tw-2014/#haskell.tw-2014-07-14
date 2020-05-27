@@ -1,0 +1,50 @@
+09:54:23 <miaoski> evast or banacorn or 有權限的人可以幫忙把這個 list 更新到 wiki 嗎? 感謝 ^^;
+09:54:26 <miaoski> https://www.irccloud.com/pastebin/8Ovy7YOd
+11:54:34 <suhorng> @djinn (a -> b -> c) -> (a -> b) -> a -> c
+11:54:34 <lambdabot> f a b c = a c (b c)
+11:55:09 <suhorng> @djinn ((Either a (a -> r)) -> r) -> r
+11:55:09 <lambdabot> f a = a (Right (\ b -> a (Left b)))
+11:55:44 <suhorng> @djinn ((a -> q) -> p) -> (a -> (b -> r) -> q) -> (b -> r) -> p
+11:55:44 <lambdabot> f a b c = a (\ d -> b d c)
+11:55:58 <suhorng> @djinn ((a -> r) -> r) -> (a -> (b -> r) -> r) -> (b -> r) -> r
+11:55:59 <lambdabot> f a b c = a (\ d -> b d c)
+11:56:42 <suhorng> @djinn-env
+11:56:42 <lambdabot> data () = ()
+11:56:42 <lambdabot> data Either a b = Left a | Right b
+11:56:42 <lambdabot> data Maybe a = Nothing | Just a
+11:56:42 <lambdabot> data Bool = False | True
+11:56:42 <lambdabot> data Void
+11:56:44 <lambdabot> type Not x = x -> Void
+11:56:46 <lambdabot> class Monad m where return :: a -> m a; (>>=) :: m a -> (a -> m b) -> m b
+11:56:48 <lambdabot> class Eq a where (==) :: a -> a -> Bool
+11:57:18 <suhorng> @djinn-add data Delim b r a = Delim { runDelim :: ((a -> r) -> b) }
+11:57:19 <lambdabot> Cannot parse command
+11:57:33 <suhorng> @djinn-add data Delim b r a = Delim ((a -> r) -> b)
+11:58:07 <suhorng> @djinn Delim p q a -> (a -> Delim q r b) -> Delim p r b
+11:58:07 <lambdabot> f a b =
+11:58:07 <lambdabot>     case a of
+11:58:07 <lambdabot>     Delim c -> Delim (\ d ->
+11:58:07 <lambdabot>                       c (\ e ->
+11:58:07 <lambdabot>                          case b e of
+11:58:09 <lambdabot>                          Delim f -> f d))
+11:58:56 <suhorng> 有點猛...XD
+12:10:31 <petercommand> @djinn-add data List a = Empty | Cons a (List a)
+12:10:31 <lambdabot> Error: Recursive types are not allowed: List
+12:19:14 <CindyLinz> miaoski: 已轉達 jayialas :p
+12:21:00 <CindyLinz> miaoski: 他說貼好了 ^^
+21:18:59 <miaoski> CindyLinz: ++
+21:34:15 <suhorng> http://yinwang0.wordpress.com/2014/07/13/swift-array/
+21:36:34 <CindyLinz> 這篇不錯 :p
+21:37:02 <CindyLinz> 想到 godfat 在 funth 的 talk.. 講 covariant / contravariant
+21:37:43 <suhorng> 可怕的東西 ... subtyping 真難
+21:58:47 <suhorng> 突然覺得搞這麼麻煩真的遠不如 ML 系那樣簡單易懂阿...
+21:59:56 <suhorng> 不過就算 array 改用 [], [::] 好了, 那對於一般物件的 mutability 要怎麼辦? 不同的物件就給個不同的類別嗎? 還是像 C++ 那樣用 const..
+22:00:57 <CindyLinz> C++ 的 const 也不太 complete 啊, 只有表面那一層
+22:01:07 <CindyLinz> 就像只有 seq 而沒有 deepSeq XD
+22:05:04 <suhorng> 不只表面一層吧? const A 的話所有 A 的東西應該都不能改了?
+22:05:33 <CindyLinz> 物件的話, 物件裡面的 pointer 指出去的東西就沒有限制了.. 深層我想的是這個部分
+22:12:41 <suhorng> 恩，但是這樣應該沒有衝突，因為 const 修是的是該變數本身，但是他裡面的指標指到的東西本來就與我無關
+22:13:20 <suhorng> 說 const 一個物件好像也是怪怪的啦...
+22:13:52 <CindyLinz> 沒衝突啊, 是在嫌它的描述力 :p
+22:14:09 <suhorng> deep_const（誤）
+22:18:40 <CindyLinz> XD

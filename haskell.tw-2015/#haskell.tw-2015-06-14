@@ -1,0 +1,76 @@
+00:01:06 <monochrom> 我的學生卻被我害苦了. 我指定CLRS為課本. 我又指定 open-book 考試.
+00:01:41 <monochrom> 如此, 你做學生的話, 你買不買實體書? XD
+00:03:33 <monochrom> 我有想過. 聰明的學生會買電子書, 但把心得寫在自己紙上帶入試場. 但世上聰明學生有幾許?
+00:05:39 <CindyLinz> 那就 open 電子書啊! XD
+00:06:02 <monochrom> 學校不准
+00:06:13 <CindyLinz> 是喔.. ^^|
+00:06:20 <monochrom> 准的話, 我都想. 都甚麼年代了
+00:06:36 <CindyLinz> 弄一個沒有通訊功能的 kindle, 裡面只存放一本書這樣
+00:08:04 <monochrom> 不如下次 take-home exam
+00:18:42 <CindyLinz> 考翻課本也沒幫助的題目 XD
+19:36:02 <mno2> parallel and concurrent programming in haskell  那一本我看完了
+19:36:05 <mno2> 不過也忘光了
+19:37:30 <mno2> 不過我覺得平常寫 project 比較實用的也就只有幾章吧
+19:38:22 <mno2> 據我所知一些實戰的 project 也不見得是書中那樣寫的，有可能太慢了。
+19:47:19 <yen3> !!
+19:47:48 <yen3> 還以為裡面的 code 已經很快了 ... Orz
+20:00:35 <CindyLinz> 可惜 mno2 不在台灣
+20:00:48 <CindyLinz> yen3: 所以台灣的 talk 還是要請你講.... ^^|
+20:14:50 <mno2> yen3: 日常用的是已經足夠快啦，但寫 web 伺服器的話就不太夠囉。warp 根本不是用那一套方法
+20:15:07 <mno2> STM 其實蠻慢的就是..
+20:15:28 <mno2> 只好開 twitch 了
+20:17:09 <CindyLinz> twitch :D
+20:17:25 <CindyLinz> 事後可以轉 youtube 很棒 ^^
+20:19:13 <mno2> 我昨天點了更多用電腦 livestream 的技能點數，只差設備了。
+20:20:32 <CindyLinz> 別的平台喔?
+20:21:04 <mno2> youtube 也大概會了
+20:21:18 <mno2> 不過主要是接錄製卡，還有錄音器之類的
+20:21:41 <mno2> 可以錄多螢幕加相機
+20:32:16 <CindyLinz> 這樣可以實況遊戲了 XD
+20:39:04 <mno2> 是說像是 brenden eich 講到一半開始打電動嗎？ lol
+20:39:33 <CindyLinz> 沒有聽過這個故事 ._.
+20:39:43 <CindyLinz> 想像起來會很有笑果 :p
+20:39:44 <letoh> 上次來的時候吧
+21:03:49 <caasihuang> Brenden Eich 在 modern web conf 的開場與晚上的見面會都打了輸出成 asm.js 的 FPS
+21:04:28 <caasihuang> 咦，這裡不是 chat
+21:06:08 <CindyLinz> 噢噢
+21:07:10 <CindyLinz> caasihuang: 你在這裡所說的一切，都能夠、而且將會在 log 裡成為證據..
+21:07:31 <CindyLinz> 雖然 chat 也有 log.. XD
+21:10:21 <caasihuang> 先認罪好了。我有罪，在這裡提 js XDd
+21:12:23 <CindyLinz> caasihuang: 也來寫 Haskell to JS compiler/transpiler 吧~~~
+21:12:30 <mno2> 請讀一篇 alonzo church 的論文懺悔 xD
+21:13:48 <CindyLinz> 哇~ Alonzo Church 1995 年才去世耶
+21:14:10 <CindyLinz> 只比 Alan Turing 大 9 歲
+21:15:17 <CindyLinz> 如果 Turing 可以活到 2004 年的話, 不知道還會創造多少東西...
+21:15:28 <CindyLinz> Turing Machine MK II
+23:26:39 <caasihuang> CindyLinz: 離 transpiler 還好遠，但之前翻姊姊大人（誤）的 repo 時注意到一件事...
+23:27:11 <caasihuang> ghcjs 編出來的檔案裡有 unpackIEEE754
+23:27:56 <CindyLinz> float?
+23:35:57 <caasihuang> 嗯嗯，用到他的是 Float32Array 跟 Float64Array
+23:36:38 <CindyLinz> 怎麼了嗎?
+23:36:47 <CindyLinz> 為什麼要注意這個 XD
+23:36:48 <caasihuang> 不太能接受打包起來 9mb ，好奇包了些什麼進去
+23:37:04 <CindyLinz> pre-allocate 9MB 大的陣列喔?
+23:37:58 <caasihuang> 整個 render.hs -> render.js 後 js 9MB XD
+23:40:08 <CindyLinz> 我們公司用 Unity3D 生一個最簡單的 demo sample 檔 149MB 的 js... (攤
+23:40:52 <CindyLinz> render.hs 內容是什麼啊?
+23:41:19 <caasihuang> https://github.com/audreyt/markdown-preview-ghcjs/blob/master/render.hs
+23:41:45 <caasihuang> 驚呆了， 25 行變成 9MB
+23:43:14 <CindyLinz> caasihuang: 上面 5~14 行的 import, 所有的 library 都要包進去欸 @@"
+23:45:02 <CindyLinz> 其中一個是 markdown parser... http://hackage.haskell.org/package/markdown-0.1.13.2/src/
+23:46:52 <caasihuang> 會好奇輸出時能不能輸出大家（誰啊？）喜歡的 asm.js 讓他小一點
+23:47:15 <CindyLinz> 輸出 asm.js 的話 code 應該會比較大..
+23:47:19 <caasihuang> * 所以只好邊做雜事邊找找有沒有文件讀
+23:47:53 <caasihuang> 啊，因為多了 |0 ？ 0rz
+23:48:03 <CindyLinz> 能用的功能比較少
+23:48:32 <CindyLinz> 要到處加 type 也是一個
+23:48:47 <CindyLinz> 沒有陣列, 沒有物件, 沒有字串
+23:49:02 <CindyLinz> 沒有 closure
+23:50:30 <CindyLinz> 不過有這個可以參考真不錯 ^^
+23:50:33 <CindyLinz> caasihuang++
+23:51:03 <CindyLinz> render.js 已經有用到類似 asm.js 的東西了欸~ # var c = ((h$stack[(h$sp - 1)] - 65536) | 0);
+23:51:04 <caasihuang> 結果查到這個 https://mail.haskell.org/pipermail/haskell-cafe/2013-July/108993.html
+23:51:11 <caasihuang> CindyLinz: <(_ _)>
+23:51:33 <caasihuang> > We implement this in GHCJS ourselves, optimizing the generated JavaScript.
+23:51:34 <lambdabot>  <hint>:1:19: parse error on input ‘in’
+23:51:40 <CindyLinz> 雖然沒有 "use asm"; 可是似乎寫成那樣子也會讓一些 JS engine 的 JIT 去特別處理的樣子

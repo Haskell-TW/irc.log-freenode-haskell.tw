@@ -1,0 +1,90 @@
+00:02:14 <b4283> 元祖 rockman
+09:57:42 <tamako> @type map
+09:57:43 <lambdabot> (a -> b) -> [a] -> [b]
+19:07:33 <suhorng> 話說 ghc 中有可能寫出 general 的 currying 嗎@_@ 不要每個 pair 都寫一個函數這樣
+19:36:11 <_13h> 不太確定... general currying 是什麼樣子?
+19:37:31 <suhorng> 例如說, 可以變 ((a,b) -> c) -> a -> b -> c 跟 ((a,b,c) -> d) -> a -> b -> c -> d 跟 ((a,b,c,d) -> e) -> a -> b -> c -> d -> e
+19:38:26 <suhorng> 等於至少要能對 (a,b)、(a,b,c)、... 有個統一的表示(之類)..
+19:39:00 <suhorng> > (,,,,) 1 True 'c' id []
+19:39:01 <lambdabot>   No instance for (GHC.Show.Show (a0 -> a0))
+19:39:02 <lambdabot>    arising from a use of `M94402...
+19:39:43 <suhorng> > (,,,,) 1 True 'c' "XD" []
+19:39:45 <lambdabot>   (1,True,'c',"XD",[])
+19:41:16 <_13h> 唔.. ((a->b)->c)->a->b->c 不好嗎？  我覺得很統一啊?
+19:41:41 <suhorng> _13h: 這不是 curry (滾)
+19:42:04 <_13h> 唔，不太懂，我以為這就是在表示 curry ?
+19:42:37 <_13h> 或者你是指參數跟傳回值的部份要分開?
+19:42:44 <suhorng> 我想用的是把原本拿 n-tuple 的函式變成全部是 -> -> ->... 那種的東西
+19:42:56 <suhorng> 所以會是像 ((a,b) -> c) -> a -> b -> c
+19:43:39 <suhorng> 例如處理pair的是 curry f a b = f (a,b)
+19:43:39 <_13h> ((a,b)->c) 是指一個函式，吃一個 tuple (a, b)，傳回 c 嗎?
+19:43:43 <suhorng> 對對
+19:44:07 <_13h> 唔  所以我才說感覺像是要把參數跟傳回值分開
+19:44:15 <suhorng> 分開？
+19:44:34 <_13h> 就是說參數部份用 tuple 表示
+19:44:35 <suhorng> 就是說 把原本 (a,b) -> c 的函式變成 a -> b -> c 的函式
+19:44:54 <suhorng> 做 curry
+19:44:57 <_13h> 喔  瞭解了，你是想要自動轉換成 curry ?
+19:45:07 <_13h> foo (a, b) 自動變成 foo a b
+19:45:14 <suhorng> 嗯嗯嗯
+19:45:15 <suhorng> currygin!
+19:45:18 <suhorng> *ing
+19:45:20 <_13h> auto curry ?
+19:45:38 <_13h> scheme 好像是這樣? 不太確ㄉㄧㄥˋ
+19:45:39 <suhorng> :t curry
+19:45:41 <lambdabot> ((a, b) -> c) -> a -> b -> c
+19:46:06 <_13h> 我的輸入法一時又壞了XD
+19:48:28 <suhorng> Scheme不太算有 n-tuple, 也不沒有靜態型別應該可以XD
+19:48:54 <suhorng> *也不用
+19:49:54 <_13h> 嗯，剛測試了一下，是我想錯了
+19:50:24 <_13h> 先把 scheme 踢掉XD
+19:52:05 <suhorng> 題外話, 隨便寫一個 expression, 我要怎麼在 ghc 中查當中特定某一項的 type 呀？
+19:52:14 <_13h> sml 算嗎?
+19:52:20 <_13h> auto curry ?
+19:52:33 <suhorng> 我是想說假如我想查 XXX c XXX 就改成 :t \x -> XXX x XXX...
+19:52:34 <_13h> http://stackoverflow.com/questions/11218905/is-it-possible-to-implement-auto-currying-to-the-lisp-family-languages
+19:52:49 <suhorng> 可是lisp比較自由...
+19:53:01 <suhorng> 用 apply 跟 a b . c 那種就可以寫出來
+19:53:02 <_13h> > :t 1 + 2
+19:53:04 <lambdabot>   <hint>:1:1: parse error on input `:'
+19:53:14 <suhorng> 不要 ">"
+19:53:18 <_13h> 喔喔
+19:53:20 <_13h> :t 1 + 2
+19:53:22 <lambdabot> Num a => a
+19:54:29 <_13h> 我剛剛之所以說 scheme 沒辦法 auto curry 是因為，做完 curry 得加一堆括號XD
+19:54:55 <_13h> 例如 (define (foo a b) (+ a b)) 和 (define bar (lambda (a) (lambda (b) (+ a b))))，兩種呼叫的方式就不一樣啦
+19:55:16 <suhorng> 應該沒關係XD
+19:55:26 <_13h> 即使我可以寫個 reader 事先做 syntax translation，但呼叫的方式會完全不同
+19:55:38 <suhorng> 就像平常呼叫沒有 curry 的函式是 f (a,b) 呼叫 currying 的版本是 f a b, 兩個不同
+19:55:42 <suhorng> 就是要不同@_@"
+19:55:48 <_13h> 第一種要寫 (foo 1 2)，轉譯過要寫 ((bar 1) 2)
+19:56:18 <_13h> 如果可以接受語法差異的話，那應該是可以做到吧
+19:56:28 <_13h> 像 sml 那樣我就蠻喜歡的
+19:56:43 <_13h> fun foo a b  就是 curry 了
+19:56:56 <_13h> foo (a, b) 就是吃 tuple
+19:56:57 <suhorng> SML應該也不行 (好吧 是我想不到XD)
+19:57:20 <_13h> 自動轉換的話我也不曉得怎麼做XD
+20:18:00 <suhorng>  http://stackoverflow.com/questions/13080074/currying-product-types Hmm...
+20:18:21 <suhorng> 真是什麼事情都有人問過了
+20:19:24 <suhorng> "A type-level list is exactly what you need!" 嘛..
+20:19:46 <_13h> type list ? XD
+20:20:56 <suhorng> 變成 type level 的東西了...
+20:27:30 <CindyLinz> suhorng: generic N-tuple 沒辦法用純 Haskell 語法寫
+20:27:42 <CindyLinz> 可以用用 ghc 的 template
+20:28:02 <suhorng> 喔喔, template 是說 TemplateHaskell [| _ |] 這個嗎？
+20:28:13 <CindyLinz> 對
+20:29:11 <CindyLinz> 如果 haskell 的 tuple (a, b, c) 訂義成 (a, (b, c)) 的 syntax sugar 的話, 可能就可以 generic 了
+20:29:31 <suhorng> 想法是改動 tuple 的部份(變成不再是 tuple), 還是說用到時指定長度、產生出相對應的 currying function 呢？
+20:29:41 <suhorng> 有道理
+20:30:31 <CindyLinz> 覺得是卡在 haskell 把不同長度的 tuple 定義為獨立的完全不同的東西
+20:32:05 <suhorng> 嗯
+20:57:00 <suhorng> 囧 剛剛想好久在 Maybe monad + do syntax 中我要怎麼弄出 Nothing
+20:57:16 <suhorng> 熊熊想起直接 Nothing 就好了...
+21:10:23 <letoh> 不同長度的 tuple 會是相同的東西嗎?
+21:11:49 <suhorng> 大概是不同的？
+22:17:10 <CindyLinz> type 都不同了呀
+22:17:48 <CindyLinz> suhorng: 你也可以用 fail
+22:18:29 <CindyLinz> 如果你這整串 do notation 裡面的東西想直接套別的 monad 的話就不用改 code 了 :p
+22:23:36 <suhorng> CindyLinz: 可是 fail 是用exception, 這樣我後面在接的時候得用 catch 之類?
+22:23:49 <suhorng> 還是怎樣@_@" 不太懂fail
+22:34:52 <b4283> fail

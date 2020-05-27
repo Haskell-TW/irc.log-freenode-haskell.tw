@@ -1,0 +1,44 @@
+12:14:00 <cibs> Integer 是 Enum 沒錯呀 # 18:55 < CindyLinz> 可是它可以用 Integer.. :Q
+12:34:12 <CindyLinz> > maxBound :: Integer
+12:34:14 <lambdabot>  No instance for (GHC.Enum.Bounded GHC.Integer.Type.Integer)
+12:34:14 <lambdabot>    arising from a use of ‘GHC.Enum.maxBound’
+12:34:22 <CindyLinz> 喔 是沒有 Bounded :p
+13:40:27 <cibs> that's right
+13:41:41 <cibs> succ 1 :: Integer
+13:41:45 <cibs> > succ 1 :: Integer
+13:41:47 <lambdabot>  2
+14:25:18 <CindyLinz> succ (maxBound) :: Int
+14:25:22 <CindyLinz> > succ (maxBound) :: Int
+14:25:23 <lambdabot>  *Exception: Prelude.Enum.succ{Int}: tried to take `succ' of maxBound
+14:25:46 <CindyLinz> 呃.. 這樣 [1..] :: [Int] 好像不是優雅地結束欸 囧
+14:26:08 <CindyLinz> > [maxBound-2 .. ] :: [Int]
+14:26:09 <lambdabot>  [9223372036854775805,9223372036854775806,9223372036854775807]
+14:26:14 <CindyLinz> 為什麼呢 orz
+14:43:43 <CindyLinz> > [minBound+3, minBound+2 .. ] :: [Int]
+14:43:44 <lambdabot>  [-9223372036854775805,-9223372036854775806,-9223372036854775807,-92233720368...
+14:43:51 <CindyLinz> > [minBound+2, minBound+1 .. ] :: [Int]
+14:43:52 <lambdabot>  [-9223372036854775806,-9223372036854775807,-9223372036854775808]
+15:00:50 <cibs> > [minBound - 1, maxBound] :: [Int]
+15:00:52 <lambdabot>  [9223372036854775807,9223372036854775807]
+15:05:43 <CindyLinz> 溢位 XD
+15:05:54 <CindyLinz> 不知道是不是 undefined behavior..
+15:06:04 <CindyLinz> 繼承自 C.. XD
+15:32:10 <cibs> http://www.haskell.org/onlinereport/basic.html # 好像只有說 Int 要從 -2^29 ~ 2^29 - 1 和 succ maxBound 要 error, 似乎沒有定義對 maxBound + 1 沒錯
+16:58:45 <petercommand> > minBound-1
+16:58:47 <lambdabot>  No instance for (GHC.Show.Show a0)
+16:58:47 <lambdabot>    arising from a use of ‘M860614385240804433517467.show_M8606143852408044335...
+16:58:47 <lambdabot>  The type variable ‘a0’ is ambiguous
+16:58:47 <lambdabot>  Note: there are several potential instances:
+16:58:47 <lambdabot>    instance [safe] GHC.Show.Show
+16:58:56 <petercommand> > minBound::Int-1
+16:58:58 <lambdabot>  Not in scope: type constructor or class ‘-’
+16:59:02 <petercommand> > minBound::Int - 1
+16:59:03 <lambdabot>  Not in scope: type constructor or class ‘-’
+16:59:12 <petercommand> > (minBound::Int) - 1
+16:59:13 <lambdabot>  9223372036854775807
+16:59:40 <petercommand> > (minBound::Int) - (1::Integer)
+16:59:41 <lambdabot>  Couldn't match expected type ‘GHC.Types.Int’
+16:59:42 <lambdabot>              with actual type ‘GHC.Integer.Type.Integer’
+17:34:40 <CindyLinz> 找到了.. :p "The results of exceptional conditions (such as overflow or underflow) on the fixed-precision numeric types are undefined; an implementation may choose error (⊥, semantically), a truncated value, or a special value such as infinity, indefinite, etc." # https://www.haskell.org/onlinereport/haskell2010/haskellch6.html#x13-1170006.1
+17:38:20 <CindyLinz> Haskell Report 2010 說 result 是 undefined.. 不是那個「undefined」, 是沒規定 XD
+17:38:57 <CindyLinz> 還好距離 undefined behavior 還有一段距離, 只有那個 value 自己爆掉 :p

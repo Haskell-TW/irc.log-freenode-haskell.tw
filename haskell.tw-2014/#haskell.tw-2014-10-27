@@ -1,0 +1,47 @@
+02:19:07 <CindyLinz> @info Scientific
+02:19:08 <lambdabot> Scientific
+02:19:14 <CindyLinz> 3 :: Scientific
+02:19:21 <CindyLinz> > 3 :: Scientific
+02:19:24 <lambdabot>  Not in scope: type constructor or class ‘Scientific’
+02:20:05 <CindyLinz> > (3 :: Scientific)
+02:20:07 <lambdabot>  Not in scope: type constructor or class ‘Scientific’
+02:20:10 <CindyLinz> > (3 :: Int)
+02:20:12 <lambdabot>  3
+02:20:20 <CindyLinz> > (3 :: Data.Scientific.Scientific)
+02:20:21 <lambdabot>  Not in scope:
+02:20:22 <lambdabot>    type constructor or class ‘Data.Scientific.Scientific’
+02:20:25 <CindyLinz> orz
+02:20:35 <monochrom>  @info 是串錯字, 會被糾正為 @undo
+02:20:42 <CindyLinz> 噢 @@"
+02:20:53 <monochrom> @info do { x <- m; y x }
+02:20:53 <lambdabot> m >>= \ x -> y x
+02:21:16 <CindyLinz> 嗯 只是自己遇到奇怪的事... 在 ghci 裡面..   (1.414346453505239e12 :: Scientific) / 8 可以馬上得到 1.76793306688154875e11
+02:21:32 <CindyLinz> 但 (1.414346453505239e12 :: Scientific) / 9 就跑不完了 orz
+02:21:54 <CindyLinz> Data.Scientific 的 Scientific type
+02:22:14 <monochrom> Data.Scientific 在哪個 package?
+02:22:31 <CindyLinz> scientific-0.2.0.1
+02:22:53 <CindyLinz> 其實是裝 Aeson (處理 JSON) 的 lib dep 到的..
+02:23:16 <CindyLinz> 現在的 Aeson 用 Number Scientific 來表示遇到數字類型的 JSON element
+02:23:24 <monochrom> "This type describes the set of all Reals which have a finite decimal expansion."
+02:23:36 <CindyLinz> 呃!
+02:23:43 <CindyLinz> 所以是無窮小數就會爆的意思 QQ
+02:23:51 <monochrom> "WARNING: recip and / will diverge when their outputs have an infinite decimal expansion."
+02:23:59 <CindyLinz> 謝謝 orz
+02:24:17 <CindyLinz> 為什麼 Aeson 要改用 Scientific 啦 QQ
+02:24:35 <CindyLinz> 這樣 JSON 的 +inf, -inf, nan 也都不見了 orz
+02:25:08 <monochrom> 貪其 parsing 快, 反正只要 parse 有限小數.
+02:25:26 <CindyLinz> 嗯, 以前是 Int 和 Double 混合的 :Q
+02:25:44 <CindyLinz> 現在這樣 domain 變小了 ._.
+02:26:05 <CindyLinz> 只好先轉成 rational 再來除好了 @@"
+02:26:30 <monochrom> 是的, parsing 快, 但不適合除數
+02:26:52 <monochrom> 真是針無兩頭利啊!
+02:27:33 <CindyLinz> 兩頭利的叫作 Javascript.. good part 與 bad part.. (咦)
+02:29:16 <monochrom> 嘻嘻, 其實針是故意一頭鈍, 因為要穿線或方便手拿. 兩頭利的針是可以造到的, 只不知有甚麼用途...
+02:29:49 <CindyLinz> 就戳傷手作為 bad part.. 有一張圖是這樣畫的 XD
+12:16:10 <mno2> http://www.haskellforall.com/2014/10/how-to-desugar-haskell-code.html  一杯 haskell 不加糖
+22:15:01 <miaoski> mno2: 上面那篇很有 CindyLinz 惡搞的感覺
+22:35:28 <CindyLinz> 囧
+22:41:26 <CindyLinz> 雖然不知道你指的是哪方面....
+22:41:36 <CindyLinz> 嗯, 還是不要跟我說好惹 XDXD
+23:21:26 <CindyLinz> 為什麼把這視為惡搞啊 OAO
+23:21:41 <CindyLinz> 這不就是在回歸基本定理嗎 Q_Q

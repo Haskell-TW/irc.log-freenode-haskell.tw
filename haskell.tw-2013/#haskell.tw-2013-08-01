@@ -1,0 +1,63 @@
+00:13:35 <suhorng> @hoogle (a -> b -> c) -> (a -> b) -> (a -> c)
+00:13:35 <lambdabot> Data.Function on :: (b -> b -> c) -> (a -> b) -> a -> a -> c
+00:13:36 <lambdabot> Data.Data gmapQl :: Data a => (r -> r' -> r) -> r -> (forall d. Data d => d -> r') -> a -> r
+00:13:36 <lambdabot> Data.IntMap.Strict mapKeysWith :: (a -> a -> a) -> (Key -> Key) -> IntMap a -> IntMap a
+00:13:55 <suhorng> :t \x y z -> (xz)(yz)
+00:13:56 <lambdabot>     Not in scope: `xz'
+00:13:56 <lambdabot>     Perhaps you meant one of these:
+00:13:56 <lambdabot>       `x' (line 1), `z' (line 1), `x' (imported from Debug.SimpleReflect)
+00:14:05 <suhorng> \x y z -> (x z) (y z)
+00:14:11 <suhorng> :t \x y z -> (x z) (y z)
+00:14:12 <lambdabot> (t2 -> t1 -> t) -> (t2 -> t1) -> t2 -> t
+00:39:16 <favonia> @pl \x y z -> (x z) (y z)
+00:39:16 <lambdabot> ap
+00:50:17 <suhorng> favonia: S combinator, reader monad ap
+01:13:24 <favonia> suhorng: y
+01:23:00 <suhorng> 在 GHCi 用 :t id . 5 跑出來  Num (a -> c) => a -> c 是什麼意思阿...
+01:24:05 <suhorng> 沒事 我知道了= =+
+10:46:14 <Yu-Lin> 為什麼會寫到 id . 5 阿XD
+10:48:06 <suhorng> 無聊亂打..XD
+10:49:52 <Yu-Lin> :t 能找出他的 type，可是怎麼想都怪怪的XD
+10:49:53 <lambdabot> lexical error at character '\131'
+10:50:44 <Yu-Lin> id . 5 看起來像 id(5( ? )) 的感覺XD
+10:51:14 <suhorng> 因為 5 的 type 是 Num a => a  .. XD
+10:51:17 <suhorng> :t 5
+10:51:18 <lambdabot> Num a => a
+10:56:20 <monochrom> id . 5 = \x -> id (5 x)
+11:00:33 <monochrom> 5多型, 而語境 "id . 5" 或 "5 x" 就迫它為函數
+11:05:08 <b4283> 可能讓 5 變成函數嗎？
+11:05:36 <CindyLinz> 語境.. 這辭真不錯..
+11:05:57 <Yu-Lin> let five = \x -> 5
+11:06:11 <Yu-Lin> Orz|||
+11:08:42 <CindyLinz> 不過.. :t 竟然用 a, c 而跳過 b 耶
+11:12:50 <suhorng> CindyLinz: 因為 b 被 5 用掉了吧?
+11:13:19 <Yu-Lin> 所以是推論的時候被弄掉了嗎？XD
+11:14:13 <Yu-Lin> id :: a -> a    5 :: b   (.) :: (a -> b) -> (b -> c) -> c
+11:14:16 <Yu-Lin> 這樣？
+11:14:34 <Yu-Lin> 不對....Orz|||
+11:14:41 <monochrom> @type (.)
+11:14:42 <lambdabot> (b -> c) -> (a -> b) -> a -> c
+11:15:05 <monochrom> 或者從最末 a->c 而來
+11:15:09 <Yu-Lin> 所以 b 其實是被 (.) 用掉了
+11:18:00 <suhorng> 恩
+11:25:38 <suhorng> 有更新 XDD http://this-plt-life.tumblr.com/post/56527605926/when-a-new-language-has-macros
+11:26:31 <Yu-Lin> XD
+11:26:33 <suhorng> http://www.haskell.org/haskellwiki/Idiom_brackets 看到這篇大笑, 用法真是太神奇了...
+20:59:29 <suhorng> 一些hackage的document真神奇...
+20:59:38 <suhorng> http://www.haskell.org/ghc/docs/latest/html/libraries/containers/Data-Map.html Data.Map latest doc
+20:59:52 <suhorng> http://hackage.haskell.org/packages/archive/containers/0.3.0.0/doc/html/Data-Map.html Data.Map containers-0.3.0.0 doc
+20:59:59 <suhorng> 下面整個比上面完整很多...
+21:03:52 <suhorng> godfat: 話說 ptt 的 PLT 板板主消失了...
+21:06:48 <godfat> suhorng, @_@ 可能是太久沒上線被拔掉了... XD Ruby 板也沒了
+21:06:49 <godfat> 不知道是不是系統自動的？平常我是用另一個帳號在看
+21:06:49 <godfat> 是說也好幾天才會看一次就是了...
+21:09:44 <suhorng> 可能是太久沒上站了..
+21:09:46 <suhorng> 帳號還在嗎?
+21:10:01 <suhorng> 還在..
+21:10:43 <godfat> 我剛剛注意到原來有信，果然是被自動退職了 XD
+21:10:44 <godfat> 說是三個月沒上線，不過應該是沒那麼久說
+21:10:44 <godfat> 信件轉寄又壞了，沒注意到有信
+21:10:58 <suhorng> 囧
+21:11:56 <godfat> 剛剛看了一下之前 Sub_CS 的上線紀錄，可能真的有三個月吧 @@
+21:11:56 <godfat> 看來不應該用不同帳號看板 XD
+21:12:47 <suhorng> 恩QQ

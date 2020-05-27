@@ -1,0 +1,87 @@
+09:51:06 <Yu-Lin> 久違的出現在這邊阿
+09:54:58 <hashcat> 大家好
+09:56:09 <hashcat> 請問這裡活動率如何
+10:03:11 <Yu-Lin> 當有人提出問題時，這裡會比太陽還熱
+10:15:52 <hashcat> 貌似現在來是在吹冷氣
+11:04:26 <MnO2> hashcat:  可以先看看 log
+12:36:26 <CindyLinz> hashcat: 沒有話題要討論的時候, 就不知道要說什麼了啊 ^^|
+12:37:18 <hashcat> 我很久以前來過
+12:37:24 <hashcat> 依然如此
+13:10:49 <hashcat> 問個問題
+13:12:10 <hashcat> 要怎上手ghc api?
+13:26:25 <Yu-Lin> 哪裡？
+13:28:57 <CindyLinz> 欸, 你說的 ghc api 是拿 ghc 當 compiler lib 用的用法?
+13:29:30 <CindyLinz> 我也很想知道.. QQ  我挖到 api 裡面 trace type 過幾次.. 還沒搞清楚過 orz
+13:30:31 <hashcat> 我是想自己增強動態特性
+13:30:50 <hashcat> 看那種haddock腦袋快垮了
+13:32:59 <CindyLinz> 那翻翻看 haddock 的 source 呢?
+13:34:34 <hashcat> 不知道從何翻起
+13:35:05 <hashcat> 有個叫GHC的模組猜測應該是包含整體架構
+13:36:04 <hashcat> 看著好像真是這麼回事
+13:36:42 <hashcat> Contents包含了大概所有Haskell的概念
+13:38:27 <CindyLinz> 這個? http://www.aosabook.org/en/ghc.html
+13:40:07 <hashcat> 這個  http://www.haskell.org/ghc/docs/latest/html/libraries/ghc-7.6.3/GHC.html
+13:41:24 <CindyLinz> 這個我失敗了 ^^|
+13:42:53 <hashcat> 什麼失敗
+13:43:11 <CindyLinz> trace 到一半就放棄了 orz
+13:44:57 <hashcat> 我亂抽了一票模組後都是一些細節的東西
+13:45:21 <hashcat> 剛好瞄到有個模組名稱特別大咖
+13:45:36 <CindyLinz> 嗯 @@
+13:47:03 <CindyLinz> 我之前想找 parse 的部分, 所以是從這邊開始看 http://www.haskell.org/ghc/docs/latest/html/libraries/ghc-7.6.3/Parser.html
+13:47:47 <CindyLinz> 因為我是想 parse haskell, 而不是 code gen (可能要看 Cmm 開頭的) 或是寫另一個 ghci (看最上層的)
+13:48:30 <MnO2> 可能找 project 來看比較快？ hlint 之類的？
+13:48:42 <hashcat> 是hint吧
+13:49:20 <MnO2> http://hackage.haskell.org/package/hlint
+13:50:07 <hashcat> 是hint吧
+13:50:20 <hashcat> hlint是refactoring
+13:50:32 <hashcat> hint才用到ghc api
+13:50:41 <CindyLinz> 對耶 hlint 也可以當起頭.. 之前拿 Fay 真是搞錯對象了.... @@"
+13:51:02 <hashcat> 什麼起頭?
+13:51:32 <CindyLinz> 讀的起頭啊
+13:51:58 <CindyLinz> 我看 hlint 的 dependency 有 haskell-src-exts, 這樣不算有用到嗎?
+13:51:58 <MnO2> 我真的不知道 hint   xD
+13:52:01 <CindyLinz> http://hackage.haskell.org/packages/archive/hlint/1.8.46/hlint.cabal
+13:52:46 <hashcat> 我是想在執行時期操作haskell code的
+13:54:05 <CindyLinz> hint 看起來像 ghci 這種性質的東西
+13:54:49 <CindyLinz> haskell lib / tool 特別喜歡用 h 開頭 ^^|
+13:56:07 <hashcat> 感覺在雞同鴨講
+13:56:23 <hashcat> haskell-src是操作語法樹的
+13:56:30 <hashcat> ghc是完整的
+13:58:23 <hashcat> hlint因為是在refactor源碼所以用到 haskell-src-ext 來操作語法樹
+13:58:47 <hashcat> hint則類似ghci附api的東西
+13:58:58 <hashcat> 用到ghc api
+14:01:55 <hashcat> 消失一下
+14:02:20 <MnO2> 嗯嗯，之前沒看過沒有分清楚差別
+17:28:33 <UncleHandsome> 請問一下有人有用過OCaml嘛？
+17:28:38 <UncleHandsome> 這語言最近好像很紅XD？
+17:31:38 <CindyLinz> 我只有以前上課的時候用過一點點, 當沒有好了 :Q
+17:32:35 <hashcat> 很紅?
+17:33:18 <hashcat> 怎說
+17:45:52 <_13h> 很紅嗎？
+17:46:28 <_13h> 感覺 haskell 的新聞還比較多一點
+17:48:00 <CindyLinz> 記得以前有人說什麼 OCaml 寫的 code 有時候跑起來是 C 寫的 50 倍快? :p
+17:48:49 <_13h> 聽起來像是不實廣告XD
+17:49:59 <CindyLinz> 「有時候」這三個字漏掉了是聽眾的責任啊 XD
+17:50:57 <CindyLinz> 隨便找的5倍版 :p http://stackoverflow.com/questions/1586423/why-is-this-ocaml-program-faster-than-my-c-program
+17:51:15 <_13h> 這就是神奇的話術嗎XD
+17:51:55 <CindyLinz> 下面就被 challenge 了 ^^|
+17:52:18 <CindyLinz> 唔.. 這是說 Haskell 平均 code 長度比 OCaml 短的意思吧 # http://benchmarksgame.alioth.debian.org/u64q/ocaml.php
+17:56:08 <_13h> fasta 的 75x memory 是怎麼回事XD
+17:57:51 <CindyLinz> 看看就好 看看就好 (小聲)
+17:57:55 <hashcat> 不知道哪個兩光寫的
+18:04:58 <cataska> http://shop.oreilly.com/product/0636920024743.do # Real World Ocaml
+19:16:04 <letoh> haskell 的書都好貴
+19:16:11 <letoh> 講錯  是 ocaml 的書XD
+19:17:14 <letoh> 看幾時可以輪到這本半價再來買XD
+19:39:28 <hychen> ocaml 應該是因為coq所以很紅?
+20:05:12 <hashcat> 用coq也跟ocaml沒啥關係吧
+22:58:44 <CindyLinz> 關係很大啊, coq 的 plugin 用 ocaml 寫
+23:18:18 <hychen> haskell 的 IO 好麻煩啊 ....
+23:25:54 <monochrom> hashcat走了. 不過, 學 GHC API 可參考 hint 的做法. hint 可在 hackage 上找到
+23:27:12 <monochrom> 遲些時我或者應該要更新 haskellwiki 的 GHC API 文章. (找 "GHC as library")
+23:30:03 <monochrom> 最近, 我在玩: C程式內 dlopen 一個用 Haskell 寫的 so, 而這個 so 還要用 GHC API 載入 Haskell 程式
+23:32:09 <monochrom> hint 與 hlint 是兩回事
+23:34:15 <CindyLinz> 真期待 ._.
+23:45:43 <UncleHandsome> 因為我最近看一些國外課程
+23:46:00 <UncleHandsome> uiuc/harvod都提到這個XD
+23:46:07 <UncleHandsome> llvm裡的example也是

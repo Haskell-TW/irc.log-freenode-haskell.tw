@@ -1,0 +1,29 @@
+09:56:22 <favonia> CindyLin1: 奇怪上次 12/18 他說 "My latest 24 Days of Hackage post..." 結果後面明明還繼續寫啊
+09:56:47 <favonia> CindyLin1: 我搞不清楚到底是怎麼回事了
+11:20:41 <CindyLinz> favonia: latest 不是目前最新的意思嗎?
+11:20:57 <favonia> CindyLinz: 啊，我腦殘了 xD
+11:21:28 <favonia> CindyLinz: 好像看錯一次在腦中就留下永遠的錯誤印象 lol
+11:24:22 <CindyLinz> XDD
+14:20:21 <CindyLinz> 我想要一個可以 random access 的 infinite array.. (思)
+14:21:04 <favonia> CindyLinz: 有 cache 的 generator 感覺比較實際...
+14:22:48 <CindyLinz> favonia: 類似 嗯.. array 的話, index 要是 Ix; 如果是有 cache 的 generator, index 是可以某種方式 hash 的東西?
+14:23:08 <CindyLinz> 我正在寫 mgccl 的 LCS
+14:23:23 <CindyLinz> 覺得他的寫法可以不用到 mutable array
+14:23:28 <CindyLinz> 用 lazy array 就好
+14:25:47 <favonia> mgccl 是啥
+14:26:24 <CindyLinz> 幾天前一個 channel 裡的朋友
+14:26:49 <CindyLinz> 他在想怎麼寫 LCS 可以比較有效率
+14:27:13 <CindyLinz> 試到最後, 還是用 mutable array 實在
+14:27:19 <CindyLinz> 可是就寫得跟 C 一樣了
+14:27:22 <CindyLinz> https://gist.github.com/4291707
+14:27:51 <CindyLinz> 我看這 code 裡面.. array element 都只有被寫一次
+14:28:01 <CindyLinz> 所以應該是可以不用 mutable array 的情況..
+14:28:06 <CindyLinz> 就拿來練習一下 ^^
+16:39:51 <CindyLinz> 好了! https://gist.github.com/6b0d01fd200124d12dba
+16:40:39 <CindyLinz> 實測隨機的 ab 字串, lazy immutable Array 版本花的時間大約是 STArray 版本的 1/4 ~ 1/5 呢
+16:57:44 <CindyLinz> 在 mgccl 那邊留一些想法~ https://gist.github.com/4291707
+17:00:18 <b4283> 好細心~
+17:01:15 <CindyLinz> 其實是因為這樣子我自己才會印象深刻 XD
+21:14:23 <favonia> CindyLinz: hello
+21:14:35 <favonia> CindyLinz: https://gist.github.com/4352742 感覺這樣還 ok 啊（？）
+21:16:49 <favonia> CindyLinz: 似乎不需要 Array?

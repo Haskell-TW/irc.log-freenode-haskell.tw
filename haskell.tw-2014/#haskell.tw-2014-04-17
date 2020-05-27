@@ -1,0 +1,40 @@
+12:18:23 <mno2> 我覺得越看了一些近期的軟體設計，試圖用 json 來做 programming，就越贊同 yinwang 前陣子所說的：他們在試圖發明 S-Expression 。
+12:18:35 <mno2> 像是 Chef 裡面 run_list 之類的
+12:48:34 <CindyLinz> (Y)
+12:54:35 <monochrom> 即使 javascript 本身, 因為 Guy Steele 的影響, 也是 lisp 的超級伸延. 我是指: lisp 說每個變量都有兩個 binding, value binding 及 function binding. javascript 說, 乾脆每個變量都有任意多個 binding, 其中固然有一個是 function binding, 其餘的, 只要你起個名字就可以加多個 binding, 例如 v.hello = 4 就是為 v 加多個叫做 hello 的 binding
+12:56:13 <monochrom> 而 function v(x) { ... } 就是為 v 設個 function binding
+12:57:20 <monochrom> 很可怕哩! v.hello=4 及 function v(x) { ... } 可以並存, 不會相斥.
+12:57:54 <monochrom> 其實我最恨的. 一個名字本來就只應有一個意思.
+12:58:33 <monochrom> 也是我抗拒 lisp 的原因之一
+13:00:16 <CindyLinz> 可以並存, 可是順序有差欸?
+13:00:17 <monochrom> 不過 s-expression 是偉大發明
+13:00:33 <monochrom> 順序不重要
+13:00:34 <CindyLinz> function v() 要先寫, 不然應該會把 v.hello 蓋掉
+13:00:37 <CindyLinz> 不用嗎!?
+13:00:47 <CindyLinz> 因為我把 function v() 理解為 v = function()..
+13:02:16 <CindyLinz> 要啦要啦 XD
+13:02:37 <monochrom> 不是哩! 設想 v 是個 record, 有個函數 field, 有個 helllo field. function v(x) {...} 只是設定 v 的函數field
+13:02:56 <CindyLinz> 等等, 你說的是 javascript 嗎? @_@"
+13:03:21 <monochrom> 是呀! 即使 lisp 也差不多
+13:03:36 <CindyLinz> 我剛剛用 chrome 的 console 試了一下, 是會蓋掉的 @@"
+13:04:04 <monochrom> 啊, 那我要重讀 javascript 了
+13:04:47 <CindyLinz> 就... 「可呼叫」不是一種 field, 而是它這個物件如果繼承自 Function 的話, 就有可以被呼叫的天性.. (不知道有什麼正式名辭 ^^|)
+13:06:18 <CindyLinz> 你說 lisp 有兩個 binding, 其中一個是指定一個 name 是哪個函數, 另一個是呼叫它?
+13:08:12 <monochrom> 不是. 一個是函數, 呼叫時用. 一個是 value, 平時及 setq 時用
+13:08:43 <monochrom> (+ v 1) 用 value binding, (setq v 1) 也是
+13:08:57 <monochrom> (v 2 3) 用 function binding
+13:10:16 <monochrom> 所以, (setq (lambda (x y) (+ x y)) 與 (v 2 3) 完全無關
+13:10:42 <CindyLinz> setq 是可以重複 setq 不同的 value 到同一個 name 上面的喔?
+13:10:45 <monochrom> 打錯字
+13:10:53 <monochrom> (setq v (lambda (x y) (+ x y)) 與 (v 2 3) 完全無關
+13:11:37 <CindyLinz> 嗯嗯嗯
+13:12:56 <CindyLinz> 可以視為兩個不同 space 裡面的兩個同名的東西嗎?
+13:13:27 <CindyLinz> 例如說... Haskell 的 type constructor 和 data constructor
+13:13:59 <monochrom> 可以. 但這樣做, 同時也宣告: function 不是 value.
+13:14:30 <CindyLinz> 要這麼兇喔... ^^|
+13:15:22 <monochrom> 這只是常理. 如果 function 是 value 的一種, 自然同一空間. 否則, 自然不同空間
+13:15:26 <CindyLinz> 可是 function 就算視為 value, 看起來也不能用 setq 的方式指定給一個 variable 啊
+13:15:46 <CindyLinz> 如果 setq 指定的東西叫作 value 的話, function 的確就不是 value 了 @@"
+13:21:17 <CindyLinz> 覺得 Haskell 寫 pattern matching 的時候, 如果要 match 一個由函數算出來的複雜大 pattern 很困難... @@"
+13:22:15 <CindyLinz> 目前我只有兩招... 1. 如果這個東西有 Eq 可以用.. 2. 這個東西有反函數, 能拆解回一個有 literal 的東西
+13:22:59 <CindyLinz> 不知道要怎麼讓它們直接 unify.. 雖然理論上加一個 deriving Eq 通常不會太難....

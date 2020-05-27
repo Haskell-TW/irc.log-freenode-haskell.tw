@@ -1,0 +1,46 @@
+01:40:44 <monochrom> 還有非常容易的新作: http://www.vex.net/~trebla/haskell/Monad.xhtml
+01:41:24 <CindyLinz> ++
+01:43:07 <monochrom> 史上最短的 Monad tutorial 哈哈. 正所謂踏在前人肩上 XD
+01:44:39 <monochrom> 不過 I/O tutorial 倒是數年內思前想後的結晶. 儘管只需頃日就寫完.
+02:45:24 <letoh> 好怪  I/O 那一篇沒辦法 send to kindle @_@
+02:46:58 <monochrom> 是不是因為我用 xhtml 呢?
+03:57:07 <CindyLinz> darkx: 那個 PkgConfFile 的問題修好了~ ^^ 叫 Perl 那邊不要去碰環境變數, 那麼 HasPerl 這邊就可以直接讀到 user package database 了
+08:32:56 <darkx> CindyLinz: 賀!
+11:48:49 <CindyLinz> 好奇看了一下, hasperl 現在執行檔的大小是 50M, 表示如果只有 ghc 而沒有 cabal 和一堆 hackage lib 的話, 好像也沒有非常大嘛 :p
+12:11:55 <darkx> 所以主要是因為一堆 hackage 的關係? XD
+13:02:24 <CindyLinz> 我猜是吧.. XD   整個 cabal + ghc 裝起來應該是 600M ~ 800M 吧..
+14:07:22 <darkx> lol
+17:30:36 <suhorng> cebrusfs: hi
+20:36:06 <suhorng> 是說有人知道 Haskell Platform 2013.4 怎麼了嗎@_@ 官網上沒有消息..
+20:36:15 <suhorng> 不知道什麼時候會更新到GHC 7.8 XD
+20:45:04 <CindyLinz> 沒有消息 XDDD
+20:45:14 <suhorng> 嗚嗚qq
+20:45:29 <CindyLinz> 嗯, 剛剛在 Begining Haskell 裡面看到, 原來 cabal 1.18 開始, 有 sandbox 模式, 可以不用 cabal-dev 了耶 :p
+20:45:45 <suhorng> 我有搜到討論串，但是看不出下文 http://www.haskell.org/pipermail/libraries/2013-October/021511.html
+20:46:16 <suhorng> XD sandbox http://ro-che.info/ccc/22
+20:46:53 <suhorng> Oops, 最一開始應該是這封信 http://www.haskell.org/pipermail/libraries/2013-October/021507.html
+20:47:01 <CindyLinz> XDXD
+20:47:17 <CindyLinz> suhorng: 不過, 你有特別期待 haskell platform 裡的什麼東西嗎?
+20:48:13 <suhorng> 我最近要更新, 如果 2014.2 會release的話就等release再一起更新XD
+20:48:28 <suhorng> 目前裝的還是 2014.4 =w=
+20:48:32 <suhorng> *2012.4
+20:56:44 <CindyLinz> 喔 XD
+22:14:07 <hashcat> 不會是人才被其他函數式語言吸光光了吧
+22:14:35 <hashcat> idris更新很快噗噗
+22:15:00 <hashcat> 其他神奇的語言各種進展, 獨haskell好像快死掉
+22:16:52 <whitglint> hashcat: 其他神奇的語言各種進展，例如？
+22:19:36 <hashcat> whitglint: 例如rust是四月三號
+22:20:28 <hashcat> idris 四月四號
+22:21:07 <hashcat> scala 4/8
+22:21:52 <hashcat> haskell 4/12
+22:22:03 <hashcat> 猜測人力分散
+22:24:35 <whitglint> Rust 的前途...
+22:25:25 <hashcat> ??
+22:26:12 <hashcat> 死死欸卡快活?
+22:26:25 <whitglint> 以為這次是 1.0 結果是 0.10，有點沒力 XD
+22:27:13 <hashcat> 版本號情結
+22:27:31 <whitglint> 等太久了咩
+22:27:48 <whitglint> 感覺語法還會變，就不想再投入時間了
+22:28:18 <hashcat> urweb語法很穩
+22:28:47 <hashcat> 因為他語法追隨ML, 不容易變化
+22:28:59 <hashcat> 其他的語法都變化不小

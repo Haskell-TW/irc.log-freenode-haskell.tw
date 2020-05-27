@@ -1,0 +1,76 @@
+00:08:05 <CindyLinz> suhorng: moeb id = fix .. 好噁
+00:08:58 <suhorng> :doc moeb
+00:09:00 <CindyLinz> moeb fmap = loeb
+00:09:12 <suhorng> 阿...好像還沒有 : doc 這東西
+00:09:15 <CindyLinz> moeb f x = go where go = f ($ go) x
+00:09:28 <CindyLinz> loeb x = go where go = fmap ($ go) x
+00:09:46 <petercommand> moeb id = fix 超神奇XD
+00:10:19 <CindyLinz> fmap 把函數送進內容物; id 把函數送到整個 container
+00:11:28 <suhorng> :O...
+00:12:21 <suhorng> googling... ha ha http://www.reddit.com/r/haskell/comments/1rgvr5/effectful_loeb/
+00:12:28 <suhorng> effectful version XD
+00:13:37 <CindyLinz> 都這樣... OAO
+00:14:50 <CindyLinz> monad fix..
+00:15:10 <suhorng> toeb = moeb traverse   -- 這命名風格...
+00:30:32 <petercommand> 咦? do statement 裡的東西把結果丟掉也會有 warning　呀?
+00:31:42 <petercommand> A do-notation statement discarded a result of type 'ghc-prim:GHC.Prim.Any'
+00:32:29 <petercommand> 後面這個 type 是啥XD
+00:44:28 <CindyLinz> 就是 Any.. XD
+00:45:33 <petercommand> XD
+00:46:19 <CindyLinz> 用在那種.. 沒有解出 type 應該是什麼, 但是其實是誰都無所謂的地方
+00:47:07 <CindyLinz> 例如說 putStrLn $ show [] 裡面的 []
+00:47:31 <CindyLinz> 理論上沒判斷出 [a] 的 a 是什麼.. 不過沒差
+00:48:11 <petercommand> 喔喔
+09:19:03 <mno2_> http://dev.stephendiehl.com/fun/
+12:04:22 <suhorng> mno2: (Y)
+12:04:26 <suhorng> 這好厲害
+12:07:17 <petercommand> !!
+12:08:44 <petercommand> 神奇的書XDD
+12:14:21 <petercommand> fork thread 出來之後有辦法結束 thread 嗎? (還是要用 callCC...
+12:17:44 <mno2_> return () ?
+12:18:16 <petercommand> return　啥都沒做呀?
+12:18:54 <suhorng> 是要去結束其他 thread?
+12:19:12 <petercommand> 不是，結束自己
+12:19:41 <petercommand> 中途結束
+12:20:02 <petercommand> 像是 exitSuccess 的 thread 版之類的
+12:25:10 <suhorng> 恩..真的不知道XD
+12:25:32 <petercommand> XD
+12:26:48 <petercommand> 好吧..丟 exception 好了XD
+12:27:04 <petercommand> 直接寫 undefined
+12:28:59 <suhorng> wwww
+14:08:40 <CindyLinz> mno2_: (Y)
+14:19:22 <CindyLinz> petercommand: callCC 聽起來不錯... 不過 Dijkstra 說你應該要讓程式恰好跑到最後一行, 不然他要發文表示 petercommand considered harmful
+14:26:04 <miaoski> 上面都看不懂，所以只好嘴炮..
+14:29:57 <petercommand> CindyLinz: lol XD
+14:30:51 <petercommand> CindyLinz: 用 forkFinally 然後丟 exception 也不錯XDD
+14:40:12 <CindyLinz> petercommand: 其實我覺得 exception 怪怪的啦 ^^|
+14:40:28 <CindyLinz> 不過也不限於 app 層直接用會怪怪的...
+14:40:55 <CindyLinz> 如果你包一下換個名字就行了... 底下的機制是 exception, 只是寫 app 的時候不會把它當 exception 理解之類的
+14:41:06 <CindyLinz> 不過也僅限於 app 層直接用會怪怪的...
+14:41:11 <CindyLinz> (剛打錯字 XD)
+14:41:24 <petercommand> 換名子XDDD
+14:41:55 <petercommand> exitThread = undefined
+14:41:59 <petercommand> 這樣?XD
+14:42:27 <CindyLinz> 畢竟 Haskell 的 exception 也不算是權貴, 只是一般的 library, 就是平實的一種 monad 機制而已...
+14:42:37 <CindyLinz> petercommand: 用 undefined 就真的怪了... @@"
+14:43:07 <CindyLinz> undefined 應該會給人一種... 這東西一定不會被碰到, 除非你寫的程式有 bug...
+14:43:07 <petercommand> XD
+14:43:25 <CindyLinz> 有些版本的 Haskell 裡面... undefined 全等於 let a = a in a
+14:43:46 <CindyLinz> 如果遇到這種的, 應該就不會是你想要的效果 @@"
+14:43:51 <petercommand> 恩..
+14:44:14 <CindyLinz> petercommand: 你可以看一下 Control.Exception 裡面的東西, extend 一個結束程式的 exception 呀~
+14:44:41 <petercommand> 恩恩
+20:02:50 <petercommand> hGetLine
+20:03:06 <petercommand> hGetLine  用在 socket 是不是會有問題呀..
+20:04:51 <petercommand> 後續動作好像都會出現 socket 的 error
+20:05:12 <petercommand> 不是 end of line 就是 resource vanished
+20:06:09 <petercommand> 但 hGetLine 本身可以得到正常的東西..
+20:11:41 <petercommand> 好怪...有些地方是正常的，有些地方不正常..
+20:46:31 <petercommand> 如果用 netcat 跟他互動是正常的...
+20:46:33 <petercommand> https://gist.github.com/petercommand/358639350f2fd1ab07b3
+20:47:25 <petercommand> hFlush handle 好像就爆了..
+20:48:27 <petercommand>  <socket: 3>: hPutChar: resource vanished (Broken pipe)
+21:01:36 <petercommand> 阿阿阿...找到問題了....另外一邊忘記loop了..QQ
+21:02:11 <petercommand> 一直盯著沒問題的地方看XD
+21:03:57 <petercommand> 有的 branch 忘記loop了..
+23:16:26 <CindyLinz> cibs, miaoski: 明天的 slide 我在 draft branch 放了 lazy/

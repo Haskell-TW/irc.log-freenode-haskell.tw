@@ -1,0 +1,58 @@
+12:47:39 <mno2> http://blog.ezyang.com/2014/08/whats-a-module-system-good-for-anyway/  都不知道有 cabal-bounds 這種 tools
+12:48:06 <mno2> --allow-newer 感覺也蠻實用的
+22:28:32 <suhorng> Haskell 要怎麼寫全排列呀？
+22:28:59 <suhorng> 照平常的寫法的話, 突然想不到拆分的那一步怎麼做比較好
+22:29:41 <suhorng> （就是 [a,b,c,d,e] ==> [(a, [b,c,d,e]) , (b, [a,c,d,e]) , (c, [a,b,d,e]) , (d, [a,b,c,e]) , (e, [a,b,c,d])]）
+22:31:11 <hashcat> 只好用monad了 (誤
+22:31:31 <suhorng> 有辦法做到比較快嗎？
+22:31:35 <hashcat> 忘記list comprehension拉?
+22:31:53 <suhorng> 那樣複雜度是不是 O(n^2) 的？
+22:32:04 <hashcat> 有沒發現左邊的列表跟右邊的有一對一的對應
+22:32:18 <suhorng> 唔
+22:33:03 <suhorng> > [(x, "abcde" \\ [x]) |  x <- "abcde"]
+22:33:04 <lambdabot>  [('a',"bcde"),('b',"acde"),('c',"abde"),('d',"abce"),('e',"abcd")]
+22:33:16 <suhorng> 恩, 是一一對應的沒錯
+22:33:55 <hashcat> 不想用那個的話還有這種 zip [a,b,c,d,e] [[a,b,c,d,e], [a,b,c,d,e], [a,b,c,d,e], [a,b,c,d,e], [a,b,c,d,e]]
+22:34:21 <petercommand> > permutations [a,b,c,d,e]
+22:34:22 <lambdabot>  [[a,b,c,d,e],[b,a,c,d,e],[c,b,a,d,e],[b,c,a,d,e],[c,a,b,d,e],[a,c,b,d,e],[d,...
+22:34:34 <suhorng> QQ 我想試有沒有辦法線性做出這種效果
+22:34:53 <petercommand> 是要這個效果嗎?
+22:35:17 <petercommand> @src permutations
+22:35:17 <lambdabot> Source not found. Abort, Retry, Panic?
+22:35:35 <suhorng> 這樣看來好像無法了
+22:35:52 <suhorng> 對, 是要這樣, 我在享有沒有辦法 O(n!), 不過好像有點困難
+22:36:00 <suhorng> hashcat: 那個 zip 是不是還少東西？
+22:36:12 <hashcat> 弄個大概而已
+22:36:41 <hashcat> 我還忙著別的東西
+22:36:56 <suhorng> OKOK
+22:39:11 <petercommand> @src (\\)
+22:39:11 <lambdabot> (\\) = foldl (flip delete)
+22:39:21 <petercommand> @src delete
+22:39:21 <lambdabot> delete = deleteBy (==)
+22:39:32 <petercommand> @src deleteBy
+22:39:32 <lambdabot> deleteBy eq x []     = []
+22:39:32 <lambdabot> deleteBy eq x (y:ys) = if x `eq` y then ys else y : deleteBy eq x ys
+22:40:32 <suhorng> delete 是線性的orz
+22:42:36 <hashcat> suhorng:我是這樣考慮的..既然haskell是函數式
+22:43:24 <hashcat> 那先想一下那個函數是一對一, 多對一什麼的
+22:43:28 <au> @src Data.List.permutations
+22:43:29 <lambdabot> Source not found. Sorry.
+22:43:41 <suhorng> 嗯哼
+22:43:51 <petercommand> @src Data.Permutation
+22:43:51 <lambdabot> Source not found. Sorry about this, I know it's a bit silly.
+22:44:02 <au> # http://hackage.haskell.org/package/base-4.7.0.1/docs/src/Data-List.html#permutations
+22:44:16 <hashcat> 配合考慮型別, 就變成蘿菠填坑了
+22:44:25 <hashcat> 就是先不考慮該怎計算
+22:44:33 <suhorng> 可是複雜度有可能會變高 :(
+22:44:38 <hashcat> 先考慮輸出的樣子
+22:45:28 <suhorng> 嗯哼
+22:46:11 <CindyLinz> suhorng: N! 和 N x N! 的複雜度不是完全一樣嗎? XD
+22:46:41 <suhorng> 咦 是這樣喔??
+22:47:14 <CindyLinz> 反正有 N! 富爸爸在, 隨便浪費 ok 的啦~ Over my dad's money! (逃)
+22:47:30 <CindyLinz> suhorng: 你一問我發現我不太肯定 ^^|
+22:47:40 <CindyLinz> 只是覺得 N! 和 (N+1)! 應該要一樣吧? @@"
+22:47:51 <suhorng> 隨便浪費 xDD
+22:49:52 <suhorng> 唔 應該不一樣, (n+1)! /= O(n!), 因為左邊有 n+1 右邊只有常數
+22:50:18 <CindyLinz> 好吧 QQ
+22:53:23 <suhorng> au: 喔喔!!來看一下 base 怎麼寫的
+22:53:32 <hashcat> 由O(n) != O(1)就能推論出來了

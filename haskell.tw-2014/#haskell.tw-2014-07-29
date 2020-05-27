@@ -1,0 +1,87 @@
+02:58:08 <monochrom> ♥ The Elements of Style. Be direct!
+11:53:20 <mno2> godfat: 想請教一個 ruby 的問題，卡好久。我裝了一個 gem，在 irb 可以成功 require，但透過 berkshelf 的 DSL 卻會跳 LoadError。環境有用 rvm 管理。但我 LOAD_PATH 印出來跟 irb 都是同樣內容。請問可能會是哪一方面的問題？
+11:54:32 <godfat> rails 是滿常會有類似的問題，berkshelf 我瞧瞧。用 rvm 會讓事情又變得複雜不少。可能性其實滿多的，大抵上我都要試試看才知道 :s
+11:55:21 <godfat> ruby 會看 RUBYLIB 跟 RUBYOPT 的 env, rvm 可能會去動
+11:56:06 <godfat> 這 dependency 好驚人.....
+11:57:42 <godfat> 你說的 DSL 是怎麼執行的？
+11:58:11 <mno2> 他在 berkshelf 3.x 上有加 extension
+11:58:40 <mno2> extension 會對到 berkshelf 裡面的一個 function
+11:58:46 <mno2> 就叫 extension
+11:59:09 <mno2> 然後他裡面就 require "berkshelf/#{plugin-name}"
+11:59:15 <mno2> 然後就爆掉了
+11:59:30 <mno2> 但我在 irb require 同樣的東西就可以
+11:59:48 <godfat> 程式跑起來時是用什麼指令？
+11:59:53 <mno2> 有什麼訊息我印出來有幫助釐清嗎
+12:00:04 <mno2> berks install
+12:00:10 <mno2> 他會去拉對應的 cookbook
+12:00:22 <mno2> 就是先去看 Berksfile
+12:00:31 <mno2> 基本上就是一個 DSL 寫的 script
+12:00:55 <mno2> 然後 3.x 他是說加一句 extension 'xxxx' 就會載入 plugin
+12:02:41 <godfat> 印出 Gem.paths 是什麼好了，我是沒這樣試過，不過應該有些資訊
+12:04:33 <mno2> http://pastebin.com/US0Fvthe
+12:05:16 <mno2> berks 那邊是直接去 library 插 puts
+12:05:34 <godfat> Gem.paths (s) 是多一點資訊，不過可能也沒啥幫助
+12:05:34 <godfat> extension 是怎麼裝上去的？
+12:06:44 <mno2> gem install "berkshelf-hg"
+12:07:21 <godfat> 真詭異... 不知道 berkshelf 是不是動了啥手腳
+12:08:26 <mno2> 我現在開始懷疑放出來的 plugin 到底是不是好的 lol
+12:08:36 <godfat> 印印看 ENV['RUBYOPT'] 和 ENV['RUBYLIB'] 好了，你看過 $LOAD_PATH 是嗎？
+12:10:30 <mno2> http://pastebin.com/z0BancUg
+12:10:33 <mno2> 不一樣了
+12:10:39 <mno2> cli 是空的
+12:10:48 <mno2> berks 裡面不是
+12:11:29 <godfat> 所以他去讀了 bundler... 你的工作目錄下有 Gemfile 嗎？
+12:12:12 <godfat> 還要確認每一個上一層都不能有 Gemfile, 或是 Gemfile 裡面必須要列出你要裝的 extension
+12:12:43 <mno2> 有.. 是 berkshelf 自動產生的
+12:12:53 <godfat> gotcha :o
+12:14:05 <mno2> 砍到之後變空的。不過還是 load 不進來 xD
+12:14:49 <mno2> 喔喔
+12:14:59 <godfat> O_o 怪怪，不然就是先試試看列進 Gemfile, 也許他強迫使用
+12:15:07 <mno2> 再 gem install 重裝一次就有了，之前搞不好裝到 local 的了
+12:15:15 <mno2> 太多雷可以踩了吧
+12:15:26 <mno2> godfat: 感謝 :)
+12:15:58 <godfat> 我覺得很多人真的都把環境搞到太複雜了，bundler 也很噁心
+12:15:58 <godfat> 不會 XD
+12:16:04 <mno2> 這些體系的 package 太多 implicit 的東西了。不熟會狂踩..
+12:17:53 <godfat> 確實，雖然我大多可以解決，可是常常還是丈二金剛... rubygems 其實也有點過於複雜，裡面可能的路徑也是一大堆。gem 其實還有分 default 跟 system 之類的... 其中一個還不能移除，只能 rm -r 掉（我重裝都會 rm -r 掉
+12:18:17 <godfat> 避免跟其他東西又打架
+12:23:37 <mno2> 應該就是為了解決掉某些 edge case 而讓系統變得複雜。可能一個東西紅了，但當初設計系統沒考慮到就會變這樣
+12:24:50 <godfat> 確實很多都是這樣造成的.. 時間拉長了，patch 多了，最後則是 99% 會動，但那 1% 變得更加 obfuscated
+19:31:04 <petercommand> > \x -> x x
+19:31:05 <lambdabot>  Occurs check: cannot construct the infinite type: t1 ~ t1 -> t
+19:31:05 <lambdabot>  Relevant bindings include x :: t1 -> t (bound at <interactive>:1:2)
+19:36:18 <petercommand> > let y = \x -> x x in y (+1) $ 1
+19:36:19 <lambdabot>  Occurs check: cannot construct the infinite type: t2 ~ t2 -> t1
+19:36:19 <lambdabot>  Relevant bindings include
+19:36:19 <lambdabot>    x :: t2 -> t1 (bound at <interactive>:1:10)
+19:36:19 <lambdabot>    y :: (t2 -> t1) -> t1 (bound at <interactive>:1:5)
+19:40:06 <petercommand> 這個錯誤的原因是甚麼呢?
+19:43:42 <petercommand> > let y = \x -> x x :: (a -> a) -> (a -> a) in y (+1) $ 1
+19:43:43 <lambdabot>  Occurs check: cannot construct the infinite type:
+19:43:43 <lambdabot>    t ~ t -> (a2 -> a2) -> a2 -> a2
+19:43:43 <lambdabot>  Relevant bindings include
+19:43:43 <lambdabot>    x :: t (bound at <interactive>:1:10)
+19:43:43 <lambdabot>    y :: t -> (a1 -> a1) -> a1 -> a1 (bound at <interactive>:1:5)
+19:57:01 <petercommand> cannot construct infinite type的意思是甚麼呀?
+20:08:09 <petercommand> 看起來似乎不太能這樣做...
+20:10:54 <au> petercommand: 見 https://stackoverflow.com/questions/4273413/y-combinator-in-haskell
+20:13:18 <petercommand> 來看一下..
+20:25:28 <petercommand> au: thx!
+20:30:29 <au> np :)
+23:10:26 <suhorng> petercommand: 在嗎 XD?
+23:11:13 <petercommand> 在
+23:12:53 <suhorng> 如果你有裝一些動態語言的 compiler 的話, 就可以玩剛才那個 \x -> x x
+23:12:53 <petercommand> 甚麼事嗎?XD
+23:13:02 <petercommand> suhorng: 像是?
+23:13:08 <suhorng> 舉例來說, Scheme 的話允許寫 (lambda (x) (x x))
+23:13:43 <petercommand> 應該就是過不了static type checker而已吧
+23:13:57 <suhorng> Haskell 裡一個函數的型別必須是 a → b 其中 a, b 是 type (或 type variable)
+23:13:59 <suhorng> 對
+23:15:22 <suhorng> 那 \x -> x x 的型別就過不了了, 因為假如這個函數的型別是 s -> t, 代表 x 的型別是 s. 那麼在 "x x" 運算式中, 後面的 x 型別是 s, 於是前面的 "x" 型別必須是 s -> ?
+23:16:03 <suhorng> 因為前面的 x 在這裡的用法是函數, 又拿的參數是個型別是 s 的東西, 所以整個型別必須是 s -> ?
+23:16:47 <suhorng> 這就是他抱怨說無法構造 infinite type   s -> t = s 的關係, 因為若前面的 x 型別是 s -> t 而後面是 s 的話, 那就代表 "s -> t" 跟 "s" 這兩個型別一樣
+23:18:51 <suhorng> 那剛才的 stackoverflow 連結就是用 recursive data type 暫時避開(呃..無標記的) recursive type 的麻煩
+23:20:12 <petercommand> 恩
+23:26:04 <suhorng> （唔 因為假若 s = s -> t 的話那我們會有 s = s -> t = (s -> t) -> t = ((s -> t) -> t) -> t ...）
+23:27:44 <petercommand> 所以就變infinite type了
+23:35:29 <suhorng> 對

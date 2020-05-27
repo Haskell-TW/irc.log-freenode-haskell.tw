@@ -1,0 +1,169 @@
+06:23:55 <monochrom> 我愛 Dijkstra :)
+06:31:01 <monochrom> 然而 lazy evaluation 是雙刃劍, 即使只談 Dijkstra 所談. 首先我當然跟 Dijkstra 一樣, 鼓勵少想操作, 因此像 Haskell 這樣, 不用想操作而能預測程式給出甚麼答案, 這是大幸. 但我們遲早也要預測程式用幾多時間幾多記憶, 這時難以避免考慮操作, 而 lazy evaluation 是較難跟的操作.操作
+06:34:53 <monochrom> 我已經知道怎樣避免操作而仍能預測時間, 畢竟這是我的博士論文! 而然寫完論文, 還是嘆曰: 不易. 而預測記憶依然遙遙無期.
+06:38:19 <monochrom> 當然, 其實官方從沒公開說 Haskell 是 lazy, 只說 non-strict. 說 non-strict, 就更加斷絕所有考慮操作的希望了! XD
+06:42:37 <monochrom> 最後, 這只是末節. 重點上 Dijkstra 是對的, 教 Haskell 可擴闊視野, 並且鼓勵把程式當嚴謹數式.
+06:46:57 <monochrom> 預測記憶, Haskell 面對的是雙邊戰爭, 是 lazy evaluation 及 garbage collection 兩面夾擊. 注意單單 garbage collection 已不易, 例如 ML 及 Java.
+06:47:38 <monochrom> 惜也! Dijkstra 不在世, 沒見到我的博士論文!
+06:48:01 <monochrom> 否則一定大讚 XD
+14:19:34 <CindyLinz> monochrom: 如果他真的還在世, 你真的敢拿給他看喔? 不是聽說他脾氣超差...? XDD
+14:20:06 <godfat1> XDDDDD
+14:21:02 <CindyLinz> monochrom: 不過, 應該可以不用甩 Haskell 官方說的 non-strict, 直接做 lazy 版, 然後說這個分析方法只適用 lazy-haskell.. 而實際上所有的 haskell 都是 lazy-haskell.. :p
+14:22:19 <godfat> ...=_=... 最終都是實作獲勝的味道
+14:39:50 <CindyLinz> 不是這樣嘛, 只是先顧現實的問題啊~ ^^  non-strict 是一個「非建構性」的定義, 什麼都不能做啊.. XD
+14:40:16 <CindyLinz> 等到有和 lazy 不一樣的 non-strict 出來, 也是可以對它作分析的 ^^
+14:40:49 <godfat> 唔，也是 XD 不過具體而言，還有啥作法嗎？
+14:40:55 <CindyLinz> 提醒提醒~~ 今天晚上是 Functional Thursday 喔~~
+14:41:05 <CindyLinz> 就沒聽過嘛 :p
+14:41:10 <godfat> 今天沒空參加 ><
+14:41:29 <CindyLinz> 我想, eval 完不要把結果記住, 仍然留著 thunk 在那邊也是一個可行的作法? XD
+14:42:00 <godfat> 如果 thunk 是 pure 的，這樣有意義嗎？ XD
+14:42:55 <CindyLinz> 省記憶體.. XD
+14:43:12 <godfat> 結果不是通常比較小嗎？
+14:45:05 <CindyLinz> do { let a = [1..1000000000] ; putStrLn $ show $ sum a ; threadDelay 1000000000 ; putStrLn $ show $ length a }
+14:45:23 <CindyLinz> 通常是啦.. 所以才沒看過有人這樣做 XD
+14:46:14 <CindyLinz> 哎唷.. 嘴砲不要太認真嘛 QQ
+14:48:35 <godfat> XDDDD
+14:48:36 <godfat> 哎唷，不認真我也沒問到這樣的具體例子呀 :P
+14:48:36 <godfat> 也許可以有 annotation 給 compiler/vm 一些提示應該要記 value 還是 thunk, 不保證這樣
+14:49:12 <CindyLinz> 「強烈建議每次重算」
+14:50:44 <CindyLinz> 不知道 GHC 會不會越過 unsafe 的牆來檢查..
+14:50:57 <CindyLinz> 我在想可以用 unsafe 擋著, 叫 GHC 每次都重算
+14:51:18 <CindyLinz> 只是如果 GHC 會爬過牆來檢查說: 你這根本 safe.... 就破功了..
+14:51:56 <godfat> 要怎麼用 unsafe 擋著呀？用 ghc 本身的 api..?
+14:53:28 <CindyLinz> http://www.haskell.org/ghc/docs/latest/html/libraries/base-4.6.0.1/System-IO-Unsafe.html
+14:53:50 <CindyLinz> 然後在裡面 IO 的地方使用 suhorng 上次遇到的問題
+14:54:58 <CindyLinz> # 19:55 < suhorng> 然後我的程式就變成(幾乎)兩倍慢了 囧
+14:55:21 <godfat> 哪個問題..? XD 為 debug 插入 IO?
+14:55:21 <godfat> 可是問題不是在怎麼讓 ghc 丟掉 value 嗎？
+14:56:24 <CindyLinz> ghc 好像還蠻容易丟掉 value 的... @@"
+14:56:49 <CindyLinz> 只要不是在同一層函數裡面用到, 就不會 cache 了的樣子
+14:57:23 <CindyLinz> 像是 fib 0 = 1 ; fib 1 = 1 ; fib n = fib (n - 1) + fib (n - 2) 裡面, f 會一再重算
+14:57:44 <CindyLinz> 但我不知道明確的 rule.. 所以真要應用還不太行
+14:58:13 <godfat> 我內心的想像是 keepThunk :: a -> a
+14:58:13 <godfat> XD
+14:58:43 <godfat> 可能會是 lexical 的...
+14:59:03 <CindyLinz> 目前的應該還不行.. 如果寫成 let a = keepThunk f in (a, a) 的話, a 的結果會被記住, f 還是只有算一次
+14:59:24 <CindyLinz> 但! 如果 f 裡面有 unsafe 的話, 不知道 ghc 會不會就不敢 cache 了 :p
+14:59:55 <CindyLinz> 我猜還是敢.. 不然 unsafe 就很沒用了.. :Q
+14:59:59 <godfat> 也許想說反正你都 unsafe 了，就讓你瞧瞧 unsafe 的真義 XD
+15:03:29 <CindyLinz> 有了
+15:03:37 <CindyLinz> 我作了測試
+15:04:48 <CindyLinz> http://lpaste.net/98225
+15:05:00 <CindyLinz> f 只會 eval 一次, 但 g 會 eval 二次
+15:07:36 <godfat> 唔，然後是不是應該有 jit 讓 g 多跑幾次後他發現其實應該 cache? XD
+15:11:33 <CindyLinz> 覺得好像要做這個已經準備好了, 只是 ghc 那幫高手的風格好學術, 可能不覺得這是重要的事 orz
+15:20:10 <CindyLinz> 不過.. 塞給 g 的參數兩次是不一樣的欸..
+15:20:15 <CindyLinz> 因為那個 callback 不一樣
+15:21:01 <CindyLinz> 它還是可以分析出塞給 next 的 3 沒有 depend on 這個 callback
+15:21:10 <CindyLinz> 那我 trace 放的位置不對...
+15:21:45 <CindyLinz> 我把 trace 移到 3 的位置, 還是有 eval 兩次 ^^
+15:23:05 <godfat> 不過說實在我很難想像好的 jit 應該怎麼做，感覺需要很多 heuristic 去預測什麼時候開始最佳化？
+15:24:18 <CindyLinz> 對啊, 就解決常見的就好.. 應該是個非常不嚴謹, 講不太出可證明的理由的行為.. @@
+15:24:38 <CindyLinz> 和 FP 圈的文化不太合.. XD
+15:25:46 <godfat> ...XDD 也是..
+15:28:25 <CindyLinz> 也許我一兩年前去 #haskell 問說.. 有沒有什麼 generic 的函數把 head :: [Int] -> Int, tail :: [Int] -> [Int] 變成 maybeHead :: [Int] -> Maybe Int 和 maybeTail 的時候..
+15:28:41 <CindyLinz> 有人回答我說 impossible, it's halting problem
+15:28:58 <CindyLinz> 就是個 symbol 了.. o.o
+15:29:25 <CindyLinz> 從實際應用的角度來說, 在 halting problem 之前, 還有很多文章可以作
+15:30:01 <godfat> 好像就是丟到 IO 裡面抓 exception... XD
+15:30:10 <CindyLinz> 像這個問題, 其實可以不用全面性地視為 halting problem, 而視為 non-exhaustive pattern 的問題
+15:30:30 <CindyLinz> non-exhaustive pattern 是可以解的..
+15:30:47 <godfat> 你是說從 input 去看嗎？
+15:31:11 <CindyLinz> 它就是缺 pattern 來 match [] 呀
+15:31:58 <CindyLinz> 只是這種解法不夠全面, 就會上不了 那個 台面.. :Q
+15:34:00 <godfat> 要這樣做似乎就等於要幫 f 補完 case 了？
+15:34:15 <godfat> 是說這樣好像也是一種 exception 的意思
+15:35:48 <CindyLinz> 可以算是 exception, 現狀也是被當成 exception... 不過我覺得這一種 exception 可以適當包裝, 讓它留在 pure...
+15:36:03 <CindyLinz> 我還沒試過把它放在 Maybe Monad 裡面能不能變成 Nothing
+15:36:33 <godfat> 這樣等於是 haskell 語意也變了.. XD
+15:37:01 <godfat> 另一方面，感覺這也是某一種 null pointer
+15:38:43 <CindyLinz> null 可以解決所有的事, 但不一定就要把所有的事都推給 null 啊? ^^
+15:39:10 <godfat> 我的意思是，他的概念其實有點像是 null, 像是可以正常處理例外
+15:39:32 <CindyLinz> 像是 Monad 的 fail?
+15:39:47 <godfat> 或是說，Maybe 其實是某種 Nullable... XD
+15:39:59 <CindyLinz> Monad 的 fail 我覺得就是: monad 內無法處理, 但是 runMonad 的地方 (monad 外面) 可以處理
+15:40:18 <godfat> 嗯，也是像是那樣
+15:42:37 <CindyLinz> 試完了, 不會被當成 failed monad # http://lpaste.net/98227
+15:43:42 <CindyLinz> 記得它的實作是有 pattern match...
+15:43:57 <CindyLinz> head [] = error "empty list"
+15:44:06 <CindyLinz> 這個 error 太兇殘了.. ww
+15:44:46 <CindyLinz> 戳一下就一路捅到 IO 才能處理 orz
+15:45:46 <godfat> XDDDD 這等於是沒有統一方法了
+15:46:28 <CindyLinz> 可是 fail 只能在 Monad 裡面用
+15:46:55 <CindyLinz> throw 更侷限, 只能在特定的 Monad 裡面用
+15:47:29 <CindyLinz> 應該強制把所有的 pure 函數都當成在 Identity a 裡面跑... ww
+15:47:41 <CindyLinz> 這樣就可以 fail 了 :p
+15:47:57 <godfat> 呃.... XD
+15:48:20 <CindyLinz> 現在在 pure 裡面放個 error 是什麼意思嘛.. XD
+15:48:35 <godfat> "please debug your application"
+15:49:16 <CindyLinz> 或說.. error 的 semantic 應該可以由 monad 來定義
+15:49:25 <CindyLinz> 不過這樣就 error = fail 了.. :p
+15:49:39 <godfat> 是啊
+15:50:01 <CindyLinz> 覺得這樣比較對啊.. :Q
+15:50:34 <CindyLinz> pure 函數到處都能用.. 然後我們又希望不要 IO monad 滿天飛
+15:50:44 <godfat> 我想是因為沒有想要整個 haskell 在 monad 裡？
+15:50:48 <CindyLinz> 結果 pure 裡面有一堆東西都是一戳就直達 IO... orz
+15:51:17 <godfat> 不過整個 haskell 都在 monad 好像也是滿有趣的... XD
+15:51:23 <CindyLinz> 整個 haskell 在 monad 裡應該是無可避免的命運吧? XD
+15:51:55 <godfat> 這樣 return a 跟 a 好像也沒分別了？
+15:52:12 <CindyLinz> 髒的是 IO a, 不是所有的 Monad 啊.. QQ  你看 Identity a 多麼純啊 ^^
+15:52:15 <godfat> 或是說 return a 變成 return $ return a 了
+15:52:20 <godfat> XDDDDD
+15:52:44 <CindyLinz> 聽起來不太妙 orz
+15:54:06 <CindyLinz> 還是由 compiler 來施展黑魔法吧, 把 error 當成 fail 來用就好 XD
+15:56:23 <godfat> 不確定這樣會變怎麼樣... XD 可以做成一個 ghc extension 瞧瞧？ XD
+15:56:49 <CindyLinz> syntax 上還是得由 programmer 決定 Identity 有幾層.. 不然最後面套了無窮多層 IdentityT, 這程式寫不了的...
+15:57:30 <godfat> 由 programmer 宣告 type?
+15:57:33 <CindyLinz> 好像可以是一個 per module 的 extension
+15:57:45 <CindyLinz>  global 用可能會和已有的程式不合
+15:57:59 <godfat> 我覺得一定不會合，語意不一樣... XD
+15:58:05 <CindyLinz> 已有的程式可能假設 Nothing 發生時一定是某某問題, 而不是發生這種 list 不夠長的意外
+15:58:29 <CindyLinz> 但可以指定讓某一層 Monad 可以收 error
+15:58:43 <CindyLinz> 好像不用 extension, 用 unsafe 就可以做了?
+15:59:21 <CindyLinz> 用 unsafe IO 裡面擺 catch, 然後再 run Identity..
+15:59:48 <CindyLinz> 那是不是已經有這種 monad 了呢? :p
+16:00:23 <godfat> 聽起來是可行.... XD
+16:00:37 <godfat> 可是不太確定為什麼要這樣用... XD
+16:01:40 <CindyLinz> 想像你寫了個 Monad
+16:01:52 <CindyLinz> 想把所有的東西 run 在這個 Monad 裡面.. 而且, 它不是 IO!
+16:02:21 <CindyLinz> 然後如果你寫的是類似 server 性質的程式, 也許這程式有些地方會出點意外
+16:02:33 <CindyLinz> 但你希望它不會因為不夠嚴重的意外就把整個程式 crash 掉
+16:02:47 <CindyLinz> 那就會在某些地方攔一些救援性質的程式
+16:02:56 <godfat> 是，我唯一想到不希望程式 crash 的真的就 server 之類的 XD
+16:03:15 <CindyLinz> 啊我就一天到晚寫 server 程式嘛, 所以都從這邊開始想啊 ^^|
+16:03:18 <godfat> 像是程式爛了自動重開，是個爛招，但有時候確實想要...
+16:03:41 <CindyLinz> 但我們就會希望不要爛到需要重開的地步, 而是局部 abort 某個 task 就好
+16:03:56 <godfat> 之前也常常覺得自己寫了好髒的東西，覺得把錯誤都藏起來了很討厭，但又不得不這樣做
+16:04:14 <CindyLinz> 就像在這邊.. 希望不要爛到整個 IO thread 要重來, 而是局部處理, 局部修復就好
+16:04:30 <CindyLinz> 像是... Memory 不夠了
+16:04:38 <CindyLinz> 也不用因此就被 kill 9
+16:04:54 <CindyLinz> 我把部分 job 丟掉, 還剩一些可以繼續跑呀~
+16:05:01 <godfat> 來個 safe haskell, 然後這跟大家想的 safe 不一樣，其實是 never crash (but unsafe...)
+16:05:12 <CindyLinz> 「跟大家想的 safe 不一樣」...... wwww
+16:06:18 <godfat> 說來我寫程式也常常覺得滿矛盾的，錯誤就想噴錯，但導致不夠 robust 又不好...
+16:06:25 <CindyLinz> 你可以噴 log
+16:06:32 <CindyLinz> fatal log, 寄信塞爆你信箱...
+16:06:34 <godfat> log 不夠吵... XD
+16:06:36 <godfat> ....XDD...
+16:06:42 <CindyLinz> cc 給董事長
+16:07:09 <godfat> 我現在確實慢慢把程式改成用 email 回報... (其實是丟給另外 service, 他會再寄信)
+16:07:11 <CindyLinz> 或是 cc 到 #haskell channel.. 就會開始有人罵你... XD
+16:07:25 <godfat> cc 給董事長也滿好笑的，還可以 cc 給客戶更猛 (??)
+16:07:28 <godfat> XDDDDDDDDDD
+16:07:29 <CindyLinz> XDD
+16:07:34 <godfat> 不行，社群不能得罪 (??)
+16:07:44 <CindyLinz> 吵過頭了 XD
+16:08:28 <CindyLinz> 我們家的 perl 程式常常在包 eval { }
+16:08:38 <CindyLinz> 類似 java 的 try { } catch all
+16:08:59 <godfat> silently faill...!?
+16:09:02 <CindyLinz> 然後會噴信
+16:09:07 <godfat> 喔喔 XD
+16:09:23 <CindyLinz> 我們實際上有很多壞掉也沒關係, 但不要總是壞掉的服務..
+16:09:43 <CindyLinz> 例如說 PM 辦活動, 玩家玩完一局有機率掉寶
+16:09:56 <godfat> crash = no items
+16:09:58 <CindyLinz> 這種程式常常在改, 因為常常有新活動, 所以也常常錯
+16:10:06 <godfat> XDDD 可以理解...
+16:10:10 <CindyLinz> 如果它出的 exception 讓正常結算都爆掉...
+16:10:22 <CindyLinz> 還不如把這 error 河蟹掉..
+16:10:33 <CindyLinz> 至少正常遊戲可以玩, 只是沒寶..

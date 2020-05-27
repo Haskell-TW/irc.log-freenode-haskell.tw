@@ -1,0 +1,26 @@
+08:54:18 <aksatac> https://twitter.com/id_aa_carmack/status/331918309916295168
+08:54:49 <aksatac> John Carmack starting port of Wolf 3D in Haskell
+10:15:31 <MnO2> http://www.reddit.com/r/haskell/comments/1dv4ij/john_carmack_interested_in_doing_a_moderatesized
+10:15:53 <MnO2> john carmack 要練習做 haskell proj 了 xD
+10:21:11 <MnO2> https://twitter.com/ID_AA_Carmack/status/331918309916295168
+12:29:35 <_13h> wolf 3d!!
+12:29:48 <_13h> 應該算重寫了？
+12:56:04 <MnO2> 希望他做完不會幹醮 xD
+12:59:16 <_13h> 他的 iOS port 經驗應該幫助不大吧XD
+20:45:40 <favonia> suhorng: 上次 Functional Thursday 狀況如何呀？
+20:49:55 <suhorng> favonia: 滿有趣的 人很多XD CindyLinz present了很多寫haskell程式時因為 Lazy 意外遇到的問題
+20:50:20 <suhorng> #haskell.tw中很多人都有去呀!
+20:53:37 <suhorng> scm老師則講給定長度是n、包含兩兩相異自然數的list，要怎麼線性找不在其中的最小自然數
+20:54:42 <suhorng> 時間有點趕就是
+20:55:56 <MnO2> scm 原本隨口說要上 irc 來看，不過….. xD
+20:56:50 <suhorng> 也許忘了 XDDD
+20:57:40 <suhorng> 後來CindyLinz present完後有很多人在前面討論 不過我沒跟到
+21:02:33 <favonia> suhorng: 下次是什麼時候？
+21:07:09 <suhorng> 老師希望能每個月一次，但還沒消息ＸＤ
+21:07:19 <favonia> xDDDD
+21:07:57 <suhorng> 我記得上次有人貼過 parallel list comprehension 的資料
+21:08:09 <suhorng> http://www.haskell.org/ghc/docs/7.2.1/html/users_guide/syntax-extns.html#monad-comprehensions 這個是「Monad comprehension」..GHC extension
+21:08:28 <suhorng> 原來過去 Haskell 曾經所有 Monad 都可以用 comprehension 語法寫.........
+21:09:03 <favonia> 對啊 不過有沒有都無所謂啦～語法糖 lol
+21:09:24 <suhorng> 有的話看起來很崩潰QQ
+23:11:45 <MnO2> ocaml 的 build system 有點複雜…

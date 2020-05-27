@@ -1,0 +1,25 @@
+20:10:43 <CindyLinz> 來心理測驗一下...
+20:10:51 <CindyLinz> 請問, lazy 的相反詞是什麼?
+20:12:14 <CindyLinz> __Z2suI3horI2ngE: page 67  forall a b. a -> b -> a 和 forall c. c -> c -> c 的包含方向是怎麼看的啊?
+20:55:26 <mno2> CindyLinz: hardworking ?
+21:08:11 <monochrom> eager
+22:06:36 <mno2> 我在寫一個 project
+22:07:22 <mno2> 想要爬整個 hackage 的 packages，尋找引用到某個 package 某個 function 的片段
+22:07:51 <mno2> 有沒有什麼比較好的方法？ 目前想到就是暴力用 haskell-src-exts 硬做
+22:08:00 <mno2> 找 import symbol
+22:09:51 <CindyLinz> 聽起來作法很正規的感覺呀
+22:10:09 <CindyLinz> 亂做就是用 regex string search 惹 XD
+22:10:10 <mno2> 不過 implicit import 的好像沒有 function 可以拿到
+22:10:26 <mno2> https://hackage.haskell.org/package/haskell-src-exts-1.16.0.1/docs/Language-Haskell-Exts-Syntax.html#t:ImportDecl
+22:10:52 <CindyLinz> 要把 import module 的所有 export 都翻出來
+22:11:14 <CindyLinz> 然後會遇到直接 export module 的...
+22:11:22 <mno2> hmm..
+22:20:25 <__Z2suI3horI2ngE> CindyLinz: S <: T, 所有可以用 T 的地方都可以用 S
+22:21:24 <__Z2suI3horI2ngE> ...開始不確定方向有沒有寫錯了 XD
+22:21:29 <CindyLinz> __Z2suI3horI2ngE: 那是不是有畫反?
+22:22:16 <__Z2suI3horI2ngE> 唔..
+22:22:25 <__Z2suI3horI2ngE> 一時難以思考
+22:26:52 <__Z2suI3horI2ngE> 唔~"~ 把 more polymorphic 的放左邊, less polymorphic 的放右邊這樣要怎麼講阿..
+23:45:44 <CindyLinz> 這是什麼問題??
+23:46:03 <CindyLinz> __Z2suI3horI2ngE: 我點開你投影片 reference 裡的 bidirectional typing tutorial 看惹... QQ
+23:46:28 <CindyLinz> 用 more :> less 講?

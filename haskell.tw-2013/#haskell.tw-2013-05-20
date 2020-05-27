@@ -1,0 +1,57 @@
+00:04:07 <letoh> 發現中文版少了一張圖 (不過圖好像不太重要就是)
+00:09:18 <MnO2> 就順手把他加一加？
+01:21:40 <letoh> 加上去了
+10:36:54 <_13h> 請教一個 layout 問題
+10:37:33 <_13h> foo x = let a = ... (換行) b = ...   這樣子不會錯
+10:37:47 <_13h> 但 foo x = (換行) let a = ... (換行) b = ...   這樣子就錯了
+10:37:57 <_13h> 有什麼規則可以判斷嗎？
+10:38:20 <_13h> 但如果加個分號  foo x = (換行) let a = ... ; (換行) b = ...   這樣子又沒錯了
+10:42:28 <hychen> 你可以放pastbin嗎? XD
+10:42:55 <_13h> 想說才兩行XD  我放一下
+10:45:16 <_13h> http://pastebin.com/isCnaEF5
+10:51:52 <monochrom> 三個都對。不個還未看你的 in 放哪裏。
+10:54:09 <_13h> http://pastebin.com/dp1pMexc  補上 in
+10:54:28 <_13h> 那錯誤應該是 hugs 的問題了@_@
+10:54:34 <monochrom> 應該三個都對
+10:56:34 <monochrom> 剛試完 hugs 沒問題
+10:57:02 <monochrom> 結論：略去的碼有問題
+10:58:17 <_13h> 咦  我是測試 lyah 上的範例XD  我找一下昨天測試的檔案
+11:05:47 <monochrom> cylinder r h = let sideArea = ...?
+11:06:38 <monochrom> 都無問題
+11:08:55 <_13h> https://github.com/letoh/learnyouahaskell-zh-tw.github.com/blob/d85186dd3b62dcbed06f16e01ca680c6482c3890/source/_posts/11-functors-applicative-functors-and-monoids.txt#L1354
+11:10:32 <_13h> 奇怪，剛剛一跑又沒問題了，昨天不曉得在鬼打牆什麼XD
+11:10:48 <monochrom> 太陽黑子 XD
+11:10:52 <_13h> 改回來... XD
+11:11:00 <_13h> XDXD
+11:20:40 <b4284> 真正的高手是用太陽黑子編輯的
+11:23:51 <monochrom> 那恐怕只有電影裏的超級富有大壞蛋才有資源做...
+11:24:48 <monochrom> Lex Luthor 啦!
+11:39:35 <_13h> 有的程式碼橫向拉的太長，導致 kindle 裡看起來換行亂七八糟，現在有看到排版變得太誇張的就順手調整一下 layout
+11:41:15 <b4284> Superman 表示：我的機器人可以輕易做到
+12:01:02 <_13h> https://gist.github.com/letoh/98b77109b3a4eecaebbe   昨天改了幾個看不太懂的句子，有人可以幫忙看一下嗎？我怕我對原文的理解也是錯的XD
+12:14:01 <c9s> hychen: 咦 你在用 haskell 寫 web 了喔? XDD
+12:52:26 <MnO2> _13h: 我覺得你改得不錯啊。比原來順很多。粗略看一下應該沒有跟原文有出入
+12:58:10 <_13h> 感謝  那就先改成這樣。我發現還有好幾個地方跟原文有點落差，也有漏翻句子的情況，有空再來慢慢修了XD
+13:01:59 <MnO2> _13h: 靠。learn you a haskell  不知道被貼到哪去。page view 昨天爆量，昨天 PV = 1010。你修改的成果第一天上線就有 1000 人看了 xDDD
+13:02:44 <MnO2> Unique User 瞬間增加 1000 人
+13:02:52 <_13h> 真可怕XD  應該是大陸的論壇？台灣有那麼多 haskell 學習人口嗎？
+13:03:11 <MnO2> 不知道。Weibo 的 like 也瞬間增加
+13:04:22 <_13h> 等我 monoid 和 monad 這兩章校完再來 merge 一次好了XD
+13:04:43 <MnO2> 感謝你
+13:05:49 <_13h> 有些贅詞修來修去還是覺得很繞口，到時候要麻煩大家幫忙看一下，我對自己的英文和中文都沒什麼信心XD
+13:11:23 <_13h> 另外問個問題。Ord 在原文的描述是 ordering，目前中文是翻譯成比大小，我覺得用中性一點的詞，像「排出順序」應該會比較好一點？
+13:11:35 <favonia> MnO2: 流量不會顯示使用者來源嗎？
+13:12:47 <_13h> 像書裡的例子："Abrakadabra" `compare` "Zebra"    就很難說有什麼大小的比較，不太直覺
+13:13:29 <MnO2> favonia: 看不太出來，最大是顯示 direct acess，怪怪的。
+13:13:45 <MnO2> 我猜測是被某個 weibo 大戶分享了
+13:14:09 <_13h> 我看了一下 Ord 的界面，應該只要把 < <= >= > max min 這些東西定義清楚，不管什麼東西都可以拿來比吧？
+13:14:18 <MnO2> 大概就暫時的吧。我想應該沒那麼多人學 Haskell
+13:15:12 <MnO2> 可以看看數學上 Partial Ordering 跟 Total Ordering 怎麼翻
+13:15:29 <MnO2> 理論上「順序性」應該是比較好
+13:16:29 <favonia> 偏序 全序
+13:17:14 <_13h> 我去查 partial ordering 發現這張廣告 http://www.wolframcdn.com/sponsor-ads/einstein.png ...
+13:18:50 <favonia> 結論：哪天出名了，自己選一張搞笑照片洩漏出去，這樣你死後大家都會用。
+13:18:58 <_13h> XDXD
+13:19:22 <MnO2> 自己弄張 troll face
+16:22:40 <MnO2> http://css.dzone.com/articles/game-life-haskell
+21:25:53 <suhorng> http://registrano.com/events/40764f

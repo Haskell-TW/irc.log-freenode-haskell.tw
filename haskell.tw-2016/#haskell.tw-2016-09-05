@@ -1,0 +1,12 @@
+16:54:34 <CindyLinz> 一直都記不清楚 foldr 與 foldl 的函數參數的參數順序
+16:54:40 <CindyLinz> 現在知道要怎麼記了
+16:54:48 <CindyLinz> 把它想成 infix operator 吧 :p
+16:56:51 <CindyLinz> @t foldl
+16:56:51 <lambdabot> Maybe you meant: tell thank you thanks thesaurus thx tic-tac-toe ticker time todo todo-add todo-delete type v @ ? .
+16:56:54 <CindyLinz> @type foldl
+16:56:57 <lambdabot> Foldable t => (b -> a -> b) -> b -> t a -> b
+16:56:57 <CindyLinz> @type foldr
+16:56:59 <lambdabot> Foldable t => (a -> b -> b) -> b -> t a -> b
+20:30:51 <petercommand> CindyLinz: ++ 我也都不記得XD
+23:01:21 <pkmx> > ((+) `foldl'` 0) [1..10]
+23:01:23 <lambdabot>  55

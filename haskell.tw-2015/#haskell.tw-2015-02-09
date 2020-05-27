@@ -1,0 +1,30 @@
+01:00:43 <monochrom> type inference 之所以 exponential time 就是這原因了. 短短 term 可以 infer 出長長 type
+02:16:02 <pkmx> Glasgow Haskell Compiler, Version 7.11.20150206
+02:16:12 <pkmx> 原來HEAD已經跑到7.11去了...
+02:16:50 <monochrom> 7.10 已在 release candidate 階段
+02:22:32 <monochrom> GHC 的政策是出得快, 比正常(非實驗)用家所需的快, 提高實驗性質. 因為 "需要穏定的話, 有 Haskell Platform 可用"
+02:26:56 <monochrom> 所以, 離棄 Haskell Platform 的人有禍了, 因為他們必疲於奔命
+02:27:52 <letoh> 現在好像強迫綁 haskell platform ?
+02:28:44 <letoh> 想試試把 arm 平台的 ghc 更新到 7.8... 但看了幾份網頁資料後好像有點麻煩XD
+11:08:18 <petercommand> letoh: 我直接下載了 ghc 的 binary distribution 來用XD
+11:46:10 <CindyLinz> 可是 letoh 這樣的描述:「把 arm 平台的 ghc 更新到 7.8」... 聽起來是要自己去作出 arm 用的 binary distribution?
+11:46:33 <CindyLinz> 人家是 hackcore 不一樣... m(_._)m
+13:35:47 <CindyLinz> 想問問大家.. persistent 的 queue 有沒有什麼有意義的應用?
+13:37:03 <CindyLinz> (persistent 的資料結構就是.. 可以隨時隨地不用錢地 (O(1)) fork 成好幾個, 然後各自發展, 也可以不用錢 (O(1)) 地記住歷史上的任何一點)
+13:37:27 <CindyLinz> pure functional 的資料結構一定是 persistent, 不過其逆不真..
+13:38:13 <CindyLinz> ← 在準備一份 pure functional realtime queue 的投影片 ._.
+13:47:08 <mno2> 如果都在 memory 裡面好像就沒有多大意義。感覺不管是 Write Ahead Log 或是訂票的 queue 都是寫到 disk 才有意義。但這通常會跟 replication 牽扯在一起？
+13:49:18 <CindyLinz> 演算法方面呢?
+13:49:43 <CindyLinz> 原本普通的 queue 我想到的應用是用在 BFS 方面..
+13:49:54 <mno2> 我想到的就是 STM 吧
+13:51:29 <mno2> 我不知道 STM 怎麼實作的，不過如果有這樣的 queue 當 WAL 的話可能蠻方便的？
+13:52:12 <CindyLinz> hmmm....
+13:52:39 <CindyLinz> 如果舉例 STM 的話, 好像要先介紹一遍 STM 就有點苦了? @@"
+13:53:39 <mno2> 那自幹版本控制系統？
+13:55:03 <mno2> 不過好像也要寫 disk, xD
+13:55:50 <CindyLinz> 往這種有 transaction, 需要 rollback 的方向想哄?
+17:09:33 <CindyLinz> 欸.. Attoparsec 的 Parser a 沒有 monad transformer 的版本啊 @@"
+17:10:05 <CindyLinz> 如果我想 parse 一大串東西來填一個 MVector ST a 要怎麼寫呢? @@"
+17:11:30 <CindyLinz> 或是.. Vector ST a 也可以, 用 Data.Vector.Fusion.Stream? 
+17:11:44 <CindyLinz> 這樣就還是會先生出一大串 lambda 啊? @@"
+17:14:31 <CindyLinz> 還是.. Attoparsec 不是 strict 的? :p

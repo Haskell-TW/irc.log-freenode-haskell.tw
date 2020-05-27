@@ -1,0 +1,21 @@
+14:09:14 <CindyLinz> concurrent 的相對辭是什麼呀?
+14:09:26 <CindyLinz> parallel 的相對應該是 serial, 那 concurrent?
+14:26:20 <CindyLinz> consecutive 嗎?
+14:26:42 <b4283> sequential ?
+14:27:50 <kanru`> 字典沒有反義字 @@
+14:28:43 <CindyLinz> 好! 我 google 看看相關文章確認一下 ^^
+14:33:39 <CindyLinz> sequential 看起來很好!
+14:33:50 <CindyLinz> 謝謝 ^^
+18:05:38 <_13h> 剛剛看到有這個  http://rubyconf.tw/2012/
+18:07:54 <_13h> 現在的網頁真有趣，會滑來滑去
+18:16:15 <kanru`> 滑來滑去?
+18:16:52 <kanru`> oh,, nav bar
+18:22:10 <b4283> speaker: godfat
+18:22:34 <b4283> 好像不錯耶
+18:25:47 <b4283> 就好像 Guido von Rossum 來台灣的 pycon @@
+18:29:07 <_13h> 有來嗎?
+18:29:33 <b4283> 松本行弘 有在speaker裡面阿
+18:31:31 <_13h> 喔喔  我是說 Guido
+18:34:32 <b4283> kanru`: comma is illegal outside of quotes
+18:35:33 <b4283> 兩邊的訊息不太一樣，guile 是 "unbound variable: nav"
+18:42:20 <kanru`> @@

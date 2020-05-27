@@ -1,0 +1,66 @@
+01:06:54 <monochrom> 別傳說了, 自行實驗就知
+01:45:58 <CindyLinz> XD
+14:30:16 <CindyLinz> 嗚嗚上班好想睡 orz
+17:00:25 <CindyLinz> 為什麼 GHC 不支援 module 之間 mutually recursive import 呢.. QQ
+17:01:13 <hashcat__> 說到這個prolog什麼都支持
+17:01:15 <CindyLinz> 先別說這樣用是不是好的程式結構, 既然是 Haskell 了.. mutually recursive everywhere 就是天性啊
+17:02:26 <hashcat> 我想不到啥狀況要用到互遞歸引入
+17:07:58 <hashcat> Haskell的開發者天性是覺得無聊就會擺爛去
+17:10:48 <CindyLinz> 狀況是有的..
+17:11:00 <CindyLinz> 我是把 module 想成 export 給 user 的 public 介面
+17:11:22 <CindyLinz> 不對, 介面的用法是沒差..
+17:11:50 <hashcat> 模組互引用的話, 我想到的狀況都是可以合併成一個模組
+17:12:15 <CindyLinz> 理論上可以合成一個模組, 可是要避開 name conflict 就很不方便 :Q
+17:13:33 <hashcat> Rust支持, Haskell不知道啥時才會支持
+17:13:58 <hashcat> Haskell已經變成實驗純函數式的場所啦
+17:14:18 <CindyLinz> 那才應該把這個看起來不知道會不會常用的功能加進去啊 XD
+17:14:21 <CindyLinz> 不計工本 XD
+17:14:54 <hashcat> 不少東西在Haskell都不會被理會
+17:15:12 <hashcat> 倒是一堆莫名其妙的擴展
+17:15:32 <CindyLinz> 那他們收 patch 會很龜毛嗎?
+17:15:33 <hashcat> 維護起來各種有心
+17:16:14 <hashcat> 陪你哈啦一陣之後不一定會修
+17:16:28 <CindyLinz> 喔不是, 我是說收 patch, 不是要他們修的話?
+17:17:19 <hashcat> 不知道
+17:17:47 <CindyLinz> mmm
+17:18:10 <CindyLinz> 可是覺得改這個應該會改很大 orz
+17:19:07 <hashcat> Haskell意外地難用唉
+17:19:15 <hashcat> 看要不改成rust或ocaml
+17:21:06 <CindyLinz> 我現在比之前熟悉 lazy 和 monad trans 那種套來套去的 recursive 以後, 現在用起來有比較舒服了~
+17:23:06 <hashcat> rust出現沒多久, 該有的特性全包了
+17:23:55 <hashcat> 除了語法是 c-like, 不過可能也算是優點
+17:24:19 <CindyLinz> XD
+17:25:46 <CindyLinz> 哎可是我就想玩 lazy everywhere 的東西啊...
+17:27:41 <hashcat> lazy everywhere的用處感覺沒logic variable everywhere大
+17:32:10 <CindyLinz> 要真的去用才能體會它大不大啊
+17:34:29 <hashcat> lazy特性我只用到像是iterator或generator的東西
+17:34:38 <CindyLinz> 之前看唐鳳寫一個試算表, 用 lazy 方式寫超漂亮的
+17:35:59 <CindyLinz> 他寫書原本想用 haskell 來作教學, 不過那時社群裡的人希望他用 javascript, 會的人比較多 ^^|
+17:39:28 <hashcat> 在哪裡
+17:39:45 <CindyLinz> 正在找... ^^|
+17:39:56 <CindyLinz> 因為是很久以前在 FB 裡的留言對話 orz
+17:40:35 <CindyLinz> 找到這個... https://github.com/audreyt/500lines/blob/master/spreadsheet/extra/Sheet.hs
+17:40:40 <CindyLinz> 奇怪, 還是 haskell @_@"
+17:44:21 <CindyLinz> 找不到那時的解說了...
+17:44:42 <CindyLinz> 主要是講 recalc 的作法
+17:45:57 <hashcat> 額算了
+17:47:37 <CindyLinz> 那個 recalc s = fmap calc s where ... 這邊兩頭出現的 s 就有意思了...
+17:47:53 <CindyLinz> 還好不是 suhorng 寫, 不然連 s 都沒有.. (逃)
+17:48:16 <CindyLinz> 啊不對 where 裡面有用到 s, 所以跑不掉 XD
+17:49:10 <hashcat> 這裡貌似少一票子人
+17:49:52 <CindyLinz> 沒差, 反正有 log.. XD
+17:52:06 <hashcat> 玩一下prolog
+17:52:14 <hashcat> http://dtai.cs.kuleuven.be/problog/tutorial.html
+17:53:20 <CindyLinz> 我要先專心把我現在弄一半的東西完成 ^^|
+17:53:53 <CindyLinz> 已經報了 talk... 沒那麼想開天窗放棄 XD
+18:03:09 <CindyLinz> 耶~ 找出來了.. 上面這個 recalc s 的原型與教學在這: https://github.com/quchen/articles/blob/master/loeb-moeb.md
+18:03:33 <CindyLinz> 超愛這四點 feature XD
+18:03:34 <CindyLinz> 1. The implementation is very simple to write.
+18:03:34 <CindyLinz> 2. The implementation is hard to understand.
+18:03:34 <CindyLinz> 3. It is easy to use.
+18:03:35 <CindyLinz> 4. It is explainable.
+18:04:11 <CindyLinz> 那應該是從這 channel 看來的..
+18:06:04 <CindyLinz> :t \x -> go where go = fmap ($ go) x
+18:06:06 <lambdabot> parse error on input `where'
+18:06:14 <CindyLinz> :t \x -> let go = fmap ($ go) x in go
+18:06:16 <lambdabot> Functor f => f (f b -> b) -> f b

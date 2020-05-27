@@ -1,0 +1,20 @@
+13:02:57 <mno2> CindyLinz: livescript backcall 似乎外面沒辦法拿到 do 裡面最後一個值？
+13:32:15 <mno2> http://lpaste.net/96586  這樣寫我還是不太滿意 xD
+23:21:20 <CindyLinz> mno2: 你指的是 return 值?
+23:21:37 <CindyLinz> mno2: backcall 和 do 應該是兩個不同的概念?
+23:21:54 <CindyLinz> do 是當場建一個 anonymous function 並且就地呼叫它
+23:22:20 <CindyLinz> 哎, 反正 livescript 裡面兩個不同概念交會的時候就是災難的發生點嘛 XDD
+23:22:39 <mno2> 可以體會 xD
+23:25:46 <CindyLinz> 不過.. backcall... 就我從純 js 或 coffeescript 來理解的話... x <- ooo 的 x, 會拿到的是 ooo 這個函數在呼叫 callback 的時候放的參數
+23:25:58 <CindyLinz> 用 backcall 的話, ooo 的 return 值應該是丟掉的
+23:26:07 <CindyLinz> 啊, 你也可以看生出來的 code
+23:26:40 <CindyLinz> 這個會動喔!? http://lpaste.net/96586
+23:39:20 <mno2> 後來發現不會動 xD
+23:39:27 <CindyLinz> mno2: 我看你這一段... 嗯, product_infos 拿到的會是這一堆 do 函數的 return 值
+23:39:35 <CindyLinz> 不會有 cb 塞的 msg @@"
+23:40:47 <CindyLinz> 你可以考慮用我這個 CondVar 了 ^^| https://github.com/CindyLinz/JS-CondVar
+23:41:45 <CindyLinz> 但我沒考慮過(當然!)配合 livescript 有沒有更順的寫法..
+23:42:19 <mno2> hmm
+23:43:17 <CindyLinz> 或手動這一段自己刻一下 (不用 CondVar), 包一個函數, 裡面附一個 counter, 等收集完所有 response 的時候再呼叫整體用的大 cb
+23:43:46 <mno2> 我是用 async.js
+23:43:56 <CindyLinz> 也是可以..

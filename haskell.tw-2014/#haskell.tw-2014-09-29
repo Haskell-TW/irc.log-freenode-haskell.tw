@@ -1,0 +1,132 @@
+00:03:55 <caasih_> au CindyLinz: 關於之前的 one_nine 遊戲，現在佔中較急
+00:04:09 <caasih_> 就不貼在那邊了，但補上朋友給我的說明：
+00:04:13 <caasih_> https://gist.github.com/CindyLinz/046e4ef5e226ffeaf7ea#comment-1308527
+00:05:02 <caasih_> （以留言的方式回在 CindyLinz 的建構式證明下面）
+00:31:29 <CindyLinz> caasih_: 檢查了一下, 發現我翻面的部分有 bug.. XD
+00:31:59 <CindyLinz> 雖然一開始準備好了奇數步和偶數步都可以用的翻面方式..
+00:33:21 <CindyLinz> 可是後面要 bubble sort 的部分, 沒有證明一開始的兩種翻面方式, 到那邊的時候奇偶性會一樣
+11:28:25 <cibs> miaoski: 22:09 < miaoski> 不知道有沒有 Clojure for the Impatient.  Scala 那本真的寫的很好入門 :) # 這麼好入門這禮拜就直接一次講完吧大大 XD
+11:31:27 <cataska> miaoski: 你可以看看這本 https://leanpub.com/clojure-for-the-brave-and-true
+11:34:54 <miaoski> cibs: 這次講完了的話，下次就沒有便當囉... =,=
+11:36:06 <miaoski> cataska: 感謝推薦，來看一下... 說不定可以當下次 study group
+11:36:56 <miaoski> 說真的 天鵝書 和 practical clojure 其實都很不適合 study group 這種時數短、大家又都有一些基礎的地方
+11:39:53 <miaoski> cataska: 還不賴，free sample 不是從 emacs 開始 (笑) 雖然講的很基本，不過對平常寫其它語言的人來說，這一章應該就蠻 shock 了 XD
+11:40:18 <cataska> miaoski: 天鵝書跟 practical clojure 有點年紀了
+11:40:36 <misgod> The Joy of Clojure  ?
+11:42:38 <mno2> 天鵝書是哪一本啊？
+11:44:06 <misgod> 應該是Programming Clojure (2nd)..封面一支天鵝?
+11:44:35 <cataska> mno2: https://pragprog.com/book/shcloj2/programming-clojure
+11:44:55 <misgod> 不過我自己是Clojure Programming  ..書名都好像
+11:45:15 <miaoski> misgod: Joy of Clojure 一點都不 joy ... 建議放過它
+11:45:44 <misgod> XD..適合有基礎的
+11:46:13 <misgod> 我是先看Clojure Programming後才去看The Joy
+11:46:15 <miaoski> 然後要跳著讀，印度人廢話好多的 ... *涉及歧視
+11:56:22 <kyun> 喜歡haskell一般喜歡scala多點？
+12:03:47 <CindyLinz> 很難講 @@"  要看喜歡 haskell 的人是喜歡什麼特點而定..  我有聽過喜歡 haskell 的人嫌過 scala 語法太複雜, 如果是喜歡 haskell 的 rule 簡單的人, 可能就不會喜歡 scala
+12:05:13 <kyun> 就類型系統而言
+12:06:11 <misgod> 也許是因為scalaz?
+12:06:37 <miaoski> scala 的類型系統還不錯...
+12:06:49 <miaoski> scalaz 我看了一下，不太懂... 它補充了些什麼
+12:06:51 <misgod> 我記得以前寫scala..完全看不懂scalaz,然後就有人建議說先去學haskell你就看得懂了..Orz
+12:08:36 <misgod> 我還在haskell初學階段,所以我還是看不懂scalaz...XD
+12:09:21 <hashcat> 先學monad其他跳過
+12:10:01 <misgod> 順道問一下,有沒有什麼推薦的書
+12:10:07 <hashcat> 除了被迫使用monad之外, Haskell貌似無特出之處
+12:10:08 <misgod> 目前在看Learn You a Haskell for Great Good!
+12:10:22 <kyun> 我是喜歡C++而去看scala
+12:10:43 <misgod> 我是從java過去scala...無痛升級
+12:10:49 <hashcat> 到底是誰一直推那本書
+12:11:23 <hashcat> 哦沒事, 想成real world haskell
+12:11:39 <misgod> 對..那一本我也正想問,我看他好像很舊了
+12:12:33 <hashcat> 那個硬推實用, 其實Haskell變化太快, 沒追mailing list跟官方文檔根本沒辦法用
+12:13:02 <hashcat> 基本概念唬弄帶過, 不看也罷
+12:13:07 <misgod> 了解
+12:14:54 <kyun> 太實用的書都這樣
+12:15:02 <kyun> 很容易過時
+12:16:12 <CindyLinz> misgod: 別聽 hashcat 的, 他常亂講 XD
+12:17:47 <cataska> 只好看 Beginning Haskell 了
+12:18:51 <CindyLinz> 我推荐 begining haskell 的前半本給偏工程師個性的人..
+12:19:14 <CindyLinz> 後半本我還拖著沒看.. XD
+12:19:23 <hashcat> CindyLinz: 我亂講也是多少有一點道理
+12:19:46 <CindyLinz> 然後, 我沒看過 learn you a haskell for great good, 所以... 不是跟這一本作比較..
+12:19:49 <hashcat> scala用的比較爽
+12:20:29 <CindyLinz> hashcat: 不不, 不是說你全部亂講, 但是除了原本就懂你講的東西的人以外, 沒辦法分辨你哪一句話是真的哪一句話是假的... XD
+12:21:13 <hashcat> 說得我好像騙子
+12:21:25 <CindyLinz> 像是... 「Haskell變化太快, 沒追mailing list跟官方文檔根本沒辦法用」這句就是假的 XD
+12:21:35 <cataska> 我一直以為 hashcat 都是很認真的講耶 Orz
+12:22:09 <CindyLinz> 他是講得很認真沒錯啊.. ._.
+12:22:11 <hashcat> 我也覺得我很認真講
+12:22:47 <hashcat> scala好歹會列哪些是實驗特性
+12:22:59 <hashcat> haskell說改就改的也沒錯吧
+12:23:59 <CindyLinz> 都是加在 extension 啊.. 都需要 explicit 指定打開才會生效, 所以沒追 mailing list 跟官方文件, 還是可以繼續用沒有新 extension 的版本
+12:25:47 <hashcat> 模組編排也很常改
+12:25:49 <CindyLinz> 不用重新裝 ghc, 是在寫的 haskell 程式裡面指明這個程式要額外動用哪些 extension.. 這樣設計是穩定, 不過會在第一行寫一排想開的 extension 列表
+12:26:06 <hashcat> 而且extension不開原始碼根本不知道什麼有開沒開的
+12:27:04 <hashcat> haskell的extension相較其他語言實在多出一級
+12:27:39 <hashcat> Haskell社群一副不用這些extension就不夠厲害一樣, 藏了一堆地雷
+12:27:47 <kyun> 話說我學haskell是爲了理由scala……
+12:29:01 <kyun> 理解
+12:29:38 <hashcat> 那就抓你作實驗噗噗
+12:29:41 <hashcat> http://hseeberger.wordpress.com/2010/11/25/introduction-to-category-theory-in-scala/
+12:29:42 <mno2> 不太喜歡 Scala，給我的印象是用 OO 的 type system 來硬是模擬 ML 的 type system，結果弄得太複雜。
+12:29:59 <cataska> 不用 scalaz 應該不用學 haskell 吧
+12:30:09 <hashcat> 看能不跳過haskell直接搞清楚scalaz
+12:31:11 <hashcat> mno2:跟C++類似, 用不上就暫時不用一定要全部看完吧
+12:31:13 <cataska> scalaz 不就是折磨人麼 Orz
+12:32:05 <mno2> hashcat: 但作為認真用的工具，會不斷地被折磨吧？我寧願一次被折磨完，後面海闊天空。
+12:32:12 <hashcat> 多面向多功能的語言, 就是好幾個簡單語言的整併混合, 學這種語言常有自己其實是在學一樣東西的錯覺
+12:32:29 <hashcat> 其實是幾百樣
+12:33:08 <hashcat> mno2: 用frege也不錯
+12:33:27 <hashcat> jvm太多好東西
+12:34:05 <mno2> 我覺得平均來看， .NET 的看起來比較好耶
+12:34:29 <hashcat> 看你要做啥吧
+12:35:09 <hashcat> 像是演化計算的話就是jvm比.net好
+12:35:59 <hashcat> python也有但做那種實在太慢
+12:36:29 <kyun> haskell看起來也挺有趣的嘛
+12:36:39 <mno2> 只是就語言來講，我以為現在的 topic 是語言
+12:37:18 <kyun> 對了，我也喜歡perl，哈，有同好的嗎
+12:37:26 <hashcat> 打倒perl
+12:37:41 <hashcat> 無限期支持反對perl
+12:39:17 <mno2> kyun: perl 要問 CindyLinz
+12:43:07 <kyun> perl這麼萌，幹嘛要反對她
+12:44:42 <hashcat> 明明就駱駝
+12:46:47 <kyun> perl6是蝴蝶了啦
+13:19:25 <CindyLinz> kyun: 你喜歡的是 perl6? 那我不熟 ^^|
+13:20:56 <CindyLinz> 只熟 perl5.. :Q
+13:52:31 <kyun> 沒甚麼人直接喜歡perl6而不喜歡perl5的吧
+13:59:46 <CindyLinz> 這方向不知道 ^^|  不過反向的話, 好像 perl5 core team 的人對 perl6 都沒什麼興趣的樣子 :/
+14:12:43 <kyun> 不過把一些perl6的東東引回到perl5裡嗎
+14:12:48 <kyun> 不是
+14:17:49 <CindyLinz> 我不知道是哪些 feature.. orz
+14:24:37 <kyun> say ~~ 之類，不過~~掛了
+14:25:56 <CindyLinz> not so smart matching.. XD
+14:29:13 <CindyLinz> say 弄成 build-in 是有一點雞肋就是 ^^|
+14:29:52 <CindyLinz> 多寫 use feature qw(say); 好像跟自己寫一個 sub say { print "@_\n" } 的長度也沒有差很多?
+14:34:26 <kyun> perl的模塊化本來就一般啦
+14:36:50 <kyun> perl5的重載就真的挺雞肋的
+14:48:05 <CindyLinz> operator overloading?
+14:48:10 <CindyLinz> 重載?
+15:05:12 <kyun> 呃，overload你們這邊叫甚麼……
+15:05:18 <kyun> 過載？
+15:06:55 <CindyLinz> 用在程式語言的話比較常聽到重載.. 不過用英文比較多 @@"
+15:07:51 <CindyLinz> 用在機器設備的話會用過載, 或是更口語一點「快爆炸了」.. XD
+15:09:13 <kyun> 收拾細軟跑
+15:10:26 <kyun> 還以爲台灣不叫「重載」呢
+15:11:45 <CindyLinz> XD
+15:12:52 <kyun> 表情怎麼打的啊
+15:22:49 <kyun> 開車也叫「過載」嗎
+15:26:54 <CindyLinz> 這就沒聽過了..
+15:27:03 <CindyLinz> 表情? 不會..  我是打一個 X 一個 D
+15:27:38 <CindyLinz> 可能你的 irc client 會看到特定字母排列的時候就換成表情?
+15:30:46 <kyun> XD
+15:31:11 <kyun> 是哦，X D在ChatZilla中顯示爲表情
+15:31:53 <CindyLinz> 我看到的都是字而已 ^^|
+15:36:28 <kyun> 那是你的客戶端不夠萌
+15:36:33 <CindyLinz> XDXD
+15:36:38 <kyun> XD
+15:36:49 <kyun> 兩個連續的不行
+15:37:18 <CindyLinz> 我用 console 連的, 不太希望 console 會自動把字母拼成表情符號啦 ^^|
+15:41:15 <hychen> CindyLinz: 所以要用腦袋compile
+15:41:27 <CindyLinz> 有像 XD
+15:42:33 <kyun> 終端看起不夠養眼
+15:42:36 <kyun> XD

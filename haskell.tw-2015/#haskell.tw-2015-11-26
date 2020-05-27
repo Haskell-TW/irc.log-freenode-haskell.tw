@@ -1,0 +1,24 @@
+10:08:14 <favonia> mno2: 他應該是說像 C++ 針對 bool 有最佳化這樣吧……
+15:23:57 <mno2> 沒預期 favonia 會回應 xD
+15:24:21 <mno2> CindyLinz: 對啊 unpacking polymorphic fields
+15:24:57 <mno2> http://www.haskellforall.com/2015/10/explicit-is-better-than-implicit.html  覺得 ByteString 那一段好像蠻方便的
+15:26:21 <CindyLinz> mno2: 現在 polymorphic fields 都還不能 unpack 呀~ 都是用一個 reference 這樣..
+15:26:44 <mno2> 8.0 以後咩
+15:28:44 <CindyLinz> 那投影片不就是在講說將來要把這個改進好嗎?
+15:28:59 <CindyLinz> 可是......
+15:29:20 <CindyLinz> 我猜這一項改進, 會在 runtime 生成兩種不同的 Map k v
+15:29:53 <CindyLinz> 欸不對不對 我想錯了.. 有可能不需要, 請忽略我這兩行 XD
+16:12:02 <mno2> https://www.reddit.com/r/haskell/comments/3jvnk4/ghci_recomputes_values/  沒注意過這件事
+17:13:17 <suhorngT> 好神奇, polymorphic 的東西要怎麼 unpack?
+17:22:47 <mno2> https://www.reddit.com/r/haskell/comments/3ktmr5/tips_for_writing_efficient_haskell_code_do_you/
+17:23:24 <mno2> I found out way too late in my adventures with Haskell that Monad Transformers and similar abstractions have a significant runtime overhead and aren't free, I thought I was just playing with types that won't get in the way when the code compiles.
+17:26:40 <CindyLinz> suhorngT: 處理它的函數剛好會對到自己只認得的那一個 type 的 data
+17:26:55 <CindyLinz> suhorngT: 那麼.. 處理它的函數應該會知道那個 type 的 data 的 layout
+17:28:54 <CindyLinz> ← 純空想.. 想想流....
+17:32:31 <mno2> http://stackoverflow.com/questions/32345095/what-is-the-correct-way-to-perform-constant-space-nested-loops-in-haskell/32359655#32359655
+19:40:12 <mno2> https://www.reddit.com/r/haskell/comments/3jq3cu/hacking_on_ghc_is_not_that_hard/
+22:09:33 <petercommand> 那個回應好讚
+22:12:13 <petercommand> "I think the benefit would be hugely reduced compile times when hacking on ghc." 目前這個部份，ghc 只有部份重編的效果好嗎?
+22:12:47 <petercommand> 我只有完整編過 ghc 而已
+22:14:48 <petercommand> 不過之前編 ghc 的時候，會被 LANG 還是 LC_ALL 影響編譯結果(導致出錯)感覺蠻糟的XD
+22:16:11 <petercommand> 記得是 hGetContent 的關係

@@ -1,0 +1,92 @@
+10:07:23 <MnO2> 又是新的一個禮拜~
+10:08:04 <b4283> happy monday haskellers
+10:56:25 <MnO2> http://goo.gl/rxnfG
+10:56:40 <MnO2> HM證明T-shirt
+10:56:49 <MnO2> 團購了~ xDD
+11:25:37 <CindyLinz> DON'T YOU UNDERSTAND? XD
+11:26:52 <_13h> 有人要開團嗎? XD
+11:28:18 <CindyLinz> 我不要買 :p
+11:28:43 <CindyLinz> 我不想穿這麼嗆的東西 XD
+11:28:55 <_13h> 我覺得還蠻酷的啊，雖然完全看不懂XD
+11:56:00 <favonia> _13h: lol 所以才要買嗎 xDDDD
+11:56:27 <favonia> MnO2: 我想要穿我現在在研究的理論的衣服 xD
+12:26:59 <c9s> 開團!
+12:27:15 <c9s> ahahahhaha
+13:32:41 <MnO2> 看了一下運費 http://www.cafepress.com/cp/info/help/index.aspx?page=shipping.aspx#1
+13:32:57 <MnO2> 如果沒有很多還是各自下訂好了 :p
+13:33:22 <MnO2> favonia: cafepress可以訂作樣式，你可以自己弄你自己想要的~
+13:38:29 <_13h> 9/30 下單有折扣？
+13:42:00 <MnO2> 幾折?
+13:42:44 <_13h> 好像是 30%off ? 我這邊開那個網頁很慢，回家再看看
+13:43:44 <CindyLinz> 來自製刺青絲襪好了 XD
+13:47:43 <MnO2> 刺個Y-combinator?
+13:49:38 <CindyLinz> http://www.wretch.cc/blog/kkww/106247
+13:52:34 <CindyLinz> 奇怪, 我記得以前 Haskell 有一張 icon, 是中間一個 λ 然後周圍有好幾個符號的
+13:52:53 <CindyLinz> 現在怎麼找來找去都是一個雙線 λ..
+13:54:49 <CindyLinz> 找到了 http://www.cs.rit.edu/~ats/lectures/haskellwiki_logo.png
+13:56:19 <CindyLinz> Y-combinator 刺青 http://matt.might.net/articles/compiling-up-to-lambda-calculus/images/y_combinator.jpg
+13:56:43 <_13h> XDXD
+13:57:00 <_13h> 這些人都生病了XD
+13:57:37 <CindyLinz> _13h: 你是說哪個呀? 刺青絲襪最近很紅耶~~
+13:57:46 <_13h> 刺手上的
+13:59:08 <CindyLinz> XD
+13:59:32 <_13h> google 查了一下還真的很熱門
+17:38:19 <MnO2> http://stackoverflow.com/questions/12534145/when-to-use-various-language-pragmas-and-optimisations
+17:38:27 <MnO2> When to use various language pragmas and optimisations?
+22:11:09 <CindyLinz> MnO2: 你平常沒事就到處 index 文章噢 ^^|
+22:11:28 <CindyLinz> 太厲害了...
+22:13:39 <MnO2>  CindyLinz: 開玩笑我google reader有上百個subscription
+22:18:45 <letoh> 上百個其實還好，厲害的是上百個都有在看XD
+22:37:15 <CindyLinz> MnO2: !!
+22:37:42 <CindyLinz> MnO2: 我是三個.. 今天加到四個... 不過有上百個未讀唷~~ (逃)
+22:53:05 <godfat> 我訂閱有 293 個，不過有很多根本沒在看，而且有些我連 comment 都會訂閱
+22:53:40 <CindyLinz> 訂閱 RSS 之類的好像比我掛在 #haskell 裡面收 log 有意義得多... ^^|
+22:54:08 <godfat> planet haskell 訂下去就看不完了 XD
+22:58:00 <CindyLinz> godfat: 這.. 「看不完」不是一個需要努力追求的目標啊...
+22:58:13 <CindyLinz> godfat: 欸, 是一個不需要努力就已經達到的目標 XD
+22:59:17 <godfat> 對啊，太容易了....... XD
+22:59:47 <CindyLinz> 其實... 我其中一個是 hackage update... (默)
+23:00:19 <godfat> 我在 twitter 上有訂閱 hackage update XD feed 就算了...
+23:06:11 <MnO2> 訂那種鐵定會被淹沒的我認為是錯誤的方式
+23:06:30 <CindyLinz> 那是我這輩子第一次用 RSS 啊... Q_Q
+23:06:48 <CindyLinz> 那幾個月我還真的一個一個看唷~
+23:06:57 <CindyLinz> 看有興趣的 package 就進去看
+23:07:04 <MnO2> 我認為要獲取資訊密度高的方式就是，要追蹤大頭，跟大頭的對手!
+23:07:24 <CindyLinz> MnO2: 大頭是誰呀?
+23:07:38 <MnO2> 所以首要問題就是找出誰是大頭啊xDD
+23:07:55 <MnO2> 進入一個新的領域最重要就是找出誰是大頭
+23:08:00 <MnO2> 然後找出大頭的戰文
+23:08:04 <MnO2> 確認他的對手
+23:08:08 <CindyLinz> 可能也不是 GHC founder?
+23:08:43 <MnO2> 不一定啊，就是指標性人物就好
+23:10:21 <MnO2> 譬如說... 你知道stackoverflow有user feed嗎?
+23:10:38 <CindyLinz> 不知道 ._.
+23:10:53 <MnO2> http://stackoverflow.com/users/83805/don-stewart
+23:10:56 <MnO2> 右下角
+23:11:27 <MnO2> 可以訂閱他問的問題跟回答的問題
+23:11:39 <CindyLinz> !
+23:12:12 <MnO2> 還有你知道stackoverflow有favorite這件事嗎?
+23:13:02 <CindyLinz> 當然也不知道 orz
+23:13:10 <MnO2> http://stackoverflow.com/users/83805/don-stewart?tab=favorites
+23:13:27 <MnO2> 大頭的最愛問題，當然就可能是好問題
+23:13:29 <CindyLinz> 這是他最欣賞的文章?
+23:13:47 <CindyLinz> MnO2: 怎麼發現他是大頭的? 從 Haskell 相關裡面看誰的文章最多?
+23:14:30 <MnO2> 看到一定程度就知道了吧
+23:15:01 <MnO2> 而且他是RWH的作者啊
+23:15:05 <CindyLinz> 讀的時候去留意 author 的名字嗎?
+23:15:29 <CindyLinz> 我都只記得內容和書名 orz
+23:15:37 <godfat> 我好像都是 google + blog 去找的
+23:15:51 <MnO2> 當然要注意啊，特別是回答好的人，reputation又高的人當然會人肉他一下
+23:16:19 <CindyLinz> 嗯嗯 ._.
+23:17:27 <MnO2> blog也是一種方式
+23:17:53 <godfat> 我之前看了些 concurrent 的東西，最後常常發現都是他做的
+23:17:53 <godfat> Simon Marlow
+23:17:53 <godfat> https://plus.google.com/u/0/107890464054636586545/about
+23:18:02 <MnO2> 像是會去跟bob harper戰的，還有被他戰的一定都是有頭有臉的人啊
+23:18:25 <godfat> XDD
+23:18:45 <MnO2> Simon Marlow是核心開發者啊，這種就一定要知道的
+23:19:45 <godfat> 我是看來看去，發現最讓我接受的說法，最後都變成是他在說的 @@
+23:21:00 <MnO2> 像是bob harper這種人物就特別好，愛戰而且戰下去大家都會跳出來回，comment裡每個人就一個一個找到部落格訂閱就好了xDD
+23:21:36 <godfat> XDDD 看他文章也覺得很爽快
+23:21:37 <CindyLinz> 大家都是罵他的關點嗎?
+23:23:24 <MnO2> 就是有爭議的部分吧

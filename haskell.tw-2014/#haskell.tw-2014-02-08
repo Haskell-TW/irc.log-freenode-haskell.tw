@@ -1,0 +1,90 @@
+00:36:58 <monochrom> "data X where C :: ... t ... -> X" 就是 existential type, 等如 "data X = forall t. C (... t ...)"
+00:41:51 <monochrom> 改功課改到頭都大. 是圖靈機及 halting problem 等等. 其實圖靈機及 halting problem 等等容易得很, 並不會使我頭大. 是學生的妙想天開胡吹, 才使我頭大.
+00:44:33 <monochrom> 真是 "每一道流星, 代表一位老師回到圖靈那處, 不用再改功課, 不用再讀學生的胡吹..." XD
+00:45:08 <godfat> ...@@
+00:50:56 <monochrom> 舉例: "問題 P 是不是 decidable?" 學生答案: "我寫了這個有時會 infinite loop 的程式, 所以 undecidable"
+00:51:52 <godfat> bug 是 undecidable XD
+14:28:36 <CindyLinz> 覺得 GHC 的 UndecidableInstances 之前應該可以怎樣加一個折衷的版本
+14:29:50 <CindyLinz> 加一些用法限制讓它仍然一定 decidable, 不過可以涵蓋到我們想利用的小特性..
+14:30:20 <CindyLinz> 還是說, 用 GADT 能當替代方案呢 @@"
+14:35:37 <CindyLinz> 我猜問題是出在 seperate compile, GHC 那時沒有看完所有的程式碼, 雖然目前這個檔案裡沒有 undecidable, 但不知道會不會哪個檔案裡的東西冒出來, 接起來就 undecidable 了..
+15:22:59 <hashcat_> 嗯不然用prolog寫一個前處理
+15:28:19 <hashcat_> 加了之後ghc更讓人無法直視
+15:30:52 <hashcat_> 有那個語言像haskell一樣弄了一堆擴展
+15:31:29 <hashcat_> 一陣子過後擴展還是擴展
+15:33:48 <hashcat_> 實驗總有個結果  像這樣食之無味棄之可惜的  會分散發展的力度
+15:43:32 <hashcat_> www.andrew.cmu.edu/user/awodey/hott/CMUslides.pdf
+15:43:58 <hashcat_> 有slides我才想看
+16:10:14 <CindyLinz> @_@
+16:57:49 <hashcat_> prolog的衰弱真是匪夷所思
+16:58:46 <hashcat_> 每個新語言都號稱從硬體底層解放出來
+16:59:10 <hashcat_> prolog早弄完了
+17:01:32 <CindyLinz> hashcat_: 年代不對啊
+17:02:03 <CindyLinz> 現在的硬體快到可以隨便浪費計算資源啊
+17:02:43 <hashcat_> 我比較在意一次突然間消失是怎樣
+17:03:15 <CindyLinz> 跟第五代電腦有關嗎?
+17:03:27 <hashcat_> 分佈式平行推論都出來了
+17:03:44 <hashcat_> 後來全部死光
+17:03:50 <CindyLinz> 某種角度來說, 是 prolog 花了太多錢了... XD
+17:04:12 <hashcat_> 只剩幾個實現供人瞻仰
+17:05:04 <hashcat_> 說到haskell的型別系統
+17:05:23 <hashcat_> abella-prover.org 這個不錯用
+17:06:44 <hashcat_> 有啥疑問不用手算或瞎猜了
+17:07:22 <hashcat_> 把haskell的規則打進去就成
+17:15:49 <hashcat_> prolog的擴展是各種用途
+17:17:03 <CindyLinz> 這樣多學一套, 負擔比直接用 haskell 又更重了 @@"
+17:19:11 <hashcat_> prolog很直白阿
+17:19:40 <CindyLinz> 我是說學 abella-prover @@"
+17:20:15 <hashcat_> 那個也是prolog變種
+17:20:45 <hashcat_> 多了些宣告和定理的
+17:21:22 <hashcat_> 會比啥monad,free monad, monad transformer,arrow,functor還重
+17:21:58 <hashcat_> 輕舟已過萬重山
+17:22:44 <hashcat_> arrow好像還分好幾種
+17:23:54 <CindyLinz> ...
+17:24:29 <CindyLinz> 好像在教一個正辛苦學加法的小朋友說: 我教你! 你先把乘法學起來, 這樣你加法就會了...
+17:26:14 <hashcat_> 怎想都是羅輯比範疇論先學吧
+17:30:54 <hashcat_> 我想說小朋友 加法不重要 來學羅輯
+17:31:30 <hashcat_> 出版小朋友羅輯讀本
+17:31:31 <CindyLinz> ...
+17:32:08 <hashcat_> 裡面有黑馬白馬 白馬非馬
+17:32:46 <hashcat_> 例子舉完然後給公式
+17:34:04 <hashcat_> 皮雅諾公設改成怎樣數蘋果
+17:34:19 <hashcat_> 加法就會了
+17:35:05 <CindyLinz> 這樣學會的是加法是什麼, 但學不到加法有什麼用...
+17:51:54 <hashcat_> 有有
+17:52:29 <hashcat_> 先從具體用例出發
+17:53:05 <hashcat_> 數完蘋果數貓咪
+17:53:51 <hashcat_> 旁邊給出相對應的皮雅諾公設推論
+17:59:24 <hashcat_> 現在一票子研究生才是
+18:00:10 <hashcat_> 把一堆東西不明所以地用熟了
+18:01:19 <hashcat_> 解考試題可以  用是完全不會用
+18:01:44 <hashcat_> 看著傻眼
+18:49:21 <letoh> 小朋友應該沒辦法理解太抽象的東西吧
+19:28:53 <hashcat> 我覺得加法和乘法也是很抽象的東西
+19:29:43 <hashcat> 只是因為常用被排在前面教
+19:30:27 <hashcat> 痛覺視覺那些直接的感覺算成最直觀具體的話
+19:31:50 <hashcat> 算術滿抽象的, 像是一百塊錢就沒人看過真的有人拿一百"塊"一元來花
+19:33:17 <hashcat> 跟真的有一百個蘋果是兩回事, 但還是一樣的算術, 不就跟monad有各種用途差不多意思
+21:07:28 <suhorng> monochrom: 謝XD
+22:15:26 <CindyLinz> 昨天買的那本 Begining Haskell 寫說最後面會帶過 Idris 耶
+22:17:29 <suhorng> 什麼!!!!!!!!
+22:31:51 <CindyLinz> By the end of the book we will move a bit from Haskell to Idris, 2 a language with a similar syntax, which features
+22:31:51 <CindyLinz> dependent typing.
+22:32:10 <CindyLinz> 那個「2」是註腳 ^^|
+22:43:59 <suhorng> 好酷喔ww
+23:37:04 <monochrom> 我認為 logic programming 的衰落是因為程式員壓根兒不要這麼高階. 程式員是操控狂 control freak, 否則哪會想做程式員. 操控狂會放手讓電腦或編譯器自治嗎?
+23:38:24 <CindyLinz> XDDD
+23:38:37 <CindyLinz> 想到 jserv... 自幹自幹再自幹... XD
+23:39:54 <suhorng> 有時候也是會夢想自己做一台電腦 XD
+23:40:55 <monochrom> 換個角度, CindyLinz 點中: logic programming 的抽像級數高過那些程式員所達.
+23:41:35 <monochrom> 不過, hashcat 也對, 你達不達, 只視乎老師怎樣教你
+23:43:33 <CindyLinz> 點中?
+23:43:53 <monochrom> 點中 = 說對
+23:43:57 <petercommand> 一般都先學加法才學邏輯的阿...反過來太恐怖了
+23:44:03 <CindyLinz> 嗯嗯
+23:44:36 <CindyLinz> 可是高階不代表不能控制呀... 還是有 internal 可以玩... @_@"
+23:46:33 <monochrom> 我認為一秩邏輯 first-order logic 應該比數字抽像. 我尚且可以拿10支筆來示範10, 但那"所有", "有一個, 但不說哪個"就真要多些想像了.
+23:47:14 <monochrom> 至於0秩, 我下不了定論.
+23:53:45 <petercommand> CindyLinz: internal?
+23:53:52 <CindyLinz> 羅馬人堅持了好久好久不要 0, 應該總是有點理由, 或是不太容易跨過的心理門檻吧? XD
+23:54:23 <CindyLinz> petercommand: 就是實作 compiler 或 interpreter 的部分. programmer 還是可以去改它呀.. :p

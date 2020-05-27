@@ -1,0 +1,14 @@
+00:07:36 <Neduck_> 喔喔，我好像有點懂你的意思，next 的 type 是 t->t->t->t
+00:12:43 <Neduck_> 所以應該想成 f next = \ guess tol val -> if abs(guess^2-val) < tol then guess else next ((guess + val / guess ) / 2.0) tol val
+00:16:15 <Neduck> 是這樣嗎？
+00:20:44 <caasih> 嗯嗯，一樣的意思
+01:17:40 <monochrom> 想學 fix 的話可參考我的 http://www.vex.net/~trebla/haskell/fix.xhtml
+01:19:25 <monochrom> Short story "foo = \n -> 1 + foo (n-1)" 等於 "foo = fix (\f -> \n -> 1 + f (n-1))"
+01:21:48 <monochrom> 嗯我是自大狂, 所以: 你必須恭讀我的 http://www.vex.net/~trebla/haskell/fix.xhtml  XD
+09:55:23 <Neduck_> 恭讀完成～受益良多，感謝你喔
+10:02:14 <Neduck_> 新的疑問：combinator是什麼呀？ XD
+10:02:18 <Neduck_> 期待之後會有 "You could have re-invented combinator" 之類的~
+12:56:55 <monochrom> 兩個未必有關的意思. 你要看上文下理分辨是哪個.  1. 沒 free variable 的 lambda term.  2. 例如 Parsec 的 anyChar, eof, chainl1 等等 常人統稱為 function 的, 但是留意 eof 的 type 是 ParsecT s u m (), 不是 X->Y, 所以不算 function, 於是有人稱 combinator.
+12:59:29 <monochrom> 不過有個共通點, 兩種都是當 lego 積木地由小零件砌成大作, 可以說你拿它們來 combine 所以叫 combinator
+13:22:26 <caasih> monochrom++
+22:41:49 <Neduck_> 大概有點感覺，謝謝

@@ -1,0 +1,249 @@
+00:43:16 <lcamel> 請問: \x1 x2 = ...  的語意在 haskell report 中有定義嗎? 看 2010 的 3.3 節從 \p1 p2 換成 \x1 x2 之後是不是就沒有繼續講了?  http://www.haskell.org/onlinereport/haskell2010/haskellch3.html#x8-260003.3
+00:47:18 <hashcat> 看不懂
+00:47:50 <lcamel> 是.. 我問的不清楚嗎?
+00:48:33 <hashcat> \x1 x2 = ... 的語意看不懂
+00:51:37 <lcamel> 我讀起來感覺是: \ 的句型後面可以是 patterns , 可以被 translate 成 \x1 x2 -> case (x1, x2) of (原來的pattern) -> e
+00:52:05 <lcamel> 這邊 \ 後面接的東西就簡化成不是patterns 而是 identifiers 了
+00:53:02 <lcamel> 然後別的章節或許有講接在 "->" 後面的 "case" 句型的語意, 但是我不知道哪裡講了 \x1 x2 -> ... 的語意, 所以跑來問
+00:53:52 <hashcat> x1..xn 和 p1..pn都是identifier
+00:54:08 <hashcat> 他只是要說兩邊等價罷了
+00:54:23 <hashcat> 不一定要想成是化約
+00:56:17 <lcamel> 那.. 換一個問題問:  \x y -> e 的意思是不是就是  \x -> ( \y -> e ) ?  如果是, 想請問在 report 中的哪一節...?
+01:01:11 <hashcat> 就在你看的那一節
+01:01:25 <hashcat> lexp  →  \ apat1 … apatn -> exp
+01:01:56 <hashcat> 因為lexp也是一種exp
+01:02:26 <hashcat> 等等我講錯
+01:02:32 <lcamel> 這好像只有 syntax
+01:02:47 <hashcat> 我看成你在問別的
+01:05:51 <lcamel> Parts of the language ... are defined by a translation into a small "core language", but the latter is never itself formally specified.   (A History of Haskell: Being Lazy With Class)
+01:07:17 <hashcat> 看了下那邊只說了怎把lambda abstraction 裡的pattern化約
+01:07:54 <lcamel> 嗯
+01:09:55 <hashcat> 猜測應該歸類在core language
+01:10:06 <hashcat> 說不定不是跟report一起的
+01:10:42 <lcamel> 還有別的?!
+01:11:17 <lcamel> 我以為 report 就到底了, report 沒講的就是沒有了...
+01:11:56 <hashcat> report 只是比較詳盡的最新報告之類的
+01:12:19 <hashcat> 不會什麼都流水帳
+01:12:23 <lcamel> 這 report 不是等同於 language spec 嗎
+01:14:52 <hashcat> 在1.2有提到
+01:15:26 <hashcat> Although the kernel is not formally specified,
+01:15:53 <lcamel> 嗯...
+01:16:20 <monochrom> (\x y -> e) = (\x -> \y -> e) 可能當成通識吧
+01:17:00 <lcamel> 有的時候我懷疑, 到底一個東西是我沒看到定義在哪裡, 還是 report 其實沒有定義.
+01:18:51 <monochrom> 嘻嘻, 其實 report 連 (\x -> b) e = b[e 代入 x] 都沒說. 又是通識 :)
+01:19:14 <letoh> 通識XD
+01:19:58 <lcamel> 是, 我也找過, 找不到 function application 那邊...
+01:22:51 <hashcat> 報告非字典
+01:23:01 <hashcat> 或者規格書
+01:23:24 <lcamel> 呃, report 就是規格啦.
+01:24:06 <lcamel> The name of the report, “Re- port on the Programming Language Haskell, A Non-strict, Purely Functional Language,” was inspired in part by the “Report on the Algorithmic Language Scheme,” which in turn was modelled after the “Report on the Algorithmic Language Algol.”
+01:24:52 <hashcat> 報告只是總體的彙整吧
+01:25:43 <hashcat> 規格的話應該像是有詞項, 定義, 範例
+01:28:04 <lcamel> "The Haskell 2010 report was published in July 2010, and is the current definition of the Haskell language."
+01:29:09 <hashcat> defination的意思不一定是像數學那種形式
+01:29:12 <lcamel> 而 scheme 的話: "The language specification: The Revised5 Report on the Algorithmic Language Scheme. "
+01:29:17 <hashcat> www.haskell.org/onlinereport/haskell2010/haskellch10.html
+01:29:31 <monochrom> 別把 report 一字看得太重. 實際上, 這文件已成為規格. 若說不完整, 那只是因為懶. 天下不完整規格何其多.
+01:29:41 <hashcat> 可能是這邊給出語法之後要你自己根據查
+01:30:37 <hashcat> 因為lambda表達式的把多重abstraction簡寫成一次寫完不是Haskell特有的
+01:30:41 <lcamel> 看其他文件, 甚至還認為沒有講完 formal semantic 在某種程度上是優點: In particular, the absence of a formal language definition does allow the language to evolve more easily, because the costs of producing fully formal specifications of any proposed change are heavy, and by themselves discourage changes.
+01:31:22 <hashcat> lambda本來就有類似\x y z->... 寫法
+01:31:33 <hashcat> 所以他就不另行補充了
+01:32:04 <lcamel> 也有一些語言有清楚定義的: We were inspired by our brothers and sisters in the ML community, who had shown that it was possible to give a complete formal definition of a language, and the Definition of Standard ML (Milner and Tofte, 1990; Milner et al., 1997) had a place of honour on our shelves.
+01:33:10 <hashcat> 就當他用haskell定義haskell罷了
+01:33:12 <lcamel> 只是我比較後知後覺, 才知道有些東西 report 沒有講..... :(
+01:33:38 <hashcat> 用那個語法對照表跟參考haskell-src
+01:34:02 <hashcat> 用haskell定義haskell就是實際的標準了
+01:35:44 <lcamel> 謝謝幾位的回答 ~
+01:36:19 <hashcat> 換我有問題
+01:36:27 <hashcat> report 是規格的意思?
+01:37:01 <lcamel> 問我嗎? 我是從上下文看的.
+01:37:27 <hashcat> 好吧
+01:38:10 <hashcat> 我只聽過formal specification
+01:38:27 <hashcat> formal report 聽起來比較稀奇
+01:45:05 <lcamel> 呃 我重看一下我講的話 讀起來像是我覺得 report 這個英文自是規格的意思, 不過這不是我想講的意思
+01:45:20 <lcamel> s/自/字/
+01:48:02 <hashcat> 明白 =)
+01:52:45 <lcamel> 我想講的是.. 基於 R幾RS 是 scheme 的 spec, Haskell 循此傳統, Haskell Report 也是 language spec. (許多指到 report 的連結文字也用 spec 指稱)  且此 report 是沒有完整語義的(沒有貶意)
+01:52:51 <hashcat> 他說啥沒有formal的優點這說法讓我想到維特根斯坦
+01:57:54 <letoh> 不然改叫實作/語言參考文件好了  不用一直鑽字面上的牛角尖啦
+01:58:25 <lcamel> 好
+01:58:39 <letoh> scheme 也是用 report 沒錯
+01:58:59 <letoh> 不過其實大家都習慣說 rnrs，很少出現 `report' 這個字XD
+02:06:13 <lcamel> 另外想問一下大家另一個奇怪的問題: 一開始學 haskell 時, 看到  f x y = ... 的定義方法, 有產生過疑惑嗎? (或者只有我有這個困擾..?)
+02:06:51 <CindyLinz> 沒有.. 覺得啊不就是語法嗎 XD
+02:06:52 <letoh> 會產生什麼樣的疑惑?
+02:07:35 <lcamel> f 吃一個參數, 吐回一個吃一個參數的 function
+02:08:05 <letoh> 唔  好像挺正常的? XD
+02:08:14 <lcamel> 那為什麼可以這麼開心的定義成吃兩個參數的樣子....
+02:09:31 <lcamel> 從 report 4.4.3.1 function bindings 來看, f x y 會被轉成 f = (\x y -> ....)
+02:13:09 <lcamel> 在知道這個轉換前, 看到的定義方法就是有 sugar 的, 那時很不適應, 只能先接受著
+02:13:28 <hashcat> 吃了一個之後會變成 (\y -> ....)
+02:14:06 <hashcat> 外加 .... 裡面的x按照beta歸約替換掉
+02:15:12 <hashcat> 你把他看成 (\x -> (\y -> ....) ) 就沒問題了吧
+02:15:22 <lcamel> 我理解 currying, 但是當初不知怎麼去想像 f x y = ... 的定義方式
+02:15:48 <letoh> 你是指語言實作嗎?
+02:16:05 <lcamel> 看 report 說 f x y 就是 f = (\x y -> ...)  (by 4.4.3.1)
+02:16:23 <hashcat> 應該先看 Lambda 演算
+02:16:35 <hashcat> 區分什麼是什麼的簡寫
+02:16:44 <hashcat> 再來看Haskell
+02:17:45 <lcamel> 實作上, x 是用 closure 記著和 \y -> ... 一起走?
+02:18:30 <lcamel> 我對 reduction / currying 沒有問題.
+02:18:33 <hashcat> 我怎老會有看不懂的中文
+02:20:39 <hashcat> 什麼一起走
+02:21:28 <hashcat> 走走~走走走~我們小手拉小手~
+02:21:30 <lcamel> \x y -> x * 3 + x - 4 + y 好了
+02:21:51 <hashcat> 就是表達式裡面有子表達式
+02:22:25 <hashcat> (\x -> (\y -> x * 3 + x - 4 + y)) 1 2
+02:22:35 <lcamel> (\x y -> x * 3 + x - 4 + y) 10  變成 \y -> 10 * 3 + 10 - 4 + y
+02:22:46 <hashcat> (\y -> 1 * 3 + 1 - 4 + y) 2
+02:22:58 <hashcat> 嗯嗯
+02:23:26 <hashcat> (\x -> (\y -> x * 3 + x - 4 + y)) 有沒看過俄羅斯娃娃
+02:24:01 <hashcat> 娃娃打開裡面還是娃娃, 開到最小一個就沒有了
+02:24:35 <lcamel> 一個想法是  (\y -> x * 3 + x - 4 + y) 的 code 和一個記著 x = 10 的 environment 一起走 (不過 haskell 反正 bind 上去就不會動了, 應該和前面直接帶入一樣)
+02:24:38 <hashcat> lambda表達式歸約之後,裡面還是lambda表達式
+02:24:48 <hashcat> 到最小一個就沒了
+02:25:49 <hashcat> 總覺得這反了吧
+02:26:02 <hashcat> lambda才是核心
+02:26:26 <hashcat> 把lambda轉成let語法是反了
+02:27:13 <lcamel> (想想)
+02:27:16 <hashcat> 雖說實作let不一定要搞成lambda表達式, 但lambda更沒理由搞成let語法
+02:27:19 <letoh> 這邊不太懂，let 應該也可以解釋不是嗎?
+02:27:35 <hashcat> lambda才是Haskell的核心
+02:27:36 <letoh> 至於特定實作要怎麼 translation 應該是另外討論?
+02:28:34 <hashcat> 實作擱置
+02:29:04 <hashcat> 理論就是lambda其他的都是語法糖
+02:29:28 <lcamel> 這和 evaluation strategy 有沒有關係... ?
+02:29:50 <hashcat> 再次強調lambda演算
+02:29:55 <letoh> 應該無關吧
+02:30:08 <letoh> 你是指 strict/non-strict 嗎?
+02:30:23 <CindyLinz> Haskell 用的 Hindley-Milner Type System 需要 let
+02:30:26 <hashcat> 不管是惰性計算還啥的都是lambda演算的範圍裡
+02:30:43 <CindyLinz> 但是 lambda 本身沒有管 Type 呀
+02:31:43 <hashcat> 有typed lambda calculus不過暫且用不到
+02:32:23 <CindyLinz> 如果不管 Hindley Milner 的話, let 的確都可以寫成 lambda 的長相
+02:32:46 <hashcat> 就我來說 type-level 跟 function-level 是可以各自獨立的
+02:32:50 <CindyLinz> 但是 Hindley Milner 是把 let 當成一種 programmer 對 compiler 的 hint
+02:33:22 <CindyLinz> 如果把所有的 let 都變成 lambda, 那就是把所有的 hint 都去掉了
+02:35:32 <hashcat> 那系統只是用來型別推論吧
+02:37:34 <CindyLinz> 對呀
+02:38:19 <hashcat> let 裡面的東西會在同一個記憶體裡這跟型別推論有關連?
+02:38:46 <CindyLinz> 我看到這一句話.. 所以就給了一個理由 XD # 02:27 < hashcat> 雖說實作let不一定要搞成lambda表達式, 但lambda更沒理由搞成let語法
+02:41:24 <hashcat> 推論系統是在編譯時期作用, 演算系統是在執行時期作用, 兩者看來就是各自獨立的
+02:41:35 <CindyLinz> 嗯嗯
+02:43:45 <lcamel> 先謝謝你們 我再想想
+02:44:17 <hashcat> lambda~
+02:46:10 <hashcat> 我在考慮到底要不要用eden compiler
+02:46:44 <lcamel> 另外和我想像的不太一樣(OS: 那又怎樣)的是, 整篇 report 裡面, "lazy" 這個單字只出現了一次
+02:47:05 <hashcat> 再次強調lambda
+02:47:23 <hashcat> 我注意到只要是lambda演算理論的東西
+02:47:37 <hashcat> report都省得一乾二淨了
+02:48:20 <lcamel> lambda 用不同的 evaluation strategy 去算還是有影響吧?
+02:48:22 <letoh> lcamel: http://www.haskell.org/onlinereport/basic.html#sect6.2  這邊第一句就有提到 non-strict XD
+02:48:58 <lcamel> letoh: 嗯嗯, 我有用 non-strict 去找. 只是沒想到 lazy 出現的次數那麼少
+02:49:16 <letoh> 唔  我以為是指同一件事?
+02:49:50 <lcamel> lazy 只是 non-strict 的一種 implementation ... ?
+02:50:01 <CindyLinz> 如果 strict 指的是一定會馬上求值
+02:50:09 <CindyLinz> 我想 non-strict 指的是不一定會馬上求值
+02:50:16 <CindyLinz> lazy 指的是不會馬上求值
+02:50:24 <CindyLinz> 我是這樣理解啦 :p
+02:50:51 <lcamel> 有看到有人這樣說 "Technically, Haskell is a language with a non-strict semantics; lazy evaluation is sim- ply one implementation technique for a non-strict language."
+02:50:51 <CindyLinz> 意思是如果他心情好, 覺得氣氛 ok, 也可能會馬上求值 XD
+02:50:54 <hashcat> lambda演算理論不同evaluation strategy對應不同的化約規則
+02:50:54 <hashcat> evaluation strategy也還是lambda理論的東西
+02:50:56 <letoh> 嗯嗯  雖說 wikipedia 上不一定正確，但我還是先查一下上面寫了啥鬼XD
+02:52:03 <lcamel> hashcat: 嗯..
+02:52:04 <hashcat> eden compiler有人用過嘛
+02:52:17 <hashcat> 別討論洋人的作文了
+02:53:01 <letoh> "Under Church encoding, lazy evaluation of operators maps to non-strict evaluation of functions; for this reason, non-strict evaluation is often referred to as "lazy"."
+02:55:59 <lcamel> 唔..
+02:59:06 <letoh> http://www.haskell.org/pipermail/haskell-cafe/2005-November/012228.html  這一串好像是相關討論    /me 還在看
+02:59:37 <hashcat> 我在想實際些的問題
+03:00:06 <hashcat> 分佈式計算要用eden還是hdph比較好
+03:02:51 <letoh> 有簡化版 haskell 實作嗎? 可能是 subset 之類的?
+03:03:39 <lcamel> (看 haskell wiki 中) http://goo.gl/4Mu1J
+03:03:47 <letoh> 唔... helium 好像是
+03:04:37 <letoh> helium 的文件怎麼會在 ms research 站上@_@
+03:04:56 <hashcat> 微軟就是ghc的大金主
+03:05:18 <letoh> http://www.cs.uu.nl/wiki/bin/view/Helium/WebHome
+03:07:27 <letoh> "Hence in most cases the terms "lazy" and "non-strict" are synonyms. But not quite."  嗯
+03:12:01 <letoh> http://eprints.utas.edu.au/643/  # An Embedded Haskell Subset Implementation   /me 被標題騙進來看...
+03:13:37 <lcamel> XD
+03:15:11 <letoh> https://github.com/davidadamojr/microhaskell  java 實作的小型 haskell
+03:23:30 <letoh> http://stackoverflow.com/questions/1445827/write-a-haskell-interpreter-in-haskell
+03:25:23 <letoh> 最後推薦的 zoo 網站上好像有一些可以參考的資料
+11:51:17 <cataska> b4283: Don't love me
+11:51:30 <b4283> 呵呵
+16:14:29 <godfat> 補充一下 non-strict 和 lazy eval
+16:14:29 <godfat> 就我所知也是 lazy eval 是一種 non-strict 的實作
+16:14:29 <godfat> 而 non-strict 的定義是給定 f _ = 1 時 f ⊥ 也是 1
+16:14:29 <godfat> 反之 f ⊥ = ⊥
+16:18:48 <CindyLinz>  那 (⊥, ⊥) === ⊥ 呢?
+16:19:15 <CindyLinz> 這跟 non-strict 是同一個方面的問題, 還是不同方面的問題?
+16:20:23 <godfat> 可能是要視 (,) 的定義是什麼？
+16:21:13 <godfat> 不過之前看到說，在 haskell 裡這些都要區分
+16:22:14 <CindyLinz> 是不是說.. f (⊥, ⊥) = 1 或 f (⊥, ⊥) = ⊥ 都可能是 strict?
+16:23:52 <godfat> 仔細想想，先把 (⊥, ⊥) 視為 f ⊥ ⊥ 的話，
+16:23:55 <godfat> 似乎 (⊥, ⊥) 在 non-strict 下也就是 ⊥ 了？
+16:24:22 <godfat> 嗯，所以我猜是同一個問題；在 strict 下，只有一種 ⊥
+16:24:23 <godfat> 反之則要區分
+16:26:04 <godfat> http://blog.ezyang.com/2010/12/hussling-haskell-types-into-hasse-diagrams/
+16:28:35 <CindyLinz> hmm
+16:30:10 <godfat> 更正：
+16:30:11 <godfat> > 似乎 (⊥, ⊥) 在 strict 下也就是 ⊥ 了？
+16:30:12 <lambdabot>   <hint>:1:6: parse error on input `,'
+16:47:31 <CindyLinz> 嗯, 如果 (, ) 是個函數, 其分量為參數的話.. 的確要直接 bottom
+16:48:31 <godfat> 不過 data constructor 我就不確定了… 感覺這樣會跟 haskell 用 weak head normal form 也有關？
+16:52:09 <CindyLinz> 先 pass 它好了... orz
+16:52:14 <godfat> XDD
+18:58:17 <miaout17_> 我不確定我是不是狀況外，data constructor在這方面與一般的function應該沒什麼不同？
+19:00:30 <Yu-Lin> 哪方面？
+19:48:00 <godfat> strictness. 由於 http://www.haskell.org/haskellwiki/Weak_head_normal_form
+19:48:01 <godfat> 我的推測是有差的
+23:14:57 <suhorng> 偷問之前的討論
+23:15:23 <suhorng> 關於 f ⊥ = ... 這種我第一次看到是在 denotational semantics
+23:15:45 <suhorng> non-strict的討論一定要在 denotational semantics 下嗎? 還是這兩個其實沒關係? (實在不瞭解orz
+23:18:03 <suhorng> 至少要定一個domain出來?
+23:18:07 <godfat1> 我想如果是一般的程式語言，很顯然都是 strict 的，
+23:18:09 <godfat1> 但也不一定需要用 denotational semantics,
+23:18:09 <godfat1> 而像是 SML 是 strict 的，但也能用 denotational semantics,
+23:18:09 <godfat1> 所以應該也沒有直接的關係..?
+23:21:29 <suhorng> 對, strict 的話滿好理解的, 做 function application 時只要任一個參數發散(不停止或爛掉) ⊥ 那 f ___ 就會算不出來
+23:22:00 <suhorng> 不過反過來討論 non-strict 時好像常常需要個 ordering, 例如討論無窮長的 list 時候用有限長的去逼近
+23:22:29 <suhorng> 然後取上界 這樣 (上界存在的domain就冒出來了)
+23:23:00 <godfat1> 嗯嗯，複雜很多 XD
+23:23:04 <suhorng> 不這樣做好橡很難清楚的討論
+23:23:48 <godfat1> 很難清楚地討論什麼？語意嗎？
+23:24:08 <suhorng> 類似吧! 我也不知道怎麼表達
+23:24:48 <suhorng> 不過很多語言有 short-circuit 的邏輯運算子應該也算 non-strict XD?
+23:25:18 <letoh> 看到幾篇文章都有提到這點
+23:25:55 <godfat1> 算是一種特例吧，那也不是 function
+23:26:25 <suhorng> 也是
+23:27:35 <letoh> 不是定義成 function 就好了嗎? XD
+23:28:10 <letoh> (or a b c d e ...) 這樣可以嗎?
+23:28:47 <letoh> 其實我已經看不太懂這邊的討論了  離題太遠的話不要理我XD
+23:29:10 <godfat1> 說到很難清楚地討論:
+23:29:10 <godfat1> http://existentialtype.wordpress.com/2011/04/24/the-real-point-of-laziness/
+23:29:10 <godfat1> 是否 lazy 還是真難說，不過我暫時還是站在 haskell 這邊 XD
+23:29:10 <godfat1> 至少用起來很有趣...
+23:29:22 <suhorng> 大驚 為什麼這樣的 (or ...) 會有 short-circuit 呀, 是語言上定義的嗎?
+23:29:47 <godfat1> 關於 (or a b c d e) …
+23:29:47 <godfat1> 之前用 clojure 有一點很不能接受，就是 and 是 macro 不是 function 呀！
+23:29:50 <letoh> 跑到第一個 non-nil 會停下來  傳回結果
+23:30:14 <suhorng> 但是如果真的是函數, 這樣的 variadic function 不也該要把參數都先算過嗎?
+23:30:16 <godfat1> 於是我也不能寫 (reduce and ...)
+23:30:22 <suhorng> macro....XD
+23:30:46 <suhorng> godfat1: 站在 Haskell 這邊是什麼議題??
+23:30:55 <godfat1> lazy or not
+23:31:06 <suhorng> 喔喔
+23:31:15 <godfat1> Robert Harper 看起來比較喜歡 SML (strict)
+23:31:33 <suhorng> 好像有看過這篇...
+23:32:32 <suhorng> Robert Harper 這幾篇說不定是教學有感 XD
+23:33:12 <godfat1> 我覺得他很多篇看起來都有這種感覺 XDDD
+23:33:16 <suhorng> （對象是沒學過 FP 的新生的樣子, 忘了哪篇討論他們課程的改革, 新生教 imperative langauge & functional language）
+23:36:24 <suhorng> 離題一下. http://ro-che.info/ccc/04.html 這真是....XD
+23:36:50 <letoh> 都忘了昨天還沒看完XD
+23:38:28 <suhorng> "Whacha doin'? Plain' Shroedinger's cat in the box again?"　"No, this is a thunk, not box! And I'm either dead or alive inside it. To check you need to evaluate the thunk!"　"Nooo... I'm too lazy!"
+23:39:10 <letoh> 超好笑  這作者宅度已經突破天際了
+23:39:33 <godfat1> 好幾篇我真的是笑翻了 XD
+23:42:29 <suhorng> http://ro-che.info/ccc/09.html referential transparency (rofl)

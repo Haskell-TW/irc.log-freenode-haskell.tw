@@ -1,0 +1,47 @@
+17:39:27 <MnO2> http://blog.sina.com.cn/s/blog_5d90e82f0101ko2d.html
+17:40:46 <MnO2> racket 跟 scheme 應該不是完全一樣？
+18:02:57 <b4283> 是不一樣
+18:10:53 <hychen> list 的尾巴不一樣
+18:11:00 <hychen> 我只記的這個 XD
+18:13:54 <_13h> list 尾巴哪裡不一樣？
+18:14:40 <_13h> quack 我有用，但也只用到很基本的功能而已
+18:20:18 <_13h> 括號的部份，我都是打開 showparan  然後一直按 )))))) 到 close
+18:20:59 <cataska> http://emacsrocks.com/e14.html
+18:21:27 <_13h> 印象中有人寫自動 close 功能，不過我覺得手動做的時候可以順便檢查一下程式碼的結構，而且我本來就不喜歡太自動的 editor... 某方面來說 emacs 很合我胃口XD
+18:22:49 <_13h> 這個 mode 雖然知道但從沒用過，不過他說的那個吞掉下一個 s-exp 跟拆掉一層 s-exp 的功能的確很常用，考慮裝起來試試
+18:22:54 <CindyLinz> 又想到 ruby 的 ennnnnnnnnnd 了 XD
+18:23:54 <_13h> 有一個 mode 可以讓每一層括號有不同顏色... 但我只用 16 色 terminal，所以顏色很快就用完了XD
+18:24:41 <_13h> 好像叫 rainbow-paren 之類的東西
+18:25:01 <CindyLinz> 套一層 aalib, 犧牲一些解析度, 作顏色 dithering (誤)
+18:25:03 <_13h> 用過一次覺得是個華而不實的東西XD
+18:25:09 <_13h> 好麻煩XD
+18:25:36 <_13h> 一個文字就幾個 pixel，做完 dithering 還能看嗎XD
+18:26:02 <CindyLinz> XDDD
+18:26:55 <_13h> 如果有 300dpi 螢幕可以考慮看看XD
+21:15:45 <suhorng> http://research.microsoft.com/en-us/um/people/simonpj/Papers/pj-lester-book/
+21:16:02 <suhorng> http://research.microsoft.com/en-us/um/people/simonpj/papers/slpj-book-1987/index.htm "The Implementation of Functional Programming Languages", Simon Peyton Jones
+21:17:21 <suhorng> 免費的書XD 還有 http://wiki.clean.cs.ru.nl/Functional_Programming_and_Parallel_Graph_Rewriting 這個 ... Lazy 的語言真是不簡單 (以上來自這串: http://www.haskell.org/pipermail/haskell-cafe/2013-April/107459.html )
+21:19:20 <letoh> 看不完XD
+21:20:51 <suhorng> 超多的XD 不過我比較想先看另外一本 Compiling With Continuations. 薄薄的 300 頁
+21:22:07 <letoh> 這本我一直找不到代理版
+21:22:27 <letoh> 之前在新竹華通看到  過幾天拿了錢去買就不見了XD
+21:22:47 <letoh> amazon 買又超貴...
+21:23:10 <suhorng> 真的...兩千多塊orz
+21:23:29 <suhorng> 所以實在不太可能><
+21:23:31 <letoh> 我那次在華通看到的標價是一千出頭 (零頭
+21:23:32 <suhorng> *看
+21:23:49 <letoh> 超高興的結果沒買到XD
+21:24:35 <letoh> 然後又看到一本不貴的 modern compiler implementation in ml，也是一樣晚個幾天去又沒買到....
+21:25:11 <suhorng> 囧 剩下比較可能的就是等圖書館了
+21:26:08 <letoh> 老實說 2000+ 的書不是沒買過，但看到出現過 1000 的就不想買貴的了XD
+21:34:06 <suhorng> http://hackershelf.com/book/114/natural-language-processing-for-the-working-programmer/ 太了不起了, NLP的書用Haskell來介紹XD Haskell其實很廣泛使用嘛!
+21:35:25 <letoh> NLP 研究工具應該還是 python 比較多?
+21:36:02 <letoh> 又是可以線上看的書XD
+21:36:30 <suhorng> hackershelf.com放的好像是線上可以免費看的書 :P
+21:36:49 <letoh> 喔喔喔
+21:36:55 <letoh> 這個站先封印 (誤
+23:08:21 <MnO2> rust 出到 0.6 了，不知道跟三星合作會不會跳版快一點
+23:09:25 <MnO2> changelog: https://github.com/mozilla/rust/blob/release-0.6/RELEASES.txt
+23:17:01 <MnO2> http://openmirage.org/   從 rust mailing list 上看到的
+23:17:15 <MnO2> 感覺蠻有趣的
+23:26:02 <letoh> ocaml!

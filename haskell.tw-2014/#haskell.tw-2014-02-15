@@ -1,0 +1,59 @@
+00:00:27 <letoh> 所以你的成品是 s-exp ?
+00:00:59 <CindyLinz> 嗯, 以前沒寫過, 或說很少寫這種長相的 code.. 覺得今天一邊寫, 縮排的方式一邊在演進中 ^^|
+00:01:18 <CindyLinz> 成品是 Haskell 啊, 可是 Haskell Template 的寫法很像 S-exp..
+00:01:22 <monochrom> 這樣說吧, S-exp 不是最好的語法, 但是第二好的語法. 即是說, 很多程式語言的語法太爛, 這情形下寧願用 S-exp.
+00:02:24 <letoh> 還有什麼語法可以當作設計參考呢?
+00:03:52 <monochrom> 我是用 Dijkstra 的語法作參考的. http://www.cs.utexas.edu/users/EWD/transcriptions/EWD13xx/EWD1300.html 或 http://www.cs.utexas.edu/users/EWD/ewd13xx/EWD1300.PDF
+00:04:12 <CindyLinz> 例如說.. f a b = a + b 要寫成 funD (mkName "f") [clause [varP (mkName "a"), varP (mkName "b")] (normalB (appE (appE (varE $ mkName "+") (varE $ mkName "a")) (varE $ mkName "b"))) []]
+00:04:47 <monochrom> 其實可考慮 [d|f a b = a + b|]
+00:05:14 <CindyLinz> 可是中間有一些混合的 @_@"
+00:05:27 <monochrom> 呀, 也是.
+00:05:46 <CindyLinz> 也就是 [d| .... |] 裡面有局部要用動態的字串換進去, 然後我看 $() 能放的位置有點少 @@"
+00:07:24 <monochrom> "為了一棵語法樹, 放棄整個語義森林" XD
+00:08:17 <godfat> 語義森林！
+00:08:18 <CindyLinz> 我想寫(示意) [d| class $(mkName $ "HasField" ++ capitalize a) s a where forall f. Functor f => $(mkName a) :: (a -> f a) -> s -> f s |]
+00:09:40 <CindyLinz> 或是.. 我只有最後面 forall f. Functor f => (a -> f a) -> s -> f s 的部分放 [d| ... |], 其他都手寫
+00:09:49 <CindyLinz> GHC 叫說 a 和 s 沒定義.. QQ
+00:09:55 <monochrom> 語義森林是一個很易迷路很多陷阱的地方. 裏面還有一棟巫婆建的語法糖果屋...
+00:10:43 <CindyLinz> 欸不對 後面那個我是用 [t| ... |]
+00:12:04 <monochrom> 唔, 是不是兩個 "a" 不同?
+00:13:09 <godfat> 語法糖果屋 XDDDDDD 再來幾個就能串成故事了
+00:13:17 <monochrom> 好像, 你有兩個 $(mkName "x") 的話, 會得到兩個不同的 x
+00:13:26 <CindyLinz> 是同一個, 嗯.. 但是是 class 那邊 s a 的 a
+00:15:00 <CindyLinz> 欸用 [t| ... |] 的時候沒有 mkName 呀
+00:15:22 <CindyLinz> 是直接寫 [t|forall f. Functor f => (a -> f a) -> s -> f s|]
+00:15:50 <CindyLinz> 編這種恐怖故事是想嚇跑誰啦.... 囧
+00:19:09 <monochrom> 我喜歡嚇跑任何有志做程式員的小孩 :)
+00:21:05 <CindyLinz> ..
+00:22:00 <monochrom> 唉, 不如說, 我喜歡嚇跑所有人
+00:23:13 <godfat> 因此留下的都是勇士了？
+00:23:32 <monochrom> 你看我寫 http://www.vex.net/~trebla/haskell/sicp.xhtml 的文筆, 是一種 "你去東會死, 去西也會死"
+00:24:17 <monochrom> 而到了 http://www.vex.net/~trebla/haskell/prerequisite.xhtml 的文筆, 簡直是 "看來你也不會學懂了"
+00:25:44 <monochrom> "中學數學不合格就不會明 haskell", 你說是何等口吻呢? XD
+00:26:36 <monochrom> 不過, 留得下的都是智勇雙全了, 也不太壞吧
+00:28:55 <CindyLinz> 要過你這關沒那麼難啊, 我神經大條一點就過了... XD
+00:29:40 <godfat> XDDDDDD
+00:31:39 <godfat> 關於數學，我覺得問題在於數學這個詞太廣了；同樣寫程式這件事也太廣了
+00:34:45 <monochrom> 你說得對
+00:38:01 <godfat> 我曾經還滿懼怕數學過，高一時數學分數非常慘 XD
+00:38:02 <godfat> 後來發現其實數學沒那麼可怕，只是有些數學我確實很不擅長
+00:38:02 <godfat> 而我們同樣把查 API 當組件工人這件事也當作寫程式，事實上也是沒錯啦... XDD
+00:41:08 <monochrom> 程式語言也算是 API
+00:42:01 <monochrom> 如此, 無論寫甚麼程式, 怎樣寫, 都是組裝工人
+00:45:57 <godfat> 好玩耶，目前最高四分
+00:45:57 <godfat> http://corpsmoderne.itch.io/flappy-space-program
+00:45:57 <godfat> 也是... XD
+00:51:09 <monochrom> 我竟然造成了一個擦著地表的穩定軌道
+00:52:21 <godfat> 小鳥呼呼地飛 XD 擦著地表的話很容易跟下一隻撞到 ~.~
+00:54:44 <monochrom> 真是 rocket science
+00:55:25 <godfat> 我沒辦法玩到更多隻了，好難
+01:38:05 <CindyLinz> 剛剛寫的程式, 用 Language.Haskell.TH, 在 GHC compile 的時候會去連 postgreSQL, 讀取 schema, 把所有的 table 和 view 抓出來建 data Table, 還有對應的每一個 field 的 Lens
+01:38:28 <CindyLinz> 感覺很有以前寫 dynamic language 的 fu... XD
+01:39:36 <monochrom> 真多姿多采. 我還只想過, 在 GHC compile 的時候播電影
+01:41:39 <CindyLinz> 那個距離我能作出來的應用太遙遠了... XD
+01:42:05 <CindyLinz> 當然... 如果是 GHC compile 太久, 我去一邊轉電視那是沒問題 XD
+01:43:43 <monochrom> 播電影只不過是一句 runIO (system "vlc abc.mkv") 罷 :)
+01:44:04 <CindyLinz> 覺得 Edward A. Kmett 的 Lens 真是太讚了, 它裡面的東西是用 type 定的, 所以要寫 lib 跟它相容也不用 import 它.... 用 lib 的人再自行決定要不要 import 就好
+01:44:17 <CindyLinz> wwww
+01:58:20 <CindyLinz> 厚~ 現在才發現有這個 package, 這樣就直接用字串拼出 Haskell 程式碼, 丟給它生出 Abstract Syntax 就好了嘛..... ww http://hackage.haskell.org/package/haskell-src-meta
+01:59:08 <CindyLinz> isn't 100% complete yet... 不知道剩哪些...

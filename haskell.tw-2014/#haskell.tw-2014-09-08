@@ -1,0 +1,19 @@
+00:30:31 <suhorng> 有副作用真是邪惡...註定 partial application 不能變多型的
+00:36:32 <suhorng> https://gist.github.com/suhorng/2cb9f1a9e36330242675
+00:37:20 <suhorng> partial_applied 的型別是 '_a -> '_a, 他註定不應該是多型的, 要是他是多型的, 不同次的呼叫讀到的東西會錯
+00:38:29 <suhorng> 這個跟這裡舉的例子很像 http://www.mlton.org/ValueRestriction
+00:44:03 <suhorng> 不過 OCaml 還是比 SML 自然些... SML 這個不能寫在 REPL 裡面只能寫在檔案裡面的樣子@_@?
+00:44:31 <suhorng> 好奇怪XD mlton 跑第二次真的會變比較快
+15:54:19 <CindyLinz> > let unsafeSuHorng a = let bad_fun = unsafePerformIO (newIORef Nothing) in unsafePerformIO $ writeIORef bad_fun (Just a) >> readIORef bad_fun >>= \(Just b) -> return b in putStrLn $ show $ (unsafeSuHorng "abc" :: Int)
+15:54:21 <lambdabot>  Not in scope: ‘unsafePerformIO’Not in scope: ‘newIORef’
+15:54:21 <lambdabot>  Perhaps you meant ‘newSTRef’ (imported from Data.STRef)Not in scope: ‘unsafe...
+15:54:21 <lambdabot>  Perhaps you meant ‘writeSTRef’ (imported from Data.STRef)Not in scope: ‘read...
+15:54:21 <lambdabot>  Perhaps you meant ‘readSTRef’ (imported from Data.STRef)
+15:54:27 <CindyLinz> 哎呀 QQ
+15:55:16 <suhorng> XDDD
+15:55:50 <CindyLinz> :t unsafeSTToIO
+15:55:51 <lambdabot> Not in scope: ‘unsafeSTToIO’
+15:55:52 <CindyLinz> ww
+15:56:00 <CindyLinz> :t unsafeIOToST
+15:56:01 <lambdabot> Not in scope: ‘unsafeIOToST’
+15:56:12 <CindyLinz> lambdabot: 小氣!

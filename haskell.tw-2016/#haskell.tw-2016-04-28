@@ -1,0 +1,7 @@
+20:14:21 <savi0r_> 我安装HDBC-mysql-0.6.6.1  会出错, 在github 上面找到的解决办法是使用HDBC-mysql-0.6.6.2 , 然后本地build  , 不使用cabal install
+20:14:54 <savi0r_> 这个我不知道怎么解决.
+20:16:00 <savi0r_> 我使用的系统是gentoo , 可以直接emerge 安装 HDBC-mysql  , 但是我不知道这个安装到什么目录下了.
+20:17:59 <savi0r_> import Database.HDBC 是成功的, import Database.HDBC.MySQL 会找不到module
+21:26:16 <CindyLinz> 為什麼不能用 cabal install 啊? @@"
+21:26:59 <CindyLinz> 你在你的 project 的 .cabal 裡面的 build-depends 指定 HDBC-mysql ==0.6.6.2 以後就可以 cabal install 了呀
+21:27:25 <CindyLinz> 還是你沒有開 cabal project?

@@ -1,0 +1,25 @@
+00:51:52 <hashcat> 誰能幫我決定下要用scala還是clojure
+00:55:13 <kanru> clojure
+00:55:32 <hashcat> 為啥
+00:55:55 <kanru> 用就對了 XD
+00:57:09 <hashcat> clojure我找不到類似Akka的東西
+00:58:00 <hashcat> 這語言感覺就是會突然一時興起冒出一堆專案然後報廢
+01:01:16 <hashcat> 賭下去好了
+01:04:18 <letoh> clojure
+01:07:21 <hashcat> 兩票阿
+01:07:44 <hashcat> scala的東西比較穩定成熟不是?
+01:07:52 <letoh> 誰叫你挑了 scala 當對手 (誤
+01:08:06 <letoh> 話說  為什麼選項中沒有 haskell 呀?
+01:08:18 <hashcat> 問哪都一面倒clojure
+01:08:34 <hashcat> haskell不堪用
+01:09:15 <hashcat> 想用分佈計算
+01:09:39 <hashcat> 排除土法煉鋼
+01:11:11 <hashcat> scala=haskell
+01:11:44 <hashcat> 選haskell等同直接變成選scala
+01:14:39 <cataska_> clojure 一票
+01:17:30 <hashcat> 好吧來盲從多數
+01:17:45 <hashcat> clojure我來了
+01:17:57 <hashcat> 先睡覺噗噗
+01:26:35 <cataska_> 有沒有回答 clojure 都是 emacs user 的八卦 XD
+01:27:46 <letoh> XDXD
+01:31:24 <hychen> 因為lisp???
